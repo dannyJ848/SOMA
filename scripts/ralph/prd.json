@@ -1,0 +1,189 @@
+{
+  "project": "biological-self",
+  "description": "Understand your body like a physician understands their patients. 100% local, 100% private.",
+  "stories": [
+    {
+      "id": "bs-001",
+      "title": "Core data model and encrypted storage",
+      "description": "Implement the BiologicalSelf data model with AES-256-GCM encryption and local SQLite storage",
+      "acceptance_criteria": [
+        "BiologicalSelf type includes all health data sections",
+        "Data encrypted at rest with passphrase",
+        "CRUD operations for all sections",
+        "Export/import functionality"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-002",
+      "title": "Local LLM explanation engine",
+      "description": "Integrate Ollama for local LLM inference with 6-level depth adaptive explanations",
+      "acceptance_criteria": [
+        "Connect to local Ollama instance",
+        "Implement 6 depth levels (8th grade to physician)",
+        "Generate personalized explanations using biological self context",
+        "Health check for Ollama availability"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-003",
+      "title": "Knowledge base with RAG",
+      "description": "Build local vector store with medical knowledge and retrieval-augmented generation",
+      "acceptance_criteria": [
+        "Local embeddings using nomic-embed-text",
+        "SQLite vector store with FTS5 hybrid search",
+        "Seed foundational medical knowledge",
+        "Context-enhanced retrieval using biological self"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-004",
+      "title": "Terminal CLI interface",
+      "description": "Create interactive terminal UI for interacting with Biological Self",
+      "acceptance_criteria": [
+        "Main menu with navigation",
+        "Ask questions with RAG-enhanced answers",
+        "View biological self summary",
+        "Add health data (conditions, meds, labs, surgeries, allergies)",
+        "Settings for depth level"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-005",
+      "title": "Lab result import from PDF",
+      "description": "Import lab results from PDF files using LLM parsing",
+      "acceptance_criteria": [
+        "Parse PDF text content",
+        "Use LLM to extract structured lab data",
+        "Preview before import",
+        "Support for text paste input"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-006",
+      "title": "Apple Health integration",
+      "description": "Import health data from Apple Health XML exports",
+      "acceptance_criteria": [
+        "Parse Apple Health export.xml",
+        "Import vital signs (HR, BP, SpO2, HRV, etc.)",
+        "Import glucose readings as labs",
+        "Deduplicate records",
+        "Preview before import"
+      ],
+      "passes": true
+    },
+    {
+      "id": "bs-007",
+      "title": "Expand knowledge base with more medical content",
+      "description": "Add more foundational medical knowledge to the knowledge base",
+      "acceptance_criteria": [
+        "Add immunology basics",
+        "Add endocrinology content",
+        "Add cardiology content",
+        "Add neurology content",
+        "Add more drug interactions and pharmacology"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-008",
+      "title": "Family history tracking and genetic risk",
+      "description": "Track family medical history and calculate basic genetic risk factors",
+      "acceptance_criteria": [
+        "Add family history in CLI",
+        "Display family history in view",
+        "Include family history in context for explanations",
+        "Basic risk factor awareness"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-009",
+      "title": "Pharmacogenomics support",
+      "description": "Support import and display of pharmacogenomic data",
+      "acceptance_criteria": [
+        "Import CYP450 variants",
+        "Display metabolizer status",
+        "Include in medication context",
+        "Warn about drug-gene interactions"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-010",
+      "title": "Vital signs trends and visualization",
+      "description": "Show trends in vital signs over time",
+      "acceptance_criteria": [
+        "Display vital sign history in CLI",
+        "Show basic trends (up/down/stable)",
+        "Identify outliers",
+        "Group by time periods"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-011",
+      "title": "Tauri desktop application shell",
+      "description": "Wrap the application in a Tauri desktop shell for native experience",
+      "acceptance_criteria": [
+        "Basic Tauri setup with Rust backend",
+        "Web UI frontend",
+        "Native file dialogs for import",
+        "System tray integration"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-012",
+      "title": "Web UI with React",
+      "description": "Create a web-based UI as alternative to terminal CLI",
+      "acceptance_criteria": [
+        "React frontend with modern design",
+        "All CLI features accessible in web UI",
+        "Responsive design",
+        "Accessibility compliance"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-013",
+      "title": "Medication interaction checker",
+      "description": "Check for potential medication interactions",
+      "acceptance_criteria": [
+        "Maintain drug interaction database",
+        "Warn when adding interacting medications",
+        "Include interactions in explanations",
+        "Severity levels for interactions"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-014",
+      "title": "Health timeline view",
+      "description": "Display a chronological timeline of health events",
+      "acceptance_criteria": [
+        "Combine all dated events into timeline",
+        "Filter by event type",
+        "Show relationships between events",
+        "Export timeline"
+      ],
+      "passes": false
+    },
+    {
+      "id": "bs-015",
+      "title": "Wearable data integration (Garmin, Fitbit)",
+      "description": "Import data from other wearable platforms",
+      "acceptance_criteria": [
+        "Garmin export support",
+        "Fitbit export support",
+        "Normalize data across platforms",
+        "Merge with Apple Health data"
+      ],
+      "passes": false
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# Biological Self - Development Progress Log
+
+## 2026-01-20 - Initial Development
+
+### Completed Stories
+- bs-001: Core data model and encrypted storage ✓
+- bs-002: Local LLM explanation engine ✓
+- bs-003: Knowledge base with RAG ✓
+- bs-004: Terminal CLI interface ✓
+- bs-005: Lab result import from PDF ✓
+- bs-006: Apple Health integration ✓
+
+### Key Decisions Made
+1. Using SQLite instead of ChromaDB for vector store (simpler, no external deps)
+2. Local embeddings via Ollama nomic-embed-text (768-dim vectors)
+3. Hybrid search (semantic + FTS5 keyword) for better retrieval
+4. AES-256-GCM with Argon2 for encryption (security best practice)
+5. 6-level depth system based on educational research
+
+### Lessons Learned
+1. better-sqlite3 transactions must be synchronous - generate embeddings first
+2. pdf-parse needs dynamic import in ESM
+3. Apple Health XML files can be huge - stream parsing essential
+
+### Architecture Notes
+- Core module structure is clean and extensible
+- CLI pattern works well for terminal UI
+- Store pattern centralizes all data access with encryption
+
+---
+Add new entries above this line.

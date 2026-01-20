@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+target/
+dist/
+
+# Build outputs
+*.app
+*.dmg
+*.exe
+*.msi
+
+# Local AI models (too large for git)
+models/*.gguf
+models/*.bin
+
+# User data (never commit)
+data/
+*.sqlite
+*.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Test coverage
+coverage/
+
+# Temporary
+tmp/
+temp/

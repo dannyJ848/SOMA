@@ -276,6 +276,20 @@ export class BiologicalSelfStore {
     return newLab;
   }
 
+  // --- Vital Signs ---
+
+  addVitalSign(self: BiologicalSelf, vital: Omit<VitalSign, 'id' | 'createdAt'>): VitalSign {
+    const now = new Date();
+    const newVital: VitalSign = {
+      ...vital,
+      id: uuidv4(),
+      createdAt: now,
+    };
+    self.vitalSigns.push(newVital);
+    this.save(self);
+    return newVital;
+  }
+
   // --- Surgeries ---
 
   addSurgery(self: BiologicalSelf, surgery: Omit<Surgery, 'id' | 'createdAt' | 'updatedAt'>): Surgery {

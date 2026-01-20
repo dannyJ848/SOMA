@@ -16,6 +16,8 @@ import type { BiologicalSelf, DepthLevel, Condition, Medication } from './core/b
 import { DEPTH_LEVEL_NAMES } from './core/biological-self/types.js';
 import { OllamaClient } from './core/explanation-engine/ollama-client.js';
 import { VectorStore, KnowledgeRetriever, seedKnowledgeBase, needsSeeding } from './core/knowledge-base/index.js';
+import { LabImporter } from './core/import/lab-import.js';
+import { AppleHealthImporter } from './core/import/apple-health.js';
 
 // ============================================================================
 // Configuration
@@ -173,11 +175,12 @@ class BiologicalSelfCLI {
       console.log('  1. ' + color('Ask a question', 'green') + ' - Get personalized health explanations');
       console.log('  2. ' + color('View my Biological Self', 'blue') + ' - See your health profile');
       console.log('  3. ' + color('Add health data', 'yellow') + ' - Conditions, medications, labs, etc.');
-      console.log('  4. ' + color('Settings', 'magenta') + ' - Change depth level, language');
-      console.log('  5. ' + color('Exit', 'dim'));
+      console.log('  4. ' + color('Import data', 'cyan') + ' - From PDF lab results or Apple Health');
+      console.log('  5. ' + color('Settings', 'magenta') + ' - Change depth level, language');
+      console.log('  6. ' + color('Exit', 'dim'));
       console.log();
 
-      const choice = await this.prompt(color('  Choose (1-5): ', 'cyan'));
+      const choice = await this.prompt(color('  Choose (1-6): ', 'cyan'));
 
       switch (choice.trim()) {
         case '1':
@@ -190,9 +193,12 @@ class BiologicalSelfCLI {
           await this.addHealthData();
           break;
         case '4':
-          await this.settings();
+          await this.importData();
           break;
         case '5':
+          await this.settings();
+          break;
+        case '6':
           await this.exit();
           return;
         default:
@@ -506,6 +512,242 @@ class BiologicalSelfCLI {
     });
 
     success(`Added allergy: ${allergen}`);
+  }
+
+  private async importData(): Promise<void> {
+    if (!this.self) return;
+
+    header('IMPORT DATA');
+    console.log('  1. Import labs from PDF');
+    console.log('  2. Import labs from text (paste)');
+    console.log('  3. Import from Apple Health');
+    console.log('  4. Back to main menu');
+    console.log();
+
+    const choice = await this.prompt(color('  Choose (1-4): ', 'cyan'));
+
+    switch (choice.trim()) {
+      case '1':
+        await this.importLabsFromPDF();
+        break;
+      case '2':
+        await this.importLabsFromText();
+        break;
+      case '3':
+        await this.importFromAppleHealth();
+        break;
+    }
+  }
+
+  private async importLabsFromPDF(): Promise<void> {
+    if (!this.self) return;
+
+    subheader('IMPORT LABS FROM PDF');
+    console.log('  Enter the full path to your lab results PDF.');
+    console.log('  ' + color('(Tip: drag and drop the file into the terminal)', 'dim'));
+    console.log();
+
+    const filePath = await this.prompt('  PDF file path: ');
+    if (!filePath.trim()) return;
+
+    // Clean up path (remove quotes that might be added by drag-drop)
+    const cleanPath = filePath.trim().replace(/^['"]|['"]$/g, '').replace(/\\ /g, ' ');
+
+    if (!existsSync(cleanPath)) {
+      error(`File not found: ${cleanPath}`);
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    info('Processing PDF with local AI...');
+    console.log('  ' + color('(This may take a moment)', 'dim'));
+
+    const importer = new LabImporter();
+    const result = await importer.importFromPDF(cleanPath);
+
+    if (!result.success) {
+      error('Failed to import labs');
+      for (const err of result.errors) {
+        console.log('    ' + color(err, 'red'));
+      }
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    if (result.labResults.length === 0) {
+      warn('No lab results could be extracted from the PDF.');
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    // Show preview
+    subheader(`Found ${result.labResults.length} lab results:`);
+    for (const lab of result.labResults.slice(0, 10)) {
+      const status = lab.status === 'abnormal-low' || lab.status === 'abnormal-high'
+        ? color(` [${lab.status}]`, 'yellow')
+        : '';
+      console.log(`  • ${lab.testName}: ${lab.value} ${lab.unit || ''}${status}`);
+    }
+    if (result.labResults.length > 10) {
+      console.log(`  ... and ${result.labResults.length - 10} more`);
+    }
+
+    console.log();
+    const confirm = await this.prompt(color('  Import these results? (y/n): ', 'cyan'));
+    if (confirm.toLowerCase() !== 'y') {
+      info('Import cancelled');
+      return;
+    }
+
+    // Import the labs
+    const finalizedLabs = importer.finalizeLabResults(result.labResults);
+    for (const lab of finalizedLabs) {
+      this.store.addLabResult(this.self, lab);
+    }
+
+    success(`Imported ${finalizedLabs.length} lab results`);
+    await this.prompt('\n  Press Enter to continue...');
+  }
+
+  private async importLabsFromText(): Promise<void> {
+    if (!this.self) return;
+
+    subheader('IMPORT LABS FROM TEXT');
+    console.log('  Paste your lab results text below.');
+    console.log('  ' + color('(Enter a blank line when done)', 'dim'));
+    console.log();
+
+    const lines: string[] = [];
+    while (true) {
+      const line = await this.prompt('');
+      if (line.trim() === '' && lines.length > 0) break;
+      lines.push(line);
+    }
+
+    const text = lines.join('\n');
+    if (text.trim().length < 20) {
+      warn('Text too short to contain lab results.');
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    info('Processing text with local AI...');
+
+    const importer = new LabImporter();
+    const result = await importer.importFromText(text);
+
+    if (!result.success || result.labResults.length === 0) {
+      warn('No lab results could be extracted from the text.');
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    // Show preview
+    subheader(`Found ${result.labResults.length} lab results:`);
+    for (const lab of result.labResults) {
+      const status = lab.status === 'abnormal-low' || lab.status === 'abnormal-high'
+        ? color(` [${lab.status}]`, 'yellow')
+        : '';
+      console.log(`  • ${lab.testName}: ${lab.value} ${lab.unit || ''}${status}`);
+    }
+
+    console.log();
+    const confirm = await this.prompt(color('  Import these results? (y/n): ', 'cyan'));
+    if (confirm.toLowerCase() !== 'y') {
+      info('Import cancelled');
+      return;
+    }
+
+    // Import the labs
+    const finalizedLabs = importer.finalizeLabResults(result.labResults);
+    for (const lab of finalizedLabs) {
+      this.store.addLabResult(this.self, lab);
+    }
+
+    success(`Imported ${finalizedLabs.length} lab results`);
+    await this.prompt('\n  Press Enter to continue...');
+  }
+
+  private async importFromAppleHealth(): Promise<void> {
+    if (!this.self) return;
+
+    subheader('IMPORT FROM APPLE HEALTH');
+    console.log('  To export your Apple Health data:');
+    console.log('  1. Open Health app on iPhone');
+    console.log('  2. Tap your profile picture');
+    console.log('  3. Tap "Export All Health Data"');
+    console.log('  4. Extract the zip and provide the path to export.xml');
+    console.log();
+
+    const filePath = await this.prompt('  export.xml path: ');
+    if (!filePath.trim()) return;
+
+    const cleanPath = filePath.trim().replace(/^['"]|['"]$/g, '').replace(/\\ /g, ' ');
+
+    if (!existsSync(cleanPath)) {
+      error(`File not found: ${cleanPath}`);
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    info('Analyzing Apple Health export...');
+    console.log('  ' + color('(Large files may take a moment)', 'dim'));
+
+    const importer = new AppleHealthImporter();
+
+    // Preview first
+    const preview = await importer.previewImport(cleanPath);
+    console.log();
+    console.log(`  Found ${preview.totalRecords.toLocaleString()} records`);
+    if (preview.dateRange.start && preview.dateRange.end) {
+      console.log(`  Date range: ${preview.dateRange.start.toLocaleDateString()} - ${preview.dateRange.end.toLocaleDateString()}`);
+    }
+
+    const confirm = await this.prompt(color('\n  Proceed with import? (y/n): ', 'cyan'));
+    if (confirm.toLowerCase() !== 'y') {
+      info('Import cancelled');
+      return;
+    }
+
+    info('Importing health data...');
+    const result = await importer.importFromXML(cleanPath);
+
+    if (!result.success) {
+      error('Failed to import Apple Health data');
+      for (const err of result.errors) {
+        console.log('    ' + color(err, 'red'));
+      }
+      await this.prompt('\n  Press Enter to continue...');
+      return;
+    }
+
+    // Show summary
+    subheader('Import Summary');
+    console.log(`  Records processed: ${result.stats.recordsProcessed.toLocaleString()}`);
+    console.log(`  Vital signs imported: ${result.stats.vitalsImported.toLocaleString()}`);
+    console.log(`  Lab results imported: ${result.stats.labsImported.toLocaleString()}`);
+
+    if (result.warnings.length > 0) {
+      console.log();
+      for (const w of result.warnings) {
+        warn(w);
+      }
+    }
+
+    // Add vitals and labs to biological self
+    for (const vital of result.vitals) {
+      this.store.addVitalSign(this.self, vital);
+    }
+
+    for (const lab of result.labs) {
+      this.store.addLabResult(this.self, {
+        ...lab,
+        collectedAt: lab.collectedAt,
+      });
+    }
+
+    success(`Import complete! Added ${result.vitals.length} vitals and ${result.labs.length} labs.`);
+    await this.prompt('\n  Press Enter to continue...');
   }
 
   private async settings(): Promise<void> {

@@ -1354,3 +1354,41 @@ Continued building comprehensive anatomical system modules following the establi
   - Differential anatomy helps users understand diagnostic reasoning
   - Shared data between bilateral regions (left/right knee) reduces duplication
 ---
+
+## 2026-01-21 - US-066
+- Implemented personalized health context for AI
+  - Comprehensive type system:
+    - UserHealthProfile (conditions, meds, labs, PGx, history)
+    - PersonalizationPreferences (enabled, privacy level, categories)
+    - RelevanceMatch with 4 levels (directly-relevant to not-relevant)
+    - AIPromptContext for local AI integration
+    - PersonalizedResponse with indicators and context sections
+  - Relevance matching engine:
+    - Topic-condition mappings (11+ body systems)
+    - Drug class to condition mappings
+    - Lab to organ/condition mappings
+    - Multi-source matching (conditions, meds, labs, family history, PGx)
+  - Privacy-preserving design:
+    - All processing is local (no data leaves device)
+    - Three privacy modes: full, limited, off
+    - Toggle personalization completely off
+  - Features:
+    - findRelevanceMatches for topic-profile matching
+    - createPersonalizedContext for content contextualization
+    - createAIPromptContext for LLM integration
+    - createRelevanceIndicators for UI display
+    - interpretLabTrend for personal lab interpretation
+    - createMedicationContext for drug explanations
+    - personalizeEducationalContent for full personalization
+  - Educational disclaimer included
+- Files changed:
+  - core/personalization/types.ts (new)
+  - core/personalization/store.ts (new)
+  - core/personalization/index.ts (new)
+  - prd.json (updated passes: true)
+- **Learnings for future iterations:**
+  - Privacy modes allow user control over data exposure
+  - Topic-to-condition mappings enable fuzzy relevance matching
+  - Lab-organ mappings connect labs to educational anatomy content
+  - PGx considerations add important safety context for medications
+---

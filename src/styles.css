@@ -188,3 +188,166 @@ header h1 {
   font-size: 0.85rem;
   margin-top: 2rem;
 }
+
+/* Enhanced Auth Styles */
+.auth-card-wide {
+  max-width: 600px;
+}
+
+.privacy-section {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.privacy-section h2 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--success);
+}
+
+.privacy-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.privacy-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.privacy-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  color: var(--accent);
+}
+
+.privacy-feature div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.privacy-feature strong {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.privacy-feature span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.create-form {
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.create-form h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-group input {
+  margin-bottom: 0.5rem;
+}
+
+.strength-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 20px;
+}
+
+.strength-bar {
+  height: 4px;
+  border-radius: 2px;
+  transition: width 0.3s, background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.strength-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Unlock screen updates */
+.privacy-notice {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lock-icon {
+  flex-shrink: 0;
+  color: var(--success);
+}
+
+.privacy-notice span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+/* Error with retry */
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.retry-link {
+  width: auto;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.retry-link:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Button states */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

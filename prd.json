@@ -271,7 +271,7 @@
         "Typecheck passes"
       ],
       "priority": 16,
-      "passes": false,
+      "passes": true,
       "notes": "Use Web Workers for model parsing to avoid UI blocking."
     },
     {

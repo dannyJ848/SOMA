@@ -2302,3 +2302,123 @@ input:disabled {
   top: 10px !important;
   right: 10px !important;
 }
+
+/* ============================================
+   Model Loading Progress Styles
+   ============================================ */
+
+.model-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.model-loading-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 320px;
+  max-width: 480px;
+}
+
+.model-loading-panel h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.loading-item {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.loading-item:last-child {
+  margin-bottom: 0;
+}
+
+.loading-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.loading-name {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.loading-percent {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.loading-bar {
+  height: 6px;
+  background: var(--bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.2s ease-out;
+}
+
+.loading-cancel,
+.loading-retry {
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.loading-cancel {
+  background: transparent;
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.loading-cancel:hover {
+  background: var(--error);
+  color: white;
+}
+
+.loading-retry {
+  background: var(--accent);
+  border: none;
+  color: white;
+}
+
+.loading-retry:hover {
+  background: var(--accent-hover);
+}
+
+.loading-error .loading-info {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: var(--error);
+}

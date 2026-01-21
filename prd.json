@@ -289,7 +289,7 @@
         "Typecheck passes"
       ],
       "priority": 17,
-      "passes": false,
+      "passes": true,
       "notes": "Use Three.js groups for layer organization. Each mesh tagged with layer metadata."
     },
     {

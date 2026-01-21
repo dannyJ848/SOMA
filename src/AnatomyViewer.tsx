@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
+import { LayerPanel, useLayerState } from './LayerPanel';
 
 interface AnatomyViewerProps {
   onBack: () => void;
@@ -143,6 +144,22 @@ type ViewPreset = keyof typeof VIEW_PRESETS;
 export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
+  const [showLayerPanel, setShowLayerPanel] = useState(true);
+
+  // Layer state management
+  const {
+    layerStates,
+    soloLayer,
+    toggleLayer,
+    setOpacity,
+    toggleExpanded,
+    toggleSolo,
+    applyPreset,
+    showAll,
+    hideAll,
+    isVisible,
+    getOpacity,
+  } = useLayerState();
 
   // Animate to a preset view
   const animateToView = (preset: ViewPreset) => {
@@ -272,6 +289,36 @@ export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
           <PlaceholderModel />
           <PerformanceMonitor />
         </Canvas>
+
+        {/* Layer toggle button */}
+        <button
+          className="layer-toggle-btn"
+          onClick={() => setShowLayerPanel(!showLayerPanel)}
+          title={showLayerPanel ? 'Hide Layers' : 'Show Layers'}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </button>
+
+        {/* Layer Panel */}
+        {showLayerPanel && (
+          <LayerPanel
+            layerStates={layerStates}
+            soloLayer={soloLayer}
+            onToggleLayer={toggleLayer}
+            onSetOpacity={setOpacity}
+            onToggleExpanded={toggleExpanded}
+            onToggleSolo={toggleSolo}
+            onApplyPreset={applyPreset}
+            onShowAll={showAll}
+            onHideAll={hideAll}
+            isVisible={isVisible}
+            getOpacity={getOpacity}
+          />
+        )}
       </div>
 
       <div className="anatomy-footer">

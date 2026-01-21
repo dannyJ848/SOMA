@@ -166,7 +166,7 @@
         "Typecheck passes"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "Use structured output / JSON mode if available. Example: 'sharp pain in my lower right stomach after eating for 2 hours' -> {bodyLocation: 'body.torso.abdomen.right-lower-quadrant', severity: 6, associatedFactors: ['after-eating'], duration: {value: 2, unit: 'hours'}}"
     },
     {

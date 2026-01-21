@@ -274,9 +274,36 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-017
+
+### What was implemented
+- ChatView React component with full conversational interface
+- Health context builder (buildHealthContext) extracts relevant health data for AI prompts
+- System prompt template with educational guidelines and medical disclaimer
+- Ollama health check on component mount with retry capability
+- Suggested questions for empty chat state
+- User/assistant message styling with avatars
+- Typing indicator during AI response
+- Chat navigation button in dashboard header
+
+### Files changed
+- **New**: `src/ChatView.tsx` - Complete chat interface component (280 lines)
+- **Modified**: `src/App.tsx` - Added chat view rendering and navigation
+- **Modified**: `src/styles.css` - Added 330 lines of chat-specific styles
+- **Modified**: `prd.json` - US-017 passes: true
+
+### Learnings for future iterations
+- Health context should be concise - only include active conditions, current meds, recent symptoms, abnormal labs
+- System prompt template with placeholder (`{HEALTH_CONTEXT}`) allows dynamic context injection
+- AI status check on mount catches Ollama not running before user tries to chat
+- Suggested questions help users understand what they can ask
+- Use `white-space: pre-wrap` on message content to preserve AI formatting
+
+---
+
 ## Next Up
 
-US-017: AI chat interface (Phase 2)
+US-018: Natural language symptom entry (Phase 2)
 
 ## Notes for Future Iterations
 

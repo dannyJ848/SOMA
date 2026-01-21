@@ -513,6 +513,33 @@ All AI layer user stories implemented:
 
 ---
 
+## 2026-01-20 - US-027
+
+### What was implemented
+- ClippingPlanes.tsx with anatomical cross-section system
+- Three orthogonal planes: sagittal (L-R), coronal (F-B), axial (T-B)
+- useClippingPlanes hook for state management with animation
+- ClippingPlanesManager applies THREE.Plane to renderer
+- PlaneIndicator shows visual plane position in scene
+- ClippingControlPanel with full UI controls
+- 5 presets: None, Midsagittal, Frontal, Transverse, Quarter View
+- Position sliders with percentage display
+- Invert button to flip clipping direction
+
+### Files changed
+- **New**: `src/ClippingPlanes.tsx` - Complete clipping system (420 lines)
+- **Modified**: `src/styles.css` - Clipping panel styles (190 lines)
+- **Modified**: `prd.json` - US-027 passes: true
+
+### Learnings for future iterations
+- **THREE.Plane**: Use (normal, constant) where constant is distance from origin
+- **Global clipping**: Set gl.localClippingEnabled and gl.clippingPlanes
+- **Plane position**: Map -1..1 to model bounds min..max for intuitive control
+- **Inversion**: Negate normal vector to flip which side is clipped
+- **Animation pattern**: Use setInterval with eased interpolation for smooth transitions
+
+---
+
 ## Notes for Future Iterations
 
 - The user is a medical student, so clinical accuracy matters

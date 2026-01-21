@@ -1025,7 +1025,7 @@
         "Typecheck passes"
       ],
       "priority": 57,
-      "passes": false,
+      "passes": true,
       "notes": "Bridges body map interaction with learning."
     },
     {

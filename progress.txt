@@ -1411,3 +1411,25 @@ Continued building comprehensive anatomical system modules following the establi
   - Types like LearningGoal and ProgressUpdateEvent are for external consumers
   - Map-based stores provide O(1) lookups for progress tracking
 ---
+
+## 2026-01-21 - US-068
+- Implemented bookmarks and personal notes module
+- Files created:
+  - core/bookmarks/types.ts (comprehensive type system)
+  - core/bookmarks/store.ts (in-memory bookmark store)
+  - core/bookmarks/index.ts (barrel exports)
+- Features:
+  - Bookmark any structure with categories and tags
+  - Rich text notes with highlighting
+  - Search and filter with multiple criteria
+  - 6 sort options (date, alphabetical, category, etc.)
+  - Export to Markdown/JSON/PDF formats
+  - Import/export bookmark sets for backup/sharing
+  - Stats dashboard with usage analytics
+  - Sync with 3D model structure selection
+- Sample data: 5 detailed study notes (heart, conduction, brachial plexus, nephron, thyroid)
+- **Learnings for future iterations:**
+  - Don't import types that are only used in type definitions (LearningContentType)
+  - Markdown export is a good default before implementing PDF
+  - Bookmark sync state enables seamless UI integration
+---

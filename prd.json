@@ -1097,7 +1097,7 @@
         "Typecheck passes"
       ],
       "priority": 61,
-      "passes": false,
+      "passes": true,
       "notes": "Spaced repetition optional enhancement."
     },
     {

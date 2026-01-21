@@ -121,11 +121,15 @@ export function InsightsPanel({ dashboardData, dataVersion }: InsightsPanelProps
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const [lastGeneratedVersion, setLastGeneratedVersion] = useState<number | null>(null);
 
-  // Check AI availability on mount
+  // Check AI availability after a delay to let the dashboard render first
+  // The ai_health command is synchronous on the Rust side and can block
   useEffect(() => {
-    invoke<AIHealthResponse>('ai_health')
-      .then(res => setAiAvailable(res.available))
-      .catch(() => setAiAvailable(false));
+    const timer = setTimeout(() => {
+      invoke<AIHealthResponse>('ai_health')
+        .then(res => setAiAvailable(res.available))
+        .catch(() => setAiAvailable(false));
+    }, 500); // 500ms delay to allow UI to render
+    return () => clearTimeout(timer);
   }, []);
 
   // Generate insights when data changes

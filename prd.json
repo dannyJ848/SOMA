@@ -194,7 +194,7 @@
         "Three.js scene renders in dedicated Anatomy view",
         "WebGL2 renderer with antialiasing",
         "Three-point lighting for anatomical clarity (ambient + 2 directional)",
-        "Perspective camera with 45° FOV",
+        "Perspective camera with 45\u00b0 FOV",
         "Canvas resizes responsively with window",
         "Performance monitoring (FPS counter in dev mode)",
         "Target: 60fps on M1 Mac",
@@ -236,7 +236,7 @@
         "Typecheck passes"
       ],
       "priority": 14,
-      "passes": false,
+      "passes": true,
       "notes": "Z-Anatomy is CC-BY-SA. Source: https://www.z-anatomy.com. Process with Blender for optimization. Target <2GB total."
     },
     {
@@ -361,7 +361,7 @@
         "Typecheck passes"
       ],
       "priority": 21,
-      "passes": false,
+      "passes": true,
       "notes": "Store in JSON/SQLite. Consider generating lower levels from MD level using AI."
     },
     {
@@ -378,8 +378,8 @@
         "Typecheck passes"
       ],
       "priority": 22,
-      "passes": false,
-      "notes": "Use chromadb npm package. Store DB in ~/.biological-self/vectors/"
+      "passes": true,
+      "notes": "Using LanceDB instead of ChromaDB for embedded/serverless operation. Store in ~/.biological-self/vectors/"
     },
     {
       "id": "US-031",
@@ -395,7 +395,7 @@
         "Typecheck passes"
       ],
       "priority": 23,
-      "passes": false,
+      "passes": true,
       "notes": "Consider @xenova/transformers for browser-compatible transformers. All processing must be local."
     },
     {
@@ -413,7 +413,7 @@
         "Typecheck passes"
       ],
       "priority": 24,
-      "passes": false,
+      "passes": true,
       "notes": "OpenStax A&P: https://openstax.org/details/books/anatomy-and-physiology-2e. CC-BY license."
     },
     {
@@ -431,7 +431,7 @@
         "Typecheck passes"
       ],
       "priority": 25,
-      "passes": false,
+      "passes": true,
       "notes": "StatPearls articles are CC-BY 4.0. Use E-utilities API for bulk download."
     },
     {
@@ -448,7 +448,7 @@
         "Typecheck passes"
       ],
       "priority": 26,
-      "passes": false,
+      "passes": true,
       "notes": "Blue Histology (UWA) and Histology Guide are open. ~500-1000 images needed."
     },
     {
@@ -466,7 +466,7 @@
         "Typecheck passes"
       ],
       "priority": 27,
-      "passes": false,
+      "passes": true,
       "notes": "Consider OpenSeadragon for deep zoom. Pre-tile large images."
     },
     {
@@ -483,7 +483,7 @@
         "Typecheck passes"
       ],
       "priority": 28,
-      "passes": false,
+      "passes": true,
       "notes": "FMA OWL available from BioPortal. Critical for structure linking."
     },
     {
@@ -500,7 +500,7 @@
         "Typecheck passes"
       ],
       "priority": 29,
-      "passes": false,
+      "passes": true,
       "notes": "HPO: https://hpo.jax.org. Critical for symptom-anatomy linking."
     },
     {
@@ -518,7 +518,7 @@
         "Typecheck passes"
       ],
       "priority": 30,
-      "passes": false,
+      "passes": true,
       "notes": "Query all collections, merge results, re-rank. Consider hybrid search (semantic + keyword)."
     },
     {
@@ -535,7 +535,7 @@
         "Typecheck passes"
       ],
       "priority": 31,
-      "passes": false,
+      "passes": true,
       "notes": "Modify system prompt to instruct citation format. Parse citations from response."
     },
     {
@@ -819,7 +819,7 @@
         "Map to metabolic/physiological pathways",
         "Cover: CBC, CMP, LFTs, lipids, thyroid, coagulation, cardiac markers",
         "Include lesser-known specialty labs",
-        "Bidirectional queries (lab→organ, organ→labs)",
+        "Bidirectional queries (lab\u2192organ, organ\u2192labs)",
         "Extensible schema for new tests",
         "Typecheck passes"
       ],
@@ -832,7 +832,7 @@
       "title": "Biomarker pathway visualization",
       "description": "When viewing a lab result, show the metabolic pathway with anatomical highlighting.",
       "acceptanceCriteria": [
-        "Click lab result → show pathway diagram",
+        "Click lab result \u2192 show pathway diagram",
         "Pathway steps with enzymes and locations",
         "3D model highlights involved organs",
         "Normal vs abnormal pathway states",
@@ -852,7 +852,7 @@
       "acceptanceCriteria": [
         "Intestinal lipid absorption visualization",
         "Liver lipid metabolism (synthesis, packaging)",
-        "Lipoprotein lifecycle (VLDL→LDL, HDL reverse transport)",
+        "Lipoprotein lifecycle (VLDL\u2192LDL, HDL reverse transport)",
         "Receptor-mediated uptake",
         "Atherosclerosis plaque formation animation",
         "Statin mechanism of action",
@@ -925,7 +925,7 @@
       "title": "Symptom-to-anatomy mapping",
       "description": "Map symptoms to possible anatomical sources with differential considerations.",
       "acceptanceCriteria": [
-        "Symptom → list of possible anatomical sources",
+        "Symptom \u2192 list of possible anatomical sources",
         "Weighted by likelihood/commonality",
         "Consider referred pain patterns",
         "Link to user's logged symptoms",
@@ -945,7 +945,7 @@
       "acceptanceCriteria": [
         "Input symptom or select from user's logs",
         "List differential diagnoses ranked",
-        "Click diagnosis → highlight affected anatomy",
+        "Click diagnosis \u2192 highlight affected anatomy",
         "Show pathophysiology for each differential",
         "Red flags / alarm symptoms highlighted",
         "When to seek care guidance",
@@ -963,11 +963,11 @@
       "acceptanceCriteria": [
         "Heart referred pain (arm, jaw)",
         "Gallbladder referred pain (shoulder)",
-        "Appendix referred pain (periumbilical→RLQ)",
-        "Kidney referred pain (flank→groin)",
+        "Appendix referred pain (periumbilical\u2192RLQ)",
+        "Kidney referred pain (flank\u2192groin)",
         "Dermatomal overlay on body model",
         "Explain viscerosomatic convergence mechanism",
-        "Interactive: click organ → show referral zone",
+        "Interactive: click organ \u2192 show referral zone",
         "5-level explanations",
         "Typecheck passes"
       ],
@@ -1016,7 +1016,7 @@
       "title": "Region-based chief complaints",
       "description": "For each body region, show common symptoms and their anatomical basis.",
       "acceptanceCriteria": [
-        "Select 3D region → see common chief complaints",
+        "Select 3D region \u2192 see common chief complaints",
         "Each complaint links to underlying anatomy",
         "User's past symptoms in this region shown",
         "Educational content for region-specific issues",

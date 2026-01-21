@@ -606,3 +606,93 @@ All AI layer user stories implemented:
 - US-022 and US-023 require manual download of model/image datasets
 - Branch: ralph/phase-3-physiology-learning
 
+
+## 2026-01-21 - US-032 through US-039
+
+### What was implemented (8 stories)
+
+**US-032: OpenStax A&P Ingestion Pipeline**
+- Created core/ingest/openstax.ts with chapter definitions for 28 chapters
+- HTML parsing with section extraction
+- Text chunking with configurable overlap (500 tokens, 50 overlap)
+- Embedding generation via @xenova/transformers
+- Sample content for cardiovascular system (heart chapters)
+
+**US-033: StatPearls Medical Articles Ingestion**
+- Created core/ingest/statpearls.ts for NCBI/PMC integration
+- Article structure parsing (abstract, sections, key points)
+- MeSH term classification for body systems
+- Sample content for heart, liver, brain, pulmonary, renal topics
+
+**US-034: Histology Image Database**
+- Created core/histology/types.ts with comprehensive type definitions
+- TissueCategory, StainType, Magnification types
+- AnnotationPoint and AnnotationRegion interfaces
+- HistologyImage metadata schema with anatomy linking
+- Created core/histology/store.ts for image management
+- Sample tissue type descriptions with 5-level characteristics
+- Sample histology images with annotations
+
+**US-035: Histology Viewer Component**
+- Created src/HistologyViewer.tsx with pan/zoom functionality
+- Mouse and touch support for navigation
+- Annotation point and region overlays with click interaction
+- Side-by-side image comparison mode
+- Info panel with complexity-appropriate content
+- Magnification indicator with zoom controls
+- Source attribution and license display
+
+**US-036: FMA Ontology Integration**
+- Created core/ontology/fma.ts for Foundational Model of Anatomy
+- FMAEntity interface with hierarchical relationships (is-a, part-of, has-part)
+- Query methods: getParents, getChildren, getParts, getAncestors, getDescendants
+- Name and synonym search with indexing
+- 3D mesh mapping for structure identification
+- Sample data for major organ systems
+
+**US-037: HPO Integration**
+- Created core/ontology/hpo.ts for Human Phenotype Ontology
+- HPOTerm interface with anatomical location mapping
+- Symptom-to-structure and structure-to-symptom queries
+- Body region indexing for navigation
+- Cross-reference support (MeSH, UMLS, SNOMED)
+- Sample phenotype terms covering major symptom categories
+
+**US-038: RAG Retrieval Pipeline**
+- Created core/rag/retrieval.ts for semantic search
+- Multi-collection search with result merging
+- Re-ranking by relevance score
+- Complexity-level filtering
+- Token limit management for context windows
+- Source deduplication
+- Specialized retrieval for structures, symptoms, lab results
+
+**US-039: AI Response with Citations**
+- Created core/rag/cited-response.ts for grounded AI responses
+- Citation parsing from AI output [1], [2] format
+- System prompt template with citation instructions
+- Streaming response support with progressive citation extraction
+- Academic citation formatting utilities
+
+### Files changed
+- **New**: core/ingest/openstax.ts (388 lines)
+- **New**: core/ingest/statpearls.ts (600 lines)
+- **New**: core/histology/types.ts (165 lines)
+- **New**: core/histology/store.ts (425 lines)
+- **New**: src/HistologyViewer.tsx (520 lines)
+- **New**: core/ontology/fma.ts (490 lines)
+- **New**: core/ontology/hpo.ts (430 lines)
+- **New**: core/rag/retrieval.ts (320 lines)
+- **New**: core/rag/cited-response.ts (265 lines)
+- **Modified**: prd.json - 8 stories marked passes: true
+
+### Learnings for future iterations
+- **LanceDB over ChromaDB**: Embedded/serverless operation without separate process
+- **@xenova/transformers**: Works well for local embeddings, ~23MB for all-MiniLM-L6-v2
+- **Ontology indexing**: Use multiple indexes (name, synonym, category) for fast lookup
+- **Hierarchical queries**: Recursive traversal with depth limits prevents infinite loops
+- **RAG token management**: Always estimate and cap context to fit model window
+- **Citation parsing**: Regex for [N] pattern, match to retrieved chunk indices
+- **Streaming with citations**: Citations extracted after full response received
+
+---

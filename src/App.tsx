@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
-import { AnatomyViewer } from './AnatomyViewer';
+
+// Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
+const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
 
 interface HealthSummary {
   totalConditions: number;
@@ -632,10 +634,16 @@ function App() {
     );
   }
 
-  // 3D Anatomy View
+  // 3D Anatomy View - lazy loaded with Suspense
   if (currentView === 'anatomy') {
     return (
-      <AnatomyViewer onBack={() => setCurrentView('dashboard')} />
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading 3D Anatomy Viewer...</div>
+        </div>
+      }>
+        <AnatomyViewer onBack={() => setCurrentView('dashboard')} />
+      </Suspense>
     );
   }
 

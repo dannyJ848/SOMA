@@ -432,99 +432,113 @@ fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
 // ============================================================================
 
 #[tauri::command]
-fn ai_health() -> Result<AIHealthResponse, String> {
-    let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("ai-bridge.ts")
-        .arg("health")
-        .output()
-        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+async fn ai_health() -> Result<AIHealthResponse, String> {
+    tauri::async_runtime::spawn_blocking(|| {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-bridge.ts")
+            .arg("health")
+            .output()
+            .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
 
-    if !output.status.success() {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        return Err(format!("AI health check failed: {}", stderr));
-    }
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("AI health check failed: {}", stderr));
+        }
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout)
-        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
 }
 
 #[tauri::command]
-fn ai_models() -> Result<AIModelsResponse, String> {
-    let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("ai-bridge.ts")
-        .arg("models")
-        .output()
-        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+async fn ai_models() -> Result<AIModelsResponse, String> {
+    tauri::async_runtime::spawn_blocking(|| {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-bridge.ts")
+            .arg("models")
+            .output()
+            .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
 
-    if !output.status.success() {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        return Err(format!("Failed to list AI models: {}", stderr));
-    }
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to list AI models: {}", stderr));
+        }
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout)
-        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
 }
 
 #[tauri::command]
-fn ai_chat(request: AIChatRequest) -> Result<AIChatResponse, String> {
-    let project_root = get_project_root();
-
-    // Serialize the request to JSON
+async fn ai_chat(request: AIChatRequest) -> Result<AIChatResponse, String> {
+    // Serialize the request to JSON before spawning
     let request_json = serde_json::to_string(&request)
         .map_err(|e| format!("Failed to serialize chat request: {}", e))?;
 
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("ai-bridge.ts")
-        .arg("chat")
-        .arg(&request_json)
-        .output()
-        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-bridge.ts")
+            .arg("chat")
+            .arg(&request_json)
+            .output()
+            .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
 
-    if !output.status.success() {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        return Err(format!("AI chat failed: {}", stderr));
-    }
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("AI chat failed: {}", stderr));
+        }
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout)
-        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
 }
 
 #[tauri::command]
-fn ai_chat_json(request: AIChatRequest) -> Result<serde_json::Value, String> {
-    let project_root = get_project_root();
-
-    // Serialize the request to JSON
+async fn ai_chat_json(request: AIChatRequest) -> Result<serde_json::Value, String> {
+    // Serialize the request to JSON before spawning
     let request_json = serde_json::to_string(&request)
         .map_err(|e| format!("Failed to serialize chat request: {}", e))?;
 
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("ai-bridge.ts")
-        .arg("chat-json")
-        .arg(&request_json)
-        .output()
-        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-bridge.ts")
+            .arg("chat-json")
+            .arg(&request_json)
+            .output()
+            .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
 
-    if !output.status.success() {
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        return Err(format!("AI chat JSON failed: {}", stderr));
-    }
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("AI chat JSON failed: {}", stderr));
+        }
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout)
-        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

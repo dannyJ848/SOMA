@@ -30,6 +30,9 @@ export interface BiologicalSelf {
   vitalSigns: VitalSign[];
   imaging: ImagingReport[];
 
+  // Symptoms (user-reported)
+  symptoms: Symptom[];
+
   // Neurocognitive testing (longitudinal)
   neuropsychEvaluations: NeuropsychologicalEvaluation[];
 
@@ -275,6 +278,83 @@ export interface ImagingReport {
   createdAt: Date;
   updatedAt: Date;
 }
+
+// ============================================================================
+// Symptoms
+// ============================================================================
+
+export interface Symptom {
+  id: string;
+  description: string;
+
+  severity: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+  // Body location using hierarchical anatomical codes
+  // e.g., "body.torso.abdomen.right-lower-quadrant"
+  bodyLocation: string;
+
+  onsetDate: Date;
+
+  // Duration tracking
+  duration?: SymptomDuration;
+  resolvedDate?: Date;
+  status: 'active' | 'resolved' | 'recurring';
+
+  // Associated factors (what triggers or accompanies the symptom)
+  associatedFactors?: AssociatedFactor[];
+
+  // Quality descriptors (how the symptom feels)
+  quality?: SymptomQuality[];
+
+  // Frequency (how often it occurs)
+  frequency?: 'constant' | 'intermittent' | 'occasional' | 'rare';
+
+  // Timing patterns
+  timeOfDay?: 'morning' | 'afternoon' | 'evening' | 'night' | 'variable';
+
+  notes?: string;
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SymptomDuration {
+  value: number;
+  unit: 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'ongoing';
+}
+
+export type AssociatedFactor =
+  | 'after-eating'
+  | 'before-eating'
+  | 'with-exertion'
+  | 'at-rest'
+  | 'with-stress'
+  | 'after-sleep'
+  | 'with-movement'
+  | 'with-breathing'
+  | 'with-urination'
+  | 'with-defecation'
+  | 'with-medication'
+  | 'with-weather-change'
+  | 'with-position-change'
+  | 'other';
+
+export type SymptomQuality =
+  | 'sharp'
+  | 'dull'
+  | 'aching'
+  | 'burning'
+  | 'throbbing'
+  | 'stabbing'
+  | 'cramping'
+  | 'pressure'
+  | 'tingling'
+  | 'numbness'
+  | 'itching'
+  | 'nausea'
+  | 'weakness'
+  | 'fatigue'
+  | 'other';
 
 // ============================================================================
 // Pharmacogenomics

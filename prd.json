@@ -1,7 +1,7 @@
 {
   "project": "Biological Self",
-  "branchName": "ralph/phase-1-desktop-app",
-  "description": "Phase 1: Personal Tool MVP - Tauri desktop app with symptom tracking and 2D body mapping",
+  "branchName": "ralph/phase-2-ai-layer",
+  "description": "Phase 2: AI Layer - Local LLM integration for health insights, natural language input, and intelligent analysis",
   "userStories": [
     {
       "id": "US-009",
@@ -116,6 +116,75 @@
       "priority": 7,
       "passes": true,
       "notes": ""
+    },
+    {
+      "id": "US-016",
+      "title": "Local LLM integration with Ollama",
+      "description": "Set up Ollama integration for local AI inference. Create a TypeScript service layer that communicates with Ollama API. All AI processing stays on device.",
+      "acceptanceCriteria": [
+        "Ollama service module created in core/ai/ollama.ts",
+        "Function to check if Ollama is running locally",
+        "Function to list available models",
+        "Function to send chat completion requests",
+        "Function to stream responses",
+        "Graceful error handling when Ollama not available",
+        "Tauri command to proxy AI requests",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "Use Ollama REST API at http://localhost:11434. Recommend llama3.2 or mistral for good balance of speed and quality. Keep all inference local - this is core to privacy promise."
+    },
+    {
+      "id": "US-017",
+      "title": "AI chat interface",
+      "description": "Chat UI for asking questions about your health data. AI has context of your conditions, medications, symptoms, and labs to provide personalized (educational) responses.",
+      "acceptanceCriteria": [
+        "Chat view accessible from main navigation",
+        "Message input with send button",
+        "Chat history displayed in scrollable container",
+        "AI responses stream in real-time",
+        "System prompt includes relevant health context",
+        "Clear disclaimer that this is educational, not medical advice",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "Build health context from store.get() - include active conditions, current meds, recent symptoms, abnormal labs. Keep context focused to fit in model's window."
+    },
+    {
+      "id": "US-018",
+      "title": "Natural language symptom entry",
+      "description": "Allow users to describe symptoms in natural language. AI extracts structured data (body location, severity, duration, factors) and pre-fills the symptom form.",
+      "acceptanceCriteria": [
+        "Text input for natural language symptom description",
+        "AI parses description and extracts structured fields",
+        "Pre-fills symptom form with extracted data",
+        "User can review and edit before saving",
+        "Handles ambiguous input gracefully",
+        "Works offline if Ollama is running",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "Use structured output / JSON mode if available. Example: 'sharp pain in my lower right stomach after eating for 2 hours' -> {bodyLocation: 'body.torso.abdomen.right-lower-quadrant', severity: 6, associatedFactors: ['after-eating'], duration: {value: 2, unit: 'hours'}}"
+    },
+    {
+      "id": "US-019",
+      "title": "Health insights panel",
+      "description": "AI-generated insights panel on dashboard showing patterns, correlations, and observations from health data. Educational summaries of trends.",
+      "acceptanceCriteria": [
+        "Insights section on dashboard",
+        "AI analyzes symptoms, labs, vitals for patterns",
+        "Shows correlations (e.g., symptoms after certain foods)",
+        "Highlights abnormal lab trends",
+        "Insights refresh on data changes",
+        "Loading state while generating",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "Generate insights asynchronously. Cache results until data changes. Focus on objective observations, not diagnoses. Example: 'Your headache symptoms appear more frequently on days with less than 6 hours of sleep.'"
     }
   ]
 }

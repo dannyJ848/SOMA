@@ -60,6 +60,29 @@ interface DashboardData {
   }>;
 }
 
+type TimelineEventType = 'lab' | 'imaging' | 'condition' | 'medication' | 'surgery' | 'symptom';
+
+interface TimelineEvent {
+  id: string;
+  type: TimelineEventType;
+  date: string;
+  title: string;
+  subtitle?: string;
+  details?: Record<string, unknown>;
+}
+
+interface TimelineData {
+  events: TimelineEvent[];
+  filters: {
+    types: TimelineEventType[];
+    startDate?: string;
+    endDate?: string;
+  };
+  totalCount: number;
+}
+
+type View = 'dashboard' | 'timeline';
+
 function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [passphrase, setPassphrase] = useState('');
@@ -70,6 +93,12 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
+  const [currentView, setCurrentView] = useState<View>('dashboard');
+  const [timeline, setTimeline] = useState<TimelineData | null>(null);
+  const [timelineLoading, setTimelineLoading] = useState(false);
+  const [activeFilters, setActiveFilters] = useState<TimelineEventType[]>(['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom']);
+  const [dateRange, setDateRange] = useState<{ start?: string; end?: string }>({});
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
 
   useEffect(() => {
     checkDatabase();
@@ -80,6 +109,12 @@ function App() {
       loadDashboard();
     }
   }, [unlocked]);
+
+  useEffect(() => {
+    if (unlocked && currentView === 'timeline') {
+      loadTimeline();
+    }
+  }, [unlocked, currentView, activeFilters, dateRange]);
 
   async function checkDatabase() {
     try {
@@ -102,6 +137,63 @@ function App() {
     } finally {
       setDashboardLoading(false);
     }
+  }
+
+  async function loadTimeline() {
+    setTimelineLoading(true);
+    try {
+      const data = await invoke<TimelineData>('get_timeline', {
+        types: activeFilters.length > 0 ? activeFilters : undefined,
+        startDate: dateRange.start || undefined,
+        endDate: dateRange.end || undefined,
+      });
+      setTimeline(data);
+    } catch (err) {
+      console.error('Failed to load timeline:', err);
+    } finally {
+      setTimelineLoading(false);
+    }
+  }
+
+  function toggleFilter(type: TimelineEventType) {
+    setActiveFilters(prev =>
+      prev.includes(type)
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    );
+  }
+
+  function getEventTypeColor(type: TimelineEventType): string {
+    const colors: Record<TimelineEventType, string> = {
+      lab: '#3b82f6',        // blue
+      imaging: '#8b5cf6',    // purple
+      condition: '#f59e0b',  // amber
+      medication: '#10b981', // emerald
+      surgery: '#ef4444',    // red
+      symptom: '#f97316',    // orange
+    };
+    return colors[type];
+  }
+
+  function getEventTypeLabel(type: TimelineEventType): string {
+    const labels: Record<TimelineEventType, string> = {
+      lab: 'Lab',
+      imaging: 'Imaging',
+      condition: 'Condition',
+      medication: 'Medication',
+      surgery: 'Surgery',
+      symptom: 'Symptom',
+    };
+    return labels[type];
+  }
+
+  function formatEventDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
   }
 
   async function handleUnlock() {
@@ -362,7 +454,7 @@ function App() {
     );
   }
 
-  // Dashboard (unlocked)
+  // Dashboard or Timeline (unlocked)
   if (dashboardLoading || !dashboard) {
     return (
       <div className="container">
@@ -373,11 +465,168 @@ function App() {
 
   const { summary, activeConditions, currentMedications, recentLabs, vitalsSummary } = dashboard;
 
+  // Event detail modal
+  const EventDetailModal = ({ event, onClose }: { event: TimelineEvent; onClose: () => void }) => (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <div className="event-type-badge" style={{ backgroundColor: getEventTypeColor(event.type) }}>
+            {getEventTypeLabel(event.type)}
+          </div>
+          <button className="modal-close" onClick={onClose}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <h3 className="modal-title">{event.title}</h3>
+        <p className="modal-date">{formatEventDate(event.date)}</p>
+        {event.subtitle && <p className="modal-subtitle">{event.subtitle}</p>}
+        {event.details && (
+          <div className="modal-details">
+            {Object.entries(event.details).map(([key, value]) => {
+              if (value === null || value === undefined) return null;
+              const displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+              const displayValue = typeof value === 'object' ? JSON.stringify(value) : String(value);
+              return (
+                <div key={key} className="detail-row">
+                  <span className="detail-label">{displayKey}</span>
+                  <span className="detail-value">{displayValue}</span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  // Timeline View
+  if (currentView === 'timeline') {
+    return (
+      <div className="container timeline-view">
+        <header className="app-header">
+          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+          </button>
+          <h1>Health Timeline</h1>
+          <div className="header-spacer" />
+        </header>
+
+        {/* Filter Controls */}
+        <div className="timeline-controls">
+          <div className="filter-toggles">
+            {(['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom'] as TimelineEventType[]).map((type) => (
+              <button
+                key={type}
+                className={`filter-toggle ${activeFilters.includes(type) ? 'active' : ''}`}
+                style={{
+                  borderColor: getEventTypeColor(type),
+                  backgroundColor: activeFilters.includes(type) ? getEventTypeColor(type) : 'transparent',
+                }}
+                onClick={() => toggleFilter(type)}
+              >
+                {getEventTypeLabel(type)}
+              </button>
+            ))}
+          </div>
+
+          <div className="date-range-selector">
+            <input
+              type="date"
+              value={dateRange.start || ''}
+              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
+              placeholder="Start date"
+            />
+            <span className="date-separator">to</span>
+            <input
+              type="date"
+              value={dateRange.end || ''}
+              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
+              placeholder="End date"
+            />
+            {(dateRange.start || dateRange.end) && (
+              <button className="clear-dates" onClick={() => setDateRange({})}>
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div className="timeline-container">
+          {timelineLoading ? (
+            <div className="loading">Loading timeline...</div>
+          ) : timeline && timeline.events.length > 0 ? (
+            <>
+              <div className="timeline-count">
+                Showing {timeline.events.length} events
+              </div>
+              <div className="timeline">
+                {timeline.events.map((event) => (
+                  <div
+                    key={event.id}
+                    className="timeline-item"
+                    onClick={() => setSelectedEvent(event)}
+                  >
+                    <div
+                      className="timeline-marker"
+                      style={{ backgroundColor: getEventTypeColor(event.type) }}
+                    />
+                    <div className="timeline-content">
+                      <div className="timeline-date">{formatEventDate(event.date)}</div>
+                      <div className="timeline-event-card">
+                        <span
+                          className="event-type-indicator"
+                          style={{ backgroundColor: getEventTypeColor(event.type) }}
+                        />
+                        <div className="event-info">
+                          <span className="event-title">{event.title}</span>
+                          {event.subtitle && <span className="event-subtitle">{event.subtitle}</span>}
+                        </div>
+                        <svg className="event-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="empty-state">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <p>No events found for the selected filters</p>
+            </div>
+          )}
+        </div>
+
+        {selectedEvent && <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+      </div>
+    );
+  }
+
   return (
     <div className="container dashboard">
-      <header>
-        <h1>Biological Self</h1>
-        <p className="subtitle">Your health, understood</p>
+      <header className="app-header">
+        <div className="header-spacer" />
+        <div className="header-title">
+          <h1>Biological Self</h1>
+          <p className="subtitle">Your health, understood</p>
+        </div>
+        <button className="timeline-button" onClick={() => setCurrentView('timeline')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          Timeline
+        </button>
       </header>
 
       <main>

@@ -90,6 +90,34 @@ pub struct DashboardData {
     pub recent_symptoms: Vec<SymptomSummary>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct TimelineEvent {
+    pub id: String,
+    #[serde(rename = "type")]
+    pub event_type: String,
+    pub date: String,
+    pub title: String,
+    pub subtitle: Option<String>,
+    pub details: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct TimelineFilters {
+    pub types: Vec<String>,
+    #[serde(rename = "startDate")]
+    pub start_date: Option<String>,
+    #[serde(rename = "endDate")]
+    pub end_date: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct TimelineData {
+    pub events: Vec<TimelineEvent>,
+    pub filters: TimelineFilters,
+    #[serde(rename = "totalCount")]
+    pub total_count: u32,
+}
+
 // Store passphrase in memory for the session
 static PASSPHRASE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> = std::sync::OnceLock::new();
 
@@ -214,6 +242,54 @@ fn get_dashboard() -> Result<DashboardData, String> {
         .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
 }
 
+#[tauri::command]
+fn get_timeline(
+    types: Option<Vec<String>>,
+    start_date: Option<String>,
+    end_date: Option<String>,
+) -> Result<TimelineData, String> {
+    let db_path = get_db_path();
+
+    let passphrase = get_passphrase()
+        .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
+
+    let mut cmd = Command::new("npx");
+    cmd.arg("tsx")
+        .arg("tauri-bridge.ts")
+        .arg("get-timeline")
+        .env("BIOSELF_PASSPHRASE", &passphrase)
+        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap());
+
+    // Add optional filter arguments
+    if let Some(ref t) = types {
+        cmd.arg(t.join(","));
+    } else {
+        cmd.arg(""); // Empty types arg
+    }
+
+    if let Some(ref sd) = start_date {
+        cmd.arg(sd);
+    } else {
+        cmd.arg(""); // Empty start date arg
+    }
+
+    if let Some(ref ed) = end_date {
+        cmd.arg(ed);
+    }
+
+    let output = cmd.output()
+        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("Failed to get timeline: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -232,7 +308,8 @@ pub fn run() {
             check_database_exists,
             unlock_database,
             create_database,
-            get_dashboard
+            get_dashboard,
+            get_timeline
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

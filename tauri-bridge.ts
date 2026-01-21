@@ -64,6 +64,28 @@ interface DashboardData {
   }>;
 }
 
+// Timeline event types
+type TimelineEventType = 'lab' | 'imaging' | 'condition' | 'medication' | 'surgery' | 'symptom';
+
+interface TimelineEvent {
+  id: string;
+  type: TimelineEventType;
+  date: string;
+  title: string;
+  subtitle?: string;
+  details?: Record<string, unknown>;
+}
+
+interface TimelineData {
+  events: TimelineEvent[];
+  filters: {
+    types: TimelineEventType[];
+    startDate?: string;
+    endDate?: string;
+  };
+  totalCount: number;
+}
+
 function getEnvOrFail(name: string): string {
   const value = process.env[name];
   if (!value) {
@@ -201,6 +223,171 @@ function getVitalsSummary(self: BiologicalSelf): VitalSummary {
   return summary;
 }
 
+function getTimelineEvents(
+  self: BiologicalSelf,
+  types?: TimelineEventType[],
+  startDate?: Date,
+  endDate?: Date
+): TimelineEvent[] {
+  const events: TimelineEvent[] = [];
+  const allowedTypes = types || ['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom'];
+
+  // Labs
+  if (allowedTypes.includes('lab')) {
+    for (const lab of self.labResults) {
+      const date = lab.collectedAt;
+      if (startDate && date < startDate) continue;
+      if (endDate && date > endDate) continue;
+
+      events.push({
+        id: lab.id,
+        type: 'lab',
+        date: date.toISOString(),
+        title: lab.testName,
+        subtitle: typeof lab.value === 'number'
+          ? `${lab.value}${lab.unit ? ' ' + lab.unit : ''}`
+          : String(lab.value),
+        details: {
+          value: lab.value,
+          unit: lab.unit,
+          status: lab.status,
+          referenceRange: lab.referenceRange,
+        },
+      });
+    }
+  }
+
+  // Imaging
+  if (allowedTypes.includes('imaging')) {
+    for (const img of self.imaging) {
+      const date = img.date;
+      if (startDate && date < startDate) continue;
+      if (endDate && date > endDate) continue;
+
+      events.push({
+        id: img.id,
+        type: 'imaging',
+        date: date.toISOString(),
+        title: `${img.type.toUpperCase()} - ${img.bodyPart}`,
+        subtitle: img.indication,
+        details: {
+          type: img.type,
+          bodyPart: img.bodyPart,
+          findings: img.findings,
+          impression: img.impression,
+        },
+      });
+    }
+  }
+
+  // Conditions (diagnosed date)
+  if (allowedTypes.includes('condition')) {
+    for (const cond of self.conditions) {
+      if (cond.diagnosedDate) {
+        const date = cond.diagnosedDate;
+        if (startDate && date < startDate) continue;
+        if (endDate && date > endDate) continue;
+
+        events.push({
+          id: cond.id,
+          type: 'condition',
+          date: date.toISOString(),
+          title: cond.name,
+          subtitle: `Diagnosed - ${cond.status}`,
+          details: {
+            status: cond.status,
+            severity: cond.severity,
+            icdCode: cond.icdCode,
+          },
+        });
+      }
+    }
+  }
+
+  // Medications (start date)
+  if (allowedTypes.includes('medication')) {
+    for (const med of self.medications) {
+      if (med.startDate) {
+        const date = med.startDate;
+        if (startDate && date < startDate) continue;
+        if (endDate && date > endDate) continue;
+
+        events.push({
+          id: med.id,
+          type: 'medication',
+          date: date.toISOString(),
+          title: med.name,
+          subtitle: med.dosage ? `Started - ${med.dosage.amount}${med.dosage.unit}` : 'Started',
+          details: {
+            dosage: med.dosage,
+            frequency: med.frequency,
+            status: med.status,
+            prescribedFor: med.prescribedFor,
+          },
+        });
+      }
+    }
+  }
+
+  // Surgeries
+  if (allowedTypes.includes('surgery')) {
+    for (const surg of self.surgicalHistory) {
+      if (surg.date) {
+        const date = surg.date;
+        if (startDate && date < startDate) continue;
+        if (endDate && date > endDate) continue;
+
+        events.push({
+          id: surg.id,
+          type: 'surgery',
+          date: date.toISOString(),
+          title: surg.procedure,
+          subtitle: surg.reason,
+          details: {
+            outcome: surg.outcome,
+            complications: surg.complications,
+            hospital: surg.hospital,
+          },
+        });
+      }
+    }
+  }
+
+  // Sort by date descending (most recent first)
+  events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return events;
+}
+
+function getTimelineData(
+  self: BiologicalSelf | null,
+  types?: TimelineEventType[],
+  startDate?: string,
+  endDate?: string
+): TimelineData {
+  if (!self) {
+    return {
+      events: [],
+      filters: { types: types || ['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom'] },
+      totalCount: 0,
+    };
+  }
+
+  const start = startDate ? new Date(startDate) : undefined;
+  const end = endDate ? new Date(endDate) : undefined;
+  const events = getTimelineEvents(self, types, start, end);
+
+  return {
+    events,
+    filters: {
+      types: types || ['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom'],
+      startDate,
+      endDate,
+    },
+    totalCount: events.length,
+  };
+}
+
 function getDashboardData(self: BiologicalSelf | null): DashboardData {
   if (!self) {
     return {
@@ -243,6 +430,19 @@ async function main() {
         const self = store.get();
         const dashboard = getDashboardData(self);
         console.log(JSON.stringify(dashboard));
+        break;
+      }
+
+      case 'get-timeline': {
+        const self = store.get();
+        // Parse optional filters from args
+        const typesArg = process.argv[3];
+        const startDateArg = process.argv[4];
+        const endDateArg = process.argv[5];
+
+        const types = typesArg ? (typesArg.split(',') as TimelineEventType[]) : undefined;
+        const timeline = getTimelineData(self, types, startDateArg, endDateArg);
+        console.log(JSON.stringify(timeline));
         break;
       }
 

@@ -84,6 +84,29 @@ export async function invoke<T>(cmd: string, args?: Record<string, unknown>): Pr
           model: 'mock-model',
           done: true
         } as T;
+      case 'ai_chat_rag':
+        // Handle RAG-enhanced chat with citations
+        const ragRequest = args?.request as {
+          messages: Array<{ role: string; content: string }>;
+          ragOptions?: { structureName?: string; symptom?: string; labName?: string };
+        };
+        const ragMessages = ragRequest?.messages || [];
+        const ragUserMessage = ragMessages.filter(m => m.role === 'user').pop()?.content || '';
+        const structureName = ragRequest?.ragOptions?.structureName;
+
+        // Generate response with mock citations
+        const ragResponse = generateMockRAGResponse(ragUserMessage, structureName);
+        return {
+          content: ragResponse.content,
+          model: 'mock-rag-model',
+          done: true,
+          citations: ragResponse.citations,
+          ragContext: {
+            chunksUsed: ragResponse.citations.length,
+            totalTokens: 1500,
+            processingTimeMs: 250
+          }
+        } as T;
       case 'ai_chat_json':
         // Handle the ai_chat_json command used by InsightsPanel and SymptomEntryForm
         const jsonRequest = args?.request as { messages: Array<{ role: string; content: string }>; systemPrompt?: string } | undefined;
@@ -330,4 +353,115 @@ Feel free to ask about:
 - Detailed anatomy
 
 What would you like to know?`;
+}
+
+interface MockRAGResponse {
+  content: string;
+  citations: Array<{
+    index: number;
+    source: string;
+    section?: string;
+    url?: string;
+  }>;
+}
+
+function generateMockRAGResponse(userMessage: string, structureName?: string): MockRAGResponse {
+  const lowerMessage = userMessage.toLowerCase();
+
+  // Chest/Thorax with citations
+  if (lowerMessage.includes('chest') || lowerMessage.includes('thorax') || structureName?.toLowerCase() === 'chest') {
+    return {
+      content: `The **thorax** (chest) is the region of the body between the neck and the abdomen [1]. It contains several vital organs including the heart, lungs, and major blood vessels.
+
+**Key Anatomical Features:**
+- The thoracic cavity is protected by the rib cage, consisting of 12 pairs of ribs [1]
+- The heart is located in the mediastinum, slightly left of center [2]
+- The lungs occupy the lateral portions of the thoracic cavity
+
+**Cardiovascular Function:**
+The heart pumps approximately 5 liters of blood per minute at rest [2]. With your hypertension being managed by Lisinopril, it's important to understand that this medication reduces cardiac workload by relaxing blood vessels.
+
+**Clinical Relevance:**
+Common conditions affecting the thorax include coronary artery disease, pneumonia, and GERD [3]. Your current HbA1c of 6.8% indicates good diabetes management, which is important for cardiovascular health.`,
+      citations: [
+        { index: 1, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 22: The Respiratory System', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system' },
+        { index: 2, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 19: The Heart', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy' },
+        { index: 3, source: 'StatPearls', section: 'Chest Pain', url: 'https://www.ncbi.nlm.nih.gov/books/NBK470557/' }
+      ]
+    };
+  }
+
+  // Head with citations
+  if (lowerMessage.includes('head') || lowerMessage.includes('brain') || structureName?.toLowerCase() === 'head') {
+    return {
+      content: `The **head** contains the brain, the central control center of the nervous system [1]. The brain is protected by the skull (cranium) and three layers of meninges.
+
+**Key Structures:**
+- The cerebrum controls higher functions like thinking, learning, and voluntary movement [1]
+- The brainstem connects the brain to the spinal cord and controls vital functions
+- The cerebellum coordinates movement and balance [2]
+
+**Blood Supply:**
+The brain receives approximately 15-20% of cardiac output through the carotid and vertebral arteries [2]. With your hypertension, maintaining blood pressure control is crucial for preventing stroke and cognitive decline.
+
+**Clinical Considerations:**
+Common conditions include migraines, tension headaches, and cerebrovascular disease [3]. Your Lisinopril helps protect cerebral blood vessels by reducing vascular pressure.`,
+      citations: [
+        { index: 1, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 13: Anatomy of the Nervous System', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/13-1-the-embryologic-perspective' },
+        { index: 2, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 13: The Brain', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-the-brain-and-spinal-cord' },
+        { index: 3, source: 'StatPearls', section: 'Headache', url: 'https://www.ncbi.nlm.nih.gov/books/NBK554510/' }
+      ]
+    };
+  }
+
+  // Abdomen with citations
+  if (lowerMessage.includes('abdomen') || lowerMessage.includes('stomach') || structureName?.toLowerCase() === 'abdomen') {
+    return {
+      content: `The **abdomen** contains most of the digestive organs and plays a critical role in metabolism [1].
+
+**Major Organs:**
+- **Stomach**: Begins protein digestion with pepsin and HCl [1]
+- **Liver**: Largest internal organ, processes nutrients and detoxifies blood
+- **Pancreas**: Produces insulin and digestive enzymes [2]
+- **Kidneys**: Filter blood and regulate fluid/electrolyte balance
+
+**Relevance to Your Health:**
+Your Type 2 Diabetes involves the pancreas, which may not produce sufficient insulin or your cells may be resistant to its effects [2]. Metformin works primarily by:
+- Reducing hepatic glucose production in the liver
+- Improving insulin sensitivity in peripheral tissues
+
+Your Lisinopril also provides renal protection, which is especially important with diabetes [3].`,
+      citations: [
+        { index: 1, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 23: The Digestive System', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system' },
+        { index: 2, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 17: The Endocrine System', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-pancreas' },
+        { index: 3, source: 'StatPearls', section: 'Diabetic Nephropathy', url: 'https://www.ncbi.nlm.nih.gov/books/NBK534200/' }
+      ]
+    };
+  }
+
+  // Default response with citations
+  return {
+    content: `Based on the educational content available, here's information relevant to your query about ${structureName || 'this anatomical structure'}:
+
+**General Anatomy:**
+The human body is organized into multiple systems that work together to maintain homeostasis [1]. Understanding anatomy helps you make informed decisions about your health.
+
+**Your Health Context:**
+With your conditions (hypertension, type 2 diabetes, hyperlipidemia), understanding how body systems interconnect is valuable [2]. Your current medications target specific physiological processes:
+- Lisinopril: Affects the cardiovascular and renal systems
+- Metformin: Affects metabolic processes in the liver and muscles
+
+**Learning More:**
+Would you like to explore:
+- How specific organs function
+- How your conditions affect different body systems
+- Common symptoms and their anatomical basis
+
+Feel free to ask about any specific structure or health topic [3].`,
+    citations: [
+      { index: 1, source: 'OpenStax Anatomy & Physiology 2e', section: 'Chapter 1: An Introduction to the Human Body', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/1-1-overview-of-anatomy-and-physiology' },
+      { index: 2, source: 'StatPearls', section: 'Physiology Overview', url: 'https://www.ncbi.nlm.nih.gov/books/NBK541120/' },
+      { index: 3, source: 'OpenStax Anatomy & Physiology 2e', section: 'Table of Contents', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction' }
+    ]
+  };
 }

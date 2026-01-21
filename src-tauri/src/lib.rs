@@ -201,6 +201,61 @@ pub struct AIChatResponse {
     pub done: bool,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RAGOptions {
+    #[serde(rename = "structureName")]
+    pub structure_name: Option<String>,
+    pub symptom: Option<String>,
+    #[serde(rename = "labName")]
+    pub lab_name: Option<String>,
+    #[serde(rename = "labValue")]
+    pub lab_value: Option<String>,
+    pub system: Option<String>,
+    #[serde(rename = "complexityLevel")]
+    pub complexity_level: Option<u8>,
+    #[serde(rename = "maxTokens")]
+    pub max_tokens: Option<u32>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIChatRAGRequest {
+    pub model: Option<String>,
+    pub messages: Vec<ChatMessage>,
+    #[serde(rename = "systemPrompt")]
+    pub system_prompt: Option<String>,
+    pub temperature: Option<f64>,
+    #[serde(rename = "ragOptions")]
+    pub rag_options: Option<RAGOptions>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Citation {
+    pub index: u32,
+    pub source: String,
+    pub section: Option<String>,
+    pub url: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RAGContext {
+    #[serde(rename = "chunksUsed")]
+    pub chunks_used: u32,
+    #[serde(rename = "totalTokens")]
+    pub total_tokens: u32,
+    #[serde(rename = "processingTimeMs")]
+    pub processing_time_ms: u32,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIChatRAGResponse {
+    pub content: String,
+    pub model: String,
+    pub done: bool,
+    pub citations: Vec<Citation>,
+    #[serde(rename = "ragContext")]
+    pub rag_context: Option<RAGContext>,
+}
+
 // Store passphrase in memory for the session
 static PASSPHRASE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> = std::sync::OnceLock::new();
 
@@ -541,6 +596,36 @@ async fn ai_chat_json(request: AIChatRequest) -> Result<serde_json::Value, Strin
     .map_err(|e| format!("Task join error: {}", e))?
 }
 
+#[tauri::command]
+async fn ai_chat_rag(request: AIChatRAGRequest) -> Result<AIChatRAGResponse, String> {
+    // Serialize the request to JSON before spawning
+    let request_json = serde_json::to_string(&request)
+        .map_err(|e| format!("Failed to serialize RAG chat request: {}", e))?;
+
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-bridge.ts")
+            .arg("chat-rag")
+            .arg(&request_json)
+            .output()
+            .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("AI RAG chat failed: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse AI RAG response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -565,7 +650,8 @@ pub fn run() {
             ai_health,
             ai_models,
             ai_chat,
-            ai_chat_json
+            ai_chat_json,
+            ai_chat_rag
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

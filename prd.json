@@ -1114,7 +1114,7 @@
         "Typecheck passes"
       ],
       "priority": 62,
-      "passes": false,
+      "passes": true,
       "notes": "Specifically for medical education use case."
     },
     {

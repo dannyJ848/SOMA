@@ -1433,3 +1433,25 @@ Continued building comprehensive anatomical system modules following the establi
   - Markdown export is a good default before implementing PDF
   - Bookmark sync state enables seamless UI integration
 ---
+
+## 2026-01-21 - US-069
+- Implemented self-assessment quiz mode
+- Files created:
+  - core/quiz/types.ts (comprehensive quiz type system)
+  - core/quiz/store.ts (quiz engine with sample questions)
+  - core/quiz/index.ts (barrel exports)
+- Features:
+  - 7 question types (structure ID, function match, pathway sequence, etc.)
+  - 4 answer formats (multiple choice, free response, ordering, image select)
+  - 5 difficulty levels matching complexity tiers
+  - Adaptive difficulty based on user performance
+  - Score tracking by system, difficulty, and question type
+  - Review incorrect answers with detailed explanations
+  - Weak area identification and recommendations
+  - Spaced repetition (SM-2 algorithm) for optimal review scheduling
+- Sample questions: 10 high-quality questions with mnemonics and clinical pearls
+- **Learnings for future iterations:**
+  - Prefix unused parameters with underscore (_topicPerformance)
+  - Only import types actually used in the store code
+  - SM-2 algorithm provides effective spaced repetition scheduling
+---

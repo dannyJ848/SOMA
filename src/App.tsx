@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
+import { ChatView } from './ChatView';
 
 interface HealthSummary {
   totalConditions: number;
@@ -83,7 +84,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -617,6 +618,16 @@ function App() {
     );
   }
 
+  // Chat View
+  if (currentView === 'chat') {
+    return (
+      <ChatView
+        onBack={() => setCurrentView('dashboard')}
+        dashboardData={dashboard}
+      />
+    );
+  }
+
   // Body Map View
   if (currentView === 'body') {
     // Get symptom locations from dashboard data
@@ -707,6 +718,12 @@ function App() {
           <p className="subtitle">Your health, understood</p>
         </div>
         <div className="header-actions">
+          <button className="header-action-button" onClick={() => setCurrentView('chat')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Chat
+          </button>
           <button className="header-action-button" onClick={() => setCurrentView('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2a3 3 0 0 0-3 3c0 1.5 1.5 3 3 3s3-1.5 3-3a3 3 0 0 0-3-3z"/>

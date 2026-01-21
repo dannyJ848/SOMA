@@ -6,7 +6,7 @@
  */
 
 import * as fs from 'fs';
-import { Ollama } from 'ollama';
+import * as http from 'http';
 import type { LabResult, ReferenceRange } from '../biological-self/types.js';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -36,15 +36,77 @@ interface ParsedLabValue {
 }
 
 // ============================================================================
+// Direct Ollama HTTP Client (with proper timeout handling)
+// ============================================================================
+
+interface OllamaGenerateOptions {
+  model: string;
+  prompt: string;
+  temperature?: number;
+  numPredict?: number;
+  timeoutMs?: number;
+}
+
+function ollamaGenerate(options: OllamaGenerateOptions): Promise<string> {
+  const { model, prompt, temperature = 0.1, numPredict = 4000, timeoutMs = 600000 } = options;
+
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify({
+      model,
+      prompt,
+      stream: false,
+      options: {
+        temperature,
+        num_predict: numPredict,
+      },
+    });
+
+    const reqOptions: http.RequestOptions = {
+      hostname: '127.0.0.1',
+      port: 11434,
+      path: '/api/generate',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data),
+      },
+      timeout: timeoutMs,
+    };
+
+    const req = http.request(reqOptions, (res) => {
+      let body = '';
+      res.on('data', (chunk) => {
+        body += chunk;
+      });
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(body);
+          resolve(json.response);
+        } catch (e) {
+          reject(new Error(`Failed to parse Ollama response: ${body.slice(0, 200)}`));
+        }
+      });
+    });
+
+    req.on('error', (err) => reject(new Error(`Ollama request failed: ${err.message}`)));
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Ollama request timed out'));
+    });
+
+    req.write(data);
+    req.end();
+  });
+}
+
+// ============================================================================
 // Lab Import Class
 // ============================================================================
 
 export class LabImporter {
-  private ollama: Ollama;
   private model: string;
 
   constructor(model: string = 'llama3.1:8b') {
-    this.ollama = new Ollama();
     this.model = model;
   }
 
@@ -58,12 +120,13 @@ export class LabImporter {
     // Read and parse PDF
     let rawText: string;
     try {
-      // Dynamic import for pdf-parse (CJS module)
-      const pdfParse = await import('pdf-parse');
-      const pdf = pdfParse.default;
+      // Dynamic import for pdf-parse v2
+      const { PDFParse } = await import('pdf-parse');
 
       const dataBuffer = fs.readFileSync(filePath);
-      const pdfData = await pdf(dataBuffer);
+      const parser = new PDFParse({ data: dataBuffer });
+      const pdfData = await parser.getText();
+      await parser.destroy();
       rawText = pdfData.text;
 
       if (!rawText || rawText.trim().length < 50) {
@@ -184,17 +247,13 @@ Example output format:
 Lab Report Text:
 ${text.slice(0, 8000)}`;
 
-    const response = await this.ollama.generate({
+    const responseText = await ollamaGenerate({
       model: this.model,
       prompt,
-      options: {
-        temperature: 0.1, // Low temperature for consistent parsing
-        num_predict: 4000,
-      },
+      temperature: 0.1, // Low temperature for consistent parsing
+      numPredict: 4000,
+      timeoutMs: 600000, // 10 minutes for LLM processing
     });
-
-    // Extract JSON from response
-    const responseText = response.response.trim();
 
     // Try to find JSON array in response
     const jsonMatch = responseText.match(/\[[\s\S]*\]/);

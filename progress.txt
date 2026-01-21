@@ -1,0 +1,53 @@
+# Biological Self - Progress & Learnings
+
+## Completed Work
+
+### Phase 0: Foundation (COMPLETE)
+- [x] Encrypted SQLite data store with AES-256-GCM
+- [x] Core health data types (conditions, meds, allergies, surgeries, family history, labs, vitals, imaging)
+- [x] Lab results importer with LLM extraction
+- [x] Pharmacogenomics data model (gene variants, phenotypes, drug guidance)
+- [x] Neuropsychological evaluations with longitudinal tracking
+- [x] Imaging reports importer (CT scans)
+- [x] Whoop wearable integration (cycles + workouts)
+- [x] Apple Health integration (daily summaries + workouts)
+
+### Data Imported
+- 75 lab results from Whoop Labs PDFs
+- 24 pharmacogenomic genes + 30 drug guidance from Quest Diagnostics
+- 3 neuropsych evaluations (2018, 2019, 2025) showing longitudinal cognitive changes
+- 4 CT imaging reports (SBO history 2017-2021)
+- 255 Whoop cycles + 247 Whoop workouts (Apr-Dec 2025)
+- 891 Apple Health daily summaries + 647 workouts (2019-2026)
+
+## Key Learnings
+
+### 1. Date Handling Critical
+Always deserialize dates from JSON. Forgetting this causes subtle bugs where date comparisons fail.
+
+### 2. Duplicate Detection Pattern
+Before importing, always check for existing records using a unique identifier (date + type, or specific ID).
+
+### 3. Large File Streaming
+For 100MB+ files (Apple Health XML), use streaming parsers not in-memory loading.
+
+### 4. Store Pattern
+After calling store.addX(), call store.get() again to refresh the self object.
+
+### 5. Passphrase from Environment
+Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
+
+## Next Up
+
+Story 009: Tauri desktop app shell
+- Set up Tauri with React frontend
+- IPC bridge to existing TypeScript database layer
+- Basic window with app chrome
+
+## Notes for Future Iterations
+
+- The user is a medical student, so clinical accuracy matters
+- Vision includes Complete Anatomy-level 3D interface
+- All data must stay local - this is the core differentiator
+- Educational only, never diagnostic
+

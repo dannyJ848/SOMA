@@ -24,6 +24,11 @@ import type {
   DepthLevel,
   PharmacogenomicProfile,
   GeneticMarker,
+  NeuropsychologicalEvaluation,
+  WhoopCycle,
+  WhoopWorkout,
+  AppleHealthDailySummary,
+  AppleHealthWorkout,
 } from './types.js';
 
 // ============================================================================
@@ -133,6 +138,11 @@ export class BiologicalSelfStore {
       labResults: [],
       vitalSigns: [],
       imaging: [],
+      neuropsychEvaluations: [],
+      whoopCycles: [],
+      whoopWorkouts: [],
+      appleHealthDailySummaries: [],
+      appleHealthWorkouts: [],
       lifestyle: {},
       settings: {
         defaultDepthLevel: 3 as DepthLevel,
@@ -341,6 +351,159 @@ export class BiologicalSelfStore {
     this.save(self);
   }
 
+  // --- Pharmacogenomics ---
+
+  setPharmacogenomics(self: BiologicalSelf, profile: Omit<PharmacogenomicProfile, 'id' | 'createdAt' | 'updatedAt'>): PharmacogenomicProfile {
+    const now = new Date();
+    const newProfile: PharmacogenomicProfile = {
+      ...profile,
+      id: uuidv4(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    self.pharmacogenomics = newProfile;
+    this.save(self);
+    return newProfile;
+  }
+
+  // --- Neuropsychological Evaluations ---
+
+  addNeuropsychEvaluation(
+    self: BiologicalSelf,
+    evaluation: Omit<NeuropsychologicalEvaluation, 'id' | 'createdAt' | 'updatedAt'>
+  ): NeuropsychologicalEvaluation {
+    const now = new Date();
+    const newEval: NeuropsychologicalEvaluation = {
+      ...evaluation,
+      id: uuidv4(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    self.neuropsychEvaluations.push(newEval);
+    this.save(self);
+    return newEval;
+  }
+
+  // --- Imaging Reports ---
+
+  addImagingReport(
+    self: BiologicalSelf,
+    report: Omit<ImagingReport, 'id' | 'createdAt' | 'updatedAt'>
+  ): ImagingReport {
+    const now = new Date();
+    const newReport: ImagingReport = {
+      ...report,
+      id: uuidv4(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    self.imaging.push(newReport);
+    this.save(self);
+    return newReport;
+  }
+
+  // --- Whoop Data ---
+
+  addWhoopCycle(
+    self: BiologicalSelf,
+    cycle: Omit<WhoopCycle, 'id' | 'createdAt'>
+  ): WhoopCycle {
+    const now = new Date();
+    const newCycle: WhoopCycle = {
+      ...cycle,
+      id: uuidv4(),
+      createdAt: now,
+    };
+    self.whoopCycles.push(newCycle);
+    this.save(self);
+    return newCycle;
+  }
+
+  addWhoopCycles(
+    self: BiologicalSelf,
+    cycles: Omit<WhoopCycle, 'id' | 'createdAt'>[]
+  ): number {
+    const now = new Date();
+    for (const cycle of cycles) {
+      const newCycle: WhoopCycle = {
+        ...cycle,
+        id: uuidv4(),
+        createdAt: now,
+      };
+      self.whoopCycles.push(newCycle);
+    }
+    this.save(self);
+    return cycles.length;
+  }
+
+  addWhoopWorkout(
+    self: BiologicalSelf,
+    workout: Omit<WhoopWorkout, 'id' | 'createdAt'>
+  ): WhoopWorkout {
+    const now = new Date();
+    const newWorkout: WhoopWorkout = {
+      ...workout,
+      id: uuidv4(),
+      createdAt: now,
+    };
+    self.whoopWorkouts.push(newWorkout);
+    this.save(self);
+    return newWorkout;
+  }
+
+  addWhoopWorkouts(
+    self: BiologicalSelf,
+    workouts: Omit<WhoopWorkout, 'id' | 'createdAt'>[]
+  ): number {
+    const now = new Date();
+    for (const workout of workouts) {
+      const newWorkout: WhoopWorkout = {
+        ...workout,
+        id: uuidv4(),
+        createdAt: now,
+      };
+      self.whoopWorkouts.push(newWorkout);
+    }
+    this.save(self);
+    return workouts.length;
+  }
+
+  // --- Apple Health Data ---
+
+  addAppleHealthDailySummaries(
+    self: BiologicalSelf,
+    summaries: Omit<AppleHealthDailySummary, 'id' | 'createdAt'>[]
+  ): number {
+    const now = new Date();
+    for (const summary of summaries) {
+      const newSummary: AppleHealthDailySummary = {
+        ...summary,
+        id: uuidv4(),
+        createdAt: now,
+      };
+      self.appleHealthDailySummaries.push(newSummary);
+    }
+    this.save(self);
+    return summaries.length;
+  }
+
+  addAppleHealthWorkouts(
+    self: BiologicalSelf,
+    workouts: Omit<AppleHealthWorkout, 'id' | 'createdAt'>[]
+  ): number {
+    const now = new Date();
+    for (const workout of workouts) {
+      const newWorkout: AppleHealthWorkout = {
+        ...workout,
+        id: uuidv4(),
+        createdAt: now,
+      };
+      self.appleHealthWorkouts.push(newWorkout);
+    }
+    this.save(self);
+    return workouts.length;
+  }
+
   // ==========================================================================
   // Query Operations
   // ==========================================================================
@@ -504,6 +667,46 @@ export class BiologicalSelfStore {
         updatedAt: new Date(i.updatedAt),
         date: new Date(i.date),
       })),
+      neuropsychEvaluations: (data.neuropsychEvaluations || []).map(e => ({
+        ...e,
+        evaluationDate: new Date(e.evaluationDate),
+        createdAt: new Date(e.createdAt),
+        updatedAt: new Date(e.updatedAt),
+      })),
+      whoopCycles: (data.whoopCycles || []).map(c => ({
+        ...c,
+        cycleStart: new Date(c.cycleStart),
+        cycleEnd: c.cycleEnd ? new Date(c.cycleEnd) : undefined,
+        sleepOnset: c.sleepOnset ? new Date(c.sleepOnset) : undefined,
+        wakeOnset: c.wakeOnset ? new Date(c.wakeOnset) : undefined,
+        createdAt: new Date(c.createdAt),
+      })),
+      whoopWorkouts: (data.whoopWorkouts || []).map(w => ({
+        ...w,
+        cycleStart: new Date(w.cycleStart),
+        cycleEnd: w.cycleEnd ? new Date(w.cycleEnd) : undefined,
+        workoutStart: new Date(w.workoutStart),
+        workoutEnd: new Date(w.workoutEnd),
+        createdAt: new Date(w.createdAt),
+      })),
+      appleHealthDailySummaries: (data.appleHealthDailySummaries || []).map(s => ({
+        ...s,
+        date: new Date(s.date),
+        createdAt: new Date(s.createdAt),
+      })),
+      appleHealthWorkouts: (data.appleHealthWorkouts || []).map(w => ({
+        ...w,
+        startDate: new Date(w.startDate),
+        endDate: new Date(w.endDate),
+        createdAt: new Date(w.createdAt),
+      })),
+      pharmacogenomics: data.pharmacogenomics ? {
+        ...data.pharmacogenomics,
+        testDate: new Date(data.pharmacogenomics.testDate),
+        reportDate: data.pharmacogenomics.reportDate ? new Date(data.pharmacogenomics.reportDate) : undefined,
+        createdAt: new Date(data.pharmacogenomics.createdAt),
+        updatedAt: new Date(data.pharmacogenomics.updatedAt),
+      } : undefined,
     };
   }
 

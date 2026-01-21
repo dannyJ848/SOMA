@@ -1477,3 +1477,26 @@ Continued building comprehensive anatomical system modules following the establi
   - Board exam types should be string literals for type safety
   - Wrong answer traps help understand why students miss questions
 ---
+
+## 2026-01-21 - US-071
+- Implemented AI learning recommendations module
+- Files created:
+  - core/ai-recommendations/types.ts (recommendation type system)
+  - core/ai-recommendations/store.ts (recommendation engine)
+  - core/ai-recommendations/index.ts (barrel exports)
+- Features:
+  - "Because you have X, learn about Y" personalized suggestions
+  - Topic-condition mappings for 4 conditions (HTN, T2DM, asthma, hypothyroid)
+  - Health triggers from conditions, symptoms, medications, labs
+  - Knowledge gap identification from learning history
+  - Weekly learning digest with summaries
+  - Learning pace preferences (intensive, moderate, casual, minimal)
+  - Detailed health relevance explanations
+  - Actionable insights for each recommendation
+  - Priority-based recommendation sorting
+- Sample data: 4 mappings, 4 triggers, 4 detailed recommendations
+- **Learnings for future iterations:**
+  - Remove unused type imports like HealthRelevanceExplanation if not used in store
+  - Detailed personalized reasons increase recommendation value
+  - Health relevance explanations should include actionable insights
+---

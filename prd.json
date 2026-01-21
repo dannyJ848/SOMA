@@ -133,7 +133,7 @@
       ],
       "priority": 8,
       "passes": false,
-      "notes": "Use Ollama REST API at http://localhost:11434. Recommend llama3.2 or mistral for good balance of speed and quality. Keep all inference local - this is core to privacy promise."
+      "notes": "Use Ollama REST API at http://localhost:11434. User has deepseek-r1:14b pulled. Keep all inference local - this is core to privacy promise."
     },
     {
       "id": "US-017",

@@ -1133,3 +1133,31 @@ Continued building comprehensive anatomical system modules following the establi
   - Clinical context with critical values enables urgent result flagging
   - Related labs list should include clinical reasoning for educational value
 ---
+
+## 2026-01-21 - US-060
+- Implemented symptom-to-anatomy mapping module
+  - 6 major symptom mappings with comprehensive data:
+    - Chest pain: cardiac, esophageal, musculoskeletal, pulmonary, aortic sources
+    - Abdominal pain: stomach, gallbladder, appendix, pancreas, colon, wall
+    - Headache: meninges, vessels, muscles, trigeminal, sinuses, cervical
+    - Low back pain: muscles, disc, facets, stenosis, SI joint, kidney, aorta
+    - Dyspnea: lungs, heart, PE, diaphragm, upper airway
+    - Joint pain: synovium, cartilage, crystals, periarticular
+  - Anatomical sources with likelihood weighting (common, less-common, rare, do-not-miss)
+  - Referred pain patterns with dermatomal levels and mechanisms
+  - Mechanism of symptom generation (pathway type, afferent, central processing)
+  - Red flags with urgency levels (immediate, urgent, soon)
+  - Symptom quality mappings for clinical correlation
+  - 5-level explanations
+  - API functions for search, highlights, exploration context
+- Files changed:
+  - core/exploration/symptom-anatomy/types.ts (new)
+  - core/exploration/symptom-anatomy/store.ts (new)
+  - core/exploration/symptom-anatomy/index.ts (new)
+  - prd.json (updated passes: true)
+- **Learnings for future iterations:**
+  - "Do not miss" diagnoses should be highlighted prominently in UI
+  - Referred pain patterns require dermatomal overlay visualization
+  - Red flag urgency levels should drive UI warnings
+  - Symptom quality (sharp vs dull) provides diagnostic clues
+---

@@ -990,7 +990,7 @@
         "Typecheck passes"
       ],
       "priority": 55,
-      "passes": false,
+      "passes": true,
       "notes": "Educational pattern recognition, not diagnosis."
     },
     {

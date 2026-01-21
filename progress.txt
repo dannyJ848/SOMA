@@ -1161,3 +1161,43 @@ Continued building comprehensive anatomical system modules following the establi
   - Red flag urgency levels should drive UI warnings
   - Symptom quality (sharp vs dull) provides diagnostic clues
 ---
+
+## 2026-01-21 - US-061
+- Implemented differential diagnosis explorer module
+  - Comprehensive type system for differential diagnoses:
+    - 12 diagnosis categories (cardiovascular, respiratory, GI, neuro, etc.)
+    - 5 care urgency levels (emergency to self-care)
+    - 4 likelihood ranks (most-likely to rare-but-serious)
+    - Pathophysiology with mechanism, progression, risk/protective factors
+    - Clinical features (symptoms, signs, lab findings, imaging)
+    - Red flags/alarm symptoms with action timeframes
+    - Diagnostic workup (first-line, second-line, gold standard)
+    - Differentiating tests to distinguish between diagnoses
+    - Care guidance with urgency, setting, reasoning
+  - 6 detailed differential diagnoses:
+    - Acute coronary syndrome (ACS)
+    - GERD
+    - Tension headache
+    - Migraine
+    - Appendicitis
+    - Pulmonary embolism (PE)
+  - 4 symptom differential lists:
+    - Chest pain (8 differentials, must-not-miss flagging)
+    - Headache (6 differentials)
+    - Abdominal pain (7 differentials)
+    - Dyspnea (6 differentials)
+  - Educational disclaimer emphasizing this is not medical advice
+  - API functions for querying diagnoses, must-not-miss conditions
+  - createDifferentialExplorerResult for building UI state
+- Files changed:
+  - core/exploration/differential-diagnosis/types.ts (new)
+  - core/exploration/differential-diagnosis/store.ts (new)
+  - core/exploration/differential-diagnosis/index.ts (new)
+  - prd.json (updated passes: true)
+- **Learnings for future iterations:**
+  - Must-not-miss diagnoses require prominent visual treatment
+  - ICD codes included for future integration with clinical systems
+  - Red flags should specify both concern AND action timeframe
+  - Likelihood rankings help structure differential presentation
+  - 5-level explanations should cover same content at different depths
+---

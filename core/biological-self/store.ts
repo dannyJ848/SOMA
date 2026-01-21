@@ -14,7 +14,6 @@ import type {
   Medication,
   Allergy,
   Surgery,
-  FamilyHistoryItem,
   LabResult,
   VitalSign,
   ImagingReport,
@@ -23,7 +22,6 @@ import type {
   UserSettings,
   DepthLevel,
   PharmacogenomicProfile,
-  GeneticMarker,
   NeuropsychologicalEvaluation,
   WhoopCycle,
   WhoopWorkout,
@@ -39,7 +37,6 @@ const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 16;
 const SALT_LENGTH = 32;
 const KEY_LENGTH = 32;
-const AUTH_TAG_LENGTH = 16;
 
 function deriveKey(passphrase: string, salt: Buffer): Buffer {
   return scryptSync(passphrase, salt, KEY_LENGTH);

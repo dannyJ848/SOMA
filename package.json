@@ -6,9 +6,13 @@
   "scripts": {
     "cli": "tsx cli.ts",
     "demo": "tsx demo.ts",
-    "dev": "echo 'Development server not yet implemented'",
-    "build": "echo 'Build not yet implemented'",
-    "test": "echo 'Tests not yet implemented'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "health",
@@ -40,16 +44,24 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.0.9",
     "@types/pdf-parse": "^1.1.5",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
     "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@tauri-apps/api": "^2.9.1",
+    "@tauri-apps/cli": "^2.9.6",
     "better-sqlite3": "^12.6.2",
     "chromadb": "^3.2.2",
     "ollama": "^0.6.3",
     "pdf-parse": "^2.4.5",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "undici": "^7.18.2",
     "uuid": "^13.0.0"
   }

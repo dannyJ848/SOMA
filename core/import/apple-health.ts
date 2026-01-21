@@ -8,7 +8,6 @@
 import * as fs from 'fs';
 import { createReadStream } from 'fs';
 import { createInterface } from 'readline';
-import { v4 as uuidv4 } from 'uuid';
 import type { VitalSign, LabResult, BloodPressure } from '../biological-self/types.js';
 
 // ============================================================================

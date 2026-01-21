@@ -935,7 +935,7 @@
         "Typecheck passes"
       ],
       "priority": 52,
-      "passes": false,
+      "passes": true,
       "notes": "Use HPO mappings and clinical knowledge base."
     },
     {

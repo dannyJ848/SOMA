@@ -14,16 +14,15 @@ import type {
   Medication,
   Allergy,
   Surgery,
-  FamilyHistoryItem,
   LabResult,
   VitalSign,
   ImagingReport,
+  Symptom,
   Demographics,
   LifestyleFactors,
   UserSettings,
   DepthLevel,
   PharmacogenomicProfile,
-  GeneticMarker,
   NeuropsychologicalEvaluation,
   WhoopCycle,
   WhoopWorkout,
@@ -39,7 +38,6 @@ const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 16;
 const SALT_LENGTH = 32;
 const KEY_LENGTH = 32;
-const AUTH_TAG_LENGTH = 16;
 
 function deriveKey(passphrase: string, salt: Buffer): Buffer {
   return scryptSync(passphrase, salt, KEY_LENGTH);
@@ -138,6 +136,7 @@ export class BiologicalSelfStore {
       labResults: [],
       vitalSigns: [],
       imaging: [],
+      symptoms: [],
       neuropsychEvaluations: [],
       whoopCycles: [],
       whoopWorkouts: [],
@@ -402,6 +401,54 @@ export class BiologicalSelfStore {
     return newReport;
   }
 
+  // --- Symptoms ---
+
+  addSymptom(
+    self: BiologicalSelf,
+    symptom: Omit<Symptom, 'id' | 'createdAt' | 'updatedAt'>
+  ): Symptom {
+    const now = new Date();
+    const newSymptom: Symptom = {
+      ...symptom,
+      id: uuidv4(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    self.symptoms.push(newSymptom);
+    this.save(self);
+    return newSymptom;
+  }
+
+  updateSymptom(self: BiologicalSelf, id: string, updates: Partial<Symptom>): void {
+    const index = self.symptoms.findIndex(s => s.id === id);
+    if (index === -1) throw new Error(`Symptom ${id} not found`);
+
+    self.symptoms[index] = {
+      ...self.symptoms[index],
+      ...updates,
+      updatedAt: new Date(),
+    };
+    this.save(self);
+  }
+
+  removeSymptom(self: BiologicalSelf, id: string): void {
+    self.symptoms = self.symptoms.filter(s => s.id !== id);
+    this.save(self);
+  }
+
+  resolveSymptom(self: BiologicalSelf, id: string, resolvedDate?: Date): void {
+    const index = self.symptoms.findIndex(s => s.id === id);
+    if (index === -1) throw new Error(`Symptom ${id} not found`);
+
+    self.symptoms[index] = {
+      ...self.symptoms[index],
+      status: 'resolved',
+      resolvedDate: resolvedDate || new Date(),
+      updatedAt: new Date(),
+    };
+    this.save(self);
+  }
+
   // --- Whoop Data ---
 
   addWhoopCycle(
@@ -535,6 +582,32 @@ export class BiologicalSelfStore {
   }
 
   /**
+   * Get active symptoms
+   */
+  getActiveSymptoms(self: BiologicalSelf): Symptom[] {
+    return self.symptoms.filter(s => s.status === 'active' || s.status === 'recurring');
+  }
+
+  /**
+   * Get symptoms by body location (supports partial matching for hierarchical codes)
+   * e.g., "body.torso" matches "body.torso.abdomen.right-lower-quadrant"
+   */
+  getSymptomsByLocation(self: BiologicalSelf, locationPrefix: string): Symptom[] {
+    return self.symptoms.filter(s =>
+      s.bodyLocation.startsWith(locationPrefix) || s.bodyLocation === locationPrefix
+    );
+  }
+
+  /**
+   * Get symptoms within a date range
+   */
+  getSymptomsByDateRange(self: BiologicalSelf, startDate: Date, endDate: Date): Symptom[] {
+    return self.symptoms
+      .filter(s => s.onsetDate >= startDate && s.onsetDate <= endDate)
+      .sort((a, b) => b.onsetDate.getTime() - a.onsetDate.getTime());
+  }
+
+  /**
    * Search across all sections
    */
   search(self: BiologicalSelf, query: string): Array<{ type: string; item: unknown }> {
@@ -568,6 +641,15 @@ export class BiologicalSelfStore {
     for (const lab of self.labResults) {
       if (lab.testName.toLowerCase().includes(lowerQuery)) {
         results.push({ type: 'labResult', item: lab });
+      }
+    }
+
+    // Search symptoms
+    for (const symptom of self.symptoms) {
+      if (symptom.description.toLowerCase().includes(lowerQuery) ||
+          symptom.bodyLocation.toLowerCase().includes(lowerQuery) ||
+          symptom.notes?.toLowerCase().includes(lowerQuery)) {
+        results.push({ type: 'symptom', item: symptom });
       }
     }
 
@@ -666,6 +748,13 @@ export class BiologicalSelfStore {
         createdAt: new Date(i.createdAt),
         updatedAt: new Date(i.updatedAt),
         date: new Date(i.date),
+      })),
+      symptoms: (data.symptoms || []).map(s => ({
+        ...s,
+        onsetDate: new Date(s.onsetDate),
+        resolvedDate: s.resolvedDate ? new Date(s.resolvedDate) : undefined,
+        createdAt: new Date(s.createdAt),
+        updatedAt: new Date(s.updatedAt),
       })),
       neuropsychEvaluations: (data.neuropsychEvaluations || []).map(e => ({
         ...e,

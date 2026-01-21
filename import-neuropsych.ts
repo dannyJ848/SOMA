@@ -10,18 +10,14 @@ import { existsSync, mkdirSync } from 'fs';
 import { BiologicalSelfStore } from './core/biological-self/store.js';
 import type {
   NeuropsychologicalEvaluation,
-  IndexScore,
-  SubtestScore,
   InterpretiveCategory,
-  CPTMeasure,
-  CPTIndicatedIssue,
 } from './core/biological-self/types.js';
 
 const DATA_DIR = join(process.cwd(), 'data');
 const DB_PATH = join(DATA_DIR, 'biological-self.db');
 
 // Helper to convert string category to InterpretiveCategory type
-function toCategory(cat: string): InterpretiveCategory {
+function _toCategory(cat: string): InterpretiveCategory {
   const map: Record<string, InterpretiveCategory> = {
     'very superior': 'very-superior',
     'superior': 'superior',
@@ -38,6 +34,7 @@ function toCategory(cat: string): InterpretiveCategory {
   };
   return map[cat.toLowerCase()] || 'average';
 }
+void _toCategory; // Preserve helper for potential future use
 
 // ============================================================================
 // 2018 Evaluation Data (September 7-8, 2018)

@@ -1,7 +1,7 @@
 {
   "project": "Biological Self",
-  "branchName": "ralph/phase-1-desktop-app",
-  "description": "Phase 1: Personal Tool MVP - Tauri desktop app with symptom tracking and 2D body mapping",
+  "branchName": "ralph/phase-3-physiology-learning",
+  "description": "Phase 3: Comprehensive Physiology Learning System - Full 3D anatomy with multi-layer visualization, RAG-powered education at 5 complexity levels, histology, cadaver cross-sections, and precise AI cueing",
   "userStories": [
     {
       "id": "US-009",
@@ -16,7 +16,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Use @tauri-apps/api for IPC. Keep existing TypeScript/SQLite code, invoke via Tauri commands. Existing database is at data/biological-self.db"
     },
     {
@@ -32,7 +32,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Use existing BiologicalSelfStore from core/biological-self/store.ts. Passphrase derives AES-256-GCM key."
     },
     {
@@ -48,7 +48,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Database already has: 75 labs, 255 Whoop cycles, 891 Apple Health summaries. Use store.get() to load data."
     },
     {
@@ -64,7 +64,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -79,7 +79,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Body location should use hierarchical codes: body.torso.abdomen.right-lower-quadrant"
     },
     {
@@ -96,7 +96,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Use hierarchical SVG groups: body > torso > abdomen > quadrants. Each clickable region has data-location attribute."
     },
     {
@@ -114,8 +114,1044 @@
         "Typecheck passes"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
       "notes": ""
+    },
+    {
+      "id": "US-016",
+      "title": "Local LLM integration with Ollama",
+      "description": "Set up Ollama integration for local AI inference. Create a TypeScript service layer that communicates with Ollama API. All AI processing stays on device.",
+      "acceptanceCriteria": [
+        "Ollama service module created in core/ai/ollama.ts",
+        "Function to check if Ollama is running locally",
+        "Function to list available models",
+        "Function to send chat completion requests",
+        "Function to stream responses",
+        "Graceful error handling when Ollama not available",
+        "Tauri command to proxy AI requests",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Use Ollama REST API at http://localhost:11434. User has deepseek-r1:14b pulled. Keep all inference local - this is core to privacy promise."
+    },
+    {
+      "id": "US-017",
+      "title": "AI chat interface",
+      "description": "Chat UI for asking questions about your health data. AI has context of your conditions, medications, symptoms, and labs to provide personalized (educational) responses.",
+      "acceptanceCriteria": [
+        "Chat view accessible from main navigation",
+        "Message input with send button",
+        "Chat history displayed in scrollable container",
+        "AI responses stream in real-time",
+        "System prompt includes relevant health context",
+        "Clear disclaimer that this is educational, not medical advice",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Build health context from store.get() - include active conditions, current meds, recent symptoms, abnormal labs. Keep context focused to fit in model's window."
+    },
+    {
+      "id": "US-018",
+      "title": "Natural language symptom entry",
+      "description": "Allow users to describe symptoms in natural language. AI extracts structured data (body location, severity, duration, factors) and pre-fills the symptom form.",
+      "acceptanceCriteria": [
+        "Text input for natural language symptom description",
+        "AI parses description and extracts structured fields",
+        "Pre-fills symptom form with extracted data",
+        "User can review and edit before saving",
+        "Handles ambiguous input gracefully",
+        "Works offline if Ollama is running",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Use structured output / JSON mode if available. Example: 'sharp pain in my lower right stomach after eating for 2 hours' -> {bodyLocation: 'body.torso.abdomen.right-lower-quadrant', severity: 6, associatedFactors: ['after-eating'], duration: {value: 2, unit: 'hours'}}"
+    },
+    {
+      "id": "US-019",
+      "title": "Health insights panel",
+      "description": "AI-generated insights panel on dashboard showing patterns, correlations, and observations from health data. Educational summaries of trends.",
+      "acceptanceCriteria": [
+        "Insights section on dashboard",
+        "AI analyzes symptoms, labs, vitals for patterns",
+        "Shows correlations (e.g., symptoms after certain foods)",
+        "Highlights abnormal lab trends",
+        "Insights refresh on data changes",
+        "Loading state while generating",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "Generate insights asynchronously. Cache results until data changes. Focus on objective observations, not diagnoses. Example: 'Your headache symptoms appear more frequently on days with less than 6 hours of sleep.'"
+    },
+    {
+      "id": "US-020",
+      "title": "Three.js scene and renderer setup",
+      "description": "Initialize Three.js WebGL renderer with scene graph, lighting system optimized for anatomical visualization, and responsive canvas.",
+      "acceptanceCriteria": [
+        "Three.js scene renders in dedicated Anatomy view",
+        "WebGL2 renderer with antialiasing",
+        "Three-point lighting for anatomical clarity (ambient + 2 directional)",
+        "Perspective camera with 45° FOV",
+        "Canvas resizes responsively with window",
+        "Performance monitoring (FPS counter in dev mode)",
+        "Target: 60fps on M1 Mac",
+        "Typecheck passes"
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "Use @react-three/fiber for React integration. Consider @react-three/drei for helpers."
+    },
+    {
+      "id": "US-021",
+      "title": "Camera orbit controls",
+      "description": "Implement full camera controls for 3D navigation: orbit, zoom, pan. Add preset anatomical view buttons.",
+      "acceptanceCriteria": [
+        "Left-drag to orbit around model",
+        "Scroll wheel to zoom (with limits)",
+        "Right-drag to pan",
+        "Touch support: pinch zoom, two-finger pan",
+        "Preset view buttons: Anterior, Posterior, Left Lateral, Right Lateral, Superior, Inferior",
+        "Smooth animated transitions between views (500ms)",
+        "Reset view button",
+        "Typecheck passes"
+      ],
+      "priority": 13,
+      "passes": true,
+      "notes": "Use OrbitControls from three/examples. Store camera state for view restoration."
+    },
+    {
+      "id": "US-022",
+      "title": "Z-Anatomy model acquisition and processing",
+      "description": "Download, process, and optimize Z-Anatomy 3D models for all body systems. Convert to optimized GLTF format.",
+      "acceptanceCriteria": [
+        "Download complete Z-Anatomy model set",
+        "Convert to GLTF/GLB format with Draco compression",
+        "Organize models by system (skeletal, muscular, etc.)",
+        "Each structure has unique name matching FMA terminology",
+        "Total asset size documented",
+        "Models load without errors",
+        "Typecheck passes"
+      ],
+      "priority": 14,
+      "passes": true,
+      "notes": "Z-Anatomy is CC-BY-SA. Source: https://www.z-anatomy.com. Process with Blender for optimization. Target <2GB total."
+    },
+    {
+      "id": "US-023",
+      "title": "Visible Human Project cadaver cross-sections",
+      "description": "Integrate Visible Human Project cross-sectional imagery (axial, sagittal, coronal) with 3D model correlation.",
+      "acceptanceCriteria": [
+        "Download VHP male and female datasets (cryosection images)",
+        "Organize by plane (axial, sagittal, coronal)",
+        "Image viewer for browsing cross-sections",
+        "Slice position correlates with 3D model clipping plane",
+        "Structure labels overlay on images",
+        "Toggle between male/female datasets",
+        "Typecheck passes"
+      ],
+      "priority": 15,
+      "passes": true,
+      "notes": "VHP is public domain (NLM/NIH). High-res images are large (~15GB total). Consider downsampled versions for initial load."
+    },
+    {
+      "id": "US-024",
+      "title": "GLTF model loader with progress",
+      "description": "Implement model loading system with progress indication, error handling, and caching.",
+      "acceptanceCriteria": [
+        "GLTFLoader with DRACOLoader for compressed models",
+        "Loading progress bar (0-100%)",
+        "Cancel loading option",
+        "Cache loaded models in memory",
+        "Lazy load systems not currently visible",
+        "Handle loading errors gracefully",
+        "Retry mechanism for failed loads",
+        "Typecheck passes"
+      ],
+      "priority": 16,
+      "passes": true,
+      "notes": "Use Web Workers for model parsing to avoid UI blocking."
+    },
+    {
+      "id": "US-025",
+      "title": "Anatomical layer system",
+      "description": "Implement visibility controls for anatomical layers: integumentary, skeletal, muscular, organs, cardiovascular, nervous, lymphatic.",
+      "acceptanceCriteria": [
+        "Layer panel with toggle checkboxes",
+        "7 primary layers: skin, skeleton, muscles, organs, vessels, nerves, lymph",
+        "Sub-layers within each (e.g., arteries vs veins)",
+        "Smooth opacity transitions (fade in/out)",
+        "Solo mode: show only selected layer",
+        "Layer presets: 'Cardiovascular Focus', 'Nervous System', etc.",
+        "Remember layer state across sessions",
+        "Typecheck passes"
+      ],
+      "priority": 17,
+      "passes": true,
+      "notes": "Use Three.js groups for layer organization. Each mesh tagged with layer metadata."
+    },
+    {
+      "id": "US-026",
+      "title": "Structure selection and highlighting",
+      "description": "Click to select anatomical structures. Highlight on hover and selection with visual feedback.",
+      "acceptanceCriteria": [
+        "Raycasting for accurate click detection",
+        "Hover effect: subtle glow/outline",
+        "Selection effect: brighter highlight, persists",
+        "Multi-select with Shift+click",
+        "Selection list panel showing selected structures",
+        "Clear selection button",
+        "Double-click to focus/zoom on structure",
+        "Typecheck passes"
+      ],
+      "priority": 18,
+      "passes": true,
+      "notes": "Use OutlinePass from three/examples for highlight effect. Store selection state."
+    },
+    {
+      "id": "US-027",
+      "title": "Cross-section clipping planes",
+      "description": "Implement anatomical clipping planes for axial, sagittal, and coronal cross-sections.",
+      "acceptanceCriteria": [
+        "Three orthogonal clipping planes",
+        "Slider control for each plane position",
+        "Toggle each plane on/off",
+        "Clip caps to show internal surfaces",
+        "Sync with VHP cross-section viewer",
+        "Plane position indicator on 3D model",
+        "Reset planes button",
+        "Typecheck passes"
+      ],
+      "priority": 19,
+      "passes": true,
+      "notes": "Use THREE.Plane with material.clippingPlanes. Enable renderer.localClippingEnabled."
+    },
+    {
+      "id": "US-028",
+      "title": "Complexity level system",
+      "description": "Implement 5-tier complexity levels for all educational content: 8th Grade, High School, College, Graduate, Medical Professional.",
+      "acceptanceCriteria": [
+        "User preference for default complexity level",
+        "Level selector in settings and on-demand",
+        "All content tagged with complexity levels",
+        "Smooth level switching without reload",
+        "Level-appropriate vocabulary mapping",
+        "Visual indicator of current level",
+        "Remember preference across sessions",
+        "Typecheck passes"
+      ],
+      "priority": 20,
+      "passes": true,
+      "notes": "Levels: 1=8th Grade (simple analogies), 2=High School (basic terminology), 3=College (full terminology), 4=Graduate (mechanisms), 5=MD (clinical correlations)"
+    },
+    {
+      "id": "US-029",
+      "title": "Multi-level content data model",
+      "description": "Design and implement data model for storing educational content at all 5 complexity levels.",
+      "acceptanceCriteria": [
+        "Content schema supports 5 explanation levels per topic",
+        "Each level has: summary, detailed explanation, key terms",
+        "Shared media assets across levels",
+        "Level-specific analogies and examples",
+        "Cross-references to related content",
+        "Source citations for each level",
+        "Validation that all levels exist for each topic",
+        "Typecheck passes"
+      ],
+      "priority": 21,
+      "passes": true,
+      "notes": "Store in JSON/SQLite. Consider generating lower levels from MD level using AI."
+    },
+    {
+      "id": "US-030",
+      "title": "ChromaDB vector database setup",
+      "description": "Set up ChromaDB for local vector storage of medical content embeddings.",
+      "acceptanceCriteria": [
+        "ChromaDB running in embedded mode (no server)",
+        "Persistent storage in app data directory",
+        "Collections: anatomy, physiology, pathology, pharmacology, histology",
+        "Metadata schema: source, chapter, system, structure_id, complexity_level",
+        "CRUD operations tested",
+        "Backup/restore functionality",
+        "Typecheck passes"
+      ],
+      "priority": 22,
+      "passes": true,
+      "notes": "Using LanceDB instead of ChromaDB for embedded/serverless operation. Store in ~/.biological-self/vectors/"
+    },
+    {
+      "id": "US-031",
+      "title": "Local embedding model setup",
+      "description": "Set up local sentence transformer model for generating embeddings without external API calls.",
+      "acceptanceCriteria": [
+        "Download and cache embedding model locally",
+        "Support models: all-MiniLM-L6-v2 or similar",
+        "Generate embeddings for text chunks",
+        "Batch processing for efficiency",
+        "GPU acceleration if available (Metal on Mac)",
+        "Fallback to CPU",
+        "Typecheck passes"
+      ],
+      "priority": 23,
+      "passes": true,
+      "notes": "Consider @xenova/transformers for browser-compatible transformers. All processing must be local."
+    },
+    {
+      "id": "US-032",
+      "title": "OpenStax Anatomy & Physiology ingestion",
+      "description": "Download, parse, and ingest complete OpenStax A&P textbook with chunking and embedding.",
+      "acceptanceCriteria": [
+        "Download OpenStax A&P (HTML/EPUB format)",
+        "Parse chapter structure preserving hierarchy",
+        "Chunk into ~500 token segments with 50 token overlap",
+        "Generate embeddings for each chunk",
+        "Store with metadata (chapter, section, page, figures)",
+        "Progress indicator during ingestion",
+        "Verify completeness (26 chapters)",
+        "Typecheck passes"
+      ],
+      "priority": 24,
+      "passes": true,
+      "notes": "OpenStax A&P: https://openstax.org/details/books/anatomy-and-physiology-2e. CC-BY license."
+    },
+    {
+      "id": "US-033",
+      "title": "StatPearls medical articles ingestion",
+      "description": "Ingest StatPearls open-access medical reference articles covering anatomy, physiology, pathology.",
+      "acceptanceCriteria": [
+        "Fetch StatPearls via NCBI/PMC API",
+        "Filter to anatomy, physiology, pathology categories",
+        "Parse article structure (abstract, sections, key points)",
+        "Generate embeddings per section",
+        "Store with metadata (PMID, authors, date, MeSH terms)",
+        "Index at least 5000 relevant articles",
+        "Update mechanism for new articles",
+        "Typecheck passes"
+      ],
+      "priority": 25,
+      "passes": true,
+      "notes": "StatPearls articles are CC-BY 4.0. Use E-utilities API for bulk download."
+    },
+    {
+      "id": "US-034",
+      "title": "Histology image database",
+      "description": "Curate and integrate histology images for all tissue types with annotations.",
+      "acceptanceCriteria": [
+        "Source histology images from open databases (Histology Guide, Blue Histology)",
+        "Cover all major tissue types (epithelial, connective, muscle, nervous)",
+        "Multiple magnifications per tissue (4x, 10x, 40x, 100x)",
+        "Structure annotations/labels on images",
+        "Link histology to gross anatomy structures",
+        "Staining type metadata (H&E, special stains)",
+        "Typecheck passes"
+      ],
+      "priority": 26,
+      "passes": true,
+      "notes": "Blue Histology (UWA) and Histology Guide are open. ~500-1000 images needed."
+    },
+    {
+      "id": "US-035",
+      "title": "Histology viewer component",
+      "description": "Interactive viewer for histology images with zoom, pan, and annotation display.",
+      "acceptanceCriteria": [
+        "Pan and zoom (pinch on touch)",
+        "Deep zoom support for high-res images",
+        "Toggle annotation overlays",
+        "Magnification indicator",
+        "Compare two images side-by-side",
+        "Link to related 3D structure",
+        "Explanation panel at current complexity level",
+        "Typecheck passes"
+      ],
+      "priority": 27,
+      "passes": true,
+      "notes": "Consider OpenSeadragon for deep zoom. Pre-tile large images."
+    },
+    {
+      "id": "US-036",
+      "title": "Foundational Model of Anatomy (FMA) ontology integration",
+      "description": "Load and integrate FMA ontology for anatomical structure relationships and terminology.",
+      "acceptanceCriteria": [
+        "Parse FMA OWL file",
+        "Build navigable hierarchy (is-a, part-of relationships)",
+        "Map FMA IDs to 3D model structures",
+        "Query functions: get_parents, get_children, get_parts, get_whole",
+        "Synonym support for structure names",
+        "~80,000 anatomical entities indexed",
+        "Typecheck passes"
+      ],
+      "priority": 28,
+      "passes": true,
+      "notes": "FMA OWL available from BioPortal. Critical for structure linking."
+    },
+    {
+      "id": "US-037",
+      "title": "Human Phenotype Ontology (HPO) integration",
+      "description": "Integrate HPO for mapping symptoms/phenotypes to anatomical structures.",
+      "acceptanceCriteria": [
+        "Parse HPO OBO/OWL file",
+        "Build symptom hierarchy",
+        "Map phenotypes to anatomical locations",
+        "Link HPO terms to user symptom data",
+        "Query: symptoms_for_structure, structures_for_symptom",
+        "~15,000 phenotype terms indexed",
+        "Typecheck passes"
+      ],
+      "priority": 29,
+      "passes": true,
+      "notes": "HPO: https://hpo.jax.org. Critical for symptom-anatomy linking."
+    },
+    {
+      "id": "US-038",
+      "title": "RAG retrieval pipeline",
+      "description": "Implement retrieval-augmented generation pipeline for grounded AI responses.",
+      "acceptanceCriteria": [
+        "Semantic search across all vector collections",
+        "Configurable top-k retrieval (default 5)",
+        "Re-ranking by relevance score",
+        "Complexity-level filtering",
+        "Context window management (<4000 tokens)",
+        "Source deduplication",
+        "Fallback for no relevant results",
+        "Typecheck passes"
+      ],
+      "priority": 30,
+      "passes": true,
+      "notes": "Query all collections, merge results, re-rank. Consider hybrid search (semantic + keyword)."
+    },
+    {
+      "id": "US-039",
+      "title": "AI response with citations",
+      "description": "Enhance AI chat to include inline citations from retrieved sources.",
+      "acceptanceCriteria": [
+        "AI responses include [1], [2] style citations",
+        "Sources section at end of response",
+        "Citations link to content viewer",
+        "Citation includes: title, source, page/section",
+        "Highlight relevant passage when clicked",
+        "Copy citation in academic format",
+        "Typecheck passes"
+      ],
+      "priority": 31,
+      "passes": true,
+      "notes": "Modify system prompt to instruct citation format. Parse citations from response."
+    },
+    {
+      "id": "US-040",
+      "title": "Content viewer panel",
+      "description": "Full-text viewer for source content with formatting, images, and navigation.",
+      "acceptanceCriteria": [
+        "Side panel or modal for content viewing",
+        "Render formatted text (headers, lists, tables)",
+        "Display figures and diagrams",
+        "Highlight cited passage",
+        "Navigate within document (prev/next section)",
+        "Link to external source URL",
+        "Bookmark content for later",
+        "Typecheck passes"
+      ],
+      "priority": 32,
+      "passes": true,
+      "notes": "Support both OpenStax HTML and StatPearls article formats."
+    },
+    {
+      "id": "US-041",
+      "title": "Structure info panel with multi-level content",
+      "description": "When a structure is selected, show comprehensive info panel with content at user's complexity level.",
+      "acceptanceCriteria": [
+        "Panel shows: name, system, location description",
+        "Explanation at current complexity level",
+        "Key facts (bullet points)",
+        "Related structures (links)",
+        "Clinical correlations (at appropriate level)",
+        "Histology link (if applicable)",
+        "View in isolation button",
+        "Typecheck passes"
+      ],
+      "priority": 33,
+      "passes": true,
+      "notes": "Pull content from RAG, adapt to complexity level."
+    },
+    {
+      "id": "US-042",
+      "title": "Skeletal system complete module",
+      "description": "Full skeletal system with all 206 bones, educational content at all levels, clinical correlations.",
+      "acceptanceCriteria": [
+        "All 206 bones individually selectable",
+        "Bone info: name, type, location, landmarks",
+        "Articulations (joints) for each bone",
+        "Muscle attachment points",
+        "Blood supply and innervation",
+        "5-level explanations for each bone",
+        "Common fractures and pathologies",
+        "Relevant imaging examples",
+        "Typecheck passes"
+      ],
+      "priority": 34,
+      "passes": true,
+      "notes": "Include axial and appendicular skeleton. Link to relevant labs (calcium, vitamin D, ALP)."
+    },
+    {
+      "id": "US-043",
+      "title": "Muscular system complete module",
+      "description": "Full muscular system with all major muscles, origins/insertions, actions, innervation.",
+      "acceptanceCriteria": [
+        "All major muscles (~650) individually selectable",
+        "Muscle info: origin, insertion, action, innervation",
+        "Muscle fiber type and histology link",
+        "Blood supply",
+        "Antagonist/synergist relationships",
+        "5-level explanations",
+        "Common injuries and pathologies",
+        "Exercise correlations",
+        "Typecheck passes"
+      ],
+      "priority": 35,
+      "passes": true,
+      "notes": "Group by region and function. Link to relevant labs (CK, myoglobin)."
+    },
+    {
+      "id": "US-044",
+      "title": "Cardiovascular system complete module",
+      "description": "Heart anatomy, conduction system, complete arterial and venous systems with territories.",
+      "acceptanceCriteria": [
+        "4-chamber heart with valves, septa",
+        "Conduction system (SA node, AV node, bundle branches)",
+        "Coronary arteries with myocardial territories",
+        "All major arteries with supply regions",
+        "All major veins with drainage regions",
+        "Cardiac cycle animation",
+        "Blood flow direction indicators",
+        "ECG correlation points",
+        "5-level explanations for all structures",
+        "Typecheck passes"
+      ],
+      "priority": 36,
+      "passes": true,
+      "notes": "Link to user's HR, BP data. Show atherosclerosis pathophysiology for lipid abnormalities."
+    },
+    {
+      "id": "US-045",
+      "title": "Respiratory system complete module",
+      "description": "Complete respiratory system from nasal cavity to alveoli with ventilation mechanics.",
+      "acceptanceCriteria": [
+        "Upper respiratory tract (nasal, pharynx, larynx)",
+        "Lower respiratory tract (trachea, bronchi, bronchioles)",
+        "Lung lobes and segments",
+        "Alveolar structure (histology view)",
+        "Respiratory muscles (diaphragm, intercostals)",
+        "Gas exchange animation",
+        "Ventilation mechanics visualization",
+        "5-level explanations",
+        "Spirometry parameter correlations",
+        "Typecheck passes"
+      ],
+      "priority": 37,
+      "passes": true,
+      "notes": "Include microscopic view of alveolar-capillary interface."
+    },
+    {
+      "id": "US-046",
+      "title": "Digestive system complete module",
+      "description": "Complete GI tract and accessory organs with digestion and absorption physiology.",
+      "acceptanceCriteria": [
+        "GI tract from mouth to anus",
+        "Accessory organs (liver, pancreas, gallbladder) with ducts",
+        "Wall layer histology for each segment",
+        "Sphincters and motility",
+        "Digestive enzyme locations",
+        "Nutrient absorption sites mapped",
+        "Gut microbiome overview",
+        "Enterohepatic circulation",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 38,
+      "passes": true,
+      "notes": "Link to liver function labs, lipase/amylase, stool studies."
+    },
+    {
+      "id": "US-047",
+      "title": "Nervous system complete module",
+      "description": "Complete CNS and PNS with functional areas, pathways, and dermatomes.",
+      "acceptanceCriteria": [
+        "Brain with lobes, gyri, sulci, functional areas",
+        "Brainstem nuclei and tracts",
+        "Spinal cord segments with gray/white matter",
+        "All cranial nerves with functions",
+        "Major peripheral nerves",
+        "Dermatome map",
+        "Autonomic nervous system (sympathetic, parasympathetic)",
+        "Major ascending/descending pathways",
+        "Reflex arc visualization",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 39,
+      "passes": true,
+      "notes": "Critical for symptom localization. Include homunculus visualization."
+    },
+    {
+      "id": "US-048",
+      "title": "Endocrine system complete module",
+      "description": "All endocrine glands with hormones, targets, feedback loops.",
+      "acceptanceCriteria": [
+        "All endocrine glands selectable",
+        "Hormones produced by each gland",
+        "Target organs/tissues for each hormone",
+        "Hormone mechanism of action",
+        "Feedback loop visualizations (HPT, HPA, HPG)",
+        "Circadian rhythm correlations",
+        "5-level explanations",
+        "Link to endocrine labs (TSH, cortisol, insulin, etc.)",
+        "Typecheck passes"
+      ],
+      "priority": 40,
+      "passes": true,
+      "notes": "Show cascade effects when one hormone is abnormal."
+    },
+    {
+      "id": "US-049",
+      "title": "Urinary system complete module",
+      "description": "Kidneys with nephron detail, ureters, bladder, urethra, and renal physiology.",
+      "acceptanceCriteria": [
+        "Kidney gross anatomy (cortex, medulla, calyces)",
+        "Nephron detailed view (glomerulus, tubules, loop of Henle, collecting duct)",
+        "Juxtaglomerular apparatus",
+        "Glomerular filtration visualization",
+        "Tubular reabsorption/secretion sites",
+        "Counter-current mechanism",
+        "Bladder and micturition",
+        "5-level explanations",
+        "Link to kidney function labs (BUN, Cr, GFR, UA)",
+        "Typecheck passes"
+      ],
+      "priority": 41,
+      "passes": true,
+      "notes": "RAAS integration with cardiovascular module."
+    },
+    {
+      "id": "US-050",
+      "title": "Reproductive system complete module",
+      "description": "Male and female reproductive anatomy with gametogenesis and hormonal cycles.",
+      "acceptanceCriteria": [
+        "Male reproductive organs complete",
+        "Female reproductive organs complete",
+        "Gametogenesis (spermatogenesis, oogenesis) animations",
+        "Menstrual cycle visualization with hormone levels",
+        "Pregnancy overview (fertilization, implantation, development)",
+        "5-level explanations",
+        "Link to reproductive hormone labs",
+        "Typecheck passes"
+      ],
+      "priority": 42,
+      "passes": true,
+      "notes": "Include histology of gonads."
+    },
+    {
+      "id": "US-051",
+      "title": "Lymphatic and immune system complete module",
+      "description": "Lymphatic vessels, nodes, organs, and immune cell types with immune response basics.",
+      "acceptanceCriteria": [
+        "Lymphatic vessel network",
+        "Major lymph node groups",
+        "Spleen anatomy and function",
+        "Thymus anatomy and function",
+        "Lymph node internal structure (histology)",
+        "Immune cell types and functions",
+        "Innate vs adaptive immunity overview",
+        "Inflammatory response steps",
+        "5-level explanations",
+        "Link to WBC differential, immunoglobulins",
+        "Typecheck passes"
+      ],
+      "priority": 43,
+      "passes": true,
+      "notes": "Include bone marrow as lymphoid organ."
+    },
+    {
+      "id": "US-052",
+      "title": "Integumentary system complete module",
+      "description": "Skin layers, appendages, wound healing, and thermoregulation.",
+      "acceptanceCriteria": [
+        "Skin layer cross-section (epidermis, dermis, hypodermis)",
+        "Epidermis sublayers detail",
+        "Dermis structures (vessels, nerves, glands)",
+        "Hair follicle anatomy",
+        "Sweat glands (eccrine, apocrine)",
+        "Sebaceous glands",
+        "Nail anatomy",
+        "Wound healing phases animation",
+        "Skin lesion types",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 44,
+      "passes": true,
+      "notes": "Include common dermatology correlations."
+    },
+    {
+      "id": "US-053",
+      "title": "System interconnection visualizations",
+      "description": "Visualize how body systems interact through major physiological pathways.",
+      "acceptanceCriteria": [
+        "Cross-system pathway diagrams",
+        "Highlight structures across multiple systems simultaneously",
+        "Pathways: RAAS, HPT axis, HPA axis, enterohepatic circulation, glucose-insulin",
+        "Interactive exploration of pathway steps",
+        "Pathophysiology when pathway is disrupted",
+        "5-level explanations for each pathway",
+        "Typecheck passes"
+      ],
+      "priority": 45,
+      "passes": true,
+      "notes": "Critical for understanding systemic effects of biomarker changes."
+    },
+    {
+      "id": "US-054",
+      "title": "Lab-to-organ mapping database",
+      "description": "Comprehensive database mapping lab tests to organs, systems, and pathways.",
+      "acceptanceCriteria": [
+        "Map each common lab test to primary organs",
+        "Map to affected body systems",
+        "Map to metabolic/physiological pathways",
+        "Cover: CBC, CMP, LFTs, lipids, thyroid, coagulation, cardiac markers",
+        "Include lesser-known specialty labs",
+        "Bidirectional queries (lab→organ, organ→labs)",
+        "Extensible schema for new tests",
+        "Typecheck passes"
+      ],
+      "priority": 46,
+      "passes": true,
+      "notes": "Use LOINC codes for standardization."
+    },
+    {
+      "id": "US-055",
+      "title": "Biomarker pathway visualization",
+      "description": "When viewing a lab result, show the metabolic pathway with anatomical highlighting.",
+      "acceptanceCriteria": [
+        "Click lab result → show pathway diagram",
+        "Pathway steps with enzymes and locations",
+        "3D model highlights involved organs",
+        "Normal vs abnormal pathway states",
+        "Clinical significance at user's complexity level",
+        "Related labs in same pathway",
+        "Treatment targets on pathway",
+        "Typecheck passes"
+      ],
+      "priority": 47,
+      "passes": true,
+      "notes": "Use Reactome pathways as data source."
+    },
+    {
+      "id": "US-056",
+      "title": "Lipid metabolism deep dive",
+      "description": "Comprehensive lipid pathway: synthesis, absorption, transport, and atherosclerosis.",
+      "acceptanceCriteria": [
+        "Intestinal lipid absorption visualization",
+        "Liver lipid metabolism (synthesis, packaging)",
+        "Lipoprotein lifecycle (VLDL→LDL, HDL reverse transport)",
+        "Receptor-mediated uptake",
+        "Atherosclerosis plaque formation animation",
+        "Statin mechanism of action",
+        "Link to user's lipid panel",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 48,
+      "passes": true,
+      "notes": "High priority given prevalence of lipid disorders."
+    },
+    {
+      "id": "US-057",
+      "title": "Glucose metabolism deep dive",
+      "description": "Complete glucose handling: absorption, insulin signaling, storage, and diabetes pathophysiology.",
+      "acceptanceCriteria": [
+        "Intestinal glucose absorption",
+        "Pancreatic beta cell insulin release",
+        "Insulin receptor signaling cascade",
+        "GLUT transporter types and locations",
+        "Glycolysis, gluconeogenesis, glycogenesis pathways",
+        "Type 1 vs Type 2 diabetes pathophysiology",
+        "Link to user's glucose/HbA1c",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 49,
+      "passes": true,
+      "notes": "Include diabetic complications visualization."
+    },
+    {
+      "id": "US-058",
+      "title": "Electrolyte and fluid balance",
+      "description": "Sodium, potassium, calcium regulation with renal and hormonal mechanisms.",
+      "acceptanceCriteria": [
+        "Nephron segment-by-segment electrolyte handling",
+        "Aldosterone mechanism (Na/K)",
+        "ADH mechanism (water)",
+        "PTH/Vitamin D/Calcitonin axis (calcium)",
+        "Acid-base regulation (bicarbonate, respiratory compensation)",
+        "Clinical correlations (hypo/hypernatremia, etc.)",
+        "Link to user's electrolyte results",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 50,
+      "passes": true,
+      "notes": "Critical for understanding common lab abnormalities."
+    },
+    {
+      "id": "US-059",
+      "title": "One-click lab-to-anatomy exploration",
+      "description": "From any lab result in user's data, one click opens anatomical and pathway context.",
+      "acceptanceCriteria": [
+        "Lab result card has 'Explore' button",
+        "Opens 3D view focused on relevant organs",
+        "Shows pathway diagram in side panel",
+        "Explains what result means physiologically",
+        "Shows related structures to explore",
+        "Suggests related labs to review",
+        "At user's complexity level",
+        "Typecheck passes"
+      ],
+      "priority": 51,
+      "passes": true,
+      "notes": "Key integration point between user data and educational content."
+    },
+    {
+      "id": "US-060",
+      "title": "Symptom-to-anatomy mapping",
+      "description": "Map symptoms to possible anatomical sources with differential considerations.",
+      "acceptanceCriteria": [
+        "Symptom → list of possible anatomical sources",
+        "Weighted by likelihood/commonality",
+        "Consider referred pain patterns",
+        "Link to user's logged symptoms",
+        "Show relevant anatomy in 3D",
+        "Explain mechanism of symptom generation",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 52,
+      "passes": true,
+      "notes": "Use HPO mappings and clinical knowledge base."
+    },
+    {
+      "id": "US-061",
+      "title": "Differential diagnosis explorer",
+      "description": "For a symptom, show possible diagnoses with anatomical visualization.",
+      "acceptanceCriteria": [
+        "Input symptom or select from user's logs",
+        "List differential diagnoses ranked",
+        "Click diagnosis → highlight affected anatomy",
+        "Show pathophysiology for each differential",
+        "Red flags / alarm symptoms highlighted",
+        "When to seek care guidance",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 53,
+      "passes": true,
+      "notes": "Educational only - include prominent disclaimer."
+    },
+    {
+      "id": "US-062",
+      "title": "Pain referral pattern visualization",
+      "description": "Visualize visceral referred pain patterns with dermatomal mapping.",
+      "acceptanceCriteria": [
+        "Heart referred pain (arm, jaw)",
+        "Gallbladder referred pain (shoulder)",
+        "Appendix referred pain (periumbilical→RLQ)",
+        "Kidney referred pain (flank→groin)",
+        "Dermatomal overlay on body model",
+        "Explain viscerosomatic convergence mechanism",
+        "Interactive: click organ → show referral zone",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 54,
+      "passes": true,
+      "notes": "Critical for understanding symptom localization discrepancies."
+    },
+    {
+      "id": "US-063",
+      "title": "Symptom cluster recognition",
+      "description": "Identify symptom patterns that suggest specific syndromes.",
+      "acceptanceCriteria": [
+        "Define common symptom clusters/syndromes",
+        "Match user's symptoms to known clusters",
+        "Suggest possible syndromes with explanation",
+        "Anatomical/physiological mechanism",
+        "Confidence indicator",
+        "When to seek medical evaluation",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 55,
+      "passes": true,
+      "notes": "Educational pattern recognition, not diagnosis."
+    },
+    {
+      "id": "US-064",
+      "title": "Symptom-triggered learning prompts",
+      "description": "When user logs a symptom, offer contextual educational content.",
+      "acceptanceCriteria": [
+        "After symptom entry, show 'Learn About This' prompt",
+        "One-click access to relevant anatomy",
+        "Pathophysiology explanation",
+        "Related conditions overview",
+        "When to see a doctor guidance",
+        "Non-intrusive (can dismiss)",
+        "Remember dismissed prompts",
+        "Typecheck passes"
+      ],
+      "priority": 56,
+      "passes": true,
+      "notes": "Key AI cueing integration point."
+    },
+    {
+      "id": "US-065",
+      "title": "Region-based chief complaints",
+      "description": "For each body region, show common symptoms and their anatomical basis.",
+      "acceptanceCriteria": [
+        "Select 3D region → see common chief complaints",
+        "Each complaint links to underlying anatomy",
+        "User's past symptoms in this region shown",
+        "Educational content for region-specific issues",
+        "Differential anatomy for the region",
+        "5-level explanations",
+        "Typecheck passes"
+      ],
+      "priority": 57,
+      "passes": true,
+      "notes": "Bridges body map interaction with learning."
+    },
+    {
+      "id": "US-066",
+      "title": "Personalized health context in AI",
+      "description": "AI educational responses personalized to user's conditions, meds, and history.",
+      "acceptanceCriteria": [
+        "AI references user's specific conditions in explanations",
+        "Medication mechanisms explained in user's context",
+        "Lab trends interpreted personally",
+        "'Relevant to you' indicators on content",
+        "Privacy-preserving (all local)",
+        "User can toggle personalization off",
+        "Typecheck passes"
+      ],
+      "priority": 58,
+      "passes": true,
+      "notes": "Makes learning immediately applicable to user."
+    },
+    {
+      "id": "US-067",
+      "title": "Learning progress tracking",
+      "description": "Track what content user has explored, show progress through body systems.",
+      "acceptanceCriteria": [
+        "Mark structures/topics as viewed",
+        "Progress bar per body system",
+        "Overall completion percentage",
+        "'Continue learning' suggestions",
+        "Recently viewed history",
+        "Time spent per topic",
+        "Export progress report",
+        "Typecheck passes"
+      ],
+      "priority": 59,
+      "passes": true,
+      "notes": "Gamification element to encourage exploration."
+    },
+    {
+      "id": "US-068",
+      "title": "Bookmarks and personal notes",
+      "description": "Allow bookmarking structures and adding study notes.",
+      "acceptanceCriteria": [
+        "Bookmark any structure or content",
+        "Add personal notes to bookmarks",
+        "Bookmarks list with search and filter",
+        "Notes sync with structure selection",
+        "Tag bookmarks for organization",
+        "Export notes as Markdown/PDF",
+        "Import/export bookmark sets",
+        "Typecheck passes"
+      ],
+      "priority": 60,
+      "passes": true,
+      "notes": "Essential for medical student use case."
+    },
+    {
+      "id": "US-069",
+      "title": "Self-assessment quiz mode",
+      "description": "Generate quizzes on anatomy and physiology from content.",
+      "acceptanceCriteria": [
+        "Structure identification quizzes (show structure, name it)",
+        "Function/relationship questions",
+        "AI-generated questions from RAG content",
+        "Multiple choice and free response",
+        "Difficulty adapts to complexity level",
+        "Score tracking and history",
+        "Review incorrect answers with explanations",
+        "Focus on weak areas",
+        "Typecheck passes"
+      ],
+      "priority": 61,
+      "passes": true,
+      "notes": "Spaced repetition optional enhancement."
+    },
+    {
+      "id": "US-070",
+      "title": "Clinical pearls and high-yield content",
+      "description": "Highlight clinically important anatomy for medical students.",
+      "acceptanceCriteria": [
+        "'Clinical Pearl' badges on high-yield structures",
+        "Board exam relevant content flags",
+        "Surgical landmark highlighting",
+        "Physical exam correlations",
+        "Common exam questions noted",
+        "Filter view to show only high-yield",
+        "Typecheck passes"
+      ],
+      "priority": 62,
+      "passes": true,
+      "notes": "Specifically for medical education use case."
+    },
+    {
+      "id": "US-071",
+      "title": "AI learning recommendations",
+      "description": "AI suggests what to learn next based on health data and learning history.",
+      "acceptanceCriteria": [
+        "Analyze user's conditions/symptoms",
+        "Identify knowledge gaps",
+        "Prioritize relevant topics",
+        "'Because you have X, learn about Y' suggestions",
+        "Weekly learning digest",
+        "Respect learning pace preferences",
+        "Explain why each topic is recommended",
+        "Typecheck passes"
+      ],
+      "priority": 63,
+      "passes": true,
+      "notes": "Key AI cueing feature - proactive education."
+    },
+    {
+      "id": "US-072",
+      "title": "Precise AI cueing system",
+      "description": "AI proactively surfaces relevant educational content based on context.",
+      "acceptanceCriteria": [
+        "Cue triggers: symptom entry, lab view, biomarker change, time-based",
+        "Context-aware content selection",
+        "Non-intrusive notification system",
+        "Cue priority ranking (urgent vs nice-to-know)",
+        "Cue frequency preferences",
+        "Link cues directly to relevant 3D/content",
+        "Track cue engagement for improvement",
+        "Typecheck passes"
+      ],
+      "priority": 64,
+      "passes": true,
+      "notes": "Central orchestration for all AI-initiated education."
     }
   ]
 }

@@ -38,7 +38,6 @@ export interface SearchResult {
 export class VectorStore {
   private db: Database.Database;
   private embeddings: LocalEmbeddings;
-  private dimension: number | null = null;
 
   constructor(dbPath: string, embeddingModel: string = 'nomic-embed-text') {
     this.db = new Database(dbPath);
@@ -287,12 +286,17 @@ export class VectorStore {
    * Get all sources in the knowledge base
    */
   getSources(): Array<{ source: string; sourceType: string; count: number }> {
-    return this.db.prepare(`
+    const rows = this.db.prepare(`
       SELECT source, source_type, COUNT(*) as count
       FROM knowledge_chunks
       GROUP BY source, source_type
       ORDER BY count DESC
     `).all() as Array<{ source: string; source_type: string; count: number }>;
+    return rows.map(row => ({
+      source: row.source,
+      sourceType: row.source_type,
+      count: row.count,
+    }));
   }
 
   /**

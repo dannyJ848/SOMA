@@ -1316,3 +1316,41 @@ Continued building comprehensive anatomical system modules following the establi
   - Dismissed prompt tracking with show-again enables re-engagement
   - Urgent vs routine guidance helps users make decisions
 ---
+
+## 2026-01-21 - US-065
+- Implemented region-based chief complaints module
+  - 6 major body regions with comprehensive data:
+    - Head: headache, dizziness, memory problems
+    - Chest: chest pain, dyspnea, palpitations, cough
+    - Upper abdomen: epigastric pain, nausea/vomiting
+    - Lower back: low back pain, sciatica
+    - Knee (left/right): knee pain, knee swelling
+  - Each region includes:
+    - Bounding box for 3D coordinate hit detection
+    - Chief complaints with frequency (very-common to uncommon)
+    - Anatomical basis with structure IDs and mechanisms
+    - Regional anatomy overview (systems, key structures)
+    - Neural innervation (sensory, motor, dermatomal levels)
+    - Vascular supply (arterial, venous)
+    - Differential anatomy for symptom differentiation
+    - Region-specific red flags with urgency
+    - 5-level explanations
+  - Body region types covering 26 distinct regions
+  - User symptom history tracking per region
+  - API functions:
+    - getRegionComplaints for region data
+    - getTopComplaintsForRegion for frequent symptoms
+    - findRegionByCoordinates for 3D click detection
+    - createRegionExplorationResult for UI state
+  - Educational disclaimer
+- Files changed:
+  - core/exploration/chief-complaints/types.ts (new)
+  - core/exploration/chief-complaints/store.ts (new)
+  - core/exploration/chief-complaints/index.ts (new)
+  - prd.json (updated passes: true)
+- **Learnings for future iterations:**
+  - Bounding boxes enable 3D coordinate-based region detection
+  - Complaint frequency ranking helps surface common issues first
+  - Differential anatomy helps users understand diagnostic reasoning
+  - Shared data between bilateral regions (left/right knee) reduces duplication
+---

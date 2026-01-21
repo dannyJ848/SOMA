@@ -403,6 +403,35 @@ All AI layer user stories implemented:
 
 ---
 
+## 2026-01-20 - US-020
+
+### What was implemented
+- AnatomyViewer React component using @react-three/fiber
+- WebGL2 renderer with antialiasing and dpr scaling [1, 2]
+- Three-point lighting system (ambient + 2 directional lights)
+- Perspective camera at 45° FOV
+- OrbitControls with damping for smooth interaction
+- Preset anatomical views with smooth animated transitions
+- Stats component for FPS monitoring in dev mode
+- Placeholder capsule/sphere model as body stand-in
+
+### Files changed
+- **New**: `src/AnatomyViewer.tsx` - Complete 3D viewer component (250 lines)
+- **Modified**: `src/App.tsx` - Added anatomy view and navigation
+- **Modified**: `src/styles.css` - Added anatomy viewer styles (160 lines)
+- **Modified**: `prd.json` - US-020 passes: true
+- **Modified**: `package.json` - Added three, @react-three/fiber, @react-three/drei
+
+### Learnings for future iterations
+- **React Three Fiber pattern**: Use `<Canvas>` wrapper with inner components for Three.js objects
+- **Camera animation**: Use requestAnimationFrame with lerp for smooth transitions
+- **OrbitControls ref**: Access via ref to programmatically control camera position
+- **Dev mode detection**: Use `window.location.hostname === 'localhost'` instead of `import.meta.env.DEV` to avoid Vite type issues
+- **dpr setting**: Use `dpr={[1, 2]}` for retina display support while limiting max pixel ratio
+- **Stats component**: From @react-three/drei, shows FPS/memory in dev mode
+
+---
+
 ## Notes for Future Iterations
 
 - The user is a medical student, so clinical accuracy matters

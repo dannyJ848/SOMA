@@ -7,7 +7,7 @@
  */
 
 import { BiologicalSelfStore } from './core/biological-self/store.js';
-import type { BiologicalSelf, LabResult, Condition, Medication } from './core/biological-self/types.js';
+import type { BiologicalSelf, LabResult, Condition, Medication, Symptom, AssociatedFactor } from './core/biological-self/types.js';
 
 interface HealthSummary {
   totalConditions: number;
@@ -353,6 +353,31 @@ function getTimelineEvents(
     }
   }
 
+  // Symptoms
+  if (allowedTypes.includes('symptom')) {
+    for (const symptom of self.symptoms) {
+      const date = symptom.onsetDate;
+      if (startDate && date < startDate) continue;
+      if (endDate && date > endDate) continue;
+
+      events.push({
+        id: symptom.id,
+        type: 'symptom',
+        date: date.toISOString(),
+        title: symptom.description,
+        subtitle: `Severity: ${symptom.severity}/10 - ${symptom.bodyLocation.split('.').pop()?.replace(/-/g, ' ')}`,
+        details: {
+          severity: symptom.severity,
+          bodyLocation: symptom.bodyLocation,
+          status: symptom.status,
+          frequency: symptom.frequency,
+          associatedFactors: symptom.associatedFactors,
+          notes: symptom.notes,
+        },
+      });
+    }
+  }
+
   // Sort by date descending (most recent first)
   events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -388,6 +413,21 @@ function getTimelineData(
   };
 }
 
+function getRecentSymptoms(self: BiologicalSelf): DashboardData['recentSymptoms'] {
+  // Get active symptoms, sorted by onset date (most recent first)
+  return self.symptoms
+    .filter(s => s.status === 'active' || s.status === 'recurring')
+    .sort((a, b) => b.onsetDate.getTime() - a.onsetDate.getTime())
+    .slice(0, 10)
+    .map(s => ({
+      id: s.id,
+      description: s.description,
+      severity: s.severity,
+      location: s.bodyLocation,
+      onsetDate: s.onsetDate.toISOString(),
+    }));
+}
+
 function getDashboardData(self: BiologicalSelf | null): DashboardData {
   if (!self) {
     return {
@@ -406,7 +446,7 @@ function getDashboardData(self: BiologicalSelf | null): DashboardData {
     currentMedications: getCurrentMedications(self),
     recentLabs: getRecentLabsWithTrends(self),
     vitalsSummary: getVitalsSummary(self),
-    recentSymptoms: [], // Will be populated when symptoms are added (US-013)
+    recentSymptoms: getRecentSymptoms(self),
   };
 }
 
@@ -457,6 +497,61 @@ async function main() {
           const summary = getSummary(self);
           console.log(JSON.stringify(summary));
         }
+        break;
+      }
+
+      case 'add-symptom': {
+        // Read symptom data from argument (JSON string)
+        const symptomJson = process.argv[3];
+        if (!symptomJson) {
+          console.error('Missing symptom data');
+          process.exit(1);
+        }
+
+        const symptomData = JSON.parse(symptomJson) as {
+          description: string;
+          severity: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+          bodyLocation: string;
+          onsetDate: string;
+          duration?: { value: number; unit: string };
+          status: 'active' | 'resolved' | 'recurring';
+          associatedFactors?: AssociatedFactor[];
+          frequency?: string;
+          timeOfDay?: string;
+          notes?: string;
+        };
+
+        let self = store.get();
+        if (!self) {
+          console.error('No database found');
+          process.exit(1);
+        }
+
+        const newSymptom = store.addSymptom(self, {
+          description: symptomData.description,
+          severity: symptomData.severity,
+          bodyLocation: symptomData.bodyLocation,
+          onsetDate: new Date(symptomData.onsetDate),
+          duration: symptomData.duration as Symptom['duration'],
+          status: symptomData.status,
+          associatedFactors: symptomData.associatedFactors,
+          frequency: symptomData.frequency as Symptom['frequency'],
+          timeOfDay: symptomData.timeOfDay as Symptom['timeOfDay'],
+          notes: symptomData.notes,
+        });
+
+        // Refresh to get latest state
+        self = store.get();
+        console.log(JSON.stringify({
+          success: true,
+          symptom: {
+            ...newSymptom,
+            onsetDate: newSymptom.onsetDate.toISOString(),
+            resolvedDate: newSymptom.resolvedDate?.toISOString(),
+            createdAt: newSymptom.createdAt.toISOString(),
+            updatedAt: newSymptom.updatedAt.toISOString(),
+          },
+        }));
         break;
       }
 

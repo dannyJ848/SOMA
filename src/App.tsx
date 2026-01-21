@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
+import { SymptomEntryForm } from './SymptomEntryForm';
 
 interface HealthSummary {
   totalConditions: number;
@@ -102,6 +103,7 @@ function App() {
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
   const [bodyDiagramView, setBodyDiagramView] = useState<'anterior' | 'posterior'>('anterior');
   const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
+  const [showSymptomForm, setShowSymptomForm] = useState(false);
 
   useEffect(() => {
     checkDatabase();
@@ -620,6 +622,26 @@ function App() {
     // Get symptom locations from dashboard data
     const symptomLocations = dashboard?.recentSymptoms.map(s => s.location).filter(Boolean) as string[] || [];
 
+    // Show symptom form if requested
+    if (showSymptomForm) {
+      return (
+        <div className="container body-view">
+          <SymptomEntryForm
+            preselectedRegion={selectedBodyRegion || undefined}
+            onSave={() => {
+              setShowSymptomForm(false);
+              setSelectedBodyRegion(null);
+              // Refresh dashboard data to update symptom markers
+              loadDashboard();
+            }}
+            onCancel={() => {
+              setShowSymptomForm(false);
+            }}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="container body-view">
         <header className="app-header">
@@ -665,12 +687,7 @@ function App() {
               <span className="selected-region-name">{getRegionName(selectedBodyRegion)}</span>
               <button
                 className="add-symptom-button"
-                onClick={() => {
-                  // This will trigger the symptom form (US-015)
-                  console.log('Add symptom for region:', selectedBodyRegion);
-                  // For now, just show an alert. US-015 will implement the form.
-                  alert(`Ready to add symptom for: ${getRegionName(selectedBodyRegion)}\n\nSymptom entry form will be implemented in US-015.`);
-                }}
+                onClick={() => setShowSymptomForm(true)}
               >
                 Add Symptom Here
               </button>

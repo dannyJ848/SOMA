@@ -118,6 +118,36 @@ pub struct TimelineData {
     pub total_count: u32,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct SymptomDuration {
+    pub value: u32,
+    pub unit: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct SymptomInput {
+    pub description: String,
+    pub severity: u32,
+    #[serde(rename = "bodyLocation")]
+    pub body_location: String,
+    #[serde(rename = "onsetDate")]
+    pub onset_date: String,
+    pub duration: Option<SymptomDuration>,
+    pub status: String,
+    #[serde(rename = "associatedFactors")]
+    pub associated_factors: Option<Vec<String>>,
+    pub frequency: Option<String>,
+    #[serde(rename = "timeOfDay")]
+    pub time_of_day: Option<String>,
+    pub notes: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AddSymptomResult {
+    pub success: bool,
+    pub symptom: serde_json::Value,
+}
+
 // Store passphrase in memory for the session
 static PASSPHRASE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> = std::sync::OnceLock::new();
 
@@ -290,6 +320,37 @@ fn get_timeline(
         .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
 }
 
+#[tauri::command]
+fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
+    let db_path = get_db_path();
+
+    let passphrase = get_passphrase()
+        .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
+
+    // Serialize the symptom input to JSON string
+    let symptom_json = serde_json::to_string(&symptom)
+        .map_err(|e| format!("Failed to serialize symptom: {}", e))?;
+
+    let output = Command::new("npx")
+        .arg("tsx")
+        .arg("tauri-bridge.ts")
+        .arg("add-symptom")
+        .arg(&symptom_json)
+        .env("BIOSELF_PASSPHRASE", &passphrase)
+        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap())
+        .output()
+        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("Failed to add symptom: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -309,7 +370,8 @@ pub fn run() {
             unlock_database,
             create_database,
             get_dashboard,
-            get_timeline
+            get_timeline,
+            add_symptom
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -899,7 +899,7 @@
         "Typecheck passes"
       ],
       "priority": 50,
-      "passes": false,
+      "passes": true,
       "notes": "Critical for understanding common lab abnormalities."
     },
     {

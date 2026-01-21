@@ -806,7 +806,7 @@
         "Typecheck passes"
       ],
       "priority": 45,
-      "passes": false,
+      "passes": true,
       "notes": "Critical for understanding systemic effects of biomarker changes."
     },
     {

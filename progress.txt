@@ -180,12 +180,41 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-014
+
+### What was implemented
+- BodyDiagram.tsx component with SVG-based body outline
+- Anterior (front) view with 26 body regions (head, neck, torso, arms, legs)
+- Posterior (back) view with 24 body regions
+- Toggle buttons to switch between anterior/posterior views
+- Hover effect highlights region with tooltip showing region name
+- Click-to-select functionality with visual selection state
+- Symptom markers displayed on regions with existing symptoms
+- Body Map view integrated into main app navigation
+- Selected region ID available for passing to symptom entry form (US-015)
+- Hierarchical body location codes (e.g., body.torso.abdomen.right-lower-quadrant)
+- Helper functions: getRegionName(), getAllRegions()
+
+### Files changed
+- **New**: `src/BodyDiagram.tsx` - SVG body diagram component with regions and interaction
+- **Modified**: `src/App.tsx` - Added body view, body diagram state, navigation
+- **Modified**: `src/styles.css` - Added body diagram styles (regions, tooltips, markers, controls)
+
+### Learnings for future iterations
+- SVG paths for body regions can be simplified polygons, doesn't need perfect anatomy
+- Tooltip positioning needs transform: translateX(-50%) for centering
+- Use data-location attribute pattern for associating regions with hierarchical codes
+- Symptom markers use prefix matching to find parent regions
+- Keep anterior/posterior regions in separate arrays for clean view switching
+
+---
+
 ## Next Up
 
-Story 014: 2D anatomical body diagram
-- SVG-based body outline with clickable regions
-- Toggle between anterior/posterior views
-- Hover highlights with tooltips
+Story 015: Manual symptom entry form
+- Form to record symptoms with body location, description, severity, onset
+- Pre-select body location from diagram
+- Save to database and show on timeline/diagram
 
 ## Notes for Future Iterations
 

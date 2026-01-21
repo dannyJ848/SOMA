@@ -96,7 +96,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Use hierarchical SVG groups: body > torso > abdomen > quadrants. Each clickable region has data-location attribute."
     },
     {

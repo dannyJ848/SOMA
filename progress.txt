@@ -432,6 +432,33 @@ All AI layer user stories implemented:
 
 ---
 
+## 2026-01-20 - US-024
+
+### What was implemented
+- ModelLoader.tsx with comprehensive GLTF loading infrastructure
+- useModelLoader hook: loadModel, cancelLoad, retryLoad, clearCache, getLoadState, isCached
+- GLTFLoader configured with DRACOLoader for compressed models
+- Loading progress tracking (0-100%) with abort controller support
+- In-memory model cache (Map) to avoid reloading
+- LoadingProgress component with progress bars, cancel/retry buttons
+- Model component for easy rendering with position/rotation/scale
+- useSystemLoader hook for lazy loading anatomical systems
+- AnatomicalSystem type with 11 body systems defined
+
+### Files changed
+- **New**: `src/ModelLoader.tsx` - Complete model loading system (350 lines)
+- **Modified**: `src/styles.css` - Loading progress overlay styles (120 lines)
+- **Modified**: `prd.json` - US-024 passes: true
+
+### Learnings for future iterations
+- **DRACO decoder**: Use CDN path for decoder (gstatic.com/draco) or bundle locally
+- **AbortController pattern**: Store in ref Map to cancel specific loads
+- **Model cache**: Use Map<string, THREE.Group> at module level for persistence
+- **Clone models**: Always clone from cache to allow multiple instances
+- **Progress events**: GLTFLoader provides loaded/total bytes for progress calculation
+
+---
+
 ## Notes for Future Iterations
 
 - The user is a medical student, so clinical accuracy matters
@@ -439,4 +466,5 @@ All AI layer user stories implemented:
 - All data must stay local - this is the core differentiator
 - Educational only, never diagnostic
 - Phase 3 is the largest phase - estimated 10-18GB of assets
+- US-022 and US-023 require manual download of model/image datasets
 

@@ -8,14 +8,52 @@ import { InsightsPanel } from './InsightsPanel';
 // Check if running inside Tauri
 const isTauri = typeof window !== 'undefined' && !!(window as unknown as { __TAURI__?: unknown }).__TAURI__;
 
+// Mock data for browser development
+const mockDashboard = {
+  summary: {
+    totalConditions: 3,
+    totalMedications: 2,
+    totalLabResults: 5,
+    totalWhoopCycles: 30,
+    totalAppleHealthDays: 90,
+    lastUpdated: new Date().toISOString()
+  },
+  activeConditions: [
+    { id: '1', name: 'Hypertension', status: 'active', severity: 'moderate' },
+    { id: '2', name: 'Type 2 Diabetes', status: 'active', severity: 'mild' },
+    { id: '3', name: 'Hyperlipidemia', status: 'active', severity: 'mild' }
+  ],
+  currentMedications: [
+    { id: '1', name: 'Lisinopril', dosage: '10mg', frequency: 'daily' },
+    { id: '2', name: 'Metformin', dosage: '500mg', frequency: 'twice daily' }
+  ],
+  recentLabs: [
+    { id: '1', testName: 'HbA1c', value: 6.8, unit: '%', status: 'elevated', collectedAt: '2024-06-15', trend: 'down', previousValue: 7.2 },
+    { id: '2', testName: 'LDL Cholesterol', value: 118, unit: 'mg/dL', status: 'borderline', collectedAt: '2024-06-15', trend: 'stable' },
+    { id: '3', testName: 'Creatinine', value: 0.9, unit: 'mg/dL', status: 'normal', collectedAt: '2024-06-15', trend: 'stable' }
+  ],
+  vitalsSummary: {
+    restingHeartRate: 68,
+    hrv: 42,
+    sleepHours: 7.2,
+    recoveryScore: 78,
+    steps: 8500,
+    lastUpdated: new Date().toISOString()
+  }
+};
+
 // Wrapper for Tauri invoke that handles browser mode gracefully
 async function invoke<T>(cmd: string, args?: Record<string, unknown>): Promise<T> {
   if (!isTauri) {
     console.log(`[Browser Mode] Tauri command "${cmd}" called with args:`, args);
     // Return mock data for browser development
     if (cmd === 'check_database_exists') return false as T;
-    if (cmd === 'get_dashboard') return { summary: { totalConditions: 0, totalMedications: 0, totalLabResults: 0, totalWhoopCycles: 0, totalAppleHealthDays: 0, lastUpdated: null }, activeConditions: [], currentMedications: [], recentLabs: [], vitalsSummary: {} } as T;
+    if (cmd === 'create_database') return true as T;
+    if (cmd === 'unlock_database') return true as T;
+    if (cmd === 'get_dashboard') return mockDashboard as T;
     if (cmd === 'get_timeline') return [] as T;
+    if (cmd === 'log_symptom') return { id: Date.now().toString(), success: true } as T;
+    if (cmd === 'chat_with_ai') return { response: 'This is a mock AI response in browser mode. The full AI integration works when running in Tauri desktop mode.' } as T;
     throw new Error(`No mock data for command: ${cmd}`);
   }
   return tauriInvoke<T>(cmd, args);

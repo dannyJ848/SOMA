@@ -35,15 +35,29 @@ interface AIHealthResponse {
   error?: string;
 }
 
-interface AIChatResponse {
+interface Citation {
+  index: number;
+  source: string;
+  section?: string;
+  url?: string;
+}
+
+interface AIChatRAGResponse {
   content: string;
   model: string;
   done: boolean;
+  citations: Citation[];
+  ragContext?: {
+    chunksUsed: number;
+    totalTokens: number;
+    processingTimeMs: number;
+  };
 }
 
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+  citations?: Citation[];
 }
 
 interface ChatViewProps {
@@ -100,7 +114,7 @@ function buildHealthContext(dashboard: DashboardData | null): string {
   return parts.join('\n\n');
 }
 
-const SYSTEM_PROMPT_TEMPLATE = `You are a helpful health education assistant for the Biological Self app. You help users understand their health data and learn about medical concepts.
+const SYSTEM_PROMPT_TEMPLATE = `You are a health and life sciences education assistant for the Biological Self app. You help users understand their health data, learn about anatomy, physiology, and medical concepts.
 
 IMPORTANT: You are NOT a doctor. You provide educational information only, not medical advice or diagnoses. Always encourage users to consult healthcare professionals for medical decisions.
 
@@ -110,11 +124,13 @@ The user has the following health information on file:
 
 Guidelines:
 - Be helpful, clear, and educational
-- Explain medical terms in accessible language
-- When discussing their data, help them understand what values mean
+- Explain medical terms in accessible language using proper anatomical and physiological terminology
+- When discussing their data, help them understand what values mean in the context of body systems
+- Relate health topics to relevant anatomy and physiology when helpful
+- Use citations [1], [2], etc. when referencing educational content
 - Never diagnose or prescribe
 - If asked about treatment decisions, recommend consulting their doctor
-- Keep responses concise but informative`;
+- Keep responses informative with proper scientific context`;
 
 export function ChatView({ onBack, dashboardData }: ChatViewProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -167,15 +183,24 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
       }));
       chatMessages.push({ role: 'user', content: userMessage });
 
-      const response = await invoke<AIChatResponse>('ai_chat', {
+      // Use RAG-enhanced chat for better educational content with citations
+      const response = await invoke<AIChatRAGResponse>('ai_chat_rag', {
         request: {
           messages: chatMessages,
           systemPrompt,
           temperature: 0.7,
+          ragOptions: {
+            complexityLevel: 3,
+            maxTokens: 3000,
+          },
         },
       });
 
-      setMessages(prev => [...prev, { role: 'assistant', content: response.content }]);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: response.content,
+        citations: response.citations,
+      }]);
     } catch (err) {
       console.error('Chat error:', err);
       setMessages(prev => [...prev, {
@@ -280,6 +305,35 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
             </div>
             <div className="message-content">
               {message.content}
+              {message.citations && message.citations.length > 0 && (
+                <div className="message-citations">
+                  <div className="citations-header">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                    Sources
+                  </div>
+                  <div className="citations-list">
+                    {message.citations.map((citation) => (
+                      <a
+                        key={citation.index}
+                        href={citation.url || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="citation-link"
+                        onClick={(e) => !citation.url && e.preventDefault()}
+                      >
+                        <span className="citation-index">[{citation.index}]</span>
+                        <span className="citation-source">{citation.source}</span>
+                        {citation.section && (
+                          <span className="citation-section">{citation.section}</span>
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ))}

@@ -17,6 +17,12 @@ import {
   type OllamaStatus,
 } from './core/ai/ollama.js';
 import { RAGRetrieval, type RetrievedContext } from './core/rag/retrieval.js';
+import {
+  searchHealthTopic,
+  formatPubMedContext,
+  formatPubMedCitations,
+  type PubMedSearchResult,
+} from './core/ai/pubmed-search.js';
 
 interface AIHealthResponse {
   available: boolean;
@@ -56,6 +62,8 @@ interface AIChatRAGRequest {
     system?: string;         // Body system filter
     complexityLevel?: 1 | 2 | 3 | 4 | 5;
     maxTokens?: number;
+    includePubMed?: boolean; // Include live PubMed search
+    pubMedQuery?: string;    // Custom PubMed query
   };
 }
 
@@ -171,14 +179,12 @@ async function main() {
         const request = JSON.parse(requestJson) as AIChatRAGRequest;
         const rag = new RAGRetrieval();
         let context: RetrievedContext | null = null;
+        const ragOpts = request.ragOptions || {};
 
         try {
           // Get the user's query from the last message
           const userMessages = request.messages.filter(m => m.role === 'user');
           const lastQuery = userMessages[userMessages.length - 1]?.content || '';
-
-          // Retrieve relevant content based on RAG options
-          const ragOpts = request.ragOptions || {};
 
           if (ragOpts.structureName) {
             // Anatomy-specific retrieval
@@ -213,6 +219,25 @@ async function main() {
           console.error('RAG retrieval warning:', ragError);
         }
 
+        // Optional: Search PubMed for recent literature
+        let pubmedResult: PubMedSearchResult | null = null;
+
+        if (ragOpts?.includePubMed) {
+          try {
+            const userMessages = request.messages.filter(m => m.role === 'user');
+            const lastQuery = userMessages[userMessages.length - 1]?.content || '';
+            const pubmedQuery = ragOpts.pubMedQuery || ragOpts.structureName || lastQuery;
+
+            pubmedResult = await searchHealthTopic(pubmedQuery, {
+              includeReviews: true,
+              recentOnly: true,
+              maxResults: 3,
+            });
+          } catch (pubmedError) {
+            console.error('PubMed search warning:', pubmedError);
+          }
+        }
+
         // Build enhanced system prompt with RAG context
         let enhancedSystemPrompt = request.systemPrompt || '';
 
@@ -233,6 +258,18 @@ ${citations}
 Important: Base your response on the educational content above when relevant. Include citations [1], [2], etc. when using information from these sources.`;
         }
 
+        // Add PubMed results if available
+        if (pubmedResult && pubmedResult.articles.length > 0) {
+          const pubmedContext = formatPubMedContext(pubmedResult);
+
+          enhancedSystemPrompt += `
+
+=== RECENT RESEARCH (PubMed) ===
+The following recent research articles may provide additional context. Cite using [PubMed-N] notation if relevant.
+
+${pubmedContext}`;
+        }
+
         const messages: ChatMessage[] = [];
         if (enhancedSystemPrompt) {
           messages.push({ role: 'system', content: enhancedSystemPrompt });
@@ -247,13 +284,30 @@ Important: Base your response on the educational content above when relevant. In
 
         const result = await chat(chatRequest);
 
-        // Build citations array from context
-        const citationsArray = context?.chunks.map(chunk => ({
+        // Build citations array from RAG context
+        const citationsArray: Array<{
+          index: number;
+          source: string;
+          section?: string;
+          url?: string;
+        }> = context?.chunks.map(chunk => ({
           index: chunk.citationIndex || 0,
           source: chunk.metadata.source,
           section: chunk.metadata.section || chunk.metadata.chapter,
           url: chunk.metadata.url,
         })) || [];
+
+        // Add PubMed citations
+        if (pubmedResult && pubmedResult.articles.length > 0) {
+          const pubmedCitations = formatPubMedCitations(pubmedResult);
+          // Map to ensure compatible type (make url optional)
+          citationsArray.push(...pubmedCitations.map(c => ({
+            index: c.index,
+            source: c.source,
+            section: c.section,
+            url: c.url as string | undefined,
+          })));
+        }
 
         const response: AIChatRAGResponse = {
           content: result.message.content,

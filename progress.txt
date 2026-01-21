@@ -459,6 +459,33 @@ All AI layer user stories implemented:
 
 ---
 
+## 2026-01-20 - US-025
+
+### What was implemented
+- LayerPanel.tsx component with full layer management UI
+- 7 primary anatomical layers with sublayers (21 total)
+- useLayerState hook for state management
+- Visibility toggles, opacity sliders, solo mode
+- 6 preset configurations (All Systems, Musculoskeletal, etc.)
+- Expandable sublayer accordions
+- localStorage persistence of layer state
+- Integrated into AnatomyViewer with toggle button
+
+### Files changed
+- **New**: `src/LayerPanel.tsx` - Complete layer management (430 lines)
+- **Modified**: `src/AnatomyViewer.tsx` - Integrated LayerPanel
+- **Modified**: `src/styles.css` - Layer panel styles (250 lines)
+- **Modified**: `prd.json` - US-025 passes: true
+
+### Learnings for future iterations
+- **Layer hierarchy**: Use dot notation (e.g., `cardiovascular.arteries`) for sublayer IDs
+- **Solo mode pattern**: Store solo layer ID separately, apply in isVisible()
+- **localStorage persistence**: Serialize Map to object for JSON.stringify
+- **Preset system**: Define activeLayers array and filter visibility accordingly
+- **Opacity inheritance**: Sublayer opacity should multiply with parent opacity
+
+---
+
 ## Notes for Future Iterations
 
 - The user is a medical student, so clinical accuracy matters

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
+import { BodyDiagram, getRegionName } from './BodyDiagram';
 
 interface HealthSummary {
   totalConditions: number;
@@ -81,7 +82,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline';
+type View = 'dashboard' | 'timeline' | 'body';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -99,6 +100,8 @@ function App() {
   const [activeFilters, setActiveFilters] = useState<TimelineEventType[]>(['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom']);
   const [dateRange, setDateRange] = useState<{ start?: string; end?: string }>({});
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+  const [bodyDiagramView, setBodyDiagramView] = useState<'anterior' | 'posterior'>('anterior');
+  const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
 
   useEffect(() => {
     checkDatabase();
@@ -612,6 +615,72 @@ function App() {
     );
   }
 
+  // Body Map View
+  if (currentView === 'body') {
+    // Get symptom locations from dashboard data
+    const symptomLocations = dashboard?.recentSymptoms.map(s => s.location).filter(Boolean) as string[] || [];
+
+    return (
+      <div className="container body-view">
+        <header className="app-header">
+          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+          </button>
+          <h1>Body Map</h1>
+          <div className="header-spacer" />
+        </header>
+
+        <section className="body-diagram-section">
+          <div className="body-diagram-header">
+            <h2>Select a Body Region</h2>
+            <div className="body-diagram-controls">
+              <button
+                className={`view-toggle ${bodyDiagramView === 'anterior' ? 'active' : ''}`}
+                onClick={() => setBodyDiagramView('anterior')}
+              >
+                Front
+              </button>
+              <button
+                className={`view-toggle ${bodyDiagramView === 'posterior' ? 'active' : ''}`}
+                onClick={() => setBodyDiagramView('posterior')}
+              >
+                Back
+              </button>
+            </div>
+          </div>
+
+          <BodyDiagram
+            view={bodyDiagramView}
+            selectedRegion={selectedBodyRegion || undefined}
+            onRegionSelect={(regionId) => setSelectedBodyRegion(regionId)}
+            symptomLocations={symptomLocations}
+          />
+
+          {selectedBodyRegion && (
+            <div className="selected-region-display">
+              <span className="selected-region-label">Selected Region</span>
+              <span className="selected-region-name">{getRegionName(selectedBodyRegion)}</span>
+              <button
+                className="add-symptom-button"
+                onClick={() => {
+                  // This will trigger the symptom form (US-015)
+                  console.log('Add symptom for region:', selectedBodyRegion);
+                  // For now, just show an alert. US-015 will implement the form.
+                  alert(`Ready to add symptom for: ${getRegionName(selectedBodyRegion)}\n\nSymptom entry form will be implemented in US-015.`);
+                }}
+              >
+                Add Symptom Here
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="container dashboard">
       <header className="app-header">
@@ -620,13 +689,24 @@ function App() {
           <h1>Biological Self</h1>
           <p className="subtitle">Your health, understood</p>
         </div>
-        <button className="timeline-button" onClick={() => setCurrentView('timeline')}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          Timeline
-        </button>
+        <div className="header-actions">
+          <button className="header-action-button" onClick={() => setCurrentView('body')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2a3 3 0 0 0-3 3c0 1.5 1.5 3 3 3s3-1.5 3-3a3 3 0 0 0-3-3z"/>
+              <path d="M12 8v14"/>
+              <path d="M8 12h8"/>
+              <path d="M8 22l4-4 4 4"/>
+            </svg>
+            Body
+          </button>
+          <button className="header-action-button" onClick={() => setCurrentView('timeline')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            Timeline
+          </button>
+        </div>
       </header>
 
       <main>

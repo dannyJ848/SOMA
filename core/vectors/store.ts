@@ -163,19 +163,20 @@ export class VectorStore {
     }
 
     // Convert documents to table format
+    // Use empty strings/0 instead of null to help LanceDB infer types
     const data = documents.map(doc => ({
       id: doc.id,
       text: doc.text,
       vector: doc.vector,
       source: doc.metadata.source,
-      chapter: doc.metadata.chapter || null,
-      section: doc.metadata.section || null,
-      system: doc.metadata.system || null,
-      structureId: doc.metadata.structureId || null,
-      complexityLevel: doc.metadata.complexityLevel || null,
-      pageNumber: doc.metadata.pageNumber || null,
-      url: doc.metadata.url || null,
-      license: doc.metadata.license || null,
+      chapter: doc.metadata.chapter || '',
+      section: doc.metadata.section || '',
+      system: doc.metadata.system || '',
+      structureId: doc.metadata.structureId || '',
+      complexityLevel: doc.metadata.complexityLevel || 0,
+      pageNumber: doc.metadata.pageNumber || 0,
+      url: doc.metadata.url || '',
+      license: doc.metadata.license || '',
       createdAt: doc.metadata.createdAt,
       updatedAt: doc.metadata.updatedAt,
     }));
@@ -211,19 +212,20 @@ export class VectorStore {
     const table = await this.getTable(collection);
 
     // Convert documents to table format
+    // Use empty strings/0 instead of null to help LanceDB infer types
     const data = documents.map(doc => ({
       id: doc.id,
       text: doc.text,
       vector: doc.vector,
       source: doc.metadata.source,
-      chapter: doc.metadata.chapter || null,
-      section: doc.metadata.section || null,
-      system: doc.metadata.system || null,
-      structureId: doc.metadata.structureId || null,
-      complexityLevel: doc.metadata.complexityLevel || null,
-      pageNumber: doc.metadata.pageNumber || null,
-      url: doc.metadata.url || null,
-      license: doc.metadata.license || null,
+      chapter: doc.metadata.chapter || '',
+      section: doc.metadata.section || '',
+      system: doc.metadata.system || '',
+      structureId: doc.metadata.structureId || '',
+      complexityLevel: doc.metadata.complexityLevel || 0,
+      pageNumber: doc.metadata.pageNumber || 0,
+      url: doc.metadata.url || '',
+      license: doc.metadata.license || '',
       createdAt: doc.metadata.createdAt,
       updatedAt: doc.metadata.updatedAt,
     }));
@@ -248,20 +250,21 @@ export class VectorStore {
     let query = table.search(queryVector).limit(limit);
 
     // Apply filters if provided
+    // Note: Use backticks for column names to preserve case sensitivity in LanceDB
     if (filter) {
       const conditions: string[] = [];
 
       if (filter.source) {
-        conditions.push(`source = '${filter.source}'`);
+        conditions.push(`\`source\` = '${filter.source}'`);
       }
       if (filter.system) {
-        conditions.push(`system = '${filter.system}'`);
+        conditions.push(`\`system\` = '${filter.system}'`);
       }
       if (filter.structureId) {
-        conditions.push(`structureId = '${filter.structureId}'`);
+        conditions.push(`\`structureId\` = '${filter.structureId}'`);
       }
       if (filter.complexityLevel !== undefined) {
-        conditions.push(`complexityLevel = ${filter.complexityLevel}`);
+        conditions.push(`\`complexityLevel\` = ${filter.complexityLevel}`);
       }
 
       if (conditions.length > 0) {
@@ -273,25 +276,32 @@ export class VectorStore {
     const results = await query.toArray();
 
     // Convert to SearchResult format and filter by score
+    // LanceDB uses L2 distance by default. For normalized vectors:
+    // L2_distance² = 2(1 - cosine_similarity), so cosine_similarity = 1 - L2²/2
     return results
-      .map(row => ({
-        id: row.id as string,
-        text: row.text as string,
-        metadata: {
-          source: row.source as string,
-          chapter: row.chapter as string | undefined,
-          section: row.section as string | undefined,
-          system: row.system as string | undefined,
-          structureId: row.structureId as string | undefined,
-          complexityLevel: row.complexityLevel as 1 | 2 | 3 | 4 | 5 | undefined,
-          pageNumber: row.pageNumber as number | undefined,
-          url: row.url as string | undefined,
-          license: row.license as string | undefined,
-          createdAt: row.createdAt as string,
-          updatedAt: row.updatedAt as string,
-        },
-        score: row._distance !== undefined ? 1 - row._distance : 1,
-      }))
+      .map(row => {
+        const distance = row._distance as number | undefined;
+        // Convert L2 distance to cosine similarity for normalized vectors
+        const score = distance !== undefined ? 1 - (distance * distance / 2) : 1;
+        return {
+          id: row.id as string,
+          text: row.text as string,
+          metadata: {
+            source: row.source as string,
+            chapter: row.chapter as string | undefined,
+            section: row.section as string | undefined,
+            system: row.system as string | undefined,
+            structureId: row.structureId as string | undefined,
+            complexityLevel: row.complexityLevel as 1 | 2 | 3 | 4 | 5 | undefined,
+            pageNumber: row.pageNumber as number | undefined,
+            url: row.url as string | undefined,
+            license: row.license as string | undefined,
+            createdAt: row.createdAt as string,
+            updatedAt: row.updatedAt as string,
+          },
+          score: Math.max(0, Math.min(1, score)),  // Clamp to [0, 1]
+        };
+      })
       .filter(r => r.score >= minScore);
   }
 

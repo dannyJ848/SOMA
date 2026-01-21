@@ -100,12 +100,41 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-011
+
+### What was implemented
+- Extended tauri-bridge.ts with `get-dashboard` command returning full health data
+- Added Rust structs for dashboard data types (ConditionSummary, MedicationSummary, LabWithTrend, VitalsSummary)
+- Implemented session passphrase storage in Rust for subsequent IPC calls
+- Created comprehensive dashboard with four main sections:
+  - Vitals Summary: resting HR, HRV, recovery score, sleep hours, steps
+  - Active Conditions: list with status badges (active/chronic)
+  - Current Medications: list with dosage and frequency
+  - Recent Labs: grid with values, units, and trend indicators
+- Lab trend calculation uses 5% threshold to determine up/down/stable
+- Empty states with contextual icons for all sections
+- Data summary footer with total counts
+
+### Files changed
+- **Modified**: `tauri-bridge.ts` - Added get-dashboard command with trend calculation
+- **Modified**: `src-tauri/src/lib.rs` - Added DashboardData structs and get_dashboard command
+- **Modified**: `src/App.tsx` - Full dashboard implementation with cards
+- **Modified**: `src/styles.css` - Dashboard styles (grids, cards, badges, trends)
+
+### Learnings for future iterations
+- Store passphrase in Rust static for session persistence (avoids re-auth on each call)
+- Trend calculation needs threshold to avoid noise (5% works well)
+- serde_json::Value useful for polymorphic fields (lab values can be number or string)
+- Grid layouts with auto-fit work well for responsive card layouts
+
+---
+
 ## Next Up
 
-Story 011: Dashboard home screen
-- Load and display health data from encrypted store
-- Cards for vitals, conditions, meds, labs
-- Trend indicators for labs
+Story 012: Health timeline view
+- Chronological timeline of all health events
+- Color-coded by event type
+- Filterable and date-selectable
 
 ## Notes for Future Iterations
 

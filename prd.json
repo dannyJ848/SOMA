@@ -48,7 +48,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Database already has: 75 labs, 255 Whoop cycles, 891 Apple Health summaries. Use store.get() to load data."
     },
     {

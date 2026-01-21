@@ -669,7 +669,7 @@
         "Typecheck passes"
       ],
       "priority": 38,
-      "passes": false,
+      "passes": true,
       "notes": "Link to liver function labs, lipase/amylase, stool studies."
     },
     {
@@ -690,7 +690,7 @@
         "Typecheck passes"
       ],
       "priority": 39,
-      "passes": false,
+      "passes": true,
       "notes": "Critical for symptom localization. Include homunculus visualization."
     },
     {
@@ -709,7 +709,7 @@
         "Typecheck passes"
       ],
       "priority": 40,
-      "passes": false,
+      "passes": true,
       "notes": "Show cascade effects when one hormone is abnormal."
     },
     {
@@ -729,7 +729,7 @@
         "Typecheck passes"
       ],
       "priority": 41,
-      "passes": false,
+      "passes": true,
       "notes": "RAAS integration with cardiovascular module."
     },
     {

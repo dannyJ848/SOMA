@@ -696,3 +696,44 @@ All AI layer user stories implemented:
 - **Streaming with citations**: Citations extracted after full response received
 
 ---
+
+## 2026-01-21 - US-040 and US-041
+
+### What was implemented (2 stories)
+
+**US-040: Content Viewer Panel**
+- Created src/ContentViewer.tsx for full-text source viewing
+- Markdown-like content rendering (headers, lists, bold, italic)
+- Citation highlighting with scroll-to-passage
+- Document outline sidebar with heading navigation
+- Font size controls (A-, A+)
+- Bookmarking functionality
+- Related documents linking
+- Source attribution and license display
+
+**US-041: Structure Info Panel with Multi-Level Content**
+- Created src/StructureInfoPanel.tsx for selected structure details
+- Panel shows: name, Latin name, system, location
+- 5-level explanation display with fallback to lower levels
+- Collapsible sections (Key Facts, Related Structures, Clinical)
+- Related structures with navigation links (partOf, hasParts, relatedTo)
+- Clinical correlations (shown only at level 4-5)
+- Related lab tests display
+- Quick action buttons (View in Isolation, View Histology)
+- Ask AI suggestions for structure-specific questions
+- Loading skeleton and error states
+- Sample data generation for testing (heart example)
+
+### Files changed
+- **New**: src/ContentViewer.tsx (552 lines)
+- **New**: src/StructureInfoPanel.tsx (708 lines)
+- **Modified**: prd.json - US-040 and US-041 passes: true
+
+### Learnings for future iterations
+- **Variable naming**: Avoid `document` as prop name (conflicts with global)
+- **Level fallback**: When content not available at user's level, try lower levels first
+- **Collapsible sections**: Use Set<string> for tracking expanded section IDs
+- **Sample data**: Create realistic examples for each major organ during dev
+- **Panel patterns**: Loading skeleton, error with retry, and loaded states
+
+---

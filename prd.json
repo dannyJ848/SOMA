@@ -553,7 +553,7 @@
         "Typecheck passes"
       ],
       "priority": 32,
-      "passes": false,
+      "passes": true,
       "notes": "Support both OpenStax HTML and StatPearls article formats."
     },
     {
@@ -571,7 +571,7 @@
         "Typecheck passes"
       ],
       "priority": 33,
-      "passes": false,
+      "passes": true,
       "notes": "Pull content from RAG, adapt to complexity level."
     },
     {
@@ -590,7 +590,7 @@
         "Typecheck passes"
       ],
       "priority": 34,
-      "passes": false,
+      "passes": true,
       "notes": "Include axial and appendicular skeleton. Link to relevant labs (calcium, vitamin D, ALP)."
     },
     {
@@ -609,7 +609,7 @@
         "Typecheck passes"
       ],
       "priority": 35,
-      "passes": false,
+      "passes": true,
       "notes": "Group by region and function. Link to relevant labs (CK, myoglobin)."
     },
     {
@@ -629,7 +629,7 @@
         "Typecheck passes"
       ],
       "priority": 36,
-      "passes": false,
+      "passes": true,
       "notes": "Link to user's HR, BP data. Show atherosclerosis pathophysiology for lipid abnormalities."
     },
     {
@@ -649,7 +649,7 @@
         "Typecheck passes"
       ],
       "priority": 37,
-      "passes": false,
+      "passes": true,
       "notes": "Include microscopic view of alveolar-capillary interface."
     },
     {

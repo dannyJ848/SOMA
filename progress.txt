@@ -209,12 +209,45 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-015
+
+### What was implemented
+- Add-symptom command in tauri-bridge.ts receiving JSON data as argument
+- Rust add_symptom command with SymptomInput struct for type-safe deserialization
+- SymptomEntryForm React component with comprehensive form fields:
+  - Body location dropdown (pre-selected from diagram via getAllRegions helper)
+  - Symptom description textarea
+  - Severity slider (1-10) with descriptive labels (Minimal→Worst possible)
+  - Date/time picker for onset using datetime-local input
+  - Duration toggle (ongoing vs specific with value + unit)
+  - Associated factors checkboxes (13 predefined values from types.ts)
+  - Additional notes textarea
+- Integration into Body Map view with form state management
+- Dashboard recentSymptoms now populated from actual symptom data
+- Timeline view includes symptoms as orange event markers
+- Form validation (description and body location required)
+- Save/cancel flow with dashboard refresh on successful save
+
+### Files changed
+- **Modified**: `tauri-bridge.ts` - Added add-symptom case, getRecentSymptoms function, symptoms in timeline events
+- **Modified**: `src-tauri/src/lib.rs` - Added SymptomInput, SymptomDuration, AddSymptomResult structs and add_symptom command
+- **New**: `src/SymptomEntryForm.tsx` - Complete symptom entry form component
+- **Modified**: `src/App.tsx` - Added showSymptomForm state, integrated SymptomEntryForm in body view
+- **Modified**: `src/styles.css` - Added 288 lines of form styles (slider, checkboxes, duration controls)
+
+### Learnings for future iterations
+- Pass complex data to tauri-bridge via JSON string argument (process.argv[3])
+- Use serde rename attributes for camelCase→snake_case field mapping in Rust
+- getAllRegions() helper from BodyDiagram.tsx provides sorted, deduplicated list
+- Symptom severity as literal type (1|2|...|10) requires casting when passing to invoke
+- Duration "ongoing" is stored as {value: 0, unit: "ongoing"} rather than undefined
+- Form components should call parent callbacks (onSave/onCancel) rather than managing navigation
+
+---
+
 ## Next Up
 
-Story 015: Manual symptom entry form
-- Form to record symptoms with body location, description, severity, onset
-- Pre-select body location from diagram
-- Save to database and show on timeline/diagram
+All Phase 1 user stories are complete
 
 ## Notes for Future Iterations
 

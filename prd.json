@@ -953,7 +953,7 @@
         "Typecheck passes"
       ],
       "priority": 53,
-      "passes": false,
+      "passes": true,
       "notes": "Educational only - include prominent disclaimer."
     },
     {

@@ -148,6 +148,59 @@ pub struct AddSymptomResult {
     pub symptom: serde_json::Value,
 }
 
+// AI Types
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIHealthResponse {
+    pub available: bool,
+    pub version: Option<String>,
+    pub error: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct OllamaModelDetails {
+    pub format: Option<String>,
+    pub family: Option<String>,
+    pub parameter_size: Option<String>,
+    pub quantization_level: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct OllamaModel {
+    pub name: String,
+    pub modified_at: String,
+    pub size: u64,
+    pub digest: String,
+    pub details: Option<OllamaModelDetails>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIModelsResponse {
+    pub models: Vec<OllamaModel>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ChatMessage {
+    pub role: String,
+    pub content: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIChatRequest {
+    pub model: Option<String>,
+    pub messages: Vec<ChatMessage>,
+    #[serde(rename = "systemPrompt")]
+    pub system_prompt: Option<String>,
+    pub format: Option<String>,
+    pub temperature: Option<f64>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct AIChatResponse {
+    pub content: String,
+    pub model: String,
+    pub done: bool,
+}
+
 // Store passphrase in memory for the session
 static PASSPHRASE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> = std::sync::OnceLock::new();
 
@@ -374,6 +427,106 @@ fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
         .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
 }
 
+// ============================================================================
+// AI Commands
+// ============================================================================
+
+#[tauri::command]
+fn ai_health() -> Result<AIHealthResponse, String> {
+    let project_root = get_project_root();
+    let output = Command::new("npx")
+        .current_dir(&project_root)
+        .arg("tsx")
+        .arg("ai-bridge.ts")
+        .arg("health")
+        .output()
+        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("AI health check failed: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+}
+
+#[tauri::command]
+fn ai_models() -> Result<AIModelsResponse, String> {
+    let project_root = get_project_root();
+    let output = Command::new("npx")
+        .current_dir(&project_root)
+        .arg("tsx")
+        .arg("ai-bridge.ts")
+        .arg("models")
+        .output()
+        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("Failed to list AI models: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+}
+
+#[tauri::command]
+fn ai_chat(request: AIChatRequest) -> Result<AIChatResponse, String> {
+    let project_root = get_project_root();
+
+    // Serialize the request to JSON
+    let request_json = serde_json::to_string(&request)
+        .map_err(|e| format!("Failed to serialize chat request: {}", e))?;
+
+    let output = Command::new("npx")
+        .current_dir(&project_root)
+        .arg("tsx")
+        .arg("ai-bridge.ts")
+        .arg("chat")
+        .arg(&request_json)
+        .output()
+        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("AI chat failed: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+}
+
+#[tauri::command]
+fn ai_chat_json(request: AIChatRequest) -> Result<serde_json::Value, String> {
+    let project_root = get_project_root();
+
+    // Serialize the request to JSON
+    let request_json = serde_json::to_string(&request)
+        .map_err(|e| format!("Failed to serialize chat request: {}", e))?;
+
+    let output = Command::new("npx")
+        .current_dir(&project_root)
+        .arg("tsx")
+        .arg("ai-bridge.ts")
+        .arg("chat-json")
+        .arg(&request_json)
+        .output()
+        .map_err(|e| format!("Failed to execute AI bridge: {}", e))?;
+
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("AI chat JSON failed: {}", stderr));
+    }
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout)
+        .map_err(|e| format!("Failed to parse AI response: {} - stdout: {}", e, stdout))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -394,7 +547,11 @@ pub fn run() {
             create_database,
             get_dashboard,
             get_timeline,
-            add_symptom
+            add_symptom,
+            ai_health,
+            ai_models,
+            ai_chat,
+            ai_chat_json
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -132,7 +132,7 @@
         "Typecheck passes"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
       "notes": "Use Ollama REST API at http://localhost:11434. User has deepseek-r1:14b pulled. Keep all inference local - this is core to privacy promise."
     },
     {

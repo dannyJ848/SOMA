@@ -32,7 +32,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Use existing BiologicalSelfStore from core/biological-self/store.ts. Passphrase derives AES-256-GCM key."
     },
     {

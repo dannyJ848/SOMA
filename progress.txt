@@ -77,12 +77,35 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-010
+
+### What was implemented
+- Enhanced first-run experience with comprehensive privacy explanation
+- Passphrase creation with confirmation field for new databases
+- Password strength indicator (Too short → Weak → Good → Strong)
+- Three privacy feature cards explaining encryption, local-only storage, and user control
+- Improved unlock flow for existing databases
+- Error handling with clear messages and "Clear and try again" option
+- Loading states during submit operations
+
+### Files changed
+- **Modified**: `src/App.tsx` - Complete auth flow overhaul
+- **Modified**: `src/styles.css` - New styles for auth components
+
+### Learnings for future iterations
+- Keep auth flow separate from dashboard - makes state management cleaner
+- Passphrase strength should guide users but not block (8 char minimum is enforced)
+- Error messages should be actionable - include retry mechanism
+- Privacy messaging is important for user trust in a health app
+
+---
+
 ## Next Up
 
-Story 010: Authentication and encryption setup flow
-- First-run passphrase creation with confirmation
-- Unlock flow for existing databases
-- Clear privacy messaging
+Story 011: Dashboard home screen
+- Load and display health data from encrypted store
+- Cards for vitals, conditions, meds, labs
+- Trend indicators for labs
 
 ## Notes for Future Iterations
 

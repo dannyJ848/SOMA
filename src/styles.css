@@ -2143,3 +2143,162 @@ input:disabled {
   background: var(--bg-secondary);
   color: var(--text-primary);
 }
+
+/* ============================================
+   3D Anatomy Viewer Styles
+   ============================================ */
+
+.anatomy-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-primary);
+}
+
+.anatomy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.anatomy-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.anatomy-header .back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.anatomy-header .back-button:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+}
+
+.view-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.current-view {
+  padding: 0.25rem 0.75rem;
+  background: var(--accent);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.anatomy-controls {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+.view-presets {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.view-presets .control-label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.view-presets button {
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-presets button:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.view-presets button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.view-presets .reset-button {
+  margin-left: 0.5rem;
+  background: transparent;
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.view-presets .reset-button:hover {
+  background: var(--warning);
+  color: var(--bg-primary);
+}
+
+.canvas-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.anatomy-footer {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.controls-help {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.controls-help span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.controls-help strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Stats panel positioning (dev mode) */
+.anatomy-viewer .stats-panel {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+}

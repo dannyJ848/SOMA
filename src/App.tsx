@@ -4,6 +4,7 @@ import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
+import { AnatomyViewer } from './AnatomyViewer';
 
 interface HealthSummary {
   totalConditions: number;
@@ -85,7 +86,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -631,6 +632,13 @@ function App() {
     );
   }
 
+  // 3D Anatomy View
+  if (currentView === 'anatomy') {
+    return (
+      <AnatomyViewer onBack={() => setCurrentView('dashboard')} />
+    );
+  }
+
   // Body Map View
   if (currentView === 'body') {
     // Get symptom locations from dashboard data
@@ -726,6 +734,14 @@ function App() {
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
             Chat
+          </button>
+          <button className="header-action-button" onClick={() => setCurrentView('anatomy')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
+              <circle cx="12" cy="16" r="2"/>
+            </svg>
+            3D Anatomy
           </button>
           <button className="header-action-button" onClick={() => setCurrentView('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

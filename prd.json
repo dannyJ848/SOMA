@@ -219,7 +219,7 @@
         "Typecheck passes"
       ],
       "priority": 13,
-      "passes": false,
+      "passes": true,
       "notes": "Use OrbitControls from three/examples. Store camera state for view restoration."
     },
     {

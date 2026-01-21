@@ -3,6 +3,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
+import { InsightsPanel } from './InsightsPanel';
 
 interface HealthSummary {
   totalConditions: number;
@@ -105,6 +106,7 @@ function App() {
   const [bodyDiagramView, setBodyDiagramView] = useState<'anterior' | 'posterior'>('anterior');
   const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
   const [showSymptomForm, setShowSymptomForm] = useState(false);
+  const [dataVersion, setDataVersion] = useState(0);
 
   useEffect(() => {
     checkDatabase();
@@ -138,6 +140,7 @@ function App() {
     try {
       const data = await invoke<DashboardData>('get_dashboard');
       setDashboard(data);
+      setDataVersion(v => v + 1); // Trigger insights refresh
     } catch (err) {
       console.error('Failed to load dashboard:', err);
     } finally {
@@ -795,6 +798,9 @@ function App() {
             )}
           </div>
         </section>
+
+        {/* AI Insights Panel */}
+        <InsightsPanel dashboardData={dashboard} dataVersion={dataVersion} />
 
         {/* Two-column layout for conditions and meds */}
         <div className="two-column">

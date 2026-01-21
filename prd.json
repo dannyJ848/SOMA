@@ -183,7 +183,7 @@
         "Typecheck passes"
       ],
       "priority": 11,
-      "passes": false,
+      "passes": true,
       "notes": "Generate insights asynchronously. Cache results until data changes. Focus on objective observations, not diagnoses. Example: 'Your headache symptoms appear more frequently on days with less than 6 hours of sleep.'"
     }
   ]

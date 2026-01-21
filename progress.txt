@@ -301,9 +301,36 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-018
+
+### What was implemented
+- Two-mode SymptomEntryForm: NL input mode and manual form mode
+- NL input mode with textarea for natural language description
+- AI parsing using JSON mode with structured output prompt
+- Body location mapping (BODY_LOCATION_MAP) from common terms to hierarchical codes
+- Form pre-fill with parsed data (description, severity, location, duration, factors)
+- "Parse with AI" button with loading spinner
+- "Fill form manually instead" fallback option
+- "Describe naturally" button in manual mode header to switch back
+- AI availability check on mount with warning message
+
+### Files changed
+- **Modified**: `src/SymptomEntryForm.tsx` - Added NL mode, parsing function, body location mapping (200+ lines)
+- **Modified**: `src/styles.css` - Added NL input styles (150+ lines)
+- **Modified**: `prd.json` - US-018 passes: true
+
+### Learnings for future iterations
+- Body location mapping handles common synonyms (stomach→abdomen, belly→abdomen)
+- Use low temperature (0.3) for structured data extraction to reduce hallucination
+- Fallback to manual mode when AI unavailable - don't block the user
+- Preselected region from body diagram should skip NL mode (already have location)
+- JSON mode response comes as `{ result: T, success: boolean }`
+
+---
+
 ## Next Up
 
-US-018: Natural language symptom entry (Phase 2)
+US-019: Health insights panel (Phase 2)
 
 ## Notes for Future Iterations
 

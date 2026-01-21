@@ -3017,3 +3017,192 @@ input:disabled {
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
 }
+
+/* ============================================
+   Complexity Level Selector Styles
+   ============================================ */
+
+.complexity-selector {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.complexity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.complexity-header h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.current-level-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.complexity-slider-container {
+  position: relative;
+  padding: 0.5rem 0 2rem 0;
+}
+
+.complexity-slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, #4ade80, #60a5fa, #a78bfa, #f97316, #ef4444);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.complexity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.complexity-marks {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.complexity-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mark-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.2s;
+}
+
+.complexity-mark.active .mark-dot {
+  background: var(--level-color, var(--accent));
+  transform: scale(1.5);
+}
+
+.mark-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.complexity-mark.active .mark-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.complexity-description {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.complexity-desc-text {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.complexity-audience {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.audience-label {
+  color: var(--text-secondary);
+}
+
+.audience-text {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.complexity-characteristics {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.complexity-characteristics li {
+  margin-bottom: 0.25rem;
+}
+
+/* Compact selector */
+.complexity-selector-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.complexity-selector-compact .complexity-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.complexity-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.complexity-btn {
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.complexity-btn:hover {
+  border-color: var(--level-color, var(--accent));
+  color: var(--level-color, var(--accent));
+}
+
+.complexity-btn.active {
+  background: var(--level-color, var(--accent));
+  border-color: var(--level-color, var(--accent));
+  color: white;
+}
+
+/* Multi-level content transitions */
+.multi-level-content {
+  transition: opacity 0.3s ease;
+}

@@ -343,7 +343,7 @@
         "Typecheck passes"
       ],
       "priority": 20,
-      "passes": false,
+      "passes": true,
       "notes": "Levels: 1=8th Grade (simple analogies), 2=High School (basic terminology), 3=College (full terminology), 4=Graduate (mechanisms), 5=MD (clinical correlations)"
     },
     {

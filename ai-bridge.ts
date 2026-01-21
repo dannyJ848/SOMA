@@ -23,6 +23,12 @@ import {
   formatPubMedCitations,
   type PubMedSearchResult,
 } from './core/ai/pubmed-search.js';
+import {
+  ContentIngestion,
+  type IngestionResult,
+  type CollectionName,
+  COLLECTIONS,
+} from './core/ingestion/index.js';
 
 interface AIHealthResponse {
   available: boolean;
@@ -367,8 +373,108 @@ ${pubmedContext}`;
         break;
       }
 
+      case 'ingest-sample': {
+        // Ingest sample life sciences content for testing/demo
+        const ingestion = new ContentIngestion();
+        try {
+          console.error('Ingesting sample life sciences content...');
+          const results = await ingestion.ingestSampleContent();
+
+          const summary = {
+            success: true,
+            collections: results.map(r => ({
+              collection: r.collection,
+              chunks: r.chunksCreated,
+              tokens: r.totalTokens,
+              timeMs: r.processingTimeMs,
+            })),
+            totalChunks: results.reduce((sum, r) => sum + r.chunksCreated, 0),
+            totalTokens: results.reduce((sum, r) => sum + r.totalTokens, 0),
+          };
+
+          console.log(JSON.stringify(summary));
+        } finally {
+          await ingestion.close();
+        }
+        break;
+      }
+
+      case 'ingest': {
+        // Ingest content from file or directory
+        const argJson = process.argv[3];
+        if (!argJson) {
+          console.error('Missing ingest arguments');
+          process.exit(1);
+        }
+
+        const args = JSON.parse(argJson) as {
+          collection: CollectionName;
+          path: string;
+          metadata?: Record<string, string | number>;
+          isDirectory?: boolean;
+        };
+
+        if (!COLLECTIONS.includes(args.collection)) {
+          console.error(`Invalid collection. Must be one of: ${COLLECTIONS.join(', ')}`);
+          process.exit(1);
+        }
+
+        const ingestion = new ContentIngestion();
+        try {
+          let result: IngestionResult;
+
+          if (args.isDirectory) {
+            result = await ingestion.ingestDirectory(
+              args.collection,
+              args.path,
+              args.metadata || {},
+              {
+                onProgress: (p) => console.error(`${p.stage}: ${p.message}`),
+              }
+            );
+          } else {
+            result = await ingestion.ingestFile(
+              args.collection,
+              args.path,
+              args.metadata || {},
+              {
+                onProgress: (p) => console.error(`${p.stage}: ${p.message}`),
+              }
+            );
+          }
+
+          console.log(JSON.stringify({
+            success: true,
+            collection: result.collection,
+            documentsAdded: result.documentsAdded,
+            chunksCreated: result.chunksCreated,
+            totalTokens: result.totalTokens,
+            processingTimeMs: result.processingTimeMs,
+          }));
+        } finally {
+          await ingestion.close();
+        }
+        break;
+      }
+
+      case 'rag-stats': {
+        // Get RAG collection statistics
+        const rag = new RAGRetrieval();
+        try {
+          const stats = await rag.getStats();
+          console.log(JSON.stringify({
+            success: true,
+            ...stats,
+          }));
+        } finally {
+          await rag.close();
+        }
+        break;
+      }
+
       default:
         console.error(`Unknown AI command: ${command}`);
+        console.error('Available commands: health, models, chat, chat-json, chat-rag, stream, ingest-sample, ingest, rag-stats');
         process.exit(1);
     }
   } catch (err) {

@@ -129,12 +129,39 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-012
+
+### What was implemented
+- Timeline data aggregation in tauri-bridge.ts collecting events from labs, imaging, conditions, medications, surgeries
+- New `get-timeline` Rust command with optional filter parameters (types, startDate, endDate)
+- Timeline React component with vertical layout and color-coded event markers
+- Six event type colors: lab=blue, imaging=purple, condition=amber, medication=emerald, surgery=red, symptom=orange
+- Filter toggles allowing users to show/hide event types
+- Date range selector with clear button
+- Click-to-detail modal showing full event information
+- Navigation between dashboard and timeline views
+
+### Files changed
+- **Modified**: `tauri-bridge.ts` - Added TimelineEvent/TimelineData interfaces, getTimelineEvents, getTimelineData functions, and get-timeline command
+- **Modified**: `src-tauri/src/lib.rs` - Added TimelineEvent, TimelineFilters, TimelineData structs and get_timeline command
+- **Modified**: `src/App.tsx` - Added Timeline view, filters, date range selector, event detail modal, navigation
+- **Modified**: `src/styles.css` - Added timeline styles (controls, items, markers, modal)
+
+### Learnings for future iterations
+- Rust command parameters should be Optional types for clean API design
+- CSS timeline with ::before pseudo-element for the vertical line works well
+- Modal pattern: overlay onClick closes, content stopPropagation prevents close
+- Event color mapping with Record<Type, string> provides type safety
+- useEffect dependencies should include filter state for auto-reload on filter change
+
+---
+
 ## Next Up
 
-Story 012: Health timeline view
-- Chronological timeline of all health events
-- Color-coded by event type
-- Filterable and date-selectable
+Story 013: Symptom data model
+- Add Symptom interface to types.ts
+- Implement store methods for symptom CRUD
+- Use hierarchical body location codes
 
 ## Notes for Future Iterations
 

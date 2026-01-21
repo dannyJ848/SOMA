@@ -486,6 +486,33 @@ All AI layer user stories implemented:
 
 ---
 
+## 2026-01-20 - US-026
+
+### What was implemented
+- SelectionManager.tsx with comprehensive selection infrastructure
+- useSelectionManager hook: select, addToSelection, toggleSelection, clearSelection
+- RaycasterManager component for mouse picking using THREE.Raycaster
+- OutlineEffect component for visual selection feedback
+- SelectionInfo panel showing structure details
+- Multi-select with Shift+click
+- HIGHLIGHT_COLORS for hover/selected states
+- useHighlightMaterials hook for material management
+- StructureMetadata interface for FMA integration
+
+### Files changed
+- **New**: `src/SelectionManager.tsx` - Complete selection system (320 lines)
+- **Modified**: `src/styles.css` - Selection info panel styles (130 lines)
+- **Modified**: `prd.json` - US-026 passes: true
+
+### Learnings for future iterations
+- **Raycaster pattern**: Use useFrame to check hover state, event listener for clicks
+- **Material swapping**: Store original materials in Map keyed by mesh.uuid
+- **Multi-select**: Use Shift key event.shiftKey to toggle selection mode
+- **Mesh registry**: Store Map<id, {mesh, metadata}> for structure lookup
+- **Outline geometry**: Use THREE.EdgesGeometry(geometry, threshold) for edge detection
+
+---
+
 ## Notes for Future Iterations
 
 - The user is a medical student, so clinical accuracy matters

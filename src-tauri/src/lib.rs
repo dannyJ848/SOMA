@@ -168,9 +168,22 @@ fn set_passphrase(passphrase: String) {
     }
 }
 
-fn get_data_dir() -> PathBuf {
+fn get_project_root() -> PathBuf {
+    // When running via Tauri, we might be in src-tauri, so go up one level
     let current_dir = std::env::current_dir().unwrap_or_default();
-    current_dir.join("data")
+    if current_dir.ends_with("src-tauri") {
+        current_dir.parent().unwrap_or(&current_dir).to_path_buf()
+    } else if current_dir.join("tauri-bridge.ts").exists() {
+        current_dir
+    } else if current_dir.parent().map(|p| p.join("tauri-bridge.ts").exists()).unwrap_or(false) {
+        current_dir.parent().unwrap().to_path_buf()
+    } else {
+        current_dir
+    }
+}
+
+fn get_data_dir() -> PathBuf {
+    get_project_root().join("data")
 }
 
 fn get_db_path() -> PathBuf {
@@ -190,7 +203,9 @@ fn unlock_database(passphrase: String) -> Result<HealthSummary, String> {
         return Err("Database does not exist. Please create one first.".to_string());
     }
 
+    let project_root = get_project_root();
     let output = Command::new("npx")
+        .current_dir(&project_root)
         .arg("tsx")
         .arg("tauri-bridge.ts")
         .arg("get-summary")
@@ -224,7 +239,9 @@ fn create_database(passphrase: String) -> Result<HealthSummary, String> {
             .map_err(|e| format!("Failed to create data directory: {}", e))?;
     }
 
+    let project_root = get_project_root();
     let output = Command::new("npx")
+        .current_dir(&project_root)
         .arg("tsx")
         .arg("tauri-bridge.ts")
         .arg("create")
@@ -253,7 +270,9 @@ fn get_dashboard() -> Result<DashboardData, String> {
     let passphrase = get_passphrase()
         .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
 
+    let project_root = get_project_root();
     let output = Command::new("npx")
+        .current_dir(&project_root)
         .arg("tsx")
         .arg("tauri-bridge.ts")
         .arg("get-dashboard")
@@ -283,8 +302,10 @@ fn get_timeline(
     let passphrase = get_passphrase()
         .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
 
+    let project_root = get_project_root();
     let mut cmd = Command::new("npx");
-    cmd.arg("tsx")
+    cmd.current_dir(&project_root)
+        .arg("tsx")
         .arg("tauri-bridge.ts")
         .arg("get-timeline")
         .env("BIOSELF_PASSPHRASE", &passphrase)
@@ -331,7 +352,9 @@ fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
     let symptom_json = serde_json::to_string(&symptom)
         .map_err(|e| format!("Failed to serialize symptom: {}", e))?;
 
+    let project_root = get_project_root();
     let output = Command::new("npx")
+        .current_dir(&project_root)
         .arg("tsx")
         .arg("tauri-bridge.ts")
         .arg("add-symptom")

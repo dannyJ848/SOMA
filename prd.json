@@ -307,7 +307,7 @@
         "Typecheck passes"
       ],
       "priority": 18,
-      "passes": false,
+      "passes": true,
       "notes": "Use OutlinePass from three/examples for highlight effect. Store selection state."
     },
     {

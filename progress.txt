@@ -328,9 +328,40 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
-## Next Up
+## 2026-01-20 - US-019
 
-US-019: Health insights panel (Phase 2)
+### What was implemented
+- InsightsPanel component with AI-powered health data analysis
+- buildDataSummary function extracts relevant health data for AI prompts
+- System prompt instructs AI to generate 2-4 objective insights as JSON array
+- Skeleton loading animation while generating insights
+- Refresh button to regenerate insights on demand
+- dataVersion prop triggers insights refresh when dashboard data changes
+- Educational disclaimer in panel header
+- Panel hides itself when AI is unavailable
+
+### Files changed
+- **New**: `src/InsightsPanel.tsx` - Complete insights panel component (200 lines)
+- **Modified**: `src/App.tsx` - Added InsightsPanel import and dataVersion state
+- **Modified**: `src/styles.css` - Added 150+ lines of insights panel styles
+- **Modified**: `prd.json` - US-019 passes: true
+
+### Learnings for future iterations
+- Use JSON array output for structured insights (easier to parse and display)
+- dataVersion pattern allows parent to signal data changes to children
+- Skeleton loading animation (shimmer effect) provides good UX during AI generation
+- Hide components gracefully when dependencies unavailable rather than showing errors
+- Focus AI prompts on patterns and correlations, not diagnoses
+
+---
+
+## Phase 2 Complete
+
+All AI layer user stories implemented:
+- US-016: Local LLM integration with Ollama
+- US-017: AI chat interface
+- US-018: Natural language symptom entry
+- US-019: Health insights panel
 
 ## Notes for Future Iterations
 

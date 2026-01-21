@@ -642,7 +642,10 @@ function App() {
           <div className="loading">Loading 3D Anatomy Viewer...</div>
         </div>
       }>
-        <AnatomyViewer onBack={() => setCurrentView('dashboard')} />
+        <AnatomyViewer
+          onBack={() => setCurrentView('dashboard')}
+          dashboardData={dashboard}
+        />
       </Suspense>
     );
   }

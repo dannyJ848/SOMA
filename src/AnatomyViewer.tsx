@@ -1,11 +1,25 @@
-import { useState, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
 import { LayerPanel, useLayerState } from './LayerPanel';
+import { StructureInfoPanel } from './StructureInfoPanel';
+import { AnatomyChatPanel } from './AnatomyChatPanel';
+import { type DashboardData } from './utils/anatomyContextBuilder';
 
 interface AnatomyViewerProps {
   onBack: () => void;
+  dashboardData: DashboardData | null;
+}
+
+// Structure definition for clickable body parts
+interface BodyStructure {
+  id: string;
+  name: string;
+  position: [number, number, number];
+  geometry: 'sphere' | 'cylinder' | 'capsule';
+  args: number[];
+  rotation?: [number, number, number];
 }
 
 // Performance monitor component (dev mode only)
@@ -49,41 +63,133 @@ function AnatomicalLighting() {
   );
 }
 
-// Placeholder anatomy model (will be replaced with actual models in US-022)
-function PlaceholderModel() {
+// Body structure definitions
+const BODY_STRUCTURES: BodyStructure[] = [
+  { id: 'head', name: 'Head', position: [0, 1.35, 0], geometry: 'sphere', args: [0.25, 32, 32] },
+  { id: 'neck', name: 'Neck', position: [0, 1.0, 0], geometry: 'cylinder', args: [0.1, 0.12, 0.2, 16] },
+  { id: 'chest', name: 'Chest', position: [0, 0.55, 0], geometry: 'capsule', args: [0.3, 0.5, 16, 32] },
+  { id: 'abdomen', name: 'Abdomen', position: [0, -0.1, 0], geometry: 'capsule', args: [0.28, 0.4, 16, 32] },
+  { id: 'leftArm', name: 'Left Arm', position: [-0.5, 0.4, 0], geometry: 'cylinder', args: [0.08, 0.08, 0.8, 16], rotation: [0, 0, Math.PI / 6] },
+  { id: 'rightArm', name: 'Right Arm', position: [0.5, 0.4, 0], geometry: 'cylinder', args: [0.08, 0.08, 0.8, 16], rotation: [0, 0, -Math.PI / 6] },
+  { id: 'leftLeg', name: 'Left Leg', position: [-0.18, -0.85, 0], geometry: 'cylinder', args: [0.1, 0.1, 1.0, 16] },
+  { id: 'rightLeg', name: 'Right Leg', position: [0.18, -0.85, 0], geometry: 'cylinder', args: [0.1, 0.1, 1.0, 16] },
+];
+
+// Single clickable body part mesh
+interface BodyPartProps {
+  structure: BodyStructure;
+  isHovered: boolean;
+  isSelected: boolean;
+  onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerOut: (e: ThreeEvent<PointerEvent>) => void;
+  onClick: (e: ThreeEvent<MouseEvent>) => void;
+}
+
+function BodyPart({ structure, isHovered, isSelected, onPointerOver, onPointerOut, onClick }: BodyPartProps) {
   const meshRef = useRef<THREE.Mesh>(null);
+
+  // Determine color based on state
+  const baseColor = '#e8d4c4';
+  const hoverEmissive = '#2244ff';
+  const selectedEmissive = '#22ff44';
+
+  let emissiveColor = '#000000';
+  let emissiveIntensity = 0;
+
+  if (isSelected) {
+    emissiveColor = selectedEmissive;
+    emissiveIntensity = 0.3;
+  } else if (isHovered) {
+    emissiveColor = hoverEmissive;
+    emissiveIntensity = 0.2;
+  }
+
+  // Create geometry based on type
+  const renderGeometry = () => {
+    switch (structure.geometry) {
+      case 'sphere':
+        return <sphereGeometry args={structure.args as [number, number, number]} />;
+      case 'cylinder':
+        return <cylinderGeometry args={structure.args as [number, number, number, number]} />;
+      case 'capsule':
+        return <capsuleGeometry args={structure.args as [number, number, number, number]} />;
+    }
+  };
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={structure.position}
+      rotation={structure.rotation || [0, 0, 0]}
+      userData={{ structureId: structure.id, structureName: structure.name }}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}
+      onClick={onClick}
+    >
+      {renderGeometry()}
+      <meshStandardMaterial
+        color={baseColor}
+        roughness={0.7}
+        metalness={0.1}
+        emissive={emissiveColor}
+        emissiveIntensity={emissiveIntensity}
+      />
+    </mesh>
+  );
+}
+
+// Interactive body model with all body parts
+interface InteractiveBodyModelProps {
+  hoveredStructure: string | null;
+  selectedStructure: string | null;
+  onHover: (structureId: string | null) => void;
+  onSelect: (structureId: string, structureName: string) => void;
+}
+
+function InteractiveBodyModel({ hoveredStructure, selectedStructure, onHover, onSelect }: InteractiveBodyModelProps) {
+  const groupRef = useRef<THREE.Group>(null);
 
   // Gentle rotation for visual interest
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
     }
   });
 
-  return (
-    <group>
-      {/* Body placeholder - capsule shape */}
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <capsuleGeometry args={[0.4, 1.2, 16, 32]} />
-        <meshStandardMaterial
-          color="#e8d4c4"
-          roughness={0.7}
-          metalness={0.1}
-        />
-      </mesh>
+  const handlePointerOver = useCallback((structureId: string) => (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    onHover(structureId);
+    document.body.style.cursor = 'pointer';
+  }, [onHover]);
 
-      {/* Head placeholder */}
-      <mesh position={[0, 1.2, 0]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshStandardMaterial
-          color="#e8d4c4"
-          roughness={0.7}
-          metalness={0.1}
+  const handlePointerOut = useCallback(() => (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    onHover(null);
+    document.body.style.cursor = 'auto';
+  }, [onHover]);
+
+  const handleClick = useCallback((structure: BodyStructure) => (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    onSelect(structure.id, structure.name);
+  }, [onSelect]);
+
+  return (
+    <group ref={groupRef}>
+      {/* Render all body parts */}
+      {BODY_STRUCTURES.map((structure) => (
+        <BodyPart
+          key={structure.id}
+          structure={structure}
+          isHovered={hoveredStructure === structure.id}
+          isSelected={selectedStructure === structure.id}
+          onPointerOver={handlePointerOver(structure.id)}
+          onPointerOut={handlePointerOut()}
+          onClick={handleClick(structure)}
         />
-      </mesh>
+      ))}
 
       {/* Ground plane for reference */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial
           color="#2a2a3a"
@@ -141,10 +247,15 @@ const VIEW_PRESETS = {
 
 type ViewPreset = keyof typeof VIEW_PRESETS;
 
-export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
+export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
   const [showLayerPanel, setShowLayerPanel] = useState(true);
+
+  // Selection state
+  const [hoveredStructure, setHoveredStructure] = useState<string | null>(null);
+  const [selectedStructure, setSelectedStructure] = useState<{ id: string; name: string } | null>(null);
+  const [showChatPanel, setShowChatPanel] = useState(false);
 
   // Layer state management
   const {
@@ -160,6 +271,28 @@ export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
     isVisible,
     getOpacity,
   } = useLayerState();
+
+  // Handle structure selection
+  const handleStructureSelect = useCallback((id: string, name: string) => {
+    setSelectedStructure({ id, name });
+    setShowChatPanel(false); // Close chat when selecting new structure
+  }, []);
+
+  // Handle "Ask AI" from info panel
+  const handleAskAI = useCallback(() => {
+    setShowChatPanel(true);
+  }, []);
+
+  // Close structure info panel
+  const handleCloseInfoPanel = useCallback(() => {
+    setSelectedStructure(null);
+    setShowChatPanel(false);
+  }, []);
+
+  // Close chat panel
+  const handleCloseChatPanel = useCallback(() => {
+    setShowChatPanel(false);
+  }, []);
 
   // Animate to a preset view
   const animateToView = (preset: ViewPreset) => {
@@ -286,7 +419,12 @@ export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
 
           <CameraController controlsRef={controlsRef} />
           <AnatomicalLighting />
-          <PlaceholderModel />
+          <InteractiveBodyModel
+            hoveredStructure={hoveredStructure}
+            selectedStructure={selectedStructure?.id || null}
+            onHover={setHoveredStructure}
+            onSelect={handleStructureSelect}
+          />
           <PerformanceMonitor />
         </Canvas>
 
@@ -317,6 +455,37 @@ export function AnatomyViewer({ onBack }: AnatomyViewerProps) {
             onHideAll={hideAll}
             isVisible={isVisible}
             getOpacity={getOpacity}
+          />
+        )}
+
+        {/* Hover tooltip */}
+        {hoveredStructure && !selectedStructure && (
+          <div className="structure-hover-tooltip">
+            {BODY_STRUCTURES.find(s => s.id === hoveredStructure)?.name || hoveredStructure}
+            <span className="tooltip-hint">Click to select</span>
+          </div>
+        )}
+
+        {/* Structure Info Panel */}
+        {selectedStructure && !showChatPanel && (
+          <div className="structure-info-container">
+            <StructureInfoPanel
+              structureId={selectedStructure.id}
+              structureName={selectedStructure.name}
+              complexityLevel={3}
+              onClose={handleCloseInfoPanel}
+              onAskAI={handleAskAI}
+            />
+          </div>
+        )}
+
+        {/* Anatomy Chat Panel */}
+        {selectedStructure && showChatPanel && (
+          <AnatomyChatPanel
+            structureId={selectedStructure.id}
+            structureName={selectedStructure.name}
+            dashboardData={dashboardData}
+            onClose={handleCloseChatPanel}
           />
         )}
       </div>

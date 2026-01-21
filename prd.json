@@ -16,7 +16,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Use @tauri-apps/api for IPC. Keep existing TypeScript/SQLite code, invoke via Tauri commands. Existing database is at data/biological-self.db"
     },
     {

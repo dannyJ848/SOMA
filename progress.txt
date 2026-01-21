@@ -37,12 +37,52 @@ After calling store.addX(), call store.get() again to refresh the self object.
 ### 5. Passphrase from Environment
 Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
+## Codebase Patterns
+
+- **IPC Bridge Pattern**: Tauri Rust commands call TypeScript via `npx tsx tauri-bridge.ts <command>` with env vars for passphrase and db path
+- **React Frontend**: All UI in `src/` directory, Vite builds to `dist/`
+- **Tauri Config**: Main config in `src-tauri/tauri.conf.json`, capabilities in `src-tauri/capabilities/`
+- **Run Dev**: Use `npm run tauri:dev` to start both Vite and Tauri
+- **TypeScript Check**: Run `npm run typecheck` before committing
+
+---
+
+## 2026-01-20 - US-009
+
+### What was implemented
+- Tauri 2.x desktop app shell with React frontend
+- Vite build configuration for development and production
+- IPC bridge script (`tauri-bridge.ts`) connecting Rust commands to TypeScript database layer
+- React app with authentication flow and dashboard showing health data counts
+- Dark theme UI with responsive design
+- Window chrome configuration (1024x768, centered, resizable)
+
+### Files changed
+- **New**: `src-tauri/` - Rust backend with IPC commands
+- **New**: `src/` - React frontend (App.tsx, main.tsx, styles.css)
+- **New**: `tauri-bridge.ts` - TypeScript CLI for Tauri IPC
+- **New**: `vite.config.ts` - Vite configuration
+- **New**: `index.html` - Vite entry point
+- **New**: `public/icon.svg` - App icon
+- **Modified**: `package.json` - Added Tauri/Vite scripts and dependencies
+- **Modified**: `tsconfig.json` - Updated for React/JSX support
+- **Modified**: Various files to fix unused import/variable TypeScript errors
+
+### Learnings for future iterations
+- Tauri 2.x requires the shell plugin for running external commands
+- First Rust build takes several minutes (compiling 400+ crates)
+- The bridge pattern (Rust -> TypeScript via CLI) works well for keeping existing database code
+- Capabilities must be configured in `src-tauri/capabilities/default.json` for shell access
+- CSP must allow `style-src 'unsafe-inline'` for React inline styles
+
+---
+
 ## Next Up
 
-Story 009: Tauri desktop app shell
-- Set up Tauri with React frontend
-- IPC bridge to existing TypeScript database layer
-- Basic window with app chrome
+Story 010: Authentication and encryption setup flow
+- First-run passphrase creation with confirmation
+- Unlock flow for existing databases
+- Clear privacy messaging
 
 ## Notes for Future Iterations
 

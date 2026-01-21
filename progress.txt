@@ -1455,3 +1455,25 @@ Continued building comprehensive anatomical system modules following the establi
   - Only import types actually used in the store code
   - SM-2 algorithm provides effective spaced repetition scheduling
 ---
+
+## 2026-01-21 - US-070
+- Implemented clinical pearls and high-yield content module
+- Files created:
+  - core/clinical-pearls/types.ts (comprehensive type system)
+  - core/clinical-pearls/store.ts (high-yield content store)
+  - core/clinical-pearls/index.ts (barrel exports)
+- Features:
+  - Clinical Pearl badges with relevance categories
+  - Board exam relevance (USMLE, COMLEX, NBME, MCAT, PANCE, NCLEX)
+  - Exam frequency ratings (very-common to rare)
+  - Surgical landmarks with approaches and safety considerations
+  - Physical exam correlations with abnormal findings
+  - Common exam questions with wrong answer traps
+  - High-yield filtering by system, exam, category
+  - Mnemonics and common mistakes for each pearl
+- Sample content: 6 pearls, 2 landmarks, 2 physical exams, 3 exam questions
+- **Learnings for future iterations:**
+  - Remove unused helper functions like generateId if not needed
+  - Board exam types should be string literals for type safety
+  - Wrong answer traps help understand why students miss questions
+---

@@ -1276,3 +1276,43 @@ Continued building comprehensive anatomical system modules following the establi
   - Text similarity needs multiple strategies for natural language
   - Red flags with urgency levels enable appropriate warnings
 ---
+
+## 2026-01-21 - US-064
+- Implemented symptom-triggered learning prompts module
+  - 6 symptom-specific learning prompts:
+    - Headache: anatomy (meninges, trigeminal, muscles), types, when to seek care
+    - Chest pain: high priority, cardiac/pulmonary/GI/MSK causes
+    - Fatigue: thyroid, anemia, sleep disorders, depression
+    - Abdominal pain: quadrant-based anatomy, visceral vs somatic pain
+    - Shortness of breath: respiratory and cardiac causes
+    - Joint pain: OA, inflammatory, crystal arthritis
+  - Each prompt includes:
+    - Title and teaser for quick display
+    - Multiple content sections (anatomy, pathophysiology, differential)
+    - Interactive anatomy links with 3D view settings
+    - Related symptoms and conditions with relationships
+    - Urgent signs requiring immediate care
+    - Routine reasons to see a provider
+    - Self-care options for appropriate situations
+    - 5-level explanations
+  - User preference system:
+    - Enable/disable learning prompts
+    - Auto-show level (always, new symptoms, never)
+    - Preferred complexity level (1-5)
+    - Dismissed prompt tracking with reasons
+    - Show-again-after-days setting
+    - Explored prompt history
+  - Trigger event system for symptom context
+  - Search with alias matching
+  - Educational disclaimer
+- Files changed:
+  - core/exploration/learning-prompts/types.ts (new)
+  - core/exploration/learning-prompts/store.ts (new)
+  - core/exploration/learning-prompts/index.ts (new)
+  - prd.json (updated passes: true)
+- **Learnings for future iterations:**
+  - Symptom aliases enable flexible matching
+  - Priority levels help surface important prompts
+  - Dismissed prompt tracking with show-again enables re-engagement
+  - Urgent vs routine guidance helps users make decisions
+---

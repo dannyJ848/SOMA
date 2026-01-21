@@ -253,7 +253,7 @@
         "Typecheck passes"
       ],
       "priority": 15,
-      "passes": false,
+      "passes": true,
       "notes": "VHP is public domain (NLM/NIH). High-res images are large (~15GB total). Consider downsampled versions for initial load."
     },
     {

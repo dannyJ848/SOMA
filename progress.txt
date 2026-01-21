@@ -1500,3 +1500,26 @@ Continued building comprehensive anatomical system modules following the establi
   - Detailed personalized reasons increase recommendation value
   - Health relevance explanations should include actionable insights
 ---
+
+## 2026-01-21 - US-072
+- Implemented precise AI cueing system
+- Files created:
+  - core/ai-cueing/types.ts (cue type system)
+  - core/ai-cueing/store.ts (cueing engine)
+  - core/ai-cueing/index.ts (barrel exports)
+- Features:
+  - 10 trigger types (symptom, lab, biomarker, medication, time, milestone, etc.)
+  - 4 priority levels with preference-based filtering
+  - 6 notification styles (banner, toast, badge, spotlight, inline, modal)
+  - Quiet hours with urgent-only override
+  - Snooze and dismiss functionality
+  - Deep linking to 3D structures with navigation params
+  - Engagement tracking (viewed, clicked, dismissed, completed)
+  - Analytics with engagement rates
+  - Template-based cue generation with variable substitution
+- Sample data: 7 templates, 2 active cues
+- **Learnings for future iterations:**
+  - Remove unused type imports (NotificationStyle, CueStatus, CueEngagement)
+  - Templates with variables enable dynamic personalized content
+  - Engagement tracking enables continuous improvement of cue relevance
+---

@@ -79,7 +79,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Body location should use hierarchical codes: body.torso.abdomen.right-lower-quadrant"
     },
     {

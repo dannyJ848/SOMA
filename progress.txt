@@ -156,12 +156,36 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 
 ---
 
+## 2026-01-20 - US-013
+
+### What was implemented
+- Symptom interface with comprehensive fields: description, severity (1-10 literal type), bodyLocation (hierarchical string), onsetDate, duration, resolvedDate, status, associatedFactors, quality, frequency, timeOfDay, notes
+- SymptomDuration interface for tracking duration with value and unit (minutes/hours/days/weeks/months/ongoing)
+- AssociatedFactor type with 14 predefined values (after-eating, with-exertion, at-rest, etc.)
+- SymptomQuality type with 15 predefined descriptors (sharp, dull, aching, burning, etc.)
+- Store CRUD methods: addSymptom, updateSymptom, removeSymptom, resolveSymptom
+- Store query methods: getActiveSymptoms, getSymptomsByLocation (with prefix matching), getSymptomsByDateRange
+- Deserialize handles symptom dates (onsetDate, resolvedDate, createdAt, updatedAt)
+- Search method includes symptoms (searches description, bodyLocation, notes)
+
+### Files changed
+- **Modified**: `core/biological-self/types.ts` - Added Symptom, SymptomDuration, AssociatedFactor, SymptomQuality types; added symptoms[] to BiologicalSelf
+- **Modified**: `core/biological-self/store.ts` - Added Symptom import, symptoms array init, CRUD methods, query methods, deserialize, search
+
+### Learnings for future iterations
+- Use literal union types (1 | 2 | ... | 10) for bounded numeric values
+- Prefix matching on hierarchical location codes enables flexible queries (e.g., "body.torso" matches all torso symptoms)
+- Type aliases (AssociatedFactor, SymptomQuality) document valid values while being lightweight
+- Include || [] fallback in deserialize for backwards compatibility with existing data
+
+---
+
 ## Next Up
 
-Story 013: Symptom data model
-- Add Symptom interface to types.ts
-- Implement store methods for symptom CRUD
-- Use hierarchical body location codes
+Story 014: 2D anatomical body diagram
+- SVG-based body outline with clickable regions
+- Toggle between anterior/posterior views
+- Hover highlights with tooltips
 
 ## Notes for Future Iterations
 

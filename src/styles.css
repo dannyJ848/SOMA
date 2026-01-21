@@ -2827,3 +2827,193 @@ input:disabled {
   font-size: 0.7rem;
   color: var(--text-secondary);
 }
+
+/* ============================================
+   Clipping Planes Control Panel Styles
+   ============================================ */
+
+.clipping-panel {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  width: 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.clipping-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.clipping-panel-header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.clipping-panel-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.clipping-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clipping-action-btn:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.clipping-action-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.clipping-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.clipping-planes-list {
+  padding: 0.5rem;
+}
+
+.clipping-plane-row {
+  padding: 0.5rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  margin-bottom: 0.375rem;
+}
+
+.clipping-plane-row:last-child {
+  margin-bottom: 0;
+}
+
+.plane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plane-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.plane-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  transition: opacity 0.2s;
+}
+
+.plane-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.plane-name.active {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.invert-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.invert-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.invert-btn.inverted {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.plane-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.slider-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  width: 50px;
+}
+
+.plane-slider {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  background: var(--bg-primary);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.plane-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-value {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  width: 36px;
+  text-align: right;
+}
+
+.clipping-help {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}

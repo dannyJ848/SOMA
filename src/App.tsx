@@ -1,9 +1,25 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { invoke } from '@tauri-apps/api/core';
+import { invoke as tauriInvoke } from '@tauri-apps/api/core';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
+
+// Check if running inside Tauri
+const isTauri = typeof window !== 'undefined' && !!(window as unknown as { __TAURI__?: unknown }).__TAURI__;
+
+// Wrapper for Tauri invoke that handles browser mode gracefully
+async function invoke<T>(cmd: string, args?: Record<string, unknown>): Promise<T> {
+  if (!isTauri) {
+    console.log(`[Browser Mode] Tauri command "${cmd}" called with args:`, args);
+    // Return mock data for browser development
+    if (cmd === 'check_database_exists') return false as T;
+    if (cmd === 'get_dashboard') return { summary: { totalConditions: 0, totalMedications: 0, totalLabResults: 0, totalWhoopCycles: 0, totalAppleHealthDays: 0, lastUpdated: null }, activeConditions: [], currentMedications: [], recentLabs: [], vitalsSummary: {} } as T;
+    if (cmd === 'get_timeline') return [] as T;
+    throw new Error(`No mock data for command: ${cmd}`);
+  }
+  return tauriInvoke<T>(cmd, args);
+}
 
 // Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));

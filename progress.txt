@@ -1671,3 +1671,15 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Question templates organized by category make it easy to extend
   - The ai_chat_rag command expects a specific request structure with messages, systemPrompt, ragOptions
 ---
+
+## 2026-01-21 - US-080
+- Implemented: Medication Physiology Data Model
+- Created comprehensive type system in core/medical-simulation/medications/types.ts
+- Includes: MedicationPhysiology, BodySystemEffect, TherapeuticTarget, AdverseEffect, DrugInteraction
+- Multi-level explanations (5 levels) for educational content
+- 3D visualization support with highlight colors and anatomy mapping
+- **Learnings for future iterations:**
+  - Use descriptive union types for classifications (e.g., AdverseEffectSeverity)
+  - Include highlight colors in data models for 3D visualization consistency
+  - Separate summary types from full data types for list views
+---

@@ -1300,7 +1300,7 @@
         "Typecheck passes"
       ],
       "priority": 72,
-      "passes": false,
+      "passes": true,
       "notes": "Foundation for medication explorer. Create in core/medical-simulation/medications/."
     },
     {

@@ -1880,3 +1880,32 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Encyclopedia store uses in-memory Maps with indexes for fast lookups
   - RAG preparation creates multiple chunks per entry at different complexity levels
 ---
+
+## 2026-01-21 23:10 - US-091
+- Implemented: MedicalEncyclopedia Main Component
+- Files changed:
+  - src/MedicalEncyclopedia.tsx (NEW)
+  - src/MedicalEncyclopedia.css (NEW)
+- Features:
+  - Search/Browse view toggle
+  - Search bar with 300ms debounce
+  - Entry type filters (9 types): condition, symptom, medication, anatomy, procedure, physiology, lab-test, imaging, terminology
+  - Category filters (14 categories): cardiovascular, respiratory, GI, neurologic, etc.
+  - Search results with preview cards:
+    - EntryTypeBadge, CategoryBadge, MatchTypeBadge components
+    - Relevance score percentage display
+    - Summary preview with line clamping
+    - Highlighted snippet for content matches
+  - Recent searches with localStorage persistence (max 10)
+  - Browse mode with AlphabeticalIndex component:
+    - Letter navigation buttons
+    - Entries grouped by first letter
+    - EntryPreviewCard with related/anatomy counts
+  - Search tips for empty state
+  - Mobile responsive with horizontal scroll filters
+- **Learnings for future iterations:**
+  - Use underscore prefix (_prop) for unused props that will be needed later
+  - Store uses in-memory search, not RAG yet - RAG will be added later
+  - Debounce pattern: useState + useEffect with setTimeout + cleanup
+  - localStorage.getItem in useState initializer for persistent state
+---

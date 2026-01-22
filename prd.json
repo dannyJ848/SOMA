@@ -1489,7 +1489,7 @@
         "Typecheck passes"
       ],
       "priority": 82,
-      "passes": false,
+      "passes": true,
       "notes": "Extends core/rag/retrieval.ts with encyclopedia support."
     },
     {

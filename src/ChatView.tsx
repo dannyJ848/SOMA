@@ -3,6 +3,8 @@ import { invoke } from './tauri-invoke';
 import { useActionTracker } from './hooks/useActionTracker';
 import { useJourneyContext, getContextualSuggestions } from './hooks/useJourneyContext';
 import type { ChatAction } from '../core/intent-prediction/types';
+import { useVoice, useVoiceConfig } from './contexts/VoiceContext';
+import { VoiceButton, SpeakingIndicator } from './components/voice';
 
 interface DashboardData {
   summary: {
@@ -182,6 +184,11 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
   // Get journey context for personalized responses
   const { chatContext, summary } = useJourneyContext();
 
+  // Voice integration
+  const { speak, stopSpeaking, playbackState, recordingState } = useVoice();
+  const { config: voiceConfig } = useVoiceConfig();
+  const lastAssistantMessageRef = useRef<string | null>(null);
+
   // Get contextual suggestions based on exploration journey
   const contextualSuggestions = useMemo(() => {
     return getContextualSuggestions(summary);
@@ -194,6 +201,26 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Auto-speak new assistant messages when enabled
+  useEffect(() => {
+    if (!voiceConfig.autoSpeak) return;
+
+    const lastMessage = messages[messages.length - 1];
+    if (
+      lastMessage &&
+      lastMessage.role === 'assistant' &&
+      lastMessage.content !== lastAssistantMessageRef.current &&
+      !isLoading
+    ) {
+      lastAssistantMessageRef.current = lastMessage.content;
+      // Extract plain text for speaking (remove citations markers)
+      const textToSpeak = lastMessage.content.replace(/\[\d+\]/g, '').trim();
+      if (textToSpeak) {
+        speak(textToSpeak);
+      }
+    }
+  }, [messages, voiceConfig.autoSpeak, isLoading, speak]);
 
   async function checkAIHealth() {
     try {
@@ -293,6 +320,25 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
       event.preventDefault();
     }
   }, [track]);
+
+  // Handle voice transcription
+  const handleVoiceTranscription = useCallback((text: string) => {
+    if (text.trim()) {
+      // Stop any ongoing speech when user starts talking
+      if (playbackState === 'playing') {
+        stopSpeaking();
+      }
+      setInput(text);
+      track('voice-input', { messageContent: text, messageRole: 'user' });
+    }
+  }, [playbackState, stopSpeaking, track]);
+
+  // Handle voice recording start - interrupt TTS
+  const handleVoiceRecordingStart = useCallback(() => {
+    if (playbackState === 'playing') {
+      stopSpeaking();
+    }
+  }, [playbackState, stopSpeaking]);
 
   return (
     <div className="container chat-view">
@@ -435,14 +481,36 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
         <div ref={messagesEndRef} />
       </div>
 
+      {/* Speaking Indicator */}
+      {(playbackState === 'playing' || playbackState === 'loading') && (
+        <div className="chat-speaking-indicator">
+          <SpeakingIndicator text="Reading response..." />
+        </div>
+      )}
+
       {/* Input Area */}
       <div className="chat-input-container">
+        <VoiceButton
+          size="small"
+          onTranscription={handleVoiceTranscription}
+          onRecordingStart={handleVoiceRecordingStart}
+          disabled={aiStatus !== 'available' || isLoading}
+          tooltip="Press and hold to speak"
+        />
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={aiStatus === 'available' ? 'Ask a question about your health...' : 'AI unavailable'}
-          disabled={aiStatus !== 'available' || isLoading}
+          placeholder={
+            recordingState === 'recording'
+              ? 'Listening...'
+              : recordingState === 'transcribing'
+              ? 'Transcribing...'
+              : aiStatus === 'available'
+              ? 'Ask a question about your health...'
+              : 'AI unavailable'
+          }
+          disabled={aiStatus !== 'available' || isLoading || recordingState !== 'idle'}
           rows={1}
         />
         <button

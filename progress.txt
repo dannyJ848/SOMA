@@ -2027,3 +2027,40 @@ New PRD created with 23 user stories (US-073 to US-095):
 - @media (pointer: coarse) targets touch devices specifically
 - will-change and translateZ(0) enable GPU acceleration for animations
 - @supports (-webkit-touch-callout: none) detects iOS Safari
+
+---
+
+## 2026-01-22 - Phase 5 & 6 Verification
+
+### What was verified
+Phase 5 (Adaptive Intent Prediction) user stories already implemented:
+- US-103: ShortcutsBar component with icons, scroll controls, animations
+- US-104: Action tracking in SymptomExplorer, MedicationExplorer, ConditionSimulator, MedicalEncyclopedia, EncyclopediaEntry
+- US-105: Action tracking in Dashboard, Timeline, BodyMap, ChatView, AnatomyViewer
+- US-106: JourneySummarizer, useJourneyContext hook, chat system prompt integration
+- US-107: predict_intent Tauri command, ai-predict-bridge.ts
+- US-108: Mobile polish - 44px touch targets, bottom sheet mode, non-blocking predictions
+
+Phase 6 (Voice Integration) completed:
+- US-V01-V16: Full voice integration with Qwen STT/TTS models
+- Python voice services package
+- Tauri voice commands
+- VoiceContext provider
+- VoiceButton, AudioPlayer components
+- ChatView voice integration
+- Mobile fallback with Web Speech API
+
+### Files changed
+- **Modified**: `prd.json` - Marked US-103 through US-108 as passing
+- **Modified**: `src/main.tsx` - Added VoiceProvider wrapper
+- **Modified**: `src/hooks/useVoiceFallback.ts` - Added Web Speech API type declarations
+- **Modified**: `core/intent-prediction/types.ts` - Added 'voice-input' to ChatAction
+
+### Learnings for future iterations
+- Phase 5 components (adaptive UI) were already implemented in previous sessions
+- useActionTracker hook is the standard pattern for tracking user actions
+- useAnatomy3DTracking bridges anatomy events to intent system
+- Web Speech API types need manual declarations (not in lib.dom.d.ts)
+- VoiceProvider must wrap App in main.tsx for voice context access
+
+---

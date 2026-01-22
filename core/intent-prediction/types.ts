@@ -144,7 +144,8 @@ export type ChatAction =
   | 'view-citation'
   | 'copy-response'
   | 'clear-chat'
-  | 'retry-message';
+  | 'retry-message'
+  | 'voice-input';
 
 export type TimelineAction =
   | 'filter-type'

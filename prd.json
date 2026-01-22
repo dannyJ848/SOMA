@@ -1582,6 +1582,213 @@
       "priority": 87,
       "passes": true,
       "notes": "Final polish for iOS deployment."
+    },
+    {
+      "id": "US-096",
+      "title": "Action Event Type System",
+      "description": "Create comprehensive TypeScript types for tracking user actions across all features in the adaptive intent prediction system.",
+      "acceptanceCriteria": [
+        "Define FeatureArea union covering all app areas",
+        "Define action types per feature (SymptomExplorerAction, MedicationExplorerAction, etc.)",
+        "Define ActionEvent interface with payload, timestamps, session linking",
+        "Define UserJourney interface for action sequences",
+        "Define InferredIntent and prediction-related types",
+        "Define event bus types for cross-component communication",
+        "Typecheck passes"
+      ],
+      "priority": 88,
+      "passes": true,
+      "notes": "Foundation for Phase 5 intent prediction. Types in core/intent-prediction/"
+    },
+    {
+      "id": "US-097",
+      "title": "Intent Event Bus",
+      "description": "Create cross-component event bus for the intent prediction system following existing anatomy3DEventBus pattern.",
+      "acceptanceCriteria": [
+        "IntentEventBus class in src/utils/intentEventBus.ts",
+        "Event types: ACTION_TRACKED, PREDICTION_READY, SHORTCUTS_UPDATED, etc.",
+        "Pub/sub with typed payloads",
+        "Event history tracking",
+        "Convenience functions for common operations",
+        "Cleanup and unsubscribe support",
+        "Typecheck passes"
+      ],
+      "priority": 89,
+      "passes": false,
+      "notes": "Follow anatomy3DEventBus.ts pattern"
+    },
+    {
+      "id": "US-098",
+      "title": "Action Tracker Hook",
+      "description": "Create useActionTracker React hook for components to track user actions.",
+      "acceptanceCriteria": [
+        "useActionTracker hook in src/hooks/",
+        "Hook accepts feature area and returns tracking functions",
+        "trackAction(type, payload) for instant actions",
+        "trackTimedAction(type) returns stop function for duration tracking",
+        "Auto-links actions with previousActionId",
+        "Session management",
+        "Typecheck passes"
+      ],
+      "priority": 90,
+      "passes": false,
+      "notes": "Main interface for components to track actions"
+    },
+    {
+      "id": "US-099",
+      "title": "Journey Store",
+      "description": "Create persistent storage for user journeys using SQLite via Tauri.",
+      "acceptanceCriteria": [
+        "SQLite table for action events",
+        "Session-based grouping",
+        "addAction(), getRecentActions(), getJourney() methods",
+        "Auto-cleanup of old sessions (30 days)",
+        "Tauri commands for CRUD",
+        "Typecheck passes"
+      ],
+      "priority": 91,
+      "passes": false,
+      "notes": "Persist journeys in core/intent-prediction/journey-store.ts"
+    },
+    {
+      "id": "US-100",
+      "title": "Prediction Engine",
+      "description": "Create the core prediction engine using DeepSeek via Ollama.",
+      "acceptanceCriteria": [
+        "Debounced prediction triggering (1.5s after last action)",
+        "Minimum 2 actions before predicting",
+        "Build prediction prompt with action sequence + health context",
+        "Parse LLM JSON response to InferredIntent",
+        "Rule-based fallback when LLM unavailable",
+        "Emit PREDICTION_READY events",
+        "Typecheck passes"
+      ],
+      "priority": 92,
+      "passes": false,
+      "notes": "Uses DeepSeek via Ollama (already default model)"
+    },
+    {
+      "id": "US-101",
+      "title": "Prediction Prompts",
+      "description": "Create optimized prompts for intent prediction.",
+      "acceptanceCriteria": [
+        "Domain knowledge rules (symptom→anatomy, medication→condition patterns)",
+        "Health profile personalization",
+        "JSON output format specification",
+        "Template functions for action sequence formatting",
+        "Typecheck passes"
+      ],
+      "priority": 93,
+      "passes": false,
+      "notes": "Prompts in core/intent-prediction/prompts.ts"
+    },
+    {
+      "id": "US-102",
+      "title": "Adaptive UI Context",
+      "description": "Create React context for managing adaptive UI state.",
+      "acceptanceCriteria": [
+        "AdaptiveUIContext provides: shortcuts, quickActions, visiblePanels, lastPrediction",
+        "Methods: showPanel, hidePanel, executeShortcut, executeQuickAction",
+        "Subscribes to PREDICTION_READY events",
+        "Pre-loading manager for predicted content",
+        "Typecheck passes"
+      ],
+      "priority": 94,
+      "passes": false,
+      "notes": "Context in src/contexts/AdaptiveUIContext.tsx"
+    },
+    {
+      "id": "US-103",
+      "title": "Shortcuts Bar Component",
+      "description": "Create UI component for displaying suggested shortcuts.",
+      "acceptanceCriteria": [
+        "ShortcutsBar.tsx with horizontal scrollable bar",
+        "Icons by type (symptom, medication, condition, anatomy, lab, chat)",
+        "Click executes navigation",
+        "Smooth fade in/out on prediction updates",
+        "Mobile responsive (44px touch targets)",
+        "Typecheck passes"
+      ],
+      "priority": 95,
+      "passes": false,
+      "notes": "Component in src/components/adaptive/"
+    },
+    {
+      "id": "US-104",
+      "title": "Integrate Action Tracking (Phase 4 Components)",
+      "description": "Add action tracking to all Phase 4 components.",
+      "acceptanceCriteria": [
+        "SymptomExplorer: track search, select, view-source, followup actions",
+        "MedicationExplorer: track search, select, view-effects, check-interaction",
+        "ConditionSimulator: track select, scrub-timeline, view-phase, view-treatment",
+        "MedicalEncyclopedia: track search, browse, view-entry",
+        "EncyclopediaEntry: track tab-change, view-anatomy, view-related",
+        "Typecheck passes"
+      ],
+      "priority": 96,
+      "passes": false,
+      "notes": "Use useActionTracker hook in each component"
+    },
+    {
+      "id": "US-105",
+      "title": "Integrate Action Tracking (Core Components)",
+      "description": "Add action tracking to dashboard, timeline, body map, and chat.",
+      "acceptanceCriteria": [
+        "Dashboard: track card clicks, quick-access button clicks",
+        "Timeline: track filter changes, event selection",
+        "BodyMap: track region selection, symptom logging",
+        "ChatView: track message sends, suggestion clicks, citation views",
+        "AnatomyViewer: bridge existing events to intent bus",
+        "Typecheck passes"
+      ],
+      "priority": 97,
+      "passes": false,
+      "notes": "Integrate with existing core components"
+    },
+    {
+      "id": "US-106",
+      "title": "Chat Journey Context Integration",
+      "description": "Pass user journey context to AI chat.",
+      "acceptanceCriteria": [
+        "JourneySummarizer to format exploration history",
+        "ChatView includes journey in system prompt",
+        "AI can reference user's exploration journey",
+        "Contextual suggestions based on journey",
+        "Typecheck passes"
+      ],
+      "priority": 98,
+      "passes": false,
+      "notes": "Enhances AI chat with journey awareness"
+    },
+    {
+      "id": "US-107",
+      "title": "Tauri Prediction Bridge",
+      "description": "Add Tauri command for intent prediction.",
+      "acceptanceCriteria": [
+        "predict_intent command in lib.rs",
+        "Calls ai-predict-bridge.ts",
+        "Request/response serialization",
+        "Error handling and timeouts",
+        "Typecheck passes"
+      ],
+      "priority": 99,
+      "passes": false,
+      "notes": "Bridge for calling prediction engine from frontend"
+    },
+    {
+      "id": "US-108",
+      "title": "Mobile Polish for Adaptive UI",
+      "description": "Ensure adaptive UI works well on mobile/iOS.",
+      "acceptanceCriteria": [
+        "Shortcuts bar is touch-friendly (44px targets)",
+        "Quick actions panel as bottom sheet on mobile",
+        "Predictions don't block UI",
+        "Battery-conscious debouncing",
+        "Typecheck passes"
+      ],
+      "priority": 100,
+      "passes": false,
+      "notes": "Final polish for mobile adaptive UI"
     }
   ]
 }

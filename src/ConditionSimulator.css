@@ -1102,3 +1102,29 @@
     flex-wrap: nowrap;
   }
 }
+
+/* Cross-Feature Navigation Links */
+.treatment-medication-links {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.medication-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid #8b5cf633;
+  border-radius: 8px;
+  color: #8b5cf6;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.medication-link-btn:hover {
+  background: #8b5cf620;
+  border-color: #8b5cf6;
+}

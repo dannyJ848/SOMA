@@ -119,6 +119,26 @@ function App() {
   const [selectedEncyclopediaEntryId, setSelectedEncyclopediaEntryId] = useState<string | null>(null);
   const [initialMedicationId, setInitialMedicationId] = useState<string | undefined>(undefined);
   const [initialConditionId, setInitialConditionId] = useState<string | undefined>(undefined);
+  // Navigation history for breadcrumb support
+  const [navigationHistory, setNavigationHistory] = useState<View[]>([]);
+
+  // Navigate with history tracking
+  const navigateWithHistory = (newView: View) => {
+    setNavigationHistory(prev => [...prev, currentView]);
+    setCurrentView(newView);
+  };
+
+  // Navigate back through history
+  const navigateBack = () => {
+    if (navigationHistory.length > 0) {
+      const newHistory = [...navigationHistory];
+      const previousView = newHistory.pop()!;
+      setNavigationHistory(newHistory);
+      setCurrentView(previousView);
+      return true;
+    }
+    return false;
+  };
 
   useEffect(() => {
     checkDatabase();
@@ -687,7 +707,10 @@ function App() {
         <MedicationExplorer
           onBack={() => {
             setInitialMedicationId(undefined);
-            setCurrentView('dashboard');
+            // Try to navigate back through history, otherwise go to dashboard
+            if (!navigateBack()) {
+              setCurrentView('dashboard');
+            }
           }}
           dashboardData={dashboard}
           onNavigateToAnatomy={() => setCurrentView('anatomy')}
@@ -712,6 +735,10 @@ function App() {
           }}
           dashboardData={dashboard}
           onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          onNavigateToMedication={(medId: string) => {
+            setInitialMedicationId(medId);
+            navigateWithHistory('medication-explorer');
+          }}
           initialConditionId={initialConditionId}
         />
       </Suspense>

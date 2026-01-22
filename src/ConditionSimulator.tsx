@@ -36,6 +36,7 @@ interface ConditionSimulatorProps {
   onBack: () => void;
   dashboardData: DashboardData | null;
   onNavigateToAnatomy?: () => void;
+  onNavigateToMedication?: (medicationId: string) => void;
   initialConditionId?: string;
 }
 
@@ -321,6 +322,7 @@ export default function ConditionSimulator({
   onBack,
   dashboardData,
   onNavigateToAnatomy,
+  onNavigateToMedication,
   initialConditionId,
 }: ConditionSimulatorProps) {
   // State
@@ -942,6 +944,16 @@ export default function ConditionSimulator({
                       <strong>Time to effect:</strong> {treatment.timeToEffect}
                     </div>
                   )}
+                  {treatment.medicationIds && treatment.medicationIds.length > 0 && onNavigateToMedication && (
+                    <div className="treatment-medication-links">
+                      <button
+                        className="medication-link-btn"
+                        onClick={() => onNavigateToMedication(treatment.medicationIds![0])}
+                      >
+                        💊 View Drug Effects
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -970,6 +982,16 @@ export default function ConditionSimulator({
                   <div className="treatment-goals">
                     <strong>Goals:</strong> {treatment.goals.join(', ')}
                   </div>
+                  {treatment.medicationIds && treatment.medicationIds.length > 0 && onNavigateToMedication && (
+                    <div className="treatment-medication-links">
+                      <button
+                        className="medication-link-btn"
+                        onClick={() => onNavigateToMedication(treatment.medicationIds![0])}
+                      >
+                        💊 View Drug Effects
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

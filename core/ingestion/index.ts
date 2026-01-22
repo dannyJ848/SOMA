@@ -7,6 +7,7 @@
 
 import { VectorStore, VectorDocument, CollectionName, COLLECTIONS, VectorMetadata } from '../vectors/store.js';
 import { EmbeddingModel, TextChunker, getEmbeddingModel } from '../vectors/embeddings.js';
+import { ANATOMY_CONTENT, PHYSIOLOGY_CONTENT, PATHOLOGY_CONTENT } from './anatomy-content.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createHash } from 'crypto';
@@ -255,144 +256,35 @@ export class ContentIngestion {
   }
 
   /**
-   * Ingest sample life sciences content (for testing/demo)
+   * Ingest comprehensive life sciences content (for testing/demo)
+   * Uses imported content from anatomy-content.ts covering all major body systems
    */
   async ingestSampleContent(): Promise<IngestionResult[]> {
     const results: IngestionResult[] = [];
 
-    // Sample anatomy content
-    const anatomyContent: SourceContent[] = [
-      {
-        text: `The heart is a muscular organ located in the mediastinum, the central compartment of the thoracic cavity. It is approximately the size of a closed fist and weighs between 250-350 grams in adults. The heart is enclosed by a double-walled sac called the pericardium, which protects the heart and anchors it to surrounding structures.
-
-The heart has four chambers: two upper atria and two lower ventricles. The right atrium receives deoxygenated blood from the body via the superior and inferior vena cava. The right ventricle pumps this blood to the lungs via the pulmonary arteries. The left atrium receives oxygenated blood from the lungs via the pulmonary veins. The left ventricle, with its thicker walls, pumps oxygenated blood to the body through the aorta.
-
-The heart wall consists of three layers: the epicardium (outer layer), myocardium (middle, muscular layer), and endocardium (inner layer). The myocardium is the thickest layer and is composed of cardiac muscle cells (cardiomyocytes) that contract rhythmically to pump blood.`,
-        metadata: {
-          source: 'OpenStax Anatomy & Physiology 2e',
-          chapter: 'Chapter 19',
-          section: 'Heart Anatomy',
-          system: 'cardiovascular',
-          complexityLevel: 3,
-          url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy',
-          license: 'CC BY 4.0',
-        },
-      },
-      {
-        text: `The lungs are paired organs of respiration located in the thoracic cavity. The right lung has three lobes (superior, middle, and inferior), while the left lung has two lobes (superior and inferior) to accommodate the heart. Each lung is enclosed by a double-layered serous membrane called the pleura.
-
-The respiratory tree begins with the trachea, which divides into the right and left main bronchi at the carina. These primary bronchi further divide into lobar bronchi, then segmental bronchi, continuing to divide approximately 23 times until reaching the alveoli. The alveoli are tiny air sacs where gas exchange occurs.
-
-Gas exchange takes place across the respiratory membrane, which consists of the alveolar epithelium, the capillary endothelium, and their fused basement membranes. This membrane is approximately 0.5 micrometers thick, allowing rapid diffusion of oxygen and carbon dioxide.`,
-        metadata: {
-          source: 'OpenStax Anatomy & Physiology 2e',
-          chapter: 'Chapter 22',
-          section: 'Organs of the Respiratory System',
-          system: 'respiratory',
-          complexityLevel: 3,
-          url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system',
-          license: 'CC BY 4.0',
-        },
-      },
-      {
-        text: `The skeletal system consists of bones, cartilage, and connective tissues that provide structural support, protection, and movement. The adult human skeleton contains 206 bones divided into two main divisions: the axial skeleton (80 bones) and the appendicular skeleton (126 bones).
-
-The axial skeleton includes the skull (22 bones), vertebral column (26 bones), and thoracic cage (25 bones including ribs and sternum). The appendicular skeleton includes the bones of the upper and lower limbs, as well as the pectoral and pelvic girdles that attach them to the axial skeleton.
-
-Bones are classified by their shape: long bones (femur, humerus), short bones (carpals, tarsals), flat bones (skull, ribs), irregular bones (vertebrae), and sesamoid bones (patella). Each type has distinct structural characteristics suited to its function.`,
-        metadata: {
-          source: 'OpenStax Anatomy & Physiology 2e',
-          chapter: 'Chapter 7',
-          section: 'Divisions of the Skeletal System',
-          system: 'skeletal',
-          complexityLevel: 2,
-          url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/7-1-divisions-of-the-skeletal-system',
-          license: 'CC BY 4.0',
-        },
-      },
-    ];
-
-    results.push(await this.ingest('anatomy', anatomyContent, {
-      onProgress: (p) => console.log(`Anatomy: ${p.message}`),
+    console.log(`\nIngesting comprehensive anatomy content (${ANATOMY_CONTENT.length} entries)...`);
+    results.push(await this.ingest('anatomy', ANATOMY_CONTENT, {
+      onProgress: (p) => console.log(`  Anatomy: ${p.message}`),
     }));
 
-    // Sample physiology content
-    const physiologyContent: SourceContent[] = [
-      {
-        text: `The cardiac cycle describes the sequence of events that occur during one complete heartbeat. It consists of two main phases: systole (contraction) and diastole (relaxation). The average cardiac cycle lasts about 0.8 seconds at a heart rate of 75 beats per minute.
-
-During atrial systole, the atria contract and push remaining blood into the ventricles. This is followed by ventricular systole, where the ventricles contract powerfully, ejecting blood into the pulmonary artery (right ventricle) and aorta (left ventricle). The AV valves close at the start of ventricular systole, producing the first heart sound (S1, "lub"). The semilunar valves close at the end of ventricular systole, producing the second heart sound (S2, "dub").
-
-Cardiac output is the volume of blood pumped by the heart per minute. It equals stroke volume (amount pumped per beat) multiplied by heart rate. Normal cardiac output is approximately 5 liters per minute at rest.`,
-        metadata: {
-          source: 'OpenStax Anatomy & Physiology 2e',
-          chapter: 'Chapter 19',
-          section: 'Cardiac Physiology',
-          system: 'cardiovascular',
-          complexityLevel: 3,
-          url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle',
-          license: 'CC BY 4.0',
-        },
-      },
-      {
-        text: `Blood pressure is the force exerted by blood against the walls of blood vessels. It is typically measured in millimeters of mercury (mmHg) and expressed as systolic pressure over diastolic pressure. Systolic pressure is the maximum pressure during ventricular contraction, while diastolic pressure is the minimum pressure during ventricular relaxation.
-
-Normal blood pressure is approximately 120/80 mmHg. Hypertension is defined as a blood pressure consistently above 130/80 mmHg. Blood pressure is regulated by several mechanisms including the baroreceptor reflex, the renin-angiotensin-aldosterone system (RAAS), and antidiuretic hormone (ADH).
-
-Mean arterial pressure (MAP) represents the average pressure in the arteries during one cardiac cycle. It can be estimated as diastolic pressure plus one-third of the pulse pressure. A MAP of at least 60 mmHg is necessary to perfuse vital organs.`,
-        metadata: {
-          source: 'OpenStax Anatomy & Physiology 2e',
-          chapter: 'Chapter 20',
-          section: 'Blood Pressure',
-          system: 'cardiovascular',
-          complexityLevel: 3,
-          url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance',
-          license: 'CC BY 4.0',
-        },
-      },
-    ];
-
-    results.push(await this.ingest('physiology', physiologyContent, {
-      onProgress: (p) => console.log(`Physiology: ${p.message}`),
+    console.log(`\nIngesting physiology content (${PHYSIOLOGY_CONTENT.length} entries)...`);
+    results.push(await this.ingest('physiology', PHYSIOLOGY_CONTENT, {
+      onProgress: (p) => console.log(`  Physiology: ${p.message}`),
     }));
 
-    // Sample pathology content
-    const pathologyContent: SourceContent[] = [
-      {
-        text: `Hypertension, or high blood pressure, is a chronic medical condition in which the systemic arterial blood pressure is elevated. It is classified as either primary (essential) hypertension, which has no identifiable cause and accounts for 90-95% of cases, or secondary hypertension, which results from an identifiable underlying condition.
-
-Risk factors for primary hypertension include age, family history, obesity, physical inactivity, tobacco use, high sodium intake, low potassium intake, excessive alcohol consumption, and stress. Secondary causes include renal artery stenosis, primary aldosteronism, pheochromocytoma, Cushing syndrome, and coarctation of the aorta.
-
-Untreated hypertension can lead to serious complications including stroke, heart failure, coronary artery disease, chronic kidney disease, and retinopathy. Treatment typically involves lifestyle modifications (diet, exercise, weight loss) and pharmacological therapy with antihypertensive medications.`,
-        metadata: {
-          source: 'StatPearls',
-          section: 'Hypertension',
-          system: 'cardiovascular',
-          complexityLevel: 4,
-          url: 'https://www.ncbi.nlm.nih.gov/books/NBK539859/',
-          license: 'CC BY 4.0',
-        },
-      },
-      {
-        text: `Type 2 diabetes mellitus is a metabolic disorder characterized by chronic hyperglycemia resulting from insulin resistance and relative insulin deficiency. It accounts for approximately 90-95% of all diabetes cases and is strongly associated with obesity and physical inactivity.
-
-Pathophysiology involves multiple defects: decreased insulin sensitivity in muscle and adipose tissue, increased hepatic glucose production, impaired insulin secretion from pancreatic beta cells, and abnormal incretin hormone function. Over time, persistent hyperglycemia leads to microvascular complications (retinopathy, nephropathy, neuropathy) and macrovascular complications (coronary artery disease, stroke, peripheral vascular disease).
-
-Diagnosis is based on fasting plasma glucose ≥126 mg/dL, 2-hour plasma glucose ≥200 mg/dL during OGTT, HbA1c ≥6.5%, or random plasma glucose ≥200 mg/dL with classic symptoms. Management includes lifestyle modifications, oral hypoglycemic agents, and potentially insulin therapy.`,
-        metadata: {
-          source: 'StatPearls',
-          section: 'Type 2 Diabetes Mellitus',
-          system: 'endocrine',
-          complexityLevel: 4,
-          url: 'https://www.ncbi.nlm.nih.gov/books/NBK513253/',
-          license: 'CC BY 4.0',
-        },
-      },
-    ];
-
-    results.push(await this.ingest('pathology', pathologyContent, {
-      onProgress: (p) => console.log(`Pathology: ${p.message}`),
+    console.log(`\nIngesting pathology content (${PATHOLOGY_CONTENT.length} entries)...`);
+    results.push(await this.ingest('pathology', PATHOLOGY_CONTENT, {
+      onProgress: (p) => console.log(`  Pathology: ${p.message}`),
     }));
+
+    // Print summary
+    const totalDocs = results.reduce((sum, r) => sum + r.documentsAdded, 0);
+    const totalChunks = results.reduce((sum, r) => sum + r.chunksCreated, 0);
+    const totalTokens = results.reduce((sum, r) => sum + r.totalTokens, 0);
+    console.log(`\n=== Ingestion Complete ===`);
+    console.log(`Total documents: ${totalDocs}`);
+    console.log(`Total chunks: ${totalChunks}`);
+    console.log(`Total tokens: ~${totalTokens}`);
 
     return results;
   }

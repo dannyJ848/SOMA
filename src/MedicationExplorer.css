@@ -1,0 +1,976 @@
+/**
+ * MedicationExplorer Styles
+ */
+
+.medication-explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #e8e8e8;
+  overflow: hidden;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.medication-explorer-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+}
+
+.medication-explorer-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.medication-explorer-header .back-button,
+.medication-explorer-header .clear-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.medication-explorer-header .back-button:hover,
+.medication-explorer-header .clear-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   Search Section
+   ============================================ */
+
+.search-section {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.search-results {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: #e8e8e8;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  gap: 12px;
+}
+
+.search-result-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.search-result-item .result-name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.search-result-item .result-brands {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.search-result-item .result-match-type {
+  padding: 2px 8px;
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #a5b4fc;
+}
+
+/* User Medications */
+.user-medications-section {
+  margin-bottom: 24px;
+}
+
+.user-medications-section h3 {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.user-medications-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.user-medication-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  color: #e8e8e8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-medication-item:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #22c55e;
+}
+
+.user-medication-item .med-name {
+  font-weight: 600;
+}
+
+.user-medication-item .med-class {
+  font-size: 0.75rem;
+  color: #22c55e;
+}
+
+/* Browse Section */
+.browse-section h3 {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.drug-class-group {
+  margin-bottom: 24px;
+}
+
+.drug-class-group .class-name {
+  font-size: 0.9rem;
+  color: #6366f1;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.class-medications {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.medication-browse-card {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #e8e8e8;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.medication-browse-card:hover {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: #6366f1;
+  transform: translateY(-2px);
+}
+
+.medication-browse-card .med-card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.medication-browse-card .med-card-brands {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+.medication-browse-card .med-card-indication {
+  font-size: 0.8rem;
+  color: #a5b4fc;
+}
+
+/* ============================================
+   Medication Detail
+   ============================================ */
+
+.medication-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.medication-detail-header {
+  margin-bottom: 24px;
+}
+
+.med-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.med-title-row h2 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.drug-class-badge {
+  padding: 4px 12px;
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #a5b4fc;
+  text-transform: capitalize;
+}
+
+.brand-names {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.medication-description {
+  color: #d1d5db;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.indications {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.indications-label {
+  font-weight: 600;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.indication-tag {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+}
+
+.tab-btn.active {
+  background: #6366f1;
+  color: #fff;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 4px 0;
+}
+
+.tab-hint {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+/* Complexity Selector */
+.complexity-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.complexity-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.complexity-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.complexity-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 6px;
+  background: transparent;
+  color: #a5b4fc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.complexity-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.complexity-btn.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}
+
+.complexity-hint {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Mechanism Section */
+.mechanism-section {
+  margin-bottom: 24px;
+}
+
+.mechanism-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.mechanism-explanation {
+  color: #d1d5db;
+  line-height: 1.7;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #6366f1;
+}
+
+/* Mechanism Details */
+.mechanism-details {
+  margin-bottom: 24px;
+}
+
+.mechanism-details h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.mechanism-detail-item {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mechanism-detail-item .detail-label {
+  width: 150px;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.mechanism-detail-item .detail-value {
+  flex: 1;
+  color: #e8e8e8;
+}
+
+/* Downstream Effects */
+.downstream-effects,
+.patient-education,
+.clinical-pearls {
+  margin-bottom: 24px;
+}
+
+.downstream-effects h4,
+.patient-education h4,
+.clinical-pearls h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.downstream-effects ul,
+.patient-education ul,
+.clinical-pearls ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.downstream-effects li,
+.patient-education li,
+.clinical-pearls li {
+  padding: 8px 0 8px 20px;
+  position: relative;
+  color: #d1d5db;
+}
+
+.downstream-effects li::before,
+.patient-education li::before,
+.clinical-pearls li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #6366f1;
+}
+
+.clinical-pearls li::before {
+  content: '💡';
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   Body System Cards
+   ============================================ */
+
+.systems-group {
+  margin-bottom: 24px;
+}
+
+.systems-group h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.systems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.body-system-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border-left: 4px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.body-system-card:hover,
+.body-system-card.highlighted {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.system-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.system-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.system-name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.system-mechanism {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.system-timing {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.timing-label {
+  color: #9ca3af;
+}
+
+/* Effect Badges */
+.effect-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.effect-badge .intensity {
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.severity-badge,
+.frequency-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+}
+
+.frequency-badge {
+  background: rgba(107, 114, 128, 0.2);
+  color: #9ca3af;
+}
+
+/* ============================================
+   Adverse Effect Cards
+   ============================================ */
+
+.adverse-group {
+  margin-bottom: 24px;
+}
+
+.adverse-group h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.black-box-group h4 {
+  color: #ef4444;
+}
+
+.adverse-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adverse-effect-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #ef4444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.adverse-effect-card:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.adverse-effect-card.black-box {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.effect-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.effect-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.effect-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.black-box-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(220, 38, 38, 0.2);
+  border-radius: 6px;
+  color: #fca5a5;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.effect-mechanism {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+}
+
+.effect-symptoms,
+.effect-management,
+.effect-seek-care {
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.symptoms-label,
+.management-label,
+.seek-care-label {
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.effect-seek-care {
+  color: #fbbf24;
+}
+
+/* ============================================
+   Therapeutic Targets
+   ============================================ */
+
+.targets-section {
+  margin-top: 24px;
+}
+
+.targets-section h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.targets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.target-card {
+  padding: 14px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 10px;
+  border-left: 3px solid #22c55e;
+}
+
+.target-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.target-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.target-name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.target-type {
+  padding: 2px 8px;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: #22c55e;
+  text-transform: capitalize;
+}
+
+.target-mechanism,
+.target-effect {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* ============================================
+   Contraindications
+   ============================================ */
+
+.contraindications-section {
+  margin-top: 24px;
+}
+
+.contraindications-section h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+
+.contraindications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contraindication-card {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #f97316;
+}
+
+.contraindication-card.absolute {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.ci-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ci-type {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.contraindication-card.absolute .ci-type {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.contraindication-card.relative .ci-type {
+  background: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+}
+
+.ci-condition {
+  font-weight: 600;
+  flex: 1;
+}
+
+.ci-reason {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.ci-alternatives {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #22c55e;
+}
+
+.alt-label {
+  color: #6b7280;
+}
+
+/* ============================================
+   Pharmacokinetics Panel
+   ============================================ */
+
+.pk-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.pk-panel h4 {
+  font-size: 1.1rem;
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.pk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.pk-section h5 {
+  font-size: 0.9rem;
+  color: #6366f1;
+  margin: 0 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.pk-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.pk-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.pk-item > span:last-child {
+  color: #e8e8e8;
+  font-size: 0.9rem;
+}
+
+/* Dosing Section */
+.dosing-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.dosing-section h4 {
+  font-size: 1.1rem;
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.dosing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.dosing-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.dosing-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.dosing-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dosing-value {
+  color: #e8e8e8;
+  font-size: 0.9rem;
+}
+
+/* Monitoring Section */
+.monitoring-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.monitoring-section h4 {
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  color: #fff;
+}
+
+.monitoring-item {
+  margin-bottom: 8px;
+}
+
+.monitoring-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  display: block;
+}
+
+.monitoring-value {
+  color: #e8e8e8;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 600px) {
+  .medication-explorer-header {
+    padding: 12px 16px;
+  }
+
+  .medication-explorer-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .class-medications {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-navigation {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: unset;
+    width: calc(50% - 2px);
+  }
+
+  .complexity-selector {
+    flex-wrap: wrap;
+  }
+
+  .complexity-hint {
+    width: 100%;
+    margin: 8px 0 0 0;
+  }
+
+  .pk-grid {
+    grid-template-columns: 1fr;
+  }
+}

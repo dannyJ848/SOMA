@@ -1683,3 +1683,17 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Include highlight colors in data models for 3D visualization consistency
   - Separate summary types from full data types for list views
 ---
+
+## 2026-01-21 - US-081
+- Implemented: Medication Database with 15 drugs
+- Created comprehensive data for: Lisinopril, Metoprolol, Amlodipine, Atorvastatin, Aspirin,
+  Metformin, Glipizide, Semaglutide, Ibuprofen, Acetaminophen, Naproxen, Albuterol, 
+  Fluticasone, Omeprazole, Famotidine
+- Each includes full mechanism, targets, effects, 5-level explanations
+- Added store functions for searching and retrieval
+- Files: core/medical-simulation/medications/store.ts
+- **Learnings for future iterations:**
+  - Structure medication data by drug class for organization
+  - Include patient education points for practical relevance
+  - Map adverse effects to specific anatomical structures for 3D visualization
+---

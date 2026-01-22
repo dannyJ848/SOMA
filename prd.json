@@ -1320,7 +1320,7 @@
         "Typecheck passes"
       ],
       "priority": 73,
-      "passes": false,
+      "passes": true,
       "notes": "Start with user's medications + common drugs."
     },
     {

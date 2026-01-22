@@ -1,0 +1,468 @@
+/**
+ * Shortcuts Bar Styles
+ *
+ * Horizontal scrollable bar with suggested shortcuts.
+ * Mobile-first with 44px touch targets.
+ */
+
+/* ============================================
+   Container
+   ============================================ */
+
+.shortcuts-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--surface-secondary, #f8f9fa);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.shortcuts-bar--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shortcuts-bar--hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.shortcuts-bar--loading {
+  min-height: 56px;
+}
+
+/* ============================================
+   Scrollable Container
+   ============================================ */
+
+.shortcuts-bar__container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  flex: 1;
+  padding: 4px 0;
+}
+
+.shortcuts-bar__container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* ============================================
+   Scroll Buttons
+   ============================================ */
+
+.shortcuts-bar__scroll-button {
+  display: none;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--surface-primary, #ffffff);
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.shortcuts-bar__scroll-button svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary, #666);
+}
+
+.shortcuts-bar__scroll-button:hover {
+  background: var(--surface-hover, #f0f0f0);
+  transform: scale(1.05);
+}
+
+.shortcuts-bar__scroll-button:active {
+  transform: scale(0.95);
+}
+
+/* Show scroll buttons on larger screens when needed */
+@media (min-width: 768px) {
+  .shortcuts-bar__scroll-button {
+    display: flex;
+  }
+}
+
+/* ============================================
+   Shortcut Button
+   ============================================ */
+
+.shortcuts-bar__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  min-width: 72px;
+  max-width: 100px;
+  border: none;
+  background: var(--surface-primary, #ffffff);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  /* Touch target: 44px minimum */
+  min-height: 44px;
+}
+
+.shortcuts-bar__button:hover {
+  background: var(--primary-light, #e3f2fd);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.shortcuts-bar__button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.shortcuts-bar__button:focus-visible {
+  outline: 2px solid var(--primary, #2196f3);
+  outline-offset: 2px;
+}
+
+/* Animation for new shortcuts */
+.shortcuts-bar__button--animating {
+  animation: shortcut-appear 0.4s ease-out;
+}
+
+@keyframes shortcut-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  50% {
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================
+   Button Icon
+   ============================================ */
+
+.shortcuts-bar__button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--primary-light, #e3f2fd);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.shortcuts-bar__button:hover .shortcuts-bar__button-icon {
+  background: var(--primary, #2196f3);
+}
+
+.shortcuts-bar__button:hover .shortcuts-bar__icon {
+  color: white;
+}
+
+.shortcuts-bar__icon {
+  width: 18px;
+  height: 18px;
+  color: var(--primary, #2196f3);
+  transition: color 0.2s ease;
+}
+
+/* ============================================
+   Button Label
+   ============================================ */
+
+.shortcuts-bar__button-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-primary, #333);
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.shortcuts-bar__loading {
+  display: flex;
+  gap: 6px;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcuts-bar__loading-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary, #2196f3);
+  border-radius: 50%;
+  animation: loading-pulse 1.4s ease-in-out infinite both;
+}
+
+.shortcuts-bar__loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.shortcuts-bar__loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.shortcuts-bar__loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading-pulse {
+  0%, 80%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+
+.shortcuts-bar__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  color: var(--text-tertiary, #999);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* ============================================
+   Icon Type Color Variations
+   ============================================ */
+
+/* Symptom - Orange */
+.shortcuts-bar__button[data-icon-type="symptom"] .shortcuts-bar__button-icon {
+  background: #fff3e0;
+}
+.shortcuts-bar__button[data-icon-type="symptom"] .shortcuts-bar__icon {
+  color: #ff9800;
+}
+.shortcuts-bar__button[data-icon-type="symptom"]:hover .shortcuts-bar__button-icon {
+  background: #ff9800;
+}
+
+/* Medication - Purple */
+.shortcuts-bar__button[data-icon-type="medication"] .shortcuts-bar__button-icon {
+  background: #f3e5f5;
+}
+.shortcuts-bar__button[data-icon-type="medication"] .shortcuts-bar__icon {
+  color: #9c27b0;
+}
+.shortcuts-bar__button[data-icon-type="medication"]:hover .shortcuts-bar__button-icon {
+  background: #9c27b0;
+}
+
+/* Condition - Red */
+.shortcuts-bar__button[data-icon-type="condition"] .shortcuts-bar__button-icon {
+  background: #ffebee;
+}
+.shortcuts-bar__button[data-icon-type="condition"] .shortcuts-bar__icon {
+  color: #f44336;
+}
+.shortcuts-bar__button[data-icon-type="condition"]:hover .shortcuts-bar__button-icon {
+  background: #f44336;
+}
+
+/* Anatomy - Teal */
+.shortcuts-bar__button[data-icon-type="anatomy"] .shortcuts-bar__button-icon {
+  background: #e0f2f1;
+}
+.shortcuts-bar__button[data-icon-type="anatomy"] .shortcuts-bar__icon {
+  color: #009688;
+}
+.shortcuts-bar__button[data-icon-type="anatomy"]:hover .shortcuts-bar__button-icon {
+  background: #009688;
+}
+
+/* Lab - Indigo */
+.shortcuts-bar__button[data-icon-type="lab"] .shortcuts-bar__button-icon {
+  background: #e8eaf6;
+}
+.shortcuts-bar__button[data-icon-type="lab"] .shortcuts-bar__icon {
+  color: #3f51b5;
+}
+.shortcuts-bar__button[data-icon-type="lab"]:hover .shortcuts-bar__button-icon {
+  background: #3f51b5;
+}
+
+/* Chat - Green */
+.shortcuts-bar__button[data-icon-type="chat"] .shortcuts-bar__button-icon {
+  background: #e8f5e9;
+}
+.shortcuts-bar__button[data-icon-type="chat"] .shortcuts-bar__icon {
+  color: #4caf50;
+}
+.shortcuts-bar__button[data-icon-type="chat"]:hover .shortcuts-bar__button-icon {
+  background: #4caf50;
+}
+
+/* Encyclopedia - Blue */
+.shortcuts-bar__button[data-icon-type="encyclopedia"] .shortcuts-bar__button-icon {
+  background: #e3f2fd;
+}
+.shortcuts-bar__button[data-icon-type="encyclopedia"] .shortcuts-bar__icon {
+  color: #2196f3;
+}
+.shortcuts-bar__button[data-icon-type="encyclopedia"]:hover .shortcuts-bar__button-icon {
+  background: #2196f3;
+}
+
+/* Timeline - Brown */
+.shortcuts-bar__button[data-icon-type="timeline"] .shortcuts-bar__button-icon {
+  background: #efebe9;
+}
+.shortcuts-bar__button[data-icon-type="timeline"] .shortcuts-bar__icon {
+  color: #795548;
+}
+.shortcuts-bar__button[data-icon-type="timeline"]:hover .shortcuts-bar__button-icon {
+  background: #795548;
+}
+
+/* Health - Pink */
+.shortcuts-bar__button[data-icon-type="health"] .shortcuts-bar__button-icon {
+  background: #fce4ec;
+}
+.shortcuts-bar__button[data-icon-type="health"] .shortcuts-bar__icon {
+  color: #e91e63;
+}
+.shortcuts-bar__button[data-icon-type="health"]:hover .shortcuts-bar__button-icon {
+  background: #e91e63;
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .shortcuts-bar {
+    background: var(--surface-secondary-dark, #1e1e1e);
+  }
+
+  .shortcuts-bar__button {
+    background: var(--surface-primary-dark, #2d2d2d);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .shortcuts-bar__button:hover {
+    background: var(--primary-dark, #1565c0);
+  }
+
+  .shortcuts-bar__button-label {
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .shortcuts-bar__scroll-button {
+    background: var(--surface-primary-dark, #2d2d2d);
+  }
+
+  .shortcuts-bar__scroll-button svg {
+    color: var(--text-secondary-dark, #aaa);
+  }
+
+  .shortcuts-bar__scroll-button:hover {
+    background: var(--surface-hover-dark, #3d3d3d);
+  }
+
+  .shortcuts-bar__empty {
+    color: var(--text-tertiary-dark, #666);
+  }
+}
+
+/* ============================================
+   Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 767px) {
+  .shortcuts-bar {
+    padding: 6px 8px;
+    border-radius: 8px;
+  }
+
+  .shortcuts-bar__button {
+    padding: 6px 10px;
+    min-width: 64px;
+    min-height: 48px; /* Larger touch target on mobile */
+  }
+
+  .shortcuts-bar__button-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .shortcuts-bar__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .shortcuts-bar__button-label {
+    font-size: 10px;
+  }
+
+  /* Hide scroll buttons on mobile - use swipe */
+  .shortcuts-bar__scroll-button {
+    display: none;
+  }
+
+  /* Add momentum scrolling on iOS */
+  .shortcuts-bar__container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .shortcuts-bar,
+  .shortcuts-bar__button,
+  .shortcuts-bar__button-icon,
+  .shortcuts-bar__icon,
+  .shortcuts-bar__scroll-button {
+    transition: none;
+  }
+
+  .shortcuts-bar__button--animating {
+    animation: none;
+  }
+
+  .shortcuts-bar__loading-dot {
+    animation: none;
+    opacity: 0.6;
+  }
+}

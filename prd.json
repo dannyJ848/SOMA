@@ -1710,7 +1710,7 @@
         "Typecheck passes"
       ],
       "priority": 95,
-      "passes": false,
+      "passes": true,
       "notes": "Component in src/components/adaptive/"
     },
     {
@@ -1726,7 +1726,7 @@
         "Typecheck passes"
       ],
       "priority": 96,
-      "passes": false,
+      "passes": true,
       "notes": "Use useActionTracker hook in each component"
     },
     {
@@ -1742,7 +1742,7 @@
         "Typecheck passes"
       ],
       "priority": 97,
-      "passes": false,
+      "passes": true,
       "notes": "Integrate with existing core components"
     },
     {
@@ -1757,7 +1757,7 @@
         "Typecheck passes"
       ],
       "priority": 98,
-      "passes": false,
+      "passes": true,
       "notes": "Enhances AI chat with journey awareness"
     },
     {
@@ -1772,7 +1772,7 @@
         "Typecheck passes"
       ],
       "priority": 99,
-      "passes": false,
+      "passes": true,
       "notes": "Bridge for calling prediction engine from frontend"
     },
     {
@@ -1787,7 +1787,7 @@
         "Typecheck passes"
       ],
       "priority": 100,
-      "passes": false,
+      "passes": true,
       "notes": "Final polish for mobile adaptive UI"
     }
   ]

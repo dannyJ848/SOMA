@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { invoke } from './tauri-invoke';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { ChatAction } from '../core/intent-prediction/types';
 
 interface DashboardData {
   summary: {
@@ -173,6 +175,9 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
   const [aiError, setAiError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<ChatAction>('chat', 'ChatView');
+
   useEffect(() => {
     checkAIHealth();
   }, []);
@@ -203,6 +208,9 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
+
+    // Track send-message action
+    track('send-message', { messageContent: userMessage, messageRole: 'user' });
 
     try {
       // Build the system prompt with health context
@@ -251,6 +259,26 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
       sendMessage();
     }
   }
+
+  // Handle suggestion click with tracking
+  const handleSuggestionClick = useCallback((suggestion: string) => {
+    track('click-suggestion', { suggestionText: suggestion });
+    setInput(suggestion);
+  }, [track]);
+
+  // Handle citation click with tracking
+  const handleCitationClick = useCallback((citation: Citation, event: React.MouseEvent) => {
+    // Track view-citation action
+    track('view-citation', {
+      citationIndex: citation.index,
+      metadata: { source: citation.source, section: citation.section },
+    });
+
+    // If no URL, prevent navigation
+    if (!citation.url) {
+      event.preventDefault();
+    }
+  }, [track]);
 
   return (
     <div className="container chat-view">
@@ -306,13 +334,13 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
             <h3>Ask me about your health data</h3>
             <p>I can help you understand your conditions, medications, lab results, and symptoms.</p>
             <div className="suggested-questions">
-              <button onClick={() => setInput('What do my recent lab results indicate?')}>
+              <button onClick={() => handleSuggestionClick('What do my recent lab results indicate?')}>
                 What do my recent lab results indicate?
               </button>
-              <button onClick={() => setInput('Explain my current medications')}>
+              <button onClick={() => handleSuggestionClick('Explain my current medications')}>
                 Explain my current medications
               </button>
-              <button onClick={() => setInput('What could be causing my recent symptoms?')}>
+              <button onClick={() => handleSuggestionClick('What could be causing my recent symptoms?')}>
                 What could be causing my symptoms?
               </button>
             </div>
@@ -355,7 +383,7 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="citation-link"
-                        onClick={(e) => !citation.url && e.preventDefault()}
+                        onClick={(e) => handleCitationClick(citation, e)}
                       >
                         <span className="citation-index">[{citation.index}]</span>
                         <span className="citation-source">{citation.source}</span>

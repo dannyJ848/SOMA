@@ -1,9 +1,16 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy, useCallback } from 'react';
 import { invoke } from './tauri-invoke';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
+import { useActionTracker } from './hooks/useActionTracker';
+import type {
+  DashboardAction,
+  NavigationAction,
+  TimelineAction,
+  BodyMapAction,
+} from '../core/intent-prediction/types';
 
 // Lazy load heavy components to prevent blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
@@ -122,23 +129,37 @@ function App() {
   // Navigation history for breadcrumb support
   const [navigationHistory, setNavigationHistory] = useState<View[]>([]);
 
+  // Action tracking hooks for intent prediction
+  const { track: trackDashboard } = useActionTracker<DashboardAction>('dashboard', 'App');
+  const { track: trackNavigation } = useActionTracker<NavigationAction>('navigation', 'App');
+  const { track: trackTimeline } = useActionTracker<TimelineAction>('timeline', 'App');
+  const { track: trackBodyMap } = useActionTracker<BodyMapAction>('body-map', 'App');
+
   // Navigate with history tracking
-  const navigateWithHistory = (newView: View) => {
+  const navigateWithHistory = useCallback((newView: View) => {
+    trackNavigation('view-change', { fromView: currentView, toView: newView });
     setNavigationHistory(prev => [...prev, currentView]);
     setCurrentView(newView);
-  };
+  }, [currentView, trackNavigation]);
 
   // Navigate back through history
-  const navigateBack = () => {
+  const navigateBack = useCallback(() => {
     if (navigationHistory.length > 0) {
       const newHistory = [...navigationHistory];
       const previousView = newHistory.pop()!;
+      trackNavigation('back', { fromView: currentView, toView: previousView });
       setNavigationHistory(newHistory);
       setCurrentView(previousView);
       return true;
     }
     return false;
-  };
+  }, [navigationHistory, currentView, trackNavigation]);
+
+  // Tracked navigation handler for header buttons
+  const handleNavigate = useCallback((targetView: View) => {
+    trackNavigation('view-change', { fromView: currentView, toView: targetView });
+    setCurrentView(targetView);
+  }, [currentView, trackNavigation]);
 
   useEffect(() => {
     checkDatabase();
@@ -196,13 +217,64 @@ function App() {
     }
   }
 
-  function toggleFilter(type: TimelineEventType) {
+  const toggleFilter = useCallback((type: TimelineEventType) => {
+    const isAdding = !activeFilters.includes(type);
+    trackTimeline('filter-type', {
+      filterType: type,
+      filterValue: isAdding ? 'enabled' : 'disabled',
+    });
     setActiveFilters(prev =>
       prev.includes(type)
         ? prev.filter(t => t !== type)
         : [...prev, type]
     );
-  }
+  }, [activeFilters, trackTimeline]);
+
+  // Handle date range change with tracking
+  const handleDateRangeChange = useCallback((field: 'start' | 'end', value: string) => {
+    trackTimeline('change-date-range', {
+      dateRangeStart: field === 'start' ? value : dateRange.start,
+      dateRangeEnd: field === 'end' ? value : dateRange.end,
+    });
+    setDateRange(prev => ({ ...prev, [field]: value }));
+  }, [dateRange, trackTimeline]);
+
+  // Handle clear date range with tracking
+  const handleClearDateRange = useCallback(() => {
+    trackTimeline('change-date-range', { dateRangeStart: undefined, dateRangeEnd: undefined });
+    setDateRange({});
+  }, [trackTimeline]);
+
+  // Handle timeline event selection with tracking
+  const handleSelectTimelineEvent = useCallback((event: TimelineEvent) => {
+    trackTimeline('select-event', { eventId: event.id, eventType: event.type });
+    setSelectedEvent(event);
+  }, [trackTimeline]);
+
+  // Handle body region selection with tracking
+  const handleBodyRegionSelect = useCallback((regionId: string) => {
+    trackBodyMap('select-region', { bodyRegion: regionId });
+    setSelectedBodyRegion(regionId);
+  }, [trackBodyMap]);
+
+  // Handle body diagram view toggle with tracking
+  const handleBodyViewToggle = useCallback((view: 'anterior' | 'posterior') => {
+    trackBodyMap('toggle-view', { metadata: { view } });
+    setBodyDiagramView(view);
+  }, [trackBodyMap]);
+
+  // Handle symptom form start with tracking
+  const handleStartSymptomLog = useCallback(() => {
+    trackBodyMap('start-symptom-log', { bodyRegion: selectedBodyRegion || undefined });
+    setShowSymptomForm(true);
+  }, [selectedBodyRegion, trackBodyMap]);
+
+  // Handle dashboard quick access button click with tracking
+  const handleQuickAccessClick = useCallback((targetView: View, cardType: string) => {
+    trackDashboard('click-quick-access', { metadata: { cardType, targetView } });
+    trackNavigation('view-change', { fromView: currentView, toView: targetView });
+    setCurrentView(targetView);
+  }, [currentView, trackDashboard, trackNavigation]);
 
   function getEventTypeColor(type: TimelineEventType): string {
     const colors: Record<TimelineEventType, string> = {
@@ -579,18 +651,18 @@ function App() {
             <input
               type="date"
               value={dateRange.start || ''}
-              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
+              onChange={(e) => handleDateRangeChange('start', e.target.value)}
               placeholder="Start date"
             />
             <span className="date-separator">to</span>
             <input
               type="date"
               value={dateRange.end || ''}
-              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
+              onChange={(e) => handleDateRangeChange('end', e.target.value)}
               placeholder="End date"
             />
             {(dateRange.start || dateRange.end) && (
-              <button className="clear-dates" onClick={() => setDateRange({})}>
+              <button className="clear-dates" onClick={handleClearDateRange}>
                 Clear
               </button>
             )}
@@ -611,7 +683,7 @@ function App() {
                   <div
                     key={event.id}
                     className="timeline-item"
-                    onClick={() => setSelectedEvent(event)}
+                    onClick={() => handleSelectTimelineEvent(event)}
                   >
                     <div
                       className="timeline-marker"
@@ -834,13 +906,13 @@ function App() {
             <div className="body-diagram-controls">
               <button
                 className={`view-toggle ${bodyDiagramView === 'anterior' ? 'active' : ''}`}
-                onClick={() => setBodyDiagramView('anterior')}
+                onClick={() => handleBodyViewToggle('anterior')}
               >
                 Front
               </button>
               <button
                 className={`view-toggle ${bodyDiagramView === 'posterior' ? 'active' : ''}`}
-                onClick={() => setBodyDiagramView('posterior')}
+                onClick={() => handleBodyViewToggle('posterior')}
               >
                 Back
               </button>
@@ -850,7 +922,7 @@ function App() {
           <BodyDiagram
             view={bodyDiagramView}
             selectedRegion={selectedBodyRegion || undefined}
-            onRegionSelect={(regionId) => setSelectedBodyRegion(regionId)}
+            onRegionSelect={handleBodyRegionSelect}
             symptomLocations={symptomLocations}
           />
 
@@ -860,7 +932,7 @@ function App() {
               <span className="selected-region-name">{getRegionName(selectedBodyRegion)}</span>
               <button
                 className="add-symptom-button"
-                onClick={() => setShowSymptomForm(true)}
+                onClick={handleStartSymptomLog}
               >
                 Add Symptom Here
               </button>
@@ -880,13 +952,13 @@ function App() {
           <p className="subtitle">Your health, understood</p>
         </div>
         <div className="header-actions">
-          <button className="header-action-button" onClick={() => setCurrentView('chat')}>
+          <button className="header-action-button" onClick={() => handleNavigate('chat')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
             Chat
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('anatomy')}>
+          <button className="header-action-button" onClick={() => handleNavigate('anatomy')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
               <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
@@ -894,7 +966,7 @@ function App() {
             </svg>
             3D Anatomy
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('body')}>
+          <button className="header-action-button" onClick={() => handleNavigate('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2a3 3 0 0 0-3 3c0 1.5 1.5 3 3 3s3-1.5 3-3a3 3 0 0 0-3-3z"/>
               <path d="M12 8v14"/>
@@ -903,7 +975,7 @@ function App() {
             </svg>
             Body
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('timeline')}>
+          <button className="header-action-button" onClick={() => handleNavigate('timeline')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 6v6l4 2"/>
@@ -975,7 +1047,7 @@ function App() {
           <div className="quick-access-buttons">
             <button
               className="quick-access-btn symptom-btn"
-              onClick={() => setCurrentView('symptom-explorer')}
+              onClick={() => handleQuickAccessClick('symptom-explorer', 'symptom')}
             >
               <span className="btn-icon">🔍</span>
               <span className="btn-text">
@@ -985,7 +1057,7 @@ function App() {
             </button>
             <button
               className="quick-access-btn medication-btn"
-              onClick={() => setCurrentView('medication-explorer')}
+              onClick={() => handleQuickAccessClick('medication-explorer', 'medication')}
             >
               <span className="btn-icon">💊</span>
               <span className="btn-text">
@@ -995,7 +1067,7 @@ function App() {
             </button>
             <button
               className="quick-access-btn condition-btn"
-              onClick={() => setCurrentView('condition-simulator')}
+              onClick={() => handleQuickAccessClick('condition-simulator', 'condition')}
             >
               <span className="btn-icon">🏥</span>
               <span className="btn-text">
@@ -1005,7 +1077,7 @@ function App() {
             </button>
             <button
               className="quick-access-btn encyclopedia-btn"
-              onClick={() => setCurrentView('encyclopedia')}
+              onClick={() => handleQuickAccessClick('encyclopedia', 'encyclopedia')}
             >
               <span className="btn-icon">📚</span>
               <span className="btn-text">

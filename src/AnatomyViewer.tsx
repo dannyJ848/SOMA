@@ -11,6 +11,7 @@ import {
   type StructureHighlight,
   type ViewPreset as EventBusViewPreset,
 } from './utils/anatomy3DEventBus';
+import { useAnatomy3DTracking } from './hooks/useAnatomy3DTracking';
 
 interface AnatomyViewerProps {
   onBack: () => void;
@@ -325,6 +326,9 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
 
   // External highlight state
   const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
+
+  // Bridge anatomy events to intent tracking
+  useAnatomy3DTracking();
 
   // Layer state management
   const {

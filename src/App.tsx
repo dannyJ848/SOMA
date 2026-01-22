@@ -5,8 +5,13 @@ import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 
-// Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
+// Lazy load heavy components to prevent blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
+const SymptomExplorer = lazy(() => import('./SymptomExplorer').then(m => ({ default: m.SymptomExplorer })));
+const MedicationExplorer = lazy(() => import('./MedicationExplorer').then(m => ({ default: m.MedicationExplorer })));
+const ConditionSimulator = lazy(() => import('./ConditionSimulator'));
+const MedicalEncyclopedia = lazy(() => import('./MedicalEncyclopedia').then(m => ({ default: m.MedicalEncyclopedia })));
+const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ default: m.EncyclopediaEntry })));
 
 interface HealthSummary {
   totalConditions: number;
@@ -88,7 +93,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -110,6 +115,10 @@ function App() {
   const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
   const [showSymptomForm, setShowSymptomForm] = useState(false);
   const [dataVersion, setDataVersion] = useState(0);
+  // Phase 4 state
+  const [selectedEncyclopediaEntryId, setSelectedEncyclopediaEntryId] = useState<string | null>(null);
+  const [initialMedicationId, setInitialMedicationId] = useState<string | undefined>(undefined);
+  const [initialConditionId, setInitialConditionId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     checkDatabase();
@@ -650,6 +659,110 @@ function App() {
     );
   }
 
+  // Phase 4: Symptom Explorer
+  if (currentView === 'symptom-explorer') {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Symptom Explorer...</div>
+        </div>
+      }>
+        <SymptomExplorer
+          onBack={() => setCurrentView('dashboard')}
+          dashboardData={dashboard}
+          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+        />
+      </Suspense>
+    );
+  }
+
+  // Phase 4: Medication Explorer
+  if (currentView === 'medication-explorer') {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Medication Explorer...</div>
+        </div>
+      }>
+        <MedicationExplorer
+          onBack={() => {
+            setInitialMedicationId(undefined);
+            setCurrentView('dashboard');
+          }}
+          dashboardData={dashboard}
+          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          initialMedicationId={initialMedicationId}
+        />
+      </Suspense>
+    );
+  }
+
+  // Phase 4: Condition Simulator
+  if (currentView === 'condition-simulator') {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Condition Simulator...</div>
+        </div>
+      }>
+        <ConditionSimulator
+          onBack={() => {
+            setInitialConditionId(undefined);
+            setCurrentView('dashboard');
+          }}
+          dashboardData={dashboard}
+          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          initialConditionId={initialConditionId}
+        />
+      </Suspense>
+    );
+  }
+
+  // Phase 4: Medical Encyclopedia
+  if (currentView === 'encyclopedia') {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Medical Encyclopedia...</div>
+        </div>
+      }>
+        <MedicalEncyclopedia
+          onBack={() => setCurrentView('dashboard')}
+          dashboardData={dashboard}
+          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          onOpenEntry={(entryId) => {
+            setSelectedEncyclopediaEntryId(entryId);
+            setCurrentView('encyclopedia-entry');
+          }}
+        />
+      </Suspense>
+    );
+  }
+
+  // Phase 4: Encyclopedia Entry
+  if (currentView === 'encyclopedia-entry' && selectedEncyclopediaEntryId) {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Encyclopedia Entry...</div>
+        </div>
+      }>
+        <EncyclopediaEntry
+          entryId={selectedEncyclopediaEntryId}
+          onBack={() => {
+            setSelectedEncyclopediaEntryId(null);
+            setCurrentView('encyclopedia');
+          }}
+          onNavigateToEntry={(entryId) => {
+            setSelectedEncyclopediaEntryId(entryId);
+            // Stay on encyclopedia-entry view
+          }}
+          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+        />
+      </Suspense>
+    );
+  }
+
   // Body Map View
   if (currentView === 'body') {
     // Get symptom locations from dashboard data
@@ -828,6 +941,53 @@ function App() {
 
         {/* AI Insights Panel */}
         <InsightsPanel dashboardData={dashboard} dataVersion={dataVersion} />
+
+        {/* Phase 4: Quick Access Buttons */}
+        <section className="dashboard-section quick-access-section">
+          <h2 className="section-title">Explore & Learn</h2>
+          <div className="quick-access-buttons">
+            <button
+              className="quick-access-btn symptom-btn"
+              onClick={() => setCurrentView('symptom-explorer')}
+            >
+              <span className="btn-icon">🔍</span>
+              <span className="btn-text">
+                <span className="btn-title">Explore Symptom</span>
+                <span className="btn-subtitle">Understand what symptoms mean</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn medication-btn"
+              onClick={() => setCurrentView('medication-explorer')}
+            >
+              <span className="btn-icon">💊</span>
+              <span className="btn-text">
+                <span className="btn-title">Drug Effects</span>
+                <span className="btn-subtitle">See how medications work</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn condition-btn"
+              onClick={() => setCurrentView('condition-simulator')}
+            >
+              <span className="btn-icon">🏥</span>
+              <span className="btn-text">
+                <span className="btn-title">Learn Condition</span>
+                <span className="btn-subtitle">Explore disease progression</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn encyclopedia-btn"
+              onClick={() => setCurrentView('encyclopedia')}
+            >
+              <span className="btn-icon">📚</span>
+              <span className="btn-text">
+                <span className="btn-title">Encyclopedia</span>
+                <span className="btn-subtitle">Medical knowledge base</span>
+              </span>
+            </button>
+          </div>
+        </section>
 
         {/* Two-column layout for conditions and meds */}
         <div className="two-column">

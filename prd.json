@@ -1544,7 +1544,7 @@
         "Typecheck passes"
       ],
       "priority": 85,
-      "passes": false,
+      "passes": true,
       "notes": "Integration point for all Phase 4 features."
     },
     {

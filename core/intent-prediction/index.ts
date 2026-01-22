@@ -67,3 +67,27 @@ export {
   initJourneyStore,
   closeJourneyStore,
 } from './journey-store';
+
+// Prediction Engine exports
+export {
+  requestIntentPrediction,
+  cancelPendingPrediction,
+  predictImmediate,
+  isPredictionInProgress,
+  hasPendingPrediction,
+  getPredictionQuiet,
+  prepareActionsForPrompt,
+} from './prediction-engine';
+
+// Prompts exports
+export {
+  buildPredictionPrompt,
+  parseIntentResponse,
+  createEmptyIntent,
+} from './prompts';
+
+// Domain Rules exports
+export {
+  getDomainFallbackPrediction,
+  applyDomainRules,
+} from './domain-rules';

@@ -1664,7 +1664,7 @@
         "Typecheck passes"
       ],
       "priority": 92,
-      "passes": false,
+      "passes": true,
       "notes": "Uses DeepSeek via Ollama (already default model)"
     },
     {
@@ -1679,7 +1679,7 @@
         "Typecheck passes"
       ],
       "priority": 93,
-      "passes": false,
+      "passes": true,
       "notes": "Prompts in core/intent-prediction/prompts.ts"
     },
     {

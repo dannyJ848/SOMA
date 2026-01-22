@@ -1264,7 +1264,7 @@
         "Typecheck passes"
       ],
       "priority": 70,
-      "passes": false,
+      "passes": true,
       "notes": "Expand from 6 to 16+ symptoms. Located in core/exploration/symptom-anatomy/."
     },
     {

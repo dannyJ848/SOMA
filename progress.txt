@@ -1631,3 +1631,28 @@ New PRD created with 23 user stories (US-073 to US-095):
 - All features receive dashboardData for personalization
 - 3D viewer integration via useAnatomy3DNavigation hook
 ---
+
+## 2026-01-21 - US-078
+- Implemented: Expanded Symptom-Anatomy Mappings from 6 to 16 symptoms
+- Added 10 new comprehensive symptom mappings:
+  1. Fatigue (8 anatomical sources: thyroid, anemia, cardiac, hepatic, diabetes, depression, adrenal, myopathy)
+  2. Dizziness (7 sources: BPPV, vestibular neuritis, Meniere's, cardiac arrhythmia, brainstem, vascular, orthostatic)
+  3. Palpitations (6 sources: atrial arrhythmias, PVCs, sinus tachycardia, hyperthyroidism, pheochromocytoma, accessory pathway)
+  4. Edema/Swelling (7 sources: right heart failure, nephrotic, cirrhosis, lymphedema, DVT, CVI, drug-induced)
+  5. Nausea/Vomiting (8 sources: gastritis, bowel obstruction, vestibular, increased ICP, hepatobiliary, CTZ, inferior MI, pregnancy)
+  6. Cough (7 sources: post-nasal drip, asthma/COPD, GERD, pneumonia, heart failure, malignancy, ACE inhibitor)
+  7. Numbness/Tingling (7 sources: peripheral neuropathy, radiculopathy, carpal tunnel, myelopathy, stroke/MS, cubital tunnel, B12)
+  8. Urinary Symptoms (7 sources: UTI, BPH, pyelonephritis, nephrolithiasis, overactive bladder, bladder cancer, stress incontinence)
+  9. Vision Changes (8 sources: cataract, retinal detachment, optic nerve, diplopia, visual cortex, vascular occlusion, glaucoma, vitreous)
+  10. Skin Rash (8 sources: contact dermatitis, urticaria, infection, autoimmune, vasculitis, drug reaction, viral exanthem, meningococcemia)
+
+- Files changed:
+  - core/exploration/symptom-anatomy/store.ts (+1340 lines)
+  
+- **Learnings for future iterations:**
+  - Valid SymptomCategory values: pain, neurologic, respiratory, cardiovascular, gastrointestinal, musculoskeletal, dermatologic, urologic, constitutional, psychiatric
+  - Use 'constitutional' for systemic symptoms (not 'generalized')
+  - Use 'urologic' for urinary symptoms (not 'genitourinary')
+  - BodyRegion can be 'generalized' but SymptomCategory cannot
+  - Each symptom mapping includes highlightColor for 3D visualization integration
+---

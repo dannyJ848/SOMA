@@ -1656,3 +1656,18 @@ New PRD created with 23 user stories (US-073 to US-095):
   - BodyRegion can be 'generalized' but SymptomCategory cannot
   - Each symptom mapping includes highlightColor for 3D visualization integration
 ---
+
+## 2026-01-21 - US-079
+- Implemented: SymptomFollowUpChat Component for AI-powered symptom differential narrowing
+- Created comprehensive follow-up question templates by symptom category
+- Real-time differential probability tracking with visual sidebar
+- Files changed:
+  - src/SymptomFollowUpChat.tsx (new - main component)
+  - src/SymptomFollowUpChat.css (new - styling)
+  - src/SymptomExplorer.tsx (modified - integration)
+  - src/SymptomExplorer.css (modified - button styles)
+- **Learnings for future iterations:**
+  - Use underscore prefix for intentionally unused parameters (e.g., `_symptom`)
+  - Question templates organized by category make it easy to extend
+  - The ai_chat_rag command expects a specific request structure with messages, systemPrompt, ragOptions
+---

@@ -194,7 +194,7 @@
         "Three.js scene renders in dedicated Anatomy view",
         "WebGL2 renderer with antialiasing",
         "Three-point lighting for anatomical clarity (ambient + 2 directional)",
-        "Perspective camera with 45° FOV",
+        "Perspective camera with 45\u00b0 FOV",
         "Canvas resizes responsively with window",
         "Performance monitoring (FPS counter in dev mode)",
         "Target: 60fps on M1 Mac",
@@ -819,7 +819,7 @@
         "Map to metabolic/physiological pathways",
         "Cover: CBC, CMP, LFTs, lipids, thyroid, coagulation, cardiac markers",
         "Include lesser-known specialty labs",
-        "Bidirectional queries (lab→organ, organ→labs)",
+        "Bidirectional queries (lab\u2192organ, organ\u2192labs)",
         "Extensible schema for new tests",
         "Typecheck passes"
       ],
@@ -832,7 +832,7 @@
       "title": "Biomarker pathway visualization",
       "description": "When viewing a lab result, show the metabolic pathway with anatomical highlighting.",
       "acceptanceCriteria": [
-        "Click lab result → show pathway diagram",
+        "Click lab result \u2192 show pathway diagram",
         "Pathway steps with enzymes and locations",
         "3D model highlights involved organs",
         "Normal vs abnormal pathway states",
@@ -852,7 +852,7 @@
       "acceptanceCriteria": [
         "Intestinal lipid absorption visualization",
         "Liver lipid metabolism (synthesis, packaging)",
-        "Lipoprotein lifecycle (VLDL→LDL, HDL reverse transport)",
+        "Lipoprotein lifecycle (VLDL\u2192LDL, HDL reverse transport)",
         "Receptor-mediated uptake",
         "Atherosclerosis plaque formation animation",
         "Statin mechanism of action",
@@ -925,7 +925,7 @@
       "title": "Symptom-to-anatomy mapping",
       "description": "Map symptoms to possible anatomical sources with differential considerations.",
       "acceptanceCriteria": [
-        "Symptom → list of possible anatomical sources",
+        "Symptom \u2192 list of possible anatomical sources",
         "Weighted by likelihood/commonality",
         "Consider referred pain patterns",
         "Link to user's logged symptoms",
@@ -945,7 +945,7 @@
       "acceptanceCriteria": [
         "Input symptom or select from user's logs",
         "List differential diagnoses ranked",
-        "Click diagnosis → highlight affected anatomy",
+        "Click diagnosis \u2192 highlight affected anatomy",
         "Show pathophysiology for each differential",
         "Red flags / alarm symptoms highlighted",
         "When to seek care guidance",
@@ -963,11 +963,11 @@
       "acceptanceCriteria": [
         "Heart referred pain (arm, jaw)",
         "Gallbladder referred pain (shoulder)",
-        "Appendix referred pain (periumbilical→RLQ)",
-        "Kidney referred pain (flank→groin)",
+        "Appendix referred pain (periumbilical\u2192RLQ)",
+        "Kidney referred pain (flank\u2192groin)",
         "Dermatomal overlay on body model",
         "Explain viscerosomatic convergence mechanism",
-        "Interactive: click organ → show referral zone",
+        "Interactive: click organ \u2192 show referral zone",
         "5-level explanations",
         "Typecheck passes"
       ],
@@ -1016,7 +1016,7 @@
       "title": "Region-based chief complaints",
       "description": "For each body region, show common symptoms and their anatomical basis.",
       "acceptanceCriteria": [
-        "Select 3D region → see common chief complaints",
+        "Select 3D region \u2192 see common chief complaints",
         "Each complaint links to underlying anatomy",
         "User's past symptoms in this region shown",
         "Educational content for region-specific issues",
@@ -1282,7 +1282,7 @@
         "Typecheck passes"
       ],
       "priority": 71,
-      "passes": false,
+      "passes": true,
       "notes": "Conversational differential narrowing."
     },
     {
@@ -1516,7 +1516,7 @@
       "description": "Create detailed entry viewer with complexity toggle, related entries sidebar, and 3D anatomy navigation.",
       "acceptanceCriteria": [
         "EncyclopediaEntry.tsx component",
-        "Complexity level toggle (Patient → Expert)",
+        "Complexity level toggle (Patient \u2192 Expert)",
         "Content adapts to selected complexity",
         "Related entries sidebar with relationship labels",
         "Anatomy links with 3D navigation buttons",
@@ -1550,7 +1550,7 @@
     {
       "id": "US-094",
       "title": "Cross-Feature Navigation",
-      "description": "Enable seamless navigation between Phase 4 features: medication → condition it treats, symptom → related conditions, etc.",
+      "description": "Enable seamless navigation between Phase 4 features: medication \u2192 condition it treats, symptom \u2192 related conditions, etc.",
       "acceptanceCriteria": [
         "Medication shows 'treats these conditions' links",
         "Condition shows 'treated by these medications' links",

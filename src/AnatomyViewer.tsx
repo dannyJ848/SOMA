@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
@@ -6,10 +6,38 @@ import { LayerPanel, useLayerState } from './LayerPanel';
 import { StructureInfoPanel } from './StructureInfoPanel';
 import { AnatomyChatPanel } from './AnatomyChatPanel';
 import { type DashboardData } from './utils/anatomyContextBuilder';
+import {
+  anatomy3DEventBus,
+  type StructureHighlight,
+  type ViewPreset as EventBusViewPreset,
+} from './utils/anatomy3DEventBus';
 
 interface AnatomyViewerProps {
   onBack: () => void;
   dashboardData: DashboardData | null;
+}
+
+// Imperative API exposed via ref
+export interface AnatomyViewerAPI {
+  navigateToStructure: (structureId: string, highlight?: boolean) => void;
+  navigateToRegion: (region: string) => void;
+  setViewPreset: (preset: EventBusViewPreset, animate?: boolean) => void;
+  enableLayers: (layers: string[]) => void;
+  disableLayers: (layers: string[]) => void;
+  highlightStructures: (highlights: StructureHighlight[]) => void;
+  clearHighlights: (structureIds?: string[]) => void;
+  selectStructure: (structureId: string, openInfoPanel?: boolean) => void;
+  deselectStructure: () => void;
+  resetView: (preserveLayers?: boolean) => void;
+}
+
+// External highlight state
+interface ExternalHighlight {
+  structureId: string;
+  color: string;
+  intensity: 'strong' | 'moderate' | 'mild';
+  pulseAnimation: boolean;
+  startTime: number;
 }
 
 // Structure definition for clickable body parts
@@ -80,29 +108,53 @@ interface BodyPartProps {
   structure: BodyStructure;
   isHovered: boolean;
   isSelected: boolean;
+  externalHighlight?: ExternalHighlight;
   onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
   onPointerOut: (e: ThreeEvent<PointerEvent>) => void;
   onClick: (e: ThreeEvent<MouseEvent>) => void;
 }
 
-function BodyPart({ structure, isHovered, isSelected, onPointerOver, onPointerOut, onClick }: BodyPartProps) {
+function BodyPart({ structure, isHovered, isSelected, externalHighlight, onPointerOver, onPointerOut, onClick }: BodyPartProps) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
 
   // Determine color based on state
   const baseColor = '#e8d4c4';
   const hoverEmissive = '#2244ff';
   const selectedEmissive = '#22ff44';
 
+  // Intensity multipliers
+  const intensityMultiplier = {
+    strong: 0.5,
+    moderate: 0.35,
+    mild: 0.2,
+  };
+
+  // Calculate emissive color and intensity
   let emissiveColor = '#000000';
   let emissiveIntensity = 0;
 
-  if (isSelected) {
+  if (externalHighlight) {
+    // External highlight takes priority
+    emissiveColor = externalHighlight.color;
+    emissiveIntensity = intensityMultiplier[externalHighlight.intensity];
+  } else if (isSelected) {
     emissiveColor = selectedEmissive;
     emissiveIntensity = 0.3;
   } else if (isHovered) {
     emissiveColor = hoverEmissive;
     emissiveIntensity = 0.2;
   }
+
+  // Pulse animation for external highlights
+  useFrame(() => {
+    if (externalHighlight?.pulseAnimation && materialRef.current) {
+      const elapsed = (Date.now() - externalHighlight.startTime) / 1000;
+      const pulse = Math.sin(elapsed * 3) * 0.15 + 0.85; // Oscillate between 0.7 and 1.0
+      const baseIntensity = intensityMultiplier[externalHighlight.intensity];
+      materialRef.current.emissiveIntensity = baseIntensity * pulse;
+    }
+  });
 
   // Create geometry based on type
   const renderGeometry = () => {
@@ -128,6 +180,7 @@ function BodyPart({ structure, isHovered, isSelected, onPointerOver, onPointerOu
     >
       {renderGeometry()}
       <meshStandardMaterial
+        ref={materialRef}
         color={baseColor}
         roughness={0.7}
         metalness={0.1}
@@ -142,11 +195,12 @@ function BodyPart({ structure, isHovered, isSelected, onPointerOver, onPointerOu
 interface InteractiveBodyModelProps {
   hoveredStructure: string | null;
   selectedStructure: string | null;
+  externalHighlights: Map<string, ExternalHighlight>;
   onHover: (structureId: string | null) => void;
   onSelect: (structureId: string, structureName: string) => void;
 }
 
-function InteractiveBodyModel({ hoveredStructure, selectedStructure, onHover, onSelect }: InteractiveBodyModelProps) {
+function InteractiveBodyModel({ hoveredStructure, selectedStructure, externalHighlights, onHover, onSelect }: InteractiveBodyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   // Gentle rotation for visual interest
@@ -182,6 +236,7 @@ function InteractiveBodyModel({ hoveredStructure, selectedStructure, onHover, on
           structure={structure}
           isHovered={hoveredStructure === structure.id}
           isSelected={selectedStructure === structure.id}
+          externalHighlight={externalHighlights.get(structure.id)}
           onPointerOver={handlePointerOver(structure.id)}
           onPointerOut={handlePointerOut()}
           onClick={handleClick(structure)}
@@ -247,7 +302,18 @@ const VIEW_PRESETS = {
 
 type ViewPreset = keyof typeof VIEW_PRESETS;
 
-export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
+// Map event bus view presets to internal view presets
+const EVENT_BUS_TO_VIEW_PRESET: Record<EventBusViewPreset, ViewPreset> = {
+  anterior: 'anterior',
+  posterior: 'posterior',
+  left: 'leftLateral',
+  right: 'rightLateral',
+  superior: 'superior',
+  inferior: 'inferior',
+};
+
+export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
+  function AnatomyViewer({ onBack, dashboardData }, ref) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
   const [showLayerPanel, setShowLayerPanel] = useState(true);
@@ -256,6 +322,9 @@ export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
   const [hoveredStructure, setHoveredStructure] = useState<string | null>(null);
   const [selectedStructure, setSelectedStructure] = useState<{ id: string; name: string } | null>(null);
   const [showChatPanel, setShowChatPanel] = useState(false);
+
+  // External highlight state
+  const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
 
   // Layer state management
   const {
@@ -333,9 +402,228 @@ export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
   };
 
   // Reset to default view
-  const resetView = () => {
+  const resetView = useCallback(() => {
     animateToView('anterior');
-  };
+  }, []);
+
+  // API methods for external control
+  const apiHighlightStructures = useCallback((highlights: StructureHighlight[]) => {
+    const newHighlights = new Map<string, ExternalHighlight>();
+    const now = Date.now();
+
+    highlights.forEach((h) => {
+      newHighlights.set(h.structureId, {
+        structureId: h.structureId,
+        color: h.color,
+        intensity: h.intensity ?? 'moderate',
+        pulseAnimation: h.pulseAnimation ?? false,
+        startTime: now,
+      });
+    });
+
+    setExternalHighlights(newHighlights);
+  }, []);
+
+  const apiClearHighlights = useCallback((structureIds?: string[]) => {
+    if (!structureIds || structureIds.length === 0) {
+      setExternalHighlights(new Map());
+    } else {
+      setExternalHighlights((prev) => {
+        const next = new Map(prev);
+        structureIds.forEach((id) => next.delete(id));
+        return next;
+      });
+    }
+  }, []);
+
+  const apiNavigateToStructure = useCallback((structureId: string, highlight = false) => {
+    // Find the structure
+    const structure = BODY_STRUCTURES.find((s) => s.id === structureId);
+    if (structure) {
+      handleStructureSelect(structure.id, structure.name);
+      if (highlight) {
+        apiHighlightStructures([{ structureId, color: '#22ff44', pulseAnimation: true }]);
+      }
+    }
+  }, [handleStructureSelect, apiHighlightStructures]);
+
+  const apiNavigateToRegion = useCallback((region: string) => {
+    // Map region names to body structures
+    const regionMap: Record<string, string> = {
+      head: 'head',
+      neck: 'neck',
+      chest: 'chest',
+      thorax: 'chest',
+      abdomen: 'abdomen',
+      stomach: 'abdomen',
+      arm: 'leftArm',
+      leftArm: 'leftArm',
+      rightArm: 'rightArm',
+      leg: 'leftLeg',
+      leftLeg: 'leftLeg',
+      rightLeg: 'rightLeg',
+    };
+
+    const structureId = regionMap[region.toLowerCase()] || region;
+    const structure = BODY_STRUCTURES.find((s) => s.id === structureId);
+    if (structure) {
+      handleStructureSelect(structure.id, structure.name);
+    }
+  }, [handleStructureSelect]);
+
+  const apiSetViewPreset = useCallback((preset: EventBusViewPreset, _animate = true) => {
+    const internalPreset = EVENT_BUS_TO_VIEW_PRESET[preset];
+    if (internalPreset) {
+      animateToView(internalPreset);
+    }
+  }, []);
+
+  const apiEnableLayers = useCallback((layers: string[]) => {
+    layers.forEach((layer) => {
+      if (!isVisible(layer)) {
+        toggleLayer(layer);
+      }
+    });
+  }, [isVisible, toggleLayer]);
+
+  const apiDisableLayers = useCallback((layers: string[]) => {
+    layers.forEach((layer) => {
+      if (isVisible(layer)) {
+        toggleLayer(layer);
+      }
+    });
+  }, [isVisible, toggleLayer]);
+
+  const apiSelectStructure = useCallback((structureId: string, openInfoPanel = true) => {
+    const structure = BODY_STRUCTURES.find((s) => s.id === structureId);
+    if (structure) {
+      if (openInfoPanel) {
+        handleStructureSelect(structure.id, structure.name);
+      } else {
+        setSelectedStructure({ id: structure.id, name: structure.name });
+      }
+    }
+  }, [handleStructureSelect]);
+
+  const apiDeselectStructure = useCallback(() => {
+    setSelectedStructure(null);
+    setShowChatPanel(false);
+  }, []);
+
+  const apiResetView = useCallback((preserveLayers = false) => {
+    animateToView('anterior');
+    setSelectedStructure(null);
+    setShowChatPanel(false);
+    apiClearHighlights();
+    if (!preserveLayers) {
+      hideAll();
+    }
+  }, [apiClearHighlights, hideAll]);
+
+  // Expose imperative API via ref
+  useImperativeHandle(ref, () => ({
+    navigateToStructure: apiNavigateToStructure,
+    navigateToRegion: apiNavigateToRegion,
+    setViewPreset: apiSetViewPreset,
+    enableLayers: apiEnableLayers,
+    disableLayers: apiDisableLayers,
+    highlightStructures: apiHighlightStructures,
+    clearHighlights: apiClearHighlights,
+    selectStructure: apiSelectStructure,
+    deselectStructure: apiDeselectStructure,
+    resetView: apiResetView,
+  }), [
+    apiNavigateToStructure,
+    apiNavigateToRegion,
+    apiSetViewPreset,
+    apiEnableLayers,
+    apiDisableLayers,
+    apiHighlightStructures,
+    apiClearHighlights,
+    apiSelectStructure,
+    apiDeselectStructure,
+    apiResetView,
+  ]);
+
+  // Subscribe to event bus
+  useEffect(() => {
+    const unsubscribers: Array<() => void> = [];
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('NAVIGATE_TO_STRUCTURE', (event) => {
+        apiNavigateToStructure(event.payload.structureId, event.payload.options?.highlight);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('NAVIGATE_TO_REGION', (event) => {
+        apiNavigateToRegion(event.payload.region);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('SET_VIEW_PRESET', (event) => {
+        apiSetViewPreset(event.payload.preset, event.payload.animate);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('ENABLE_LAYERS', (event) => {
+        apiEnableLayers(event.payload.layers);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('DISABLE_LAYERS', (event) => {
+        apiDisableLayers(event.payload.layers);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('HIGHLIGHT_STRUCTURES', (event) => {
+        apiHighlightStructures(event.payload.highlights);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('CLEAR_HIGHLIGHTS', (event) => {
+        apiClearHighlights(event.payload.structureIds);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('SELECT_STRUCTURE', (event) => {
+        apiSelectStructure(event.payload.structureId, event.payload.openInfoPanel);
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('DESELECT_STRUCTURE', () => {
+        apiDeselectStructure();
+      })
+    );
+
+    unsubscribers.push(
+      anatomy3DEventBus.on('RESET_VIEW', (event) => {
+        apiResetView(event.payload.preserveLayers);
+      })
+    );
+
+    return () => {
+      unsubscribers.forEach((unsub) => unsub());
+    };
+  }, [
+    apiNavigateToStructure,
+    apiNavigateToRegion,
+    apiSetViewPreset,
+    apiEnableLayers,
+    apiDisableLayers,
+    apiHighlightStructures,
+    apiClearHighlights,
+    apiSelectStructure,
+    apiDeselectStructure,
+    apiResetView,
+  ]);
 
   return (
     <div className="anatomy-viewer">
@@ -422,6 +710,7 @@ export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
           <InteractiveBodyModel
             hoveredStructure={hoveredStructure}
             selectedStructure={selectedStructure?.id || null}
+            externalHighlights={externalHighlights}
             onHover={setHoveredStructure}
             onSelect={handleStructureSelect}
           />
@@ -505,4 +794,4 @@ export function AnatomyViewer({ onBack, dashboardData }: AnatomyViewerProps) {
       </div>
     </div>
   );
-}
+});

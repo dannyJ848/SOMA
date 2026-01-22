@@ -1576,3 +1576,58 @@ All 64 user stories now pass typecheck.
 - Map-based in-memory stores for efficient lookups
 - Sample data with rich medical content
 ---
+
+## 2026-01-21 - PHASE 4 STARTED
+
+### Phase 4: Advanced Medical Simulation Platform
+New PRD created with 23 user stories (US-073 to US-095):
+
+**Phase 4.1: 3D Navigation API (Foundation) - COMPLETE**
+- US-073: 3D Anatomy Event Bus ✅
+- US-074: 3D Navigation Hook ✅
+- US-075: AnatomyViewer Imperative API ✅
+- US-076: Highlight Rendering with Pulse Animation ✅
+
+**Phase 4.2: Symptom-to-Anatomy Integration**
+- US-077: SymptomExplorer Main Component ✅
+- US-078: Expand Symptom-Anatomy Mappings (10+)
+- US-079: SymptomFollowUpChat Component
+
+**Phase 4.3: Medication-to-Physiology**
+- US-080: Medication Physiology Data Model
+- US-081: Medication Database (15+ drugs)
+- US-082: MedicationExplorer Main Component
+- US-083: DrugInteractionChecker Component
+
+**Phase 4.4: Condition Simulation**
+- US-084: Condition Simulation Data Model
+- US-085: Condition Database (15+ conditions)
+- US-086: ConditionSimulator Main Component
+- US-087: DiseaseTimelinePanel Component
+- US-088: TreatmentOptionsPanel Component
+
+**Phase 4.5: Medical Encyclopedia**
+- US-089: Medical Encyclopedia Data Model
+- US-090: Encyclopedia RAG Collection
+- US-091: MedicalEncyclopedia Main Component
+- US-092: EncyclopediaEntry Component
+
+**Phase 4.6: Integration & Polish**
+- US-093: Dashboard Phase 4 Integration
+- US-094: Cross-Feature Navigation
+- US-095: iOS Mobile Testing and Polish
+
+### Files already created in Phase 4:
+- src/utils/anatomy3DEventBus.ts (event bus for 3D viewer communication)
+- src/hooks/useAnatomy3DNavigation.ts (navigation hook with compound actions)
+- src/AnatomyViewer.tsx (extended with imperative API, event bus subscription)
+- src/SymptomExplorer.tsx (main symptom exploration component)
+- src/SymptomExplorer.css (styles for symptom explorer)
+
+### Key patterns for Phase 4:
+- Event bus pattern for cross-component 3D communication
+- Compound actions combine multiple 3D operations (focus, highlight, layers)
+- Color mappings: likelihood (common=green, rare=purple, do-not-miss=red)
+- All features receive dashboardData for personalization
+- 3D viewer integration via useAnatomy3DNavigation hook
+---

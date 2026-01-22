@@ -7,7 +7,7 @@
 
 import { VectorStore, VectorDocument, CollectionName, COLLECTIONS, VectorMetadata } from '../vectors/store.js';
 import { EmbeddingModel, TextChunker, getEmbeddingModel } from '../vectors/embeddings.js';
-import { ANATOMY_CONTENT, PHYSIOLOGY_CONTENT, PATHOLOGY_CONTENT } from './anatomy-content.js';
+import { ANATOMY_CONTENT, PHYSIOLOGY_CONTENT, PATHOLOGY_CONTENT, PHARMACOLOGY_CONTENT, HISTOLOGY_CONTENT } from './anatomy-content.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createHash } from 'crypto';
@@ -275,6 +275,16 @@ export class ContentIngestion {
     console.log(`\nIngesting pathology content (${PATHOLOGY_CONTENT.length} entries)...`);
     results.push(await this.ingest('pathology', PATHOLOGY_CONTENT, {
       onProgress: (p) => console.log(`  Pathology: ${p.message}`),
+    }));
+
+    console.log(`\nIngesting pharmacology content (${PHARMACOLOGY_CONTENT.length} entries)...`);
+    results.push(await this.ingest('pharmacology', PHARMACOLOGY_CONTENT, {
+      onProgress: (p) => console.log(`  Pharmacology: ${p.message}`),
+    }));
+
+    console.log(`\nIngesting histology content (${HISTOLOGY_CONTENT.length} entries)...`);
+    results.push(await this.ingest('histology', HISTOLOGY_CONTENT, {
+      onProgress: (p) => console.log(`  Histology: ${p.message}`),
     }));
 
     // Print summary

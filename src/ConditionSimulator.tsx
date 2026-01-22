@@ -5,8 +5,10 @@
  * and visualizing anatomical changes in the 3D viewer over time.
  */
 
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { ConditionSimulatorAction } from '../core/intent-prediction/types';
 import {
   getCondition,
   getAllConditions,
@@ -342,6 +344,12 @@ export default function ConditionSimulator({
     componentId: 'condition-simulator',
   });
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<ConditionSimulatorAction>('condition-simulator', 'ConditionSimulator');
+
+  // Ref to track initial phase (to avoid tracking on initial render)
+  const hasSetInitialPhase = useRef(false);
+
   // Get user's conditions from dashboard data
   const userConditionIds = useMemo(() => {
     if (!dashboardData?.activeConditions) return new Set<string>();
@@ -424,7 +432,14 @@ export default function ConditionSimulator({
     setSelectedCondition(condition);
     setActivePhaseIndex(0);
     setActiveTab('overview');
-  }, []);
+    hasSetInitialPhase.current = false;
+
+    // Track condition selection
+    track('select-condition', {
+      entityId: condition.conditionId,
+      entityName: condition.name,
+    });
+  }, [track]);
 
   const handleBackToList = useCallback(() => {
     setSelectedCondition(null);
@@ -434,7 +449,41 @@ export default function ConditionSimulator({
 
   const handlePhaseClick = useCallback((index: number) => {
     setActivePhaseIndex(index);
+    hasSetInitialPhase.current = true;
   }, []);
+
+  // Track timeline scrubbing (phase changes)
+  useEffect(() => {
+    if (selectedCondition && hasSetInitialPhase.current && currentPhase) {
+      track('scrub-timeline', {
+        entityId: selectedCondition.conditionId,
+        entityName: selectedCondition.name,
+        phaseIndex: activePhaseIndex,
+        phaseName: currentPhase.displayName,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePhaseIndex]); // Only track when phase changes
+
+  // Track tab changes for view-phase and view-treatments
+  useEffect(() => {
+    if (selectedCondition && activeTab !== 'overview') {
+      if (activeTab === 'timeline') {
+        track('view-phase', {
+          entityId: selectedCondition.conditionId,
+          entityName: selectedCondition.name,
+          tabName: activeTab,
+        });
+      } else if (activeTab === 'treatments') {
+        track('view-treatments', {
+          entityId: selectedCondition.conditionId,
+          entityName: selectedCondition.name,
+          tabName: activeTab,
+        });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]); // Only track when tab changes
 
   const handleHighlightStructure = useCallback(
     (structureId: string) => {
@@ -450,9 +499,12 @@ export default function ConditionSimulator({
       if (condition) {
         handleSelectCondition(condition);
         setSearchQuery('');
+
+        // Track search action
+        track('search', { searchQuery: searchQuery, entityId: condition.conditionId });
       }
     },
-    [handleSelectCondition]
+    [handleSelectCondition, track, searchQuery]
   );
 
   // Get explanation for current complexity level

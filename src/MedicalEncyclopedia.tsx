@@ -5,8 +5,10 @@
  * with semantic search, category filtering, and cross-referenced navigation.
  */
 
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { EncyclopediaAction } from '../core/intent-prediction/types';
 import {
   searchEntries,
   getEntrySummaries,
@@ -308,6 +310,12 @@ export function MedicalEncyclopedia({
   // Initialize 3D navigation (will be used in EncyclopediaEntry component)
   useAnatomy3DNavigation({ componentId: 'encyclopedia' });
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<EncyclopediaAction>('encyclopedia', 'MedicalEncyclopedia');
+
+  // Ref to prevent initial tracking
+  const hasSearched = useRef(false);
+
   // State
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -359,8 +367,12 @@ export function MedicalEncyclopedia({
         localStorage.setItem('encyclopedia-recent-searches', JSON.stringify(updated));
         return updated;
       });
+
+      // Track search action
+      hasSearched.current = true;
+      track('search', { searchQuery: debouncedQuery });
     }
-  }, [debouncedQuery, selectedEntryTypes, selectedCategory]);
+  }, [debouncedQuery, selectedEntryTypes, selectedCategory, track]);
 
   // Get all entries for browse view
   const allEntries = useMemo(() => {
@@ -392,10 +404,21 @@ export function MedicalEncyclopedia({
 
   // Handle entry selection
   const handleSelectEntry = useCallback((entryId: string) => {
+    // Track view-entry action
+    track('view-entry', { entityId: entryId });
+
     if (onOpenEntry) {
       onOpenEntry(entryId);
     }
-  }, [onOpenEntry]);
+  }, [onOpenEntry, track]);
+
+  // Track browse view toggle
+  useEffect(() => {
+    if (activeView === 'browse') {
+      track('browse-category', {});
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeView]); // Only track when view changes
 
   // Handle recent search selection
   const handleRecentSearchSelect = useCallback((query: string) => {

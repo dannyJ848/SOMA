@@ -5,8 +5,10 @@
  * related entries sidebar, and 3D anatomy navigation.
  */
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { EncyclopediaEntryAction } from '../core/intent-prediction/types';
 import type { ViewPreset } from './utils/anatomy3DEventBus';
 import { getEntry } from '../core/medical-simulation/encyclopedia/store';
 import type {
@@ -297,6 +299,9 @@ export function EncyclopediaEntry({
   const { navigateToStructure, highlightStructures, setViewPreset, enableLayers } =
     useAnatomy3DNavigation({ componentId: 'encyclopedia-entry' });
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<EncyclopediaEntryAction>('encyclopedia-entry', 'EncyclopediaEntry');
+
   // State
   const [complexityLevel, setComplexityLevel] = useState<ComplexityLevel>(2);
   const [activeTab, setActiveTab] = useState<'content' | 'anatomy' | 'related' | 'references'>('content');
@@ -313,6 +318,41 @@ export function EncyclopediaEntry({
   // Mapped complexity level for content
   const contentLevel = mapComplexityToContent(complexityLevel);
 
+  // Track initial view and entry
+  useEffect(() => {
+    if (entry) {
+      track('view-content', {
+        entityId: entry.entryId,
+        entityName: entry.name,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entryId]); // Track when entry changes
+
+  // Track complexity level changes
+  useEffect(() => {
+    if (entry) {
+      track('change-complexity', {
+        complexityLevel,
+        entityId: entry.entryId,
+        entityName: entry.name,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [complexityLevel]); // Only track when complexity changes
+
+  // Track tab changes
+  useEffect(() => {
+    if (entry && activeTab !== 'content') {
+      track('change-tab', {
+        tabName: activeTab,
+        entityId: entry.entryId,
+        entityName: entry.name,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]); // Only track when tab changes
+
   // Map AnatomyLink viewPreset to EventBus ViewPreset
   const mapViewPreset = (preset?: string): ViewPreset => {
     const mapping: Record<string, ViewPreset> = {
@@ -328,6 +368,12 @@ export function EncyclopediaEntry({
 
   // Handle anatomy navigation
   const handleAnatomyNavigate = useCallback((link: AnatomyLink) => {
+    // Track view-anatomy-link action
+    track('view-anatomy-link', {
+      structureId: link.structureId,
+      structureName: link.structureName,
+    });
+
     // Navigate to structure
     navigateToStructure(link.structureId);
 
@@ -352,7 +398,18 @@ export function EncyclopediaEntry({
     if (onNavigateToAnatomy) {
       onNavigateToAnatomy();
     }
-  }, [navigateToStructure, setViewPreset, enableLayers, highlightStructures, onNavigateToAnatomy]);
+  }, [navigateToStructure, setViewPreset, enableLayers, highlightStructures, onNavigateToAnatomy, track]);
+
+  // Handle related entry click with tracking
+  const handleRelatedEntryClick = useCallback((relatedEntry: RelatedEntry) => {
+    // Track view-related-entry action
+    track('view-related-entry', {
+      entityId: relatedEntry.entryId,
+      entityName: relatedEntry.name,
+    });
+
+    onNavigateToEntry(relatedEntry.entryId);
+  }, [onNavigateToEntry, track]);
 
   // If entry not found
   if (!entry) {
@@ -530,7 +587,7 @@ export function EncyclopediaEntry({
                 <RelatedEntryCard
                   key={related.entryId}
                   entry={related}
-                  onClick={() => onNavigateToEntry(related.entryId)}
+                  onClick={() => handleRelatedEntryClick(related)}
                 />
               ))}
             </div>

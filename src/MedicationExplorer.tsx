@@ -5,8 +5,10 @@
  * and visualizing drug actions in the 3D anatomy viewer.
  */
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { MedicationExplorerAction } from '../core/intent-prediction/types';
 import {
   getMedication,
   getAllMedications,
@@ -284,6 +286,9 @@ export function MedicationExplorer({
     autoResetOnUnmount: true,
   });
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<MedicationExplorerAction>('medication-explorer', 'MedicationExplorer');
+
   // Get all medications for browsing
   const allMedications = useMemo(() => getAllMedications(), []);
 
@@ -304,10 +309,12 @@ export function MedicationExplorer({
     if (query.trim().length > 0) {
       const results = searchMedications(query);
       setSearchResults(results);
+      // Track search action
+      track('search', { searchQuery: query });
     } else {
       setSearchResults([]);
     }
-  }, []);
+  }, [track]);
 
   // Select medication handler
   const handleSelectMedication = useCallback((medicationId: string) => {
@@ -317,6 +324,12 @@ export function MedicationExplorer({
       setSearchQuery('');
       setSearchResults([]);
       setActiveTab('overview');
+
+      // Track medication selection
+      track('select-medication', {
+        entityId: medicationId,
+        entityName: med.genericName,
+      });
 
       // Get highlights for 3D viewer
       const highlights = getMedicationAnatomyHighlights(medicationId);
@@ -340,11 +353,18 @@ export function MedicationExplorer({
         navigation.enableLayers(med.anatomySettings.recommendedLayers);
       }
     }
-  }, [navigation]);
+  }, [navigation, track]);
 
   // Navigate to body system
   const handleNavigateToSystem = useCallback((system: BodySystemEffect) => {
     setHighlightedSystemId(system.systemId);
+
+    // Track view-system-effects action
+    track('view-system-effects', {
+      structureId: system.systemId,
+      structureName: system.systemName,
+    });
+
     if (system.affectedStructures && system.affectedStructures.length > 0) {
       navigation.navigateToRegion(system.affectedStructures[0], {
         animate: true,
@@ -356,10 +376,15 @@ export function MedicationExplorer({
     if (onNavigateToAnatomy) {
       onNavigateToAnatomy();
     }
-  }, [navigation, onNavigateToAnatomy]);
+  }, [navigation, onNavigateToAnatomy, track]);
 
   // Navigate to adverse effect location
   const handleNavigateToAdverseEffect = useCallback((effect: AdverseEffect) => {
+    // Track view-adverse-effects action
+    track('view-adverse-effects', {
+      entityName: effect.effectName,
+    });
+
     if (effect.affectedStructures && effect.affectedStructures.length > 0) {
       navigation.navigateToRegion(effect.affectedStructures[0], {
         animate: true,
@@ -371,7 +396,7 @@ export function MedicationExplorer({
     if (onNavigateToAnatomy) {
       onNavigateToAnatomy();
     }
-  }, [navigation, onNavigateToAnatomy]);
+  }, [navigation, onNavigateToAnatomy, track]);
 
   // Clear selection
   const handleClearSelection = useCallback(() => {
@@ -386,6 +411,18 @@ export function MedicationExplorer({
     if (!selectedMedication) return '';
     return selectedMedication.explanations[`level${complexityLevel}`] || '';
   }, [selectedMedication, complexityLevel]);
+
+  // Track tab changes
+  useEffect(() => {
+    if (selectedMedication && activeTab === 'overview') {
+      track('view-mechanism', {
+        entityId: selectedMedication.medicationId,
+        entityName: selectedMedication.genericName,
+        tabName: activeTab,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]); // Only track when tab changes
 
   // Group medications by class for browsing
   const medicationsByClass = useMemo(() => {

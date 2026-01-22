@@ -5,8 +5,10 @@
  * Integrates with 3D anatomy viewer, AI chat, and RAG system.
  */
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAnatomy3DNavigation, type SymptomSource } from './hooks/useAnatomy3DNavigation';
+import { useActionTracker } from './hooks/useActionTracker';
+import type { SymptomExplorerAction } from '../core/intent-prediction/types';
 import {
   searchSymptoms,
   getSymptomAnatomyMapping,
@@ -211,6 +213,9 @@ export function SymptomExplorer({
     autoResetOnUnmount: true,
   });
 
+  // Action tracking for intent prediction
+  const { track } = useActionTracker<SymptomExplorerAction>('symptom-explorer', 'SymptomExplorer');
+
   // Get all available symptoms for browsing
   const allSymptoms = useMemo(() => getAllSymptomAnatomyMappings(), []);
 
@@ -220,10 +225,12 @@ export function SymptomExplorer({
     if (query.trim().length > 0) {
       const results = searchSymptoms(query);
       setSearchResults(results);
+      // Track search action
+      track('search', { searchQuery: query });
     } else {
       setSearchResults([]);
     }
-  }, []);
+  }, [track]);
 
   // Select symptom handler
   const handleSelectSymptom = useCallback((symptomId: string) => {
@@ -232,6 +239,12 @@ export function SymptomExplorer({
       setSelectedSymptom(mapping);
       setSearchQuery('');
       setSearchResults([]);
+
+      // Track symptom selection
+      track('select-symptom', {
+        entityId: symptomId,
+        entityName: mapping.symptomName,
+      });
 
       // Get highlights for 3D viewer
       const highlights = getSymptomAnatomyHighlights(symptomId);
@@ -246,17 +259,24 @@ export function SymptomExplorer({
 
       navigation.focusOnSymptomSources(sources);
     }
-  }, [navigation]);
+  }, [navigation, track]);
 
   // Highlight single source
   const handleHighlightSource = useCallback((source: AnatomicalSource) => {
     setHighlightedSourceId(source.structureId);
+
+    // Track view-source action
+    track('view-source', {
+      structureId: source.structureId,
+      structureName: source.structureName,
+    });
+
     navigation.highlightSingleStructure(
       source.structureId,
       source.highlightColor,
       source.likelihood === 'do-not-miss'
     );
-  }, [navigation]);
+  }, [navigation, track]);
 
   // Navigate to source
   const handleNavigateToSource = useCallback((source: AnatomicalSource) => {
@@ -309,6 +329,28 @@ export function SymptomExplorer({
       (a, b) => order[a.likelihood] - order[b.likelihood]
     );
   }, [selectedSymptom]);
+
+  // Track follow-up chat toggle
+  useEffect(() => {
+    if (showFollowUpChat && selectedSymptom) {
+      track('answer-followup', {
+        entityId: selectedSymptom.symptomId,
+        entityName: selectedSymptom.symptomName,
+      });
+    }
+  }, [showFollowUpChat, selectedSymptom, track]);
+
+  // Track complexity level changes
+  useEffect(() => {
+    if (selectedSymptom) {
+      track('change-complexity', {
+        complexityLevel,
+        entityId: selectedSymptom.symptomId,
+        entityName: selectedSymptom.symptomName,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [complexityLevel]); // Only track when complexity changes, not on initial render
 
   // User's relevant symptoms from dashboard
   const userRelevantSymptoms = useMemo(() => {

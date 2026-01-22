@@ -1453,7 +1453,7 @@
         "Typecheck passes"
       ],
       "priority": 80,
-      "passes": false,
+      "passes": true,
       "notes": "Links conditions to treatment education."
     },
     {

@@ -1822,3 +1822,22 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Smooth transitions between phases
   - Callback to update 3D viewer on phase change
 ---
+
+## 2026-01-21 22:58 - US-088
+- Implemented: TreatmentOptionsPanel Component
+- Files changed:
+  - src/TreatmentOptionsPanel.tsx (NEW)
+  - src/TreatmentOptionsPanel.css (NEW)
+- Features:
+  - Lists treatment options with modality icons
+  - Efficacy badges (highly-effective to limited)
+  - Evidence level badges (IA to V + guideline)
+  - First-line treatment highlighting
+  - Expandable treatment cards with details
+  - Mechanism of action summary
+  - Treatment goals and expected outcomes
+  - Contraindications and side effects sections
+  - Medication links that call onMedicationClick
+  - Phase filtering and modality filtering
+  - Evidence level legend
+---

@@ -1647,7 +1647,7 @@
         "Typecheck passes"
       ],
       "priority": 91,
-      "passes": false,
+      "passes": true,
       "notes": "Persist journeys in core/intent-prediction/journey-store.ts"
     },
     {

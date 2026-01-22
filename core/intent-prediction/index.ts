@@ -59,3 +59,11 @@ export type {
   IntentEvent,
   IntentEventHandler,
 } from './types';
+
+// Journey Store exports
+export {
+  JourneyStore,
+  getJourneyStore,
+  initJourneyStore,
+  closeJourneyStore,
+} from './journey-store';

@@ -596,6 +596,250 @@ async fn ai_chat_json(request: AIChatRequest) -> Result<serde_json::Value, Strin
     .map_err(|e| format!("Task join error: {}", e))?
 }
 
+// ============================================================================
+// Journey Store Types
+// ============================================================================
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyActionInput {
+    pub id: String,
+    #[serde(rename = "sessionId")]
+    pub session_id: String,
+    pub timestamp: String,
+    #[serde(rename = "featureArea")]
+    pub feature_area: String,
+    #[serde(rename = "actionType")]
+    pub action_type: String,
+    pub payload: serde_json::Value,
+    #[serde(rename = "durationMs")]
+    pub duration_ms: Option<u64>,
+    #[serde(rename = "previousActionId")]
+    pub previous_action_id: Option<String>,
+    #[serde(rename = "sourceComponent")]
+    pub source_component: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyAddActionResult {
+    pub success: bool,
+    #[serde(rename = "actionId")]
+    pub action_id: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyActionsResult {
+    pub actions: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyCountResult {
+    pub count: u32,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyStartResult {
+    #[serde(rename = "journeyId")]
+    pub journey_id: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyResult {
+    pub journey: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneysResult {
+    pub journeys: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JourneyStatsResult {
+    #[serde(rename = "totalActions")]
+    pub total_actions: u32,
+    #[serde(rename = "totalJourneys")]
+    pub total_journeys: u32,
+    #[serde(rename = "oldestAction")]
+    pub oldest_action: Option<String>,
+    #[serde(rename = "newestAction")]
+    pub newest_action: Option<String>,
+}
+
+// ============================================================================
+// Journey Store Commands
+// ============================================================================
+
+#[tauri::command]
+async fn journey_add_action(action: JourneyActionInput) -> Result<JourneyAddActionResult, String> {
+    let action_json = serde_json::to_string(&action)
+        .map_err(|e| format!("Failed to serialize action: {}", e))?;
+
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("add-action")
+            .arg(&action_json)
+            .output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to add action: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn journey_get_recent_actions(session_id: String, limit: Option<u32>) -> Result<JourneyActionsResult, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let mut cmd = Command::new("npx");
+        cmd.current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("get-recent-actions")
+            .arg(&session_id);
+
+        if let Some(l) = limit {
+            cmd.arg(l.to_string());
+        }
+
+        let output = cmd.output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to get recent actions: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn journey_get_action_count(session_id: String) -> Result<JourneyCountResult, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("get-action-count")
+            .arg(&session_id)
+            .output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to get action count: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn journey_start(
+    session_id: String,
+    journey_type: String,
+    health_context: serde_json::Value,
+) -> Result<JourneyStartResult, String> {
+    let health_context_json = serde_json::to_string(&health_context)
+        .map_err(|e| format!("Failed to serialize health context: {}", e))?;
+
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("start-journey")
+            .arg(&session_id)
+            .arg(&journey_type)
+            .arg(&health_context_json)
+            .output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to start journey: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn journey_get(journey_id: String) -> Result<JourneyResult, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("get-journey")
+            .arg(&journey_id)
+            .output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to get journey: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn journey_get_stats() -> Result<JourneyStatsResult, String> {
+    tauri::async_runtime::spawn_blocking(|| {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("journey-bridge.ts")
+            .arg("get-stats")
+            .output()
+            .map_err(|e| format!("Failed to execute journey bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Failed to get stats: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
 #[tauri::command]
 async fn ai_chat_rag(request: AIChatRAGRequest) -> Result<AIChatRAGResponse, String> {
     // Serialize the request to JSON before spawning
@@ -651,7 +895,13 @@ pub fn run() {
             ai_models,
             ai_chat,
             ai_chat_json,
-            ai_chat_rag
+            ai_chat_rag,
+            journey_add_action,
+            journey_get_recent_actions,
+            journey_get_action_count,
+            journey_start,
+            journey_get,
+            journey_get_stats
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

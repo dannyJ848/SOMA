@@ -1783,3 +1783,24 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Anatomical changes use visualIndicator with color, pulse, opacity for 3D rendering
   - Treatment options link to medicationIds for cross-referencing
 ---
+
+## 2026-01-21 22:53 - US-086
+- Implemented: ConditionSimulator Main Component
+- Files changed:
+  - src/ConditionSimulator.tsx (NEW)
+  - src/ConditionSimulator.css (NEW)
+- Features:
+  - Condition search/browse by category with filter chips
+  - Interactive timeline scrubber showing disease phases
+  - Phase details with symptoms, anatomical changes, reversibility
+  - Scrubbing timeline updates 3D viewer highlighting
+  - Reversibility indicators (reversible/partially-reversible/irreversible)
+  - 5-level complexity selector for pathophysiology explanations
+  - Integration with useAnatomy3DNavigation hook
+  - Tabs: Overview, Timeline, Complications, Treatments
+  - User's conditions highlighted at top
+- **Learnings for future iterations:**
+  - DashboardData uses activeConditions, not conditions
+  - ViewPreset type differs between conditions/types.ts and event bus - need mapping function
+  - lateral-left/right in conditions maps to left/right in event bus
+---

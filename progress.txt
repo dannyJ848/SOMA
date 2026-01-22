@@ -1857,3 +1857,26 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Type-specific extensions (Condition, Medication, Anatomy, Procedure, LabTest)
   - Index types (CategoryIndex, AlphabeticalIndex, TypeIndex)
 ---
+
+## 2026-01-21 23:05 - US-090
+- Implemented: Encyclopedia RAG Collection
+- Files changed:
+  - core/vectors/store.ts (MODIFIED - added 'encyclopedia' to COLLECTIONS)
+  - core/medical-simulation/encyclopedia/store.ts (NEW)
+- Features:
+  - Added 'encyclopedia' collection to LanceDB collections
+  - In-memory encyclopedia store with indexes (type, category, keyword)
+  - Search function with entry type and category filtering
+  - Complexity level mapping (patient/intermediate/professional)
+  - Cross-reference operations (getRelatedEntries, getEntriesForAnatomyStructure)
+  - buildCrossReferenceIndex for finding entries that reference each other
+  - RAG preparation functions: prepareEntryForEmbedding, prepareAllEntriesForEmbedding
+  - Creates embedding chunks at each complexity level (patient, intermediate, professional)
+  - Content sections also chunked separately for more granular retrieval
+  - getContentAtComplexity for retrieving content at numeric level (1-5)
+  - Store statistics (byType, byCategory, totalAnatomyLinks, totalRelatedLinks)
+- **Learnings for future iterations:**
+  - Import only what's needed - RelatedEntry and AnatomyLink weren't used directly
+  - Encyclopedia store uses in-memory Maps with indexes for fast lookups
+  - RAG preparation creates multiple chunks per entry at different complexity levels
+---

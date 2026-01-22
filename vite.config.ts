@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     port: 1420,
     strictPort: true,
+    host: process.env.TAURI_DEV_HOST || false,
     watch: {
       // Tauri expects a fixed port
       ignored: ['**/src-tauri/**'],

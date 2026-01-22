@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,7 @@
 		027BB2B4447C0B764CFA8813 /* biological-self_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "biological-self_iOS.entitlements"; sourceTree = "<group>"; };
 		111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A3AC17A59B14029A268BA94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		3C59BDCA93C23E486C2B348B /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
+		3C59BDCA93C23E486C2B348B /* main.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.rs; sourceTree = "<group>"; };
 		411159BF11DAADB1D54F92BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4ED33725D92C0930A473529F /* libPods-biological-self_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-biological-self_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53877E4FA6A0E149CAB46D6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -35,12 +35,12 @@
 		6AAE341E48671C1CFCE46548 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		789A1E119CF3A9CE7E383675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F0AA83961D85B47B84773C9 /* Pods-biological-self_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-biological-self_iOS.debug.xcconfig"; path = "Target Support Files/Pods-biological-self_iOS/Pods-biological-self_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		8D67E6F39DC9C20206C92C78 /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
+		8D67E6F39DC9C20206C92C78 /* lib.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = lib.rs; sourceTree = "<group>"; };
 		925D15F6B341A7CD3E195C80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AC7E72EA8446FBFC158C9DB7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
 		C78ECE76EFC3F1613F7617F8 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		D0DEB622C23A2A51E71FA956 /* Pods-biological-self_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-biological-self_iOS.release.xcconfig"; path = "Target Support Files/Pods-biological-self_iOS/Pods-biological-self_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "biological-self_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D486941D7A6691FDC4DC8B23 /* Biological Self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Biological Self.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7433F69C427CF88CB194DF9 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
 		E53F96E106FA30CEC2614696 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E5F7AC5192F4EAEE5C1E068B /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
@@ -88,7 +88,6 @@
 				7F0AA83961D85B47B84773C9 /* Pods-biological-self_iOS.debug.xcconfig */,
 				D0DEB622C23A2A51E71FA956 /* Pods-biological-self_iOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -121,7 +120,7 @@
 		9FEE756F415B2D7376776DA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */,
+				D486941D7A6691FDC4DC8B23 /* Biological Self.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,7 +185,7 @@
 			);
 			name = "biological-self_iOS";
 			productName = "biological-self_iOS";
-			productReference = D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */;
+			productReference = D486941D7A6691FDC4DC8B23 /* Biological Self.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +207,6 @@
 			);
 			mainGroup = BBF1E3DE40CE7F524D074719;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 9FEE756F415B2D7376776DA2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -417,6 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "biological-self_iOS/biological-self_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = NDJZ6S9Q4L;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -442,7 +441,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dannygomez.biological-self";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
 				PRODUCT_NAME = "Biological Self";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -459,6 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "biological-self_iOS/biological-self_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = NDJZ6S9Q4L;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -484,7 +484,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dannygomez.biological-self";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
 				PRODUCT_NAME = "Biological Self";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

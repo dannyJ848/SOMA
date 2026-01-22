@@ -1697,3 +1697,22 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Include patient education points for practical relevance
   - Map adverse effects to specific anatomical structures for 3D visualization
 ---
+
+## 2026-01-21 - US-082: MedicationExplorer Main Component
+- Created main MedicationExplorer.tsx component with full drug exploration interface
+- Features implemented:
+  - Drug search/selection from medication database
+  - Tab navigation: Overview, Body Systems, Adverse Effects, Pharmacokinetics
+  - Body system cards with effect type badges (therapeutic/adverse/neutral)
+  - Adverse effect cards with severity (mild/moderate/severe) and frequency indicators
+  - Complexity level toggle (1-5) for educational content
+  - Integration with useAnatomy3DNavigation for 3D viewer control
+  - Click system to highlight in 3D with appropriate colors
+  - PKPanel for ADME pharmacokinetics display
+- Created MedicationExplorer.css with complete styling
+- Files changed: src/MedicationExplorer.tsx, src/MedicationExplorer.css
+- **Learnings for future iterations:**
+  - Use `highlightStructures` method (not `highlightMultipleStructures`) from useAnatomy3DNavigation
+  - Effect type badge colors: therapeutic=green, adverse=red, neutral=gray
+  - PK data structure: absorption, distribution, metabolism, excretion as separate sections
+---

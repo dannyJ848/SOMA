@@ -335,6 +335,9 @@ export interface DrugInteraction {
 
   /** Affected body systems */
   affectedSystems?: string[];
+
+  /** Monitoring parameters */
+  monitoring?: string[];
 }
 
 // ============================================

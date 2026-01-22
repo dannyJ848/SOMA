@@ -1377,7 +1377,7 @@
         "Typecheck passes"
       ],
       "priority": 76,
-      "passes": false,
+      "passes": true,
       "notes": "Foundation for condition simulator. Create in core/medical-simulation/conditions/."
     },
     {
@@ -1398,8 +1398,8 @@
         "Typecheck passes"
       ],
       "priority": 77,
-      "passes": false,
-      "notes": "Include user's conditions + related diseases."
+      "passes": true,
+      "notes": "Include user's conditions + related diseases. 15 conditions implemented including Stroke."
     },
     {
       "id": "US-086",

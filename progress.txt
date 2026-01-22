@@ -1738,3 +1738,48 @@ New PRD created with 23 user stories (US-073 to US-095):
   - InteractionMechanism values are: pharmacokinetic, pharmacodynamic, additive, synergistic, antagonistic
   - useAnatomy3DNavigation takes options object `{ componentId: 'id' }`, not a string directly
 ---
+
+## 2026-01-21 - US-084: Condition Simulation Data Model
+- Created comprehensive type system in core/medical-simulation/conditions/types.ts
+- Main types created:
+  - ConditionSimulation: Main condition type with all data
+  - DiseaseProgression with timelineSteps and phases
+  - ProgressionStep with anatomical changes and reversibility
+  - ConditionAnatomyMapping with primary/secondary structures
+  - TreatmentOption with efficacy and evidence level
+  - Complication with affected structures
+  - ConditionPathophysiology with mechanisms and risk factors
+  - ClinicalPresentation with symptoms, findings, labs, imaging
+  - MultiLevelExplanation (5 levels consistent with medication model)
+- Supporting enums: ConditionCategory, ProgressionPhase, Reversibility, TreatmentModality, EvidenceLevel
+- CONDITION_HIGHLIGHT_COLORS palette for 3D visualization
+- ConditionSummary and ConditionSearchResult for UI
+- Files changed: core/medical-simulation/conditions/types.ts (NEW)
+- **Learnings for future iterations:**
+  - Consistent MultiLevelExplanation structure across modules (level1-level5)
+  - ViewPreset matches anatomy viewer presets
+  - ProgressionStep.anatomicalChanges include visualIndicator for 3D rendering
+---
+
+## 2026-01-21 22:48 - US-085
+- Implemented: Condition Database with 15 conditions
+- Files changed:
+  - core/medical-simulation/conditions/store.ts (NEW - 3200+ lines)
+- Conditions added:
+  - Cardiovascular: Hypertension, Heart Failure, Atrial Fibrillation, Coronary Artery Disease
+  - Metabolic: Type 2 Diabetes, Hyperlipidemia, Metabolic Syndrome  
+  - Respiratory: COPD, Asthma
+  - Musculoskeletal: Osteoarthritis, Osteoporosis, Rheumatoid Arthritis
+  - Neurologic: Migraine, Peripheral Neuropathy, Stroke
+- Each condition includes:
+  - Complete pathophysiology with mechanisms and risk factors
+  - Disease progression timeline with anatomical changes per phase
+  - Complications with affected structures
+  - Treatment options with 5-level explanations
+  - Anatomy mapping for 3D visualization
+- Store functions: getCondition, getAllConditions, getConditionSummaries, searchConditions, getConditionAnatomyHighlights
+- **Learnings for future iterations:**
+  - ConditionSimulation type requires all fields - use the types.ts as reference
+  - Anatomical changes use visualIndicator with color, pulse, opacity for 3D rendering
+  - Treatment options link to medicationIds for cross-referencing
+---

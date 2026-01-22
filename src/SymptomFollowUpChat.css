@@ -1,0 +1,401 @@
+/**
+ * SymptomFollowUpChat Styles
+ */
+
+.symptom-followup-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-secondary, #1a1a2e);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+.symptom-followup-chat .chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-tertiary, #16213e);
+  border-bottom: 1px solid var(--border-color, #2d3748);
+}
+
+.symptom-followup-chat .chat-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-primary, #f0f0f0);
+}
+
+.symptom-followup-chat .rationale-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--border-color, #2d3748);
+  border-radius: 6px;
+  color: var(--text-secondary, #a0aec0);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.symptom-followup-chat .rationale-toggle:hover {
+  background: var(--bg-hover, #2d3748);
+  color: var(--text-primary, #f0f0f0);
+}
+
+/* Content Area */
+.symptom-followup-chat .chat-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Messages */
+.symptom-followup-chat .chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.symptom-followup-chat .chat-message {
+  display: flex;
+  gap: 10px;
+  max-width: 85%;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.symptom-followup-chat .chat-message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.symptom-followup-chat .chat-message.system {
+  align-self: center;
+  max-width: 90%;
+}
+
+.symptom-followup-chat .message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-primary, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+}
+
+.symptom-followup-chat .message-avatar.user {
+  background: var(--accent-secondary, #22c55e);
+}
+
+.symptom-followup-chat .message-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.symptom-followup-chat .message-content {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary, #f0f0f0);
+}
+
+.symptom-followup-chat .chat-message.assistant .message-content {
+  background: var(--bg-tertiary, #16213e);
+  border-bottom-left-radius: 4px;
+}
+
+.symptom-followup-chat .chat-message.user .message-content {
+  background: var(--accent-primary, #6366f1);
+  border-bottom-right-radius: 4px;
+}
+
+.symptom-followup-chat .chat-message.system .message-content {
+  background: transparent;
+  border: 1px solid var(--border-color, #2d3748);
+  text-align: center;
+  color: var(--text-secondary, #a0aec0);
+}
+
+.symptom-followup-chat .chat-message.summary .message-content {
+  background: linear-gradient(135deg, var(--bg-tertiary, #16213e), var(--bg-secondary, #1a1a2e));
+  border: 1px solid var(--accent-primary, #6366f1);
+}
+
+/* Rationale */
+.symptom-followup-chat .message-rationale {
+  padding: 8px 12px;
+  background: var(--bg-secondary, #1a1a2e);
+  border-left: 3px solid var(--accent-primary, #6366f1);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #a0aec0);
+}
+
+.symptom-followup-chat .message-rationale strong {
+  color: var(--accent-primary, #6366f1);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Differential Updates */
+.symptom-followup-chat .differential-updates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 8px;
+}
+
+.symptom-followup-chat .update-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background: var(--bg-secondary, #1a1a2e);
+}
+
+.symptom-followup-chat .update-item.increased {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.symptom-followup-chat .update-item.decreased {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.symptom-followup-chat .update-item.unchanged {
+  color: var(--text-secondary, #a0aec0);
+}
+
+.symptom-followup-chat .update-arrow {
+  font-weight: bold;
+}
+
+/* Loading */
+.symptom-followup-chat .chat-message.loading .message-body {
+  padding: 12px 16px;
+  background: var(--bg-tertiary, #16213e);
+  border-radius: 12px;
+}
+
+.symptom-followup-chat .typing-indicator {
+  display: flex;
+  gap: 4px;
+}
+
+.symptom-followup-chat .typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--text-secondary, #a0aec0);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.symptom-followup-chat .typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.symptom-followup-chat .typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Differential Sidebar */
+.symptom-followup-chat .differential-sidebar {
+  width: 200px;
+  padding: 16px;
+  background: var(--bg-tertiary, #16213e);
+  border-left: 1px solid var(--border-color, #2d3748);
+  overflow-y: auto;
+}
+
+.symptom-followup-chat .differential-sidebar h4 {
+  margin: 0 0 12px 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #a0aec0);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.symptom-followup-chat .differential-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.symptom-followup-chat .differential-item {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.symptom-followup-chat .differential-item:hover {
+  background: var(--bg-hover, #2d3748);
+}
+
+.symptom-followup-chat .diff-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-primary, #f0f0f0);
+  margin-bottom: 6px;
+}
+
+.symptom-followup-chat .diff-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.symptom-followup-chat .diff-bar-container {
+  height: 4px;
+  background: var(--bg-secondary, #1a1a2e);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.symptom-followup-chat .diff-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.symptom-followup-chat .diff-score {
+  font-size: 0.7rem;
+  color: var(--text-secondary, #a0aec0);
+}
+
+/* Response Section */
+.symptom-followup-chat .response-section {
+  padding: 16px;
+  background: var(--bg-tertiary, #16213e);
+  border-top: 1px solid var(--border-color, #2d3748);
+}
+
+.symptom-followup-chat .response-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.symptom-followup-chat .response-option {
+  padding: 10px 16px;
+  background: var(--bg-secondary, #1a1a2e);
+  border: 1px solid var(--border-color, #2d3748);
+  border-radius: 20px;
+  color: var(--text-primary, #f0f0f0);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.symptom-followup-chat .response-option:hover {
+  background: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #6366f1);
+  transform: translateY(-1px);
+}
+
+.symptom-followup-chat .custom-response {
+  display: flex;
+  gap: 8px;
+}
+
+.symptom-followup-chat .custom-response input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-secondary, #1a1a2e);
+  border: 1px solid var(--border-color, #2d3748);
+  border-radius: 8px;
+  color: var(--text-primary, #f0f0f0);
+  font-size: 0.9rem;
+}
+
+.symptom-followup-chat .custom-response input:focus {
+  outline: none;
+  border-color: var(--accent-primary, #6366f1);
+}
+
+.symptom-followup-chat .custom-response input::placeholder {
+  color: var(--text-muted, #4a5568);
+}
+
+.symptom-followup-chat .send-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-primary, #6366f1);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.symptom-followup-chat .send-btn:hover:not(:disabled) {
+  background: var(--accent-primary-dark, #4f46e5);
+  transform: scale(1.05);
+}
+
+.symptom-followup-chat .send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .symptom-followup-chat .differential-sidebar {
+    display: none;
+  }
+
+  .symptom-followup-chat .chat-message {
+    max-width: 95%;
+  }
+
+  .symptom-followup-chat .response-options {
+    flex-direction: column;
+  }
+
+  .symptom-followup-chat .response-option {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -21,6 +21,7 @@ import type {
   SymptomSearchResult,
 } from '../core/exploration/symptom-anatomy/types';
 import { type DashboardData } from './utils/anatomyContextBuilder';
+import { SymptomFollowUpChat } from './SymptomFollowUpChat';
 import './SymptomExplorer.css';
 
 // ============================================
@@ -202,6 +203,7 @@ export function SymptomExplorer({
   const [highlightedSourceId, setHighlightedSourceId] = useState<string | null>(null);
   const [complexityLevel, setComplexityLevel] = useState<1 | 2 | 3 | 4 | 5>(3);
   const [showRedFlags, setShowRedFlags] = useState(true);
+  const [showFollowUpChat, setShowFollowUpChat] = useState(false);
 
   // 3D Navigation API
   const navigation = useAnatomy3DNavigation({
@@ -275,9 +277,18 @@ export function SymptomExplorer({
   const handleClearSelection = useCallback(() => {
     setSelectedSymptom(null);
     setHighlightedSourceId(null);
+    setShowFollowUpChat(false);
     navigation.clearHighlights();
     navigation.resetView();
   }, [navigation]);
+
+  // Handle source highlight from follow-up chat
+  const handleChatHighlightSource = useCallback((structureId: string) => {
+    const source = selectedSymptom?.anatomicalSources.find(s => s.structureId === structureId);
+    if (source) {
+      handleHighlightSource(source);
+    }
+  }, [selectedSymptom, handleHighlightSource]);
 
   // Get current explanation based on complexity level
   const currentExplanation = useMemo(() => {
@@ -422,7 +433,29 @@ export function SymptomExplorer({
               <span className="meta-item region">{selectedSymptom.bodyRegion}</span>
             </div>
             <p className="symptom-description">{selectedSymptom.description}</p>
+
+            {/* AI Analysis Button */}
+            <button
+              className="ai-analysis-btn"
+              onClick={() => setShowFollowUpChat(!showFollowUpChat)}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              {showFollowUpChat ? 'Hide AI Analysis' : 'Start AI-Powered Analysis'}
+            </button>
           </div>
+
+          {/* AI Follow-up Chat */}
+          {showFollowUpChat && (
+            <div className="followup-chat-container">
+              <SymptomFollowUpChat
+                symptom={selectedSymptom}
+                complexityLevel={complexityLevel}
+                onHighlightSource={handleChatHighlightSource}
+              />
+            </div>
+          )}
 
           {/* Complexity Level Selector */}
           <div className="complexity-selector">

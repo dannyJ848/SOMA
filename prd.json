@@ -1435,7 +1435,7 @@
         "Typecheck passes"
       ],
       "priority": 79,
-      "passes": false,
+      "passes": true,
       "notes": "Core timeline interaction for disease progression."
     },
     {

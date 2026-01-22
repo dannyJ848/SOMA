@@ -1804,3 +1804,21 @@ New PRD created with 23 user stories (US-073 to US-095):
   - ViewPreset type differs between conditions/types.ts and event bus - need mapping function
   - lateral-left/right in conditions maps to left/right in event bus
 ---
+
+## 2026-01-21 22:55 - US-087
+- Implemented: DiseaseTimelinePanel Component
+- Files changed:
+  - src/DiseaseTimelinePanel.tsx (NEW)
+  - src/DiseaseTimelinePanel.css (NEW)
+- Features:
+  - Horizontal timeline with phase markers (desktop)
+  - Range slider for mobile
+  - Drag/click to select phase
+  - Phase detail card: name, timeframe, symptoms, reversibility
+  - Anatomical changes grid with 3D navigation
+  - Typical treatments and goals of care sections
+  - Previous/Next navigation buttons
+  - Keyboard navigation (arrow keys)
+  - Smooth transitions between phases
+  - Callback to update 3D viewer on phase change
+---

@@ -1694,7 +1694,7 @@
         "Typecheck passes"
       ],
       "priority": 94,
-      "passes": false,
+      "passes": true,
       "notes": "Context in src/contexts/AdaptiveUIContext.tsx"
     },
     {

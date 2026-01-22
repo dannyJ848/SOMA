@@ -665,6 +665,64 @@ pub struct JourneyStatsResult {
 }
 
 // ============================================================================
+// Intent Prediction Types
+// ============================================================================
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PredictionHealthProfile {
+    pub conditions: Vec<serde_json::Value>,
+    pub medications: Vec<serde_json::Value>,
+    #[serde(rename = "recentSymptoms")]
+    pub recent_symptoms: Vec<serde_json::Value>,
+    #[serde(rename = "abnormalLabs")]
+    pub abnormal_labs: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PredictionCurrentContext {
+    pub view: String,
+    #[serde(rename = "selectedEntity")]
+    pub selected_entity: Option<serde_json::Value>,
+    #[serde(rename = "visiblePanels")]
+    pub visible_panels: Vec<String>,
+    #[serde(rename = "activeComplexityLevel")]
+    pub active_complexity_level: Option<u8>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PredictionRequest {
+    #[serde(rename = "recentActions")]
+    pub recent_actions: Vec<serde_json::Value>,
+    #[serde(rename = "healthProfile")]
+    pub health_profile: PredictionHealthProfile,
+    #[serde(rename = "currentContext")]
+    pub current_context: PredictionCurrentContext,
+    #[serde(rename = "maxPredictions")]
+    pub max_predictions: Option<u32>,
+    #[serde(rename = "maxShortcuts")]
+    pub max_shortcuts: Option<u32>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PredictionResponse {
+    pub intent: serde_json::Value,
+    pub model: String,
+    #[serde(rename = "processingTimeMs")]
+    pub processing_time_ms: u64,
+    #[serde(rename = "tokensUsed")]
+    pub tokens_used: u32,
+    #[serde(rename = "usedFallback")]
+    pub used_fallback: bool,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PredictionHealthResponse {
+    pub available: bool,
+    pub model: Option<String>,
+    pub error: Option<String>,
+}
+
+// ============================================================================
 // Journey Store Commands
 // ============================================================================
 
@@ -870,6 +928,65 @@ async fn ai_chat_rag(request: AIChatRAGRequest) -> Result<AIChatRAGResponse, Str
     .map_err(|e| format!("Task join error: {}", e))?
 }
 
+// ============================================================================
+// Intent Prediction Commands
+// ============================================================================
+
+#[tauri::command]
+async fn predict_intent(request: PredictionRequest) -> Result<PredictionResponse, String> {
+    // Serialize the request to JSON before spawning
+    let request_json = serde_json::to_string(&request)
+        .map_err(|e| format!("Failed to serialize prediction request: {}", e))?;
+
+    tauri::async_runtime::spawn_blocking(move || {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-predict-bridge.ts")
+            .arg("predict")
+            .arg(&request_json)
+            .output()
+            .map_err(|e| format!("Failed to execute prediction bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Intent prediction failed: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse prediction response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
+#[tauri::command]
+async fn prediction_health() -> Result<PredictionHealthResponse, String> {
+    tauri::async_runtime::spawn_blocking(|| {
+        let project_root = get_project_root();
+        let output = Command::new("npx")
+            .current_dir(&project_root)
+            .arg("tsx")
+            .arg("ai-predict-bridge.ts")
+            .arg("health")
+            .output()
+            .map_err(|e| format!("Failed to execute prediction bridge: {}", e))?;
+
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            return Err(format!("Prediction health check failed: {}", stderr));
+        }
+
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        serde_json::from_str(&stdout)
+            .map_err(|e| format!("Failed to parse health response: {} - stdout: {}", e, stdout))
+    })
+    .await
+    .map_err(|e| format!("Task join error: {}", e))?
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -901,7 +1018,9 @@ pub fn run() {
             journey_get_action_count,
             journey_start,
             journey_get,
-            journey_get_stats
+            journey_get_stats,
+            predict_intent,
+            prediction_health
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

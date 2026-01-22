@@ -156,6 +156,35 @@ export async function invoke<T>(cmd: string, args?: Record<string, unknown>): Pr
           description: 'This is a mock structure description for browser development.',
           clinicalRelevance: 'Important for understanding anatomy.'
         } as T;
+      case 'predict_intent':
+        // Mock intent prediction response
+        return {
+          intent: {
+            primaryIntent: 'Learning about health conditions',
+            confidence: 0.85,
+            relatedTopics: ['cardiovascular health', 'diabetes management'],
+            predictedNextActions: [
+              { featureArea: 'medication-explorer', actionType: 'search', probability: 0.7, reasoning: 'User exploring conditions often checks medications' }
+            ],
+            suggestedShortcuts: [
+              { id: 's1', label: 'Explore Medications', description: 'View your current medications', targetView: 'medication-explorer', iconType: 'medication', priority: 1 },
+              { id: 's2', label: 'Ask AI Assistant', description: 'Chat about your health', targetView: 'chat', iconType: 'chat', priority: 2 }
+            ],
+            recommendedPanels: [],
+            contentToPreload: [],
+            quickActions: []
+          },
+          model: 'mock-deepseek',
+          processingTimeMs: 150,
+          tokensUsed: 500,
+          usedFallback: false
+        } as T;
+      case 'prediction_health':
+        return {
+          available: true,
+          model: 'deepseek-r1:14b',
+          error: null
+        } as T;
       default:
         console.warn(`[Browser Mode] No mock data for command: ${cmd}`);
         return {} as T;

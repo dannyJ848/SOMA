@@ -767,24 +767,51 @@
 }
 
 /* ============================================
-   Responsive
+   Responsive & Mobile Optimizations
    ============================================ */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .symptom-explorer {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .symptom-explorer-header {
     padding: 12px 16px;
+    padding-top: calc(12px + env(safe-area-inset-top, 0px));
   }
 
   .symptom-explorer-header h1 {
     font-size: 1.25rem;
   }
 
+  .symptom-explorer-header .back-button,
+  .symptom-explorer-header .clear-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .search-section {
+    padding: 16px;
+  }
+
+  .search-input {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 14px 14px 14px 44px;
+  }
+
   .symptom-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .symptom-browse-card {
+    padding: 14px;
+    min-height: 44px;
   }
 
   .complexity-selector {
     flex-wrap: wrap;
+    padding: 10px 14px;
   }
 
   .complexity-hint {
@@ -793,11 +820,63 @@
     margin-left: 0;
   }
 
+  .complexity-btn {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
   .source-actions {
     flex-direction: column;
   }
 
   .source-action-btn {
     justify-content: center;
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  .red-flags-header {
+    min-height: 44px;
+  }
+
+  .user-symptom-item {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .related-symptom-btn {
+    min-height: 44px;
+    padding: 10px 18px;
+  }
+
+  .followup-chat-container {
+    min-height: 350px;
+    max-height: calc(100vh - 200px);
+  }
+
+  .ai-analysis-btn {
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .symptom-browse-card:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .anatomical-source-card:active {
+    transform: scale(0.99);
+  }
+
+  .source-action-btn:active,
+  .related-symptom-btn:active,
+  .user-symptom-item:active {
+    transform: scale(0.97);
+    opacity: 0.9;
   }
 }

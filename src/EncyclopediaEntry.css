@@ -623,14 +623,24 @@ h5.section-title {
   text-align: center;
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive & iOS Optimizations */
 @media (max-width: 768px) {
+  .encyclopedia-entry {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .entry-header {
     padding: 1rem;
+    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
   }
 
   .entry-title {
     font-size: 1.5rem;
+  }
+
+  .back-btn {
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .complexity-section {
@@ -638,17 +648,23 @@ h5.section-title {
   }
 
   .level-btn {
-    font-size: 0.65rem;
-    padding: 0.375rem 0.25rem;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.375rem;
+    min-width: 40px;
+    min-height: 40px;
   }
 
   .tab-nav {
     padding: 0.5rem 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tab-btn {
-    padding: 0.5rem 0.75rem;
+    padding: 0.625rem 1rem;
     font-size: 0.85rem;
+    min-height: 44px;
+    flex-shrink: 0;
   }
 
   .entry-content {
@@ -660,9 +676,51 @@ h5.section-title {
     grid-template-columns: 1fr;
   }
 
+  .anatomy-link-card,
+  .related-entry-card {
+    min-height: 44px;
+  }
+
+  .view-3d-btn {
+    min-height: 44px;
+  }
+
+  .quick-anatomy-btn {
+    min-height: 44px;
+  }
+
+  .reference-item {
+    min-height: 44px;
+  }
+
   .entry-footer {
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .entry-disclaimer {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .anatomy-link-card:active,
+  .related-entry-card:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .tab-btn:active,
+  .level-btn:active {
+    transform: scale(0.97);
+  }
+
+  .view-3d-btn:active,
+  .quick-anatomy-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
   }
 }

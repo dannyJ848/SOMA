@@ -1065,29 +1065,78 @@
 }
 
 /* ============================================
-   Responsive
+   Responsive & Mobile Optimizations
    ============================================ */
 
 @media (max-width: 768px) {
+  .condition-simulator {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .simulator-header {
+    padding: 0.75rem 1rem;
+    padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  }
+
+  .simulator-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .back-to-dashboard {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
   .simulator-content {
     padding: 1rem;
   }
 
+  .search-input {
+    font-size: 16px; /* Prevents iOS zoom */
+    min-height: 44px;
+  }
+
+  .clear-search {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
   .conditions-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .condition-card {
+    min-height: 44px;
+    padding: 0.875rem;
   }
 
   .complications-grid {
     grid-template-columns: 1fr;
   }
 
+  .complication-card,
+  .treatment-card {
+    min-height: 44px;
+  }
+
   .changes-grid {
     grid-template-columns: 1fr;
+  }
+
+  .anatomical-change-card {
+    min-height: 44px;
   }
 
   .complexity-selector {
     flex-direction: column;
     align-items: flex-start;
+    padding: 0.75rem;
+  }
+
+  .complexity-button {
+    min-width: 40px;
+    min-height: 40px;
   }
 
   .category-filters {
@@ -1095,11 +1144,70 @@
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-filter {
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    flex-shrink: 0;
   }
 
   .detail-tabs {
     overflow-x: auto;
     flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-button {
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    flex-shrink: 0;
+  }
+
+  /* Timeline mobile slider */
+  .timeline-phase {
+    min-width: 100px;
+  }
+
+  .phase-dot {
+    min-width: 44px;
+    min-height: 44px;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .back-button {
+    min-height: 44px;
+    padding: 0.5rem 0;
+  }
+
+  .medication-link-btn {
+    min-height: 44px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .condition-card:active,
+  .complication-card:active,
+  .treatment-card:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .category-filter:active,
+  .tab-button:active,
+  .complexity-button:active {
+    transform: scale(0.97);
+  }
+
+  .timeline-phase:active .phase-dot {
+    transform: scale(1.15);
+  }
+
+  .anatomical-change-card:active {
+    transform: translateX(2px);
   }
 }
 

@@ -1961,3 +1961,69 @@ New PRD created with 23 user stories (US-073 to US-095):
   - Check export style before writing lazy import pattern
   - Keep cross-feature navigation (medication link from condition) for US-094
 ---
+
+## 2026-01-21 23:45 - US-094
+- Implemented: Cross-Feature Navigation
+- Files changed:
+  - src/App.tsx (MODIFIED)
+  - src/ConditionSimulator.tsx (MODIFIED)
+  - src/ConditionSimulator.css (MODIFIED)
+- Features:
+  - Added onNavigateToMedication prop to ConditionSimulator
+  - Treatment cards with medicationIds show "View Drug Effects" button
+  - Navigation history stack for breadcrumb-style back navigation:
+    - navigateWithHistory(view) - pushes current view to history
+    - navigateBack() - pops from history and returns to previous view
+  - MedicationExplorer back button uses history if available
+  - Condition → Medication flow: click treatment → view drug effects
+  - Initial medication/condition IDs support deep linking
+- **Learnings for future iterations:**
+  - Navigation history is simple array state + push/pop
+  - Cross-feature data linking requires IDs in both directions
+  - treatment.medicationIds enables condition → medication linking
+  - Use `treatment.medicationIds![0]` for first medication when array exists
+---
+
+---
+
+## 2026-01-21 - US-095
+
+### What was implemented
+- iOS Mobile Testing and Polish for all Phase 4 features
+- Added iOS-specific meta tags to index.html (viewport-fit=cover, apple-mobile-web-app-capable, etc.)
+- Added comprehensive iOS mobile CSS utilities to styles.css:
+  - Safe area insets (env() CSS variables for iPhone notch and home indicator)
+  - Touch optimizations (-webkit-tap-highlight-color, touch-action)
+  - Minimum 44px tap targets for accessibility per iOS HIG
+  - Smooth touch scrolling (-webkit-overflow-scrolling: touch)
+  - Input zoom prevention (font-size: 16px)
+  - Bottom sheet pattern for mobile modals
+  - Touch feedback effects for interactive elements
+  - Performance optimizations (will-change, transform: translateZ(0))
+  - Reduced motion support
+  - iOS Safari 100vh fix
+- Enhanced SymptomExplorer.css with mobile-specific styles
+- Enhanced MedicationExplorer.css with mobile-specific styles
+- Enhanced ConditionSimulator.css with mobile-specific styles
+- Enhanced MedicalEncyclopedia.css with mobile-specific styles
+- Enhanced EncyclopediaEntry.css with mobile-specific styles
+
+### Files changed
+- **Modified**: `index.html` - Added iOS meta tags
+- **Modified**: `src/styles.css` - Added iOS mobile optimizations section
+- **Modified**: `src/SymptomExplorer.css` - Enhanced responsive styles
+- **Modified**: `src/MedicationExplorer.css` - Enhanced responsive styles
+- **Modified**: `src/ConditionSimulator.css` - Enhanced responsive styles
+- **Modified**: `src/MedicalEncyclopedia.css` - Enhanced responsive styles
+- **Modified**: `src/EncyclopediaEntry.css` - Enhanced responsive styles
+
+### Learnings for future iterations
+- iOS requires viewport-fit=cover for edge-to-edge rendering on iPhone X+
+- Input font-size must be 16px+ to prevent iOS Safari zoom on focus
+- Use env(safe-area-inset-*) for iPhone notch and home indicator spacing
+- Touch targets should be minimum 44x44px per iOS Human Interface Guidelines
+- Use -webkit-overflow-scrolling: touch for smooth momentum scrolling
+- Bottom sheet pattern works well for modals on mobile
+- @media (pointer: coarse) targets touch devices specifically
+- will-change and translateZ(0) enable GPU acceleration for animations
+- @supports (-webkit-touch-callout: none) detects iOS Safari

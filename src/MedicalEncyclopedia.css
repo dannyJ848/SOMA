@@ -534,18 +534,32 @@
   }
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive & iOS Optimizations */
 @media (max-width: 768px) {
+  .medical-encyclopedia {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .encyclopedia-header {
     padding: 1rem;
+    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
   }
 
   .encyclopedia-title {
     font-size: 1.25rem;
   }
 
+  .back-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
   .view-toggle {
     padding: 0 1rem;
+  }
+
+  .toggle-btn {
+    min-height: 44px;
   }
 
   .search-section,
@@ -555,28 +569,77 @@
     padding-right: 1rem;
   }
 
+  .search-input {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+
+  .search-bar {
+    min-height: 48px;
+  }
+
+  .clear-search {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
   .results-grid,
   .entries-grid {
     grid-template-columns: 1fr;
+  }
+
+  .search-result-card,
+  .entry-preview-card {
+    min-height: 44px;
   }
 
   .filter-chips {
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
   }
 
   .filter-chip {
     flex-shrink: 0;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+  }
+
+  .recent-item {
+    min-height: 44px;
   }
 
   .letter-nav {
     justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .letter-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
     font-size: 0.9rem;
+  }
+
+  .encyclopedia-footer {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .search-result-card:active,
+  .entry-preview-card:active,
+  .recent-item:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .toggle-btn:active,
+  .filter-chip:active,
+  .letter-btn:active {
+    transform: scale(0.97);
   }
 }

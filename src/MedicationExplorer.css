@@ -936,33 +936,62 @@
 }
 
 /* ============================================
-   Responsive
+   Responsive & Mobile Optimizations
    ============================================ */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .medication-explorer {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .medication-explorer-header {
     padding: 12px 16px;
+    padding-top: calc(12px + env(safe-area-inset-top, 0px));
   }
 
   .medication-explorer-header h1 {
     font-size: 1.25rem;
   }
 
+  .medication-explorer-header .back-button,
+  .medication-explorer-header .clear-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .search-section {
+    padding: 16px;
+  }
+
+  .search-input {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+
   .class-medications {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .medication-browse-card {
+    min-height: 44px;
+    padding: 14px;
   }
 
   .tab-navigation {
     flex-wrap: wrap;
+    padding: 4px;
   }
 
   .tab-btn {
     flex: unset;
     width: calc(50% - 2px);
+    min-height: 44px;
+    padding: 10px 12px;
   }
 
   .complexity-selector {
     flex-wrap: wrap;
+    padding: 10px 14px;
   }
 
   .complexity-hint {
@@ -970,7 +999,55 @@
     margin: 8px 0 0 0;
   }
 
+  .complexity-btn {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
   .pk-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dosing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-medication-item {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+
+  .search-result-item {
+    min-height: 44px;
+    padding: 14px 16px;
+  }
+
+  .body-system-card,
+  .adverse-effect-card,
+  .target-card,
+  .contraindication-card {
+    min-height: 44px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .medication-browse-card:active,
+  .user-medication-item:active,
+  .search-result-item:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .body-system-card:active,
+  .adverse-effect-card:active {
+    transform: translateX(2px);
+    opacity: 0.95;
+  }
+
+  .tab-btn:active {
+    transform: scale(0.97);
   }
 }

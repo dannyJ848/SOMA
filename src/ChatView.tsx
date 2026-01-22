@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { invoke } from './tauri-invoke';
 import { useActionTracker } from './hooks/useActionTracker';
+import { useJourneyContext, getContextualSuggestions } from './hooks/useJourneyContext';
 import type { ChatAction } from '../core/intent-prediction/types';
 
 interface DashboardData {
@@ -178,6 +179,14 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
   // Action tracking for intent prediction
   const { track } = useActionTracker<ChatAction>('chat', 'ChatView');
 
+  // Get journey context for personalized responses
+  const { chatContext, summary } = useJourneyContext();
+
+  // Get contextual suggestions based on exploration journey
+  const contextualSuggestions = useMemo(() => {
+    return getContextualSuggestions(summary);
+  }, [summary]);
+
   useEffect(() => {
     checkAIHealth();
   }, []);
@@ -213,9 +222,14 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
     track('send-message', { messageContent: userMessage, messageRole: 'user' });
 
     try {
-      // Build the system prompt with health context
+      // Build the system prompt with health context and journey context
       const healthContext = buildHealthContext(dashboardData);
-      const systemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{HEALTH_CONTEXT}', healthContext);
+      let systemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{HEALTH_CONTEXT}', healthContext);
+
+      // Add journey context if available
+      if (chatContext) {
+        systemPrompt = systemPrompt + '\n\n' + chatContext;
+      }
 
       // Build message history for context
       const chatMessages = messages.map(m => ({
@@ -334,15 +348,14 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
             <h3>Ask me about your health data</h3>
             <p>I can help you understand your conditions, medications, lab results, and symptoms.</p>
             <div className="suggested-questions">
-              <button onClick={() => handleSuggestionClick('What do my recent lab results indicate?')}>
-                What do my recent lab results indicate?
-              </button>
-              <button onClick={() => handleSuggestionClick('Explain my current medications')}>
-                Explain my current medications
-              </button>
-              <button onClick={() => handleSuggestionClick('What could be causing my recent symptoms?')}>
-                What could be causing my symptoms?
-              </button>
+              {contextualSuggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                >
+                  {suggestion}
+                </button>
+              ))}
             </div>
           </div>
         )}

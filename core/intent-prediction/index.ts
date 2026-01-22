@@ -91,3 +91,12 @@ export {
   getDomainFallbackPrediction,
   applyDomainRules,
 } from './domain-rules';
+
+// Journey Summarizer exports
+export {
+  summarizeJourney,
+  formatJourneyForChatPrompt,
+  getRecentActionsForSummary,
+  type JourneySummary,
+  type EntityReference,
+} from './journey-summarizer';

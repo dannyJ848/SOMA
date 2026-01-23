@@ -2720,3 +2720,35 @@ Downloaded Qwen2.5-7B-Instruct-Q4_K_M.gguf (4.4GB) from bartowski/Qwen2.5-7B-Ins
 3. Prepare for TestFlight distribution
 
 ---
+
+### iOS Build Complete
+Successfully built iOS app for device testing and TestFlight:
+
+**Build Output:**
+- IPA: `src-tauri/gen/apple/build/arm64/Biological Self.ipa` (4.3MB)
+- Signing: Apple Development certificate
+- Provisioning: iOS Team Provisioning Profile
+
+**Frameworks Linked:**
+- Accelerate (SIMD/BLAS for neural networks)
+- Metal + MetalKit + MetalPerformanceShaders (GPU acceleration)
+- CoreGraphics, QuartzCore, UIKit, WebKit, Security
+
+**To upload to TestFlight:**
+```bash
+# Using Transporter app (recommended)
+open -a Transporter "Biological Self.ipa"
+
+# Or using xcrun (requires App Store Connect API key)
+xcrun altool --upload-app -f "Biological Self.ipa" -t ios --apiKey <key> --apiIssuer <issuer>
+```
+
+**To install on device:**
+```bash
+# Via Xcode (device connected)
+xcrun ios-deploy --bundle "Biological Self.ipa"
+
+# Or drag IPA to Xcode Devices window
+```
+
+---

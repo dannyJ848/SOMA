@@ -2064,3 +2064,374 @@ Phase 6 (Voice Integration) completed:
 - VoiceProvider must wrap App in main.tsx for voice context access
 
 ---
+
+## 2026-01-22 - Educational Database Expansion (Session 1)
+
+### Overview
+Expanding the pharmacology database from ~54 drugs to 100+ drugs for Phase 7: Educational Medical Content.
+
+### Drugs Added This Session (17 new drugs)
+
+**Neurological (2):**
+- Gabapentin (anticonvulsant/neuropathic pain)
+- Levetiracetam (anticonvulsant)
+
+**Cardiovascular/Hematologic (3):**
+- Amlodipine (CCB for hypertension)
+- Furosemide (loop diuretic)
+- Warfarin (anticoagulant)
+
+**Analgesics (3):**
+- Acetaminophen (non-opioid analgesic)
+- Ibuprofen (NSAID)
+- Tramadol (opioid/SNRI analgesic)
+
+**Endocrine/Diabetes (3):**
+- Glipizide (sulfonylurea)
+- Sitagliptin (DPP-4 inhibitor)
+- Empagliflozin (SGLT2 inhibitor)
+
+**Antimicrobials (3):**
+- Amoxicillin (beta-lactam antibiotic)
+- Azithromycin (macrolide antibiotic)
+- Ciprofloxacin (fluoroquinolone antibiotic)
+
+**Psychiatric (3):**
+- Sertraline (SSRI)
+- Escitalopram (SSRI)
+- Bupropion (NDRI)
+
+### Current Drug Count: ~71 drugs
+### Target: 100+ drugs
+### Remaining to add: ~29 drugs
+
+### Drug Categories Still Needed
+1. **Respiratory medications** (~4-5 drugs needed):
+   - Albuterol (beta-2 agonist)
+   - Fluticasone (inhaled corticosteroid)
+   - Montelukast (leukotriene inhibitor)
+   - Tiotropium (anticholinergic)
+
+2. **Gastrointestinal medications** (~4-5 drugs needed):
+   - Omeprazole/Pantoprazole (PPIs)
+   - Ondansetron (antiemetic)
+   - Metoclopramide (prokinetic)
+   - Loperamide (antidiarrheal)
+   - Docusate/Senna (laxatives)
+
+3. **More cardiovascular** (~4-5 drugs needed):
+   - Carvedilol (beta-blocker)
+   - Digoxin (cardiac glycoside)
+   - Spironolactone (aldosterone antagonist)
+   - Hydralazine (vasodilator)
+   - Apixaban/Rivaroxaban (DOACs)
+
+4. **More psychiatric** (~3-4 drugs needed):
+   - Quetiapine (atypical antipsychotic)
+   - Trazodone (sedating antidepressant)
+   - Lorazepam/Alprazolam (benzodiazepines)
+
+5. **Thyroid/Endocrine** (~2-3 drugs needed):
+   - Levothyroxine
+   - Prednisone (corticosteroid)
+
+6. **Pain management** (~2-3 drugs needed):
+   - Oxycodone (opioid)
+   - Naproxen (NSAID)
+   - Cyclobenzaprine (muscle relaxant)
+
+7. **Other important drugs** (~3-4 drugs needed):
+   - Methotrexate (DMARD)
+   - Allopurinol (gout)
+   - Montelukast (allergy)
+   - Cetirizine (antihistamine)
+
+### Files Changed
+- **Modified**: `/Users/dannygomez/biological-self/core/pharmacology/drug-database.ts`
+  - Added 17 comprehensive drug entries following DrugEducation interface
+  - Each drug includes: mechanism, pharmacokinetics, indications, dosing, adverse effects, interactions, contraindications, special populations, monitoring, patient education, clinical pearls
+
+### Interface Structure Reference (for next session)
+Each drug must follow this structure from `/Users/dannygomez/biological-self/core/pharmacology/types.ts`:
+```typescript
+{
+  id: string,
+  genericName: string,
+  brandNames: string[],
+  drugClass: string,
+  category: DrugCategory, // 'cardiovascular' | 'neurological' | 'psychiatric' | etc.
+  overview: string, // Plain language description
+  mechanism: {
+    type: MechanismType, // 'receptor-agonist' | 'enzyme-inhibitor' | 'ion-channel-blocker' | etc.
+    target: string,
+    targetLocation: string,
+    simpleExplanation: string,
+    detailedMechanism: string,
+    mechanismSteps: { order, location, action, result, timeframe? }[],
+    physiologicalEffects: { system, effect, mechanism, clinicalRelevance, desiredOrAdverse }[],
+    onsetOfAction: string,
+    durationOfEffect: string,
+  },
+  pharmacokinetics: {
+    absorption: { bioavailability, route, factors, timeToePeak, foodEffect? },
+    distribution: { volumeOfDistribution, proteinBinding, tissueDistribution, crossesBBB, crossesPlacenta },
+    metabolism: { primarySite, enzymes, activeMetabolites, geneticVariability?, drugInteractionRisk },
+    excretion: { primaryRoute, renalClearance?, biliaryClearance?, adjustmentNeeded },
+    halfLife: string,
+    timeToSteadyState: string,
+  },
+  indications: { condition, approvalStatus: 'FDA-approved'|'off-label', evidenceLevel, firstLine, notes? }[],
+  dosing: { usualDose, adjustments, maxDose, administration },
+  adverseEffects: { name, frequency, severity, mechanism, management, reversible, onsetTiming }[],
+  interactions: { interactingDrug, interactionType: 'pharmacokinetic'|'pharmacodynamic', severity, mechanism, effect, management }[],
+  contraindications: { condition, type: 'absolute'|'relative', reason, alternative? }[],
+  specialPopulations: { population: 'pregnancy'|'geriatric'|'pediatric'|..., consideration, recommendation, pregnancyCategory? }[],
+  monitoring: { parameter, frequency, rationale, actionThreshold? }[],
+  patientEducation: string[],
+  clinicalPearls: string[],
+}
+```
+
+### Todo List Status
+- [completed] Audit existing educational modules for enhancement opportunities
+- [completed] Expand Symptom Education Database (50+ symptoms)
+- [in_progress] Expand Pharmacology Database (100+ drugs) - 71% complete
+- [pending] Expand Condition Database (100+ conditions)
+- [pending] Expand Lab Interpretation Database (50+ tests)
+- [pending] Build Physical Exam Education Module
+- [pending] Build Vital Signs Education Module
+- [pending] Create AI-integrated Case Studies
+
+### Learnings for future iterations
+- Drug entries must follow exact interface structure from types.ts
+- Each drug entry is approximately 150-200 lines of comprehensive content
+- Typecheck after each batch (3-4 drugs) to catch errors early
+- Common mistakes: wrong enum values, missing required nested properties
+- Use existing drug entries as template for structure
+- The array ends at line ~14240 (find "^];" to locate insertion point)
+
+### Next Session Action Plan
+1. Read this progress entry to understand context
+2. Continue adding drugs from the "Categories Still Needed" list
+3. Run `npm run typecheck` after each batch of 3-4 drugs
+4. Update this progress file with new drugs added
+5. When pharmacology reaches 100+, move to Condition Database expansion
+
+---
+
+### Additional Drugs Added (continued session):
+**Respiratory (2):**
+- Albuterol (SABA - rescue inhaler)
+- Fluticasone (ICS - controller)
+
+**Gastrointestinal (2):**
+- Omeprazole (PPI)
+- Ondansetron (5-HT3 antagonist antiemetic)
+
+### Final Session Count: 21 new drugs added
+### Total Estimated Drugs: ~75 drugs
+### Remaining to reach 100+: ~25 drugs
+
+### Categories Still Needed for Next Session:
+1. **More GI medications** (2-3):
+   - Metoclopramide, Loperamide, Docusate
+
+2. **More cardiovascular** (4-5):
+   - Carvedilol, Digoxin, Spironolactone, Apixaban, Rivaroxaban
+
+3. **More psychiatric** (3-4):
+   - Quetiapine, Trazodone, Lorazepam, Alprazolam
+
+4. **Thyroid/Endocrine** (2-3):
+   - Levothyroxine, Prednisone
+
+5. **Pain management** (2-3):
+   - Oxycodone, Naproxen, Cyclobenzaprine
+
+6. **Other important** (3-4):
+   - Methotrexate, Allopurinol, Cetirizine, Montelukast
+
+### Quick Resume Commands for Next Session:
+```bash
+# Find insertion point (end of DRUGS array)
+grep -n "^];" /Users/dannygomez/biological-self/core/pharmacology/drug-database.ts | head -2
+
+# Run typecheck after adding drugs
+npm run typecheck
+
+# Read this progress file
+tail -200 /Users/dannygomez/biological-self/progress.txt
+```
+
+---
+
+## 2026-01-23 - Condition Database Expansion (Session 1)
+
+### Work Completed
+Fixed schema issues for 5 neurologic/cardiovascular conditions added to the condition database:
+
+1. **Parkinson's Disease** - Added with correct schema
+2. **Alzheimer's Disease** - Added with correct schema  
+3. **Multiple Sclerosis** - Added with correct schema
+4. **Ischemic Stroke** - Full schema conversion required
+5. **Peripheral Artery Disease** - Full schema conversion required
+
+### Major Bug Fixed: Incorrect Condition Schema
+The newly added conditions initially used an **incorrect schema** that caused typecheck failures. The wrong schema had:
+- `overview` instead of `description`
+- `synonyms` instead of `aliases`
+- `icdCodes: { icd10: [...] }` instead of `icdCode: string`
+- `symptoms: { primary, secondary, atypical }` instead of `clinicalPresentation: { primarySymptoms, associatedSymptoms, physicalFindings, labFindings }`
+- `diseaseProgression: { stages }` instead of `progression: { naturalHistory, timelineSteps }`
+
+### Type Fixes Applied
+Multiple type constraint violations were discovered and fixed:
+
+1. **ViewPreset**: `'lateral'` is NOT valid → use `'lateral-left'` or `'lateral-right'`
+2. **Reversibility**: `'potentially-reversible'` is NOT valid → use `'partially-reversible'`
+3. **ProgressionPhase**: `'acute'` and `'recovery'` are NOT valid → use: `preclinical`, `early`, `established`, `advanced`, `severe`, `end-stage`, `remission`, `chronic`
+4. **ComplicationSeverity**: `'critical'` is NOT valid → use: `minor`, `moderate`, `major`
+5. **StructureInvolvement role**: `'affected'` is NOT valid → use: `primary-site`, `secondary-site`, `target-organ`, `collateral`, `compensatory`
+6. **showByDefault**: REQUIRED on all `StructureInvolvement` entries including secondary structures
+
+### Files Modified
+- `/Users/dannygomez/biological-self/core/medical-simulation/conditions/store.ts`
+
+### Current Status
+- **Condition Database**: 47/100 conditions complete
+- **Typecheck**: PASSING
+
+### Correct ConditionSimulation Schema Reference
+```typescript
+// Tuple format for Map entries:
+['condition-id', {
+  conditionId: string,
+  name: string,
+  aliases: string[],                    // NOT synonyms
+  icdCode: string,                      // NOT icdCodes object
+  category: ConditionCategory,
+  subcategory: string,
+  description: string,                  // NOT overview
+  pathophysiology: {
+    summary: string,
+    mechanisms: { name, description, systemsInvolved, keyMediators, contribution }[],
+    riskFactors: { name, type, impact, description, intervention? }[],
+  },
+  clinicalPresentation: {               // NOT symptoms
+    primarySymptoms: { name, prevalence, description }[],
+    associatedSymptoms: { name, prevalence, description }[],
+    physicalFindings: { name, examType, description, diagnosticValue? }[],
+    labFindings: { testName, abnormality, normalRange, significance }[],
+  },
+  progression: {                        // NOT diseaseProgression
+    naturalHistory: string,
+    timelineSteps: {
+      phaseId: string,
+      phase: 'preclinical'|'early'|'established'|'advanced'|'severe'|'end-stage'|'remission'|'chronic',  // NOT 'acute'|'recovery'
+      displayName: string,
+      timeframe: string,
+      description: string,
+      symptoms: string[],
+      anatomicalChanges: { structureId, structureName, changeType, description, severity, visualIndicator, isNewAtPhase }[],
+      reversibility: 'reversible'|'partially-reversible'|'irreversible',  // NOT 'potentially-reversible'
+      typicalTreatments: string[],
+    }[],
+    prognosis: string,
+  },
+  complications: {
+    complicationId: string,
+    name: string,
+    category: 'acute'|'chronic',
+    severity: 'minor'|'moderate'|'major',  // NOT 'critical'
+    riskLevel: 'high'|'moderate'|'low',
+    description: string,
+    mechanism: string,
+    affectedStructures: { structureId, structureName, effect, highlightColor }[],
+    warningSymptoms: string[],
+    preventable: boolean,
+  }[],
+  treatmentOptions: { ... with explanations levels 1-5 }[],
+  anatomyMapping: {
+    primaryStructures: { structureId, structureName, role: 'primary-site'|..., involvement, highlightColor, showByDefault: boolean }[],
+    secondaryStructures: { ... showByDefault: boolean REQUIRED }[],  // showByDefault is REQUIRED
+    systemsInvolved: string[],
+    recommendedView: 'anterior'|'posterior'|'lateral-left'|'lateral-right'|'superior',  // NOT 'lateral'
+    recommendedLayers: string[],
+    focusRegion?: string,
+  },
+  explanations: { level1, level2, level3, level4, level5 },
+  relatedConditions: string[],
+  epidemiology: { prevalence, incidence, demographics },
+  clinicalPearls: string[],
+  patientEducation: string[],
+  emergencyWarnings: string[],
+}]
+```
+
+### Todo List Status
+- [completed] Audit existing educational modules
+- [completed] Expand Symptom Education Database (50+ symptoms)
+- [completed] Expand Pharmacology Database (100+ drugs)
+- [in_progress] Expand Condition Database (100+ conditions) - 47/100 complete
+- [pending] Expand Lab Interpretation Database (50+ tests)
+- [pending] Build Physical Exam Education Module
+- [pending] Build Vital Signs Education Module
+- [pending] Create AI-integrated Case Studies
+
+### Conditions Still Needed to Reach 100 (~53 more)
+**Cardiovascular (5-6):**
+- Aortic Stenosis, Mitral Regurgitation, Aortic Aneurysm, Endocarditis, Pericarditis
+
+**Neurologic (5-6):**
+- TIA, Hemorrhagic Stroke, Meningitis, Encephalitis, Guillain-Barré
+
+**Respiratory (4-5):**
+- Tuberculosis, Lung Cancer, Interstitial Lung Disease, Bronchiectasis, Pleural Effusion
+
+**Gastrointestinal (4-5):**
+- Pancreatitis, Cholecystitis, Appendicitis, Diverticulitis, Hepatitis
+
+**Renal/Urologic (3-4):**
+- Acute Kidney Injury, Nephrolithiasis, Prostate Cancer, Bladder Cancer
+
+**Endocrine (3-4):**
+- Hyperthyroidism, Cushing Syndrome, Adrenal Insufficiency, Pheochromocytoma
+
+**Infectious (5-6):**
+- Sepsis, HIV/AIDS, Influenza, COVID-19, Cellulitis, Osteomyelitis
+
+**Musculoskeletal (3-4):**
+- Ankylosing Spondylitis, Fibromyalgia, Lupus, Scleroderma
+
+**Hematologic (3-4):**
+- Leukemia, Lymphoma, Sickle Cell Disease, Hemophilia
+
+**Other (3-4):**
+- Anaphylaxis, Burns, Dehydration, Malnutrition
+
+### Quick Resume Commands
+```bash
+# Check current condition count
+grep -c "conditionId:" /Users/dannygomez/biological-self/core/medical-simulation/conditions/store.ts
+
+# Find insertion point (end of condition array, before "]);")
+grep -n "^\]);" /Users/dannygomez/biological-self/core/medical-simulation/conditions/store.ts
+
+# Read an existing condition as template (e.g., hypertension starts around line 88)
+sed -n '88,400p' /Users/dannygomez/biological-self/core/medical-simulation/conditions/store.ts
+
+# Typecheck after adding conditions
+npm run typecheck
+
+# Read this progress file
+tail -250 /Users/dannygomez/biological-self/progress.txt
+```
+
+### Learnings for Future Sessions
+- ALWAYS use the correct schema - copy from an existing working condition
+- Check types.ts for valid enum values BEFORE writing new conditions
+- `showByDefault` is REQUIRED on ALL StructureInvolvement entries
+- Run typecheck after each 2-3 conditions to catch errors early
+- Conditions use tuple format: `['id', { ...object }]` inside the Map constructor
+
+---

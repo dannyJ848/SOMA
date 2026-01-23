@@ -5047,6 +5047,2032 @@ const COPD_EXACERBATION_CASE: ClinicalCase = {
 };
 
 // ============================================
+// Case: Pulmonary Embolism
+// ============================================
+
+const PULMONARY_EMBOLISM_CASE: ClinicalCase = {
+  id: 'pe-submassive',
+  title: 'The Post-Flight Shortness of Breath',
+  category: 'pulmonology',
+  complexity: 'intermediate',
+
+  learningObjectives: [
+    'Recognize the varied presentations of pulmonary embolism',
+    'Apply Wells criteria and D-dimer in PE evaluation',
+    'Understand risk stratification in PE (massive vs submassive vs low-risk)',
+    'Learn the initial anticoagulation approach for PE',
+  ],
+
+  presentation: {
+    chiefComplaint: 'Shortness of breath',
+    demographics: {
+      age: 42,
+      sex: 'female',
+      occupation: 'marketing executive',
+      context: 'presents to urgent care with sudden-onset dyspnea',
+    },
+    openingParagraph: `Ms. Rodriguez is a 42-year-old marketing executive who presents to urgent care with shortness of breath that began suddenly this morning while walking up stairs. She just returned yesterday from an 11-hour international flight. She describes the breathlessness as "different from anything I've felt before" and mentions a sharp pain in her right side when she takes a deep breath.`,
+    generalAppearance: 'Well-appearing woman who appears mildly anxious. Breathing is slightly rapid but she speaks in full sentences. Occasionally winces when taking a deep breath.',
+    vitalSigns: {
+      temperature: '99.1°F (37.3°C)',
+      heartRate: '108 bpm, regular',
+      bloodPressure: '132/84 mmHg',
+      respiratoryRate: '22/min',
+      oxygenSaturation: '93% on room air',
+      interpretation: 'Tachycardic with tachypnea and mild hypoxemia. Low-grade fever may be present with PE. The combination of recent travel, acute dyspnea, and hypoxemia is concerning for PE.',
+    },
+  },
+
+  availableData: {
+    historyQuestions: [
+      {
+        id: 'hpi-onset',
+        question: 'When did the shortness of breath start?',
+        category: 'hpi',
+        response: 'It started suddenly this morning around 8 AM while I was walking upstairs. One moment I was fine, the next I couldn\'t catch my breath.',
+        educationalNote: 'Sudden onset of dyspnea is classic for PE, unlike the gradual onset of pneumonia or CHF. The acute nature should raise suspicion.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-chest-pain',
+        question: 'Tell me more about the chest pain.',
+        category: 'hpi',
+        response: 'It\'s on my right side, pretty sharp. It hurts more when I breathe in deeply or cough.',
+        educationalNote: 'Pleuritic chest pain (worse with inspiration) occurs in 40-50% of PE cases due to pulmonary infarction irritating the pleura.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-travel',
+        question: 'You mentioned a long flight. Tell me about your recent travel.',
+        category: 'hpi',
+        response: 'I flew back from Tokyo yesterday. It was an 11-hour flight. I didn\'t really get up much - just watched movies and slept.',
+        educationalNote: 'Prolonged immobility (flights >4 hours) is a major risk factor for VTE. The risk increases with flight duration and is highest in the first 2 weeks after travel.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-leg-symptoms',
+        question: 'Any pain or swelling in your legs?',
+        category: 'hpi',
+        response: 'Now that you mention it, my right calf has been aching since last night. I thought it was just stiff from sitting.',
+        educationalNote: 'Calf pain/swelling suggests DVT as the source of PE. However, absence of leg symptoms does not rule out PE - up to 50% of PE patients have no clinical evidence of DVT.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-syncope',
+        question: 'Any dizziness, fainting, or feeling like you might pass out?',
+        category: 'hpi',
+        response: 'I felt lightheaded when I first got short of breath, but I didn\'t actually pass out.',
+        educationalNote: 'Syncope or presyncope can indicate hemodynamically significant PE with right heart strain. Its presence is a marker of severity.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-clots',
+        question: 'Have you ever had blood clots before?',
+        category: 'pmh',
+        response: 'No, never.',
+        educationalNote: 'Prior VTE is a strong risk factor for recurrence. First unprovoked PE has ~10% 1-year recurrence rate.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'pmh-cancer',
+        question: 'Any history of cancer?',
+        category: 'pmh',
+        response: 'No cancer.',
+        educationalNote: 'Malignancy is a major risk factor for VTE due to hypercoagulable state. Unprovoked VTE in appropriate patients should prompt age-appropriate cancer screening.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'meds-hormones',
+        question: 'Do you take any hormones like birth control or HRT?',
+        category: 'medications',
+        response: 'Yes, I\'ve been on birth control pills for about 10 years.',
+        educationalNote: 'Estrogen-containing contraceptives increase VTE risk 2-4x. Combined with other risk factors like immobility, the risk is multiplicative.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'fh-clots',
+        question: 'Any family history of blood clots?',
+        category: 'family',
+        response: 'My mother had a "clot in her lung" after her hip surgery.',
+        educationalNote: 'Family history of VTE, especially unprovoked, raises suspicion for inherited thrombophilia (Factor V Leiden, Prothrombin mutation, etc.).',
+        isKeyFinding: true,
+      },
+      {
+        id: 'sh-smoking',
+        question: 'Do you smoke?',
+        category: 'social',
+        response: 'Occasionally, maybe 2-3 cigarettes a week socially.',
+        educationalNote: 'Smoking combined with oral contraceptives synergistically increases VTE risk.',
+        isKeyFinding: false,
+      },
+    ],
+
+    physicalExam: [
+      {
+        system: 'Cardiovascular',
+        findings: [
+          {
+            id: 'cv-heart-sounds',
+            exam: 'Heart auscultation',
+            finding: 'Tachycardic but regular rhythm. Normal S1/S2. Loud P2 component noted.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'A loud P2 (pulmonic component of S2) suggests pulmonary hypertension from PE. It indicates elevated pulmonary pressures.',
+          },
+          {
+            id: 'cv-jvp',
+            exam: 'Jugular venous pressure',
+            finding: 'Mildly elevated at 10cm with prominent A wave',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Elevated JVP with prominent A wave suggests right heart strain from increased pulmonary vascular resistance.',
+          },
+        ],
+      },
+      {
+        system: 'Respiratory',
+        findings: [
+          {
+            id: 'resp-lungs',
+            exam: 'Lung auscultation',
+            finding: 'Clear breath sounds bilaterally. No wheezes or rales. Splinting on right with deep inspiration.',
+            isNormal: true,
+            isKeyFinding: true,
+            educationalNote: 'Lungs are often clear in PE - this is a key distinguishing feature from pneumonia. The "clear lungs with hypoxemia" pattern should raise PE suspicion.',
+          },
+        ],
+      },
+      {
+        system: 'Extremities',
+        findings: [
+          {
+            id: 'ext-leg',
+            exam: 'Lower extremity examination',
+            finding: 'Right calf 2cm larger in circumference than left. Mild tenderness to palpation of right calf. Positive Homan sign (calf pain with dorsiflexion). No cord palpable.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Asymmetric leg swelling with >2cm difference in calf circumference is highly suggestive of DVT. Homan sign has poor sensitivity/specificity but supports clinical suspicion.',
+          },
+        ],
+      },
+    ],
+
+    labOrders: [
+      {
+        id: 'lab-dimer',
+        name: 'D-dimer',
+        category: 'specialty',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: '2850 ng/mL (normal <500)',
+          interpretation: 'Markedly elevated',
+          isAbnormal: true,
+          educationalNote: 'D-dimer is highly sensitive but not specific for PE. A negative D-dimer can rule out PE in low/intermediate probability patients. This elevated result requires imaging.',
+        },
+      },
+      {
+        id: 'lab-troponin',
+        name: 'Troponin I',
+        category: 'specialty',
+        turnaroundTime: '45 minutes',
+        result: {
+          value: '0.08 ng/mL (normal <0.04)',
+          interpretation: 'Mildly elevated',
+          isAbnormal: true,
+          educationalNote: 'Elevated troponin in PE indicates right ventricular strain and is a marker of submassive PE. It correlates with adverse outcomes.',
+        },
+      },
+      {
+        id: 'lab-bnp',
+        name: 'BNP',
+        category: 'specialty',
+        turnaroundTime: '45 minutes',
+        result: {
+          value: '450 pg/mL (normal <100)',
+          interpretation: 'Elevated',
+          isAbnormal: true,
+          educationalNote: 'Elevated BNP reflects right ventricular wall stress. Combined with elevated troponin, suggests hemodynamically significant PE.',
+        },
+      },
+      {
+        id: 'lab-abg',
+        name: 'Arterial Blood Gas',
+        category: 'specialty',
+        turnaroundTime: '15 minutes',
+        result: {
+          value: 'pH 7.48, pCO2 30, pO2 68, HCO3 22, A-a gradient 42',
+          interpretation: 'Respiratory alkalosis with hypoxemia and widened A-a gradient',
+          isAbnormal: true,
+          educationalNote: 'The classic ABG pattern in PE: respiratory alkalosis (hyperventilation response) with hypoxemia and widened A-a gradient indicating V/Q mismatch.',
+        },
+      },
+    ],
+
+    imagingOrders: [
+      {
+        id: 'img-cta',
+        name: 'CT Pulmonary Angiography',
+        modality: 'CT',
+        turnaroundTime: '1 hour',
+        result: {
+          finding: 'Large filling defect in right main pulmonary artery extending into lobar branches. Smaller filling defects in left lower lobe segmental arteries. RV/LV ratio 1.3 (normal <1). Straightening of interventricular septum.',
+          interpretation: 'Bilateral pulmonary embolism with evidence of right heart strain',
+          isAbnormal: true,
+          educationalNote: 'CTPA is the gold standard for PE diagnosis. RV dilation (RV/LV ratio >1) and septal bowing indicate right heart strain - markers of submassive PE requiring closer monitoring.',
+        },
+      },
+      {
+        id: 'img-doppler',
+        name: 'Bilateral Lower Extremity Duplex Ultrasound',
+        modality: 'Ultrasound',
+        turnaroundTime: '1 hour',
+        result: {
+          finding: 'Non-compressible right popliteal vein with echogenic thrombus extending to distal femoral vein. Left side normal.',
+          interpretation: 'Acute right lower extremity deep vein thrombosis',
+          isAbnormal: true,
+          educationalNote: 'DVT found in 50% of PE patients. Identifying the DVT source confirms VTE and is important for treatment planning (IVC filter consideration if anticoagulation contraindicated).',
+        },
+      },
+      {
+        id: 'img-echo',
+        name: 'Echocardiogram',
+        modality: 'Ultrasound',
+        turnaroundTime: '1.5 hours',
+        result: {
+          finding: 'RV dilation with RV:LV ratio 1.2. Hypokinetic RV free wall with preserved apical motion (McConnell sign). Moderate TR with estimated RVSP 55 mmHg. D-shaped septum in systole. No LV dysfunction.',
+          interpretation: 'Acute right heart strain consistent with submassive PE',
+          isAbnormal: true,
+          educationalNote: 'McConnell sign (apical sparing of RV hypokinesis) is relatively specific for acute PE. Echocardiography helps risk-stratify and guides decisions about thrombolysis.',
+        },
+      },
+    ],
+  },
+
+  caseFlow: {
+    stages: [
+      {
+        id: 'initial-assessment',
+        name: 'Initial Assessment',
+        description: 'Assess the patient and calculate pretest probability',
+      },
+      {
+        id: 'diagnostic-workup',
+        name: 'Diagnostic Workup',
+        description: 'Choose appropriate diagnostic tests based on pretest probability',
+      },
+      {
+        id: 'risk-stratification',
+        name: 'Risk Stratification',
+        description: 'Determine PE severity and treatment approach',
+      },
+      {
+        id: 'treatment-initiation',
+        name: 'Treatment Initiation',
+        description: 'Initiate anticoagulation and determine disposition',
+      },
+    ],
+    decisionPoints: [
+      {
+        id: 'decision-pretest',
+        stageId: 'initial-assessment',
+        question: 'Based on history and exam, what is your assessment of PE probability?',
+        context: 'Patient with sudden dyspnea, recent long flight, leg symptoms, on OCPs.',
+        options: [
+          {
+            id: 'low-prob',
+            text: 'Low probability - check D-dimer only',
+            consequence: 'Could miss significant PE if D-dimer elevated',
+            isCorrect: false,
+            feedback: 'This patient has multiple risk factors and classic symptoms. Wells score: DVT symptoms (3) + PE most likely diagnosis (3) + tachycardia (1.5) + immobilization (1.5) = 9 points (high probability).',
+          },
+          {
+            id: 'high-prob',
+            text: 'High probability - proceed directly to CTPA',
+            consequence: 'Appropriate given high pretest probability',
+            isCorrect: true,
+            feedback: 'Correct. With Wells score >6, pretest probability is high. In high-probability patients, D-dimer adds little value and CTPA should be obtained directly.',
+          },
+        ],
+        correctOptionId: 'high-prob',
+        educationalExplanation: 'In high pretest probability PE (Wells >6), D-dimer is less useful because even a negative result doesn\'t sufficiently lower post-test probability. Proceed directly to definitive imaging.',
+      },
+    ],
+    paths: [
+      {
+        id: 'optimal-path',
+        name: 'Appropriate Diagnosis and Treatment',
+        description: 'High suspicion leads to prompt diagnosis and appropriate therapy',
+        stageSequence: ['initial-assessment', 'diagnostic-workup', 'risk-stratification', 'treatment-initiation'],
+        outcome: 'optimal',
+      },
+    ],
+  },
+
+  resolution: {
+    diagnosis: {
+      name: 'Submassive Pulmonary Embolism',
+      icdCode: 'I26.99',
+      explanation: 'Bilateral pulmonary embolism with right heart strain but preserved systemic blood pressure. Provoked by travel-related immobility and estrogen use.',
+      pathophysiology: 'Thrombus (likely from right leg DVT) embolized to pulmonary circulation, causing acute obstruction. This increases pulmonary vascular resistance, leading to right ventricular pressure overload. RV dilation compresses LV, reducing LV filling. Elevated troponin and BNP reflect myocardial strain.',
+      epidemiology: 'PE affects 1-2 per 1000 adults annually. Risk factors present in >90% of cases. Air travel >4 hours doubles VTE risk for 2 weeks.',
+      prognosis: 'With treatment, 30-day mortality for submassive PE is 3-5%. Without treatment, mortality approaches 30%. Risk of recurrence after provoked PE is lower than unprovoked.',
+    },
+    diagnosticReasoning: 'This case demonstrates the classic presentation of provoked PE: sudden dyspnea in a patient with identifiable risk factors (long flight, OCP use, family history). The triad of dyspnea, pleuritic chest pain, and hemoptysis (not all present here) is classic but seen in only 20% of cases. The clear lungs with hypoxemia pattern, elevated D-dimer, and positive CTPA confirm the diagnosis. Risk stratification using troponin, BNP, and RV function on imaging categorizes this as submassive PE.',
+    keyFindings: [
+      'Sudden-onset dyspnea after long-haul flight',
+      'Pleuritic chest pain',
+      'Unilateral leg swelling and calf pain',
+      'Estrogen use (oral contraceptives)',
+      'Family history of VTE',
+      'Tachycardia with hypoxemia and clear lungs',
+      'Elevated D-dimer, troponin, and BNP',
+      'CTPA showing bilateral PE with RV strain',
+    ],
+    treatment: {
+      immediate: 'Initiate anticoagulation immediately. Given submassive classification (RV dysfunction, elevated biomarkers, but stable BP), admit to monitored bed for close observation. Prepare for escalation if hemodynamic deterioration.',
+      medications: [
+        {
+          name: 'Heparin',
+          dose: '80 units/kg bolus then 18 units/kg/hour',
+          route: 'IV',
+          frequency: 'Continuous infusion',
+          rationale: 'Immediate anticoagulation prevents clot propagation. UFH preferred in submassive PE where thrombolysis might be needed.',
+        },
+        {
+          name: 'Rivaroxaban',
+          dose: '15mg BID x 21 days, then 20mg daily',
+          route: 'PO',
+          frequency: 'As noted',
+          rationale: 'After initial heparin, transition to DOAC for long-term anticoagulation. DOACs are preferred over warfarin for PE treatment.',
+        },
+      ],
+      procedures: 'Systemic thrombolysis (tPA) not indicated currently due to stable hemodynamics. If deterioration occurs (hypotension, worsening oxygenation), thrombolysis or catheter-directed therapy should be considered.',
+      monitoring: 'Continuous telemetry, serial troponins, reassess hemodynamics frequently. If BP drops <90 systolic, activate massive PE protocol. Duration of anticoagulation: minimum 3 months, likely extended given ongoing risk factors.',
+      patientEducation: [
+        'Discontinue oral contraceptives - discuss alternative contraception',
+        'Compression stockings for post-thrombotic syndrome prevention',
+        'Movement and hydration during future long flights',
+        'Signs of bleeding while on anticoagulation',
+        'Importance of medication adherence',
+      ],
+    },
+    outcome: 'Ms. Rodriguez was admitted to a step-down unit for monitoring. She remained hemodynamically stable and was transitioned to rivaroxaban on day 2. She was discharged on day 3 with outpatient follow-up. Thrombophilia testing was deferred until after completion of anticoagulation. She was counseled to stop OCPs and switched to non-hormonal contraception.',
+    followUp: 'Follow-up with hematology for duration of anticoagulation decision and thrombophilia workup. Repeat imaging in 3 months if considering stopping anticoagulation. Continue anticoagulation minimum 3 months, likely 6 months given size of PE and ongoing provocation (unclear if thrombophilia present).',
+  },
+
+  teachingPoints: [
+    {
+      topic: 'Wells Criteria for PE',
+      content: 'Wells criteria estimate pretest probability: Clinical signs of DVT (3), PE most likely diagnosis (3), HR >100 (1.5), Immobilization or surgery (1.5), Previous VTE (1.5), Hemoptysis (1), Cancer (1). Score >6 = high probability. In high probability, proceed to CTPA; in low/moderate, D-dimer can rule out PE.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'PE Risk Stratification: The Key to Management',
+      content: 'Massive PE: hypotension (SBP <90) or requiring vasopressors - consider thrombolysis. Submassive PE: normotensive but with RV dysfunction or elevated biomarkers - close monitoring, thrombolysis if deterioration. Low-risk PE: normal vitals, no RV dysfunction, negative biomarkers - may be candidates for outpatient treatment.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'The "Clear Lungs with Hypoxemia" Pattern',
+      content: 'When you see a patient with significant hypoxemia but clear lung exam, think about PE, shunt, or anemia. In the right clinical context, clear lungs should raise PE suspicion, not lower it - this is the opposite of pneumonia or CHF.',
+      category: 'clinical-pearl',
+      importance: 'critical',
+    },
+    {
+      topic: 'D-dimer: Know When It Helps and When It Doesn\'t',
+      content: 'D-dimer is useful to RULE OUT PE in low/intermediate pretest probability patients. A negative D-dimer in a high-probability patient still has ~15% chance of PE. Also, D-dimer loses utility in patients with cancer, recent surgery, pregnancy, or hospitalized patients due to high false-positive rate.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+  ],
+
+  commonPitfalls: [
+    'Ruling out PE based on normal chest X-ray or lung exam',
+    'Relying on D-dimer in high-probability patients',
+    'Missing the diagnosis because "patient looks well"',
+    'Delaying anticoagulation while waiting for imaging',
+    'Not recognizing submassive PE markers (troponin, RV strain)',
+    'Using fibrinolysis in submassive PE without clinical deterioration',
+    'Forgetting to look for DVT as the source',
+    'Not addressing modifiable risk factors (OCPs)',
+  ],
+
+  relatedCases: [
+    'dvt-acute',
+    'atrial-fibrillation',
+    'chf-acute',
+    'pneumonia-cap',
+    'pneumothorax',
+  ],
+};
+
+// ============================================
+// Case: Acute Pancreatitis
+// ============================================
+
+const ACUTE_PANCREATITIS_CASE: ClinicalCase = {
+  id: 'pancreatitis-gallstone',
+  title: 'The Worst Abdominal Pain of My Life',
+  category: 'gastroenterology',
+  complexity: 'intermediate',
+
+  learningObjectives: [
+    'Recognize the classic presentation of acute pancreatitis',
+    'Understand the two most common causes: gallstones and alcohol',
+    'Apply severity scoring systems to guide management',
+    'Learn the principles of supportive care in acute pancreatitis',
+  ],
+
+  presentation: {
+    chiefComplaint: 'Severe abdominal pain',
+    demographics: {
+      age: 48,
+      sex: 'female',
+      occupation: 'teacher',
+      context: 'presents to ED via ambulance with severe abdominal pain',
+    },
+    openingParagraph: `Mrs. Chen is a 48-year-old teacher who presents to the emergency department via ambulance with severe abdominal pain that began suddenly after dinner about 8 hours ago. She describes it as the worst pain she's ever experienced, rating it 10/10. The pain started after eating a fatty meal at a restaurant and has been constant. She has been vomiting repeatedly and cannot find any position that provides relief.`,
+    generalAppearance: 'Woman in obvious distress, lying still on the stretcher with knees drawn up. Appears uncomfortable and pale. Occasional retching into emesis basin.',
+    vitalSigns: {
+      temperature: '100.4°F (38°C)',
+      heartRate: '112 bpm, regular',
+      bloodPressure: '98/62 mmHg',
+      respiratoryRate: '24/min',
+      oxygenSaturation: '96% on room air',
+      interpretation: 'Febrile, tachycardic, hypotensive, and tachypneic. This constellation suggests systemic inflammatory response - concerning for severe pancreatitis with third-spacing of fluids.',
+    },
+  },
+
+  availableData: {
+    historyQuestions: [
+      {
+        id: 'hpi-location',
+        question: 'Where exactly is the pain?',
+        category: 'hpi',
+        response: 'It started in my upper stomach area and goes straight through to my back. It\'s like someone is stabbing me in the stomach and back at the same time.',
+        educationalNote: 'Epigastric pain radiating to the back is the classic description of pancreatitis. The retroperitoneal location of the pancreas explains the back pain.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-trigger',
+        question: 'What were you doing when the pain started?',
+        category: 'hpi',
+        response: 'I had just finished a big dinner - we celebrated my sister\'s birthday. I had fried food and cake. About an hour after eating, the pain hit me like a ton of bricks.',
+        educationalNote: 'Fatty meals stimulate CCK release, causing gallbladder contraction. If a stone impacts in the bile duct/pancreatic duct, this triggers gallstone pancreatitis.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-position',
+        question: 'Does anything make it better or worse?',
+        category: 'hpi',
+        response: 'Nothing makes it better. Lying flat makes it worse. Curling up in a ball with my knees to my chest is the only position I can tolerate.',
+        educationalNote: 'The fetal position/leaning forward position relieves pancreatic pain because it reduces stretch on the retroperitoneum and splanchnic nerves. Supine position worsens it.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-vomiting',
+        question: 'Tell me about the vomiting.',
+        category: 'hpi',
+        response: 'I\'ve thrown up at least 10 times. At first it was food, now it\'s just bile. The vomiting doesn\'t make the pain better at all.',
+        educationalNote: 'Unlike bowel obstruction or gastritis, vomiting does NOT relieve pancreatic pain. This helps distinguish it from other causes of abdominal pain with vomiting.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-gallstones',
+        question: 'Any history of gallbladder problems?',
+        category: 'pmh',
+        response: 'A few years ago I was told I had gallstones on an ultrasound, but the doctor said we could just "watch" them since I wasn\'t having symptoms.',
+        educationalNote: 'Key finding! Known gallstones + acute pancreatitis presentation = gallstone pancreatitis until proven otherwise. This is the most common cause of acute pancreatitis.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-prior-episodes',
+        question: 'Have you had anything like this before?',
+        category: 'pmh',
+        response: 'I\'ve had some mild pain in my right side after eating fatty foods before, but nothing like this.',
+        educationalNote: 'Prior biliary colic (symptomatic cholelithiasis) often precedes gallstone pancreatitis. Each episode of biliary colic is a warning sign.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'sh-alcohol',
+        question: 'How much alcohol do you drink?',
+        category: 'social',
+        response: 'Just socially - maybe a glass of wine once or twice a week. I had one glass at dinner tonight.',
+        educationalNote: 'Alcohol is the second most common cause of pancreatitis (after gallstones). Usually requires significant chronic use (>5 drinks/day for years). Her minimal use makes this unlikely.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-triglycerides',
+        question: 'Any history of high triglycerides or cholesterol?',
+        category: 'pmh',
+        response: 'I don\'t think so. My labs have always been normal.',
+        educationalNote: 'Hypertriglyceridemia (usually >1000 mg/dL) is the third most common cause of pancreatitis. Worth checking in unclear cases.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'meds-list',
+        question: 'What medications do you take?',
+        category: 'medications',
+        response: 'Just metformin for pre-diabetes and lisinopril for blood pressure.',
+        educationalNote: 'Neither of these are common causes of drug-induced pancreatitis. Notable causes include valproic acid, azathioprine, and GLP-1 agonists.',
+        isKeyFinding: false,
+      },
+    ],
+
+    physicalExam: [
+      {
+        system: 'Abdominal',
+        findings: [
+          {
+            id: 'abd-inspection',
+            exam: 'Abdominal inspection',
+            finding: 'Abdomen slightly distended. No visible bruising. Decreased movement with respiration.',
+            isNormal: false,
+            isKeyFinding: false,
+            educationalNote: 'Early pancreatitis may have minimal findings. Grey-Turner sign (flank bruising) and Cullen sign (periumbilical bruising) are seen in severe necrotizing pancreatitis but take 24-48 hours to develop.',
+          },
+          {
+            id: 'abd-palpation',
+            exam: 'Abdominal palpation',
+            finding: 'Severe tenderness in epigastrium. Voluntary and involuntary guarding. No rebound tenderness. Bowel sounds hypoactive.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Epigastric tenderness with guarding is classic. The lack of rebound suggests no free perforation. Hypoactive bowel sounds result from ileus.',
+          },
+        ],
+      },
+      {
+        system: 'Cardiovascular',
+        findings: [
+          {
+            id: 'cv-perfusion',
+            exam: 'Cardiovascular assessment',
+            finding: 'Tachycardic. Peripheral pulses rapid but thready. Extremities cool with delayed capillary refill (4 seconds).',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'These findings indicate hypovolemia/early shock from third-spacing of fluids into the retroperitoneum and abdominal cavity. Aggressive fluid resuscitation is critical.',
+          },
+        ],
+      },
+    ],
+
+    labOrders: [
+      {
+        id: 'lab-lipase',
+        name: 'Lipase',
+        category: 'basic',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: '2,850 U/L (normal <160)',
+          interpretation: 'Markedly elevated (>3x upper limit = diagnostic)',
+          isAbnormal: true,
+          educationalNote: 'Lipase >3x upper limit of normal is one of the diagnostic criteria for acute pancreatitis. Lipase is more specific and remains elevated longer than amylase.',
+        },
+      },
+      {
+        id: 'lab-lfts',
+        name: 'Liver Function Tests',
+        category: 'basic',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: 'AST 185, ALT 210, Alk Phos 280, T.Bili 2.8, D.Bili 1.9',
+          interpretation: 'Elevated transaminases and bilirubin - cholestatic pattern',
+          isAbnormal: true,
+          educationalNote: 'ALT >3x ULN has positive predictive value >95% for gallstone etiology of pancreatitis. The cholestatic pattern confirms biliary involvement.',
+        },
+      },
+      {
+        id: 'lab-cbc',
+        name: 'Complete Blood Count',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'WBC 16,500, Hgb 16.2, Hct 48%, Plt 285,000',
+          interpretation: 'Leukocytosis and hemoconcentration',
+          isAbnormal: true,
+          educationalNote: 'Leukocytosis reflects inflammation. Elevated hematocrit (hemoconcentration) indicates significant fluid loss into third space - a marker of severity.',
+        },
+      },
+      {
+        id: 'lab-bmp',
+        name: 'Basic Metabolic Panel',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'Na 138, K 3.8, Cl 102, CO2 20, BUN 32, Cr 1.4, Glu 185, Ca 7.8',
+          interpretation: 'Mild AKI, metabolic acidosis, hypocalcemia',
+          isAbnormal: true,
+          educationalNote: 'BUN elevation with low CO2 indicates dehydration with metabolic acidosis. Hypocalcemia occurs due to calcium sequestration in saponified fat - a marker of severity.',
+        },
+      },
+      {
+        id: 'lab-crp',
+        name: 'C-Reactive Protein',
+        category: 'specialty',
+        turnaroundTime: '45 minutes',
+        result: {
+          value: '180 mg/L (normal <10)',
+          interpretation: 'Markedly elevated inflammatory marker',
+          isAbnormal: true,
+          educationalNote: 'CRP >150 at 48 hours predicts severe pancreatitis. Useful for prognosis but measured later in the course.',
+        },
+      },
+    ],
+
+    imagingOrders: [
+      {
+        id: 'img-ruq-us',
+        name: 'Right Upper Quadrant Ultrasound',
+        modality: 'Ultrasound',
+        turnaroundTime: '1 hour',
+        result: {
+          finding: 'Multiple gallstones identified. Gallbladder wall mildly thickened at 4mm. Common bile duct dilated at 9mm (normal <6mm). Pancreas poorly visualized due to overlying bowel gas.',
+          interpretation: 'Cholelithiasis with biliary dilation suggesting recent stone passage or retained stone',
+          isAbnormal: true,
+          educationalNote: 'RUQ ultrasound is the initial imaging of choice for gallstone pancreatitis. CBD dilation suggests a stone has passed through or is still impacted.',
+        },
+      },
+      {
+        id: 'img-ct',
+        name: 'CT Abdomen/Pelvis with IV Contrast',
+        modality: 'CT',
+        turnaroundTime: '1.5 hours',
+        result: {
+          finding: 'Enlarged, edematous pancreas with peripancreatic inflammatory stranding. No pancreatic necrosis identified. Moderate peripancreatic fluid collection. Gallstones confirmed. No evidence of walled-off necrosis or pseudocyst.',
+          interpretation: 'Acute interstitial pancreatitis, moderate severity',
+          isAbnormal: true,
+          educationalNote: 'CT is not required for diagnosis but helps assess severity and complications. Best performed 72+ hours after onset to fully assess necrosis.',
+        },
+      },
+    ],
+  },
+
+  caseFlow: {
+    stages: [
+      {
+        id: 'initial-resuscitation',
+        name: 'Initial Resuscitation',
+        description: 'Aggressive IV fluid resuscitation and pain control',
+      },
+      {
+        id: 'establish-diagnosis',
+        name: 'Establish Diagnosis',
+        description: 'Confirm pancreatitis and determine etiology',
+      },
+      {
+        id: 'assess-severity',
+        name: 'Assess Severity',
+        description: 'Risk stratify using clinical criteria and imaging',
+      },
+      {
+        id: 'definitive-management',
+        name: 'Definitive Management',
+        description: 'Plan for source control and ongoing care',
+      },
+    ],
+    decisionPoints: [
+      {
+        id: 'decision-etiology',
+        stageId: 'establish-diagnosis',
+        question: 'What is the most likely cause of this patient\'s pancreatitis?',
+        context: 'Patient with known gallstones, elevated LFTs, and onset after fatty meal.',
+        options: [
+          {
+            id: 'gallstone',
+            text: 'Gallstone pancreatitis',
+            consequence: 'Correct - guides need for cholecystectomy',
+            isCorrect: true,
+            feedback: 'Correct. Known gallstones + elevated ALT >3x ULN + classic presentation = gallstone pancreatitis. This determines need for cholecystectomy during same admission once recovered.',
+          },
+          {
+            id: 'alcohol',
+            text: 'Alcoholic pancreatitis',
+            consequence: 'Would miss the true cause',
+            isCorrect: false,
+            feedback: 'Unlikely given minimal alcohol use (1-2 glasses wine/week). Alcoholic pancreatitis typically requires heavy use over years.',
+          },
+        ],
+        correctOptionId: 'gallstone',
+        educationalExplanation: 'Gallstones and alcohol account for 80% of acute pancreatitis. In this case, known gallstones with elevated LFTs strongly suggests gallstone etiology.',
+      },
+    ],
+    paths: [
+      {
+        id: 'optimal-path',
+        name: 'Appropriate Diagnosis and Management',
+        description: 'Early resuscitation, correct diagnosis, appropriate surgical consultation',
+        stageSequence: ['initial-resuscitation', 'establish-diagnosis', 'assess-severity', 'definitive-management'],
+        outcome: 'optimal',
+      },
+    ],
+  },
+
+  resolution: {
+    diagnosis: {
+      name: 'Acute Gallstone Pancreatitis, Moderate Severity',
+      icdCode: 'K85.10',
+      explanation: 'Acute pancreatitis caused by gallstone impaction at the ampulla of Vater, leading to pancreatic ductal obstruction and autodigestion.',
+      pathophysiology: 'When a gallstone impacts at the ampulla, it obstructs both the bile duct and pancreatic duct. Pancreatic enzymes become activated within the pancreas (normally activated in duodenum) leading to autodigestion. Trypsin activates other enzymes, creating a cascade of tissue damage, inflammation, and potentially necrosis.',
+      epidemiology: 'Acute pancreatitis affects ~275,000 patients annually in the US. Gallstones cause ~40% of cases. Risk factors for gallstones (the "5 Fs"): Female, Fat, Forty, Fertile, Family history.',
+      prognosis: 'Interstitial edematous pancreatitis (80% of cases) has mortality <3%. Necrotizing pancreatitis has mortality 10-30%. This patient has moderate disease - expected recovery with appropriate management.',
+    },
+    diagnosticReasoning: 'Diagnosis of acute pancreatitis requires 2 of 3 criteria: (1) characteristic abdominal pain, (2) lipase >3x ULN, (3) imaging findings. This patient meets all three. Gallstone etiology is confirmed by known cholelithiasis, elevated ALT, and dilated CBD on ultrasound. Severity assessment using BISAP score and imaging indicates moderate disease.',
+    keyFindings: [
+      'Epigastric pain radiating to back after fatty meal',
+      'Known gallstones with previous biliary colic',
+      'Lipase >3x upper limit of normal',
+      'Elevated ALT suggesting gallstone etiology',
+      'Dilated common bile duct on ultrasound',
+      'Signs of hypovolemia requiring resuscitation',
+      'Hypocalcemia and hemoconcentration as severity markers',
+    ],
+    treatment: {
+      immediate: 'Aggressive IV fluid resuscitation with lactated Ringer\'s (250-500 mL/hour initially, goal-directed thereafter). IV pain control. NPO initially. IV antiemetics.',
+      medications: [
+        {
+          name: 'Lactated Ringer\'s',
+          dose: '250-500 mL/hour initially, then titrate to urine output and hemodynamics',
+          route: 'IV',
+          frequency: 'Continuous',
+          rationale: 'Aggressive early fluid resuscitation (especially in first 12-24 hours) reduces necrosis and mortality. LR preferred over NS to avoid hyperchloremic acidosis.',
+        },
+        {
+          name: 'Hydromorphone',
+          dose: '0.5-1mg',
+          route: 'IV',
+          frequency: 'Every 3-4 hours PRN',
+          rationale: 'Adequate pain control is essential. No evidence that opioids worsen outcomes despite theoretical sphincter of Oddi concerns.',
+        },
+        {
+          name: 'Ondansetron',
+          dose: '4mg',
+          route: 'IV',
+          frequency: 'Every 6-8 hours PRN',
+          rationale: 'Antiemetic for symptom control.',
+        },
+      ],
+      procedures: 'ERCP with sphincterotomy if cholangitis or persistent biliary obstruction present. Cholecystectomy during same admission once pancreatitis resolves (ideally within 72 hours of improvement) to prevent recurrence.',
+      monitoring: 'Serial hemodynamics and urine output. Trending BUN, creatinine, hematocrit as markers of resuscitation adequacy. Serial lipase is not helpful. Reassess for complications if clinical worsening.',
+      patientEducation: [
+        'Gallbladder removal is necessary to prevent recurrent pancreatitis',
+        'Low-fat diet during recovery',
+        'Avoid alcohol to reduce pancreatic stress',
+        'Warning signs of complications to report',
+        'Recovery typically takes 1-2 weeks',
+      ],
+    },
+    outcome: 'Mrs. Chen responded well to aggressive IV fluid resuscitation, receiving 6 liters in the first 24 hours. Her pain improved by day 3 and she began tolerating a low-fat diet. General surgery performed laparoscopic cholecystectomy on day 4 without complications. She was discharged on day 6 with outpatient follow-up.',
+    followUp: 'Follow-up in 2 weeks to ensure continued recovery. Liver function tests to confirm resolution of biliary obstruction. Nutrition counseling for low-fat diet. Discuss long-term pancreatic health.',
+  },
+
+  teachingPoints: [
+    {
+      topic: 'The Atlanta Criteria: How to Diagnose Pancreatitis',
+      content: 'Diagnosis requires 2 of 3: (1) Characteristic abdominal pain (acute onset, severe, epigastric, often radiating to back), (2) Serum lipase (or amylase) ≥3x upper limit of normal, (3) Characteristic imaging findings on CT/MRI/US. You don\'t need all three - two is sufficient.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'Gallstone vs Alcoholic Pancreatitis',
+      content: 'Gallstone pancreatitis: often female, ALT >3x ULN (PPV 95%), gallstones on imaging, onset after meals, LFT elevation. Alcoholic pancreatitis: often male, heavy alcohol use history, may have recurrent episodes, normal LFTs, no stones. The distinction matters because gallstone pancreatitis requires cholecystectomy.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'Fluid Resuscitation is the Cornerstone',
+      content: 'Early aggressive fluid resuscitation (first 12-24 hours) is the most important intervention in acute pancreatitis. Goal: restore intravascular volume lost to third-spacing. Target: urine output ≥0.5 mL/kg/hour, decreasing BUN, improving hemodynamics. Use Lactated Ringer\'s. Inadequate resuscitation increases necrosis risk.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+    {
+      topic: 'Early Cholecystectomy Prevents Recurrence',
+      content: 'In gallstone pancreatitis, same-admission cholecystectomy (once pancreatitis improves) reduces risk of recurrence from 25-30% to <5%. Delaying surgery to "let inflammation settle" actually increases recurrence and readmission rates. Operate within 72 hours of improvement.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+  ],
+
+  commonPitfalls: [
+    'Under-resuscitating with fluids (pancreatitis is a "fluid-eating monster")',
+    'Ordering serial lipase levels (they don\'t guide management)',
+    'Withholding opioids for pain control (sphincter of Oddi concern is theoretical)',
+    'Keeping patient NPO too long (early enteral feeding is beneficial)',
+    'Giving prophylactic antibiotics (not recommended without infection)',
+    'Delaying cholecystectomy to a later admission',
+    'Not recognizing gallstone etiology when ALT is elevated',
+    'Missing necrotizing pancreatitis or infected necrosis',
+  ],
+
+  relatedCases: [
+    'cholecystitis-acute',
+    'biliary-colic',
+    'chronic-pancreatitis',
+    'pancreatic-pseudocyst',
+    'bowel-obstruction',
+  ],
+};
+
+// ============================================
+// Case: Bacterial Meningitis
+// ============================================
+
+const BACTERIAL_MENINGITIS_CASE: ClinicalCase = {
+  id: 'meningitis-bacterial',
+  title: 'The Worst Headache with Fever',
+  category: 'infectious-disease',
+  complexity: 'advanced',
+
+  learningObjectives: [
+    'Recognize the classic presentation of bacterial meningitis',
+    'Understand the urgency of empiric antibiotics in suspected meningitis',
+    'Learn the proper approach to lumbar puncture and CSF analysis',
+    'Apply appropriate empiric antibiotic coverage based on patient factors',
+  ],
+
+  presentation: {
+    chiefComplaint: 'Severe headache and fever',
+    demographics: {
+      age: 22,
+      sex: 'male',
+      occupation: 'college student',
+      context: 'brought to ED by roommate, confused and febrile',
+    },
+    openingParagraph: `Mr. Davis is a 22-year-old college student who is brought to the emergency department by his roommate. The roommate reports that Mr. Davis complained of a severe headache yesterday and didn't come out of his room this morning. When he checked on him, Mr. Davis was confused, had a high fever, and couldn't tolerate the lights being turned on. He had been healthy until 2 days ago when he mentioned feeling like he had "the flu."`,
+    generalAppearance: 'Young man appearing acutely ill, lying in bed with eyes closed and hands covering his face. Responds to questions but answers are slow and sometimes inappropriate. Photophobic - asks to dim the lights.',
+    vitalSigns: {
+      temperature: '103.2°F (39.6°C)',
+      heartRate: '118 bpm',
+      bloodPressure: '136/82 mmHg',
+      respiratoryRate: '20/min',
+      oxygenSaturation: '98% on room air',
+      interpretation: 'High fever with tachycardia. The blood pressure is maintained. Mental status changes with fever in a young person is concerning for CNS infection.',
+    },
+  },
+
+  availableData: {
+    historyQuestions: [
+      {
+        id: 'hpi-headache',
+        question: 'Can you describe the headache?',
+        category: 'hpi',
+        response: '(Patient responds slowly) It\'s... everywhere. The worst headache I\'ve ever had. It keeps getting worse.',
+        educationalNote: 'Severe, progressive, generalized headache is typical of meningitis. "Worst headache of my life" should also prompt consideration of SAH.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-neck',
+        question: 'Does your neck hurt?',
+        category: 'hpi',
+        response: 'Yeah, it\'s really stiff. It hurts to look down.',
+        educationalNote: 'Neck stiffness (nuchal rigidity) is a classic meningeal sign present in ~70% of bacterial meningitis cases.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-light',
+        question: 'Do the lights bother you?',
+        category: 'hpi',
+        response: '(Winces and covers eyes) Please, can you turn them off? They hurt my eyes so bad.',
+        educationalNote: 'Photophobia occurs due to meningeal irritation and is part of the classic triad along with headache and neck stiffness.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-prodrome',
+        question: 'What symptoms did you have before this?',
+        category: 'hpi',
+        response: '(Roommate answers) He said he had sore throat and runny nose a few days ago. Then yesterday the headache started.',
+        educationalNote: 'Upper respiratory prodrome followed by meningitis suggests bacterial seeding from nasopharyngeal colonization, typical of meningococcal or pneumococcal infection.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-rash',
+        question: 'Have you noticed any rash?',
+        category: 'hpi',
+        response: '(Roommate) I noticed some spots on his legs this morning. They looked like bruises.',
+        educationalNote: 'Petechial or purpuric rash in the setting of fever and meningeal signs is highly concerning for meningococcemia - a medical emergency.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-general',
+        question: 'Any medical problems?',
+        category: 'pmh',
+        response: '(Roommate) He\'s usually super healthy. No medical problems that I know of.',
+        educationalNote: 'Bacterial meningitis can occur in otherwise healthy young adults, especially from N. meningitidis.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'pmh-vaccines',
+        question: 'Has he had his meningitis vaccines?',
+        category: 'pmh',
+        response: '(Roommate) I think so? He had to get shots before college.',
+        educationalNote: 'MenACWY vaccine is required for college but doesn\'t cover serogroup B (now ~40% of cases). MenB vaccine is recommended but not required everywhere.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'sh-contacts',
+        question: 'Has anyone around him been sick?',
+        category: 'social',
+        response: '(Roommate) There was some kind of virus going around the dorm last week. A lot of people had colds.',
+        educationalNote: 'Close contacts in congregate settings (dorms, military barracks) are at risk for N. meningitidis transmission. Post-exposure prophylaxis may be needed.',
+        isKeyFinding: true,
+      },
+    ],
+
+    physicalExam: [
+      {
+        system: 'Neurological',
+        findings: [
+          {
+            id: 'neuro-mental',
+            exam: 'Mental status',
+            finding: 'Lethargic but arousable. Oriented to person only. Speech is slow. GCS 13 (E3V4M6).',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Altered mental status occurs in 70-80% of bacterial meningitis and indicates serious disease. The combination of fever + headache + altered mental status = meningitis until proven otherwise.',
+          },
+          {
+            id: 'neuro-neck',
+            exam: 'Nuchal rigidity testing',
+            finding: 'Marked resistance to passive neck flexion. Positive Kernig sign (pain with knee extension when hip is flexed). Positive Brudzinski sign (involuntary hip flexion when neck is flexed).',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Kernig and Brudzinski signs have high specificity (~95%) but low sensitivity (~5%) for meningitis. A negative test does NOT rule out meningitis, but a positive test is highly concerning.',
+          },
+          {
+            id: 'neuro-cranial',
+            exam: 'Cranial nerves',
+            finding: 'Pupils equal and reactive. No papilledema on fundoscopy. No focal cranial nerve deficits.',
+            isNormal: true,
+            isKeyFinding: true,
+            educationalNote: 'Absence of papilledema suggests no significant raised ICP - LP can likely proceed without CT. Cranial nerve palsies can occur with meningitis but are absent here.',
+          },
+          {
+            id: 'neuro-motor',
+            exam: 'Motor examination',
+            finding: 'Moves all extremities symmetrically. No focal weakness. Reflexes symmetric.',
+            isNormal: true,
+            isKeyFinding: false,
+            educationalNote: 'Lack of focal findings argues against brain abscess or stroke as the cause of altered mental status.',
+          },
+        ],
+      },
+      {
+        system: 'Skin',
+        findings: [
+          {
+            id: 'skin-rash',
+            exam: 'Skin examination',
+            finding: 'Scattered petechiae on lower extremities and trunk, some coalescing into larger purpuric lesions. Non-blanching.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Purpuric rash with meningeal signs = meningococcemia/meningococcal meningitis. This is a MEDICAL EMERGENCY requiring immediate antibiotics - don\'t wait for LP.',
+          },
+        ],
+      },
+    ],
+
+    labOrders: [
+      {
+        id: 'lab-csf',
+        name: 'Lumbar Puncture / CSF Analysis',
+        category: 'specialty',
+        turnaroundTime: '1 hour',
+        result: {
+          value: 'Opening pressure 32 cm H2O (elevated). WBC 2,200/μL with 95% neutrophils. Protein 280 mg/dL. Glucose 28 mg/dL (serum glucose 120). Gram stain: gram-positive diplococci.',
+          interpretation: 'CSF profile diagnostic of bacterial meningitis. Gram stain suggests Streptococcus pneumoniae.',
+          isAbnormal: true,
+          educationalNote: 'Classic bacterial meningitis CSF: elevated WBC with neutrophil predominance, elevated protein, LOW glucose (<40 or <40% of serum). Gram stain is positive in 60-90% of untreated cases.',
+        },
+      },
+      {
+        id: 'lab-cbc',
+        name: 'Complete Blood Count',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'WBC 22,500 with 88% neutrophils and 12% bands. Hgb 14.2. Plt 98,000.',
+          interpretation: 'Leukocytosis with left shift. Thrombocytopenia concerning for DIC.',
+          isAbnormal: true,
+          educationalNote: 'Bandemia (>10% bands) indicates significant bacterial infection. Thrombocytopenia with meningococcemia suggests early DIC - a poor prognostic sign.',
+        },
+      },
+      {
+        id: 'lab-cultures',
+        name: 'Blood Cultures x2',
+        category: 'basic',
+        turnaroundTime: '24-48 hours preliminary',
+        result: {
+          value: '(Preliminary at 18 hours): Gram-positive diplococci in both bottles.',
+          interpretation: 'Consistent with S. pneumoniae bacteremia',
+          isAbnormal: true,
+          educationalNote: 'Blood cultures are positive in 50-90% of bacterial meningitis. Always draw before antibiotics if possible, but NEVER delay antibiotics for cultures.',
+        },
+      },
+      {
+        id: 'lab-lactate',
+        name: 'Lactate',
+        category: 'basic',
+        turnaroundTime: '15 minutes',
+        result: {
+          value: '3.2 mmol/L (normal <2.0)',
+          interpretation: 'Elevated, suggesting tissue hypoperfusion',
+          isAbnormal: true,
+          educationalNote: 'Elevated lactate in meningitis indicates sepsis and is associated with worse outcomes. Should prompt aggressive resuscitation.',
+        },
+      },
+    ],
+
+    imagingOrders: [
+      {
+        id: 'img-ct-head',
+        name: 'CT Head without Contrast',
+        modality: 'CT',
+        turnaroundTime: '30 minutes',
+        result: {
+          finding: 'No acute intracranial hemorrhage. No mass effect or midline shift. Ventricles normal in size. No hydrocephalus.',
+          interpretation: 'No contraindication to lumbar puncture',
+          isAbnormal: false,
+          educationalNote: 'CT before LP is needed only in select cases: altered mental status, immunocompromise, focal neuro signs, papilledema, seizures. A normal CT does NOT rule out elevated ICP.',
+        },
+      },
+    ],
+  },
+
+  caseFlow: {
+    stages: [
+      {
+        id: 'recognition',
+        name: 'Recognition',
+        description: 'Identify clinical syndrome and high-risk features',
+      },
+      {
+        id: 'empiric-treatment',
+        name: 'Empiric Treatment',
+        description: 'Initiate empiric antibiotics immediately',
+      },
+      {
+        id: 'diagnostic-confirmation',
+        name: 'Diagnostic Confirmation',
+        description: 'LP and CSF analysis to confirm diagnosis',
+      },
+      {
+        id: 'definitive-therapy',
+        name: 'Definitive Therapy',
+        description: 'Narrow antibiotics based on culture and adjust treatment',
+      },
+    ],
+    decisionPoints: [
+      {
+        id: 'decision-timing',
+        stageId: 'empiric-treatment',
+        question: 'When should antibiotics be started?',
+        context: 'Patient with meningeal signs, altered mental status, and petechial rash.',
+        options: [
+          {
+            id: 'after-lp',
+            text: 'After lumbar puncture results return',
+            consequence: 'Dangerous delay in life-threatening infection',
+            isCorrect: false,
+            feedback: 'This is a common and dangerous mistake. Every hour of antibiotic delay increases mortality by 3-4%. With petechial rash, treat immediately.',
+          },
+          {
+            id: 'immediately',
+            text: 'Immediately - do not wait for LP or CT',
+            consequence: 'Appropriate urgent treatment',
+            isCorrect: true,
+            feedback: 'Correct! In suspected bacterial meningitis with severe features (altered mental status, rash), antibiotics should be given within minutes of recognition. LP can follow.',
+          },
+        ],
+        correctOptionId: 'immediately',
+        educationalExplanation: 'Time to antibiotics is the single most important modifiable factor in bacterial meningitis outcome. The goal is antibiotics within 1 hour of arrival. Never delay for CT or LP in severe cases.',
+      },
+    ],
+    paths: [
+      {
+        id: 'optimal-path',
+        name: 'Rapid Recognition and Treatment',
+        description: 'Immediate antibiotics, then diagnostic workup',
+        stageSequence: ['recognition', 'empiric-treatment', 'diagnostic-confirmation', 'definitive-therapy'],
+        outcome: 'optimal',
+      },
+    ],
+  },
+
+  resolution: {
+    diagnosis: {
+      name: 'Bacterial Meningitis due to Streptococcus pneumoniae',
+      icdCode: 'G00.1',
+      explanation: 'Acute bacterial infection of the meninges caused by pneumococcus, presenting with classic meningeal syndrome plus systemic inflammatory response.',
+      pathophysiology: 'Bacteria colonize the nasopharynx, then invade the bloodstream and cross the blood-brain barrier. In the subarachnoid space, bacterial components trigger intense inflammation (cytokines, neutrophil influx). This inflammation causes increased ICP, vasculitis, and neuronal injury. The exudate in meningitis impairs CSF flow and absorption.',
+      epidemiology: 'S. pneumoniae is the most common cause of bacterial meningitis in adults (>50% of cases). Mortality is 20-30% even with treatment, and 30-50% of survivors have neurological sequelae.',
+      prognosis: 'With appropriate treatment, survival is 70-80%. However, risk of permanent neurological deficits (hearing loss, cognitive impairment, focal deficits) is 30-50%.',
+    },
+    diagnosticReasoning: 'This case demonstrates the classic meningitis triad: headache, fever, and nuchal rigidity - present in only 40-50% of cases. The addition of altered mental status created a tetrad that, along with petechial rash, demanded immediate empiric treatment. CSF analysis confirmed bacterial meningitis with neutrophilic pleocytosis, elevated protein, and low glucose. Gram stain showing gram-positive diplococci identified pneumococcus.',
+    keyFindings: [
+      'Classic triad: severe headache, fever, neck stiffness',
+      'Altered mental status',
+      'Positive Kernig and Brudzinski signs',
+      'Petechial/purpuric rash',
+      'CSF: neutrophilic pleocytosis, high protein, low glucose',
+      'Gram-positive diplococci on CSF gram stain',
+      'Bacteremia with same organism',
+    ],
+    treatment: {
+      immediate: 'Empiric antibiotics started within 15 minutes of arrival. Dexamethasone given before first antibiotic dose. IV fluids for hemodynamic support. ICU admission for close neurological monitoring.',
+      medications: [
+        {
+          name: 'Ceftriaxone',
+          dose: '2g',
+          route: 'IV',
+          frequency: 'Every 12 hours',
+          rationale: '3rd-generation cephalosporin provides excellent CNS penetration and covers S. pneumoniae and N. meningitidis.',
+        },
+        {
+          name: 'Vancomycin',
+          dose: '15-20 mg/kg',
+          route: 'IV',
+          frequency: 'Every 8-12 hours',
+          rationale: 'Added for drug-resistant S. pneumoniae coverage until sensitivities available. Up to 30% of pneumococci may be penicillin non-susceptible.',
+        },
+        {
+          name: 'Dexamethasone',
+          dose: '0.15 mg/kg',
+          route: 'IV',
+          frequency: 'Every 6 hours x 4 days',
+          rationale: 'Adjunctive steroids (given before or with first antibiotic dose) reduce mortality and neurological sequelae in pneumococcal meningitis.',
+        },
+      ],
+      procedures: 'Lumbar puncture for diagnosis. Repeat LP may be needed if clinical improvement is not observed at 48-72 hours.',
+      monitoring: 'Neurological checks every 1-2 hours. Monitor for complications: seizures, cerebral edema, hydrocephalus, SIADH. Audiology evaluation before discharge.',
+      patientEducation: [
+        'Contact tracing and prophylaxis for close contacts (if N. meningitidis)',
+        'Risk of hearing loss - follow-up audiology testing',
+        'Vaccination if not previously vaccinated',
+        'Signs of complications to watch for after discharge',
+      ],
+    },
+    outcome: 'Mr. Davis was intubated on hospital day 2 due to declining mental status but was extubated on day 5 as he improved. CSF culture confirmed S. pneumoniae sensitive to penicillin, allowing de-escalation. He completed 14 days of IV ceftriaxone. Audiology testing revealed mild high-frequency hearing loss in the left ear. He was discharged to acute rehabilitation and returned to school 3 months later.',
+    followUp: 'Follow-up audiology in 1 month. Neurology follow-up for cognitive assessment. Ensure pneumococcal vaccination is up to date. Long-term monitoring for late neurological complications.',
+  },
+
+  teachingPoints: [
+    {
+      topic: 'The Meningitis Triad and Why It\'s Not Enough',
+      content: 'Classic triad (headache, fever, neck stiffness) is present in only 40-50% of bacterial meningitis. However, >95% have at least 2 of: headache, fever, neck stiffness, altered mental status. If there\'s any suspicion, treat empirically.',
+      category: 'clinical-pearl',
+      importance: 'critical',
+    },
+    {
+      topic: 'NEVER Delay Antibiotics for Meningitis',
+      content: 'Each hour of antibiotic delay increases mortality by 3-4%. If you suspect bacterial meningitis, give antibiotics immediately. Blood cultures can be drawn first (takes 2 minutes). LP can wait. CT can wait. Antibiotics cannot wait.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+    {
+      topic: 'CSF Interpretation in Meningitis',
+      content: 'Bacterial: WBC 1000-10000, >80% PMNs, protein >200, glucose <40 (or <40% serum). Viral: WBC 10-500, lymphocyte predominance, protein 50-100, glucose normal. Fungal/TB: WBC 10-500, lymphocytes, very high protein, very low glucose.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'Dexamethasone in Bacterial Meningitis',
+      content: 'Give dexamethasone (0.15 mg/kg q6h x 4 days) BEFORE or WITH the first antibiotic dose. Reduces mortality and hearing loss in pneumococcal meningitis. Less benefit if given after antibiotics. Discontinue if non-pneumococcal cause confirmed.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+  ],
+
+  commonPitfalls: [
+    'Waiting for CT before giving antibiotics',
+    'Waiting for LP before giving antibiotics',
+    'Forgetting dexamethasone or giving it after antibiotics',
+    'Not covering for resistant pneumococcus (add vancomycin)',
+    'Missing the diagnosis because classic triad is absent',
+    'Forgetting to consider meningitis in elderly who may have atypical presentation',
+    'Not arranging audiology follow-up',
+    'Forgetting contact prophylaxis for meningococcal meningitis',
+  ],
+
+  relatedCases: [
+    'viral-meningitis',
+    'encephalitis',
+    'brain-abscess',
+    'sepsis-urosepsis',
+    'subarachnoid-hemorrhage',
+  ],
+};
+
+// ============================================
+// Case: Atrial Fibrillation with RVR
+// ============================================
+
+const AFIB_RVR_CASE: ClinicalCase = {
+  id: 'afib-rvr',
+  title: 'The Racing Heart',
+  category: 'cardiology',
+  complexity: 'intermediate',
+
+  learningObjectives: [
+    'Recognize atrial fibrillation on ECG and clinical presentation',
+    'Understand rate control vs rhythm control strategies',
+    'Apply CHA2DS2-VASc for stroke risk stratification',
+    'Learn appropriate anticoagulation decision-making in AF',
+  ],
+
+  presentation: {
+    chiefComplaint: 'Heart racing and shortness of breath',
+    demographics: {
+      age: 67,
+      sex: 'female',
+      occupation: 'retired nurse',
+      context: 'presents to ED with palpitations and dyspnea',
+    },
+    openingParagraph: `Mrs. Thompson is a 67-year-old retired nurse who presents to the emergency department with the sudden onset of rapid heartbeat and shortness of breath that began about 3 hours ago while she was gardening. She describes feeling her heart "flopping around" in her chest and noticed she couldn't catch her breath with her usual activities. She feels lightheaded but has not passed out.`,
+    generalAppearance: 'Alert, mildly anxious woman in mild respiratory distress. Speaking in full sentences but appears to be breathing rapidly. Skin is warm and dry.',
+    vitalSigns: {
+      temperature: '98.2°F (36.8°C)',
+      heartRate: '142 bpm, irregularly irregular',
+      bloodPressure: '118/78 mmHg',
+      respiratoryRate: '22/min',
+      oxygenSaturation: '94% on room air',
+      interpretation: 'Tachycardia with irregular rhythm - concerning for atrial fibrillation with rapid ventricular response. Blood pressure is maintained. Mild hypoxemia likely related to decreased cardiac output.',
+    },
+  },
+
+  availableData: {
+    historyQuestions: [
+      {
+        id: 'hpi-onset',
+        question: 'Tell me exactly what happened when this started.',
+        category: 'hpi',
+        response: 'I was bending over planting flowers when suddenly my heart started racing. It felt like it was beating all over the place - not a regular rhythm at all. I had to sit down because I got dizzy.',
+        educationalNote: 'The "irregular irregularity" description is classic for AF. Sudden onset with exertion is common. Patients often accurately describe the rhythm abnormality.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-prior',
+        question: 'Has this ever happened before?',
+        category: 'hpi',
+        response: 'I\'ve had a few brief episodes where my heart felt like it was racing, maybe lasting a minute or two, but nothing like this. This has been going on for 3 hours.',
+        educationalNote: 'Brief prior episodes suggest paroxysmal AF. Episodes lasting hours represent progression. Duration matters for cardioversion decisions (>48 hours = TEE needed or anticoagulation x 3 weeks).',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-chest-pain',
+        question: 'Any chest pain?',
+        category: 'hpi',
+        response: 'No real pain, just this uncomfortable awareness of my heart pounding and the breathlessness.',
+        educationalNote: 'Lack of chest pain is reassuring for absence of ischemia, though AF can cause demand ischemia in patients with CAD.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'pmh-cardiac',
+        question: 'Do you have any heart problems?',
+        category: 'pmh',
+        response: 'I have high blood pressure, controlled with medication. No heart attacks or anything like that. My doctor mentioned my heart was slightly enlarged on an echo a couple years ago.',
+        educationalNote: 'Hypertension is the most common risk factor for AF. LVH from hypertension creates substrate for AF. Both are CHA2DS2-VASc factors.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-dm',
+        question: 'Do you have diabetes?',
+        category: 'pmh',
+        response: 'Yes, type 2 diabetes for about 10 years. Well controlled with metformin.',
+        educationalNote: 'Diabetes is a CHA2DS2-VASc point and increases stroke risk. Important for anticoagulation decision.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-stroke',
+        question: 'Any history of stroke or TIA?',
+        category: 'pmh',
+        response: 'No, thankfully.',
+        educationalNote: 'Prior stroke/TIA is the strongest predictor of stroke in AF (2 CHA2DS2-VASc points). Its absence doesn\'t preclude anticoagulation.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'pmh-thyroid',
+        question: 'Any thyroid problems?',
+        category: 'pmh',
+        response: 'I had my thyroid checked a few months ago - it was normal.',
+        educationalNote: 'Hyperthyroidism is a reversible cause of AF. Always check TSH in new AF.',
+        isKeyFinding: false,
+      },
+      {
+        id: 'sh-alcohol',
+        question: 'How much alcohol do you drink?',
+        category: 'social',
+        response: 'Just wine with dinner, maybe 1-2 glasses a day.',
+        educationalNote: 'Moderate alcohol consumption increases AF risk. "Holiday heart" from binge drinking is a classic precipitant. Worth discussing in any AF patient.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'meds-list',
+        question: 'What medications are you taking?',
+        category: 'medications',
+        response: 'Lisinopril 20mg, metformin 1000mg twice daily, and atorvastatin 40mg at night.',
+        educationalNote: 'No AV nodal blocking agents on her regimen, which explains the rapid ventricular rate. Will need rate control added.',
+        isKeyFinding: false,
+      },
+    ],
+
+    physicalExam: [
+      {
+        system: 'Cardiovascular',
+        findings: [
+          {
+            id: 'cv-rhythm',
+            exam: 'Cardiac auscultation',
+            finding: 'Irregularly irregular rhythm, rate approximately 140. Variable S1 intensity. No murmurs appreciated. S2 normal.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Irregularly irregular rhythm is pathognomonic for AF (or MAT). Variable S1 intensity reflects varying diastolic filling times between beats.',
+          },
+          {
+            id: 'cv-jvp',
+            exam: 'Jugular veins',
+            finding: 'JVP 8 cm, no prominent A waves (absent in AF)',
+            isNormal: true,
+            isKeyFinding: true,
+            educationalNote: 'Absent A waves in JVP confirm loss of atrial contraction. JVP not significantly elevated argues against heart failure.',
+          },
+          {
+            id: 'cv-pulses',
+            exam: 'Peripheral pulses',
+            finding: 'Pulse deficit present (radial rate 120, apical rate 140). Pulses irregularly irregular.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Pulse deficit (apical rate > radial rate) occurs because some ventricular contractions don\'t generate enough pressure to be felt peripherally. Common in rapid AF.',
+          },
+        ],
+      },
+      {
+        system: 'Respiratory',
+        findings: [
+          {
+            id: 'resp-lungs',
+            exam: 'Lung auscultation',
+            finding: 'Clear to auscultation bilaterally. No crackles or wheezes.',
+            isNormal: true,
+            isKeyFinding: true,
+            educationalNote: 'Clear lungs argue against heart failure. Some patients with new AF have subclinical HF that becomes apparent with loss of atrial kick.',
+          },
+        ],
+      },
+      {
+        system: 'Extremities',
+        findings: [
+          {
+            id: 'ext-edema',
+            exam: 'Lower extremities',
+            finding: 'No peripheral edema. Warm and well-perfused.',
+            isNormal: true,
+            isKeyFinding: false,
+            educationalNote: 'Absence of edema supports that cardiac function is reasonably preserved despite the arrhythmia.',
+          },
+        ],
+      },
+    ],
+
+    labOrders: [
+      {
+        id: 'lab-tsh',
+        name: 'TSH',
+        category: 'basic',
+        turnaroundTime: '1 hour',
+        result: {
+          value: '2.1 mIU/L (normal 0.4-4.0)',
+          interpretation: 'Normal thyroid function',
+          isAbnormal: false,
+          educationalNote: 'TSH should be checked in all new AF. If low, check free T4. Hyperthyroidism is a reversible cause of AF.',
+        },
+      },
+      {
+        id: 'lab-bnp',
+        name: 'BNP',
+        category: 'specialty',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: '320 pg/mL (normal <100)',
+          interpretation: 'Mildly elevated',
+          isAbnormal: true,
+          educationalNote: 'BNP is often elevated in AF even without clinical HF due to atrial stretch. Moderate elevation warrants echo to assess ventricular function.',
+        },
+      },
+      {
+        id: 'lab-troponin',
+        name: 'Troponin I',
+        category: 'specialty',
+        turnaroundTime: '45 minutes',
+        result: {
+          value: '0.02 ng/mL (normal <0.04)',
+          interpretation: 'Normal',
+          isAbnormal: false,
+          educationalNote: 'Normal troponin is reassuring. Rapid AF can cause demand ischemia and mild troponin elevation even without coronary disease.',
+        },
+      },
+      {
+        id: 'lab-bmp',
+        name: 'Basic Metabolic Panel',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'Na 140, K 3.8, Cl 102, CO2 24, BUN 18, Cr 0.9, Glu 145',
+          interpretation: 'Largely normal, mild hyperglycemia',
+          isAbnormal: false,
+          educationalNote: 'Electrolytes (especially K and Mg) are important - hypokalemia and hypomagnesemia can trigger/perpetuate AF.',
+        },
+      },
+    ],
+
+    imagingOrders: [
+      {
+        id: 'img-ecg',
+        name: '12-Lead ECG',
+        modality: 'X-ray',
+        turnaroundTime: '5 minutes',
+        result: {
+          finding: 'Irregularly irregular rhythm, rate 145. No P waves visible. Fibrillatory baseline. Normal QRS duration. No ST changes or T wave inversions.',
+          interpretation: 'Atrial fibrillation with rapid ventricular response',
+          isAbnormal: true,
+          educationalNote: 'Classic AF ECG: irregular R-R intervals, absent P waves, fibrillatory baseline ("f waves"). Narrow QRS suggests AV node is conducting normally.',
+        },
+      },
+      {
+        id: 'img-cxr',
+        name: 'Chest X-ray',
+        modality: 'X-ray',
+        turnaroundTime: '30 minutes',
+        result: {
+          finding: 'Heart size at upper limits of normal. No pulmonary vascular congestion. Clear lung fields. No effusion.',
+          interpretation: 'Mild cardiomegaly without heart failure',
+          isAbnormal: false,
+          educationalNote: 'Mild cardiomegaly is consistent with her history of LVH. Clear lungs are reassuring for absence of acute HF.',
+        },
+      },
+      {
+        id: 'img-echo',
+        name: 'Transthoracic Echocardiogram',
+        modality: 'Ultrasound',
+        turnaroundTime: '1.5 hours',
+        result: {
+          finding: 'Dilated left atrium (4.8 cm). Mild concentric LVH. LVEF 50-55%. No significant valvular disease. No LA thrombus visualized (limited study).',
+          interpretation: 'Structural heart disease predisposing to AF',
+          isAbnormal: true,
+          educationalNote: 'LA dilation and LVH are common findings in AF patients. They represent both cause and consequence. LVEF preservation is reassuring. TTE cannot definitively rule out LA thrombus.',
+        },
+      },
+    ],
+  },
+
+  caseFlow: {
+    stages: [
+      {
+        id: 'recognition',
+        name: 'Recognition',
+        description: 'Identify the arrhythmia and hemodynamic status',
+      },
+      {
+        id: 'acute-management',
+        name: 'Acute Management',
+        description: 'Decide on rate vs rhythm control approach',
+      },
+      {
+        id: 'stroke-risk',
+        name: 'Stroke Risk Assessment',
+        description: 'Calculate CHA2DS2-VASc and plan anticoagulation',
+      },
+      {
+        id: 'long-term-plan',
+        name: 'Long-term Planning',
+        description: 'Establish ongoing AF management strategy',
+      },
+    ],
+    decisionPoints: [
+      {
+        id: 'decision-strategy',
+        stageId: 'acute-management',
+        question: 'What is the initial management strategy?',
+        context: 'Hemodynamically stable patient with AF and RVR, duration approximately 3 hours.',
+        options: [
+          {
+            id: 'cardioversion-immediate',
+            text: 'Immediate electrical cardioversion',
+            consequence: 'Appropriate option but rate control also reasonable',
+            isCorrect: false,
+            feedback: 'Cardioversion is an option since duration <48 hours, but rate control is equally valid for stable patients and may be preferred initially.',
+          },
+          {
+            id: 'rate-control',
+            text: 'Rate control with beta-blocker or calcium channel blocker',
+            consequence: 'Appropriate first-line approach for stable AF with RVR',
+            isCorrect: true,
+            feedback: 'Correct. In hemodynamically stable patients, rate control is first-line. Many will spontaneously convert with rate control alone, especially in new-onset AF.',
+          },
+          {
+            id: 'antiarrhythmic',
+            text: 'Start amiodarone for rhythm control',
+            consequence: 'Overly aggressive for first episode; rate control preferred',
+            isCorrect: false,
+            feedback: 'Antiarrhythmics are not first-line for acute AF management. They have significant side effects and rate control is equally effective for symptom relief.',
+          },
+        ],
+        correctOptionId: 'rate-control',
+        educationalExplanation: 'AFFIRM and RACE trials showed no mortality benefit of rhythm vs rate control. Rate control is simpler, safer, and effective for symptom relief. Reserve rhythm control for patients who remain symptomatic despite adequate rate control.',
+      },
+    ],
+    paths: [
+      {
+        id: 'optimal-path',
+        name: 'Appropriate Rate Control and Anticoagulation',
+        description: 'Rate control, stroke risk assessment, and anticoagulation initiation',
+        stageSequence: ['recognition', 'acute-management', 'stroke-risk', 'long-term-plan'],
+        outcome: 'optimal',
+      },
+    ],
+  },
+
+  resolution: {
+    diagnosis: {
+      name: 'Paroxysmal Atrial Fibrillation with Rapid Ventricular Response',
+      icdCode: 'I48.0',
+      explanation: 'New-onset atrial fibrillation with rapid ventricular rate in a patient with structural heart disease (LVH, LA dilation) and multiple risk factors.',
+      pathophysiology: 'AF results from rapid, chaotic electrical activity in the atria, often originating from ectopic foci near the pulmonary veins. Risk factors like hypertension cause atrial remodeling (fibrosis, dilation) that creates the substrate for AF. Triggers (alcohol, caffeine, illness) initiate the arrhythmia. The irregular, rapid ventricular rate causes symptoms through decreased cardiac output and AV desynchrony.',
+      epidemiology: 'AF affects 33 million people worldwide. Prevalence increases with age (10% in those >80). Risk factors: hypertension (most common), age, diabetes, heart failure, valvular disease, obesity, sleep apnea.',
+      prognosis: 'AF is associated with 5x increased stroke risk, 2x mortality, and significant morbidity. With appropriate rate control and anticoagulation, most patients do well. Progression from paroxysmal to persistent/permanent is common.',
+    },
+    diagnosticReasoning: 'The diagnosis was straightforward: irregularly irregular rhythm on exam and ECG with absent P waves confirms AF. RVR is defined by rate >100. The next step was determining if this was truly new or undiagnosed longstanding AF. Her brief prior symptoms suggest paroxysmal AF that progressed. Risk stratification and management planning followed.',
+    keyFindings: [
+      'Irregularly irregular rhythm at 142 bpm',
+      'ECG: absent P waves, fibrillatory baseline, irregular R-R',
+      'Hemodynamically stable (preserved BP)',
+      'Duration <48 hours',
+      'Underlying structural heart disease (LVH, LA dilation)',
+      'Multiple stroke risk factors (age, HTN, DM, female)',
+    ],
+    treatment: {
+      immediate: 'IV metoprolol for rate control. Goal heart rate <110 at rest initially. Monitor for response.',
+      medications: [
+        {
+          name: 'Metoprolol',
+          dose: '5mg IV, then 25mg PO BID',
+          route: 'IV then PO',
+          frequency: 'BID',
+          rationale: 'Beta-blockers are first-line for rate control in AF. They reduce rate by slowing AV node conduction. Titrate to effect.',
+        },
+        {
+          name: 'Apixaban',
+          dose: '5mg BID',
+          route: 'PO',
+          frequency: 'Twice daily',
+          rationale: 'DOACs are preferred over warfarin for stroke prevention in nonvalvular AF. CHA2DS2-VASc = 4 (age, female, HTN, DM) indicates high stroke risk.',
+        },
+      ],
+      procedures: 'Cardioversion not pursued as she converted to sinus rhythm with rate control. If she remained in AF and symptomatic, cardioversion could be considered since onset <48 hours.',
+      monitoring: 'Telemetry monitoring. Follow heart rate trend. If ongoing AF, consider rhythm monitoring to assess AF burden and guide long-term strategy.',
+      patientEducation: [
+        'Importance of anticoagulation for stroke prevention',
+        'Signs of stroke to seek emergency care',
+        'Lifestyle modifications: limit alcohol, treat sleep apnea if present',
+        'Rate-controlling medication adherence',
+        'When to seek care (severe symptoms, chest pain, syncope)',
+      ],
+    },
+    outcome: 'Mrs. Thompson\'s heart rate decreased to 85 bpm with IV metoprolol. She spontaneously converted to sinus rhythm about 4 hours after presentation. She was started on apixaban for stroke prevention and transitioned to oral metoprolol. She was discharged the following day with cardiology follow-up and a 2-week event monitor to assess for recurrence.',
+    followUp: 'Cardiology follow-up in 2 weeks. Event monitor to assess AF recurrence and burden. If paroxysmal AF is confirmed, discussion of rhythm control strategies (cardioversion, antiarrhythmic drugs, or ablation) vs continued rate control. Continue anticoagulation indefinitely given high CHA2DS2-VASc score.',
+  },
+
+  teachingPoints: [
+    {
+      topic: 'CHA2DS2-VASc: Know It Cold',
+      content: 'Congestive HF (1), Hypertension (1), Age ≥75 (2), Diabetes (1), Stroke/TIA (2), Vascular disease (1), Age 65-74 (1), Sex category/female (1). Score ≥2 in men or ≥3 in women indicates anticoagulation. This patient scored 4.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'Rate Control: Simple and Effective',
+      content: 'Rate control is first-line for most AF. Options: beta-blockers (metoprolol, atenolol), non-DHP CCBs (diltiazem, verapamil), or digoxin. Target: HR <110 at rest (RACE II trial). Tighter control (<80) for symptomatic patients. Combine agents if needed.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+    {
+      topic: 'DOACs vs Warfarin in AF',
+      content: 'DOACs (apixaban, rivaroxaban, dabigatran, edoxaban) are preferred over warfarin for nonvalvular AF. They have better safety profiles, fixed dosing, no monitoring, and equal or superior efficacy. Warfarin reserved for mechanical valves or severe mitral stenosis.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+    {
+      topic: 'The 48-Hour Rule for Cardioversion',
+      content: 'If AF duration <48 hours (reliably), cardioversion can proceed without prolonged anticoagulation or TEE. If duration ≥48 hours or unknown, either anticoagulate for 3 weeks pre-cardioversion OR perform TEE to rule out LA thrombus before cardioversion.',
+      category: 'treatment',
+      importance: 'critical',
+    },
+  ],
+
+  commonPitfalls: [
+    'Forgetting to calculate CHA2DS2-VASc and initiate anticoagulation',
+    'Using rate-controlling agents in decompensated heart failure (avoid CCBs, use cautious beta-blockers)',
+    'Cardioverting without considering thrombus risk if duration >48 hours',
+    'Over-treating rate (very strict control offers no benefit and may cause bradycardia)',
+    'Not checking TSH in new AF',
+    'Assuming paroxysmal AF doesn\'t need anticoagulation',
+    'Using anticoagulation based on rhythm presence rather than stroke risk score',
+    'Missing underlying causes (sleep apnea, alcohol, hyperthyroidism)',
+  ],
+
+  relatedCases: [
+    'chf-acute',
+    'stemi-classic',
+    'hypertensive-emergency',
+    'stroke-acute-ischemic',
+    'atrial-flutter',
+  ],
+};
+
+// ============================================
+// Case: Acute Kidney Injury
+// ============================================
+
+const AKI_CASE: ClinicalCase = {
+  id: 'aki-prerenal',
+  title: 'The Elderly Woman Who Stopped Eating',
+  category: 'nephrology',
+  complexity: 'intermediate',
+
+  learningObjectives: [
+    'Recognize and classify acute kidney injury using KDIGO criteria',
+    'Differentiate prerenal, intrinsic, and postrenal AKI',
+    'Understand the urinalysis and fractional excretion of sodium in AKI',
+    'Learn appropriate fluid management in different types of AKI',
+  ],
+
+  presentation: {
+    chiefComplaint: 'Weakness and confusion',
+    demographics: {
+      age: 82,
+      sex: 'female',
+      occupation: 'retired',
+      context: 'brought to ED by daughter, found lethargic at home',
+    },
+    openingParagraph: `Mrs. Garcia is an 82-year-old woman brought to the ED by her daughter who found her mother confused and weak at home. The daughter reports that Mrs. Garcia has been eating and drinking very little over the past week after a "stomach bug" with vomiting and diarrhea. She lives alone and the daughter hadn't visited in a week. Today she found her mother barely able to get out of bed and not making sense when she talked.`,
+    generalAppearance: 'Elderly woman appearing chronically and acutely ill. Thin, appears dehydrated with dry mucous membranes and sunken eyes. Lethargic but arousable. Skin tenting present.',
+    vitalSigns: {
+      temperature: '97.8°F (36.5°C)',
+      heartRate: '102 bpm',
+      bloodPressure: '94/58 mmHg lying, 78/52 sitting',
+      respiratoryRate: '18/min',
+      oxygenSaturation: '97% on room air',
+      interpretation: 'Hypotensive with significant orthostatic change (>20 mmHg systolic drop). Tachycardic. Low-grade temperature. These findings indicate severe volume depletion.',
+    },
+  },
+
+  availableData: {
+    historyQuestions: [
+      {
+        id: 'hpi-illness',
+        question: 'Tell me about the illness she had.',
+        category: 'hpi',
+        response: '(Daughter) She called me about a week ago saying she had diarrhea and vomiting. She said it was probably something she ate. I told her to drink fluids and rest. But when I came today, she seemed so much worse.',
+        educationalNote: 'GI losses (vomiting, diarrhea) are a classic cause of prerenal AKI. In elderly, even short periods of decreased intake can cause significant volume depletion.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-intake',
+        question: 'How much has she been eating and drinking?',
+        category: 'hpi',
+        response: '(Daughter) She said she couldn\'t keep anything down at first. Then I guess she just stopped trying. She said she hasn\'t had much of an appetite. Looking at her kitchen, there\'s hardly any food gone from the fridge.',
+        educationalNote: 'Decreased oral intake compounds GI losses. Elderly are particularly vulnerable to dehydration due to decreased thirst mechanism and renal concentrating ability.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'hpi-urine',
+        question: 'Has she been urinating?',
+        category: 'hpi',
+        response: '(Daughter) She said she hasn\'t been going much. When I asked about the bathroom, she said she only went once or twice yesterday, and it was very dark colored.',
+        educationalNote: 'Oliguria (<500 mL/day) with concentrated urine is classic for prerenal AKI - the kidneys are appropriately retaining fluid.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-kidney',
+        question: 'Any kidney problems?',
+        category: 'pmh',
+        response: '(Daughter) Her doctor told her she had "mild kidney problems" - I think he called it CKD stage 3. But she\'s never been on dialysis or anything.',
+        educationalNote: 'Pre-existing CKD significantly increases risk of AKI. Even "mild" CKD (stage 3) reduces renal reserve and ability to handle volume/hemodynamic stress.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'pmh-cardiac',
+        question: 'What other medical problems does she have?',
+        category: 'pmh',
+        response: '(Daughter) High blood pressure, heart problems - she had a "weak heart" they said, diabetes, and arthritis.',
+        educationalNote: 'Heart failure ("weak heart"), diabetes, and hypertension all affect kidney function. This triad of comorbidities is common in elderly with CKD.',
+        isKeyFinding: true,
+      },
+      {
+        id: 'meds-list',
+        question: 'What medications does she take?',
+        category: 'medications',
+        response: '(Daughter pulls out bag) Lisinopril, Lasix, metoprolol, metformin, and she takes ibuprofen for her arthritis - she buys it herself.',
+        educationalNote: 'This medication list is a "perfect storm" for AKI: ACE inhibitor (reduces GFR), diuretic (volume depletion), and NSAID (renal vasoconstriction). Called the "triple whammy."',
+        isKeyFinding: true,
+      },
+    ],
+
+    physicalExam: [
+      {
+        system: 'General/Skin',
+        findings: [
+          {
+            id: 'gen-hydration',
+            exam: 'Assessment of hydration',
+            finding: 'Dry mucous membranes. Furrowed tongue. Skin tenting over sternum (>3 seconds). Sunken eyes. No axillary moisture.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'These are classic signs of severe dehydration. Skin tenting over sternum is more reliable than over hands/arms in elderly (age-related skin changes).',
+          },
+        ],
+      },
+      {
+        system: 'Cardiovascular',
+        findings: [
+          {
+            id: 'cv-assessment',
+            exam: 'Cardiovascular examination',
+            finding: 'Tachycardic, regular rhythm. No murmurs. JVP flat (not visible even at 0°). Pulses thready.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Flat JVP with tachycardia and thready pulses indicates significant hypovolemia. The absence of elevated JVP helps distinguish prerenal from cardiorenal AKI.',
+          },
+        ],
+      },
+      {
+        system: 'Abdominal',
+        findings: [
+          {
+            id: 'abd-exam',
+            exam: 'Abdominal examination',
+            finding: 'Soft, non-distended. Mild diffuse tenderness. Hypoactive bowel sounds. No bladder distension on palpation.',
+            isNormal: false,
+            isKeyFinding: true,
+            educationalNote: 'Lack of bladder distension argues against urinary obstruction (postrenal AKI). Hypoactive bowels may reflect ileus from hypokalemia or general debility.',
+          },
+        ],
+      },
+    ],
+
+    labOrders: [
+      {
+        id: 'lab-bmp',
+        name: 'Basic Metabolic Panel',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'Na 148, K 5.8, Cl 112, CO2 18, BUN 92, Cr 4.2 (baseline 1.4), Glu 245',
+          interpretation: 'Severe AKI (Cr tripled), hypernatremia, hyperkalemia, metabolic acidosis',
+          isAbnormal: true,
+          educationalNote: 'Cr rising from 1.4 to 4.2 = KDIGO Stage 3 AKI (>3x baseline). BUN:Cr ratio >20:1 suggests prerenal. Hyperkalemia is dangerous and needs urgent treatment.',
+        },
+      },
+      {
+        id: 'lab-ua',
+        name: 'Urinalysis',
+        category: 'basic',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: 'Sp Gr 1.035, pH 5.0, trace protein, no blood, no WBC, no bacteria, rare hyaline casts',
+          interpretation: 'Concentrated urine with benign sediment',
+          isAbnormal: true,
+          educationalNote: 'High specific gravity indicates kidneys CAN concentrate urine (functioning tubules). Bland sediment (no cells, no casts) favors prerenal over ATN. Hyaline casts are nonspecific.',
+        },
+      },
+      {
+        id: 'lab-fena',
+        name: 'Fractional Excretion of Sodium',
+        category: 'specialty',
+        turnaroundTime: '30 minutes',
+        result: {
+          value: 'FENa 0.4%',
+          interpretation: 'Low (<1%), consistent with prerenal azotemia',
+          isAbnormal: true,
+          educationalNote: 'FENa <1% = prerenal (kidneys avidly retaining sodium). FENa >2% = intrinsic renal (tubular damage prevents sodium reabsorption). Exception: FENa unreliable if on diuretics (use FEUrea instead).',
+        },
+      },
+      {
+        id: 'lab-cbc',
+        name: 'Complete Blood Count',
+        category: 'basic',
+        turnaroundTime: '20 minutes',
+        result: {
+          value: 'WBC 12.5, Hgb 10.2, Hct 32%, Plt 285,000',
+          interpretation: 'Mild leukocytosis, anemia (likely CKD-related)',
+          isAbnormal: true,
+          educationalNote: 'The elevated hematocrit relative to baseline would suggest hemoconcentration from dehydration. Pre-existing anemia of CKD is common.',
+        },
+      },
+      {
+        id: 'lab-lactate',
+        name: 'Lactate',
+        category: 'basic',
+        turnaroundTime: '15 minutes',
+        result: {
+          value: '2.8 mmol/L (normal <2.0)',
+          interpretation: 'Mildly elevated suggesting tissue hypoperfusion',
+          isAbnormal: true,
+          educationalNote: 'Elevated lactate confirms tissue hypoperfusion from hypovolemia. Should improve with fluid resuscitation.',
+        },
+      },
+    ],
+
+    imagingOrders: [
+      {
+        id: 'img-renal-us',
+        name: 'Renal Ultrasound',
+        modality: 'Ultrasound',
+        turnaroundTime: '1 hour',
+        result: {
+          finding: 'Kidneys bilaterally small (9 cm each, lower normal). Echogenic parenchyma consistent with chronic kidney disease. No hydronephrosis. Bladder empty post-void.',
+          interpretation: 'Chronic kidney disease changes; no obstruction',
+          isAbnormal: true,
+          educationalNote: 'Small, echogenic kidneys indicate underlying CKD. Absence of hydronephrosis rules out obstructive (postrenal) cause. Post-void residual rules out bladder outlet obstruction.',
+        },
+      },
+    ],
+  },
+
+  caseFlow: {
+    stages: [
+      {
+        id: 'recognize-aki',
+        name: 'Recognize AKI',
+        description: 'Identify acute kidney injury and classify severity',
+      },
+      {
+        id: 'determine-etiology',
+        name: 'Determine Etiology',
+        description: 'Differentiate prerenal, intrinsic, and postrenal causes',
+      },
+      {
+        id: 'immediate-management',
+        name: 'Immediate Management',
+        description: 'Address life-threatening complications and initiate treatment',
+      },
+      {
+        id: 'ongoing-care',
+        name: 'Ongoing Care',
+        description: 'Monitor recovery and prevent future episodes',
+      },
+    ],
+    decisionPoints: [
+      {
+        id: 'decision-etiology',
+        stageId: 'determine-etiology',
+        question: 'What is the most likely etiology of this patient\'s AKI?',
+        context: 'Elderly patient with GI losses, decreased intake, dehydration on exam, FENa <1%, bland sediment.',
+        options: [
+          {
+            id: 'prerenal',
+            text: 'Prerenal azotemia from hypovolemia',
+            consequence: 'Correct - guides appropriate fluid resuscitation',
+            isCorrect: true,
+            feedback: 'Correct. History of GI losses and poor intake, physical signs of dehydration, BUN:Cr >20, FENa <1%, concentrated urine with bland sediment all point to prerenal etiology.',
+          },
+          {
+            id: 'atn',
+            text: 'Acute tubular necrosis',
+            consequence: 'Would miss opportunity for volume resuscitation',
+            isCorrect: false,
+            feedback: 'ATN typically shows muddy brown casts, FENa >2%, and isosthenuria (fixed specific gravity ~1.010). This patient has findings of preserved tubular function.',
+          },
+          {
+            id: 'obstruction',
+            text: 'Urinary tract obstruction',
+            consequence: 'Would delay appropriate treatment',
+            isCorrect: false,
+            feedback: 'No hydronephrosis on ultrasound, no bladder distension, and no history suggestive of obstruction rule this out.',
+          },
+        ],
+        correctOptionId: 'prerenal',
+        educationalExplanation: 'The workup clearly supports prerenal AKI: appropriate history, clinical dehydration, FENa <1%, BUN:Cr >20:1, concentrated urine, and bland sediment. The kidneys are responding appropriately to hypovolemia by conserving sodium and water.',
+      },
+    ],
+    paths: [
+      {
+        id: 'optimal-path',
+        name: 'Appropriate Diagnosis and Resuscitation',
+        description: 'Correct identification of prerenal AKI with aggressive fluid resuscitation',
+        stageSequence: ['recognize-aki', 'determine-etiology', 'immediate-management', 'ongoing-care'],
+        outcome: 'optimal',
+      },
+    ],
+  },
+
+  resolution: {
+    diagnosis: {
+      name: 'Acute Kidney Injury Stage 3 (Prerenal) on Chronic Kidney Disease Stage 3',
+      icdCode: 'N17.9',
+      explanation: 'Severe prerenal AKI superimposed on pre-existing CKD, caused by volume depletion from GI losses, decreased oral intake, and exacerbated by nephrotoxic medications.',
+      pathophysiology: 'Prerenal AKI occurs when renal perfusion pressure falls below the threshold for autoregulation. The kidneys respond appropriately by maximally reabsorbing sodium and water (hence FENa <1%). However, if hypovolemia is severe or prolonged, it can progress to intrinsic renal injury (ATN). This patient had multiple "hits": volume depletion + ACE inhibitor (blocks compensatory efferent vasoconstriction) + NSAID (blocks afferent prostaglandin-mediated vasodilation) + diuretic (exacerbates volume loss).',
+      epidemiology: 'AKI occurs in 5-7% of hospitalized patients and >50% of ICU patients. Prerenal causes account for 40-60% of AKI. Elderly with CKD and polypharmacy are at highest risk.',
+      prognosis: 'Prerenal AKI, if recognized and treated early, is generally reversible. However, each episode of AKI accelerates CKD progression. This patient may not return to baseline kidney function.',
+    },
+    diagnosticReasoning: 'The diagnosis was systematic: (1) Confirm AKI: Cr 4.2 vs baseline 1.4 = Stage 3 AKI by KDIGO; (2) Classify etiology: prerenal vs intrinsic vs postrenal. History, exam, and labs all pointed to prerenal; (3) Identify contributing factors: the "triple whammy" of ACE + diuretic + NSAID in the setting of volume depletion.',
+    keyFindings: [
+      'Creatinine tripled from baseline (1.4 → 4.2)',
+      'History of GI losses and poor oral intake',
+      'Physical examination showing severe dehydration',
+      'Orthostatic hypotension',
+      'FENa <1% with concentrated urine',
+      'Bland urinary sediment',
+      'BUN:Cr ratio >20:1',
+      'No hydronephrosis on ultrasound',
+      '"Triple whammy" medications',
+    ],
+    treatment: {
+      immediate: 'Hold all nephrotoxic medications (lisinopril, furosemide, ibuprofen, metformin). Treat hyperkalemia emergently. Aggressive IV fluid resuscitation with isotonic crystalloid. Foley catheter to monitor output.',
+      medications: [
+        {
+          name: 'Calcium gluconate',
+          dose: '1g',
+          route: 'IV',
+          frequency: 'Once (emergently)',
+          rationale: 'Cardioprotection for hyperkalemia - stabilizes cardiac membrane without lowering K.',
+        },
+        {
+          name: 'Insulin regular',
+          dose: '10 units with D50',
+          route: 'IV',
+          frequency: 'Once (emergently)',
+          rationale: 'Shifts potassium intracellularly. Must give dextrose to prevent hypoglycemia.',
+        },
+        {
+          name: 'Normal Saline',
+          dose: '500mL boluses, then 150-200 mL/hour',
+          route: 'IV',
+          frequency: 'Continuous, goal-directed',
+          rationale: 'Volume resuscitation is the definitive treatment for prerenal AKI. Isotonic fluids preferred. Avoid over-resuscitation (watch for pulmonary edema given CHF history).',
+        },
+      ],
+      procedures: 'Foley catheter for strict I/O monitoring. Central line if peripheral access inadequate. Dialysis if refractory hyperkalemia, severe acidosis, volume overload, or uremic symptoms.',
+      monitoring: 'Serial electrolytes (especially potassium) every 4-6 hours initially. Strict intake/output. Daily weights. Serial creatinine to monitor recovery. Telemetry for hyperkalemia.',
+      patientEducation: [
+        'Avoid NSAIDs permanently',
+        'Maintain hydration, especially during illness',
+        'Hold ACE inhibitor and diuretic during "sick days" (vomiting, diarrhea)',
+        'Follow-up kidney function monitoring',
+        'May not return to baseline kidney function',
+      ],
+    },
+    outcome: 'Mrs. Garcia received 2L NS boluses in the ED with improvement in blood pressure and mental status. Her potassium was treated and decreased to 5.0. She was admitted to the hospital and received continued IV fluids. By day 3, her creatinine had improved to 2.4 and by discharge on day 5, it was 1.9 (still above her baseline of 1.4). Her ACE inhibitor was restarted at a lower dose. She was counseled to avoid NSAIDs and given "sick day" instructions.',
+    followUp: 'Nephrology follow-up in 2 weeks. Repeat BMP in 1 week to ensure continued improvement. May need adjustment of antihypertensive regimen. Consider whether ACE inhibitor should be continued long-term given recurrent AKI risk.',
+  },
+
+  teachingPoints: [
+    {
+      topic: 'KDIGO Criteria for AKI',
+      content: 'Stage 1: Cr increase ≥0.3 mg/dL within 48h OR ≥1.5-1.9x baseline OR UO <0.5 mL/kg/h for 6-12h. Stage 2: Cr 2.0-2.9x baseline OR UO <0.5 mL/kg/h for ≥12h. Stage 3: Cr ≥3x baseline OR Cr ≥4.0 OR initiation of RRT OR UO <0.3 mL/kg/h for ≥24h.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'The Triple Whammy: ACE + Diuretic + NSAID',
+      content: 'This combination is a recipe for AKI: ACE inhibitors dilate efferent arteriole, diuretics cause volume depletion, NSAIDs cause afferent arteriolar constriction. Together, they devastate GFR. This is a common and preventable cause of AKI.',
+      category: 'clinical-pearl',
+      importance: 'critical',
+    },
+    {
+      topic: 'FENa: How to Use It',
+      content: 'FENa = (UNa × PCr) / (PNa × UCr) × 100. FENa <1% = prerenal (kidneys retaining sodium appropriately). FENa >2% = intrinsic/ATN (tubular damage). Caveat: FENa unreliable if patient is on diuretics - use FEUrea instead (<35% prerenal, >50% ATN).',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+    {
+      topic: 'Urinary Sediment in AKI',
+      content: 'Prerenal: bland sediment with hyaline casts. ATN: muddy brown granular casts, renal tubular epithelial cells. GN: RBC casts, dysmorphic RBCs. AIN: WBC casts, eosinophiluria. The sediment is a "liquid biopsy" of the kidney.',
+      category: 'diagnostic-approach',
+      importance: 'critical',
+    },
+  ],
+
+  commonPitfalls: [
+    'Not checking baseline creatinine to determine if this is AKI or CKD',
+    'Continuing nephrotoxic medications during acute illness',
+    'Under-resuscitating prerenal AKI',
+    'Over-resuscitating patients with cardiorenal syndrome',
+    'Using FENa in patients on diuretics (unreliable)',
+    'Not treating hyperkalemia emergently',
+    'Missing the "triple whammy" medication combination',
+    'Failing to give sick day instructions to at-risk patients',
+  ],
+
+  relatedCases: [
+    'chf-acute',
+    'hyperkalemia',
+    'metabolic-acidosis',
+    'uti-complicated',
+    'rhabdomyolysis',
+  ],
+};
+
+// ============================================
 // Database Export
 // ============================================
 
@@ -5059,6 +7085,11 @@ export const CLINICAL_CASES: Record<string, ClinicalCase> = {
   'sepsis-urosepsis': SEPSIS_CASE,
   'chf-acute': HEART_FAILURE_CASE,
   'copd-exacerbation': COPD_EXACERBATION_CASE,
+  'pe-submassive': PULMONARY_EMBOLISM_CASE,
+  'pancreatitis-gallstone': ACUTE_PANCREATITIS_CASE,
+  'meningitis-bacterial': BACTERIAL_MENINGITIS_CASE,
+  'afib-rvr': AFIB_RVR_CASE,
+  'aki-prerenal': AKI_CASE,
 };
 
 // ============================================

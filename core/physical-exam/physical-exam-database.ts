@@ -3537,6 +3537,1835 @@ is critical for disability evaluation and treatment planning.`,
   ],
 };
 
+// ============================================
+// General Examination
+// ============================================
+
+export const GENERAL_EXAM: SystemExamEducation = {
+  id: 'general',
+  name: 'General Exam',
+  fullName: 'General Physical Examination',
+
+  overview: `The general examination provides an overall impression of the patient's health status,
+nutritional state, and level of distress. It begins the moment you see the patient and includes
+assessment of vital signs, body habitus, level of consciousness, and general appearance. This
+systematic overview helps prioritize the focused examination and identifies acuity of illness.`,
+
+  clinicalImportance: `The general exam sets the tone for the entire encounter. A patient who appears
+comfortable can be approached differently than one in obvious distress. General appearance often
+provides clues to underlying conditions: cushingoid features suggest glucocorticoid excess,
+cachexia may indicate malignancy or chronic disease. The general exam helps calibrate the urgency
+of the situation and guides the subsequent focused examination.`,
+
+  equipmentNeeded: [
+    {
+      name: 'Scale',
+      purpose: 'Measuring body weight',
+      howToUse: 'Have patient remove shoes and heavy clothing, stand centered on scale',
+      alternatives: 'Chair scale for mobility-impaired patients, bed scale for critically ill',
+      tips: [
+        'Weigh at same time of day for serial measurements',
+        'Document clothing status (gown vs street clothes)',
+        'Compare to previous weights for trend',
+      ],
+    },
+    {
+      name: 'Stadiometer/Height measure',
+      purpose: 'Measuring height for BMI calculation',
+      howToUse: 'Patient stands straight, heels together, looking forward (Frankfurt plane)',
+      tips: ['Height may decrease 1-2 cm over the day due to spinal compression'],
+    },
+    {
+      name: 'Thermometer',
+      purpose: 'Measuring body temperature',
+      howToUse: 'Oral (under tongue), tympanic, temporal, or rectal depending on situation',
+      tips: [
+        'Oral temp affected by recent hot/cold drinks - wait 15 minutes',
+        'Rectal is gold standard but rarely needed outside ICU/pediatrics',
+      ],
+    },
+    {
+      name: 'Pulse oximeter',
+      purpose: 'Measuring oxygen saturation',
+      howToUse: 'Place on finger, wait for stable waveform before reading',
+      tips: [
+        'Poor signal with cold hands, nail polish, motion artifact',
+        'May be falsely normal with carbon monoxide poisoning',
+      ],
+    },
+  ],
+
+  patientPositioning: [
+    {
+      position: 'Sitting on exam table',
+      whenUsed: 'Standard initial positioning for most patients',
+      howToAchieve: 'Patient sits upright with legs dangling',
+      alternatives: ['Wheelchair if unable to transfer', 'Supine if orthostatic'],
+      considerations: 'Allows observation of general appearance while maintaining patient dignity',
+    },
+    {
+      position: 'Standing',
+      whenUsed: 'Assessing gait, posture, orthostatic vitals',
+      howToAchieve: 'Patient stands unassisted or with minimal support',
+      alternatives: ['Sitting for unsafe patients'],
+      considerations: 'Watch for instability, assess need for gait aids',
+    },
+  ],
+
+  approach: {
+    sequence: [
+      {
+        order: 1,
+        action: 'Observation from doorway',
+        rationale: 'Initial gestalt before interrupting the patient',
+        whatToObserve: [
+          'Level of distress or comfort',
+          'Body position and posture',
+          'Breathing pattern',
+          'Skin color visible',
+          'Alertness and responsiveness',
+        ],
+        transitionTip: 'Form your initial impression in seconds as you enter',
+      },
+      {
+        order: 2,
+        action: 'Introduce yourself and assess responsiveness',
+        rationale: 'Establishes rapport and mental status baseline',
+        whatToObserve: [
+          'Appropriate eye contact',
+          'Understanding of introduction',
+          'Speech clarity and content',
+          'Affect and mood',
+        ],
+      },
+      {
+        order: 3,
+        action: 'Measure vital signs',
+        rationale: 'Objective data about physiological status',
+        whatToObserve: [
+          'Heart rate and rhythm',
+          'Blood pressure (both arms if indicated)',
+          'Respiratory rate (count for 30 seconds)',
+          'Temperature',
+          'Oxygen saturation',
+        ],
+        transitionTip: 'Vital signs should be measured before focused exam when possible',
+      },
+      {
+        order: 4,
+        action: 'Assess body habitus',
+        rationale: 'Nutritional status and endocrine clues',
+        whatToObserve: [
+          'Height and weight/BMI',
+          'Fat distribution pattern',
+          'Muscle mass',
+          'Signs of weight loss or gain',
+        ],
+      },
+      {
+        order: 5,
+        action: 'Inspect skin and overall appearance',
+        rationale: 'Systemic disease often manifests in appearance',
+        whatToObserve: [
+          'Skin color (pallor, jaundice, cyanosis)',
+          'Hydration status',
+          'Visible lesions or rashes',
+          'Personal hygiene and grooming',
+        ],
+      },
+    ],
+    adaptations: [
+      {
+        scenario: 'Critically ill patient',
+        modification: 'ABCs first - airway, breathing, circulation before complete exam',
+        rationale: 'Life-threatening conditions take priority',
+      },
+      {
+        scenario: 'Elderly patient',
+        modification: 'Allow more time, assess for frailty and functional status',
+        rationale: 'Geriatric assessment includes mobility and independence',
+      },
+    ],
+    typicalDuration: '3-5 minutes',
+    documentationTemplate: 'General: Alert and oriented, no acute distress. Well-nourished, well-developed. Vital signs: [BP], [HR], [RR], [T], [SpO2].',
+  },
+
+  components: [
+    {
+      id: 'general-appearance',
+      name: 'General Appearance',
+      technique: 'inspection',
+      whatItAssesses: 'Overall health status and acuity of illness',
+      anatomy: 'Whole body observation',
+      pathophysiology: 'Chronic illness, metabolic disorders, and acute conditions affect overall appearance',
+      clinicalSignificance: 'Provides gestalt impression guiding exam urgency and focus',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Observe from doorway', detail: 'Note level of distress, position, alertness' },
+          { order: 2, action: 'Assess nutrition', detail: 'Note body habitus, muscle wasting, obesity' },
+          { order: 3, action: 'Note hygiene', detail: 'Grooming, clothing appropriateness, body odor' },
+          { order: 4, action: 'Observe skin', detail: 'Color, visible lesions, diaphoresis' },
+        ],
+        landmarks: [],
+        patientInstructions: 'Just sit comfortably while I do my initial assessment',
+        examinerPosition: 'Standing at doorway, then at comfortable distance',
+        commonErrors: ['Rushing past general observation to focused exam'],
+      },
+      normalFinding: {
+        description: 'Alert, comfortable, well-nourished, well-groomed, no acute distress',
+        variations: ['Variations in body habitus are normal'],
+        ageConsiderations: 'Elderly may have decreased muscle mass, skin changes',
+        documentationExample: 'General: Alert and oriented, NAD. Well-nourished, well-developed.',
+      },
+      abnormalFindings: [
+        {
+          name: 'Acute distress',
+          description: 'Patient appears uncomfortable, anxious, or in pain',
+          appearance: 'Grimacing, guarding, tachypnea, diaphoresis',
+          mechanism: 'Pain, hypoxia, or metabolic derangement causing sympathetic activation',
+          associatedConditions: ['Acute MI', 'Pulmonary embolism', 'Acute abdomen', 'Severe pain'],
+          severity: 'moderate',
+          urgency: 'urgent',
+          nextSteps: ['Identify and address cause', 'Pain assessment', 'Vitals'],
+          differentialDiagnosis: ['Cardiac', 'Pulmonary', 'Abdominal', 'Musculoskeletal emergency'],
+          additionalTestsNeeded: ['ECG', 'Labs based on presentation'],
+          documentationExample: 'General: Alert, moderate distress, diaphoretic, clutching chest',
+        },
+        {
+          name: 'Cachexia',
+          description: 'Severe weight loss with muscle wasting',
+          appearance: 'Temporal wasting, prominent bones, loose skin',
+          mechanism: 'Catabolic state from malignancy, chronic disease, or malnutrition',
+          associatedConditions: ['Cancer', 'Heart failure', 'COPD', 'AIDS', 'Anorexia'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Nutritional assessment', 'Evaluate for underlying cause'],
+          differentialDiagnosis: ['Malignancy', 'Chronic infection', 'Inflammatory disease'],
+          additionalTestsNeeded: ['CBC', 'CMP', 'Albumin', 'Consider CT imaging'],
+          documentationExample: 'General: Cachectic appearance with temporal wasting, appears older than stated age',
+        },
+        {
+          name: 'Cushingoid appearance',
+          description: 'Features of glucocorticoid excess',
+          appearance: 'Moon facies, central obesity, buffalo hump, thin extremities, striae',
+          mechanism: 'Excess cortisol causes fat redistribution and protein catabolism',
+          associatedConditions: ['Cushing syndrome', 'Exogenous steroid use'],
+          severity: 'mild',
+          urgency: 'routine',
+          nextSteps: ['Medication history', 'Cortisol testing if not on steroids'],
+          differentialDiagnosis: ['Exogenous steroids', 'Pituitary adenoma', 'Adrenal tumor', 'Ectopic ACTH'],
+          additionalTestsNeeded: ['24-hour urine cortisol', 'Dexamethasone suppression test'],
+          documentationExample: 'General: Cushingoid habitus with moon facies, central obesity, and purple striae',
+        },
+      ],
+      pitfalls: ['Anchoring on first impression', 'Missing subtle signs of distress'],
+      practiceTips: ['Practice forming gestalt quickly', 'Compare appearance to expected for age'],
+    },
+    {
+      id: 'vital-signs',
+      name: 'Vital Signs',
+      technique: 'special-test',
+      whatItAssesses: 'Physiological stability and homeostasis',
+      anatomy: 'Cardiovascular and respiratory systems',
+      pathophysiology: 'Vital signs reflect autonomic function, cardiac output, respiratory function, and thermoregulation',
+      clinicalSignificance: 'Abnormal vitals indicate physiological stress and guide urgency',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Blood pressure', detail: 'Appropriate cuff size, arm at heart level, seated 5 min' },
+          { order: 2, action: 'Heart rate', detail: 'Palpate radial pulse 30-60 seconds, note regularity' },
+          { order: 3, action: 'Respiratory rate', detail: 'Count for 30 seconds without patient awareness' },
+          { order: 4, action: 'Temperature', detail: 'Oral, tympanic, or temporal based on situation' },
+          { order: 5, action: 'Oxygen saturation', detail: 'Clean dry finger, wait for stable waveform' },
+        ],
+        landmarks: [
+          { name: 'Radial artery', howToFind: 'Lateral wrist, proximal to thumb base', significance: 'Standard pulse location' },
+        ],
+        patientInstructions: 'Please relax and sit quietly while I measure your vital signs',
+        examinerPosition: 'Beside patient, at comfortable height',
+        commonErrors: ['Wrong BP cuff size', 'Counting resp rate while patient aware'],
+      },
+      normalFinding: {
+        description: 'BP 90-120/60-80, HR 60-100, RR 12-20, Temp 36.5-37.5°C, SpO2 ≥95%',
+        variations: ['Athletes may have resting HR 40-60', 'Elderly may have slightly higher systolic BP'],
+        ageConsiderations: 'Normal values vary significantly by age, especially in pediatrics',
+        documentationExample: 'VS: BP 118/76, HR 72, RR 14, T 37.0°C, SpO2 98% RA',
+      },
+      abnormalFindings: [
+        {
+          name: 'Hypertension',
+          description: 'Elevated blood pressure',
+          appearance: 'BP ≥130/80 (Stage 1) or ≥140/90 (Stage 2)',
+          mechanism: 'Increased vascular resistance or cardiac output',
+          associatedConditions: ['Essential hypertension', 'Renal disease', 'Endocrine disorders', 'Pain', 'Anxiety'],
+          severity: 'moderate',
+          urgency: 'routine',
+          nextSteps: ['Repeat measurement', 'Check both arms', 'Assess for end-organ damage'],
+          differentialDiagnosis: ['Primary hypertension', 'Secondary causes'],
+          additionalTestsNeeded: ['BMP', 'UA', 'ECG', 'Lipid panel'],
+          documentationExample: 'VS: BP 162/98 (repeated 158/96), elevated',
+        },
+        {
+          name: 'Fever',
+          description: 'Elevated body temperature',
+          appearance: 'Temperature >38°C (100.4°F)',
+          mechanism: 'Hypothalamic set point elevation due to pyrogens',
+          associatedConditions: ['Infection', 'Inflammation', 'Malignancy', 'Drug reaction'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Source evaluation', 'Infectious workup', 'Consider sepsis criteria'],
+          differentialDiagnosis: ['Bacterial infection', 'Viral illness', 'Autoimmune', 'Drug fever'],
+          additionalTestsNeeded: ['CBC', 'Blood cultures', 'UA/UCx', 'CXR'],
+          documentationExample: 'VS: T 39.2°C, febrile',
+        },
+      ],
+      pitfalls: ['Using wrong cuff size', 'Not repeating abnormal values'],
+      practiceTips: ['Always verify unexpected values', 'Know normal ranges by age'],
+    },
+  ],
+
+  specialTests: [
+    {
+      id: 'orthostatic-vitals',
+      name: 'Orthostatic Vital Signs',
+      alternateNames: ['Postural vitals', 'Tilt test'],
+      system: 'general',
+      purpose: 'Assess for orthostatic hypotension indicating volume depletion or autonomic dysfunction',
+      indications: ['Dizziness', 'Syncope', 'Falls', 'Suspected dehydration', 'GI bleeding'],
+      contraindications: ['Severe hypotension', 'Active chest pain', 'Unstable patient'],
+      procedure: {
+        patientPosition: 'Supine for 5 minutes, then standing',
+        examinerPosition: 'Beside patient, ready to support if needed',
+        steps: [
+          { order: 1, action: 'Supine vitals', detail: 'Measure BP and HR after 5 minutes supine' },
+          { order: 2, action: 'Stand patient', detail: 'Have patient stand (with support if needed)' },
+          { order: 3, action: 'Immediate standing vitals', detail: 'Measure BP and HR immediately on standing' },
+          { order: 4, action: '3-minute standing vitals', detail: 'Repeat BP and HR after 3 minutes standing' },
+          { order: 5, action: 'Assess symptoms', detail: 'Ask about dizziness, lightheadedness' },
+        ],
+        patientInstructions: 'Tell me immediately if you feel dizzy or lightheaded',
+        duration: '10 minutes',
+      },
+      interpretation: {
+        positiveResult: 'SBP drop ≥20 mmHg OR DBP drop ≥10 mmHg OR HR increase ≥30 bpm with symptoms',
+        negativeResult: 'No significant change in BP or HR on standing',
+        falsePositives: ['Medications', 'Prolonged bed rest', 'Elderly baseline autonomic dysfunction'],
+        falseNegatives: ['Recent fluid resuscitation', 'Compensatory tachycardia masking'],
+        clinicalContext: 'Must correlate with symptoms - some patients have asymptomatic orthostatic changes',
+      },
+      accuracy: {
+        sensitivity: '~50% for significant volume depletion',
+        specificity: '~90% when positive with symptoms',
+        notes: 'More sensitive when patient symptomatic during testing',
+      },
+      clinicalUtility: 'Useful for volume status assessment and syncope workup',
+      commonErrors: ['Not waiting 5 min supine', 'Not reassessing at 3 minutes', 'Testing after recent fluids'],
+      evidence: 'Positive orthostatics suggest volume depletion but absence does not exclude it',
+    },
+  ],
+
+  relatedSystems: [
+    {
+      relatedSystem: 'cardiovascular',
+      relationship: 'Vital signs reflect cardiac function',
+      whenToExamineTogether: 'Abnormal pulse or BP warrants focused cardiac exam',
+      clinicalExample: 'Tachycardia may indicate cardiac arrhythmia or volume depletion',
+    },
+    {
+      relatedSystem: 'respiratory',
+      relationship: 'Respiratory rate and SpO2 reflect pulmonary function',
+      whenToExamineTogether: 'Abnormal respiratory vitals warrant chest exam',
+      clinicalExample: 'Tachypnea and low SpO2 suggest pulmonary pathology',
+    },
+  ],
+
+  findingPatterns: [
+    {
+      name: 'Sepsis pattern',
+      description: 'Constellation of findings suggesting systemic infection',
+      findings: [
+        { component: 'Temperature', finding: 'Fever >38°C or hypothermia <36°C', significance: 'Suggests infection' },
+        { component: 'Heart rate', finding: 'Tachycardia >90', significance: 'Sympathetic activation' },
+        { component: 'Respiratory rate', finding: 'Tachypnea >20', significance: 'Metabolic acidosis compensation' },
+        { component: 'Mental status', finding: 'Confusion or altered', significance: 'End-organ dysfunction' },
+      ],
+      suggestsDiagnosis: ['Sepsis', 'Severe infection'],
+      mechanism: 'Systemic inflammatory response to infection',
+      clinicalScenario: 'Elderly patient with UTI developing confusion and hypotension',
+      keyLearningPoint: 'Elderly may not mount fever - hypothermia can indicate severe sepsis',
+    },
+  ],
+
+  redFlags: [
+    {
+      finding: 'Hypotension with altered mental status',
+      concernFor: 'Shock - inadequate tissue perfusion',
+      mechanism: 'Insufficient blood pressure to perfuse vital organs',
+      immediateActions: ['IV access', 'Fluid resuscitation', 'Identify cause', 'Consider vasopressors'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Fever with rigors and hypotension',
+      concernFor: 'Septic shock',
+      mechanism: 'Severe infection with cardiovascular collapse',
+      immediateActions: ['Blood cultures', 'Broad-spectrum antibiotics', 'Fluid resuscitation', 'ICU consideration'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Oxygen saturation <90% on room air',
+      concernFor: 'Respiratory failure requiring intervention',
+      mechanism: 'Inadequate oxygen delivery to tissues',
+      immediateActions: ['Supplemental oxygen', 'ABG', 'Chest X-ray', 'Respiratory support'],
+      neverMiss: true,
+    },
+  ],
+
+  commonMistakes: [
+    {
+      mistake: 'Using small BP cuff on large arm',
+      consequence: 'Falsely elevated blood pressure reading',
+      howToAvoid: 'Cuff bladder should cover 80% of arm circumference',
+      correctTechnique: 'Measure arm circumference and select appropriate cuff',
+    },
+    {
+      mistake: 'Counting respiratory rate while patient is aware',
+      consequence: 'Artificially altered breathing pattern',
+      howToAvoid: 'Count respirations while appearing to assess pulse',
+      correctTechnique: 'Keep fingers on pulse but watch chest for 30 seconds',
+    },
+  ],
+
+  clinicalPearls: [
+    'The general exam begins from the doorway - form your initial impression in seconds.',
+    'Vital signs are called "vital" for a reason - abnormalities require explanation.',
+    'Heart rate and respiratory rate are the most sensitive early indicators of clinical deterioration.',
+    'When vitals and appearance conflict, trust appearance - the "sick" patient needs attention.',
+    'Serial vital signs are more valuable than single measurements - trends matter.',
+  ],
+};
+
+// ============================================
+// Neck Examination
+// ============================================
+
+export const NECK_EXAM: SystemExamEducation = {
+  id: 'neck',
+  name: 'Neck Exam',
+  fullName: 'Neck Examination',
+
+  overview: `The neck examination assesses the thyroid gland, lymph nodes, carotid arteries, and
+cervical spine. It provides information about endocrine function, infection/malignancy spread,
+vascular disease, and musculoskeletal pathology. The neck connects vital structures and is
+often examined in conjunction with the HEENT and cardiovascular exams.`,
+
+  clinicalImportance: `Thyroid disorders are common and often first detected on neck exam.
+Lymphadenopathy may indicate infection, malignancy, or systemic disease. Carotid bruits
+suggest vascular disease with stroke risk. Cervical spine pathology causes pain and
+potentially neurological compromise. A systematic neck exam is essential for complete
+physical assessment.`,
+
+  equipmentNeeded: [
+    {
+      name: 'Stethoscope',
+      purpose: 'Auscultation for carotid bruits and thyroid bruits',
+      howToUse: 'Use bell for vascular sounds, light pressure to avoid creating artifact',
+      tips: ['Have patient hold breath briefly to eliminate respiratory sounds'],
+    },
+    {
+      name: 'Cup of water',
+      purpose: 'Patient swallows during thyroid palpation',
+      howToUse: 'Patient takes small sip and swallows on command',
+      tips: ['Thyroid moves with swallowing, masses do not'],
+    },
+    {
+      name: 'Penlight',
+      purpose: 'Transillumination of neck masses if indicated',
+      howToUse: 'Darken room, place light against mass',
+      tips: ['Cystic masses transilluminate, solid do not'],
+    },
+  ],
+
+  patientPositioning: [
+    {
+      position: 'Sitting upright',
+      whenUsed: 'Standard positioning for thyroid and lymph node exam',
+      howToAchieve: 'Patient sits comfortably with neck slightly extended',
+      alternatives: ['Supine with pillow under shoulders for better thyroid access'],
+      considerations: 'Good lighting essential - position patient facing light',
+    },
+    {
+      position: 'Neck slightly flexed',
+      whenUsed: 'Relaxing SCM for lymph node palpation',
+      howToAchieve: 'Patient turns head slightly toward side being examined',
+      alternatives: ['Support head with your hand if needed'],
+      considerations: 'Relaxed muscles allow deeper palpation of lymph node chains',
+    },
+  ],
+
+  approach: {
+    sequence: [
+      {
+        order: 1,
+        action: 'Inspection',
+        rationale: 'Identify visible abnormalities before touching',
+        whatToObserve: [
+          'Symmetry of neck',
+          'Visible masses or swelling',
+          'Thyroid prominence',
+          'Jugular venous distension',
+          'Surgical scars',
+        ],
+      },
+      {
+        order: 2,
+        action: 'Thyroid inspection',
+        rationale: 'Goiter may be visible before palpable',
+        whatToObserve: [
+          'Anterior neck contour',
+          'Movement with swallowing',
+          'Asymmetry suggesting nodule',
+        ],
+        transitionTip: 'Have patient swallow water while observing thyroid area',
+      },
+      {
+        order: 3,
+        action: 'Lymph node palpation',
+        rationale: 'Systematic assessment of all node groups',
+        whatToObserve: [
+          'Size, consistency, tenderness of nodes',
+          'Fixed vs mobile',
+          'Single vs matted',
+        ],
+        transitionTip: 'Use consistent sequence to avoid missing node groups',
+      },
+      {
+        order: 4,
+        action: 'Thyroid palpation',
+        rationale: 'Assess thyroid size, consistency, nodules',
+        whatToObserve: [
+          'Gland size',
+          'Nodules or irregularities',
+          'Tenderness',
+          'Movement with swallowing',
+        ],
+      },
+      {
+        order: 5,
+        action: 'Carotid assessment',
+        rationale: 'Evaluate for vascular disease',
+        whatToObserve: [
+          'Carotid pulse quality',
+          'Bruits on auscultation',
+        ],
+        transitionTip: 'Always auscultate before vigorous palpation',
+      },
+      {
+        order: 6,
+        action: 'Cervical spine',
+        rationale: 'Assess range of motion and pain',
+        whatToObserve: [
+          'Range of motion (flexion, extension, rotation, lateral bending)',
+          'Pain with movement',
+          'Muscle spasm',
+        ],
+      },
+    ],
+    adaptations: [
+      {
+        scenario: 'Known carotid disease',
+        modification: 'Very gentle palpation - avoid dislodging plaque',
+        rationale: 'Aggressive palpation could cause embolism',
+      },
+      {
+        scenario: 'Neck trauma',
+        modification: 'Immobilize spine until cleared',
+        rationale: 'Cervical spine injury must be excluded',
+      },
+    ],
+    typicalDuration: '3-5 minutes',
+    documentationTemplate: 'Neck: Supple, no lymphadenopathy. Thyroid normal size, no nodules. No carotid bruits. Full ROM without pain.',
+  },
+
+  components: [
+    {
+      id: 'lymph-nodes',
+      name: 'Cervical Lymph Nodes',
+      technique: 'palpation',
+      whatItAssesses: 'Lymphatic drainage of head, neck, and upper body',
+      anatomy: 'Multiple lymph node chains: submental, submandibular, preauricular, postauricular, anterior cervical, posterior cervical, supraclavicular',
+      pathophysiology: 'Lymph nodes enlarge with infection (reactive), malignancy (metastatic or primary), or systemic disease',
+      clinicalSignificance: 'Location and character of nodes suggest etiology - tender suggests infection, hard/fixed suggests malignancy',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Submental nodes', detail: 'Palpate under chin in midline', tip: 'Drain lower lip, floor of mouth' },
+          { order: 2, action: 'Submandibular nodes', detail: 'Palpate along mandible', tip: 'Drain tongue, submandibular gland' },
+          { order: 3, action: 'Preauricular nodes', detail: 'Palpate in front of ear', tip: 'Drain eye, temporal region' },
+          { order: 4, action: 'Postauricular nodes', detail: 'Palpate behind ear over mastoid', tip: 'Drain scalp, ear' },
+          { order: 5, action: 'Anterior cervical chain', detail: 'Palpate along SCM anterior border', tip: 'Drain pharynx, tonsils' },
+          { order: 6, action: 'Posterior cervical chain', detail: 'Palpate along trapezius anterior border', tip: 'Drain scalp, neck' },
+          { order: 7, action: 'Supraclavicular nodes', detail: 'Palpate in supraclavicular fossa', tip: 'Left = Virchow node (GI malignancy)' },
+        ],
+        landmarks: [
+          { name: 'Sternocleidomastoid', howToFind: 'Turn head against resistance', significance: 'Divides anterior and posterior triangles' },
+          { name: 'Supraclavicular fossa', howToFind: 'Depression above clavicle', significance: 'Virchow node location' },
+        ],
+        patientInstructions: 'Relax your neck, turn slightly toward me',
+        examinerPosition: 'Behind or in front of patient',
+        commonErrors: ['Missing supraclavicular nodes', 'Not comparing sides'],
+      },
+      normalFinding: {
+        description: 'Small (<1 cm), soft, mobile nodes may be normal, especially in children',
+        variations: ['Shotty nodes from prior infections common'],
+        ageConsiderations: 'Children have more palpable nodes normally than adults',
+        documentationExample: 'No cervical, supraclavicular, or axillary lymphadenopathy',
+      },
+      abnormalFindings: [
+        {
+          name: 'Tender lymphadenopathy',
+          description: 'Enlarged, tender lymph nodes',
+          appearance: 'Soft, mobile, tender nodes >1 cm',
+          mechanism: 'Reactive hyperplasia from infection in drainage area',
+          associatedConditions: ['Pharyngitis', 'Dental infection', 'Skin infection', 'Mononucleosis'],
+          severity: 'mild',
+          urgency: 'routine',
+          nextSteps: ['Examine drainage area', 'Treat underlying infection'],
+          differentialDiagnosis: ['Bacterial infection', 'Viral infection', 'Early malignancy'],
+          additionalTestsNeeded: ['Depends on suspected source'],
+          documentationExample: 'Tender anterior cervical lymphadenopathy, 1.5 cm, soft, mobile',
+        },
+        {
+          name: 'Hard, fixed lymph node',
+          description: 'Non-tender, firm node fixed to underlying tissue',
+          appearance: 'Rock-hard, immobile, often non-tender',
+          mechanism: 'Malignant infiltration and fixation to surrounding structures',
+          associatedConditions: ['Metastatic carcinoma', 'Lymphoma'],
+          severity: 'severe',
+          urgency: 'urgent',
+          nextSteps: ['Imaging', 'Biopsy', 'Search for primary malignancy'],
+          differentialDiagnosis: ['Metastatic SCC', 'Lymphoma', 'Thyroid cancer spread'],
+          additionalTestsNeeded: ['CT neck', 'FNA or excisional biopsy', 'PET scan'],
+          documentationExample: '2 cm hard, fixed left supraclavicular node, non-tender',
+        },
+        {
+          name: 'Left supraclavicular node (Virchow)',
+          description: 'Enlarged left supraclavicular lymph node',
+          appearance: 'Palpable node in left supraclavicular fossa',
+          mechanism: 'Metastatic spread via thoracic duct from abdominal malignancy',
+          associatedConditions: ['Gastric cancer', 'Pancreatic cancer', 'Other GI malignancies'],
+          severity: 'severe',
+          urgency: 'urgent',
+          nextSteps: ['CT chest/abdomen/pelvis', 'Upper endoscopy', 'Node biopsy'],
+          differentialDiagnosis: ['GI malignancy', 'Lung cancer', 'Lymphoma'],
+          additionalTestsNeeded: ['CT CAP', 'EGD', 'Biopsy'],
+          documentationExample: 'Palpable left supraclavicular (Virchow) node, 1.5 cm, firm',
+        },
+      ],
+      pitfalls: ['Missing supraclavicular nodes', 'Calling shotty nodes abnormal'],
+      practiceTips: ['Develop consistent sequence', 'Always check supraclavicular bilaterally'],
+    },
+    {
+      id: 'thyroid',
+      name: 'Thyroid Gland',
+      technique: 'palpation',
+      whatItAssesses: 'Thyroid size, nodules, and consistency',
+      anatomy: 'Butterfly-shaped gland anterior to trachea at level of cricoid cartilage, with isthmus connecting two lateral lobes',
+      pathophysiology: 'Thyroid enlarges diffusely (goiter) or focally (nodule) from various causes',
+      clinicalSignificance: 'Goiter may indicate hyper/hypothyroidism; nodules need evaluation for cancer',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Inspect', detail: 'Look for visible goiter or asymmetry' },
+          { order: 2, action: 'Have patient swallow', detail: 'Observe thyroid rise with swallowing' },
+          { order: 3, action: 'Palpate from behind', detail: 'Fingers curve around SCM to reach thyroid' },
+          { order: 4, action: 'Displace trachea', detail: 'Gently push trachea to one side to examine opposite lobe' },
+          { order: 5, action: 'Palpate during swallow', detail: 'Feel thyroid move under fingers during swallowing' },
+          { order: 6, action: 'Auscultate if enlarged', detail: 'Listen for thyroid bruit (suggests hyperthyroidism)' },
+        ],
+        landmarks: [
+          { name: 'Cricoid cartilage', howToFind: 'Ring below thyroid cartilage (Adam\'s apple)', significance: 'Thyroid isthmus lies just below' },
+          { name: 'Thyroid notch', howToFind: 'Superior notch of thyroid cartilage', significance: 'Reference for thyroid location' },
+        ],
+        patientInstructions: 'Swallow when I tell you. Slight chin elevation helps.',
+        examinerPosition: 'Behind patient, fingers wrapping around neck',
+        commonErrors: ['Palpating too high (at thyroid cartilage)', 'Not feeling during swallow'],
+      },
+      normalFinding: {
+        description: 'Soft, non-tender, moves with swallowing, no nodules',
+        variations: ['May not be palpable in obese patients', 'Slightly enlarged in pregnancy'],
+        ageConsiderations: 'Elderly may have irregular contour without pathology',
+        documentationExample: 'Thyroid: Normal size, no nodules, moves appropriately with swallowing',
+      },
+      abnormalFindings: [
+        {
+          name: 'Diffuse goiter',
+          description: 'Symmetric enlargement of thyroid',
+          appearance: 'Visible and palpable enlargement of entire gland',
+          mechanism: 'TSH stimulation, autoimmune disease, or iodine deficiency',
+          associatedConditions: ['Graves disease', 'Hashimoto thyroiditis', 'Iodine deficiency'],
+          severity: 'mild',
+          urgency: 'routine',
+          nextSteps: ['TSH', 'Free T4', 'Thyroid ultrasound'],
+          differentialDiagnosis: ['Graves', 'Hashimoto', 'Multinodular goiter'],
+          additionalTestsNeeded: ['TSH', 'Thyroid antibodies', 'US if nodules suspected'],
+          documentationExample: 'Thyroid: Diffusely enlarged ~2x normal, soft, non-tender, no discrete nodules',
+        },
+        {
+          name: 'Thyroid nodule',
+          description: 'Focal lesion within thyroid',
+          appearance: 'Discrete mass moving with swallowing',
+          mechanism: 'Benign adenoma, cyst, or malignancy',
+          associatedConditions: ['Benign adenoma (most common)', 'Thyroid cancer', 'Thyroid cyst'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['TSH', 'Ultrasound', 'FNA if indicated'],
+          differentialDiagnosis: ['Benign nodule', 'Thyroid cancer', 'Cyst'],
+          additionalTestsNeeded: ['US with characterization', 'FNA based on size/features'],
+          documentationExample: 'Thyroid: 2 cm firm nodule right lobe, mobile, non-tender',
+        },
+      ],
+      pitfalls: ['Mistaking lymph node for thyroid nodule', 'Missing posterior nodules'],
+      practiceTips: ['Water swallow is essential', 'Compare both lobes systematically'],
+    },
+    {
+      id: 'carotid-arteries',
+      name: 'Carotid Arteries',
+      technique: 'auscultation',
+      whatItAssesses: 'Carotid artery patency and stenosis',
+      anatomy: 'Common carotid bifurcates at thyroid cartilage level into internal and external carotid',
+      pathophysiology: 'Atherosclerotic plaque causes turbulent flow heard as bruit',
+      clinicalSignificance: 'Carotid stenosis is a major risk factor for stroke',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Auscultate first', detail: 'Listen with bell before palpating', tip: 'Palpation could dislodge plaque' },
+          { order: 2, action: 'Position stethoscope', detail: 'Place bell over carotid at angle of jaw' },
+          { order: 3, action: 'Have patient hold breath', detail: 'Eliminates transmitted breath sounds' },
+          { order: 4, action: 'Listen for bruit', detail: 'Whooshing sound during systole indicates stenosis' },
+          { order: 5, action: 'Gentle palpation', detail: 'Feel pulse quality - do NOT massage or compress both sides' },
+        ],
+        landmarks: [
+          { name: 'Carotid bifurcation', howToFind: 'Level of thyroid cartilage, anterior to SCM', significance: 'Most common site of stenosis' },
+        ],
+        patientInstructions: 'Hold your breath briefly while I listen',
+        examinerPosition: 'In front of patient',
+        commonErrors: ['Compressing artery while listening', 'Palpating before auscultating'],
+      },
+      normalFinding: {
+        description: 'No bruit, good pulse quality bilaterally',
+        variations: ['Very thin patients may transmit heart sounds'],
+        ageConsiderations: 'Elderly may have bruits without critical stenosis',
+        documentationExample: 'Carotids: 2+ pulses bilaterally, no bruits',
+      },
+      abnormalFindings: [
+        {
+          name: 'Carotid bruit',
+          description: 'Whooshing sound over carotid artery',
+          appearance: 'Systolic whoosh heard with stethoscope bell',
+          mechanism: 'Turbulent flow through stenotic segment',
+          associatedConditions: ['Carotid stenosis', 'Atherosclerosis'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Carotid ultrasound', 'Consider CTA if significant'],
+          differentialDiagnosis: ['Carotid stenosis', 'Transmitted heart murmur', 'Venous hum'],
+          additionalTestsNeeded: ['Carotid duplex ultrasound'],
+          documentationExample: 'Right carotid bruit present, 2+ pulse. No left bruit.',
+        },
+      ],
+      pitfalls: ['Missing bruit due to too much pressure', 'Confusing transmitted murmur with bruit'],
+      practiceTips: ['Light pressure with bell', 'Always compare both sides'],
+    },
+  ],
+
+  specialTests: [
+    {
+      id: 'spurling-test',
+      name: 'Spurling Test',
+      alternateNames: ['Cervical compression test', 'Foraminal compression test'],
+      system: 'neck',
+      purpose: 'Evaluate for cervical radiculopathy',
+      indications: ['Neck pain with radicular symptoms', 'Suspected cervical disc herniation'],
+      contraindications: ['Known cervical instability', 'Cervical myelopathy', 'Severe neck pain'],
+      procedure: {
+        patientPosition: 'Sitting upright',
+        examinerPosition: 'Behind patient',
+        steps: [
+          { order: 1, action: 'Extend neck', detail: 'Patient extends neck slightly' },
+          { order: 2, action: 'Lateral flexion', detail: 'Tilt head toward symptomatic side' },
+          { order: 3, action: 'Axial compression', detail: 'Apply downward pressure to top of head' },
+          { order: 4, action: 'Assess response', detail: 'Positive if reproduces radicular arm pain' },
+        ],
+        patientInstructions: 'Tell me if this reproduces your arm pain',
+        duration: '10 seconds',
+      },
+      interpretation: {
+        positiveResult: 'Reproduction of radicular arm pain (not just neck pain)',
+        negativeResult: 'No arm pain with maneuver',
+        falsePositives: ['Facet arthropathy'],
+        falseNegatives: ['Central disc herniation'],
+        clinicalContext: 'High specificity - positive test strongly suggests radiculopathy',
+      },
+      accuracy: {
+        sensitivity: '~50%',
+        specificity: '~90%',
+        notes: 'High specificity means positive test is meaningful',
+      },
+      clinicalUtility: 'Helpful when positive; negative does not rule out radiculopathy',
+      commonErrors: ['Calling positive when only neck pain produced', 'Excessive force'],
+      evidence: 'Well-validated test for cervical radiculopathy',
+    },
+  ],
+
+  relatedSystems: [
+    {
+      relatedSystem: 'heent',
+      relationship: 'Lymph nodes drain structures examined in HEENT',
+      whenToExamineTogether: 'Lymphadenopathy warrants search for source in drainage area',
+      clinicalExample: 'Submandibular lymphadenopathy with dental infection',
+    },
+    {
+      relatedSystem: 'neurological',
+      relationship: 'Cervical spine pathology causes neurological symptoms',
+      whenToExamineTogether: 'Radicular symptoms need both neck and neuro exam',
+      clinicalExample: 'Cervical radiculopathy causing arm weakness',
+    },
+  ],
+
+  findingPatterns: [
+    {
+      name: 'Hyperthyroidism pattern',
+      description: 'Constellation of thyroid exam findings in Graves disease',
+      findings: [
+        { component: 'Thyroid', finding: 'Diffuse enlargement', significance: 'Autoimmune stimulation' },
+        { component: 'Thyroid', finding: 'Thyroid bruit', significance: 'Increased vascularity' },
+        { component: 'General', finding: 'Tremor, tachycardia', significance: 'Hypermetabolic state' },
+      ],
+      suggestsDiagnosis: ['Graves disease'],
+      mechanism: 'TSH receptor antibodies cause thyroid stimulation and growth',
+      clinicalScenario: 'Young woman with weight loss, palpitations, and goiter',
+      keyLearningPoint: 'Thyroid bruit is specific for hyperthyroidism - listen when thyroid is enlarged',
+    },
+  ],
+
+  redFlags: [
+    {
+      finding: 'Hard, fixed cervical lymph node',
+      concernFor: 'Malignancy - metastatic carcinoma or lymphoma',
+      mechanism: 'Malignant cells infiltrate and fix node to surrounding structures',
+      immediateActions: ['Imaging (CT neck)', 'ENT referral', 'Biopsy'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Rapidly enlarging thyroid mass',
+      concernFor: 'Anaplastic thyroid cancer or hemorrhage into nodule',
+      mechanism: 'Aggressive malignancy or acute bleeding',
+      immediateActions: ['Urgent ultrasound', 'ENT/surgery referral', 'Airway assessment'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Left supraclavicular lymphadenopathy (Virchow node)',
+      concernFor: 'GI malignancy with metastasis',
+      mechanism: 'Spread via thoracic duct from abdominal cancer',
+      immediateActions: ['CT chest/abdomen/pelvis', 'Upper endoscopy', 'Node biopsy'],
+      neverMiss: true,
+    },
+  ],
+
+  commonMistakes: [
+    {
+      mistake: 'Palpating thyroid cartilage instead of thyroid gland',
+      consequence: 'Missing thyroid pathology',
+      howToAvoid: 'Thyroid is below cricoid cartilage, not at Adam\'s apple',
+      correctTechnique: 'Locate cricoid first, then palpate just below',
+    },
+    {
+      mistake: 'Not having patient swallow during thyroid exam',
+      consequence: 'Missing nodules and misidentifying non-thyroid masses',
+      howToAvoid: 'Always palpate while patient swallows',
+      correctTechnique: 'Thyroid moves up with swallowing, other structures do not',
+    },
+  ],
+
+  clinicalPearls: [
+    'Thyroid moves with swallowing - lymph nodes do not. Use this to differentiate.',
+    'Left supraclavicular node (Virchow) drains abdominal organs via thoracic duct - concerning for GI malignancy.',
+    'Auscultate carotids BEFORE palpating to avoid dislodging plaque.',
+    'Thyroid bruit suggests hyperthyroidism - always listen when thyroid is enlarged.',
+    'Tender lymphadenopathy suggests infection; non-tender, hard, fixed suggests malignancy.',
+  ],
+};
+
+// ============================================
+// Skin Examination
+// ============================================
+
+export const SKIN_EXAM: SystemExamEducation = {
+  id: 'skin',
+  name: 'Skin Exam',
+  fullName: 'Dermatological Examination',
+
+  overview: `The skin examination assesses the body\'s largest organ for primary dermatologic
+conditions and manifestations of systemic disease. It includes evaluation of skin, hair, nails,
+and mucous membranes. The skin often provides clues to internal disease, making thorough
+skin examination an important part of general medical assessment.`,
+
+  clinicalImportance: `Skin cancer is the most common malignancy, making skin exam essential for
+early detection. Many systemic diseases manifest with skin findings - the "window to internal
+disease." Rashes may be the first sign of drug reactions, infections, or autoimmune conditions.
+A careful skin exam can be diagnostic and guide further workup.`,
+
+  equipmentNeeded: [
+    {
+      name: 'Good lighting',
+      purpose: 'Essential for visualizing skin lesions',
+      howToUse: 'Use natural light when possible; supplement with bright exam light',
+      tips: ['Side lighting helps show texture and elevation', 'Darken room for Wood lamp'],
+    },
+    {
+      name: 'Magnifying lens',
+      purpose: 'Detailed examination of lesions',
+      howToUse: 'Hold 2-3 inches from skin, focus light on lesion',
+      tips: ['Essential for examining small lesions and borders'],
+    },
+    {
+      name: 'Dermatoscope',
+      purpose: 'Evaluate pigmented lesions for melanoma features',
+      howToUse: 'Apply oil/gel, place in contact with skin, examine pattern',
+      tips: ['Requires training to interpret', 'Improves melanoma detection'],
+    },
+    {
+      name: 'Ruler/measuring tape',
+      purpose: 'Document lesion size for tracking changes',
+      howToUse: 'Measure longest dimension and perpendicular dimension',
+      tips: ['Include ruler in photos for scale'],
+    },
+    {
+      name: 'Wood lamp (UV)',
+      purpose: 'Detect fungal infections, pigmentary changes',
+      howToUse: 'Darken room, shine UV light on affected area',
+      tips: ['Tinea capitis fluoresces green', 'Erythrasma fluoresces coral-red'],
+    },
+  ],
+
+  patientPositioning: [
+    {
+      position: 'Fully undressed with gown',
+      whenUsed: 'Complete skin examination',
+      howToAchieve: 'Patient in gown, expose one area at a time',
+      alternatives: ['Partial exam if complete not feasible'],
+      considerations: 'Maintain dignity - examine systematically while keeping unexposed areas covered',
+    },
+    {
+      position: 'Standing',
+      whenUsed: 'Back and posterior body exam',
+      howToAchieve: 'Patient stands with back to examiner',
+      alternatives: ['Sitting at edge of bed'],
+      considerations: 'Ensure patient stability',
+    },
+  ],
+
+  approach: {
+    sequence: [
+      {
+        order: 1,
+        action: 'General observation',
+        rationale: 'Identify obvious abnormalities and overall skin condition',
+        whatToObserve: [
+          'Overall skin color and tone',
+          'Obvious lesions or rashes',
+          'Distribution pattern',
+          'Signs of scratching or excoriation',
+        ],
+      },
+      {
+        order: 2,
+        action: 'Systematic inspection',
+        rationale: 'Examine entire skin surface methodically',
+        whatToObserve: [
+          'Scalp and hair',
+          'Face and ears',
+          'Neck and chest',
+          'Back',
+          'Arms and hands (including nails)',
+          'Legs and feet (including between toes)',
+        ],
+        transitionTip: 'Use consistent head-to-toe approach to avoid missing areas',
+      },
+      {
+        order: 3,
+        action: 'Focused lesion examination',
+        rationale: 'Characterize any identified lesions',
+        whatToObserve: [
+          'Morphology (macule, papule, nodule, etc.)',
+          'Color',
+          'Size',
+          'Shape and borders',
+          'Distribution and arrangement',
+          'Surface characteristics',
+        ],
+      },
+      {
+        order: 4,
+        action: 'Nail and hair examination',
+        rationale: 'Appendages reflect systemic and local disease',
+        whatToObserve: [
+          'Nail color, shape, texture',
+          'Hair distribution and quality',
+          'Scalp condition',
+        ],
+      },
+    ],
+    adaptations: [
+      {
+        scenario: 'Elderly patient',
+        modification: 'Pay special attention to sun-exposed areas for skin cancer',
+        rationale: 'Increased skin cancer risk with age and sun exposure',
+      },
+      {
+        scenario: 'Dark skin',
+        modification: 'Examine palms, soles, and mucous membranes for melanoma',
+        rationale: 'Acral melanoma more common; pigmented lesions harder to evaluate',
+      },
+    ],
+    typicalDuration: '5-10 minutes for complete exam',
+    documentationTemplate: 'Skin: No suspicious lesions. [Normal/Abnormal findings]. Nails: [findings]. Hair: [findings].',
+  },
+
+  components: [
+    {
+      id: 'primary-lesions',
+      name: 'Primary Lesion Assessment',
+      technique: 'inspection',
+      whatItAssesses: 'Initial morphology of skin lesions',
+      anatomy: 'Epidermis, dermis, and subcutaneous tissue',
+      pathophysiology: 'Different diseases produce characteristic lesion types',
+      clinicalSignificance: 'Correct lesion identification guides differential diagnosis',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Identify lesion type', detail: 'Flat vs raised, solid vs fluid-filled' },
+          { order: 2, action: 'Measure size', detail: 'Use ruler for accurate measurement' },
+          { order: 3, action: 'Assess color', detail: 'Note color and any color variation' },
+          { order: 4, action: 'Examine borders', detail: 'Regular vs irregular, well-defined vs ill-defined' },
+          { order: 5, action: 'Palpate', detail: 'Feel texture, depth, tenderness' },
+        ],
+        landmarks: [],
+        patientInstructions: 'Tell me if anything is tender',
+        examinerPosition: 'Good lighting, close to lesion',
+        commonErrors: ['Using imprecise terminology', 'Not measuring lesions'],
+      },
+      normalFinding: {
+        description: 'Skin intact, no lesions, appropriate color for ethnicity',
+        variations: ['Benign nevi common', 'Seborrheic keratoses in elderly'],
+        ageConsiderations: 'More lentigines and keratoses with age',
+        documentationExample: 'Skin clear without suspicious lesions',
+      },
+      abnormalFindings: [
+        {
+          name: 'Suspicious melanocytic lesion',
+          description: 'Pigmented lesion with ABCDE warning signs',
+          appearance: 'Asymmetric, irregular Borders, Color variation, Diameter >6mm, Evolving',
+          mechanism: 'Melanocyte proliferation with potential malignant transformation',
+          associatedConditions: ['Melanoma', 'Dysplastic nevus'],
+          severity: 'severe',
+          urgency: 'urgent',
+          nextSteps: ['Dermatology referral', 'Biopsy'],
+          differentialDiagnosis: ['Melanoma', 'Dysplastic nevus', 'Seborrheic keratosis'],
+          additionalTestsNeeded: ['Excisional or punch biopsy'],
+          documentationExample: '8mm pigmented lesion right upper back, asymmetric with irregular borders and color variation',
+        },
+        {
+          name: 'Basal cell carcinoma',
+          description: 'Pearly, telangiectatic papule/nodule',
+          appearance: 'Pearly, waxy papule with rolled borders and central depression, often with telangiectasias',
+          mechanism: 'UV-induced DNA damage in basal keratinocytes',
+          associatedConditions: ['Sun exposure', 'Fair skin', 'Immunosuppression'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Biopsy', 'Dermatology referral for excision'],
+          differentialDiagnosis: ['Squamous cell carcinoma', 'Amelanotic melanoma', 'Sebaceous hyperplasia'],
+          additionalTestsNeeded: ['Shave or punch biopsy'],
+          documentationExample: '5mm pearly papule with telangiectasias on right nasal ala',
+        },
+        {
+          name: 'Erythematous maculopapular rash',
+          description: 'Red flat and raised lesions in combination',
+          appearance: 'Mixture of macules and papules, often coalescing',
+          mechanism: 'Varies by etiology - viral exanthem, drug reaction, etc.',
+          associatedConditions: ['Viral exanthem', 'Drug eruption', 'Autoimmune disease'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Medication review', 'Consider infectious etiology', 'Mucosal exam'],
+          differentialDiagnosis: ['Viral exanthem', 'Drug eruption', 'SLE rash'],
+          additionalTestsNeeded: ['Based on clinical context'],
+          documentationExample: 'Diffuse erythematous maculopapular rash trunk and extremities, sparing palms/soles',
+        },
+      ],
+      pitfalls: ['Confusing terminology', 'Not examining entire body'],
+      practiceTips: ['Learn precise dermatologic vocabulary', 'Always examine hidden areas'],
+    },
+    {
+      id: 'nails',
+      name: 'Nail Examination',
+      technique: 'inspection',
+      whatItAssesses: 'Nail health and systemic disease manifestations',
+      anatomy: 'Nail plate, nail bed, nail matrix, cuticle, and paronychial tissue',
+      pathophysiology: 'Nails grow continuously and reflect health over months',
+      clinicalSignificance: 'Nails provide clues to systemic disease, infection, and local pathology',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Inspect nail plate', detail: 'Color, texture, shape, ridges' },
+          { order: 2, action: 'Examine nail bed', detail: 'Color through nail, splinter hemorrhages' },
+          { order: 3, action: 'Check cuticle and paronychium', detail: 'Inflammation, infection' },
+          { order: 4, action: 'Palpate', detail: 'Tenderness, fluctuance' },
+          { order: 5, action: 'Assess capillary refill', detail: 'Press nail bed, release, count seconds' },
+        ],
+        landmarks: [
+          { name: 'Lunula', howToFind: 'White crescent at base of nail', significance: 'Visible matrix' },
+        ],
+        patientInstructions: 'Show me your hands with fingers spread',
+        examinerPosition: 'Hands at eye level, good lighting',
+        commonErrors: ['Not removing nail polish', 'Missing toenails'],
+      },
+      normalFinding: {
+        description: 'Pink nail bed, smooth nail plate, intact cuticles, capillary refill <3 seconds',
+        variations: ['Longitudinal ridges increase with age', 'White spots common and benign'],
+        ageConsiderations: 'Nails thicken and grow more slowly with age',
+        documentationExample: 'Nails: Normal color and texture, no clubbing',
+      },
+      abnormalFindings: [
+        {
+          name: 'Clubbing',
+          description: 'Enlargement of fingertip with increased nail angle',
+          appearance: 'Loss of nail bed angle >180°, spongy nail bed, drumstick fingers',
+          mechanism: 'Uncertain - likely hypoxia-related growth factors',
+          associatedConditions: ['Lung cancer', 'IPF', 'Cyanotic heart disease', 'IBD', 'Cirrhosis'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Chest imaging', 'Evaluate for underlying cause'],
+          differentialDiagnosis: ['Pulmonary disease', 'Cardiac disease', 'GI disease'],
+          additionalTestsNeeded: ['CXR', 'CT chest', 'Based on history'],
+          documentationExample: 'Clubbing present bilaterally with loss of nail bed angle',
+        },
+        {
+          name: 'Splinter hemorrhages',
+          description: 'Linear red-brown streaks under nail',
+          appearance: 'Thin longitudinal lines in nail bed',
+          mechanism: 'Microemboli lodging in nail bed capillaries',
+          associatedConditions: ['Endocarditis', 'Trauma', 'Vasculitis'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Cardiac exam', 'Consider endocarditis workup if febrile'],
+          differentialDiagnosis: ['Trauma (most common)', 'Endocarditis', 'Vasculitis'],
+          additionalTestsNeeded: ['Blood cultures and echo if endocarditis suspected'],
+          documentationExample: 'Multiple splinter hemorrhages bilateral hands',
+        },
+        {
+          name: 'Onychomycosis',
+          description: 'Fungal nail infection',
+          appearance: 'Thickened, yellow, crumbly nail with subungual debris',
+          mechanism: 'Dermatophyte invasion of nail plate',
+          associatedConditions: ['Tinea pedis', 'Diabetes', 'Immunosuppression'],
+          severity: 'mild',
+          urgency: 'routine',
+          nextSteps: ['Confirm with KOH or culture', 'Consider oral antifungal'],
+          differentialDiagnosis: ['Psoriasis', 'Trauma', 'Lichen planus'],
+          additionalTestsNeeded: ['KOH prep', 'Fungal culture'],
+          documentationExample: 'Thickened, yellow great toenails bilaterally with subungual debris c/w onychomycosis',
+        },
+      ],
+      pitfalls: ['Missing early clubbing', 'Not checking toenails'],
+      practiceTips: ['Compare nail bed angle to normal', 'Check capillary refill routinely'],
+    },
+  ],
+
+  specialTests: [
+    {
+      id: 'diascopy',
+      name: 'Diascopy',
+      alternateNames: ['Glass slide test'],
+      system: 'skin',
+      purpose: 'Distinguish purpura from erythema - purpura does not blanch',
+      indications: ['Red/purple lesions', 'Suspected vasculitis', 'Determining if lesion blanches'],
+      contraindications: ['Open wounds'],
+      procedure: {
+        patientPosition: 'Comfortable, lesion exposed',
+        examinerPosition: 'Close to lesion',
+        steps: [
+          { order: 1, action: 'Place glass slide', detail: 'Press clear glass slide firmly on lesion' },
+          { order: 2, action: 'Apply pressure', detail: 'Press to blanch surrounding skin' },
+          { order: 3, action: 'Observe', detail: 'Note if lesion color disappears (blanches) or persists' },
+        ],
+        patientInstructions: 'This may be slightly uncomfortable',
+        duration: '10 seconds',
+      },
+      interpretation: {
+        positiveResult: 'Lesion does NOT blanch = purpura (blood extravasation)',
+        negativeResult: 'Lesion blanches = erythema (dilated vessels)',
+        falsePositives: ['Deep hemorrhage may partially blanch'],
+        falseNegatives: ['Minimal extravasation may blanch'],
+        clinicalContext: 'Non-blanching lesions (purpura) concerning for vasculitis, coagulopathy, or infection',
+      },
+      accuracy: {
+        sensitivity: '~90%',
+        specificity: '~95%',
+        notes: 'Simple and reliable bedside test',
+      },
+      clinicalUtility: 'Essential for evaluating red/purple lesions',
+      commonErrors: ['Insufficient pressure', 'Using opaque object'],
+      evidence: 'Classic physical diagnosis technique',
+    },
+    {
+      id: 'nikolsky-sign',
+      name: 'Nikolsky Sign',
+      alternateNames: ['Nikolsky phenomenon'],
+      system: 'skin',
+      purpose: 'Detect intraepidermal blistering diseases',
+      indications: ['Blistering skin disease', 'Suspected pemphigus or TEN'],
+      contraindications: ['Fragile skin where testing would cause harm'],
+      procedure: {
+        patientPosition: 'Skin accessible',
+        examinerPosition: 'Close to affected area',
+        steps: [
+          { order: 1, action: 'Identify area', detail: 'Find normal-appearing skin near blisters' },
+          { order: 2, action: 'Apply lateral pressure', detail: 'Rub firmly with finger' },
+          { order: 3, action: 'Observe', detail: 'Positive if epidermis slides off or blister forms' },
+        ],
+        patientInstructions: 'This may be uncomfortable',
+        duration: '5 seconds',
+      },
+      interpretation: {
+        positiveResult: 'Epidermis easily separates from dermis with lateral pressure',
+        negativeResult: 'Skin remains intact',
+        falsePositives: ['Friction blisters', 'Epidermolysis bullosa'],
+        falseNegatives: ['Early pemphigus', 'Subepidermal blistering diseases'],
+        clinicalContext: 'Positive in pemphigus, TEN/SJS, staphylococcal scalded skin',
+      },
+      accuracy: {
+        sensitivity: '~80% for pemphigus',
+        specificity: '~90%',
+        notes: 'More reliable in active disease',
+      },
+      clinicalUtility: 'Helps distinguish pemphigus from bullous pemphigoid',
+      commonErrors: ['Testing on normal skin far from lesions', 'Insufficient pressure'],
+      evidence: 'Classic sign first described by Pyotr Nikolsky in 1896',
+    },
+  ],
+
+  relatedSystems: [
+    {
+      relatedSystem: 'musculoskeletal',
+      relationship: 'Autoimmune skin diseases often affect joints',
+      whenToExamineTogether: 'Psoriasis warrants joint exam for psoriatic arthritis',
+      clinicalExample: 'Psoriatic plaques with joint pain suggests psoriatic arthritis',
+    },
+    {
+      relatedSystem: 'cardiovascular',
+      relationship: 'Nail findings may indicate endocarditis',
+      whenToExamineTogether: 'Splinter hemorrhages with fever warrant cardiac exam',
+      clinicalExample: 'Fever, splinter hemorrhages, and new murmur suggests endocarditis',
+    },
+  ],
+
+  findingPatterns: [
+    {
+      name: 'Drug eruption pattern',
+      description: 'Morbilliform rash starting 7-14 days after new medication',
+      findings: [
+        { component: 'Distribution', finding: 'Symmetric, trunk > extremities', significance: 'Systemic reaction' },
+        { component: 'Morphology', finding: 'Maculopapular, blanching', significance: 'Drug hypersensitivity' },
+        { component: 'Mucosal', finding: 'Spared (if involved, consider SJS)', significance: 'Simple vs severe' },
+      ],
+      suggestsDiagnosis: ['Drug eruption', 'Consider SJS/TEN if mucosal involvement'],
+      mechanism: 'Type IV hypersensitivity to medication',
+      clinicalScenario: 'Diffuse rash 10 days after starting antibiotic',
+      keyLearningPoint: 'Mucosal involvement, facial edema, or skin pain suggest progression to SJS/TEN',
+    },
+  ],
+
+  redFlags: [
+    {
+      finding: 'Rapidly spreading purpura with fever',
+      concernFor: 'Meningococcemia or other severe infection with DIC',
+      mechanism: 'Septic emboli and coagulopathy cause non-blanching lesions',
+      immediateActions: ['Blood cultures', 'Broad-spectrum antibiotics', 'ICU consideration'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Blistering rash with mucosal involvement',
+      concernFor: 'Stevens-Johnson syndrome or toxic epidermal necrolysis',
+      mechanism: 'Drug-induced keratinocyte death',
+      immediateActions: ['Stop all potential culprit drugs', 'Dermatology consult', 'Consider burn unit'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Rapidly changing pigmented lesion',
+      concernFor: 'Melanoma',
+      mechanism: 'Malignant transformation of melanocytes',
+      immediateActions: ['Urgent dermatology referral', 'Excisional biopsy'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Non-healing ulcer',
+      concernFor: 'Squamous cell carcinoma or other malignancy',
+      mechanism: 'Malignancy prevents normal healing',
+      immediateActions: ['Biopsy', 'Dermatology referral'],
+      neverMiss: true,
+    },
+  ],
+
+  commonMistakes: [
+    {
+      mistake: 'Not examining entire skin surface',
+      consequence: 'Missing skin cancers in hidden locations',
+      howToAvoid: 'Systematic head-to-toe exam including scalp, ears, between toes',
+      correctTechnique: 'Complete skin check for all patients at risk',
+    },
+    {
+      mistake: 'Using imprecise terminology (e.g., "rash")',
+      consequence: 'Poor communication and documentation',
+      howToAvoid: 'Learn and use proper dermatologic morphologic terms',
+      correctTechnique: 'Describe primary lesion, distribution, arrangement specifically',
+    },
+  ],
+
+  clinicalPearls: [
+    'Skin is the window to internal disease - many systemic conditions have cutaneous manifestations.',
+    'ABCDE for melanoma: Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolution.',
+    'Non-blanching lesions (purpura) indicate blood outside vessels - always concerning.',
+    'When a rash involves mucous membranes, think drug reaction (SJS/TEN) and escalate care.',
+    'In dark skin, examine palms, soles, and mucous membranes for melanoma (acral pattern).',
+  ],
+};
+
+// ============================================
+// Psychiatric Examination
+// ============================================
+
+export const PSYCHIATRIC_EXAM: SystemExamEducation = {
+  id: 'psychiatric',
+  name: 'Psychiatric Exam',
+  fullName: 'Mental Status Examination',
+
+  overview: `The mental status examination (MSE) is the psychiatric equivalent of the physical exam.
+It provides a systematic assessment of a patient's current mental state including appearance,
+behavior, speech, mood, thought process, thought content, perception, cognition, insight, and
+judgment. The MSE is performed through observation and directed questioning during the interview.`,
+
+  clinicalImportance: `Mental health conditions are highly prevalent and often unrecognized.
+The MSE helps identify psychiatric disorders, assess severity, monitor treatment response,
+and evaluate capacity for medical decision-making. It also detects delirium in medical
+patients - an often-missed condition with serious consequences.`,
+
+  equipmentNeeded: [
+    {
+      name: 'Private, quiet space',
+      purpose: 'Patient comfort and confidentiality for psychiatric interview',
+      howToUse: 'Conduct interview in private room with door closed',
+      tips: ['Remove potential weapons/dangerous objects', 'Position near exit if safety concern'],
+    },
+    {
+      name: 'Cognitive screening tools',
+      purpose: 'Standardized assessment of cognition',
+      howToUse: 'MMSE, MoCA, or Mini-Cog as indicated',
+      tips: ['Account for education level and language', 'Document which tool used'],
+    },
+    {
+      name: 'PHQ-9 or similar screening tool',
+      purpose: 'Depression screening and severity',
+      howToUse: 'Patient completes self-report questionnaire',
+      tips: ['Score guides diagnosis and treatment decisions'],
+    },
+  ],
+
+  patientPositioning: [
+    {
+      position: 'Seated comfortably',
+      whenUsed: 'Standard psychiatric interview',
+      howToAchieve: 'Chairs at same level, comfortable distance (3-4 feet)',
+      alternatives: ['Bedside if inpatient'],
+      considerations: 'No barriers between you and patient; maintain exit access if needed',
+    },
+  ],
+
+  approach: {
+    sequence: [
+      {
+        order: 1,
+        action: 'Observe appearance and behavior',
+        rationale: 'Non-verbal information often as valuable as verbal',
+        whatToObserve: [
+          'Grooming and hygiene',
+          'Clothing appropriateness',
+          'Psychomotor activity (agitation vs retardation)',
+          'Eye contact',
+          'Rapport and attitude toward examiner',
+        ],
+        transitionTip: 'Begin observing from the moment you see the patient',
+      },
+      {
+        order: 2,
+        action: 'Assess speech characteristics',
+        rationale: 'Speech reflects thought process',
+        whatToObserve: [
+          'Rate (rapid, slow, normal)',
+          'Volume',
+          'Rhythm and prosody',
+          'Latency of response',
+        ],
+      },
+      {
+        order: 3,
+        action: 'Evaluate mood and affect',
+        rationale: 'Core of emotional assessment',
+        whatToObserve: [
+          'Mood (patient\'s subjective report)',
+          'Affect (observed emotional expression)',
+          'Affect range, reactivity, congruence with stated mood',
+        ],
+        transitionTip: 'Ask "How has your mood been?" then observe affect throughout',
+      },
+      {
+        order: 4,
+        action: 'Assess thought process',
+        rationale: 'How thoughts are organized and connected',
+        whatToObserve: [
+          'Logical vs illogical',
+          'Goal-directed vs tangential',
+          'Circumstantial, loose associations',
+          'Flight of ideas or thought blocking',
+        ],
+      },
+      {
+        order: 5,
+        action: 'Evaluate thought content',
+        rationale: 'What the patient is thinking about',
+        whatToObserve: [
+          'Delusions (false fixed beliefs)',
+          'Obsessions',
+          'Suicidal or homicidal ideation (MUST ASK)',
+          'Preoccupations',
+        ],
+        transitionTip: 'Always ask directly about suicidal and homicidal thoughts',
+      },
+      {
+        order: 6,
+        action: 'Assess perceptions',
+        rationale: 'Identify hallucinations and other perceptual abnormalities',
+        whatToObserve: [
+          'Hallucinations (auditory, visual, other)',
+          'Illusions',
+          'Depersonalization/derealization',
+        ],
+      },
+      {
+        order: 7,
+        action: 'Evaluate cognition',
+        rationale: 'Assess orientation, attention, memory',
+        whatToObserve: [
+          'Orientation (person, place, time, situation)',
+          'Attention and concentration',
+          'Memory (immediate, recent, remote)',
+          'Executive function if indicated',
+        ],
+        transitionTip: 'Use standardized tools (MMSE, MoCA) for formal assessment',
+      },
+      {
+        order: 8,
+        action: 'Assess insight and judgment',
+        rationale: 'Determines treatment adherence and safety',
+        whatToObserve: [
+          'Awareness of illness',
+          'Understanding of consequences',
+          'Quality of decision-making',
+        ],
+      },
+    ],
+    adaptations: [
+      {
+        scenario: 'Agitated patient',
+        modification: 'Prioritize safety assessment, use de-escalation techniques',
+        rationale: 'Safety comes first',
+      },
+      {
+        scenario: 'Medical patient with altered mental status',
+        modification: 'Focus on delirium screening, orient frequently',
+        rationale: 'Medical causes must be excluded',
+      },
+    ],
+    typicalDuration: '15-30 minutes',
+    documentationTemplate: 'MSE: Appearance: []. Behavior: []. Speech: []. Mood: "[]". Affect: []. Thought process: []. Thought content: [No SI/HI]. Perceptions: []. Cognition: []. Insight/Judgment: [].',
+  },
+
+  components: [
+    {
+      id: 'mood-affect',
+      name: 'Mood and Affect',
+      technique: 'inspection',
+      whatItAssesses: 'Emotional state - subjective experience (mood) and observed expression (affect)',
+      anatomy: 'Limbic system, prefrontal cortex',
+      pathophysiology: 'Mood disorders involve dysregulation of neurotransmitters and neural circuits',
+      clinicalSignificance: 'Core assessment for depression, mania, anxiety',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Ask about mood', detail: 'How would you describe your mood lately?' },
+          { order: 2, action: 'Observe affect', detail: 'Watch facial expressions, body language throughout interview' },
+          { order: 3, action: 'Assess affect quality', detail: 'Range, reactivity, appropriateness, congruence' },
+          { order: 4, action: 'Note stability', detail: 'Observe for lability or rapidly shifting affect' },
+        ],
+        landmarks: [],
+        patientInstructions: 'Tell me in your own words how your mood has been',
+        examinerPosition: 'Seated facing patient, observing throughout',
+        commonErrors: ['Confusing mood and affect', 'Not observing affect throughout interview'],
+      },
+      normalFinding: {
+        description: 'Euthymic mood, full-range affect that is reactive and appropriate to content',
+        variations: ['Cultural differences in affect display'],
+        ageConsiderations: 'Elderly may have reduced affect range without pathology',
+        documentationExample: 'Mood: "Good." Affect: Full range, reactive, congruent with stated mood.',
+      },
+      abnormalFindings: [
+        {
+          name: 'Depressed mood with constricted affect',
+          description: 'Patient reports feeling down, affect shows reduced range and reactivity',
+          appearance: 'Downcast gaze, slumped posture, tearfulness, psychomotor slowing',
+          mechanism: 'Dysregulation of serotonin, norepinephrine, dopamine systems',
+          associatedConditions: ['Major depressive disorder', 'Adjustment disorder', 'Bipolar depression'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Suicide risk assessment', 'PHQ-9', 'Consider treatment/referral'],
+          differentialDiagnosis: ['MDD', 'Bipolar depression', 'Medical cause', 'Grief'],
+          additionalTestsNeeded: ['TSH', 'B12', 'Rule out medical causes'],
+          documentationExample: 'Mood: "Depressed" x 3 weeks. Affect: Constricted, tearful, poorly reactive.',
+        },
+        {
+          name: 'Elevated mood with expansive affect',
+          description: 'Euphoric mood with increased energy and affect range',
+          appearance: 'Animated, pressured speech, decreased need for sleep, grandiosity',
+          mechanism: 'Excess dopaminergic activity in limbic circuits',
+          associatedConditions: ['Bipolar mania', 'Hypomania', 'Substance-induced'],
+          severity: 'moderate',
+          urgency: 'urgent',
+          nextSteps: ['Safety assessment', 'Assess for psychotic features', 'Consider hospitalization'],
+          differentialDiagnosis: ['Bipolar I mania', 'Substance intoxication', 'Hyperthyroidism'],
+          additionalTestsNeeded: ['Urine drug screen', 'TSH'],
+          documentationExample: 'Mood: "Fantastic, best ever!" Affect: Euphoric, expansive, labile.',
+        },
+        {
+          name: 'Flat affect',
+          description: 'Severe reduction in emotional expression',
+          appearance: 'Immobile face, monotone voice, absence of normal gestures',
+          mechanism: 'May reflect negative symptoms of schizophrenia or severe depression',
+          associatedConditions: ['Schizophrenia', 'Severe depression', 'Parkinson disease'],
+          severity: 'moderate',
+          urgency: 'soon',
+          nextSteps: ['Full psychiatric evaluation', 'Consider neurological causes'],
+          differentialDiagnosis: ['Schizophrenia negative symptoms', 'Severe depression', 'Parkinsonism'],
+          additionalTestsNeeded: ['Based on clinical context'],
+          documentationExample: 'Affect: Flat, minimal facial expression or vocal inflection throughout interview.',
+        },
+      ],
+      pitfalls: ['Confusing flat affect for depression', 'Not assessing affect congruence'],
+      practiceTips: ['Mood is what patient reports, affect is what you observe'],
+    },
+    {
+      id: 'thought-content',
+      name: 'Thought Content',
+      technique: 'special-test',
+      whatItAssesses: 'What the patient is thinking about - delusions, suicidal ideation, obsessions',
+      anatomy: 'Prefrontal cortex, limbic system',
+      pathophysiology: 'Psychotic disorders involve dopamine dysregulation affecting reality testing',
+      clinicalSignificance: 'Identifies psychosis, assesses danger to self/others',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Listen for spontaneous content', detail: 'What themes emerge during interview?' },
+          { order: 2, action: 'Ask about unusual beliefs', detail: 'Has anyone been trying to harm you? Do you have special abilities?' },
+          { order: 3, action: 'Screen for suicidal ideation', detail: 'Have you had thoughts of hurting yourself or not wanting to be alive?' },
+          { order: 4, action: 'Screen for homicidal ideation', detail: 'Have you had thoughts of harming anyone else?' },
+          { order: 5, action: 'Assess intent and plan', detail: 'If ideation present, assess specifics' },
+        ],
+        landmarks: [],
+        patientInstructions: 'These are questions I ask everyone',
+        examinerPosition: 'Maintain eye contact, non-judgmental stance',
+        commonErrors: ['Not asking about suicide directly', 'Avoiding uncomfortable questions'],
+      },
+      normalFinding: {
+        description: 'No delusions, no suicidal or homicidal ideation, no obsessions',
+        variations: ['Overvalued ideas without fixed false belief are normal'],
+        ageConsiderations: 'Elderly may have more rigid thinking patterns',
+        documentationExample: 'Thought content: No delusions. Denies SI/HI. No obsessions or preoccupations.',
+      },
+      abnormalFindings: [
+        {
+          name: 'Suicidal ideation',
+          description: 'Thoughts of killing oneself',
+          appearance: 'May be spontaneously stated or revealed on direct questioning',
+          mechanism: 'Complex - hopelessness, psychiatric illness, impulsivity',
+          associatedConditions: ['Depression', 'Bipolar disorder', 'Schizophrenia', 'Substance use', 'Personality disorders'],
+          severity: 'severe',
+          urgency: 'emergent',
+          nextSteps: ['Full suicide risk assessment', 'Safety planning', 'Consider hospitalization'],
+          differentialDiagnosis: ['Assess underlying psychiatric disorder'],
+          additionalTestsNeeded: ['Toxicology if indicated'],
+          documentationExample: 'SI present - passive thoughts of wanting to die x 1 week. Denies plan or intent. Protective factors: children.',
+        },
+        {
+          name: 'Paranoid delusions',
+          description: 'Fixed false beliefs of persecution',
+          appearance: 'Conviction that others are plotting against, spying on, or trying to harm patient',
+          mechanism: 'Dopamine excess in mesolimbic pathway, aberrant salience',
+          associatedConditions: ['Schizophrenia', 'Delusional disorder', 'Substance-induced psychosis'],
+          severity: 'moderate',
+          urgency: 'urgent',
+          nextSteps: ['Safety assessment', 'Antipsychotic medication', 'Consider hospitalization'],
+          differentialDiagnosis: ['Schizophrenia', 'Delusional disorder', 'Substances', 'Medical cause'],
+          additionalTestsNeeded: ['Urine drug screen', 'Basic labs to rule out medical cause'],
+          documentationExample: 'Paranoid delusions present - believes FBI monitoring him through TV, fixed belief.',
+        },
+      ],
+      pitfalls: ['Not asking about suicide directly', 'Dismissing unusual beliefs as "just anxiety"'],
+      practiceTips: ['Ask about suicide directly - it does not plant the idea', 'Use non-judgmental, curious stance'],
+    },
+    {
+      id: 'cognition',
+      name: 'Cognitive Assessment',
+      technique: 'special-test',
+      whatItAssesses: 'Orientation, attention, memory, executive function',
+      anatomy: 'Hippocampus (memory), prefrontal cortex (executive), parietal (attention)',
+      pathophysiology: 'Delirium, dementia, and psychiatric conditions affect different cognitive domains',
+      clinicalSignificance: 'Distinguishes delirium from dementia and psychiatric illness',
+      howToPerform: {
+        steps: [
+          { order: 1, action: 'Assess orientation', detail: 'Person, place, time, situation' },
+          { order: 2, action: 'Test attention', detail: 'Spell WORLD backwards, serial 7s, months backwards' },
+          { order: 3, action: 'Test memory', detail: '3-word recall at 5 minutes' },
+          { order: 4, action: 'Assess language', detail: 'Naming, repetition, comprehension' },
+          { order: 5, action: 'Consider formal testing', detail: 'MMSE, MoCA, Mini-Cog as indicated' },
+        ],
+        landmarks: [],
+        patientInstructions: 'I\'m going to ask you some questions to test your memory and concentration',
+        examinerPosition: 'Face patient directly',
+        commonErrors: ['Relying on "oriented x 3" without actually testing', 'Not accounting for education'],
+      },
+      normalFinding: {
+        description: 'Oriented x 4, attention intact, memory intact for 3-word recall, no aphasia',
+        variations: ['Mild word-finding difficulty with age may be normal'],
+        ageConsiderations: 'Processing speed slows with age; distinguish from pathology',
+        documentationExample: 'Cognition: A&O x 4. Attention intact (WORLD backwards). 3/3 recall at 5 min.',
+      },
+      abnormalFindings: [
+        {
+          name: 'Disorientation',
+          description: 'Impaired awareness of person, place, time, or situation',
+          appearance: 'Unable to state correct date, location, or reason for visit',
+          mechanism: 'Global impairment from delirium, dementia, or intoxication',
+          associatedConditions: ['Delirium', 'Advanced dementia', 'Intoxication', 'Head injury'],
+          severity: 'moderate',
+          urgency: 'urgent',
+          nextSteps: ['Delirium workup', 'Find underlying cause'],
+          differentialDiagnosis: ['Delirium (acute)', 'Dementia (chronic)', 'Intoxication'],
+          additionalTestsNeeded: ['CBC', 'CMP', 'UA', 'Consider CT head'],
+          documentationExample: 'Orientation: Knows name, but disoriented to place (thinks he is at home) and time (off by 2 months).',
+        },
+        {
+          name: 'Impaired attention (inattention)',
+          description: 'Unable to focus and sustain attention',
+          appearance: 'Cannot complete serial 7s, WORLD backwards, easily distracted',
+          mechanism: 'Hallmark of delirium; also seen in ADHD, mania',
+          associatedConditions: ['Delirium', 'ADHD', 'Mania', 'Anxiety'],
+          severity: 'moderate',
+          urgency: 'urgent',
+          nextSteps: ['Delirium workup if acute onset'],
+          differentialDiagnosis: ['Delirium', 'ADHD', 'Anxiety'],
+          additionalTestsNeeded: ['If acute: full delirium workup'],
+          documentationExample: 'Attention: Impaired - unable to complete WORLD backwards or serial 7s, frequently distracted.',
+        },
+      ],
+      pitfalls: ['Assuming alert patient is not delirious', 'Not testing attention specifically'],
+      practiceTips: ['Inattention is the hallmark of delirium', 'Acute cognitive change = delirium until proven otherwise'],
+    },
+  ],
+
+  specialTests: [
+    {
+      id: 'suicide-risk-assessment',
+      name: 'Suicide Risk Assessment',
+      alternateNames: ['Safety assessment', 'Suicide inquiry'],
+      system: 'psychiatric',
+      purpose: 'Evaluate risk of suicide and need for intervention',
+      indications: ['Any patient with depression', 'Expressed hopelessness', 'After suicide attempt', 'Screening all psychiatric patients'],
+      contraindications: ['None - this should always be asked when indicated'],
+      procedure: {
+        patientPosition: 'Private setting',
+        examinerPosition: 'Seated, maintaining eye contact',
+        steps: [
+          { order: 1, action: 'Ask about passive SI', detail: 'Have you wished you were dead or could go to sleep and not wake up?' },
+          { order: 2, action: 'Ask about active SI', detail: 'Have you actually had thoughts of killing yourself?' },
+          { order: 3, action: 'Assess method/plan', detail: 'Have you thought about how you would do it?' },
+          { order: 4, action: 'Assess intent', detail: 'Have you started to work out the details? Do you intend to act on these thoughts?' },
+          { order: 5, action: 'Assess access to means', detail: 'Do you have access to firearms, medications, etc.?' },
+          { order: 6, action: 'Identify protective factors', detail: 'Reasons for living - family, religion, future plans' },
+        ],
+        patientInstructions: 'These are questions I ask everyone. I need to ask about thoughts of suicide.',
+        duration: '5-10 minutes',
+      },
+      interpretation: {
+        positiveResult: 'Presence of suicidal ideation with plan and/or intent indicates high risk',
+        negativeResult: 'Denial of SI with protective factors suggests lower immediate risk',
+        falsePositives: ['Manipulative statements without actual intent'],
+        falseNegatives: ['Patient concealing intent'],
+        clinicalContext: 'Clinical judgment integrates multiple factors - never rely on single factor',
+      },
+      accuracy: {
+        sensitivity: 'Varies - direct questioning improves detection',
+        specificity: 'Clinical judgment required',
+        notes: 'No screening tool perfectly predicts suicide; clinical assessment essential',
+      },
+      clinicalUtility: 'Essential for all patients with psychiatric complaints or depression',
+      commonErrors: ['Not asking directly', 'Assuming patient will volunteer information', 'Not assessing access to means'],
+      evidence: 'Asking about suicide does NOT increase risk - evidence supports direct inquiry',
+    },
+    {
+      id: 'mmse',
+      name: 'Mini-Mental State Examination',
+      alternateNames: ['MMSE', 'Folstein test'],
+      system: 'psychiatric',
+      purpose: 'Standardized assessment of cognitive function',
+      indications: ['Suspected dementia', 'Delirium assessment', 'Cognitive screening'],
+      contraindications: ['Severe hearing/vision impairment', 'Non-English speaker without validated translation'],
+      procedure: {
+        patientPosition: 'Seated comfortably',
+        examinerPosition: 'Seated facing patient with form',
+        steps: [
+          { order: 1, action: 'Orientation', detail: 'Year, season, date, day, month, state, county, town, hospital, floor (10 pts)' },
+          { order: 2, action: 'Registration', detail: 'Repeat 3 words (3 pts)' },
+          { order: 3, action: 'Attention', detail: 'Serial 7s or WORLD backwards (5 pts)' },
+          { order: 4, action: 'Recall', detail: '3-word recall (3 pts)' },
+          { order: 5, action: 'Language', detail: 'Naming, repetition, 3-stage command, reading, writing, copying (9 pts)' },
+        ],
+        patientInstructions: 'I am going to ask you some questions and give you some tasks',
+        duration: '10 minutes',
+      },
+      interpretation: {
+        positiveResult: 'Score ≤23 suggests cognitive impairment (adjust for education)',
+        negativeResult: 'Score 24-30 generally normal',
+        falsePositives: ['Low education', 'Depression', 'Anxiety', 'Language barrier'],
+        falseNegatives: ['High education may mask early dementia', 'Frontal lobe dysfunction'],
+        clinicalContext: 'Screening tool only - not diagnostic',
+      },
+      accuracy: {
+        sensitivity: '~80% for dementia',
+        specificity: '~80%',
+        notes: 'Less sensitive for mild cognitive impairment; MoCA may be better',
+      },
+      clinicalUtility: 'Widely used, well-validated, quick administration',
+      commonErrors: ['Not adjusting for education', 'Using in acute delirium as dementia test'],
+      evidence: 'Gold standard cognitive screening for decades, though MoCA increasingly preferred',
+    },
+  ],
+
+  relatedSystems: [
+    {
+      relatedSystem: 'neurological',
+      relationship: 'Neurological disease often presents with psychiatric symptoms',
+      whenToExamineTogether: 'Cognitive impairment warrants neuro exam; new psychiatric symptoms need neuro rule-out',
+      clinicalExample: 'Frontal lobe tumor presenting with personality change',
+    },
+    {
+      relatedSystem: 'general',
+      relationship: 'Medical conditions cause psychiatric symptoms (delirium)',
+      whenToExamineTogether: 'Altered mental status needs full medical workup',
+      clinicalExample: 'UTI causing delirium in elderly patient',
+    },
+  ],
+
+  findingPatterns: [
+    {
+      name: 'Delirium pattern',
+      description: 'Acute confusion with fluctuating course',
+      findings: [
+        { component: 'Attention', finding: 'Impaired', significance: 'Hallmark of delirium' },
+        { component: 'Orientation', finding: 'Often impaired', significance: 'Global cognitive involvement' },
+        { component: 'Course', finding: 'Acute onset, fluctuating', significance: 'Distinguishes from dementia' },
+        { component: 'Perception', finding: 'Hallucinations common (often visual)', significance: 'Suggests delirium' },
+      ],
+      suggestsDiagnosis: ['Delirium'],
+      mechanism: 'Acute brain dysfunction from medical illness, medications, or withdrawal',
+      clinicalScenario: 'Post-operative elderly patient who becomes confused at night',
+      keyLearningPoint: 'Delirium is a medical emergency - find and treat the cause',
+    },
+    {
+      name: 'Major depression pattern',
+      description: 'Persistent depressed mood with neurovegetative symptoms',
+      findings: [
+        { component: 'Mood', finding: 'Depressed', significance: 'Core symptom' },
+        { component: 'Affect', finding: 'Constricted, tearful', significance: 'Reduced emotional expression' },
+        { component: 'Psychomotor', finding: 'Slowed or agitated', significance: 'Visible manifestation' },
+        { component: 'Thought content', finding: 'Hopelessness, possibly SI', significance: 'Assess carefully' },
+      ],
+      suggestsDiagnosis: ['Major depressive disorder'],
+      mechanism: 'Dysregulation of monoamine neurotransmitters',
+      clinicalScenario: 'Patient with 4 weeks of depressed mood, insomnia, poor appetite, fatigue',
+      keyLearningPoint: 'Always assess suicidal ideation in depression',
+    },
+  ],
+
+  redFlags: [
+    {
+      finding: 'Suicidal ideation with plan and intent',
+      concernFor: 'Imminent suicide risk',
+      mechanism: 'Convergence of hopelessness, plan, and determination',
+      immediateActions: ['Do not leave patient alone', 'Remove access to means', 'Emergency psychiatric evaluation', 'Consider hospitalization'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Acute psychosis with command hallucinations',
+      concernFor: 'Risk of harm to self or others',
+      mechanism: 'Hallucinations commanding dangerous actions',
+      immediateActions: ['Safety assessment', 'One-to-one observation', 'Emergency psychiatric evaluation'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Acute confusion (delirium)',
+      concernFor: 'Underlying life-threatening medical condition',
+      mechanism: 'Brain dysfunction from metabolic, infectious, or toxic cause',
+      immediateActions: ['Full medical workup', 'Review medications', 'Treat underlying cause'],
+      neverMiss: true,
+    },
+    {
+      finding: 'Neuroleptic malignant syndrome (NMS)',
+      concernFor: 'Life-threatening reaction to antipsychotic',
+      mechanism: 'Dopamine blockade causing hyperthermia, rigidity, autonomic instability',
+      immediateActions: ['Stop antipsychotic', 'Supportive care', 'Consider dantrolene', 'ICU admission'],
+      neverMiss: true,
+    },
+  ],
+
+  commonMistakes: [
+    {
+      mistake: 'Not asking about suicidal ideation directly',
+      consequence: 'Missing patient at risk, potential completed suicide',
+      howToAvoid: 'Ask every depressed patient directly about suicidal thoughts',
+      correctTechnique: 'Are you having any thoughts of hurting yourself or ending your life?',
+    },
+    {
+      mistake: 'Attributing delirium to dementia or psychiatric illness',
+      consequence: 'Missing treatable medical cause, increased mortality',
+      howToAvoid: 'Acute onset and inattention = delirium until proven otherwise',
+      correctTechnique: 'Full medical workup for any acute cognitive change',
+    },
+    {
+      mistake: 'Not documenting mental status examination',
+      consequence: 'Inability to track changes, medicolegal risk',
+      howToAvoid: 'Document MSE for all psychiatric consultations',
+      correctTechnique: 'Use structured format covering all MSE domains',
+    },
+  ],
+
+  clinicalPearls: [
+    'Asking about suicide does NOT increase risk - it often provides relief and opens dialogue.',
+    'Delirium = acute confusion with inattention. Always has a medical cause that must be found.',
+    'Mood is what the patient tells you; affect is what you observe. They should be congruent.',
+    'Visual hallucinations suggest delirium or organic cause; auditory more common in schizophrenia.',
+    'The best predictor of future behavior is past behavior - always ask about prior suicide attempts.',
+  ],
+};
+
 
 // ============================================
 // Exam Database Collection
@@ -3549,11 +5378,10 @@ export const PHYSICAL_EXAMS: Record<ExamSystemId, SystemExamEducation> = {
   respiratory: RESPIRATORY_EXAM,
   heent: HEENT_EXAM,
   musculoskeletal: MUSCULOSKELETAL_EXAM,
-  // Placeholder entries for future expansion
-  skin: {} as SystemExamEducation,
-  general: {} as SystemExamEducation,
-  neck: {} as SystemExamEducation,
-  psychiatric: {} as SystemExamEducation,
+  skin: SKIN_EXAM,
+  general: GENERAL_EXAM,
+  neck: NECK_EXAM,
+  psychiatric: PSYCHIATRIC_EXAM,
 };
 
 // ============================================

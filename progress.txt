@@ -2435,3 +2435,241 @@ tail -250 /Users/dannygomez/biological-self/progress.txt
 - Conditions use tuple format: `['id', { ...object }]` inside the Map constructor
 
 ---
+
+## 2026-01-23 - Progress Audit & Mobile Optimization
+
+### Progress Audit Results
+All educational databases have been completed and exceed targets:
+
+| Module | Count | Target | Status |
+|--------|-------|--------|--------|
+| Conditions | 100 | 100 | ✅ Complete |
+| Drugs | 140 | 100+ | ✅ Complete |
+| Symptoms | 51 | 50+ | ✅ Complete |
+| Lab Tests | 88 | 50+ | ✅ Complete |
+| Physical Exams | 10 | new | ✅ Built |
+| Vital Signs | 6 | new | ✅ Built |
+| Clinical Cases | 13 | new | ✅ Built |
+
+### Updated Todo List Status
+- [completed] Audit existing educational modules
+- [completed] Expand Symptom Education Database (50+ symptoms) - 51 done
+- [completed] Expand Pharmacology Database (100+ drugs) - 140 done
+- [completed] Expand Condition Database (100+ conditions) - 100 done
+- [completed] Expand Lab Interpretation Database (50+ tests) - 88 done
+- [completed] Build Physical Exam Education Module - 10 exams
+- [completed] Build Vital Signs Education Module - 6 vitals
+- [completed] Create AI-integrated Case Studies - 13 cases
+- [in_progress] Mobile optimization for iPhone/Safari
+
+### Typecheck Status: PASSING
+
+### Mobile Optimization Work Starting
+The app loads in Safari on iPhone but needs optimization for mobile experience:
+- Responsive layouts for smaller screens
+- Touch-friendly interactions
+- Mobile navigation patterns
+- Performance optimization for mobile browsers
+
+---
+
+### Mobile Optimization Implemented
+**Added iOS-native bottom navigation bar:**
+- Fixed nav at bottom with 5 tabs: Home, Body, Anatomy, Chat, Timeline
+- Active state highlighting for current view
+- Safe area padding for iPhone home indicator
+- Touch-optimized with 56px minimum height
+
+**Responsive CSS improvements (768px breakpoint):**
+- Header actions hidden on mobile (nav at bottom instead)
+- Dashboard switches to single-column layout
+- Vitals grid: 3 columns (2 on <375px screens)
+- Labs grid: 2 columns (1 on <375px screens)
+- Reduced padding and font sizes for mobile
+- Timeline filters stack vertically
+- Date range inputs go full width
+
+**Extra small screen optimizations (<375px):**
+- Further reduced grid columns
+- Smaller nav icons and labels
+- Hidden quick-access subtitles
+
+**Files Modified:**
+- `/Users/dannygomez/biological-self/src/styles.css` - Added ~240 lines of mobile CSS
+- `/Users/dannygomez/biological-self/src/App.tsx` - Added MobileBottomNav component
+
+**Typecheck Status:** PASSING
+
+**Testing:**
+- Dev server accessible at http://10.0.0.125:1420/
+- Verified loading on iPhone Safari
+
+---
+
+### AI Model Auto-Selection Implemented
+Updated `core/ai/ollama.ts` to automatically select the optimal model based on device memory:
+
+**Model Tiers:**
+| Tier | Memory | Preferred Models |
+|------|--------|------------------|
+| Mobile (iPhone) | ≤8GB | qwen2.5:7b, deepseek-r1:7b, llama3.2:7b |
+| Standard (Mac) | 8-20GB | deepseek-r1:14b, qwen2.5:14b |
+| High-end | >20GB | deepseek-r1:32b, qwen2.5:32b |
+
+**New Functions:**
+- `selectOptimalModel()` - Auto-selects best model for device
+- `getDeviceTier()` - Returns tier info for UI display
+- `getRecommendedModels()` - Suggests models to download
+- `clearModelCache()` - Resets cached selection
+
+**Key Features:**
+- Detects system memory via `os.totalmem()`
+- Identifies iOS by checking darwin + ≤8GB RAM
+- Caches model selection for performance
+- Falls back to mobile-tier models if preferred not available
+- Falls back to first available model as last resort
+
+**Files Modified:**
+- `core/ai/ollama.ts` - Added auto-selection logic
+- `core/ai/index.ts` - Updated exports
+
+**Typecheck Status:** PASSING
+
+---
+
+### Model Configuration Updated for TestFlight
+Updated model priority to use Qwen 2.5 7B as primary with Qwen3-4B as fallback:
+
+**Mobile Tier (iPhone/TestFlight) Priority:**
+1. `qwen2.5:7b-instruct` (primary)
+2. `qwen2.5:7b`
+3. `qwen3:4b` (fallback if 7B has memory issues)
+4. `qwen3:4b-instruct`
+5. `deepseek-r1:7b`, `llama3.2:7b`
+6. Smaller models: `qwen3:1.7b`, `phi4-mini`, `smollm3:3b`
+
+**Strategy:**
+- Try Qwen 2.5 7B first (~4GB quantized) - best reasoning at this size
+- If TestFlight users report memory crashes, bump down to Qwen3-4B (~2.5GB)
+- Qwen3-4B still has excellent reasoning (rivals Qwen2.5-7B in benchmarks)
+
+**Typecheck Status:** PASSING
+
+---
+
+### On-Device LLM Integration (llama.cpp)
+Added native LLM inference for iOS/macOS using llama-cpp-2 Rust bindings.
+
+**New Files:**
+- `src-tauri/src/llm.rs` - On-device inference module with Metal GPU acceleration
+
+**New Tauri Commands:**
+- `llm_health` - Check if on-device LLM is available
+- `llm_chat` - Generate chat completions natively
+- `llm_preload` - Preload model during app startup
+
+**Dependencies Added:**
+- `llama-cpp-2` with Metal support
+- `tokio` for async
+- `once_cell` for lazy static model loading
+- `parking_lot` for mutex
+- `dirs` for finding model paths
+- `rand` for sampling
+
+**Model Locations (checked in order):**
+1. `models/qwen2.5-7b-instruct-q4_k_m.gguf` (app bundle)
+2. `~/Library/Application Support/biological-self/models/` (macOS)
+3. `../models/` (development)
+4. Fallback: `qwen3-4b-instruct-q4_k_m.gguf`
+
+**Next Steps:**
+1. Download GGUF model: `ollama pull qwen2.5:7b-instruct` then export to GGUF
+   Or download directly from HuggingFace
+2. Place in `models/` directory
+3. Build iOS app: `npx tauri ios build`
+
+**Typecheck Status:** PASSING
+**Cargo Check:** PASSING
+
+---
+
+## January 23, 2025 - iOS Build Fixes & Mobile UI
+
+### iOS Framework Linking (Accelerate + Metal)
+Fixed iOS build failure caused by missing Apple framework symbols (vDSP_* functions).
+
+**Problem:**
+```
+Undefined symbols for architecture arm64:
+  "_vDSP_maxv", "_vDSP_measqv", "_vDSP_sve", "_vDSP_vadd", etc.
+```
+
+**Solution - Two-pronged fix:**
+
+1. **Created `.cargo/config.toml`** with iOS-specific linker flags:
+```toml
+[target.aarch64-apple-ios]
+rustflags = [
+    "-C", "link-arg=-framework", "-C", "link-arg=Accelerate",
+    "-C", "link-arg=-framework", "-C", "link-arg=Metal",
+    "-C", "link-arg=-framework", "-C", "link-arg=MetalKit",
+    "-C", "link-arg=-framework", "-C", "link-arg=MetalPerformanceShaders",
+]
+```
+
+2. **Updated Xcode project** (`src-tauri/gen/apple/biological-self.xcodeproj/project.pbxproj`):
+   - Added `Accelerate.framework` to PBXFileReference, PBXBuildFile, Frameworks group
+   - Added `MetalPerformanceShaders.framework` similarly
+
+**Files Modified:**
+- `src-tauri/.cargo/config.toml` (NEW)
+- `src-tauri/gen/apple/biological-self.xcodeproj/project.pbxproj`
+- `src-tauri/build.rs` (framework linking for macOS/iOS)
+
+**Build Status:** Rust compilation for iOS PASSING
+
+---
+
+### Mobile UI Optimization
+Added mobile-first UI components for iPhone experience.
+
+**New Component:** `MobileBottomNav` in `src/App.tsx`
+- iOS-style bottom tab navigation
+- Icons for: Home, Body, Anatomy, Chat, Timeline
+- Active state highlighting
+- Safe area padding for notched devices
+
+**CSS Updates:** `src/styles.css` (~240 lines added)
+- `.mobile-bottom-nav` - Fixed bottom navigation bar
+- Responsive breakpoints for 768px and 375px
+- Safe area insets for iPhone notch/home indicator
+- Touch-friendly tap targets (44px minimum)
+- Adjusted main content padding to account for bottom nav
+
+**Vite Config Update:** `vite.config.ts`
+- Changed `host` to `'0.0.0.0'` for iOS device access during development
+
+---
+
+### Model Download Instructions
+To enable on-device AI, download the GGUF model:
+
+```bash
+mkdir -p ~/Library/Application\ Support/biological-self/models
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct-GGUF \
+  qwen2.5-7b-instruct-q4_k_m.gguf \
+  --local-dir ~/Library/Application\ Support/biological-self/models/
+```
+
+---
+
+### Next Steps
+1. Download GGUF model file
+2. Test on-device LLM inference on iPhone
+3. Build out advanced anatomy model with:
+   - Histology layers
+   - Tissue-level detail
+   - Interactive layering system
+4. Prepare for TestFlight distribution
+
+---

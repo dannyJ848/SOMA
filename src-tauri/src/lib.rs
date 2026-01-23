@@ -2,6 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::process::Command;
 use std::path::PathBuf;
 
+// On-device LLM module for iOS/native inference
+mod llm;
+pub use llm::{llm_health, llm_chat, llm_preload};
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct HealthSummary {
     #[serde(rename = "totalConditions")]
@@ -1256,7 +1260,11 @@ pub fn run() {
             voice_health,
             voice_models,
             voice_transcribe,
-            voice_synthesize
+            voice_synthesize,
+            // On-device LLM commands (for iOS/native)
+            llm_health,
+            llm_chat,
+            llm_preload
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

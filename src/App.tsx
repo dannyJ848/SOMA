@@ -102,6 +102,69 @@ interface TimelineData {
 
 type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry';
 
+// Mobile Bottom Navigation Component
+function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNavigate: (view: View) => void }) {
+  return (
+    <nav className="mobile-bottom-nav">
+      <div className="mobile-nav-items">
+        <button
+          className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => onNavigate('dashboard')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Home</span>
+        </button>
+        <button
+          className={`mobile-nav-item ${currentView === 'body' ? 'active' : ''}`}
+          onClick={() => onNavigate('body')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="5" r="3"/>
+            <path d="M12 8v14"/>
+            <path d="M8 12h8"/>
+            <path d="M8 22l4-4 4 4"/>
+          </svg>
+          <span>Body</span>
+        </button>
+        <button
+          className={`mobile-nav-item ${currentView === 'anatomy' ? 'active' : ''}`}
+          onClick={() => onNavigate('anatomy')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v12"/>
+            <path d="M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
+            <circle cx="12" cy="16" r="2"/>
+          </svg>
+          <span>Anatomy</span>
+        </button>
+        <button
+          className={`mobile-nav-item ${currentView === 'chat' ? 'active' : ''}`}
+          onClick={() => onNavigate('chat')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>Chat</span>
+        </button>
+        <button
+          className={`mobile-nav-item ${currentView === 'timeline' ? 'active' : ''}`}
+          onClick={() => onNavigate('timeline')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>Timeline</span>
+        </button>
+      </div>
+    </nav>
+  );
+}
+
 function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [passphrase, setPassphrase] = useState('');
@@ -1207,6 +1270,9 @@ function App() {
           )}
         </footer>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
     </div>
   );
 }

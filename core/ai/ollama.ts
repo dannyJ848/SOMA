@@ -8,8 +8,143 @@
  * Docs: https://github.com/ollama/ollama/blob/main/docs/api.md
  */
 
+import { platform, totalmem } from 'os';
+
 const OLLAMA_BASE_URL = 'http://localhost:11434';
-const DEFAULT_MODEL = 'deepseek-r1:14b';
+
+// ============================================================================
+// Model Configuration - Auto-select based on device capabilities
+// ============================================================================
+
+/**
+ * Model tiers based on available system memory
+ * - Mobile (≤8GB): Optimized 7B models for iPhone
+ * - Standard (8-16GB): 14B models for most Macs
+ * - High-end (>16GB): 32B+ models for powerful machines
+ */
+interface ModelTier {
+  name: string;
+  minMemoryGB: number;
+  maxMemoryGB: number;
+  preferredModels: string[]; // In order of preference
+}
+
+const MODEL_TIERS: ModelTier[] = [
+  {
+    name: 'mobile',
+    minMemoryGB: 0,
+    maxMemoryGB: 10,
+    preferredModels: [
+      // Primary: Qwen 2.5 7B - best reasoning at this size
+      'qwen2.5:7b-instruct',
+      'qwen2.5:7b',
+      // Fallback: Qwen3 4B if 7B causes memory issues
+      'qwen3:4b',
+      'qwen3:4b-instruct',
+      // Other 7B alternatives
+      'deepseek-r1:7b',
+      'llama3.2:7b',
+      // Smaller fallbacks if needed
+      'qwen3:1.7b',
+      'phi4-mini',
+      'smollm3:3b',
+    ],
+  },
+  {
+    name: 'standard',
+    minMemoryGB: 10,
+    maxMemoryGB: 24,
+    preferredModels: [
+      'qwen2.5:14b-instruct',
+      'qwen2.5:14b',
+      'deepseek-r1:14b',
+      'llama3.2:11b',
+      'mistral-nemo:12b',
+    ],
+  },
+  {
+    name: 'high-end',
+    minMemoryGB: 24,
+    maxMemoryGB: Infinity,
+    preferredModels: [
+      'qwen2.5:32b-instruct',
+      'qwen2.5:32b',
+      'deepseek-r1:32b',
+      'llama3.3:70b-instruct-q4_0',
+      'mixtral:8x7b',
+    ],
+  },
+];
+
+// Fallback if no preferred model is available
+const FALLBACK_MODEL = 'qwen2.5:7b-instruct';
+
+// Cache for detected settings
+let cachedSystemMemoryGB: number | null = null;
+let cachedSelectedModel: string | null = null;
+
+/**
+ * Get system memory in GB
+ */
+function getSystemMemoryGB(): number {
+  if (cachedSystemMemoryGB !== null) {
+    return cachedSystemMemoryGB;
+  }
+
+  try {
+    // totalmem() returns bytes
+    cachedSystemMemoryGB = totalmem() / (1024 * 1024 * 1024);
+  } catch {
+    // Default to mobile tier if we can't detect
+    // This is safer for iPhone where os.totalmem might not work
+    cachedSystemMemoryGB = 6;
+  }
+
+  return cachedSystemMemoryGB;
+}
+
+/**
+ * Detect if running on iOS (limited memory environment)
+ */
+function isIOSEnvironment(): boolean {
+  // In Tauri iOS, we're running in a constrained environment
+  // On iOS via Tauri, platform() returns 'darwin' but with limited memory
+  // We use memory as the primary indicator since Node's platform() won't return 'ios'
+  const memGB = getSystemMemoryGB();
+  // iPhone Pro models have 8GB, standard iPhones have 6GB
+  // Any darwin device with ≤8GB is likely iOS
+  const plat = platform();
+  return (plat === 'darwin' && memGB <= 8) || memGB <= 6;
+}
+
+/**
+ * Get the appropriate model tier based on system memory
+ */
+function getModelTier(): ModelTier {
+  const memGB = getSystemMemoryGB();
+
+  // Find the appropriate tier
+  for (const tier of MODEL_TIERS) {
+    if (memGB >= tier.minMemoryGB && memGB < tier.maxMemoryGB) {
+      return tier;
+    }
+  }
+
+  // Default to mobile tier for safety
+  return MODEL_TIERS[0];
+}
+
+/**
+ * Get the current device tier name for UI display
+ */
+export function getDeviceTier(): { tier: string; memoryGB: number; isIOS: boolean } {
+  const tier = getModelTier();
+  return {
+    tier: tier.name,
+    memoryGB: Math.round(getSystemMemoryGB() * 10) / 10,
+    isIOS: isIOSEnvironment(),
+  };
+}
 
 // ============================================================================
 // Types
@@ -158,20 +293,83 @@ export async function hasModel(modelName: string): Promise<boolean> {
 }
 
 /**
- * Get the default model name, or first available if default not found
+ * Select the optimal model based on device capabilities and available models
+ * This is the main function for auto-selecting the right model for the device
  */
-export async function getDefaultModel(): Promise<string | null> {
+export async function selectOptimalModel(): Promise<string | null> {
+  // Return cached selection if available
+  if (cachedSelectedModel !== null) {
+    return cachedSelectedModel;
+  }
+
   const models = await listModels();
   if (models.length === 0) return null;
 
-  // Check for the preferred model
-  const preferred = models.find(m =>
-    m.name === DEFAULT_MODEL || m.name.startsWith('deepseek')
-  );
-  if (preferred) return preferred.name;
+  const modelNames = models.map(m => m.name);
+  const tier = getModelTier();
 
-  // Fall back to first available
-  return models[0].name;
+  console.log(`[AI] Device tier: ${tier.name}, Memory: ${getSystemMemoryGB().toFixed(1)}GB`);
+  console.log(`[AI] Available models: ${modelNames.join(', ')}`);
+
+  // Try to find a preferred model for this tier
+  for (const preferredModel of tier.preferredModels) {
+    const match = modelNames.find(m =>
+      m === preferredModel ||
+      m.startsWith(preferredModel.split(':')[0]) // Match base model name
+    );
+    if (match) {
+      console.log(`[AI] Selected model: ${match} (matched preference: ${preferredModel})`);
+      cachedSelectedModel = match;
+      return match;
+    }
+  }
+
+  // If no preferred model found, try models from lower tiers (for mobile compatibility)
+  if (tier.name !== 'mobile') {
+    const mobileTier = MODEL_TIERS[0];
+    for (const mobileModel of mobileTier.preferredModels) {
+      const match = modelNames.find(m =>
+        m === mobileModel ||
+        m.startsWith(mobileModel.split(':')[0])
+      );
+      if (match) {
+        console.log(`[AI] Selected fallback model: ${match} (mobile-compatible)`);
+        cachedSelectedModel = match;
+        return match;
+      }
+    }
+  }
+
+  // Last resort: use first available model
+  console.log(`[AI] No preferred model found, using first available: ${models[0].name}`);
+  cachedSelectedModel = models[0].name;
+  return cachedSelectedModel;
+}
+
+/**
+ * Get the default model name (alias for selectOptimalModel for backwards compatibility)
+ */
+export async function getDefaultModel(): Promise<string | null> {
+  return selectOptimalModel();
+}
+
+/**
+ * Clear the cached model selection (useful when models change)
+ */
+export function clearModelCache(): void {
+  cachedSelectedModel = null;
+  cachedSystemMemoryGB = null;
+}
+
+/**
+ * Get recommended models for the user to download based on their device
+ */
+export function getRecommendedModels(): { primary: string; alternatives: string[] } {
+  const tier = getModelTier();
+  return {
+    primary: tier.preferredModels[0],
+    alternatives: tier.preferredModels.slice(1, 4),
+  };
 }
 
 // ============================================================================
@@ -182,7 +380,8 @@ export async function getDefaultModel(): Promise<string | null> {
  * Send a chat completion request to Ollama
  */
 export async function chat(request: ChatRequest): Promise<ChatResponse> {
-  const model = request.model || DEFAULT_MODEL;
+  // Auto-select optimal model if not specified
+  const model = request.model || await selectOptimalModel() || FALLBACK_MODEL;
 
   try {
     const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
@@ -251,7 +450,8 @@ export async function streamChat(
   onDone?: (finalResponse: ChatResponse) => void,
   onError?: (error: Error) => void,
 ): Promise<void> {
-  const model = request.model || DEFAULT_MODEL;
+  // Auto-select optimal model if not specified
+  const model = request.model || await selectOptimalModel() || FALLBACK_MODEL;
 
   try {
     const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
@@ -346,7 +546,8 @@ export async function streamChat(
 export async function* streamChatGenerator(
   request: ChatRequest
 ): AsyncGenerator<StreamChunk, void, unknown> {
-  const model = request.model || DEFAULT_MODEL;
+  // Auto-select optimal model if not specified
+  const model = request.model || await selectOptimalModel() || FALLBACK_MODEL;
 
   const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
     method: 'POST',
@@ -433,4 +634,5 @@ export async function chatJSON<T>(
 // Export constants
 // ============================================================================
 
-export { OLLAMA_BASE_URL, DEFAULT_MODEL };
+// Constants are exported here (functions use inline export)
+export { OLLAMA_BASE_URL, FALLBACK_MODEL, MODEL_TIERS };

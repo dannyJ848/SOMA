@@ -22,3 +22,20 @@ log = "0.4"
 tauri = { version = "2.9.5", features = [] }
 tauri-plugin-log = "2"
 tauri-plugin-shell = "2"
+
+# On-device LLM inference via llama.cpp
+llama-cpp-2 = { version = "0.1", features = ["metal"] }
+tokio = { version = "1", features = ["sync", "rt"] }
+once_cell = "1.19"
+parking_lot = "0.12"
+dirs = "5.0"
+rand = "0.8"
+
+[target.'cfg(target_os = "ios")'.dependencies]
+# iOS-specific: ensure Metal is used
+llama-cpp-2 = { version = "0.1", features = ["metal"] }
+
+[features]
+default = []
+# Enable for iOS builds with Metal GPU acceleration
+metal = ["llama-cpp-2/metal"]

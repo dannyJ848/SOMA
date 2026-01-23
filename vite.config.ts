@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     port: 1420,
     strictPort: true,
-    host: process.env.TAURI_DEV_HOST || false,
+    host: '0.0.0.0', // Bind to all interfaces for iOS development
     watch: {
       // Tauri expects a fixed port
       ignored: ['**/src-tauri/**'],

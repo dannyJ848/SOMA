@@ -4044,3 +4044,127 @@ textarea,
     height: 22px;
   }
 }
+
+/* =====================================================
+   HISTOLOGY VIEWER INTEGRATION
+   ===================================================== */
+
+/* Full-screen histology viewer overlay */
+.histology-viewer-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: #1a1a1a;
+}
+
+/* Tissue layer indicator */
+.tissue-layer-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.tissue-layer-breadcrumb .separator {
+  color: #666;
+}
+
+.tissue-layer-breadcrumb .current-layer {
+  color: #4a9eff;
+  font-weight: 500;
+}
+
+/* Zoom level indicator for histology */
+.magnification-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(74, 158, 255, 0.2);
+  border: 1px solid rgba(74, 158, 255, 0.4);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #4a9eff;
+}
+
+/* Tissue type badge */
+.tissue-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #252525;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.tissue-type-badge .tissue-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.tissue-type-badge.epithelial .tissue-color {
+  background: linear-gradient(135deg, #f5e6e8, #e8d4e8);
+}
+
+.tissue-type-badge.connective .tissue-color {
+  background: linear-gradient(135deg, #e8f5e8, #d4e8d4);
+}
+
+.tissue-type-badge.muscle .tissue-color {
+  background: linear-gradient(135deg, #f5d4d4, #e8c4c4);
+}
+
+.tissue-type-badge.nervous .tissue-color {
+  background: linear-gradient(135deg, #f5f0d4, #e8e0c4);
+}
+
+/* Layer depth indicator */
+.layer-depth-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: #252525;
+  border-radius: 8px;
+}
+
+.layer-depth-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.layer-depth-item:hover {
+  background: #333;
+}
+
+.layer-depth-item.active {
+  background: rgba(74, 158, 255, 0.2);
+  color: #4a9eff;
+}
+
+.layer-depth-item .depth-line {
+  width: 12px;
+  height: 2px;
+  background: #444;
+}
+
+.layer-depth-item.active .depth-line {
+  background: #4a9eff;
+}

@@ -2673,3 +2673,50 @@ huggingface-cli download Qwen/Qwen2.5-7B-Instruct-GGUF \
 4. Prepare for TestFlight distribution
 
 ---
+
+---
+
+## January 23, 2025 - Anatomy Histology Integration & LLM Model Setup
+
+### Histology Viewer Integration
+Added full histology integration to the AnatomyViewer component:
+
+**New Features:**
+- Integrated HistologyViewer component into AnatomyViewer
+- Created STRUCTURE_HISTOLOGY_MAP linking body structures to tissue-level histology
+- Added "View Histology" button to StructureInfoPanel for structures with histology data
+- Added drill-down capability from gross anatomy to microscopic tissue detail
+- Full-screen histology overlay with zoom, pan, and annotation support
+
+**Histology Mappings:**
+| Structure | Histology | Tissue Layers |
+|-----------|-----------|---------------|
+| Head | Cerebral Cortex | epidermis, dermis, bone, meninges, cerebral-cortex |
+| Neck | Simple Squamous | epidermis, dermis, muscle, thyroid, trachea |
+| Chest | Cardiac Muscle | epidermis, dermis, muscle, ribs, lungs, heart |
+| Abdomen | Simple Squamous | epidermis, dermis, muscle, peritoneum, organs |
+| Arms/Legs | Simple Squamous | epidermis, dermis, muscle, bone, vessels |
+
+**Files Modified:**
+- `src/AnatomyViewer.tsx` - Added histology integration, sample data, and handlers
+- `src/styles.css` - Added ~120 lines of histology viewer CSS
+
+### GGUF Model Downloaded
+Downloaded Qwen2.5-7B-Instruct-Q4_K_M.gguf (4.4GB) from bartowski/Qwen2.5-7B-Instruct-GGUF:
+- Location: `~/Library/Application Support/biological-self/models/`
+- Single-file GGUF format for llama.cpp compatibility
+- Q4_K_M quantization for good quality/size balance
+
+**Files Modified:**
+- `src-tauri/src/llm.rs` - Updated model paths to match downloaded filename
+
+### Build Status
+- **TypeScript:** PASSING
+- **Cargo Check:** PASSING
+
+### Next Steps
+1. Test on-device LLM inference with the downloaded model
+2. Build and test macOS app with LLM integration
+3. Prepare for TestFlight distribution
+
+---

@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { LayerPanel, useLayerState } from './LayerPanel';
 import { StructureInfoPanel } from './StructureInfoPanel';
 import { AnatomyChatPanel } from './AnatomyChatPanel';
+import { HistologyViewer } from './HistologyViewer';
 import { type DashboardData } from './utils/anatomyContextBuilder';
 import {
   anatomy3DEventBus,
@@ -12,6 +13,7 @@ import {
   type ViewPreset as EventBusViewPreset,
 } from './utils/anatomy3DEventBus';
 import { useAnatomy3DTracking } from './hooks/useAnatomy3DTracking';
+import type { HistologyImage } from '../core/histology/types';
 
 interface AnatomyViewerProps {
   onBack: () => void;
@@ -103,6 +105,142 @@ const BODY_STRUCTURES: BodyStructure[] = [
   { id: 'leftLeg', name: 'Left Leg', position: [-0.18, -0.85, 0], geometry: 'cylinder', args: [0.1, 0.1, 1.0, 16] },
   { id: 'rightLeg', name: 'Right Leg', position: [0.18, -0.85, 0], geometry: 'cylinder', args: [0.1, 0.1, 1.0, 16] },
 ];
+
+// Histology mapping - links body structures to tissue-level detail
+const STRUCTURE_HISTOLOGY_MAP: Record<string, { histologyId: string; tissueLayers: string[] }> = {
+  head: {
+    histologyId: 'hist-003', // Cerebral cortex
+    tissueLayers: ['epidermis', 'dermis', 'bone', 'meninges', 'cerebral-cortex'],
+  },
+  neck: {
+    histologyId: 'hist-001', // Simple squamous (thyroid follicles)
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'thyroid', 'trachea'],
+  },
+  chest: {
+    histologyId: 'hist-002', // Cardiac muscle
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'ribs', 'lungs', 'heart'],
+  },
+  abdomen: {
+    histologyId: 'hist-001', // Simple squamous (peritoneum)
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'peritoneum', 'organs'],
+  },
+  leftArm: {
+    histologyId: 'hist-001',
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'bone', 'vessels'],
+  },
+  rightArm: {
+    histologyId: 'hist-001',
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'bone', 'vessels'],
+  },
+  leftLeg: {
+    histologyId: 'hist-001',
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'bone', 'vessels'],
+  },
+  rightLeg: {
+    histologyId: 'hist-001',
+    tissueLayers: ['epidermis', 'dermis', 'muscle', 'bone', 'vessels'],
+  },
+};
+
+// Sample histology images for demonstration (would be loaded from HistologyStore in production)
+const SAMPLE_HISTOLOGY_IMAGES: Record<string, HistologyImage> = {
+  'hist-001': {
+    id: 'hist-001',
+    title: 'Simple Squamous Epithelium - Mesentery',
+    description: 'Silver-stained preparation of mesentery showing simple squamous epithelium (mesothelium) with clearly visible cell boundaries and nuclei.',
+    tissueCategory: 'epithelial',
+    tissueSubtype: 'simple_squamous',
+    organSource: 'mesentery',
+    bodySystem: 'digestive',
+    stain: 'Silver',
+    magnification: '40x',
+    filename: 'simple_squamous_mesentery_40x.jpg',
+    filePath: '',
+    fileSize: 0,
+    width: 1024,
+    height: 768,
+    annotations: {
+      points: [
+        { x: 45, y: 35, label: 'Nucleus', description: 'Flattened, centrally located nucleus' },
+        { x: 60, y: 50, label: 'Cell boundary', description: 'Silver staining highlights cell margins' },
+      ],
+      regions: [],
+    },
+    relatedStructures: [],
+    relatedImages: ['hist-002', 'hist-003'],
+    source: 'blue_histology',
+    license: 'Educational use',
+    complexityLevel: 3,
+    keyFeatures: ['Flat, polygonal cell outlines', 'Central, elliptical nuclei', 'Very thin cytoplasm'],
+    clinicalRelevance: 'Mesothelial cells can undergo reactive changes in peritonitis.',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  'hist-002': {
+    id: 'hist-002',
+    title: 'Cardiac Muscle - Heart',
+    description: 'H&E stained section of cardiac muscle showing branching fibers, central nuclei, and intercalated discs.',
+    tissueCategory: 'muscle',
+    tissueSubtype: 'cardiac',
+    organSource: 'heart',
+    bodySystem: 'cardiovascular',
+    stain: 'H&E',
+    magnification: '40x',
+    filename: 'cardiac_muscle_heart_40x.jpg',
+    filePath: '',
+    fileSize: 0,
+    width: 1024,
+    height: 768,
+    annotations: {
+      points: [
+        { x: 30, y: 40, label: 'Intercalated disc', description: 'Dark-staining step-like junction between cardiomyocytes' },
+        { x: 55, y: 55, label: 'Central nucleus', description: 'Single, centrally located nucleus' },
+        { x: 70, y: 30, label: 'Branching fiber', description: 'Characteristic branching pattern of cardiac muscle' },
+      ],
+      regions: [],
+    },
+    relatedStructures: [],
+    relatedImages: ['hist-001', 'hist-003'],
+    source: 'histology_guide',
+    license: 'Educational use',
+    complexityLevel: 3,
+    keyFeatures: ['Branched fibers', 'Intercalated discs', 'Single central nucleus', 'Cross-striations'],
+    clinicalRelevance: 'Myocardial infarction shows coagulative necrosis.',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  'hist-003': {
+    id: 'hist-003',
+    title: 'Cerebral Cortex - Brain',
+    description: 'H&E stained section of cerebral cortex showing layers, neurons with Nissl substance, and glial cells.',
+    tissueCategory: 'nervous',
+    organSource: 'brain',
+    bodySystem: 'nervous',
+    stain: 'H&E',
+    magnification: '20x',
+    filename: 'cerebral_cortex_brain_20x.jpg',
+    filePath: '',
+    fileSize: 0,
+    width: 1024,
+    height: 768,
+    annotations: {
+      points: [
+        { x: 45, y: 35, label: 'Pyramidal neuron', description: 'Large triangular cell body with apical dendrite' },
+        { x: 30, y: 50, label: 'Neuropil', description: 'Background of neuronal and glial processes' },
+      ],
+      regions: [],
+    },
+    relatedStructures: [],
+    relatedImages: ['hist-001', 'hist-002'],
+    source: 'blue_histology',
+    license: 'Educational use',
+    complexityLevel: 3,
+    keyFeatures: ['Layered organization', 'Large neurons with prominent nucleoli', 'Basophilic Nissl substance'],
+    clinicalRelevance: 'Neuronal loss and gliosis seen in neurodegeneration.',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+};
 
 // Single clickable body part mesh
 interface BodyPartProps {
@@ -324,6 +462,11 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const [selectedStructure, setSelectedStructure] = useState<{ id: string; name: string } | null>(null);
   const [showChatPanel, setShowChatPanel] = useState(false);
 
+  // Histology viewer state
+  const [showHistologyViewer, setShowHistologyViewer] = useState(false);
+  const [currentHistologyImage, setCurrentHistologyImage] = useState<HistologyImage | null>(null);
+  const [relatedHistologyImages, setRelatedHistologyImages] = useState<HistologyImage[]>([]);
+
   // External highlight state
   const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
 
@@ -366,6 +509,42 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const handleCloseChatPanel = useCallback(() => {
     setShowChatPanel(false);
   }, []);
+
+  // Handle viewing histology for current structure
+  const handleViewHistology = useCallback((histologyId: string) => {
+    const image = SAMPLE_HISTOLOGY_IMAGES[histologyId];
+    if (image) {
+      setCurrentHistologyImage(image);
+      // Load related images
+      const related = image.relatedImages
+        ?.map(id => SAMPLE_HISTOLOGY_IMAGES[id])
+        .filter((img): img is HistologyImage => img !== undefined) || [];
+      setRelatedHistologyImages(related);
+      setShowHistologyViewer(true);
+    }
+  }, []);
+
+  // Get histology ID for current structure
+  const getHistologyIdForStructure = useCallback((structureId: string): string | undefined => {
+    return STRUCTURE_HISTOLOGY_MAP[structureId]?.histologyId;
+  }, []);
+
+  // Close histology viewer and return to anatomy
+  const handleCloseHistologyViewer = useCallback(() => {
+    setShowHistologyViewer(false);
+    setCurrentHistologyImage(null);
+    setRelatedHistologyImages([]);
+  }, []);
+
+  // Handle clicking a structure from within histology viewer
+  const handleHistologyStructureClick = useCallback((structureId: string) => {
+    // Navigate to the 3D anatomy structure
+    const structure = BODY_STRUCTURES.find(s => s.id === structureId);
+    if (structure) {
+      handleCloseHistologyViewer();
+      handleStructureSelect(structure.id, structure.name);
+    }
+  }, [handleCloseHistologyViewer]);
 
   // Animate to a preset view
   const animateToView = (preset: ViewPreset) => {
@@ -760,7 +939,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
         )}
 
         {/* Structure Info Panel */}
-        {selectedStructure && !showChatPanel && (
+        {selectedStructure && !showChatPanel && !showHistologyViewer && (
           <div className="structure-info-container">
             <StructureInfoPanel
               structureId={selectedStructure.id}
@@ -768,18 +947,35 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
               complexityLevel={3}
               onClose={handleCloseInfoPanel}
               onAskAI={handleAskAI}
+              onViewHistology={getHistologyIdForStructure(selectedStructure.id) ?
+                () => handleViewHistology(getHistologyIdForStructure(selectedStructure.id)!) :
+                undefined
+              }
             />
           </div>
         )}
 
         {/* Anatomy Chat Panel */}
-        {selectedStructure && showChatPanel && (
+        {selectedStructure && showChatPanel && !showHistologyViewer && (
           <AnatomyChatPanel
             structureId={selectedStructure.id}
             structureName={selectedStructure.name}
             dashboardData={dashboardData}
             onClose={handleCloseChatPanel}
           />
+        )}
+
+        {/* Histology Viewer - Full screen overlay */}
+        {showHistologyViewer && currentHistologyImage && (
+          <div className="histology-viewer-container">
+            <HistologyViewer
+              image={currentHistologyImage}
+              relatedImages={relatedHistologyImages}
+              onStructureClick={handleHistologyStructureClick}
+              onBack={handleCloseHistologyViewer}
+              complexityLevel={3}
+            />
+          </div>
         )}
       </div>
 

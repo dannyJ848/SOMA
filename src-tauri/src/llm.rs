@@ -70,20 +70,27 @@ pub struct LlmChatResponse {
 /// Get the model path from the app bundle or resources
 fn get_model_path() -> Option<PathBuf> {
     // Try different locations for the model file
+    // Note: bartowski HuggingFace uses "Qwen2.5-7B-Instruct-Q4_K_M.gguf" naming
     let possible_paths: Vec<PathBuf> = vec![
+        // macOS Application Support (primary location for downloaded models)
+        dirs::data_dir()
+            .map(|p| p.join("biological-self/models/Qwen2.5-7B-Instruct-Q4_K_M.gguf"))
+            .unwrap_or_default(),
         // iOS app bundle
-        PathBuf::from("models/qwen2.5-7b-instruct-q4_k_m.gguf"),
-        // macOS local data
-        dirs::data_local_dir()
+        PathBuf::from("models/Qwen2.5-7B-Instruct-Q4_K_M.gguf"),
+        // Alternative lowercase naming
+        dirs::data_dir()
             .map(|p| p.join("biological-self/models/qwen2.5-7b-instruct-q4_k_m.gguf"))
             .unwrap_or_default(),
+        PathBuf::from("models/qwen2.5-7b-instruct-q4_k_m.gguf"),
         // Development path
+        PathBuf::from("../models/Qwen2.5-7B-Instruct-Q4_K_M.gguf"),
         PathBuf::from("../models/qwen2.5-7b-instruct-q4_k_m.gguf"),
-        // Fallback to smaller model
-        PathBuf::from("models/qwen3-4b-instruct-q4_k_m.gguf"),
-        dirs::data_local_dir()
+        // Fallback to smaller Qwen3 model
+        dirs::data_dir()
             .map(|p| p.join("biological-self/models/qwen3-4b-instruct-q4_k_m.gguf"))
             .unwrap_or_default(),
+        PathBuf::from("models/qwen3-4b-instruct-q4_k_m.gguf"),
     ];
 
     for path in possible_paths {
@@ -91,6 +98,7 @@ fn get_model_path() -> Option<PathBuf> {
             log::info!("Found model at: {:?}", path);
             return Some(path);
         }
+        log::debug!("Checked path (not found): {:?}", path);
     }
 
     log::warn!("No model file found in any expected location");

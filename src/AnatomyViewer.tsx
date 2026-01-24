@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
-import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
+import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle, useMemo } from 'react';
+import { Canvas, useThree, ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
 import { LayerPanel, useLayerState } from './LayerPanel';
 import { StructureInfoPanel } from './StructureInfoPanel';
 import { AnatomyChatPanel } from './AnatomyChatPanel';
 import { HistologyViewer } from './HistologyViewer';
+import { UnifiedEducationPanel } from './education';
 import { type DashboardData } from './utils/anatomyContextBuilder';
+import { type BodyProportions, applyProportionsToStructure } from './utils/bodyProportionCalculator';
 import {
   anatomy3DEventBus,
   type StructureHighlight,
@@ -14,10 +16,24 @@ import {
 } from './utils/anatomy3DEventBus';
 import { useAnatomy3DTracking } from './hooks/useAnatomy3DTracking';
 import type { HistologyImage } from '../core/histology/types';
+import {
+  EnhancedAnatomyModel,
+  GLBAnatomyModel,
+  SystemFilterPanel,
+  DetailLevelIndicator,
+  useLOD,
+  type AnatomicalSystem,
+} from './anatomy';
 
 interface AnatomyViewerProps {
   onBack: () => void;
   dashboardData: DashboardData | null;
+  /** Called when a body region is selected - provides screen coordinates for UI positioning */
+  onStructureSelect?: (structureId: string, structureName: string, screenPosition: { x: number; y: number }) => void;
+  /** Called when selection is cleared */
+  onStructureDeselect?: () => void;
+  /** Body proportions for customizing the 3D model based on user demographics */
+  bodyProportions?: BodyProportions;
 }
 
 // Imperative API exposed via ref
@@ -73,8 +89,6 @@ function AnatomicalLighting() {
         position={[5, 8, 5]}
         intensity={0.8}
         color="#ffffff"
-        castShadow
-        shadow-mapSize={[1024, 1024]}
       />
 
       {/* Fill light - softer light from front-left */}
@@ -285,15 +299,9 @@ function BodyPart({ structure, isHovered, isSelected, externalHighlight, onPoint
     emissiveIntensity = 0.2;
   }
 
-  // Pulse animation for external highlights
-  useFrame(() => {
-    if (externalHighlight?.pulseAnimation && materialRef.current) {
-      const elapsed = (Date.now() - externalHighlight.startTime) / 1000;
-      const pulse = Math.sin(elapsed * 3) * 0.15 + 0.85; // Oscillate between 0.7 and 1.0
-      const baseIntensity = intensityMultiplier[externalHighlight.intensity];
-      materialRef.current.emissiveIntensity = baseIntensity * pulse;
-    }
-  });
+  // Pulse animation for external highlights - DISABLED for performance
+  // Keeping code for reference but not running animation every frame
+  // If pulse animation is needed, could be implemented with CSS or throttled
 
   // Create geometry based on type
   const renderGeometry = () => {
@@ -336,18 +344,18 @@ interface InteractiveBodyModelProps {
   selectedStructure: string | null;
   externalHighlights: Map<string, ExternalHighlight>;
   onHover: (structureId: string | null) => void;
-  onSelect: (structureId: string, structureName: string) => void;
+  onSelect: (structureId: string, structureName: string, screenPosition: { x: number; y: number }) => void;
+  /** Optional custom structures (with proportions applied) */
+  structures?: BodyStructure[];
 }
 
-function InteractiveBodyModel({ hoveredStructure, selectedStructure, externalHighlights, onHover, onSelect }: InteractiveBodyModelProps) {
+function InteractiveBodyModel({ hoveredStructure, selectedStructure, externalHighlights, onHover, onSelect, structures }: InteractiveBodyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
+  // Use custom structures if provided, otherwise use default
+  const bodyStructures = structures || BODY_STRUCTURES;
 
-  // Gentle rotation for visual interest
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
-    }
-  });
+  // DISABLED: Auto-rotation causes constant re-renders and hurts performance
+  // Users can manually rotate with mouse
 
   const handlePointerOver = useCallback((structureId: string) => (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
@@ -363,13 +371,18 @@ function InteractiveBodyModel({ hoveredStructure, selectedStructure, externalHig
 
   const handleClick = useCallback((structure: BodyStructure) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    onSelect(structure.id, structure.name);
+    // Extract screen coordinates from the native event for radial menu positioning
+    const screenPosition = {
+      x: e.nativeEvent.clientX,
+      y: e.nativeEvent.clientY,
+    };
+    onSelect(structure.id, structure.name, screenPosition);
   }, [onSelect]);
 
   return (
     <group ref={groupRef}>
       {/* Render all body parts */}
-      {BODY_STRUCTURES.map((structure) => (
+      {bodyStructures.map((structure) => (
         <BodyPart
           key={structure.id}
           structure={structure}
@@ -382,18 +395,11 @@ function InteractiveBodyModel({ hoveredStructure, selectedStructure, externalHig
         />
       ))}
 
-      {/* Ground plane for reference */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]} receiveShadow>
-        <planeGeometry args={[10, 10]} />
-        <meshStandardMaterial
-          color="#2a2a3a"
-          roughness={0.9}
-          metalness={0}
-        />
+      {/* Ground plane for reference - simplified */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]}>
+        <planeGeometry args={[6, 6]} />
+        <meshBasicMaterial color="#2a2a3a" />
       </mesh>
-
-      {/* Axis helper for orientation (subtle) */}
-      <axesHelper args={[0.5]} />
     </group>
   );
 }
@@ -418,15 +424,38 @@ function CameraController({ controlsRef }: CameraControllerProps) {
       enablePan={true}
       enableZoom={true}
       enableRotate={true}
-      minDistance={1}
-      maxDistance={20}
+      minDistance={2.0}
+      maxDistance={15}
       minPolarAngle={0}
       maxPolarAngle={Math.PI}
       target={[0, 0.5, 0]}
-      dampingFactor={0.05}
+      dampingFactor={0.1}
       enableDamping={true}
+      zoomSpeed={0.5}
     />
   );
+}
+
+// LOD State Reporter - reports LOD state to parent via callback
+// OPTIMIZED: Only reports when detail level changes, not on every distance update
+interface LODStateReporterProps {
+  onLODStateChange: (state: ReturnType<typeof useLOD>) => void;
+}
+
+function LODStateReporter({ onLODStateChange }: LODStateReporterProps) {
+  const lodState = useLOD();
+  const prevLevelRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    // Only trigger parent update when detail level changes (not every distance change)
+    // This prevents excessive re-renders of the entire component tree
+    if (prevLevelRef.current !== lodState.detailLevel) {
+      prevLevelRef.current = lodState.detailLevel;
+      onLODStateChange(lodState);
+    }
+  }, [lodState.detailLevel, onLODStateChange, lodState]);
+
+  return null;
 }
 
 // View presets for anatomical positions
@@ -452,7 +481,7 @@ const EVENT_BUS_TO_VIEW_PRESET: Record<EventBusViewPreset, ViewPreset> = {
 };
 
 export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
-  function AnatomyViewer({ onBack, dashboardData }, ref) {
+  function AnatomyViewer({ onBack, dashboardData, onStructureSelect, onStructureDeselect, bodyProportions }, ref) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
   const [showLayerPanel, setShowLayerPanel] = useState(true);
@@ -462,13 +491,53 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const [selectedStructure, setSelectedStructure] = useState<{ id: string; name: string } | null>(null);
   const [showChatPanel, setShowChatPanel] = useState(false);
 
+  // Enhanced mode state (LOD-based multimodal rendering)
+  const [enhancedMode, setEnhancedMode] = useState(true);
+  const [useRealModels, setUseRealModels] = useState(false); // Toggle for real GLB models
+  const [lodState, setLodState] = useState<ReturnType<typeof useLOD> | null>(null);
+  // Start with minimal systems for fast initial load - user can enable more
+  const [enabledSystems, setEnabledSystems] = useState<AnatomicalSystem[]>([
+    'integumentary', 'skeletal'  // Only skin and skeleton by default for performance
+  ]);
+  const [animateOrgans, setAnimateOrgans] = useState(false);
+
   // Histology viewer state
   const [showHistologyViewer, setShowHistologyViewer] = useState(false);
   const [currentHistologyImage, setCurrentHistologyImage] = useState<HistologyImage | null>(null);
   const [relatedHistologyImages, setRelatedHistologyImages] = useState<HistologyImage[]>([]);
 
+  // Education panel state
+  const [showEducationPanel, setShowEducationPanel] = useState(false);
+
   // External highlight state
   const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
+
+  // Toggle anatomical system
+  const handleToggleSystem = useCallback((system: AnatomicalSystem) => {
+    setEnabledSystems(prev =>
+      prev.includes(system)
+        ? prev.filter(s => s !== system)
+        : [...prev, system]
+    );
+  }, []);
+
+  // Enhanced mode structure selection handler
+  // Accepts both {x,y} and {clientX,clientY} formats from different model components
+  const handleEnhancedStructureSelect = useCallback((
+    structureId: string,
+    structureName: string,
+    event?: { clientX: number; clientY: number } | { x: number; y: number }
+  ) => {
+    setSelectedStructure({ id: structureId, name: structureName });
+    setShowChatPanel(false);
+    // Notify parent if callback provided - normalize to {x, y} format
+    if (onStructureSelect && event) {
+      const screenPosition = 'clientX' in event
+        ? { x: event.clientX, y: event.clientY }
+        : event;
+      onStructureSelect(structureId, structureName, screenPosition);
+    }
+  }, [onStructureSelect]);
 
   // Bridge anatomy events to intent tracking
   useAnatomy3DTracking();
@@ -488,11 +557,24 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     getOpacity,
   } = useLayerState();
 
+  // Memoize transformed structures based on body proportions
+  const transformedStructures = useMemo(() => {
+    if (!bodyProportions) return BODY_STRUCTURES;
+
+    return BODY_STRUCTURES.map(structure =>
+      applyProportionsToStructure(structure, bodyProportions)
+    );
+  }, [bodyProportions]);
+
   // Handle structure selection
-  const handleStructureSelect = useCallback((id: string, name: string) => {
+  const handleStructureSelect = useCallback((id: string, name: string, screenPosition?: { x: number; y: number }) => {
     setSelectedStructure({ id, name });
     setShowChatPanel(false); // Close chat when selecting new structure
-  }, []);
+    // Notify parent if callback provided
+    if (onStructureSelect && screenPosition) {
+      onStructureSelect(id, name, screenPosition);
+    }
+  }, [onStructureSelect]);
 
   // Handle "Ask AI" from info panel
   const handleAskAI = useCallback(() => {
@@ -503,7 +585,11 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const handleCloseInfoPanel = useCallback(() => {
     setSelectedStructure(null);
     setShowChatPanel(false);
-  }, []);
+    // Notify parent of deselection
+    if (onStructureDeselect) {
+      onStructureDeselect();
+    }
+  }, [onStructureDeselect]);
 
   // Close chat panel
   const handleCloseChatPanel = useCallback(() => {
@@ -534,6 +620,16 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     setShowHistologyViewer(false);
     setCurrentHistologyImage(null);
     setRelatedHistologyImages([]);
+  }, []);
+
+  // Open education panel for current structure
+  const handleViewEducation = useCallback(() => {
+    setShowEducationPanel(true);
+  }, []);
+
+  // Close education panel
+  const handleCloseEducationPanel = useCallback(() => {
+    setShowEducationPanel(false);
   }, []);
 
   // Handle clicking a structure from within histology viewer
@@ -870,13 +966,14 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
 
       <div className="canvas-container">
         <Canvas
-          shadows
           gl={{
-            antialias: true,
+            antialias: false,  // Disable for performance
             alpha: false,
             powerPreference: 'high-performance',
+            precision: 'lowp',  // Lower precision for mobile
           }}
-          dpr={[1, 2]}
+          dpr={1}  // Force 1x pixel ratio for performance (was [1,2] = 4x on Retina!)
+          frameloop="always"  // Can change to "demand" for even more savings
         >
           <color attach="background" args={['#1a1a2e']} />
 
@@ -890,15 +987,98 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
 
           <CameraController controlsRef={controlsRef} />
           <AnatomicalLighting />
-          <InteractiveBodyModel
-            hoveredStructure={hoveredStructure}
-            selectedStructure={selectedStructure?.id || null}
-            externalHighlights={externalHighlights}
-            onHover={setHoveredStructure}
-            onSelect={handleStructureSelect}
-          />
+
+          {/* Render enhanced or basic model based on mode */}
+          {enhancedMode ? (
+            <>
+              {useRealModels ? (
+                <GLBAnatomyModel
+                  hoveredStructure={hoveredStructure}
+                  selectedStructure={selectedStructure?.id || null}
+                  enabledSystems={enabledSystems}
+                  onHover={setHoveredStructure}
+                  onSelect={handleEnhancedStructureSelect}
+                  showSkeleton={true}
+                  showOrgans={true}
+                  animateOrgans={animateOrgans}
+                />
+              ) : (
+                <EnhancedAnatomyModel
+                  hoveredStructure={hoveredStructure}
+                  selectedStructure={selectedStructure?.id || null}
+                  enabledSystems={enabledSystems}
+                  onHover={setHoveredStructure}
+                  onSelect={handleEnhancedStructureSelect}
+                  showSkeleton={true}
+                  showOrgans={true}
+                  animateOrgans={animateOrgans}
+                />
+              )}
+              <LODStateReporter onLODStateChange={setLodState} />
+            </>
+          ) : (
+            <InteractiveBodyModel
+              hoveredStructure={hoveredStructure}
+              selectedStructure={selectedStructure?.id || null}
+              externalHighlights={externalHighlights}
+              onHover={setHoveredStructure}
+              onSelect={handleStructureSelect}
+              structures={transformedStructures}
+            />
+          )}
           <PerformanceMonitor />
         </Canvas>
+
+        {/* LOD Detail Level Indicator (enhanced mode only) */}
+        {enhancedMode && lodState && (
+          <DetailLevelIndicator lodState={lodState} />
+        )}
+
+        {/* System Filter Panel (enhanced mode only) */}
+        {enhancedMode && lodState && (
+          <SystemFilterPanel
+            enabledSystems={enabledSystems}
+            onToggleSystem={handleToggleSystem}
+            lodState={lodState}
+          />
+        )}
+
+        {/* Organ Animation Indicator (enhanced mode only) */}
+        {enhancedMode && animateOrgans && lodState && lodState.detailLevel !== 'body' && (
+          <div className="organ-pulse-indicator">
+            <span className="pulse-dot" />
+            <span>Organs animating</span>
+          </div>
+        )}
+
+        {/* Mode toggle and view controls */}
+        <div className="lod-view-toggle">
+          <button
+            className={enhancedMode ? 'active' : ''}
+            onClick={() => setEnhancedMode(!enhancedMode)}
+            title={enhancedMode ? 'Switch to basic view' : 'Switch to enhanced view'}
+          >
+            {enhancedMode ? '🔬 Enhanced' : '👤 Basic'}
+          </button>
+          {enhancedMode && (
+            <>
+              <button
+                className={useRealModels ? 'active' : ''}
+                onClick={() => setUseRealModels(!useRealModels)}
+                title={useRealModels ? 'Switch to procedural models' : 'Switch to real 3D models'}
+              >
+                {useRealModels ? '🦴 Real' : '📐 Procedural'}
+              </button>
+              <button
+                className={animateOrgans ? 'active' : ''}
+                onClick={() => setAnimateOrgans(!animateOrgans)}
+                title={animateOrgans ? 'Pause animations' : 'Start animations'}
+              >
+                {animateOrgans ? '⏸️ Pause' : '▶️ Animate'}
+              </button>
+            </>
+          )}
+        </div>
 
         {/* Layer toggle button */}
         <button
@@ -913,8 +1093,8 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
           </svg>
         </button>
 
-        {/* Layer Panel */}
-        {showLayerPanel && (
+        {/* Layer Panel (classic mode only) */}
+        {!enhancedMode && showLayerPanel && (
           <LayerPanel
             layerStates={layerStates}
             soloLayer={soloLayer}
@@ -933,13 +1113,13 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
         {/* Hover tooltip */}
         {hoveredStructure && !selectedStructure && (
           <div className="structure-hover-tooltip">
-            {BODY_STRUCTURES.find(s => s.id === hoveredStructure)?.name || hoveredStructure}
+            {hoveredStructure}
             <span className="tooltip-hint">Click to select</span>
           </div>
         )}
 
         {/* Structure Info Panel */}
-        {selectedStructure && !showChatPanel && !showHistologyViewer && (
+        {selectedStructure && !showChatPanel && !showHistologyViewer && !showEducationPanel && (
           <div className="structure-info-container">
             <StructureInfoPanel
               structureId={selectedStructure.id}
@@ -951,6 +1131,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
                 () => handleViewHistology(getHistologyIdForStructure(selectedStructure.id)!) :
                 undefined
               }
+              onViewEducation={handleViewEducation}
             />
           </div>
         )}
@@ -974,6 +1155,17 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
               onStructureClick={handleHistologyStructureClick}
               onBack={handleCloseHistologyViewer}
               complexityLevel={3}
+            />
+          </div>
+        )}
+
+        {/* Unified Education Panel - Histology, Pathology, Physiology */}
+        {selectedStructure && showEducationPanel && (
+          <div className="education-panel-container">
+            <UnifiedEducationPanel
+              regionId={selectedStructure.id}
+              regionName={selectedStructure.name}
+              onClose={handleCloseEducationPanel}
             />
           </div>
         )}

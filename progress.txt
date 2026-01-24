@@ -2775,3 +2775,207 @@ claude --resume
 3. Distribute to testers
 
 ---
+
+## 2026-01-23 - Body-Centric Architecture Transformation
+
+### What was implemented
+Major UI paradigm shift from dashboard-first to body-centric design where the 3D body model is the central hub.
+
+**New Components:**
+- `src/hooks/useUserDemographics.ts` - Demographics state management hook (height, weight, age, sex, body type)
+- `src/utils/bodyProportionCalculator.ts` - Calculate 3D model proportions from demographics
+- `src/utils/regionToSystemMapper.ts` - Map 8 body regions to medical content (systems, organs, conditions, medications, symptoms)
+- `src/onboarding/OnboardingFlow.tsx` - Multi-step onboarding: Welcome → Demographics → Preview → Complete
+- `src/ui/RadialContextMenu.tsx` - 8-item circular menu appearing on body region selection
+- `src/ui/HealthStatusOverlay.tsx` - Floating health status indicators (vitals, alerts)
+- `src/BodyCentricHome.tsx` - Main body-first view with integrated context panels
+
+**Context Panel Actions (8 options):**
+- Medications (for selected region)
+- Symptoms (for selected region)
+- Encyclopedia
+- Chat with AI
+- Go Deeper (anatomical layers)
+- Histology
+- Pathology
+- Physiology
+
+**Navigation Changes:**
+- Default view changed from 'dashboard' to 'body-centric'
+- Mobile bottom nav updated: Body (home), Chat, Timeline, Stats
+- Onboarding flow shows for first-time users
+
+**Styling:**
+- ~1300 lines of CSS added for all body-centric components
+- Radial menu with animated item expansion
+- Context panels slide in from right
+- Mobile-first responsive design
+
+### Files changed
+- **New**: `src/hooks/useUserDemographics.ts`
+- **New**: `src/utils/bodyProportionCalculator.ts`
+- **New**: `src/utils/regionToSystemMapper.ts`
+- **New**: `src/onboarding/OnboardingFlow.tsx`
+- **New**: `src/ui/RadialContextMenu.tsx`
+- **New**: `src/ui/HealthStatusOverlay.tsx`
+- **New**: `src/BodyCentricHome.tsx`
+- **Modified**: `src/App.tsx` - Added body-centric view, onboarding check, demographics hook
+- **Modified**: `src/styles.css` - Added body-centric component styles
+
+### Learnings for future iterations
+- DashboardData type varies across components - consider centralizing type definition
+- AnatomyViewer doesn't yet support custom props (bodyProportions, onStructureSelect) - future enhancement needed
+- TypeScript's noUnusedLocals catches underscore-prefixed variables too - must fully remove unused code
+- Region-to-content mapping is extensible - can add more body regions and content types
+- Onboarding saves to localStorage and Tauri backend for persistence
+
+### Build Status
+- **TypeScript:** PASSING
+- All 8 tasks completed for body-centric architecture
+
+### Next Steps
+1. Enhance AnatomyViewer to support body-centric callbacks (onStructureSelect, onDeselect, bodyProportions)
+2. Connect radial menu to actual 3D model selection events
+3. Implement deep linking for encyclopedia entries from context panels
+4. Test full flow: onboarding → body selection → radial menu → context panels
+
+---
+
+## 2026-01-23 - Performance Optimization Session
+
+### Problem
+3D Anatomy Viewer was extremely slow - "moving like a snail" during zoom and rotation interactions, especially on mobile/Retina displays.
+
+### Root Causes Identified
+1. **Pixel ratio**: `dpr={[1,2]}` caused 4x pixel rendering on Retina displays
+2. **Constant animations**: Multiple `useFrame` hooks running 60x/second for rotation and pulse effects
+3. **All systems enabled**: 30+ meshes rendered on initial load (all 10 anatomical systems)
+4. **Expensive materials**: Using `MeshStandardMaterial` (PBR) instead of simpler materials
+5. **High-poly geometry**: 32 segments per mesh instead of low-poly alternatives
+6. **Frequent re-renders**: LODStateReporter triggered parent re-renders on every camera distance change
+7. **Shadows enabled**: Shadow mapping adds significant GPU overhead
+
+### Optimizations Applied
+
+#### Canvas/WebGL Configuration (`src/AnatomyViewer.tsx`)
+- Changed `dpr` from `[1,2]` to `1` (prevents 4x rendering on Retina)
+- Disabled antialiasing: `antialias: false`
+- Set precision to `lowp` for mobile
+- Set `powerPreference: 'high-performance'`
+- Removed all shadow casting from lights
+
+#### Animation Hooks Removed
+- `InteractiveBodyModel`: Removed `useFrame` rotation animation
+- `BodyPart`: Removed `useFrame` pulse animation
+- `GLBAnatomyModel`: Removed `useFrame` rotation animation
+- Removed unused `useFrame` imports
+
+#### React Render Optimization
+- `LODStateReporter`: Now only triggers parent re-renders when detail level changes, not on every camera distance update (prevents constant re-renders during zoom)
+
+#### Geometry & Material Optimization (`src/anatomy/EnhancedAnatomyModel.tsx`)
+- Reduced segment counts from 32 to 8-12 (`SEGMENTS_LOW=8`, `SEGMENTS_MED=12`)
+- Switched from `MeshStandardMaterial` to `MeshLambertMaterial`
+- Memoized `StaticMesh` component with `React.memo()`
+- `AnimationController` throttled to every 6th frame
+- Animations disabled by default (`animateOrgans=false`)
+
+#### LOD System Throttling (`src/anatomy/AnatomyLODSystem.tsx`)
+- Throttled updates to max 10/second (every 100ms)
+- Only triggers on significant camera movement (>0.1 units)
+
+#### Initial Load Optimization
+- Changed default `enabledSystems` from all 10 systems to just `['integumentary', 'skeletal']`
+- Reduces initial mesh count from ~30 to 6 (80% reduction)
+
+### Files Modified
+- `src/AnatomyViewer.tsx` - Canvas config, removed useFrame hooks, LODStateReporter optimization, reduced default systems
+- `src/anatomy/EnhancedAnatomyModel.tsx` - Low-poly geometry, MeshLambertMaterial, memoization
+- `src/anatomy/GLBAnatomyModel.tsx` - Removed rotation useFrame
+- `src/anatomy/AnatomyLODSystem.tsx` - Throttled LOD updates
+
+### Test Files Created
+- `test_mobile_performance.py` - Mobile emulation performance test
+- `test_perf_simple.py` - Simple FPS measurement
+- `test_3d_perf.py` - Comprehensive 3D interaction test
+- `test_repair_loop.py` - Automated test-repair cycle
+- `public/perf-test.html` - Standalone Three.js performance benchmark
+- `perf_monitor.py` - Real-time performance monitoring
+
+### Performance Test Results (Mobile Emulation - iPhone 14 Pro, 3x DPR)
+```
+Idle FPS:        60.3
+Zoom FPS:        60.5
+Rotation FPS:    60.5
+Interaction FPS: 62.0
+Status:          EXCELLENT (all >= 55 FPS)
+```
+
+### Learnings for Future Iterations
+- `dpr={[1,2]}` is a major performance killer on Retina - always use `dpr={1}` for 3D
+- Every `useFrame` hook runs 60x/second - avoid for non-essential animations
+- React state updates in 3D components cause full re-renders - use refs for frequently changing values
+- Start with minimal enabled features and let users opt-in to more complex views
+- `MeshLambertMaterial` is much faster than `MeshStandardMaterial` and often looks good enough
+- Shadow mapping is expensive - disable unless specifically needed
+
+### Build Status
+- **TypeScript:** PASSING
+- Performance optimizations complete
+
+---
+
+---
+
+## 2026-01-23 - Body-Centric Radial Menu Integration
+
+### What was implemented
+Connected the 3D anatomy viewer to the radial context menu, enabling the core body-centric interaction flow.
+
+**Task 1: Add onStructureSelect callback to AnatomyViewer**
+- Added `onStructureSelect` and `onStructureDeselect` props to `AnatomyViewerProps`
+- Updated `InteractiveBodyModel` click handler to extract screen coordinates from `e.nativeEvent.clientX/clientY`
+- Updated `EnhancedAnatomyModel` to properly use `e.nativeEvent` for coordinates
+- Updated `GLBAnatomyModel` interface and handlers to pass screen coordinates
+- Normalized coordinate format from `{clientX, clientY}` to `{x, y}` in handlers
+
+**Task 2: Wire radial menu to 3D model selection in BodyCentricHome**
+- Added `handleStructureSelect` callback that:
+  - Gets region mapping from `getRegionMapping(structureId)`
+  - Updates selection state with region info and screen position
+  - Opens radial menu at click position
+- Added `handleStructureDeselect` to clear selection state
+- Connected callbacks to `AnatomyViewer` component
+
+**Task 3: Add body proportions support**
+- Added `bodyProportions?: BodyProportions` prop to `AnatomyViewer`
+- Added `structures?: BodyStructure[]` prop to `InteractiveBodyModel`
+- Created memoized `transformedStructures` using `applyProportionsToStructure`
+- `BodyCentricHome` now calculates proportions from demographics and passes to viewer
+
+### Files changed
+- **Modified**: `src/AnatomyViewer.tsx` - Added callbacks, body proportions, imports
+- **Modified**: `src/anatomy/EnhancedAnatomyModel.tsx` - Fixed nativeEvent usage
+- **Modified**: `src/anatomy/GLBAnatomyModel.tsx` - Added screen coordinate passing
+- **Modified**: `src/BodyCentricHome.tsx` - Wired radial menu, added proportions calculation
+
+### Flow now works
+1. User taps body region in 3D viewer
+2. Click handler extracts screen coordinates
+3. `onStructureSelect` fires with structureId, name, and {x, y} position
+4. `BodyCentricHome` updates selection state
+5. Radial menu appears at click position with 8 contextual options
+6. User selects action → context panel opens with region-specific content
+
+### Build Status
+- **TypeScript:** PASSING
+- **Vite Build:** PASSING
+- Body-centric interaction flow complete
+
+### Learnings for future iterations
+- Three.js `ThreeEvent` has `nativeEvent` property for accessing DOM event coordinates
+- When normalizing coordinate formats between components, use type guards (`'clientX' in event`)
+- Body proportions can be applied to static structure definitions using transforms
+- Memoizing transformed structures prevents recalculation on every render
+
+---

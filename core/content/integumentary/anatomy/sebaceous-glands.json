@@ -1,0 +1,215 @@
+{
+  "id": "structure-sebaceous-glands",
+  "type": "structure",
+  "name": "Sebaceous Glands",
+  "alternateNames": ["Oil glands", "Holocrine glands", "Sebaceous follicles"],
+  "fmaId": "FMA:59160",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Sebaceous glands are tiny oil factories in your skin that keep your hair and skin moisturized.",
+      "explanation": "Your skin has millions of tiny glands that make an oily substance called sebum. Think of sebum as nature's lotion! These glands are usually connected to hair follicles and release their oil through the hair opening.\n\nSebum has important jobs:\n- It keeps your skin soft and waterproof\n- It keeps your hair shiny and healthy\n- It helps protect your skin from germs\n\nYou have the most sebaceous glands on your face, scalp, and upper back. That's why these areas can get oily. During puberty, hormones tell these glands to make extra sebum, which is why teenagers often have oilier skin and sometimes get acne.\n\nThe glands make oil in a special way - the cells actually fill up with oil, then burst open to release it. New cells grow to replace them, so the glands are constantly making fresh oil.",
+      "keyTerms": [
+        {
+          "term": "sebum",
+          "definition": "The oily substance made by sebaceous glands that moisturizes skin and hair",
+          "pronunciation": "SEE-bum"
+        },
+        {
+          "term": "gland",
+          "definition": "A group of cells that makes and releases a substance your body needs"
+        },
+        {
+          "term": "pore",
+          "definition": "A tiny opening in the skin where oil and sweat come out"
+        }
+      ],
+      "analogies": [
+        "Sebaceous glands are like tiny factories that make natural skin lotion",
+        "Sebum is like the oil you put on a wooden cutting board to keep it from drying out",
+        "The glands work like popcorn popping - cells burst open to release their contents"
+      ],
+      "examples": [
+        "When you don't wash your hair for a few days, it gets oily because sebum builds up",
+        "Your nose and forehead get shiny because they have extra sebaceous glands"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Sebaceous glands are holocrine exocrine glands that produce sebum, usually associated with hair follicles as part of the pilosebaceous unit, with high density on the face, scalp, and upper trunk.",
+      "explanation": "**Structure**\nSebaceous glands are small, lobulated structures located in the dermis. Most are connected to hair follicles, emptying sebum into the follicular canal. Some exist independently (free sebaceous glands) on the lips, eyelids (meibomian glands), nipples, and genitalia.\n\nThe gland consists of:\n- Outer layer of undifferentiated basal cells (germinative layer)\n- Inner cells progressively accumulating lipid droplets\n- Central cells that rupture, releasing sebum (holocrine secretion)\n\n**Sebum Composition**\nSebum contains:\n- Triglycerides (40-60%)\n- Wax esters (20-25%)\n- Squalene (12-15%)\n- Free fatty acids (5-10%)\n- Cholesterol and cholesterol esters\n\n**Function**\n- Lubricates and waterproofs skin and hair\n- Provides antimicrobial protection (fatty acids inhibit bacterial growth)\n- Transports antioxidants (vitamin E) to skin surface\n- Helps maintain skin pH (acid mantle)\n\n**Regulation**\nSebum production is regulated primarily by androgens (testosterone, DHT). This explains increased sebum production during puberty and the development of acne. The glands are also influenced by retinoids, growth hormone, and thyroid hormones.",
+      "keyTerms": [
+        {
+          "term": "holocrine",
+          "definition": "Type of secretion where entire cells accumulate product, die, and release contents",
+          "pronunciation": "HOL-oh-krin"
+        },
+        {
+          "term": "pilosebaceous unit",
+          "definition": "The combined structure of hair follicle, sebaceous gland, and arrector pili muscle",
+          "pronunciation": "pie-loh-seh-BAY-shus"
+        },
+        {
+          "term": "meibomian glands",
+          "definition": "Modified sebaceous glands in the eyelids that produce the oily layer of tears",
+          "pronunciation": "my-BOH-mee-an"
+        },
+        {
+          "term": "squalene",
+          "definition": "A lipid unique to human sebum; precursor to cholesterol",
+          "pronunciation": "SKWAY-leen"
+        },
+        {
+          "term": "acid mantle",
+          "definition": "The slightly acidic film on the skin surface (pH 4.5-5.5) that inhibits microbial growth"
+        }
+      ],
+      "analogies": [
+        "Holocrine secretion is like squeezing all the toothpaste out of a tube by bursting it",
+        "The sebaceous gland is like a factory where workers (cells) fill with product until they burst"
+      ],
+      "examples": [
+        "Acne forms when sebum and dead skin cells clog pores and bacteria multiply",
+        "Dry skin in winter can result from reduced sebum production combined with low humidity"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Sebaceous glands are androgen-responsive holocrine glands producing sebum through lipid synthesis, accumulation, and cell disintegration, with density and activity variations contributing to both protective functions and pathological conditions like acne and sebaceous neoplasms.",
+      "explanation": "**Cellular Biology**\nSebaceous gland development begins in utero around 13-16 weeks gestation, arising from the follicular epithelium. Sebocyte differentiation involves:\n\n1. Basal cells (stem cells) at periphery expressing K5, K14\n2. Proliferation and movement inward\n3. PPAR-γ activation initiates lipogenesis\n4. Progressive lipid accumulation (visible as vacuoles)\n5. Loss of nucleus and organelles\n6. Cell rupture and sebum release (transit time: 2-3 weeks)\n\n**Sebum Biochemistry**\nSebocytes synthesize lipids de novo:\n- Wax esters: Unique to sebum, formed from long-chain alcohols and fatty acids\n- Squalene: Triterpene synthesized via MVA pathway\n- Triglycerides: Partially hydrolyzed by bacterial lipases in follicle\n- Free fatty acids: Particularly sapienic acid (C16:1Δ6), antimicrobial\n\nSebum lipids are atypical: odd-chain, branched-chain, and unsaturated forms uncommon elsewhere.\n\n**Hormonal Regulation**\nAndrogens are the primary regulators:\n- Testosterone converted to DHT by 5α-reductase types 1 and 2\n- Androgens bind AR, increase proliferation and lipogenesis\n- IGF-1 acts synergistically\n- Estrogens: Inhibitory at high doses, complex effects\n- Retinoids: Decrease sebocyte proliferation and differentiation\n\n**Regional Variations**\n- Face/scalp: 400-900 glands/cm², high sebum production\n- Trunk: Intermediate density\n- Palms/soles: No sebaceous glands (no hair follicles)\n- Modified glands: Meibomian (eyelid), Fordyce spots (oral mucosa), Tyson glands (genitalia)\n\n**Microbiome Interaction**\nCutibacterium acnes (formerly Propionibacterium acnes) colonizes the pilosebaceous unit, hydrolyzing triglycerides and metabolizing sebum. Dysbiosis contributes to acne pathogenesis.",
+      "keyTerms": [
+        {
+          "term": "sebocyte",
+          "definition": "The specialized lipid-producing cell of the sebaceous gland"
+        },
+        {
+          "term": "PPAR-γ",
+          "definition": "Peroxisome proliferator-activated receptor gamma; master regulator of sebocyte differentiation and lipogenesis"
+        },
+        {
+          "term": "sapienic acid",
+          "definition": "16:1Δ6 fatty acid unique to human sebum with antimicrobial properties"
+        },
+        {
+          "term": "Cutibacterium acnes",
+          "definition": "Lipophilic commensal bacterium colonizing pilosebaceous units; role in acne pathogenesis"
+        },
+        {
+          "term": "5α-reductase",
+          "definition": "Enzyme converting testosterone to dihydrotestosterone (DHT); target of finasteride"
+        }
+      ],
+      "clinicalNotes": "Isotretinoin (13-cis-retinoic acid) induces sebaceous gland atrophy by inhibiting proliferation and causing apoptosis - the basis for severe acne treatment. Sebaceous hyperplasia presents as yellowish umbilicated papules in elderly. Sebaceous carcinoma is an aggressive malignancy, often periocular, associated with Muir-Torre syndrome (MSH/MLH mismatch repair mutations)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Sebaceous gland biology integrates lipid metabolism, androgen signaling, and stem cell dynamics within the pilosebaceous niche, with dysfunction leading to acne vulgaris, seborrheic conditions, and sebaceous neoplasia, informing targeted therapeutic interventions.",
+      "explanation": "**Stem Cell Dynamics**\nSebaceous glands contain unipotent stem cells in the basal layer with self-renewal capacity. Evidence suggests bidirectional flow with bulge stem cells contributing to sebaceous gland regeneration. Blimp1+ progenitors and Lrig1+ cells contribute to sebocyte lineage.\n\n**Lipogenic Pathways**\nSebocyte lipogenesis involves multiple pathways:\n- SREBP-1c (sterol regulatory element-binding protein) activation\n- Acetyl-CoA carboxylase (ACC) and fatty acid synthase (FAS)\n- Stearoyl-CoA desaturase (SCD) for unsaturated fatty acids\n- DGAT enzymes for triglyceride synthesis\n\nmTORC1 signaling integrates hormonal and nutritional signals. High glycemic diet activates mTORC1/SREBP-1, increasing sebum production - linking diet to acne.\n\n**Androgen Signaling Details**\n- Type 1 5α-reductase: Predominant in sebaceous glands\n- Androgen receptor: Nuclear translocation, target gene transcription\n- Sebocyte-specific AR targets: Genes for lipid synthesis and differentiation\n- Anti-androgens (spironolactone, cyproterone acetate, flutamide) reduce sebum\n\n**Innate Immunity**\nSebocytes are immunologically active:\n- TLR2/6 expression, activated by C. acnes lipoproteins\n- Produce cytokines (IL-1, IL-6, TNF-α, IL-8)\n- Secrete antimicrobial peptides (cathelicidins, β-defensins)\n- Express inflammasome components\n\n**Pathophysiology of Acne**\n1. Androgen-induced sebum hypersecretion\n2. Follicular hyperkeratinization (microcomedone formation)\n3. C. acnes proliferation and biofilm formation\n4. Inflammation (innate and adaptive immunity)\n\nGenetic factors: AR gene CAG repeats, CYP17 polymorphisms, IL-1α variants\n\n**Sebaceous Neoplasms**\n- Sebaceous adenoma: Benign, Muir-Torre marker\n- Sebaceous carcinoma: Aggressive, periocular predilection, high mortality\n- Molecular: Loss of mismatch repair (MSI), adipophilin expression for diagnosis",
+      "keyTerms": [
+        {
+          "term": "SREBP-1c",
+          "definition": "Sterol regulatory element-binding protein; master transcriptional regulator of lipogenesis"
+        },
+        {
+          "term": "mTORC1",
+          "definition": "Mechanistic target of rapamycin complex 1; integrates nutrient signals with cell growth and lipogenesis"
+        },
+        {
+          "term": "Muir-Torre syndrome",
+          "definition": "Hereditary cancer syndrome with sebaceous neoplasms and internal malignancies due to mismatch repair gene mutations"
+        },
+        {
+          "term": "adipophilin",
+          "definition": "Lipid droplet-associated protein; immunohistochemical marker for sebaceous differentiation"
+        },
+        {
+          "term": "microcomedone",
+          "definition": "Earliest acne lesion: follicular hyperkeratinization creating a plug at the infundibulum"
+        }
+      ],
+      "clinicalNotes": "Spironolactone (androgen receptor blocker) effective for adult female acne. Isotretinoin normalizes follicular keratinization, reduces sebum, and has anti-inflammatory effects - induces long-term remission. Sebaceous carcinoma requires Mohs surgery with margin control; sentinel lymph node biopsy for staging. Muir-Torre screening includes colonoscopy and gynecologic/urologic evaluation."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The sebaceous gland functions as an androgen target organ, metabolic sensor, and immunoregulatory unit whose dysregulation underlies acne vulgaris and sebaceous neoplasms, with emerging understanding of mTOR, lipid signaling, and microbiome interactions informing precision approaches to therapy.",
+      "explanation": "**Advanced Molecular Regulation**\nSebocyte differentiation is orchestrated by:\n- PPAR-γ/RXR heterodimers: Bind PPRE elements, activate lipogenic genes\n- LXR (liver X receptor): Synergizes with PPAR-γ\n- Wnt/β-catenin: Inhibits sebaceous differentiation (Myc induces it)\n- Hedgehog: Required for gland development\n- c-Myc: Overexpression induces sebaceous differentiation\n\n**Nutrient Sensing and Metabolic Links**\nThe mTORC1/FoxO1 axis links nutrition to sebum production:\n- Insulin/IGF-1 activates PI3K/Akt, inhibiting FoxO1\n- Nuclear FoxO1 export releases AR for translocation\n- High glycemic load and dairy activate mTORC1\n- Leucine (abundant in dairy) activates mTORC1\n\nThis explains epidemiological associations between Western diet and acne prevalence.\n\n**Microbiome-Sebocyte Interactions**\n- C. acnes phylotypes (IA1, IA2, II, III) have differential pathogenicity\n- Biofilm formation in follicle creates resistant niche\n- CAMP factor (Christie-Atkins-Munch-Petersen) acts as pore-forming toxin\n- Short-chain fatty acids from C. acnes metabolism affect keratinocytes\n- Dysbiosis model: Loss of S. epidermidis balance with C. acnes\n\n**Inflammasome Biology in Acne**\nC. acnes activates NLRP3 inflammasome via:\n- TLR2-mediated NF-κB priming\n- Lysosomal damage from phagocytosed bacteria\n- ROS production\n- IL-1β and IL-18 release\n\nAnti-IL-1 biologics (anakinra) effective in acne fulminans.\n\n**Advanced Therapeutics**\n1. Topical:\n   - Retinoids: Tretinoin, adapalene, tazarotene (normalizes keratinization)\n   - BPO: Antimicrobial, no resistance\n   - Antibiotics: Clindamycin (combined with BPO to prevent resistance)\n   - Dapsone, azelaic acid: Anti-inflammatory, comedolytic\n\n2. Systemic:\n   - Isotretinoin: RAR agonist, sebum reduction >90%\n   - Hormonal: Combined OCP, spironolactone, clascoterone (topical AR blocker)\n   - Antibiotics: Doxycycline (sub-antimicrobial dosing anti-inflammatory)\n   - Emerging: DGAT inhibitors, SCD inhibitors\n\n3. Procedural:\n   - Light/laser: PDT, pulsed dye laser, IPL\n   - Chemical peels: Salicylic acid, glycolic acid\n   - Extraction, intralesional corticosteroids\n\n**Sebaceous Carcinoma Management**\nPathology: Irregular lobules, foamy cytoplasm, pagetoid spread common\nIHC: Adipophilin+, EMA+, AR+, perilipin+\nMuir-Torre testing: IHC for MLH1, MSH2, MSH6, PMS2; PCR for MSI\nTreatment: Wide local excision or Mohs, sentinel node biopsy, consider radiation\nSystemic: Checkpoint inhibitors showing efficacy in advanced disease",
+      "keyTerms": [
+        {
+          "term": "FoxO1",
+          "definition": "Forkhead box transcription factor that suppresses AR activity; inhibited by insulin signaling"
+        },
+        {
+          "term": "clascoterone",
+          "definition": "First FDA-approved topical androgen receptor inhibitor for acne"
+        },
+        {
+          "term": "NLRP3 inflammasome",
+          "definition": "Cytosolic multiprotein complex activated by C. acnes, leading to IL-1β release and inflammation"
+        },
+        {
+          "term": "CAMP factor",
+          "definition": "C. acnes virulence factor causing host cell lysis through pore formation"
+        },
+        {
+          "term": "pagetoid spread",
+          "definition": "Intraepithelial extension of tumor cells; characteristic of sebaceous carcinoma and must be evaluated for surgical margins"
+        }
+      ],
+      "clinicalNotes": "Acne treatment selection based on phenotype: comedonal (topical retinoids), inflammatory (add BPO/antibiotics), hormonal pattern (anti-androgens), nodular/scarring (isotretinoin). iPLEDGE program mandatory for isotretinoin. Sebaceous carcinoma mimics chalazion; high index of suspicion for recurrent/atypical lesions. Muir-Torre requires GI/GU malignancy surveillance per Lynch syndrome protocols. Emerging sebaceous carcinoma trials include pembrolizumab for advanced disease. Acne scarring prevention critical - early aggressive therapy; established scars treated with resurfacing lasers, subcision, fillers, or microneedling."
+    }
+  },
+  "media": [],
+  "citations": [
+    {
+      "id": "zouboulis-2004",
+      "type": "article",
+      "title": "Acne and sebaceous gland function",
+      "authors": ["Christos C. Zouboulis"],
+      "source": "Clinics in Dermatology"
+    },
+    {
+      "id": "smith-thiboutot",
+      "type": "article",
+      "title": "Thematic review series: Skin lipids. Sebaceous gland lipids",
+      "authors": ["Kelley M. Smith", "Diane M. Thiboutot"],
+      "source": "Journal of Lipid Research"
+    }
+  ],
+  "crossReferences": [
+    {
+      "targetId": "structure-hair-follicles",
+      "targetType": "structure",
+      "relationship": "related",
+      "label": "Hair Follicles"
+    },
+    {
+      "targetId": "condition-acne",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Acne"
+    },
+    {
+      "targetId": "structure-meibomian-glands",
+      "targetType": "structure",
+      "relationship": "related",
+      "label": "Meibomian Glands"
+    }
+  ],
+  "tags": {
+    "systems": ["integumentary"],
+    "structures": ["FMA:59160"],
+    "topics": ["anatomy", "physiology", "histology"],
+    "keywords": ["sebum", "sebaceous", "holocrine", "pilosebaceous", "androgens", "acne"],
+    "clinicalRelevance": "high",
+    "examRelevance": {
+      "usmle": true,
+      "nbme": true,
+      "shelf": ["medicine"]
+    }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

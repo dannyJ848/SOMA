@@ -1,0 +1,525 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const menstrualDisorders: WomensHealthContent = {
+  id: 'menstrual-disorders',
+  title: 'Menstrual Disorders',
+  category: 'Menstrual Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'What are Menstrual Disorders?',
+      content: `Menstrual disorders are problems with your period. They can make your periods irregular, painful, or unusually heavy or light.
+
+**Common Types of Menstrual Disorders:**
+
+1. **Irregular Periods**
+   - Periods that come too often or not often enough
+   - Periods that are unpredictable
+   - Skipping periods
+
+2. **Heavy Periods**
+   - Needing to change protection every hour
+   - Passing large blood clots
+   - Periods lasting more than 7 days
+
+3. **Painful Periods**
+   - Severe cramping
+   - Pain that doesn't go away with medicine
+   - Pain that keeps you from normal activities
+
+4. **Absent Periods**
+   - Not having a period by age 15
+   - Not having a period for 3+ months (not pregnant)
+
+**When to See a Doctor:**
+- Your periods suddenly change
+- You have very heavy bleeding
+- You have severe pain
+- You go 3+ months without a period
+- You bleed between periods
+
+Remember: Most menstrual problems can be treated. A doctor can help find what's causing the issue.`,
+      keyPoints: [
+        'Menstrual disorders affect the timing, amount, or comfort of periods',
+        'Common problems include irregular, heavy, painful, or absent periods',
+        'Sudden changes in your period pattern warrant medical attention',
+        'Most menstrual disorders are treatable'
+      ],
+      vocabulary: [
+        { term: 'Irregular', definition: 'Not happening at regular times' },
+        { term: 'Cramping', definition: 'Painful muscle contractions in the uterus' },
+        { term: 'Clots', definition: 'Gel-like lumps of blood that can pass during period' },
+        { term: 'Absent', definition: 'Not present or missing' }
+      ],
+      quiz: [
+        {
+          question: 'What is a sign of a heavy period?',
+          options: [
+            'Needing to change protection less than once a day',
+            'Needing to change protection every hour',
+            'Having no pain at all',
+            'Periods lasting 2 days'
+          ],
+          correctAnswer: 1,
+          explanation: 'Needing to change your pad or tampon every hour is a sign of heavy menstrual bleeding.'
+        },
+        {
+          question: 'When should you see a doctor about missing periods?',
+          options: [
+            'After missing one period',
+            'After missing 3+ periods (not pregnant)',
+            'Only if trying to get pregnant',
+            'Never, it\'s normal'
+          ],
+          correctAnswer: 1,
+          explanation: 'If you go 3 or more months without a period and you\'re not pregnant, you should see a doctor.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Types and Causes of Menstrual Disorders',
+      content: `Menstrual disorders encompass a range of conditions that affect the normal menstrual cycle. Understanding the specific type helps guide appropriate treatment.
+
+**Major Categories of Menstrual Disorders:**
+
+**1. Abnormal Uterine Bleeding (AUB)**
+- **Polymenorrhea:** Cycles shorter than 21 days
+- **Oligomenorrhea:** Cycles longer than 35 days
+- **Menorrhagia:** Excessive or prolonged bleeding
+- **Metrorrhagia:** Bleeding between periods
+- **Menometrorrhagia:** Excessive and irregular bleeding
+
+**2. Amenorrhea (Absent Periods)**
+- **Primary:** Never had a period by age 15
+- **Secondary:** Had periods before, but stopped for 3+ months
+
+**3. Dysmenorrhea (Painful Periods)**
+- **Primary:** Cramping without underlying disease
+- **Secondary:** Pain caused by reproductive conditions
+
+**Common Causes:**
+
+**Hormonal Imbalances:**
+- Thyroid problems
+- Polycystic ovary syndrome (PCOS)
+- Stress and weight changes
+
+**Structural Issues:**
+- Uterine fibroids
+- Polyps
+- Endometriosis
+- Adenomyosis
+
+**Medical Conditions:**
+- Bleeding disorders
+- Diabetes
+- Liver or kidney disease
+- Certain medications
+
+**Lifestyle Factors:**
+- Extreme exercise
+- Significant weight loss or gain
+- High stress levels
+- Poor nutrition
+
+**When to Seek Medical Care:**
+- Soaking through a pad/tampon every hour for several hours
+- Periods lasting longer than 7 days
+- Passing clots larger than a quarter
+- Severe pain that doesn't improve with OTC medication
+- Bleeding between periods or after sex
+- Periods that stop for more than 3 months`,
+      keyPoints: [
+        'Menstrual disorders are classified by bleeding patterns and symptoms',
+        'Causes include hormonal, structural, and lifestyle factors',
+        'AUB encompasses various abnormal bleeding patterns',
+        'Both primary and secondary amenorrhea require evaluation'
+      ],
+      vocabulary: [
+        { term: 'Polymenorrhea', definition: 'Frequent menstrual cycles less than 21 days apart' },
+        { term: 'Oligomenorrhea', definition: 'Infrequent menstrual cycles more than 35 days apart' },
+        { term: 'Metrorrhagia', definition: 'Bleeding between expected menstrual periods' },
+        { term: 'AUB', definition: 'Abnormal Uterine Bleeding - any bleeding pattern outside normal range' }
+      ],
+      quiz: [
+        {
+          question: 'What is the difference between primary and secondary amenorrhea?',
+          options: [
+            'Primary is genetic, secondary is not',
+            'Primary is no periods by age 15, secondary is stopping after having them',
+            'Primary is temporary, secondary is permanent',
+            'Primary is caused by stress, secondary by medication'
+          ],
+          correctAnswer: 1,
+          explanation: 'Primary amenorrhea is never having had a period by age 15, while secondary amenorrhea is the cessation of periods after they have started.',
+        },
+        {
+          question: 'What defines polymenorrhea?',
+          options: [
+            'Cycles longer than 35 days',
+            'Cycles shorter than 21 days',
+            'Bleeding between periods',
+            'No bleeding for 3+ months'
+          ],
+          correctAnswer: 1,
+          explanation: 'Polymenorrhea is defined as menstrual cycles that occur more frequently than every 21 days.'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Pathophysiology and Clinical Evaluation',
+      content: `Menstrual disorders require systematic evaluation using the PALM-COEIN classification system developed by FIGO (International Federation of Gynecology and Obstetrics).
+
+**FIGO PALM-COEIN Classification:**
+
+**Structural Causes (PALM):**
+- **P**olyps (endometrial or cervical)
+- **A**denomyosis (endometrial tissue in uterine muscle)
+- **L**eiomyoma (fibroids)
+- **M**alignancy or hyperplasia
+
+**Non-Structural Causes (COEIN):**
+- **C**oagulopathy (bleeding disorders)
+- **O**vulatory dysfunction
+- **E**ndometrial dysfunction
+- **I**atrogenic (medications, IUD)
+- **N**ot yet classified
+
+**Diagnostic Evaluation:**
+
+**History Taking:**
+- Detailed menstrual history (cycle length, duration, flow)
+- Age at menarche
+- Sexual history and contraceptive use
+- Medical and surgical history
+- Medication review
+- Symptoms of systemic disease
+
+**Physical Examination:**
+- BMI and vital signs
+- Thyroid examination
+- Abdominal and pelvic examination
+- Signs of androgen excess (hirsutism, acne)
+
+**Laboratory Tests:**
+- **CBC:** Check for anemia from heavy bleeding
+- **TSH:** Thyroid function
+- **Prolactin:** Exclude pituitary issues
+- **FSH/LH:** Evaluate ovarian function
+- **Androgens:** Rule out PCOS
+- **Iron studies:** Assess iron deficiency
+
+**Imaging:**
+- **Pelvic ultrasound:** First-line imaging
+- **Saline infusion sonohysterography:** Evaluate uterine cavity
+- **MRI:** For complex cases or adenomyosis
+- **Hysteroscopy:** Direct visualization of uterine cavity
+
+**Ovulatory Dysfunction Mechanisms:**
+
+Anovulation leads to unopposed estrogen stimulation:
+- No corpus luteum formation
+- No progesterone production
+- Proliferative endometrium continues growing
+- Eventually outgrows blood supply → irregular shedding
+
+**Common Anovulatory Causes:**
+- PCOS (androgen excess, insulin resistance)
+- Hypothalamic suppression (stress, exercise, weight)
+- Perimenopause (follicle depletion)
+- Thyroid disorders
+- Hyperprolactinemia`,
+      keyPoints: [
+        'PALM-COEIN provides a systematic approach to classify abnormal uterine bleeding',
+        'Evaluation requires comprehensive history, physical exam, labs, and imaging',
+        'Anovulation causes unopposed estrogen and irregular bleeding',
+        'Multiple hormonal systems can disrupt ovulation'
+      ],
+      vocabulary: [
+        { term: 'FIGO', definition: 'International Federation of Gynecology and Obstetrics' },
+        { term: 'Coagulopathy', definition: 'Bleeding disorder affecting blood clotting' },
+        { term: 'Menarche', definition: 'First menstrual period' },
+        { term: 'Anovulation', definition: 'Absence of ovulation in a menstrual cycle' }
+      ],
+      quiz: [
+        {
+          question: 'What does the PALM-COEIN classification system help with?',
+          options: [
+            'Predicting menopause timing',
+            'Systematically categorizing causes of abnormal bleeding',
+            'Diagnosing pregnancy complications',
+            'Evaluating breast health'
+          ],
+          correctAnswer: 1,
+          explanation: 'The PALM-COEIN system was developed by FIGO to systematically categorize the causes of abnormal uterine bleeding into structural (PALM) and non-structural (COEIN) causes.',
+        },
+        {
+          question: 'Why does anovulation cause irregular bleeding?',
+          options: [
+            'Too much progesterone production',
+            'Unopposed estrogen causes endometrial overgrowth',
+            'The uterus stops responding to hormones',
+            'Blood clots form in the uterus'
+          ],
+          correctAnswer: 1,
+          explanation: 'Without ovulation, no corpus luteum forms, so no progesterone is produced. Unopposed estrogen causes the endometrium to proliferate until it outgrows its blood supply and sheds irregularly.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Management and Treatment Approaches',
+      content: `Treatment of menstrual disorders is tailored to the underlying cause, patient's reproductive goals, and severity of symptoms. A stepwise approach is often employed.
+
+**Pharmacologic Management:**
+
+**Hormonal Therapies:**
+1. **Combined Hormonal Contraceptives (CHC)**
+   - Oral contraceptive pills (monophasic, multiphasic)
+   - Contraceptive patch
+   - Vaginal ring
+   - Mechanism: Suppress ovulation, stabilize endometrium
+   - Efficacy: 90% reduction in menstrual blood loss
+
+2. **Progestin-Only Therapies**
+   - Oral progestins (norethindrone, medroxyprogesterone)
+   - Levonorgestrel IUD (52mg)
+   - Progestin implant
+   - Mechanism: Decidualize endometrium, reduce proliferation
+   - LNG-IUD: 70-90% reduction in bleeding, 20% amenorrhea rate
+
+3. **GnRH Agonists**
+   - Leuprolide, goserelin
+   - Creates temporary menopausal state
+   - Limited to 6-month use due to bone loss
+   - Add-back therapy extends duration
+
+4. **Non-Hormonal Options:**
+   - **Tranexamic acid:** Antifibrinolytic, reduces flow by 30-50%
+   - **NSAIDs:** Reduce prostaglandins, decrease flow by 20-40%
+   - **Desmopressin:** For bleeding disorders
+
+**Surgical Interventions:**
+
+**Uterine-Sparing Procedures:**
+1. **Endometrial Ablation**
+   - Thermal, radiofrequency, or cryoablation
+   - 60-80% achieve amenorrhea or hypomenorrhea
+   - Contra-indicated if future fertility desired
+
+2. **Myomectomy**
+   - Hysteroscopic for submucosal fibroids
+   - Laparoscopic or abdominal for intramural/subserosal
+   - Preserves fertility
+
+3. **Polypectomy**
+   - Hysteroscopic removal
+   - Low recurrence rate
+
+**Definitive Surgery:**
+- **Hysterectomy:** Removal of uterus
+- Indications: Failed conservative management, malignancy
+- Routes: Vaginal, laparoscopic, robotic, abdominal
+- Permanent solution for AUB
+
+**Condition-Specific Approaches:**
+
+**PCOS:**
+- Combined hormonal contraception
+- Metformin for insulin resistance
+- Lifestyle modifications
+- Anti-androgens for hirsutism
+
+**Endometriosis:**
+- CHC or progestin-only
+- GnRH agonists/antagonists
+- Aromatase inhibitors (adjunct)
+- Surgical excision
+
+**Adenomyosis:**
+- CHC (may be less effective)
+- LNG-IUD (first-line)
+- GnRH agonists
+- Hysterectomy (definitive)
+
+**Bleeding Disorders:**
+- Tranexamic acid
+- Desmopressin for von Willebrand disease
+- Factor replacement for hemophilia
+- Avoid NSAIDs (can worsen bleeding)
+
+**Fertility Considerations:**
+- Ovulation induction for anovulation (letrozole, clomiphene)
+- Myomectomy for cavity-distorting fibroids
+- Hysteroscopic adhesiolysis for Asherman syndrome
+- Surgical management of endometriosis`,
+      keyPoints: [
+        'Hormonal contraceptives are first-line for many menstrual disorders',
+        'LNG-IUD provides highly effective treatment for heavy menstrual bleeding',
+        'Treatment choice depends on underlying cause and fertility desires',
+        'Surgical options range from uterine-sparing to definitive procedures'
+      ],
+      vocabulary: [
+        { term: 'Tranexamic Acid', definition: 'Antifibrinolytic medication that reduces menstrual bleeding' },
+        { term: 'Endometrial Ablation', definition: 'Procedure to destroy uterine lining and reduce bleeding' },
+        { term: 'Myomectomy', definition: 'Surgical removal of fibroids while preserving uterus' },
+        { term: 'Add-back Therapy', definition: 'Low-dose hormones given with GnRH agonists to prevent bone loss' }
+      ],
+      quiz: [
+        {
+          question: 'What is the mechanism of action for combined hormonal contraceptives in treating AUB?',
+          options: [
+            'Increase prostaglandin production',
+            'Suppress ovulation and stabilize endometrium',
+            'Directly constrict uterine blood vessels',
+            'Increase fibrinolytic activity'
+          ],
+          correctAnswer: 1,
+          explanation: 'Combined hormonal contraceptives work by suppressing ovulation and creating a thinner, more stable endometrial lining, resulting in lighter, more predictable bleeding.',
+        },
+        {
+          question: 'What is the amenorrhea rate with LNG-IUD?',
+          options: [
+            '5%',
+            '20%',
+            '50%',
+            '80%'
+          ],
+          correctAnswer: 1,
+          explanation: 'The levonorgestrel intrauterine device results in approximately 20% amenorrhea rate, with 70-90% reduction in menstrual blood loss overall.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Management and Special Populations',
+      content: `Complex menstrual disorders require nuanced understanding of endocrine interactions, comorbidities, and individualized treatment approaches.
+
+**Molecular Mechanisms of Abnormal Bleeding:**
+
+**Endometrial Angiogenesis:**
+- VEGF upregulation in heavy bleeding
+- Abnormal vessel architecture
+- Increased endothelial proliferation
+- Dysregulated prostaglandin ratios (↑PGE2, ↓PGF2α)
+
+**Local Fibrinolytic Activity:**
+- ↑Matrix metalloproteinases (MMPs)
+- ↑Plasminogen activators
+- Impaired hemostasis
+- Enhanced tissue breakdown
+
+**Inflammatory Pathways:**
+- COX-2 overexpression
+- Leukocyte infiltration
+- Cytokine-mediated effects
+- Prostaglandin-induced uterine contractions
+
+**Special Population Considerations:**
+
+**Adolescents:**
+- Immature HPO axis → anovulatory cycles common
+- 60-80% of cycles anovulatory in first year post-menarche
+- Evaluation if not ovulatory by 2-3 years post-menarche
+- Consider bleeding disorders if severe (von Willebrand disease prevalence 13%)
+
+**Perimenopause:**
+- Follicle depletion → rising FSH
+- Shortened follicular phase → shorter cycles initially
+- Eventually becomes anovulatory → irregular cycles
+- Consider endometrial sampling if risk factors present
+
+**Athletes (Female Athlete Triad):**
+- Low energy availability
+- Menstrual dysfunction
+- Decreased bone mineral density
+- Treatment: Increase energy intake, reduce exercise, consider transdermal estrogen
+
+**Patients with Bleeding Disorders:**
+- **von Willebrand Disease:** Most common inherited bleeding disorder
+- **Platelet function disorders:** aspirin use, uremia
+- **Factor deficiencies:** hemophilia carriers
+- Multidisciplinary management with hematology
+
+**Refractory Cases:**
+
+**Ulipristal Acetate:**
+- Selective progesterone receptor modulator
+- For fibroid-related bleeding
+- Liver toxicity concerns limits use
+
+**Elagolix:**
+- GnRH antagonist
+- Add-back therapy included
+- For endometriosis-associated pain
+
+**Relugolix Combination Therapy:**
+- GnRH antagonist with estradiol/progesterone add-back
+- For heavy menstrual bleeding associated with fibroids
+
+**Future Directions:**
+- Targeted anti-angiogenic therapy
+- Selective progesterone receptor modulators (SPRMs)
+- Personalized medicine based on genetic profiling
+- Endometrial microbiome research
+
+**Quality of Life Considerations:**
+- Menstrual disorders impact work productivity
+- Associated with increased healthcare costs
+- Psychological effects: anxiety, depression
+- Social implications: activity limitations
+
+**Monitoring and Follow-up:**
+- CBC every 3-6 months while on treatment
+- Bone density with prolonged GnRH use
+- Lipid profile with hormonal therapies
+- Periodic imaging for structural abnormalities`,
+      keyPoints: [
+        'Abnormal bleeding involves dysregulation of angiogenesis, fibrinolysis, and inflammation',
+        'Special populations require tailored approaches based on physiology',
+        'Bleeding disorders should be considered in refractory heavy bleeding',
+        'New treatments target specific molecular pathways'
+      ],
+      vocabulary: [
+        { term: 'VEGF', definition: 'Vascular Endothelial Growth Factor - promotes blood vessel formation' },
+        { term: 'MMPs', definition: 'Matrix Metalloproteinases - enzymes that break down extracellular matrix' },
+        { term: 'SPRM', definition: 'Selective Progesterone Receptor Modulator - tissue-specific progesterone effects' },
+        { term: 'COX-2', definition: 'Cyclooxygenase-2 - enzyme involved in prostaglandin production' }
+      ],
+      quiz: [
+        {
+          question: 'What percentage of cycles are typically anovulatory in the first year after menarche?',
+          options: ['20-30%', '40-50%', '60-80%', '90-100%'],
+          correctAnswer: 2,
+          explanation: 'During the first year after menarche, 60-80% of cycles are typically anovulatory due to HPO axis immaturity. This usually resolves within 2-3 years.',
+        },
+        {
+          question: 'What is the most common inherited bleeding disorder in women with heavy menstrual bleeding?',
+          options: [
+            'Hemophilia A',
+            'von Willebrand Disease',
+            'Factor XIII deficiency',
+            'Platelet storage pool disorder'
+          ],
+          correctAnswer: 1,
+          explanation: 'von Willebrand disease is the most common inherited bleeding disorder, affecting approximately 13% of women with heavy menstrual bleeding referred for evaluation.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-cycle',
+    'pms',
+    'pmdd',
+    'endometriosis',
+    'pcos'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'FIGO Guidelines for Menstrual Disorders',
+    'ACOG Practice Bulletin No. 128: Diagnosis of Abnormal Uterine Bleeding',
+    'American Society for Reproductive Medicine Guidelines'
+  ]
+};

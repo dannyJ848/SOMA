@@ -1,0 +1,714 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const pcos: WomensHealthContent = {
+  id: 'pcos',
+  title: 'Polycystic Ovary Syndrome (PCOS)',
+  category: 'Reproductive Conditions',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding PCOS',
+      content: `PCOS (Polycystic Ovary Syndrome) is a hormonal disorder that affects women of reproductive age. It's one of the most common causes of infertility.
+
+**What is PCOS?**
+- Hormone imbalance
+| Problems with ovulation
+| Small cysts on ovaries (not actual cysts)
+| Can cause irregular periods
+| Can make it hard to get pregnant
+
+**Common Symptoms:**
+| Irregular periods or no periods
+| Excess facial/body hair
+| Acne
+| Weight gain or difficulty losing weight
+| Thinning hair on scalp
+| Dark patches of skin (especially on neck)
+| Skin tags
+
+**What Causes PCOS?**
+| Exact cause unknown
+| Genetics (runs in families)
+| Insulin resistance (body doesn't use insulin well)
+| High levels of androgens (male hormones)
+
+**How is PCOS Diagnosed?**
+| Doctor will ask about your symptoms
+| Physical exam
+| Blood tests to check hormone levels
+| Ultrasound to look at ovaries
+| Usually diagnosed when 2 of 3 features are present
+
+**Treatment Options:**
+| Birth control pills to regulate periods
+| Lifestyle changes (diet, exercise)
+| Medication to help with insulin
+| Fertility treatments if trying to get pregnant
+
+**Complications if Not Treated:**
+| Type 2 diabetes
+| High blood pressure
+| High cholesterol
+| Sleep apnea
+| Depression/anxiety
+| Endometrial cancer
+
+**Remember:** PCOS is very common and treatable. With proper management, most women with PCOS can have healthy lives and pregnancies.
+`,
+      keyPoints: [
+        'PCOS is a hormonal disorder affecting women of reproductive age',
+        'Common symptoms include irregular periods, excess hair growth, and acne',
+        'Insulin resistance and high androgens are key features',
+        'Treatment includes lifestyle changes and hormonal medications',
+      ],
+      vocabulary: [
+        { term: 'PCOS', definition: 'Polycystic Ovary Syndrome - hormonal disorder' },
+        { term: 'Androgens', definition: 'Male hormones present in women' },
+        { term: 'Insulin Resistance', definition: 'When cells don\'t respond properly to insulin' },
+        { term: 'Cysts', definition: 'Fluid-filled sacs on ovaries (in PCOS, these are actually immature follicles)' }
+      ],
+      quiz: [
+        {
+          question: 'What are the three main diagnostic features of PCOS?',
+          options: [
+            'Irregular periods, ovarian cysts, excess hair growth',
+            'Painful periods, weight gain, acne',
+            'Heavy periods, headaches, fatigue',
+            'Irregular periods, low weight, hair loss',
+          ],
+          correctAnswer: 0,
+          explanation: 'The three main diagnostic features of PCOS are irregular/absent periods, polycystic ovaries on ultrasound, and clinical or laboratory evidence of hyperandrogenism (excess hair growth).',
+        },
+        {
+          question: 'What is the relationship between PCOS and insulin?',
+          options: [
+            'PCOS causes low insulin levels',
+            'Insulin resistance is common in PCOS',
+            'Insulin has no relationship to PCOS',
+            'PCOS is caused by eating too much sugar',
+          ],
+          correctAnswer: 1,
+          explanation: 'Insulin resistance is a key feature of PCOS, affecting 50-70% of women with the condition. The body produces insulin but doesn\'t use it effectively.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'PCOS Diagnosis and Clinical Features',
+      content: `Polycystic Ovary Syndrome is the most common endocrine disorder in reproductive-aged women, affecting 6-12% of women.
+
+**Diagnostic Criteria (Rotterdam 2003):**
+
+Two out of three required:
+
+1. **Oligo-anovulation:**
+| Fewer than 9 periods per year
+| Irregular cycles >35 days
+| Unpredictable cycles
+
+2. **Hyperandrogenism:**
+| Clinical: hirsutism, acne, male-pattern hair loss
+| Laboratory: elevated free testosterone
+| DHEA-S elevated
+
+3. **Polycystic Ovaries:**
+| 12+ follicles in each ovary measuring 2-9 mm
+| Increased ovarian volume >10 mL
+| "String of pearls" appearance
+
+**Differential Diagnosis:**
+
+| Condition | Differentiating Features |
+|-----------|-------------------------|
+| Thyroid disorders | TSH testing abnormal |
+| Prolactinoma | Elevated prolactin |
+| Congenital adrenal hyperplasia | 17-OHP elevated |
+| Cushing syndrome | 24-hour urine cortisol elevated |
+
+**Clinical Features:**
+
+**Menstrual:**
+| Primary amenorrhea (never had periods)
+| Secondary amenorrhea (periods stopped)
+| Oligomenorrhea (infrequent periods)
+| Dysfunctional uterine bleeding
+
+**Dermatologic:**
+| Hirsutism (male-pattern hair growth)
+| Acne (often severe)
+| Androgenic alopecia (hair thinning)
+| Acanthosis nigricans (dark, velvety skin patches)
+| Skin tags (acrochordons)
+
+**Metabolic:**
+| Insulin resistance (50-70%)
+| Obesity (50-60%)
+| Weight difficulty
+| Dyslipidemia (elevated triglycerides, low HDL)
+
+**Reproductive:**
+| Infertility (70-90% have ovulation dysfunction)
+| Pregnancy complications:
+  - Miscarriage rate: 30-50% vs. 15%
+  - Gestational diabetes: 40-50% vs. 3-5%
+  | Preeclampsia: 2-4x increased
+
+**Long-Term Health Risks:**
+
+| Condition | Risk Increase |
+|-----------|--------------|
+| Type 2 diabetes | 4x increased |
+| Metabolic syndrome | 2x increased |
+| Cardiovascular disease | 2x increased |
+| Endometrial cancer | 3x increased |
+| Obstructive sleep apnea | 5-10x increased
+
+**Evaluation:**
+
+**History:**
+| Menstrual pattern
+| Hirsutism progression
+| Weight gain patterns
+| Acne onset
+| Family history of PCOS, diabetes
+| Medications
+
+**Physical Exam:**
+| BMI and waist circumference
+| Blood pressure
+| Ferriman-Gallwey score (hirsutism)
+| Acne evaluation
+| Acanthosis nigricans assessment
+| Skin tags
+| Hair thinning
+
+**Laboratory:**
+
+| Test | PCOS Finding |
+|------|-------------|
+| Testosterone | Elevated (or free testosterone) |
+| SHBG | Often decreased |
+| LH/FSH ratio | ≥2:1 |
+| DHEA-S | May be elevated |
+| Prolactin | Mild elevation possible |
+| TSH | Rule out thyroid disease |
+| 17-OHP | Rule out CAH (if indicated) |
+| Lipids | Often abnormal |
+| Glucose | 2-hour GTT if risk factors |
+| Insulin | Elevated fasting insulin |
+
+**Imaging:**
+| Pelvic ultrasound (preferred)
+| Ovarian volume >10 mL
+| 12+ follicles 2-9 mm
+| "Stromal density" increased
+`,
+      keyPoints: [
+        'Rotterdam criteria require 2 of 3: oligo-anovulation, hyperandrogenism, polycystic ovaries',
+        'PCOS significantly increases risk of type 2 diabetes and cardiovascular disease',
+        'Laboratory evaluation includes hormones, metabolic markers, and exclusion of other disorders',
+        'Ultrasound shows characteristic "string of pearls" appearance',
+      ],
+      vocabulary: [
+        { term: 'Oligo-anovulation', definition: 'Infrequent or absent ovulation' },
+        { term: 'Hirsutism', definition: 'Excess male-pattern hair growth in women' },
+        { term: 'Acanthosis Nigricans', definition: 'Dark, thickened patches of skin' },
+        { term: 'Ferriman-Gallwey Score', definition: 'System for assessing hirsutism' }
+      ],
+      quiz: [
+        {
+          question: 'What LH/FSH ratio is suggestive of PCOS?',
+          options: [
+            '1:1',
+            '≥2:1',
+            '5:1',
+            '10:1',
+          ],
+          correctAnswer: 1,
+          explanation: 'An LH/FSH ratio of 2:1 or greater is characteristic of PCOS, reflecting the altered hypothal-pituitary-ovarian feedback.',
+        },
+        {
+          question: 'What dermatologic finding is most specific to insulin resistance in PCOS?',
+          options: [
+            'Acne',
+            'Skin tags',
+            'Acanthosis nigricans',
+            'Hirsutism',
+          ],
+          correctAnswer: 2,
+          explanation: 'Acanthosis nigricans (dark, velvety skin patches) is most strongly associated with insulin resistance, which is a key feature of PCOS.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'PCOS Pathophysiology and Management',
+      content: `PCOS involves complex interactions between neuroendocrine dysfunction, metabolic abnormalities, and genetic predisposition.
+
+**Pathophysiology:**
+
+**Neuroendocrine Abnormalities:**
+| GnRH pulse frequency increased
+| LH secretion elevated relative to FSH
+| LH pulse amplitude increased
+| Ovarian theca cells produce excess androgens
+| SHBG decreased by androgens
+
+**Androgen Excess:**
+| Ovarian theca cell hyperfunction
+| Adrenal contribution (25% of androgens)
+| Peripheral conversion of androgens to testosterone
+| Some converted to estrone (weak estrogen)
+| Androgens inhibit follicular development
+| Cause hirsutism, acne, alopecia
+
+**Insulin Resistance:**
+| 50-70% have insulin resistance
+| Compensatory hyperinsulinemia
+| Insulin acts as co-gonadotropin, stimulating androgen production
+| Increases androstenedione conversion to testosterone
+| May directly stimulate ovarian theca cells
+
+**Genetic Factors:**
+| Hereditary component
+| Twin studies: 70% concordance
+| Multiple genes implicated (not one single gene)
+| Epigenetic modifications possible
+
+**Inflammation:**
+| Chronic low-grade inflammation
+| Elevated inflammatory markers:
+  - C-reactive protein
+  - Interleukin-6
+  - TNF-alpha
+| Contributes to metabolic dysfunction
+
+**Management Strategies:**
+
+**Lifestyle Modification (First-Line):**
+
+**Weight Loss:|
+| 5-10% weight loss can:
+  - Restore ovulation
+  - Improve insulin sensitivity
+  - Reduce androgen levels
+  - Improve lipid profile
+
+**Diet:|
+| Low glycemic index foods
+| Moderate carbohydrate (40-45%)
+| Adequate protein (20-25%)
+| Healthy fats (30-35%)
+| Anti-inflammatory foods
+
+**Exercise:|
+| 150 minutes/week moderate activity
+| Both aerobic and resistance training
+| Improves insulin sensitivity
+| Reduces androgens
+
+**Pharmacologic Management:**
+
+**Combined Oral Contraceptives:**
+| First-line for menstrual regulation
+| Suppress ovarian androgen production
+| Increase SHBG (binds androgens)
+| Improve hirsutism and acne
+| Contraindicated if pregnancy desired
+
+**Metformin:**
+| Improves insulin sensitivity
+| Reduces androgen levels
+| Can restore ovulation
+| Dose: 500-2000 mg daily
+| Contraindicated in pregnancy (category B)
+
+**Anti-Androgens:|
+| Spironolactone (50-200 mg daily)
+| Cyproterone acetate
+| Flutamide (rare due to hepatotoxicity)
+| Must use contraception
+| Contraindicated in pregnancy
+
+**Ovulation Induction:**
+
+**Clomiphene Citrate:**
+| First-line for fertility
+| Days 5-9 or 3-7
+| Dose: 50-150 mg
+| Monitoring with ultrasound
+| Risk of multiples: 5-10%
+
+**Letrozole:|
+| Aromatase inhibitor
+| May be superior to clomiphene
+| Lower multiple pregnancy risk
+| Better endometrial development
+
+**Gonadotropins:|
+| Injectable FSH/LH
+| With or without IUI
+| Requires intensive monitoring
+| Higher multiple pregnancy risk
+
+**Metabolic Management:**
+
+| Intervention | Effect |
+|-------------|--------|
+| Metformin | Improves insulin sensitivity |
+| Statins | Dyslipidemia |
+| Weight loss | All metabolic parameters |
+| Bariatric surgery | May resolve PCOS symptoms
+`,
+      keyPoints: [
+        'LH/FSH ratio ≥2:1 is characteristic of PCOS',
+        'Insulin resistance drives hyperandrogenism in PCOS',
+        'Lifestyle changes are first-line treatment for all PCOS',
+        'Metformin improves insulin sensitivity and may restore ovulation',
+      ],
+      vocabulary: [
+        { term: 'GnRH', definition: 'Gonadotropin-Releasing Hormone' },
+        { term: 'Theca Cells', definition: 'Cells in ovary that produce androgens' },
+        { term: 'SHBG', definition: 'Sex Hormone Binding Globulin' },
+        { term: 'Hyperinsulinemia', definition: 'Elevated insulin levels' }
+      ],
+      quiz: [
+        {
+          question: 'How does insulin contribute to hyperandrogenism in PCOS?',
+          options: [
+            'Insulin directly causes acne',
+            'Insulin acts as co-gonadotropin to stimulate androgen production',
+            'Insulin reduces estrogen levels',
+            'Insulin has no effect on androgens',
+          ],
+          correctAnswer: 1,
+          explanation: 'Insulin acts as a co-gonadotropin, synergizing with LH to stimulate ovarian theca cells to produce excess androgens.',
+        },
+        {
+          question: 'What is the recommended weight loss goal for PCOS management?',
+          options: [
+            '2-3% of body weight',
+            '5-10% of body weight',
+            '15-20% of body weight',
+            '30% or more of body weight',
+          ],
+          correctAnswer: 1,
+          explanation: 'Weight loss of 5-10% of body weight can restore ovulation, improve insulin sensitivity, and reduce androgen levels in women with PCOS.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'PCOS Management and Long-Term Health',
+      content: `Comprehensive PCOS management addresses reproductive, metabolic, dermatologic, and psychological aspects.
+
+**Reproductive Management:**
+
+**Menstrual Regulation:**
+| Combined oral contraceptives:
+  - Standard approach for non-pregnant patients
+  - Suppress ovarian androgen production
+  - Improve hirsutism and acne
+  - Regularize periods
+  - Protect endometrium
+
+**Progestin-Only Options:**
+| For estrogen contraindications:
+  - Oral progestins
+  - Levonorgestrel IUD
+  - Etonogestrel implant
+
+**Ovulation Induction:**
+| Clomiphene first-line
+| Letrozole may be superior
+| Gonadotropins if oral agents fail
+| IUI considered with gonadotropins
+
+**Pregnancy in PCOS:**
+| High-risk for complications
+| Preconception counseling essential
+| Weight loss before pregnancy beneficial
+| Screening for GDM at 24-28 weeks
+| Screen for GDM early (12-16 weeks) in high-risk
+| Low-dose aspirin (81 mg) starting at 12 weeks
+| Monitor for preeclampsia
+
+**Metabolic Management:**
+
+| Parameter | Target | Treatment |
+|----------|--------|----------|
+| Insulin resistance | Normal | Metformin, lifestyle |
+| Dyslipidemia | Normal | Metformin, statins if needed |
+| Prediabetes | Normal | Metformin + lifestyle |
+| Obesity | BMI 18.5-24.9 | Lifestyle, metformin |
+
+**Bariatric Surgery:**
+| Indications:
+  - BMI ≥40 or
+  - BMI 35-39 with comorbidities
+| Improvement in PCOS symptoms
+| Fertility often improves
+| Nutrition deficiencies possible
+| Wait 12-24 months before pregnancy
+
+**Dermatologic Management:**
+
+| Condition | Treatment |
+|----------|----------|
+| Hirsutism | COCs, spironolactone |
+| Acne | COCs, topical retinoids, antibiotics |
+| Alopecia | COCs, minoxidil (2-5%) |
+
+**Long-Term Health Monitoring:**
+
+| Condition | Screening Frequency |
+|-----------|-------------------|
+| Type 2 diabetes | Every 1-3 years |
+| Dyslipidemia | Every 3-5 years |
+| Hypertension | Every 1-2 years |
+| Depression/anxiety | Annually |
+| Obstructive sleep apnea | High index of suspicion |
+| Endometrial cancer | Irregular bleeding evaluation |
+
+**Screening Tests:**
+- 2-hour GTT every 1-3 years
+| Lipid panel every 3-5 years
+| Fasting glucose annually
+| Blood pressure at each visit
+| Sleep study if symptoms suggest OSA
+
+**Psychological Support:**
+| Depression and anxiety common
+| Body image concerns
+| Infertility distress
+| Support groups available
+| Counseling beneficial
+
+**Treatment Considerations:**
+
+| Medication | Indication | Concerns |
+|------------|------------|---------|
+| COCs | Menstrual regulation, acne, hirsutism | VTE risk, contraindications |
+| Metformin | Insulin resistance, ovulation | GI side effects, B12 deficiency |
+| Spironolactone | Hirsutism, acne | Hyperkalemia, teratogenic |
+| Letrozole | Ovulation | Anti-estrogenic
+`,
+      keyPoints: [
+        'PCOS requires lifelong health monitoring due to metabolic and cardiovascular risks',
+        'Bariatric surgery can significantly improve PCOS symptoms and fertility',
+        'Pregnancy in PCOS is high-risk and requires specialized care',
+        'Psychological support is important due to body image and infertility distress',
+      ],
+      vocabulary: [
+        { term: 'VTE', definition: 'Venous Thromboembolism' },
+        { term: 'GTT', definition: 'Glucose Tolerance Test' },
+        { term: 'B12 Deficiency', definition: 'Low vitamin B12 levels' },
+        { term: 'Anti-estrogenic', definition: 'Blocks or reduces estrogen effects' }
+      ],
+      quiz: [
+        {
+          question: 'When should screening for gestational diabetes begin in PCOS pregnancies?',
+          options: [
+            '24-28 weeks as in all pregnancies',
+            '12-16 weeks due to high risk',
+            'Only if symptoms develop',
+            '32-36 weeks',
+          ],
+          correctAnswer: 1,
+          explanation: 'Women with PCOS are at high risk for gestational diabetes, so early screening at 12-16 weeks is recommended, earlier than the standard 24-28 weeks.',
+        },
+        {
+          question: 'What is the role of metformin in PCOS management?',
+          options: [
+            'Primary treatment for hirsutism',
+            'Improves insulin sensitivity and may restore ovulation',
+            'Directly reduces weight',
+            'Treats acne primarily',
+          ],
+          correctAnswer: 1,
+          explanation: 'Metformin improves insulin sensitivity, reduces androgens, and can restore ovulation in women with PCOS.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced PCOS Pathophysiology',
+      content: `PCOS involves complex neuroendocrine dysfunction with genetic, metabolic, and inflammatory components.
+
+**Genetic Architecture:**
+
+| Gene | Function | Association |
+|------|---------|------------|
+| FSHR | FSH receptor | Altered FSH sensitivity |
+| LHCGR | LH/CG receptor | Altered LH response |
+| DENND1A | GnRH pulse regulation | PCOS-like phenotype in animal models |
+| THADA | Insulin signaling | Type 2 diabetes risk |
+| LHCGR | Steroidogenesis | Androgen production |
+| FBN3 | Follicle development | Ovarian development |
+
+**Inheritance Pattern:**
+| Familial clustering
+| 70% concordance in monozygotic twins
+| 30-40% heritability estimate
+| Likely polygenic inheritance
+
+**Pulsatile Hormone Secretion:**
+
+**Normal:**
+| GnRH pulses every 60-90 minutes
+| Pulse frequency determines LH/FSH ratio
+| Slower pulses favor FSH secretion
+| Faster pulses favor LH secretion
+
+**PCOS:**
+| GnRH pulse frequency increased
+| Faster pulse → more LH, less FSH
+| Amplitude increased
+| Disordered pulse pattern
+
+**Androgen Production:**
+| Ovarian theca cells stimulated
+| Androstenedione produced
+| Converted peripherally to testosterone
+| Some converted to estrone (weak estrogen)
+| Androgens inhibit follicular development
+| Cause hirsutism, acne, alopecia
+
+**Insulin as Gonadotropin:**
+| Insulin amplifies LH effect on theca cells
+| Increases CYP17 activity
+| Enhances androgen production
+| May directly stimulate ovarian theca cells
+
+**Follicular Development:|
+| Early antral follicle recruitment
+| Arrest at small/medium size
+| Multiple small follicles seen on ultrasound
+| Dominant follicle selection fails
+| No single follicle reaches maturity
+
+**Epigenetic Factors:|
+| DNA methylation differences
+| Histone modifications
+| May explain phenotypic variation
+| Environmental influences
+
+**Inflammatory Markers in PCOS:**
+
+| Marker | Finding |
+|--------|---------|
+| CRP | Elevated 2-3x |
+| IL-6 | Elevated |
+| TNF-α | Elevated |
+| Homocysteine | Often elevated |
+| Vascular inflammation | Present
+
+**Inflammation contributes to:|
+| Insulin resistance
+| Endothelial dysfunction
+| Cardiovascular risk
+| Possibly androgen production
+
+**Intraovarian Environment:**
+
+**Abnormal Folliculogenesis:|
+| Arrested development
+| Multiple small follicles
+| Stromal hyperplasia
+| Theca cell hyperplasia
+| Increased vascularization
+
+**Steroidogenesis:|
+| Theca cells produce excess androgens
+| Granulosa cells may produce estradiol but at suboptimal levels
+| FSH resistance possible
+| LH hyperresponsiveness
+
+**Adipose Tissue Dysfunction:|
+| Visceral adiposity common
+| Adipokine dysregulation:
+  - Leptin: elevated but resistance present
+  - Adiponectin: decreased
+  - Resistin: elevated
+| Free fatty acids increased
+| Contributes to insulin resistance
+
+**Ovarian Pathology:**
+| Subcortical stromal hyperplasia
+| Increased ovarian stromal density
+| Collagen deposition
+| Hyperthecosis (clusters of luteinized theca cells)
+
+**Management Implications:**
+
+| Metformin Mechanisms:|
+| Activates AMPK pathway
+| Decreases hepatic glucose production
+| Improves insulin sensitivity
+| Decreases androgen production
+| May directly affect ovarian function
+
+**Weight Loss Impact:|
+| Decreases visceral fat
+| Reduces inflammation
+| Improves insulin sensitivity
+| Reduces free testosterone
+| May restore ovulation
+
+**Combined Oral Contraceptives:|
+| Suppress ovarian androgen production
+| Increase SHBG → lower free testosterone
+| Improve hirsutism and acne
+| Regularize periods
+| Provide endometrial protection
+`,
+      keyPoints: [
+        'PCOS involves polygenic inheritance with 30-40% heritability',
+        'GnRH pulse frequency increase drives LH/FSH ratio elevation',
+        'Chronic low-grade inflammation is a key feature of PCOS',
+        'Metformin activates AMPK and improves insulin sensitivity',
+      ],
+      vocabulary: [
+        { term: 'Gonadotropin', definition: 'FSH and LH hormones' },
+        { term: 'CYP17', definition: 'Enzyme involved in androgen biosynthesis' },
+        { term: 'Adipokine', definition: 'Hormone secreted by adipose tissue' },
+        { term: 'AMPK', definition: 'AMP-activated protein kinase' }
+      ],
+      quiz: [
+        {
+          question: 'What is characteristic of the GnRH pulse pattern in PCOS?',
+          options: [
+            'Slower pulse frequency',
+            'Increased pulse frequency and amplitude',
+            'Completely absent pulses',
+            'Variable from normal to abnormal',
+          ],
+          correctAnswer: 1,
+          explanation: 'In PCOS, GnRH pulse frequency is increased, and pulse amplitude may also be increased. This favors LH production over FSH, creating the characteristic LH:FSH ratio >2.',
+        },
+        {
+          question: 'What is the role of adipokines in PCOS?',
+          options: [
+            'They have no role in PCOS',
+            'Leptin resistance, low adiponectin, elevated resistin contribute to metabolic dysfunction',
+            'Only leptin is abnormal in PCOS',
+            'They improve insulin sensitivity',
+          ],
+          correctAnswer: 1,
+          explanation: 'PCOS is associated with leptin resistance (elevated levels but tissue resistance), decreased adiponectin, and elevated resistin, all contributing to metabolic dysfunction.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-disorders',
+    'amenorrhea',
+    'infertility',
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'Rotterdam ESHRE/ASRM-Sponsored PCOS Consensus Workshop Group',
+    'NIH PCOS Evidence Report',
+    'Endocrine Society Clinical Practice Guideline',
+  ]
+}

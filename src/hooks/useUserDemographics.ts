@@ -40,6 +40,7 @@ export interface UseUserDemographicsReturn extends DemographicsState {
   saveDemographics: (demographics: UserDemographics) => Promise<void>;
   updateDemographics: (partial: Partial<UserDemographics>) => Promise<void>;
   clearDemographics: () => Promise<void>;
+  refreshDemographics: () => Promise<void>;
   calculateBMI: (heightCm: number, weightKg: number) => number;
   getBMICategory: (bmi: number) => string;
 }
@@ -259,6 +260,7 @@ export function useUserDemographics(): UseUserDemographicsReturn {
     saveDemographics,
     updateDemographics,
     clearDemographics,
+    refreshDemographics: loadDemographics,
     calculateBMI,
     getBMICategory,
   };

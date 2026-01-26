@@ -1,0 +1,135 @@
+.ui-card {
+  background-color: var(--ui-card-bg, #ffffff);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Variants */
+.ui-card--elevated {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.ui-card--outlined {
+  border: 1px solid var(--ui-card-border, #e5e7eb);
+}
+
+.ui-card--filled {
+  background-color: var(--ui-card-filled-bg, #f3f4f6);
+}
+
+/* Padding */
+.ui-card--padding-none {
+  padding: 0;
+}
+
+.ui-card--padding-sm {
+  padding: 0.75rem;
+}
+
+.ui-card--padding-md {
+  padding: 1rem;
+}
+
+.ui-card--padding-lg {
+  padding: 1.5rem;
+}
+
+/* Header */
+.ui-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ui-card-divider, #e5e7eb);
+  margin-bottom: 1rem;
+}
+
+.ui-card__header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ui-card__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ui-card-title, #111827);
+  line-height: 1.5;
+}
+
+.ui-card__subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--ui-card-subtitle, #6b7280);
+}
+
+.ui-card__action {
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* Body */
+.ui-card__body {
+  color: var(--ui-card-text, #374151);
+}
+
+/* Footer */
+.ui-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ui-card-divider, #e5e7eb);
+  margin-top: 1rem;
+}
+
+.ui-card__footer--left {
+  justify-content: flex-start;
+}
+
+.ui-card__footer--center {
+  justify-content: center;
+}
+
+.ui-card__footer--right {
+  justify-content: flex-end;
+}
+
+.ui-card__footer--space-between {
+  justify-content: space-between;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .ui-card {
+    background-color: var(--ui-card-bg-dark, #1f2937);
+  }
+
+  .ui-card--outlined {
+    border-color: var(--ui-card-border-dark, #374151);
+  }
+
+  .ui-card--filled {
+    background-color: var(--ui-card-filled-bg-dark, #111827);
+  }
+
+  .ui-card__header {
+    border-bottom-color: var(--ui-card-divider-dark, #374151);
+  }
+
+  .ui-card__title {
+    color: var(--ui-card-title-dark, #f9fafb);
+  }
+
+  .ui-card__subtitle {
+    color: var(--ui-card-subtitle-dark, #9ca3af);
+  }
+
+  .ui-card__body {
+    color: var(--ui-card-text-dark, #d1d5db);
+  }
+
+  .ui-card__footer {
+    border-top-color: var(--ui-card-divider-dark, #374151);
+  }
+}

@@ -1,0 +1,1685 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-24",
+    "totalDrugs": 520,
+    "categories": [
+      "cardiovascular",
+      "diabetes_endocrine",
+      "respiratory",
+      "cns",
+      "antibiotics",
+      "gastrointestinal",
+      "pain_inflammation",
+      "oncology",
+      "immunology",
+      "other"
+    ],
+    "disclaimer": "This database is for educational and clinical decision support purposes only. Always verify information with current prescribing references."
+  },
+  "drugs": [
+    {
+      "id": "CVS001",
+      "genericName": "metoprolol",
+      "brandNames": ["Lopressor", "Toprol-XL"],
+      "class": "Beta Blocker (Beta-1 Selective)",
+      "category": "cardiovascular",
+      "mechanism": "Selectively blocks beta-1 adrenergic receptors in the heart, reducing heart rate, contractility, and blood pressure. Decreases myocardial oxygen demand.",
+      "indications": ["Hypertension", "Angina pectoris", "Heart failure (with reduced ejection fraction)", "Acute myocardial infarction", "Atrial fibrillation/flutter rate control", "Migraine prophylaxis"],
+      "contraindications": ["Severe bradycardia", "Heart block (2nd or 3rd degree)", "Cardiogenic shock", "Decompensated heart failure", "Sick sinus syndrome without pacemaker", "Severe peripheral arterial disease"],
+      "dosing": {
+        "adult": {
+          "hypertension": "IR: 25-100mg BID; XL: 25-400mg daily",
+          "heartFailure": "Start 12.5-25mg BID, titrate to max 200mg BID",
+          "atrialFibrillation": "2.5-5mg IV q5min (max 15mg); then 25-100mg PO BID",
+          "acuteMI": "5mg IV q2min x3, then 50mg PO q6h x48h, then 100mg BID"
+        },
+        "pediatric": "1-2mg/kg/day divided BID (max 6mg/kg/day)",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Start low, titrate carefully in severe impairment"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Dizziness", "Bradycardia", "Hypotension", "Cold extremities", "Nausea", "Diarrhea"],
+        "serious": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Bronchospasm", "Worsening heart failure", "Masking hypoglycemia symptoms"]
+      },
+      "drugInteractions": [
+        {"drug": "Verapamil/Diltiazem", "severity": "major", "effect": "Additive AV block and bradycardia"},
+        {"drug": "Clonidine", "severity": "major", "effect": "Rebound hypertension if clonidine stopped"},
+        {"drug": "MAOIs", "severity": "major", "effect": "Hypertensive crisis"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Additive bradycardia"},
+        {"drug": "CYP2D6 inhibitors", "severity": "moderate", "effect": "Increased metoprolol levels"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "ECG", "Signs of heart failure", "Blood glucose in diabetics"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible with breastfeeding",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "kidneys"]
+    },
+    {
+      "id": "CVS002",
+      "genericName": "atenolol",
+      "brandNames": ["Tenormin"],
+      "class": "Beta Blocker (Beta-1 Selective)",
+      "category": "cardiovascular",
+      "mechanism": "Cardioselective beta-1 blocker with minimal beta-2 activity. Reduces heart rate and contractility.",
+      "indications": ["Hypertension", "Angina pectoris", "Acute MI", "Supraventricular arrhythmias"],
+      "contraindications": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Uncontrolled heart failure"],
+      "dosing": {
+        "adult": {
+          "hypertension": "25-100mg daily",
+          "angina": "50-200mg daily",
+          "acuteMI": "5mg IV, repeat in 10min, then 50mg PO q12h"
+        },
+        "pediatric": "0.5-1mg/kg/day (max 2mg/kg/day)",
+        "renalAdjustment": "CrCl 15-35: max 50mg daily; CrCl <15: max 25mg daily",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Cold extremities", "Bradycardia", "Dizziness", "Depression"],
+        "serious": ["Severe bradycardia", "Heart block", "Bronchospasm", "Heart failure exacerbation"]
+      },
+      "drugInteractions": [
+        {"drug": "Calcium channel blockers", "severity": "major", "effect": "Additive cardiac depression"},
+        {"drug": "Clonidine", "severity": "major", "effect": "Rebound hypertension"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Additive bradycardia"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Use with caution",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS003",
+      "genericName": "carvedilol",
+      "brandNames": ["Coreg", "Coreg CR"],
+      "class": "Beta Blocker (Non-selective with Alpha-1 blocking)",
+      "category": "cardiovascular",
+      "mechanism": "Non-selective beta blocker with alpha-1 blocking activity. Reduces heart rate, blood pressure, and peripheral vascular resistance.",
+      "indications": ["Heart failure (HFrEF)", "Hypertension", "Left ventricular dysfunction post-MI"],
+      "contraindications": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Decompensated heart failure", "Severe hepatic impairment", "Bronchial asthma"],
+      "dosing": {
+        "adult": {
+          "heartFailure": "Start 3.125mg BID, double q2wk to max 25mg BID (<85kg) or 50mg BID (>85kg)",
+          "hypertension": "Start 6.25mg BID, max 25mg BID",
+          "postMI": "Start 6.25mg BID, titrate to 25mg BID"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Contraindicated in severe impairment"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Fatigue", "Hypotension", "Diarrhea", "Weight gain", "Hyperglycemia"],
+        "serious": ["Severe bradycardia", "Heart block", "Worsening heart failure", "Hepatotoxicity", "Bronchospasm"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP2D6 inhibitors", "severity": "major", "effect": "Increased carvedilol levels"},
+        {"drug": "Rifampin", "severity": "major", "effect": "Decreased carvedilol levels"},
+        {"drug": "Insulin/oral hypoglycemics", "severity": "moderate", "effect": "Enhanced hypoglycemia, masked symptoms"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Increased digoxin levels"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "LFTs", "Blood glucose", "Weight"],
+      "pregnancyCategory": "C",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "liver"]
+    },
+    {
+      "id": "CVS004",
+      "genericName": "propranolol",
+      "brandNames": ["Inderal", "Inderal LA", "InnoPran XL"],
+      "class": "Beta Blocker (Non-selective)",
+      "category": "cardiovascular",
+      "mechanism": "Non-selective beta blocker affecting both beta-1 and beta-2 receptors. Also has membrane-stabilizing activity.",
+      "indications": ["Hypertension", "Angina", "Arrhythmias", "MI prophylaxis", "Migraine prophylaxis", "Essential tremor", "Pheochromocytoma", "Thyrotoxicosis", "Performance anxiety"],
+      "contraindications": ["Asthma", "COPD with bronchospasm", "Severe bradycardia", "Heart block", "Cardiogenic shock", "Raynaud phenomenon"],
+      "dosing": {
+        "adult": {
+          "hypertension": "40mg BID, max 640mg/day",
+          "angina": "80-320mg/day in divided doses",
+          "migraine": "80-240mg/day in divided doses",
+          "tremor": "40mg BID, max 320mg/day",
+          "anxiety": "10-40mg 30-60min before event"
+        },
+        "pediatric": "1-4mg/kg/day divided TID-QID",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Reduce dose; start low"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Dizziness", "Cold extremities", "Nausea", "Sleep disturbances", "Depression"],
+        "serious": ["Bronchospasm", "Severe bradycardia", "Heart failure", "Hypoglycemia masking"]
+      },
+      "drugInteractions": [
+        {"drug": "Epinephrine", "severity": "major", "effect": "Severe hypertension"},
+        {"drug": "Verapamil", "severity": "major", "effect": "Severe hypotension and bradycardia"},
+        {"drug": "Theophylline", "severity": "moderate", "effect": "Reduced bronchodilation"},
+        {"drug": "Warfarin", "severity": "moderate", "effect": "Increased warfarin effect"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "Respiratory status"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "brain", "lungs"]
+    },
+    {
+      "id": "CVS005",
+      "genericName": "bisoprolol",
+      "brandNames": ["Zebeta"],
+      "class": "Beta Blocker (Beta-1 Selective)",
+      "category": "cardiovascular",
+      "mechanism": "Highly selective beta-1 blocker with no intrinsic sympathomimetic activity.",
+      "indications": ["Hypertension", "Heart failure (with enalapril and diuretic)"],
+      "contraindications": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Decompensated heart failure"],
+      "dosing": {
+        "adult": {
+          "hypertension": "2.5-20mg daily",
+          "heartFailure": "Start 1.25mg daily, titrate to max 10mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "CrCl <40: start 2.5mg daily",
+        "hepaticAdjustment": "Start 2.5mg daily in hepatic impairment"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Headache", "Dizziness", "Diarrhea"],
+        "serious": ["Severe bradycardia", "Heart block", "Heart failure worsening"]
+      },
+      "drugInteractions": [
+        {"drug": "Non-DHP calcium channel blockers", "severity": "major", "effect": "Additive AV block"},
+        {"drug": "Clonidine", "severity": "major", "effect": "Rebound hypertension"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure"],
+      "pregnancyCategory": "C",
+      "lactation": "Use with caution",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS006",
+      "genericName": "nebivolol",
+      "brandNames": ["Bystolic"],
+      "class": "Beta Blocker (Beta-1 Selective with Nitric Oxide)",
+      "category": "cardiovascular",
+      "mechanism": "Highly selective beta-1 blocker that also stimulates nitric oxide release causing vasodilation.",
+      "indications": ["Hypertension"],
+      "contraindications": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Decompensated heart failure", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "hypertension": "Start 5mg daily, max 40mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "CrCl <30: start 2.5mg daily",
+        "hepaticAdjustment": "Moderate impairment: start 2.5mg; severe: contraindicated"
+      },
+      "sideEffects": {
+        "common": ["Headache", "Fatigue", "Dizziness", "Diarrhea", "Nausea"],
+        "serious": ["Severe bradycardia", "Heart block", "Heart failure exacerbation"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP2D6 inhibitors", "severity": "moderate", "effect": "Increased nebivolol levels"},
+        {"drug": "Verapamil/Diltiazem", "severity": "major", "effect": "Additive cardiac depression"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure"],
+      "pregnancyCategory": "C",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS007",
+      "genericName": "labetalol",
+      "brandNames": ["Trandate"],
+      "class": "Beta Blocker (Non-selective with Alpha-1 blocking)",
+      "category": "cardiovascular",
+      "mechanism": "Combined alpha-1 and non-selective beta blockade. Beta:alpha ratio approximately 7:1 (oral) or 3:1 (IV).",
+      "indications": ["Hypertension", "Hypertensive emergencies", "Preeclampsia/eclampsia"],
+      "contraindications": ["Asthma", "Severe bradycardia", "Heart block", "Cardiogenic shock", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "hypertension": "100mg BID, max 2400mg/day",
+          "hypertensiveEmergency": "20mg IV, then 40-80mg IV q10min (max 300mg) or 0.5-2mg/min infusion"
+        },
+        "pediatric": "1-3mg/kg/day divided BID",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Reduce dose; contraindicated in severe"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Fatigue", "Nausea", "Nasal congestion", "Scalp tingling"],
+        "serious": ["Hepatotoxicity", "Severe bradycardia", "Heart block", "Bronchospasm", "Orthostatic hypotension"]
+      },
+      "drugInteractions": [
+        {"drug": "Halothane", "severity": "major", "effect": "Myocardial depression"},
+        {"drug": "Cimetidine", "severity": "moderate", "effect": "Increased labetalol levels"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "LFTs"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "liver"]
+    },
+    {
+      "id": "CVS008",
+      "genericName": "nadolol",
+      "brandNames": ["Corgard"],
+      "class": "Beta Blocker (Non-selective)",
+      "category": "cardiovascular",
+      "mechanism": "Non-selective beta blocker with long duration of action. No membrane-stabilizing activity.",
+      "indications": ["Hypertension", "Angina pectoris", "Portal hypertension prophylaxis"],
+      "contraindications": ["Asthma", "Severe bradycardia", "Heart block", "Cardiogenic shock"],
+      "dosing": {
+        "adult": {
+          "hypertension": "40-320mg daily",
+          "angina": "40-240mg daily",
+          "portalHypertension": "40-160mg daily"
+        },
+        "pediatric": "1-2.5mg/kg/day",
+        "renalAdjustment": "CrCl 31-50: q24-36h; CrCl 10-30: q24-48h; CrCl <10: q40-60h",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Dizziness", "Cold extremities", "Bradycardia"],
+        "serious": ["Severe bradycardia", "Bronchospasm", "Heart failure worsening"]
+      },
+      "drugInteractions": [
+        {"drug": "Epinephrine", "severity": "major", "effect": "Severe hypertension"},
+        {"drug": "Antidiabetic agents", "severity": "moderate", "effect": "Hypoglycemia masking"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "Renal function"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "liver"]
+    },
+    {
+      "id": "CVS009",
+      "genericName": "sotalol",
+      "brandNames": ["Betapace", "Betapace AF", "Sorine"],
+      "class": "Beta Blocker (Class III Antiarrhythmic)",
+      "category": "cardiovascular",
+      "mechanism": "Non-selective beta blocker with class III antiarrhythmic properties (potassium channel blockade). Prolongs action potential and refractory period.",
+      "indications": ["Ventricular arrhythmias", "Atrial fibrillation/flutter maintenance of sinus rhythm"],
+      "contraindications": ["Long QT syndrome", "Torsades de pointes", "Severe sinus bradycardia", "Heart block", "Cardiogenic shock", "Uncontrolled heart failure", "Asthma", "CrCl <40 (AF formulation)"],
+      "dosing": {
+        "adult": {
+          "ventricularArrhythmias": "80mg BID, titrate q3d to 160-320mg BID",
+          "atrialFibrillation": "80mg BID (or 112mg daily if AF formulation)"
+        },
+        "pediatric": "Age-based dosing per guidelines",
+        "renalAdjustment": "CrCl 30-60: q24h; CrCl 10-30: q36-48h; CrCl <10: individualize",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Fatigue", "Bradycardia", "Dizziness", "Dyspnea", "QT prolongation"],
+        "serious": ["Torsades de pointes", "Proarrhythmia", "Severe bradycardia", "Heart failure"]
+      },
+      "drugInteractions": [
+        {"drug": "QT-prolonging drugs", "severity": "major", "effect": "Increased torsades risk"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Additive bradycardia"},
+        {"drug": "Potassium-depleting diuretics", "severity": "major", "effect": "Increased arrhythmia risk"}
+      ],
+      "monitoring": ["ECG (QTc)", "Heart rate", "Blood pressure", "Electrolytes", "Renal function"],
+      "pregnancyCategory": "B",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart"]
+    },
+    {
+      "id": "CVS010",
+      "genericName": "esmolol",
+      "brandNames": ["Brevibloc"],
+      "class": "Beta Blocker (Ultra-short acting Beta-1 Selective)",
+      "category": "cardiovascular",
+      "mechanism": "Ultra-short acting cardioselective beta-1 blocker. Half-life ~9 minutes. Metabolized by RBC esterases.",
+      "indications": ["Supraventricular tachycardia", "Perioperative hypertension/tachycardia", "Atrial fibrillation rate control"],
+      "contraindications": ["Severe bradycardia", "Heart block", "Cardiogenic shock", "Decompensated heart failure"],
+      "dosing": {
+        "adult": {
+          "SVT": "500mcg/kg bolus over 1min, then 50-200mcg/kg/min infusion",
+          "perioperative": "250-500mcg/kg bolus, then 50-300mcg/kg/min"
+        },
+        "pediatric": "100-500mcg/kg bolus, 25-200mcg/kg/min infusion",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Hypotension", "Diaphoresis", "Nausea", "Dizziness"],
+        "serious": ["Severe bradycardia", "Heart block", "Heart failure", "Bronchospasm"]
+      },
+      "drugInteractions": [
+        {"drug": "Verapamil/Diltiazem", "severity": "major", "effect": "Fatal cardiac arrest possible"},
+        {"drug": "Morphine", "severity": "moderate", "effect": "Increased esmolol levels"}
+      ],
+      "monitoring": ["Continuous ECG", "Blood pressure", "Heart rate"],
+      "pregnancyCategory": "C",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart"]
+    },
+    {
+      "id": "CVS011",
+      "genericName": "lisinopril",
+      "brandNames": ["Prinivil", "Zestril"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Inhibits angiotensin-converting enzyme, preventing conversion of angiotensin I to angiotensin II. Reduces aldosterone secretion and bradykinin breakdown.",
+      "indications": ["Hypertension", "Heart failure", "Post-MI", "Diabetic nephropathy"],
+      "contraindications": ["History of ACE inhibitor-induced angioedema", "Hereditary angioedema", "Bilateral renal artery stenosis", "Pregnancy", "Concomitant aliskiren in diabetes"],
+      "dosing": {
+        "adult": {
+          "hypertension": "10-40mg daily (start 10mg)",
+          "heartFailure": "Start 2.5-5mg daily, target 20-40mg daily",
+          "postMI": "Start 5mg, then 10mg daily, target 40mg daily"
+        },
+        "pediatric": "0.07mg/kg daily (max 0.6mg/kg or 40mg)",
+        "renalAdjustment": "CrCl 10-30: start 2.5-5mg; CrCl <10: start 2.5mg",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Cough (10-15%)", "Dizziness", "Headache", "Fatigue", "Hyperkalemia"],
+        "serious": ["Angioedema", "Acute renal failure", "Hypotension", "Neutropenia"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium supplements/sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced antihypertensive effect, renal dysfunction"},
+        {"drug": "Lithium", "severity": "major", "effect": "Increased lithium toxicity"},
+        {"drug": "Aliskiren", "severity": "major", "effect": "Hyperkalemia, hypotension, renal impairment"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "BUN/Creatinine", "CBC (rare)"],
+      "pregnancyCategory": "D",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS012",
+      "genericName": "enalapril",
+      "brandNames": ["Vasotec"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug converted to enalaprilat. Inhibits ACE, reducing angiotensin II and aldosterone.",
+      "indications": ["Hypertension", "Heart failure", "Asymptomatic LV dysfunction"],
+      "contraindications": ["ACE inhibitor angioedema history", "Bilateral renal artery stenosis", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "5-40mg daily or divided BID",
+          "heartFailure": "Start 2.5mg BID, target 10-20mg BID"
+        },
+        "pediatric": "0.08mg/kg daily up to 5mg",
+        "renalAdjustment": "CrCl 10-50: start 2.5mg; CrCl <10: start 2.5mg on dialysis days",
+        "hepaticAdjustment": "May need lower doses due to reduced conversion"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Dizziness", "Headache", "Fatigue"],
+        "serious": ["Angioedema", "Hyperkalemia", "Acute renal failure"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS013",
+      "genericName": "ramipril",
+      "brandNames": ["Altace"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug hydrolyzed to ramiprilat. Long-acting ACE inhibitor with high tissue penetration.",
+      "indications": ["Hypertension", "Heart failure post-MI", "Cardiovascular risk reduction", "Diabetic nephropathy"],
+      "contraindications": ["ACE inhibitor angioedema history", "Bilateral renal artery stenosis", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "2.5-20mg daily or divided BID",
+          "heartFailure": "Start 1.25-2.5mg BID, target 5mg BID",
+          "cardiovascularRiskReduction": "2.5mg daily, target 10mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "CrCl <40: start 1.25mg daily",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Dizziness", "Hypotension", "Fatigue"],
+        "serious": ["Angioedema", "Hyperkalemia", "Acute renal failure", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced antihypertensive effect"},
+        {"drug": "Aliskiren", "severity": "major", "effect": "Avoid combination in diabetes"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS014",
+      "genericName": "benazepril",
+      "brandNames": ["Lotensin"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug converted to benazeprilat. Inhibits ACE with high lipophilicity for tissue penetration.",
+      "indications": ["Hypertension"],
+      "contraindications": ["ACE inhibitor angioedema history", "Bilateral renal artery stenosis", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "10-40mg daily or divided BID"
+        },
+        "pediatric": "0.2mg/kg daily (max 0.6mg/kg or 40mg)",
+        "renalAdjustment": "CrCl <30: start 5mg daily",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Dizziness", "Headache", "Fatigue"],
+        "serious": ["Angioedema", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Use with caution",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS015",
+      "genericName": "captopril",
+      "brandNames": ["Capoten"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "First oral ACE inhibitor. Short-acting, contains sulfhydryl group. Direct ACE inhibition without prodrug conversion.",
+      "indications": ["Hypertension", "Heart failure", "Post-MI LV dysfunction", "Diabetic nephropathy"],
+      "contraindications": ["ACE inhibitor angioedema history", "Bilateral renal artery stenosis", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "25-150mg BID-TID",
+          "heartFailure": "6.25-50mg TID",
+          "diabeticNephropathy": "25mg TID"
+        },
+        "pediatric": "0.3-0.5mg/kg/dose TID",
+        "renalAdjustment": "CrCl 10-50: 75% dose; CrCl <10: 50% dose",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Rash", "Dysgeusia", "Hypotension"],
+        "serious": ["Angioedema", "Neutropenia", "Proteinuria", "Hyperkalemia"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Allopurinol", "severity": "moderate", "effect": "Increased hypersensitivity risk"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function", "CBC", "Urinalysis"],
+      "pregnancyCategory": "D",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS016",
+      "genericName": "quinapril",
+      "brandNames": ["Accupril"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug converted to quinaprilat. High tissue ACE binding.",
+      "indications": ["Hypertension", "Heart failure"],
+      "contraindications": ["ACE inhibitor angioedema history", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "10-80mg daily or divided BID",
+          "heartFailure": "5mg BID, target 20-40mg BID"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "CrCl 30-60: start 5mg; CrCl 10-30: start 2.5mg",
+        "hepaticAdjustment": "Start 5mg; titrate carefully"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Dizziness", "Headache", "Fatigue"],
+        "serious": ["Angioedema", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Tetracyclines", "severity": "moderate", "effect": "Reduced tetracycline absorption"},
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS017",
+      "genericName": "fosinopril",
+      "brandNames": ["Monopril"],
+      "class": "ACE Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug converted to fosinoprilat. Unique phosphinic acid structure. Dual hepatic/renal elimination.",
+      "indications": ["Hypertension", "Heart failure"],
+      "contraindications": ["ACE inhibitor angioedema history", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "10-40mg daily",
+          "heartFailure": "10-40mg daily"
+        },
+        "pediatric": "0.1-0.6mg/kg daily",
+        "renalAdjustment": "No initial adjustment needed (dual elimination)",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Cough", "Dizziness", "Nausea", "Diarrhea"],
+        "serious": ["Angioedema", "Hyperkalemia", "Renal failure"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Antacids", "severity": "minor", "effect": "Reduced absorption"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature", "liver"]
+    },
+    {
+      "id": "CVS018",
+      "genericName": "losartan",
+      "brandNames": ["Cozaar"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Selectively blocks angiotensin II type 1 (AT1) receptors, preventing vasoconstriction and aldosterone release. Has active metabolite (E-3174).",
+      "indications": ["Hypertension", "Diabetic nephropathy", "Stroke risk reduction in LVH", "Heart failure (if ACE-intolerant)"],
+      "contraindications": ["Pregnancy", "Concomitant aliskiren in diabetes"],
+      "dosing": {
+        "adult": {
+          "hypertension": "50-100mg daily or divided BID",
+          "diabeticNephropathy": "50mg daily, titrate to 100mg",
+          "strokePrevention": "50-100mg daily"
+        },
+        "pediatric": "0.7mg/kg daily (max 50mg)",
+        "renalAdjustment": "No adjustment for hypertension; 25mg start for hepatic impairment",
+        "hepaticAdjustment": "Start 25mg daily"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Hyperkalemia", "Fatigue", "Diarrhea", "Upper respiratory infection"],
+        "serious": ["Angioedema (rare)", "Hypotension", "Acute renal failure", "Rhabdomyolysis (rare)"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy, renal risk"},
+        {"drug": "Lithium", "severity": "major", "effect": "Increased lithium levels"},
+        {"drug": "Rifampin", "severity": "moderate", "effect": "Reduced losartan efficacy"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS019",
+      "genericName": "valsartan",
+      "brandNames": ["Diovan"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Selective AT1 receptor antagonist. No active metabolites.",
+      "indications": ["Hypertension", "Heart failure", "Post-MI with LV dysfunction"],
+      "contraindications": ["Pregnancy", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "hypertension": "80-320mg daily",
+          "heartFailure": "40mg BID, target 160mg BID",
+          "postMI": "20mg BID, titrate to 160mg BID"
+        },
+        "pediatric": "1.3mg/kg daily (max 40mg) ages 6-16",
+        "renalAdjustment": "No adjustment; caution in severe renal impairment",
+        "hepaticAdjustment": "Max 80mg daily in moderate impairment"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Headache", "Fatigue", "Hyperkalemia", "Diarrhea"],
+        "serious": ["Hypotension", "Acute renal failure", "Angioedema (rare)"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS020",
+      "genericName": "irbesartan",
+      "brandNames": ["Avapro"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Long-acting selective AT1 receptor antagonist. High bioavailability.",
+      "indications": ["Hypertension", "Diabetic nephropathy"],
+      "contraindications": ["Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "150-300mg daily",
+          "diabeticNephropathy": "300mg daily"
+        },
+        "pediatric": "Not established under 6 years",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Diarrhea", "Dyspepsia", "Fatigue"],
+        "serious": ["Hypotension", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS021",
+      "genericName": "olmesartan",
+      "brandNames": ["Benicar"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug rapidly converted to olmesartan. Tight AT1 receptor binding.",
+      "indications": ["Hypertension"],
+      "contraindications": ["Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "20-40mg daily"
+        },
+        "pediatric": "10-20mg daily ages 6-16",
+        "renalAdjustment": "No adjustment; caution if CrCl <20",
+        "hepaticAdjustment": "No adjustment required"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Diarrhea", "Upper respiratory infection"],
+        "serious": ["Sprue-like enteropathy", "Hypotension", "Hyperkalemia", "Acute renal failure"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing diuretics", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Colesevelam", "severity": "moderate", "effect": "Reduced olmesartan absorption"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function", "GI symptoms"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "kidneys", "vasculature", "GI_tract"]
+    },
+    {
+      "id": "CVS022",
+      "genericName": "telmisartan",
+      "brandNames": ["Micardis"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Longest half-life ARB. High lipophilicity and volume of distribution. Partial PPAR-gamma agonist activity.",
+      "indications": ["Hypertension", "Cardiovascular risk reduction"],
+      "contraindications": ["Pregnancy", "Biliary obstruction", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "hypertension": "40-80mg daily",
+          "cardiovascularRisk": "80mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "No adjustment; start low in severe renal impairment",
+        "hepaticAdjustment": "Contraindicated in severe; max 40mg in moderate"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Upper respiratory infection", "Back pain", "Diarrhea"],
+        "serious": ["Hypotension", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Increased digoxin levels"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"},
+        {"drug": "Ramipril", "severity": "moderate", "effect": "Additive hypotension"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS023",
+      "genericName": "candesartan",
+      "brandNames": ["Atacand"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug (candesartan cilexetil) converted to active candesartan. Tight, insurmountable AT1 receptor binding.",
+      "indications": ["Hypertension", "Heart failure"],
+      "contraindications": ["Pregnancy", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "hypertension": "8-32mg daily",
+          "heartFailure": "4-32mg daily"
+        },
+        "pediatric": "4-16mg daily ages 6-17",
+        "renalAdjustment": "No adjustment; caution in severe renal impairment",
+        "hepaticAdjustment": "Start low in moderate impairment; avoid in severe"
+      },
+      "sideEffects": {
+        "common": ["Dizziness", "Upper respiratory infection", "Back pain"],
+        "serious": ["Hypotension", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS024",
+      "genericName": "azilsartan",
+      "brandNames": ["Edarbi"],
+      "class": "Angiotensin II Receptor Blocker (ARB)",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug (azilsartan medoxomil) with potent, sustained AT1 receptor blockade.",
+      "indications": ["Hypertension"],
+      "contraindications": ["Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "40-80mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "No adjustment in mild-moderate; avoid in severe"
+      },
+      "sideEffects": {
+        "common": ["Diarrhea", "Dizziness", "Fatigue"],
+        "serious": ["Hypotension", "Hyperkalemia", "Renal impairment"]
+      },
+      "drugInteractions": [
+        {"drug": "Potassium-sparing agents", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy"}
+      ],
+      "monitoring": ["Blood pressure", "Potassium", "Renal function"],
+      "pregnancyCategory": "D",
+      "lactation": "Not recommended",
+      "costCategory": "high",
+      "anatomyLinks": ["heart", "kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS025",
+      "genericName": "amlodipine",
+      "brandNames": ["Norvasc"],
+      "class": "Calcium Channel Blocker (Dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Blocks L-type calcium channels in vascular smooth muscle, causing vasodilation. Minimal effect on cardiac conduction.",
+      "indications": ["Hypertension", "Chronic stable angina", "Vasospastic angina", "Coronary artery disease"],
+      "contraindications": ["Severe hypotension", "Severe aortic stenosis", "Cardiogenic shock"],
+      "dosing": {
+        "adult": {
+          "hypertension": "2.5-10mg daily",
+          "angina": "5-10mg daily"
+        },
+        "pediatric": "2.5-5mg daily ages 6-17",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Start 2.5mg daily"
+      },
+      "sideEffects": {
+        "common": ["Peripheral edema (10%)", "Flushing", "Headache", "Dizziness", "Fatigue"],
+        "serious": ["Severe hypotension", "Worsening angina", "Myocardial infarction (rare)"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP3A4 inhibitors", "severity": "moderate", "effect": "Increased amlodipine levels"},
+        {"drug": "Simvastatin", "severity": "moderate", "effect": "Limit simvastatin to 20mg daily"},
+        {"drug": "Cyclosporine", "severity": "moderate", "effect": "Increased cyclosporine levels"}
+      ],
+      "monitoring": ["Blood pressure", "Heart rate", "Peripheral edema"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS026",
+      "genericName": "nifedipine",
+      "brandNames": ["Procardia", "Procardia XL", "Adalat CC"],
+      "class": "Calcium Channel Blocker (Dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Potent peripheral vasodilator. Blocks L-type calcium channels primarily in vascular smooth muscle.",
+      "indications": ["Hypertension", "Chronic stable angina", "Vasospastic angina", "Raynaud phenomenon"],
+      "contraindications": ["Cardiogenic shock", "Severe aortic stenosis", "Immediate-release for hypertension"],
+      "dosing": {
+        "adult": {
+          "hypertension": "ER: 30-90mg daily",
+          "angina": "ER: 30-90mg daily; IR: 10-20mg TID (short-term)"
+        },
+        "pediatric": "0.25-0.5mg/kg/dose",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Reduce dose; monitor closely"
+      },
+      "sideEffects": {
+        "common": ["Peripheral edema", "Headache", "Flushing", "Dizziness", "Constipation (ER)"],
+        "serious": ["Reflex tachycardia", "Hypotension", "Worsening angina", "MI"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP3A4 inhibitors", "severity": "major", "effect": "Increased nifedipine levels"},
+        {"drug": "Grapefruit juice", "severity": "moderate", "effect": "Increased levels"},
+        {"drug": "Rifampin", "severity": "major", "effect": "Markedly reduced efficacy"}
+      ],
+      "monitoring": ["Blood pressure", "Heart rate", "Peripheral edema"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS027",
+      "genericName": "diltiazem",
+      "brandNames": ["Cardizem", "Cardizem CD", "Tiazac", "Dilacor XR"],
+      "class": "Calcium Channel Blocker (Non-dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Blocks L-type calcium channels in heart and vasculature. Slows AV nodal conduction, reduces heart rate, and causes vasodilation.",
+      "indications": ["Hypertension", "Chronic stable angina", "Vasospastic angina", "Atrial fibrillation/flutter rate control", "PSVT"],
+      "contraindications": ["Sick sinus syndrome without pacemaker", "2nd/3rd degree AV block", "Severe hypotension", "Acute MI with pulmonary congestion", "Concomitant IV beta-blockers", "WPW with atrial fibrillation"],
+      "dosing": {
+        "adult": {
+          "hypertension": "ER: 120-540mg daily",
+          "angina": "IR: 30-90mg QID; ER: 120-480mg daily",
+          "atrialFibrillation": "0.25mg/kg IV over 2min, may repeat 0.35mg/kg; infusion 5-15mg/hr"
+        },
+        "pediatric": "1.5-2mg/kg/day divided TID-QID",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Start low; titrate carefully"
+      },
+      "sideEffects": {
+        "common": ["Peripheral edema", "Headache", "Dizziness", "Bradycardia", "Constipation", "Nausea"],
+        "serious": ["Severe bradycardia", "Heart block", "Heart failure", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Beta-blockers", "severity": "major", "effect": "Additive AV block and negative inotropy"},
+        {"drug": "CYP3A4 substrates", "severity": "moderate", "effect": "Increased levels of substrates"},
+        {"drug": "Simvastatin", "severity": "major", "effect": "Increased statin levels; limit dose"},
+        {"drug": "Carbamazepine", "severity": "major", "effect": "Increased carbamazepine toxicity"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "ECG", "LFTs"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS028",
+      "genericName": "verapamil",
+      "brandNames": ["Calan", "Calan SR", "Verelan", "Isoptin"],
+      "class": "Calcium Channel Blocker (Non-dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Blocks L-type calcium channels with predominant effect on heart. Strong negative inotropic and dromotropic effects.",
+      "indications": ["Hypertension", "Chronic stable angina", "Vasospastic angina", "PSVT", "Atrial fibrillation/flutter rate control", "Migraine prophylaxis", "Cluster headache prophylaxis"],
+      "contraindications": ["Severe LV dysfunction", "Hypotension", "Sick sinus syndrome", "2nd/3rd degree AV block", "WPW with atrial fibrillation", "Concomitant IV beta-blockers", "VT"],
+      "dosing": {
+        "adult": {
+          "hypertension": "IR: 80-120mg TID; SR: 180-480mg daily",
+          "angina": "80-120mg TID; ER: 180-480mg daily",
+          "arrhythmias": "5-10mg IV over 2min; PO 240-480mg/day divided"
+        },
+        "pediatric": "4-8mg/kg/day divided TID",
+        "renalAdjustment": "Reduce dose by 20-25%",
+        "hepaticAdjustment": "Reduce dose by 20-50%"
+      },
+      "sideEffects": {
+        "common": ["Constipation (common)", "Dizziness", "Headache", "Peripheral edema", "Nausea", "Hypotension"],
+        "serious": ["Severe bradycardia", "Heart block", "Heart failure", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Beta-blockers", "severity": "major", "effect": "Severe bradycardia, heart block, heart failure"},
+        {"drug": "Digoxin", "severity": "major", "effect": "Increased digoxin levels 50-75%"},
+        {"drug": "Simvastatin/Lovastatin", "severity": "major", "effect": "Increased statin levels; rhabdomyolysis risk"},
+        {"drug": "Colchicine", "severity": "major", "effect": "Colchicine toxicity"},
+        {"drug": "Dantrolene", "severity": "major", "effect": "Hyperkalemia, cardiovascular collapse"}
+      ],
+      "monitoring": ["Heart rate", "Blood pressure", "ECG", "LFTs", "Digoxin levels if applicable"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS029",
+      "genericName": "felodipine",
+      "brandNames": ["Plendil"],
+      "class": "Calcium Channel Blocker (Dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Highly vascular-selective dihydropyridine CCB. Minimal cardiac effects.",
+      "indications": ["Hypertension"],
+      "contraindications": ["Severe hypotension"],
+      "dosing": {
+        "adult": {
+          "hypertension": "2.5-10mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Start 2.5mg daily"
+      },
+      "sideEffects": {
+        "common": ["Peripheral edema", "Headache", "Flushing", "Dizziness"],
+        "serious": ["Severe hypotension", "Reflex tachycardia"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP3A4 inhibitors", "severity": "moderate", "effect": "Increased felodipine levels"},
+        {"drug": "Grapefruit juice", "severity": "major", "effect": "Markedly increased levels"}
+      ],
+      "monitoring": ["Blood pressure", "Heart rate", "Peripheral edema"],
+      "pregnancyCategory": "C",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["vasculature"]
+    },
+    {
+      "id": "CVS030",
+      "genericName": "nicardipine",
+      "brandNames": ["Cardene", "Cardene IV"],
+      "class": "Calcium Channel Blocker (Dihydropyridine)",
+      "category": "cardiovascular",
+      "mechanism": "Potent arterial vasodilator. Available IV for acute hypertensive emergencies.",
+      "indications": ["Hypertension", "Chronic stable angina", "Hypertensive emergencies"],
+      "contraindications": ["Severe aortic stenosis", "Advanced aortic stenosis"],
+      "dosing": {
+        "adult": {
+          "hypertension": "PO: 20-40mg TID; IV: 5-15mg/hr",
+          "hypertensiveEmergency": "IV: Start 5mg/hr, titrate q5-15min by 2.5mg/hr"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "Start low; titrate carefully",
+        "hepaticAdjustment": "Start low; titrate carefully"
+      },
+      "sideEffects": {
+        "common": ["Headache", "Flushing", "Peripheral edema", "Tachycardia", "Nausea"],
+        "serious": ["Severe hypotension", "Angina exacerbation"]
+      },
+      "drugInteractions": [
+        {"drug": "CYP3A4 inhibitors", "severity": "moderate", "effect": "Increased nicardipine levels"},
+        {"drug": "Cyclosporine", "severity": "moderate", "effect": "Increased cyclosporine levels"}
+      ],
+      "monitoring": ["Blood pressure", "Heart rate", "Peripheral edema"],
+      "pregnancyCategory": "C",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["heart", "vasculature"]
+    },
+    {
+      "id": "CVS031",
+      "genericName": "hydrochlorothiazide",
+      "brandNames": ["Microzide", "HydroDIURIL"],
+      "class": "Thiazide Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Inhibits sodium-chloride cotransporter in distal convoluted tubule. Increases excretion of sodium, chloride, and water.",
+      "indications": ["Hypertension", "Edema", "Calcium nephrolithiasis prevention"],
+      "contraindications": ["Anuria", "Sulfonamide hypersensitivity"],
+      "dosing": {
+        "adult": {
+          "hypertension": "12.5-50mg daily",
+          "edema": "25-100mg daily"
+        },
+        "pediatric": "1-2mg/kg/day divided daily-BID",
+        "renalAdjustment": "Ineffective if CrCl <30; avoid in severe renal impairment",
+        "hepaticAdjustment": "Use with caution in hepatic impairment"
+      },
+      "sideEffects": {
+        "common": ["Hypokalemia", "Hyponatremia", "Hyperuricemia", "Hypercalcemia", "Hyperglycemia", "Photosensitivity"],
+        "serious": ["Severe electrolyte imbalances", "Acute kidney injury", "Pancreatitis", "Aplastic anemia"]
+      },
+      "drugInteractions": [
+        {"drug": "Lithium", "severity": "major", "effect": "Increased lithium toxicity"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Hypokalemia increases digoxin toxicity"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced diuretic effect"},
+        {"drug": "Antidiabetic agents", "severity": "moderate", "effect": "Hyperglycemia may reduce efficacy"}
+      ],
+      "monitoring": ["Electrolytes (K, Na, Mg)", "BUN/Creatinine", "Uric acid", "Glucose", "Lipids"],
+      "pregnancyCategory": "B",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS032",
+      "genericName": "chlorthalidone",
+      "brandNames": ["Thalitone"],
+      "class": "Thiazide-like Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Long-acting thiazide-like diuretic. Inhibits sodium reabsorption in distal tubule. More potent and longer-acting than HCTZ.",
+      "indications": ["Hypertension", "Edema"],
+      "contraindications": ["Anuria", "Sulfonamide hypersensitivity"],
+      "dosing": {
+        "adult": {
+          "hypertension": "12.5-25mg daily (max 100mg)",
+          "edema": "50-100mg daily"
+        },
+        "pediatric": "2mg/kg 3 times weekly",
+        "renalAdjustment": "Reduced efficacy if CrCl <30",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Hypokalemia", "Hyponatremia", "Hyperuricemia", "Hyperglycemia", "Hypercalcemia"],
+        "serious": ["Severe hyponatremia", "Acute kidney injury", "Arrhythmias from electrolyte imbalance"]
+      },
+      "drugInteractions": [
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Increased toxicity with hypokalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy"}
+      ],
+      "monitoring": ["Electrolytes", "Renal function", "Uric acid", "Glucose"],
+      "pregnancyCategory": "B",
+      "lactation": "Compatible",
+      "costCategory": "low",
+      "anatomyLinks": ["kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS033",
+      "genericName": "indapamide",
+      "brandNames": ["Lozol"],
+      "class": "Thiazide-like Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Thiazide-like diuretic with additional direct vasodilatory effects. Less metabolic effects than traditional thiazides.",
+      "indications": ["Hypertension", "Edema in heart failure"],
+      "contraindications": ["Anuria", "Severe renal failure", "Hepatic encephalopathy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "1.25-2.5mg daily",
+          "edema": "2.5-5mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "Ineffective in severe renal impairment",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Hypokalemia", "Dizziness", "Headache", "Fatigue"],
+        "serious": ["Severe hyponatremia", "Arrhythmias", "Hepatic encephalopathy"]
+      },
+      "drugInteractions": [
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"},
+        {"drug": "QT-prolonging drugs", "severity": "major", "effect": "Increased risk with hypokalemia"}
+      ],
+      "monitoring": ["Electrolytes", "Renal function", "Glucose"],
+      "pregnancyCategory": "B",
+      "lactation": "Unknown",
+      "costCategory": "low",
+      "anatomyLinks": ["kidneys", "vasculature"]
+    },
+    {
+      "id": "CVS034",
+      "genericName": "furosemide",
+      "brandNames": ["Lasix"],
+      "class": "Loop Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Inhibits Na-K-2Cl cotransporter in thick ascending limb of Loop of Henle. Potent diuresis with significant electrolyte loss.",
+      "indications": ["Edema (heart failure, hepatic, renal)", "Acute pulmonary edema", "Hypertension", "Hypercalcemia"],
+      "contraindications": ["Anuria", "Hepatic coma", "Severe electrolyte depletion", "Sulfonamide allergy (use with caution)"],
+      "dosing": {
+        "adult": {
+          "edema": "PO: 20-80mg daily-BID; IV: 20-200mg",
+          "acutePulmonaryEdema": "40-80mg IV; may double q2h if needed",
+          "hypertension": "40-80mg BID"
+        },
+        "pediatric": "1-2mg/kg/dose PO/IV; max 6mg/kg/dose",
+        "renalAdjustment": "Higher doses often needed; max single dose 200mg IV",
+        "hepaticAdjustment": "Use with caution; can precipitate hepatic encephalopathy"
+      },
+      "sideEffects": {
+        "common": ["Hypokalemia", "Hyponatremia", "Hypomagnesemia", "Hypocalcemia", "Hyperuricemia", "Dehydration", "Orthostatic hypotension"],
+        "serious": ["Ototoxicity", "Severe electrolyte imbalance", "Acute kidney injury", "Pancreatitis"]
+      },
+      "drugInteractions": [
+        {"drug": "Aminoglycosides", "severity": "major", "effect": "Additive ototoxicity"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Hypokalemia increases toxicity"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced diuretic effect"}
+      ],
+      "monitoring": ["Electrolytes (K, Na, Mg, Ca)", "BUN/Creatinine", "Blood pressure", "Weight", "Uric acid"],
+      "pregnancyCategory": "C",
+      "lactation": "Compatible; may suppress lactation",
+      "costCategory": "low",
+      "anatomyLinks": ["kidneys", "heart", "ears"]
+    },
+    {
+      "id": "CVS035",
+      "genericName": "bumetanide",
+      "brandNames": ["Bumex"],
+      "class": "Loop Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Potent loop diuretic. 40x more potent than furosemide. Inhibits Na-K-2Cl cotransporter.",
+      "indications": ["Edema (heart failure, hepatic, renal)"],
+      "contraindications": ["Anuria", "Hepatic coma", "Severe electrolyte depletion"],
+      "dosing": {
+        "adult": {
+          "edema": "PO: 0.5-2mg daily-BID (max 10mg/day); IV: 0.5-1mg; may repeat q2-3h"
+        },
+        "pediatric": "0.015-0.1mg/kg/dose q6-24h",
+        "renalAdjustment": "May need higher doses; continuous infusion preferred",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Hypokalemia", "Muscle cramps", "Dizziness", "Hypotension", "Hyperuricemia"],
+        "serious": ["Ototoxicity", "Severe electrolyte imbalance", "Encephalopathy"]
+      },
+      "drugInteractions": [
+        {"drug": "Aminoglycosides", "severity": "major", "effect": "Additive ototoxicity"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"}
+      ],
+      "monitoring": ["Electrolytes", "Renal function", "Blood pressure", "Weight"],
+      "pregnancyCategory": "C",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["kidneys", "heart"]
+    },
+    {
+      "id": "CVS036",
+      "genericName": "torsemide",
+      "brandNames": ["Demadex"],
+      "class": "Loop Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Loop diuretic with longer duration than furosemide. Better oral bioavailability.",
+      "indications": ["Edema (heart failure, hepatic, renal)", "Hypertension"],
+      "contraindications": ["Anuria", "Hepatic coma"],
+      "dosing": {
+        "adult": {
+          "heartFailure": "10-20mg daily; max 200mg/day",
+          "renalEdema": "20mg daily; max 200mg/day",
+          "hepaticEdema": "5-10mg daily with aldosterone antagonist",
+          "hypertension": "5-10mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "Higher doses may be needed",
+        "hepaticAdjustment": "Use with aldosterone antagonist"
+      },
+      "sideEffects": {
+        "common": ["Headache", "Dizziness", "Diarrhea", "Hyperuricemia"],
+        "serious": ["Ototoxicity", "Severe electrolyte imbalance", "Hepatic encephalopathy"]
+      },
+      "drugInteractions": [
+        {"drug": "Aminoglycosides", "severity": "major", "effect": "Additive ototoxicity"},
+        {"drug": "Lithium", "severity": "major", "effect": "Lithium toxicity"},
+        {"drug": "Probenecid", "severity": "moderate", "effect": "Reduced torsemide effect"}
+      ],
+      "monitoring": ["Electrolytes", "Renal function", "Blood pressure"],
+      "pregnancyCategory": "B",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["kidneys", "heart"]
+    },
+    {
+      "id": "CVS037",
+      "genericName": "spironolactone",
+      "brandNames": ["Aldactone"],
+      "class": "Potassium-Sparing Diuretic (Aldosterone Antagonist)",
+      "category": "cardiovascular",
+      "mechanism": "Competitively blocks aldosterone at mineralocorticoid receptors in distal tubule. Causes potassium retention and sodium excretion.",
+      "indications": ["Heart failure (HFrEF)", "Primary hyperaldosteronism", "Edema (cirrhosis, nephrotic syndrome)", "Hypertension", "Hirsutism/acne in women"],
+      "contraindications": ["Hyperkalemia", "Addison's disease", "Anuria", "Acute renal insufficiency"],
+      "dosing": {
+        "adult": {
+          "heartFailure": "12.5-25mg daily (max 50mg)",
+          "edema": "25-200mg daily",
+          "hypertension": "25-100mg daily",
+          "primaryHyperaldosteronism": "100-400mg daily"
+        },
+        "pediatric": "1-3.3mg/kg/day divided daily-QID",
+        "renalAdjustment": "Avoid if CrCl <30; contraindicated in acute renal failure",
+        "hepaticAdjustment": "Start low in cirrhosis"
+      },
+      "sideEffects": {
+        "common": ["Hyperkalemia", "Gynecomastia", "Breast tenderness", "Menstrual irregularities", "GI upset"],
+        "serious": ["Severe hyperkalemia", "Acute kidney injury", "Hepatotoxicity", "Agranulocytosis (rare)"]
+      },
+      "drugInteractions": [
+        {"drug": "ACE inhibitors/ARBs", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Severe hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Reduced efficacy, hyperkalemia"},
+        {"drug": "Digoxin", "severity": "moderate", "effect": "Increased digoxin levels"}
+      ],
+      "monitoring": ["Potassium", "Sodium", "Renal function", "Blood pressure"],
+      "pregnancyCategory": "C",
+      "lactation": "Active metabolite present in milk",
+      "costCategory": "low",
+      "anatomyLinks": ["kidneys", "heart", "adrenal_glands"]
+    },
+    {
+      "id": "CVS038",
+      "genericName": "eplerenone",
+      "brandNames": ["Inspra"],
+      "class": "Potassium-Sparing Diuretic (Selective Aldosterone Antagonist)",
+      "category": "cardiovascular",
+      "mechanism": "Selective aldosterone receptor antagonist with minimal anti-androgen effects compared to spironolactone.",
+      "indications": ["Heart failure post-MI", "Heart failure (HFrEF)", "Hypertension"],
+      "contraindications": ["Hyperkalemia (K >5.0)", "CrCl <30 (for hypertension)", "Strong CYP3A4 inhibitors", "Type 2 diabetes with microalbuminuria"],
+      "dosing": {
+        "adult": {
+          "heartFailurePostMI": "25mg daily, titrate to 50mg daily",
+          "heartFailure": "25mg daily, titrate to 50mg daily",
+          "hypertension": "50mg daily, may increase to 50mg BID"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "Not recommended if CrCl <50 (HF) or <30 (HTN)",
+        "hepaticAdjustment": "No adjustment for mild-moderate"
+      },
+      "sideEffects": {
+        "common": ["Hyperkalemia", "Dizziness", "Diarrhea", "Fatigue"],
+        "serious": ["Severe hyperkalemia", "Acute kidney injury"]
+      },
+      "drugInteractions": [
+        {"drug": "Strong CYP3A4 inhibitors", "severity": "major", "effect": "Contraindicated"},
+        {"drug": "ACE inhibitors/ARBs", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Hyperkalemia"}
+      ],
+      "monitoring": ["Potassium", "Renal function", "Blood pressure"],
+      "pregnancyCategory": "B",
+      "lactation": "Unknown",
+      "costCategory": "high",
+      "anatomyLinks": ["kidneys", "heart"]
+    },
+    {
+      "id": "CVS039",
+      "genericName": "triamterene",
+      "brandNames": ["Dyrenium"],
+      "class": "Potassium-Sparing Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Blocks epithelial sodium channels (ENaC) in collecting duct. Potassium-sparing without aldosterone antagonism.",
+      "indications": ["Edema", "Hypertension (with thiazide)", "Prevention of thiazide-induced hypokalemia"],
+      "contraindications": ["Hyperkalemia", "Severe renal impairment", "Severe hepatic disease"],
+      "dosing": {
+        "adult": {
+          "edema": "50-100mg BID (max 300mg/day)"
+        },
+        "pediatric": "2-4mg/kg/day divided daily-BID",
+        "renalAdjustment": "Avoid if CrCl <30",
+        "hepaticAdjustment": "Use with caution; avoid in severe"
+      },
+      "sideEffects": {
+        "common": ["Hyperkalemia", "Nausea", "Leg cramps", "Dizziness"],
+        "serious": ["Severe hyperkalemia", "Kidney stones", "Megaloblastic anemia", "Interstitial nephritis"]
+      },
+      "drugInteractions": [
+        {"drug": "ACE inhibitors/ARBs", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Severe hyperkalemia"},
+        {"drug": "NSAIDs", "severity": "moderate", "effect": "Increased nephrotoxicity"}
+      ],
+      "monitoring": ["Potassium", "Renal function", "CBC"],
+      "pregnancyCategory": "C",
+      "lactation": "Present in milk",
+      "costCategory": "moderate",
+      "anatomyLinks": ["kidneys"]
+    },
+    {
+      "id": "CVS040",
+      "genericName": "amiloride",
+      "brandNames": ["Midamor"],
+      "class": "Potassium-Sparing Diuretic",
+      "category": "cardiovascular",
+      "mechanism": "Blocks ENaC in collecting duct. Promotes sodium excretion and potassium retention.",
+      "indications": ["Hypertension (with thiazide)", "Heart failure (adjunct)", "Lithium-induced nephrogenic DI"],
+      "contraindications": ["Hyperkalemia", "Severe renal impairment", "Diabetic nephropathy"],
+      "dosing": {
+        "adult": {
+          "hypertension": "5-10mg daily (max 20mg)"
+        },
+        "pediatric": "0.625mg/kg/day",
+        "renalAdjustment": "Avoid if CrCl <50",
+        "hepaticAdjustment": "Use with caution"
+      },
+      "sideEffects": {
+        "common": ["Hyperkalemia", "Nausea", "Headache", "Dizziness"],
+        "serious": ["Severe hyperkalemia", "Metabolic acidosis"]
+      },
+      "drugInteractions": [
+        {"drug": "ACE inhibitors/ARBs", "severity": "major", "effect": "Hyperkalemia"},
+        {"drug": "Potassium supplements", "severity": "major", "effect": "Severe hyperkalemia"},
+        {"drug": "Lithium", "severity": "moderate", "effect": "Reduced lithium clearance"}
+      ],
+      "monitoring": ["Potassium", "Renal function"],
+      "pregnancyCategory": "B",
+      "lactation": "Unknown",
+      "costCategory": "moderate",
+      "anatomyLinks": ["kidneys"]
+    },
+    {
+      "id": "CVS041",
+      "genericName": "atorvastatin",
+      "brandNames": ["Lipitor"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Competitively inhibits HMG-CoA reductase, the rate-limiting enzyme in cholesterol synthesis. Reduces LDL-C, triglycerides, and increases HDL-C.",
+      "indications": ["Primary hyperlipidemia", "Mixed dyslipidemia", "Primary prevention of cardiovascular disease", "Secondary prevention post-MI/stroke", "Familial hypercholesterolemia"],
+      "contraindications": ["Active liver disease", "Unexplained persistent LFT elevations", "Pregnancy", "Breastfeeding"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "10-80mg daily",
+          "intensiveTherapy": "40-80mg daily for ASCVD"
+        },
+        "pediatric": "10-20mg daily (ages 10-17)",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Contraindicated in active liver disease"
+      },
+      "sideEffects": {
+        "common": ["Myalgia", "Arthralgia", "Diarrhea", "Nasopharyngitis", "Headache"],
+        "serious": ["Rhabdomyolysis", "Hepatotoxicity", "Myopathy", "New-onset diabetes", "Immune-mediated necrotizing myopathy"]
+      },
+      "drugInteractions": [
+        {"drug": "Cyclosporine", "severity": "major", "effect": "Markedly increased statin levels"},
+        {"drug": "Gemfibrozil", "severity": "major", "effect": "Increased rhabdomyolysis risk"},
+        {"drug": "Strong CYP3A4 inhibitors", "severity": "major", "effect": "Increased statin levels"},
+        {"drug": "Warfarin", "severity": "moderate", "effect": "Increased warfarin effect"},
+        {"drug": "Colchicine", "severity": "moderate", "effect": "Increased myopathy risk"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs (baseline and PRN)", "CK if symptomatic", "Blood glucose"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "low",
+      "anatomyLinks": ["liver", "vasculature", "heart"]
+    },
+    {
+      "id": "CVS042",
+      "genericName": "rosuvastatin",
+      "brandNames": ["Crestor"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Most potent statin. Hydrophilic with high hepatic selectivity. Not significantly metabolized by CYP450.",
+      "indications": ["Hyperlipidemia", "Cardiovascular prevention", "Familial hypercholesterolemia", "Slowing atherosclerosis progression"],
+      "contraindications": ["Active liver disease", "Pregnancy", "Breastfeeding"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "5-40mg daily",
+          "intensiveTherapy": "20-40mg daily",
+          "asianPatients": "Start 5mg daily"
+        },
+        "pediatric": "5-20mg daily (ages 8-17 for heterozygous FH)",
+        "renalAdjustment": "CrCl <30: start 5mg, max 10mg",
+        "hepaticAdjustment": "Contraindicated in active disease"
+      },
+      "sideEffects": {
+        "common": ["Myalgia", "Headache", "Nausea", "Asthenia", "Constipation"],
+        "serious": ["Rhabdomyolysis", "Hepatotoxicity", "Proteinuria/hematuria", "Diabetes"]
+      },
+      "drugInteractions": [
+        {"drug": "Cyclosporine", "severity": "major", "effect": "Greatly increased levels; max 5mg"},
+        {"drug": "Gemfibrozil", "severity": "major", "effect": "Increased myopathy risk"},
+        {"drug": "Warfarin", "severity": "moderate", "effect": "Increased INR"},
+        {"drug": "Antacids", "severity": "minor", "effect": "Reduced absorption; give 2h apart"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs", "CK if symptomatic", "Urinalysis (high doses)"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "low",
+      "anatomyLinks": ["liver", "vasculature", "heart"]
+    },
+    {
+      "id": "CVS043",
+      "genericName": "simvastatin",
+      "brandNames": ["Zocor"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug converted to active form. Inhibits HMG-CoA reductase.",
+      "indications": ["Hyperlipidemia", "Cardiovascular prevention", "Diabetic dyslipidemia"],
+      "contraindications": ["Active liver disease", "Pregnancy", "Concomitant strong CYP3A4 inhibitors"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "10-40mg daily (evening dosing)",
+          "note": "80mg only for patients on this dose >12 months without myopathy"
+        },
+        "pediatric": "10-40mg daily (ages 10-17 for FH)",
+        "renalAdjustment": "CrCl <30: start 5mg daily",
+        "hepaticAdjustment": "Contraindicated in active disease"
+      },
+      "sideEffects": {
+        "common": ["Myalgia", "Headache", "GI upset", "Upper respiratory infection"],
+        "serious": ["Rhabdomyolysis (highest risk statin)", "Hepatotoxicity", "Myopathy"]
+      },
+      "drugInteractions": [
+        {"drug": "Amiodarone", "severity": "major", "effect": "Max simvastatin 10mg"},
+        {"drug": "Diltiazem/Verapamil", "severity": "major", "effect": "Max simvastatin 10mg"},
+        {"drug": "Amlodipine", "severity": "moderate", "effect": "Max simvastatin 20mg"},
+        {"drug": "Grapefruit juice", "severity": "major", "effect": "Avoid large quantities"},
+        {"drug": "Strong CYP3A4 inhibitors", "severity": "major", "effect": "Contraindicated"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs", "CK if symptomatic"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "low",
+      "anatomyLinks": ["liver", "vasculature"]
+    },
+    {
+      "id": "CVS044",
+      "genericName": "pravastatin",
+      "brandNames": ["Pravachol"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Hydrophilic statin. Not metabolized by CYP450. Lower myopathy risk.",
+      "indications": ["Hyperlipidemia", "Cardiovascular prevention"],
+      "contraindications": ["Active liver disease", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "10-80mg daily"
+        },
+        "pediatric": "20-40mg daily (ages 8-13); up to 40mg (ages 14-18)",
+        "renalAdjustment": "Start 10mg daily",
+        "hepaticAdjustment": "Contraindicated in active disease"
+      },
+      "sideEffects": {
+        "common": ["Headache", "Nausea", "Rash", "Diarrhea"],
+        "serious": ["Rhabdomyolysis (lower risk)", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Cyclosporine", "severity": "major", "effect": "Increased pravastatin levels"},
+        {"drug": "Gemfibrozil", "severity": "major", "effect": "Increased myopathy risk"},
+        {"drug": "Colchicine", "severity": "moderate", "effect": "Increased myopathy risk"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs"],
+      "pregnancyCategory": "X",
+      "lactation": "Not recommended",
+      "costCategory": "low",
+      "anatomyLinks": ["liver", "vasculature"]
+    },
+    {
+      "id": "CVS045",
+      "genericName": "lovastatin",
+      "brandNames": ["Mevacor", "Altoprev"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "First statin approved. Prodrug requiring hepatic activation. Take with evening meal.",
+      "indications": ["Hyperlipidemia", "Cardiovascular prevention"],
+      "contraindications": ["Active liver disease", "Pregnancy", "Strong CYP3A4 inhibitors"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "IR: 20-80mg daily with evening meal; ER: 20-60mg at bedtime"
+        },
+        "pediatric": "10-40mg daily (ages 10-17)",
+        "renalAdjustment": "CrCl <30: max 20mg daily",
+        "hepaticAdjustment": "Contraindicated"
+      },
+      "sideEffects": {
+        "common": ["Headache", "GI upset", "Myalgia", "Rash"],
+        "serious": ["Rhabdomyolysis", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Strong CYP3A4 inhibitors", "severity": "major", "effect": "Contraindicated"},
+        {"drug": "Amiodarone", "severity": "major", "effect": "Max 40mg lovastatin"},
+        {"drug": "Grapefruit juice", "severity": "major", "effect": "Avoid"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "low",
+      "anatomyLinks": ["liver", "vasculature"]
+    },
+    {
+      "id": "CVS046",
+      "genericName": "fluvastatin",
+      "brandNames": ["Lescol", "Lescol XL"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Synthetic statin metabolized by CYP2C9. Lower interaction potential.",
+      "indications": ["Hyperlipidemia", "Secondary prevention post-PCI"],
+      "contraindications": ["Active liver disease", "Pregnancy"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "IR: 20-40mg BID; XL: 80mg daily"
+        },
+        "pediatric": "20mg daily (ages 10-16)",
+        "renalAdjustment": "No adjustment for mild-moderate",
+        "hepaticAdjustment": "Contraindicated in active disease"
+      },
+      "sideEffects": {
+        "common": ["Headache", "Dyspepsia", "Diarrhea", "Myalgia"],
+        "serious": ["Rhabdomyolysis", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Fluconazole", "severity": "moderate", "effect": "Increased fluvastatin levels"},
+        {"drug": "Cyclosporine", "severity": "major", "effect": "Increased levels"},
+        {"drug": "Warfarin", "severity": "moderate", "effect": "Increased INR"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "moderate",
+      "anatomyLinks": ["liver", "vasculature"]
+    },
+    {
+      "id": "CVS047",
+      "genericName": "pitavastatin",
+      "brandNames": ["Livalo", "Zypitamag"],
+      "class": "HMG-CoA Reductase Inhibitor (Statin)",
+      "category": "cardiovascular",
+      "mechanism": "Minimal CYP450 metabolism. May raise HDL more than other statins.",
+      "indications": ["Hyperlipidemia"],
+      "contraindications": ["Active liver disease", "Pregnancy", "Cyclosporine use"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "2-4mg daily"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "CrCl 15-59 on dialysis: max 2mg daily",
+        "hepaticAdjustment": "Contraindicated in active disease"
+      },
+      "sideEffects": {
+        "common": ["Myalgia", "Back pain", "Diarrhea", "Constipation"],
+        "serious": ["Rhabdomyolysis", "Hepatotoxicity"]
+      },
+      "drugInteractions": [
+        {"drug": "Cyclosporine", "severity": "major", "effect": "Contraindicated"},
+        {"drug": "Erythromycin", "severity": "major", "effect": "Max 1mg pitavastatin"},
+        {"drug": "Rifampin", "severity": "major", "effect": "Max 2mg pitavastatin"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs"],
+      "pregnancyCategory": "X",
+      "lactation": "Contraindicated",
+      "costCategory": "high",
+      "anatomyLinks": ["liver", "vasculature"]
+    },
+    {
+      "id": "CVS048",
+      "genericName": "ezetimibe",
+      "brandNames": ["Zetia"],
+      "class": "Cholesterol Absorption Inhibitor",
+      "category": "cardiovascular",
+      "mechanism": "Inhibits intestinal cholesterol absorption at brush border by blocking NPC1L1 protein. Reduces LDL-C 15-20%.",
+      "indications": ["Primary hyperlipidemia (with or without statin)", "Homozygous familial hypercholesterolemia", "Homozygous sitosterolemia"],
+      "contraindications": ["Moderate-severe hepatic impairment (with statin)", "Active liver disease (with statin)"],
+      "dosing": {
+        "adult": {
+          "hyperlipidemia": "10mg daily"
+        },
+        "pediatric": "10mg daily (ages 10+)",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Avoid combination with statin if moderate-severe"
+      },
+      "sideEffects": {
+        "common": ["Diarrhea", "Arthralgia", "Upper respiratory infection", "Sinusitis"],
+        "serious": ["Hepatitis", "Pancreatitis", "Myopathy (with statin)", "Thrombocytopenia"]
+      },
+      "drugInteractions": [
+        {"drug": "Cyclosporine", "severity": "moderate", "effect": "Increased ezetimibe levels"},
+        {"drug": "Fibrates", "severity": "moderate", "effect": "Increased ezetimibe levels"},
+        {"drug": "Cholestyramine", "severity": "moderate", "effect": "Reduced ezetimibe absorption"}
+      ],
+      "monitoring": ["Lipid panel", "LFTs (with statin)"],
+      "pregnancyCategory": "C",
+      "lactation": "Not recommended",
+      "costCategory": "moderate",
+      "anatomyLinks": ["GI_tract", "liver"]
+    },
+    {
+      "id": "CVS049",
+      "genericName": "aspirin",
+      "brandNames": ["Bayer", "Ecotrin", "Bufferin"],
+      "class": "Antiplatelet (Salicylate)",
+      "category": "cardiovascular",
+      "mechanism": "Irreversibly inhibits COX-1, preventing thromboxane A2 synthesis. Effect lasts lifespan of platelet (~10 days).",
+      "indications": ["Secondary prevention of MI/stroke", "Acute coronary syndromes", "Post-PCI/stent", "Kawasaki disease", "Pain/fever (higher doses)"],
+      "contraindications": ["Aspirin allergy", "Active bleeding", "Children with viral illness (Reye syndrome)", "Severe hepatic failure", "Last trimester of pregnancy"],
+      "dosing": {
+        "adult": {
+          "cardiacPrevention": "81-325mg daily",
+          "acuteACS": "162-325mg chewed, then 81-325mg daily",
+          "postStent": "81-325mg daily (usually with P2Y12 inhibitor)"
+        },
+        "pediatric": "Kawasaki: 80-100mg/kg/day divided q6h (acute), then 3-5mg/kg/day",
+        "renalAdjustment": "Avoid in severe renal impairment",
+        "hepaticAdjustment": "Avoid in severe hepatic impairment"
+      },
+      "sideEffects": {
+        "common": ["GI upset", "Dyspepsia", "Nausea", "Tinnitus (toxicity)", "Easy bruising"],
+        "serious": ["GI bleeding", "Intracranial hemorrhage", "Reye syndrome", "Hypersensitivity", "Bronchospasm"]
+      },
+      "drugInteractions": [
+        {"drug": "Warfarin", "severity": "major", "effect": "Increased bleeding risk"},
+        {"drug": "NSAIDs", "severity": "major", "effect": "Increased GI bleeding; ibuprofen may block aspirin effect"},
+        {"drug": "Methotrexate", "severity": "major", "effect": "Increased methotrexate toxicity"},
+        {"drug": "SSRIs", "severity": "moderate", "effect": "Increased bleeding risk"}
+      ],
+      "monitoring": ["Signs of bleeding", "Hemoglobin/hematocrit", "Stool guaiac"],
+      "pregnancyCategory": "D (3rd trimester)",
+      "lactation": "Compatible at low doses",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "GI_tract", "brain"]
+    },
+    {
+      "id": "CVS050",
+      "genericName": "clopidogrel",
+      "brandNames": ["Plavix"],
+      "class": "Antiplatelet (P2Y12 Inhibitor)",
+      "category": "cardiovascular",
+      "mechanism": "Prodrug requiring CYP2C19 activation. Irreversibly blocks P2Y12 ADP receptor on platelets.",
+      "indications": ["Acute coronary syndrome", "Recent MI/stroke", "Peripheral artery disease", "Post-PCI/stent (with aspirin)"],
+      "contraindications": ["Active bleeding", "Severe hepatic impairment"],
+      "dosing": {
+        "adult": {
+          "ACS": "300-600mg loading, then 75mg daily",
+          "maintenance": "75mg daily",
+          "stent": "Usually 75mg daily x 6-12 months with aspirin"
+        },
+        "pediatric": "Not established",
+        "renalAdjustment": "No adjustment required",
+        "hepaticAdjustment": "Use with caution in severe"
+      },
+      "sideEffects": {
+        "common": ["Bleeding", "Bruising", "Rash", "Diarrhea", "Pruritus"],
+        "serious": ["Major bleeding", "TTP", "Neutropenia", "Aplastic anemia"]
+      },
+      "drugInteractions": [
+        {"drug": "Omeprazole/Esomeprazole", "severity": "major", "effect": "Reduced clopidogrel efficacy (CYP2C19)"},
+        {"drug": "Warfarin", "severity": "major", "effect": "Increased bleeding"},
+        {"drug": "NSAIDs", "severity": "major", "effect": "Increased bleeding risk"},
+        {"drug": "CYP2C19 inhibitors", "severity": "moderate", "effect": "Reduced activation"}
+      ],
+      "monitoring": ["Signs of bleeding", "CBC", "Consider CYP2C19 genotyping"],
+      "pregnancyCategory": "B",
+      "lactation": "Unknown",
+      "costCategory": "low",
+      "anatomyLinks": ["heart", "vasculature", "brain"]
+    }
+  ]
+}

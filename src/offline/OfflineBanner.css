@@ -1,0 +1,347 @@
+/**
+ * OfflineBanner Styles
+ */
+
+/* Banner Container */
+.offline-banner-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  padding: 12px 16px;
+  background: var(--card-bg, #1a1a1a);
+  border: 1px solid var(--border-color, #333);
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease;
+}
+
+.offline-banner-container.top {
+  top: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-width: 2px;
+}
+
+.offline-banner-container.bottom {
+  bottom: 0;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-top-width: 2px;
+}
+
+/* Status variants */
+.offline-banner-container.offline {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.offline-banner-container.online {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.offline-banner-container.animate-success {
+  animation: successPulse 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Banner Content */
+.offline-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Icon */
+.offline-banner-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.offline-banner-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.offline-banner-container.offline .offline-banner-icon {
+  color: #ef4444;
+}
+
+.offline-banner-container.online .offline-banner-icon {
+  color: #10b981;
+}
+
+/* Message */
+.offline-banner-message {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #fff);
+}
+
+.offline-banner-pending {
+  padding: 2px 8px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.offline-banner-sync-info {
+  color: var(--text-secondary, #888);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Actions */
+.offline-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Sync Button */
+.offline-banner-sync-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--accent, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.offline-banner-sync-btn:hover:not(:disabled) {
+  background: var(--accent-hover, #2563eb);
+  transform: translateY(-1px);
+}
+
+.offline-banner-sync-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.offline-banner-sync-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.offline-banner-sync-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Spinner */
+.offline-banner-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dismiss Button */
+.offline-banner-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-secondary, #888);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.offline-banner-dismiss:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary, #fff);
+}
+
+.offline-banner-dismiss svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Capabilities Section */
+.offline-banner-capabilities {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  color: var(--text-secondary, #888);
+}
+
+.offline-banner-capabilities p {
+  margin: 0 0 8px 0;
+  color: var(--text-primary, #fff);
+  font-weight: 500;
+}
+
+.offline-banner-capabilities ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offline-banner-capabilities li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.offline-banner-capabilities li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+/* Compact Variant */
+.offline-banner-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ef4444;
+}
+
+.offline-banner-compact svg {
+  width: 14px;
+  height: 14px;
+}
+
+.offline-banner-compact-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #ef4444;
+  color: white;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .offline-banner-container {
+    padding: 10px 12px;
+  }
+
+  .offline-banner-content {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .offline-banner-message {
+    flex-basis: 100%;
+    order: 2;
+  }
+
+  .offline-banner-icon {
+    order: 1;
+  }
+
+  .offline-banner-actions {
+    order: 3;
+    margin-left: auto;
+  }
+
+  .offline-banner-capabilities ul {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Safe area support for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .offline-banner-container.top {
+    padding-top: calc(12px + env(safe-area-inset-top));
+  }
+
+  .offline-banner-container.bottom {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Print styles - hide banner */
+@media print {
+  .offline-banner-container,
+  .offline-banner-compact {
+    display: none !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .offline-banner-container,
+  .offline-banner-spinner {
+    animation: none;
+  }
+
+  .offline-banner-sync-btn {
+    transition: none;
+  }
+}

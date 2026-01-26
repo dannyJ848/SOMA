@@ -1,0 +1,97 @@
+{
+  "id": "concept-menopause-transition",
+  "type": "concept",
+  "name": "Menopause Transition",
+  "alternateNames": ["Perimenopause", "Change of life", "Climacteric"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Menopause is when your periods stop permanently, usually in your late 40s or early 50s. The transition takes several years and can cause symptoms like hot flashes and sleep problems.",
+      "explanation": "Menopause happens when your ovaries stop releasing eggs and making as much estrogen. This is a natural part of aging, not a disease. Most women go through menopause between ages 45 and 55, with the average age being 51. Before periods stop completely, there's usually a transition period (called perimenopause) lasting 4-8 years where periods become irregular and symptoms may start. Common symptoms include hot flashes (sudden feelings of warmth), night sweats, trouble sleeping, mood changes, and vaginal dryness. Not everyone has bad symptoms - about 25% of women sail through with few problems. Once you've gone 12 months without a period, you've reached menopause.",
+      "keyTerms": [
+        { "term": "menopause", "definition": "When your periods stop permanently, confirmed after 12 months without a period" },
+        { "term": "perimenopause", "definition": "The years of transition before menopause when periods become irregular and symptoms may occur" },
+        { "term": "hot flash", "definition": "A sudden feeling of warmth, usually strongest in the face and chest, lasting a few minutes" }
+      ],
+      "analogies": ["Think of perimenopause like a dimmer switch slowly turning down - your hormones don't shut off suddenly but gradually decrease over several years."],
+      "examples": ["A 48-year-old woman notices her periods becoming unpredictable - sometimes 24 days apart, sometimes 45 - along with occasional night sweats. This is typical perimenopause."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The menopause transition involves declining ovarian function over 4-8 years, causing irregular cycles and symptoms from estrogen fluctuation and decline, with menopause defined as 12 months of amenorrhea.",
+      "explanation": "Perimenopause typically begins in the mid-40s when ovarian follicle reserve declines and cycles become variable in length. Estrogen levels fluctuate (sometimes higher than normal, sometimes lower) rather than steadily declining. FSH levels rise as the pituitary tries to stimulate the failing ovaries. Symptoms result from estrogen variability and ultimate decline: vasomotor symptoms (hot flashes, night sweats) affect 75% of women; genitourinary syndrome of menopause (vaginal dryness, urinary symptoms) affects up to 50%; sleep disturbance, mood changes, and cognitive fog are common. The average duration of hot flashes is 7 years. Menopause before age 40 is premature ovarian insufficiency and requires evaluation. After menopause, cardiovascular disease risk increases due to loss of estrogen's protective effects, and bone loss accelerates.",
+      "keyTerms": [
+        { "term": "vasomotor symptoms", "definition": "Hot flashes and night sweats caused by changes in the body's temperature regulation" },
+        { "term": "genitourinary syndrome of menopause", "definition": "Vaginal dryness, irritation, and urinary symptoms from low estrogen", "pronunciation": "GSM" },
+        { "term": "premature ovarian insufficiency", "definition": "Menopause before age 40, affecting 1% of women" },
+        { "term": "FSH", "definition": "Follicle-stimulating hormone; rises during perimenopause as ovaries become less responsive" }
+      ],
+      "analogies": ["During perimenopause, your hormones are like a roller coaster - the ups and downs cause symptoms, not just the eventual low level."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The menopause transition is characterized by STRAW+10 staging, estrogen fluctuations causing vasomotor and genitourinary symptoms, and long-term health implications including accelerated bone loss and cardiovascular risk modification, with management options ranging from lifestyle to hormone therapy.",
+      "explanation": "STRAW+10 staging divides reproductive aging into stages: late reproductive (-3), early perimenopause (-2), late perimenopause (-1), early postmenopause (+1), and late postmenopause (+2). Early perimenopause features cycle variability (>7 days different from normal); late perimenopause has cycles ≥60 days with elevated FSH. Hot flashes result from narrowing of the thermoneutral zone in the hypothalamus; even small temperature changes trigger vasodilation and sweating. First-line treatment is lifestyle modification (layered clothing, avoiding triggers, regular exercise). Hormone therapy (HT) is most effective for vasomotor symptoms - estrogen (with progestogen if uterus present) reduces hot flashes 75-90%. Non-hormonal options include SSRIs/SNRIs (paroxetine FDA-approved), gabapentin, clonidine, and oxybutynin. Genitourinary syndrome responds to vaginal estrogen (minimal systemic absorption, safe in most breast cancer survivors) or ospemifene. Contraception remains necessary until 12 months postmenopause.",
+      "keyTerms": [
+        { "term": "STRAW+10", "definition": "Stages of Reproductive Aging Workshop criteria for classifying the menopause transition" },
+        { "term": "thermoneutral zone", "definition": "Temperature range where body doesn't need to heat or cool; narrows in menopause, triggering hot flashes" },
+        { "term": "hormone therapy", "definition": "Estrogen (plus progestogen if uterus present) to treat menopausal symptoms" },
+        { "term": "vaginal estrogen", "definition": "Low-dose local estrogen for genitourinary symptoms; minimal systemic absorption" }
+      ],
+      "clinicalNotes": "Hormone therapy timing matters: initiation within 10 years of menopause or before age 60 has favorable benefit-risk profile (hormone therapy timing hypothesis). Contraindicated with history of breast cancer, VTE, stroke, or active liver disease."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Management of the menopause transition requires individualized assessment of symptom burden, cardiovascular and breast cancer risk, bone health, and patient preferences, with hormone therapy remaining the most effective treatment when appropriately selected using shared decision-making.",
+      "explanation": "Symptom management hierarchy: vasomotor symptoms - lifestyle first, then systemic HT or non-hormonal options; GSM - vaginal estrogen first-line (even with systemic HT), alternatives include vaginal DHEA, ospemifene. Systemic HT formulations: transdermal estrogen preferred (lower VTE risk than oral), micronized progesterone or progestins for endometrial protection. HT benefit-risk depends on timing, baseline risks, and formulation. Women's Health Initiative showed increased breast cancer with combined HT after >5 years, no increase with estrogen-only. Cardiovascular effects depend on timing - early initiation may be protective (timing hypothesis supported by ELITE trial). HT duration: use lowest effective dose for shortest time needed, reassess periodically, but no mandatory stopping point. For women who cannot use HT, fezolinetant (NK3R antagonist) is newly FDA-approved non-hormonal option. Bone loss accelerates 2-3% per year in early postmenopause; HT provides bone protection but not FDA-approved for osteoporosis prevention alone.",
+      "keyTerms": [
+        { "term": "timing hypothesis", "definition": "Concept that HT cardiovascular effects depend on initiation timing relative to menopause" },
+        { "term": "transdermal estrogen", "definition": "Estrogen delivered via patch or gel; avoids first-pass liver metabolism, lower VTE risk" },
+        { "term": "micronized progesterone", "definition": "Natural progesterone formulation that may have better safety profile than synthetic progestins" },
+        { "term": "fezolinetant", "definition": "Non-hormonal medication blocking NK3 receptors in hypothalamus for vasomotor symptoms" }
+      ],
+      "clinicalNotes": "Shared decision-making tools: NAMS menopause position statement, North American Menopause Society certified practitioners. When discontinuing HT, gradual taper may reduce symptom recurrence but evidence is limited. Vasomotor symptoms return in 50% after stopping HT."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Evidence-based menopause management integrates risk stratification for hormone therapy candidacy, emerging non-hormonal therapies, management of premature ovarian insufficiency, and comprehensive care addressing quality of life, cardiovascular health, bone density, and cognitive concerns.",
+      "explanation": "Risk stratification for HT: use absolute rather than relative risk framing. For healthy women <60 or within 10 years of menopause, benefits generally outweigh risks. Absolute risks from WHI per 10,000 woman-years: CHD +7, stroke +8, VTE +18, breast cancer +8 (combined HT); benefits included fewer fractures and possibly colorectal cancer. Individualize using breast cancer risk calculators (IBIS), cardiovascular risk assessment (ASCVD). Newer options: tissue-selective estrogen complex (bazedoxifene + conjugated estrogens), estetrol (E4, fetal estrogen with selective activity). Premature ovarian insufficiency requires HT at least until natural menopause age (50-51) for cardiovascular and bone protection. Cognitive symptoms are common but HT doesn't prevent dementia and shouldn't be prescribed for that purpose. Compounded bioidentical hormones are not recommended due to variable potency and lack of safety data. Menopause affects multiple systems - comprehensive care addresses vasomotor symptoms, GSM, mood, sleep, sexual health, bone, and cardiovascular risk.",
+      "keyTerms": [
+        { "term": "tissue-selective estrogen complex", "definition": "Conjugated estrogen combined with bazedoxifene (SERM) providing estrogen benefits with endometrial protection without progestogen" },
+        { "term": "KEEPS trial", "definition": "Study supporting hormone therapy timing hypothesis - early HT did not adversely affect atherosclerosis progression" },
+        { "term": "bioidentical hormones", "definition": "Hormones molecularly identical to human hormones; FDA-approved versions exist, compounded versions not recommended" },
+        { "term": "ASCVD risk", "definition": "Atherosclerotic cardiovascular disease risk; should be assessed when considering HT" }
+      ],
+      "clinicalNotes": "NAMS recommends: HT is appropriate for symptomatic women <60 or within 10 years of menopause without contraindications; use FDA-approved HT rather than compounded; reassess ongoing need periodically; no arbitrary duration limits in absence of new contraindications. Vaginal estrogen is generally safe even with breast cancer history per ACOG, though oncology input advised."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "nams-position-statement",
+      "type": "article",
+      "title": "The 2022 hormone therapy position statement of The North American Menopause Society",
+      "source": "Menopause",
+      "url": "https://www.menopause.org/for-women",
+      "license": "Professional guidance"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-menstrual-cycle-explained", "targetType": "concept", "relationship": "related", "label": "Menstrual Cycle" },
+    { "targetId": "concept-osteoporosis-prevention", "targetType": "concept", "relationship": "related", "label": "Osteoporosis Prevention" },
+    { "targetId": "concept-perimenopause-mood-changes", "targetType": "concept", "relationship": "related", "label": "Perimenopause Mood Changes" }
+  ],
+  "tags": {
+    "systems": ["reproductive", "endocrine"],
+    "topics": ["physiology", "patient-education", "womens-health"],
+    "keywords": ["menopause", "perimenopause", "hot flashes", "hormone therapy", "HRT", "estrogen"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["obgyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

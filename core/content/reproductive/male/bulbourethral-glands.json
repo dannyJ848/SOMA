@@ -1,0 +1,102 @@
+{
+  "id": "structure-bulbourethral-glands",
+  "type": "structure",
+  "name": "Bulbourethral Glands",
+  "alternateNames": ["Cowper's glands", "Pre-ejaculatory glands"],
+  "fmaId": "FMA:9599",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The bulbourethral glands are two tiny glands that make a slippery fluid to help during sexual activity.",
+      "explanation": "These pea-sized glands are located below the prostate. They produce a clear, slippery fluid called pre-ejaculate or 'pre-cum' that comes out before ejaculation. This fluid has two important jobs: it lubricates the urethra to make it easier for sperm to travel through, and it neutralizes any leftover acidic urine that could harm sperm.",
+      "keyTerms": [
+        { "term": "pre-ejaculate", "definition": "The clear fluid that comes out before ejaculation" },
+        { "term": "lubricant", "definition": "A slippery substance that reduces friction" },
+        { "term": "neutralize", "definition": "To make something neither acidic nor basic" }
+      ],
+      "analogies": ["The bulbourethral glands are like oil that you put on a water slide - they make the path slippery so sperm can travel more easily."],
+      "examples": ["The slippery fluid helps protect sperm from any acid left in the urethra from urine."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The bulbourethral glands (Cowper's glands) are paired accessory glands that secrete alkaline mucus to lubricate the urethra and neutralize residual urinary acidity before ejaculation.",
+      "explanation": "Each bulbourethral gland is about 1 cm in diameter, located within the urogenital diaphragm (deep perineal pouch) on either side of the membranous urethra. Their ducts are approximately 2.5 cm long and empty into the bulbar (proximal spongy) urethra. The glands secrete a clear, viscous, mucoid fluid during sexual arousal that precedes ejaculation. This pre-ejaculatory fluid serves to: lubricate the urethral lumen, neutralize acidic urinary residue, and provide additional lubrication for intercourse. The volume secreted is typically 0.5-5 mL.",
+      "keyTerms": [
+        { "term": "Cowper's glands", "definition": "Alternative name for bulbourethral glands, named after anatomist William Cowper" },
+        { "term": "urogenital diaphragm", "definition": "Muscular layer of the pelvic floor through which the urethra passes" },
+        { "term": "membranous urethra", "definition": "Short segment of urethra passing through urogenital diaphragm" },
+        { "term": "mucoid secretion", "definition": "Thick, sticky fluid containing mucins" },
+        { "term": "pre-ejaculatory fluid", "definition": "Clear secretion released during sexual arousal before ejaculation" }
+      ],
+      "analogies": ["The bulbourethral glands work like a cleaning crew that prepares the pathway before the main event."],
+      "examples": ["Pre-ejaculatory fluid can sometimes contain sperm (from a previous ejaculation), which is why withdrawal is not reliable contraception."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The bulbourethral glands are compound tubuloalveolar glands producing a mucinous, alkaline secretion rich in galactose and sialic acid, released during the excitement phase of the sexual response to prepare the urethra for ejaculation.",
+      "explanation": "Histologically, the glands consist of mucus-secreting tubuloalveolar acini surrounded by fibrous capsule and skeletal muscle fibers of the urogenital diaphragm. The secretory cells are columnar with basal nuclei and apical mucin granules, resembling pyloric glands of the stomach. The secretion contains galactose, galactosamine, sialic acid, and mucins that provide lubricating properties. Parasympathetic stimulation (from pelvic splanchnic nerves, S2-S4) triggers secretion during sexual arousal. The ducts penetrate the perineal membrane to enter the bulbar urethra. Blood supply is from branches of the internal pudendal artery.",
+      "keyTerms": [
+        { "term": "tubuloalveolar", "definition": "Gland type with both tube-shaped and sac-like secretory units" },
+        { "term": "sialic acid", "definition": "Carbohydrate component of mucins providing viscosity" },
+        { "term": "pelvic splanchnic nerves", "definition": "Parasympathetic nerves from S2-S4 innervating pelvic organs" },
+        { "term": "perineal membrane", "definition": "Fibrous sheet forming floor of deep perineal pouch" },
+        { "term": "internal pudendal artery", "definition": "Branch of internal iliac artery supplying perineum and external genitalia" }
+      ],
+      "examples": ["The parasympathetic-mediated secretion explains why pre-ejaculate is produced during the arousal phase, before sympathetically-mediated ejaculation."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The bulbourethral glands demonstrate parasympathetic-regulated mucin secretion with biochemical composition optimized for urethral conditioning, though their contribution to overall seminal volume and fertility is minimal compared to other accessory glands.",
+      "explanation": "The glands' secretory function involves muscarinic receptor activation (M3 subtype) leading to intracellular calcium release and mucin exocytosis. The glycoprotein-rich secretion (MUC5B, MUC5AC type mucins) creates a protective film over urethral epithelium. While the pre-ejaculatory fluid itself does not contain sperm, it may pick up residual sperm from the urethra, explaining pregnancy risk with withdrawal method. The glands are androgen-sensitive, with testosterone maintaining epithelial secretory function. Clinical significance is limited but includes: syringocele (cystic dilation of duct), cowperitis (infection, rare), and potential site of urethral stricture. In forensic context, prostate-specific antigen (PSA) is detectable in bulbourethral secretion, relevant for sexual assault examination.",
+      "keyTerms": [
+        { "term": "muscarinic M3 receptor", "definition": "Acetylcholine receptor subtype mediating glandular secretion" },
+        { "term": "mucin exocytosis", "definition": "Release of mucin granule contents from secretory cells" },
+        { "term": "syringocele", "definition": "Cystic dilation of bulbourethral gland duct, can cause urethral obstruction" },
+        { "term": "cowperitis", "definition": "Infection/inflammation of bulbourethral glands" },
+        { "term": "residual sperm", "definition": "Sperm remaining in urethra from previous ejaculation" }
+      ],
+      "clinicalNotes": "Syringocele may present in young males with voiding symptoms or perineal discomfort. Diagnosis by retrograde urethrography or cystourethroscopy. Treatment is transurethral unroofing if symptomatic."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The bulbourethral glands, while minor contributors to seminal volume, have clinical relevance in urethral pathology, forensic medicine, and contraceptive counseling regarding pre-ejaculatory fluid sperm content.",
+      "explanation": "Clinical contexts: 1) Contraceptive counseling: studies show viable sperm in pre-ejaculatory fluid in variable proportions (0-40%) of samples, primarily reflecting contamination from prior ejaculation rather than glandular origin; counseling about withdrawal failure rates (20% typical use) should address this; 2) Urethral pathology: syringocele classification (simple/perforated/ruptured) guides management; bulbourethral gland abscess rare but reported; Cowper's duct cyst can mimic urethral diverticulum; 3) Forensic: PSA detection in pre-ejaculatory fluid informs sexual assault forensic protocols; 4) Comparative anatomy: glands are more prominent in some species (boar bulbourethral gland secretion forms gel plug). Imaging: MRI can visualize bulbourethral glands and their ducts; voiding cystourethrography may show syringocele. Surgical considerations: glands lie within urogenital diaphragm, relevant for perineal approaches.",
+      "keyTerms": [
+        { "term": "withdrawal method failure rate", "definition": "Approximately 20% with typical use, 4% with perfect use per year" },
+        { "term": "forensic PSA detection", "definition": "Use of PSA as biomarker for seminal fluid in sexual assault examination" },
+        { "term": "Cowper's duct cyst", "definition": "Cystic retention in bulbourethral duct, may cause urethral symptoms" },
+        { "term": "voiding cystourethrography", "definition": "Contrast imaging of bladder and urethra during voiding" },
+        { "term": "deep perineal pouch", "definition": "Anatomical space between perineal membrane and superior fascia of urogenital diaphragm" }
+      ],
+      "clinicalNotes": "For counseling about pre-ejaculatory fluid and pregnancy risk: recommend urination between ejaculations to clear residual sperm from urethra if using withdrawal. Syringocele should be in differential for young males with unexplained voiding symptoms; MRI and cystourethroscopy are diagnostic modalities."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-prostate", "targetType": "structure", "relationship": "related", "label": "Prostate" },
+    { "targetId": "structure-urethra", "targetType": "structure", "relationship": "related", "label": "Urethra" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:9599"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "low",
+    "examRelevance": { "usmle": true }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

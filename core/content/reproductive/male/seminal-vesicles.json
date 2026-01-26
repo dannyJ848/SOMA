@@ -1,0 +1,103 @@
+{
+  "id": "structure-seminal-vesicles",
+  "type": "structure",
+  "name": "Seminal Vesicles",
+  "alternateNames": ["Seminal glands", "Vesicular glands"],
+  "fmaId": "FMA:19386",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The seminal vesicles are two small pouches that make most of the fluid in semen.",
+      "explanation": "The seminal vesicles are located behind the bladder and produce a thick, yellowish fluid that mixes with sperm. This fluid makes up about 70% of semen and contains sugar (fructose) that gives sperm energy to swim. Without this fluid, sperm wouldn't have enough fuel for their journey.",
+      "keyTerms": [
+        { "term": "semen", "definition": "The fluid that contains sperm and comes out during ejaculation" },
+        { "term": "fructose", "definition": "A type of sugar that gives sperm energy" },
+        { "term": "gland", "definition": "An organ that makes and releases substances the body needs" }
+      ],
+      "analogies": ["The seminal vesicles are like juice boxes that provide energy drinks for sperm to fuel their swimming."],
+      "examples": ["The fructose in seminal fluid is like Gatorade for sperm, giving them energy for their journey."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The seminal vesicles are paired accessory glands that produce 70% of seminal fluid volume, rich in fructose, prostaglandins, and proteins that support sperm function.",
+      "explanation": "Each seminal vesicle is a coiled, sac-like gland about 5 cm long located posterior to the bladder and superior to the prostate. The vesicle's duct joins with the vas deferens to form the ejaculatory duct, which passes through the prostate to empty into the prostatic urethra. Seminal vesicle fluid is alkaline (pH 7.2-7.8), which helps neutralize the acidic vaginal environment. Key components include fructose (energy source for sperm), prostaglandins (may stimulate uterine contractions), fibrinogen (initial semen coagulation), and semenogelin (major gel-forming protein).",
+      "keyTerms": [
+        { "term": "ejaculatory duct", "definition": "Short duct formed where vas deferens meets seminal vesicle duct, passing through prostate" },
+        { "term": "prostaglandins", "definition": "Lipid compounds that may help sperm transport and stimulate female tract contractions", "pronunciation": "PROSS-tah-GLAN-dins" },
+        { "term": "fibrinogen", "definition": "Protein that helps semen clot immediately after ejaculation" },
+        { "term": "semenogelin", "definition": "Protein that forms the gel-like coagulum in freshly ejaculated semen", "pronunciation": "SEM-en-OH-jel-in" },
+        { "term": "alkaline", "definition": "Having a pH above 7, the opposite of acidic" }
+      ],
+      "analogies": ["The seminal vesicles are like a sports nutrition company, providing energy drinks (fructose) and recovery formulas (prostaglandins) for sperm athletes."],
+      "examples": ["The alkaline seminal fluid helps protect sperm from the acidic environment of the vagina (pH 3.8-4.5)."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The seminal vesicles are androgen-dependent secretory glands with columnar epithelium producing a complex secretion containing fructose, prostaglandins, semenogelin, fibrinogen, and various proteins that contribute to semen coagulation and sperm capacitation.",
+      "explanation": "The seminal vesicle wall consists of outer adventitia, smooth muscle (two layers), and highly folded mucosa lined by pseudostratified columnar epithelium. Secretory activity is testosterone-dependent, explaining seminal vesicle atrophy in hypogonadism and with androgen deprivation therapy. The glandular secretion contributes multiple functions: fructose provides anaerobic substrate for sperm metabolism; prostaglandins E and F may modulate female tract motility; semenogelin I and II form the coagulum trapping sperm post-ejaculation (liquefied by prostatic PSA within 15-30 minutes); seminal plasma proteins contribute to immune modulation in the female tract. Blood supply is from the vesiculodeferential artery (branch of umbilical/internal iliac artery).",
+      "keyTerms": [
+        { "term": "pseudostratified columnar epithelium", "definition": "Epithelial tissue appearing multilayered but with all cells attached to basement membrane" },
+        { "term": "coagulum", "definition": "The gel-like clot formed by semen immediately after ejaculation", "pronunciation": "koh-AG-yoo-lum" },
+        { "term": "liquefaction", "definition": "Process by which semen coagulum dissolves, mediated by PSA" },
+        { "term": "vesiculodeferential artery", "definition": "Artery supplying seminal vesicle and vas deferens, from internal iliac artery" },
+        { "term": "seminal plasma", "definition": "The non-cellular fluid component of semen" }
+      ],
+      "examples": ["Absence of fructose in semen suggests ejaculatory duct obstruction or congenital absence of seminal vesicles."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The seminal vesicles function as androgen-regulated secretory organs whose products regulate semen coagulation-liquefaction dynamics, provide metabolic substrates, and contribute immunomodulatory factors that may promote reproductive success.",
+      "explanation": "Molecular regulation involves androgen receptor-mediated transcription controlling secretory protein expression. Key secreted proteins include: semenogelin I/II (coagulation, sperm motility inhibition until liquefaction), fibronectin (extracellular matrix component), lactoferrin (antimicrobial), and transglutaminase (cross-links semenogelins). Post-ejaculation, prostatic PSA cleaves semenogelins releasing sperm from the coagulum. The high concentration of prostaglandins (PGE1, PGE2, PGF2α) may modulate cervical mucus, uterine contractions, and immune responses. Seminal plasma contains TGF-β, cytokines, and other factors hypothesized to induce maternal immune tolerance to paternal antigens. Imaging: transrectal ultrasound shows normal vesicles as symmetric, fluid-filled structures; MRI provides superior soft tissue characterization for suspected pathology.",
+      "keyTerms": [
+        { "term": "semenogelin cleavage", "definition": "Proteolytic breakdown of semenogelin by PSA enabling sperm motility" },
+        { "term": "transglutaminase", "definition": "Enzyme that cross-links proteins in semen coagulum" },
+        { "term": "maternal immune tolerance", "definition": "Immunological acceptance of fetal (paternal) antigens during pregnancy" },
+        { "term": "ejaculatory duct obstruction", "definition": "Blockage causing low volume azoospermia with low fructose" },
+        { "term": "TRUS", "definition": "Transrectal ultrasound, imaging modality for prostate and seminal vesicles" }
+      ],
+      "clinicalNotes": "In evaluation of low semen volume (<1.5 mL) with azoospermia, absence of fructose and acidic pH suggest ejaculatory duct obstruction or seminal vesicle agenesis. TRUS can visualize dilated ejaculatory ducts or seminal vesicle cysts. Seminal vesicle invasion is a staging criterion in prostate cancer (T3b)."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The seminal vesicles contribute to reproductive function through complex secretory products affecting sperm biology and female tract immunology, with clinical relevance in male infertility evaluation, prostate cancer staging, and assisted reproduction.",
+      "explanation": "Clinical applications: 1) Infertility evaluation: seminal fructose level distinguishes ejaculatory duct obstruction from other causes of low volume azoospermia; absent fructose with acidic pH indicates lack of seminal vesicle contribution; 2) Prostate cancer: seminal vesicle invasion (stage T3b) significantly worsens prognosis and affects treatment planning; MRI identifies SVI with high accuracy; 3) Assisted reproduction: seminal plasma exposure may improve implantation rates through immune modulation; 4) Rare pathology: seminal vesicle cysts, infection (seminal vesiculitis), primary tumors (very rare). Developmental association with Wolffian duct explains: congenital absence of seminal vesicles with renal agenesis; seminal vesicle abnormalities in CBAVD. Post-prostatectomy assessment may show absent seminal vesicle fluid contribution. Novel biomarkers from seminal vesicle secretions (e.g., semenogelin) are being investigated for prostate cancer detection.",
+      "keyTerms": [
+        { "term": "T3b prostate cancer", "definition": "Tumor invading seminal vesicle(s), indicating locally advanced disease" },
+        { "term": "seminal vesicle invasion (SVI)", "definition": "Extension of prostate cancer into seminal vesicle, key prognostic factor" },
+        { "term": "Zinner syndrome", "definition": "Triad of unilateral renal agenesis, ipsilateral seminal vesicle cyst, and ejaculatory duct obstruction" },
+        { "term": "seminal plasma priming", "definition": "Exposure of female reproductive tract to seminal plasma to improve implantation outcomes" },
+        { "term": "mesonephric duct anomalies", "definition": "Developmental abnormalities affecting structures derived from Wolffian duct including vas, seminal vesicles, and kidney" }
+      ],
+      "clinicalNotes": "MRI criteria for seminal vesicle invasion: tumor signal in vesicle, loss of normal vesicle angle, asymmetric enlargement. Robotic prostatectomy spares nerve bundles lateral to seminal vesicles when oncologically safe. For ejaculatory duct obstruction, transurethral resection of ejaculatory ducts (TURED) may restore fertility in selected cases."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-vas-deferens", "targetType": "structure", "relationship": "related", "label": "Vas Deferens" },
+    { "targetId": "structure-prostate", "targetType": "structure", "relationship": "related", "label": "Prostate" },
+    { "targetId": "structure-ejaculatory-duct", "targetType": "structure", "relationship": "child", "label": "Ejaculatory Duct" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:19386"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

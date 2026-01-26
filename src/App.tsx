@@ -5,6 +5,7 @@ import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 import { useActionTracker } from './hooks/useActionTracker';
+import { useUserDemographics } from './hooks/useUserDemographics';
 import type {
   DashboardAction,
   NavigationAction,
@@ -19,6 +20,10 @@ const MedicationExplorer = lazy(() => import('./MedicationExplorer').then(m => (
 const ConditionSimulator = lazy(() => import('./ConditionSimulator'));
 const MedicalEncyclopedia = lazy(() => import('./MedicalEncyclopedia').then(m => ({ default: m.MedicalEncyclopedia })));
 const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ default: m.EncyclopediaEntry })));
+
+// Body-centric components
+const OnboardingFlow = lazy(() => import('./onboarding/OnboardingFlow').then(m => ({ default: m.OnboardingFlow })));
+const BodyCentricHome = lazy(() => import('./BodyCentricHome').then(m => ({ default: m.BodyCentricHome })));
 
 interface HealthSummary {
   totalConditions: number;
@@ -100,28 +105,21 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric';
 
 // Mobile Bottom Navigation Component
 function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNavigate: (view: View) => void }) {
   return (
-    <nav className="mobile-bottom-nav">
-      <div className="mobile-nav-items">
+    <nav className="mobile-bottom-nav" role="navigation" aria-label="Main navigation">
+      <div className="mobile-nav-items" role="menubar">
         <button
-          className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
-          onClick={() => onNavigate('dashboard')}
+          className={`mobile-nav-item ${currentView === 'body-centric' ? 'active' : ''}`}
+          onClick={() => onNavigate('body-centric')}
+          role="menuitem"
+          aria-current={currentView === 'body-centric' ? 'page' : undefined}
+          aria-label="Body - 3D body explorer"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <span>Home</span>
-        </button>
-        <button
-          className={`mobile-nav-item ${currentView === 'body' ? 'active' : ''}`}
-          onClick={() => onNavigate('body')}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <circle cx="12" cy="5" r="3"/>
             <path d="M12 8v14"/>
             <path d="M8 12h8"/>
@@ -130,22 +128,13 @@ function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNav
           <span>Body</span>
         </button>
         <button
-          className={`mobile-nav-item ${currentView === 'anatomy' ? 'active' : ''}`}
-          onClick={() => onNavigate('anatomy')}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v12"/>
-            <path d="M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
-            <circle cx="12" cy="16" r="2"/>
-          </svg>
-          <span>Anatomy</span>
-        </button>
-        <button
           className={`mobile-nav-item ${currentView === 'chat' ? 'active' : ''}`}
           onClick={() => onNavigate('chat')}
+          role="menuitem"
+          aria-current={currentView === 'chat' ? 'page' : undefined}
+          aria-label="Chat - AI health assistant"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
           <span>Chat</span>
@@ -153,12 +142,28 @@ function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNav
         <button
           className={`mobile-nav-item ${currentView === 'timeline' ? 'active' : ''}`}
           onClick={() => onNavigate('timeline')}
+          role="menuitem"
+          aria-current={currentView === 'timeline' ? 'page' : undefined}
+          aria-label="Timeline - Health history"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
             <path d="M12 6v6l4 2"/>
           </svg>
           <span>Timeline</span>
+        </button>
+        <button
+          className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => onNavigate('dashboard')}
+          role="menuitem"
+          aria-current={currentView === 'dashboard' ? 'page' : undefined}
+          aria-label="Stats - Health dashboard"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Stats</span>
         </button>
       </div>
     </nav>
@@ -175,7 +180,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
-  const [currentView, setCurrentView] = useState<View>('dashboard');
+  const [currentView, setCurrentView] = useState<View>('body-centric');
   const [timeline, setTimeline] = useState<TimelineData | null>(null);
   const [timelineLoading, setTimelineLoading] = useState(false);
   const [activeFilters, setActiveFilters] = useState<TimelineEventType[]>(['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom']);
@@ -197,6 +202,9 @@ function App() {
   const { track: trackNavigation } = useActionTracker<NavigationAction>('navigation', 'App');
   const { track: trackTimeline } = useActionTracker<TimelineAction>('timeline', 'App');
   const { track: trackBodyMap } = useActionTracker<BodyMapAction>('body-map', 'App');
+
+  // Demographics hook for body-centric home
+  const { isOnboarded, isLoading: demographicsLoading, refreshDemographics } = useUserDemographics();
 
   // Navigate with history tracking
   const navigateWithHistory = useCallback((newView: View) => {
@@ -472,8 +480,11 @@ function App() {
 
   if (loading) {
     return (
-      <div className="container">
-        <div className="loading">Loading...</div>
+      <div className="container" role="main" aria-busy="true" aria-label="Loading application">
+        <div className="loading" role="status" aria-live="polite">
+          <div className="loading-spinner" aria-hidden="true" />
+          <span>Loading...</span>
+        </div>
       </div>
     );
   }
@@ -630,11 +641,47 @@ function App() {
     );
   }
 
-  // Dashboard or Timeline (unlocked)
-  if (dashboardLoading || !dashboard) {
+  // Onboarding flow for new users (show after unlock, before main content)
+  if (!isOnboarded && !demographicsLoading) {
     return (
-      <div className="container">
-        <div className="loading">Loading your health data...</div>
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading onboarding...</div>
+        </div>
+      }>
+        <OnboardingFlow
+          onComplete={async () => {
+            // Refresh demographics state from localStorage after onboarding saves
+            await refreshDemographics();
+            // Refresh dashboard after onboarding completes
+            loadDashboard();
+          }}
+        />
+      </Suspense>
+    );
+  }
+
+  // Dashboard or Timeline (unlocked) - show skeleton loader
+  if (dashboardLoading || !dashboard || demographicsLoading) {
+    return (
+      <div className="container" role="main" aria-busy="true">
+        <div className="dashboard-skeleton" role="status" aria-live="polite">
+          <span className="sr-only">Loading your health data...</span>
+          <div className="skeleton-section">
+            <div className="skeleton skeleton-section-title" />
+            <div className="skeleton-vitals-grid">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="skeleton skeleton-vital-item" />
+              ))}
+            </div>
+          </div>
+          <div className="skeleton-section">
+            <div className="skeleton skeleton-section-title" />
+            {[1, 2, 3].map(i => (
+              <div key={i} className="skeleton skeleton-list-item" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -784,6 +831,9 @@ function App() {
         </div>
 
         {selectedEvent && <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
       </div>
     );
   }
@@ -925,6 +975,30 @@ function App() {
     );
   }
 
+  // Body-Centric Home (default view)
+  if (currentView === 'body-centric') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Body-Centric Home...</div>
+          </div>
+        }>
+          <BodyCentricHome
+            dashboardData={dashboard}
+            isLoading={dashboardLoading}
+            onNavigate={(view: View) => {
+              trackNavigation('view-change', { fromView: currentView, toView: view });
+              setCurrentView(view);
+            }}
+          />
+        </Suspense>
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+      </>
+    );
+  }
+
   // Body Map View
   if (currentView === 'body') {
     // Get symptom locations from dashboard data
@@ -1007,14 +1081,17 @@ function App() {
   }
 
   return (
-    <div className="container dashboard">
-      <header className="app-header">
+    <div className="container dashboard" role="main" aria-label="Health Dashboard">
+      {/* Skip link for keyboard users */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      <header className="app-header" role="banner">
         <div className="header-spacer" />
         <div className="header-title">
           <h1>Biological Self</h1>
           <p className="subtitle">Your health, understood</p>
         </div>
-        <div className="header-actions">
+        <nav className="header-actions" aria-label="Quick actions">
           <button className="header-action-button" onClick={() => handleNavigate('chat')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -1045,14 +1122,14 @@ function App() {
             </svg>
             Timeline
           </button>
-        </div>
+        </nav>
       </header>
 
-      <main>
+      <main id="main-content">
         {/* Vitals Summary Card */}
-        <section className="dashboard-section">
-          <h2 className="section-title">Vitals Summary</h2>
-          <div className="vitals-grid">
+        <section className="dashboard-section" aria-labelledby="vitals-heading">
+          <h2 id="vitals-heading" className="section-title">Vitals Summary</h2>
+          <div className="vitals-grid" role="list" aria-label="Vital signs">
             {vitalsSummary.restingHeartRate ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
                 <span className="vital-label">Resting HR</span>

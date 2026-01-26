@@ -1,0 +1,144 @@
+{
+  "id": "condition-panic-disorder",
+  "type": "condition",
+  "category": "anxiety-disorder",
+  "name": "Panic Disorder",
+  "alternateNames": ["Panic Attack Disorder", "Episodic Paroxysmal Anxiety"],
+  "icd10": "F41.0",
+  "dsm5": "300.01",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Panic disorder involves sudden, unexpected episodes of intense fear called panic attacks, along with ongoing worry about having more attacks.",
+      "explanation": "A panic attack is a sudden rush of intense fear or discomfort that peaks within minutes. Your heart might race, you might have trouble breathing, feel dizzy, or even think you're dying or losing control. These attacks can happen unexpectedly, without any obvious trigger. Panic disorder is when you keep having panic attacks and worry a lot about when the next one will happen. Many people change their behavior to try to avoid attacks - like avoiding places where they've had attacks before. Panic attacks are very scary, but they are not dangerous and cannot hurt you. With treatment, most people get much better.",
+      "keyTerms": [
+        { "term": "panic attack", "definition": "A sudden surge of intense fear with physical symptoms that peaks within minutes" },
+        { "term": "unexpected", "definition": "Happening without a clear trigger or warning" },
+        { "term": "avoidance", "definition": "Staying away from places or situations because of fear" }
+      ],
+      "analogies": ["A panic attack is like your body's alarm system going off when there's no real danger - your brain thinks there's an emergency even when you're safe."],
+      "examples": ["Someone having a panic attack might suddenly feel their heart pounding, have trouble breathing, feel like the walls are closing in, and think they're having a heart attack - even though they're medically healthy."],
+      "importantNote": "Panic attacks feel terrifying but are not physically harmful. They cannot cause heart attacks, make you 'go crazy,' or kill you. They always pass."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Panic disorder requires recurrent unexpected panic attacks followed by at least one month of persistent concern about attacks, worry about consequences, or behavioral changes.",
+      "explanation": "A panic attack involves an abrupt surge of intense fear/discomfort reaching peak within minutes, with 4+ symptoms: palpitations, sweating, trembling, shortness of breath, choking sensation, chest pain, nausea, dizziness, chills/heat, numbness/tingling, derealization/depersonalization, fear of losing control, fear of dying. Panic disorder requires: recurrent unexpected attacks; at least one attack followed by 1+ month of concern about additional attacks, worry about attack implications (heart attack, 'going crazy'), or significant maladaptive behavior change (avoidance). Often co-occurs with agoraphobia (but can occur separately). First attack often leads to ER visit due to cardiac or respiratory concerns.",
+      "keyTerms": [
+        { "term": "palpitations", "definition": "Awareness of heart beating, racing, or pounding" },
+        { "term": "derealization", "definition": "Feeling that the world around you isn't real", "pronunciation": "dee-real-ih-ZAY-shun" },
+        { "term": "depersonalization", "definition": "Feeling detached from yourself or watching yourself from outside" },
+        { "term": "agoraphobia", "definition": "Fear of situations where escape might be difficult or help unavailable during panic", "pronunciation": "ag-or-ah-FOE-bee-ah" }
+      ],
+      "diagnosticCriteria": "4+ symptoms from list during attack; attacks recurrent and unexpected; 1+ month of concern/worry/behavior change after attack",
+      "prevalence": "Lifetime prevalence 2-3%; F:M ratio 2:1; typical onset late teens to mid-30s; peaks in mid-20s"
+    },
+    "3": {
+      "level": 3,
+      "summary": "Panic disorder involves hyperactive fear circuitry, misinterpretation of bodily sensations, and responds well to SSRIs and cognitive-behavioral therapy.",
+      "explanation": "Neurobiological model: overactive amygdala and locus coeruleus; reduced inhibitory prefrontal cortex function; dysregulated noradrenergic and serotonergic systems; hypersensitive CO2 chemoreceptors (CO2 inhalation can trigger attacks in vulnerable individuals); possible sodium lactate sensitivity. Cognitive model: catastrophic misinterpretation of bodily sensations ('my heart is racing = heart attack'); anxiety sensitivity (fear of anxiety symptoms themselves); interoceptive conditioning (bodily sensations become conditioned stimuli). Treatment: SSRIs (first-line: paroxetine, sertraline, fluoxetine FDA-approved); SNRIs (venlafaxine); TCAs (imipramine, clomipramine effective but more side effects). CBT components: psychoeducation, cognitive restructuring, interoceptive exposure (deliberately inducing symptoms), in vivo exposure. Benzodiazepines for acute relief but limit to short-term.",
+      "keyTerms": [
+        { "term": "anxiety sensitivity", "definition": "Fear of anxiety-related sensations based on beliefs that they have harmful consequences" },
+        { "term": "interoceptive exposure", "definition": "Deliberately inducing feared bodily sensations (e.g., spinning for dizziness) to reduce fear of them" },
+        { "term": "catastrophic misinterpretation", "definition": "Interpreting normal bodily sensations as signs of serious physical or mental catastrophe" },
+        { "term": "suffocation alarm", "definition": "Theory that panic involves hypersensitive brainstem CO2 sensors triggering false suffocation signals" }
+      ],
+      "clinicalNotes": "Start SSRIs at low dose - paradoxical initial anxiety possible. Full response may take 8-12 weeks. CBT is as effective as medication and may have more durable effects. Combination treatment may be superior. Rule out medical causes: hyperthyroidism, pheochromocytoma, arrhythmias, mitral valve prolapse, caffeine, stimulants."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management addresses treatment resistance, comorbid agoraphobia, nocturnal panic, and optimizes exposure-based interventions.",
+      "explanation": "Treatment-resistant panic: optimize SSRI dose (often need higher doses); switch class; augment with benzodiazepine (clonazepam 0.5-1mg BID), buspirone, or gabapentin/pregabalin. Agoraphobia management: graduated in vivo exposure is essential; address safety behaviors (carrying medications, needing companion); virtual reality exposure for severe cases. Nocturnal panic (occurs from non-REM sleep): educate that it's panic (not sleep apnea or nightmares); treat same as daytime panic; good sleep hygiene important. Respiratory training: controversial; some evidence for capnometry-assisted breathing training. Relapse prevention: continue medication 1+ year after remission; CBT booster sessions. Medical presentations: many panic patients present to cardiology, pulmonology, neurology, ER; psychiatric consultation improves outcomes. Substance comorbidity: high rates of alcohol use (self-medication); benzodiazepines require caution.",
+      "keyTerms": [
+        { "term": "nocturnal panic", "definition": "Panic attacks that awaken from sleep; occur during non-REM sleep, not during dreaming" },
+        { "term": "safety behaviors", "definition": "Actions taken during anxiety to prevent feared outcomes; maintain panic by preventing disconfirmation" },
+        { "term": "interoceptive conditioning", "definition": "Learning in which internal bodily cues become conditioned stimuli for fear" },
+        { "term": "capnometry", "definition": "Measurement of exhaled CO2; biofeedback for respiratory training in panic" }
+      ],
+      "clinicalNotes": "Panic disorder without agoraphobia has better prognosis. Agoraphobia without exposure treatment tends to persist. Panic attacks can occur in any anxiety disorder - panic disorder requires unexpected attacks plus worry/avoidance. Suicide risk elevated - screen for depression and hopelessness."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert management integrates fear learning neuroscience, D-cycloserine augmentation, novel interventions, and translational research advances.",
+      "explanation": "Fear learning mechanisms: panic involves failure of fear extinction - prefrontal cortex doesn't adequately inhibit amygdala fear responses; safety learning is impaired. D-cycloserine (DCS), an NMDA partial agonist, enhances extinction learning when given before exposure sessions - modest effect sizes in research. Translational advances: GLUN2B-containing NMDA receptors as targets; HDAC inhibitors to enhance memory reconsolidation; cortisol enhancement of extinction. Biological predictors: cortisol response, heart rate variability, startle potentiation; potential for treatment matching. Novel interventions: reconsolidation-based approaches (brief reactivation + interference); intensive treatment protocols (massed exposure over days vs. weeks); technology-assisted interventions (apps, VR). Genetic factors: CCK, COMT, NPSR1 gene variants associated; polygenic risk scores under development. Long-term outcomes: with treatment, most achieve remission; without treatment, chronic course common; early intervention may prevent agoraphobia development. Economic burden: high ER utilization, work disability, medical costs; effective treatment is cost-effective.",
+      "keyTerms": [
+        { "term": "D-cycloserine", "definition": "NMDA receptor partial agonist that may enhance fear extinction learning when combined with exposure" },
+        { "term": "fear extinction", "definition": "Process by which learned fear responses diminish with repeated exposure to feared stimulus without harm" },
+        { "term": "reconsolidation", "definition": "Process by which reactivated memories become malleable; potential therapeutic target" },
+        { "term": "massed exposure", "definition": "Intensive exposure treatment concentrated over short period (days) vs. spaced over weeks" }
+      ],
+      "clinicalNotes": "Panic disorder is one of the most treatable psychiatric conditions - communicate hope. Early intervention before agoraphobia develops is key. Consider patient preference: some prefer medication, others therapy; combined may be best. Maintenance strategies prevent relapse. Fear of panic often maintains panic - break this cycle therapeutically."
+    }
+  },
+
+  "riskFactors": [
+    "Family history of panic disorder or anxiety",
+    "Temperament: neuroticism, anxiety sensitivity",
+    "History of childhood adversity or trauma",
+    "Stressful life events",
+    "Smoking",
+    "Female sex",
+    "Separation anxiety in childhood"
+  ],
+
+  "whatToDoInPanicAttack": [
+    "Remind yourself: 'This is a panic attack. It is scary but not dangerous. It will pass.'",
+    "Focus on slow, deep breathing - breathe out longer than you breathe in",
+    "Ground yourself - notice 5 things you can see, 4 you can hear, 3 you can touch",
+    "Stay where you are if possible - leaving reinforces the idea that it's dangerous",
+    "Focus on the present moment, not 'what if' thoughts",
+    "Let the panic peak and pass - fighting it intensifies it",
+    "After it passes, continue your activities rather than going home"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "samhsaHelpline": "1-800-662-4357"
+    },
+    "message": "Panic attacks feel terrifying but are not dangerous. If you're struggling with recurring panic, help is available and treatment works."
+  },
+
+  "treatments": {
+    "firstLine": ["SSRIs", "SNRIs", "CBT with exposure"],
+    "secondLine": ["TCAs", "Benzodiazepines (short-term)"],
+    "cbtComponents": ["Psychoeducation", "Cognitive restructuring", "Interoceptive exposure", "In vivo exposure"],
+    "adjunctive": ["Relaxation techniques", "Breathing retraining"]
+  },
+
+  "citations": [
+    {
+      "id": "apa-dsm5-tr",
+      "type": "manual",
+      "title": "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision",
+      "authors": ["American Psychiatric Association"],
+      "year": 2022
+    },
+    {
+      "id": "barlow-2000",
+      "type": "study",
+      "title": "Cognitive-behavioral therapy, imipramine, or their combination for panic disorder",
+      "journal": "JAMA",
+      "year": 2000
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-agoraphobia", "targetType": "condition", "relationship": "related", "label": "Agoraphobia" },
+    { "targetId": "condition-generalized-anxiety-disorder", "targetType": "condition", "relationship": "differential", "label": "Generalized Anxiety Disorder" },
+    { "targetId": "treatment-cbt", "targetType": "treatment", "relationship": "treatment", "label": "CBT" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "anxiety-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

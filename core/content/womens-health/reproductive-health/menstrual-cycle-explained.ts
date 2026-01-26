@@ -1,0 +1,189 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const menstrualCycleExplained: LegacyWomensHealthContent = {
+  id: 'concept-menstrual-cycle-explained',
+  type: 'concept',
+  name: 'Menstrual Cycle Explained',
+  alternateNames: ['Monthly cycle', 'Period cycle', 'Menstruation'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: "The menstrual cycle is a monthly process where your body prepares for pregnancy, and if pregnancy doesn't happen, you get your period.",
+      explanation: `Think of your body like a garden preparing for a seed. Every month, your uterus (womb) gets ready to grow a baby by building up a soft, cushy lining. At the same time, an egg is released from your ovary.
+
+If the egg doesn't meet with sperm to start a pregnancy, your body doesn't need that cushy lining anymore. So it leaves your body through your vagina as your period - that's the blood and tissue you see.
+
+Then the whole process starts over again. Most cycles are about 28 days, but anywhere from 21-35 days is normal. Your period usually lasts 3-7 days.`,
+      keyTerms: [
+        { term: 'period', definition: 'The bleeding that happens each month when your body releases the lining of your uterus' },
+        { term: 'uterus', definition: 'The organ in your lower belly where a baby grows during pregnancy, also called the womb' },
+        { term: 'ovary', definition: 'One of two small organs that hold your eggs and release one each month' },
+      ],
+      analogies: ['Your menstrual cycle is like your body preparing a cozy nest every month - if no baby bird comes, the nest gets cleared away and rebuilt fresh.'],
+      examples: ['Many girls get their first period between ages 10-15. Once it starts, it happens every month until menopause (usually in your late 40s or 50s).'],
+    },
+    2: {
+      level: 2,
+      summary: 'The menstrual cycle is a hormonal process lasting about 28 days that involves the ovaries releasing an egg and the uterus preparing its lining for potential pregnancy.',
+      explanation: `The menstrual cycle has four main phases:
+
+**Menstruation (Days 1-5):** The uterine lining sheds as your period.
+
+**Follicular Phase (Days 1-13):** Hormones cause an egg to mature in the ovary while the uterine lining rebuilds.
+
+**Ovulation (Around Day 14):** The mature egg is released from the ovary.
+
+**Luteal Phase (Days 15-28):** The empty follicle produces progesterone to maintain the uterine lining.
+
+If the egg isn't fertilized, hormone levels drop and the cycle restarts with menstruation.
+
+Key hormones include:
+- **Estrogen:** Helps the egg mature and builds uterine lining
+- **Progesterone:** Maintains the lining after ovulation`,
+      keyTerms: [
+        { term: 'ovulation', definition: 'The release of a mature egg from the ovary, usually around day 14 of the cycle', pronunciation: 'AHV-yoo-LAY-shun' },
+        { term: 'estrogen', definition: 'A hormone that helps eggs mature and builds up the uterine lining', pronunciation: 'ES-truh-jen' },
+        { term: 'progesterone', definition: 'A hormone produced after ovulation that prepares the uterus for pregnancy', pronunciation: 'pro-JES-ter-own' },
+        { term: 'follicle', definition: 'A small sac in the ovary that contains and nurtures a developing egg' },
+      ],
+      analogies: ['Estrogen and progesterone work like a relay team - estrogen gets things started in the first half, then hands off to progesterone to finish the job.'],
+    },
+    3: {
+      level: 3,
+      summary: 'The menstrual cycle is regulated by the hypothalamic-pituitary-ovarian axis, involving coordinated release of GnRH, FSH, LH, estrogen, and progesterone to control follicular development, ovulation, and endometrial changes.',
+      explanation: `The cycle begins with the hypothalamus releasing GnRH, stimulating the anterior pituitary to secrete FSH and LH.
+
+**Follicular Phase:**
+- FSH promotes development of ovarian follicles
+- Follicles produce increasing estrogen
+- Rising estrogen causes the endometrium to proliferate (proliferative phase)
+- Estrogen exerts negative feedback on FSH
+
+**Ovulation:**
+- At mid-cycle, high estrogen triggers a positive feedback surge of LH (and FSH)
+- Ovulation occurs approximately 36 hours after LH surge
+
+**Luteal Phase:**
+- The ruptured follicle becomes the corpus luteum
+- Corpus luteum secretes progesterone and estrogen
+- Progesterone transforms the endometrium into a secretory state suitable for implantation
+- Without fertilization, the corpus luteum degenerates around day 26
+- Hormone levels fall, triggering menstruation
+
+The cycle averages 28 days but normal range is 21-35 days.`,
+      keyTerms: [
+        { term: 'GnRH', definition: 'Gonadotropin-releasing hormone from the hypothalamus that controls pituitary release of FSH and LH', pronunciation: 'G-N-R-H' },
+        { term: 'FSH', definition: 'Follicle-stimulating hormone that promotes ovarian follicle development' },
+        { term: 'LH surge', definition: 'A rapid increase in luteinizing hormone that triggers ovulation' },
+        { term: 'corpus luteum', definition: 'The structure formed from the ruptured follicle after ovulation; produces progesterone', pronunciation: 'KOR-pus LOO-tee-um' },
+      ],
+      clinicalNotes: "Ovulation predictor kits detect the LH surge. Basal body temperature rises 0.5-1F after ovulation due to progesterone's thermogenic effect.",
+    },
+    4: {
+      level: 4,
+      summary: 'The menstrual cycle integrates pulsatile GnRH secretion, two-cell two-gonadotropin steroidogenesis, dominant follicle selection, and endometrial receptivity windows, with clinical implications for fertility, contraception, and menstrual disorders.',
+      explanation: `**Neuroendocrine Regulation:**
+GnRH is secreted in pulses; frequency and amplitude vary across the cycle to differentially regulate FSH and LH.
+
+**Ovarian Steroidogenesis (Two-Cell Model):**
+- Theca cells (LH-responsive) produce androgens
+- Granulosa cells (FSH-responsive) convert androgens to estrogens
+
+**Follicle Selection:**
+- Multiple follicles begin development
+- By day 7, one dominant follicle is selected via FSH threshold effects
+- The dominant follicle produces increasing estradiol
+- Estradiol >200 pg/mL for 50+ hours triggers positive feedback LH surge
+- Ovulation occurs 10-12 hours after LH peak
+
+**Corpus Luteum:**
+- Has a fixed 14-day lifespan
+- Unless rescued by hCG from implantation
+
+**Endometrial Receptivity:**
+- Implantation window occurs days 20-24
+
+**Clinical Parameters:**
+- Menstrual flow averages 30-40 mL
+- >80 mL defines heavy menstrual bleeding
+- Cycle irregularity may indicate anovulation, thyroid dysfunction, hyperprolactinemia, or PCOS`,
+      keyTerms: [
+        { term: 'two-cell two-gonadotropin model', definition: 'Mechanism where theca cells make androgens (via LH) and granulosa cells convert them to estrogens (via FSH)' },
+        { term: 'dominant follicle', definition: 'The single follicle selected for ovulation, typically reaching 18-25mm at maturity' },
+        { term: 'implantation window', definition: 'The 4-5 day period when the endometrium is receptive to blastocyst implantation' },
+        { term: 'anovulation', definition: 'Absence of ovulation; common cause of irregular periods and infertility' },
+      ],
+      clinicalNotes: 'Mid-luteal progesterone >3 ng/mL suggests ovulation. Irregular cycles with cycle length <21 or >35 days warrant evaluation. Combined hormonal contraceptives work by suppressing the LH surge.',
+    },
+    5: {
+      level: 5,
+      summary: 'Clinical management of menstrual cycle disorders requires understanding of neuroendocrine regulation, ovarian reserve assessment, endometrial dating discrepancies, and evidence-based approaches to anovulation, luteal phase defects, and cycle optimization for fertility or contraception.',
+      explanation: `**Clinical Evaluation:**
+- Menstrual history (cycle length, duration, flow)
+- Hormonal assessment (day 3 FSH/estradiol for ovarian reserve, TSH, prolactin)
+- Imaging (transvaginal ultrasound for antral follicle count)
+- Anti-Mullerian hormone (AMH) provides cycle-independent ovarian reserve assessment
+
+**Anovulatory Cycles:**
+- Common at menarche and perimenopause
+- In reproductive years, evaluate for:
+  - PCOS (Rotterdam criteria)
+  - Hypothalamic amenorrhea
+  - Thyroid dysfunction
+  - Hyperprolactinemia
+
+**Luteal Phase Defect:**
+- Short luteal phase, inadequate progesterone
+- Remains controversial as a distinct entity
+
+**Fertility Tracking Methods:**
+- Cervical mucus changes
+- Basal body temperature
+- LH surge detection
+- Follicular monitoring
+
+**Cycle Regulation Options:**
+- Combined hormonal contraceptives (suppress HPO axis)
+- Progestins (endometrial stabilization)
+- Ovulation induction (clomiphene, letrozole, gonadotropins)
+
+**Emerging Tools:**
+- Endometrial receptivity assays for implantation failure evaluation`,
+      keyTerms: [
+        { term: 'ovarian reserve', definition: 'The remaining quantity and quality of oocytes; assessed by FSH, AMH, and antral follicle count' },
+        { term: 'Rotterdam criteria', definition: 'PCOS diagnosis requiring 2 of 3: oligo/anovulation, hyperandrogenism, polycystic ovaries on ultrasound' },
+        { term: 'hypothalamic amenorrhea', definition: 'Absence of menses due to suppressed GnRH from energy deficit, stress, or excessive exercise' },
+        { term: 'AMH', definition: 'Anti-Mullerian hormone; produced by granulosa cells, reflects ovarian follicle pool, not affected by cycle day' },
+      ],
+      clinicalNotes: 'ACOG recommends treating primary amenorrhea by age 15 (with secondary sexual characteristics) or age 13 (without). Secondary amenorrhea evaluation begins after 3 months without menses in previously regular cycles. For irregular bleeding, rule out pregnancy first, then structural causes (polyps, fibroids) via imaging.',
+    },
+  },
+  media: [],
+  citations: [
+    {
+      id: 'acog-menstrual-faq',
+      type: 'website',
+      title: 'Your Menstrual Cycle',
+      source: 'American College of Obstetricians and Gynecologists',
+      url: 'https://www.acog.org/womens-health/faqs/your-menstrual-cycle',
+      license: 'Educational use',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'condition-menstrual-disorders', targetType: 'condition', relationship: 'related', label: 'Menstrual Disorders' },
+    { targetId: 'concept-fertility-basics', targetType: 'concept', relationship: 'related', label: 'Fertility Basics' },
+    { targetId: 'concept-contraception-options', targetType: 'concept', relationship: 'related', label: 'Contraception Options' },
+  ],
+  tags: {
+    systems: ['reproductive'],
+    topics: ['physiology', 'patient-education', 'womens-health'],
+    keywords: ['menstrual cycle', 'period', 'ovulation', 'hormones', 'fertility'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

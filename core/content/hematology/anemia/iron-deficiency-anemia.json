@@ -1,0 +1,118 @@
+{
+  "topic": "Iron Deficiency Anemia",
+  "category": "condition",
+  "system": "hematology",
+  "contents": [
+    {
+      "id": "condition-iron-deficiency-anemia",
+      "type": "condition",
+      "name": "Iron Deficiency Anemia",
+      "alternateNames": ["IDA", "Low iron anemia", "Microcytic anemia from iron deficiency"],
+      "icdCode": "D50",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "Iron deficiency anemia happens when your body doesn't have enough iron to make healthy red blood cells.",
+          "explanation": "Iron is like fuel that helps your red blood cells carry oxygen around your body. When you don't have enough iron, your body can't make enough healthy red blood cells, and the ones it makes are smaller and paler than normal. This means less oxygen gets to your muscles and organs, which can make you feel very tired and weak. Iron deficiency is the most common cause of anemia worldwide.",
+          "keyTerms": [
+            {"term": "iron", "definition": "A mineral your body needs to make healthy red blood cells"},
+            {"term": "anemia", "definition": "When you don't have enough healthy red blood cells to carry oxygen"},
+            {"term": "red blood cells", "definition": "Tiny disc-shaped cells that carry oxygen throughout your body"}
+          ],
+          "analogies": ["Iron is like the fuel that powers your body's oxygen delivery trucks (red blood cells). Without enough fuel, the trucks can't make their deliveries."],
+          "examples": ["Feeling unusually tired even after a good night's sleep could be a sign of iron deficiency anemia."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "Iron deficiency anemia occurs when iron stores become depleted, leading to reduced hemoglobin production and smaller, paler red blood cells.",
+          "explanation": "Your body uses iron to make hemoglobin, the protein inside red blood cells that carries oxygen. When iron levels drop, the body first uses up iron stored in the liver, spleen, and bone marrow. Once stores are exhausted, hemoglobin production falls, resulting in anemia. Common causes include blood loss (heavy periods, GI bleeding), poor dietary intake, malabsorption (celiac disease), and increased needs (pregnancy, growth). On blood tests, iron deficiency shows low hemoglobin, low MCV (small cells), low ferritin, and low serum iron with high TIBC.",
+          "keyTerms": [
+            {"term": "hemoglobin", "definition": "The iron-containing protein in red blood cells that binds and carries oxygen", "pronunciation": "HEE-muh-glow-bin"},
+            {"term": "ferritin", "definition": "A protein that stores iron in your body; blood levels reflect iron stores", "pronunciation": "FAIR-ih-tin"},
+            {"term": "MCV", "definition": "Mean corpuscular volume - the average size of red blood cells"},
+            {"term": "TIBC", "definition": "Total iron binding capacity - measures how much transferrin is available to bind iron; high when iron is low"}
+          ],
+          "analogies": ["Ferritin is like a piggy bank for iron. When you need iron, your body withdraws from this bank first."],
+          "examples": ["A woman with heavy menstrual periods may gradually develop iron deficiency as she loses more iron than she takes in."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "Iron deficiency anemia results from negative iron balance causing depleted stores, deficient erythropoiesis, and ultimately microcytic hypochromic anemia with characteristic lab findings.",
+          "explanation": "Iron deficiency progresses through stages: 1) Depleted iron stores (low ferritin, normal Hgb), 2) Iron-deficient erythropoiesis (low transferrin saturation, rising TIBC, early anemia), 3) Frank IDA (low Hgb, low MCV, hypochromia). The peripheral smear shows microcytic, hypochromic RBCs with increased central pallor, often with target cells and pencil cells (elliptocytes). Reticulocyte count is low/inappropriately normal. The reticulocyte hemoglobin content (CHr or Ret-He) drops early, sometimes before MCV changes. Key differential includes thalassemia trait (normal/high RBC count, normal ferritin, elevated RDW in IDA vs normal RDW in thalassemia), anemia of chronic disease (normal/elevated ferritin), and sideroblastic anemia.",
+          "keyTerms": [
+            {"term": "microcytic", "definition": "Red blood cells smaller than normal (MCV <80 fL)", "pronunciation": "my-kro-SIT-ik"},
+            {"term": "hypochromic", "definition": "Red blood cells paler than normal due to reduced hemoglobin content", "pronunciation": "hy-po-KROW-mik"},
+            {"term": "transferrin saturation", "definition": "Percentage of iron-binding sites on transferrin occupied by iron; (serum iron/TIBC) x 100; low in IDA"},
+            {"term": "reticulocyte hemoglobin", "definition": "Hemoglobin content of young red blood cells; early marker of iron-deficient erythropoiesis"},
+            {"term": "RDW", "definition": "Red cell distribution width - measure of RBC size variation; elevated in IDA"}
+          ],
+          "clinicalNotes": "Always investigate the cause of IDA. In postmenopausal women and all men, GI evaluation (upper and lower endoscopy) is typically indicated to exclude GI malignancy as source of occult blood loss."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Iron deficiency anemia involves disrupted iron homeostasis affecting heme synthesis, with hepcidin as the master regulator, and requires systematic evaluation of etiology before initiating replacement therapy.",
+          "explanation": "Normal iron homeostasis maintains 3-4g total body iron: 2.5g in hemoglobin, 1g in stores (ferritin, hemosiderin), remainder in myoglobin and enzymes. Daily losses (1-2mg via desquamation, menstruation) must be matched by dietary absorption. Hepcidin, produced by hepatocytes, is the master regulator - it degrades ferroportin on enterocytes and macrophages, blocking iron export. In iron deficiency, hepcidin is suppressed, maximizing iron absorption. In inflammation, hepcidin rises (IL-6 mediated), explaining the overlap with anemia of chronic disease. Diagnostic workup: ferritin <30 ng/mL is diagnostic; 30-100 ng/mL is indeterminate (check soluble transferrin receptor or sTfR/log ferritin index). Oral iron (ferrous sulfate 325mg = 65mg elemental iron) is first-line; IV iron for malabsorption, intolerance, or severe deficiency. Monitor response: reticulocytosis by day 7-10, hemoglobin rise 1-2 g/dL by 4 weeks.",
+          "keyTerms": [
+            {"term": "hepcidin", "definition": "Liver-produced hormone that regulates systemic iron homeostasis by controlling ferroportin degradation", "pronunciation": "HEP-sid-in"},
+            {"term": "ferroportin", "definition": "Iron export protein on enterocytes and macrophages; target of hepcidin regulation", "pronunciation": "fair-oh-POR-tin"},
+            {"term": "soluble transferrin receptor", "definition": "sTfR - elevated in iron deficiency but not inflammation; helps distinguish IDA from ACD"},
+            {"term": "elemental iron", "definition": "The actual amount of absorbable iron in a supplement; ferrous sulfate 325mg = 65mg elemental iron"},
+            {"term": "reticulocytosis", "definition": "Increase in young red blood cells, indicating bone marrow response to treatment"}
+          ],
+          "clinicalNotes": "Take oral iron on empty stomach with vitamin C for best absorption. GI side effects are dose-dependent - alternate day dosing may improve tolerance with similar efficacy. Recheck ferritin 2-3 months after Hgb normalizes to ensure stores are replete."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Iron deficiency anemia management requires understanding of iron absorption physiology, IV iron formulations for refractory cases, and systematic evaluation for occult malignancy or rare causes.",
+          "explanation": "Iron absorption occurs predominantly in duodenum via DMT1 (apical membrane) and ferroportin (basolateral). Hepcidin-ferroportin axis is central: TMPRSS6 mutations (iron-refractory IDA) or IRIDA cause paradoxically high hepcidin and refractory oral iron response. IV iron indications: CKD (target ferritin 200-500, TSAT 20-30% per KDIGO), inflammatory bowel disease, post-bariatric surgery, heart failure with IDA (IRONMAN, AFFIRM-AHF trials), or intolerance/failure of oral iron. IV formulations differ in molecular weight and dextran content affecting infusion reactions: ferric carboxymaltose (FCM) allows high single doses (750-1000mg); iron sucrose requires multiple smaller doses; ferumoxytol allows rapid infusion. Low-molecular-weight iron dextran has historically higher anaphylaxis risk. Total dose = weight (kg) x (target Hgb - actual Hgb) x 2.4 + 500 (for stores). Refractory IDA warrants GI evaluation including capsule endoscopy for small bowel pathology, celiac serology, H. pylori testing, and consideration of autoimmune gastritis (anti-parietal cell antibodies). Rare causes: hereditary hemorrhagic telangiectasia, blue rubber bleb nevus syndrome, intravascular hemolysis with hemoglobinuria (PNH).",
+          "keyTerms": [
+            {"term": "DMT1", "definition": "Divalent metal transporter 1 - apical membrane protein importing iron into enterocytes"},
+            {"term": "IRIDA", "definition": "Iron-refractory iron deficiency anemia - genetic disorder with TMPRSS6 mutations causing elevated hepcidin"},
+            {"term": "ferric carboxymaltose", "definition": "IV iron formulation allowing high single-dose infusion (up to 750-1000mg)", "pronunciation": "FAIR-ik kar-BOX-ee-MAHL-tose"},
+            {"term": "Ganzoni formula", "definition": "Formula for calculating total IV iron replacement dose based on deficit and stores"},
+            {"term": "KDIGO", "definition": "Kidney Disease Improving Global Outcomes - guidelines organization with iron management recommendations for CKD"}
+          ],
+          "clinicalNotes": "FCM can cause hypophosphatemia via FGF23 induction - monitor phosphate with repeated dosing. Consider malignancy workup with bidirectional endoscopy in unexplained IDA >40 years. In IDA with normal endoscopies, consider celiac serology, capsule endoscopy, and urine hemosiderin for intravascular hemolysis."
+        }
+      },
+      "media": [],
+      "citations": [
+        {
+          "id": "camaschella-2015",
+          "type": "article",
+          "title": "Iron-deficiency anemia",
+          "authors": ["Camaschella C"],
+          "source": "N Engl J Med",
+          "year": 2015,
+          "volume": "372",
+          "pages": "1832-1843"
+        },
+        {
+          "id": "auerbach-2021",
+          "type": "article",
+          "title": "Clinical Use of Intravenous Iron",
+          "authors": ["Auerbach M", "Adamson JW"],
+          "source": "N Engl J Med",
+          "year": 2021
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "condition-anemia-chronic-disease", "targetType": "condition", "relationship": "differential", "label": "Anemia of Chronic Disease"},
+        {"targetId": "condition-thalassemia", "targetType": "condition", "relationship": "differential", "label": "Thalassemia"},
+        {"targetId": "test-cbc-interpretation", "targetType": "test", "relationship": "diagnostic", "label": "CBC Interpretation"},
+        {"targetId": "topic-dietary-iron", "targetType": "topic", "relationship": "management", "label": "Dietary Iron"}
+      ],
+      "tags": {
+        "systems": ["hematology"],
+        "topics": ["anemia", "iron deficiency", "microcytic anemia"],
+        "keywords": ["iron deficiency", "IDA", "ferritin", "hemoglobin", "microcytic"],
+        "clinicalRelevance": "critical",
+        "patientEducation": true
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    }
+  ]
+}

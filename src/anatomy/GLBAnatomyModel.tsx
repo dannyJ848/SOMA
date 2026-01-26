@@ -5,16 +5,18 @@
  * Falls back to procedural geometry when models aren't available.
  */
 
-import { useEffect, useRef, useMemo, useCallback, Suspense } from 'react';
+import { useEffect, useRef, useMemo, useCallback, Suspense, memo } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { useGLTF, Clone } from '@react-three/drei';
 import * as THREE from 'three';
-import { useLOD } from './AnatomyLODSystem';
+import { useLOD, calculateStructureOpacity } from './AnatomyLODSystem';
 import {
   type AnatomicalSystem,
+  type AnatomicalStructure,
   SYSTEM_COLORS,
+  getStructuresAtDetailLevel,
 } from './AnatomyStructures';
-import { SYSTEM_MODELS, REGIONAL_MODELS } from '../ModelLoader';
+import { SYSTEM_MODELS } from '../ModelLoader';
 
 // ============================================
 // Types
@@ -31,26 +33,9 @@ interface GLBAnatomyModelProps {
   animateOrgans?: boolean;
 }
 
-// Map region IDs to model paths
-const REGION_TO_MODEL: Record<string, string> = {
-  head: REGIONAL_MODELS.head,
-  neck: REGIONAL_MODELS.neck,
-  chest: REGIONAL_MODELS.thorax,
-  thorax: REGIONAL_MODELS.thorax,
-  abdomen: REGIONAL_MODELS.abdomen,
-  trunk: REGIONAL_MODELS.trunk,
-  back: REGIONAL_MODELS.back,
-  leftArm: REGIONAL_MODELS.leftUpperLimb,
-  rightArm: REGIONAL_MODELS.rightUpperLimb,
-  leftLeg: REGIONAL_MODELS.leftLowerLimb,
-  rightLeg: REGIONAL_MODELS.rightLowerLimb,
-  leftHand: REGIONAL_MODELS.rightHand, // Mirror for left
-  rightHand: REGIONAL_MODELS.rightHand,
-  leftFoot: REGIONAL_MODELS.rightFoot, // Mirror for left
-  rightFoot: REGIONAL_MODELS.rightFoot,
-  cranium: REGIONAL_MODELS.cranium,
-  viscera: REGIONAL_MODELS.visceralSystems,
-};
+// DISABLED: Regional models are 8-10MB each, too heavy for mobile
+// Map kept for reference but not used
+// const REGION_TO_MODEL: Record<string, string> = { ... };
 
 // ============================================
 // Individual GLB Model Component
@@ -248,9 +233,100 @@ function SystemModel({
 }
 
 // ============================================
-// Regional Model Loader
+// Procedural Organ Mesh for non-GLB systems
 // ============================================
 
+const SEGMENTS_LOW = 8;
+const SEGMENTS_MED = 12;
+
+interface ProceduralOrganMeshProps {
+  structure: AnatomicalStructure;
+  isHovered: boolean;
+  isSelected: boolean;
+  opacity: number;
+  onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerOut: (e: ThreeEvent<PointerEvent>) => void;
+  onClick: (e: ThreeEvent<MouseEvent>) => void;
+}
+
+const ProceduralOrganMesh = memo(function ProceduralOrganMesh({
+  structure,
+  isHovered,
+  isSelected,
+  opacity,
+  onPointerOver,
+  onPointerOut,
+  onClick,
+}: ProceduralOrganMeshProps) {
+  if (opacity <= 0) return null;
+
+  let emissiveColor = '#000000';
+  let emissiveIntensity = 0;
+
+  if (isSelected) {
+    emissiveColor = '#22ff44';
+    emissiveIntensity = 0.4;
+  } else if (isHovered) {
+    emissiveColor = '#2244ff';
+    emissiveIntensity = 0.3;
+  } else if (structure.emissiveColor) {
+    emissiveColor = structure.emissiveColor;
+    emissiveIntensity = 0.15;
+  }
+
+  const renderGeometry = () => {
+    const args = structure.geometryArgs;
+    switch (structure.geometry) {
+      case 'sphere':
+        return <sphereGeometry args={[args[0], SEGMENTS_MED, SEGMENTS_MED]} />;
+      case 'cylinder':
+        return <cylinderGeometry args={[args[0], args[1], args[2], SEGMENTS_LOW]} />;
+      case 'capsule':
+        return <capsuleGeometry args={[args[0], args[1], SEGMENTS_LOW, SEGMENTS_LOW]} />;
+      case 'box':
+        return <boxGeometry args={args as [number, number, number]} />;
+      case 'torus':
+        return <torusGeometry args={[args[0], args[1], SEGMENTS_LOW, SEGMENTS_MED]} />;
+      default:
+        return <sphereGeometry args={[0.1, SEGMENTS_LOW, SEGMENTS_LOW]} />;
+    }
+  };
+
+  return (
+    <mesh
+      position={structure.position}
+      rotation={structure.rotation || [0, 0, 0]}
+      scale={structure.scale || [1, 1, 1]}
+      userData={{
+        structureId: structure.id,
+        structureName: structure.name,
+        system: structure.system,
+      }}
+      onPointerOver={structure.clickable ? onPointerOver : undefined}
+      onPointerOut={structure.clickable ? onPointerOut : undefined}
+      onClick={structure.clickable ? onClick : undefined}
+    >
+      {renderGeometry()}
+      <meshLambertMaterial
+        color={structure.color}
+        emissive={emissiveColor}
+        emissiveIntensity={emissiveIntensity}
+        transparent={opacity < 1}
+        opacity={opacity * (structure.opacity ?? 1)}
+        side={THREE.FrontSide}
+      />
+    </mesh>
+  );
+});
+
+// Systems that have GLB models available
+const GLB_AVAILABLE_SYSTEMS: AnatomicalSystem[] = ['skeletal'];
+
+// ============================================
+// Regional Model Loader - DISABLED for performance
+// Each regional model is 8-10MB, too heavy for mobile
+// ============================================
+/*
 interface RegionalModelProps {
   regionId: string;
   regionName: string;
@@ -264,57 +340,8 @@ interface RegionalModelProps {
   onSelect: (regionId: string, regionName: string, event?: { clientX: number; clientY: number }) => void;
 }
 
-function RegionalModel({
-  regionId,
-  regionName,
-  modelUrl,
-  position = [0, 0, 0],
-  scale = 1,
-  isHovered,
-  isSelected,
-  opacity,
-  onHover,
-  onSelect,
-}: RegionalModelProps) {
-  const handlePointerOver = useCallback((e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
-    onHover(regionId);
-    document.body.style.cursor = 'pointer';
-  }, [regionId, onHover]);
-
-  const handlePointerOut = useCallback((e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
-    onHover(null);
-    document.body.style.cursor = 'auto';
-  }, [onHover]);
-
-  const handleClick = useCallback((e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation();
-    onSelect(regionId, regionName, {
-      clientX: e.nativeEvent.clientX,
-      clientY: e.nativeEvent.clientY,
-    });
-  }, [regionId, regionName, onSelect]);
-
-  return (
-    <Suspense fallback={<ModelLoadingFallback />}>
-      <LoadedGLBModel
-        url={modelUrl}
-        position={position}
-        scale={scale}
-        structureId={regionId}
-        structureName={regionName}
-        system="integumentary"
-        isHovered={isHovered}
-        isSelected={isSelected}
-        opacity={opacity}
-        onPointerOver={handlePointerOver}
-        onPointerOut={handlePointerOut}
-        onClick={handleClick}
-      />
-    </Suspense>
-  );
-}
+function RegionalModel({ ... }: RegionalModelProps) { ... }
+*/
 
 // ============================================
 // Main GLB Anatomy Model Component
@@ -342,12 +369,58 @@ export function GLBAnatomyModel({
     return 0.7;
   }, [lodState.detailLevel]);
 
-  // DISABLED: Rotation causes constant re-renders, hurts performance
-  // useFrame removed - users can manually rotate with mouse
+  // Get procedural structures for non-GLB systems - Complete Anatomy style
+  // Always use 'body' level to get ALL structures for layer toggling
+  const proceduralStructures = useMemo(() => {
+    const structures = getStructuresAtDetailLevel('body'); // Get all body-level structures
+    console.log('[GLBAnatomyModel] All structures:', structures.length);
+    console.log('[GLBAnatomyModel] Enabled systems:', enabledSystems);
+
+    const filtered = structures.filter(structure => {
+      // Skip systems that have GLB models (skeletal) - they're rendered separately
+      if (GLB_AVAILABLE_SYSTEMS.includes(structure.system)) return false;
+      // Primary filter: system must be enabled
+      if (!enabledSystems.includes(structure.system)) return false;
+      // Check showOrgans for organ systems
+      const organSystems = ['cardiovascular', 'respiratory', 'digestive', 'nervous', 'urinary', 'lymphatic', 'endocrine'];
+      if (organSystems.includes(structure.system) && !showOrgans) return false;
+      return true;
+    });
+
+    console.log('[GLBAnatomyModel] Procedural structures:', filtered.map(s => `${s.id} (${s.system})`));
+    return filtered;
+  }, [enabledSystems, showOrgans]);
+
+  // Event handlers for procedural meshes
+  const handlePointerOver = useCallback((e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    const structureId = e.object.userData?.structureId;
+    if (structureId) {
+      onHover(structureId);
+      document.body.style.cursor = 'pointer';
+    }
+  }, [onHover]);
+
+  const handlePointerOut = useCallback((e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    onHover(null);
+    document.body.style.cursor = 'auto';
+  }, [onHover]);
+
+  const handleClick = useCallback((e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    const userData = e.object.userData;
+    if (userData?.structureId) {
+      onSelect(userData.structureId, userData.structureName, {
+        clientX: e.nativeEvent.clientX,
+        clientY: e.nativeEvent.clientY,
+      });
+    }
+  }, [onSelect]);
 
   return (
     <group ref={groupRef}>
-      {/* Skeletal System */}
+      {/* Skeletal System - Real GLB model (1.6MB) */}
       {showSkeleton && enabledSystems.includes('skeletal') && (
         <SystemModel
           system="skeletal"
@@ -360,75 +433,43 @@ export function GLBAnatomyModel({
         />
       )}
 
-      {/* Digestive System */}
-      {showOrgans && enabledSystems.includes('digestive') && (
-        <SystemModel
-          system="digestive"
-          isEnabled={true}
-          hoveredStructure={hoveredStructure}
-          selectedStructure={selectedStructure}
-          opacity={baseOpacity * 0.9}
-          onHover={onHover}
-          onSelect={onSelect}
-        />
-      )}
+      {/* Procedural organs for systems without GLB models */}
+      {proceduralStructures.map((structure) => {
+        const opacity = calculateStructureOpacity(
+          lodState.cameraDistance,
+          lodState.detailLevel,
+          structure.visibility
+        );
 
-      {/* Regional Models (when not at body level) */}
-      {lodState.detailLevel !== 'body' && (
-        <>
-          {Object.entries(REGION_TO_MODEL).map(([regionId, modelUrl]) => {
-            if (!modelUrl) return null;
+        return (
+          <ProceduralOrganMesh
+            key={structure.id}
+            structure={structure}
+            isHovered={hoveredStructure === structure.id}
+            isSelected={selectedStructure === structure.id}
+            opacity={opacity * baseOpacity}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+        );
+      })}
 
-            const regionName = regionId.replace(/([A-Z])/g, ' $1').trim();
-            return (
-              <RegionalModel
-                key={regionId}
-                regionId={regionId}
-                regionName={regionName}
-                modelUrl={modelUrl}
-                isHovered={hoveredStructure === regionId}
-                isSelected={selectedStructure === regionId}
-                opacity={baseOpacity}
-                onHover={onHover}
-                onSelect={onSelect}
-              />
-            );
-          })}
-        </>
-      )}
-
-      {/* Ground plane */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]} receiveShadow>
-        <planeGeometry args={[10, 10]} />
-        <meshStandardMaterial color="#1a1a2e" roughness={0.9} metalness={0} />
+      {/* Simplified ground plane - use BasicMaterial for performance */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]}>
+        <planeGeometry args={[6, 6]} />
+        <meshBasicMaterial color="#1a1a2e" />
       </mesh>
-
-      {/* Grid helper for spatial reference at close zoom */}
-      {lodState.detailLevel !== 'body' && (
-        <gridHelper
-          args={[4, 20, '#333355', '#222244']}
-          position={[0, -1.39, 0]}
-        />
-      )}
     </group>
   );
 }
 
-// Preload common models
+// Preload common models - ONLY the lightweight skeletal system (1.6MB)
+// DISABLED preloading of digestive (8.6MB) and regional models (8-10MB each)
 export function preloadAnatomyModels() {
-  // Preload skeletal models
+  // Preload skeletal models only
   SYSTEM_MODELS.skeletal.forEach((url) => {
     useGLTF.preload(url);
-  });
-
-  // Preload digestive models
-  SYSTEM_MODELS.digestive.forEach((url) => {
-    useGLTF.preload(url);
-  });
-
-  // Preload regional models
-  Object.values(REGIONAL_MODELS).forEach((url) => {
-    if (url) useGLTF.preload(url);
   });
 }
 

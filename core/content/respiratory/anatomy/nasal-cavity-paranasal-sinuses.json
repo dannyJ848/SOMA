@@ -1,0 +1,119 @@
+{
+  "id": "structure-nasal-cavity-paranasal-sinuses",
+  "type": "structure",
+  "name": "Nasal Cavity and Paranasal Sinuses",
+  "alternateNames": ["Nasal Passages", "Sinus Cavities", "Cavitas nasi"],
+  "fmaId": "FMA:54378",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The nasal cavity is the inside of your nose where air comes in, and sinuses are hollow spaces in your skull bones that connect to it.",
+      "explanation": "When you breathe through your nose, air goes into the nasal cavity - a hollow space that runs from your nostrils to your throat. This space is divided in half by a wall called the septum. The inside of your nose is covered with a wet, sticky layer called mucus that catches dust, germs, and tiny particles before they can get to your lungs. Your nose also warms and moistens the air. Around your nose, inside your skull bones, there are empty spaces called sinuses. You have sinuses in your forehead, cheeks, and between your eyes. These sinuses make mucus that drains into your nose.",
+      "keyTerms": [
+        {"term": "nasal cavity", "definition": "The hollow space inside your nose where air passes through"},
+        {"term": "septum", "definition": "The wall that divides your nose into two sides"},
+        {"term": "sinuses", "definition": "Hollow spaces in the bones of your face and head"},
+        {"term": "mucus", "definition": "The wet, sticky substance that lines your nose and catches germs"}
+      ],
+      "analogies": ["Your nasal cavity is like an air conditioning system - it cleans, warms, and moistens the air before it goes to your lungs, just like an AC unit treats air for a building."],
+      "examples": ["When you have a cold, your sinuses might fill with mucus and feel stuffy and painful."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The nasal cavity is a respiratory passage extending from the nostrils to the nasopharynx, with paranasal sinuses being air-filled cavities in surrounding skull bones.",
+      "explanation": "The nasal cavity is divided by the nasal septum into left and right halves. Each side has three bony projections called turbinates (conchae) that increase the surface area for warming and humidifying air. The cavity is lined with respiratory epithelium containing cilia that move mucus toward the throat. Four pairs of paranasal sinuses (frontal, maxillary, ethmoid, and sphenoid) are air-filled cavities in facial and cranial bones that drain into the nasal cavity through small openings called ostia. These sinuses reduce skull weight, add resonance to voice, and produce mucus.",
+      "keyTerms": [
+        {"term": "turbinates", "definition": "Bony projections in the nasal cavity that increase surface area", "pronunciation": "TUR-bih-nayts"},
+        {"term": "conchae", "definition": "Another name for turbinates; shell-shaped bones in the nose", "pronunciation": "KONG-kee"},
+        {"term": "respiratory epithelium", "definition": "The specialized lining of the airways with mucus-producing cells and cilia"},
+        {"term": "ostia", "definition": "Small openings through which sinuses drain into the nasal cavity", "pronunciation": "OS-tee-ah"},
+        {"term": "maxillary sinus", "definition": "The largest paranasal sinus, located in the cheekbone"}
+      ],
+      "analogies": ["The turbinates work like radiator fins, spreading out to create more surface area for heat exchange with the incoming air."],
+      "examples": ["Sinusitis occurs when sinus drainage is blocked and the sinuses become infected and inflamed."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The nasal cavity extends from the vestibule to choanae, featuring respiratory and olfactory regions, with paranasal sinuses communicating via the ostiomeatal complex.",
+      "explanation": "The nasal cavity has distinct regions: the vestibule (lined with skin and vibrissae), the respiratory region (pseudostratified ciliated columnar epithelium with goblet cells), and the olfactory region (specialized olfactory epithelium in the superior aspect). The lateral wall contains the superior, middle, and inferior turbinates, with meatus between them serving as drainage pathways. The middle meatus contains the ostiomeatal complex (OMC), the critical drainage pathway for the frontal, maxillary, and anterior ethmoid sinuses. The posterior ethmoid drains to the superior meatus, while the sphenoid sinus drains to the sphenoethmoidal recess. Blood supply includes the sphenopalatine artery (internal maxillary branch) and anterior/posterior ethmoidal arteries (ophthalmic branch). Kiesselbach's plexus (Little's area) on the anterior septum is a common site of epistaxis.",
+      "keyTerms": [
+        {"term": "vestibule", "definition": "The anterior-most portion of the nasal cavity, lined with skin and hair (vibrissae)"},
+        {"term": "ostiomeatal complex", "definition": "The functional unit of sinus drainage including the middle meatus and related structures", "pronunciation": "OS-tee-oh-mee-AY-tal"},
+        {"term": "Kiesselbach's plexus", "definition": "Vascular anastomotic area on the anterior septum, common site of anterior epistaxis", "pronunciation": "KEE-sel-bahks"},
+        {"term": "choanae", "definition": "The posterior openings of the nasal cavity into the nasopharynx", "pronunciation": "koh-AY-nee"},
+        {"term": "sphenopalatine artery", "definition": "Primary arterial supply to the nasal cavity, branch of internal maxillary artery"}
+      ],
+      "clinicalNotes": "Ostiomeatal complex obstruction is central to chronic rhinosinusitis pathophysiology. FESS (functional endoscopic sinus surgery) targets this area."
+    },
+    "4": {
+      "level": 4,
+      "summary": "The nasal cavity integrates mucociliary clearance, immunological defense, and neuroendocrine functions, with sinus pathophysiology involving complex inflammatory cascades and biofilm formation.",
+      "explanation": "Nasal mucosal physiology involves the nasal cycle - alternating congestion and decongestion of the nasal passages every 2-4 hours controlled by autonomic innervation. Mucociliary clearance operates via the sol-gel bilayer: cilia beat in the periciliary liquid (sol) layer, propelling the overlying mucus (gel) layer toward the nasopharynx at 6-20mm/min. Innate immunity includes antimicrobial peptides (defensins, lysozyme, lactoferrin), secretory IgA, and resident immune cells. Chronic rhinosinusitis pathophysiology involves epithelial barrier dysfunction, Th2-skewed inflammation (especially in CRSwNP), eosinophilic infiltration, and bacterial biofilm formation on sinus mucosa. The nasal microbiome composition (Corynebacterium, Staphylococcus epidermidis vs. S. aureus) influences disease susceptibility. Neural reflexes mediate nasobronchial cross-talk affecting lower airway function.",
+      "keyTerms": [
+        {"term": "nasal cycle", "definition": "Alternating congestion/decongestion of nasal passages every 2-4 hours, regulated by sympathetic tone"},
+        {"term": "mucociliary clearance", "definition": "Coordinated ciliary beating that propels mucus from the lower airways and sinuses toward the pharynx"},
+        {"term": "biofilm", "definition": "Structured microbial community encased in extracellular matrix, resistant to antibiotics and host defenses"},
+        {"term": "CRSwNP", "definition": "Chronic rhinosinusitis with nasal polyps, typically eosinophilic, Th2-driven inflammation"},
+        {"term": "CRSsNP", "definition": "Chronic rhinosinusitis without nasal polyps, more neutrophilic, Th1/Th17 inflammation"}
+      ],
+      "clinicalNotes": "Samter's triad (aspirin-exacerbated respiratory disease): nasal polyps, asthma, NSAID sensitivity - related to arachidonic acid metabolism dysregulation."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced management of sinonasal disorders integrates molecular phenotyping, targeted biologics, and evidence-based surgical approaches with evolving understanding of type 2 inflammation and microbiome interactions.",
+      "explanation": "Contemporary rhinosinusitis management utilizes endotype-based phenotyping: Type 2 inflammation (elevated IgE, eosinophilia, IL-4/IL-5/IL-13) versus non-Type 2 (neutrophilic, IL-17 driven). Biomarkers guide therapy: serum IgE, blood eosinophils, tissue eosinophilia, periostin. Biologic therapies target specific pathways: dupilumab (IL-4Ralpha), mepolizumab/benralizumab (IL-5/IL-5R), omalizumab (IgE). EPOS 2020 guidelines emphasize medical management before surgery, with FESS reserved for refractory cases. Surgical approaches range from balloon sinuplasty to extended approaches (Draf III frontal, endoscopic modified Lothrop). Postoperative management includes saline irrigations, topical corticosteroids (mometasone, fluticasone), and maintenance biologic therapy. Emerging concepts include the role of Staphylococcus aureus superantigens in polyp formation, epithelial-to-mesenchymal transition in remodeling, and therapeutic microbiome modulation.",
+      "keyTerms": [
+        {"term": "EPOS", "definition": "European Position Paper on Rhinosinusitis - consensus guidelines for diagnosis and management"},
+        {"term": "dupilumab", "definition": "Monoclonal antibody targeting IL-4 receptor alpha, blocking IL-4 and IL-13 signaling"},
+        {"term": "FESS", "definition": "Functional endoscopic sinus surgery - minimally invasive approach to restore sinus drainage"},
+        {"term": "Draf III", "definition": "Extended frontal sinus procedure creating common frontal drainage pathway, also called modified Lothrop"},
+        {"term": "Type 2 inflammation", "definition": "Eosinophil-driven inflammation characterized by IL-4, IL-5, IL-13 cytokines and IgE elevation"}
+      ],
+      "clinicalNotes": "Selection of biologics: dupilumab (broad CRSwNP), omalizumab (allergic phenotype), mepolizumab (severe eosinophilia). Consider aspirin desensitization for AERD. 3D printed surgical navigation and AI-assisted planning are emerging."
+    }
+  },
+  "media": [
+    {
+      "id": "nasal-cavity-3d-model",
+      "type": "3d-model",
+      "filename": "nasal_cavity_sinuses.glb",
+      "title": "3D Nasal Cavity and Paranasal Sinuses",
+      "description": "Interactive 3D model showing nasal cavity anatomy and sinus drainage patterns"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "epos-2020",
+      "type": "article",
+      "title": "European Position Paper on Rhinosinusitis and Nasal Polyps 2020",
+      "authors": ["Fokkens WJ", "Lund VJ", "Hopkins C"],
+      "source": "Rhinology",
+      "url": "https://doi.org/10.4193/Rhin20.600"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-pharynx", "targetType": "structure", "relationship": "related", "label": "Pharynx"},
+    {"targetId": "histology-respiratory-epithelium", "targetType": "structure", "relationship": "related", "label": "Respiratory Epithelium"}
+  ],
+  "tags": {
+    "systems": ["respiratory"],
+    "structures": ["FMA:54378", "FMA:59679", "FMA:57750"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

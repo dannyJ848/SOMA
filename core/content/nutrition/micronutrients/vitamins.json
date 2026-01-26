@@ -1,0 +1,117 @@
+{
+  "id": "concept-vitamins",
+  "type": "concept",
+  "name": "Vitamins",
+  "alternateNames": ["Micronutrients", "Essential Vitamins"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Vitamins are tiny nutrients in food that help your body grow, heal, and stay healthy - you only need small amounts, but they're super important!",
+      "explanation": "Vitamins are like little helpers that make your body work properly. Even though you only need tiny amounts, without them your body can't do important jobs like:\n\n- **See in the dark** (Vitamin A from carrots and sweet potatoes)\n- **Fight off germs** (Vitamin C from oranges and strawberries)\n- **Build strong bones** (Vitamin D from sunshine and milk)\n- **Heal cuts** (Vitamin K from green vegetables)\n- **Turn food into energy** (B vitamins from grains and meat)\n\n**Two Types of Vitamins:**\n\n*Fat-soluble vitamins* (A, D, E, K) are stored in your body's fat. You don't need to eat them every day because your body saves them.\n\n*Water-soluble vitamins* (C and all the B vitamins) dissolve in water. Your body can't store much of these, so you need to eat them more often. Extra amounts leave in your pee!\n\n**Getting Your Vitamins:**\nThe best way to get vitamins is by eating lots of different colorful fruits, vegetables, whole grains, and proteins. Each color of food has different vitamins - that's why eating a 'rainbow' of foods is so important!",
+      "keyTerms": [
+        { "term": "vitamins", "definition": "Tiny nutrients your body needs in small amounts to grow and stay healthy" },
+        { "term": "fat-soluble", "definition": "Vitamins that dissolve in fat and can be stored in your body (A, D, E, K)" },
+        { "term": "water-soluble", "definition": "Vitamins that dissolve in water and aren't stored well, so you need them more often (C and B vitamins)" }
+      ],
+      "analogies": ["Vitamins are like the oil in a car engine - you don't need much, but without it the engine won't run!", "Fat-soluble vitamins are like saving money in a piggy bank - your body stores them up. Water-soluble vitamins are like spending money right away - your body uses them and lets go of the extra."],
+      "examples": ["Sailors used to get scurvy (bleeding gums and weakness) on long voyages because they didn't have fresh fruits with Vitamin C.", "Your skin makes Vitamin D when you play outside in the sunshine!"]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Vitamins are essential organic compounds required in small amounts for metabolism, growth, and physiological functions, classified as fat-soluble (A, D, E, K) or water-soluble (C, B-complex).",
+      "explanation": "**Fat-Soluble Vitamins (ADEK)**:\n\n*Vitamin A (Retinol, Beta-carotene)*\n- Functions: Vision (rhodopsin in rods), cell differentiation, immune function, reproduction\n- Sources: Liver, dairy, eggs (preformed); carrots, sweet potatoes, spinach (provitamin A carotenoids)\n- Deficiency: Night blindness, xerophthalmia, impaired immunity\n- Toxicity: Teratogenic; liver damage; bone abnormalities\n\n*Vitamin D (Cholecalciferol)*\n- Functions: Calcium/phosphorus absorption, bone health, immune regulation\n- Sources: Sunlight exposure, fatty fish, fortified milk, egg yolks\n- Deficiency: Rickets (children), osteomalacia (adults), muscle weakness\n- Toxicity: Hypercalcemia, kidney stones, calcification\n\n*Vitamin E (Tocopherols)*\n- Functions: Antioxidant (protects cell membranes from oxidation)\n- Sources: Vegetable oils, nuts, seeds, wheat germ\n- Deficiency: Rare; neurological problems, hemolytic anemia\n\n*Vitamin K (Phylloquinone, Menaquinones)*\n- Functions: Blood clotting (coagulation factors II, VII, IX, X), bone metabolism\n- Sources: Green leafy vegetables (K1), fermented foods (K2), gut bacteria\n- Deficiency: Bleeding, easy bruising; hemorrhagic disease of newborn\n\n**Water-Soluble Vitamins**:\n\n*Vitamin C (Ascorbic Acid)*\n- Functions: Collagen synthesis, antioxidant, iron absorption, immune function\n- Sources: Citrus fruits, berries, peppers, broccoli\n- Deficiency: Scurvy (bleeding gums, poor wound healing, fatigue)\n\n*B Vitamins*: See B-complex detail (B1-B12, folate, biotin, pantothenic acid)",
+      "keyTerms": [
+        { "term": "retinol", "definition": "The active form of vitamin A; essential for vision and cell differentiation", "pronunciation": "RET-in-ol" },
+        { "term": "cholecalciferol", "definition": "Vitamin D3; synthesized in skin from sunlight or obtained from animal foods; converted to active hormone", "pronunciation": "koh-leh-kal-SIF-er-ol" },
+        { "term": "scurvy", "definition": "Vitamin C deficiency disease causing bleeding gums, poor wound healing, and fatigue" }
+      ],
+      "analogies": ["Vitamin A for vision works like the light-sensitive film in a camera - it captures light signals in your eye.", "Vitamin K is like the clotting 'glue' that helps stop bleeding - without it, even small cuts would bleed for a long time."],
+      "examples": ["People who take blood thinners like warfarin need consistent vitamin K intake because the drug works by blocking vitamin K.", "The 'fortified' label on milk means vitamin D has been added since milk doesn't naturally contain much."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Vitamins serve as coenzymes, antioxidants, and hormone precursors with specific biochemical functions, regulated absorption, transport, storage, and metabolism, and definable deficiency syndromes.",
+      "explanation": "**Vitamin A Biochemistry**:\nRetinol absorbed with fat via micelles; esterified and transported in chylomicrons; stored in liver stellate cells. 11-cis-retinal combines with opsin to form rhodopsin; light isomerizes to all-trans-retinal, triggering phototransduction. Retinoic acid activates nuclear receptors (RAR, RXR) regulating gene transcription for epithelial differentiation.\n\n**Vitamin D Activation**:\n7-dehydrocholesterol → (UV-B in skin) → cholecalciferol (D3) → (liver 25-hydroxylase) → 25(OH)D (calcidiol; storage form) → (kidney 1α-hydroxylase) → 1,25(OH)2D (calcitriol; active hormone). PTH stimulates renal activation; calcitriol increases intestinal calcium and phosphorus absorption, promotes bone resorption, inhibits PTH secretion.\n\n**Vitamin E Function**:\nα-tocopherol is primary form; incorporated into cell membranes. Scavenges lipid peroxyl radicals, terminating lipid peroxidation chain reactions. Vitamin C regenerates oxidized vitamin E. Deficiency causes spinocerebellar ataxia (requires fat malabsorption or genetic defects).\n\n**Vitamin K Mechanism**:\nCofactor for γ-glutamyl carboxylase, which carboxylates glutamate residues on vitamin K-dependent proteins (factors II, VII, IX, X, protein C, protein S, osteocalcin). Carboxylation creates calcium-binding sites essential for function. Warfarin inhibits vitamin K epoxide reductase (VKORC1), preventing recycling.\n\n**B Vitamin Coenzyme Functions**:\n- B1 (thiamine): TPP coenzyme for pyruvate dehydrogenase, α-ketoglutarate dehydrogenase, transketolase\n- B2 (riboflavin): FAD, FMN for electron transport and oxidation reactions\n- B3 (niacin): NAD+, NADP+ for redox reactions\n- B6 (pyridoxine): PLP for transamination, decarboxylation, glycogenolysis\n- B12 (cobalamin): Methylcobalamin (homocysteine → methionine), adenosylcobalamin (methylmalonyl-CoA → succinyl-CoA)\n- Folate: THF for one-carbon transfers (DNA synthesis, methylation)\n- Biotin: Carboxylase coenzyme (pyruvate carboxylase, acetyl-CoA carboxylase)",
+      "keyTerms": [
+        { "term": "coenzyme", "definition": "Non-protein organic molecule that binds to enzyme and is essential for its catalytic activity; many vitamins function as coenzymes" },
+        { "term": "calcidiol", "definition": "25-hydroxyvitamin D; the circulating storage form of vitamin D; best measure of vitamin D status", "pronunciation": "kal-SID-ee-ol" },
+        { "term": "calcitriol", "definition": "1,25-dihydroxyvitamin D; the active hormone form that regulates calcium absorption and bone metabolism", "pronunciation": "kal-SIT-ree-ol" }
+      ],
+      "clinicalNotes": "Vitamin D sufficiency defined as 25(OH)D >30 ng/mL; insufficiency 20-30; deficiency <20 ng/mL. Endocrine Society recommends 1500-2000 IU/day for adults at risk of deficiency. Higher doses may be needed for obesity, malabsorption, or medications affecting metabolism (phenytoin, glucocorticoids)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Vitamin deficiency and toxicity states present with characteristic clinical syndromes requiring recognition for diagnosis and treatment, while optimal intake levels and supplementation indications remain areas of active research.",
+      "explanation": "**Vitamin A Disorders**:\n*Deficiency*: Leading cause of preventable blindness worldwide. Progression: night blindness → Bitot's spots (conjunctival keratinization) → corneal xerosis → keratomalacia → blindness. Also causes follicular hyperkeratosis, increased infection susceptibility. Treatment: High-dose supplementation (WHO protocol).\n*Toxicity*: Acute (nausea, headache, papilledema); chronic (alopecia, hepatotoxicity, pseudotumor cerebri). Teratogenic in first trimester (neural crest defects). Carotenemia (orange skin) is benign.\n\n**Vitamin D Clinical Considerations**:\n*Deficiency causes*: Limited sun exposure, dark skin, malabsorption, obesity, chronic kidney disease, liver disease. *Risk groups*: Institutionalized elderly, veiled women, obese individuals, northern latitudes.\n*Treatment*: Ergocalciferol (D2) or cholecalciferol (D3) 50,000 IU weekly × 8 weeks, then maintenance 1,500-2,000 IU/day. D3 may be more effective at raising 25(OH)D levels.\n*Toxicity*: Usually requires >10,000 IU/day chronically or industrial exposure. Causes hypercalcemia → nephrolithiasis, nephrocalcinosis, cardiac arrhythmias.\n\n**B Vitamin Deficiency Syndromes**:\n*B1 (Thiamine)*: Dry beriberi (peripheral neuropathy); wet beriberi (high-output cardiac failure); Wernicke encephalopathy (confusion, ataxia, ophthalmoplegia); Korsakoff syndrome (confabulation, amnesia). Risk: alcohol use, malnutrition, bariatric surgery.\n*B2 (Riboflavin)*: Cheilosis, angular stomatitis, glossitis, seborrheic dermatitis.\n*B3 (Niacin)*: Pellagra - the 4 D's: dermatitis (sun-exposed areas), diarrhea, dementia, death. Risk: corn-based diets, carcinoid syndrome, Hartnup disease.\n*B6 (Pyridoxine)*: Peripheral neuropathy, seborrheic dermatitis, glossitis, confusion. Risk: isoniazid (forms hydrazine with PLP), alcoholism.\n*B12 (Cobalamin)*: Megaloblastic anemia + neurological (subacute combined degeneration: posterior columns, lateral corticospinal tracts). Risk: pernicious anemia, vegans, metformin, gastric surgery, ileal disease.\n*Folate*: Megaloblastic anemia without neurological findings; neural tube defects if deficient periconceptionally.",
+      "keyTerms": [
+        { "term": "Wernicke encephalopathy", "definition": "Acute thiamine deficiency causing confusion, ophthalmoplegia, and ataxia; medical emergency requiring immediate thiamine", "pronunciation": "VAIR-ni-kee" },
+        { "term": "pernicious anemia", "definition": "Autoimmune destruction of parietal cells causing loss of intrinsic factor and B12 malabsorption", "pronunciation": "per-NISH-us" },
+        { "term": "subacute combined degeneration", "definition": "B12 deficiency-induced demyelination of posterior columns and lateral corticospinal tracts causing sensory ataxia and weakness" }
+      ],
+      "clinicalNotes": "Give thiamine BEFORE glucose in malnourished/alcoholic patients to prevent precipitating Wernicke encephalopathy. B12 deficiency: Check MMA and homocysteine (both elevated in B12 deficiency; only homocysteine elevated in folate deficiency). Neuro symptoms may not fully reverse with treatment."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Evidence-based vitamin recommendations require interpretation of intake adequacy studies, randomized trials of supplementation, and understanding of the limitations of current reference values, with clinical decisions individualized based on risk factors and measured status.",
+      "explanation": "**Vitamin D Controversies**:\n*Optimal levels*: IOM recommends 20 ng/mL (50 nmol/L) based on bone health; Endocrine Society suggests 30 ng/mL for at-risk populations. Observational studies associate higher levels with reduced cancer, CVD, autoimmune disease - but RCTs (VITAL, D2d) show limited benefits for most outcomes.\n*Supplementation evidence*: Meta-analyses suggest modest reduction in respiratory infections (NNT ~33) and cancer mortality. No clear benefit for CVD, diabetes prevention, falls (except in vitamin D-deficient). Individual response varies by baseline status, genetics (VDR polymorphisms), and body composition.\n\n**B12 and Folate Considerations**:\n*Serum B12 limitations*: Insensitive; can be normal despite tissue deficiency. Functional markers (MMA, homocysteine) improve specificity. Holotranscobalamin (active B12) may be superior.\n*Folate fortification*: Mandatory folic acid fortification of grains (since 1998 in US) reduced neural tube defects 25-30%. Concern about masking B12 deficiency; high folate may promote cancer in some contexts (controversial).\n*MTHFR polymorphisms*: 677C>T variant reduces enzyme activity; may increase homocysteine if folate status marginal. Clinical significance of supplementing methylfolate vs folic acid unclear in most individuals.\n\n**Antioxidant Vitamin Supplementation**:\nObservational studies suggested benefit of vitamins E, C, beta-carotene for CVD and cancer. RCTs (ATBC, CARET, SELECT, PHS II) failed to confirm benefits and showed potential harms:\n- Beta-carotene increased lung cancer in smokers\n- Vitamin E may increase prostate cancer, all-cause mortality\n- High-dose antioxidants may interfere with exercise adaptations\n\nCurrent recommendation: Obtain antioxidants from food; supplements not recommended for chronic disease prevention in general population.\n\n**Special Populations**:\n*Pregnancy*: Folate 400-800 mcg preconceptionally and first trimester (4 mg if prior NTD). Vitamin D 600-4000 IU. Avoid excess vitamin A (<10,000 IU/day or no retinol supplements).\n*Bariatric surgery*: Lifelong supplementation required; specific protocols vary by procedure (ASMBS guidelines).\n*Elderly*: B12 crystalline form recommended (better absorbed than food-bound). Vitamin D 800-1000 IU minimum.\n*Vegans*: B12 supplementation mandatory. Consider vitamin D, iodine, omega-3.\n\n**Drug-Nutrient Interactions**:\n- Metformin → B12 deficiency (monitor after years of use)\n- PPIs/H2 blockers → B12, magnesium, calcium issues\n- Phenytoin, carbamazepine → vitamin D, folate metabolism\n- Isoniazid → pyridoxine depletion (supplement 25-50 mg daily)\n- Warfarin → vitamin K interaction (maintain consistent intake)",
+      "keyTerms": [
+        { "term": "methylmalonic acid (MMA)", "definition": "Metabolite elevated in B12 deficiency; more specific than serum B12; adenosylcobalamin-dependent pathway marker", "pronunciation": "meth-il-mah-LON-ik" },
+        { "term": "MTHFR", "definition": "Methylenetetrahydrofolate reductase; enzyme in folate metabolism; common polymorphisms may affect homocysteine levels", "pronunciation": "M-T-H-F-R" },
+        { "term": "holotranscobalamin", "definition": "Transcobalamin II-bound B12; the biologically active, deliverable form; may be better marker of B12 status than total serum B12" }
+      ],
+      "clinicalNotes": "USPSTF: Insufficient evidence to recommend routine vitamin supplementation for chronic disease prevention in non-pregnant adults. Exception: Folic acid for women of childbearing potential. Screen vitamin D in high-risk populations. Treat documented deficiencies. High-dose vitamins rarely beneficial and potentially harmful."
+    }
+  },
+
+  "media": [
+    {
+      "id": "vitamin-overview-chart",
+      "type": "image",
+      "filename": "vitamin_summary_table.png",
+      "title": "Vitamin Summary Chart",
+      "description": "Functions, sources, deficiency, and toxicity for all vitamins"
+    },
+    {
+      "id": "vitamin-d-metabolism",
+      "type": "diagram",
+      "filename": "vitamin_d_activation.svg",
+      "title": "Vitamin D Activation Pathway",
+      "description": "From sun exposure to calcitriol production"
+    }
+  ],
+  "citations": [
+    {
+      "id": "iom-dri",
+      "type": "textbook",
+      "title": "Dietary Reference Intakes for Calcium and Vitamin D",
+      "source": "Institute of Medicine",
+      "url": "https://www.nap.edu/catalog/13050"
+    },
+    {
+      "id": "holick-vitamin-d",
+      "type": "article",
+      "title": "Evaluation, Treatment, and Prevention of Vitamin D Deficiency: An Endocrine Society Clinical Practice Guideline",
+      "authors": ["Holick MF", "Binkley NC", "Bischoff-Ferrari HA", "et al."],
+      "source": "Journal of Clinical Endocrinology & Metabolism"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-b-vitamins", "targetType": "concept", "relationship": "child", "label": "B Vitamins" },
+    { "targetId": "concept-minerals", "targetType": "concept", "relationship": "sibling", "label": "Minerals" },
+    { "targetId": "condition-rickets", "targetType": "condition", "relationship": "related", "label": "Rickets" },
+    { "targetId": "condition-scurvy", "targetType": "condition", "relationship": "related", "label": "Scurvy" },
+    { "targetId": "diet-vegetarian", "targetType": "concept", "relationship": "related", "label": "Vegetarian Diet" }
+  ],
+  "tags": {
+    "systems": ["digestive", "musculoskeletal", "nervous", "immune"],
+    "topics": ["nutrition", "micronutrients", "metabolism"],
+    "keywords": ["vitamin D", "B12", "folate", "antioxidant", "deficiency"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "pediatrics"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

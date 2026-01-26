@@ -1,0 +1,158 @@
+{
+  "id": "mens-health-prostatitis",
+  "type": "patient-education",
+  "category": "mens-health",
+  "subcategory": "prostate-health",
+  "name": "Prostatitis",
+  "alternateNames": ["Prostate Infection", "Prostate Inflammation"],
+  "description": "Understanding prostatitis - inflammation of the prostate that can occur at any age",
+  "audienceNote": "Prostatitis is often underdiagnosed because men may not connect pelvic pain with the prostate or feel embarrassed discussing symptoms",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Prostatitis is when the prostate becomes inflamed or infected, causing pain and urinary symptoms.",
+      "explanation": "Prostatitis means the prostate is inflamed (swollen and irritated). Unlike an enlarged prostate (BPH), which mainly affects older men, prostatitis can happen at any age, including young men. It's actually one of the most common reasons men under 50 see a urologist. Symptoms can include pain in the pelvis, groin, or lower back, difficulty or pain when urinating, and sometimes fever if there's an infection. There are different types - some are caused by bacteria and need antibiotics, while others are not caused by infection and may need different treatments. The good news is that most cases improve with proper treatment, though some men have recurring episodes.",
+      "keyTerms": [
+        { "term": "prostatitis", "definition": "Inflammation or infection of the prostate gland" },
+        { "term": "inflammation", "definition": "When part of the body becomes swollen, red, and often painful as a response to injury or infection" },
+        { "term": "pelvic pain", "definition": "Pain in the lower belly area, between the hip bones" }
+      ],
+      "commonSymptoms": [
+        "Pain in the pelvis, lower back, or between the scrotum and rectum (perineum)",
+        "Pain or burning when urinating",
+        "Urgent or frequent need to urinate",
+        "Difficulty urinating or weak stream",
+        "Pain during or after ejaculation",
+        "Flu-like symptoms (fever, chills) with bacterial infection"
+      ],
+      "importantNote": "Acute bacterial prostatitis with fever is a serious condition requiring prompt medical attention and antibiotics."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Prostatitis encompasses four syndromes: acute bacterial (serious infection), chronic bacterial (recurring infections), chronic pelvic pain syndrome (most common), and asymptomatic inflammatory prostatitis.",
+      "explanation": "The NIH classification divides prostatitis into four categories: Category I (acute bacterial prostatitis) is a serious infection with fever, chills, and severe urinary symptoms - it requires immediate antibiotic treatment and may require hospitalization. Category II (chronic bacterial prostatitis) involves recurring urinary tract infections with bacteria found in the prostate - treated with longer courses of antibiotics (4-12 weeks). Category III (chronic prostatitis/chronic pelvic pain syndrome or CP/CPPS) is the most common type (90-95% of cases) - it causes pelvic pain and urinary symptoms but NO bacteria are found; it may have inflammatory (IIIA) or non-inflammatory (IIIB) subtypes. Category IV (asymptomatic inflammatory prostatitis) is found incidentally on biopsy or semen analysis. Diagnosis involves history, physical exam including digital rectal exam, urinalysis, and sometimes urine cultures or expressed prostatic secretions.",
+      "keyTerms": [
+        { "term": "CP/CPPS", "definition": "Chronic prostatitis/chronic pelvic pain syndrome - the most common form, causing pain without infection" },
+        { "term": "perineum", "definition": "The area between the scrotum and anus where prostatitis pain is often felt" },
+        { "term": "expressed prostatic secretions", "definition": "Fluid obtained by prostatic massage for testing" },
+        { "term": "NIH classification", "definition": "The standard system dividing prostatitis into four categories" }
+      ],
+      "diagnosticApproach": [
+        "Detailed symptom history including pain location",
+        "Digital rectal exam (tender, swollen prostate in acute cases)",
+        "Urinalysis and urine culture",
+        "NIH Chronic Prostatitis Symptom Index (NIH-CPSI) questionnaire",
+        "Sometimes: semen culture, cystoscopy, or imaging"
+      ],
+      "treatmentOverview": {
+        "acuteBacterial": "Hospitalization if severe, IV then oral antibiotics (fluoroquinolones or TMP-SMX) for 4-6 weeks",
+        "chronicBacterial": "Prolonged oral antibiotics (6-12 weeks), sometimes with alpha-blockers",
+        "CPPS": "Multimodal approach: alpha-blockers, anti-inflammatories, pelvic floor physical therapy, stress management"
+      }
+    },
+    "3": {
+      "level": 3,
+      "summary": "Prostatitis pathophysiology varies by type: bacterial categories involve uropathogenic infection while CP/CPPS likely reflects a complex interplay of inflammation, pelvic floor dysfunction, and central sensitization.",
+      "explanation": "Acute bacterial prostatitis (Category I) typically results from ascending urethral infection with gram-negative organisms (E. coli 80%, Pseudomonas, Enterococcus) or hematogenous spread. Risk factors include UTI, urethral instrumentation, and unprotected anal intercourse. The acutely infected prostate is boggy and exquisitely tender - vigorous massage is contraindicated (bacteremia risk). Chronic bacterial prostatitis (Category II) involves bacterial persistence in prostatic acini, often with biofilm formation; the same organisms predominate. The blood-prostate barrier limits antibiotic penetration, hence prolonged fluoroquinolone therapy (good prostatic penetration). CP/CPPS (Category III) pathophysiology is multifactorial: initial insult (infection, trauma, autoimmune) triggers prostatic inflammation, which sensitizes pelvic floor muscles and pudendal nerve, leading to chronic pelvic floor myofascial dysfunction and eventually central sensitization with hyperalgesia. This explains why antibiotics often fail - the chronic pain persists after any initiating infection resolves. The UPOINT phenotyping system (Urinary, Psychosocial, Organ-specific, Infection, Neurologic/systemic, Tenderness) guides individualized multimodal treatment.",
+      "keyTerms": [
+        { "term": "biofilm", "definition": "Protective matrix formed by bacteria that shields them from antibiotics and host defenses" },
+        { "term": "central sensitization", "definition": "Nervous system changes that amplify pain signals, making the pain chronic" },
+        { "term": "UPOINT", "definition": "Clinical phenotyping system for CP/CPPS guiding targeted treatment" },
+        { "term": "pelvic floor dysfunction", "definition": "Abnormal tension or spasm in pelvic floor muscles contributing to pain" },
+        { "term": "pudendal nerve", "definition": "Nerve supplying the pelvic floor, perineum, and genitals" }
+      ],
+      "UPOINTphenotyping": {
+        "U": "Urinary symptoms - treat with alpha-blockers, anticholinergics",
+        "P": "Psychosocial - depression/anxiety screening, CBT, stress management",
+        "O": "Organ-specific (prostate) - anti-inflammatories, phytotherapy (quercetin, saw palmetto)",
+        "I": "Infection - if suspected, appropriate antibiotics",
+        "N": "Neurologic/systemic - neuromodulators (amitriptyline, gabapentin)",
+        "T": "Tenderness (pelvic floor) - pelvic floor physical therapy, trigger point release"
+      },
+      "clinicalNotes": "Pelvic floor physical therapy is often underutilized but is evidence-based for CP/CPPS. Avoid repeated unnecessary antibiotic courses in culture-negative CP/CPPS."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced prostatitis management requires precise phenotyping, understanding of microbiome contributions, recognition of related pain syndromes, and multimodal therapy targeting central and peripheral mechanisms.",
+      "explanation": "Acute bacterial prostatitis: Requires fluoroquinolone (ciprofloxacin, levofloxacin) or TMP-SMX for 4-6 weeks minimum; severe cases require hospitalization with IV antibiotics; prostatic abscess (2-3% of cases) requires drainage. Monitor for urinary retention requiring catheterization. Chronic bacterial prostatitis: Biofilm-forming pathogens (E. coli, Enterococcus, Pseudomonas) require prolonged fluoroquinolone therapy (6-12 weeks) with 60-80% cure rates; alpha-blocker adjunct improves outcomes. Consider prostatic calcifications as bacterial reservoirs. CP/CPPS: The most challenging category. Key insights: 1) Microbiome alterations may play a role - prostatic and urinary microbiome studies show altered communities; 2) It exists on a spectrum with interstitial cystitis, vulvodynia, and irritable bowel syndrome (chronic pelvic pain syndrome complex); 3) Pudendal neuralgia should be considered in perineal-predominant pain; 4) Myofascial trigger points in levator ani, obturator internus, and piriformis muscles contribute significantly. Treatment: multimodal per UPOINT. Physical therapy (reverse Kegels, trigger point release, myofascial techniques) has Level 1 evidence. Phytotherapy (quercetin, pollen extracts) shows modest benefit. Neuromodulators (amitriptyline, duloxetine) for central sensitization. Avoid repeated prostatic biopsies and TURP in CP/CPPS.",
+      "keyTerms": [
+        { "term": "prostatic abscess", "definition": "Pus collection in the prostate; complication of severe acute prostatitis" },
+        { "term": "pudendal neuralgia", "definition": "Chronic perineal pain from pudendal nerve irritation or entrapment" },
+        { "term": "myofascial trigger points", "definition": "Hyperirritable spots in muscle that cause referred pain and dysfunction" },
+        { "term": "levator ani syndrome", "definition": "Chronic rectal pain from pelvic floor muscle spasm; overlaps with CP/CPPS" },
+        { "term": "interstitial cystitis", "definition": "Chronic bladder pain syndrome; shares features with CP/CPPS" }
+      ],
+      "treatmentPearls": [
+        "Avoid repeated antibiotic courses in culture-negative CP/CPPS",
+        "Screen for depression and anxiety - highly comorbid",
+        "Refer for pelvic floor PT early in CP/CPPS",
+        "Hot baths (sitz baths) provide temporary relief",
+        "Dietary modifications: reduce caffeine, alcohol, spicy foods",
+        "Regular ejaculation may help some men (prostatic drainage)"
+      ],
+      "clinicalNotes": "Quality of life impact of CP/CPPS is comparable to MI, Crohn's disease, or chronic heart failure. Multidisciplinary pain management may be needed."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Cutting-edge prostatitis research explores microbiome therapeutics, neuromodulation, targeted anti-inflammatory approaches, and biomarker-driven management in the context of urologic chronic pelvic pain syndrome.",
+      "explanation": "Emerging perspectives in prostatitis: 1) Microbiome: Next-generation sequencing reveals complex prostatic and urinary microbiomes even in 'sterile' CP/CPPS; dysbiosis may perpetuate inflammation; therapeutic implications include targeted probiotics and phage therapy for chronic bacterial prostatitis. 2) Immunology: CP/CPPS shows Th1/Th17 skewing, elevated IL-6 and TNF-alpha in prostatic fluid; autoimmune mechanisms suspected with antibodies against prostatic antigens. Novel anti-inflammatory targets include mast cell stabilizers and lipoxygenase inhibitors. 3) Neurogenic inflammation: Substance P and calcitonin gene-related peptide (CGRP) contribute to prostatic inflammation and pain sensitization; potential targets for therapy. 4) Pelvic pain neuroscience: Functional MRI shows altered brain connectivity patterns in CP/CPPS, similar to other chronic pain syndromes; suggests CNS-targeted therapies (neuromodulation, mindfulness-based stress reduction) are appropriate. 5) Biomarkers: Urinary chemokines (MCP-1, MIP-1alpha) may differentiate inflammatory from non-inflammatory CPPS; semen cytokine profiles correlate with symptom severity. 6) Neuromodulation: Transcutaneous tibial nerve stimulation, sacral neuromodulation (for refractory cases), and electroacupuncture show promise. The NIH-sponsored MAPP (Multidisciplinary Approach to Pelvic Pain) research network is advancing the understanding of urologic chronic pelvic pain as part of a systemic pain syndrome.",
+      "keyTerms": [
+        { "term": "urologic CPPS", "definition": "Umbrella term for chronic pelvic pain syndromes including CP/CPPS and interstitial cystitis" },
+        { "term": "MAPP network", "definition": "NIH-funded research network studying pelvic pain as a systemic condition" },
+        { "term": "neurogenic inflammation", "definition": "Inflammation caused by release of neuropeptides from sensory nerve endings" },
+        { "term": "sacral neuromodulation", "definition": "Electrical stimulation of sacral nerves via implanted device for refractory pelvic pain" },
+        { "term": "phage therapy", "definition": "Use of bacteriophages to target antibiotic-resistant bacteria" }
+      ],
+      "futureDirections": [
+        "Microbiome-targeted therapeutics",
+        "Precision medicine based on inflammatory biomarkers",
+        "Novel neuromodulation approaches",
+        "Integrated multidisciplinary clinics for UCPPS",
+        "Central sensitization-targeted pharmacotherapy"
+      ],
+      "clinicalNotes": "CP/CPPS is increasingly viewed as a manifestation of a systemic functional pain syndrome. Patients benefit from validation that their condition is real and understood. Research is shifting from prostate-centric to nervous system-focused approaches."
+    }
+  },
+
+  "whenToSeekHelp": [
+    "Fever with urinary symptoms - may indicate serious infection",
+    "Inability to urinate - emergency",
+    "Severe pelvic or perineal pain",
+    "Blood in urine",
+    "Persistent or worsening symptoms despite treatment"
+  ],
+
+  "citations": [
+    {
+      "id": "nih-prostatitis-workshop",
+      "type": "consensus",
+      "title": "NIH Consensus Definition and Classification of Prostatitis",
+      "source": "JAMA",
+      "year": 1999
+    },
+    {
+      "id": "aua-prostatitis",
+      "type": "guideline",
+      "title": "AUA Guideline on the Management of Prostatitis",
+      "source": "American Urological Association"
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "mens-health-prostate-anatomy", "targetType": "patient-education", "relationship": "foundational", "label": "Prostate Anatomy" },
+    { "targetId": "mens-health-bph", "targetType": "patient-education", "relationship": "differential", "label": "BPH" },
+    { "targetId": "mens-health-sti-prevention", "targetType": "patient-education", "relationship": "related", "label": "STI Prevention" }
+  ],
+
+  "tags": {
+    "systems": ["urinary", "reproductive"],
+    "topics": ["mens-health", "prostate", "prostatitis", "chronic-pain", "patient-education"],
+    "clinicalRelevance": "high"
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

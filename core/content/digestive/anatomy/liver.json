@@ -1,0 +1,112 @@
+{
+  "id": "structure-liver",
+  "type": "structure",
+  "name": "Liver",
+  "alternateNames": ["Hepar"],
+  "fmaId": "FMA:7197",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The liver is the largest organ inside your body and acts like a chemical factory, processing everything you eat and drink.",
+      "explanation": "Your liver is about the size of a football and sits on the right side of your belly, protected by your ribs. It does over 500 different jobs! The liver cleans your blood by filtering out harmful substances, makes a green liquid called bile that helps digest fats, stores energy from food (like a battery), and makes proteins your body needs. Everything you eat gets processed by the liver first before going to the rest of your body.",
+      "keyTerms": [
+        { "term": "bile", "definition": "A green liquid made by the liver that helps break down fats" },
+        { "term": "filter", "definition": "To remove bad things from a liquid, like cleaning dirty water" },
+        { "term": "organ", "definition": "A part of your body that does specific jobs" }
+      ],
+      "analogies": ["The liver is like a factory, warehouse, and recycling center all in one - it makes things, stores things, and breaks down things for disposal."],
+      "examples": ["When you take medicine, your liver processes it so your body can use it, then breaks it down when you're done."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The liver is the largest solid organ (~1.5 kg), receiving blood from both the hepatic artery and portal vein, performing metabolic, synthetic, storage, and detoxification functions, and producing bile.",
+      "explanation": "The liver has four lobes: right (largest), left, caudate, and quadrate. It receives dual blood supply: hepatic artery (25%, oxygenated) and portal vein (75%, nutrient-rich from GI tract). Blood exits via hepatic veins to the IVC. The liver produces 500-1000 mL of bile daily, stored in the gallbladder. Major functions include: metabolism of carbohydrates (gluconeogenesis, glycogen storage), proteins (albumin, clotting factors), and lipids; detoxification of drugs and toxins; storage of vitamins (A, D, B12, K) and iron; and immune functions (Kupffer cells).",
+      "keyTerms": [
+        { "term": "portal vein", "definition": "Vessel carrying nutrient-rich blood from intestines to liver", "pronunciation": "POR-tal" },
+        { "term": "hepatic", "definition": "Relating to the liver", "pronunciation": "heh-PAT-ik" },
+        { "term": "gluconeogenesis", "definition": "Making new glucose from non-carbohydrate sources", "pronunciation": "gloo-koh-nee-oh-JEN-uh-sis" }
+      ],
+      "analogies": ["The liver's dual blood supply is like having two highways into a city - one bringing supplies (portal vein) and one bringing fuel (hepatic artery)."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The liver's functional unit is the hepatic lobule, with hepatocytes arranged around central veins, receiving blood from portal triads and performing zonal-specific metabolic functions.",
+      "explanation": "The liver contains ~80% hepatocytes and ~20% non-parenchymal cells (Kupffer cells, sinusoidal endothelial cells, stellate cells). The classic hepatic lobule is hexagonal with a central vein and portal triads (portal vein branch, hepatic artery branch, bile duct) at corners. The functional acinus model (Rappaport) divides hepatocytes into zones based on oxygen/nutrient gradient: Zone 1 (periportal, highest oxygen, gluconeogenesis, bile acid synthesis, oxidative metabolism), Zone 2 (intermediate), Zone 3 (pericentral, lowest oxygen, glycolysis, lipogenesis, CYP450 drug metabolism, most susceptible to ischemia). Bile flows opposite to blood (toward portal triads). Sinusoidal endothelium is fenestrated, allowing plasma access to hepatocytes via Space of Disse.",
+      "keyTerms": [
+        { "term": "portal triad", "definition": "Bundle containing portal vein branch, hepatic artery branch, and bile duct" },
+        { "term": "Zone 3", "definition": "Pericentral hepatocytes; most susceptible to ischemic and toxic injury; CYP450-rich" },
+        { "term": "Space of Disse", "definition": "Perisinusoidal space between sinusoidal endothelium and hepatocytes; allows nutrient exchange" }
+      ],
+      "clinicalNotes": "Acetaminophen toxicity affects Zone 3 preferentially (CYP2E1 metabolism to NAPQI). Ischemic hepatitis shows Zone 3 necrosis."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Hepatic function integrates complex metabolic pathways (carbohydrate, lipid, protein, bilirubin), xenobiotic metabolism via cytochrome P450 enzymes, bile acid synthesis and enterohepatic circulation, and regenerative capacity.",
+      "explanation": "Carbohydrate metabolism: glycogen synthesis/glycogenolysis maintain blood glucose; gluconeogenesis from lactate, amino acids, glycerol during fasting. Lipid metabolism: fatty acid oxidation, ketogenesis, VLDL synthesis/secretion, cholesterol synthesis (HMG-CoA reductase), bile acid synthesis (CYP7A1). Protein metabolism: albumin synthesis (half-life 21 days), clotting factor synthesis (vitamin K-dependent II, VII, IX, X, protein C/S), urea cycle (ammonia detoxification). Bilirubin metabolism: unconjugated bilirubin bound to albumin, taken up via OATP transporters, conjugated with glucuronic acid by UGT1A1, excreted into bile via MRP2. Drug metabolism: Phase I (CYP450 oxidation, reduction, hydrolysis), Phase II (conjugation - glucuronidation, sulfation, acetylation, glutathione conjugation), Phase III (transporter-mediated efflux). Liver regeneration: hepatocyte proliferation driven by HGF and EGF; full mass restoration in weeks.",
+      "keyTerms": [
+        { "term": "UGT1A1", "definition": "UDP-glucuronosyltransferase; conjugates bilirubin; deficiency causes Gilbert syndrome (mild) or Crigler-Najjar (severe)" },
+        { "term": "enterohepatic circulation", "definition": "Recycling of bile acids: secreted into intestine, reabsorbed in terminal ileum, returned to liver via portal vein" },
+        { "term": "HMG-CoA reductase", "definition": "Rate-limiting enzyme in cholesterol synthesis; target of statin drugs" }
+      ],
+      "clinicalNotes": "CYP450 inducers (rifampin, phenytoin) and inhibitors (azole antifungals, macrolides, grapefruit juice) cause drug interactions. Gilbert syndrome (common, benign unconjugated hyperbilirubinemia) exacerbated by fasting, stress, illness."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical hepatology requires integration of liver function tests, imaging modalities, elastography, histopathology, and interventional techniques to diagnose and manage liver disease including viral hepatitis, NAFLD/NASH, cirrhosis, and hepatocellular carcinoma.",
+      "explanation": "LFT interpretation: AST/ALT elevation indicates hepatocellular injury (viral, autoimmune, NASH, drug-induced); R-ratio (ALT/ALP normalized) >5 hepatocellular, <2 cholestatic, 2-5 mixed. ALP/GGT elevation: cholestatic injury, infiltrative disease. Isolated GGT elevation: often alcohol, medications, or metabolic syndrome. Albumin and INR reflect synthetic function; hyperbilirubinemia indicates impaired conjugation, secretion, or obstruction. Imaging: ultrasound for steatosis, masses, biliary dilation; CT/MRI for characterization; LI-RADS for HCC. Elastography (FibroScan, shear wave) assesses fibrosis non-invasively. Liver biopsy gold standard for diagnosis and staging (fibrosis stage F0-F4, activity grade). Cirrhosis assessment: Child-Pugh score (ascites, encephalopathy, bilirubin, albumin, INR) predicts prognosis; MELD score (bilirubin, INR, creatinine) prioritizes transplant listing. HCC surveillance: ultrasound +/- AFP every 6 months in cirrhotics. Treatment: DAAs for HCV, tenofovir/entecavir for HBV, lifestyle modification for NAFLD, resmetirom for NASH with fibrosis.",
+      "keyTerms": [
+        { "term": "MELD score", "definition": "Model for End-Stage Liver Disease; uses bilirubin, INR, creatinine to predict 90-day mortality and prioritize transplant" },
+        { "term": "LI-RADS", "definition": "Liver Imaging Reporting and Data System; standardized HCC imaging classification" },
+        { "term": "Child-Pugh score", "definition": "Classification of cirrhosis severity (A, B, C) predicting operative risk and prognosis" }
+      ],
+      "clinicalNotes": "HCC treatment by BCLC stage: very early/early - resection, ablation, or transplant; intermediate - TACE; advanced - systemic therapy (atezolizumab-bevacizumab first-line). TIPS for refractory ascites and variceal bleeding. Liver transplant for decompensated cirrhosis, HCC within Milan criteria, acute liver failure."
+    }
+  },
+
+  "media": [
+    {
+      "id": "liver-3d",
+      "type": "3d-model",
+      "filename": "liver.glb",
+      "title": "3D Liver Model",
+      "description": "Interactive 3D model showing lobes, segments, vessels, and biliary tree"
+    },
+    {
+      "id": "liver-lobule-histology",
+      "type": "histology",
+      "filename": "liver_lobule.jpg",
+      "title": "Hepatic Lobule Histology",
+      "description": "Central vein, hepatocytes, sinusoids, and portal triad"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-6",
+      "type": "textbook",
+      "title": "Accessory Organs in Digestion",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.6",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-gallbladder", "targetType": "structure", "relationship": "sibling", "label": "Gallbladder" },
+    { "targetId": "structure-pancreas", "targetType": "structure", "relationship": "sibling", "label": "Pancreas" },
+    { "targetId": "condition-cirrhosis", "targetType": "condition", "relationship": "related", "label": "Cirrhosis" },
+    { "targetId": "condition-hepatitis", "targetType": "condition", "relationship": "related", "label": "Hepatitis" }
+  ],
+  "tags": {
+    "systems": ["digestive", "metabolic"],
+    "structures": ["FMA:7197"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

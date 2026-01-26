@@ -45,3 +45,59 @@ export {
   GLBAnatomyModel,
   preloadAnatomyModels,
 } from './GLBAnatomyModel';
+
+// Animation System
+export {
+  // Components
+  AnimatedAnatomySystem,
+  AnimationController,
+  AnimationTimeline,
+  BloodFlowParticles,
+  // Hook
+  useAnatomyAnimation,
+  // Types
+  type AnatomyAnimationConfig,
+  type AnatomyAnimationState,
+  type AnimationPlaybackState,
+  type AnimationTimelineControls,
+  type HeartAnimationState,
+  type RespiratoryAnimationState,
+  type BloodFlowState,
+  type HeartMeshRefs,
+  type RespiratoryMeshRefs,
+  type BloodFlowRefs,
+  type UseAnatomyAnimationOptions,
+  type UseAnatomyAnimationReturn,
+  // Default config
+  DEFAULT_ANIMATION_CONFIG,
+} from './AnatomyAnimationSystem';
+
+// Animation Types (detailed types)
+export {
+  type HeartRateConfig,
+  type HeartChamberState,
+  type HeartValveState,
+  type HeartChamber,
+  type HeartValve,
+  type HeartAnimationConfig,
+  type BreathingRateConfig,
+  type BreathingPhase,
+  type LungState,
+  type DiaphragmState,
+  type RespiratoryAnimationConfig,
+  type BloodOxygenState,
+  type BloodParticle,
+  type BloodVesselPath,
+  type BloodFlowConfig,
+  type OrganAnimationConfig,
+  type AnimationEvent,
+  type AnimationEventType,
+  type AnimationEventHandler,
+  type BloodFlowShaderUniforms,
+  type VesselShaderUniforms,
+  // Timing utilities
+  heartCycleDuration,
+  breathCycleDuration,
+  CARDIAC_TIMING,
+  RESPIRATORY_TIMING,
+} from './animation-types';

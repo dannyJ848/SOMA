@@ -1,15 +1,23 @@
 /**
  * DrugInteractionChecker Component
  *
- * Analyzes user's medication list for drug-drug interactions,
- * overlapping system effects, and safety concerns.
+ * Comprehensive drug interaction checker that analyzes user's medication list
+ * for drug-drug interactions, condition-based contraindications, overlapping
+ * system effects, and safety concerns.
+ *
+ * Features:
+ * - Multi-drug selection with search
+ * - Severity-based color coding
+ * - Detailed interaction explanations
+ * - Links to relevant anatomy
+ * - Contraindication checking
+ * - Monitoring recommendations
  */
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import type { DashboardData } from './utils/anatomyContextBuilder';
 import type {
   MedicationPhysiology,
-  DrugInteraction,
   InteractionSeverity,
   InteractionMechanism,
 } from '../core/medical-simulation/medications/types';
@@ -17,6 +25,19 @@ import {
   getMedication,
   getAllMedications,
 } from '../core/medical-simulation/medications/store';
+import {
+  checkMultipleDrugInteractions,
+  findInteractionsForDrug,
+  getInteractionSeverityColor,
+  getOverallInteractionRisk,
+  type DrugInteractionEntry,
+} from '../core/pharmacology/interactions';
+import {
+  getContraindicationsForDrug,
+  checkMultipleContraindications,
+  getContraindicationColor,
+  type DrugContraindication,
+} from '../core/pharmacology/contraindications';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
 import './DrugInteractionChecker.css';
 
@@ -29,50 +50,32 @@ interface DrugInteractionCheckerProps {
   dashboardData: DashboardData | null;
   /** Callback when user wants to explore a medication */
   onExploreMedication?: (medicationId: string) => void;
+  /** User's medical conditions for contraindication checking */
+  userConditions?: string[];
+  /** Callback to navigate to anatomy for a specific structure */
+  onNavigateToAnatomy?: (structureId: string) => void;
 }
 
 interface AnalyzedInteraction {
-  /** First drug in the interaction pair */
-  drug1: {
-    id: string;
-    name: string;
-  };
-  /** Second drug in the interaction pair */
-  drug2: {
-    id: string;
-    name: string;
-  };
-  /** Severity of the interaction */
+  drug1: { id: string; name: string };
+  drug2: { id: string; name: string };
   severity: InteractionSeverity;
-  /** Type of interaction */
-  interactionType: InteractionType;
-  /** Description of the interaction */
+  interactionType: 'pharmacokinetic' | 'pharmacodynamic';
   description: string;
-  /** Clinical effect */
   clinicalEffect: string;
-  /** Management recommendation */
   management: string;
-  /** Overlapping body systems */
   overlappingSystems: OverlappingSystem[];
-  /** Evidence level */
   evidenceLevel?: 'established' | 'probable' | 'suspected' | 'theoretical';
-  /** Monitoring parameters */
   monitoring?: string[];
+  documentation?: string;
+  onsetTiming?: string;
 }
 
-// Use InteractionMechanism from types
-type InteractionType = InteractionMechanism;
-
 interface OverlappingSystem {
-  /** System identifier */
   systemId: string;
-  /** System name */
   systemName: string;
-  /** How both drugs affect this system */
   combinedEffect: string;
-  /** Structures to highlight */
   structures: string[];
-  /** Highlight color */
   highlightColor: string;
 }
 
@@ -84,272 +87,87 @@ interface SystemOverlapSummary {
   structures: string[];
 }
 
+interface ContraindicationResult {
+  drug: string;
+  condition: string;
+  contraindication: DrugContraindication;
+}
+
 // ============================================
-// Interaction Analysis Utilities
+// Utility Functions
 // ============================================
 
 /**
- * Common drug interactions database
- * In production, this would come from a comprehensive drug database
+ * Map body system names to anatomical structure IDs
  */
-const KNOWN_INTERACTIONS: Record<string, DrugInteraction[]> = {
-  lisinopril: [
-    {
-      interactionId: 'lisinopril-nsaid',
-      interactingDrugId: 'ibuprofen',
-      interactingDrugName: 'Ibuprofen',
-      severity: 'moderate',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'NSAIDs can reduce the antihypertensive effect of ACE inhibitors and may increase risk of kidney injury',
-      clinicalEffect: 'Decreased blood pressure control; potential acute kidney injury',
-      management:
-        'Monitor blood pressure closely; consider alternative analgesic; ensure adequate hydration',
-      evidenceLevel: 'established',
-      monitoring: ['Blood pressure', 'Serum creatinine', 'Potassium'],
-    },
-    {
-      interactionId: 'lisinopril-naproxen',
-      interactingDrugId: 'naproxen',
-      interactingDrugName: 'Naproxen',
-      severity: 'moderate',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'NSAIDs can reduce the antihypertensive effect of ACE inhibitors and may increase risk of kidney injury',
-      clinicalEffect: 'Decreased blood pressure control; potential acute kidney injury',
-      management:
-        'Monitor blood pressure closely; consider alternative analgesic; ensure adequate hydration',
-      evidenceLevel: 'established',
-      monitoring: ['Blood pressure', 'Serum creatinine', 'Potassium'],
-    },
-    {
-      interactionId: 'lisinopril-metformin',
-      interactingDrugId: 'metformin',
-      interactingDrugName: 'Metformin',
-      severity: 'minor',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'ACE inhibitors may enhance the hypoglycemic effect of antidiabetic medications',
-      clinicalEffect: 'Slightly increased risk of hypoglycemia',
-      management: 'Monitor blood glucose, especially during initial combination therapy',
-      evidenceLevel: 'probable',
-      monitoring: ['Blood glucose', 'HbA1c'],
-    },
-  ],
-  metoprolol: [
-    {
-      interactionId: 'metoprolol-lisinopril',
-      interactingDrugId: 'lisinopril',
-      interactingDrugName: 'Lisinopril',
-      severity: 'minor',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'Additive blood pressure lowering effect; generally beneficial in heart failure',
-      clinicalEffect: 'Enhanced hypotensive effect',
-      management: 'Monitor for symptomatic hypotension, especially when standing',
-      evidenceLevel: 'established',
-      monitoring: ['Blood pressure', 'Heart rate'],
-    },
-    {
-      interactionId: 'metoprolol-amlodipine',
-      interactingDrugId: 'amlodipine',
-      interactingDrugName: 'Amlodipine',
-      severity: 'moderate',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'Both drugs have negative inotropic effects; may cause additive cardiac depression',
-      clinicalEffect: 'Risk of hypotension, bradycardia, or heart failure exacerbation',
-      management:
-        'Monitor heart rate and blood pressure; use lower doses when combining',
-      evidenceLevel: 'established',
-      monitoring: ['Blood pressure', 'Heart rate', 'ECG if symptomatic'],
-    },
-  ],
-  aspirin: [
-    {
-      interactionId: 'aspirin-ibuprofen',
-      interactingDrugId: 'ibuprofen',
-      interactingDrugName: 'Ibuprofen',
-      severity: 'major',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'Ibuprofen may interfere with the antiplatelet effect of low-dose aspirin; also increases bleeding risk',
-      clinicalEffect:
-        'Reduced cardioprotective effect of aspirin; increased risk of GI bleeding',
-      management:
-        'Take aspirin at least 30 minutes before or 8 hours after ibuprofen; consider alternative analgesic',
-      evidenceLevel: 'established',
-      monitoring: ['Signs of bleeding', 'GI symptoms'],
-    },
-    {
-      interactionId: 'aspirin-naproxen',
-      interactingDrugId: 'naproxen',
-      interactingDrugName: 'Naproxen',
-      severity: 'major',
-      mechanismType: 'pharmacodynamic',
-      description:
-        'Combined antiplatelet and NSAID effects significantly increase bleeding risk',
-      clinicalEffect: 'Significantly increased risk of GI bleeding and bruising',
-      management:
-        'Avoid combination if possible; use gastroprotective agent if necessary',
-      evidenceLevel: 'established',
-      monitoring: ['Signs of bleeding', 'Hemoglobin', 'Stool guaiac'],
-    },
-  ],
-  atorvastatin: [
-    {
-      interactionId: 'atorvastatin-amlodipine',
-      interactingDrugId: 'amlodipine',
-      interactingDrugName: 'Amlodipine',
-      severity: 'moderate',
-      mechanismType: 'pharmacokinetic',
-      description:
-        'Amlodipine may increase atorvastatin exposure via CYP3A4 inhibition',
-      clinicalEffect: 'Increased risk of myopathy and rhabdomyolysis',
-      management:
-        'Limit atorvastatin dose to 40mg when combined; monitor for muscle symptoms',
-      evidenceLevel: 'established',
-      monitoring: ['CK levels', 'Muscle pain/weakness symptoms'],
-    },
-  ],
-  metformin: [
-    {
-      interactionId: 'metformin-glipizide',
-      interactingDrugId: 'glipizide',
-      interactingDrugName: 'Glipizide',
-      severity: 'moderate',
-      mechanismType: 'additive',
-      description:
-        'Combination increases hypoglycemia risk due to additive glucose-lowering effects',
-      clinicalEffect: 'Increased risk of hypoglycemia, especially with missed meals',
-      management:
-        'Educate on hypoglycemia symptoms; consider glucose monitoring; carry fast-acting glucose',
-      evidenceLevel: 'established',
-      monitoring: ['Blood glucose', 'HbA1c', 'Symptoms of hypoglycemia'],
-    },
-    {
-      interactionId: 'metformin-semaglutide',
-      interactingDrugId: 'semaglutide',
-      interactingDrugName: 'Semaglutide',
-      severity: 'minor',
-      mechanismType: 'additive',
-      description:
-        'Complementary mechanisms for glucose control; generally well-tolerated combination',
-      clinicalEffect: 'Enhanced glycemic control; may have additive GI side effects',
-      management: 'Monitor for GI tolerability during initiation of semaglutide',
-      evidenceLevel: 'established',
-      monitoring: ['Blood glucose', 'HbA1c', 'GI symptoms'],
-    },
-  ],
-  omeprazole: [
-    {
-      interactionId: 'omeprazole-metformin',
-      interactingDrugId: 'metformin',
-      interactingDrugName: 'Metformin',
-      severity: 'minor',
-      mechanismType: 'pharmacokinetic',
-      description:
-        'PPIs may increase metformin absorption by altering gastric pH',
-      clinicalEffect: 'Potentially enhanced metformin effect',
-      management: 'Generally not clinically significant; routine monitoring sufficient',
-      evidenceLevel: 'theoretical',
-      monitoring: ['Blood glucose'],
-    },
-  ],
-  ibuprofen: [
-    {
-      interactionId: 'ibuprofen-naproxen',
-      interactingDrugId: 'naproxen',
-      interactingDrugName: 'Naproxen',
-      severity: 'major',
-      mechanismType: 'additive',
-      description:
-        'Combining two NSAIDs significantly increases risk of GI bleeding and renal toxicity',
-      clinicalEffect:
-        'Markedly increased risk of GI ulceration, bleeding, and acute kidney injury',
-      management: 'Do NOT combine; use one NSAID at the lowest effective dose',
-      evidenceLevel: 'established',
-      monitoring: ['GI symptoms', 'Renal function', 'Signs of bleeding'],
-    },
-  ],
+const SYSTEM_TO_ANATOMY: Record<string, { structures: string[]; color: string }> = {
+  cardiovascular: {
+    structures: ['heart', 'aorta', 'coronary-arteries', 'great-vessels'],
+    color: '#ef4444',
+  },
+  hepatic: {
+    structures: ['liver', 'portal-vein', 'hepatic-artery'],
+    color: '#84cc16',
+  },
+  renal: {
+    structures: ['kidneys', 'renal-artery', 'ureter'],
+    color: '#f97316',
+  },
+  neurological: {
+    structures: ['brain', 'spinal-cord', 'cranial-nerves'],
+    color: '#8b5cf6',
+  },
+  respiratory: {
+    structures: ['lungs', 'bronchi', 'trachea'],
+    color: '#06b6d4',
+  },
+  gastrointestinal: {
+    structures: ['stomach', 'small-intestine', 'large-intestine', 'esophagus'],
+    color: '#eab308',
+  },
+  hematologic: {
+    structures: ['bone-marrow', 'spleen'],
+    color: '#dc2626',
+  },
+  musculoskeletal: {
+    structures: ['skeletal-muscle', 'bones', 'tendons'],
+    color: '#f59e0b',
+  },
+  metabolic: {
+    structures: ['pancreas', 'liver', 'adipose-tissue'],
+    color: '#10b981',
+  },
+  auditory: {
+    structures: ['inner-ear', 'cochlea'],
+    color: '#6366f1',
+  },
+  psychiatric: {
+    structures: ['brain', 'limbic-system', 'prefrontal-cortex'],
+    color: '#ec4899',
+  },
 };
 
 /**
- * Get known interactions for a drug
+ * Get structures and color for affected systems
  */
-function getKnownInteractions(drugId: string): DrugInteraction[] {
-  return KNOWN_INTERACTIONS[drugId.toLowerCase()] || [];
-}
-
-/**
- * Analyze interactions between two medications
- */
-function analyzeInteractionPair(
-  drug1: MedicationPhysiology,
-  drug2: MedicationPhysiology
-): AnalyzedInteraction | null {
-  // First check known interactions database
-  const knownInteractions = getKnownInteractions(drug1.medicationId);
-  const directInteraction = knownInteractions.find(
-    (i) => i.interactingDrugId.toLowerCase() === drug2.medicationId.toLowerCase()
-  );
-
-  // Also check reverse direction
-  const reverseInteractions = getKnownInteractions(drug2.medicationId);
-  const reverseInteraction = reverseInteractions.find(
-    (i) => i.interactingDrugId.toLowerCase() === drug1.medicationId.toLowerCase()
-  );
-
-  const interaction = directInteraction || reverseInteraction;
-
-  // Find overlapping body systems
-  const overlappingSystems = findOverlappingSystems(drug1, drug2);
-
-  // If we have a known interaction, use it
-  if (interaction) {
-    return {
-      drug1: { id: drug1.medicationId, name: drug1.genericName },
-      drug2: { id: drug2.medicationId, name: drug2.genericName },
-      severity: interaction.severity,
-      interactionType: interaction.mechanismType as InteractionType,
-      description: interaction.description,
-      clinicalEffect: interaction.clinicalEffect,
-      management: interaction.management,
-      overlappingSystems,
-      evidenceLevel: interaction.evidenceLevel,
-      monitoring: interaction.monitoring,
+function getAnatomyForSystems(systems: string[]): OverlappingSystem[] {
+  return systems.map((system) => {
+    const anatomy = SYSTEM_TO_ANATOMY[system.toLowerCase()] || {
+      structures: [],
+      color: '#64748b',
     };
-  }
-
-  // If no known interaction but overlapping systems exist with significant effects
-  if (overlappingSystems.length > 0) {
-    const significantOverlap = overlappingSystems.some(
-      (os) =>
-        os.combinedEffect.includes('additive') ||
-        os.combinedEffect.includes('enhanced')
-    );
-
-    if (significantOverlap) {
-      return {
-        drug1: { id: drug1.medicationId, name: drug1.genericName },
-        drug2: { id: drug2.medicationId, name: drug2.genericName },
-        severity: 'minor',
-        interactionType: 'pharmacodynamic',
-        description: `Both medications affect overlapping body systems: ${overlappingSystems.map((s) => s.systemName).join(', ')}`,
-        clinicalEffect:
-          'Potential for additive or enhanced effects on shared body systems',
-        management: 'Monitor for enhanced effects on overlapping systems',
-        overlappingSystems,
-        evidenceLevel: 'theoretical',
-      };
-    }
-  }
-
-  return null;
+    return {
+      systemId: system.toLowerCase(),
+      systemName: system.charAt(0).toUpperCase() + system.slice(1),
+      combinedEffect: `Both drugs affect the ${system} system`,
+      structures: anatomy.structures,
+      highlightColor: anatomy.color,
+    };
+  });
 }
 
 /**
- * Find overlapping body systems between two drugs
+ * Find overlapping body systems between medications
  */
 function findOverlappingSystems(
   drug1: MedicationPhysiology,
@@ -363,27 +181,25 @@ function findOverlappingSystems(
     );
 
     if (matchingSys) {
-      // Determine combined effect
       let combinedEffect: string;
       let highlightColor: string;
 
       if (sys1.effectType === matchingSys.effectType) {
         if (sys1.effectType === 'therapeutic') {
           combinedEffect = 'Additive therapeutic effect';
-          highlightColor = '#22c55e'; // green
+          highlightColor = '#22c55e';
         } else if (sys1.effectType === 'adverse') {
           combinedEffect = 'Additive adverse effect - increased monitoring needed';
-          highlightColor = '#dc2626'; // red
+          highlightColor = '#dc2626';
         } else {
           combinedEffect = 'Neutral combined effect';
-          highlightColor = '#64748b'; // gray
+          highlightColor = '#64748b';
         }
       } else {
         combinedEffect = 'Opposing effects - potential for interaction';
-        highlightColor = '#f59e0b'; // amber
+        highlightColor = '#f59e0b';
       }
 
-      // Collect unique structures
       const structures = [
         ...new Set([
           ...(sys1.affectedStructures || []),
@@ -404,6 +220,32 @@ function findOverlappingSystems(
   return overlaps;
 }
 
+/**
+ * Convert interaction entry to analyzed interaction format
+ */
+function interactionEntryToAnalyzed(
+  entry: DrugInteractionEntry,
+  drug1Name: string,
+  drug2Name: string
+): AnalyzedInteraction {
+  const overlappingSystems = getAnatomyForSystems(entry.affectedSystems);
+
+  return {
+    drug1: { id: entry.drug1, name: drug1Name },
+    drug2: { id: entry.drug2, name: drug2Name },
+    severity: entry.severity,
+    interactionType: entry.type,
+    description: entry.mechanism,
+    clinicalEffect: entry.effect,
+    management: entry.management,
+    overlappingSystems,
+    evidenceLevel: entry.evidenceLevel,
+    monitoring: entry.monitoring,
+    documentation: entry.documentation,
+    onsetTiming: entry.onsetTiming,
+  };
+}
+
 // ============================================
 // Component
 // ============================================
@@ -411,21 +253,24 @@ function findOverlappingSystems(
 export function DrugInteractionChecker({
   dashboardData,
   onExploreMedication,
+  userConditions = [],
+  onNavigateToAnatomy,
 }: DrugInteractionCheckerProps) {
   const navigation = useAnatomy3DNavigation({ componentId: 'drug-interaction-checker' });
 
   // State
   const [selectedMedications, setSelectedMedications] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [interactions, setInteractions] = useState<AnalyzedInteraction[]>([]);
-  const [selectedInteraction, setSelectedInteraction] =
-    useState<AnalyzedInteraction | null>(null);
+  const [contraindications, setContraindications] = useState<ContraindicationResult[]>([]);
+  const [selectedInteraction, setSelectedInteraction] = useState<AnalyzedInteraction | null>(null);
   const [complexityLevel, setComplexityLevel] = useState(2);
-  const [filterSeverity, setFilterSeverity] = useState<InteractionSeverity | 'all'>(
-    'all'
-  );
+  const [filterSeverity, setFilterSeverity] = useState<InteractionSeverity | 'all'>('all');
   const [showSystemOverlap, setShowSystemOverlap] = useState(false);
+  const [showContraindications, setShowContraindications] = useState(false);
+  const [activeTab, setActiveTab] = useState<'interactions' | 'contraindications' | 'monitoring'>('interactions');
 
-  // Get user's medications from dashboard or allow manual selection
+  // Get user's medications from dashboard
   const userMedications = useMemo(() => {
     if (dashboardData?.currentMedications) {
       return dashboardData.currentMedications.map((m: { name: string }) => m.name.toLowerCase());
@@ -433,8 +278,19 @@ export function DrugInteractionChecker({
     return [];
   }, [dashboardData]);
 
-  // Get all available medications for manual selection
+  // Get all available medications for selection
   const allMedications = useMemo(() => getAllMedications(), []);
+
+  // Filter medications based on search
+  const filteredMedications = useMemo(() => {
+    if (!searchQuery.trim()) return allMedications;
+    const query = searchQuery.toLowerCase();
+    return allMedications.filter(
+      (med) =>
+        med.genericName.toLowerCase().includes(query) ||
+        med.brandNames.some((b) => b.toLowerCase().includes(query))
+    );
+  }, [allMedications, searchQuery]);
 
   // Initialize with user's medications
   useEffect(() => {
@@ -450,19 +306,56 @@ export function DrugInteractionChecker({
       return;
     }
 
-    const analyzedInteractions: AnalyzedInteraction[] = [];
+    // Check comprehensive interaction database
+    const dbInteractions = checkMultipleDrugInteractions(selectedMedications);
 
-    // Get medication data
+    // Convert to analyzed interactions
+    const analyzedInteractions: AnalyzedInteraction[] = dbInteractions.map((result) =>
+      interactionEntryToAnalyzed(result.interaction, result.drug1, result.drug2)
+    );
+
+    // Also check medication store data for additional overlaps
     const medsData = selectedMedications
       .map((id) => getMedication(id))
       .filter((m): m is MedicationPhysiology => m !== undefined);
 
-    // Pairwise analysis
+    // Find system overlaps not already captured
     for (let i = 0; i < medsData.length; i++) {
       for (let j = i + 1; j < medsData.length; j++) {
-        const interaction = analyzeInteractionPair(medsData[i], medsData[j]);
-        if (interaction) {
-          analyzedInteractions.push(interaction);
+        const existingInteraction = analyzedInteractions.find(
+          (int) =>
+            (int.drug1.id === medsData[i].medicationId && int.drug2.id === medsData[j].medicationId) ||
+            (int.drug1.id === medsData[j].medicationId && int.drug2.id === medsData[i].medicationId)
+        );
+
+        if (existingInteraction) {
+          // Add system overlaps to existing interaction
+          const overlaps = findOverlappingSystems(medsData[i], medsData[j]);
+          existingInteraction.overlappingSystems = [
+            ...existingInteraction.overlappingSystems,
+            ...overlaps.filter(
+              (o) =>
+                !existingInteraction.overlappingSystems.some((e) => e.systemId === o.systemId)
+            ),
+          ];
+        } else {
+          // Check for system overlaps that warrant noting
+          const overlaps = findOverlappingSystems(medsData[i], medsData[j]);
+          const hasAdverseOverlap = overlaps.some((o) => o.combinedEffect.includes('adverse'));
+
+          if (hasAdverseOverlap) {
+            analyzedInteractions.push({
+              drug1: { id: medsData[i].medicationId, name: medsData[i].genericName },
+              drug2: { id: medsData[j].medicationId, name: medsData[j].genericName },
+              severity: 'minor',
+              interactionType: 'pharmacodynamic',
+              description: `Both medications affect overlapping body systems`,
+              clinicalEffect: 'Potential for additive effects on shared body systems',
+              management: 'Monitor for enhanced effects on overlapping systems',
+              overlappingSystems: overlaps,
+              evidenceLevel: 'theoretical',
+            });
+          }
         }
       }
     }
@@ -481,6 +374,17 @@ export function DrugInteractionChecker({
 
     setInteractions(analyzedInteractions);
   }, [selectedMedications]);
+
+  // Check contraindications when medications or conditions change
+  useEffect(() => {
+    if (selectedMedications.length === 0 || userConditions.length === 0) {
+      setContraindications([]);
+      return;
+    }
+
+    const results = checkMultipleContraindications(selectedMedications, userConditions);
+    setContraindications(results);
+  }, [selectedMedications, userConditions]);
 
   // Calculate system overlap summary
   const systemOverlapSummary = useMemo((): SystemOverlapSummary[] => {
@@ -511,7 +415,6 @@ export function DrugInteractionChecker({
       }
     }
 
-    // Only return systems affected by 2+ drugs
     return Array.from(systemMap.values())
       .filter((s) => s.drugCount >= 2)
       .sort((a, b) => b.drugCount - a.drugCount);
@@ -523,6 +426,23 @@ export function DrugInteractionChecker({
     return interactions.filter((i) => i.severity === filterSeverity);
   }, [interactions, filterSeverity]);
 
+  // Collect all monitoring parameters
+  const allMonitoringParams = useMemo(() => {
+    const params = new Set<string>();
+    for (const interaction of interactions) {
+      if (interaction.monitoring) {
+        interaction.monitoring.forEach((p) => params.add(p));
+      }
+    }
+    return Array.from(params);
+  }, [interactions]);
+
+  // Overall risk level
+  const overallRisk = useMemo(
+    () => getOverallInteractionRisk(selectedMedications),
+    [selectedMedications]
+  );
+
   // Toggle medication selection
   const toggleMedication = useCallback((medId: string) => {
     setSelectedMedications((prev) =>
@@ -530,7 +450,15 @@ export function DrugInteractionChecker({
     );
   }, []);
 
-  // Highlight overlapping systems in 3D
+  // Add medication from search
+  const addMedication = useCallback((medId: string) => {
+    if (!selectedMedications.includes(medId)) {
+      setSelectedMedications((prev) => [...prev, medId]);
+    }
+    setSearchQuery('');
+  }, [selectedMedications]);
+
+  // Highlight interaction in 3D
   const highlightInteraction = useCallback(
     (interaction: AnalyzedInteraction) => {
       setSelectedInteraction(interaction);
@@ -539,7 +467,7 @@ export function DrugInteractionChecker({
         sys.structures.map((structureId) => ({
           structureId,
           color: sys.highlightColor,
-          pulse: sys.combinedEffect.includes('adverse'),
+          pulse: interaction.severity === 'major' || interaction.severity === 'contraindicated',
         }))
       );
 
@@ -548,31 +476,22 @@ export function DrugInteractionChecker({
     [navigation]
   );
 
-  // Highlight all overlapping systems
-  const highlightAllOverlaps = useCallback(() => {
-    const highlights = systemOverlapSummary.flatMap((sys) =>
-      sys.structures.map((structureId) => ({
-        structureId,
-        color: sys.drugCount >= 3 ? '#dc2626' : '#f59e0b',
-        pulse: sys.drugCount >= 3,
-      }))
-    );
-
-    navigation.highlightStructures(highlights);
-  }, [navigation, systemOverlapSummary]);
+  // Navigate to specific anatomy
+  const navigateToStructure = useCallback(
+    (structureId: string) => {
+      navigation.navigateToRegion(structureId, {
+        animate: true,
+        duration: 800,
+        highlight: true,
+      });
+      onNavigateToAnatomy?.(structureId);
+    },
+    [navigation, onNavigateToAnatomy]
+  );
 
   // Get severity badge style
   const getSeverityStyle = (severity: InteractionSeverity) => {
-    switch (severity) {
-      case 'contraindicated':
-        return 'severity-badge contraindicated';
-      case 'major':
-        return 'severity-badge major';
-      case 'moderate':
-        return 'severity-badge moderate';
-      case 'minor':
-        return 'severity-badge minor';
-    }
+    return `severity-badge ${severity}`;
   };
 
   // Get severity display text
@@ -592,12 +511,11 @@ export function DrugInteractionChecker({
   // Get explanation based on complexity level
   const getExplanation = (interaction: AnalyzedInteraction) => {
     if (complexityLevel <= 2) {
-      // Simplified explanation
       return `These medications can interact when taken together. ${interaction.management}`;
     } else if (complexityLevel <= 3) {
       return `${interaction.description}. Clinical effect: ${interaction.clinicalEffect}`;
     } else {
-      return `${interaction.description}\n\nClinical Effect: ${interaction.clinicalEffect}\n\nMechanism Type: ${interaction.interactionType}${interaction.evidenceLevel ? `\nEvidence Level: ${interaction.evidenceLevel}` : ''}`;
+      return `${interaction.description}\n\nClinical Effect: ${interaction.clinicalEffect}\n\nMechanism Type: ${interaction.interactionType}${interaction.evidenceLevel ? `\nEvidence Level: ${interaction.evidenceLevel}` : ''}${interaction.onsetTiming ? `\nOnset: ${interaction.onsetTiming}` : ''}`;
     }
   };
 
@@ -615,278 +533,459 @@ export function DrugInteractionChecker({
     return counts;
   }, [interactions]);
 
+  // Get risk level color
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case 'critical':
+        return '#7c2d12';
+      case 'high':
+        return '#dc2626';
+      case 'moderate':
+        return '#f97316';
+      case 'low':
+        return '#22c55e';
+      default:
+        return '#64748b';
+    }
+  };
+
   return (
     <div className="drug-interaction-checker">
       {/* Header */}
       <div className="checker-header">
         <h2>Drug Interaction Checker</h2>
         <p className="checker-subtitle">
-          Analyze your medications for potential interactions and overlapping effects
+          Analyze your medications for potential interactions, contraindications, and safety concerns
         </p>
+        {selectedMedications.length >= 2 && (
+          <div
+            className="overall-risk-badge"
+            style={{ backgroundColor: `${getRiskColor(overallRisk)}20`, borderColor: getRiskColor(overallRisk) }}
+          >
+            <span className="risk-label">Overall Risk:</span>
+            <span className="risk-value" style={{ color: getRiskColor(overallRisk) }}>
+              {overallRisk.charAt(0).toUpperCase() + overallRisk.slice(1)}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Medication Selection */}
       <div className="medication-selection">
-        <h3>Your Medications</h3>
-        <div className="medication-chips">
-          {allMedications.map((med) => (
-            <button
-              key={med.medicationId}
-              className={`med-chip ${
-                selectedMedications.includes(med.medicationId) ? 'selected' : ''
-              }`}
-              onClick={() => toggleMedication(med.medicationId)}
-            >
-              {med.genericName}
-              {selectedMedications.includes(med.medicationId) && (
-                <span className="check-mark">&#10003;</span>
-              )}
-            </button>
-          ))}
+        <h3>Select Medications</h3>
+
+        {/* Search input */}
+        <div className="med-search-container">
+          <input
+            type="text"
+            className="med-search-input"
+            placeholder="Search medications to add..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <div className="med-search-results">
+              {filteredMedications.slice(0, 10).map((med) => (
+                <button
+                  key={med.medicationId}
+                  className={`med-search-result ${
+                    selectedMedications.includes(med.medicationId) ? 'selected' : ''
+                  }`}
+                  onClick={() => addMedication(med.medicationId)}
+                  disabled={selectedMedications.includes(med.medicationId)}
+                >
+                  <span className="med-name">{med.genericName}</span>
+                  <span className="med-brands">{med.brandNames.slice(0, 2).join(', ')}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Selected medications */}
+        <div className="medication-chips">
+          {selectedMedications.map((medId) => {
+            const med = getMedication(medId) || allMedications.find((m) =>
+              m.genericName.toLowerCase() === medId.toLowerCase()
+            );
+            return (
+              <button
+                key={medId}
+                className="med-chip selected"
+                onClick={() => toggleMedication(medId)}
+              >
+                {med?.genericName || medId}
+                <span className="remove-icon">&times;</span>
+              </button>
+            );
+          })}
+        </div>
+
         <p className="selection-hint">
           {selectedMedications.length} medications selected
           {selectedMedications.length < 2 && ' - Select at least 2 to check interactions'}
         </p>
       </div>
 
-      {/* Summary Panel */}
+      {/* Tab Navigation */}
       {selectedMedications.length >= 2 && (
-        <div className="interaction-summary">
-          <h3>Interaction Summary</h3>
-          <div className="summary-stats">
-            {severityCounts.contraindicated > 0 && (
-              <div className="stat-item contraindicated">
-                <span className="stat-count">{severityCounts.contraindicated}</span>
-                <span className="stat-label">Contraindicated</span>
-              </div>
-            )}
-            {severityCounts.major > 0 && (
-              <div className="stat-item major">
-                <span className="stat-count">{severityCounts.major}</span>
-                <span className="stat-label">Major</span>
-              </div>
-            )}
-            {severityCounts.moderate > 0 && (
-              <div className="stat-item moderate">
-                <span className="stat-count">{severityCounts.moderate}</span>
-                <span className="stat-label">Moderate</span>
-              </div>
-            )}
-            {severityCounts.minor > 0 && (
-              <div className="stat-item minor">
-                <span className="stat-count">{severityCounts.minor}</span>
-                <span className="stat-label">Minor</span>
-              </div>
-            )}
-            {interactions.length === 0 && (
-              <div className="stat-item none">
-                <span className="stat-label">No significant interactions found</span>
-              </div>
-            )}
-          </div>
-
-          {/* System overlap toggle */}
-          <div className="overlap-toggle">
+        <div className="checker-tabs">
+          <button
+            className={`tab-btn ${activeTab === 'interactions' ? 'active' : ''}`}
+            onClick={() => setActiveTab('interactions')}
+          >
+            Interactions ({interactions.length})
+          </button>
+          {userConditions.length > 0 && (
             <button
-              className={`overlap-btn ${showSystemOverlap ? 'active' : ''}`}
-              onClick={() => setShowSystemOverlap(!showSystemOverlap)}
+              className={`tab-btn ${activeTab === 'contraindications' ? 'active' : ''}`}
+              onClick={() => setActiveTab('contraindications')}
             >
-              {showSystemOverlap ? 'Hide' : 'Show'} Body System Overlap
+              Contraindications ({contraindications.length})
             </button>
-            {showSystemOverlap && systemOverlapSummary.length > 0 && (
-              <button className="highlight-overlap-btn" onClick={highlightAllOverlaps}>
-                Highlight in 3D
-              </button>
-            )}
-          </div>
+          )}
+          <button
+            className={`tab-btn ${activeTab === 'monitoring' ? 'active' : ''}`}
+            onClick={() => setActiveTab('monitoring')}
+          >
+            Monitoring ({allMonitoringParams.length})
+          </button>
+        </div>
+      )}
 
-          {/* System overlap detail */}
-          {showSystemOverlap && (
-            <div className="system-overlap-panel">
-              <h4>Body Systems Affected by Multiple Drugs</h4>
-              {systemOverlapSummary.length === 0 ? (
-                <p className="no-overlap">
-                  No body systems are affected by multiple medications
-                </p>
-              ) : (
-                <div className="overlap-list">
-                  {systemOverlapSummary.map((sys) => (
-                    <div key={sys.systemId} className="overlap-item">
-                      <div className="overlap-header">
-                        <span className="system-name">{sys.systemName}</span>
-                        <span
-                          className={`drug-count ${
-                            sys.drugCount >= 3 ? 'high' : 'moderate'
-                          }`}
-                        >
-                          {sys.drugCount} drugs
-                        </span>
-                      </div>
-                      <div className="overlap-drugs">{sys.drugs.join(', ')}</div>
-                    </div>
-                  ))}
+      {/* Interactions Tab */}
+      {activeTab === 'interactions' && selectedMedications.length >= 2 && (
+        <>
+          {/* Summary Panel */}
+          <div className="interaction-summary">
+            <h3>Interaction Summary</h3>
+            <div className="summary-stats">
+              {severityCounts.contraindicated > 0 && (
+                <div className="stat-item contraindicated">
+                  <span className="stat-count">{severityCounts.contraindicated}</span>
+                  <span className="stat-label">Contraindicated</span>
                 </div>
               )}
+              {severityCounts.major > 0 && (
+                <div className="stat-item major">
+                  <span className="stat-count">{severityCounts.major}</span>
+                  <span className="stat-label">Major</span>
+                </div>
+              )}
+              {severityCounts.moderate > 0 && (
+                <div className="stat-item moderate">
+                  <span className="stat-count">{severityCounts.moderate}</span>
+                  <span className="stat-label">Moderate</span>
+                </div>
+              )}
+              {severityCounts.minor > 0 && (
+                <div className="stat-item minor">
+                  <span className="stat-count">{severityCounts.minor}</span>
+                  <span className="stat-label">Minor</span>
+                </div>
+              )}
+              {interactions.length === 0 && (
+                <div className="stat-item none">
+                  <span className="stat-label">No significant interactions found</span>
+                </div>
+              )}
+            </div>
+
+            {/* System overlap toggle */}
+            <div className="overlap-toggle">
+              <button
+                className={`overlap-btn ${showSystemOverlap ? 'active' : ''}`}
+                onClick={() => setShowSystemOverlap(!showSystemOverlap)}
+              >
+                {showSystemOverlap ? 'Hide' : 'Show'} Body System Overlap
+              </button>
+            </div>
+
+            {/* System overlap detail */}
+            {showSystemOverlap && (
+              <div className="system-overlap-panel">
+                <h4>Body Systems Affected by Multiple Drugs</h4>
+                {systemOverlapSummary.length === 0 ? (
+                  <p className="no-overlap">No overlapping body systems detected</p>
+                ) : (
+                  <div className="overlap-list">
+                    {systemOverlapSummary.map((sys) => (
+                      <div key={sys.systemId} className="overlap-item">
+                        <div className="overlap-header">
+                          <span className="system-name">{sys.systemName}</span>
+                          <span className={`drug-count ${sys.drugCount >= 3 ? 'high' : 'moderate'}`}>
+                            {sys.drugCount} drugs
+                          </span>
+                        </div>
+                        <div className="overlap-drugs">{sys.drugs.join(', ')}</div>
+                        {sys.structures.length > 0 && (
+                          <div className="overlap-structures">
+                            {sys.structures.slice(0, 3).map((struct) => (
+                              <button
+                                key={struct}
+                                className="structure-link"
+                                onClick={() => navigateToStructure(struct)}
+                              >
+                                View {struct}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Controls */}
+          {interactions.length > 0 && (
+            <div className="checker-controls">
+              <div className="control-group">
+                <label>Explanation Level</label>
+                <div className="complexity-slider">
+                  {[1, 2, 3, 4, 5].map((level) => (
+                    <button
+                      key={level}
+                      className={`level-btn ${complexityLevel === level ? 'active' : ''}`}
+                      onClick={() => setComplexityLevel(level)}
+                    >
+                      {level}
+                    </button>
+                  ))}
+                </div>
+                <span className="level-label">
+                  {complexityLevel <= 2 ? 'Simple' : complexityLevel === 3 ? 'Intermediate' : 'Detailed'}
+                </span>
+              </div>
+
+              <div className="control-group">
+                <label>Filter by Severity</label>
+                <select
+                  value={filterSeverity}
+                  onChange={(e) => setFilterSeverity(e.target.value as InteractionSeverity | 'all')}
+                >
+                  <option value="all">All ({interactions.length})</option>
+                  {severityCounts.contraindicated > 0 && (
+                    <option value="contraindicated">Contraindicated ({severityCounts.contraindicated})</option>
+                  )}
+                  {severityCounts.major > 0 && (
+                    <option value="major">Major ({severityCounts.major})</option>
+                  )}
+                  {severityCounts.moderate > 0 && (
+                    <option value="moderate">Moderate ({severityCounts.moderate})</option>
+                  )}
+                  {severityCounts.minor > 0 && (
+                    <option value="minor">Minor ({severityCounts.minor})</option>
+                  )}
+                </select>
+              </div>
+            </div>
+          )}
+
+          {/* Interactions List */}
+          {filteredInteractions.length > 0 && (
+            <div className="interactions-list">
+              <h3>Drug Interactions</h3>
+              {filteredInteractions.map((interaction, idx) => (
+                <div
+                  key={`${interaction.drug1.id}-${interaction.drug2.id}-${idx}`}
+                  className={`interaction-card ${selectedInteraction === interaction ? 'selected' : ''} ${interaction.severity}`}
+                  onClick={() => highlightInteraction(interaction)}
+                >
+                  <div className="interaction-header">
+                    <div className="drug-pair">
+                      <button
+                        className="drug-link"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onExploreMedication?.(interaction.drug1.id);
+                        }}
+                      >
+                        {interaction.drug1.name}
+                      </button>
+                      <span className="interaction-arrow">+</span>
+                      <button
+                        className="drug-link"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onExploreMedication?.(interaction.drug2.id);
+                        }}
+                      >
+                        {interaction.drug2.name}
+                      </button>
+                    </div>
+                    <span className={getSeverityStyle(interaction.severity)}>
+                      {getSeverityText(interaction.severity)}
+                    </span>
+                  </div>
+
+                  <div className="interaction-body">
+                    <p className="interaction-description">{getExplanation(interaction)}</p>
+
+                    {interaction.overlappingSystems.length > 0 && (
+                      <div className="overlapping-systems">
+                        <span className="systems-label">Affected Systems:</span>
+                        <div className="system-tags">
+                          {interaction.overlappingSystems.map((sys) => (
+                            <button
+                              key={sys.systemId}
+                              className="system-tag"
+                              style={{
+                                borderColor: sys.highlightColor,
+                                backgroundColor: `${sys.highlightColor}20`,
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (sys.structures[0]) {
+                                  navigateToStructure(sys.structures[0]);
+                                }
+                              }}
+                            >
+                              {sys.systemName}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="interaction-management">
+                      <span className="management-label">Management:</span>
+                      <p className="management-text">{interaction.management}</p>
+                    </div>
+
+                    {interaction.monitoring && interaction.monitoring.length > 0 && complexityLevel >= 3 && (
+                      <div className="interaction-monitoring">
+                        <span className="monitoring-label">Monitoring:</span>
+                        <ul className="monitoring-list">
+                          {interaction.monitoring.map((param, i) => (
+                            <li key={i}>{param}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {interaction.evidenceLevel && complexityLevel >= 4 && (
+                      <div className="evidence-level">
+                        Evidence: {interaction.evidenceLevel}
+                        {interaction.documentation && (
+                          <span className="documentation"> - {interaction.documentation}</span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* No interactions message */}
+          {selectedMedications.length >= 2 && interactions.length === 0 && (
+            <div className="no-interactions">
+              <div className="no-interactions-icon">&#10003;</div>
+              <h3>No Significant Interactions Found</h3>
+              <p>
+                Based on available data, your selected medications do not have known
+                significant interactions. However, always consult your healthcare
+                provider about your complete medication list.
+              </p>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Contraindications Tab */}
+      {activeTab === 'contraindications' && selectedMedications.length >= 2 && (
+        <div className="contraindications-panel">
+          <h3>Condition-Based Contraindications</h3>
+          {userConditions.length === 0 ? (
+            <div className="no-conditions">
+              <p>Add your medical conditions to check for contraindications.</p>
+            </div>
+          ) : contraindications.length === 0 ? (
+            <div className="no-contraindications">
+              <div className="no-interactions-icon">&#10003;</div>
+              <p>No contraindications found for your conditions.</p>
+            </div>
+          ) : (
+            <div className="contraindication-list">
+              {contraindications.map((ci, idx) => (
+                <div
+                  key={`${ci.drug}-${ci.condition}-${idx}`}
+                  className={`contraindication-card ${ci.contraindication.type}`}
+                  style={{ borderLeftColor: getContraindicationColor(ci.contraindication.type) }}
+                >
+                  <div className="ci-header">
+                    <span className="ci-drug">{ci.drug}</span>
+                    <span
+                      className="ci-type-badge"
+                      style={{
+                        backgroundColor: `${getContraindicationColor(ci.contraindication.type)}20`,
+                        color: getContraindicationColor(ci.contraindication.type),
+                      }}
+                    >
+                      {ci.contraindication.type}
+                    </span>
+                  </div>
+                  <div className="ci-condition">
+                    <strong>Condition:</strong> {ci.contraindication.condition}
+                  </div>
+                  <div className="ci-reason">
+                    <strong>Reason:</strong> {ci.contraindication.reason}
+                  </div>
+                  <div className="ci-risk">
+                    <strong>Risk:</strong> {ci.contraindication.risk}
+                  </div>
+                  {ci.contraindication.alternatives.length > 0 && (
+                    <div className="ci-alternatives">
+                      <strong>Alternatives:</strong>
+                      <ul>
+                        {ci.contraindication.alternatives.map((alt, i) => (
+                          <li key={i}>{alt}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {ci.contraindication.clinicalPearl && (
+                    <div className="ci-pearl">
+                      <strong>Clinical Pearl:</strong> {ci.contraindication.clinicalPearl}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           )}
         </div>
       )}
 
-      {/* Controls */}
-      {interactions.length > 0 && (
-        <div className="checker-controls">
-          <div className="control-group">
-            <label>Complexity Level</label>
-            <div className="complexity-slider">
-              {[1, 2, 3, 4, 5].map((level) => (
-                <button
-                  key={level}
-                  className={`level-btn ${complexityLevel === level ? 'active' : ''}`}
-                  onClick={() => setComplexityLevel(level)}
-                >
-                  {level}
-                </button>
-              ))}
+      {/* Monitoring Tab */}
+      {activeTab === 'monitoring' && selectedMedications.length >= 2 && (
+        <div className="monitoring-panel">
+          <h3>Recommended Monitoring</h3>
+          {allMonitoringParams.length === 0 ? (
+            <div className="no-monitoring">
+              <p>No specific monitoring parameters required for current selection.</p>
             </div>
-            <span className="level-label">
-              {complexityLevel <= 2
-                ? 'Simple'
-                : complexityLevel === 3
-                  ? 'Intermediate'
-                  : 'Detailed'}
-            </span>
-          </div>
-
-          <div className="control-group">
-            <label>Filter by Severity</label>
-            <select
-              value={filterSeverity}
-              onChange={(e) =>
-                setFilterSeverity(e.target.value as InteractionSeverity | 'all')
-              }
-            >
-              <option value="all">All ({interactions.length})</option>
-              {severityCounts.contraindicated > 0 && (
-                <option value="contraindicated">
-                  Contraindicated ({severityCounts.contraindicated})
-                </option>
-              )}
-              {severityCounts.major > 0 && (
-                <option value="major">Major ({severityCounts.major})</option>
-              )}
-              {severityCounts.moderate > 0 && (
-                <option value="moderate">Moderate ({severityCounts.moderate})</option>
-              )}
-              {severityCounts.minor > 0 && (
-                <option value="minor">Minor ({severityCounts.minor})</option>
-              )}
-            </select>
-          </div>
-        </div>
-      )}
-
-      {/* Interactions List */}
-      {filteredInteractions.length > 0 && (
-        <div className="interactions-list">
-          <h3>Drug Interactions</h3>
-          {filteredInteractions.map((interaction, idx) => (
-            <div
-              key={`${interaction.drug1.id}-${interaction.drug2.id}-${idx}`}
-              className={`interaction-card ${
-                selectedInteraction === interaction ? 'selected' : ''
-              }`}
-              onClick={() => highlightInteraction(interaction)}
-            >
-              <div className="interaction-header">
-                <div className="drug-pair">
-                  <button
-                    className="drug-link"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onExploreMedication?.(interaction.drug1.id);
-                    }}
-                  >
-                    {interaction.drug1.name}
-                  </button>
-                  <span className="interaction-arrow">&#8596;</span>
-                  <button
-                    className="drug-link"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onExploreMedication?.(interaction.drug2.id);
-                    }}
-                  >
-                    {interaction.drug2.name}
-                  </button>
-                </div>
-                <span className={getSeverityStyle(interaction.severity)}>
-                  {getSeverityText(interaction.severity)}
-                </span>
+          ) : (
+            <div className="monitoring-categories">
+              <div className="monitoring-grid">
+                {allMonitoringParams.map((param, idx) => (
+                  <div key={idx} className="monitoring-param">
+                    <span className="param-icon">&#9679;</span>
+                    <span className="param-name">{param}</span>
+                  </div>
+                ))}
               </div>
-
-              <div className="interaction-body">
-                <p className="interaction-description">
-                  {getExplanation(interaction)}
+              <div className="monitoring-note">
+                <p>
+                  <strong>Note:</strong> This list summarizes parameters that should be monitored
+                  based on potential drug interactions. Consult your healthcare provider for
+                  specific monitoring schedules and target values.
                 </p>
-
-                {interaction.overlappingSystems.length > 0 && (
-                  <div className="overlapping-systems">
-                    <span className="systems-label">Overlapping Systems:</span>
-                    <div className="system-tags">
-                      {interaction.overlappingSystems.map((sys) => (
-                        <span
-                          key={sys.systemId}
-                          className="system-tag"
-                          style={{
-                            borderColor: sys.highlightColor,
-                            backgroundColor: `${sys.highlightColor}20`,
-                          }}
-                        >
-                          {sys.systemName}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="interaction-management">
-                  <span className="management-label">Management:</span>
-                  <p className="management-text">{interaction.management}</p>
-                </div>
-
-                {interaction.monitoring && interaction.monitoring.length > 0 && (
-                  <div className="interaction-monitoring">
-                    <span className="monitoring-label">Monitoring:</span>
-                    <ul className="monitoring-list">
-                      {interaction.monitoring.map((param, i) => (
-                        <li key={i}>{param}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {interaction.evidenceLevel && complexityLevel >= 4 && (
-                  <div className="evidence-level">
-                    Evidence: {interaction.evidenceLevel}
-                  </div>
-                )}
               </div>
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* No interactions message */}
-      {selectedMedications.length >= 2 && interactions.length === 0 && (
-        <div className="no-interactions">
-          <div className="no-interactions-icon">&#10003;</div>
-          <h3>No Significant Interactions Found</h3>
-          <p>
-            Based on available data, your selected medications do not have known
-            significant interactions. However, always consult your healthcare
-            provider about your complete medication list.
-          </p>
+          )}
         </div>
       )}
 
@@ -895,7 +994,8 @@ export function DrugInteractionChecker({
         <div className="disclaimer">
           <strong>Important:</strong> This tool is for educational purposes only.
           Drug interaction data may not be complete. Always consult your healthcare
-          provider or pharmacist about potential drug interactions.
+          provider or pharmacist about potential drug interactions and before making
+          any changes to your medications.
         </div>
       </div>
     </div>

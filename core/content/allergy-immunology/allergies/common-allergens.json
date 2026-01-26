@@ -1,0 +1,273 @@
+{
+  "id": "allergy-common-allergens",
+  "type": "patient-education",
+  "category": "allergy-immunology",
+  "subcategory": "allergies",
+  "name": "Common Allergens",
+  "alternateNames": ["Types of Allergens", "Allergy Triggers", "What Causes Allergies"],
+  "description": "Understanding the most common substances that cause allergic reactions",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Allergens are things that trigger allergies. The most common ones are found in the air, in foods, in medicines, and from insect stings.",
+      "explanation": "Allergens are all around us, but they only cause problems for people whose immune systems react to them. Here are the main types:\n\n**Things You Breathe In (Airborne Allergens)**\n- **Pollen**: Tiny grains from trees, grasses, and weeds that float in the air, especially in spring and fall\n- **Dust mites**: Tiny bugs too small to see that live in bedding, carpets, and furniture\n- **Pet dander**: Tiny flakes of skin and proteins from cats, dogs, and other furry animals\n- **Mold**: Fuzzy growth that appears in damp places like bathrooms and basements\n\n**Foods That Cause Allergies**\nThe 'Big 9' cause most food allergies:\n- Milk\n- Eggs\n- Peanuts\n- Tree nuts (almonds, cashews, walnuts)\n- Fish\n- Shellfish (shrimp, crab, lobster)\n- Wheat\n- Soy\n- Sesame\n\n**Insect Stings**\n- Bees, wasps, hornets, yellow jackets, and fire ants can cause allergic reactions\n\n**Medicines**\n- Penicillin and related antibiotics are the most common\n- Aspirin and ibuprofen can cause reactions in some people\n\n**Other Common Allergens**\n- Latex (rubber gloves, balloons)\n- Nickel (jewelry, belt buckles)\n- Certain plants (poison ivy, poison oak)",
+      "keyTerms": [
+        {
+          "term": "pollen",
+          "definition": "Tiny grains from plants that float in the air and cause seasonal allergies",
+          "pronunciation": "POL-en"
+        },
+        {
+          "term": "dust mites",
+          "definition": "Microscopic bugs that live in bedding and carpets and trigger allergies"
+        },
+        {
+          "term": "dander",
+          "definition": "Tiny flakes of skin and proteins from animals that cause pet allergies",
+          "pronunciation": "DAN-der"
+        }
+      ],
+      "keyPoints": [
+        "Allergens are things that trigger allergic reactions",
+        "Airborne allergens include pollen, dust, mold, and pet dander",
+        "Nine foods cause most food allergies",
+        "Insect stings and medicines can also cause allergies"
+      ],
+      "practicalTips": [
+        "Keep windows closed during high pollen seasons",
+        "Wash bedding weekly in hot water to reduce dust mites",
+        "Always read food labels if you have food allergies",
+        "Tell all doctors and pharmacists about any drug allergies"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Allergens are proteins or other substances that trigger IgE-mediated immune responses. They are categorized by route of exposure and include indoor, outdoor, food, drug, insect, and contact allergens.",
+      "explanation": "**Outdoor Allergens (Aeroallergens)**\n\n**Tree Pollen** (Early Spring)\n- Birch, oak, maple, cedar, elm\n- Cross-reactive with certain foods (oral allergy syndrome)\n\n**Grass Pollen** (Late Spring/Early Summer)\n- Timothy, Bermuda, Kentucky bluegrass, ryegrass\n- Major cause of hay fever\n\n**Weed Pollen** (Late Summer/Fall)\n- Ragweed (most common cause of fall allergies in US)\n- Sagebrush, pigweed, lamb's quarters\n\n**Mold Spores** (Year-round, peaks in warm/damp conditions)\n- Outdoor: Alternaria, Cladosporium\n- Both indoor and outdoor exposure possible\n\n**Indoor Allergens**\n\n**House Dust Mites**\n- Dermatophagoides pteronyssinus and D. farinae\n- Thrive in humid environments (>50% humidity)\n- Feed on human skin flakes\n- Allergens found in feces and body parts\n\n**Pet Allergens**\n- Cat: Fel d 1 (major allergen in saliva, sebaceous glands)\n- Dog: Can f 1-6 (multiple allergens)\n- Small mammals: Rodents, rabbits\n\n**Cockroach**\n- Bla g 1, Bla g 2 allergens\n- Common in urban environments\n- Strong association with asthma\n\n**Indoor Mold**\n- Aspergillus, Penicillium\n- Grows in damp areas: bathrooms, basements, under sinks\n\n**Food Allergens**\n- Proteins that resist digestion and heat\n- Can cause reactions from trace amounts (cross-contamination)\n- Labeling laws require declaration of major allergens\n\n**Drug Allergens**\n- Beta-lactam antibiotics (penicillins, cephalosporins): Most common cause of drug allergy\n- NSAIDs: Can cause both allergic and non-allergic reactions\n- Sulfonamides, anticonvulsants, biologics\n\n**Hymenoptera Venom**\n- Honeybee, wasp, yellow jacket, hornet, fire ant\n- Major allergens are enzymes (phospholipase, hyaluronidase)",
+      "keyTerms": [
+        {
+          "term": "aeroallergen",
+          "definition": "Airborne allergen that is inhaled, such as pollen or dust mites",
+          "pronunciation": "AIR-oh-AL-er-jen"
+        },
+        {
+          "term": "cross-reactivity",
+          "definition": "When the immune system reacts to similar proteins in different substances",
+          "pronunciation": "cross-ree-ak-TIV-ih-tee"
+        },
+        {
+          "term": "Fel d 1",
+          "definition": "The major cat allergen, found in saliva and skin glands",
+          "pronunciation": "fell-dee-one"
+        },
+        {
+          "term": "oral allergy syndrome",
+          "definition": "Mouth itching from fresh fruits/vegetables in people with pollen allergies"
+        }
+      ],
+      "keyPoints": [
+        "Allergens are categorized by route of exposure",
+        "Outdoor allergens follow seasonal patterns",
+        "Indoor allergens cause year-round symptoms",
+        "Cross-reactivity can occur between related allergens"
+      ],
+      "avoidanceStrategies": {
+        "dustMites": [
+          "Use allergen-proof mattress and pillow covers",
+          "Wash bedding weekly in water above 130°F (54°C)",
+          "Keep humidity below 50%",
+          "Remove carpeting if possible"
+        ],
+        "pollen": [
+          "Monitor pollen counts",
+          "Shower and change clothes after outdoor activities",
+          "Use HEPA filters",
+          "Keep windows closed during peak seasons"
+        ],
+        "pets": [
+          "Keep pets out of bedrooms",
+          "Use HEPA air purifiers",
+          "Bathe pets regularly",
+          "Consider hypoallergenic breeds (though none are truly allergen-free)"
+        ]
+      }
+    },
+    "3": {
+      "level": 3,
+      "summary": "Allergen characterization involves understanding molecular structure, immunogenic properties, environmental prevalence, and cross-reactive relationships that influence sensitization patterns and clinical manifestations.",
+      "explanation": "**Molecular Allergen Characterization**\n\nAllergens are classified into protein families with shared structural features:\n\n**Major Indoor Allergen Groups**\n\n*House Dust Mite*\n- Group 1 (Der p 1): Cysteine protease, disrupts epithelial barrier\n- Group 2 (Der p 2): Lipid-binding, MD-2 homolog, activates TLR4\n- Groups 4, 5, 7: IgE-binding proteins\n- Group 23 (Der p 23): Peritrophin-like, major allergen\n\n*Cat*\n- Fel d 1: Uteroglobin-like, secretoglobin family\n- Fel d 4: Lipocalin\n- Fel d 7: von Willebrand factor\n\n*Dog*\n- Can f 1, Can f 2: Lipocalins\n- Can f 5: Prostatic kallikrein (male dogs)\n- Can f 6: Lipocalin\n\n**Pollen Allergens by Protein Family**\n\n*PR-10 Proteins (Pathogenesis-Related)*\n- Bet v 1 (birch) - major cross-reactive allergen\n- Cross-reactive with: apple (Mal d 1), hazelnut (Cor a 1), soy (Gly m 4)\n- Causes oral allergy syndrome (pollen-food allergy syndrome)\n\n*Profilins*\n- Pan-allergens found in all plants\n- Cross-reactive but often clinically less relevant\n\n*Lipid Transfer Proteins (LTPs)*\n- Heat and digestion resistant\n- Cause systemic reactions (not just oral symptoms)\n- Pru p 3 (peach) - major LTP allergen\n\n*Grass Group 1/5 Allergens*\n- High cross-reactivity among grass species\n\n**Food Allergen Properties**\n\n*Stability Determines Clinical Phenotype*\n- Heat/digestion-stable: Systemic reactions (milk caseins, peanut Ara h 1/2/3)\n- Heat-labile: Oral symptoms only (PR-10 proteins, profilins)\n\n*Major Food Allergen Families*\n- Cupin superfamily: Vicilins (Ara h 1), legumins (Ara h 3)\n- Prolamin superfamily: 2S albumins (Ara h 2, Ara h 6), LTPs, cereal prolamins\n- Tropomyosins: Shellfish (Pen a 1), dust mite (Der p 10) - cross-reactive\n- Parvalbumins: Fish (Gad c 1)\n- Caseins: Milk (Bos d 8)\n- Ovomucoid: Egg (Gal d 1) - heat-stable\n\n**Component-Resolved Diagnostics**\nMolecular allergen testing allows:\n- Distinguish primary sensitization vs. cross-reactivity\n- Predict severity (e.g., Ara h 2 correlates with clinical peanut allergy)\n- Guide immunotherapy eligibility\n- Explain clinical patterns",
+      "keyTerms": [
+        {
+          "term": "component-resolved diagnostics",
+          "definition": "Testing for specific allergen proteins rather than whole extracts to improve diagnostic accuracy"
+        },
+        {
+          "term": "PR-10 proteins",
+          "definition": "Plant defense proteins that cross-react with Bet v 1; cause oral allergy syndrome",
+          "pronunciation": "P-R-ten"
+        },
+        {
+          "term": "lipid transfer proteins",
+          "definition": "Heat-stable plant allergens that can cause severe systemic reactions",
+          "pronunciation": "LIP-id TRANS-fer"
+        },
+        {
+          "term": "tropomyosin",
+          "definition": "Muscle protein that is cross-reactive between shellfish, dust mites, and cockroaches",
+          "pronunciation": "troh-poh-MY-oh-sin"
+        },
+        {
+          "term": "lipocalin",
+          "definition": "Major allergen family in animal dander (cat, dog, horse)",
+          "pronunciation": "lip-oh-KAY-lin"
+        }
+      ],
+      "keyPoints": [
+        "Allergens cluster into protein families with shared properties",
+        "Molecular characteristics determine stability and cross-reactivity",
+        "Component-resolved diagnostics improve allergy evaluation",
+        "Protease activity of some allergens promotes sensitization"
+      ],
+      "clinicalCorrelations": [
+        "Bet v 1 sensitization predicts oral allergy syndrome with certain fruits",
+        "Ara h 2 positivity has high specificity for clinical peanut allergy",
+        "Tropomyosin cross-reactivity links shellfish, dust mites, and cockroach allergy",
+        "LTP sensitization associated with more severe food reactions"
+      ]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced allergen science encompasses innate immune activation by allergen intrinsic properties, microbiome interactions, route-specific sensitization, and environmental/climate factors modulating allergen exposure and potency.",
+      "explanation": "**Allergen Intrinsic Adjuvant Properties**\n\nBeyond antigenic properties, allergens possess features enhancing immunogenicity:\n\n**Protease Activity**\n- Papain-like cysteine proteases (Der p 1, Der f 1)\n  - Cleave tight junction proteins (occludin, claudin-1)\n  - Increase epithelial permeability\n  - Activate protease-activated receptors (PAR-2)\n  - Induce IL-25, IL-33, TSLP release\n- Serine proteases in cockroach, fungi\n\n**Lipid-Binding/Transport**\n- Allergens associate with environmental lipids\n- Pollen-associated lipid mediators (PALMs)\n  - Phytoprostanes, oxylipins\n  - Activate innate immunity independent of IgE\n- Der p 2 mimics MD-2, activates TLR4 with LPS\n\n**Chitin Content**\n- Dust mite, cockroach, fungi contain chitin\n- Activates innate immunity via chitin receptors\n- Induces ILC2 activation, TH2 polarization\n\n**Route-Specific Sensitization Mechanisms**\n\n**Epicutaneous (Skin)**\n- Barrier dysfunction (filaggrin mutations) permits sensitization\n- Langerhans cells sample environmental allergens\n- TSLP-activated DCs promote TH2 differentiation\n- Food allergen exposure through damaged skin (dual allergen exposure hypothesis)\n\n**Respiratory**\n- Inhaled allergens engage airway epithelium, DCs\n- Mucociliary clearance normally protective\n- Protease allergens overcome barrier\n- Concurrent viral infection enhances sensitization\n\n**Gastrointestinal**\n- Oral tolerance normally develops through gut exposure\n- Acid, enzymes digest most proteins (protection)\n- Antacids may impair digestion, increasing sensitization risk\n- Gut microbiome influences oral tolerance\n\n**Environmental and Climate Factors**\n\n**Climate Change Impact**\n- Extended pollen seasons (earlier start, later end)\n- Increased pollen production per plant (CO2 effect)\n- Geographic spread of allergenic plants\n- Altered allergen potency (stress-induced changes)\n\n**Air Pollution**\n- Diesel exhaust particles (DEP) enhance sensitization\n- Ozone increases allergen protein expression\n- Particulate matter increases epithelial permeability\n- PM-allergen complexes enhance delivery to airways\n\n**Microbiome-Allergen Interactions**\n- Gut dysbiosis in early life associated with allergy development\n- Microbial metabolites (SCFAs) promote regulatory T cells\n- Pathobiont colonization may promote sensitization\n- Helminth infections protective (hygiene hypothesis extension)",
+      "keyTerms": [
+        {
+          "term": "pollen-associated lipid mediators (PALMs)",
+          "definition": "Bioactive lipids in pollen that activate innate immunity independent of adaptive responses"
+        },
+        {
+          "term": "dual allergen exposure hypothesis",
+          "definition": "Theory that cutaneous sensitization promotes allergy while oral exposure promotes tolerance"
+        },
+        {
+          "term": "protease-activated receptors",
+          "definition": "Cell surface receptors activated by allergen proteases, triggering inflammatory responses",
+          "pronunciation": "PRO-tee-ace"
+        },
+        {
+          "term": "oral tolerance",
+          "definition": "Immune non-responsiveness to ingested antigens; failure leads to food allergy"
+        }
+      ],
+      "keyPoints": [
+        "Allergen proteases disrupt barriers and activate innate immunity",
+        "Route of exposure determines sensitization vs. tolerance outcomes",
+        "Climate change is increasing pollen seasons and allergen potency",
+        "Air pollution enhances allergen sensitization"
+      ],
+      "clinicalCorrelations": [
+        "Dual allergen hypothesis supports early oral introduction for food allergy prevention",
+        "Proton pump inhibitor use associated with increased food sensitization",
+        "Climate change implications for allergy management and public health",
+        "Air quality considerations in asthma action plans"
+      ]
+    },
+    "5": {
+      "level": 5,
+      "summary": "Cutting-edge allergen research integrates multi-omics approaches, novel immunological pathways, precision diagnostics with molecular fingerprinting, and therapeutic targeting of specific epitopes for disease modification.",
+      "explanation": "**Advanced Molecular Allergenomics**\n\n**High-Resolution Allergen Mapping**\n- X-ray crystallography and cryo-EM structures of allergen-IgE complexes\n- B-cell epitope mapping: Conformational (3D) vs. linear epitopes\n- T-cell epitope identification: MHC class II restriction patterns\n- Individual variation in epitope recognition ('epitope spreading')\n\n**Allergen Isoforms and Variants**\n- Natural sequence polymorphisms affect IgE binding\n- Post-translational modifications (glycosylation, lipidation)\n- Environmental processing (oxidation, proteolysis)\n- Recombinant vs. natural allergen differences\n\n**Novel Sensitization Pathways**\n\n**Type 2 Innate Lymphoid Cells (ILC2)**\n- Activated by epithelial alarmins (IL-25, IL-33, TSLP)\n- Allergen-independent source of IL-5, IL-13\n- Tissue-resident with memory-like properties\n- May initiate allergic responses before adaptive immunity\n\n**Dendritic Cell Subsets**\n- cDC2 (CD1c+, CD11b+): TH2-polarizing capacity\n- Monocyte-derived DCs: Inflammatory contexts\n- pDCs: Usually tolerogenic, but context-dependent\n- Langerhans cells: Skin-specific, TSLP-responsive\n\n**Regulatory Mechanisms**\n- Allergen-specific Tregs (FOXP3+, IL-10+, TGF-β+)\n- Tr1 cells: IL-10 producers without FOXP3\n- Breg cells: IL-10-producing B regulatory cells\n- IgG4: Non-inflammatory blocking antibody\n\n**Precision Diagnostics**\n\n**Multiplex Molecular Platforms**\n- ISAC (Immuno Solid-phase Allergen Chip): 112 allergen components\n- ALEX (Allergy Explorer): 300+ components\n- Species-specific vs. cross-reactive marker identification\n\n**Clinical Decision Applications**\n- Ara h 2 > 0.35 kUA/L: High specificity for clinical peanut allergy\n- Gly m 4 without Ara h 1/2/3: Likely PR-10 cross-reactivity, not primary peanut allergy\n- rBet v 1 monosensitization: Good candidate for birch immunotherapy\n- Genuine sensitization markers guide immunotherapy selection\n\n**Basophil Activation Testing (BAT)**\n- Functional assay of effector cell response\n- Useful when discordant history/testing\n- CD63 or CD203c upregulation as readout\n- Threshold testing for desensitization protocols\n\n**Therapeutic Allergen Targeting**\n\n**Hypoallergenic Variants**\n- Recombinant hypoallergens: Reduced IgE binding, preserved T-cell epitopes\n- Allergen fragments, peptides\n- Contiguous overlapping peptides (COPs)\n- Mosaic proteins combining multiple allergens\n\n**Adjuvant Systems**\n- CpG oligonucleotides: TH1-skewing\n- MPLA: TLR4 agonist\n- Virus-like particles: Enhanced immunogenicity\n- Nanoparticle delivery systems\n\n**Biologics Targeting Allergic Pathways**\n- Omalizumab: Anti-IgE, approved for allergic asthma, urticaria\n- Dupilumab: Anti-IL-4Rα, approved for atopic dermatitis, asthma, CRSwNP\n- Mepolizumab, benralizumab: Anti-IL-5 pathway, severe eosinophilic asthma\n- Tezepelumab: Anti-TSLP, severe asthma regardless of biomarkers\n\n**Future Directions**\n- Epitope-specific tolerance induction\n- CAR-Treg therapy for allergen-specific tolerance\n- Gene editing approaches\n- Microbiome-targeted interventions",
+      "keyTerms": [
+        {
+          "term": "conformational epitope",
+          "definition": "Antibody-binding site formed by 3D protein structure; sensitive to denaturation"
+        },
+        {
+          "term": "ISAC",
+          "definition": "Immuno Solid-phase Allergen Chip - multiplex platform testing 112 molecular allergens"
+        },
+        {
+          "term": "basophil activation testing",
+          "definition": "Functional assay measuring allergen-induced basophil degranulation markers"
+        },
+        {
+          "term": "hypoallergen",
+          "definition": "Modified allergen with reduced IgE binding but preserved T-cell epitopes for safer immunotherapy"
+        },
+        {
+          "term": "epitope spreading",
+          "definition": "Diversification of allergen-specific immune response to additional epitopes over time"
+        }
+      ],
+      "clinicalCorrelations": [
+        "Component-resolved diagnostics reduce unnecessary dietary restrictions",
+        "BAT helps resolve discordant history and testing results",
+        "Precision selection of immunotherapy extracts based on molecular sensitization profile",
+        "Biologics enable immunotherapy in previously contraindicated severe allergic patients"
+      ],
+      "references": [
+        "Radauer C, et al. Allergens are distributed into few protein families and possess a restricted number of biochemical functions. J Allergy Clin Immunol. 2008",
+        "Matricardi PM, et al. EAACI Molecular Allergology User's Guide. Pediatr Allergy Immunol. 2016",
+        "Demoly P, et al. International consensus on drug allergy. Allergy. 2014"
+      ]
+    }
+  },
+  "allergenCategories": {
+    "indoor": {
+      "title": "Indoor Allergens",
+      "examples": ["Dust mites", "Pet dander", "Mold", "Cockroach"],
+      "seasonality": "Year-round"
+    },
+    "outdoor": {
+      "title": "Outdoor Allergens",
+      "examples": ["Tree pollen", "Grass pollen", "Weed pollen", "Mold spores"],
+      "seasonality": "Seasonal"
+    },
+    "food": {
+      "title": "Food Allergens",
+      "examples": ["Milk", "Eggs", "Peanuts", "Tree nuts", "Fish", "Shellfish", "Wheat", "Soy", "Sesame"],
+      "seasonality": "Any time with exposure"
+    },
+    "drug": {
+      "title": "Drug Allergens",
+      "examples": ["Penicillin", "Sulfonamides", "NSAIDs", "Biologics"],
+      "seasonality": "Any time with exposure"
+    },
+    "insect": {
+      "title": "Insect Allergens",
+      "examples": ["Bee venom", "Wasp venom", "Fire ant venom"],
+      "seasonality": "Spring through fall"
+    }
+  },
+  "relatedContent": [
+    {
+      "id": "allergy-basics-what-are-allergies",
+      "relationship": "parent",
+      "label": "What Are Allergies"
+    },
+    {
+      "id": "allergy-seasonal-allergies",
+      "relationship": "related",
+      "label": "Seasonal Allergies"
+    },
+    {
+      "id": "allergy-food-allergies",
+      "relationship": "related",
+      "label": "Food Allergies"
+    },
+    {
+      "id": "treatment-avoidance-strategies",
+      "relationship": "treatment",
+      "label": "Allergen Avoidance"
+    }
+  ],
+  "tags": {
+    "systems": ["immune"],
+    "topics": ["allergens", "triggers", "pollen", "dust mites", "food allergy", "patient-education"],
+    "keywords": ["allergen", "pollen", "dust mite", "pet dander", "food allergy", "cross-reactivity"],
+    "clinicalRelevance": "high"
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

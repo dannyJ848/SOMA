@@ -6,19 +6,20 @@
  */
 
 import type {
-  LabTest,
-  LabPanel,
+  StoreLabTest,
+  StoreLabPanel,
   LabCategory,
   BodySystem,
   OrganLabMapping,
   LabStatistics,
+  StoreLeveledExplanations,
 } from './types';
 
 // ============================================================================
 // LAB TESTS
 // ============================================================================
 
-const labTests = new Map<string, LabTest>();
+const labTests = new Map<string, StoreLabTest>();
 
 // ----------------------------------------------------------------------------
 // COMPLETE BLOOD COUNT (CBC)
@@ -1165,7 +1166,7 @@ labTests.set('ptt', {
 // LAB PANELS
 // ============================================================================
 
-const labPanels = new Map<string, LabPanel>();
+const labPanels = new Map<string, StoreLabPanel>();
 
 labPanels.set('cbc', {
   id: 'cbc',
@@ -1332,7 +1333,7 @@ function calculateLabStatistics(): LabStatistics {
   const categoryCounts = {} as Record<LabCategory, number>;
   const categories: LabCategory[] = [
     'cbc', 'cmp', 'lft', 'lipid', 'thyroid', 'coagulation', 'cardiac',
-    'renal', 'inflammatory', 'endocrine', 'tumor-marker', 'urinalysis',
+    'renal', 'inflammatory', 'endocrine', 'tumor-markers', 'urinalysis',
     'blood-gas', 'autoimmune', 'infectious', 'nutritional', 'specialty'
   ];
 
@@ -1353,46 +1354,46 @@ export const LAB_STATISTICS = calculateLabStatistics();
 // API FUNCTIONS
 // ============================================================================
 
-export function getLabTest(id: string): LabTest | undefined {
+export function getLabTest(id: string): StoreLabTest | undefined {
   return labTests.get(id);
 }
 
-export function getAllLabTests(): LabTest[] {
+export function getAllLabTests(): StoreLabTest[] {
   return Array.from(labTests.values());
 }
 
-export function getLabTestsByCategory(category: LabCategory): LabTest[] {
+export function getLabTestsByCategory(category: LabCategory): StoreLabTest[] {
   return Array.from(labTests.values()).filter((t) => t.category === category);
 }
 
-export function getLabTestsByOrgan(organName: string): LabTest[] {
+export function getLabTestsByOrgan(organName: string): StoreLabTest[] {
   const lowerOrgan = organName.toLowerCase();
   return Array.from(labTests.values()).filter((t) =>
     t.primaryOrgans.some((o) => o.toLowerCase().includes(lowerOrgan))
   );
 }
 
-export function getLabTestsBySystem(system: BodySystem): LabTest[] {
+export function getLabTestsBySystem(system: BodySystem): StoreLabTest[] {
   return Array.from(labTests.values()).filter((t) =>
     t.affectedSystems.includes(system)
   );
 }
 
-export function getLabTestsByPathway(pathwayId: string): LabTest[] {
+export function getLabTestsByPathway(pathwayId: string): StoreLabTest[] {
   return Array.from(labTests.values()).filter(
     (t) => t.relatedPathways?.includes(pathwayId)
   );
 }
 
-export function getLabPanel(id: string): LabPanel | undefined {
+export function getLabPanel(id: string): StoreLabPanel | undefined {
   return labPanels.get(id);
 }
 
-export function getAllLabPanels(): LabPanel[] {
+export function getAllLabPanels(): StoreLabPanel[] {
   return Array.from(labPanels.values());
 }
 
-export function searchLabTests(query: string): LabTest[] {
+export function searchLabTests(query: string): StoreLabTest[] {
   const q = query.toLowerCase();
   return Array.from(labTests.values()).filter(
     (t) =>
@@ -1421,5 +1422,6 @@ export function getLabExplanation(
 ): string | undefined {
   const test = labTests.get(id);
   if (!test) return undefined;
-  return test.explanations[`level${level}`];
+  const levelKey = `level${level}` as keyof StoreLeveledExplanations;
+  return test.explanations[levelKey];
 }

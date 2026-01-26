@@ -1,0 +1,118 @@
+{
+  "id": "structure-diaphragm-accessory-muscles",
+  "type": "structure",
+  "name": "Diaphragm and Accessory Muscles of Respiration",
+  "alternateNames": ["Respiratory muscles", "Breathing muscles"],
+  "fmaId": "FMA:13295",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The diaphragm is the main muscle that helps you breathe by moving up and down, and other muscles in your neck and chest help when you need to breathe harder.",
+      "explanation": "The diaphragm is a big, dome-shaped muscle that sits under your lungs like a trampoline. When you breathe in, it flattens and moves down, pulling air into your lungs like a bellows. When you breathe out, it relaxes and moves back up, pushing air out. Most of the time, the diaphragm does all the work of breathing. But when you exercise hard or when you're sick and need more air, other muscles in your neck, shoulders, and between your ribs jump in to help pull in more air.",
+      "keyTerms": [
+        {"term": "diaphragm", "definition": "The main breathing muscle under your lungs that moves up and down"},
+        {"term": "accessory muscles", "definition": "Extra muscles that help you breathe harder when you need more air"},
+        {"term": "inhale", "definition": "Breathing in - when the diaphragm moves down"},
+        {"term": "exhale", "definition": "Breathing out - when the diaphragm relaxes and moves up"}
+      ],
+      "analogies": ["The diaphragm works like a plunger in a syringe - when it moves down, air is pulled in; when it moves up, air is pushed out."],
+      "examples": ["When you hiccup, your diaphragm suddenly contracts, causing that jerky 'hic' sound."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The diaphragm is the primary muscle of inspiration, contracting to increase thoracic volume, while accessory muscles including scalenes, sternocleidomastoid, and intercostals assist during increased respiratory demand.",
+      "explanation": "The diaphragm is innervated by the phrenic nerve (C3-5) and accounts for 70-80% of inspiratory work during quiet breathing. When it contracts, it descends 1-2cm (up to 10cm during deep breathing), increasing thoracic volume and creating negative intrathoracic pressure that draws air in. Expiration is normally passive, driven by elastic recoil. During increased demand, accessory inspiratory muscles activate: scalenes (elevate 1st-2nd ribs), sternocleidomastoid (elevates sternum), and external intercostals (elevate ribs). Forced expiration uses abdominal muscles (rectus abdominis, obliques, transversus) to push the diaphragm up, and internal intercostals to depress ribs. The diaphragm has three openings: caval (T8, IVC), esophageal (T10, esophagus and vagus), and aortic (T12, aorta, thoracic duct, azygos vein).",
+      "keyTerms": [
+        {"term": "phrenic nerve", "definition": "Nerve from C3-5 that controls the diaphragm", "pronunciation": "FREN-ik"},
+        {"term": "scalene muscles", "definition": "Neck muscles that elevate the first two ribs during deep breathing", "pronunciation": "SKAY-leen"},
+        {"term": "sternocleidomastoid", "definition": "Neck muscle that lifts the sternum during forced breathing", "pronunciation": "STER-no-KLY-do-MAS-toyd"},
+        {"term": "intercostal muscles", "definition": "Muscles between the ribs that help move the rib cage"},
+        {"term": "elastic recoil", "definition": "Natural tendency of lungs to spring back, driving normal expiration"}
+      ],
+      "analogies": ["The diaphragm and accessory muscles are like a team of workers - the diaphragm is the main worker who handles the job alone usually, but the accessory muscles are extra help that comes in when the job gets tough."],
+      "examples": ["When someone with asthma is struggling to breathe, you can see their neck muscles working hard - this is using accessory muscles."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Respiratory muscle anatomy includes the diaphragm's insertions and apertures, intercostal mechanics, and the coordinated action of inspiratory and expiratory muscle groups with specific innervation patterns.",
+      "explanation": "The diaphragm originates from sternal (xiphoid), costal (inner 6 ribs), and lumbar (crura from L1-3) portions, inserting into the central tendon. Right crus is longer, encircling the esophagus. The diaphragm receives motor innervation from phrenic nerves (C3-5); sensory innervation is phrenic (central tendon) and intercostal (peripheral portion). Intercostal muscles: external intercostals (fibers downward and forward) are inspiratory, elevating ribs; internal intercostals (fibers upward and forward) are expiratory, depressing ribs. Parasternal intercostals (innermost intercostal muscle portion) are inspiratory. The thoracoabdominal mechanics follow the 'bucket handle' (lateral rib elevation) and 'pump handle' (anterior sternum elevation) motions. Accessory muscles include scalenes (anterior: 1st rib; middle: 1st rib; posterior: 2nd rib), SCM, serratus anterior, and pectoralis major/minor (when arms fixed).",
+      "keyTerms": [
+        {"term": "crura", "definition": "Tendinous portions of diaphragm originating from lumbar vertebrae", "pronunciation": "KROO-rah"},
+        {"term": "central tendon", "definition": "Aponeurotic center of diaphragm where muscle fibers insert"},
+        {"term": "bucket handle movement", "definition": "Lateral rib elevation increasing transverse thoracic diameter"},
+        {"term": "pump handle movement", "definition": "Anterior sternal elevation increasing anteroposterior thoracic diameter"},
+        {"term": "paradoxical breathing", "definition": "Inward movement of abdomen during inspiration, indicating diaphragm dysfunction"}
+      ],
+      "clinicalNotes": "C3-4-5 keeps the diaphragm alive - high cervical spine injury causes respiratory failure. Sniff test fluoroscopy detects hemidiaphragm paralysis (paradoxical upward movement)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Respiratory muscle physiology integrates neural control, pressure-volume relationships, and fatigue mechanics with clinical assessment methods for neuromuscular respiratory disorders.",
+      "explanation": "Respiratory muscle strength is assessed by maximal inspiratory pressure (MIP/PImax, normal >-80 cmH2O) and maximal expiratory pressure (MEP/PEmax, normal >+80 cmH2O), measured at RV and TLC respectively. Sniff nasal inspiratory pressure (SNIP) is more comfortable and correlates with survival in neuromuscular disease. Transdiaphragmatic pressure (Pdi = Pga - Pes) directly measures diaphragm function. Respiratory muscle fatigue develops when the tension-time index (TTI = Pdi/Pdimax x Ti/Ttot) exceeds 0.15. The diaphragm has mixed fiber type composition optimized for endurance but is susceptible to disuse atrophy (VIDD - ventilator-induced diaphragmatic dysfunction). Neural control involves the respiratory pattern generator in the medulla (pre-Botzinger complex), with inputs from chemoreceptors, mechanoreceptors, and cortical centers. Phrenic nerve injury causes ipsilateral diaphragm paralysis; bilateral paralysis causes ventilatory failure with orthopnea and reduced supine VC.",
+      "keyTerms": [
+        {"term": "MIP/PImax", "definition": "Maximal inspiratory pressure - measure of inspiratory muscle strength"},
+        {"term": "SNIP", "definition": "Sniff nasal inspiratory pressure - clinically useful test of diaphragm strength"},
+        {"term": "transdiaphragmatic pressure", "definition": "Difference between gastric and esophageal pressure, direct measure of diaphragm function"},
+        {"term": "VIDD", "definition": "Ventilator-induced diaphragmatic dysfunction - atrophy from mechanical ventilation"},
+        {"term": "pre-Botzinger complex", "definition": "Brainstem region generating inspiratory rhythm"}
+      ],
+      "clinicalNotes": "SNIP <40 cmH2O predicts hypoventilation. Supine VC drop >20% suggests diaphragm weakness. Diaphragm ultrasound measures thickness and thickening fraction - normal excursion >10mm during tidal breathing."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced respiratory muscle management encompasses ultrasound assessment, phrenic nerve stimulation, and multidisciplinary approaches to neuromuscular ventilatory failure with emerging regenerative strategies.",
+      "explanation": "Diaphragm ultrasound has become a key assessment tool: B-mode measures thickness (zone of apposition, normal 1.5-5mm at FRC), M-mode measures excursion (>10mm tidal, >40mm deep breathing), and thickening fraction (TFdi = (Tdi inspiration - Tdi expiration)/Tdi expiration x 100%, normal >20%) predicts weaning success. Phrenic nerve conduction studies and needle EMG assess neuropathic versus myopathic dysfunction. Diaphragm pacing (phrenic nerve stimulation) is FDA-approved for high cervical SCI (NeuRx system) and ALS (Synapse system), though ALS trials showed potential harm. VIDD prevention strategies include spontaneous breathing trials, inspiratory muscle training, and minimizing sedation/paralysis. Pulmonary rehabilitation improves respiratory muscle function in COPD. Emerging approaches include gene therapy for muscular dystrophies, stem cell therapy, and bioengineered diaphragm constructs. Noninvasive ventilation (NIV) remains first-line for chronic ventilatory failure in NMD, with invasive ventilation via tracheostomy for progressive disease.",
+      "keyTerms": [
+        {"term": "thickening fraction", "definition": "Ultrasound measure of diaphragm contractility; low values predict weaning failure"},
+        {"term": "diaphragm pacing", "definition": "Electrical stimulation of phrenic nerve to pace diaphragm contraction"},
+        {"term": "NeuRx DPS", "definition": "FDA-approved diaphragm pacing system for high cervical spinal cord injury"},
+        {"term": "inspiratory muscle training", "definition": "Targeted exercise to strengthen respiratory muscles, improving weaning and exercise capacity"},
+        {"term": "zone of apposition", "definition": "Region where diaphragm apposes chest wall, measured by ultrasound for thickness"}
+      ],
+      "clinicalNotes": "Weaning predictors: diaphragm TFdi >30%, rapid shallow breathing index <105. ALS: NIV when FVC <50% or SNIP <40 or orthopnea. Consider tracheostomy ventilation discussion early. Duchenne: start NIV when FVC <50% or hypercapnia."
+    }
+  },
+  "media": [
+    {
+      "id": "diaphragm-3d-model",
+      "type": "3d-model",
+      "filename": "diaphragm_respiratory_muscles.glb",
+      "title": "3D Diaphragm and Respiratory Muscles",
+      "description": "Interactive model showing diaphragm, intercostals, and accessory muscles with movement animation"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "ats-diaphragm",
+      "type": "article",
+      "title": "ATS/ERS Statement on Respiratory Muscle Testing",
+      "authors": ["American Thoracic Society", "European Respiratory Society"],
+      "source": "Am J Respir Crit Care Med"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "process-breathing-mechanics", "targetType": "process", "relationship": "related", "label": "Mechanics of Breathing"},
+    {"targetId": "structure-pleura", "targetType": "structure", "relationship": "related", "label": "Pleura"}
+  ],
+  "tags": {
+    "systems": ["respiratory", "musculoskeletal"],
+    "structures": ["FMA:13295", "FMA:9759", "FMA:13066"],
+    "topics": ["anatomy", "physiology", "neuromuscular"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery", "neurology"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

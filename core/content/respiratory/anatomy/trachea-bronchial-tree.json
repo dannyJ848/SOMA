@@ -1,0 +1,119 @@
+{
+  "id": "structure-trachea-bronchial-tree",
+  "type": "structure",
+  "name": "Trachea and Bronchial Tree",
+  "alternateNames": ["Windpipe and Airways", "Tracheobronchial tree", "Lower conducting airways"],
+  "fmaId": "FMA:7394",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The trachea is your windpipe that carries air from your throat to your lungs, where it splits into tubes called bronchi that branch out like an upside-down tree.",
+      "explanation": "When you breathe in, air travels down your windpipe (trachea), a tube about as long as your hand that goes from your throat to your chest. At the bottom, the windpipe splits into two tubes called bronchi - one goes to your left lung and one to your right lung. Inside each lung, these tubes keep splitting into smaller and smaller branches, just like a tree's branches get smaller as they spread out. The tiniest tubes are called bronchioles. Your windpipe has rings made of cartilage (like the material in your ear) that keep it from collapsing, so air can always flow through.",
+      "keyTerms": [
+        {"term": "trachea", "definition": "The windpipe - a tube that carries air from your throat to your lungs"},
+        {"term": "bronchi", "definition": "The two main tubes that the windpipe splits into, one for each lung"},
+        {"term": "bronchioles", "definition": "The smallest air tubes in your lungs"},
+        {"term": "cartilage", "definition": "Firm but flexible material that forms rings to keep the windpipe open"}
+      ],
+      "analogies": ["The bronchial tree is like an upside-down tree - the trachea is the trunk, the main bronchi are the biggest branches, and the bronchioles are the tiny twigs at the ends."],
+      "examples": ["When you choke on food, it might go 'down the wrong pipe' and enter your trachea instead of your esophagus."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The trachea is a cartilaginous tube extending from the larynx that bifurcates into primary bronchi, which progressively divide into smaller airways ending in bronchioles.",
+      "explanation": "The trachea is 10-12 cm long and 2-2.5 cm in diameter, consisting of 16-20 C-shaped cartilage rings with smooth muscle (trachealis) posteriorly. It extends from the cricoid cartilage (C6) to the carina (T5-6), where it bifurcates. The right main bronchus is wider, shorter, and more vertical than the left, making it more common for aspirated objects to enter the right lung. Each main bronchus divides into lobar bronchi (3 right, 2 left), then segmental bronchi (10 per lung), and further into bronchioles. Bronchi have cartilage plates and mucous glands; bronchioles lack cartilage and glands. Terminal bronchioles are the last conducting airways, leading to respiratory bronchioles where gas exchange begins.",
+      "keyTerms": [
+        {"term": "carina", "definition": "The ridge at the bifurcation of the trachea into the main bronchi", "pronunciation": "kah-REE-nah"},
+        {"term": "lobar bronchi", "definition": "Branches of main bronchi that supply each lung lobe (3 right, 2 left)"},
+        {"term": "segmental bronchi", "definition": "Branches of lobar bronchi supplying individual bronchopulmonary segments"},
+        {"term": "terminal bronchioles", "definition": "The last purely conducting airways, about 0.5mm diameter"},
+        {"term": "trachealis muscle", "definition": "Smooth muscle forming the posterior wall of the trachea"}
+      ],
+      "analogies": ["The airways branch like an inverted tree - from the trunk (trachea) to main branches (bronchi) to smaller branches (segmental bronchi) to twigs (bronchioles)."],
+      "examples": ["In asthma, the bronchioles narrow due to muscle spasm, making breathing difficult."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The tracheobronchial tree comprises 23 generations of airway branching with progressive changes in wall structure, epithelial composition, and physiological function from conducting to respiratory zones.",
+      "explanation": "The trachea (generation 0) to terminal bronchioles (generation 16) constitute the conducting zone - anatomic dead space with no gas exchange. Respiratory bronchioles (generations 17-19), alveolar ducts (20-22), and alveolar sacs (23) form the respiratory zone. Cartilage progressively decreases and is absent in bronchioles (<1mm diameter). Epithelium transitions from pseudostratified ciliated columnar with goblet cells (trachea/bronchi) to simple ciliated columnar, then cuboidal (bronchioles), and finally squamous type I pneumocytes in alveoli. Smooth muscle spirals around airways, becoming relatively more prominent in bronchioles. Clara cells (club cells) in bronchioles secrete surfactant protein and protect against oxidative damage. The bronchial circulation (bronchial arteries from thoracic aorta) supplies the conducting airways, while pulmonary circulation supplies the respiratory zone.",
+      "keyTerms": [
+        {"term": "conducting zone", "definition": "Airways from nose to terminal bronchioles where no gas exchange occurs; anatomic dead space (~150mL)"},
+        {"term": "respiratory zone", "definition": "Airways distal to terminal bronchioles where gas exchange occurs"},
+        {"term": "Clara cells", "definition": "Non-ciliated secretory cells in bronchiolar epithelium, now called club cells"},
+        {"term": "bronchial arteries", "definition": "Systemic arterial supply to the bronchi, originating from thoracic aorta"},
+        {"term": "airway generations", "definition": "Sequential branching levels from trachea (generation 0) to alveoli (generation 23)"}
+      ],
+      "clinicalNotes": "Foreign body aspiration more common in right main bronchus due to wider diameter and vertical orientation. Bronchoscopy landmarks: carina, lobar/segmental bronchi. Tracheostomy site between rings 2-4."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Tracheobronchial physiology integrates mucociliary clearance, airway resistance dynamics, and neurohumoral control, with clinical implications for obstructive diseases and airway management.",
+      "explanation": "Airway resistance (Raw) is governed by Poiseuille's law: R = 8nl/(pi*r^4), making resistance extremely sensitive to radius changes. The main bronchi and early branches provide most resistance; the combined cross-sectional area increases dramatically in small airways, reducing their individual contribution. Autonomic control: parasympathetic (vagus) causes bronchoconstriction via M3 muscarinic receptors; sympathetic stimulation (beta-2 receptors) causes bronchodilation. Additional mediators include histamine, leukotrienes (bronchoconstriction), and prostaglandins. Mucociliary escalator: 200 cilia per cell beat at 1000/min, propelling mucus (2-5 microns/second) toward the pharynx. Airway smooth muscle responds to stretch (bronchoconstriction), hypoxia (regional vasoconstriction but airway dilation), and inflammatory mediators. Airway hyperresponsiveness in asthma involves epithelial barrier dysfunction, smooth muscle hypertrophy, and neural hyperreactivity.",
+      "keyTerms": [
+        {"term": "airway resistance", "definition": "Resistance to airflow, primarily in medium-sized airways; normal ~1-2 cmH2O/L/s"},
+        {"term": "mucociliary escalator", "definition": "Coordinated ciliary beating that propels mucus from distal airways to pharynx"},
+        {"term": "airway hyperresponsiveness", "definition": "Exaggerated bronchoconstrictor response to stimuli; hallmark of asthma"},
+        {"term": "beta-2 receptors", "definition": "Adrenergic receptors on airway smooth muscle mediating bronchodilation"},
+        {"term": "dynamic airway compression", "definition": "Airway narrowing during forced expiration when intrathoracic pressure exceeds intraluminal pressure"}
+      ],
+      "clinicalNotes": "FEV1/FVC ratio defines obstruction (<0.70 or <LLN). Bronchodilator reversibility (>12% and 200mL improvement) suggests asthma. Methacholine challenge assesses hyperresponsiveness (PC20)."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced airway management encompasses interventional bronchoscopy, molecular understanding of airway remodeling, and precision approaches to obstructive lung diseases.",
+      "explanation": "Interventional bronchoscopy includes rigid bronchoscopy, therapeutic modalities (laser, electrocautery, cryotherapy, photodynamic therapy), airway stent placement (silicone, metallic, hybrid), and endobronchial valve insertion for emphysema volume reduction. Navigational bronchoscopy (electromagnetic, cone-beam CT) enables peripheral nodule diagnosis and fiducial placement. Thermoplasty delivers radiofrequency energy to reduce airway smooth muscle mass in severe asthma. Molecular phenotyping of airways: Type 2-high asthma (eosinophilic, IL-4/5/13, responsive to corticosteroids and biologics) versus Type 2-low (neutrophilic/paucigranulocytic, less steroid-responsive). Airway remodeling involves epithelial-mesenchymal transition, subepithelial fibrosis, goblet cell metaplasia, and smooth muscle hypertrophy/hyperplasia. Targeted biologics: anti-IgE (omalizumab), anti-IL-5/IL-5R (mepolizumab, benralizumab), anti-IL-4Ralpha (dupilumab), anti-TSLP (tezepelumab). Tracheobronchomalacia diagnosis requires dynamic CT or bronchoscopy; treatment includes CPAP, tracheobronchoplasty, or stenting.",
+      "keyTerms": [
+        {"term": "bronchial thermoplasty", "definition": "Radiofrequency ablation of airway smooth muscle for severe asthma; ALAIR system"},
+        {"term": "endobronchial valve", "definition": "One-way valve placed bronchoscopically for emphysema lung volume reduction"},
+        {"term": "navigational bronchoscopy", "definition": "GPS-like technology enabling biopsy of peripheral lung nodules"},
+        {"term": "tezepelumab", "definition": "Anti-TSLP monoclonal antibody effective across asthma phenotypes"},
+        {"term": "tracheobronchomalacia", "definition": "Excessive airway collapsibility due to cartilage weakness; >50% expiratory narrowing"}
+      ],
+      "clinicalNotes": "BTVA (bronchoscopic thermal vapor ablation) for emphysema shows promise. Consider ECMO for bridge in critical airway obstruction. Biomarkers guide biologic selection: IgE/allergic (omalizumab), eosinophils (mepolizumab), FeNO (dupilumab)."
+    }
+  },
+  "media": [
+    {
+      "id": "bronchial-tree-3d-model",
+      "type": "3d-model",
+      "filename": "tracheobronchial_tree.glb",
+      "title": "3D Tracheobronchial Tree",
+      "description": "Interactive model showing trachea through bronchiolar levels with lobar anatomy"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "west-physiology",
+      "type": "textbook",
+      "title": "West's Respiratory Physiology: The Essentials",
+      "authors": ["West JB", "Luks AM"],
+      "source": "Wolters Kluwer"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-larynx", "targetType": "structure", "relationship": "related", "label": "Larynx"},
+    {"targetId": "structure-lungs", "targetType": "structure", "relationship": "child", "label": "Lungs"},
+    {"targetId": "condition-asthma", "targetType": "condition", "relationship": "related", "label": "Asthma"}
+  ],
+  "tags": {
+    "systems": ["respiratory"],
+    "structures": ["FMA:7394", "FMA:7409", "FMA:7407"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

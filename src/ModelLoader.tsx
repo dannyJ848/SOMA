@@ -3,6 +3,65 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import * as THREE from 'three';
 
+/**
+ * 3D ANATOMICAL MODEL SOURCES
+ * ===========================
+ * See /docs/3D_MODEL_SOURCES.md for complete documentation
+ *
+ * PRIMARY SOURCES (Recommended):
+ *
+ * 1. Z-Anatomy (CC BY-SA 4.0) - CURRENTLY INTEGRATED
+ *    - Website: https://www.z-anatomy.com/
+ *    - GitHub: https://github.com/Z-Anatomy/Models-of-human-anatomy
+ *    - Sketchfab: https://sketchfab.com/Z-Anatomy
+ *    - Format: GLB (web-ready), Blender, FBX
+ *    - Coverage: 1500+ anatomical structures
+ *
+ * 2. BodyParts3D (CC BY 4.0)
+ *    - Archive: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html
+ *    - Format: OBJ (requires conversion to GLB)
+ *    - Coverage: 1,523 anatomical parts
+ *    - Note: Z-Anatomy is based on improved BodyParts3D models
+ *
+ * 3. NIH 3D Print Exchange (Public Domain / CC)
+ *    - Website: https://3d.nih.gov/
+ *    - Format: STL, OBJ, GLB (exportable from viewer)
+ *    - Coverage: Heart collection, brain, various organs
+ *    - Note: Many models from patient MRI data
+ *
+ * SUPPLEMENTARY SOURCES (CC-Licensed Individual Organs):
+ *
+ * 4. Sketchfab (Various CC licenses)
+ *    - Anatomy: https://sketchfab.com/tags/anatomy
+ *    - Format: GLB, FBX, OBJ (all downloadable)
+ *    - Recommended models (CC BY):
+ *      - Human Heart (Freddan755): sketchfab.com/3d-models/human-heart-3342c8c438904ee2b3b6b68fedf30531
+ *      - Brain with Labels (AbdulMuhaymin): sketchfab.com/3d-models/brain-with-labeled-parts-28c8971e11334e8b97a2a0d6235992e8
+ *      - Human Organs (mkhasant): sketchfab.com/3d-models/human-organs-035316622877438cb62de673b8f19217
+ *      - Realistic Lungs (neshallads): sketchfab.com/3d-models/realistic-human-lungs-ce09f4099a68467880f46e61eb9a3531
+ *
+ * 5. TurboSquid (Royalty-Free)
+ *    - Free organs: https://www.turbosquid.com/Search/3D-Models/free/organ
+ *    - Format: FBX, OBJ, Blender
+ *    - Note: Requires conversion; check individual licenses
+ *
+ * 6. CGTrader (Royalty-Free)
+ *    - Free anatomy: https://www.cgtrader.com/free-3d-models/anatomy
+ *    - Format: MAX, OBJ, FBX, some GLB
+ *    - Note: 1,100+ free models available
+ *
+ * OPTIMIZATION NOTES:
+ * - Target file size: < 5MB per organ for web performance
+ * - Use Draco compression: gltf-pipeline -i model.glb -o compressed.glb -d
+ * - Polygon reduction in Blender if needed (Decimate modifier)
+ * - This loader already includes DRACOLoader support
+ *
+ * ATTRIBUTION (when using CC models):
+ * - Z-Anatomy: "3D models from Z-Anatomy (z-anatomy.com), CC BY-SA 4.0"
+ * - BodyParts3D: "BodyParts3D, (C) DBCLS, CC BY 4.0"
+ * - NIH 3D: "From NIH 3D (3d.nih.gov), Public Domain"
+ */
+
 // Model cache to avoid reloading
 const modelCache = new Map<string, THREE.Group>();
 
@@ -346,19 +405,44 @@ export type AnatomicalSystem =
   | 'lymphatic'
   | 'integumentary';
 
-// Model paths by system (to be populated with actual model paths)
+// Model paths by system
+// PERFORMANCE: Only load ONE main model per system to avoid loading 80+ MB of data
+// The full system models contain all components, so we don't need the sub-parts
 export const SYSTEM_MODELS: Record<AnatomicalSystem, string[]> = {
-  skeletal: [],
+  skeletal: [
+    // Only load the main 1.6MB skeleton, not all the 8MB component files
+    'assets/models/skeletal/1_Skeletal_system.glb',
+  ],
   muscular: [],
   cardiovascular: [],
   nervous: [],
   respiratory: [],
-  digestive: [],
+  digestive: [
+    'assets/models/digestive/Digestive_system.glb',
+  ],
   urinary: [],
   reproductive: [],
   endocrine: [],
   lymphatic: [],
   integumentary: [],
+};
+
+// Regional model paths for body parts
+export const REGIONAL_MODELS: Record<string, string> = {
+  head: 'assets/models/organs/Head.glb',
+  neck: 'assets/models/organs/Neck.glb',
+  thorax: 'assets/models/organs/Thorax.glb',
+  abdomen: 'assets/models/organs/Abdomen.glb',
+  trunk: 'assets/models/organs/Trunk.glb',
+  back: 'assets/models/organs/Back.glb',
+  leftUpperLimb: 'assets/models/organs/Left_upper_limb.glb',
+  rightUpperLimb: 'assets/models/organs/Right_upper_limb.glb',
+  leftLowerLimb: 'assets/models/organs/Left_lower_limb.glb',
+  rightLowerLimb: 'assets/models/organs/Right_lower_limb.glb',
+  rightHand: 'assets/models/organs/Right_hand.glb',
+  rightFoot: 'assets/models/organs/Right_foot.glb',
+  cranium: 'assets/models/organs/Cranium.glb',
+  visceralSystems: 'assets/models/organs/Visceral_systems.glb',
 };
 
 // Lazy loading manager for anatomical systems

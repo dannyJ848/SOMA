@@ -1,0 +1,214 @@
+{
+  "id": "structure-sweat-glands",
+  "type": "structure",
+  "name": "Sweat Glands",
+  "alternateNames": ["Sudoriferous glands", "Sudoriparous glands", "Eccrine and apocrine glands"],
+  "fmaId": "FMA:59152",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Sweat glands are your body's natural air conditioning system, releasing sweat to cool you down.",
+      "explanation": "You have millions of sweat glands all over your body - about 2 to 4 million! When you get hot from exercise, warm weather, or even feeling nervous, these tiny glands make sweat that comes out through small holes in your skin called pores.\n\nSweat is mostly water with a little bit of salt. When it evaporates (dries up) from your skin, it takes heat away with it, cooling you down. That's why you sweat when you exercise - your body is trying to prevent overheating!\n\nThere are two main types of sweat glands:\n1. **Regular sweat glands (eccrine)** - Found everywhere on your body, especially on your palms, soles, and forehead. They make the watery sweat that cools you down.\n\n2. **Smelly sweat glands (apocrine)** - Found in your armpits and private areas. They make thicker sweat that doesn't smell at first, but bacteria on your skin break it down and cause body odor.\n\nSweat by itself is actually almost odorless - the smell comes from bacteria eating the sweat!",
+      "keyTerms": [
+        {
+          "term": "sweat",
+          "definition": "A salty liquid made by sweat glands to cool your body down"
+        },
+        {
+          "term": "pore",
+          "definition": "A tiny opening in your skin where sweat and oil come out"
+        },
+        {
+          "term": "evaporate",
+          "definition": "When a liquid turns into a gas and disappears into the air"
+        }
+      ],
+      "analogies": [
+        "Sweat glands work like a sprinkler system that cools your body just like sprinklers cool a hot yard",
+        "Sweating is like your body sweating is like a car's radiator - it releases heat to prevent overheating",
+        "The evaporation of sweat is like when you step out of a swimming pool and feel cold - the water taking away your body heat"
+      ],
+      "examples": [
+        "Your hands get sweaty when you're nervous before a test",
+        "You sweat more when you exercise because your muscles make extra heat",
+        "Your armpits smell because bacteria break down the sweat there"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Sweat glands include eccrine glands (thermoregulatory, distributed across body) and apocrine glands (scent glands, limited to axillae and genital region), both tubular structures with secretory coils and ducts.",
+      "explanation": "**Eccrine Sweat Glands**\nEccrine glands are the primary thermoregulatory glands, numbering 2-4 million in humans. They are simple coiled tubular glands with:\n- Secretory coil: Located in deep dermis or hypodermis\n- Dermal duct: Straight portion through dermis\n- Epidermal duct (acrosyringium): Spiral portion through epidermis opening at a sweat pore\n\nEccrine sweat is hypotonic (dilute), containing mostly water, NaCl, urea, lactate, and small amounts of other electrolytes. Production can reach 10-12 liters/day with maximum exertion.\n\nDistribution is highest on palms, soles, and forehead. Palmar/plantar sweating responds to emotional stimuli (cold sweat), while general body sweating responds to thermal stimuli.\n\n**Apocrine Sweat Glands**\nApocrine glands are larger, limited to axillae, areolae, periumbilical area, and anogenital region. They:\n- Open into hair follicles (not directly to surface)\n- Produce thicker, lipid-rich secretion\n- Become active at puberty (androgen-regulated)\n- Produce precursors of body odor (broken down by skin bacteria)\n- Are stimulated by emotional stress\n\n**Apoeccrine Glands**\nA third type, apoeccrine glands, are found in axillae and share features of both eccrine and apocrine glands. They produce copious watery sweat and may contribute to axillary hyperhidrosis.\n\n**Regulation**\n- Eccrine: Sympathetic nervous system, primarily cholinergic (ACh)\n- Apocrine: Sympathetic, adrenergic (epinephrine, norepinephrine)",
+      "keyTerms": [
+        {
+          "term": "eccrine glands",
+          "definition": "Sweat glands distributed across the body that produce watery sweat for thermoregulation",
+          "pronunciation": "EK-rin"
+        },
+        {
+          "term": "apocrine glands",
+          "definition": "Sweat glands in armpits and groin that produce thicker secretions and contribute to body odor",
+          "pronunciation": "AP-oh-krin"
+        },
+        {
+          "term": "acrosyringium",
+          "definition": "The spiral intraepidermal portion of the eccrine sweat duct",
+          "pronunciation": "ak-roh-sih-RIN-jee-um"
+        },
+        {
+          "term": "hypotonic",
+          "definition": "Having lower solute concentration than body fluids (dilute sweat compared to plasma)"
+        },
+        {
+          "term": "thermoregulation",
+          "definition": "The process of maintaining body temperature within a normal range"
+        }
+      ],
+      "analogies": [
+        "Eccrine glands are like air conditioning units throughout a building, while apocrine glands are like scent diffusers in certain rooms",
+        "The sweat duct spiraling through the epidermis is like a corkscrew"
+      ],
+      "examples": [
+        "Hyperhidrosis (excessive sweating) often affects palms, soles, and axillae where gland density is highest",
+        "Body odor develops at puberty when apocrine glands become active"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Eccrine and apocrine glands represent distinct sweat gland lineages with different developmental origins, secretory mechanisms (merocrine vs. decapitation secretion), innervation patterns, and functional roles in thermoregulation, chemical signaling, and barrier homeostasis.",
+      "explanation": "**Eccrine Gland Histology**\nThe secretory coil contains two cell types:\n- Clear cells: Contain glycogen, produce primary isotonic secretion via aquaporin-5 channels\n- Dark cells: Sialomucin granules, contribute glycoproteins\n\nMyoepithelial cells surround secretory cells, contracting to aid secretion.\n\nThe duct has a double layer of cuboidal cells that reabsorb Na+ and Cl- via ENaC channels and CFTR, producing hypotonic final sweat. Aldosterone enhances duct reabsorption, conserving sodium.\n\n**Secretory Mechanism**\nPrimary isotonic secretion: Na+, K+, Cl- transport creates osmotic gradient; water follows via aquaporins.\nDuctal modification: ENaC/CFTR reabsorption recovers 99% of Na+; sweat rate affects final composition (faster = less time for reabsorption = saltier sweat).\n\n**Apocrine Gland Characteristics**\n- Secretory portion much larger than eccrine (10x diameter)\n- Single layer of columnar/cuboidal cells\n- Secretion mechanism: Previously thought to be \"decapitation secretion\" (apical pinching); now considered mostly merocrine\n- Secretory products: Steroids, lipids, proteins including sialomucin\n- Odor precursors: 3-methyl-2-hexenoic acid (3M2H), androstenone, androstenol\n\n**Specialized Glands**\n- Ceruminous glands (ear canal): Modified apocrine, produce cerumen (ear wax)\n- Moll glands (eyelids): Modified apocrine, associated with cilia\n- Mammary glands: Highly modified apocrine glands\n\n**Innervation**\n- Eccrine: Sympathetic cholinergic (unusual - most sympathetic is adrenergic)\n- Acetylcholine → muscarinic M3 receptors → Ca2+ → secretion\n- Apocrine: Sympathetic adrenergic (β2 and α1 receptors)\n- Emotional stimuli (palmoplantar eccrine): Mixed cholinergic/adrenergic",
+      "keyTerms": [
+        {
+          "term": "clear cells",
+          "definition": "Eccrine secretory cells containing glycogen and aquaporin-5 that produce the primary sweat secretion"
+        },
+        {
+          "term": "ENaC",
+          "definition": "Epithelial sodium channel in sweat duct cells; reabsorbs Na+ to create hypotonic sweat"
+        },
+        {
+          "term": "CFTR",
+          "definition": "Cystic fibrosis transmembrane conductance regulator; Cl- channel in sweat duct; mutations cause cystic fibrosis"
+        },
+        {
+          "term": "myoepithelial cells",
+          "definition": "Contractile cells surrounding gland secretory cells that facilitate secretion"
+        },
+        {
+          "term": "ceruminous glands",
+          "definition": "Modified apocrine glands in the external auditory canal producing cerumen (ear wax)"
+        }
+      ],
+      "clinicalNotes": "The sweat test (pilocarpine iontophoresis) diagnoses cystic fibrosis by detecting elevated chloride (>60 mEq/L) due to defective CFTR in duct cells. Anhidrosis (inability to sweat) causes dangerous hyperthermia. Hidradenitis suppurativa affects apocrine gland-bearing areas."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Sweat glands integrate complex ion transport physiology (Na+/K+-ATPase, NKCC1, ENaC, CFTR), sympathetic neural control with unique cholinergic eccrine innervation, and developmental biology with implications for hyperhidrosis, anhidrotic conditions, and cystic fibrosis diagnostics.",
+      "explanation": "**Eccrine Secretory Physiology**\nPrimary secretion in clear cells involves:\n1. Basolateral Na+/K+-ATPase creates Na+ gradient\n2. NKCC1 (Na+-K+-2Cl- cotransporter) imports Cl-\n3. Apical CFTR and Ca2+-activated Cl- channels secrete Cl-\n4. Na+ follows paracellularly\n5. Aquaporin-5 channels allow osmotic water flow\n\nDuctal reabsorption:\n1. ENaC (amiloride-sensitive) absorbs Na+ at apical membrane\n2. CFTR provides Cl- conductance\n3. Na+/K+-ATPase at basolateral membrane\n4. Result: Final sweat is hypotonic (10-70 mEq/L Na+ vs. 140 mEq/L plasma)\n\n**Sweat Composition Dynamics**\n- Low sweat rate: More time for ductal reabsorption → very dilute sweat\n- High sweat rate: Less reabsorption time → saltier sweat\n- Heat acclimatization: Increased aldosterone → enhanced duct reabsorption → more dilute sweat\n\n**Cholinergic Eccrine Innervation**\nUnique among sympathetic targets, eccrine glands are cholinergic:\n- ACh → M3 muscarinic receptors → Gq → PLC → IP3 → Ca2+ release\n- Ca2+ activates TMEM16A Cl- channels\n- VIP co-released, enhances secretion\n- Atropine blocks sweating\n\nPalmar/plantar eccrine glands have dual innervation (cholinergic for emotional sweating, adrenergic component).\n\n**Apocrine Secretory Products**\n- Odor precursors: HMHA-Gln (3-hydroxy-3-methylhexanoic acid-glutamine)\n- Bacterial metabolism: Corynebacterium, Staphylococcus cleave amino acid conjugates\n- Released volatile fatty acids and steroids create axillary odor\n- Pheromone-like function: Androstenone, androstenol may influence social behavior\n\n**Developmental Biology**\n- Eccrine glands develop independently from epidermis (not hair follicle-associated)\n- EDA (ectodysplasin-A) signaling critical for development\n- Mutations in EDA pathway cause hypohidrotic ectodermal dysplasia\n- Apocrine glands develop from follicular bulge, hormone-dependent maturation at puberty",
+      "keyTerms": [
+        {
+          "term": "NKCC1",
+          "definition": "Na+-K+-2Cl- cotransporter on basolateral membrane of secretory cells; imports ions for secretion"
+        },
+        {
+          "term": "TMEM16A",
+          "definition": "Calcium-activated chloride channel (anoctamin-1) in eccrine secretory cells"
+        },
+        {
+          "term": "hypohidrotic ectodermal dysplasia",
+          "definition": "Genetic disorder with absent/reduced sweat glands, sparse hair, and dental abnormalities due to EDA pathway mutations"
+        },
+        {
+          "term": "heat acclimatization",
+          "definition": "Physiological adaptations to hot environments including increased sweating efficiency and dilute sweat production"
+        },
+        {
+          "term": "HMHA",
+          "definition": "3-hydroxy-3-methylhexanoic acid; odor precursor in apocrine sweat, cleaved by bacteria to volatile odorants"
+        }
+      ],
+      "clinicalNotes": "Hyperhidrosis treatment ladder: topical antiperspirants (aluminum chloride), iontophoresis, botulinum toxin (blocks ACh release), anticholinergics (glycopyrrolate), microwave thermolysis (miraDry), and endoscopic thoracic sympathectomy. CF sweat test: pilocarpine stimulates M3 receptors; CFTR dysfunction prevents Cl- and Na+ reabsorption. Bromhidrosis (body odor) treated with topical antibiotics, botox, or surgical gland removal."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Sweat gland physiology encompasses ion transport mechanisms informing CF diagnostics, sympathetic cholinergic signaling pathways targeted in hyperhidrosis therapy, microbiome-odor precursor interactions, and developmental signaling (EDA/NF-κB) relevant to ectodermal dysplasias and regenerative approaches.",
+      "explanation": "**Molecular Physiology of Ion Transport**\nThe sweat gland is a model for transepithelial ion transport:\n\nSecretory Coil:\n- β-adrenergic stimulation (minor): cAMP → PKA → CFTR phosphorylation\n- Cholinergic stimulation (major): Ca2+ → TMEM16A activation\n- Basolateral: Na+/K+-ATPase, NKCC1, KCa channels\n- Apical: CFTR, TMEM16A\n- Aquaporin-5: Rate-limiting for water flow\n\nDuct:\n- ENaC: 3-subunit channel (α, β, γ), regulated by aldosterone and SGK1\n- CFTR: Provides Cl- conductance, regulates ENaC\n- In CF: CFTR dysfunction → ENaC hyperactivity → excessive Na+ reabsorption (but Cl- can't follow) → elevated sweat Cl-\n\n**CFTR and Cystic Fibrosis**\nSweat duct is unique CF organ: CFTR loss causes Cl- retention (opposite to lung/GI where Cl- secretion is impaired).\n- Sweat Cl- >60 mEq/L diagnostic; 30-60 borderline\n- Pilocarpine iontophoresis: M3 → Ca2+ → secretion\n- Gibson-Cooke collection method gold standard\n- CFTR modulators (ivacaftor, lumacaftor, tezacaftor, elexacaftor) can normalize sweat Cl-\n\n**Hyperhidrosis Pathophysiology**\nPrimary focal hyperhidrosis: Genetic predisposition, normal gland number but hyperactive\n- Potential mechanisms: Enhanced cholinergic sensitivity, reduced inhibition\n- Treatments:\n  - Aluminum chloride: Blocks ducts, damages secretory cells\n  - Botulinum toxin: Cleaves SNAP-25, prevents ACh vesicle fusion\n  - Glycopyrrolate: Muscarinic antagonist\n  - Oxybutynin: Anticholinergic with CNS effects\n  - Sympathectomy: T2-4 for palmar, higher complication rate for axillary\n  - MiraDry: Microwave destruction of glands\n\n**Developmental and Regenerative Biology**\nEccrine gland development requires:\n- Wnt/β-catenin signaling: Initial placode formation\n- EDA/EDAR/EDARADD: NF-κB pathway activation\n- Shh: Duct specification\n- Sox9, Myb: Lineage specification\n\nRegeneration potential limited - wound healing shows minimal new gland formation. Organoid and tissue engineering approaches under investigation.\n\n**Apocrine Gland and Microbiome**\nOdor formation pathway:\n1. Apocrine secretion contains HMHA-Gln, S-cysteinyl conjugates\n2. Corynebacterium striatum, C. jeikeium, Staphylococcus express amino acid lyases\n3. Cleavage releases volatile 3M2H, sulfanylalkanols\n4. ABCC11 (MRP8) transporter determines odor precursor secretion\n5. ABCC11 SNP (rs17822931) predicts dry earwax and reduced body odor (common in East Asians)\n\n**Hidradenitis Suppurativa**\nChronic inflammatory condition of apocrine gland-bearing areas:\n- Pathogenesis: Follicular occlusion, rupture, inflammation\n- Innate immunity dysregulation: IL-1, IL-17, TNF-α\n- Treatment: Adalimumab (anti-TNF), emerging IL-17 inhibitors\n- Surgical options for chronic tunneling disease",
+      "keyTerms": [
+        {
+          "term": "CFTR modulator",
+          "definition": "Drugs that correct or potentiate dysfunctional CFTR protein; elexacaftor-tezacaftor-ivacaftor (Trikafta) is highly effective combination"
+        },
+        {
+          "term": "ABCC11",
+          "definition": "ATP-binding cassette transporter determining apocrine odor precursor secretion and earwax type"
+        },
+        {
+          "term": "Gibson-Cooke method",
+          "definition": "Gold standard sweat test: pilocarpine iontophoresis to stimulate sweating, collection on gauze, chloride measurement"
+        },
+        {
+          "term": "SNAP-25",
+          "definition": "SNARE protein cleaved by botulinum toxin, preventing neurotransmitter vesicle fusion"
+        },
+        {
+          "term": "hidradenitis suppurativa",
+          "definition": "Chronic inflammatory disease of apocrine gland-bearing skin causing painful nodules, abscesses, and sinus tracts"
+        }
+      ],
+      "clinicalNotes": "Hyperhidrosis quality of life impact is severe; treatment individualized by site and severity. Botox duration 4-6 months axillae, less for palms. Compensatory hyperhidrosis (other sites increase sweating) occurs in 30-80% after sympathectomy. CF sweat test remains diagnostic even with modulator therapy, though values may normalize. Hidradenitis Hurley staging guides therapy: Stage I (topical/intralesional), Stage II (biologics), Stage III (surgery). Eccrine gland tumors rare: poroma, spiroadenoma, hidradenoma; malignant variants have poor prognosis."
+    }
+  },
+  "media": [],
+  "citations": [
+    {
+      "id": "sato-1989",
+      "type": "article",
+      "title": "Biology of sweat glands and their disorders",
+      "authors": ["Kenzo Sato"],
+      "source": "Journal of the American Academy of Dermatology"
+    },
+    {
+      "id": "quinton-2007",
+      "type": "article",
+      "title": "Cystic fibrosis: lessons from the sweat gland",
+      "authors": ["Paul M. Quinton"],
+      "source": "Physiology"
+    }
+  ],
+  "crossReferences": [
+    {
+      "targetId": "process-thermoregulation",
+      "targetType": "process",
+      "relationship": "related",
+      "label": "Thermoregulation"
+    },
+    {
+      "targetId": "condition-hyperhidrosis",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Hyperhidrosis"
+    },
+    {
+      "targetId": "condition-cystic-fibrosis",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Cystic Fibrosis"
+    }
+  ],
+  "tags": {
+    "systems": ["integumentary"],
+    "structures": ["FMA:59152", "FMA:59154", "FMA:59162"],
+    "topics": ["anatomy", "physiology", "histology"],
+    "keywords": ["sweat", "eccrine", "apocrine", "thermoregulation", "CFTR", "hyperhidrosis"],
+    "clinicalRelevance": "high",
+    "examRelevance": {
+      "usmle": true,
+      "nbme": true,
+      "shelf": ["medicine", "pediatrics"]
+    }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

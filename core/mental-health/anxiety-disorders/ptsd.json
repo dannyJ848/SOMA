@@ -1,0 +1,166 @@
+{
+  "id": "condition-ptsd",
+  "type": "condition",
+  "category": "trauma-disorder",
+  "name": "Post-Traumatic Stress Disorder",
+  "alternateNames": ["PTSD", "Post-Traumatic Stress", "Trauma-Related Disorder"],
+  "icd10": "F43.10",
+  "dsm5": "309.81",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "PTSD is a condition that can develop after experiencing or witnessing a terrifying event, causing lasting effects like flashbacks, nightmares, and feeling constantly on edge.",
+      "explanation": "After a traumatic event - like combat, assault, an accident, or natural disaster - most people feel upset, scared, or have trouble sleeping for a while. For most people, these reactions fade over time. But for some people, the symptoms continue for months or years, and that's when it becomes PTSD. People with PTSD may have vivid flashbacks or nightmares where they feel like they're reliving the trauma. They might avoid anything that reminds them of what happened, feel emotionally numb, or be constantly on guard and jumpy. PTSD is treatable, and many people recover with proper help.",
+      "keyTerms": [
+        { "term": "trauma", "definition": "A deeply distressing or disturbing experience that overwhelms your ability to cope" },
+        { "term": "flashback", "definition": "A vivid, intrusive memory where you feel like you're reliving the traumatic event" },
+        { "term": "hypervigilance", "definition": "Being in a constant state of high alert, always watching for danger" }
+      ],
+      "analogies": ["PTSD is like a burglar alarm that got stuck in the 'on' position - your brain's danger detection system keeps going off even when you're safe, because it learned during the trauma that the world isn't safe."],
+      "examples": ["A car accident survivor might have nightmares about the crash, avoid driving, feel disconnected from loved ones, and startle easily at loud noises - even years later."],
+      "importantNote": "PTSD is not a sign of weakness. It's a normal response to abnormal events. It happens to brave people, including military veterans, first responders, and survivors of violence. Recovery is possible."
+    },
+    "2": {
+      "level": 2,
+      "summary": "PTSD requires exposure to actual/threatened death, serious injury, or sexual violence, followed by symptoms in four clusters: intrusion, avoidance, negative alterations in cognition/mood, and arousal/reactivity, lasting more than 1 month.",
+      "explanation": "DSM-5 Criterion A (exposure): experiencing, witnessing, learning of close family/friend's trauma, or repeated/extreme exposure to aversive details (not through media unless work-related). Four symptom clusters: (B) Intrusion - intrusive memories, nightmares, flashbacks, psychological distress at reminders, physiological reactions to reminders; (C) Avoidance - of internal reminders (memories, thoughts, feelings) and external reminders (people, places, activities); (D) Negative cognitions and mood - inability to remember aspects of trauma, persistent negative beliefs, distorted blame, persistent negative emotions, diminished interest, detachment, inability to experience positive emotions; (E) Arousal and reactivity - irritability/anger, reckless/self-destructive behavior, hypervigilance, exaggerated startle, concentration problems, sleep disturbance. Duration >1 month; causes significant distress/impairment.",
+      "keyTerms": [
+        { "term": "intrusion symptoms", "definition": "Unwanted re-experiencing of trauma through memories, nightmares, or flashbacks" },
+        { "term": "dissociation", "definition": "Disconnection from thoughts, feelings, surroundings, or identity; includes depersonalization and derealization" },
+        { "term": "negative cognitions", "definition": "Persistent negative beliefs about self, others, or world ('I am bad,' 'No one can be trusted')" },
+        { "term": "hyperarousal", "definition": "State of excessive alertness including irritability, hypervigilance, exaggerated startle, sleep problems" }
+      ],
+      "diagnosticCriteria": "Criterion A exposure + 1+ intrusion + 1+ avoidance + 2+ negative cognition/mood + 2+ arousal symptoms + >1 month + impairment",
+      "prevalence": "Lifetime prevalence 6-9%; higher in trauma-exposed populations (combat veterans 15-30%, sexual assault survivors 30-50%); F:M ratio 2:1"
+    },
+    "3": {
+      "level": 3,
+      "summary": "PTSD involves impaired fear extinction, dysregulated HPA axis and noradrenergic systems, and altered memory processing; trauma-focused psychotherapy is first-line treatment.",
+      "explanation": "Neurobiological model: hyperactive amygdala (fear processing); hypoactive medial prefrontal cortex (impaired fear inhibition); reduced hippocampal volume (context processing, memory consolidation); dysregulated HPA axis with lower cortisol (unlike other stress disorders); noradrenergic hyperactivity (flashbacks, hyperarousal). Fear conditioning: trauma creates strong conditioned fear response; extinction is impaired so fear persists. Memory: traumatic memories are fragmented, sensory-heavy, poorly contextualized. Treatment: Trauma-focused CBT is first-line - includes Prolonged Exposure (PE), Cognitive Processing Therapy (CPT), and EMDR. PE: imaginal exposure (recounting trauma) + in vivo exposure (approaching avoided situations). CPT: identifying and challenging trauma-related cognitions. EMDR: bilateral stimulation while processing trauma memory. Medications: SSRIs (sertraline, paroxetine FDA-approved) and SNRIs (venlafaxine); prazosin for nightmares.",
+      "keyTerms": [
+        { "term": "prolonged exposure", "definition": "Evidence-based trauma therapy involving repeated recounting of trauma memory and approaching avoided situations" },
+        { "term": "cognitive processing therapy", "definition": "Trauma therapy focusing on challenging and modifying trauma-related beliefs and meanings" },
+        { "term": "EMDR", "definition": "Eye Movement Desensitization and Reprocessing; trauma therapy using bilateral stimulation during trauma memory processing" },
+        { "term": "prazosin", "definition": "Alpha-1 blocker that reduces noradrenergic activity; effective for PTSD nightmares" }
+      ],
+      "clinicalNotes": "Screen all trauma-exposed individuals. PCL-5 is standard self-report measure. Trauma-focused therapy superior to medications but often underutilized. Dropout can be issue - careful pacing and strong therapeutic alliance help. Avoid benzodiazepines - may worsen PTSD outcomes and interfere with therapy."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced PTSD management addresses complex presentations, dissociative subtype, comorbidity, and integrates emerging treatments for resistant cases.",
+      "explanation": "Dissociative subtype: depersonalization or derealization in addition to full PTSD criteria; may require stabilization before trauma-focused work. Complex PTSD (ICD-11): prolonged/repeated trauma (abuse, captivity) leading to affect dysregulation, negative self-concept, and relational disturbances in addition to PTSD symptoms; may require phase-based treatment. Treatment resistance: optimize trauma-focused therapy before medication changes; combine medication + psychotherapy; consider stellate ganglion block, ketamine, or MDMA-assisted therapy (breakthrough therapy designation). Comorbidities: depression (50%), substance use (40%), TBI overlap (veterans); address suicidality. Special populations: combat veterans (moral injury, military sexual trauma); childhood trauma survivors (developmental impacts); refugees (cultural adaptations); first responders. Complicated grief: distinguish from PTSD. Sleep: prioritize - CBT-I plus prazosin for nightmares.",
+      "keyTerms": [
+        { "term": "complex PTSD", "definition": "Disorder of prolonged/repeated trauma with additional features: affect dysregulation, negative self-concept, relational disturbance" },
+        { "term": "moral injury", "definition": "Psychological damage from actions violating one's moral code; common in veterans" },
+        { "term": "stellate ganglion block", "definition": "Anesthetic injection in neck targeting sympathetic nervous system; emerging treatment for PTSD" },
+        { "term": "MDMA-assisted therapy", "definition": "Psychotherapy enhanced by MDMA to facilitate trauma processing; Phase 3 trials promising for treatment-resistant PTSD" }
+      ],
+      "clinicalNotes": "Stabilization before trauma-focused work is important for severely dissociative or suicidal patients. Phase-based approach for complex trauma: safety/stabilization, trauma processing, integration. Trauma-informed care: ask 'What happened to you?' not 'What's wrong with you?' Address practical needs (housing, safety) along with PTSD treatment."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert PTSD management integrates fear reconsolidation science, precision medicine approaches, novel pharmacotherapies, and addresses public health and prevention.",
+      "explanation": "Fear reconsolidation research: reactivating trauma memory may open window for modification; propranolol during reconsolidation (mixed results); behavioral interventions (brief exposure during reconsolidation window). Biomarkers: glucocorticoid receptor sensitivity, inflammatory markers, neuroimaging (amygdala reactivity, hippocampal volume), startle response; potential for risk prediction and treatment matching. Novel treatments: MDMA-assisted therapy (Phase 3 trials show 67% remission); psilocybin (early research); stellate ganglion block (replicated efficacy); transcranial magnetic stimulation. Prevention: early intervention (Psychological First Aid, trauma-focused CBT within weeks); hydrocortisone administration in acute trauma may prevent PTSD. Genetic factors: FKBP5 gene interacts with childhood trauma; methylation changes (epigenetics) after trauma. Systems issues: access to evidence-based care is major barrier; training more therapists in PE/CPT essential. Social determinants: ongoing safety, social support, and resources affect recovery. Collective trauma: mass casualty events, pandemics, war - community-level interventions needed.",
+      "keyTerms": [
+        { "term": "fear reconsolidation", "definition": "Process by which reactivated fear memories become labile and potentially modifiable" },
+        { "term": "psychological first aid", "definition": "Evidence-informed approach for early post-trauma intervention focusing on safety, comfort, connection, coping" },
+        { "term": "epigenetics", "definition": "Changes in gene expression without DNA sequence changes; trauma can cause epigenetic changes" },
+        { "term": "FKBP5", "definition": "Gene regulating glucocorticoid receptor sensitivity; interacts with trauma exposure to affect PTSD risk" }
+      ],
+      "clinicalNotes": "PTSD is a public health issue - advocate for trauma-informed systems and evidence-based treatment access. Posttraumatic growth is real - trauma can lead to positive changes, though we should not romanticize suffering. Long-term recovery is the norm with treatment. Research priorities: prevention, treatment matching, novel treatments for resistant cases."
+    }
+  },
+
+  "traumaTypes": [
+    "Combat and military trauma",
+    "Sexual assault and abuse",
+    "Physical assault",
+    "Childhood abuse and neglect",
+    "Intimate partner violence",
+    "Serious accidents",
+    "Natural disasters",
+    "Terrorism and mass violence",
+    "Medical trauma",
+    "Witnessing death or violence",
+    "Sudden violent death of loved one"
+  ],
+
+  "riskFactors": [
+    "Severity and type of trauma",
+    "Prior trauma exposure",
+    "Pre-existing mental health conditions",
+    "Lack of social support after trauma",
+    "Peritraumatic dissociation",
+    "Female sex",
+    "Younger age at trauma",
+    "Lower socioeconomic status",
+    "Genetic factors"
+  ],
+
+  "protectiveFactors": [
+    "Strong social support",
+    "Sense of purpose or meaning",
+    "Coping skills",
+    "Early intervention after trauma",
+    "Feelings of self-efficacy",
+    "Resilience"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "veteransCrisisLine": "988, then press 1",
+      "crisisTextLine": "Text HOME to 741741",
+      "rainn": "1-800-656-4673 (Sexual Assault Hotline)",
+      "domesticViolence": "1-800-799-7233"
+    },
+    "online": {
+      "ptsdFoundation": "www.ptsd.va.gov",
+      "rainn": "www.rainn.org"
+    },
+    "message": "If you're struggling with trauma, you're not alone. Recovery is possible, and effective treatments exist. Please reach out for help."
+  },
+
+  "treatments": {
+    "firstLine": ["Prolonged Exposure (PE)", "Cognitive Processing Therapy (CPT)", "EMDR", "SSRIs (sertraline, paroxetine)"],
+    "secondLine": ["Venlafaxine", "Prazosin (for nightmares)", "Other trauma-focused therapies"],
+    "emerging": ["MDMA-assisted therapy", "Stellate ganglion block", "Ketamine"],
+    "adjunctive": ["Sleep treatment", "Anger management", "Skills training", "Substance use treatment if comorbid"]
+  },
+
+  "citations": [
+    {
+      "id": "foa-2019",
+      "type": "study",
+      "title": "Effect of Prolonged Exposure Therapy Delivered Over 2 Weeks vs 8 Weeks vs Present-Centered Therapy on PTSD Symptom Severity",
+      "journal": "JAMA",
+      "year": 2019
+    },
+    {
+      "id": "mitchell-2021",
+      "type": "study",
+      "title": "MDMA-assisted therapy for severe PTSD: a randomized, double-blind, placebo-controlled phase 3 study",
+      "journal": "Nature Medicine",
+      "year": 2021
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-acute-stress-disorder", "targetType": "condition", "relationship": "related", "label": "Acute Stress Disorder" },
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "comorbidity", "label": "Major Depressive Disorder" },
+    { "targetId": "treatment-prolonged-exposure", "targetType": "treatment", "relationship": "treatment", "label": "Prolonged Exposure" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "trauma"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

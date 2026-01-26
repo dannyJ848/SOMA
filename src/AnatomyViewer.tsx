@@ -495,9 +495,19 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const [enhancedMode, setEnhancedMode] = useState(true);
   const [useRealModels, setUseRealModels] = useState(false); // Toggle for real GLB models
   const [lodState, setLodState] = useState<ReturnType<typeof useLOD> | null>(null);
-  // Start with minimal systems for fast initial load - user can enable more
+  // Start with ALL systems enabled for Complete Anatomy-style layer control
+  // Users can toggle individual systems on/off as needed
   const [enabledSystems, setEnabledSystems] = useState<AnatomicalSystem[]>([
-    'integumentary', 'skeletal'  // Only skin and skeleton by default for performance
+    'integumentary',
+    'muscular',
+    'skeletal',
+    'cardiovascular',
+    'respiratory',
+    'digestive',
+    'nervous',
+    'urinary',
+    'lymphatic',
+    'endocrine',
   ]);
   const [animateOrgans, setAnimateOrgans] = useState(false);
 

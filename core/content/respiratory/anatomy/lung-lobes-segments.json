@@ -1,0 +1,120 @@
+{
+  "id": "structure-lung-lobes-segments",
+  "type": "structure",
+  "name": "Lung Lobes and Segments",
+  "alternateNames": ["Pulmonary lobes", "Bronchopulmonary segments"],
+  "fmaId": "FMA:7195",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Your lungs are divided into sections called lobes - your right lung has three and your left lung has two - and each lobe is divided into smaller parts called segments.",
+      "explanation": "You have two lungs in your chest. Your right lung is bigger and has three sections called lobes: upper, middle, and lower. Your left lung is smaller (to make room for your heart) and has only two lobes: upper and lower. Each lobe is further divided into smaller sections called segments, kind of like how an orange is divided into wedges. Each segment has its own air tube (bronchus) and blood supply. This division is important because if part of your lung gets sick, doctors can sometimes remove just that segment without taking the whole lobe.",
+      "keyTerms": [
+        {"term": "lobe", "definition": "A major section of the lung; the right lung has 3 lobes, the left has 2"},
+        {"term": "segment", "definition": "A smaller section of a lobe with its own air tube and blood supply"},
+        {"term": "right lung", "definition": "The larger lung with three lobes"},
+        {"term": "left lung", "definition": "The smaller lung with two lobes, next to the heart"}
+      ],
+      "analogies": ["Your lungs are like spongy balloons divided into sections, similar to how a pomegranate is divided into sections of seeds, each wrapped in its own compartment."],
+      "examples": ["If someone has lung cancer in just one segment, doctors might remove only that segment, leaving the rest of the lung working."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The right lung has three lobes (upper, middle, lower) separated by oblique and horizontal fissures, while the left lung has two lobes separated by the oblique fissure; each lobe contains bronchopulmonary segments.",
+      "explanation": "The right lung is divided into three lobes by two fissures: the horizontal fissure separates the upper and middle lobes, and the oblique fissure separates the middle and lower lobes. The left lung has only the oblique fissure, dividing upper and lower lobes. The lingula is a tongue-like projection of the left upper lobe that corresponds anatomically to the right middle lobe. Each lung contains 10 bronchopulmonary segments (though some left-sided segments may be fused), which are independent units with their own segmental bronchus, artery, and vein. Segments are separated by connective tissue septa and are named based on their position: apical, posterior, anterior, lateral, medial, superior, and basal segments.",
+      "keyTerms": [
+        {"term": "fissure", "definition": "A deep groove separating lung lobes; horizontal (right only) and oblique (both lungs)"},
+        {"term": "bronchopulmonary segment", "definition": "A functionally independent unit of lung tissue with its own airway and blood supply"},
+        {"term": "lingula", "definition": "Tongue-shaped projection of the left upper lobe, analogous to the right middle lobe", "pronunciation": "LING-gyoo-lah"},
+        {"term": "oblique fissure", "definition": "Fissure present in both lungs, separating the lower lobe from upper structures"},
+        {"term": "horizontal fissure", "definition": "Fissure only in right lung, separating upper and middle lobes"}
+      ],
+      "analogies": ["Lung segments are like slices of a citrus fruit - each slice (segment) can be separated from the others because it has its own membrane wrapping."],
+      "examples": ["A chest X-ray can show whether pneumonia is affecting one segment, one lobe, or the entire lung."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Bronchopulmonary segmental anatomy defines surgically and functionally distinct units with specific vascular supply, drainage, and clinical significance for localized pathology.",
+      "explanation": "Right lung segments: Upper lobe (apical, posterior, anterior), Middle lobe (lateral, medial), Lower lobe (superior, medial basal, anterior basal, lateral basal, posterior basal). Left lung segments: Upper lobe (apicoposterior, anterior, superior lingular, inferior lingular), Lower lobe (superior, anteromedial basal, lateral basal, posterior basal). Each segment receives a tertiary (segmental) bronchus and pulmonary artery branch; pulmonary veins run between segments (intersegmental). The right upper lobe bronchus arises before the carina in 1-3% of cases (tracheal bronchus). Surface anatomy: oblique fissure follows the 6th rib anteriorly to T3 posteriorly; horizontal fissure at 4th costal cartilage level. Segmental resection is possible due to intersegmental septa and discrete vascular pedicles. Anatomic variations include incomplete fissures and accessory lobes (azygos lobe).",
+      "keyTerms": [
+        {"term": "segmental bronchus", "definition": "Tertiary bronchus supplying a specific bronchopulmonary segment"},
+        {"term": "intersegmental veins", "definition": "Pulmonary veins running between segments rather than within them"},
+        {"term": "tracheal bronchus", "definition": "Anomalous right upper lobe bronchus arising directly from trachea"},
+        {"term": "azygos lobe", "definition": "Accessory lobe created by azygos vein passing through right upper lobe"},
+        {"term": "segmentectomy", "definition": "Surgical removal of a bronchopulmonary segment"}
+      ],
+      "clinicalNotes": "Segment-specific consolidation patterns on CT help localize pathology. Superior segment of lower lobe is posterior - aspiration site in supine patients. Segmentectomy for early lung cancer shows similar outcomes to lobectomy for small tumors."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pulmonary lobar and segmental anatomy integrates with ventilation-perfusion relationships, surgical planning, and radiologic interpretation for precision management of localized disease.",
+      "explanation": "Regional lung function varies with posture and gravity: in upright position, ventilation and perfusion increase from apex to base, but perfusion increases more rapidly, creating V/Q mismatch (high V/Q at apex, low at base). West's zones describe the relationship between alveolar pressure (PA), pulmonary arterial (Pa), and venous (Pv) pressures: Zone 1 (PA>Pa>Pv, apex, dead space), Zone 2 (Pa>PA>Pv, mid-lung), Zone 3 (Pa>Pv>PA, base, most perfusion). Surgical considerations: lobectomy remains standard for resectable lung cancer, but anatomic segmentectomy is oncologically equivalent for tumors <=2cm (JCOG0802/WJOG4607L trials). 3D CT reconstruction enables virtual bronchoscopy and precise surgical planning. Intersegmental plane identification uses inflation-deflation technique or ICG fluorescence. Radiologic anatomy: lingula projects anteriorly (often seen on PA film), lower lobe segments posteriorly (lateral film).",
+      "keyTerms": [
+        {"term": "West's zones", "definition": "Model describing regional pulmonary blood flow based on pressure relationships"},
+        {"term": "V/Q matching", "definition": "Relationship between ventilation and perfusion; ideally V/Q = 1"},
+        {"term": "anatomic segmentectomy", "definition": "Precise surgical removal following segmental planes, preserving function"},
+        {"term": "JCOG0802", "definition": "Japanese trial demonstrating non-inferiority of segmentectomy to lobectomy for small peripheral lung cancers"},
+        {"term": "intersegmental plane", "definition": "Connective tissue boundary between adjacent segments, identified surgically for segmentectomy"}
+      ],
+      "clinicalNotes": "Postoperative FEV1 prediction: ppoFEV1 = preop FEV1 x (1 - segments removed/total functioning segments). V/Q scan or quantitative CT perfusion refines this. VATS/RATS segmentectomy feasible with comparable outcomes to open."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary pulmonary segmental surgery integrates molecular staging, minimally invasive techniques, and functional preservation with evolving evidence for sublobar resection in early-stage lung cancer.",
+      "explanation": "Lung cancer surgical management is evolving toward parenchymal-sparing approaches. CALGB 140503 demonstrated non-inferiority of sublobar resection (wedge or segmentectomy) for peripheral T1aN0 tumors. JCOG0802 showed overall survival benefit of segmentectomy over lobectomy for tumors <=2cm. Patient selection considers tumor size, location, nodal status (systematic sampling/dissection), histology (lepidic-predominant favors sublobar), and pulmonary reserve. Technology integration: 3D-CT reconstruction for preoperative planning, ICG fluorescence for intersegmental plane, robotic-assisted segmentectomy, and electromagnetic navigational bronchoscopy for lesion localization. Molecular profiling (EGFR, ALK, ROS1, PD-L1, KRAS) guides adjuvant/neoadjuvant therapy. Stereotactic body radiotherapy (SBRT) is an alternative for medically inoperable patients with equivalent local control. Emerging: ultra-minimally invasive surgery (uniportal VATS), subxiphoid approaches, and natural orifice transluminal endoscopic surgery (NOTES) concepts.",
+      "keyTerms": [
+        {"term": "CALGB 140503", "definition": "US trial demonstrating non-inferiority of sublobar resection for small peripheral NSCLCs"},
+        {"term": "ICG fluorescence", "definition": "Indocyanine green imaging for intraoperative visualization of intersegmental planes and perfusion"},
+        {"term": "SBRT", "definition": "Stereotactic body radiation therapy - high-dose focused radiation for inoperable early lung cancer"},
+        {"term": "lepidic-predominant", "definition": "Adenocarcinoma subtype with favorable prognosis, growing along alveolar walls"},
+        {"term": "uniportal VATS", "definition": "Single-incision video-assisted thoracoscopic surgery, reducing surgical trauma"}
+      ],
+      "clinicalNotes": "Sublobar resection with adequate margins (>2cm or > tumor diameter) is acceptable for T1a. Wedge resection for lepidic-predominant histology. Consider SBRT if FEV1 <40% predicted or DLCO <40%. Immunotherapy (adjuvant or neoadjuvant) changes surgical timing and approach."
+    }
+  },
+  "media": [
+    {
+      "id": "lung-segments-3d-model",
+      "type": "3d-model",
+      "filename": "lung_lobes_segments.glb",
+      "title": "3D Lung Lobes and Segments",
+      "description": "Interactive model showing all lobes and bronchopulmonary segments with color coding"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "jcog0802",
+      "type": "article",
+      "title": "Segmentectomy versus Lobectomy for Clinical Stage IA Lung Cancer",
+      "authors": ["Saji H", "Okada M", "Tsuboi M"],
+      "source": "Lancet",
+      "url": "https://doi.org/10.1016/S0140-6736(21)02333-3"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-bronchial-tree", "targetType": "structure", "relationship": "related", "label": "Bronchial Tree"},
+    {"targetId": "structure-pleura", "targetType": "structure", "relationship": "related", "label": "Pleura"},
+    {"targetId": "condition-lung-cancer", "targetType": "condition", "relationship": "related", "label": "Lung Cancer"}
+  ],
+  "tags": {
+    "systems": ["respiratory"],
+    "structures": ["FMA:7195", "FMA:7200", "FMA:7203"],
+    "topics": ["anatomy", "surgery", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

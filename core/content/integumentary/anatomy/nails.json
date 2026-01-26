@@ -1,0 +1,218 @@
+{
+  "id": "structure-nails",
+  "type": "structure",
+  "name": "Nails",
+  "alternateNames": ["Nail unit", "Unguis", "Nail apparatus", "Fingernails and toenails"],
+  "fmaId": "FMA:54326",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Nails are hard plates made of keratin that protect your fingertips and help you pick up small objects.",
+      "explanation": "Your fingernails and toenails are made of a tough protein called keratin - the same stuff that makes up your hair. They grow from a hidden area under your skin called the nail root, and the white half-moon shape you might see at the base is called the lunula.\n\nNails grow slowly - fingernails about 3-4 millimeters per month, and toenails even slower. That's why it can take 6 months to grow a new fingernail and over a year for a toenail!\n\nNails have important jobs:\n- They protect the sensitive tips of your fingers and toes\n- They help you pick up tiny objects (try picking up a coin without using your nails!)\n- They help you scratch an itch\n- They can show signs of health problems - that's why doctors sometimes look at your nails\n\nThe pink color of your nails comes from the blood vessels underneath. The part that hangs over the tip of your finger is white because there's no blood showing through it.",
+      "keyTerms": [
+        {
+          "term": "keratin",
+          "definition": "A tough protein that makes up nails, hair, and the outer layer of skin",
+          "pronunciation": "KAIR-ah-tin"
+        },
+        {
+          "term": "lunula",
+          "definition": "The white half-moon shape at the base of your nail",
+          "pronunciation": "LOO-nyoo-lah"
+        },
+        {
+          "term": "cuticle",
+          "definition": "The thin skin that covers and protects the base of your nail"
+        }
+      ],
+      "analogies": [
+        "Nails are like built-in tools at the end of your fingers",
+        "The nail root is like a hidden factory that keeps making more nail material",
+        "Keratin in nails is like the same material that makes rhinoceros horns"
+      ],
+      "examples": [
+        "When you bang your nail, it can turn purple from blood trapped underneath",
+        "Biting your nails can damage the nail root and cause uneven growth",
+        "White spots on nails usually come from minor injuries"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The nail unit is a specialized appendage consisting of the nail plate, nail bed, matrix, and surrounding folds, formed through keratinization of matrix epithelium and serving protective and functional roles.",
+      "explanation": "**Nail Anatomy**\nThe nail unit consists of several components:\n\n**Nail Plate**: The visible hard part of the nail, a translucent keratinized structure. It's about 0.5mm thick on fingernails and slightly thicker on toenails.\n\n**Nail Matrix**: The germinative zone under the proximal nail fold that produces the nail plate. It contains rapidly dividing keratinocytes that flatten and harden. The lunula is the visible portion of the matrix.\n\n**Nail Bed**: The tissue beneath the nail plate from the lunula to the hyponychium. It's firmly attached to the nail plate and gives the nail its pink color.\n\n**Nail Folds**: \n- Proximal nail fold (PNF): Skin covering the matrix, produces the cuticle (eponychium)\n- Lateral nail folds: Skin borders on sides\n\n**Hyponychium**: The thickened skin under the free edge of the nail, creates a seal protecting the nail bed.\n\n**Cuticle (Eponychium)**: The dead skin layer that seals the junction between the nail plate and proximal nail fold, preventing pathogen entry.\n\n**Growth**\nNails grow from the matrix at approximately 0.1mm/day for fingernails (3mm/month) and 0.03mm/day for toenails (1mm/month). Complete fingernail replacement takes 6 months; toenails take 12-18 months. Growth is faster in summer, in younger people, and in dominant hand fingers.",
+      "keyTerms": [
+        {
+          "term": "nail matrix",
+          "definition": "The growth zone under the proximal nail fold that produces the nail plate through cell division",
+          "pronunciation": "MAY-triks"
+        },
+        {
+          "term": "nail bed",
+          "definition": "The tissue beneath the nail plate that provides attachment and blood supply",
+          "relatedTerms": ["sterile matrix"]
+        },
+        {
+          "term": "hyponychium",
+          "definition": "Thickened skin under the free edge of the nail that creates a protective seal",
+          "pronunciation": "hy-poh-NIK-ee-um"
+        },
+        {
+          "term": "eponychium",
+          "definition": "The cuticle; dead skin layer at the base of the nail",
+          "pronunciation": "ep-oh-NIK-ee-um"
+        },
+        {
+          "term": "proximal nail fold",
+          "definition": "The fold of skin that covers and protects the proximal nail matrix"
+        }
+      ],
+      "analogies": [
+        "The nail matrix is like a factory assembly line continuously producing new nail material",
+        "The cuticle is like weatherstripping that seals a door from rain"
+      ],
+      "examples": [
+        "Damage to the nail matrix can cause permanent nail deformities",
+        "Fungal infections often start at the hyponychium and work their way back",
+        "Pushing cuticles too aggressively can damage the matrix and cause ridges"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The nail unit comprises specialized keratinizing epithelium (matrix producing hard keratin nail plate), vascularized dermis (nail bed), and supporting structures (nail folds, hyponychium), with nail plate composition and growth dynamics reflecting systemic and local pathology.",
+      "explanation": "**Nail Plate Composition**\nThe nail plate is composed of tightly bound keratinized cells (onychocytes) arranged in layers:\n- Hard keratin (α-keratin filaments, primarily K31/K34/K85)\n- High cysteine content (sulfur cross-links) provides hardness\n- Lipids (0.1-1%) including cholesterol\n- Water content (7-12%) affects flexibility\n\nThe nail plate has three layers: dorsal, intermediate (thickest, from matrix), and ventral (from nail bed).\n\n**Matrix Histology**\nThe matrix has thick epithelium with:\n- Basal layer with melanocytes (longitudinal melanonychia)\n- No granular layer (distinguishes nail from epidermis)\n- Direct transition to cornified nail plate\n- Proximal matrix: Upper nail plate\n- Distal matrix (lunula): Lower nail plate\n\n**Nail Bed**\nThe nail bed is also called sterile matrix:\n- Thin epidermis (no stratum granulosum)\n- Produces thin ventral nail plate layer\n- Longitudinal ridges interdigitate with nail plate ridges (rete ridges)\n- Rich capillary network (causes pink color, allows oxygen/nutrient diffusion)\n\n**Vascular Supply**\n- Paired digital arteries → proper digital arteries → arterial arches\n- Three arch systems: proximal (PNF), distal (matrix/lunula), and nail bed\n- Glomus bodies for thermoregulation (glomus tumor arises from these)\n\n**Innervation**\n- Highly sensitive: Dense sensory innervation for fine tactile discrimination\n- Pain sensitivity: Subungual hematoma extremely painful due to confined space\n\n**Growth Factors**\nWnt signaling, FGF, and BMPs regulate nail matrix proliferation. The nail matrix has high regenerative capacity if germinal cells are preserved.",
+      "keyTerms": [
+        {
+          "term": "hard keratin",
+          "definition": "Keratin with high cysteine/sulfur content forming rigid structures (nails, hair cortex), distinct from soft keratin of epidermis"
+        },
+        {
+          "term": "onychocyte",
+          "definition": "A terminally differentiated keratinized cell comprising the nail plate"
+        },
+        {
+          "term": "sterile matrix",
+          "definition": "Another term for the nail bed epithelium (distal to the germinal matrix)"
+        },
+        {
+          "term": "glomus body",
+          "definition": "Specialized arteriovenous anastomosis in the nail bed for thermoregulation"
+        },
+        {
+          "term": "longitudinal melanonychia",
+          "definition": "Pigmented streak in nail plate due to matrix melanocyte activation"
+        }
+      ],
+      "clinicalNotes": "Matrix biopsy carries risk of permanent nail dystrophy - only biopsy when necessary. Nail bed lacerations require careful repair to prevent split nail deformity. Melanoma in nail unit (subungual melanoma) often presents as longitudinal melanonychia; the ABCDEF criteria help differentiate from benign causes."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Nail unit biology integrates specialized keratinization (K31/34/85, trichohyalin-like proteins), stem cell niches in the matrix, and complex vascular architecture, with pathology reflecting matrix damage (dystrophy), bed disorders (onycholysis), and neoplastic transformation (melanoma, SCC).",
+      "explanation": "**Molecular Biology of Keratinization**\nNail-specific keratin expression:\n- Matrix: K6a, K6b, K16, K17 (proliferating cells)\n- Differentiating/nail plate: K31, K34, K85 (hard hair-type keratins)\n- High-sulfur matrix proteins (KAPs) for cross-linking\n\nThe absence of keratohyalin granules (no stratum granulosum) is a distinguishing feature. Instead, trichohyalin-like proteins contribute to cornification.\n\n**Stem Cell Biology**\nNail stem cells reside in:\n- Proximal matrix: Primary nail plate production\n- Nail folds: Contribute to both nail and adjacent skin\n- Evidence suggests Wnt-responsive stem cells in nail matrix can contribute to digit tip regeneration in mice (and potentially humans)\n\n**Nail Plate Biomechanics**\n- Modulus of elasticity similar to hooves/claws\n- Hardness from disulfide bonds (reduced in nail diseases)\n- Permeability: Hydrophobic barrier but more permeable than stratum corneum\n- Topical drug delivery: A therapeutic challenge\n\n**Nail Bed Physiology**\n- Capillary network visible as nail color\n- Nail fold capillaroscopy: Diagnostic for connective tissue diseases\n- Psoriatic changes: Salmon patch (oil drop sign), onycholysis\n\n**Nail Changes in Systemic Disease**\n- Clubbing: Hypoxia, lung cancer, IBD, cardiovascular disease\n- Koilonychia (spoon nails): Iron deficiency\n- Lindsay nails (half-and-half): Chronic kidney disease\n- Terry nails (mostly white): Cirrhosis\n- Beau's lines: Transverse grooves from growth arrest (severe illness)\n- Mees' lines: Transverse white bands (arsenic, chemotherapy)\n\n**Onychomycosis Pathogenesis**\nDermatophyte invasion (usually Trichophyton rubrum or T. mentagrophytes):\n- Distal subungual: Most common, starts at hyponychium\n- Proximal subungual: Immunosuppression marker\n- White superficial: Surface infection only\n- Total dystrophic: End-stage involvement",
+      "keyTerms": [
+        {
+          "term": "nail fold capillaroscopy",
+          "definition": "Visualization of proximal nail fold capillaries to assess for microvascular abnormalities in connective tissue diseases"
+        },
+        {
+          "term": "clubbing",
+          "definition": "Increased nail curvature and soft tissue swelling, associated with chronic hypoxia, lung cancer, and other systemic diseases"
+        },
+        {
+          "term": "Beau's lines",
+          "definition": "Transverse depressions in nail plate from temporary growth arrest during severe illness"
+        },
+        {
+          "term": "onycholysis",
+          "definition": "Separation of nail plate from nail bed, starting distally"
+        },
+        {
+          "term": "dermatophyte",
+          "definition": "Fungal organisms (Trichophyton, Microsporum, Epidermophyton) that infect keratinized tissues"
+        }
+      ],
+      "clinicalNotes": "Nail fold capillaroscopy: Giant capillaries and avascular areas suggest systemic sclerosis. Clubbing assessment: Schamroth sign (loss of diamond-shaped window between opposed fingernails). Onychomycosis treatment requires prolonged therapy: oral terbinafine (12-16 weeks) or topical efinaconazole/tavaborole for mild disease. Melanonychia striata workup: width >3mm, variegation, Hutchinson sign (pigment extending to nail folds) → biopsy matrix. Glomus tumors present with triad: point tenderness, cold sensitivity, severe paroxysmal pain."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The nail unit serves as a diagnostic window (systemic disease manifestations, capillaroscopy), a regenerative model (Wnt-mediated digit tip regeneration potential), and a site of specialized pathology (matrix melanoma, complex onychomycosis, inflammatory nail disorders requiring integrated medical-surgical management).",
+      "explanation": "**Advanced Molecular Biology**\nNail morphogenesis and regeneration involve:\n- Wnt pathway: Essential for nail matrix development and stem cell maintenance\n- Lef1, β-catenin: Transcriptional regulators in matrix\n- BMP/Msx1: Regulate nail bed vs. matrix fates\n- Digit tip regeneration: Nail stem cells contribute to blastema formation\n- Sox9: Required for nail plate integrity\n\nMurine studies show that Wnt signaling can drive mammalian digit tip regeneration, with nail stem cells contributing to bone, nerve, and connective tissue. Translational implications for human regenerative medicine.\n\n**Nail Pharmacokinetics**\nDrug penetration challenges:\n- Nail plate is 100-200x less permeable than stratum corneum\n- Strategies: Chemical enhancers, physical methods (iontophoresis, laser), nano-formulations\n- Oral therapy often needed for onychomycosis (systemic drug delivery to matrix)\n\n**Inflammatory Nail Disorders**\n\n*Nail Psoriasis:*\n- Nail matrix involvement: Pitting (focal parakeratosis), leukonychia, onycholysis, subungual hyperkeratosis\n- Nail bed: Oil drop sign, splinter hemorrhages\n- Severity: NAPSI score (0-80)\n- Treatment: Topical (potent steroids, calcipotriol), intralesional triamcinolone, biologics (anti-TNF, anti-IL-17, anti-IL-23)\n\n*Nail Lichen Planus:*\n- Matrix: Thinning, ridging, pterygium (scarring of nail fold to nail bed)\n- Risk of permanent nail loss\n- Treatment: Systemic steroids, intralesional injections early to prevent scarring\n\n**Nail Unit Tumors**\n\n*Subungual Melanoma:*\n- 1-3% of melanomas; higher proportion in dark-skinned individuals\n- ABCDEF criteria: Age (peak 50-70), Brown-black band, Change, Digit (thumb > hallux > index), Extension (Hutchinson sign), Family history\n- Staging: AJCC melanoma staging\n- Treatment: Amputation historically; Mohs/wide excision with margin control increasingly used\n- Sentinel lymph node biopsy for appropriate thickness\n\n*Squamous Cell Carcinoma:*\n- HPV-associated (types 16, 18, 56); may mimic wart\n- Bowen disease (SCC in situ) common nail bed presentation\n- May invade bone if delayed diagnosis\n\n*Glomus Tumor:*\n- From glomus body thermoregulatory structures\n- Classic triad: Love test (point pressure pain), cold sensitivity, paroxysmal pain\n- MRI: Best imaging; T2 hyperintense\n- Treatment: Surgical excision\n\n**Onychomycosis: Advanced Management**\n- Resistance: T. rubrum resistance to azoles emerging\n- Biofilms: Fungal biofilms on nail plate complicate treatment\n- Combination therapy: Oral + topical, debridement\n- Newer agents: Efinaconazole, tavaborole (topical); fosravuconazole (oral, Japan)\n- Device-based: Laser (Nd:YAG), photodynamic therapy (limited evidence)\n- Duration: May need >1 year for toenails; cure rates 35-80%",
+      "keyTerms": [
+        {
+          "term": "pterygium",
+          "definition": "Scarring of proximal nail fold to nail bed causing obliteration of the nail, seen in lichen planus"
+        },
+        {
+          "term": "NAPSI",
+          "definition": "Nail Psoriasis Severity Index; scoring system (0-80) for quantifying nail psoriasis"
+        },
+        {
+          "term": "Hutchinson sign",
+          "definition": "Periungual pigmentation extending to nail folds; concerning for subungual melanoma"
+        },
+        {
+          "term": "Love test",
+          "definition": "Point pressure test with pencil tip causing exquisite pain over glomus tumor"
+        },
+        {
+          "term": "blastema",
+          "definition": "Regenerative cell mass formed after tissue loss that can give rise to new structures; nail stem cells contribute to digit tip blastema"
+        }
+      ],
+      "clinicalNotes": "Nail psoriasis affects 80% of psoriasis patients over lifetime; associated with psoriatic arthritis (higher risk if nail involvement). Longitudinal melanonychia workup: if single band on single digit, especially thumb, with growth, width >3mm, or variegation → matrix biopsy. Biopsy technique: 3mm punch through nail plate or longitudinal excision for diagnostic specimen. Nail surgery complications: Postoperative matrix scarring, split nail, permanent dystrophy. Photodynamic therapy for onychomycosis: ALA applied after nail plate thinning, LED activation; lower cure rates than oral therapy but no systemic effects. Nail psoriasis biologics: Anti-IL-17 (secukinumab, ixekizumab) show high NAPSI improvement rates; consider for extensive nail involvement."
+    }
+  },
+  "media": [],
+  "citations": [
+    {
+      "id": "de-berker-2013",
+      "type": "article",
+      "title": "Nail anatomy",
+      "authors": ["David de Berker"],
+      "source": "Clinics in Dermatology"
+    },
+    {
+      "id": "haneke-nail",
+      "type": "textbook",
+      "title": "Histopathology of the Nail",
+      "authors": ["Eckart Haneke"],
+      "source": "Springer"
+    }
+  ],
+  "crossReferences": [
+    {
+      "targetId": "condition-onychomycosis",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Onychomycosis"
+    },
+    {
+      "targetId": "condition-nail-psoriasis",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Nail Psoriasis"
+    },
+    {
+      "targetId": "condition-nail-disorders",
+      "targetType": "condition",
+      "relationship": "see-also",
+      "label": "Nail Disorders"
+    }
+  ],
+  "tags": {
+    "systems": ["integumentary"],
+    "structures": ["FMA:54326", "FMA:54328", "FMA:54332"],
+    "topics": ["anatomy", "histology"],
+    "keywords": ["nail", "nail matrix", "nail bed", "keratin", "onychomycosis", "melanonychia"],
+    "clinicalRelevance": "high",
+    "examRelevance": {
+      "usmle": true,
+      "nbme": true,
+      "shelf": ["medicine"]
+    }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

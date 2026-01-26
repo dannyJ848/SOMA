@@ -260,6 +260,54 @@ pub struct AIChatRAGResponse {
     pub rag_context: Option<RAGContext>,
 }
 
+// ============================================================================
+// Demographics Types
+// ============================================================================
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct UserDemographics {
+    #[serde(rename = "heightCm")]
+    pub height_cm: i32,
+    #[serde(rename = "weightKg")]
+    pub weight_kg: i32,
+    pub age: i32,
+    pub sex: String,
+    #[serde(rename = "bodyType")]
+    pub body_type: String,
+    pub ethnicity: Option<String>,
+    pub bmi: Option<f64>,
+    #[serde(rename = "bodyFatEstimate")]
+    pub body_fat_estimate: Option<f64>,
+}
+
+// Store demographics in memory for the session
+static DEMOGRAPHICS: std::sync::OnceLock<std::sync::Mutex<Option<UserDemographics>>> = std::sync::OnceLock::new();
+
+fn get_demographics_store() -> Option<UserDemographics> {
+    DEMOGRAPHICS.get_or_init(|| std::sync::Mutex::new(None))
+        .lock()
+        .ok()
+        .and_then(|guard| guard.clone())
+}
+
+fn set_demographics_store(demographics: UserDemographics) {
+    if let Some(mutex) = DEMOGRAPHICS.get() {
+        if let Ok(mut guard) = mutex.lock() {
+            *guard = Some(demographics);
+        }
+    } else {
+        let _ = DEMOGRAPHICS.set(std::sync::Mutex::new(Some(demographics)));
+    }
+}
+
+fn clear_demographics_store() {
+    if let Some(mutex) = DEMOGRAPHICS.get() {
+        if let Ok(mut guard) = mutex.lock() {
+            *guard = None;
+        }
+    }
+}
+
 // Store passphrase in memory for the session
 static PASSPHRASE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> = std::sync::OnceLock::new();
 
@@ -484,6 +532,27 @@ fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
     let stdout = String::from_utf8_lossy(&output.stdout);
     serde_json::from_str(&stdout)
         .map_err(|e| format!("Failed to parse response: {} - stdout: {}", e, stdout))
+}
+
+// ============================================================================
+// Demographics Commands
+// ============================================================================
+
+#[tauri::command]
+fn get_demographics() -> Option<UserDemographics> {
+    get_demographics_store()
+}
+
+#[tauri::command]
+fn save_demographics(demographics: UserDemographics) -> Result<(), String> {
+    set_demographics_store(demographics);
+    Ok(())
+}
+
+#[tauri::command]
+fn clear_demographics() -> Result<(), String> {
+    clear_demographics_store();
+    Ok(())
 }
 
 // ============================================================================
@@ -1244,6 +1313,9 @@ pub fn run() {
             get_dashboard,
             get_timeline,
             add_symptom,
+            get_demographics,
+            save_demographics,
+            clear_demographics,
             ai_health,
             ai_models,
             ai_chat,

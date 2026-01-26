@@ -5,7 +5,7 @@
  * Provides contextual actions for the selected region.
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, KeyboardEvent } from 'react';
 import { getRegionDisplayName } from '../utils/regionToSystemMapper';
 
 // ============================================
@@ -151,7 +151,9 @@ export function RadialContextMenu({
 }: RadialContextMenuProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<ContextMenuAction | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Handle animation state
   useEffect(() => {
@@ -185,19 +187,59 @@ export function RadialContextMenu({
     };
   }, [isOpen, onClose]);
 
-  // Handle escape key
+  // Handle keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+      switch (e.key) {
+        case 'Escape':
+          onClose();
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          e.preventDefault();
+          setFocusedIndex(prev => (prev + 1) % MENU_ITEMS.length);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          setFocusedIndex(prev => (prev - 1 + MENU_ITEMS.length) % MENU_ITEMS.length);
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          handleSelect(MENU_ITEMS[focusedIndex].id);
+          break;
+        case 'Tab':
+          // Allow tab but cycle through menu items
+          e.preventDefault();
+          if (e.shiftKey) {
+            setFocusedIndex(prev => (prev - 1 + MENU_ITEMS.length) % MENU_ITEMS.length);
+          } else {
+            setFocusedIndex(prev => (prev + 1) % MENU_ITEMS.length);
+          }
+          break;
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen, onClose]);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, focusedIndex]);
+
+  // Focus the current item when focusedIndex changes
+  useEffect(() => {
+    if (isOpen && itemRefs.current[focusedIndex]) {
+      itemRefs.current[focusedIndex]?.focus();
+    }
+  }, [isOpen, focusedIndex]);
+
+  // Reset focused index when menu opens
+  useEffect(() => {
+    if (isOpen) {
+      setFocusedIndex(0);
+    }
+  }, [isOpen]);
 
   // Calculate menu position (keep on screen)
   const getAdjustedPosition = useCallback(() => {
@@ -279,21 +321,29 @@ export function RadialContextMenu({
           return (
             <button
               key={item.id}
-              className={`radial-menu-item ${hoveredItem === item.id ? 'hovered' : ''}`}
+              ref={(el) => { itemRefs.current[index] = el; }}
+              className={`radial-menu-item ${hoveredItem === item.id || focusedIndex === index ? 'hovered' : ''}`}
               style={{
                 '--item-x': `${x}px`,
                 '--item-y': `${y}px`,
                 '--item-delay': `${index * 30}ms`,
               } as React.CSSProperties}
               onClick={() => handleSelect(item.id)}
-              onMouseEnter={() => setHoveredItem(item.id)}
+              onMouseEnter={() => {
+                setHoveredItem(item.id);
+                setFocusedIndex(index);
+              }}
               onMouseLeave={() => setHoveredItem(null)}
-              onFocus={() => setHoveredItem(item.id)}
+              onFocus={() => {
+                setHoveredItem(item.id);
+                setFocusedIndex(index);
+              }}
               onBlur={() => setHoveredItem(null)}
               role="menuitem"
               aria-label={`${item.label}: ${item.description}`}
+              tabIndex={focusedIndex === index ? 0 : -1}
             >
-              <div className="radial-menu-item-icon">{item.icon}</div>
+              <div className="radial-menu-item-icon" aria-hidden="true">{item.icon}</div>
               <span className="radial-menu-item-label">{item.label}</span>
             </button>
           );

@@ -1,0 +1,108 @@
+{
+  "id": "ent-ear-anatomy",
+  "type": "patient-education",
+  "name": "Ear Anatomy",
+  "alternateNames": ["Auditory System Anatomy", "Structure of the Ear"],
+  "category": "ear",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Your ear has three parts that work together to help you hear sounds and keep your balance.",
+      "explanation": "Your ear is like a special machine that turns sound waves in the air into signals your brain can understand. The part you can see on the outside of your head is called the outer ear. It catches sounds like a satellite dish. Sound travels down a tunnel called the ear canal to a thin piece of skin called the eardrum. When sound hits the eardrum, it vibrates like a drum. Behind the eardrum is the middle ear, which has three tiny bones that pass the vibrations along. The innermost part, called the inner ear, is filled with fluid and turns those vibrations into nerve signals that go to your brain. The inner ear also helps you keep your balance.",
+      "keyTerms": [
+        {"term": "outer ear", "definition": "The part of the ear you can see on the outside of your head"},
+        {"term": "ear canal", "definition": "The tunnel that sound travels through to reach the eardrum"},
+        {"term": "eardrum", "definition": "A thin piece of skin that vibrates when sound hits it"},
+        {"term": "inner ear", "definition": "The deepest part of the ear that sends signals to your brain"}
+      ],
+      "analogies": ["Your ear works like a series of dominos - sound pushes the first piece (eardrum), which pushes the next pieces (tiny bones), which pushes the last piece (inner ear) to create the signal your brain hears."],
+      "examples": ["When someone speaks to you, their voice makes sound waves that travel through all three parts of your ear before you can understand what they said."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The ear consists of the external, middle, and inner ear, each with specialized structures for sound collection, amplification, and transduction into neural signals.",
+      "explanation": "The external ear includes the pinna (auricle) and external auditory canal, which direct sound waves to the tympanic membrane (eardrum). The middle ear is an air-filled cavity containing the ossicular chain - three small bones called the malleus (hammer), incus (anvil), and stapes (stirrup). These bones amplify sound vibrations from the eardrum and transmit them to the inner ear. The Eustachian tube connects the middle ear to the back of the throat, equalizing air pressure. The inner ear contains the cochlea for hearing (a snail-shaped, fluid-filled structure) and the vestibular system for balance (semicircular canals and otolith organs). Hair cells in the cochlea convert mechanical vibrations into electrical nerve signals sent via the auditory nerve to the brain.",
+      "keyTerms": [
+        {"term": "pinna", "definition": "The visible outer part of the ear that collects sound waves", "pronunciation": "PIN-ah"},
+        {"term": "ossicular chain", "definition": "The three small bones in the middle ear that transmit sound", "pronunciation": "aw-SIK-yoo-lar"},
+        {"term": "cochlea", "definition": "The snail-shaped structure in the inner ear that detects sound", "pronunciation": "COCK-lee-ah"},
+        {"term": "Eustachian tube", "definition": "The tube connecting the middle ear to the throat for pressure equalization", "pronunciation": "yoo-STAY-shun"}
+      ],
+      "analogies": ["The three middle ear bones work like a lever system, taking small movements at the eardrum and converting them to stronger movements at the cochlea - amplifying sound about 22 times."],
+      "examples": ["When you yawn or swallow, your Eustachian tube opens briefly to equalize pressure, which is why these actions can help with the 'clogged' feeling in your ears during airplane takeoff or landing."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The auditory system integrates mechanical sound transmission through the outer and middle ear with the cochlea's tonotopic organization and vestibular labyrinth for balance.",
+      "explanation": "The external auditory canal is approximately 2.5cm long with cartilaginous lateral and bony medial portions, lined with ceruminous and sebaceous glands. The tympanic membrane has three layers: outer epithelial, middle fibrous, and inner mucosal. The ossicles articulate via synovial joints, with the stapes footplate fitting into the oval window. The stapedius and tensor tympani muscles provide acoustic reflex protection. The cochlea has 2.5 turns and contains three fluid-filled compartments: scala vestibuli (perilymph), scala media/cochlear duct (endolymph), and scala tympani (perilymph). The organ of Corti sits on the basilar membrane within the scala media, containing inner (95% of afferent innervation) and outer hair cells. Sound frequency is encoded tonotopically - high frequencies at the base, low frequencies at the apex. The vestibular labyrinth includes three semicircular canals detecting rotational acceleration and the utricle/saccule detecting linear acceleration via otolithic membranes.",
+      "keyTerms": [
+        {"term": "organ of Corti", "definition": "The sensory epithelium in the cochlea containing hair cells for sound detection"},
+        {"term": "tonotopic organization", "definition": "Spatial arrangement where different frequencies are detected at different locations along the cochlea"},
+        {"term": "basilar membrane", "definition": "Membrane supporting the organ of Corti, varying in stiffness to enable frequency selectivity"},
+        {"term": "acoustic reflex", "definition": "Protective contraction of middle ear muscles in response to loud sounds"},
+        {"term": "endolymph", "definition": "High-potassium fluid filling the scala media, creating the electrical potential for hair cell function"}
+      ],
+      "clinicalNotes": "The round window provides pressure relief for cochlear fluid displacement. Otosclerosis causes stapes footplate fixation. Meniere's disease involves endolymphatic hydrops. Acoustic neuroma arises from Schwann cells of the vestibular nerve."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Auditory transduction involves mechanotransduction channel kinetics in stereocilia, central auditory pathway processing, and vestibular integration with oculomotor and proprioceptive systems.",
+      "explanation": "Hair cell mechanotransduction occurs via tip links connecting stereocilia; deflection toward the kinocilium opens mechanically-gated cation channels (primarily K+ influx due to endolymph's +80mV endocochlear potential), causing depolarization and glutamatergic neurotransmitter release onto spiral ganglion neurons. Outer hair cells provide active cochlear amplification via prestin-mediated electromotility, enhancing frequency selectivity and sensitivity by 40-60dB. The central auditory pathway proceeds: cochlear nucleus → superior olivary complex (binaural processing for sound localization) → lateral lemniscus → inferior colliculus → medial geniculate body → primary auditory cortex (Brodmann areas 41/42). The vestibular system integrates with: vestibulo-ocular reflex (VOR) maintaining gaze stability, vestibulospinal pathways for postural control, and vestibulo-cortical networks for spatial orientation. Velocity storage mechanisms in the vestibular nuclei extend VOR duration beyond semicircular canal time constants.",
+      "keyTerms": [
+        {"term": "tip links", "definition": "Protein filaments connecting stereocilia, essential for opening mechanotransduction channels"},
+        {"term": "prestin", "definition": "Motor protein in outer hair cell lateral membrane enabling electromotility and cochlear amplification"},
+        {"term": "endocochlear potential", "definition": "The +80mV electrical potential in endolymph, generated by stria vascularis"},
+        {"term": "vestibulo-ocular reflex", "definition": "Reflex stabilizing gaze during head movement via semicircular canal-ocular motor connection"},
+        {"term": "velocity storage", "definition": "Central mechanism in vestibular nuclei prolonging VOR response beyond peripheral input duration"}
+      ],
+      "clinicalNotes": "Aminoglycoside ototoxicity preferentially damages outer hair cells. Otoacoustic emissions (OAE) test outer hair cell function. Vestibular migraine involves central vestibular pathway sensitization."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary otologic practice integrates molecular understanding of hair cell pathophysiology, advanced imaging, and regenerative medicine approaches with precision diagnostics and surgical innovation.",
+      "explanation": "Hair cell loss is permanent in mammals due to supporting cell quiescence; regenerative strategies target Atoh1 transcription factor, Wnt/Notch pathway modulation, and direct conversion approaches. Genetic deafness accounts for ~50% of congenital hearing loss: GJB2 (connexin 26) mutations cause the most common autosomal recessive form, while mutations in TMC1, OTOF, and numerous other genes are targets for emerging gene therapy. Cochlear implants bypass damaged hair cells, directly stimulating spiral ganglion neurons; current research addresses electrode-neural interface optimization, hybrid acoustic-electric stimulation for residual low-frequency hearing, and totally implantable devices. Vestibular assessment includes videonystagmography (VNG), rotary chair testing, vestibular evoked myogenic potentials (cervical and ocular), and video head impulse testing (vHIT) for individual semicircular canal function. Superior canal dehiscence syndrome results from third window effect causing autophony, sound/pressure-induced vertigo, and characteristic audiometric/VEMP findings; surgical repair via middle fossa or transmastoid approach is definitive treatment.",
+      "keyTerms": [
+        {"term": "Atoh1", "definition": "Transcription factor critical for hair cell differentiation, target for regenerative therapy"},
+        {"term": "GJB2", "definition": "Gene encoding connexin 26, the most common cause of autosomal recessive nonsyndromic hearing loss"},
+        {"term": "vHIT", "definition": "Video head impulse test assessing individual semicircular canal function via VOR measurement"},
+        {"term": "superior canal dehiscence", "definition": "Absence of bone over superior semicircular canal creating third window effect"},
+        {"term": "cochlear synaptopathy", "definition": "Hidden hearing loss from damage to inner hair cell-spiral ganglion synapses, not detected by standard audiometry"}
+      ],
+      "clinicalNotes": "Gene therapy trials for OTOF mutations (otoferlin) showing promising hearing restoration. Intratympanic steroid injection for sudden sensorineural hearing loss should be initiated within 2 weeks. Enlarged vestibular aqueduct syndrome associated with SLC26A4 (Pendred) mutations."
+    }
+  },
+  "media": [
+    {
+      "id": "ear-anatomy-diagram",
+      "type": "diagram",
+      "filename": "ear_anatomy_complete.svg",
+      "title": "Complete Ear Anatomy",
+      "description": "Cross-sectional diagram showing outer, middle, and inner ear structures"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch15",
+      "type": "textbook",
+      "title": "The Special Senses",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "15",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-introduction",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "ent-hearing-loss", "targetType": "condition", "relationship": "related", "label": "Hearing Loss Types"},
+    {"targetId": "ent-vertigo", "targetType": "condition", "relationship": "related", "label": "Vertigo and Dizziness"}
+  ],
+  "tags": {
+    "systems": ["auditory", "vestibular"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "condition-menstrual-disorders",
+  "type": "condition",
+  "name": "Menstrual Disorders",
+  "alternateNames": ["Period problems", "Abnormal uterine bleeding", "Menstrual irregularities"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Menstrual disorders are problems with your period - it might be too heavy, too painful, come at the wrong times, or not come at all.",
+      "explanation": "Your period should follow a somewhat regular pattern, but sometimes things go wrong. Heavy periods mean soaking through pads or tampons very quickly or bleeding for more than 7 days. Painful periods (cramps) are common, but really bad pain that keeps you home from school or work isn't normal. Missing periods when you're not pregnant can happen from stress, being very underweight or overweight, or other health issues. Periods that come too often (less than 21 days apart) or too rarely (more than 35 days apart) should be checked by a doctor. Most period problems can be helped with medicine or other treatments.",
+      "keyTerms": [
+        { "term": "heavy period", "definition": "Bleeding that soaks through a pad or tampon every hour for several hours, or lasts more than 7 days" },
+        { "term": "cramps", "definition": "Pain in your lower belly during your period caused by your uterus squeezing" },
+        { "term": "irregular period", "definition": "When your periods don't come in a predictable pattern" }
+      ],
+      "analogies": ["Think of your period like a monthly appointment - it should show up around the same time and last a reasonable length. When it's way off schedule or causing big problems, something needs attention."],
+      "examples": ["Missing your period for 3 months (when not pregnant), bleeding so heavily you avoid activities, or cramps so bad you can't go to school are all reasons to see a doctor."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Menstrual disorders include heavy menstrual bleeding (menorrhagia), painful periods (dysmenorrhea), absent periods (amenorrhea), and irregular cycles, each with specific causes and treatments.",
+      "explanation": "Heavy menstrual bleeding (HMB) is defined as blood loss that interferes with physical, social, or emotional quality of life. Causes include fibroids, polyps, hormonal imbalances, and bleeding disorders. Dysmenorrhea can be primary (no underlying disease, due to prostaglandins) or secondary (caused by conditions like endometriosis). Amenorrhea is primary if periods never started by age 15, or secondary if periods stop for 3+ months. Oligomenorrhea means infrequent periods (>35 days apart), while polymenorrhea means too-frequent periods (<21 days). Causes range from stress and weight changes to thyroid problems, PCOS, and structural abnormalities. Treatment depends on the cause and may include hormonal medications, NSAIDs, or procedures.",
+      "keyTerms": [
+        { "term": "menorrhagia", "definition": "Abnormally heavy or prolonged menstrual bleeding", "pronunciation": "men-oh-RAY-jee-ah" },
+        { "term": "dysmenorrhea", "definition": "Painful menstrual periods with cramping", "pronunciation": "dis-men-oh-REE-ah" },
+        { "term": "amenorrhea", "definition": "Absence of menstrual periods", "pronunciation": "ay-men-oh-REE-ah" },
+        { "term": "prostaglandins", "definition": "Chemical messengers that cause uterine contractions and cramping during periods" }
+      ],
+      "analogies": ["Prostaglandins are like tiny messengers telling your uterus to squeeze - too many messengers means too much squeezing and more pain."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Abnormal uterine bleeding is classified by the PALM-COEIN system (structural vs non-structural causes), with evaluation guided by patient age, bleeding pattern, and risk factors, and management tailored to diagnosis and reproductive goals.",
+      "explanation": "The FIGO PALM-COEIN classification organizes AUB causes: Structural (PALM) includes Polyps, Adenomyosis, Leiomyomas (fibroids), and Malignancy/hyperplasia. Non-structural (COEIN) includes Coagulopathy, Ovulatory dysfunction, Endometrial factors, Iatrogenic, and Not yet classified. Evaluation includes history (cycle characteristics, associated symptoms), physical exam, labs (CBC, pregnancy test, TSH, coagulation studies if indicated), and imaging (transvaginal ultrasound, saline infusion sonography, or hysteroscopy). Primary dysmenorrhea results from elevated prostaglandin F2-alpha causing myometrial contractions and ischemia. Secondary dysmenorrhea suggests underlying pathology (endometriosis, adenomyosis, fibroids). Treatment of HMB includes hormonal options (combined oral contraceptives, progestins, LNG-IUD), tranexamic acid, NSAIDs, and surgical options (endometrial ablation, myomectomy, hysterectomy).",
+      "keyTerms": [
+        { "term": "PALM-COEIN", "definition": "FIGO classification system for causes of abnormal uterine bleeding" },
+        { "term": "adenomyosis", "definition": "Endometrial tissue growing within the uterine muscle wall, causing heavy painful periods", "pronunciation": "ad-en-oh-my-OH-sis" },
+        { "term": "LNG-IUD", "definition": "Levonorgestrel intrauterine device; highly effective for reducing menstrual bleeding" },
+        { "term": "endometrial ablation", "definition": "Procedure that destroys the uterine lining to reduce or stop menstrual bleeding" }
+      ],
+      "clinicalNotes": "First-line medical management for HMB: LNG-IUD is most effective (reduces flow 90%+). Combined hormonal contraceptives reduce flow 40-50%. Tranexamic acid 1g TID during menses reduces flow 30-50%."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Management of menstrual disorders requires systematic evaluation using PALM-COEIN, age-appropriate workup for malignancy risk, targeted treatment based on etiology and patient preferences, and recognition of bleeding disorders as an underdiagnosed cause of HMB.",
+      "explanation": "In adolescents with HMB, bleeding disorders (especially von Willebrand disease) occur in 20% - screen with CBC, PT/PTT, fibrinogen, and consider VWF antigen/activity. Anovulatory bleeding is common at extremes of reproductive age. In reproductive-age women, structural causes predominate; submucosal fibroids and polyps are best visualized with SIS or hysteroscopy. Endometrial biopsy is indicated for women >45 with AUB, or younger with risk factors (obesity, anovulation, tamoxifen use). Medical management of HMB: LNG-IUD (Mirena) is first-line per NICE guidelines, reducing PBAC scores 80-96%. GnRH agonists with add-back therapy manage severe symptoms awaiting surgery. For primary dysmenorrhea, NSAIDs (inhibit prostaglandin synthesis) are first-line; hormonal contraceptives are second-line. For secondary dysmenorrhea, treat underlying cause. Continuous hormonal contraception eliminates withdrawal bleeding and menstrual symptoms.",
+      "keyTerms": [
+        { "term": "von Willebrand disease", "definition": "Most common inherited bleeding disorder; affects 13% of women with HMB" },
+        { "term": "PBAC score", "definition": "Pictorial Blood Assessment Chart; objective measure of menstrual blood loss" },
+        { "term": "GnRH agonist", "definition": "Medication that suppresses ovarian function; used for fibroids, endometriosis, severe HMB" },
+        { "term": "add-back therapy", "definition": "Low-dose estrogen/progestin given with GnRH agonists to prevent bone loss and vasomotor symptoms" }
+      ],
+      "clinicalNotes": "Screen for bleeding disorders in: HMB since menarche, family history of bleeding, personal bleeding history (dental extraction, surgery, postpartum). VWF levels vary with cycle and are lowest during menses - test during follicular phase."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Evidence-based management of menstrual disorders integrates guideline-directed medical therapy, appropriate surgical intervention selection, emerging treatments including GnRH antagonists with add-back, and optimization of quality of life while addressing fertility considerations.",
+      "explanation": "ACOG and NICE guidelines recommend stepwise HMB management: LNG-IUD as first-line (NNT 2 vs placebo), followed by systemic hormonal therapy, antifibrinolytics, and NSAIDs. Surgical options when medical management fails include hysteroscopic resection of submucosal fibroids (type 0-2), endometrial ablation (for completed childbearing), uterine artery embolization, and hysterectomy. Newer GnRH antagonist combinations (elagolix, relugolix with add-back) provide rapid symptom control with preserved bone health. For dysmenorrhea refractory to NSAIDs and hormonal therapy, consider laparoscopy for endometriosis diagnosis and treatment. Adenomyosis management is challenging; options include LNG-IUD, GnRH analogs, and hysterectomy. Primary amenorrhea workup depends on presence of secondary sexual characteristics and uterus. Secondary amenorrhea requires pregnancy test, then evaluation for hypothalamic-pituitary-ovarian dysfunction. Treatment addresses underlying cause plus consideration of bone health and cardiovascular risk from hypoestrogenism.",
+      "keyTerms": [
+        { "term": "elagolix", "definition": "Oral GnRH antagonist FDA-approved for endometriosis and uterine fibroids with heavy bleeding" },
+        { "term": "uterine artery embolization", "definition": "Interventional radiology procedure blocking fibroid blood supply; preserves uterus but may affect fertility" },
+        { "term": "hysteroscopic myomectomy", "definition": "Minimally invasive removal of submucosal fibroids through the cervix; fertility-preserving" },
+        { "term": "hypothalamic amenorrhea", "definition": "Functional suppression of GnRH from energy deficit, stress, or exercise; treat underlying cause and consider bone protection" }
+      ],
+      "clinicalNotes": "Counsel on fertility implications: LNG-IUD rapidly reversible; endometrial ablation contraindicated if future pregnancy desired; UAE may affect fertility. For HMB with desire for fertility, hysteroscopic myomectomy (submucosal fibroids) or medical management preferred. Consider referral to hematology for confirmed bleeding disorders."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "acog-pb-128",
+      "type": "article",
+      "title": "Practice Bulletin No. 128: Diagnosis of Abnormal Uterine Bleeding in Reproductive-Aged Women",
+      "source": "American College of Obstetricians and Gynecologists",
+      "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin",
+      "license": "Professional guidance"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-menstrual-cycle-explained", "targetType": "concept", "relationship": "related", "label": "Menstrual Cycle" },
+    { "targetId": "condition-endometriosis", "targetType": "condition", "relationship": "related", "label": "Endometriosis" },
+    { "targetId": "condition-fibroids", "targetType": "condition", "relationship": "related", "label": "Uterine Fibroids" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "topics": ["pathology", "patient-education", "womens-health"],
+    "keywords": ["heavy periods", "painful periods", "menorrhagia", "dysmenorrhea", "amenorrhea", "AUB"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["obgyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

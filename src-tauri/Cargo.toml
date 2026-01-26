@@ -35,7 +35,39 @@ rand = "0.8"
 # iOS-specific: ensure Metal is used
 llama-cpp-2 = { version = "0.1", features = ["metal"] }
 
+[target.'cfg(target_os = "android")'.dependencies]
+# Android-specific: CPU only for now
+llama-cpp-2 = { version = "0.1", features = [] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+# Windows-specific: CPU with AVX2 support
+llama-cpp-2 = { version = "0.1", features = [] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# Linux-specific: CPU with AVX2 support
+llama-cpp-2 = { version = "0.1", features = [] }
+
 [features]
 default = []
 # Enable for iOS builds with Metal GPU acceleration
 metal = ["llama-cpp-2/metal"]
+# Enable for CUDA builds (Windows/Linux with NVIDIA GPU)
+cuda = []
+# Enable for CPU-only builds
+cpu-only = []
+
+[profile.dev]
+incremental = true
+opt-level = 0
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = 3
+strip = true
+
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+strip = false

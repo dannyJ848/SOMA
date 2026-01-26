@@ -77,12 +77,20 @@ export function getTransitionProgress(distance: number, level: DetailLevel): num
 
 /**
  * Calculate opacity for structure based on distance and visibility settings
+ * For Complete Anatomy-style layer toggling, structures with minDetailLevel: 'body'
+ * should always be visible (opacity 1) when their system is enabled
  */
 export function calculateStructureOpacity(
   distance: number,
   currentLevel: DetailLevel,
   visibility: StructureVisibility
 ): number {
+  // For structures with minDetailLevel: 'body', always return full opacity
+  // This enables Complete Anatomy-style layer toggling where organs are always visible
+  if (visibility.minDetailLevel === 'body') {
+    return 1;
+  }
+
   const levelOrder: DetailLevel[] = ['body', 'region', 'organ', 'tissue', 'cellular'];
   const currentIndex = levelOrder.indexOf(currentLevel);
   const minIndex = levelOrder.indexOf(visibility.minDetailLevel);

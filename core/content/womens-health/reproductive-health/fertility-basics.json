@@ -1,0 +1,97 @@
+{
+  "id": "concept-fertility-basics",
+  "type": "concept",
+  "name": "Fertility Basics",
+  "alternateNames": ["Conception basics", "Getting pregnant", "Reproductive fertility"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Fertility is your body's ability to have a baby. Understanding when you're most likely to get pregnant can help whether you're trying to conceive or trying to avoid it.",
+      "explanation": "For pregnancy to happen, a few things need to line up: a healthy egg from the woman, healthy sperm from the man, and the right timing. Women release one egg per month from their ovaries (this is called ovulation), usually about 2 weeks before the next period. The egg can only be fertilized for about 12-24 hours after release, but sperm can live inside the woman's body for up to 5 days. This means the 'fertile window' - when pregnancy is possible - is about 6 days each month. Fertility is highest in your 20s and early 30s, then gradually decreases. Most healthy couples trying to conceive will get pregnant within a year.",
+      "keyTerms": [
+        { "term": "fertility", "definition": "The ability to get pregnant and have a baby" },
+        { "term": "ovulation", "definition": "When an egg is released from the ovary, happening once a month" },
+        { "term": "fertile window", "definition": "The days each month when pregnancy is possible, about 6 days around ovulation" }
+      ],
+      "analogies": ["Getting pregnant is like catching a bus that only comes once a month and only waits for a few minutes - timing is everything."],
+      "examples": ["If you have a 28-day cycle and ovulate on day 14, your fertile window is roughly days 9-14."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Fertility depends on ovulation timing, sperm health, and fallopian tube function. The fertile window spans approximately 6 days per cycle, and fertility naturally declines with age, especially after 35.",
+      "explanation": "Conception requires ovulation, fertilization in the fallopian tube, and implantation in the uterus. Ovulation typically occurs 14 days before the next period (not 14 days after the last period - cycle lengths vary). Signs of ovulation include changes in cervical mucus (becomes clear and stretchy, like egg whites), mild pelvic discomfort, and slight temperature rise after ovulation. The fertile window is the 5 days before ovulation plus ovulation day itself, because sperm can survive 3-5 days while eggs live only 12-24 hours. Female fertility peaks in the mid-20s and declines more rapidly after 35 (due to decreasing egg quantity and quality). Male fertility also declines with age but more gradually. Most couples (85%) conceive within one year of trying; infertility is defined as not conceiving after 12 months of regular unprotected intercourse.",
+      "keyTerms": [
+        { "term": "cervical mucus", "definition": "Fluid produced by the cervix that changes throughout the cycle; fertile mucus helps sperm travel" },
+        { "term": "implantation", "definition": "When a fertilized egg attaches to the uterine lining, about 6-10 days after ovulation" },
+        { "term": "infertility", "definition": "Inability to conceive after 12 months of trying (or 6 months if woman is over 35)" },
+        { "term": "ovarian reserve", "definition": "The number and quality of eggs remaining in the ovaries" }
+      ],
+      "analogies": ["Cervical mucus works like a highway system for sperm - during the fertile window, the roads are open and slippery; at other times, they're blocked."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Fertility optimization requires understanding the 6-day fertile window, factors affecting fecundability, age-related decline in oocyte quantity and quality, and when to pursue infertility evaluation.",
+      "explanation": "Fecundability (probability of conception per cycle) is approximately 20-25% in healthy couples during peak fertility. Intercourse timing is optimized when occurring every 1-2 days during the fertile window; frequency beyond this doesn't improve chances. Ovulation prediction methods include calendar calculation, cervical mucus observation (Billings method), basal body temperature (rises 0.5-1F after ovulation - confirms but doesn't predict), and urinary LH detection (positive test indicates ovulation in 24-36 hours). Female age significantly impacts fertility: at 30, monthly fecundity is ~20%; at 35, ~15%; at 40, ~5%. This decline reflects diminishing ovarian reserve and increasing oocyte aneuploidy. Male factors contribute to 40% of infertility cases. Preconception counseling should address folic acid supplementation, medication review, chronic disease optimization, and lifestyle factors (smoking, alcohol, weight).",
+      "keyTerms": [
+        { "term": "fecundability", "definition": "Probability of conception per menstrual cycle, about 20-25% in healthy couples" },
+        { "term": "aneuploidy", "definition": "Abnormal number of chromosomes in an egg; increases with maternal age" },
+        { "term": "basal body temperature", "definition": "Body temperature at rest; rises after ovulation due to progesterone" },
+        { "term": "LH surge", "definition": "Rapid rise in luteinizing hormone that triggers ovulation within 24-36 hours" }
+      ],
+      "clinicalNotes": "Recommend infertility evaluation after 12 months of trying if <35, or 6 months if ≥35. Earlier evaluation warranted with known risk factors (irregular cycles, history of PID, endometriosis, male factor concerns)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Clinical assessment of fertility involves evaluation of ovulatory function, tubal patency, uterine cavity, and male factor, with initial testing including day 3 FSH/estradiol, AMH, semen analysis, and imaging, guiding management from timed intercourse to assisted reproduction.",
+      "explanation": "Basic infertility workup evaluates four factors: ovulation (history, mid-luteal progesterone), tubal patency (HSG or HyCoSy), uterine cavity (HSG, SIS, or hysteroscopy), and male factor (semen analysis). Ovarian reserve testing includes day 3 FSH (elevated >10 suggests diminished reserve), AMH (low <1 ng/mL suggests diminished reserve), and antral follicle count on ultrasound. Initial treatment depends on diagnosis: anovulatory infertility - ovulation induction with letrozole (first-line) or clomiphene; unexplained infertility - may start with timed intercourse, progress to IUI with ovarian stimulation; tubal factor - IVF generally required; male factor - IUI or IVF/ICSI depending on severity. Lifestyle counseling: BMI optimization (underweight and obesity both impair fertility), limit caffeine to <200mg/day, eliminate smoking and recreational drugs, limit alcohol.",
+      "keyTerms": [
+        { "term": "HSG", "definition": "Hysterosalpingogram; X-ray with contrast to evaluate tubal patency and uterine cavity" },
+        { "term": "AMH", "definition": "Anti-Mullerian hormone; marker of ovarian reserve, can be tested any cycle day" },
+        { "term": "IUI", "definition": "Intrauterine insemination; washed sperm placed directly in uterus around ovulation" },
+        { "term": "IVF", "definition": "In vitro fertilization; eggs retrieved and fertilized in lab, embryos transferred to uterus" }
+      ],
+      "clinicalNotes": "Letrozole is superior to clomiphene for ovulation induction in PCOS (higher live birth rates per NEJM PPCOS II trial). Unexplained infertility treatment progression: 3-4 cycles timed intercourse or IUI with oral ovulation induction, then consider IVF."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced fertility management integrates evidence-based ovulation induction protocols, appropriate timing of ART referral, fertility preservation options, and shared decision-making around treatment intensity, cost, and success rates stratified by age and diagnosis.",
+      "explanation": "Ovulation induction protocols: Letrozole 2.5-7.5mg days 3-7 is first-line for PCOS and unexplained infertility (ASRM guidelines). Clomiphene 50-150mg days 3-7 or 5-9 is alternative. Gonadotropin stimulation (FSH injections) increases efficacy but also multiple pregnancy risk - requires monitoring. For IUI, wash sperm to obtain 5-10 million total motile sperm; cumulative pregnancy rates plateau after 3-4 cycles. IVF success rates vary by age: <35 years ~45% live birth per cycle; 35-37 ~35%; 38-40 ~25%; >40 ~10%. Fertility preservation: oocyte cryopreservation for age-related decline or before gonadotoxic therapy; expected yield 10-20 mature oocytes per cycle in young women. Preimplantation genetic testing (PGT-A) can screen embryos for aneuploidy but doesn't improve live birth rates in good-prognosis patients (STAR trial). Recurrent pregnancy loss (≥2 losses) warrants karyotype, uterine evaluation, antiphospholipid antibody testing.",
+      "keyTerms": [
+        { "term": "controlled ovarian stimulation", "definition": "Using gonadotropin injections to develop multiple follicles for IVF or IUI" },
+        { "term": "oocyte cryopreservation", "definition": "Egg freezing for fertility preservation; vitrification technique has improved survival rates" },
+        { "term": "PGT-A", "definition": "Preimplantation genetic testing for aneuploidy; biopsy of embryo before transfer" },
+        { "term": "recurrent pregnancy loss", "definition": "Two or more pregnancy losses; affects 1-2% of couples, warrants systematic evaluation" }
+      ],
+      "clinicalNotes": "Counsel patients on realistic expectations: IVF cumulative live birth rate after 3 cycles ~65-70% for women <35. Fertility preservation is most effective when eggs are frozen before age 35. ASRM recommends expedited evaluation for women >35 after 6 months, women >40 should be offered immediate evaluation and treatment."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "asrm-fertility-evaluation",
+      "type": "article",
+      "title": "Diagnostic evaluation of the infertile female: a committee opinion",
+      "source": "American Society for Reproductive Medicine",
+      "url": "https://www.asrm.org/practice-guidance/practice-committee-documents/",
+      "license": "Professional guidance"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-menstrual-cycle-explained", "targetType": "concept", "relationship": "related", "label": "Menstrual Cycle" },
+    { "targetId": "concept-preconception-care", "targetType": "concept", "relationship": "related", "label": "Preconception Care" },
+    { "targetId": "condition-pcos", "targetType": "condition", "relationship": "related", "label": "PCOS" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "topics": ["physiology", "patient-education", "womens-health", "fertility"],
+    "keywords": ["fertility", "conception", "ovulation", "infertility", "getting pregnant", "IVF", "IUI"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["obgyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

@@ -1,0 +1,169 @@
+{
+  "id": "mens-health-bph",
+  "type": "patient-education",
+  "category": "mens-health",
+  "subcategory": "prostate-health",
+  "name": "Benign Prostatic Hyperplasia (BPH)",
+  "alternateNames": ["Enlarged Prostate", "Benign Prostate Enlargement"],
+  "description": "Understanding BPH - the common condition causing urinary symptoms in older men",
+  "audienceNote": "BPH affects most men as they age but many delay seeking help due to embarrassment - this content normalizes the condition",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "As men get older, the prostate often grows larger, which can make it harder to urinate.",
+      "explanation": "BPH (benign prostatic hyperplasia) is a very common condition where the prostate grows bigger as men age. 'Benign' means it's not cancer. Because the prostate wraps around the tube that carries urine, when it gets bigger, it can squeeze this tube and make urinating more difficult. You might notice you need to go more often, especially at night, or that your stream is weaker. This happens to most men eventually - about half of men in their 50s and most men in their 80s have some degree of prostate enlargement. The good news is there are many effective treatments.",
+      "keyTerms": [
+        { "term": "BPH", "definition": "Benign prostatic hyperplasia - a non-cancerous growth of the prostate" },
+        { "term": "benign", "definition": "Not cancer; not harmful in the way cancer is" },
+        { "term": "enlarged prostate", "definition": "When the prostate grows bigger than normal" }
+      ],
+      "commonSymptoms": [
+        "Needing to urinate more often, especially at night",
+        "Difficulty starting to urinate",
+        "Weak or slow urine stream",
+        "Feeling like your bladder isn't completely empty",
+        "Stopping and starting during urination"
+      ],
+      "importantNote": "BPH is NOT prostate cancer. However, you can have both conditions at the same time, which is why regular check-ups are important."
+    },
+    "2": {
+      "level": 2,
+      "summary": "BPH is a non-malignant proliferation of prostatic tissue in the transition zone, causing lower urinary tract symptoms (LUTS) through bladder outlet obstruction.",
+      "explanation": "BPH occurs in the transition zone of the prostate, the area surrounding the urethra. As this tissue enlarges, it compresses the prostatic urethra, creating bladder outlet obstruction (BOO). Symptoms are divided into: 1) Voiding (obstructive) symptoms: hesitancy, weak stream, straining, intermittency, incomplete emptying, terminal dribbling; 2) Storage (irritative) symptoms: frequency, urgency, nocturia, urge incontinence. The International Prostate Symptom Score (IPSS) quantifies severity (0-7 mild, 8-19 moderate, 20-35 severe). Natural history is progressive but variable - some men have minimal bother while others develop complications (acute urinary retention, recurrent UTIs, bladder stones, renal insufficiency). BPH has both static (tissue volume) and dynamic (smooth muscle tone) components, which is why combination therapy works well.",
+      "keyTerms": [
+        { "term": "LUTS", "definition": "Lower urinary tract symptoms - the collection of urinary symptoms caused by bladder or prostate problems" },
+        { "term": "IPSS", "definition": "International Prostate Symptom Score - a questionnaire to rate symptom severity from 0-35" },
+        { "term": "bladder outlet obstruction", "definition": "Blockage of urine flow from the bladder, often due to enlarged prostate" },
+        { "term": "nocturia", "definition": "Waking at night to urinate" },
+        { "term": "acute urinary retention", "definition": "Sudden inability to urinate - a medical emergency requiring catheterization" }
+      ],
+      "diagnosticApproach": [
+        "Medical history and symptom questionnaire (IPSS)",
+        "Physical exam including digital rectal exam (DRE)",
+        "Urinalysis to rule out infection",
+        "PSA blood test",
+        "Sometimes: uroflowmetry, post-void residual measurement"
+      ],
+      "treatmentOverview": [
+        "Watchful waiting for mild symptoms",
+        "Medications: alpha-blockers, 5-alpha reductase inhibitors, or combination",
+        "Minimally invasive procedures for moderate-severe symptoms",
+        "Surgery (TURP) for severe cases"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "BPH pathophysiology involves androgen-dependent stromal-epithelial proliferation with a significant smooth muscle component, explaining the efficacy of combined pharmacotherapy targeting both static and dynamic obstruction.",
+      "explanation": "BPH develops exclusively in the transition zone through both stromal and glandular hyperplasia. The pathophysiology involves: 1) Androgen-dependent growth: DHT (via 5-alpha reductase type 2) promotes epithelial and stromal proliferation; 2) Stromal-epithelial interactions: paracrine growth factors (FGF, EGF, TGF-beta) drive proliferation; 3) Smooth muscle tone: alpha-1 adrenergic receptors (particularly alpha-1A subtype) in prostatic smooth muscle contribute to dynamic obstruction. This dual pathophysiology underlies combination therapy: 5-alpha reductase inhibitors (finasteride, dutasteride) reduce glandular volume over 6-12 months, while alpha-blockers (tamsulosin, alfuzosin, silodosin) relax smooth muscle for rapid symptom relief. The COMBAT and MTOPS trials demonstrated superiority of combination therapy for larger prostates (>30-40g) with moderate-severe symptoms. Secondary bladder changes (detrusor hypertrophy, then decompensation) contribute to storage symptoms. The AUA Symptom Index (identical to IPSS) plus bother score guides treatment decisions.",
+      "keyTerms": [
+        { "term": "alpha-1 adrenergic receptor", "definition": "Receptor in prostatic smooth muscle; blocking it relaxes tissue and improves flow" },
+        { "term": "5-alpha reductase inhibitor", "definition": "Medication that blocks conversion of testosterone to DHT, shrinking the prostate" },
+        { "term": "static component", "definition": "Obstruction due to physical tissue volume" },
+        { "term": "dynamic component", "definition": "Obstruction due to smooth muscle contraction/tone" },
+        { "term": "detrusor", "definition": "The bladder muscle that contracts to expel urine" }
+      ],
+      "medications": {
+        "alphaBlockers": {
+          "examples": ["tamsulosin (Flomax)", "alfuzosin (Uroxatral)", "silodosin (Rapaflo)"],
+          "mechanism": "Relax prostatic smooth muscle, improving flow",
+          "onset": "Days to weeks",
+          "sideEffects": ["Dizziness", "Orthostatic hypotension", "Retrograde ejaculation (especially tamsulosin)"]
+        },
+        "5ARIs": {
+          "examples": ["finasteride (Proscar)", "dutasteride (Avodart)"],
+          "mechanism": "Block DHT production, shrinking prostate over 6-12 months",
+          "onset": "3-6 months for symptom improvement",
+          "sideEffects": ["Decreased libido", "Erectile dysfunction", "Reduced ejaculate volume"],
+          "note": "Reduce PSA by ~50% - must double measured PSA values"
+        }
+      },
+      "clinicalNotes": "TURP remains gold standard for refractory BPH. Newer procedures (UroLift, Rezum, aquablation, HoLEP) offer alternatives with different efficacy and side effect profiles. Tadalafil 5mg daily is FDA-approved for BPH/LUTS (with or without concurrent ED)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "BPH management requires individualized therapy based on prostate size, symptom severity, risk of progression, and patient goals, with an expanding landscape of minimally invasive surgical therapies.",
+      "explanation": "Risk stratification guides therapy: large prostate (>30-40mL), elevated PSA (>1.5), severe symptoms, and reduced Qmax (<10mL/s) predict progression to AUR and need for surgery. Treatment algorithm: 1) Mild symptoms (IPSS <8): watchful waiting, behavioral modifications (fluid timing, caffeine reduction); 2) Moderate symptoms: monotherapy with alpha-blocker (rapid relief) or 5-ARI (if large prostate); combination therapy for larger prostates; 3) Moderate-severe with desire for procedure: consider minimally invasive options; 4) Severe/refractory: surgical intervention. Minimally invasive surgical therapies (MISTs): UroLift (prostatic urethral lift - mechanical separation of lateral lobes, preserves ejaculation), Rezum (water vapor thermal therapy), Aquablation (robotic waterjet ablation), and iTind (temporary implant). Traditional surgeries: TURP (transurethral resection - gold standard, highest efficacy, 65% retrograde ejaculation), HoLEP (holmium laser enucleation - equivalent to open prostatectomy, size-independent), PVP (photoselective vaporization), simple prostatectomy (for very large glands >80-100g). Post-void residual (PVR) >200-300mL, recurrent UTIs, bladder stones, renal insufficiency, and recurrent gross hematuria are indications for surgical intervention.",
+      "keyTerms": [
+        { "term": "Qmax", "definition": "Maximum urinary flow rate on uroflowmetry; normal >15 mL/s, <10 mL/s suggests obstruction" },
+        { "term": "UroLift", "definition": "Prostatic urethral lift procedure using permanent implants to hold lateral lobes apart" },
+        { "term": "Rezum", "definition": "Water vapor (steam) therapy that ablates prostatic tissue" },
+        { "term": "HoLEP", "definition": "Holmium laser enucleation of prostate - endoscopic equivalent of open prostatectomy" },
+        { "term": "TURP", "definition": "Transurethral resection of prostate - gold standard surgical treatment" }
+      ],
+      "proceduralComparison": {
+        "UroLift": { "efficacy": "Moderate", "preservesEjaculation": "Yes", "bestFor": "Lateral lobe enlargement <80g" },
+        "Rezum": { "efficacy": "Moderate-good", "preservesEjaculation": "Yes", "bestFor": "Central/median lobe, <80g" },
+        "TURP": { "efficacy": "High", "preservesEjaculation": "No (65% retrograde)", "bestFor": "30-80g, failed medical therapy" },
+        "HoLEP": { "efficacy": "Highest", "preservesEjaculation": "No", "bestFor": "Any size, particularly >80g" }
+      },
+      "clinicalNotes": "Counsel patients that alpha-blockers provide rapid relief while 5-ARIs require 6+ months but provide durable disease modification. Intraoperative floppy iris syndrome (IFIS) occurs with tamsulosin - inform ophthalmologists before cataract surgery."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary BPH management integrates phenotyping based on prostatic anatomy, bladder function, and patient-centered outcomes with novel therapeutic targets and emerging technologies.",
+      "explanation": "Advanced BPH management concepts: 1) Phenotyping matters: prostatic configuration (lateral lobe, median lobe, bilobar) guides procedural selection - median lobe responds poorly to UroLift but well to Rezum; intravesical prostatic protrusion (IPP) on ultrasound predicts symptom severity and treatment response. 2) Bladder dysfunction assessment: pressure-flow urodynamics differentiates BOO from detrusor underactivity (contractility index) - detrusor underactivity predicts poor response to prostate surgery; overactive bladder (OAB) component may persist after deobstruction requiring anticholinergics/beta-3 agonists. 3) PSA density and multiparametric MRI role: in men with elevated PSA and BPH, PSA density <0.15 and negative mpMRI (PI-RADS 1-2) may obviate biopsy; transition zone volume on MRI predicts 5-ARI response. 4) Emerging therapies: prostatic artery embolization (PAE) offers non-surgical debulking with 30-40% volume reduction; convective radiofrequency water vapor (Rezum) targeting median lobe; aquablation with robotically controlled waterjet and real-time ultrasound guidance; combinations of MISTs may evolve. 5) Sexual function preservation has become paramount - ejaculatory dysfunction significantly impacts quality of life; ejaculation-preserving procedures (UroLift, Rezum, Aquablation) are preferred in sexually active men. NIDDK's Medical Therapy of Prostatic Symptoms (MTOPS) and REDUCE trials provide long-term outcomes data.",
+      "keyTerms": [
+        { "term": "intravesical prostatic protrusion", "definition": "Extent of prostatic tissue projecting into bladder; correlates with BOO severity" },
+        { "term": "detrusor underactivity", "definition": "Weak bladder contraction that may coexist with or mimic BOO; poor surgical candidate" },
+        { "term": "PSA density", "definition": "PSA divided by prostate volume; helps distinguish BPH from cancer" },
+        { "term": "prostatic artery embolization", "definition": "Interventional radiology procedure occluding prostatic arteries to shrink prostate" },
+        { "term": "pressure-flow study", "definition": "Urodynamic test measuring detrusor pressure during voiding to confirm obstruction" }
+      ],
+      "clinicalNotes": "Shared decision-making is essential - patients value different outcomes (symptom relief vs. sexual function preservation vs. avoiding repeat procedures). MTOPS showed combination therapy reduced progression to AUR by 67% vs. placebo. Future directions include targeted thermotherapy and focal ablation based on MRI-defined anatomy."
+    }
+  },
+
+  "whenToSeekHelp": [
+    "Urinary symptoms that bother you or affect your quality of life",
+    "Waking more than once per night to urinate regularly",
+    "Blood in your urine",
+    "Pain with urination",
+    "Sudden inability to urinate (emergency - go to ER)",
+    "Signs of kidney problems (swelling, fatigue, confusion)"
+  ],
+
+  "selfCareStrategies": [
+    "Limit fluids before bedtime",
+    "Reduce caffeine and alcohol, which irritate the bladder",
+    "Urinate when you first feel the urge - don't hold it",
+    "Double void: urinate, wait a moment, try again",
+    "Stay active - regular exercise may help symptoms",
+    "Review medications with your doctor - some can worsen symptoms"
+  ],
+
+  "citations": [
+    {
+      "id": "aua-bph-guidelines",
+      "type": "guideline",
+      "title": "Surgical Management of Lower Urinary Tract Symptoms Attributed to Benign Prostatic Hyperplasia",
+      "source": "American Urological Association",
+      "year": 2021
+    },
+    {
+      "id": "mtops-trial",
+      "type": "study",
+      "title": "The Long-Term Effect of Doxazosin, Finasteride, and Combination Therapy on the Clinical Progression of Benign Prostatic Hyperplasia",
+      "source": "NEJM",
+      "year": 2003
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "mens-health-prostate-anatomy", "targetType": "patient-education", "relationship": "foundational", "label": "Prostate Anatomy" },
+    { "targetId": "mens-health-psa-testing", "targetType": "patient-education", "relationship": "related", "label": "PSA Testing" },
+    { "targetId": "structure-prostate", "targetType": "structure", "relationship": "anatomy", "label": "Prostate (Detailed)" }
+  ],
+
+  "tags": {
+    "systems": ["urinary", "reproductive"],
+    "topics": ["mens-health", "prostate", "BPH", "urology", "patient-education"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

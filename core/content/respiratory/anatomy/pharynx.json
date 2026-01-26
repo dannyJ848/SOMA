@@ -1,0 +1,120 @@
+{
+  "id": "structure-pharynx",
+  "type": "structure",
+  "name": "Pharynx",
+  "alternateNames": ["Throat", "Pharyngeal passage"],
+  "fmaId": "FMA:46688",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The pharynx is your throat - a tube that connects your nose and mouth to your food pipe and windpipe.",
+      "explanation": "The pharynx is like a hallway in your body. It starts behind your nose and goes down to where your throat splits into two paths - one for food (esophagus) and one for air (trachea). When you swallow food or drink, muscles in your throat push it down to your stomach. When you breathe, air passes through your throat on its way to your lungs. Your throat also helps you speak and contains your tonsils, which help fight germs.",
+      "keyTerms": [
+        {"term": "pharynx", "definition": "The medical name for your throat"},
+        {"term": "esophagus", "definition": "The tube that carries food from your throat to your stomach"},
+        {"term": "trachea", "definition": "The windpipe that carries air to your lungs"},
+        {"term": "tonsils", "definition": "Germ-fighting tissues at the back of your throat"}
+      ],
+      "analogies": ["Your throat is like a train station junction where two different lines (air and food) both pass through but go to different destinations."],
+      "examples": ["When you have a sore throat, the walls of your pharynx are red and swollen."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The pharynx is a muscular tube divided into three regions: nasopharynx, oropharynx, and laryngopharynx, serving both respiratory and digestive functions.",
+      "explanation": "The pharynx is approximately 12-14 cm long and is divided into three parts: 1) The nasopharynx is the uppermost section behind the nose, containing the adenoids and opening to the Eustachian tubes that connect to the middle ear. 2) The oropharynx is the middle section behind the mouth, containing the palatine tonsils and uvula. 3) The laryngopharynx (hypopharynx) is the lowest section behind the larynx, where the airway and digestive tract separate. During swallowing, the epiglottis covers the larynx to prevent food from entering the airways.",
+      "keyTerms": [
+        {"term": "nasopharynx", "definition": "Upper part of the throat behind the nose", "pronunciation": "NAY-zoh-FAIR-inks"},
+        {"term": "oropharynx", "definition": "Middle part of the throat behind the mouth", "pronunciation": "OR-oh-FAIR-inks"},
+        {"term": "laryngopharynx", "definition": "Lower part of the throat behind the voice box, also called hypopharynx", "pronunciation": "lah-RING-goh-FAIR-inks"},
+        {"term": "Eustachian tube", "definition": "Tube connecting the middle ear to the nasopharynx", "pronunciation": "yoo-STAY-shun"},
+        {"term": "epiglottis", "definition": "Flap of tissue that covers the airway during swallowing"}
+      ],
+      "analogies": ["The pharynx is like a three-story building: the nasopharynx is the top floor (nose level), the oropharynx is the middle floor (mouth level), and the laryngopharynx is the ground floor where traffic exits to two different streets."],
+      "examples": ["Sleep apnea often involves collapse of the oropharynx during sleep."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The pharynx comprises three anatomical regions with distinct mucosal linings, lymphoid tissue, and muscular layers essential for deglutition and respiration.",
+      "explanation": "The nasopharynx is lined with respiratory (ciliated pseudostratified columnar) epithelium and contains the pharyngeal tonsil (adenoid), Waldeyer's ring components, and the torus tubarius (cartilaginous opening of the Eustachian tube). The oropharynx transitions to stratified squamous epithelium and contains the palatine tonsils in the tonsillar fossa between the palatoglossal and palatopharyngeal arches. The laryngopharynx extends from the epiglottis to the cricoid cartilage (C6 level), bounded anteriorly by the laryngeal inlet and piriform fossae laterally. Pharyngeal musculature includes the three pharyngeal constrictors (superior, middle, inferior) innervated by the pharyngeal plexus (CN IX, X, sympathetics), and longitudinal muscles (stylopharyngeus - CN IX, palatopharyngeus, salpingopharyngeus - CN X). Killian's dehiscence between the thyropharyngeus and cricopharyngeus (inferior constrictor components) is a site of Zenker's diverticulum formation.",
+      "keyTerms": [
+        {"term": "Waldeyer's ring", "definition": "Ring of lymphoid tissue including palatine, lingual, pharyngeal tonsils, and tubal tonsils"},
+        {"term": "pharyngeal constrictors", "definition": "Three paired muscles (superior, middle, inferior) that constrict pharynx during swallowing"},
+        {"term": "piriform fossa", "definition": "Recess lateral to the larynx in the laryngopharynx where food passes during swallowing"},
+        {"term": "Killian's dehiscence", "definition": "Weak area between thyropharyngeus and cricopharyngeus muscles, site of Zenker's diverticulum"},
+        {"term": "pharyngeal plexus", "definition": "Nerve network from CN IX, X, and sympathetics providing motor and sensory innervation to pharynx"}
+      ],
+      "clinicalNotes": "Peritonsillar abscess (quinsy) forms in the peritonsillar space. The glossopharyngeal nerve (CN IX) provides sensory innervation to oropharynx - testing gag reflex assesses CN IX and X."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pharyngeal physiology integrates complex neuromuscular coordination for deglutition, airway protection, and phonation, with clinical implications for dysphagia, OSA, and malignancy.",
+      "explanation": "Deglutition involves three phases: oral (voluntary, CN V, VII, XII), pharyngeal (reflexive, CN IX, X via nucleus ambiguus), and esophageal (involuntary, vagus). The pharyngeal phase takes ~1 second and involves: soft palate elevation (tensor and levator veli palatini), pharyngeal shortening (longitudinal muscles), sequential pharyngeal constriction, laryngeal elevation and closure (thyrohyoid and intrinsic laryngeal muscles), and upper esophageal sphincter relaxation. Central pattern generators in the brainstem coordinate this sequence. Obstructive sleep apnea pathophysiology involves pharyngeal collapsibility during sleep due to reduced dilator muscle tone (genioglossus, tensor palatini), negative intraluminal pressure during inspiration, and anatomic factors (retrognathia, macroglossia, obesity). Pharyngeal squamous cell carcinoma (especially HPV-related oropharyngeal cancer) has distinct molecular profiles and improved prognosis compared to HPV-negative tumors.",
+      "keyTerms": [
+        {"term": "deglutition", "definition": "The process of swallowing, involving oral, pharyngeal, and esophageal phases"},
+        {"term": "nucleus ambiguus", "definition": "Brainstem nucleus containing motor neurons for pharyngeal and laryngeal muscles"},
+        {"term": "upper esophageal sphincter", "definition": "Sphincter formed primarily by cricopharyngeus muscle, relaxes during swallowing"},
+        {"term": "Pcrit", "definition": "Critical closing pressure - measure of pharyngeal collapsibility used in OSA assessment"},
+        {"term": "HPV-related oropharyngeal cancer", "definition": "SCC associated with HPV 16/18, typically p16 positive, better prognosis than HPV-negative"}
+      ],
+      "clinicalNotes": "Videofluoroscopic swallow study (VFSS) and FEES (fiberoptic endoscopic evaluation of swallowing) assess dysphagia. Drug-induced sleep endoscopy (DISE) localizes obstruction in OSA for surgical planning."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced pharyngeal management encompasses precision medicine for head/neck cancers, multimodal OSA treatment algorithms, and evolving understanding of microbiome-immune interactions.",
+      "explanation": "HPV-related oropharyngeal SCC management integrates p16 immunohistochemistry and HPV DNA/RNA testing for staging (AJCC 8th edition separate staging for HPV-positive disease). De-escalation trials (RTOG 1016, De-ESCALaTE) evaluate reduced-intensity regimens to minimize treatment morbidity. Immunotherapy (pembrolizumab, nivolumab) is now first-line for recurrent/metastatic HNSCC. Transoral robotic surgery (TORS) and transoral laser microsurgery offer surgical alternatives with organ preservation. OSA management follows a phenotype-based approach: anatomic obstruction (PAP therapy, surgical options including UPPP, hypoglossal nerve stimulation), low arousal threshold (sedative hypnotics), high loop gain (acetazolamide), and poor muscle responsiveness (targeted myofunctional therapy). Hypoglossal nerve stimulation (Inspire therapy) is FDA-approved for PAP-intolerant moderate-severe OSA. Pharyngeal microbiome research links dysbiosis to cancer development and treatment response. Novel biomarkers (circulating tumor DNA, methylation signatures) guide treatment monitoring and early recurrence detection.",
+      "keyTerms": [
+        {"term": "TORS", "definition": "Transoral robotic surgery - minimally invasive approach for oropharyngeal tumors using robotic platform"},
+        {"term": "hypoglossal nerve stimulation", "definition": "Implantable device that stimulates genioglossus to prevent pharyngeal collapse during sleep"},
+        {"term": "de-escalation", "definition": "Treatment approach reducing chemotherapy or radiation intensity for HPV-positive cancers to minimize toxicity"},
+        {"term": "pembrolizumab", "definition": "Anti-PD-1 checkpoint inhibitor approved for first-line recurrent/metastatic HNSCC"},
+        {"term": "UPPP", "definition": "Uvulopalatopharyngoplasty - surgical procedure removing redundant oropharyngeal tissue for OSA"}
+      ],
+      "clinicalNotes": "KEYNOTE-048 established pembrolizumab as first-line for CPS >= 1 HNSCC. MAD (mandibular advancement device) is alternative to CPAP for mild-moderate OSA. Consider 3D-printed custom devices. Drug-induced sleep endoscopy guides surgical planning."
+    }
+  },
+  "media": [
+    {
+      "id": "pharynx-3d-model",
+      "type": "3d-model",
+      "filename": "pharynx_regions.glb",
+      "title": "3D Pharynx Anatomy",
+      "description": "Interactive model showing nasopharynx, oropharynx, and laryngopharynx with associated structures"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "netter-atlas",
+      "type": "textbook",
+      "title": "Atlas of Human Anatomy",
+      "authors": ["Netter FH"],
+      "source": "Elsevier",
+      "chapter": "Head and Neck"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-nasal-cavity", "targetType": "structure", "relationship": "related", "label": "Nasal Cavity"},
+    {"targetId": "structure-larynx", "targetType": "structure", "relationship": "child", "label": "Larynx"},
+    {"targetId": "condition-sleep-apnea", "targetType": "condition", "relationship": "related", "label": "Sleep Apnea"}
+  ],
+  "tags": {
+    "systems": ["respiratory", "digestive"],
+    "structures": ["FMA:46688"],
+    "topics": ["anatomy", "physiology", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

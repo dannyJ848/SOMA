@@ -1,0 +1,103 @@
+{
+  "id": "structure-vas-deferens",
+  "type": "structure",
+  "name": "Vas Deferens",
+  "alternateNames": ["Ductus deferens", "Sperm duct", "Vasa deferentia (plural)"],
+  "fmaId": "FMA:19368",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The vas deferens is a tube that carries sperm from the testicles to mix with other fluids before leaving the body.",
+      "explanation": "The vas deferens is like a highway for sperm. It's a long muscular tube that starts at the epididymis (where sperm are stored) and carries sperm up through the body. The tube has thick muscular walls that squeeze to push sperm along during ejaculation. When a man has a vasectomy (a type of birth control surgery), the doctor cuts these tubes so sperm can't travel through anymore.",
+      "keyTerms": [
+        { "term": "tube", "definition": "A hollow cylinder that things can travel through" },
+        { "term": "muscular walls", "definition": "Walls made of muscle that can squeeze" },
+        { "term": "vasectomy", "definition": "A surgery that cuts the vas deferens to prevent pregnancy" }
+      ],
+      "analogies": ["The vas deferens is like a straw that carries sperm from storage to the exit point."],
+      "examples": ["A vasectomy is when a doctor cuts the vas deferens, which is why it's sometimes called 'getting your tubes tied' for men."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The vas deferens is a muscular duct approximately 45 cm long that transports sperm from the epididymis to the ejaculatory duct.",
+      "explanation": "Each vas deferens begins at the tail of the epididymis and travels upward through the inguinal canal as part of the spermatic cord. It then curves behind the bladder, widens into the ampulla, and joins with the duct of the seminal vesicle to form the ejaculatory duct. The vas has a thick muscular wall (three layers of smooth muscle) and a narrow lumen. During ejaculation, strong peristaltic contractions rapidly propel sperm toward the urethra. The vas deferens can be felt as a firm cord within the scrotum during physical examination.",
+      "keyTerms": [
+        { "term": "spermatic cord", "definition": "Bundle containing the vas deferens, blood vessels, and nerves that runs through the inguinal canal", "pronunciation": "sper-MAT-ik" },
+        { "term": "ampulla", "definition": "The dilated portion of the vas deferens near its termination", "pronunciation": "am-PULL-ah" },
+        { "term": "ejaculatory duct", "definition": "Short duct formed by union of vas deferens and seminal vesicle duct" },
+        { "term": "peristalsis", "definition": "Wave-like muscular contractions that push contents forward", "pronunciation": "pair-ih-STALL-sis" },
+        { "term": "inguinal canal", "definition": "Passage through the abdominal wall through which the spermatic cord travels", "pronunciation": "ING-gwih-nal" }
+      ],
+      "analogies": ["The vas deferens works like a squeeze tube of toothpaste - the muscular walls contract to push sperm forward."],
+      "examples": ["During a vasectomy, the surgeon accesses the vas deferens through the scrotum and removes a small segment."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The vas deferens is a thick-walled muscular duct with a trilaminar smooth muscle arrangement (inner longitudinal, middle circular, outer longitudinal) that enables rapid peristaltic transport of sperm during emission.",
+      "explanation": "The vas deferens has the highest ratio of wall thickness to lumen diameter of any hollow viscus in the body. Its mucosa is lined by pseudostratified columnar epithelium with stereocilia, surrounded by lamina propria. The muscular layer enables coordinated contractions during the emission phase of ejaculation (sympathetic nervous system via hypogastric nerves, T10-L2). The vas traverses several anatomical regions: scrotal, funicular (within spermatic cord), inguinal, pelvic (retroperitoneal). Near the seminal vesicle, it dilates into the ampulla where sperm can be stored. The arterial supply includes the artery of the vas deferens (from superior vesical artery) with anastomoses from testicular and cremasteric arteries.",
+      "keyTerms": [
+        { "term": "emission", "definition": "Movement of sperm and seminal fluid into the prostatic urethra prior to ejaculation" },
+        { "term": "hypogastric nerve", "definition": "Sympathetic nerve carrying signals for emission from T10-L2 spinal segments" },
+        { "term": "artery of the vas deferens", "definition": "Primary blood supply, typically arising from superior vesical artery" },
+        { "term": "trilaminar", "definition": "Having three layers (referring to the three smooth muscle layers)" },
+        { "term": "stereocilia", "definition": "Long microvilli on the epithelial surface that assist in fluid absorption" }
+      ],
+      "examples": ["The thick muscular wall of the vas deferens is appreciated during vasectomy when the surgeon feels the firm, cord-like structure within the scrotum."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The vas deferens serves as both a conduit and reservoir for sperm, with its sympathetically-mediated contractility coordinated with accessory gland secretion during the emission-ejaculation reflex arc.",
+      "explanation": "The emission reflex involves coordinated sympathetic activation (hypogastric nerve) causing: 1) peristalsis of vas deferens, 2) contraction of seminal vesicles, 3) prostatic secretion, and 4) closure of the internal urethral sphincter (preventing retrograde ejaculation). The ampullary region contains secretory epithelium contributing to seminal plasma. Vasal fluid contains sperm at high concentration with specific ionic composition (low bicarbonate maintaining quiescence). Developmental origin from the mesonephric (Wolffian) duct explains association between vas deferens agenesis and CFTR mutations: the mesonephric duct epithelium is CFTR-dependent, and abnormal CFTR leads to inspissation and degeneration. No-scalpel vasectomy techniques utilize the palpable, superficial nature of the vas within the scrotum.",
+      "keyTerms": [
+        { "term": "retrograde ejaculation", "definition": "Backward flow of semen into the bladder due to internal sphincter dysfunction" },
+        { "term": "Wolffian duct", "definition": "Embryonic mesonephric duct that develops into male internal genital structures including vas deferens" },
+        { "term": "CBAVD", "definition": "Congenital bilateral absence of the vas deferens, associated with CFTR mutations" },
+        { "term": "internal urethral sphincter", "definition": "Involuntary smooth muscle sphincter at bladder neck that closes during ejaculation" },
+        { "term": "inspissation", "definition": "Thickening of secretions leading to duct obstruction" }
+      ],
+      "clinicalNotes": "CBAVD is found in approximately 2% of infertile men and 95% of men with cystic fibrosis. All men with CBAVD should have CFTR mutation screening, and their partners should be tested before assisted reproduction to assess CF risk in offspring."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The vas deferens exemplifies developmental integration of the mesonephric duct system with clinical implications for reproductive surgery, genetic screening in azoospermia, and male contraceptive development.",
+      "explanation": "The vas deferens is clinically significant in multiple contexts: 1) Vasectomy: most effective reversible male contraception, with vas reconnection (vasovasostomy or vasoepididymostomy) achieving patency rates of 70-95% depending on obstructive interval; 2) CBAVD: isolated or as CF manifestation, requires CFTR and renal ultrasound (unilateral renal agenesis in 10-25%); 3) Inguinal hernia repair: vas deferens injury is a known complication with medicolegal implications; 4) Iatrogenic injury during pelvic surgery. Emerging research includes reversible vas deferens occlusion devices (RISUG/Vasalgel) and vas deferens tissue engineering. Vasography (contrast imaging of vas) can confirm patency in evaluation of azoospermia. Post-vasectomy pain syndrome (PVPS) occurs in 1-2%, potentially due to epididymal congestion or sperm granuloma. Microsurgical vasectomy reversal success depends on time since vasectomy, vasal fluid quality at surgery, and presence of sperm in vasal fluid.",
+      "keyTerms": [
+        { "term": "vasovasostomy", "definition": "Microsurgical reconnection of cut ends of vas deferens for vasectomy reversal" },
+        { "term": "vasoepididymostomy", "definition": "Connection of vas deferens directly to epididymis when vasovasostomy not possible due to secondary obstruction" },
+        { "term": "RISUG", "definition": "Reversible Inhibition of Sperm Under Guidance - experimental polymer-based vas occlusion method" },
+        { "term": "sperm granuloma", "definition": "Inflammatory nodule at vasectomy site caused by sperm leakage and immune reaction" },
+        { "term": "post-vasectomy pain syndrome", "definition": "Chronic scrotal pain following vasectomy, occurring in 1-2% of men" }
+      ],
+      "clinicalNotes": "Vasectomy reversal success rates: <3 years post-vasectomy: 95% patency, 75% pregnancy; 3-8 years: 90% patency, 55% pregnancy; >15 years: 70% patency, 30% pregnancy. Intraoperative finding of no sperm in vasal fluid indicates secondary epididymal obstruction requiring vasoepididymostomy. Sperm banking before vasectomy should be discussed for men with uncertainty."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-epididymis", "targetType": "structure", "relationship": "related", "label": "Epididymis" },
+    { "targetId": "structure-seminal-vesicles", "targetType": "structure", "relationship": "related", "label": "Seminal Vesicles" },
+    { "targetId": "structure-prostate", "targetType": "structure", "relationship": "related", "label": "Prostate" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:19368"],
+    "topics": ["anatomy"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

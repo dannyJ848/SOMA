@@ -6,6 +6,7 @@
  * - Simplified materials
  * - Minimal animations (disabled by default)
  * - Memoized components
+ * - Optional advanced animation system integration
  */
 
 import { useRef, useMemo, useCallback, memo } from 'react';
@@ -22,6 +23,13 @@ import {
   type AnatomicalSystem,
   SYSTEM_COLORS,
 } from './AnatomyStructures';
+import {
+  useAnatomyAnimation,
+  BloodFlowParticles,
+  type AnatomyAnimationConfig,
+  type AnatomyAnimationState,
+  DEFAULT_ANIMATION_CONFIG,
+} from './AnatomyAnimationSystem';
 
 // ============================================
 // Types
@@ -36,6 +44,14 @@ interface EnhancedAnatomyModelProps {
   showSkeleton?: boolean;
   showOrgans?: boolean;
   animateOrgans?: boolean;
+  /** Use advanced animation system instead of simple animations */
+  useAdvancedAnimation?: boolean;
+  /** Advanced animation configuration (only used if useAdvancedAnimation is true) */
+  animationConfig?: Partial<AnatomyAnimationConfig>;
+  /** Show blood flow particles */
+  showBloodFlow?: boolean;
+  /** Callback when animation state changes */
+  onAnimationStateChange?: (state: AnatomyAnimationState) => void;
 }
 
 // ============================================
@@ -136,14 +152,18 @@ const StaticMesh = memo(function StaticMesh({
 // Single Animation Controller (instead of per-mesh)
 // ============================================
 
-interface AnimationControllerProps {
+interface SimpleAnimationControllerProps {
   heartRef: React.RefObject<THREE.Mesh | null>;
   leftLungRef: React.RefObject<THREE.Mesh | null>;
   rightLungRef: React.RefObject<THREE.Mesh | null>;
   enabled: boolean;
 }
 
-function AnimationController({ heartRef, leftLungRef, rightLungRef, enabled }: AnimationControllerProps) {
+/**
+ * Simple animation controller for basic organ animations
+ * Used when useAdvancedAnimation is false (default for performance)
+ */
+function SimpleAnimationController({ heartRef, leftLungRef, rightLungRef, enabled }: SimpleAnimationControllerProps) {
   const startTime = useRef(Date.now());
   const frameSkip = useRef(0);
 
@@ -156,14 +176,14 @@ function AnimationController({ heartRef, leftLungRef, rightLungRef, enabled }: A
 
     const elapsed = (Date.now() - startTime.current) / 1000;
 
-    // Heart beat
+    // Heart beat - ~70 BPM (1.17 Hz)
     if (heartRef.current) {
-      const beat = Math.sin(elapsed * 1.2 * Math.PI * 2);
+      const beat = Math.sin(elapsed * 1.17 * Math.PI * 2);
       const scale = 1 + beat * 0.05;
       heartRef.current.scale.setScalar(scale);
     }
 
-    // Lung breathing
+    // Lung breathing - ~15 breaths/min (0.25 Hz)
     const breath = Math.sin(elapsed * 0.25 * Math.PI * 2);
     const lungScale = 1 + breath * 0.05;
 
@@ -174,6 +194,59 @@ function AnimationController({ heartRef, leftLungRef, rightLungRef, enabled }: A
       rightLungRef.current.scale.set(lungScale, lungScale * 1.05, lungScale);
     }
   });
+
+  return null;
+}
+
+interface AdvancedAnimationControllerProps {
+  heartRef: React.RefObject<THREE.Mesh | null>;
+  leftLungRef: React.RefObject<THREE.Mesh | null>;
+  rightLungRef: React.RefObject<THREE.Mesh | null>;
+  enabled: boolean;
+  config?: Partial<AnatomyAnimationConfig>;
+  showBloodFlow: boolean;
+  onStateChange?: (state: AnatomyAnimationState) => void;
+}
+
+/**
+ * Advanced animation controller using the full animation system
+ * Provides realistic heart cycle, breathing, and blood flow
+ */
+function AdvancedAnimationController({
+  heartRef,
+  leftLungRef,
+  rightLungRef,
+  enabled,
+  config,
+  showBloodFlow,
+  onStateChange,
+}: AdvancedAnimationControllerProps) {
+  const { state } = useAnatomyAnimation({
+    config: {
+      ...config,
+      heart: { ...DEFAULT_ANIMATION_CONFIG.heart, ...config?.heart, enabled },
+      respiratory: { ...DEFAULT_ANIMATION_CONFIG.respiratory, ...config?.respiratory, enabled },
+      bloodFlow: { ...DEFAULT_ANIMATION_CONFIG.bloodFlow, ...config?.bloodFlow, enabled: showBloodFlow && enabled },
+    },
+    heartRefs: { heart: heartRef },
+    respiratoryRefs: { leftLung: leftLungRef, rightLung: rightLungRef },
+  });
+
+  // Notify parent of state changes
+  useMemo(() => {
+    onStateChange?.(state);
+  }, [state, onStateChange]);
+
+  // Render blood flow particles if enabled
+  if (showBloodFlow && enabled && state.bloodFlow.particles.length > 0) {
+    return (
+      <BloodFlowParticles
+        particles={state.bloodFlow.particles}
+        oxygenatedColor={new THREE.Color(config?.bloodFlow?.oxygenatedColor || '#ff4444')}
+        deoxygenatedColor={new THREE.Color(config?.bloodFlow?.deoxygenatedColor || '#4466ff')}
+      />
+    );
+  }
 
   return null;
 }
@@ -191,6 +264,10 @@ export function EnhancedAnatomyModel({
   showSkeleton = true,
   showOrgans = true,
   animateOrgans = false, // DISABLED BY DEFAULT for performance
+  useAdvancedAnimation = false, // Use simple animations by default
+  animationConfig,
+  showBloodFlow = false,
+  onAnimationStateChange,
 }: EnhancedAnatomyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const heartRef = useRef<THREE.Mesh>(null);
@@ -199,16 +276,33 @@ export function EnhancedAnatomyModel({
 
   const lodState = useLOD();
 
-  // Filter structures based on LOD and enabled systems - memoized
+  // Filter structures based on enabled systems only - Complete Anatomy style
+  // All structures should be visible when their system is enabled, regardless of LOD
   const visibleStructures = useMemo(() => {
-    const structures = getStructuresAtDetailLevel(lodState.detailLevel);
-    return structures.filter(structure => {
+    // Import ALL structures, not just those at current detail level
+    // This ensures organs appear when their system is toggled on
+    const structures = getStructuresAtDetailLevel('body'); // Always get body-level structures (all)
+    console.log('[EnhancedAnatomyModel] All structures:', structures.length);
+    console.log('[EnhancedAnatomyModel] Enabled systems:', enabledSystems);
+
+    const filtered = structures.filter(structure => {
+      // Primary filter: system must be enabled
       if (!enabledSystems.includes(structure.system)) return false;
+
+      // Secondary filter: respect showSkeleton/showOrgans props if needed
+      // But these are true by default so structures should appear
       if (structure.system === 'skeletal' && !showSkeleton) return false;
-      if (['cardiovascular', 'respiratory', 'digestive', 'nervous', 'urinary', 'lymphatic', 'endocrine'].includes(structure.system) && !showOrgans) return false;
+
+      // Organ systems - only filter if showOrgans is explicitly false
+      const organSystems = ['cardiovascular', 'respiratory', 'digestive', 'nervous', 'urinary', 'lymphatic', 'endocrine'];
+      if (organSystems.includes(structure.system) && !showOrgans) return false;
+
       return true;
     });
-  }, [lodState.detailLevel, enabledSystems, showSkeleton, showOrgans]);
+
+    console.log('[EnhancedAnatomyModel] Visible structures:', filtered.map(s => `${s.id} (${s.system})`));
+    return filtered;
+  }, [enabledSystems, showSkeleton, showOrgans]);
 
   // NO auto-rotation - it causes constant re-renders
   // Users can manually rotate with mouse
@@ -243,13 +337,25 @@ export function EnhancedAnatomyModel({
 
   return (
     <group ref={groupRef}>
-      {/* Single animation controller instead of per-mesh animations */}
-      <AnimationController
-        heartRef={heartRef}
-        leftLungRef={leftLungRef}
-        rightLungRef={rightLungRef}
-        enabled={animateOrgans}
-      />
+      {/* Animation controller - choose between simple and advanced */}
+      {useAdvancedAnimation ? (
+        <AdvancedAnimationController
+          heartRef={heartRef}
+          leftLungRef={leftLungRef}
+          rightLungRef={rightLungRef}
+          enabled={animateOrgans}
+          config={animationConfig}
+          showBloodFlow={showBloodFlow}
+          onStateChange={onAnimationStateChange}
+        />
+      ) : (
+        <SimpleAnimationController
+          heartRef={heartRef}
+          leftLungRef={leftLungRef}
+          rightLungRef={rightLungRef}
+          enabled={animateOrgans}
+        />
+      )}
 
       {visibleStructures.map((structure) => {
         const opacity = calculateStructureOpacity(
@@ -369,8 +475,10 @@ interface SystemFilterPanelProps {
 export function SystemFilterPanel({
   enabledSystems,
   onToggleSystem,
-  lodState,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  lodState: _lodState,
 }: SystemFilterPanelProps) {
+  // All anatomical systems - always show all for Complete Anatomy-style layer control
   const systems: { id: AnatomicalSystem; name: string; icon: string }[] = [
     { id: 'integumentary', name: 'Skin', icon: '🧑' },
     { id: 'muscular', name: 'Muscles', icon: '💪' },
@@ -384,12 +492,8 @@ export function SystemFilterPanel({
     { id: 'endocrine', name: 'Hormones', icon: '⚗️' },
   ];
 
-  const availableSystems = systems.filter(system => {
-    if (lodState.detailLevel === 'body') {
-      return ['integumentary', 'muscular', 'skeletal'].includes(system.id);
-    }
-    return true;
-  });
+  // Show all systems at all zoom levels for Complete Anatomy-style layer toggling
+  const availableSystems = systems;
 
   return (
     <div className="system-filter-panel">

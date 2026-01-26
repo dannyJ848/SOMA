@@ -1,0 +1,107 @@
+{
+  "id": "ent-hearing-loss",
+  "type": "patient-education",
+  "name": "Hearing Loss Types",
+  "alternateNames": ["Hearing Impairment", "Deafness", "Auditory Dysfunction"],
+  "category": "ear",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Hearing loss means you have trouble hearing sounds, and it can happen in different ways depending on which part of your ear is affected.",
+      "explanation": "Hearing loss is when you cannot hear as well as you should. There are different types depending on where the problem is. Conductive hearing loss happens when sound cannot get through the outer or middle ear - like when earwax blocks your ear canal or fluid builds up behind your eardrum. Sensorineural hearing loss happens when there is damage to the inner ear or the hearing nerve - this is the most common type in older adults. Some people have mixed hearing loss, which is a combination of both types. Hearing loss can happen in one ear or both, and it can range from mild (having trouble hearing quiet sounds) to profound (being unable to hear most sounds).",
+      "keyTerms": [
+        {"term": "conductive hearing loss", "definition": "Hearing loss caused by a blockage or problem in the outer or middle ear"},
+        {"term": "sensorineural hearing loss", "definition": "Hearing loss caused by damage to the inner ear or hearing nerve"},
+        {"term": "mixed hearing loss", "definition": "Having both conductive and sensorineural hearing loss"},
+        {"term": "hearing nerve", "definition": "The nerve that carries sound signals from your ear to your brain"}
+      ],
+      "analogies": ["Think of your ear like a phone: conductive hearing loss is like a problem with the microphone (sound cannot get in), while sensorineural hearing loss is like a problem with the wiring or speaker (the signal cannot be processed properly)."],
+      "examples": ["If you have a lot of earwax buildup, sounds might seem muffled - this is conductive hearing loss that usually gets better once the wax is removed."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Hearing loss is classified by location (conductive, sensorineural, or mixed), degree (mild to profound), and configuration, with various causes and treatment approaches.",
+      "explanation": "Conductive hearing loss results from conditions affecting the external or middle ear that impair sound transmission: cerumen impaction, otitis media with effusion, tympanic membrane perforation, ossicular discontinuity, or otosclerosis. Sensorineural hearing loss (SNHL) involves the cochlea or auditory nerve, caused by aging (presbycusis), noise exposure, ototoxic medications, infections (viral labyrinthitis, meningitis), or genetic factors. Hearing loss severity is graded by pure-tone average thresholds: mild (26-40 dB), moderate (41-55 dB), moderately severe (56-70 dB), severe (71-90 dB), and profound (>90 dB). Configuration describes the pattern across frequencies - flat, sloping (high-frequency loss), rising (low-frequency loss), or notched. Treatment depends on type: conductive loss is often medically or surgically correctable, while SNHL typically requires amplification (hearing aids) or cochlear implantation.",
+      "keyTerms": [
+        {"term": "presbycusis", "definition": "Age-related hearing loss, typically affecting high frequencies first", "pronunciation": "prez-bih-KOO-sis"},
+        {"term": "otosclerosis", "definition": "Abnormal bone growth in the middle ear causing stapes fixation", "pronunciation": "oh-toe-skler-OH-sis"},
+        {"term": "pure-tone average", "definition": "Average hearing threshold at 500, 1000, and 2000 Hz, used to classify hearing loss degree"},
+        {"term": "ototoxic", "definition": "Harmful to the ear, particularly the cochlea or vestibular system"}
+      ],
+      "analogies": ["Presbycusis (age-related hearing loss) is like a worn carpet - high-traffic areas (high frequencies we use most) show wear first."],
+      "examples": ["Musicians and construction workers are at high risk for noise-induced hearing loss, which typically shows as a 'notch' at 4000 Hz on the audiogram."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Diagnostic evaluation of hearing loss includes comprehensive audiometry, tympanometry, acoustic reflexes, and speech testing, with imaging and laboratory workup guided by clinical presentation.",
+      "explanation": "Complete audiologic evaluation includes pure-tone audiometry (air and bone conduction to differentiate conductive from sensorineural loss), tympanometry (middle ear compliance and pressure), acoustic reflex thresholds and decay, and speech audiometry (speech recognition threshold and word recognition score). The air-bone gap quantifies the conductive component. Weber test (tuning fork to vertex) lateralizes to the affected ear in conductive loss, unaffected ear in sensorineural loss. Rinne test compares air and bone conduction. Asymmetric SNHL requires MRI with gadolinium to rule out vestibular schwannoma. Sudden sensorineural hearing loss (SSNHL) is an otologic emergency requiring prompt evaluation and treatment (systemic and/or intratympanic corticosteroids). Laboratory evaluation for unexplained bilateral SNHL may include thyroid function, syphilis serology, autoimmune markers, and genetic testing. Otoacoustic emissions (OAE) assess outer hair cell function and are used in newborn hearing screening.",
+      "keyTerms": [
+        {"term": "air-bone gap", "definition": "Difference between air and bone conduction thresholds, indicating conductive component"},
+        {"term": "tympanometry", "definition": "Objective test measuring eardrum mobility and middle ear pressure"},
+        {"term": "word recognition score", "definition": "Percentage of words correctly identified at suprathreshold levels, indicating clarity of hearing"},
+        {"term": "vestibular schwannoma", "definition": "Benign tumor on the vestibular nerve, often presenting with asymmetric hearing loss"},
+        {"term": "sudden sensorineural hearing loss", "definition": "Rapid hearing decline (>30 dB over 3 frequencies within 72 hours), an otologic emergency"}
+      ],
+      "clinicalNotes": "SSNHL treatment: systemic steroids (1mg/kg prednisone taper) within 2 weeks, intratympanic steroids if inadequate response or contraindication. MRI indicated for all unilateral/asymmetric SNHL. Glomus tumors may present with pulsatile tinnitus and conductive hearing loss."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced understanding of hearing loss pathophysiology encompasses cochlear synaptopathy, strial dysfunction, genetic mechanisms, and evolving pharmacologic and regenerative therapeutic targets.",
+      "explanation": "Cochlear synaptopathy (hidden hearing loss) involves selective loss of inner hair cell-spiral ganglion synapses, particularly affecting high-spontaneous-rate fibers critical for speech-in-noise perception; this precedes hair cell loss in noise exposure and aging. The endocochlear potential depends on stria vascularis function - strial presbycusis represents age-related marginal cell dysfunction. Genetic hearing loss follows various inheritance patterns: autosomal recessive (most common, including GJB2/connexin 26), autosomal dominant (progressive, variable penetrance), X-linked, and mitochondrial (aminoglycoside susceptibility with m.1555A>G). Syndromic hearing loss includes Usher syndrome (retinitis pigmentosa), Waardenburg syndrome (pigmentation anomalies), Pendred syndrome (thyroid enlargement, enlarged vestibular aqueduct), and Alport syndrome (nephritis). Extended high-frequency audiometry (above 8 kHz) may detect early cochlear damage before conventional frequencies affected. Pharmacologic otoprotection research targets glutamate excitotoxicity, oxidative stress, and apoptotic pathways.",
+      "keyTerms": [
+        {"term": "cochlear synaptopathy", "definition": "Loss of inner hair cell synapses causing speech-in-noise difficulty despite normal audiogram"},
+        {"term": "stria vascularis", "definition": "Highly vascularized structure generating endocochlear potential via K+ recycling"},
+        {"term": "connexin 26", "definition": "Gap junction protein encoded by GJB2, most common cause of genetic nonsyndromic SNHL"},
+        {"term": "Usher syndrome", "definition": "Autosomal recessive syndrome with congenital deafness and progressive retinitis pigmentosa"},
+        {"term": "otoprotection", "definition": "Pharmacologic strategies to prevent cochlear damage from noise, aging, or ototoxins"}
+      ],
+      "clinicalNotes": "ABR wave I amplitude reduction suggests synaptopathy. Genetic testing panel approach for childhood SNHL now standard. Mitochondrial testing before aminoglycoside therapy in high-risk populations. D-methionine and NAC under investigation as otoprotectants."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary hearing loss management integrates precision audiologic diagnostics, advanced amplification technology, cochlear implant innovations, and emerging gene and cell-based therapies.",
+      "explanation": "Modern hearing aid technology includes digital signal processing with machine learning algorithms, directional microphone arrays with spatial noise reduction, frequency lowering for high-frequency losses, Bluetooth connectivity, and rechargeable systems. Extended-wear devices (Lyric) remain in the canal for months. Bone conduction devices (BAHA, Ponto, Osia) bypass the external/middle ear for conductive/mixed loss or single-sided deafness. Cochlear implant candidacy has expanded to include: pediatric bilateral implantation under 12 months, asymmetric hearing for bimodal stimulation, and electric-acoustic stimulation for low-frequency residual hearing. Electrode arrays optimize perimodiolar positioning for neural proximity. Auditory brainstem implants for NF2 patients or cochlear aplasia bypass the cochlea entirely. Gene therapy trials target OTOF (otoferlin), TMC1, and GJB2 using AAV vectors with promising results restoring hearing in congenitally deaf children. Hair cell regeneration research continues on Atoh1, gamma-secretase inhibition (Notch pathway), and direct supporting cell reprogramming.",
+      "keyTerms": [
+        {"term": "electric-acoustic stimulation", "definition": "Hybrid cochlear implant with hearing aid function for low frequencies, electrode for highs"},
+        {"term": "BAHA", "definition": "Bone-anchored hearing aid using osseointegrated implant to transmit sound via bone conduction"},
+        {"term": "auditory brainstem implant", "definition": "Device stimulating cochlear nucleus directly, used when cochlea or auditory nerve is absent"},
+        {"term": "AAV vector", "definition": "Adeno-associated virus used to deliver therapeutic genes in inner ear gene therapy"},
+        {"term": "single-sided deafness", "definition": "Profound hearing loss in one ear with normal or near-normal hearing in the other"}
+      ],
+      "clinicalNotes": "CI candidacy: pediatric screening criteria continue expanding; adult criteria now include up to 60% sentence recognition in best-aided condition. Gene therapy phase 1/2 trials show AAV1-OTOF can restore hearing to near-normal levels in DFNB9. Tinnitus and hyperacusis increasingly recognized as cochlear synaptopathy manifestations."
+    }
+  },
+  "media": [
+    {
+      "id": "audiogram-examples",
+      "type": "diagram",
+      "filename": "audiogram_patterns.svg",
+      "title": "Common Audiogram Patterns",
+      "description": "Examples of conductive, sensorineural, and mixed hearing loss on audiogram"
+    }
+  ],
+  "citations": [
+    {
+      "id": "aao-hns-hearing-loss",
+      "type": "guideline",
+      "title": "Clinical Practice Guideline: Sudden Hearing Loss",
+      "source": "American Academy of Otolaryngology-Head and Neck Surgery",
+      "url": "https://doi.org/10.1177/0194599819859885"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "ent-ear-anatomy", "targetType": "anatomy", "relationship": "related", "label": "Ear Anatomy"},
+    {"targetId": "ent-hearing-aids", "targetType": "treatment", "relationship": "related", "label": "Hearing Aids"},
+    {"targetId": "ent-hearing-tests", "targetType": "procedure", "relationship": "related", "label": "Hearing Tests"}
+  ],
+  "tags": {
+    "systems": ["auditory"],
+    "topics": ["conditions", "diagnosis", "treatment"],
+    "clinicalRelevance": "high",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

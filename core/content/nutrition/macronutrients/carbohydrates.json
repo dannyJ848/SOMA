@@ -1,0 +1,119 @@
+{
+  "id": "concept-carbohydrates",
+  "type": "concept",
+  "name": "Carbohydrates",
+  "alternateNames": ["Carbs", "Saccharides", "Sugars and Starches"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Carbohydrates are foods like bread, fruit, and pasta that give your body quick energy to move, think, and play.",
+      "explanation": "Carbohydrates are your body's favorite fuel! When you eat foods like bread, rice, fruits, or candy, your body breaks them down into a simple sugar called glucose. This glucose travels through your blood to all your cells, giving them the energy they need. Think of carbs like putting gas in a car - without fuel, the car can't run!\n\nThere are three main types of carbs:\n- **Simple carbs** (sugars): Found in candy, soda, fruit. They give you fast energy but don't last long.\n- **Complex carbs** (starches): Found in bread, pasta, potatoes. They give you longer-lasting energy.\n- **Fiber**: Found in vegetables, whole grains, beans. Your body can't digest it, but it helps your tummy work well.\n\nYour brain especially loves glucose - it's the only fuel your brain can easily use! That's why you might feel tired or grumpy when you haven't eaten in a while.",
+      "keyTerms": [
+        { "term": "glucose", "definition": "The simple sugar your body uses for energy - it travels in your blood to feed all your cells" },
+        { "term": "fiber", "definition": "A type of carb your body can't digest that helps food move through your intestines" },
+        { "term": "starch", "definition": "A type of carb found in foods like bread and potatoes that gives you longer-lasting energy" }
+      ],
+      "analogies": ["Carbs are like the gas you put in a car - they're the fuel that makes your body go!", "Simple carbs are like newspaper that burns fast, while complex carbs are like logs that burn slowly and keep you warm longer."],
+      "examples": ["When you eat an apple before soccer practice, the carbs give you energy to run fast.", "Eating oatmeal for breakfast keeps you feeling full until lunch because it has complex carbs and fiber."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Carbohydrates are organic molecules made of carbon, hydrogen, and oxygen that serve as the body's primary energy source, providing 4 calories per gram.",
+      "explanation": "Carbohydrates are classified by their molecular structure:\n\n**Simple Carbohydrates (Sugars)**:\n- *Monosaccharides*: Single sugar units (glucose, fructose, galactose)\n- *Disaccharides*: Two sugar units joined together (sucrose = glucose + fructose; lactose = glucose + galactose; maltose = glucose + glucose)\n\n**Complex Carbohydrates**:\n- *Oligosaccharides*: 3-10 sugar units (found in beans, causing gas)\n- *Polysaccharides*: Long chains of sugars\n  - Starch: Plant storage form (amylose, amylopectin)\n  - Glycogen: Animal storage form (stored in liver and muscles)\n  - Fiber: Indigestible plant material (cellulose, pectin, beta-glucan)\n\n**Digestion and Absorption**:\n1. Mouth: Salivary amylase begins starch breakdown\n2. Stomach: Amylase inactivated by acid\n3. Small intestine: Pancreatic amylase completes starch digestion; brush border enzymes break disaccharides into monosaccharides\n4. Absorption: Monosaccharides absorbed into bloodstream\n\n**Fiber Types**:\n- Soluble fiber: Dissolves in water, forms gel, helps lower cholesterol (oats, beans, apples)\n- Insoluble fiber: Does not dissolve, adds bulk to stool (whole wheat, vegetables, nuts)",
+      "keyTerms": [
+        { "term": "monosaccharide", "definition": "A single sugar molecule; the simplest form of carbohydrate (glucose, fructose, galactose)", "pronunciation": "MON-oh-SAK-uh-ride" },
+        { "term": "glycogen", "definition": "The storage form of glucose in animals, found mainly in liver and muscle tissue", "pronunciation": "GLY-koh-jen" },
+        { "term": "glycemic index", "definition": "A measure of how quickly a food raises blood sugar levels compared to pure glucose", "pronunciation": "gly-SEE-mik" }
+      ],
+      "analogies": ["Simple sugars are like individual Lego blocks, while complex carbs are like structures built from many blocks - they take longer to take apart.", "Glycogen stored in your muscles is like a local gas station, while liver glycogen is like a central fuel depot that supplies the whole body."],
+      "examples": ["White bread (high glycemic index ~75) spikes blood sugar quickly, while whole grain bread (~50) causes a slower rise.", "Athletes often 'carb load' before events by eating extra pasta to maximize glycogen stores."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Carbohydrate metabolism involves regulated pathways of glycolysis, gluconeogenesis, and glycogenesis, with blood glucose maintained within narrow limits by insulin and glucagon signaling.",
+      "explanation": "**Carbohydrate Chemistry**:\nCarbohydrates have the general formula (CH2O)n. Aldoses have an aldehyde group; ketoses have a ketone group. D-glucose is an aldohexose that forms pyranose (6-membered) rings in solution. Glycosidic bonds link monosaccharides: α-1,4 linkages (digestible starch), β-1,4 linkages (indigestible cellulose).\n\n**Metabolic Pathways**:\n- *Glycolysis*: Glucose → 2 pyruvate + 2 ATP + 2 NADH (cytoplasm, anaerobic)\n- *Gluconeogenesis*: Non-carbohydrate precursors → glucose (liver, kidney; uses lactate, glycerol, amino acids)\n- *Glycogenesis*: Glucose → glycogen (storage)\n- *Glycogenolysis*: Glycogen → glucose (mobilization)\n- *Pentose phosphate pathway*: Generates NADPH and ribose-5-phosphate\n\n**Blood Glucose Regulation**:\n- Normal fasting: 70-100 mg/dL\n- *Insulin* (beta cells): Promotes glucose uptake, glycogenesis, and lipogenesis; inhibits gluconeogenesis\n- *Glucagon* (alpha cells): Promotes glycogenolysis and gluconeogenesis\n- *Cortisol, epinephrine, growth hormone*: Counter-regulatory hormones that raise blood glucose\n\n**Fiber Physiology**:\nSoluble fiber forms viscous gel that slows gastric emptying, delays glucose absorption, and binds bile acids (increasing cholesterol excretion). Insoluble fiber increases fecal bulk and transit speed. Both types are fermented by colonic bacteria producing short-chain fatty acids (SCFAs: acetate, propionate, butyrate) that nourish colonocytes.",
+      "keyTerms": [
+        { "term": "glycolysis", "definition": "The metabolic pathway that converts glucose to pyruvate, producing ATP; occurs in cytoplasm without oxygen", "pronunciation": "gly-KOL-ih-sis" },
+        { "term": "gluconeogenesis", "definition": "Synthesis of glucose from non-carbohydrate precursors (lactate, amino acids, glycerol); primarily in liver", "pronunciation": "GLOO-koh-nee-oh-JEN-uh-sis" },
+        { "term": "short-chain fatty acids", "definition": "Bacterial fermentation products of fiber (acetate, propionate, butyrate) that provide energy to colonocytes and have metabolic effects" }
+      ],
+      "clinicalNotes": "Glycemic index (GI) measures blood glucose response to 50g carbohydrate versus glucose reference. Glycemic load (GL) = GI × available carbohydrate (g) ÷ 100, accounting for portion size. Low-GI diets improve glycemic control in diabetes and may reduce cardiovascular risk."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Carbohydrate metabolism is tightly regulated through allosteric enzyme control, hormonal signaling cascades, and transcriptional regulation, with clinical implications for diabetes, metabolic syndrome, and nutrition therapy.",
+      "explanation": "**Enzyme Regulation**:\n- *Hexokinase/Glucokinase*: First committed step; glucokinase (liver) has high Km, acts as glucose sensor\n- *Phosphofructokinase-1 (PFK-1)*: Rate-limiting glycolysis enzyme; activated by AMP, F-2,6-BP; inhibited by ATP, citrate\n- *Pyruvate kinase*: Regulated by F-1,6-BP (feedforward), alanine (feedback inhibition)\n- *Pyruvate dehydrogenase*: Gate to TCA cycle; inhibited by NADH, acetyl-CoA, ATP\n- *Glycogen synthase/phosphorylase*: Reciprocally regulated by insulin/glucagon via phosphorylation cascades\n\n**Insulin Signaling**:\nInsulin receptor → IRS-1 phosphorylation → PI3K activation → Akt/PKB → GLUT4 translocation, GSK3 inhibition (activates glycogen synthase), mTORC1 activation (protein synthesis), SREBP-1c (lipogenesis). Insulin resistance involves defects at multiple nodes: serine phosphorylation of IRS-1, reduced GLUT4, impaired Akt activation.\n\n**Dietary Fiber and Metabolic Health**:\nViscous soluble fibers (β-glucan, psyllium) reduce postprandial glucose by 20-50%. Mechanism: delayed gastric emptying, increased unstirred water layer thickness, reduced brush border enzyme access. SCFA effects: butyrate is preferred colonocyte fuel; propionate reduces hepatic cholesterol synthesis; acetate serves as lipogenic substrate. Fiber intake correlates inversely with all-cause mortality, cardiovascular disease, and type 2 diabetes (meta-analyses show 15-30% risk reduction per 10g/day increase).\n\n**Carbohydrate Quality Metrics**:\n- Glycemic index limitations: individual variability (20-25%), food combinations, preparation methods\n- Insulin index may better predict metabolic responses (protein foods stimulate insulin without hyperglycemia)\n- Whole grain intake associated with reduced mortality independent of fiber content",
+      "keyTerms": [
+        { "term": "GLUT4", "definition": "Insulin-regulated glucose transporter in muscle and adipose tissue; translocates to membrane upon insulin signaling" },
+        { "term": "insulin resistance", "definition": "Impaired cellular response to insulin signaling, requiring higher insulin levels to maintain glucose homeostasis; precursor to type 2 diabetes" },
+        { "term": "glycogen storage disease", "definition": "Inherited disorders of glycogen metabolism; types include von Gierke (G6Pase), Pompe (acid maltase), McArdle (muscle phosphorylase)" }
+      ],
+      "clinicalNotes": "Carbohydrate counting essential for insulin dosing in type 1 diabetes: typically 1 unit rapid-acting insulin per 10-15g carbohydrate (individualized). Continuous glucose monitoring reveals significant glycemic variability; time-in-range (70-180 mg/dL) becoming preferred metric over HbA1c alone."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Evidence-based carbohydrate recommendations require individualization based on metabolic status, therapeutic goals, and patient preferences, with ongoing research clarifying optimal carbohydrate quantity and quality for various clinical contexts.",
+      "explanation": "**Current Dietary Guidelines**:\nDietary Guidelines for Americans 2020-2025: 45-65% of calories from carbohydrates. American Diabetes Association: No ideal carbohydrate percentage; individualize based on eating patterns, preferences, and metabolic goals. Emphasize non-starchy vegetables, minimally processed whole grains, legumes; limit added sugars to <10% calories, ideally <6%.\n\n**Low-Carbohydrate Diets**:\n- Very low carbohydrate (<50g/day): Induces ketosis; effective for short-term weight loss and glycemic control; concerns about long-term safety, LDL elevation, sustainability\n- Moderate low-carb (50-130g/day): Comparable weight loss to low-fat diets at 1-2 years; may improve triglycerides and HDL; acceptable option per ADA\n- Meta-analyses show similar weight loss across macronutrient distributions when calories equated; adherence is primary determinant of success\n\n**Specific Clinical Applications**:\n- *Type 2 diabetes*: Reducing carbohydrate intake (particularly refined) improves glycemia; degree of restriction individualized; VLCD may enable diabetes remission\n- *Type 1 diabetes*: Low-carb approaches reduce insulin requirements and glycemic variability but require careful management to avoid hypoglycemia and DKA\n- *Obesity/metabolic syndrome*: Emphasis on carbohydrate quality (whole grains, fiber) over quantity; Mediterranean pattern superior to low-fat for metabolic outcomes\n- *Athletic performance*: Periodized carbohydrate availability (train low, compete high) may enhance metabolic flexibility; endurance athletes benefit from 6-10g/kg/day during heavy training\n- *Ketogenic therapy*: Established for refractory epilepsy; emerging evidence for neurodegenerative diseases, cancer (preclinical); requires close monitoring\n\n**Emerging Research**:\nContinuous glucose monitoring reveals significant interindividual variability in glycemic responses to identical foods (Zeevi et al., Cell 2015). Personalized nutrition approaches using gut microbiome composition, genetics, and CGM data show promise for optimizing carbohydrate recommendations. Resistant starch and novel fibers (galacto-oligosaccharides, polydextrose) under investigation as prebiotics with metabolic benefits.",
+      "keyTerms": [
+        { "term": "nutritional ketosis", "definition": "Metabolic state with blood ketones 0.5-3.0 mmol/L induced by carbohydrate restriction; distinct from diabetic ketoacidosis", "pronunciation": "kee-TOH-sis" },
+        { "term": "carbohydrate periodization", "definition": "Strategic manipulation of carbohydrate intake relative to training (train low/compete high) to enhance metabolic adaptation" },
+        { "term": "time-in-range", "definition": "Percentage of time blood glucose remains within target (typically 70-180 mg/dL); emerging glycemic control metric complementing HbA1c" }
+      ],
+      "clinicalNotes": "ADA 2024 Standards of Care: Medical nutrition therapy should be individualized; no single ideal carbohydrate percentage. For adults with type 2 diabetes, reducing overall carbohydrate intake has demonstrated the most evidence for improving glycemia. Quality matters: emphasize nutrient-dense carbohydrate sources high in fiber, vitamins, minerals; minimize added sugars and refined grains."
+    }
+  },
+
+  "media": [
+    {
+      "id": "carb-digestion-diagram",
+      "type": "diagram",
+      "filename": "carbohydrate_digestion.svg",
+      "title": "Carbohydrate Digestion and Absorption",
+      "description": "Pathway from polysaccharides to monosaccharide absorption"
+    },
+    {
+      "id": "glycemic-index-chart",
+      "type": "image",
+      "filename": "glycemic_index_foods.png",
+      "title": "Glycemic Index of Common Foods",
+      "description": "Visual comparison of GI values for common carbohydrate sources"
+    }
+  ],
+  "citations": [
+    {
+      "id": "dga-2020",
+      "type": "website",
+      "title": "Dietary Guidelines for Americans 2020-2025",
+      "source": "U.S. Department of Agriculture and U.S. Department of Health and Human Services",
+      "url": "https://www.dietaryguidelines.gov/",
+      "accessedDate": "2026-01-24"
+    },
+    {
+      "id": "ada-standards-2024",
+      "type": "article",
+      "title": "Standards of Medical Care in Diabetes—2024",
+      "authors": ["American Diabetes Association Professional Practice Committee"],
+      "source": "Diabetes Care",
+      "url": "https://diabetesjournals.org/care/issue/47/Supplement_1"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-proteins", "targetType": "concept", "relationship": "sibling", "label": "Proteins" },
+    { "targetId": "concept-fats", "targetType": "concept", "relationship": "sibling", "label": "Fats" },
+    { "targetId": "condition-diabetes-type2", "targetType": "condition", "relationship": "related", "label": "Type 2 Diabetes" },
+    { "targetId": "concept-fiber", "targetType": "concept", "relationship": "child", "label": "Dietary Fiber" },
+    { "targetId": "diet-diabetic", "targetType": "concept", "relationship": "related", "label": "Diabetic Diet" }
+  ],
+  "tags": {
+    "systems": ["digestive", "endocrine"],
+    "topics": ["nutrition", "metabolism", "macronutrients"],
+    "keywords": ["glucose", "fiber", "glycemic index", "insulin", "diabetes", "energy"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

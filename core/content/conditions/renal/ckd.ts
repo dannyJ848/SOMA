@@ -193,8 +193,8 @@ CKD for ≥3 months with:
   citations: [{ id: 'kdigo-ckd-2024', type: 'website', title: 'KDIGO CKD Guidelines', source: 'Kidney Disease Improving Global Outcomes' }],
   crossReferences: [{ targetId: 'condition-diabetes', targetType: 'condition', relationship: 'related', label: 'Diabetes' }],
   tags: { systems: ['renal'], topics: ['nephrology'], keywords: ['CKD', 'kidney failure', 'dialysis', 'eGFR', 'SGLT2'], clinicalRelevance: 'critical', examRelevance: { usmle: true, nbme: true, shelf: ['medicine'] } },
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+  createdAt: '2025-01-26T00:00:00.000Z',
+  updatedAt: '2025-01-26T00:00:00.000Z',
   version: 1,
   status: 'published',
 };

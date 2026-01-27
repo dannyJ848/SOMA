@@ -206,8 +206,8 @@ export const kidneyStones: EducationalContent = {
   citations: [{ id: 'aua-stones-2022', type: 'article', title: 'AUA Guideline on Surgical Management of Stones', source: 'Journal of Urology' }],
   crossReferences: [{ targetId: 'condition-gout', targetType: 'condition', relationship: 'related', label: 'Gout' }],
   tags: { systems: ['renal', 'urinary'], topics: ['urology', 'nephrology'], keywords: ['kidney stones', 'nephrolithiasis', 'colic', 'lithotripsy'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'surgery'] } },
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+  createdAt: '2025-01-26T00:00:00.000Z',
+  updatedAt: '2025-01-26T00:00:00.000Z',
   version: 1,
   status: 'published',
 };

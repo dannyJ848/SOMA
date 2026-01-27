@@ -1,0 +1,1264 @@
+/**
+ * Strabismus - Comprehensive Educational Content
+ *
+ * Covers types of strabismus (esotropia, exotropia, hypertropia)
+ * in children and adults, with diagnosis and treatment options.
+ */
+
+import { EducationalContent } from "../../types";
+
+export const strabismus: EducationalContent = {
+  id: "condition-strabismus",
+  type: "condition",
+  name: "Strabismus",
+  alternateNames: ["Squint", "Crossed Eyes", "Walleye", "Eye Turn", "Lazy Eye"],
+  hpoId: "HP:0000486",
+
+  levels: {
+    1: {
+      level: 1,
+      summary: "Strabismus is a condition where the eyes do not line up in the same direction. One eye may turn in, out, up, or down. It commonly starts in childhood but can affect adults too.",
+      explanation: `Think of your eyes as a team that needs to work together. When you have strabismus, the eyes don't work as a team - one eye looks straight ahead while the other eye turns in a different direction.
+
+**What happens in strabismus?**
+
+Normally, both eyes point at the same object and the brain combines the two images into one 3D picture. With strabismus:
+- The eyes are misaligned
+- Each eye sees a different image
+- The brain may ignore the image from the turned eye
+- This can cause:
+  - Double vision
+  - Loss of depth perception (3D vision)
+  - "Lazy eye" (amblyopia) in children
+
+**Types of strabismus:**
+
+1. **Esotropia (eye turns inward):**
+   - Commonly called "crossed eyes"
+   - One eye turns toward the nose
+
+2. **Exotropia (eye turns outward):**
+   - Commonly called "walleye"
+   - One eye turns away from the nose
+
+3. **Hypertropia (eye turns upward):**
+   - One eye looks higher than the other
+
+4. **Hypotropia (eye turns downward):**
+   - One eye looks lower than the other
+
+**The strabismus can be:**
+- **Constant:** Eye turns all the time
+- **Intermittent:** Eye turns only sometimes (stress, tiredness, illness)
+
+**What causes strabismus?**
+
+**In children:**
+- Problems with eye muscles
+- Problems with how the brain controls eye muscles
+- Farsightedness (need for glasses)
+- Family history (runs in families)
+- Premature birth
+- Down syndrome, cerebral palsy
+
+**In adults:**
+- Childhood strabismus that was never treated or returned
+- Stroke or brain injury
+- Thyroid eye disease
+- Diabetes
+- Head trauma
+- Eye muscle or nerve problems
+
+**Warning signs in children:**
+- Eyes that don't look in the same direction
+- Tilting head to see better
+- Squinting or closing one eye
+- Bumping into things
+- Poor depth perception
+- Double vision (older children)
+
+**How is strabismus diagnosed?**
+- Eye exam
+- Light reflection test (Hirschberg test)
+- Cover test
+- Vision check
+- Sometimes special measurements
+
+**How is strabismus treated?**
+
+**In children:**
+- **Glasses:** correct vision problems
+- **Patching:** treats lazy eye (amblyopia)
+- **Eye exercises:** for some types
+- **Surgery:** adjusts eye muscles
+- **Botox injections:** for some cases
+
+**In adults:**
+- **Prism glasses:** special glasses that bend light
+- **Eye exercises:** for some types
+- **Surgery:** to realign eyes
+- **Botox injections:** temporary improvement
+
+**Remember:**
+- Early treatment in children is critical
+- Lazy eye (amblyopia) can become permanent if not treated by age 8-10
+- Adults can also be treated successfully
+- Treatment helps both appearance and vision function`,
+      keyTerms: [
+        { term: "strabismus", definition: "Misalignment of the eyes where they do not look in the same direction at the same time" },
+        { term: "amblyopia", definition: "Also called lazy eye; reduced vision in an eye that is not used properly during childhood" },
+        { term: "esotropia", definition: "Type of strabismus where one eye turns inward toward the nose" },
+        { term: "exotropia", definition: "Type of strabismus where one eye turns outward away from the nose" },
+      ],
+      analogies: [
+        "The eyes are like two horses pulling a carriage - they need to pull together to move straight. In strabismus, one horse pulls in a different direction.",
+        "Strabismus is like a camera that is slightly off-center - the picture doesn't line up correctly.",
+      ],
+      examples: [
+        "A child's left eye turns inward when they are tired or focusing on close objects.",
+        "An adult suddenly develops double vision after a stroke because one eye is no longer aligned.",
+      ],
+      patientCounselingPoints: [
+        "Children should have eye exams by age 1 and again before starting school.",
+        "Patching treats lazy eye but requires cooperation - make it fun for children.",
+        "Strabismus surgery improves alignment but may not perfect it.",
+        "Adults with new double vision need medical evaluation to rule out serious conditions.",
+        "Glasses may be all that is needed for some types of strabismus.",
+      ],
+    },
+    2: {
+      level: 2,
+      summary: "Strabismus is ocular misalignment characterized by a deviation of one eye relative to the other. It is classified by direction (esotropia, exotropia, hypertropia), constancy (constant vs intermittent), and etiology (comitant vs incomitant). Childhood strabismus can lead to amblyopia, while adult-onset strabismus typically causes diplopia.",
+      explanation: `## Classification of Strabismus
+
+**By Direction of Deviation:**
+
+| Type | Description | Common Name |
+|------|-------------|-------------|
+| Esotropia | Eye turns inward (nasal) | Crossed eyes |
+| Exotropia | Eye turns outward (temporal) | Walleye |
+| Hypertropia | Eye turns upward | Vertical deviation |
+| Hypotropia | Eye turns downward | Vertical deviation |
+| Cyclotropia | Eye rotates | Torsional deviation |
+
+**By Pattern:**
+- **Comitant:** Deviation same in all directions of gaze
+- **Incomitant:** Deviation varies with gaze (paralytic/restrictive)
+
+**By Constancy:**
+- **Constant:** Eye turned all the time
+- **Intermittent:** Eye turns only sometimes
+  - Common in exotropia
+  - Worse when tired, sick, or focusing up close
+
+**By Age of Onset:**
+- **Congenital/infantile:** Present at birth or within first 6 months
+- **Acquired:** Develops later in childhood or adulthood
+
+**By Etiology:**
+- **Primary:** No other cause
+- **Secondary:** Related to other conditions (trauma, neurologic, sensory)
+
+## Types in Detail
+
+**Esotropia (Inward Deviation):**
+
+1. **Infantile Esotropia:**
+   - Onset <6 months
+   - Large angle (20-40 prism diopters)
+   - May have alternation
+   - Needs early surgery (6-18 months)
+   - Associated with: nystagmus, inferior oblique overaction
+
+2. **Accommodative Esotropia:**
+   - Related to farsightedness (hyperopia)
+   - Onset usually 2-3 years
+   - Glasses fully correct the deviation
+   - May be partially accommodative
+   - Bifocal may be needed for near deviation
+
+3. **Acquired Non-Accommodative:**
+   - Onset after infancy
+   - Not corrected with glasses
+   - May be from nerve palsy, myasthenia
+
+4. **Sensory Esotropia:**
+   - Poor vision in one eye
+   - Eye turns in to reduce input
+   - From: cataract, optic nerve problem, retinal disease
+
+**Exotropia (Outward Deviation):**
+
+1. **Intermittent Exotropia:**
+   - Most common type of exotropia
+   - More common in girls
+   - Family history common
+   - Starts as intermittent
+   - Worse with distance, fatigue, illness
+   - May become constant over time
+   - Patient may close one eye in bright sun
+
+2. **Constant Exotropia:**
+   - Eye always turned out
+   - Usually intermittent that progressed
+   - Can be sensory type from poor vision
+
+3. **Infantile Exotropia:**
+   - Presents at birth
+   - Large angle
+   - Rule out:
+     - Duane retraction syndrome
+     - Mobius syndrome
+     - Craniofacial abnormalities
+
+**Vertical Deviations:**
+
+1. **Hypertropia:**
+   - One eye higher than the other
+   - May be comitant or incomitant
+   - Causes: palsy, restrictive, congenital
+
+2. **Dissociated Vertical Deviation (DVD):**
+   - Eye drifts up spontaneously
+   - Associated with infantile esotropia
+   - Doesn't follow normal innervation
+   - Bilateral but asymmetric
+
+## Causes
+
+**Childhood Strabismus:**
+- Genetics (runs in families)
+- Refractive error (farsightedness)
+- Amblyopia cycle
+- Muscle imbalance
+- Neurologic (cerebral palsy, hydrocephalus)
+- Craniofacial syndromes (Down, Crouzon, Apert)
+
+**Adult Strabismus:**
+- Childhood strabismus that recurred
+- Thyroid eye disease (Graves)
+- Stroke
+- Head trauma
+- Brain tumor
+- Myasthenia gravis
+- Multiple sclerosis
+- Diabetes (cranial nerve palsy)
+- Blowout fracture
+- Orbital decompression
+
+## Clinical Features
+
+**In Children:**
+- Visible eye turn
+- Head turn or tilt
+- Squinting or closing one eye
+- Poor depth perception
+- Bumping into objects
+- No complaint of double vision (brain suppresses)
+
+**In Adults:**
+- Double vision (diplopia)
+- Eye misalignment visible
+- Head turn to avoid double vision
+- Eye strain
+- Difficulty with depth perception
+- Reading difficulty
+
+**Amblyopia (Lazy Eye):**
+- Reduced vision in one eye
+- Brain ignores input from turned eye
+- Develops in childhood only
+- Untreatable after ~age 10
+- Treatment: glasses, patching, atropine
+
+## Diagnosis
+
+**Visual Acuity:**
+- Each eye tested separately
+- Children: pictures or letters
+- Detect amblyopia
+
+**Cover Test:**
+- **Cover-uncover:** detects deviation
+- **Alternate cover:** measures deviation
+- Done at distance and near
+- Prism measurement possible
+
+**Hirschberg Test:**
+- Light reflection in cornea
+- Estimates deviation
+- Quick screening
+
+**Bruckner Test:**
+- Red reflex comparison
+- Detects amblyopia, significant refractive error
+
+**Ocular Motility:**
+- Eye movements in all directions
+- Look for limitations
+- Observe for overactions
+
+**Cycloplegic Refraction:**
+- Drops to temporarily paralyze accommodation
+- Accurate measurement of refractive error
+- Essential for children
+
+**Sensory Testing:**
+- Stereopsis (3D vision)
+- Worth 4-dot test
+- Suppression testing
+
+**Imaging (if indicated):**
+- CT scan: trauma, orbital fracture
+- MRI: neurologic causes, tumor
+
+## Treatment
+
+**Goals:**
+- Restore alignment
+- Restore binocular vision
+- Treat amblyopia
+- Improve appearance
+
+**Nonsurgical:**
+
+1. **Glasses:**
+   - Correct refractive error
+   - May fully correct accommodative esotropia
+   - Prism glasses for small deviations in adults
+   - Bifocals for accommodative esotropia with near deviation
+
+2. **Patching:**
+   - Treats amblyopia
+   - Patch good eye to force use of weak eye
+   - Duration varies with age
+   - Compliance critical
+
+3. **Atropine Penalization:**
+   - Blurs good eye
+   - Alternative to patching
+   - Used in older children
+
+4. **Orthoptics/Vision Therapy:**
+   - Eye exercises
+   - Convergence exercises
+   - Useful for convergence insufficiency
+   - Limited evidence for other types
+
+5. **Botulinum Toxin (Botox):**
+   - Temporary muscle weakness
+   - Adjustable
+   - Used in some cases
+   - May help avoid surgery
+
+**Surgical:**
+
+**Strabismus Surgery:**
+- Adjusts eye muscles
+- Recession: muscle moved back (weakening)
+- Resection: muscle shortened (strengthening)
+- Transposition: muscle moved
+- Usually outpatient
+- General anesthesia for children
+- Local for adults
+
+**Timing of Surgery:**
+- Infantile esotropia: 6-18 months
+- Acquired: after amblyopia treated
+- Intermittent exotropia: when becomes constant or bothersome
+- Adults: for diplopia or appearance
+
+**Success Rate:**
+- 60-80% achieve good alignment
+- May need more than one surgery
+- Overcorrection/undercorrection possible
+
+**Postoperative Care:**
+- Eye drops/ointment
+- Activity restrictions
+- Follow-up visits
+- May need adjustment (augmentation or revision)
+
+## Specific Considerations
+
+**Congenital Esotropia:**
+- Surgery 6-18 months
+- Large angle requires large surgery
+- Binocular vision often limited
+- Multiple surgeries may be needed
+
+**Intermittent Exotropia:**
+- Surgery when: constant, bothersome, or increasing
+- May deteriorate without treatment
+- Good binocular potential
+- Good surgical outcomes
+
+**Adult-Onset Strabismus:**
+- Treat underlying cause
+- Prism glasses first
+- Surgery for persistent deviation
+- Botulinum for some cases
+- May have diplopia postoperatively
+
+**Thyroid Eye Disease:**
+- Wait for stable phase before surgery
+- May need orbital decompression first
+- Botox may help
+- Surgery challenging`,
+      keyTerms: [
+        { term: "esotropia", definition: "Inward deviation of one eye (nasal direction)" },
+        { term: "exotropia", definition: "Outward deviation of one eye (temporal direction)" },
+        { term: "amblyopia", definition: "Reduced vision in an eye from disuse during childhood; lazy eye" },
+        { term: "comitant", definition: "Strabismus where deviation remains the same in all gaze directions" },
+        { term: "incomitant", definition: "Strabismus where deviation varies with gaze direction; suggests palsy or restriction" },
+        { term: "prism diopter", definition: "Unit of measurement for ocular deviation; 1 prism diopter deviates light 1 cm at 1 meter" },
+      ],
+      analogies: [
+        "Amblyopia is like a weak muscle that has not been exercised - the brain forgets how to use the eye properly.",
+        "Strabismus surgery is like adjusting the tension on puppet strings - the surgeon tightens or loosens the eye muscles to realign the eyes.",
+      ],
+      patientCounselingPoints: [
+        "Children should have eye exams by age 1 and again before starting school.",
+        "Patching requires consistency - patch for the prescribed time every day.",
+        "Surgery improves alignment but may not perfect it or restore 3D vision.",
+        "New onset double vision in adults requires medical evaluation.",
+        "Strabismus surgery is usually outpatient with 1-2 week recovery.",
+      ],
+    },
+    3: {
+      level: 3,
+      summary: "Strabismus is a disorder of ocular alignment characterized by abnormal binocular coordination. Etiologies include abnormalities of the neuromuscular apparatus, sensory deprivation, refractive error, and neurologic disease. Treatment targets restoration of binocular vision through optical correction, amblyopia therapy, and surgical realignment. Outcomes depend on age of onset, binocular potential, and timely intervention.",
+      explanation: `## Pathophysiology
+
+**Normal Binocular Vision:**
+- Corresponding retinal points stimulated
+- Motor fusion: muscles maintain alignment
+- Sensory fusion: brain combines images
+- Stereopsis: depth perception from disparity
+- Normal fusional amplitude: 20-30 prism diopters
+
+**Strabismus Pathogenesis:**
+
+1. **Motor Abnormality:**
+   - Innervational imbalance
+   - Muscle overaction/underaction
+   - Muscle pulley abnormalities
+   - Anatomic muscle abnormalities
+   - Cranial nerve palsy
+   - Mechanical restriction
+
+2. **Sensory Abnormality:**
+   - Poor vision in one eye (sensory strabismus)
+   - Cataract, optic nerve hypoplasia
+   - Retinoblastoma, retinal disease
+   - Refractive anisometropia
+
+3. **Accommodative Mechanism:**
+   - AC/A ratio (accommodative convergence/accommodation)
+   - High AC/A: convergence with little accommodation
+   - Hyperopia: accommodation needed to see clearly
+   - Accommodative esotropia: convergence from focusing
+
+**Amblyopia Development:**
+- Disuse suppression of deviated eye
+- Competitive interaction between eyes
+- Cortical changes
+- Critical period: birth to ~8 years
+- Reversible if treated early
+- Permanent after critical period
+
+**Suppression:**
+- Brain ignores image from deviated eye
+- Develops to avoid diplopia
+- Becomes habitual
+- Can be deep (hard to break)
+- Facilitates amblyopia
+
+**Abnormal Retinal Correspondence (ARC):**
+- Cortex develops new relationship
+- Non-corresponding points perceived as corresponding
+- Allows some binocular function
+- Makes surgical alignment challenging
+
+## Detailed Classification
+
+**Comitant vs Incomitant:**
+
+**Comitant:**
+- Deviation same in all gaze positions
+- Same with either eye fixing
+- Usually concomitant strabismus
+- Infantile esotropia, accommodative esotropia, intermittent exotropia
+
+**Incomitant:**
+- Deviation varies with gaze
+- Different with each eye fixing
+- Paralytic or restrictive
+- CN IV palsy, thyroid eye disease, blowout fracture
+
+**Specific Patterns:**
+
+**A Pattern:**
+- More esotropia in upgaze
+- More exotropia in downgaze
+- Associated with: superior oblique overaction, IOOA
+
+**V Pattern:**
+- More esotropia in downgaze
+- More exotropia in upgaze
+- Associated with: inferior oblique overaction, IOUA
+
+**Dissociated Vertical Deviation (DVD):**
+- Spontaneous upward drift
+- Associated with infantile esotropia
+- Does not follow Hering's law
+- Bilateral but asymmetric
+- Often masked with fusion
+
+**Infantile Esotropia:**
+- Onset <6 months
+- Large angle (20-40 PD)
+- Cross-fixation may be present
+- Associated findings:
+  - Inferior oblique overaction
+  - Dissociated vertical deviation
+  - Latent nystagmus
+  - Optic disc hypoplasia (some)
+
+**Accommodative Esotropia:**
+- Related to hyperopia
+- Onset 2-3 years typical
+- AC/A ratio determines:
+  - High AC/A: near deviation > distance
+  - Normal AC/A: near = distance
+- Fully accommodative: glasses correct completely
+- Partially accommodative: residual deviation with glasses
+- May need bifocal for near
+
+**Intermittent Exotropia:**
+- Most common exotropia
+- X(T) pattern
+- Worse at distance, when tired
+- Good fusional control initially
+- Progresses to constant over time
+- Decompensation factors:
+  - Fatigue, illness, stress
+  - Decreased vision
+  - Loss of fusional amplitude
+
+## Diagnostic Evaluation
+
+**Measurement Techniques:**
+
+**Prism and Cover Test:**
+- Gold standard for measurement
+- Prism neutralizes deviation
+- Alternate cover test for total deviation
+- Cover-uncover for manifest deviation
+- Measure at distance and near
+- Measure in all gazes for incomitant
+
+**Krimsky Test:**
+- Prism placed over fixing eye
+- Reflection centered
+- Used for poor cooperation
+
+**Hirschberg Test:**
+- Corneal light reflection position
+- Each mm = ~7 prism diopters
+- Screening tool only
+
+**Motility Examination:**
+- Versions: both eyes together
+- Ductions: each eye separately
+- Overaction/underaction grading (1-4+)
+- Observe for:
+  - Restriction
+  - Weakness
+  - Nystagmus
+
+**Sensory Testing:**
+
+**Stereopsis:**
+- Titmus fly test (3000 arc sec)
+- Randot circles
+- Lang stereotest
+- Polarized glasses
+- Normal: 40-60 arc sec
+- Poor stereopsis: >200 arc sec
+
+**Worth 4-Dot Test:**
+- Four lights (1 red, 2 green, 1 white)
+- Red/green glasses
+- Fusion, suppression, diplopia detection
+- Distance and near testing
+
+**4-Prism Base-Out Test:**
+- Detects microtropia
+- Movement of recovering eye
+- Confirms small-angle strabismus
+
+**Bagolini Lenses:**
+- Striated glasses during normal viewing
+- Tests fusion, suppression
+- More natural environment
+
+**Cycloplegic Refraction:**
+- Atropine (3-7 days) or cyclopentolate (30-60 min)
+- Paralyzes accommodation
+- Accurate refractive error
+- Essential for children
+
+**Diagnostic Imaging:**
+- CT: orbital fracture, trauma
+- MRI: cranial nerve palsy, tumor
+- Ultrasound: intraocular foreign body (rare)
+
+## Treatment Approaches
+
+**Optical Management:**
+
+**Glasses:**
+- Full cycloplegic refraction
+- Correct hyperopia in accommodative esotropia
+- Correct anisometropia
+- May reduce deviation partially or completely
+- Bifocal for high AC/A ratio
+
+**Prism:**
+- Fresnel prism: temporary
+- Ground-in prism: permanent
+- Small deviations (<10 PD)
+- Pre-surgical testing
+- For diplopia in adults
+- Fusional vergence training
+
+**Amblyopia Therapy:**
+
+**Patching:**
+- Occluder patch over good eye
+- 2-6 hours/day depending on age
+- Compliance critical
+- Continue until age 10 or vision plateaus
+- Maintenance patching sometimes needed
+
+**Atropine Penalization:**
+- 1 drop atropine daily
+- Blurs good eye for near
+- Alternative to patching
+- Works best for moderate amblyopia
+- Better compliance than patching
+- Side effects: light sensitivity
+
+**Optical Penalization:**
+- Blur good eye with glasses
+- +3 to +4 sphere
+- Weekend atropine
+- Various regimens
+
+**Surgical Planning:**
+
+**Preoperative Assessment:**
+- Angle measurement (prism diopters)
+- Binocular potential
+- Amblyopia status
+- Fusional vergence
+- AC/A ratio
+- Presence of DVD, IOOA
+
+**Surgical Formulas:**
+
+**For Esotropia:**
+- Medial rectus recession: 3-5 mm per muscle
+- Lateral rectus resection: 5-8 mm per muscle
+- 3 mm recession = 15 PD correction
+- 1 mm resection = 4-5 PD correction
+
+**For Exotropia:**
+- Lateral rectus recession: 6-10 mm per muscle
+- Medial rectus resection: 3-6 mm per muscle
+- Bilateral surgery: divide between two muscles
+
+**Adjustable Sutures:**
+- Intraoperative bowtie
+- Adjustment in immediate postop (6-24 hours)
+- Better outcomes for complex cases
+- Adult cooperation needed
+- Not for children
+
+**Postoperative Management:**
+- Antibiotic/steroid drops
+- Activity: no swimming for 2 weeks
+- Follow-up: 1 week, 6 weeks, 6 months
+- Overcorrection may need prisms or surgery
+- Undercorrection may need augmentation
+
+**Botulinum Toxin:**
+- Alternative to surgery
+- Temporary effect (3-4 months)
+- Dose: 2.5-5 units per muscle
+- Indications:
+  - Small-angle strabismus
+  - Thyroid eye disease
+  - Sixth nerve palsy (acute)
+  - Adjunct to surgery
+- Complications: ptosis, vertical deviation`,
+      keyTerms: [
+        { term: "AC/A ratio", definition: "Accommodative convergence to accommodation ratio; relates focusing effort to eye alignment" },
+        { term: "ARC", definition: "Abnormal retinal correspondence; cortical adaptation where non-corresponding retinal points are perceived as corresponding" },
+        { term: "fusional amplitude", definition: "Range of prism over which fusion can be maintained; normal 20-30 prism diopters" },
+        { term: "cycloplegic refraction", definition: "Refraction after accommodation paralysis with atropine or cyclopentolate; essential in children" },
+        { term: "comitant", definition: "Strabismus where deviation remains constant in all gaze directions" },
+      ],
+      analogies: [
+        "Amblyopia is like an unused muscle that atrophies - without exercise during childhood, it never develops full strength.",
+        "AC/A ratio is like the relationship between zoom and focus on a camera - some people have too much zoom when they focus.",
+      ],
+      clinicalNotes: "For accommodative esotropia, prescribe the full cycloplegic refraction. Under-correcting to strengthen the eyes is ineffective and can worsen amblyopia.",
+    },
+    4: {
+      level: 4,
+      summary: "Strabismus management integrates optical, sensory, and surgical therapies tailored to etiology, age, and binocular potential. Pediatric strabismus requires early intervention to prevent or treat amblyopia and develop binocular vision. Adult strabismus focuses on diplopia elimination and cosmetic improvement. Understanding neuromuscular anatomy, sensory adaptations, and surgical principles guides optimal outcomes.",
+      explanation: `## Neuromuscular Anatomy and Physiology
+
+**Extraocular Muscles (EOMs):**
+
+| Muscle | Innervation | Primary Action | Secondary Action |
+|--------|-------------|-----------------|------------------|
+| Medial Rectus | CN III | Adduction | None |
+| Lateral Rectus | CN VI | Abduction | None |
+| Superior Rectus | CN III | Elevation | Intorsion, adduction |
+| Inferior Rectus | CN III | Depression | Extorsion, adduction |
+| Superior Oblique | CN IV | Intorsion | Depression, abduction |
+| Inferior Oblique | CN III | Extorsion | Elevation, abduction |
+
+**Muscle Pulleys:**
+- Connective tissue sleeves
+- Stabilize muscle paths
+- Determine functional pulling direction
+- Surgically important (pulley posterior surgery)
+
+**Hering's Law of Equal Innervation:**
+- Both eyes receive equal innervation
+- Covers both eyes for each movement
+- Explains primary and secondary deviation
+
+**Sherrington's Law of Reciprocal Innervation:**
+- Agonist and antagonist reciprocally innervated
+- One contracts, the other relaxes
+- Basis for recession/resection surgery
+
+**Mechanics of Surgery:**
+
+**Recession:**
+- Muscle moved posteriorly on sclera
+- Weakens muscle action
+- Primary effect: angle of correction
+- Secondary effect: muscle tension change
+- Limit: 1/3 of muscle length (~10 mm for MR, LR)
+
+**Resection:**
+- Muscle shortened
+- Strengthens muscle action
+- Combined with recession (R&R)
+- Advancement also possible
+
+**Transposition:**
+- Muscle insertion moved
+- Changes muscle action
+- Used for palsy
+- Humpty Dumpty, Knapp procedures
+
+## Sensory Adaptations
+
+**Suppression Scotoma:**
+- Area of retina suppressed
+- Corresponds to deviated eye image
+- Avoids diplopia
+- Becomes deeper over time
+- Hard to break if long-standing
+
+**Abnormal Retinal Correspondence (ARC):**
+- Harmonious: angle matches deviation
+- Unharmonious: partial adaptation
+- Paradoxical: rare
+- Makes surgical alignment difficult
+- Post-op diplopia risk
+
+**Amblyopia Mechanisms:**
+- Form deprivation: cataract, ptosis
+- Strabismic: suppression, misalignment
+- Anisometropic: unequal refractive error
+- Combination: common
+- Critical period: birth to 8 years
+
+**Prognostic Factors for Binocular Outcome:**
+- Age of onset (earlier = worse)
+- Duration of misalignment
+- Presence of amblyopia
+- ARC presence
+- Fusion potential
+- Stereopsis potential
+
+## Special Forms
+
+**Cranial Nerve Palsies:**
+
+**CN IV (Trochlear) Palsy:**
+- Superior oblique weakness
+- Hypertropia worse on downgaze
+- Head tilt: contralateral
+- Diplopia vertical, torsional
+- Most congenital: bilateral
+- Most acquired: unilateral (trauma)
+- Treatment: prism, surgery (after 6 months stable)
+
+**CN VI (Abducens) Palsy:**
+- Lateral rectus weakness
+- Esotropia, limited abduction
+- Small deviations: prism, Botox
+- Large deviations: recession/resection
+- Transposition for complete palsy
+- Rule out tumor (in children)
+
+**CN III (Oculomotor) Palsy:**
+- Multiple muscles affected
+- Ptosis, mydriasis
+- Eye down and out
+- Ischemic vs compressive
+- Surgical management after stable
+
+**Thyroid Eye Disease:**
+- Inferior rectus and medial rectus most involved
+- Restrictive, not paralytic
+- Crowding at apex
+- Wait for stable phase for surgery
+- May need orbital decompression first
+- Botox may help temporarily
+- Surgery: recession on tight muscles
+
+**Duane Retraction Syndrome:**
+- Congenital CN VI aberrant innervation
+- Limitation of abduction
+- Retraction of globe on adduction
+- Palpebral fissure narrowing on adduction
+- Upshoot/downshoot
+- Usually: don't operate
+- Surgery for: head turn, significant deviation in primary
+
+**Brown Syndrome:**
+- Superior oblique tendon sheath restriction
+- Limited elevation in adduction
+- May be congenital or acquired
+- Spontaneous resolution common
+- Surgery: tendon lengthening
+
+**Mobius Syndrome:**
+- CN VI and VII palsy
+- Esotropia, face paralysis
+- May need strabismus surgery
+- Poor binocular potential
+
+**Cerebral Palsy:**
+- High prevalence of strabismus
+- Often esotropia
+- May have nystagmus
+- Surgery successful
+- Sensory outcomes limited
+
+**Strabismus After Retinal Surgery:**
+- Scleral buckle: myopic shift
+- Vitrectomy: changes
+- May need prism, surgery
+- Challenging: limited fusion
+
+## Surgical Decision-Making
+
+**Unilateral vs Bilateral Surgery:**
+
+**Esotropia:**
+- <20 PD: unilateral R&R
+- >20 PD: bilateral MR recession
+- Large angle: 3-muscle or 4-muscle surgery
+
+**Exotropia:**
+- <15 PD: unilateral R&R
+- >15 PD: bilateral LR recession
+- Very large: 3-muscle surgery
+
+**Angle Considerations:**
+- Distance vs near deviation
+- AC/A ratio affects near alignment
+- May need different surgery for high AC/A
+- Bifocal added postoperatively
+
+**Incomitant Strabismus:**
+- Identify paretic muscle
+- Measure in all gazes
+- Plan based on primary position deviation
+- Consider transposition for complete palsy
+- Adjustable sutures helpful
+
+**Adult Strabismus:**
+- Diplopia primary concern
+- Prism trial preoperative
+- Discuss diplopia risk
+- May accept postoperative diplopia
+- Botulinum alternative
+
+**Reoperations:**
+- More challenging
+- Scar tissue
+- Prior surgery effects
+- May need larger doses
+- Adjustable sutures valuable
+- Higher complication rate
+
+## Outcomes and Expectations
+
+**Success Criteria:**
+- Alignment within 10 PD of target
+- No diplopia in primary and reading
+- Acceptable cosmesis
+- Improved binocular function
+
+**Success Rates:**
+- Infantile ET: 60-70% long-term alignment
+- Accommodative ET: 90%+ with glasses
+- Intermittent XT: 70-80% success
+- Paralytic: 50-70% success
+- Reoperations: 50-60% success
+
+**Unsuccessful Outcomes:**
+- Overcorrection
+- Undercorrection
+- Diplopia (previously suppressed)
+- New incomitance
+- Slipped muscle
+- Lost muscle
+- Anterior segment ischemia (rare)
+
+**Sensory Outcomes:**
+- Children: stereopsis possible if early treatment
+- Adults: limited sensory improvement
+- Cosmetic improvement reliable
+- Diplopia elimination usually possible`,
+      keyTerms: [
+        { term: "Hering's law", definition: "Equal innervation to yoke muscles; primary deviation less than secondary in palsy" },
+        { term: "Sherrington's law", definition: "Reciprocal innervation between agonist and antagonist muscles" },
+        { term: "primary deviation", definition: "Deviation when normal eye fixates; smaller than secondary in palsy" },
+        { term: "secondary deviation", definition: "Deviation when paretic eye fixates; larger than primary due to Hering's law" },
+        { term: "Yoke muscles", definition: "Pair of muscles (one in each eye) that receive equal innervation for conjugate movement" },
+      ],
+      clinicalNotes: `Key clinical pearls for strabismus:
+
+1. **Treat amblyopia first** - Before strabismus surgery in children, treat amblyopia to maximize binocular potential. Patching may reduce angle.
+
+2. **Cycloplegic refraction essential** - Children can accommodate through hyperopia. Without cycloplegia, you'll underestimate refractive error.
+
+3. **Measure in all gazes** - For suspected incomitant strabismus, measure in primary, right/left/up/down gaze. Pattern reveals paretic muscle.
+
+4. **Observe head posture** - Abnormal head turn suggests: (1) neutralizing head position for strabismus, or (2) nystagmus null point.
+
+5. **New onset diplopia** - Red flag in adults. Requires neurologic imaging to rule out tumor, aneurysm, myasthenia.
+
+6. **Sensory results best in young** - Stereopsis development requires early alignment. Infantile ET surgery by 18 months for best results.
+
+7. **Consider ARC** - Abnormal retinal correspondence makes surgical planning challenging. May need prisms or orthoptics preoperatively.
+
+8. **Postop diplopia risk** - Discuss with adults. Long-standing strabismus may develop diplopia after realignment. Prism trial helpful.`,
+    },
+    5: {
+      level: 5,
+      summary: "Contemporary strabismus management integrates detailed diagnostic assessment, understanding of sensory adaptations, and individualized surgical planning. Pediatric cases prioritize amblyopia treatment and binocular development, while adult management focuses on diplopia elimination. Evidence supports early intervention, appropriate surgical timing, and realistic expectations for functional and cosmetic outcomes.",
+      explanation: `## Evidence-Based Practice
+
+**Treatment Timing:**
+
+**Infantile Esotropia:**
+- Early surgery improves outcomes
+- Optimal window: 6-18 months
+- Earlier surgery (6-12 months) may improve stereopsis
+- Randomized trials support early intervention
+
+**Intermittent Exotropia:**
+- Surgery timing controversial
+- Progressive: intervene when constant or increasing
+- Stable: observe until bothersome
+- Monitor for deterioration
+- School age common timing
+
+**Amblyopia Treatment:**
+- PATCH study: patching effective
+- Atropine equivalent to patching for moderate amblyopia
+- Weekend atropine effective
+- Compliance is critical
+- Treatment into teen years can help
+
+**Surgical Outcomes Evidence:**
+
+**Success Rates by Type:**
+- Infantile ET: 65-80% long-term
+- Accommodative ET: 90%+ with glasses
+- Intermittent XT: 70-90%
+- Sensory strabismus: 80-90%
+- Paralytic: Variable (50-90%)
+
+**Reoperation Rates:**
+- Infantile ET: 20-40% need second surgery
+- Intermittent XT: 10-30%
+- Higher with large angles, complex patterns
+
+**Principles of Surgical Planning:**
+
+**Dose-Response Data:**
+
+**Medial Rectus Recession:**
+- 3 mm = 15 PD (esotropia)
+- 4 mm = 20 PD
+- 5 mm = 25 PD
+- Diminishing returns >5 mm
+
+**Lateral Rectus Recession:**
+- 6 mm = 20-25 PD (exotropia)
+- 8 mm = 30-35 PD
+- 10 mm = 40-45 PD
+
+**Resection:**
+- 1 mm = 4-5 PD
+- 5 mm MR resection = 20 PD
+- 8 mm LR resection = 35-40 PD
+
+**Formulas:**
+- Standard tables based on deviation
+- Adjust for: patient factors, prior surgery, fusion potential
+- Adjustable sutures improve precision
+
+**Adjustable Suture Technique:**
+- Intraoperative bowtie suture
+- Adjustment 6-24 hours postop
+- Better outcomes for:
+  - Reoperations
+  - Thyroid eye disease
+  - Complex strabismus
+  - Adults with diplopia
+- Not for children
+
+## Controversies
+
+**Early Surgery vs. Glasses First:**
+- Infantile ET: surgery by 18 months
+- Accommodative ET: glasses first
+- High AC/A: glasses + surgery
+
+**Monocular vs. Binocular Surgery:**
+- Small angles: monocular R&R
+- Large angles: bilateral recession
+- Minimizes comitance issues
+- Preserves some fusional convergence
+
+**Botulinum vs. Surgery:**
+- Similar success for small angles
+- Botulinum advantages: temporary, adjustable
+- Surgery advantages: permanent, predictable
+- Role in acute CN VI palsy
+- Adjunct to surgery
+
+**Prism Adaptation Preop:**
+- Wear prisms preoperatively
+- May predict fusion potential
+- May help adjust surgical dose
+- Not universally used
+
+**Postoperative Diplopia:**
+- Long-standing strabismus risk
+- ARC patients may develop diplopia
+- Preoperative prism trial helpful
+- Discuss risks with adults
+- Some accept diplopia for alignment
+
+**Management of Undercorrection:**
+- Observation first (may improve)
+- Prism glasses
+- Repeat surgery
+- Botulinum (early)
+
+**Management of Overcorrection:**
+- Observe early (may resolve)
+- Prism glasses
+- Botulinum (for overcorrected esotropia)
+- Reoperation for persistent
+
+## Special Populations
+
+**Strabismus in Cerebral Palsy:**
+- High prevalence (30-50%)
+- Often esotropia
+- May have nystagmus
+- Surgery successful for alignment
+- Sensory outcomes limited
+- Head position important
+
+**Down Syndrome:**
+- High prevalence
+- Oblique dysfunction common
+- DVD common
+- Surgery successful
+- Careful anesthesia needed
+
+**Prematurity:**
+- ROP associated strabismus
+- Esotropia common
+- May need early surgery
+- Monitor for amblyopia
+
+**Adult-Onset Strabismus:**
+- Diplopia primary concern
+- Rule out neurologic cause
+- Treat underlying condition
+- Prism trial first
+- Surgery for persistent deviation
+- Botulinum alternative
+
+**Thyroid Eye Disease:**
+- Wait 6 months stable
+- Orbital decompression first if indicated
+- Recession of tight muscles
+- Avoid resections (restrictive)
+- Adjustable sutures helpful
+- May need staged surgery
+
+## Advanced Techniques
+
+**Botulinum Toxin:**
+- 2.5-5 units per muscle
+- EMG guided injection
+- Effect: 3-4 months
+- Indications:
+  - Small-angle strabismus
+  - Acute CN VI palsy
+  - Thyroid orbitopathy
+  - Adjunct to surgery
+  - Adjustable alternative
+- Repeatable
+
+**Prism Management:**
+- Fresnel: temporary, adjustable
+- Ground-in: permanent
+- Press-on prisms
+- Used for:
+  - Small deviations
+  - Diplopia pre/post op
+  - Contraindication to surgery
+- Compensate for incomitance
+
+**Strabismus After Retinal Detachment Surgery:**
+- Common after scleral buckle
+- May be transient or permanent
+- Prism trial first
+- Remove buckle if large (rare)
+- Strabismus surgery if persistent
+
+**Complex Strabismus:**
+- Lost muscle: transposition
+- Scar tissue: extensive dissection
+- Restrictive: release of scar
+- Pulley surgery (selective)
+- May need combined approaches
+
+**Postoperative Care Advances:**
+- Topical NSAIDs for pain
+- Same-day surgery common
+- Early ambulation
+- Activity restrictions minimal
+- Follow-up at 1 week, 6 weeks`,
+      keyTerms: [
+        { term: "dose-response curve", definition: "Relationship between mm of surgery and prism diopters corrected; non-linear at extremes" },
+        { term: "adjustable suture", definition: "Suture technique allowing postoperative adjustment of muscle position; improves surgical precision" },
+        { term: "Fresnel prism", definition: "Thin, flexible plastic prism that adheres to glasses; temporary prism correction" },
+      ],
+      clinicalNotes: `Advanced clinical pearls:
+
+1. **Treat amblyopia early and aggressively** - The critical period extends to at least age 7-8. Weekend atropine equivalent to daily patching for moderate amblyopia with better compliance.
+
+2. **Cycloplegic refraction is mandatory** - Without it, you'll miss significant hyperopia in children. Use cyclopentolate 1% (30-60 min) or atropine (3-7 days).
+
+3. **Measure in all gaze positions** - Essential for incomitant strabismus. Pattern recognition identifies paretic muscle. Use three-step test for vertical deviations.
+
+4. **Observe head posture** - Abnormal head turn may be compensating for strabismus or nystagmus. Surgery can improve or eliminate abnormal head posture.
+
+5. **New diplopia needs workup** - Adult-onset diplopia requires neurologic imaging to rule out tumor, aneurysm, myasthenia gravis, diabetes. Don't miss these.
+
+6. **Timing matters** - Infantile ET: surgery by 18 months for best stereopsis. Intermittent XT: surgery when constant or bothersome, not just based on angle.
+
+7. **Preoperative prism trial** - For adults with long-standing strabismus, prisms can predict if postoperative diplopia will be tolerated. If they tolerate prism, they'll tolerate alignment.
+
+8. **Manage expectations** - Surgery improves alignment (>70% within 10 PD) but may not perfect it. Cosmetic improvement reliable. Sensory outcomes depend on age, binocular potential.`,
+    },
+  },
+
+  media: [
+    {
+      id: "strabismus-types",
+      type: "diagram",
+      filename: "strabismus-types.svg",
+      title: "Types of Strabismus",
+      description: "Illustration of esotropia, exotropia, and hypertropia",
+    },
+    {
+      id: "cover-test",
+      type: "diagram",
+      filename: "cover-test-technique.svg",
+      title: "Cover Test Technique",
+      description: "Step-by-step demonstration of cover-uncover and alternate cover test",
+    },
+    {
+      id: "strabismus-surgery",
+      type: "diagram",
+      filename: "strabismus-surgery.svg",
+      title: "Strabismus Surgery Techniques",
+      description: "Illustration of recession and resection procedures",
+    },
+  ],
+
+  citations: [
+    {
+      id: "aao-strabismus-2017",
+      type: "article",
+      title: "Strabismus and Amblyopia Preferred Practice Pattern",
+      authors: ["American Academy of Ophthalmology"],
+      source: "Ophthalmology",
+    },
+    {
+      id: "amblyopia-treatment-studies",
+      type: "article",
+      title: "Randomized Clinical Trials of Amblyopia Treatment",
+      authors: ["Pediatric Eye Disease Investigator Group"],
+      source: "Ophthalmology",
+    },
+  ],
+
+  crossReferences: [
+    { targetId: "condition-amblyopia", targetType: "condition", relationship: "related", label: "Amblyopia" },
+    { targetId: "condition-graves-disease", targetType: "condition", relationship: "related", label: "Thyroid Eye Disease" },
+  ],
+
+  tags: {
+    systems: ["visual", "nervous", "muscular"],
+    topics: ["ophthalmology", "pediatric ophthalmology", "neuro-ophthalmology"],
+    keywords: ["strabismus", "esotropia", "exotropia", "amblyopia", "lazy eye"],
+    clinicalRelevance: "high",
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ["pediatrics", "family medicine"],
+    },
+  },
+
+  createdAt: "2025-01-26T00:00:00.000Z",
+  updatedAt: "2025-01-26T00:00:00.000Z",
+  version: 1,
+  status: "published",
+};
+
+export default strabismus;

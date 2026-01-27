@@ -1,0 +1,1224 @@
+/**
+ * Dry Eye Syndrome - Comprehensive Educational Content
+ *
+ * Covers dry eye etiology (aqueous deficiency vs evaporative),
+ * diagnosis, and treatment options.
+ */
+
+import { EducationalContent} from "../../types";
+
+export const dryEye: EducationalContent = {
+  id: "condition-dry-eye",
+  type: "condition",
+  name: "Dry Eye Syndrome",
+  alternateNames: ["Dry Eye Disease', 'Keratoconjunctivitis Sicca', 'Dry Eye', 'DES"],
+  hpoId: 'HP:0000571',
+
+  levels: {
+    1: {
+      level: 1,
+      summary: "Dry eye syndrome occurs when your eyes don't make enough tears or the tears evaporate too quickly. This makes your eyes feel uncomfortable, gritty, or like something is in them.",
+      explanation: `Think of your eyes like a garden. Just as plants need water to stay healthy, your eyes need tears to stay moist and comfortable. Tears lubricate the eyes, wash away debris, and protect against infection.
+
+When your eyes are too dry, they feel:
+- Sandy or gritty (like sand in the eye)
+- Burning or stinging
+- Itchy
+- Tired or heavy
+- Like something is stuck in them
+- Sensitive to light
+- Blurry vision that clears with blinking
+
+**What causes dry eyes?**
+
+Your eyes might be dry because:
+1. **Not enough tears** - Your body doesn't produce enough tear fluid
+2. **Tears evaporate too fast** - Your tears don't have the right oil layer to keep them from drying out
+3. **Poor tear quality** - Your tears lack important components
+
+**Common causes:**
+- Getting older (tear production decreases)
+- Computer use and screen time (we blink less when focusing)
+- Dry air or wind
+- Air conditioning or heating
+- Certain medications (antihistamines, decongestants, antidepressants)
+- Hormonal changes (menopause, pregnancy)
+- Medical conditions (diabetes, thyroid problems, rheumatoid arthritis)
+- Eye surgery (LASIK)
+- Contact lens wear
+- Smoking
+- Not blinking enough (reading, computer work)
+
+**How are dry eyes diagnosed?**
+- Eye exam looking at tear film
+- Special tests to measure tear production
+- Tests to check tear quality
+- Exam with special dyes to see dry spots on the eye
+
+**How are dry eyes treated?**
+
+**Simple things to try first:**
+- Artificial tears (eye drops) from the drugstore
+- Blink more often, especially when using screens
+- Take breaks when reading or using computer (20-20-20 rule: every 20 minutes, look 20 feet away for 20 seconds)
+- Use a humidifier in dry rooms
+- Drink plenty of water
+- Wear sunglasses outside to block wind
+- Avoid smoke and other irritants
+
+**Medical treatments:**
+- Preservative-free artificial tears
+- Eye drops that help you make more tears
+- Tiny plugs that block tear drainage (punctal plugs)
+- Prescription eye drops (Restasis, Xiidra)
+- Antibiotics for eyelid inflammation
+- LipiFlow thermal treatment for blocked oil glands
+
+**Remember:**
+- Dry eye is a chronic condition - it usually can't be cured, only managed
+- Using artificial tears regularly is important, even when your eyes don't feel dry
+- Treating dry eye protects your cornea and maintains good vision`,
+      keyTerms: [
+        { term: "tear film', definition: 'The layer of liquid that covers and protects the front of the eye" },
+        { term: "cornea', definition: 'The clear front surface of the eye that helps focus light" },
+        { term: "artificial tears', definition: 'Eye drops that lubricate the eye to relieve dryness" },
+      ],
+      analogies: [
+        "Tears are like windshield wiper fluid - they keep the "windshield" of your eye clear and smooth.",
+        "The tear film is like a protective coating that keeps your eye moist, just like lotion keeps skin from getting dry.",
+      ],
+      examples: [
+        "Someone who works at a computer all day notices their eyes feel gritty and uncomfortable by the afternoon.",
+        "A woman going through menopause develops dry eyes due to hormonal changes.",
+      ],
+      patientCounselingPoints: [
+        "Use artificial tears regularly, even when your eyes don't feel dry - prevention is key.",
+        'Take breaks when using screens: follow the 20-20-20 rule.',
+        "Blink consciously when reading or using digital devices.",
+        "Use a humidifier in dry environments, especially during winter.",
+        "Avoid blowing air directly into your eyes (fans, car vents, hair dryers).",
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Dry eye syndrome is a multifactorial disorder of the tear film and ocular surface resulting in symptoms of discomfort, visual disturbance, and tear film instability. It is classified as aqueous deficient ( decreased tear production) or evaporative (excessive tear evaporation), with both mechanisms often present simultaneously.',
+      explanation: `## Anatomy of the Tear Film
+
+**Three Layers of Tear Film:**
+
+1. **Mucin Layer (innermost):**
+   - Produced by conjunctival goblet cells
+   - Anchors tear film to cornea
+   - Provides smooth optical surface
+
+2. **Aqueous Layer (middle):**
+   - Produced by lacrimal glands
+   - Makes up 98% of tear volume
+   - Contains water, electrolytes, proteins
+
+3. **Lipid Layer (outermost):**
+   - Produced by meibomian glands
+   - Prevents evaporation
+   - Provides smooth surface
+
+## Classification of Dry Eye
+
+**1. Aqueous Deficient Dry Eye (ADDE):**
+- Decreased tear production
+- Lacrimal gland dysfunction
+- Sjögren syndrome (autoimmune)
+- Age-related decrease
+- Medication-induced
+- Neuropathic (decreased sensation)
+
+**2. Evaporative Dry Eye (EDE):**
+- Excessive tear evaporation
+- Meibomian gland dysfunction (MGD)
+- Blepharitis
+- Poor lid-globe congruity
+- Environmental factors
+
+**Many patients have both types.**
+
+## Risk Factors
+
+**Demographic:**
+- Age >50 (tear production decreases)
+- Female sex (hormonal changes, menopause)
+- Asian ethnicity (higher MGD prevalence)
+
+**Environmental:**
+- Dry climate
+- Low humidity
+- Wind, air conditioning, heating
+- High altitude
+- Smoke, pollutants
+- Visual tasks (reading, computer use)
+
+**Medical Conditions:**
+- Sjögren syndrome
+- Rheumatoid arthritis, SLE, other autoimmune
+- Diabetes
+- Thyroid disorders
+- Vitamin A deficiency
+- Rosacea
+- Allergic conjunctivitis
+- Androgen deficiency
+
+**Medications:**
+- Antihistamines
+- Decongestants
+- Antidepressants (TCAs, SSRIs)
+- Anticholinergics
+- Diuretics
+- Beta-blockers
+- Isotretinoin (Accutane)
+- Hormone replacement therapy
+
+**Ocular Factors:**
+- Contact lens wear
+- Refractive surgery (LASIK, PRK)
+- Prolonged computer use
+- Decreased blink rate
+- Eyelid abnormalities
+- Allergic eye disease
+
+## Clinical Features
+
+**Symptoms:**
+- Dryness, grittiness, sandy sensation
+- Burning, stinging
+- Itching
+- Foreign body sensation
+- Tired eyes, eye fatigue
+- Blurred vision (variable, clears with blinking)
+- Light sensitivity
+- Tearing (reflex tearing from dryness)
+- Contact lens intolerance
+- Difficulty reading for long periods
+
+**Signs:**
+- Conjunctival redness
+- Decreased tear meniscus
+- Rapid tear break-up time (TBUT)
+- Corneal staining (fluorescein, lissamine green)
+- Conjunctival staining (lissamine green)
+- Meibomian gland changes (EDE)
+- Corneal filaments (severe)
+- Mucous threads
+
+## Diagnosis
+
+**Screening Questions:**
+- Do your eyes feel dry?
+- Do you use artificial tears?
+- Do you have burning, stinging, or grittiness?
+- Does your vision fluctuate or blur?
+- Do you have difficulty reading?
+- Are symptoms worse with reading, computer use, or wind?
+
+**Diagnostic Tests:**
+
+1. **Schirmer Test (Tear Production):**
+   - Measures aqueous tear production
+   - Normal: >10 mm/5 minutes (anesthesia)
+   - Normal: >15 mm/5 minutes (no anesthesia)
+   - Mild: 6-10 mm
+   - Moderate: 2-5 mm
+   - Severe: <2 mm
+
+2. **Tear Break-Up Time (TBUT):**
+   - Measures tear film stability
+   - Fluorescein stain, observe with slit lamp
+   - Normal: >10 seconds
+   - Dry eye: <10 seconds
+
+3. **Corneal Staining:**
+   - Fluorescein: epithelial defects
+   - Lissamine green: conjunctival and corneal damage
+   - Oxford Scale grades severity (0-IV)
+
+4. **Ocular Surface Staining Patterns:**
+   - Interpalpebral exposure zone
+   - Punctate epithelial erosions (PEE)
+   - Inferior corneal staining (common)
+   - Nasal staining (early aqueous deficiency)
+
+5. **Meibomian Gland Assessment:**
+   - Gland expression
+   - Gland dropout (meibography)
+   - Secretion quality (clear to toothpaste-like)
+   - Capsule thickening
+
+6. **Tear Osmolarity:**
+   - Measures tear concentration
+   - Elevated in dry eye (>308 mOsm/L)
+   - Not widely available
+
+7. **Osmolarity Matrix:**
+   - Inter-eye difference >5 mOsm/L
+   - Osmolarity >308 mOsm/L
+   - Supports dry eye diagnosis
+
+**DEWS II Diagnostic Criteria:**
+- Symptoms + one of:
+  - TBUT <10 seconds OR
+  - Osmolarity >308 mOsm/L OR
+  - Positive ocular surface staining
+
+## Treatment
+
+**First-Line Measures:**
+
+**Artificial Tears:**
+- Preservative-free preferred (chronic use)
+- Use 4+ times daily
+- Different viscosities available
+- Gel formulations for severe cases
+- Ointment at bedtime
+
+**Lid Hygiene (for MGD/Blepharitis):**
+- Warm compresses 5-10 minutes daily
+- Lid scrubs (baby shampoo or commercial pads)
+- Meibomian gland expression
+- Commercial devices (LipiFlow, TearScience)
+
+**Environmental Modifications:**
+- Humidifier (target humidity 40-60%)
+- Avoid drafts, fans, vents
+- Take breaks during visual tasks
+- Blink exercises
+- 20-20-20 rule for computer use
+- Sunglasses outdoors
+
+**Second-Line Treatments:**
+
+**Anti-Inflammatory:**
+- Cyclosporine 0.05% (Restasis): BID
+- Cyclosporine 0.09% (Cequa): BID
+- Lifitegrast 5% (Xiidra): BID
+- Short course topical steroids (loteprednol, fluorometholone)
+
+**Punctal Plugs:**
+- Block tear drainage
+- Keeps tears on eye longer
+- Silicone (removable) or collagen (dissolvable)
+- Complications: epiphora, plug loss, irritation
+
+**Omega-3 Supplements:**
+- May improve meibomian gland function
+- Mixed evidence
+- Consider if dietary deficiency
+
+**Autologous Serum Eye Drops:**
+- Made from patient's blood
+- Contains growth factors
+- For severe refractory cases
+
+**Moisture Goggles:**
+- Chamber goggles at night
+- Prevents overnight drying
+- For severe cases
+
+**Oral Medications:**
+- Pilocarpine, cevimeline (Sjögren)
+- Doxycycline (anti-inflammatory for MGD)
+- Azithromycin (anti-inflammatory for MGD)
+
+**Procedural:**
+- LipiFlow thermal pulsation
+- Intense pulsed light (IPL)
+- Meibomian gland probing
+- Amniotic membrane (severe cases)
+
+## Follow-Up
+
+**Response Assessment:**
+- Symptom improvement (subjective)
+- Decreased artificial tear use
+- Improved TBUT
+- Reduced staining
+- Meibomian gland improvement
+
+**Chronic Management:**
+- Long-term treatment usually needed
+- Regular follow-up every 3-6 months
+- Adjust based on response
+- Consider comorbidities`,
+      keyTerms: [
+        { term: "tear film', definition: 'Three-layered fluid (lipid, aqueous, mucin) covering cornea and conjunctiva" },
+        { term: "aqueous deficient', definition: 'Dry eye from decreased tear production by lacrimal glands" },
+        { term: "evaporative', definition: "Dry eye from excessive tear evaporation, usually from meibomian gland dysfunction' },
+        { term: "Schirmer test', definition: 'Measures tear production using filter paper strip in lower eyelid" },
+        { term: "TBUT', definition: 'Tear break-up time; measures tear film stability; <10 seconds indicates dry eye" },
+        { term: "MGD', definition: 'Meibomian gland dysfunction; blockage of oil glands in eyelids causing evaporative dry eye" },
+      ],
+      analogies: [
+        "The tear film is like a three-layer cake - lipid (oil) on top, aqueous (water) in the middle, and mucin (mucous) on the bottom.",
+        "Meibomian glands are like olive oil presses - when they get blocked, the protective oil layer is missing.",
+      ],
+      patientCounselingPoints: [
+        "Use preservative-free artificial tears for long-term use to avoid irritation from preservatives.",
+        "Apply warm compresses daily for meibomian gland dysfunction.",
+        'Take regular breaks when reading or using screens - follow the 20-20-20 rule.',
+        "Add omega-3 fatty acids to your diet or take supplements.",
+        "Use a humidifier in dry environments, especially during winter.",
+      ],
+    },
+    3: {
+      level: 3,
+      summary: "Dry eye is a multifactorial disease of the ocular surface involving tear film instability, hyperosmolarity, and ocular surface inflammation. Classification includes aqueous deficient and evaporative subtypes, with diagnostic evaluation incorporating symptoms, staining, tear assessment, and meibomian gland evaluation. Treatment progresses from lubrication to anti-inflammatory therapy and procedural interventions.",
+      explanation: `## Pathophysiology
+
+**Dry Eye as a Vicious Cycle:**
+
+1. **Initial Insult:**
+   - Tear deficiency or increased evaporation
+   - Tear film instability
+   - Hyperosmolar tears
+
+2. **Ocular Surface Damage:**
+   - Epithelial cell damage
+   - Release of inflammatory mediators
+   - Increased MMP-9 (matrix metalloproteinase)
+   - Cytokine production
+
+3. **Neurosensory Abnormalities:**
+   - Nerve damage from inflammation
+   - Decreased corneal sensitivity
+   - Reduced blink reflex
+   - Decreased tear production
+
+4. **Goblet Cell Loss:**
+   - Mucin deficiency
+   - Worse tear film instability
+   - Perpetuates cycle
+
+**Inflammatory Mediators:**
+- IL-1, IL-6, TNF-alpha
+- MMP-9 (elevated in dry eye tears)
+- T-cell infiltration
+- Apoptosis of epithelial cells
+
+**Tear Film Hyperosmolarity:**
+- Key pathogenic factor
+- Damages ocular surface
+- Triggers inflammation
+- Threshold: >308 mOsm/L
+
+**Lacrimal Functional Unit:**
+- Integrated system including:
+  - Lacrimal glands
+  - Ocular surface
+  - Sensory and motor nerves
+  - Hormonal influence
+- Disruption at any level causes dry eye
+
+## Detailed Classification
+
+**Aqueous Deficient Dry Eye (ADDE):**
+
+**Sjögren Syndrome:**
+- Autoimmune exocrinopathy
+- Sicca symptoms: dry eyes, dry mouth
+- May have systemic autoimmune disease
+- Schirmer <5 mm/5 min typical
+- SSA/SSB antibodies positive in 60-70%
+
+**Non-Sjögren ADDE:**
+- Age-related lacrimal decline
+- Lacrimal gland obstruction/damage
+- Neuropathic (decreased reflex tearing)
+- Medication-induced
+- Hormonal (menopause, anti-androgen)
+
+**Evaporative Dry Eye (EDE):**
+
+**Meibomian Gland Dysfunction (MGD):**
+- Most common cause of dry eye
+- Obstructive: hyperkeratinization, atrophy
+- Secretory: altered secretion
+- Leading cause of evaporative loss
+
+**Blepharitis:**
+- Anterior: Staphylococcal, seborrheic
+- Posterior: MGD
+- Chronic inflammation
+- Tear film instability
+
+**Other Causes:**
+- Poor lid-globe congruity (proptosis, lid laxity)
+- Conjunctivochalasis (redundant conjunctiva)
+- Floppy eyelid syndrome
+- Environmental (low humidity, wind)
+
+## Diagnostic Evaluation
+
+**Symptom Assessment:**
+
+**Validated Questionnaires:**
+- **OSDI (Ocular Surface Disease Index):** 12 questions
+  - Normal: 0-12
+  - Mild: 13-22
+  - Moderate: 23-32
+  - Severe: 33-100
+- **SPEED (Standard Patient Evaluation of Eye Dryness)**
+- **DEQ (Dry Eye Questionnaire)**
+
+**DEWS II Diagnostic Definition:**
+Symptoms + at least one sign:
+- TBUT <10 seconds OR
+- Osmolarity >308 mOsm/L OR
+- Positive ocular surface staining
+
+**Ocular Surface Staining Scales:**
+
+**Oxford Scheme (0-IV):**
+- Grade 0: None
+- Grade I: Minimal (<10 dots)
+- Grade II: Mild (10-30 dots)
+- Grade III: Moderate (30-100 dots)
+- Grade IV: Severe (>100 dots or confluence)
+
+**NEI/Industry Scale:**
+- Grades 0-3 in each zone (nasal, central, inferior, temporal)
+- Score 0-15 total
+
+**Meibomian Gland Evaluation:**
+
+**Expression:**
+- Clear liquid: normal
+- Cloudy: early MGD
+- Viscous/toothpaste: moderate MGD
+- No secretion: severe MGD
+
+**Meibography:**
+- Infrared imaging of glands
+- Gland dropout scoring
+- Irreversible loss
+- Structural assessment
+
+**Tear Film Assessment:**
+
+**Schirmer Test:**
+- **Schirmer I:** Without anesthesia (reflex + basal)
+  - Normal: >15 mm/5 min
+  - Dry: <10 mm/5 min
+- **Schirmer II:** With anesthesia (basal only)
+  - Normal: >10 mm/5 min
+  - Severe: <5 mm/5 min
+
+**Tear Break-Up Time:**
+- Instill fluorescein
+- Ask patient not to blink
+- Measure time to first dry spot
+- Normal: >10 seconds
+- Mild: 6-10 seconds
+- Moderate: 3-5 seconds
+- Severe: <3 seconds
+
+**Tear Meniscus Height:**
+- Normal: >0.2 mm
+- Reduced in aqueous deficiency
+- Quick clinical assessment
+
+**Other Tests:**
+- Tear osmolarity (lab test)
+- MMP-9 testing (InflammaDry)
+- Conjunctival impression cytology
+- Confocal microscopy (research)
+
+## Treatment Algorithms
+
+**Severity-Based Approach (DEWS II):**
+
+**Level 1 (Mild):**
+- Education/environmental modification
+- Artificial tears (preservative-free)
+- Omega-3 supplements
+- Lid hygiene if MGD
+
+**Level 2 (Moderate):**
+- Continue Level 1 measures
+- Anti-inflammatory: cyclosporine or lifitegrast
+- Punctal plugs
+- Doxycycline for MGD
+- Short-course steroid bridge
+
+**Level 3 (Severe):**
+- Continue Level 2 measures
+- Permanent punctal occlusion (cautery)
+- Autologous serum drops
+- Moisture goggles
+- Amniotic membrane (acute)
+- Consider systemic agents
+
+**Anti-Inflammatory Therapy:**
+
+**Cyclosporine (Restasis, Cequa):**
+- T-cell immunomodulator
+- Increases tear production
+- Takes 3-6 months for full effect
+- Burning on instillation common
+- BID dosing
+
+**Lifitegrast (Xiidra):**
+- LFA-1 antagonist
+- Reduces inflammation
+- Faster onset than cyclosporine
+- BID dosing
+- Taste disturbances common
+
+**Topical Steroids:**
+- Loteprednol (Alrex, Lotemax): QID
+- Fluorometholone (FML): QID
+- Prednisolone acetate: QID
+- Short courses (2-4 weeks)
+- Monitor IOP
+
+**Oral Agents:**
+- Doxycycline 50-100 mg BID
+  - Anti-inflammatory for MGD
+  - 1-3 month course
+  - Photosensitivity
+- Azithromycin 500 mg weekly
+  - Anti-inflammatory for MGD
+- Pilocarpine 5 mg TID
+  - For Sjögren
+  - Increases secretions
+
+**Procedural Treatments:**
+
+**Punctal Plugs:**
+- Silicone: permanent until removed
+- Collagen: dissolvable (1-3 months)
+- Intracanalicular: smartplug
+- Complications: epiphora, pyogenic granuloma
+
+**LipiFlow (Thermal Pulsation):**
+- Heat + expression
+- Treats MGD
+- Single treatment
+- Expensive, variable insurance coverage
+
+**Intense Pulsed Light (IPL):**
+- For MGD, rosacea
+- Reduces inflammation
+- Multiple treatments needed
+- Monthly for 3-4 treatments
+
+**Meibomian Gland Probing:**
+- For obstructive MGD
+- Opens blocked orifices
+- Office procedure
+- Immediate relief
+
+**Amniotic Membrane:**
+- Tissue engineering
+- Promotes healing
+- For severe corneal involvement
+- Dissolvable or sutured
+
+**Autologous Serum:**
+- Made from patient's blood
+- 20% concentration
+- Contains growth factors, vitamins
+- For severe refractory cases
+- Requires special pharmacy`,
+      keyTerms: [
+        { term: "DEWS', definition: "Dry Eye Workshop; international expert consensus on dry eye definition and management' },
+        { term: "OSDI', definition: "Ocular Surface Disease Index; validated questionnaire for dry eye symptoms' },
+        { term: "MMP-9', definition: "Matrix metalloproteinase-9; inflammatory enzyme elevated in dry eye tears' },
+        { term: "lacrimal functional unit', definition: 'Integrated system of lacrimal glands, ocular surface, and nerves that maintain tear film" },
+      ],
+      analogies: [
+        "Dry eye is a vicious cycle - like a car with no oil, the engine (ocular surface) gets damaged and produces less lubrication.",
+        "Meibomian gland dropout is like balding for the oil glands - once glands are lost, they don\'t come back.",
+      ],
+      clinicalNotes: "Preservative-free artificial tears are preferred for chronic use (>4 times daily). Benzalkonium chloride (BAK), a common preservative, can worsen dry eye with long-term use.",
+    },
+    4: {
+      level: 4,
+      summary: "Dry eye management requires understanding of the vicious cycle of tear film instability, hyperosmolarity, and ocular surface inflammation. DEWS II provides evidence-based framework for classification and treatment. Individualized therapy addresses underlying etiology (aqueous deficiency vs evaporative) and severity level, progressing from lubrication to anti-inflammatory and procedural interventions.",
+      explanation: `## Advanced Pathophysiology Concepts
+
+**Neurogenic Inflammation:**
+- Corneal nerve damage reduces reflex tearing
+- Neuropathic pain can mimic dry eye symptoms
+- Central sensitization contributes
+- Explains symptom-sign discordance
+
+**Sex Hormone Influence:**
+- Androgens support meibomian gland function
+- Androgen deficiency contributes to MGD
+- Estrogen may affect lacrimal glands
+- Explains female predominance
+
+**Oxidative Stress:**
+- Imbalance of ROS and antioxidants
+- Contributes to ocular surface damage
+- Omega-3 fatty acids may help
+- Future therapeutic target
+
+**Glycocalyx Damage:**
+- Surface microplicae on epithelial cells
+- Holds mucin layer
+- Damaged in chronic dry eye
+- Prevents stable tear film
+
+## Special Populations
+
+**Sjögren Syndrome:**
+- Autoimmune epithelitis
+- Anti-Ro/SSA and Anti-La/SSB antibodies
+- May have systemic disease (RA, SLE)
+- Extraglandular manifestations
+- Treat systemic disease + local therapy
+- Higher risk of lymphoma
+
+**Post-Menopausal Women:**
+- Androgen deficiency
+- Hormone replacement therapy controversy
+- May worsen dry eye in some studies
+- Consider anti-androgen medications
+
+**Computer Vision Syndrome (Digital Eye Strain):**
+- Decreased blink rate (up to 66% reduction)
+- Incomplete blinking
+- Increased tear evaporation
+- Accommodative strain
+- Ergonomic interventions important
+
+**Contact Lens Wearers:**
+- Increased tear evaporation
+- Deposits on lenses
+- Mechanical irritation
+- Preservative-free solutions
+- Daily disposables may help
+- Consider refractive surgery if severe
+
+**Post-Refractive Surgery:**
+- LASIK/PRK causes corneal nerve damage
+- Temporary dry eye common
+- Can persist >6 months
+- Pre-treat dry eye before surgery
+- Punctal plugs often used
+
+**Glaucoma Patients:**
+- Preserved drops worsen dry eye
+- Benzalkonium chloride toxicity
+- Switch to preservative-free
+- Consider laser/surgery
+
+## Advanced Diagnostic Techniques
+
+**Tear Osmolarity:**
+- Gold standard biomarker
+- Hyperosmolarity >308 mOsm/L
+- Inter-eye difference >5 mOsm/L
+- Not widely available
+- Variable reproducibility
+
+**MMP-9 Testing (InflammaDry):**
+- Point-of-care test
+- Detects elevated MMP-9
+- Supports inflammation diagnosis
+- Positive in ~40% of symptomatic patients
+
+**Meibography:**
+- Infrared imaging
+- Scores gland dropout
+- Atrophy grading
+- Irreversible changes
+- Structural assessment
+
+**Confocal Microscopy:**
+- In vivo imaging
+- Nerve fiber density
+- Inflammatory cell density
+- Goblet cell density
+- Research tool currently
+
+**Tear Protein Analysis:**
+- Lactoferrin, lysozyme
+- Tear film proteomics
+- Biomarker discovery
+- Future diagnostic tool
+
+## Treatment Optimization
+
+**Artificial Tear Selection:**
+
+**Viscosity Classes:**
+- Low: drops for mild cases
+- Medium: gel drops
+- High: ointments/ointments at night
+
+**Formulation Factors:**
+- Preservative-free preferred
+- Single-dose vials
+- Sodium hyaluronate (more viscous)
+- Carboxymethylcellulose
+- Polyethylene glycol/propylene glycol
+- Liposomal formulations
+
+**Dosing:**
+- Preventive: 4 times daily
+- Therapeutic: hourly initially
+- Preservative-free if >4 times daily
+- Taper as symptoms improve
+
+**Anti-Inflammatory Strategy:**
+
+**Steroid Bridge:**
+- Start with steroid + cyclosporine/lifitegrast
+- Continue steroid 2-4 weeks
+- Taper as long-acting agent takes effect
+- Monitor IOP
+
+**Cyclosporine vs Lifitegrast:**
+
+| Factor | Cyclosporine | Lifitegrast |
+|--------|--------------|-------------|
+| Onset | 3-6 months | 2-12 weeks |
+| Burning | Common | Less |
+| Taste | No | Yes (bitter) |
+| Cost | Generic available | Brand only |
+| Efficacy | Good data | Similar |
+
+**Combination Therapy:**
+- Cyclosporine + omega-3
+- Lifitegrast + artificial tears
+- Multiple mechanisms for refractory cases
+
+**Punctal Plug Strategy:**
+
+**Patient Selection:**
+- Mild-moderate aqueous deficiency
+- Intolerant of drops
+- Adjunct to pharmacotherapy
+- Good refractory response
+
+**Technique:**
+- Inferior plugs first
+- Consider superior later
+- Collagen as trial
+- Silicone permanent
+
+**Complications:**
+- Epiphora (10-20%)
+- Pyogenic granuloma
+- Plug migration
+- Canaliculitis (rare)
+- Extrusion (20%)
+
+## Procedural Interventions
+
+**LipiFlow (Thermal Pulsation):**
+- Single 12-minute treatment
+- Heat (42.5°C) + pressure
+- Opens obstructed glands
+- Lasts 1-3 years
+- Expensive, variable coverage
+
+**Intense Pulsed Light (IPL):**
+- Originally for rosacea
+- Reduces inflammation
+- Improves gland function
+- 3-4 treatments monthly
+- Maintenance may be needed
+
+**Radiofrequency (RF):**
+- TempSure Envi
+- Similar to IPL
+- Collagen production
+- Thermal effect
+
+**Meibomian Gland Probing:**
+- Office procedure
+- Opens obstructed orifices
+- Immediate relief
+- May need repeating
+
+**Amniotic Membrane:**
+- Tissue engineered
+- Anti-inflammatory, anti-scarring
+- Dissolvable (1 week) or sutured
+- For severe corneal involvement
+- Promotes healing
+
+**Salivary Gland Transplant:**
+- For severe Sjögren
+- Microvascular submandibular transfer
+- Specialized centers
+- Significant surgery
+
+**Tarsorrhaphy:**
+- Partial eyelid closure
+- For severe exposure
+- Reduces evaporation
+- Last resort
+
+## Refractory Dry Eye
+
+**Approach:**
+1. Re-evaluate diagnosis
+2. Optimize existing therapy
+3. Add second-line agents
+4. Consider procedural options
+5. Investigate comorbidities
+6. Multidisciplinary approach
+
+**Medication Review:**
+- Identify offending agents
+- Consider alternatives
+- Adjust dosing schedule
+
+**Comorbidities:**
+- Allergic conjunctivitis
+- Blepharitis/MGD
+- Rosacea
+- Thyroid eye disease
+- Neuropathic pain
+
+**Neuropathic Pain:**
+- Gabapentin, pregabalin
+- Central sensitization
+- Pain out of proportion to signs
+- Consider neuro-ophthalmology`,
+      keyTerms: [
+        { term: "neurogenic inflammation', definition: 'Inflammatory response triggered by nerve damage; contributes to dry eye vicious cycle" },
+        { term: "symptom-sign discordance', definition: "Severity of symptoms not matching examination findings; common in dry eye' },
+        { term: 'glycocalyx", definition: 'Microplical surface on corneal epithelial cells that anchors mucin layer of tear film" },
+      ],
+      clinicalNotes: `Key clinical pearls for dry eye:
+
+1. **Preservative-free tears for chronic use** - Benzalkonium chloride (BAK) toxicity worsens dry eye. Use preservative-free drops if using >4 times daily.
+
+2. **Treat MGD aggressively** - Most dry eye is evaporative from meibomian gland dysfunction. Warm compresses, lid hygiene, and consider oral doxycycline.
+
+3. **Don't undertreat inflammation** - Dry eye is an inflammatory disease. Use cyclosporine or lifitegrast early. Steroid bridge can jumpstart response.
+
+4. **Punctal plugs are effective** - Underutilized option for aqueous deficient dry eye. Consider before escalating to more aggressive therapies.
+
+5. **Refractory cases need re-evaluation** - If not responding, reconsider diagnosis. Look for neuropathic pain, medication effects, comorbidities.
+
+6. **Pre-treat before refractive surgery** - Optimize dry eye before LASIK/PRK. Punctal plugs and aggressive therapy reduce postoperative dryness.
+
+7. **Blepharitis and dry eye go together** - Treat lid disease concurrently with dry eye. Lid hygiene, warm compresses, consider oral doxycycline.
+
+8. **Screen for Sjögren** - In aqueous deficient dry eye, consider Sjögren evaluation (ANA, SSA/SSB, rheumatology referral, lip biopsy).`,
+    },
+    5: {
+      level: 5,
+      summary: "Contemporary dry eye management integrates DEWS II framework, individualized therapy based on etiology and severity, and emerging biomarkers and therapeutics. Understanding the vicious cycle of hyperosmolarity and inflammation guides treatment selection, while special populations require tailored approaches. Ongoing research aims to improve diagnostics and develop targeted therapies.",
+      explanation: `## Evidence-Based Practice
+
+**DEWS II Framework:**
+
+**Definition:**
+"Dry eye is a multifactorial disease of the ocular surface characterized by a loss of homeostasis of the tear film, and accompanied by ocular surface symptoms, in which tear film instability and hyperosmolarity, ocular surface inflammation and damage, and neurosensory abnormalities play etiological roles."
+
+**Key Concepts:**
+- Tear film instability is central
+- Hyperosmolarity is core mechanism
+- Inflammation perpetuates disease
+- Neurosensory abnormalities contribute
+- Symptoms and signs may not correlate
+
+**Etiologic Classification:**
+
+**Aqueous Deficient:**
+- Sjögren syndrome-related
+- Non-Sjögren
+- **Most severe aqueous deficiency = Sjögren**
+
+**Evaporative:**
+- Meibomian gland dysfunction (most common)
+- Disorder of eyelid aperture
+- Low blink rate
+- Mucin deficiency
+- **Most common overall = MGD**
+
+**Mixed:**
+- Both aqueous deficient and evaporative
+- **Most patients have mixed disease**
+
+## Diagnostic Algorithms
+
+**Stepwise Approach:**
+
+1. **Symptom Assessment**
+   - OSDI questionnaire
+   - Dry eye symptoms present?
+
+2. **Sign Assessment**
+   - TBUT <10 seconds?
+   - Positive staining?
+   - Low Schirmer?
+   - Abnormal osmolarity?
+
+3. **Classification**
+   - Aqueous deficient vs evaporative
+   - Meibomian gland assessment
+   - Grading of severity
+
+4. **Etiology Search**
+   - Medication review
+   - Autoimmune screening
+   - Environmental factors
+   - Systemic diseases
+
+**Red Flags for Sjögren:**
+- Severe aqueous deficiency
+- Positive autoantibodies
+- Systemic symptoms
+- Consider rheumatology referral
+- Salivary gland biopsy
+
+## Treatment Evidence
+
+**Artificial Tears:**
+- Lubricating eye drops improve symptoms
+- Preservative-free preferred
+- No head-to-head comparisons
+- Choose based on patient preference
+
+**Cyclosporine:**
+- Multiple RCTs show benefit
+- Increases tear production
+- Reduces surface staining
+- Takes 3-6 months for full effect
+- Long-term data supports continued use
+
+**Lifitegrast:**
+- FDA approved 2016
+- Four RCTs show benefit
+- Faster onset than cyclosporine
+- Similar efficacy to cyclosporine
+- BID dosing
+
+**Omega-3 Supplements:**
+- DREAM study (2023): No benefit over placebo
+- Earlier studies suggested benefit
+- May still benefit MGD
+- Not recommended as first-line
+
+**Punctal Plugs:**
+- Multiple studies show benefit
+- Similar efficacy to cyclosporine
+- Cost-effective
+- Complication rate ~15%
+
+**LipiFlow:**
+- RCTs show gland improvement
+- Symptom benefit modest
+- Cost-effectiveness unclear
+- Variable insurance coverage
+
+**IPL for Dry Eye:**
+- Several RCTs show benefit
+- Particularly for MGD
+- Long-term data emerging
+- Requires multiple treatments
+
+## Emerging Therapies
+
+**Novel Pharmacologics:**
+- NOVA333 (rebamipide prodrug)
+- Tyrvaya (varenicline nasal spray)
+  - Nasal neurostimulation
+  - FDA approved 2021
+  - Increases tear production
+- Diquafosol (P2Y2 agonist) - Japan/Asia
+- Rebamipide (mucin secretagogue) - Japan/Asia
+
+**Anti-Inflammatory Targets:**
+- LFA-1 antagonists (lifitegrast class)
+- Integrin antagonists
+- Novel cyclosporine formulations
+- Tacrolimus ophthalmic
+
+**Device-Based Therapies:**
+- Nasal neurostimulation (Tyrvaya)
+- Thermal pulsation (LipiFlow alternatives)
+- RF devices (TempSure Envi)
+- Neurostimulation (TrueTear - discontinued)
+
+**Regenerative Approaches:**
+- Autologous serum
+- Platelet-rich plasma
+- Cord blood serum
+- Amniotic membrane
+- Stem cell therapy (future)
+
+## Special Situations Management
+
+**Pregnancy and Lactation:**
+- Artificial tears safe
+- Avoid most medications
+- Punctal plugs safe
+- Autologous serum possible
+- Avoid NSAIDs, steroids
+
+**Pediatric Dry Eye:**
+- Screen time increase
+- Allergic conjunctivitis
+- Congenital disorders
+- Preservative-free tears
+- Address environmental factors
+
+**Elderly Patients:**
+- Polypharmacy
+- Multiple comorbidities
+- More severe disease
+- Preservative-free preferred
+- Consider cognitive factors
+
+**Contact Lens Intolerance:**
+- Switch to daily disposables
+- Preservative-free solutions
+- Treat underlying dry eye
+- Consider permanent refractive surgery
+
+**Glaucoma with Dry Eye:**
+- Preserved drops worsen dry eye
+- Switch to preservative-free
+- Consider SLT/laser
+- Surgical options if severe
+
+## Controversies and Future Directions
+
+**Omega-3 Supplementation:**
+- DREAM study negative
+- Earlier studies positive
+- May benefit specific subgroups
+- Not first-line recommendation
+
+**Treating Asymptomatic Dry Eye:**
+- Signs without symptoms
+- Observation acceptable
+- Prevent future damage?
+- Individualize
+
+**Antibiotics for MGD:**
+- Doxycycline commonly used
+- Anti-inflammatory properties
+- Azithromycin alternative
+- Evidence limited but practice common
+
+**Restasis vs. Generic Cyclosporine:**
+- Multiple generics available
+- Some formulations differ
+- Patient preference important
+- Insurance coverage varies
+
+**Testing Protocols:**
+- osmolarity: expensive, limited availability
+- MMP-9: point of care, limited use
+- No consensus on routine testing
+- Clinical diagnosis often sufficient
+
+**Future Directions:**
+- Biomarker discovery
+- Precision medicine approaches
+- Gene therapy possibilities
+- Neuro-regeneration
+- New drug targets`,
+      keyTerms: [
+        { term: "DEWS II', definition: "Dry Eye Workshop II; 2017 international consensus defining dry eye and treatment framework' },
+        { term: "varenicline nasal spray', definition: 'Tyrvaya; nasal spray that stimulates trigeminal nerve to increase tear production" },
+        { term: "DREAM study', definition: "2023 randomized trial showing omega-3 supplements no better than placebo for dry eye' },
+      ],
+      clinicalNotes: `Advanced clinical pearls:
+
+1. **DEWS II is the framework** - Understand the vicious cycle of hyperosmolarity, instability, and inflammation. Treat the cycle, not just symptoms.
+
+2. **Preservative-free is key** - BAK toxicity is real. Use preservative-free drops for any chronic use (>4 times daily). This is non-negotiable.
+
+3. **MGD is most common** - Most dry eye is evaporative from meibomian gland dysfunction. Look for gland dropout, express glands, treat aggressively.
+
+4. **Anti-inflammatory is essential** - Dry eye is inflammatory. Use cyclosporine or lifitegrast early. Consider steroid bridge for faster relief.
+
+5. **Punctal plugs underutilized** - Simple, effective for aqueous deficiency. Consider before escalating to more expensive/complex therapies.
+
+6. **Screen for Sjögren** - In severe aqueous deficiency, think Sjögren. Check ANA, SSA/SSB, refer to rheumatology if indicated.
+
+7. **Refractory needs re-evaluation** - If not responding, reconsider diagnosis. Neuropathic pain, wrong diagnosis, or comorbidities may be present.
+
+8. **Medication review mandatory** - Many drugs worsen dry eye. Review all medications, consider alternatives. B preserved glaucoma drops are common culprits.`,
+    },
+  },
+
+  media: [
+    {
+      id: "tear-film-layers",
+      type: "diagram",
+      filename: "tear-film-layers.svg",
+      title: "Tear Film Layers",
+      description: "Illustration of lipid, aqueous, and mucin layers of the tear film",
+    },
+    {
+      id: "meibomian-glands",
+      type: "diagram",
+      filename: "meibomian-glands.svg",
+      title: "Meibomian Glands and MGD",
+      description: "Anatomy of meibomian glands and changes in meibomian gland dysfunction",
+    },
+    {
+      id: "dry-eye-cycle",
+      type: "diagram",
+      filename: "dry-eye-vicious-cycle.svg",
+      title: "Dry Eye Vicious Cycle",
+      description: "Pathophysiology of dry eye as a self-perpetuating cycle",
+    },
+  ],
+
+  citations: [
+    {
+      id: 'dews2-report',
+      type: "article",
+      title: "TFOS DEWS II Report",
+      authors: ["Craig JP', 'Nichols KK', 'Ackerman S', 'et al."],
+      source: "Ocular Surface",
+    },
+    {
+      id: 'aao-dry-eye-2023',
+      type: "article",
+      title: "Dry Eye Syndrome Preferred Practice Pattern",
+      authors: ["American Academy of Ophthalmology"],
+      source: "Ophthalmology",
+    },
+    {
+      id: "dream-trial",
+      type: "article",
+      title: "Omega-3 Fatty Acid Supplementation for the Treatment of Dry Eye Disease",
+      authors: ["The Dry Eye Assessment and Management (DREAM) Study Research Group"],
+      source: "New England Journal of Medicine",
+    },
+  ],
+
+  crossReferences: [
+    { targetId: "condition-conjunctivitis', targetType: 'condition', relationship: 'related', label: 'Conjunctivitis" },
+    { targetId: "condition-blepharitis', targetType: 'condition', relationship: 'related', label: 'Blepharitis" },
+  ],
+
+  tags: {
+    systems: ["visual"],
+    topics: ["ophthalmology', 'tear film', 'lacrimal"],
+    keywords: ["dry eye', 'keratoconjunctivitis sicca', 'meibomian gland dysfunction', 'artificial tears"],
+    clinicalRelevance: "high",
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ["family medicine"],
+    },
+  },
+
+  createdAt: '2025-01-26T00:00:00.000Z',
+  updatedAt: '2025-01-26T00:00:00.000Z',
+  version: 1,
+  status: "published",
+};
+
+export default dryEye;

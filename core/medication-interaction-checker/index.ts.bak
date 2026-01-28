@@ -1,0 +1,179 @@
+/**
+ * Medication Interaction Checker
+ */
+
+import type {
+  DrugInput,
+  PatientContext,
+  DrugInteraction,
+  InteractionAnalysisResult,
+} from "./types.js";
+
+export type * from "./types.js";
+export { getUserFriendlyExplanation } from "./explanations.js";
+
+const SEVERITY_SCORES = { contraindicated: 100, major: 50, moderate: 20, minor: 5, none: 0 };
+const SEVERITY_COLORS = { contraindicated: "#dc2626", major: "#f97316", moderate: "#eab308", minor: "#22c55e", none: "#6b7280" };
+const DEFAULT_CONFIG = { includeMinor: true, includeTheoretical: false, usePatientContext: true };
+
+interface DrugCYPInfo { enzyme: string; role: "substrate" | "inhibitor" | "inducer"; strength?: "weak" | "moderate" | "strong"; }
+const DRUG_CYP_MAP: Map<string, DrugCYPInfo[]> = new Map();
+const CYP_SUBSTRATES = ["simvastatin", "atorvastatin", "lovastatin", "amlodipine", "diltiazem", "verapamil", "fentanyl", "oxycodone", "alprazolam", "triazolam"];
+const CYP_INHIBITORS = ["clarithromycin", "itraconazole", "ketoconazole", "ritonavir", "erythromycin", "fluconazole", "verapamil", "diltiazem"];
+const CYP_INDUCERS = ["carbamazepine", "phenytoin", "rifampin", "st john wort"];
+for (const d of CYP_SUBSTRATES) DRUG_CYP_MAP.set(d, [{enzyme: "CYP3A4", role: "substrate"}]);
+for (const d of CYP_INHIBITORS) { const m = DRUG_CYP_MAP.get(d) || []; m.push({enzyme: "CYP3A4", role: "inhibitor", strength: "strong"}); DRUG_CYP_MAP.set(d, m); }
+for (const d of CYP_INDUCERS) { const m = DRUG_CYP_MAP.get(d) || []; m.push({enzyme: "CYP3A4", role: "inducer", strength: "strong"}); DRUG_CYP_MAP.set(d, m); }
+
+interface PDInteractionRule {
+  drug1Classes: string[];
+  drug2Classes: string[];
+  severity: "contraindicated" | "major" | "moderate";
+  effect: string;
+  mechanism: string;
+  management: string;
+}
+
+const PD_INTERACTIONS: PDInteractionRule[] = [
+  { drug1Classes: ["opioid", "morphine", "codeine", "oxycodone", "fentanyl"], drug2Classes: ["benzodiazepine", "lorazepam", "diazepam", "alprazolam"], severity: "major", effect: "CNS/respiratory depression", mechanism: "Additive CNS depression", management: "Avoid concurrent use" },
+  { drug1Classes: ["ssri", "fluoxetine", "paroxetine", "sertraline"], drug2Classes: ["maoi", "phenelzine", "tranylcypromine"], severity: "contraindicated", effect: "Serotonin syndrome", mechanism: "Additive serotonergic effects", management: "Do NOT use together" },
+  { drug1Classes: ["anticoagulant", "warfarin", "apixaban", "rivaroxaban"], drug2Classes: ["nsaid", "ibuprofen", "naproxen", "aspirin"], severity: "major", effect: "Increased bleeding", mechanism: "Additive hemostasis impairment", management: "Avoid if possible, monitor" },
+  { drug1Classes: ["ace inhibitor", "lisinopril", "enalapril"], drug2Classes: ["potassium", "spironolactone", "eplerenone"], severity: "major", effect: "Hyperkalemia", mechanism: "Reduced potassium excretion", management: "Monitor potassium" },
+];
+
+const DRUG_CLASS_MAP: Map<string, string[]> = new Map([
+  ["opioid", ["morphine", "codeine", "oxycodone", "hydrocodone", "fentanyl", "tramadol"]],
+  ["benzodiazepine", ["lorazepam", "diazepam", "alprazolam", "clonazepam", "temazepam"]],
+  ["ssri", ["fluoxetine", "paroxetine", "sertraline", "citalopram"]],
+  ["maoi", ["phenelzine", "tranylcypromine", "selegiline"]],
+  ["anticoagulant", ["warfarin", "apixaban", "rivaroxaban", "dabigatran"]],
+  ["nsaid", ["ibuprofen", "naproxen", "aspirin", "diclofenac"]],
+  ["ace inhibitor", ["lisinopril", "enalapril", "ramipril"]],
+  ["arb", ["losartan", "valsartan", "candesartan"]],
+]);
+
+export class MedicationInteractionChecker {
+  private config = DEFAULT_CONFIG;
+  constructor(cfg: Partial<typeof DEFAULT_CONFIG> = {}) { this.config = { ...DEFAULT_CONFIG, ...cfg }; }
+
+  checkInteractions(drugs: DrugInput[], ctx?: PatientContext): InteractionAnalysisResult {
+    if (drugs.length < 2) return this.createEmptyResult();
+    const interactions: DrugInteraction[] = [];
+    const safe: {drug1: DrugInput; drug2: DrugInput}[] = [];
+    for (let i = 0; i < drugs.length; i++) {
+      for (let j = i + 1; j < drugs.length; j++) {
+        const ix = this.findInteractionBetween(drugs[i], drugs[j], ctx);
+        if (ix) interactions.push(ix); else safe.push({ drug1: drugs[i], drug2: drugs[j] });
+      }
+    }
+    return { overallRisk: this.calculateOverallRisk(interactions), interactions, interactionsBySeverity: this.groupBySeverity(interactions), safeCombinations: safe, summary: this.createSummary(interactions), recommendations: this.generateRecs(interactions) };
+  }
+
+  findInteractionBetween(d1: DrugInput, d2: DrugInput, ctx?: PatientContext): DrugInteraction | null {
+    const pk = this.checkPK(d1, d2); if (pk) return this.applyCtx(pk, ctx);
+    const pd = this.checkPD(d1, d2); if (pd) return this.applyCtx(pd, ctx);
+    return null;
+  }
+
+  private checkPK(d1: DrugInput, d2: DrugInput): DrugInteraction | null {
+    const n1 = d1.name.toLowerCase(); const n2 = d2.name.toLowerCase();
+    const c1 = DRUG_CYP_MAP.get(n1); const c2 = DRUG_CYP_MAP.get(n2);
+    if (\!c1 || \!c2) return null;
+    for (const i1 of c1) { for (const i2 of c2) {
+      if (i1.enzyme === i2.enzyme && ((i1.role === "inhibitor" && i2.role === "substrate") || (i2.role === "inhibitor" && i1.role === "substrate"))) {
+        const inh = i1.role === "inhibitor" ? d1 : d2;
+        const sub = i1.role === "substrate" ? d1 : d2;
+        const str = (i1.role === "inhibitor" ? i1 : i2).strength || "moderate";
+        return { id: "cyp-"+i1.enzyme+"-"+n1+"-"+n2, drug1: d1, drug2: d2, severity: str === "strong" ? "major" : str, type: "pharmacokinetic", evidenceLevel: "probable", onsetTiming: "delayed", mechanism: inh.name+" inhibits "+i1.enzyme, clinicalEffect: "Increased "+sub.name+" levels", management: "Monitor for toxicity", monitoring: [], affectedSystems: [], documentation: "CYP" };
+      }
+    }}
+    return null;
+  }
+
+  private checkPD(d1: DrugInput, d2: DrugInput): DrugInteraction | null {
+    const n1 = d1.name.toLowerCase(); const n2 = d2.name.toLowerCase();
+    for (const r of PD_INTERACTIONS) {
+      if (this.matches(n1, r.drug1Classes) && this.matches(n2, r.drug2Classes)) {
+        return { id: "pd-"+n1+"-"+n2, drug1: d1, drug2: d2, severity: r.severity, type: "pharmacodynamic", evidenceLevel: "established", onsetTiming: "rapid", mechanism: r.mechanism, clinicalEffect: r.effect, management: r.management, monitoring: [], affectedSystems: [], documentation: "PD" };
+      }
+    }
+    return null;
+  }
+
+  private matches(n: string, classes: string[]): boolean {
+    for (const c of classes) if (n.includes(c.toLowerCase())) return true;
+    return false;
+  }
+
+  private applyCtx(ix: DrugInteraction, ctx?: PatientContext): DrugInteraction {
+    if (\!ctx || \!this.config.usePatientContext) return ix;
+    let sev = ix.severity;
+    if (ctx.age && ctx.age >= 65) {
+      if (ix.severity === "moderate") sev = "major";
+      else if (ix.severity === "minor") sev = "moderate";
+    }
+    if (sev \!== ix.severity) return { ...ix, patientSpecificModifications: { severity: sev, reason: "Age-related risk" } };
+    return ix;
+  }
+
+  private groupBySeverity(ix: DrugInteraction[]) {
+    return { contraindicated: ix.filter(i => (i.patientSpecificModifications?.severity || i.severity) === "contraindicated"), major: ix.filter(i => (i.patientSpecificModifications?.severity || i.severity) === "major"), moderate: ix.filter(i => (i.patientSpecificModifications?.severity || i.severity) === "moderate"), minor: ix.filter(i => (i.patientSpecificModifications?.severity || i.severity) === "minor") };
+  }
+
+  private calculateOverallRisk(ix: DrugInteraction[]) {
+    if (ix.length === 0) return { level: "none", score: 0, summary: "No interactions", color: SEVERITY_COLORS.none };
+    let score = 0; let max: "contraindicated" | "major" | "moderate" | "minor" = "minor";
+    for (const i of ix) {
+      const s = i.patientSpecificModifications?.severity || i.severity;
+      score += SEVERITY_SCORES[s];
+      if (s === "contraindicated") max = "contraindicated";
+      else if (s === "major" && max \!== "contraindicated") max = "major";
+      else if (s === "moderate" && max === "minor") max = "moderate";
+    }
+    let l, sum, col;
+    if (max === "contraindicated") { l = "critical"; sum = "Dangerous combinations"; col = SEVERITY_COLORS.contraindicated; }
+    else if (max === "major") { l = "high"; sum = "Major interactions"; col = SEVERITY_COLORS.major; }
+    else if (max === "moderate") { l = "moderate"; sum = "Moderate interactions"; col = SEVERITY_COLORS.moderate; }
+    else { l = "low"; sum = "Minor interactions"; col = SEVERITY_COLORS.minor; }
+    return { level: l, score: Math.min(score, 100), summary: sum, color: col };
+  }
+
+  private createSummary(ix: DrugInteraction[]) {
+    const c = { contraindicated: 0, major: 0, moderate: 0, minor: 0 };
+    for (const i of ix) { const s = i.patientSpecificModifications?.severity || i.severity; if (s in c) c[s]++; }
+    return { totalPairs: 0, totalInteractions: ix.length, countsBySeverity: c };
+  }
+
+  private generateRecs(ix: DrugInteraction[]) {
+    const recs = [];
+    for (const i of ix) {
+      const s = i.patientSpecificModifications?.severity || i.severity;
+      let p, cat;
+      if (s === "contraindicated") { p = "urgent"; cat = "avoid-combination"; }
+      else if (s === "major") { p = "high"; cat = "consult-provider"; }
+      else { p = "low"; cat = "monitor"; }
+      recs.push({ priority: p, category: cat, recommendation: i.management, applicableDrugs: [i.drug1.name, i.drug2.name], rationale: i.mechanism });
+    }
+    return recs;
+  }
+
+  private createEmptyResult() {
+    return { overallRisk: { level: "none", score: 0, summary: "No drugs", color: SEVERITY_COLORS.none }, interactions: [], interactionsBySeverity: { contraindicated: [], major: [], moderate: [], minor: [] }, safeCombinations: [], summary: { totalPairs: 0, totalInteractions: 0, countsBySeverity: { contraindicated: 0, major: 0, moderate: 0, minor: 0 } }, recommendations: [] };
+  }
+}
+
+export function checkTwoDrugs(d1: DrugInput, d2: DrugInput, ctx?: PatientContext) {
+  return new MedicationInteractionChecker().findInteractionBetween(d1, d2, ctx);
+}
+
+export function checkMultipleMedications(drugs: DrugInput[], ctx?: PatientContext) {
+  return new MedicationInteractionChecker().checkInteractions(drugs, ctx);
+}
+
+export function explainInteraction(ix: DrugInteraction) {
+  return getUserFriendlyExplanation(ix);
+}
+
+export function getSeverityColor(s: string) {
+  return SEVERITY_COLORS[s] || SEVERITY_COLORS.none;
+}

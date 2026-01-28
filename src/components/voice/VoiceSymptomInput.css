@@ -1,0 +1,25 @@
+.voice-symptom-input { display: flex; flex-direction: row; align-items: flex-start; gap: 12px; }
+.voice-symptom-input--inline { flex-direction: row; }
+.voice-symptom-input__button { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: #f0f4f8; border: 2px solid #d1d9e6; border-radius: 50%; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
+.voice-symptom-input__button:hover:not(:disabled) { background: #e1e8f0; border-color: #b0b8c4; }
+.voice-symptom-input__button:disabled { opacity: 0.5; cursor: not-allowed; }
+.voice-symptom-input__button--recording { background: #fee2e2; border-color: #f87171; animation: pulse-recording 1.5s ease-in-out infinite; }
+.voice-symptom-input__icon { width: 20px; height: 20px; }
+.voice-symptom-input__pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: rgba(239, 68, 68, 0.2); animation: pulse-ring 1.5s ease-out infinite; pointer-events: none; }
+@keyframes pulse-recording { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); } }
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 0; } }
+.voice-symptom-input__input-wrapper { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.voice-symptom-input__transcription { display: flex; flex-direction: column; gap: 8px; }
+.voice-symptom-input__text { padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; position: relative; }
+.voice-symptom-input__label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px; }
+.voice-symptom-input__content { margin: 0; font-size: 14px; color: #1e293b; line-height: 1.5; }
+.voice-symptom-input__clear { position: absolute; top: 8px; right: 8px; padding: 4px 8px; font-size: 12px; background: transparent; border: 1px solid #e2e8f0; border-radius: 4px; cursor: pointer; color: #64748b; transition: all 0.15s ease; }
+.voice-symptom-input__clear:hover { background: #f1f5f9; color: #475569; }
+.voice-symptom-input__recording-status { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fef3c7; border: 1px solid #fbbf24; border-radius: 6px; font-size: 13px; color: #92400e; }
+.voice-symptom-input__recording-status .voice-symptom-input__pulse { position: static; width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; }
+.voice-symptom-input__placeholder { padding: 12px; color: #94a3b8; font-style: italic; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; }
+.voice-symptom-input__submit { align-self: flex-start; padding: 8px 16px; font-size: 14px; font-weight: 500; color: white; background: #3b82f6; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }
+.voice-symptom-input__submit:hover { background: #2563eb; }
+.voice-symptom-input__error { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; font-size: 13px; color: #dc2626; }
+.voice-symptom-input__error svg { flex-shrink: 0; width: 16px; height: 16px; }
+.voice-symptom-input__unavailable { padding: 10px 12px; background: #fefce8; border: 1px solid #fde047; border-radius: 6px; font-size: 13px; color: #a16207; }

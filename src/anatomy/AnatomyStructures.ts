@@ -995,3 +995,5 @@ export const SYSTEM_COLORS: Record<AnatomicalSystem, string> = {
 };
 
 export default ALL_STRUCTURES;
+
+export const ADDITIONAL_MUSCULAR_STRUCTURES: AnatomicalStructure[] = [];

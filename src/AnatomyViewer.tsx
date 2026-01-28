@@ -24,6 +24,11 @@ import {
   useLOD,
   type AnatomicalSystem,
 } from './anatomy';
+import {
+  EnhancedCameraControls,
+  ANATOMICAL_VIEW_PRESETS,
+} from './anatomy/EnhancedCameraControls';
+
 
 interface AnatomyViewerProps {
   onBack: () => void;

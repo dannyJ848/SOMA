@@ -1,30 +1,24 @@
 /**
- * Physical Examination Content Module
- *
- * Comprehensive educational content covering all aspects of the physical examination,
- * from vital signs to specialized system examinations. Each section includes:
- * - Normal findings and technique
- * - Abnormal findings and their clinical significance
- * - Disease correlations
- * - Multi-level complexity for learners at all stages
- *
- * NOTE: Content modules are planned for future implementation.
+ * Physical Examination Module - The Biological Self
  */
 
-/**
- * Physical Examination Systematic Approach
- */
-export const PHYSICAL_EXAM_SEQUENCE = [
-  'vital-signs',
-  'general-survey',
-  'heent',
-  'neck',
-  'cardiovascular',
-  'respiratory',
-  'abdominal',
-  'musculoskeletal',
-  'neurological',
-  'skin',
-] as const;
+// Abdominal Examination
+export * from './abdominal/index.js';
 
-export type PhysicalExamSection = (typeof PHYSICAL_EXAM_SEQUENCE)[number];
+// Cardiovascular Examination
+export * from './cardiovascular/index.js';
+
+// HEENT Examination
+export * from './heent/index.js';
+
+// Musculoskeletal Examination
+export * from './musculoskeletal/index.js';
+
+// Neurological Examination
+export * from './neurological/index.js';
+
+// Respiratory Examination
+export * from './respiratory/index.js';
+
+// Skin Examination
+export * from './skin/index.js';

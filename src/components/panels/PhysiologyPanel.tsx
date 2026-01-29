@@ -14,6 +14,7 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { usePhysiologyContent, type PhysiologyContentData } from '../../hooks/usePhysiologyContent';
+import { GlassPanel, GlassButton } from '../ui/GlassUI';
 import './panels.css';
 
 // ============================================================================
@@ -258,9 +259,9 @@ function AskAIForm({ onSubmit, regionName }: AskAIFormProps) {
           placeholder={`Ask about ${regionName} physiology...`}
           className="ask-ai-input"
         />
-        <button type="submit" className="ask-ai-button" disabled={!question.trim()}>
+        <GlassButton type="submit" variant="primary" size="sm" disabled={!question.trim()}>
           Ask AI
-        </button>
+        </GlassButton>
       </form>
       <div className="suggested-questions">
         <span className="suggestions-label">Try asking:</span>
@@ -328,9 +329,9 @@ function ErrorState({ message, onRetry }: { message: string; onRetry?: () => voi
       <span className="error-icon">&#9888;</span>
       <p className="error-message">{message}</p>
       {onRetry && (
-        <button className="retry-button" onClick={onRetry}>
+        <GlassButton variant="default" size="sm" onClick={onRetry}>
           Try Again
-        </button>
+        </GlassButton>
       )}
     </div>
   );
@@ -363,7 +364,7 @@ export function PhysiologyPanel({
   // Render loading state
   if (isLoading) {
     return (
-      <div className="physiology-panel">
+      <GlassPanel className="physiology-panel" elevated bordered>
         <div className="physiology-panel-header">
           <div className="header-title">
             <span className="header-icon">&#9881;</span>
@@ -372,19 +373,26 @@ export function PhysiologyPanel({
               <span className="header-subtitle">{regionName}</span>
             </div>
           </div>
-          <button className="close-btn" onClick={onClose} aria-label="Close panel">
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            iconOnly
+            onClick={onClose}
+            aria-label="Close panel"
+            className="close-btn"
+          >
             &#215;
-          </button>
+          </GlassButton>
         </div>
         <LoadingSkeleton />
-      </div>
+      </GlassPanel>
     );
   }
 
   // Render error state
   if (error) {
     return (
-      <div className="physiology-panel">
+      <GlassPanel className="physiology-panel" elevated bordered>
         <div className="physiology-panel-header">
           <div className="header-title">
             <span className="header-icon">&#9881;</span>
@@ -393,18 +401,25 @@ export function PhysiologyPanel({
               <span className="header-subtitle">{regionName}</span>
             </div>
           </div>
-          <button className="close-btn" onClick={onClose} aria-label="Close panel">
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            iconOnly
+            onClick={onClose}
+            aria-label="Close panel"
+            className="close-btn"
+          >
             &#215;
-          </button>
+          </GlassButton>
         </div>
         <ErrorState message={error} onRetry={refetch} />
-      </div>
+      </GlassPanel>
     );
   }
 
   // Render content
   return (
-    <div className="physiology-panel">
+    <GlassPanel className="physiology-panel" elevated bordered>
       {/* Header */}
       <div className="physiology-panel-header">
         <div className="header-title">
@@ -414,9 +429,16 @@ export function PhysiologyPanel({
             <span className="header-subtitle">{regionName}</span>
           </div>
         </div>
-        <button className="close-btn" onClick={onClose} aria-label="Close panel">
+        <GlassButton
+          variant="ghost"
+          size="sm"
+          iconOnly
+          onClick={onClose}
+          aria-label="Close panel"
+          className="close-btn"
+        >
           &#215;
-        </button>
+        </GlassButton>
       </div>
 
       {/* Complexity Selector */}
@@ -660,7 +682,7 @@ export function PhysiologyPanel({
           </CollapsibleSection>
         )}
       </div>
-    </div>
+    </GlassPanel>
   );
 }
 

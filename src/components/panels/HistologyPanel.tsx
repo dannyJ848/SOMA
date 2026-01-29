@@ -17,6 +17,7 @@ import type {
   ClinicalCorrelation,
   MagnificationLevel,
 } from '../../hooks/useHistologyContent';
+import { GlassPanel, GlassButton } from '../ui/GlassUI';
 import './HistologyPanel.css';
 
 // ============================================
@@ -554,7 +555,7 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
   // Loading state
   if (isLoading) {
     return (
-      <div className="histology-panel histology-panel--loading">
+      <GlassPanel className="histology-panel histology-panel--loading" elevated bordered>
         <div className="histology-panel__header">
           <div className="histology-panel__title-area">
             <MicroscopeIcon className="histology-panel__title-icon" />
@@ -563,27 +564,30 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
               <span className="histology-panel__subtitle">Histology</span>
             </div>
           </div>
-          <button
-            className="histology-panel__close-btn"
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            iconOnly
             onClick={onClose}
             title="Close"
             aria-label="Close histology panel"
+            className="histology-panel__close-btn"
           >
             <CloseIcon className="histology-panel__close-icon" />
-          </button>
+          </GlassButton>
         </div>
         <div className="histology-panel__loading-content">
           <div className="histology-panel__loading-spinner" />
           <span>Loading histology content...</span>
         </div>
-      </div>
+      </GlassPanel>
     );
   }
 
   // Error state
   if (error || !content) {
     return (
-      <div className="histology-panel histology-panel--error">
+      <GlassPanel className="histology-panel histology-panel--error" elevated bordered>
         <div className="histology-panel__header">
           <div className="histology-panel__title-area">
             <MicroscopeIcon className="histology-panel__title-icon" />
@@ -592,31 +596,38 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
               <span className="histology-panel__subtitle">Histology</span>
             </div>
           </div>
-          <button
-            className="histology-panel__close-btn"
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            iconOnly
             onClick={onClose}
             title="Close"
             aria-label="Close histology panel"
+            className="histology-panel__close-btn"
           >
             <CloseIcon className="histology-panel__close-icon" />
-          </button>
+          </GlassButton>
         </div>
         <div className="histology-panel__error-content">
           <span className="histology-panel__error-text">
             {error?.message || 'Failed to load histology content'}
           </span>
-          <button className="histology-panel__retry-btn" onClick={refresh}>
-            <RefreshIcon className="histology-panel__retry-icon" />
+          <GlassButton
+            variant="default"
+            size="sm"
+            onClick={refresh}
+            leftIcon={<RefreshIcon className="histology-panel__retry-icon" />}
+          >
             Retry
-          </button>
+          </GlassButton>
         </div>
-      </div>
+      </GlassPanel>
     );
   }
 
   // Main content
   return (
-    <div className="histology-panel">
+    <GlassPanel className="histology-panel" elevated bordered>
       {/* Header */}
       <div className="histology-panel__header">
         <div className="histology-panel__title-area">
@@ -626,14 +637,17 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
             <span className="histology-panel__subtitle">Histology</span>
           </div>
         </div>
-        <button
-          className="histology-panel__close-btn"
+        <GlassButton
+          variant="ghost"
+          size="sm"
+          iconOnly
           onClick={onClose}
           title="Close"
           aria-label="Close histology panel"
+          className="histology-panel__close-btn"
         >
           <CloseIcon className="histology-panel__close-icon" />
-        </button>
+        </GlassButton>
       </div>
 
       {/* Complexity Selector */}
@@ -728,16 +742,18 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
 
       {/* Footer */}
       <div className="histology-panel__footer">
-        <button
-          className="histology-panel__ask-btn"
+        <GlassButton
+          variant="primary"
+          size="md"
           onClick={() => handleAskAbout('this tissue')}
           title="Ask AI about this histology"
+          leftIcon={<ChatIcon className="histology-panel__ask-icon" />}
+          className="histology-panel__ask-btn"
         >
-          <ChatIcon className="histology-panel__ask-icon" />
           Ask AI About This
-        </button>
+        </GlassButton>
       </div>
-    </div>
+    </GlassPanel>
   );
 });
 

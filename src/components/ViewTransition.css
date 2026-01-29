@@ -1,0 +1,323 @@
+/* ============================================
+   View Transition Styles
+   Smooth animations for view switching
+   ============================================ */
+
+/* Base transition wrapper */
+.view-transition {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* CSS Custom Property for duration (can be overridden inline) */
+.view-transition {
+  --view-transition-duration: 250ms;
+  --view-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --view-transition-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --view-transition-ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* ============================================
+   Fade Transition
+   ============================================ */
+
+.view-transition--fade .view-enter {
+  opacity: 0;
+}
+
+.view-transition--fade .view-enter-active {
+  opacity: 1;
+  transition: opacity var(--view-transition-duration) var(--view-transition-ease-out);
+}
+
+.view-transition--fade .view-exit {
+  opacity: 1;
+}
+
+.view-transition--fade .view-exit-active {
+  opacity: 0;
+  transition: opacity var(--view-transition-duration) var(--view-transition-ease-in);
+}
+
+/* ============================================
+   Slide Left Transition (for forward navigation)
+   ============================================ */
+
+.view-transition--slide-left .view-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.view-transition--slide-left .view-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-out),
+    transform var(--view-transition-duration) var(--view-transition-ease-out);
+}
+
+.view-transition--slide-left .view-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.view-transition--slide-left .view-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-in),
+    transform var(--view-transition-duration) var(--view-transition-ease-in);
+}
+
+/* ============================================
+   Slide Right Transition (for back navigation)
+   ============================================ */
+
+.view-transition--slide-right .view-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.view-transition--slide-right .view-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-out),
+    transform var(--view-transition-duration) var(--view-transition-ease-out);
+}
+
+.view-transition--slide-right .view-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.view-transition--slide-right .view-exit-active {
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-in),
+    transform var(--view-transition-duration) var(--view-transition-ease-in);
+}
+
+/* ============================================
+   Slide Up Transition
+   ============================================ */
+
+.view-transition--slide-up .view-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.view-transition--slide-up .view-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-out),
+    transform var(--view-transition-duration) var(--view-transition-ease-out);
+}
+
+.view-transition--slide-up .view-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.view-transition--slide-up .view-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-in),
+    transform var(--view-transition-duration) var(--view-transition-ease-in);
+}
+
+/* ============================================
+   Slide Down Transition
+   ============================================ */
+
+.view-transition--slide-down .view-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.view-transition--slide-down .view-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-out),
+    transform var(--view-transition-duration) var(--view-transition-ease-out);
+}
+
+.view-transition--slide-down .view-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.view-transition--slide-down .view-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--view-transition-duration) var(--view-transition-ease-in),
+    transform var(--view-transition-duration) var(--view-transition-ease-in);
+}
+
+/* ============================================
+   Reduced Motion Support
+   Respects user preference for reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .view-transition .view-enter,
+  .view-transition .view-enter-active,
+  .view-transition .view-exit,
+  .view-transition .view-exit-active {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  /* For reduced motion, just do instant opacity change */
+  .view-transition .view-enter {
+    opacity: 0;
+  }
+
+  .view-transition .view-enter-active {
+    opacity: 1;
+  }
+
+  .view-transition .view-exit {
+    opacity: 1;
+  }
+
+  .view-transition .view-exit-active {
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Global View Transition Classes
+   Can be applied directly to elements without wrapper
+   ============================================ */
+
+.view-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.view-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 250ms cubic-bezier(0, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.view-exit {
+  opacity: 1;
+}
+
+.view-exit-active {
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* ============================================
+   App View Container with Transitions
+   Applied to main content area
+   ============================================ */
+
+.app-view-container {
+  position: relative;
+  min-height: 100vh;
+  will-change: opacity, transform;
+}
+
+.app-view-container.transitioning {
+  pointer-events: none;
+}
+
+/* Keyframe alternatives for more complex animations */
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes viewFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes viewSlideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes viewSlideOutToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes viewSlideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes viewSlideOutToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* Utility classes using keyframes */
+.animate-view-fade-in {
+  animation: viewFadeIn 250ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-view-fade-out {
+  animation: viewFadeOut 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.animate-view-slide-in {
+  animation: viewSlideInFromRight 250ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-view-slide-out {
+  animation: viewSlideOutToLeft 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.animate-view-slide-in-reverse {
+  animation: viewSlideInFromLeft 250ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-view-slide-out-reverse {
+  animation: viewSlideOutToRight 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}

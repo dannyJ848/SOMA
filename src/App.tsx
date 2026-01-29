@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy, useCallback } from 'react';
+import { useState, useEffect, Suspense, lazy, useCallback, useRef } from 'react';
 import { invoke } from './tauri-invoke';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
@@ -8,6 +8,11 @@ import { useActionTracker } from './hooks/useActionTracker';
 import { useUserDemographics } from './hooks/useUserDemographics';
 import { useTranslation, useI18n } from './i18n/useI18n';
 import { LanguageToggle } from './components/LanguageSwitcher';
+import { ViewTransition, getSlideDirection } from './components/ViewTransition';
+import './components/ViewTransition.css';
+import { UnifiedNavigation, KeyboardShortcutsHelp } from './components/navigation';
+import { GlobalSearch } from './search/GlobalSearch';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import type {
   DashboardAction,
   NavigationAction,
@@ -109,70 +114,8 @@ interface TimelineData {
 
 type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric';
 
-// Mobile Bottom Navigation Component
-function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNavigate: (view: View) => void }) {
-  const { t } = useTranslation('navigation');
+// MobileBottomNav is now imported from ./components/MobileBottomNav
 
-  return (
-    <nav className="mobile-bottom-nav" role="navigation" aria-label={t('nav.title') || 'Main navigation'}>
-      <div className="mobile-nav-items" role="menubar">
-        <button
-          className={`mobile-nav-item ${currentView === 'body-centric' ? 'active' : ''}`}
-          onClick={() => onNavigate('body-centric')}
-          role="menuitem"
-          aria-current={currentView === 'body-centric' ? 'page' : undefined}
-          aria-label={`${t('nav.body')} - 3D body explorer`}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <circle cx="12" cy="5" r="3"/>
-            <path d="M12 8v14"/>
-            <path d="M8 12h8"/>
-            <path d="M8 22l4-4 4 4"/>
-          </svg>
-          <span>{t('nav.body')}</span>
-        </button>
-        <button
-          className={`mobile-nav-item ${currentView === 'chat' ? 'active' : ''}`}
-          onClick={() => onNavigate('chat')}
-          role="menuitem"
-          aria-current={currentView === 'chat' ? 'page' : undefined}
-          aria-label={`${t('nav.chat')} - AI health assistant`}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span>{t('nav.chat')}</span>
-        </button>
-        <button
-          className={`mobile-nav-item ${currentView === 'timeline' ? 'active' : ''}`}
-          onClick={() => onNavigate('timeline')}
-          role="menuitem"
-          aria-current={currentView === 'timeline' ? 'page' : undefined}
-          aria-label={`${t('nav.timeline')} - Health history`}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          <span>{t('nav.timeline')}</span>
-        </button>
-        <button
-          className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
-          onClick={() => onNavigate('dashboard')}
-          role="menuitem"
-          aria-current={currentView === 'dashboard' ? 'page' : undefined}
-          aria-label={`${t('nav.dashboard')} - Health dashboard`}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <span>{t('nav.dashboard')}</span>
-        </button>
-      </div>
-    </nav>
-  );
-}
 
 function App() {
   const { t } = useTranslation('common');
@@ -203,6 +146,15 @@ function App() {
   const [initialConditionId, setInitialConditionId] = useState<string | undefined>(undefined);
   // Navigation history for breadcrumb support
   const [navigationHistory, setNavigationHistory] = useState<View[]>([]);
+  // Track previous view for transition direction
+  const previousViewRef = useRef<View | null>(null);
+  // View order for determining slide direction
+  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry'];
+  // Transition type based on navigation direction
+  const [transitionType, setTransitionType] = useState<'fade' | 'slide-left' | 'slide-right'>('fade');
+  // Global keyboard shortcuts state
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false);
 
   // Action tracking hooks for intent prediction
   const { track: trackDashboard } = useActionTracker<DashboardAction>('dashboard', 'App');
@@ -213,19 +165,23 @@ function App() {
   // Demographics hook for body-centric home
   const { isOnboarded, isLoading: demographicsLoading, refreshDemographics } = useUserDemographics();
 
-  // Navigate with history tracking
+  // Navigate with history tracking and transition animation
   const navigateWithHistory = useCallback((newView: View) => {
     trackNavigation('view-change', { fromView: currentView, toView: newView });
+    previousViewRef.current = currentView;
+    setTransitionType(getSlideDirection(currentView, newView, viewOrder));
     setNavigationHistory(prev => [...prev, currentView]);
     setCurrentView(newView);
-  }, [currentView, trackNavigation]);
+  }, [currentView, trackNavigation, viewOrder]);
 
-  // Navigate back through history
+  // Navigate back through history with reverse transition
   const navigateBack = useCallback(() => {
     if (navigationHistory.length > 0) {
       const newHistory = [...navigationHistory];
       const previousView = newHistory.pop()!;
       trackNavigation('back', { fromView: currentView, toView: previousView });
+      previousViewRef.current = currentView;
+      setTransitionType('slide-right'); // Always slide right when going back
       setNavigationHistory(newHistory);
       setCurrentView(previousView);
       return true;
@@ -233,11 +189,13 @@ function App() {
     return false;
   }, [navigationHistory, currentView, trackNavigation]);
 
-  // Tracked navigation handler for header buttons
+  // Tracked navigation handler for header buttons with transition
   const handleNavigate = useCallback((targetView: View) => {
     trackNavigation('view-change', { fromView: currentView, toView: targetView });
+    previousViewRef.current = currentView;
+    setTransitionType(getSlideDirection(currentView, targetView, viewOrder));
     setCurrentView(targetView);
-  }, [currentView, trackNavigation]);
+  }, [currentView, trackNavigation, viewOrder]);
 
   useEffect(() => {
     checkDatabase();
@@ -254,6 +212,102 @@ function App() {
       loadTimeline();
     }
   }, [unlocked, currentView, activeFilters, dateRange]);
+
+  // Global keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check if user is typing in an input field
+      const target = event.target as HTMLElement;
+      const isInputField =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        target.getAttribute('role') === 'textbox';
+
+      // Always handle Escape to close panels/modals (even in input fields)
+      if (event.key === 'Escape') {
+        // Close search if open
+        if (isSearchOpen) {
+          event.preventDefault();
+          setIsSearchOpen(false);
+          return;
+        }
+        // Close shortcuts help if open
+        if (isShortcutsHelpOpen) {
+          event.preventDefault();
+          setIsShortcutsHelpOpen(false);
+          return;
+        }
+        // Close selected event modal if open
+        if (selectedEvent) {
+          event.preventDefault();
+          setSelectedEvent(null);
+          return;
+        }
+        // Close symptom form if open
+        if (showSymptomForm) {
+          event.preventDefault();
+          setShowSymptomForm(false);
+          return;
+        }
+        return;
+      }
+
+      // Skip other shortcuts when typing in input fields
+      if (isInputField) {
+        return;
+      }
+
+      // Skip if Cmd/Ctrl/Alt modifiers are pressed (allow Shift for ?)
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
+
+      switch (event.key) {
+        // / - Open search (prevent browser find)
+        case '/':
+          event.preventDefault();
+          setIsSearchOpen(true);
+          break;
+
+        // ? (Shift + /) - Open keyboard shortcuts help
+        case '?':
+          event.preventDefault();
+          setIsShortcutsHelpOpen(prev => !prev);
+          break;
+
+        // H - Toggle UI visibility
+        case 'h':
+        case 'H':
+          // Only in anatomy views - handled by UnifiedNavigation
+          if (currentView === 'anatomy' || currentView === 'body-centric') {
+            // Let UnifiedNavigation handle this
+            return;
+          }
+          break;
+
+        // Space - Reset camera view (only in anatomy views)
+        // F - Focus on selection (only in anatomy views)
+        // 1-6 - Camera presets (only in anatomy views)
+        // These are handled by UnifiedNavigation component when active
+        case ' ':
+        case 'f':
+        case 'F':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+          // These are handled by the UnifiedNavigation component
+          // when in anatomy or body-centric views
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentView, isSearchOpen, isShortcutsHelpOpen, selectedEvent, showSymptomForm]);
 
   async function checkDatabase() {
     try {
@@ -353,6 +407,57 @@ function App() {
     trackNavigation('view-change', { fromView: currentView, toView: targetView });
     setCurrentView(targetView);
   }, [currentView, trackDashboard, trackNavigation]);
+
+  // Handle search result selection
+  const handleSearchResultSelect = useCallback((result: {
+    id: string;
+    category: string;
+    navigationPath?: string;
+    structureId?: string;
+    entryId?: string;
+  }) => {
+    setIsSearchOpen(false);
+
+    // Navigate based on the result category
+    switch (result.category) {
+      case 'anatomy':
+      case 'structure':
+        if (result.structureId) {
+          // Navigate to anatomy view with the selected structure
+          trackNavigation('view-change', { fromView: currentView, toView: 'anatomy', metadata: { structureId: result.structureId } });
+          setCurrentView('anatomy');
+        }
+        break;
+      case 'condition':
+        setInitialConditionId(result.entryId || result.id);
+        trackNavigation('view-change', { fromView: currentView, toView: 'condition-simulator' });
+        setCurrentView('condition-simulator');
+        break;
+      case 'medication':
+        setInitialMedicationId(result.entryId || result.id);
+        trackNavigation('view-change', { fromView: currentView, toView: 'medication-explorer' });
+        setCurrentView('medication-explorer');
+        break;
+      case 'symptom':
+        trackNavigation('view-change', { fromView: currentView, toView: 'symptom-explorer' });
+        setCurrentView('symptom-explorer');
+        break;
+      case 'encyclopedia':
+        if (result.entryId) {
+          setSelectedEncyclopediaEntryId(result.entryId);
+          trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia-entry' });
+          setCurrentView('encyclopedia-entry');
+        } else {
+          trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia' });
+          setCurrentView('encyclopedia');
+        }
+        break;
+      default:
+        // Default to encyclopedia for unknown categories
+        trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia' });
+        setCurrentView('encyclopedia');
+    }
+  }, [currentView, trackNavigation]);
 
   function getEventTypeColor(type: TimelineEventType): string {
     const colors: Record<TimelineEventType, string> = {
@@ -738,14 +843,16 @@ function App() {
     </div>
   );
 
-  // Timeline View
-  if (currentView === 'timeline') {
-    return (
-      <div className="container timeline-view">
-        <header className="app-header">
-          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
+  // Render the current view content based on currentView state
+  const renderViewContent = () => {
+    // Timeline View
+    if (currentView === 'timeline') {
+      return (
+        <div className="container timeline-view">
+          <header className="app-header">
+            <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             {t('action.back')}
           </button>
@@ -848,6 +955,21 @@ function App() {
 
         {/* Mobile Bottom Navigation */}
         <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
       </div>
     );
   }
@@ -862,19 +984,46 @@ function App() {
     );
   }
 
-  // 3D Anatomy View - lazy loaded with Suspense
+  // 3D Anatomy View - lazy loaded with Suspense, uses UnifiedNavigation for 3D canvas controls
   if (currentView === 'anatomy') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading 3D Anatomy Viewer...</div>
-        </div>
-      }>
-        <AnatomyViewer
-          onBack={() => setCurrentView('dashboard')}
-          dashboardData={dashboard}
+      <UnifiedNavigation
+        toolbarPosition="left"
+        showBreadcrumbs={true}
+        showCameraIndicator={true}
+        onCameraPresetChange={(preset) => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { cameraPreset: preset } });
+        }}
+        onResetView={() => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
+        }}
+      >
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading 3D Anatomy Viewer...</div>
+          </div>
+        }>
+          <AnatomyViewer
+            onBack={() => handleNavigate('dashboard')}
+            dashboardData={dashboard}
+          />
+        </Suspense>
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </UnifiedNavigation>
     );
   }
 
@@ -989,10 +1138,20 @@ function App() {
     );
   }
 
-  // Body-Centric Home (default view)
+  // Body-Centric Home (default view) - uses UnifiedNavigation for 3D canvas controls
   if (currentView === 'body-centric') {
     return (
-      <>
+      <UnifiedNavigation
+        toolbarPosition="left"
+        showBreadcrumbs={true}
+        showCameraIndicator={true}
+        onCameraPresetChange={(preset) => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { cameraPreset: preset } });
+        }}
+        onResetView={() => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
+        }}
+      >
         <Suspense fallback={
           <div className="container">
             <div className="loading">Loading Body-Centric Home...</div>
@@ -1009,7 +1168,22 @@ function App() {
         </Suspense>
         {/* Mobile Bottom Navigation */}
         <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
-      </>
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </UnifiedNavigation>
     );
   }
 
@@ -1365,7 +1539,35 @@ function App() {
 
       {/* Mobile Bottom Navigation */}
       <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+      {/* Global Search Modal */}
+      {isSearchOpen && (
+        <GlobalSearch
+          onResultSelect={handleSearchResultSelect}
+          onOpenChange={setIsSearchOpen}
+          defaultOpen={true}
+        />
+      )}
+
+      {/* Keyboard Shortcuts Help Modal */}
+      <KeyboardShortcutsHelp
+        isOpen={isShortcutsHelpOpen}
+        onClose={() => setIsShortcutsHelpOpen(false)}
+      />
     </div>
+  );
+  }; // End of renderViewContent
+
+  // Wrap all view content with ViewTransition for smooth animations
+  return (
+    <ViewTransition
+      viewKey={currentView}
+      duration={250}
+      transitionType={transitionType}
+      className="app-view-container"
+    >
+      {renderViewContent()}
+    </ViewTransition>
   );
 }
 

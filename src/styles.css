@@ -15,6 +15,11 @@
   --error: #ef4444;
   --border: #2a2a2a;
 
+  /* Glass morphism variables */
+  --glass-bg: rgba(26, 26, 46, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 12px;
+
   /* Accessibility-focused variables */
   --focus-ring-color: #3b82f6;
   --focus-ring-width: 3px;
@@ -164,7 +169,7 @@ header h1 {
   border: 1px solid var(--border);
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -376,6 +381,7 @@ input:disabled {
   border: 1px solid var(--border);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease;
 }
 
 .section-title {
@@ -411,7 +417,7 @@ input:disabled {
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .vital-item:hover {
@@ -2355,12 +2361,15 @@ input:disabled {
 }
 
 .model-loading-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 1.5rem;
   min-width: 320px;
   max-width: 480px;
+  transition: background 0.2s ease;
 }
 
 .model-loading-panel h3 {
@@ -2467,13 +2476,16 @@ input:disabled {
   left: 16px;
   width: 260px;
   max-height: calc(100vh - 160px);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   z-index: 50;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .layer-panel-header {
@@ -3022,11 +3034,14 @@ input:disabled {
   bottom: 80px;
   right: 16px;
   width: 280px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 1rem;
   z-index: 50;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .selection-header {
@@ -3159,11 +3174,14 @@ input:disabled {
   top: 60px;
   right: 16px;
   width: 240px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
   overflow: hidden;
   z-index: 50;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .clipping-panel-header {
@@ -4208,6 +4226,327 @@ textarea,
 
 .mobile-nav-item span {
   line-height: 1;
+}
+
+/* ============================================================================
+   GlassUI Mobile Navigation - Premium Glass Morphism Styles
+   ============================================================================ */
+
+/* Glass mobile nav container */
+.glass-mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  padding-bottom: var(--safe-area-inset-bottom);
+  /* Remove default background - glass layers provide it */
+  background: transparent;
+  border-top: none;
+}
+
+/* Glass backdrop layer - provides the blur and translucency */
+.glass-nav-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  z-index: -2;
+}
+
+/* Dark mode glass backdrop */
+@media (prefers-color-scheme: dark) {
+  .glass-nav-backdrop {
+    background: rgba(28, 28, 30, 0.78);
+  }
+}
+
+/* Top border with subtle gradient glow */
+.glass-nav-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 80%,
+    transparent 100%
+  );
+  z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-nav-border {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0.15) 80%,
+      transparent 100%
+    );
+  }
+}
+
+/* Active indicator pill - animated sliding indicator */
+.glass-nav-indicator {
+  position: absolute;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.25) 0%,
+    rgba(99, 102, 241, 0.2) 100%
+  );
+  border-radius: 16px;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  opacity: 0;
+  z-index: 0;
+}
+
+.glass-mobile-nav:has(.glass-nav-item.active) .glass-nav-indicator {
+  opacity: 1;
+}
+
+/* Glass nav items container */
+.glass-mobile-nav .mobile-nav-items {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Glass nav item button */
+.glass-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #6b7280);
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  min-height: 56px;
+  gap: 4px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, color 0.25s ease;
+}
+
+/* Glass nav icon wrapper */
+.glass-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.25s ease;
+}
+
+.glass-nav-icon svg {
+  width: 22px;
+  height: 22px;
+  transition: stroke 0.25s ease, transform 0.2s ease;
+}
+
+/* Glass nav label */
+.glass-nav-label {
+  line-height: 1;
+  transition: color 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+  font-size: 10px;
+}
+
+/* Active state styles */
+.glass-nav-item.active {
+  color: var(--accent, #3b82f6);
+}
+
+.glass-nav-item.active .glass-nav-icon {
+  transform: translateY(-2px);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.glass-nav-item.active .glass-nav-icon svg {
+  stroke: var(--accent, #3b82f6);
+  stroke-width: 2.25;
+}
+
+.glass-nav-item.active .glass-nav-label {
+  color: var(--accent, #3b82f6);
+  font-weight: 600;
+  transform: translateY(-1px);
+}
+
+/* Active dot indicator */
+.glass-nav-active-dot {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  background: var(--accent, #3b82f6);
+  border-radius: 50%;
+  animation: glassDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes glassDotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+}
+
+/* Press/active state */
+.glass-nav-item:active {
+  transform: scale(0.95);
+}
+
+.glass-nav-item:active .glass-nav-icon {
+  transform: scale(0.92);
+}
+
+/* Hover state (for devices that support hover) */
+@media (hover: hover) {
+  .glass-nav-item:hover:not(.active) {
+    color: var(--text-primary, #374151);
+  }
+
+  .glass-nav-item:hover:not(.active) .glass-nav-icon {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .glass-nav-item:hover:not(.active) .glass-nav-icon {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+/* ============================================================================
+   Floating Action Button (FAB) for Mobile Nav
+   ============================================================================ */
+
+.mobile-nav-fab {
+  position: fixed;
+  bottom: calc(70px + var(--safe-area-inset-bottom));
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Glass morphism with gradient */
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.9) 0%,
+    rgba(99, 102, 241, 0.85) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Shadow and elevation */
+  box-shadow:
+    0 4px 16px rgba(59, 130, 246, 0.35),
+    0 8px 32px rgba(99, 102, 241, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s ease;
+}
+
+.mobile-nav-fab:active {
+  transform: scale(0.92);
+  box-shadow:
+    0 2px 8px rgba(59, 130, 246, 0.3),
+    0 4px 16px rgba(99, 102, 241, 0.15);
+}
+
+.mobile-nav-fab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-nav-fab-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+/* Glow effect behind FAB */
+.mobile-nav-fab-glow {
+  position: absolute;
+  inset: -4px;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.4) 0%,
+    transparent 70%
+  );
+  border-radius: 32px;
+  z-index: 0;
+  animation: fabGlow 3s ease-in-out infinite;
+}
+
+@keyframes fabGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+/* Hide FAB on larger screens */
+@media (min-width: 769px) {
+  .mobile-nav-fab {
+    display: none;
+  }
+}
+
+/* Dark mode FAB adjustments */
+@media (prefers-color-scheme: dark) {
+  .mobile-nav-fab {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.95) 0%,
+      rgba(99, 102, 241, 0.9) 100%
+    );
+    box-shadow:
+      0 4px 16px rgba(59, 130, 246, 0.45),
+      0 8px 32px rgba(99, 102, 241, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
 }
 
 /* Mobile-specific responsive rules */
@@ -5372,7 +5711,10 @@ textarea,
   left: 0;
   right: 0;
   max-height: 70vh;
-  background: var(--bg-card);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-top: 1px solid var(--glass-border);
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
   z-index: 900;
@@ -5380,6 +5722,7 @@ textarea,
   flex-direction: column;
   animation: slideUp 0.3s ease-out;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 @keyframes slideUp {
@@ -8998,4 +9341,152 @@ button:disabled,
 
 .structure-hovered {
   box-shadow: 0 0 15px rgba(34, 68, 255, 0.4);
+}
+
+/* ============================================================================
+   GLASS MORPHISM UTILITIES
+   ============================================================================ */
+
+/* Glass effect utility classes */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-heavy {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-border {
+  border: 1px solid var(--glass-border);
+}
+
+.glass-border-accent {
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* Glass hover effects */
+.glass-hover {
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease;
+}
+
+.glass-hover:hover {
+  background: rgba(26, 26, 46, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth transition utilities */
+.transition-fast {
+  transition: all 0.15s ease;
+}
+
+.transition-normal {
+  transition: all 0.2s ease;
+}
+
+.transition-smooth {
+  transition: all 0.3s ease;
+}
+
+.transition-colors {
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.transition-transform {
+  transition: transform 0.2s ease;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease;
+}
+
+.transition-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+/* ============================================
+   View Transition Styles
+   Smooth animations for view switching
+   ============================================ */
+
+/* View enter states - initial state before animation */
+.view-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+/* View enter active - animate to final state */
+.view-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 250ms cubic-bezier(0, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* View exit states - initial state before exit animation */
+.view-exit {
+  opacity: 1;
+}
+
+/* View exit active - animate out */
+.view-exit-active {
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Slide left variation (for forward navigation) */
+.view-enter-slide-left {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.view-enter-slide-left-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 250ms cubic-bezier(0, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Slide right variation (for back navigation) */
+.view-enter-slide-right {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.view-enter-slide-right-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 250ms cubic-bezier(0, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .view-enter,
+  .view-enter-active,
+  .view-exit,
+  .view-exit-active,
+  .view-enter-slide-left,
+  .view-enter-slide-left-active,
+  .view-enter-slide-right,
+  .view-enter-slide-right-active {
+    transition: none !important;
+    transform: none !important;
+  }
 }

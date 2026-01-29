@@ -7,6 +7,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { usePathologyContent, PathologyCondition, ConditionCategory } from './usePathologyContent';
+import { GlassPanel, GlassButton } from '../ui/GlassUI';
 
 // ============================================================================
 // Types & Interfaces
@@ -165,7 +166,7 @@ export function PathologyPanel({
   // Render loading state
   if (loading) {
     return (
-      <div className="pathology-panel">
+      <GlassPanel className="pathology-panel" elevated bordered>
         <PanelHeader
           regionName={regionName}
           complexityLevel={complexityLevel}
@@ -181,14 +182,14 @@ export function PathologyPanel({
           </div>
         </div>
         <PanelStyles />
-      </div>
+      </GlassPanel>
     );
   }
 
   // Render error state
   if (error) {
     return (
-      <div className="pathology-panel">
+      <GlassPanel className="pathology-panel" elevated bordered>
         <PanelHeader
           regionName={regionName}
           complexityLevel={complexityLevel}
@@ -201,16 +202,18 @@ export function PathologyPanel({
           <div className="error-state">
             <span className="error-icon">!</span>
             <p>{error}</p>
-            <button onClick={() => window.location.reload()}>Retry</button>
+            <GlassButton variant="default" size="sm" onClick={() => window.location.reload()}>
+              Retry
+            </GlassButton>
           </div>
         </div>
         <PanelStyles />
-      </div>
+      </GlassPanel>
     );
   }
 
   return (
-    <div className="pathology-panel">
+    <GlassPanel className="pathology-panel" elevated bordered>
       {/* Header */}
       <PanelHeader
         regionName={regionName}
@@ -224,30 +227,38 @@ export function PathologyPanel({
       <div className="panel-content">
         {/* Filter Bar */}
         <div className="filter-bar">
-          <button
+          <GlassButton
+            variant={activeFilter === 'all' ? 'primary' : 'ghost'}
+            size="sm"
             className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
             onClick={() => setActiveFilter('all')}
           >
             All ({conditions?.length || 0})
-          </button>
-          <button
+          </GlassButton>
+          <GlassButton
+            variant={activeFilter === 'common' ? 'primary' : 'ghost'}
+            size="sm"
             className={`filter-btn ${activeFilter === 'common' ? 'active' : ''}`}
             onClick={() => setActiveFilter('common')}
           >
             Common
-          </button>
-          <button
+          </GlassButton>
+          <GlassButton
+            variant={activeFilter === 'rare' ? 'primary' : 'ghost'}
+            size="sm"
             className={`filter-btn ${activeFilter === 'rare' ? 'active' : ''}`}
             onClick={() => setActiveFilter('rare')}
           >
             Rare
-          </button>
-          <button
+          </GlassButton>
+          <GlassButton
+            variant={activeFilter === 'emergency' ? 'danger' : 'ghost'}
+            size="sm"
             className={`filter-btn emergency ${activeFilter === 'emergency' ? 'active' : ''}`}
             onClick={() => setActiveFilter('emergency')}
           >
             Emergency
-          </button>
+          </GlassButton>
         </div>
 
         {/* Conditions by Category */}
@@ -289,7 +300,9 @@ export function PathologyPanel({
         {filteredConditions.length === 0 && (
           <div className="no-results">
             <p>No conditions found for the selected filter.</p>
-            <button onClick={() => setActiveFilter('all')}>Show All Conditions</button>
+            <GlassButton variant="default" size="sm" onClick={() => setActiveFilter('all')}>
+              Show All Conditions
+            </GlassButton>
           </div>
         )}
 
@@ -316,21 +329,21 @@ export function PathologyPanel({
         <div className="ask-ai-section">
           <h3>Ask AI about pathology</h3>
           <div className="ai-suggestions">
-            <button onClick={() => onAskAI(`What are the most common diseases affecting the ${regionName}?`)}>
+            <GlassButton variant="ghost" size="sm" onClick={() => onAskAI(`What are the most common diseases affecting the ${regionName}?`)}>
               Most common diseases?
-            </button>
-            <button onClick={() => onAskAI(`What are warning signs for ${regionName} problems?`)}>
+            </GlassButton>
+            <GlassButton variant="ghost" size="sm" onClick={() => onAskAI(`What are warning signs for ${regionName} problems?`)}>
               Warning signs?
-            </button>
-            <button onClick={() => onAskAI(`How are ${regionName} conditions diagnosed?`)}>
+            </GlassButton>
+            <GlassButton variant="ghost" size="sm" onClick={() => onAskAI(`How are ${regionName} conditions diagnosed?`)}>
               How are they diagnosed?
-            </button>
+            </GlassButton>
           </div>
         </div>
       </div>
 
       <PanelStyles />
-    </div>
+    </GlassPanel>
   );
 }
 
@@ -370,7 +383,9 @@ function PanelHeader({
       </div>
       <div className="header-right">
         <div className="complexity-selector">
-          <button
+          <GlassButton
+            variant="ghost"
+            size="sm"
             className="complexity-btn"
             onClick={onToggleComplexity}
           >
@@ -379,7 +394,7 @@ function PanelHeader({
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
               <path d="M7 10l5 5 5-5H7z"/>
             </svg>
-          </button>
+          </GlassButton>
           {showComplexitySelector && (
             <div className="complexity-dropdown">
               {Object.entries(COMPLEXITY_LEVELS).map(([level, info]) => (
@@ -396,11 +411,18 @@ function PanelHeader({
             </div>
           )}
         </div>
-        <button className="close-btn" onClick={onClose}>
+        <GlassButton
+          variant="ghost"
+          size="sm"
+          iconOnly
+          className="close-btn"
+          onClick={onClose}
+          aria-label="Close panel"
+        >
           <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
           </svg>
-        </button>
+        </GlassButton>
       </div>
     </div>
   );
@@ -644,35 +666,38 @@ function ConditionCard({
 
           {/* Action Buttons */}
           <div className="card-actions">
-            <button
+            <GlassButton
+              variant={isUserCondition ? 'primary' : 'default'}
+              size="sm"
               className={`mark-condition-btn ${isUserCondition ? 'marked' : ''}`}
               onClick={onMarkAsMyCondition}
-            >
-              {isUserCondition ? (
-                <>
+              leftIcon={
+                isUserCondition ? (
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
-                  Marked as My Condition
-                </>
-              ) : (
-                <>
+                ) : (
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                     <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                   </svg>
-                  I Have This Condition
-                </>
-              )}
-            </button>
-            <button
+                )
+              }
+            >
+              {isUserCondition ? 'Marked as My Condition' : 'I Have This Condition'}
+            </GlassButton>
+            <GlassButton
+              variant="primary"
+              size="sm"
               className="ask-ai-btn"
               onClick={() => onAskAI('Tell me more about this condition and what I should know.')}
+              leftIcon={
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                </svg>
+              }
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-              </svg>
               Ask AI
-            </button>
+            </GlassButton>
           </div>
         </div>
       )}
@@ -691,7 +716,9 @@ function PanelStyles() {
         display: flex;
         flex-direction: column;
         height: 100%;
-        background: #1a1a1a;
+        background: rgba(26, 26, 26, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         color: #e0e0e0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
@@ -702,8 +729,10 @@ function PanelStyles() {
         justify-content: space-between;
         align-items: center;
         padding: 16px 20px;
-        background: linear-gradient(135deg, #2d1f1f 0%, #1f1a1a 100%);
-        border-bottom: 1px solid #3d2d2d;
+        background: linear-gradient(135deg, rgba(45, 31, 31, 0.8) 0%, rgba(31, 26, 26, 0.8) 100%);
+        border-bottom: 1px solid rgba(61, 45, 45, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
 
       .header-left {
@@ -775,10 +804,12 @@ function PanelStyles() {
         right: 0;
         margin-top: 4px;
         min-width: 280px;
-        background: #252525;
-        border: 1px solid #3a3a3a;
+        background: rgba(37, 37, 37, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(58, 58, 58, 0.6);
         border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         z-index: 100;
         overflow: hidden;
       }
@@ -902,7 +933,9 @@ function PanelStyles() {
         align-items: center;
         gap: 8px;
         padding: 8px 12px;
-        background: #222;
+        background: rgba(34, 34, 34, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         border-left: 3px solid;
         border-radius: 0 6px 6px 0;
         margin-bottom: 12px;
@@ -931,25 +964,28 @@ function PanelStyles() {
       }
 
       .condition-card {
-        background: #222;
-        border: 1px solid #2a2a2a;
+        background: rgba(34, 34, 34, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(42, 42, 42, 0.8);
         border-radius: 8px;
         overflow: hidden;
         transition: all 0.2s;
       }
 
       .condition-card:hover {
-        border-color: #3a3a3a;
+        border-color: rgba(58, 58, 58, 0.9);
+        background: rgba(40, 40, 40, 0.7);
       }
 
       .condition-card.expanded {
-        border-color: #ef4444;
-        box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+        border-color: rgba(239, 68, 68, 0.6);
+        box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2), 0 4px 20px rgba(0, 0, 0, 0.3);
       }
 
       .condition-card.user-condition {
-        border-color: #22c55e;
-        background: rgba(34, 197, 94, 0.05);
+        border-color: rgba(34, 197, 94, 0.5);
+        background: rgba(34, 197, 94, 0.08);
       }
 
       .card-header {
@@ -1028,7 +1064,8 @@ function PanelStyles() {
       /* Card Content */
       .card-content {
         padding: 0 16px 16px;
-        border-top: 1px solid #2a2a2a;
+        border-top: 1px solid rgba(42, 42, 42, 0.6);
+        background: rgba(26, 26, 26, 0.4);
       }
 
       .content-tabs {
@@ -1041,8 +1078,10 @@ function PanelStyles() {
 
       .tab-btn {
         padding: 6px 12px;
-        background: #1a1a1a;
-        border: 1px solid #2a2a2a;
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(42, 42, 42, 0.6);
         border-radius: 6px;
         color: #888;
         cursor: pointer;
@@ -1052,13 +1091,13 @@ function PanelStyles() {
       }
 
       .tab-btn:hover {
-        background: #252525;
+        background: rgba(37, 37, 37, 0.8);
         color: #ccc;
       }
 
       .tab-btn.active {
-        background: rgba(239, 68, 68, 0.15);
-        border-color: rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.2);
+        border-color: rgba(239, 68, 68, 0.4);
         color: #ef4444;
       }
 
@@ -1217,17 +1256,20 @@ function PanelStyles() {
         display: flex;
         flex-direction: column;
         padding: 8px 12px;
-        background: #252525;
-        border: 1px solid #333;
+        background: rgba(37, 37, 37, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(51, 51, 51, 0.6);
         border-radius: 6px;
         cursor: pointer;
         text-align: left;
         color: inherit;
+        transition: all 0.2s;
       }
 
       .related-chip:hover {
-        background: #2d2d2d;
-        border-color: #444;
+        background: rgba(45, 45, 45, 0.8);
+        border-color: rgba(68, 68, 68, 0.8);
       }
 
       .related-relationship {

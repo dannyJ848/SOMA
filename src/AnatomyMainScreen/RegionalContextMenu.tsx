@@ -1,9 +1,13 @@
 /**
  * Regional Context Menu
  *
- * Radial-style menu that appears when a body region is selected.
- * Provides contextual actions for exploring layers, encyclopedia,
- * personal health data, and AI assistance.
+ * Hybrid context menu that combines a RadialContextMenu for quick actions
+ * with a sliding detail panel for in-depth exploration.
+ *
+ * - Right-click/long-press triggers the radial menu for quick actions
+ * - "View Details" action opens a sliding panel with full options
+ * - Glass morphism styling via GlassUI components
+ * - Smooth transitions and animations
  *
  * Supports layer-specific navigation with:
  * - Toggle visibility mode
@@ -12,9 +16,20 @@
  * - Conditions grouped by layer in My Health section
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { MenuSection } from './MenuSection';
 import { getRegionDisplayName } from '../utils/regionToSystemMapper';
+import {
+  RadialContextMenu,
+  useLongPress,
+  type RadialMenuAction,
+  type RadialMenuItem,
+} from '../components/navigation/RadialContextMenu';
+import {
+  GlassPanel,
+  GlassButton,
+  GlassBadge,
+} from '../components/ui/GlassUI';
 import type { BiologicalSelf, PatientCondition } from './types';
 import './regional-context-menu.css';
 
@@ -29,7 +44,11 @@ export type MenuAction =
   | { type: 'layers'; layerId: string; showOnly?: boolean }
   | { type: 'encyclopedia'; section: EncyclopediaSection; layer?: string }
   | { type: 'my-health'; layer?: string }
-  | { type: 'ask-ai'; context?: { layer?: string } };
+  | { type: 'ask-ai'; context?: { layer?: string } }
+  | { type: 'isolate-region' }
+  | { type: 'xray-view' }
+  | { type: 'add-favorite' }
+  | { type: 'share' };
 
 /** Layer mode for the Layers section */
 export type LayerMode = 'toggle' | 'focus';
@@ -58,6 +77,10 @@ export interface RegionalContextMenuProps {
   onClose: () => void;
   /** Callback when an action is selected */
   onAction: (action: MenuAction) => void;
+  /** Whether the region is favorited */
+  isFavorited?: boolean;
+  /** Initial mode: 'radial' shows quick menu, 'panel' shows detail panel */
+  initialMode?: 'radial' | 'panel';
 }
 
 // ============================================
@@ -281,6 +304,115 @@ function useRegion(regionId: string) {
 }
 
 // ============================================
+// Custom Radial Menu Items for Regional Context
+// ============================================
+
+function createRegionalMenuItems(hasPatientData: boolean): RadialMenuItem[] {
+  const baseItems: RadialMenuItem[] = [
+    {
+      id: 'view-details',
+      label: 'View Details',
+      shortLabel: 'Details',
+      description: 'Open detailed information panel',
+      color: '#3b82f6',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
+        </svg>
+      ),
+    },
+    {
+      id: 'show-layers',
+      label: 'Show Layers',
+      shortLabel: 'Layers',
+      description: 'Explore anatomical layers',
+      color: '#22c55e',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2" />
+          <polyline points="2 17 12 22 22 17" />
+          <polyline points="2 12 12 17 22 12" />
+        </svg>
+      ),
+    },
+    {
+      id: 'ask-ai',
+      label: 'Ask AI',
+      shortLabel: 'AI',
+      description: 'Get AI-powered insights',
+      color: '#ec4899',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.6 5.8-4 7.4V21a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2.6c-2.4-1.6-4-4.3-4-7.4a9 9 0 0 1 9-9z" />
+          <path d="M9 17v2" />
+          <path d="M15 17v2" />
+          <circle cx="9" cy="10" r="1" fill="currentColor" />
+          <circle cx="15" cy="10" r="1" fill="currentColor" />
+          <path d="M9 14h6" />
+        </svg>
+      ),
+    },
+    {
+      id: 'isolate-region',
+      label: 'Isolate Region',
+      shortLabel: 'Isolate',
+      description: 'Focus on this region only',
+      color: '#8b5cf6',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v4" />
+          <path d="M12 18v4" />
+          <path d="M4.93 4.93l2.83 2.83" />
+          <path d="M16.24 16.24l2.83 2.83" />
+          <path d="M2 12h4" />
+          <path d="M18 12h4" />
+          <path d="M4.93 19.07l2.83-2.83" />
+          <path d="M16.24 7.76l2.83-2.83" />
+        </svg>
+      ),
+    },
+    {
+      id: 'xray-view',
+      label: 'X-Ray View',
+      shortLabel: 'X-Ray',
+      description: 'Toggle X-ray visualization',
+      color: '#06b6d4',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="12" cy="10" r="3" />
+          <path d="M12 13v5" />
+          <path d="M9 18h6" />
+          <path d="M10 15l-2 3" />
+          <path d="M14 15l2 3" />
+        </svg>
+      ),
+    },
+  ];
+
+  // Add health-related item if patient has data
+  if (hasPatientData) {
+    baseItems.push({
+      id: 'add-favorite' as RadialMenuAction, // We'll repurpose this for "My Health"
+      label: 'My Health',
+      shortLabel: 'Health',
+      description: 'View your health data',
+      color: '#f59e0b',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      ),
+    });
+  }
+
+  return baseItems;
+}
+
+// ============================================
 // Sub-Components
 // ============================================
 
@@ -292,19 +424,23 @@ interface LayerBadgesProps {
 /** Displays layer badges with condition counts */
 function LayerBadges({ layers, onLayerClick }: LayerBadgesProps) {
   return (
-    <div className="layer-badges" role="group" aria-label="Layer condition counts">
+    <div className="layer-badges glass-layer-badges" role="group" aria-label="Layer condition counts">
       {layers.map((layer, index) => (
         <span key={layer.id}>
-          <button
-            className={`layer-badge ${layer.conditionCount > 0 ? 'has-conditions' : ''}`}
+          <GlassButton
+            size="sm"
+            variant={layer.conditionCount > 0 ? 'primary' : 'ghost'}
             onClick={() => onLayerClick(layer.id, 'focus')}
             aria-label={`${layer.label}: ${layer.conditionCount} conditions`}
+            className="layer-badge-button"
           >
             {layer.label}
             {layer.conditionCount > 0 && (
-              <span className="layer-badge-count">({layer.conditionCount})</span>
+              <GlassBadge size="sm" variant="info" className="layer-badge-count">
+                {layer.conditionCount}
+              </GlassBadge>
             )}
-          </button>
+          </GlassButton>
           {index < layers.length - 1 && (
             <span className="layer-badge-separator" aria-hidden="true">|</span>
           )}
@@ -321,12 +457,7 @@ interface LayersSectionProps {
 
 /** Enhanced Layers section with toggle and focus modes */
 function LayersSection({ layers, onLayerAction }: LayersSectionProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [mode, setMode] = useState<LayerMode>('toggle');
-
-  const handleModeToggle = useCallback(() => {
-    setMode(prev => prev === 'toggle' ? 'focus' : 'toggle');
-  }, []);
 
   const handleLayerSelect = useCallback((layerLabel: string) => {
     const layer = LAYER_OPTIONS.find(l => LAYER_LABELS[l] === layerLabel);
@@ -343,22 +474,24 @@ function LayersSection({ layers, onLayerAction }: LayersSectionProps) {
   });
 
   return (
-    <div className="layers-section-wrapper">
+    <div className="layers-section-wrapper glass-section">
       <div className="layers-mode-toggle">
-        <button
-          className={`mode-button ${mode === 'toggle' ? 'active' : ''}`}
+        <GlassButton
+          size="sm"
+          variant={mode === 'toggle' ? 'primary' : 'ghost'}
           onClick={() => setMode('toggle')}
           aria-pressed={mode === 'toggle'}
         >
           Toggle
-        </button>
-        <button
-          className={`mode-button ${mode === 'focus' ? 'active' : ''}`}
+        </GlassButton>
+        <GlassButton
+          size="sm"
+          variant={mode === 'focus' ? 'primary' : 'ghost'}
           onClick={() => setMode('focus')}
           aria-pressed={mode === 'focus'}
         >
           Focus
-        </button>
+        </GlassButton>
       </div>
       <MenuSection
         icon="layers"
@@ -412,7 +545,7 @@ function MyHealthSection({
   }, [onHealthClick]);
 
   return (
-    <div className="my-health-section">
+    <div className="my-health-section glass-section">
       <div
         className="my-health-header clickable"
         onClick={handleToggle}
@@ -439,9 +572,9 @@ function MyHealthSection({
               : 'View your health data'}
           </span>
         </div>
-        <span className="menu-section-badge" aria-label={`${patientDataCount} items`}>
+        <GlassBadge variant="info" size="md">
           {patientDataCount}
-        </span>
+        </GlassBadge>
         <div className={`menu-section-chevron ${isExpanded ? 'expanded' : ''}`} aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M6 9l6 6 6-6" />
@@ -461,7 +594,9 @@ function MyHealthSection({
                   aria-label={`${LAYER_LABELS[layer]}: ${conditions.length} conditions. Click to view details.`}
                 >
                   <span className="layer-name">{LAYER_LABELS[layer]}</span>
-                  <span className="condition-count">({conditions.length})</span>
+                  <GlassBadge size="sm" variant="default">
+                    {conditions.length}
+                  </GlassBadge>
                   <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M9 18l6-6-6-6" />
                   </svg>
@@ -471,9 +606,12 @@ function MyHealthSection({
                     <li key={condition.id} className="condition-item">
                       <span className={`condition-severity ${condition.severity}`} />
                       <span className="condition-name">{condition.name}</span>
-                      <span className={`condition-status ${condition.status}`}>
+                      <GlassBadge
+                        size="sm"
+                        variant={condition.status === 'active' ? 'warning' : 'success'}
+                      >
                         {condition.status}
-                      </span>
+                      </GlassBadge>
                     </li>
                   ))}
                   {conditions.length > 3 && (
@@ -492,15 +630,19 @@ function MyHealthSection({
             </div>
           )}
 
-          <button
-            className="view-all-health"
+          <GlassButton
+            variant="ghost"
+            size="md"
             onClick={handleViewAll}
+            className="view-all-health-button"
+            rightIcon={
+              <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            }
           >
             View All Health Data
-            <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+          </GlassButton>
         </div>
       )}
     </div>
@@ -508,71 +650,80 @@ function MyHealthSection({
 }
 
 // ============================================
-// Main Component
+// Detail Panel Component
 // ============================================
 
-export function RegionalContextMenu({
+interface DetailPanelProps {
+  isOpen: boolean;
+  regionId: string;
+  regionName: string;
+  patientData?: BiologicalSelf;
+  onClose: () => void;
+  onAction: (action: MenuAction) => void;
+  /** Position hint for slide direction */
+  slideFrom?: 'left' | 'right';
+}
+
+function DetailPanel({
+  isOpen,
   regionId,
+  regionName,
   patientData,
-  position,
   onClose,
   onAction,
-}: RegionalContextMenuProps) {
+  slideFrom = 'right',
+}: DetailPanelProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [adjustedPosition, setAdjustedPosition] = useState(position);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const region = useRegion(regionId);
   const hasPatientData = checkPatientDataForRegion(regionId, patientData);
   const patientDataCount = getPatientDataCount(regionId, patientData);
   const layersWithCounts = getLayersWithCounts(regionId, patientData);
 
-  // Animate in on mount
+  // Handle open/close animations
   useEffect(() => {
-    // Small delay for animation
-    const timer = setTimeout(() => setIsVisible(true), 10);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Adjust position to keep menu on screen
-  useEffect(() => {
-    if (!menuRef.current) return;
-
-    const menu = menuRef.current;
-    const rect = menu.getBoundingClientRect();
-    const padding = 16;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    let x = position.x;
-    let y = position.y;
-
-    // Adjust horizontal position
-    if (x + rect.width / 2 > viewportWidth - padding) {
-      x = viewportWidth - rect.width / 2 - padding;
-    } else if (x - rect.width / 2 < padding) {
-      x = rect.width / 2 + padding;
+    if (isOpen) {
+      setIsVisible(true);
+      // Small delay to trigger CSS transition
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
+    } else {
+      setIsAnimating(false);
+      // Wait for animation to complete before hiding
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 350); // Match CSS transition duration
+      return () => clearTimeout(timer);
     }
+  }, [isOpen]);
 
-    // Adjust vertical position
-    if (y + rect.height > viewportHeight - padding) {
-      y = viewportHeight - rect.height - padding;
-    } else if (y < padding) {
-      y = padding;
-    }
-
-    setAdjustedPosition({ x, y });
-  }, [position]);
-
-  // Handle click outside
+  // Handle escape key
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        handleClose();
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
       }
     };
 
-    // Delay adding listener to prevent immediate close
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Handle click outside
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
     const timer = setTimeout(() => {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
@@ -583,38 +734,17 @@ export function RegionalContextMenu({
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, []);
-
-  // Handle escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setIsVisible(false);
-    // Wait for animation before calling onClose
-    setTimeout(onClose, 200);
-  }, [onClose]);
+  }, [isOpen, onClose]);
 
   const handleLayerAction = useCallback((layerId: LayerId, mode: LayerMode) => {
     if (mode === 'focus') {
-      // Focus mode: show only this layer and open detail view
       onAction({ type: 'layers', layerId, showOnly: true });
     } else {
-      // Toggle mode: just toggle layer visibility
       onAction({ type: 'layers', layerId, showOnly: false });
     }
   }, [onAction]);
 
-  const handleLayerBadgeClick = useCallback((layerId: LayerId, mode: LayerMode) => {
-    // Clicking a layer badge with conditions opens detail view for that layer
+  const handleLayerBadgeClick = useCallback((layerId: LayerId) => {
     onAction({ type: 'layers', layerId, showOnly: true });
   }, [onAction]);
 
@@ -631,82 +761,261 @@ export function RegionalContextMenu({
     onAction({ type: 'ask-ai' });
   }, [onAction]);
 
-  const handleAskAIWithLayer = useCallback((layer: LayerId) => {
-    onAction({ type: 'ask-ai', context: { layer } });
-  }, [onAction]);
+  // Don't render if not visible
+  if (!isVisible) return null;
+
+  const panelClasses = [
+    'detail-panel',
+    `detail-panel--slide-${slideFrom}`,
+    isAnimating ? 'detail-panel--open' : '',
+  ].filter(Boolean).join(' ');
+
+  const overlayClasses = [
+    'detail-panel-overlay',
+    isAnimating ? 'detail-panel-overlay--open' : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <div
-      className={`regional-context-menu-overlay ${isVisible ? 'visible' : ''}`}
-      aria-hidden={!isVisible}
-    >
+    <div className={overlayClasses}>
+      {/* Backdrop with glass blur effect */}
       <div
-        ref={menuRef}
-        className={`regional-context-menu ${isVisible ? 'visible' : ''}`}
-        style={{
-          left: adjustedPosition.x,
-          top: adjustedPosition.y,
-        }}
-        role="menu"
-        aria-label={`Context menu for ${region.name}`}
+        className="detail-panel-backdrop"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      <GlassPanel
+        ref={panelRef}
+        className={panelClasses}
+        size="lg"
+        elevated
+        bordered
+        glow
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Details for ${regionName}`}
       >
-        {/* Header */}
-        <div className="menu-header">
-          <h3 className="menu-region-name">{region.name}</h3>
-          <button
-            className="menu-close-button"
-            onClick={handleClose}
-            aria-label="Close menu"
+        {/* Header with glass effect */}
+        <div className="detail-panel-header">
+          <div className="detail-panel-header-content">
+            <div className="detail-panel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </div>
+            <div className="detail-panel-title-wrapper">
+              <h3 className="detail-panel-title">{regionName}</h3>
+              <span className="detail-panel-subtitle">Region Details</span>
+            </div>
+          </div>
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            iconOnly
+            onClick={onClose}
+            aria-label="Close panel"
+            className="detail-panel-close-btn"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6L18 18" />
             </svg>
-          </button>
+          </GlassButton>
         </div>
 
-        {/* Layer Badges - Quick access to layer conditions */}
+        {/* Layer Badges with glass styling */}
         {hasPatientData && (
-          <LayerBadges
-            layers={layersWithCounts}
-            onLayerClick={handleLayerBadgeClick}
-          />
+          <div className="detail-panel-badges">
+            <LayerBadges
+              layers={layersWithCounts}
+              onLayerClick={handleLayerBadgeClick}
+            />
+          </div>
         )}
 
-        {/* Menu Sections */}
-        <div className="menu-sections">
-          {/* Layers section with toggle/focus modes */}
-          <LayersSection
-            layers={layersWithCounts}
-            onLayerAction={handleLayerAction}
-          />
-
-          {/* Encyclopedia section */}
-          <MenuSection
-            icon="book"
-            title="Encyclopedia"
-            items={ENCYCLOPEDIA_OPTIONS.map(s => ENCYCLOPEDIA_LABELS[s])}
-            onSelect={handleEncyclopediaSelect}
-          />
-
-          {/* My Health section - only if patient has data for this region */}
-          {hasPatientData && (
-            <MyHealthSection
-              regionId={regionId}
-              patientData={patientData}
-              patientDataCount={patientDataCount}
-              onHealthClick={handleMyHealthClick}
+        {/* Menu Sections with staggered animation */}
+        <div className="detail-panel-sections">
+          <div className="detail-panel-section" style={{ '--section-index': 0 } as React.CSSProperties}>
+            <LayersSection
+              layers={layersWithCounts}
+              onLayerAction={handleLayerAction}
             />
+          </div>
+
+          <div className="detail-panel-section" style={{ '--section-index': 1 } as React.CSSProperties}>
+            <MenuSection
+              icon="book"
+              title="Encyclopedia"
+              items={ENCYCLOPEDIA_OPTIONS.map(s => ENCYCLOPEDIA_LABELS[s])}
+              onSelect={handleEncyclopediaSelect}
+            />
+          </div>
+
+          {hasPatientData && (
+            <div className="detail-panel-section" style={{ '--section-index': 2 } as React.CSSProperties}>
+              <MyHealthSection
+                regionId={regionId}
+                patientData={patientData}
+                patientDataCount={patientDataCount}
+                onHealthClick={handleMyHealthClick}
+              />
+            </div>
           )}
 
-          {/* Ask AI */}
-          <MenuSection
-            icon="chat"
-            title="Ask AI"
-            subtitle={`About ${region.name}`}
-            onClick={handleAskAIClick}
-          />
+          <div className="detail-panel-section" style={{ '--section-index': hasPatientData ? 3 : 2 } as React.CSSProperties}>
+            <MenuSection
+              icon="chat"
+              title="Ask AI"
+              subtitle={`About ${regionName}`}
+              onClick={handleAskAIClick}
+            />
+          </div>
         </div>
-      </div>
+
+        {/* Bottom action bar */}
+        <div className="detail-panel-footer">
+          <GlassButton
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="detail-panel-back-btn"
+            leftIcon={
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            }
+          >
+            Back to Menu
+          </GlassButton>
+        </div>
+      </GlassPanel>
+    </div>
+  );
+}
+
+// ============================================
+// Main Component
+// ============================================
+
+export function RegionalContextMenu({
+  regionId,
+  patientData,
+  position,
+  onClose,
+  onAction,
+  isFavorited = false,
+  initialMode = 'radial',
+}: RegionalContextMenuProps) {
+  const [showRadialMenu, setShowRadialMenu] = useState(initialMode === 'radial');
+  const [showDetailPanel, setShowDetailPanel] = useState(initialMode === 'panel');
+  const [transitioningToPanel, setTransitioningToPanel] = useState(false);
+
+  const region = useRegion(regionId);
+  const hasPatientData = checkPatientDataForRegion(regionId, patientData);
+
+  // Determine slide direction based on position
+  // If click is on the right side of screen, slide from left, otherwise from right
+  const slideDirection = useMemo(() => {
+    if (typeof window === 'undefined') return 'right';
+    return position.x > window.innerWidth / 2 ? 'left' : 'right';
+  }, [position.x]);
+
+  // Create custom menu items based on patient data availability
+  const menuItems = useMemo(() => {
+    return createRegionalMenuItems(hasPatientData);
+  }, [hasPatientData]);
+
+  // Handle radial menu action selection
+  const handleRadialSelect = useCallback((action: RadialMenuAction) => {
+    switch (action) {
+      case 'view-details':
+      case 'show-layers':
+        // Smooth transition from radial to detail panel
+        setTransitioningToPanel(true);
+        setShowRadialMenu(false);
+        // Small delay for radial menu close animation
+        setTimeout(() => {
+          setShowDetailPanel(true);
+          setTransitioningToPanel(false);
+        }, 200);
+        break;
+      case 'ask-ai':
+        onAction({ type: 'ask-ai' });
+        onClose();
+        break;
+      case 'isolate-region':
+        onAction({ type: 'isolate-region' });
+        onClose();
+        break;
+      case 'xray-view':
+        onAction({ type: 'xray-view' });
+        onClose();
+        break;
+      case 'add-favorite':
+        // Repurposed for "My Health" when patient data exists
+        if (hasPatientData) {
+          onAction({ type: 'my-health' });
+        } else {
+          onAction({ type: 'add-favorite' });
+        }
+        onClose();
+        break;
+      case 'share':
+        onAction({ type: 'share' });
+        onClose();
+        break;
+      default:
+        onClose();
+    }
+  }, [hasPatientData, onAction, onClose]);
+
+  // Handle radial menu close
+  const handleRadialClose = useCallback(() => {
+    if (!showDetailPanel && !transitioningToPanel) {
+      onClose();
+    }
+    setShowRadialMenu(false);
+  }, [showDetailPanel, transitioningToPanel, onClose]);
+
+  // Handle detail panel close
+  const handleDetailPanelClose = useCallback(() => {
+    setShowDetailPanel(false);
+    onClose();
+  }, [onClose]);
+
+  // Handle action from detail panel
+  const handleDetailAction = useCallback((action: MenuAction) => {
+    onAction(action);
+    setShowDetailPanel(false);
+    onClose();
+  }, [onAction, onClose]);
+
+  return (
+    <div className="regional-context-menu-wrapper">
+      {/* Radial Context Menu for Quick Actions */}
+      <RadialContextMenu
+        isOpen={showRadialMenu}
+        position={position}
+        regionId={regionId}
+        regionName={region.name}
+        onSelect={handleRadialSelect}
+        onClose={handleRadialClose}
+        customItems={menuItems}
+        isFavorited={isFavorited}
+        radius={100}
+      />
+
+      {/* Sliding Detail Panel with Glass Morphism */}
+      <DetailPanel
+        isOpen={showDetailPanel}
+        regionId={regionId}
+        regionName={region.name}
+        patientData={patientData}
+        onClose={handleDetailPanelClose}
+        onAction={handleDetailAction}
+        slideFrom={slideDirection}
+      />
     </div>
   );
 }
@@ -722,5 +1031,6 @@ export {
   getLayersWithCounts,
   getConditionLayers,
   useRegion,
+  useLongPress,
 };
 export default RegionalContextMenu;

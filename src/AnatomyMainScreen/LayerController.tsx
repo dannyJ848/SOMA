@@ -4,10 +4,22 @@
  * Side panel for controlling visible anatomical layers.
  * Provides toggle switches for each layer type, opacity sliders,
  * and preset configurations for common viewing modes.
+ *
+ * Integrated with SmartPanelManager for dockable, collapsible,
+ * and draggable panel functionality with glass morphism styling.
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import './regional-context-menu.css';
+import {
+  PanelManagerProvider,
+  usePanelManager,
+  SmartPanelManager,
+  type PanelConfig,
+  type PanelContentProps,
+  type DockPosition,
+} from '../components/panels/SmartPanelManager';
+import { GlassPanel } from '../components/ui/GlassUI';
 
 // ============================================
 // Types
@@ -166,10 +178,10 @@ const LAYER_PRESETS: LayerPreset[] = [
 ];
 
 // ============================================
-// Component
+// Core Layer Controller Component (Internal)
 // ============================================
 
-export function LayerController({
+function LayerControllerContent({
   activeLayers,
   onLayersChange,
   onOpacityChange,
@@ -388,6 +400,275 @@ export function LayerController({
       )}
     </div>
   );
+}
+
+// ============================================
+// SmartPanel-Compatible Layer Controller
+// ============================================
+
+/** Extended props for the smart panel wrapper */
+export interface SmartLayerControllerProps extends LayerControllerProps {
+  /** Default dock position (defaults to 'right') */
+  defaultDockPosition?: DockPosition;
+  /** Whether the panel starts open */
+  defaultOpen?: boolean;
+  /** Panel ID for the SmartPanelManager */
+  panelId?: string;
+}
+
+/** Layer icon for panel header */
+const LayerIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+    <polyline points="2 17 12 22 22 17" />
+    <polyline points="2 12 12 17 22 12" />
+  </svg>
+);
+
+/**
+ * Panel content component that receives SmartPanelManager props
+ * and renders the layer controller with glass morphism styling
+ */
+function LayerControllerPanelContent({
+  panelId,
+  isMinimized,
+  onClose,
+  onMinimize,
+  onMaximize,
+  // Layer controller props passed via closure
+  layerControllerProps,
+}: PanelContentProps & { layerControllerProps: LayerControllerProps }) {
+  if (isMinimized) {
+    return null;
+  }
+
+  return (
+    <GlassPanel
+      size="sm"
+      elevated
+      context="dark"
+      className="layer-controller-smart-panel"
+      style={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <LayerControllerContent
+        {...layerControllerProps}
+        className={`smart-panel-layer-controller ${layerControllerProps.className || ''}`}
+      />
+    </GlassPanel>
+  );
+}
+
+/**
+ * Creates a panel configuration for the LayerController
+ */
+function createLayerControllerPanelConfig(
+  panelId: string,
+  defaultPosition: DockPosition,
+  layerControllerProps: LayerControllerProps
+): PanelConfig {
+  // Create a component that includes the layer controller props in closure
+  const PanelComponent = (props: PanelContentProps) => (
+    <LayerControllerPanelContent
+      {...props}
+      layerControllerProps={layerControllerProps}
+    />
+  );
+
+  return {
+    id: panelId,
+    title: 'Layers',
+    component: PanelComponent,
+    defaultPosition,
+    minSize: { width: 280, height: 300 },
+    defaultSize: { width: 320, height: 480 },
+    maxSize: { width: 400, height: 800 },
+    resizable: true,
+    priority: 10,
+    icon: '🗂',
+  };
+}
+
+/**
+ * Hook to manage the layer controller panel
+ */
+export function useLayerControllerPanel(panelId: string = 'layer-controller') {
+  const panelManager = usePanelManager();
+
+  return useMemo(
+    () => ({
+      isOpen: panelManager.getPanelState(panelId)?.isOpen ?? false,
+      isMinimized: panelManager.getPanelState(panelId)?.isMinimized ?? false,
+      open: () => panelManager.openPanel(panelId),
+      close: () => panelManager.closePanel(panelId),
+      toggle: () => panelManager.togglePanel(panelId),
+      minimize: () => panelManager.minimizePanel(panelId),
+      maximize: () => panelManager.maximizePanel(panelId),
+      moveTo: (position: DockPosition) => panelManager.movePanel(panelId, position),
+    }),
+    [panelManager, panelId]
+  );
+}
+
+/**
+ * Smart Layer Controller Component
+ *
+ * Wraps the LayerController with SmartPanelManager integration,
+ * providing dockable, collapsible, and draggable functionality
+ * with glass morphism styling from GlassUI.
+ *
+ * This component should be used within a PanelManagerProvider context.
+ * For standalone usage, use LayerControllerWithProvider instead.
+ */
+export function LayerController({
+  activeLayers,
+  onLayersChange,
+  onOpacityChange,
+  initialOpacities = {},
+  compact = false,
+  className = '',
+  defaultDockPosition = 'right',
+  defaultOpen = true,
+  panelId = 'layer-controller',
+}: SmartLayerControllerProps) {
+  const panelManager = usePanelManager();
+
+  // Create the panel config with current props
+  const panelConfig = useMemo(
+    () =>
+      createLayerControllerPanelConfig(panelId, defaultDockPosition, {
+        activeLayers,
+        onLayersChange,
+        onOpacityChange,
+        initialOpacities,
+        compact,
+        className,
+      }),
+    [
+      panelId,
+      defaultDockPosition,
+      activeLayers,
+      onLayersChange,
+      onOpacityChange,
+      initialOpacities,
+      compact,
+      className,
+    ]
+  );
+
+  // Register the panel on mount
+  useEffect(() => {
+    panelManager.registerPanel(panelConfig);
+
+    // Open the panel by default if specified
+    if (defaultOpen) {
+      panelManager.openPanel(panelId);
+    }
+
+    return () => {
+      panelManager.unregisterPanel(panelId);
+    };
+  }, [panelManager, panelConfig, panelId, defaultOpen]);
+
+  // The actual rendering is handled by SmartPanelManager
+  return null;
+}
+
+/**
+ * Standalone Layer Controller with built-in PanelManagerProvider
+ *
+ * Use this component when you don't have an existing PanelManagerProvider
+ * in your component tree. It creates its own provider and renders the
+ * SmartPanelManager along with the layer controller panel.
+ */
+export function LayerControllerWithProvider({
+  activeLayers,
+  onLayersChange,
+  onOpacityChange,
+  initialOpacities = {},
+  compact = false,
+  className = '',
+  defaultDockPosition = 'right',
+  defaultOpen = true,
+  panelId = 'layer-controller',
+}: SmartLayerControllerProps) {
+  const panelConfig = useMemo(
+    () =>
+      createLayerControllerPanelConfig(panelId, defaultDockPosition, {
+        activeLayers,
+        onLayersChange,
+        onOpacityChange,
+        initialOpacities,
+        compact,
+        className,
+      }),
+    [
+      panelId,
+      defaultDockPosition,
+      activeLayers,
+      onLayersChange,
+      onOpacityChange,
+      initialOpacities,
+      compact,
+      className,
+    ]
+  );
+
+  return (
+    <PanelManagerProvider
+      initialPanels={[panelConfig]}
+      storageKey="layer-controller-panel-state"
+    >
+      <LayerControllerInner
+        panelId={panelId}
+        defaultOpen={defaultOpen}
+      />
+      <SmartPanelManager className="layer-controller-panel-manager" />
+    </PanelManagerProvider>
+  );
+}
+
+/**
+ * Internal component to handle panel registration within provider
+ */
+function LayerControllerInner({
+  panelId,
+  defaultOpen,
+}: {
+  panelId: string;
+  defaultOpen: boolean;
+}) {
+  const panelManager = usePanelManager();
+
+  useEffect(() => {
+    if (defaultOpen) {
+      panelManager.openPanel(panelId);
+    }
+  }, [panelManager, panelId, defaultOpen]);
+
+  return null;
+}
+
+/**
+ * Legacy Layer Controller for backward compatibility
+ *
+ * This is the original LayerController component without SmartPanelManager
+ * integration. Use this if you need the simple, non-dockable version.
+ */
+export function LegacyLayerController(props: LayerControllerProps) {
+  return <LayerControllerContent {...props} />;
 }
 
 // ============================================

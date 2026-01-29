@@ -8,12 +8,34 @@
 
 import React, { useState, useCallback, useRef, Suspense, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 import { PersonalizedBodyModel } from './PersonalizedBodyModel';
 import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from '../hooks/useUserDemographics';
 import { calculateBodyProportions, type BodyProportions } from '../utils/bodyProportionCalculator';
 import { ANATOMICAL_LAYERS, type LayerDefinition } from '../LayerPanel';
 import type { BiologicalSelf } from './types';
+
+// New navigation components
+import {
+  EnhancedCameraControls,
+  type EnhancedCameraControlsRef,
+} from '../components/3d/EnhancedCameraControls';
+import {
+  RadialContextMenu,
+  FloatingToolbar,
+  SpatialBreadcrumbs,
+  useLongPress,
+  type RadialMenuAction,
+  type ToolbarItem,
+  type BreadcrumbItem,
+} from '../components/navigation';
+
+// SmartPanelManager integration for dockable, collapsible panels
+import {
+  PanelManagerProvider,
+  SmartPanelManager,
+} from '../components/panels/SmartPanelManager';
+import { LayerController } from './LayerController';
 
 interface AnatomyMainScreenProps {
   patientData?: BiologicalSelf;
@@ -31,118 +53,8 @@ interface RegionContextMenuProps {
   onAskAI?: () => void;
 }
 
-interface LayerControllerProps {
-  activeLayers: string[];
-  onLayersChange: (layers: string[]) => void;
-}
-
 interface HealthOverlayProps {
   patientData: BiologicalSelf;
-}
-
-// ============================================
-// Layer Controller Component
-// ============================================
-
-function LayerController({ activeLayers, onLayersChange }: LayerControllerProps) {
-  const handleToggleLayer = useCallback((layerId: string) => {
-    if (activeLayers.includes(layerId)) {
-      onLayersChange(activeLayers.filter(id => id !== layerId));
-    } else {
-      onLayersChange([...activeLayers, layerId]);
-    }
-  }, [activeLayers, onLayersChange]);
-
-  const handleShowAll = useCallback(() => {
-    onLayersChange(ANATOMICAL_LAYERS.map(l => l.id));
-  }, [onLayersChange]);
-
-  const handleHideAll = useCallback(() => {
-    onLayersChange([]);
-  }, [onLayersChange]);
-
-  // Quick presets
-  const presets = [
-    { id: 'skin-muscle-bone', name: 'External', layers: ['integumentary', 'muscular', 'skeletal'] },
-    { id: 'organs', name: 'Organs', layers: ['organs', 'cardiovascular', 'respiratory'] },
-    { id: 'nervous', name: 'Nervous', layers: ['nervous'] },
-    { id: 'all', name: 'All', layers: ANATOMICAL_LAYERS.map(l => l.id) },
-  ];
-
-  return (
-    <div className="layer-controller">
-      <div className="layer-controller-header">
-        <h3>Layers</h3>
-        <div className="layer-quick-actions">
-          <button
-            className="layer-quick-btn"
-            onClick={handleShowAll}
-            title="Show all layers"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-          </button>
-          <button
-            className="layer-quick-btn"
-            onClick={handleHideAll}
-            title="Hide all layers"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
-              <line x1="1" y1="1" x2="23" y2="23"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div className="layer-presets">
-        {presets.map(preset => (
-          <button
-            key={preset.id}
-            className={`layer-preset-btn ${
-              preset.layers.every(l => activeLayers.includes(l)) &&
-              preset.layers.length === activeLayers.length
-                ? 'active'
-                : ''
-            }`}
-            onClick={() => onLayersChange(preset.layers)}
-          >
-            {preset.name}
-          </button>
-        ))}
-      </div>
-
-      <div className="layer-list">
-        {ANATOMICAL_LAYERS.map((layer: LayerDefinition) => (
-          <button
-            key={layer.id}
-            className={`layer-toggle-btn ${activeLayers.includes(layer.id) ? 'active' : ''}`}
-            onClick={() => handleToggleLayer(layer.id)}
-          >
-            <span
-              className="layer-color-indicator"
-              style={{ backgroundColor: layer.color }}
-            />
-            <span className="layer-name">{layer.name}</span>
-            <span className="layer-visibility-icon">
-              {activeLayers.includes(layer.id) ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-              ) : (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="1" y1="1" x2="23" y2="23"/>
-                </svg>
-              )}
-            </span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 // ============================================
@@ -370,6 +282,197 @@ function CanvasLoading() {
 // Main Component
 // ============================================
 
+// ============================================
+// Anatomical Hierarchy Data
+// ============================================
+
+const ANATOMICAL_HIERARCHY: Record<string, BreadcrumbItem[]> = {
+  body: [],
+  head: [
+    { id: 'head', label: 'Head', latinName: 'Caput', systemColor: '#64B5F6' },
+  ],
+  neck: [
+    { id: 'neck', label: 'Neck', latinName: 'Collum', systemColor: '#64B5F6' },
+  ],
+  chest: [
+    { id: 'chest', label: 'Chest', latinName: 'Thorax', systemColor: '#E57373' },
+  ],
+  heart: [
+    { id: 'chest', label: 'Chest', latinName: 'Thorax', systemColor: '#E57373' },
+    { id: 'heart', label: 'Heart', latinName: 'Cor', systemColor: '#E57373' },
+  ],
+  abdomen: [
+    { id: 'abdomen', label: 'Abdomen', latinName: 'Abdomen', systemColor: '#81C784' },
+  ],
+  stomach: [
+    { id: 'abdomen', label: 'Abdomen', latinName: 'Abdomen', systemColor: '#81C784' },
+    { id: 'stomach', label: 'Stomach', latinName: 'Gaster', systemColor: '#81C784' },
+  ],
+  liver: [
+    { id: 'abdomen', label: 'Abdomen', latinName: 'Abdomen', systemColor: '#81C784' },
+    { id: 'liver', label: 'Liver', latinName: 'Hepar', systemColor: '#81C784' },
+  ],
+  leftArm: [
+    { id: 'leftArm', label: 'Left Arm', latinName: 'Brachium Sinistrum', systemColor: '#FFB74D' },
+  ],
+  rightArm: [
+    { id: 'rightArm', label: 'Right Arm', latinName: 'Brachium Dextrum', systemColor: '#FFB74D' },
+  ],
+  leftLeg: [
+    { id: 'leftLeg', label: 'Left Leg', latinName: 'Crus Sinistrum', systemColor: '#BA68C8' },
+  ],
+  rightLeg: [
+    { id: 'rightLeg', label: 'Right Leg', latinName: 'Crus Dextrum', systemColor: '#BA68C8' },
+  ],
+};
+
+// ============================================
+// Toolbar Items Configuration
+// ============================================
+
+function createToolbarItems(
+  activeLayers: string[],
+  showHealthOverlay: boolean,
+  currentView: string | null
+): ToolbarItem[] {
+  return [
+    // View section
+    {
+      id: 'view-front',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M12 12v8M8 20h8" />
+        </svg>
+      ),
+      label: 'Front View',
+      tooltip: 'Switch to front view',
+      section: 'views',
+      active: currentView === 'front',
+    },
+    {
+      id: 'view-back',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M12 12v8M8 20h8" />
+          <line x1="8" y1="8" x2="16" y2="8" strokeDasharray="2 2" />
+        </svg>
+      ),
+      label: 'Back View',
+      tooltip: 'Switch to back view',
+      section: 'views',
+      active: currentView === 'back',
+    },
+    {
+      id: 'view-left',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M15 4l-7 8 7 8" />
+        </svg>
+      ),
+      label: 'Left View',
+      tooltip: 'Switch to left view',
+      section: 'views',
+      active: currentView === 'left',
+    },
+    {
+      id: 'view-right',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 4l7 8-7 8" />
+        </svg>
+      ),
+      label: 'Right View',
+      tooltip: 'Switch to right view',
+      section: 'views',
+      active: currentView === 'right',
+    },
+    // Layers section
+    {
+      id: 'layer-skin',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+        </svg>
+      ),
+      label: 'Skin',
+      tooltip: 'Toggle skin layer',
+      section: 'layers',
+      active: activeLayers.includes('integumentary'),
+    },
+    {
+      id: 'layer-muscle',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M6 4c0 0 4 2 6 2s6-2 6-2v4c0 0-4 2-6 2s-6-2-6-2V4z" />
+          <path d="M6 12c0 0 4 2 6 2s6-2 6-2v4c0 0-4 2-6 2s-6-2-6-2v-4z" />
+        </svg>
+      ),
+      label: 'Muscles',
+      tooltip: 'Toggle muscle layer',
+      section: 'layers',
+      active: activeLayers.includes('muscular'),
+    },
+    {
+      id: 'layer-skeleton',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="6" r="3" />
+          <path d="M12 9v6M9 21l3-6 3 6M9 15h6" />
+        </svg>
+      ),
+      label: 'Skeleton',
+      tooltip: 'Toggle skeletal layer',
+      section: 'layers',
+      active: activeLayers.includes('skeletal'),
+    },
+    {
+      id: 'layer-organs',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      ),
+      label: 'Organs',
+      tooltip: 'Toggle organs layer',
+      section: 'layers',
+      active: activeLayers.includes('organs'),
+    },
+    // Tools section
+    {
+      id: 'toggle-health',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      ),
+      label: 'Health Data',
+      tooltip: showHealthOverlay ? 'Hide health overlay' : 'Show health overlay',
+      section: 'tools',
+      active: showHealthOverlay,
+    },
+    {
+      id: 'reset-view',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
+      ),
+      label: 'Reset View',
+      tooltip: 'Reset camera to default position',
+      section: 'tools',
+    },
+  ];
+}
+
+const TOOLBAR_SECTIONS = [
+  { id: 'views', label: 'Views' },
+  { id: 'layers', label: 'Layers' },
+  { id: 'tools', label: 'Tools' },
+];
+
 export function AnatomyMainScreen({
   patientData,
   onRegionSelect,
@@ -381,8 +484,16 @@ export function AnatomyMainScreen({
   const [activeLayers, setActiveLayers] = useState<string[]>(['integumentary', 'muscular', 'skeletal']);
   const [showHealthOverlay, setShowHealthOverlay] = useState(true);
 
+  // New navigation state
+  const [radialMenuOpen, setRadialMenuOpen] = useState(false);
+  const [radialMenuPosition, setRadialMenuPosition] = useState({ x: 0, y: 0 });
+  const [contextMenuRegion, setContextMenuRegion] = useState<{ id: string; name: string } | null>(null);
+  const [currentCameraPreset, setCurrentCameraPreset] = useState<string | null>('front');
+  const [anatomicalPath, setAnatomicalPath] = useState<BreadcrumbItem[]>([]);
+
   // Refs
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const cameraControlsRef = useRef<EnhancedCameraControlsRef>(null);
 
   // Get user demographics for body model customization
   const { demographics } = useUserDemographics();
@@ -393,11 +504,31 @@ export function AnatomyMainScreen({
     return calculateBodyProportions(demoData);
   }, [demographics]);
 
+  // Memoized toolbar items
+  const toolbarItems = useMemo(
+    () => createToolbarItems(activeLayers, showHealthOverlay, currentCameraPreset),
+    [activeLayers, showHealthOverlay, currentCameraPreset]
+  );
+
   // Handlers
   const handleRegionSelect = useCallback((regionId: string, regionName: string) => {
     setSelectedRegion(regionId);
     setSelectedRegionName(regionName);
     onRegionSelect?.(regionId, regionName);
+
+    // Update anatomical path for breadcrumbs
+    const hierarchy = ANATOMICAL_HIERARCHY[regionId] || [];
+    setAnatomicalPath(hierarchy);
+
+    // Focus camera on the selected region
+    if (cameraControlsRef.current) {
+      const position = getRegionPosition(regionId);
+      cameraControlsRef.current.focusOnPoint(
+        new THREE.Vector3(...position),
+        2,
+        true
+      );
+    }
   }, [onRegionSelect]);
 
   const handleCloseContextMenu = useCallback(() => {
@@ -415,83 +546,310 @@ export function AnatomyMainScreen({
     setShowHealthOverlay(prev => !prev);
   }, []);
 
+  // Radial context menu handlers
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (selectedRegion) {
+      setRadialMenuPosition({ x: e.clientX, y: e.clientY });
+      setContextMenuRegion({ id: selectedRegion, name: selectedRegionName });
+      setRadialMenuOpen(true);
+    }
+  }, [selectedRegion, selectedRegionName]);
+
+  const handleRadialMenuSelect = useCallback((action: RadialMenuAction) => {
+    if (!contextMenuRegion) return;
+
+    switch (action) {
+      case 'view-details':
+        onNavigateToDetail?.(contextMenuRegion.id);
+        break;
+      case 'isolate-region':
+        // Isolate to just the selected region layers
+        setActiveLayers(['organs']);
+        if (cameraControlsRef.current) {
+          const position = getRegionPosition(contextMenuRegion.id);
+          cameraControlsRef.current.focusOnPoint(
+            new THREE.Vector3(...position),
+            1.5,
+            true
+          );
+        }
+        break;
+      case 'xray-view':
+        // Toggle to x-ray style view (skeletal only)
+        setActiveLayers(['skeletal']);
+        break;
+      case 'show-layers':
+        // Show all layers
+        setActiveLayers(ANATOMICAL_LAYERS.map(l => l.id));
+        break;
+      case 'ask-ai':
+        console.log('Ask AI about', contextMenuRegion.name);
+        break;
+      case 'add-favorite':
+        console.log('Add to favorites:', contextMenuRegion.id);
+        break;
+      case 'share':
+        console.log('Share:', contextMenuRegion.id);
+        break;
+    }
+    setRadialMenuOpen(false);
+  }, [contextMenuRegion, onNavigateToDetail]);
+
+  const handleRadialMenuClose = useCallback(() => {
+    setRadialMenuOpen(false);
+    setContextMenuRegion(null);
+  }, []);
+
+  // Long press handler for touch devices
+  const longPressHandlers = useLongPress({
+    delay: 500,
+    onLongPress: (e) => {
+      if (selectedRegion) {
+        const clientX = 'touches' in e ? (e as React.TouchEvent).touches[0].clientX : (e as React.MouseEvent).clientX;
+        const clientY = 'touches' in e ? (e as React.TouchEvent).touches[0].clientY : (e as React.MouseEvent).clientY;
+        setRadialMenuPosition({ x: clientX, y: clientY });
+        setContextMenuRegion({ id: selectedRegion, name: selectedRegionName });
+        setRadialMenuOpen(true);
+      }
+    },
+  });
+
+  // Toolbar action handler
+  const handleToolbarAction = useCallback((actionId: string) => {
+    switch (actionId) {
+      // View presets
+      case 'view-front':
+        cameraControlsRef.current?.setViewPreset('front', true);
+        setCurrentCameraPreset('front');
+        break;
+      case 'view-back':
+        cameraControlsRef.current?.setViewPreset('back', true);
+        setCurrentCameraPreset('back');
+        break;
+      case 'view-left':
+        cameraControlsRef.current?.setViewPreset('left', true);
+        setCurrentCameraPreset('left');
+        break;
+      case 'view-right':
+        cameraControlsRef.current?.setViewPreset('right', true);
+        setCurrentCameraPreset('right');
+        break;
+      // Layer toggles
+      case 'layer-skin':
+        setActiveLayers(prev =>
+          prev.includes('integumentary')
+            ? prev.filter(l => l !== 'integumentary')
+            : [...prev, 'integumentary']
+        );
+        break;
+      case 'layer-muscle':
+        setActiveLayers(prev =>
+          prev.includes('muscular')
+            ? prev.filter(l => l !== 'muscular')
+            : [...prev, 'muscular']
+        );
+        break;
+      case 'layer-skeleton':
+        setActiveLayers(prev =>
+          prev.includes('skeletal')
+            ? prev.filter(l => l !== 'skeletal')
+            : [...prev, 'skeletal']
+        );
+        break;
+      case 'layer-organs':
+        setActiveLayers(prev =>
+          prev.includes('organs')
+            ? prev.filter(l => l !== 'organs')
+            : [...prev, 'organs']
+        );
+        break;
+      // Tools
+      case 'toggle-health':
+        setShowHealthOverlay(prev => !prev);
+        break;
+      case 'reset-view':
+        cameraControlsRef.current?.reset(true);
+        setCurrentCameraPreset('front');
+        setAnatomicalPath([]);
+        setSelectedRegion(null);
+        setSelectedRegionName('');
+        break;
+    }
+  }, []);
+
+  // Breadcrumb navigation handler
+  const handleBreadcrumbNavigate = useCallback((level: number) => {
+    if (level === 0) {
+      // Navigate to body root
+      setAnatomicalPath([]);
+      setSelectedRegion(null);
+      setSelectedRegionName('');
+      cameraControlsRef.current?.reset(true);
+    } else if (anatomicalPath[level - 1]) {
+      // Navigate to specific level
+      const targetItem = anatomicalPath[level - 1];
+      setAnatomicalPath(anatomicalPath.slice(0, level));
+      setSelectedRegion(targetItem.id);
+      setSelectedRegionName(targetItem.label);
+
+      // Focus camera on the target region
+      const position = getRegionPosition(targetItem.id);
+      cameraControlsRef.current?.focusOnPoint(
+        new THREE.Vector3(...position),
+        2.5,
+        true
+      );
+    }
+  }, [anatomicalPath]);
+
+  // Camera change handler
+  const handleCameraChange = useCallback(() => {
+    // Could track camera state changes here if needed
+  }, []);
+
+  const handlePresetChange = useCallback((presetName: string) => {
+    setCurrentCameraPreset(presetName);
+  }, []);
+
   return (
-    <div className="anatomy-main-screen">
-      {/* 3D Canvas - takes up most of the screen */}
-      <div ref={canvasContainerRef} className="anatomy-canvas-container">
-        <Suspense fallback={<CanvasLoading />}>
-          <Canvas
-            camera={{ position: [0, 0, 2], fov: 50 }}
-            gl={{ antialias: true, alpha: true }}
-          >
-            {/* Lighting */}
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 5]} intensity={0.8} />
-            <directionalLight position={[-5, 5, -5]} intensity={0.3} />
-
-            {/* 3D Body Model */}
-            <PersonalizedBodyModel
-              bodyProportions={bodyProportions}
-              activeLayers={activeLayers}
-              onRegionSelect={handleRegionSelect}
-              selectedRegion={selectedRegion}
-            />
-
-            {/* Health Overlay */}
-            {showHealthOverlay && patientData && (
-              <HealthOverlay patientData={patientData} />
-            )}
-
-            {/* Camera Controls */}
-            <OrbitControls
-              enablePan={true}
-              enableZoom={true}
-              enableRotate={true}
-              minDistance={1}
-              maxDistance={5}
-              maxPolarAngle={Math.PI}
-            />
-          </Canvas>
-        </Suspense>
-
-        {/* Health overlay toggle */}
-        <button
-          className={`health-overlay-toggle ${showHealthOverlay ? 'active' : ''}`}
-          onClick={handleToggleHealthOverlay}
-          title={showHealthOverlay ? 'Hide health overlay' : 'Show health overlay'}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-        </button>
-      </div>
-
-      {/* Layer controls - side panel */}
-      <LayerController
-        activeLayers={activeLayers}
-        onLayersChange={setActiveLayers}
-      />
-
-      {/* Regional context menu - shows when region selected */}
-      {selectedRegion && (
-        <RegionalContextMenu
-          regionId={selectedRegion}
-          patientData={patientData}
-          onClose={handleCloseContextMenu}
-          onViewDetails={handleViewDetails}
-          onViewSymptoms={() => console.log('View symptoms for', selectedRegion)}
-          onViewMedications={() => console.log('View medications for', selectedRegion)}
-          onAskAI={() => console.log('Ask AI about', selectedRegionName)}
+    <PanelManagerProvider storageKey="anatomy-main-screen-panels">
+      <div className="anatomy-main-screen">
+        {/* Spatial Breadcrumbs - shows anatomical hierarchy */}
+        <SpatialBreadcrumbs
+          path={anatomicalPath}
+          onNavigate={handleBreadcrumbNavigate}
+          position="top-left"
+          showPreviews={true}
+          glassEffect={true}
+          homeLabel="Body"
         />
-      )}
 
-      {/* Help hint when nothing selected */}
-      {!selectedRegion && (
-        <div className="anatomy-help-hint">
-          <span>Tap any body region to explore</span>
+        {/* 3D Canvas - takes up most of the screen */}
+        <div
+          ref={canvasContainerRef}
+          className="anatomy-canvas-container"
+          onContextMenu={handleContextMenu}
+          {...longPressHandlers}
+        >
+          <Suspense fallback={<CanvasLoading />}>
+            <Canvas
+              camera={{ position: [0, 0.5, 4], fov: 50 }}
+              gl={{ antialias: true, alpha: true }}
+            >
+              {/* Lighting */}
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[10, 10, 5]} intensity={0.8} />
+              <directionalLight position={[-5, 5, -5]} intensity={0.3} />
+
+              {/* 3D Body Model */}
+              <PersonalizedBodyModel
+                bodyProportions={bodyProportions}
+                activeLayers={activeLayers}
+                onRegionSelect={handleRegionSelect}
+                selectedRegion={selectedRegion}
+              />
+
+              {/* Health Overlay */}
+              {showHealthOverlay && patientData && (
+                <HealthOverlay patientData={patientData} />
+              )}
+
+              {/* Enhanced Camera Controls - replaces OrbitControls */}
+              <EnhancedCameraControls
+                ref={cameraControlsRef}
+                enablePan={true}
+                enableZoom={true}
+                enableRotate={true}
+                minDistance={1.5}
+                maxDistance={10}
+                maxPolarAngle={Math.PI}
+                enableMomentum={true}
+                enableSmoothZoom={true}
+                enableDoubleClickFocus={true}
+                focusAnimationDuration={800}
+                focusEasing="cinematic"
+                enableTouchGestures={true}
+                onCameraChange={handleCameraChange}
+                onPresetChange={handlePresetChange}
+                initialPosition={[0, 0.5, 4]}
+                initialTarget={[0, 0.2, 0]}
+              />
+            </Canvas>
+          </Suspense>
+
+          {/* Health overlay toggle - now positioned to not conflict with toolbar */}
+          <button
+            className={`health-overlay-toggle ${showHealthOverlay ? 'active' : ''}`}
+            onClick={handleToggleHealthOverlay}
+            title={showHealthOverlay ? 'Hide health overlay' : 'Show health overlay'}
+            style={{ bottom: '80px' }} // Adjusted to make room for toolbar
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </button>
         </div>
-      )}
-    </div>
+
+        {/* Floating Toolbar - anatomy-specific tools */}
+        <FloatingToolbar
+          position="right"
+          autoHide={false}
+          items={toolbarItems}
+          sections={TOOLBAR_SECTIONS}
+          onItemClick={handleToolbarAction}
+          draggable={true}
+          showLabels={false}
+        />
+
+        {/*
+          Smart Layer Controller Panel - dockable, collapsible, draggable
+          Integrates with SmartPanelManager for glass morphism styling
+          and seamless 3D experience integration
+        */}
+        <LayerController
+          activeLayers={activeLayers}
+          onLayersChange={setActiveLayers}
+          defaultDockPosition="right"
+          defaultOpen={true}
+          panelId="layer-controller"
+        />
+
+        {/* SmartPanelManager renders all registered panels with glass morphism */}
+        <SmartPanelManager className="anatomy-panel-manager" />
+
+        {/* Radial Context Menu - appears on right-click/long-press */}
+        <RadialContextMenu
+          isOpen={radialMenuOpen}
+          position={radialMenuPosition}
+          regionId={contextMenuRegion?.id}
+          regionName={contextMenuRegion?.name}
+          onSelect={handleRadialMenuSelect}
+          onClose={handleRadialMenuClose}
+          radius={110}
+        />
+
+        {/* Regional context menu - shows when region selected (legacy, can be removed or kept as additional info panel) */}
+        {selectedRegion && (
+          <RegionalContextMenu
+            regionId={selectedRegion}
+            patientData={patientData}
+            onClose={handleCloseContextMenu}
+            onViewDetails={handleViewDetails}
+            onViewSymptoms={() => console.log('View symptoms for', selectedRegion)}
+            onViewMedications={() => console.log('View medications for', selectedRegion)}
+            onAskAI={() => console.log('Ask AI about', selectedRegionName)}
+          />
+        )}
+
+        {/* Help hint when nothing selected */}
+        {!selectedRegion && (
+          <div className="anatomy-help-hint">
+            <span>Tap any body region to explore. Right-click or long-press for more options.</span>
+          </div>
+        )}
+      </div>
+    </PanelManagerProvider>
   );
 }
 

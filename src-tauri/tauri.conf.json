@@ -45,8 +45,7 @@
         "proxyUrl": null,
         "browserExtensionsEnabled": false,
         "useHttpsScheme": false,
-        "devtools": true,
-        "backgroundThrottling": "Auto"
+        "devtools": true
       }
     ],
     "security": {
@@ -73,7 +72,7 @@
           "deny": []
         }
       },
-      "pattern": { "use": "isolation" },
+      "pattern": { "use": "brownfield" },
       "capabilities": []
     },
     "withGlobalTauri": true,
@@ -160,8 +159,7 @@
       }
     },
     "iOS": {
-      "developmentTeam": "NDJZ6S9Q4L",
-      "codeSignIdentity": "Apple Development"
+      "developmentTeam": "NDJZ6S9Q4L"
     },
     "android": {
       "minSdkVersion": 24

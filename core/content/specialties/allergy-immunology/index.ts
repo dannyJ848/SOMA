@@ -33,9 +33,15 @@ export { foodAllergiesContent } from './food-allergies';
 export { drugAllergiesContent } from './drug-allergies';
 export { environmentalAllergiesContent } from './environmental-allergies';
 export { allergicAsthmaContent } from './allergic-asthma';
+export { allergicRhinitis } from './allergic-conditions/allergic-rhinitis';
+export { foodAllergies } from './allergic-conditions/food-allergies';
+export { drugAllergies } from './allergic-conditions/drug-allergies';
 
 // Immunodeficiency
 export { immunodeficiencyDisordersContent } from './immunodeficiency-disorders';
+export { primaryImmunodeficiency } from './immunodeficiency/primary-immunodeficiency';
+export { secondaryImmunodeficiency } from './immunodeficiency/secondary-immunodeficiency';
+export { igaDeficiency } from './immunodeficiency/iga-deficiency';
 
 // Autoimmunity
 export { autoimmunePrinciplesContent } from './autoimmune-principles';

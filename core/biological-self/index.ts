@@ -5,4 +5,5 @@
  */
 
 export * from './types.js';
+export * from './anatomical-extensions.js';
 export { BiologicalSelfStore } from './store.js';

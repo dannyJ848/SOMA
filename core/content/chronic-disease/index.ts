@@ -7,8 +7,11 @@
 
 // Self-Management Skills
 export * from './self-management/symptom-monitoring';
+export * from './self-management/symptom-tracking';
 export * from './self-management/home-vital-tracking';
 export * from './self-management/medication-adherence';
+export * from './self-management/medication-organization';
+export * from './self-management/lifestyle-modifications';
 export * from './self-management/warning-signs';
 export * from './self-management/provider-communication';
 

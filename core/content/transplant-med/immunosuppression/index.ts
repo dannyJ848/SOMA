@@ -8,11 +8,13 @@
 // Individual content exports
 export { calcineurinInhibitors } from './calcineurin-inhibitors.js';
 export { antiproliferativeAgents } from './antiproliferative-agents.js';
+export { antimetabolites } from './antimetabolites.js';
 export { corticosteroidsTransplant } from './corticosteroids-transplant.js';
 
 // Import for aggregate export
 import { calcineurinInhibitors } from './calcineurin-inhibitors.js';
 import { antiproliferativeAgents } from './antiproliferative-agents.js';
+import { antimetabolites } from './antimetabolites.js';
 import { corticosteroidsTransplant } from './corticosteroids-transplant.js';
 
 /**
@@ -21,6 +23,7 @@ import { corticosteroidsTransplant } from './corticosteroids-transplant.js';
 export const IMMUNOSUPPRESSION_CONTENT = [
   calcineurinInhibitors,
   antiproliferativeAgents,
+  antimetabolites,
   corticosteroidsTransplant,
 ];
 
@@ -30,6 +33,7 @@ export const IMMUNOSUPPRESSION_CONTENT = [
 export const IMMUNOSUPPRESSION_CONTENT_IDS = [
   'transplant-calcineurin-inhibitors',
   'transplant-antiproliferative-agents',
+  'topic-antimetabolites',
   'transplant-corticosteroids',
 ] as const;
 
@@ -39,6 +43,7 @@ export const IMMUNOSUPPRESSION_CONTENT_IDS = [
 export const IMMUNOSUPPRESSION_CATEGORIES = [
   'calcineurin-inhibitors',
   'antiproliferative-agents',
+  'antimetabolites',
   'corticosteroids',
   'drug-monitoring',
   'drug-interactions',

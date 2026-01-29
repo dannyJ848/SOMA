@@ -1,1100 +1,654 @@
-import { LegacyEducationalContent } from '../../../types'
+import type { EducationalContent } from '../../../types';
 
-export const primaryImmunodeficiency: LegacyEducationalContent = {
+export const primaryImmunodeficiency: EducationalContent = {
   id: 'primary-immunodeficiency',
-  title: 'Primary Immunodeficiency',
-  specialty: 'allergy-immunology',
-  category: 'immunodeficiency',
-
+  type: 'condition',
+  name: 'Primary Immunodeficiency',
+  alternateNames: ['Inborn Errors of Immunity', 'Primary Immune Deficiency Disorders', 'PIDD', 'IEI'],
   levels: {
     1: {
-      title: 'Introduction to Primary Immunodeficiency',
-      description: 'Basic understanding of inherited immune system problems',
-      content: `
-# What is Primary Immunodeficiency?
+      level: 1,
+      summary: 'Primary immunodeficiencies are inherited conditions where part of the immune system is missing or does not work properly, leading to increased infections and other health problems.',
+      explanation: `Primary immunodeficiency diseases, also called inborn errors of immunity, are conditions people are born with that affect how their immune system works. Unlike secondary immunodeficiencies caused by medications or illnesses, these are genetic conditions passed down in families.
 
-Primary immunodeficiency diseases (PIDD) are disorders where part of the body's immune system is missing or doesn't function properly. These are usually inherited (genetic) conditions present from birth, though symptoms may not appear until later in life.
+People with primary immunodeficiency get sick more often than others. They may have many ear infections, sinus infections, pneumonia, or other infections that keep coming back. They might also take longer to recover from illnesses.
 
-## Common Signs and Symptoms
+There are more than 400 different types of primary immunodeficiency. Some are mild and may not be noticed until adulthood, while others are severe and appear in infancy. Common types include problems with making antibodies, problems with white blood cells, and problems with the complement system.
 
-### Frequent Infections
-- Needing antibiotics more than 2 times per year
-- Infections that don't go away easily
-- Infections that keep coming back
-- Needing IV antibiotics for infections
-
-### Unusual Infections
-- Infections with organisms that don't usually make people sick
-- Fungal infections
-- Persistent thrush or fungal skin infections
-
-### Other Common Problems
-- Poor growth or failure to thrive (in children)
-- Chronic diarrhea
-- Absent tonsils or lymph nodes
-- Skin rashes
-- Autoimmune problems
-- Family history of early deaths
-
-## Most Common Types
-
-### Antibody Deficiencies
-- The body doesn't make enough antibodies
-- Most common type of PIDD
-- Examples: Common Variable Immunodeficiency (CVID), X-linked Agammaglobulinemia
-
-### Combined Immunodeficiencies
-- Both T-cells and B-cells affected
-- More severe
-- Example: Severe Combined Immunodeficiency (SCID)
-
-### Phagocytic Cell Deficiencies
-- Problems with white blood cells that fight bacteria
-- Example: Chronic Granulomatous Disease
-
-## When to See a Specialist
-
-Consider seeing an immunologist if you or your child has:
-- Eight or more ear infections in one year
-- Two or more serious sinus infections in one year
-- Two or more pneumonias in one year
-- Need IV antibiotics to clear infections
-- Infections with unusual organisms
-- Family history of immunodeficiency
-
-## Basic Management
-
-### Infection Prevention
-- Good hand hygiene
-- Staying up to date on vaccines (with some exceptions)
-- Avoiding sick people when possible
-- Prompt treatment of infections
-
-### Treatment Options
-- Antibiotic prophylaxis (preventive antibiotics)
-- Immunoglobulin replacement (IVIG or SCIG)
-- Medications to boost immune function
-- Bone marrow transplant for severe cases
-      `
+Treatment depends on the specific condition but may include antibiotics to prevent infections, immunoglobulin replacement therapy to provide antibodies, or in severe cases, stem cell transplantation to replace the faulty immune system.`,
+      keyTerms: [
+        { term: 'immune system', definition: 'The body\'s defense system that fights infections' },
+        { term: 'antibodies', definition: 'Proteins made by the immune system to fight germs' },
+        { term: 'genetic', definition: 'Passed down from parents through genes' },
+        { term: 'immunoglobulin', definition: 'Another word for antibodies; proteins that fight infection' }
+      ],
+      analogies: [
+        'Primary immunodeficiency is like having a security system with missing parts - some defenses are not working',
+        'Antibodies are like soldiers in the army; some immunodeficiencies mean you do not have enough soldiers or they cannot fight properly'
+      ],
+      examples: [
+        'A child who has had 8 ear infections and 3 cases of pneumonia by age 2',
+        'An adult who always catches colds that last for weeks and often need antibiotics'
+      ]
     },
+    2: {
+      level: 2,
+      summary: 'Primary immunodeficiencies are inherited genetic disorders affecting immune system components, with over 400 recognized types classified by the affected immune compartment.',
+      explanation: `Primary immunodeficiencies (PIDD), now called inborn errors of immunity (IEI), comprise a growing group of more than 400 genetic disorders affecting immune system development and function. These conditions collectively affect approximately 1 in 1,200 people.
 
-    beginner: {
-      title: 'Understanding Primary Immunodeficiency',
-      description: 'Learn about types, diagnosis, and basic management',
-      content: `
-# Understanding Primary Immunodeficiency
+Classification by immune compartment (International Union of Immunological Societies):
 
-## How the Immune System Works
+1. Combined immunodeficiencies (affecting T and B cells):
+- Severe Combined Immunodeficiency (SCID): Most serious, no T-cell function
+- Complete DiGeorge syndrome: Thymic aplasia
+- Wiskott-Aldrich syndrome: T-cells, B-cells, platelets affected
+- Ataxia-telangiectasia: DNA repair defect
 
-### Normal Immune System Components
+2. Predominantly antibody deficiencies:
+- X-linked agammaglobulinemia: No B-cells, no antibodies
+- Common variable immunodeficiency (CVID): Most common symptomatic PID
+- Selective IgA deficiency: Most common PID (often asymptomatic)
+- Specific antibody deficiency: Poor response to vaccines
+- Hyper-IgM syndromes: Defective class switching
 
-**White Blood Cells**
-- Neutrophils: First responders, eat bacteria
-- Lymphocytes: T-cells and B-cells
-  - B-cells: Make antibodies
-  - T-cells: Help B-cells and kill infected cells
-- NK cells: Natural killer cells
+3. Immune dysregulation:
+- Hemophagocytic lymphohistiocytosis (HLH)
+- Familial Mediterranean fever
+- APECED (Autoimmune Polyendocrinopathy-Candidiasis-Ectodermal Dystrophy)
 
-**Antibodies**
-- Proteins that recognize germs
-- Help mark germs for destruction
-- Different types (IgG, IgA, IgM, IgE, IgD)
+4. Phagocyte defects:
+- Chronic granulomatous disease (CGD)
+- Leukocyte adhesion deficiency
+- Chediak-Higashi syndrome
 
-**Complement System**
-- Group of proteins that help antibodies
-- Help destroy bacteria
+5. Defects in innate immunity:
+- TLR signaling defects
+- Mendelian susceptibility to mycobacterial disease
 
-## Classification of Primary Immunodeficiencies
+6. Autoinflammatory disorders:
+- Cryopyrin-associated periodic syndromes
+- TNF receptor-associated periodic syndrome (TRAPS)
 
-### Antibody Deficiencies (Most Common)
+7. Complement deficiencies:
+- C1-C4 deficiencies: Autoimmune disease, infections
+- C5-C9 deficiencies: Neisseria infections
+- Properdin deficiency
 
-**X-linked Agammaglobulinemia (XLA)**
-- Genetic defect in B-cell development
-- Mostly affects males
-- Very low antibody levels
-- Recurrent bacterial infections
+Inheritance patterns:
+- X-linked: Affects males (XLA, Wiskott-Aldrich, Hyper-IgM type 1, CGD carrier females)
+- Autosomal recessive: Both parents carriers (SCID, most CVID, CGD)
+- Autosomal dominant: One affected parent (some CVID)
 
-**Common Variable Immunodeficiency (CVID)**
-- Low antibody levels
-- Can develop at any age
-- Both men and women affected
-- Recurrent sinopulmonary infections
-
-**Selective IgA Deficiency**
-- Most common PIDD
-- Low IgA levels
-- Some have no symptoms
-- Others have recurrent infections
-
-**Hyper IgM Syndrome**
-- Normal/high IgM, low other antibodies
-- Recurrent infections
-- Neutropenia common
-
-### Combined Immunodeficiencies
-
-**Severe Combined Immunodeficiency (SCID)**
-- Life-threatening in infancy
-- "Bubble boy disease"
-- Defect in both T-cells and B-cells
-- Requires bone marrow transplant
-
-**Wiskott-Aldrich Syndrome**
-- Low platelets, eczema, infections
-- X-linked inheritance
-- T-cell and B-cell dysfunction
-
-### Phagocytic Cell Disorders
-
-**Chronic Granulomatous Disease (CGD)**
-- Neutrophils can't kill certain bacteria/fungi
-- Granulomas form
-- Recurrent infections with catalase-positive organisms
-
-**Leukocyte Adhesion Deficiency**
-- White cells can't get to infection sites
-- Delayed umbilical cord separation
-- Poor wound healing
-
-### Complement Deficiencies
-
-**C2 Deficiency**
-- Most common complement deficiency
-- Increased risk of infections
-- Autoimmune disease risk
-
-**C3 Deficiency**
-- Severe recurrent infections
-- Similar to antibody deficiency
-
-## Diagnosis
-
-### Warning Signs (10 Warning Signs)
-
-1. Four or more new ear infections within one year
-2. Two or more serious sinus infections within one year
-3. Two or more months on antibiotics with little effect
-4. Two or more pneumonias within one year
-5. Failure of an infant to gain weight or grow normally
-6. Recurrent, deep skin or organ abscesses
-7. Persistent thrush in mouth or fungal infection on skin
-8. Need for intravenous antibiotics to clear infections
-9. Two or more deep-seated infections including septicemia
-10. A family history of primary immunodeficiency
-
-### Laboratory Testing
-
-**Initial Screening**
-- Complete blood count (CBC)
-- Immunoglobulin levels (IgG, IgA, IgM, IgE)
-- Vaccine response testing
-
-**Advanced Testing**
-- Lymphocyte subsets (T-cells, B-cells, NK cells)
-- Functional testing (neutrophil function)
-- Genetic testing
-- Complement levels
-
-## Treatment Approaches
-
-### Immunoglobulin Replacement
-
-**Indications**
-- Antibody deficiencies
-- Low IgG levels
-- Poor vaccine response
-- Recurrent infections despite prophylaxis
-
-**Types**
-- IVIG (intravenous): Every 3-4 weeks
-- SCIG (subcutaneous): Weekly or more frequent
-- Both provide antibodies to fight infections
-
-### Antibiotic Prophylaxis
-- Preventive antibiotics
-- Common for certain PIDDs
-- Reduces infection frequency
-
-### Bone Marrow Transplant
-- Curative for severe PIDDs
-- Used for SCID, CGD, WAS
-- Replaces defective immune system
-
-### Gene Therapy
-- Emerging treatment
-- Corrects genetic defect
-- Used for some specific disorders
-
-## Complications
-
-### Autoimmune Disease
-- Higher risk in PIDD patients
-- Autoimmune cytopenias
-- Rheumatologic conditions
-
-### Lymphoma Risk
-- Increased cancer risk
-- Especially CVID patients
-- Regular monitoring needed
-
-### Organ Damage
-- Chronic lung disease (bronchiectasis)
-- Liver disease
-- Gastrointestinal complications
-      `
+Warning signs (Jeffrey Modell Foundation 10 Warning Signs):
+1. Four or more new ear infections within 1 year
+2. Two or more serious sinus infections within 1 year
+3. Two or more pneumonias within 1 year
+4. Recurrent, deep skin or organ abscesses
+5. Two or more deep-seated infections
+6. Need for IV antibiotics to clear infections
+7. Infections that do not resolve with antibiotics
+8. Family history of primary immunodeficiency
+9. Failure of infant to thrive or grow normally
+10. Persistent thrush in mouth or fungal skin infections`,
+      keyTerms: [
+        { term: 'SCID', definition: 'Severe Combined Immunodeficiency; most serious form with absent T-cell function' },
+        { term: 'CVID', definition: 'Common Variable Immunodeficiency; most common symptomatic antibody deficiency' },
+        { term: 'agammaglobulinemia', definition: 'Absence of gamma globulins (antibodies) in blood' },
+        { term: 'phagocyte', definition: 'White blood cell that engulfs and destroys bacteria and fungi' },
+        { term: 'complement', definition: 'System of proteins that enhance antibody and phagocyte function' }
+      ],
+      analogies: [
+        'Combined immunodeficiency is like having both the soldiers and the commanders missing from an army',
+        'Antibody deficiencies are like having soldiers but no ammunition to fight infections'
+      ],
+      examples: [
+        'A boy with X-linked agammaglobulinemia who gets repeated sinus and lung infections starting after 6 months of age',
+        'A person with CVID who has bronchiectasis from repeated pneumonias and also has autoimmune thyroid disease'
+      ]
     },
+    3: {
+      level: 3,
+      summary: 'Primary immunodeficiency pathogenesis involves genetic mutations affecting immune cell development, signaling, or function, with diagnosis requiring clinical suspicion, laboratory testing, and genetic confirmation.',
+      explanation: `Primary immunodeficiencies result from genetic mutations affecting immune system development, receptor signaling, cytokine production, or effector functions. Understanding these mechanisms guides diagnosis and treatment.
 
-    intermediate: {
-      title: 'Clinical Management of Primary Immunodeficiency',
-      description: 'Comprehensive approach to diagnosis and treatment',
-      content: `
-# Clinical Management of Primary Immunodeficiency
+Molecular mechanisms by category:
 
-## Diagnostic Evaluation
+Antibody deficiencies:
 
-### Initial Assessment
+X-linked agammaglobulinemia (XLA):
+- Mutation: BTK (Bruton tyrosine kinase)
+- Mechanism: B-cell development arrested at pre-B stage
+- Manifestation: No circulating B-cells, no antibodies
+- Infections: Encapsulated bacteria (Streptococcus pneumoniae, Haemophilus influenzae)
 
-**Detailed History**
-- Infection history: type, frequency, severity, pathogens
-- Age of onset
-- Growth and development (pediatrics)
-- Family history (including unexplained deaths)
-- Autoimmune manifestations
-- Vaccine history and responses
+Common Variable Immunodeficiency (CVID):
+- Heterogeneous genetic causes: TACI (TNFRSF13B), BAFF-R, CD19, CD20, ICOS, others
+- Mechanism: Defective B-cell differentiation to plasma cells
+- Manifestation: Low IgG, IgA, and/or IgM; impaired vaccine responses
+- Associated: Autoimmunity, granulomatous disease, lymphoid hyperplasia, cancer risk
 
-**Physical Examination**
-- Growth parameters
-- Lymph node assessment (absent or enlarged)
-- Tonsillar size
-- Organomegaly
-- Skin findings (rashes, eczema)
-- Dysmorphic features
+Hyper-IgM syndromes:
+- X-linked: CD40Ligand deficiency (T-cell help to B-cells impaired)
+- Autosomal recessive: AICDA, UNG (class switch recombination defects)
+- Manifestation: High IgM, low IgG, IgA; opportunistic infections
+- CD40L deficiency: Also susceptible to Pneumocystis, Cryptosporidium
 
-### Laboratory Evaluation
+Selective IgA deficiency:
+- Usually sporadic
+- Mechanism: Block in IgA B-cell differentiation
+- Often asymptomatic; may have allergies, autoimmunity, infections
 
-**First-Line Testing**
-- CBC with differential
-- Quantitative immunoglobulins (IgG, IgA, IgM, IgE)
-- Serum IgG subclasses
-- Vaccine antibody titers (tetanus, pneumococcal, H. flu)
-- HIV testing (to exclude secondary cause)
+Combined immunodeficiencies:
 
-**Second-Line Testing**
-- Lymphocyte subsets (CD3, CD4, CD8, CD19, CD16/56)
-- T-cell function assays
-- Neutrophil function testing (DHR, NBT)
-- Dihydrorhodamine (DHR) test for CGD
-- Genetic testing (targeted panels or whole exome)
+SCID:
+- X-linked: IL2RG (common gamma chain) - 40% of cases
+- Autosomal recessive: ADA (adenosine deaminase), RAG1/2, JAK3, IL7R, others
+- Mechanism: Defective T-cell development (and B/NK depending on type)
+- Manifestation: Absent T-cell function; presents with severe infections, failure to thrive
+- "Bubble boy" disease
+- Newborn screening now available (TREC test)
 
-**Specialized Testing**
-- Specific antibody responses
-- Complement studies (CH50, AH50, C3, C4)
-- Enzyme assays (ADA, PNP)
-- Flow cytometry for specific proteins
-
-## Specific Primary Immunodeficiencies
-
-### Antibody Deficiencies
-
-**X-linked Agammaglobulinemia (XLA)**
-*Genetics:* BTK gene mutation, X-linked
-*Lab findings:* CD19+ B-cells <2%, low all Igs
-*Clinical onset:* After 6 months (maternal antibodies wane)
-*Infections:* Encapsulated bacteria, enteroviruses
-*Treatment:* IgG replacement, antibiotic prophylaxis
-
-**Common Variable Immunodeficiency (CVID)**
-*Genetics:* Heterogeneous, some known genes (TNFRSF13B)
-*Age:* Can present at any age (usually teens-adults)
-*Lab findings:* Low IgG, plus low IgA and/or IgM
-*Diagnostic criteria:* Low IgG + low IgA/IgM + poor vaccine response + exclusion of other causes
-*Complications:* Autoimmune disease (20-25%), lymphoma, bronchiectasis, granulomatous disease
-*Treatment:* IgG replacement, treat complications
-
-**Selective IgA Deficiency**
-*Lab findings:* IgA <7 mg/dL, normal IgG and IgM
-*Epidemiology:* 1:300-1:700 (most common PIDD)
-*Clinical:* Many asymptomatic; others have sinopulmonary, GI infections, celiac-like disease, autoimmunity
-*Treatment:* Antibiotics as needed; IgG replacement not indicated
-*Contraindications:* Avoid blood products with IgA (risk of anaphylaxis if anti-IgA antibodies)
-
-**Hyper IgM Syndrome**
-*Types:* X-linked (CD40L), autosomal recessive (AID, UNG, CD40)
-*Lab findings:* Low IgG, IgA, IgE; normal/high IgM
-*Clinical:* Recurrent bacterial infections, opportunistic infections (PCP), neutropenia
-*Treatment:* IgG replacement, prophylaxis for PCP, consider HSCT
-
-### Combined Immunodeficiencies
-
-**Severe Combined Immunodeficiency (SCID)**
-*Types:* Multiple genetic defects (IL2RG, JAK3, RAG1/2, ADA, etc.)
-*Lab findings:* Very low T-cells, B-cells variable
-*Clinical:* Failure to thrive, persistent infections (oral thrush, diaper rash), chronic diarrhea
-*Treatment:* HSCT curative; gene therapy for ADA deficiency; IVIG, prophylaxis while awaiting transplant
-*Newborn screening:* TREC assay
-
-**Wiskott-Aldrich Syndrome (WAS)**
-*Genetics:* WAS gene, X-linked
-*Clinical triad:* Microthrombocytopenia, eczema, recurrent infections
-*Lab findings:* Small platelets, low IgM, variable IgG/IgA
-*Treatment:* HSCT curative; IgG replacement, prophylaxis if not transplanted
-
-**Ataxia-Telangiectasia**
-*Genetics:* ATM gene, autosomal recessive
-*Clinical:* Progressive ataxia, telangiectasias, sinopulmonary infections, cancer risk
-*Lab findings:* Low IgA (70%), low IgG (variable), elevated AFP
-*Treatment:* Supportive; avoid radiation (DNA repair defect); IgG if antibody deficient
-
-### Phagocytic Defects
-
-**Chronic Granulomatous Disease (CGD)**
-*Pathophysiology:* NADPH oxidase defect → can't produce respiratory burst
-*Genetics:* X-linked (gp91phox), AR (p47phox most common)
-*Lab findings:* Abnormal DHR test (↓ oxidative burst)
-*Infections:* Catalase-positive organisms (S. aureus, Serratia, Burkholderia, Aspergillus)
-*Complications:* Granulomas, colitis, obstructive complications
-*Treatment:* Antibacterial/antifungal prophylaxis, IFN-γ, HSCT in severe cases
-
-**Leukocyte Adhesion Deficiency (LAD)**
-*Types:* LAD I (CD18), LAD II (fucose metabolism), LAD III (kindlin-3)
-*Clinical:* Delayed umbilical cord separation, poor wound healing, periodontitis, infections without pus
-*Lab findings:* Marked neutrophilia, CD18 deficiency (LAD I)
-*Treatment:* HSCT for LAD I; fucose supplementation for LAD II
-
-### Complement Deficiencies
-
-**Early Component Deficiencies (C1, C2, C4)**
-- Increased infections (encapsulated bacteria)
-- Autoimmunity (SLE-like in C1q, C4, C2 deficiency)
-
-**C3 Deficiency**
-- Severe recurrent infections
-- Similar to antibody deficiency
-
-**Terminal Component Deficiencies (C5-9)**
-- Neisserial infections (meningococcus, gonorrhea)
-- May be asymptomatic otherwise
-
-## Treatment Strategies
-
-### Immunoglobulin Replacement
-
-**Indications**
-- Confirmed antibody deficiency
-- Recurrent infections
-- Poor vaccine response
-
-**IVIG vs. SCIG**
-
-*IVIG*
-- Dose: 400-600 mg/kg every 3-4 weeks
-- Higher peak levels
-- Systemic reactions possible
-- Venous access needed
-
-*SCIG*
-- Dose: 100-200 mg/kg weekly (or divided more frequently)
-- Steady state levels
-- Fewer systemic reactions
-- Home administration
-- Local site reactions common
-
-**Target Trough Levels**
-- Individualized based on clinical response
-- Many target IgG >700 mg/dL (higher for lung disease)
-
-### Antibiotic Prophylaxis
-
-**Common Regimens**
-- Azithromycin 3x/week or monthly
-- TMP-SMX (for PCP prophylaxis)
-- Amoxicillin or cephalosporin (children)
-
-### Hematopoietic Stem Cell Transplant (HSCT)
-
-**Indications**
-- SCID (curative)
-- WAS, CGD (curative)
-- CVID with severe complications (consider)
-
-**Donor Sources**
-- Matched sibling donor (ideal)
-- Matched unrelated donor
-- Haploidentical parent
-- Cord blood
-
-**Gene Therapy**
-- Approved for ADA-SCID, X-linked SCID (Europe)
-- Clinical trials for other disorders
-- Risks: insertional mutagenesis, leukemia
-
-### Other Therapies
-
-**Thymic Transplantation**
-- Complete DiGeorge syndrome
+DiGeorge syndrome:
 - 22q11.2 deletion
+- Thymic hypoplasia/aplasia
+- Variable T-cell deficiency
+- Associated: Cardiac defects, hypocalcemia, characteristic facies
 
-**Enzyme Replacement**
-- PEG-ADA for ADA-deficient SCID
+Phagocyte defects:
 
-**Cytokine Therapy**
-- IFN-γ for CGD
+Chronic granulomatous disease (CGD):
+- Mutations: GP91phox (X-linked), p47phox, p67phox, p22phox (autosomal)
+- Mechanism: Defective NADPH oxidase, cannot make superoxide
+- Manifestation: Susceptibility to catalase-positive bacteria and fungi
+- Infections: Staphylococcus aureus, Burkholderia cepacia, Serratia, Aspergillus
+- Granuloma formation, inflammatory complications
 
-## Monitoring and Follow-up
+Leukocyte adhesion deficiency (LAD):
+- LAD1: CD18 deficiency (integrin defect)
+- LAD2: SLC35C1 (fucose transporter defect)
+- Manifestation: Impaired leukocyte migration to infection sites
+- Features: Delayed umbilical cord separation, poor wound healing, leukocytosis
 
-### Regular Assessments
-- Infection frequency and severity
-- Lung function (PFTs, CT chest)
-- IgG trough levels
-- Autoimmune complications
-- Lymphoma surveillance (CVID)
-- Quality of life
+Complement deficiencies:
 
-### Vaccination Considerations
-- Live vaccines contraindicated in many PIDDs
-- Inactivated vaccines generally safe
-- Assess vaccine responses
-- Household members should receive live vaccines
+Early classical pathway (C1, C2, C4):
+- Associated with systemic lupus erythematosus-like disease
+- Immune complex clearance impaired
 
-### Genetic Counseling
-- Inheritance pattern discussion
-- Prenatal testing available
-- Preimplantation genetic diagnosis
-- Cascade testing of family members
-      `
+Late complement (C5-C9):
+- Susceptibility to Neisseria meningitidis
+- Recurrent meningococcal infections
+
+Properdin deficiency:
+- X-linked
+- Alternative pathway defect
+- Severe meningococcal disease
+
+Diagnostic approach:
+
+Initial screening:
+- CBC with differential and lymphocyte subset enumeration
+- Quantitative immunoglobulins (IgG, IgA, IgM)
+- IgG subclasses (controversial utility)
+- Vaccine response assessment (tetanus, pneumococcal)
+- Complement levels (CH50, AH50, individual components)
+
+Advanced testing:
+- Lymphocyte proliferation assays
+- Cytokine production assessment
+- Phagocyte function (DHR assay for CGD, chemotaxis)
+- Specific genetic testing (single gene or panels)
+- Whole exome sequencing for undiagnosed cases
+
+Newborn screening:
+- T-cell receptor excision circles (TRECs) for SCID
+- Now mandated in all 50 US states
+- Identifies infants before infections occur
+- KREC assay for B-cell defects in development`,
+      keyTerms: [
+        { term: 'BTK', definition: 'Bruton tyrosine kinase; mutation causes X-linked agammaglobulinemia' },
+        { term: 'class switch recombination', definition: 'Process allowing B-cells to change antibody class from IgM to IgG, IgA, or IgE' },
+        { term: 'NADPH oxidase', definition: 'Enzyme complex producing superoxide for microbial killing; defective in CGD' },
+        { term: 'TREC', definition: 'T-cell receptor excision circle; byproduct of T-cell development used for SCID screening' },
+        { term: 'CH50', definition: 'Total hemolytic complement assay; measures classical pathway function' }
+      ]
     },
+    4: {
+      level: 4,
+      summary: 'Primary immunodeficiency treatment includes antimicrobial prophylaxis, immunoglobulin replacement, immunomodulatory therapy, enzyme replacement, and hematopoietic stem cell transplantation for severe cases.',
+      explanation: `Management of primary immunodeficiency requires a multidisciplinary approach including infectious disease prevention, immune replacement or modulation, and in severe cases, curative therapies.
 
-    advanced: {
-      title: 'Advanced Primary Immunodeficiency Management',
-      description: 'Complex presentations and special populations',
-      content: `
-# Advanced Primary Immunodeficiency Management
+Antibody deficiency management:
 
-## Diagnostic Challenges
+Immunoglobulin replacement therapy (IgRT):
 
-### Atypical Presentations
+Indications:
+- Significantly reduced IgG with impaired antibody responses
+- Recurrent infections despite antibiotics
 
-**Adult-Onset PIDD**
-- CVID, IgA deficiency can present in adults
-- Often initially diagnosed as asthma, COPD, or recurrent bronchitis
-- Diagnostic delay common (average ~7 years)
-- High index of awareness needed
+Routes:
+- Intravenous immunoglobulin (IVIG): Every 3-4 weeks
+- Subcutaneous immunoglobulin (SCIG): Weekly or biweekly self-administered
 
-**Minimal Phenotype**
-- Some genetic PIDDs have mild presentations
-- Family member testing after severe case diagnosed
-- Unrevealed until stressor (medication, illness)
+Dosing:
+- 400-600 mg/kg/month (individualized based on response)
+- Monitor trough levels (for IVIG) or steady-state levels
+- Adjust for infection frequency
 
-**Phenocopies**
-- Secondary immunodeficiencies mimicking PIDD
-- Medications (rituximab, corticosteroids)
-- Protein-losing enteropathy causing low IgG
-- Malignancy
+Efficacy:
+- Reduces infections by 70-90%
+- Slows progression of bronchiectasis
+- Does not treat associated autoimmunity or granulomas
 
-### Genetic Testing Interpretation
+Complications:
+- Headaches (aseptic meningitis)
+- Thrombosis (high dose, older products rare)
+- Hemolysis (high-titer anti-A or anti-B)
+- Anaphylaxis (IgA deficiency with anti-IgA antibodies - use IgA-depleted product)
+- Renal dysfunction (osmotic nephrosis with sucrose-containing products)
 
-**Variants of Uncertain Significance (VUS)**
-- Common as testing becomes more widespread
-- Requires correlation with phenotype
-- Family studies helpful
-- May need reclassification over time
+Antibiotic prophylaxis:
+- Continuous (e.g., amoxicillin, azithromycin, TMP-SMX)
+- Reduces infection frequency
+- Risk of resistance with long-term use
 
-**Incomplete Penetrance**
-- Same mutation, different severity
-- Modifier genes
-- Environmental factors
+Antimicrobial therapy:
+- Early aggressive treatment of infections
+- Broader spectrum coverage until cultures return
+- Longer courses often needed
+- Monitor for complications (abscess, bronchiectasis)
 
-**Mosaicism**
-- Not all cells carry mutation
-- Milder phenotype possible
-- Parental mosaicism implications
+Vaccines:
+- Live vaccines contraindicated in most cellular immunodeficiencies
+- Inactivated vaccines safe but may be less effective
+- Pneumococcal, meningococcal vaccines recommended for complement deficiencies
+- Annual influenza vaccine
 
-## Complex PIDDs
+Specific treatments by condition:
 
-**Immune Dysregulation, Polyendocrinopathy, Enteropathy, X-linked (IPEX)**
-- FOXP3 mutation affecting Tregs
-- Autoimmunity dominates (diabetes, thyroiditis, enteropathy)
-- Eczema, food allergies
-- HSCT curative
+SCID:
+- Hematopoietic stem cell transplantation (HSCT): Curative, best outcomes <3.5 months
+- Gene therapy: For ADA-SCID, X-linked SCID (investigational)
+- Enzyme replacement: PEG-ADA for ADA-SCID (bridge to transplant)
+- Protective isolation; no live vaccines; irradiated blood products
 
-**CTLA4 Haploinsufficiency**
-- Autoimmunity (cytopenias, enteropathy)
-- Lymphoproliferation
-- Organ infiltration
-- Abatacept (CTLA4-Ig) therapy effective
+CGD:
+- Prophylactic antibiotics (TMP-SMX) and antifungals (itraconazole)
+- Interferon-gamma reduces infections by 70%
+- Aggressive early treatment of infections
+- HSCT curative but risks vs benefits considered
+- Steroids for inflammatory complications (caution with infection)
 
-**LRBA Deficiency**
-- Similar to CTLA4 deficiency
-- Autoimmunity, hypogammaglobulinemia
-- Responds to abatacept
+Hyper-IgE syndrome (Job syndrome):
+- Prophylactic antibiotics and antifungals
+- Skin care for eczema
+- Monitor for skeletal abnormalities, aneurysms
+- HSCT in severe cases
 
-**PIK3CD Gain-of-Function (APDS)**
-- Activated PI3K delta syndrome
-- Combined immunodeficiency
-- Bronchiectasis, lymphoproliferation
-- CMV, EBV problems
-- Leniolisib (PI3Kδ inhibitor) approved
+Wiskott-Aldrich syndrome:
+- Splenectomy may reduce bleeding and infections (infection risk)
+- HSCT curative; best outcomes with matched sibling donor
+- Supportive care for eczema, infections
 
-**STAT3 Gain-of-Function**
-- Autoimmunity, lymphoproliferation
-- Early-onset solid tumors
-- Ruxolitinib (JAK inhibitor) may help
+Complement deficiencies:
+- Early antibiotics for any fever (meningococcemia risk)
+- Vaccination against encapsulated organisms
+- Fresh frozen plasma for acute C1-inhibitor deficiency
+- Eculizumab for C5 deficiency if paroxysmal nocturnal hemoglobinuria overlap
 
-## Complications Management
+Hematopoietic stem cell transplantation:
 
-### Pulmonary Complications
+Indications:
+- SCID (definitive treatment)
+- CGD with severe infections/inflammation
+- Wiskott-Aldrich syndrome
+- HLH
+- IPEX syndrome
+- Selected other severe PIDs
 
-**Bronchiectasis**
-- Pathophysiology: Recurrent infection → airway damage
-- Diagnosis: CT chest (gold standard)
-- Prevention: Aggressive infection treatment, airway clearance
-- Management: Chest PT, mucolytics, antibiotics
+Donor selection:
+- Matched sibling donor: Best outcomes
+- Matched unrelated donor: Good alternative
+- Haploidentical: Increasingly used
+- Cord blood: Alternative source
 
-**Interstitial Lung Disease**
-- Granulomatous disease (CVID, CGD)
-- Proliferative/fibrotic patterns
-- Consider corticosteroids, steroid-sparing agents
+Timing:
+- Earlier transplantation better outcomes
+- Before infections and organ damage
+- SCID: Ideally <3.5 months
 
-**Pleural Effusions**
-- Uncommon but can occur
-- Evaluate for infection, other causes
+Conditioning:
+- Myeloablative: Higher cure rates, more toxicity
+- Reduced intensity: Less toxicity, may have mixed chimerism
+- No conditioning: Used in some SCID (T-cell only reconstitution)
 
-### Gastrointestinal Complications
+Gene therapy:
+- Approved for ADA-SCID
+- Investigational for X-linked SCID, WAS, CGD
+- Autologous stem cells transduced with corrected gene
+- Avoids graft-versus-host disease
+- Risk of insertional oncogenesis (leukemia)
 
-**Chronic Diarrhea/Malabsorption**
-- Infectious causes
-- Inflammatory bowel disease-like
-- Celiac disease (more common)
-- Giardia, Cryptosporidium
+Monitoring and complications:
 
-**Inflammatory Bowel Disease**
-- More common in CVID, XLA
-- May be atypical presentation
-- Treatment challenging (immunosuppression risk)
+Regular surveillance:
+- Infection history review
+- Lung function testing
+- CT chest (bronchiectasis screening)
+- GI evaluation (malabsorption, enteropathy)
+- Autoimmune screening
+- Cancer surveillance (especially CVID - lymphoma, gastric cancer)
 
-**Liver Disease**
-- Nodular regenerative hyperplasia
-- Portal hypertension
-- Elevated LFTs common (monitor)
+Associated conditions management:
+- Autoimmunity: May require immunosuppression (caution)
+- Granulomas: Steroids, TNF inhibitors
+- Lymphoid hyperplasia: Rituximab in some cases
+- Bronchiectasis: Airway clearance, rotating antibiotics
 
-**Helicobacter pylori**
-- Increased colonization
-- Screen if symptomatic
+Patient education:
+- Infection recognition and early treatment
+- Adherence to prophylaxis
+- Vaccine status for household contacts
+- Genetic counseling for family planning
+- Emergency action plans
 
-### Autoimmune Complications
+Transition of care:
+- Pediatric to adult care coordination
+- Self-management skills
+- Insurance and employment considerations
+- Reproductive health counseling`,
+      keyTerms: [
+        { term: 'IVIG', definition: 'Intravenous immunoglobulin; antibody replacement therapy' },
+        { term: 'SCID newborn screening', definition: 'TREC testing on dried blood spots to identify infants with severe T-cell defects' },
+        { term: 'hematopoietic stem cell transplantation', definition: 'Replacement of immune system with donor stem cells; curative for severe PIDs' },
+        { term: 'interferon-gamma', definition: 'Cytokine used as adjunctive therapy in CGD to boost immune function' },
+        { term: 'gene therapy', definition: 'Correction of genetic defect using viral vectors to deliver normal gene' }
+      ],
+      clinicalNotes: `Clinical pearls for primary immunodeficiency:
 
-**Cytopenias**
-- Autoimmune hemolytic anemia (AIHA)
-- Immune thrombocytopenia (ITP)
-- Autoimmune neutropenia
+1. Think of CVID in adults with recurrent sinopulmonary infections and low immunoglobulins
+2. SCID is a pediatric emergency - newborn screening identifies infants before they get sick
+3. In CGD, think of catalase-positive organisms; Serratia liver abscess is classic
+4. Family history of early death from infection or consanguinity should raise suspicion
 
-**Rheumatologic Disease**
-- Rheumatoid arthritis-like
-- SLE-like (especially complement deficiencies)
-- Sarcoidosis/granulomatous disease
+Diagnosis:
+- Do not ignore the Jeffrey Modell warning signs
+- Check quantitative immunoglobulins in patients with recurrent infections
+- Vaccine responses distinguish CVID from specific antibody deficiency
+- Genetic testing increasingly available; consider in undiagnosed cases
 
-**Endocrine Autoimmunity**
-- Thyroid disease
-- Type 1 diabetes
-- Adrenal insufficiency
+Treatment nuances:
+- Start immunoglobulin before permanent organ damage (bronchiectasis)
+- SCIG preferred by many patients for convenience and fewer systemic side effects
+- Antibiotic prophylaxis reduces infections but monitoring for resistance needed
+- Aggressive early treatment of infections in all PIDs
 
-### Malignancy Risk
+Transplant timing:
+- Earlier is better for SCID - ideally before infections
+- CGD transplant controversial - balance infection/inflammation vs transplant risks
+- Gene therapy emerging alternative for some conditions
 
-**Lymphoma**
-- B-cell lymphomas (especially CVID)
-- Risk increases with age
-- Regular surveillance important
+Complications to watch:
+- CVID patients at risk for lymphoma, gastric cancer, lymphocytic interstitial pneumonitis
+- Autoimmunity common in CVID, APECED, IPEX
+- Granulomatous complications in CVID and CGD
+- Bronchiectasis from recurrent infections
 
-**Other Cancers**
-- Gastric cancer (CVID)
-- Skin cancer
-- HPV-related cancers
+Genetic counseling:
+- X-linked: Male children at risk, carrier females often asymptomatic
+- Autosomal recessive: 25% risk for each pregnancy
+- Prenatal diagnosis available for many severe forms
+- Preimplantation genetic diagnosis possible
 
-## Special Populations
+When to refer:
+- Meeting warning sign criteria
+- Unexplained recurrent infections
+- Family history of PID
+- Failure to thrive with infections
+- Newborn screen positive for SCID`
+    },
+    5: {
+      level: 5,
+      summary: 'Advanced concepts include newborn screening implementation, newborn genetic diagnosis, targeted biologic therapies, improved HSCT techniques, and emerging gene therapy applications for primary immunodeficiencies.',
+      explanation: `Contemporary management of primary immunodeficiency has been transformed by newborn screening, next-generation genetic diagnosis, improved transplant techniques, and gene therapy advances.
 
-### Pregnancy Considerations
+Newborn screening for SCID:
 
-**Preconception Counseling**
-- Genetic implications
-- Medication adjustments
-- IgG replacement during pregnancy (dose may need increase)
+TREC assay:
+- Detects T-cell receptor excision circles by PCR on dried blood spot
+- Surrogate marker for naive T-cell production
+- Low/absent TRECs indicate T-cell lymphopenia
+- Implemented in all 50 US states since 2018
 
-**Fetal Considerations**
-- Maternal antibodies (if on IgG replacement)
-- Some PIDDs are pregnancy-detected
+Benefits:
+- Identifies SCID before infections occur
+- Enables early HSCT with excellent outcomes
+- Also detects other T-cell defects (DiGeorge, other lymphopenias)
+- Cost-effective; prevents deaths and complications
 
-**Postpartum**
-- Breastfeeding considerations (maternal IgA deficiency)
-- Newborn evaluation if genetic PIDD
+Challenges:
+- False positives (prematurity, cardiac surgery, other causes of lymphopenia)
+- Need for rapid confirmatory testing
+- Infrastructure for rapid HSCT referral
+- Ethical considerations for conditions of unknown significance
 
-### Transition from Pediatric to Adult Care
+Genetic diagnosis advances:
 
-**Challenges**
-- Different healthcare systems
-- Insurance coverage
-- Patient independence
+Next-generation sequencing:
+- PID gene panels: 200+ genes
+- Whole exome sequencing for undiagnosed cases
+- Rapid diagnosis in critically ill infants
+- Identifies atypical presentations
 
-**Transition Planning**
-- Begin in early adolescence
-- Patient education
-- Adult immunologist identification
+Benefits of genetic diagnosis:
+- Definitive diagnosis
+- Prognostic information
+- Family planning
+- Targeted therapy selection
+- Identification of carriers
+- Research opportunities
 
-## Novel Therapeutics
+Variants of uncertain significance:
+- Challenge in interpretation
+- Need for functional studies
+- International databases (Infevers, ClinVar)
+- Expert committees for variant classification
 
-### Targeted Therapies
+Targeted biologic therapies:
 
-**Abatacept (CTLA4-Ig)**
-- CTLA4 and LRBA deficiency
-- Improves autoimmunity
-- Reduces immunosuppression need
+JAK inhibitors:
+- Ruxolitinib for HLH, some autoinflammatory disorders
+- Tofacitinib for IPEX syndrome
+- Controls immune dysregulation
 
-**Ruxolitinib (JAK Inhibitor)**
-- STAT3 GOF
-- Interferonopathies
-- Reduces inflammatory complications
+TNF inhibitors:
+- Etanercept, infliximab for inflammatory complications
+- Caution in patients with infection risk
 
-**Leniolisib (PI3Kδ Inhibitor)**
-- APDS1 (PIK3CD mutations)
-- First approved therapy for APDS
-- Reduces lymphoproliferation
+IL-1 blockade:
+- Anakinra for autoinflammatory disorders
+- Some forms of HLH
 
-**Sirolimus (mTOR Inhibitor)**
+Anti-CD20 (rituximab):
+- For lymphoid hyperplasia in CVID
 - Autoimmune complications
-- Reduces lymphoproliferation
 
-### Gene Therapy
+Abatacept (CTLA4-Ig):
+- For LRBA deficiency
+- Replaces missing CTLA4 function
 
-**Approved Products**
-- Strimvelis (ADA-SCID) - Europe
-- Libmeldy (ADA-SCID) - US/Europe
-- Zynteglo (beta-thalassemia) - platform applicable to PIDD
+Tocilizumab (anti-IL-6):
+- Cytokine release syndrome
+- Some autoinflammatory conditions
 
-**Clinical Trials**
-- X-linked SCID
-- CGD
-- WAS
-- Chronic granulomatous disease
+HSCT advances:
 
-**Challenges**
-- Insertional mutagenesis risk
-- Conditioning regimens
-- Cost
-- Long-term follow-up
+Haploidentical transplantation:
+- Post-transplant cyclophosphamide reduces GVHD
+- Parent can be donor
+- Expands donor pool
+- Good outcomes in SCID
 
-### Emerging Therapies
+Reduced intensity conditioning:
+- Less toxicity
+- Suitable for older patients, those with organ dysfunction
+- May have mixed chimerism
 
-**Gene Editing**
-- CRISPR/Cas9
-- Base editing
-- Prime editing
+T-cell depleted grafts:
+- Reduces GVHD
+- Allows haploidentical donors
+- Slower immune reconstitution
+- Risk of viral infections
+
+Gene therapy advances:
+
+Approved therapies:
+- Strimvelis (ADA-SCID): Retroviral vector, ex vivo
+- Zynteglo (beta-thalassemia): Related technology
+
+In development:
+- X-linked SCID: Previous leukemia risk with gamma-retrovirus; lentiviral vectors safer
+- WAS: Lentiviral gene therapy promising
+- CGD: Challenges with oxidase complex expression
+- XLA: More complex (requires B-cell reconstitution)
+
+Challenges:
+- Insertional oncogenesis
+- Optimal stem cell collection
+- Cost and access
+- Durability of response
+- Manufacturing complexity
+
+Future directions:
+
+In utero HSCT:
+- Performed before birth for severe PIDs
+- Tolerance induction to donor cells
+- Experimental; promising for some conditions
+
+Genome editing:
+- CRISPR-Cas9 correction of mutations
+- Ex vivo editing of patient stem cells
+- Preclinical for many PIDs
 - Potential for precise correction
 
-**mRNA Therapeutics**
-- Transient protein expression
-- Potential for enzyme replacement
-- Vaccine applications
-
-## Diagnostic Dilemmas
-
-### Distinguishing PIDD from Secondary Immunodeficiency
-
-**Medication Effects**
-- Rituximab: prolonged B-cell depletion
-- Corticosteroids: multiple effects
-- Chemotherapy
-- CAR-T therapy
-
-**Protein Loss**
-- Nephrotic syndrome
-- Protein-losing enteropathy
-- Lymphangiectasia
-
-**Distinguishing Features**
-- Age of onset
-- Family history
-- Genetic testing
-- B-cell recovery after medication cessation
-
-### Overlap Syndromes
-
-**CVID Mimics**
-- Multiple myeloma (monoclonal gammopathy)
-- CLL with hypogammaglobulinemia
-- Drug-induced hypogammaglobulinemia
-
-**Combined Immunodeficiency Mimics**
-- HIV infection
-- Iatrogenic (medications)
-- Malnutrition
-
-## Prognosis and Natural History
-
-### Factors Affecting Outcomes
-
-**Positive Factors**
-- Early diagnosis
-- Appropriate IgG replacement
-- Prophylactic antibiotics
-- HSCT when indicated
-- Access to specialized care
-
-**Negative Factors**
-- Diagnostic delay
-- Irreversible organ damage
-- Severe autoimmunity
-- Malignancy
-- Poor adherence
-
-### Quality of Life
-
-**Challenges**
-- Frequent medical visits
-- Treatment burden (IVIG/SCIG)
-- Anxiety about infections
-- Financial burden
-- School/work impacts
-
-**Support Resources**
-- Immune Deficiency Foundation (IDF)
-- Patient support groups
-- Patient assistance programs
-- Mental health support
-      `
-    },
-
-    expert: {
-      title: 'Expert-Level Primary Immunodeficiency Knowledge',
-      description: 'Research frontiers and future directions',
-      content: `
-# Expert-Level Perspectives on Primary Immunodeficiency
-
-## Molecular Mechanisms
-
-### Genetic Architecture
-
-**Mendelian PIDDs**
-- Single gene defects with clear inheritance
-- X-linked, autosomal dominant, autosomal recessive
-- ~500 genes identified
-
-**Polygenic Influences**
-- Multiple variants contributing
-- Modifier genes affecting phenotype
-- Gene-gene interactions
-
-**De Novo Mutations**
-- Especially in AD PIDDs
-- Whole exome sequencing impact
-- Parental germline mosaicism
-
-**Copy Number Variations**
-- Gene deletions, duplications
-- May affect multiple genes
-- Detected by CMA, WES
-
-**Non-Coding Variants**
-- Regulatory region mutations
-- Splice site variants
-- Deep intronic variants
-
-### Pathogenic Mechanisms
-
-**Developmental Pathway Defects**
-- Hematopoiesis (RAG1/2, IL2RG)
-- Lymphocyte differentiation
-- Class switch recombination (AICDA)
-
-**Signaling Pathway Defects**
-- Cytokine receptors (γc, IL-7R)
-- JAK-STAT pathway
-- NF-κB pathway (NEMO, IKBA)
-- PI3K-AKT-mTOR pathway
-
-**Effector Function Defects**
-- Oxidative burst (CYBA, CYBB, NCF1-4)
-- Cytotoxicity (PRF1, UNC13D)
-- Apoptosis (FAS, FASL)
-
-**Regulatory Pathway Defects**
-- FOXP3 (IPEX)
-- CTLA4, LRBA
-- STAT3 (AD-HIES)
-
-## Precision Medicine Approaches
-
-### Genotype-Phenotype Correlations
-
-**CVID Subtypes**
-- TNFRSF13B (TACI): Heterozygous, AD with incomplete penetrance
-- NFKB1, NFKB2: AD, often with adrenocorticotropic deficiency
-- ICOS: AR, severe phenotype
-- PRKCD: AD, EBV-associated lymphoma
-
-**SCID Genotypes**
-- IL2RG (X-linked): Most common
-- JAK3 (AR): Similar to IL2RG
-- RAG1/2 (AR): Omenn syndrome possible
-- ADA (AR): Metabolic complications
-- IL7R (AR): B-cells present
-
-**CGD Genotypes**
-- CYBB (X-linked): ~70% of cases
-- CYBA (AR): p22phox
-- NCF1 (AR): p47phox (most common AR)
-- NCF2 (AR): p67phox
-- NCF4 (AR): p40phox
-
-### Biomarker Development
-
-**Diagnostic Biomarkers**
-- TRECs (T-cell receptor excision circles) for SCID
-- KRECs (kappa-deleting recombination excision circles)
-- Serum IgG subclass patterns
-- Specific vaccine responses
-
-**Prognostic Biomarkers**
-- B-cell numbers (CVID complications)
-- Switched memory B-cells
-- T-cell repertoire diversity
-- Telomere length (DKC1 mutations)
-
-**Pharmacodynamic Biomarkers**
-- IgG trough levels
-- Vaccine response monitoring
-- Gene expression signatures
-
-## Therapeutic Innovation
-
-### Advanced Gene Therapy
-
-**Lentiviral Vectors**
-- Improved safety compared to gamma-retroviral
-- Self-inactivating (SIN) vectors
-- Tissue-specific promoters
-
-**Gene Editing**
-
-*CRISPR/Cas9*
-- Precise gene correction
-- Off-target effects (concern)
-- HDR-mediated correction
-- Clinical trials for SCID, CGD
-
-*Base Editing*
-- C→T, A→G conversions
-- No double-strand breaks
-- Reduced off-target effects
-- Potential for wider application
-
-*Prime Editing*
-- More versatile editing
-- Larger edits possible
-- Still in development
-
-**Challenges**
-- Delivery to hematopoietic stem cells
-- Off-target effects
-- Conditioning regimens
-- Insertional mutagenesis
-- Immune responses to editing machinery
-
-### RNA Therapeutics
-
-**mRNA Therapy**
-- Transient protein expression
-- No genome integration
-- Potential for enzyme replacement
-- LNP delivery optimization
-
-**Antisense Oligonucleotides**
-- Splice modulation
-- Exon skipping
-- Nonsense suppression
-
-**RNAi**
-- Gene knockdown
-- Potential for dominant-negative mutations
-
-### Immunomodulation
-
-**Targeted Cytokine Blockade**
-
-*Anti-IL-6 (Tocilizumab)*
-- Castleman disease in CVID
-- Autoimmune complications
-
-*Anti-IL-1 (Anakinra)*
-- Inflammatory complications
-
-*Anti-TNF*
-- Granulomatous disease in CVID
-
-**JAK Inhibition**
-- Ruxolitinib for STAT3 GOF
-- Baricitinib for interferonopathies
-- Potential for broad immunomodulation
-
-**BTK Inhibition**
-- For XLA carriers with symptoms
-- Theoretical application
-
-### Cellular Therapies
-
-**Haploidentical HSCT**
-- T-cell depletion (CD34+ selection)
-- Post-transplant cyclophosphamide
-- Expanded donor pool
-
-**Treg Cell Therapy**
-- For IPEX-like disorders
-- Autoimmune complications
-
-**Thymus Transplantation**
-- Complete DiGeorge syndrome
-- Long-term engraftment
-
-## Newborn Screening Evolution
-
-### Current State
-
-**TREC Screening (SCID)**
-- Implemented in all US states
-- Detects T-cell lymphopenia
-- Early diagnosis → better outcomes
-
-### Future Directions
-
-**KREC Screening**
-- Detects B-cell deficiencies
-- Combined with TRECs
-- Possible addition to NBS panels
-
-**Metabolic Screening**
-- ADA activity
-- Combined metabolic and immune disorders
-
-**Whole Genome Sequencing**
-- As first-tier NBS
-- Ethical considerations
-- Data interpretation challenges
-- Cost-effectiveness
-
-## Research Frontiers
-
-### Microbiome and PIDD
-
-**Gut Microbiome**
-- Dysbiosis in CVID, XLA
-- Relationship to enteropathy
-- Potential for microbiome-based therapies
-
-**Therapeutic Modulation**
-- Fecal microbiota transplantation
-- Targeted probiotics
-- Prebiotic supplementation
-
-### Immunometabolism
-
-**Metabolic Reprogramming**
-- Immune cell function depends on metabolism
-- Glycolysis vs. oxidative phosphorylation
-- Potential metabolic therapies
-
-**Mitochondrial Function**
-- Role in immune cell signaling
-- Metabolic PIDDs
-
-### Artificial Intelligence
-
-**Variant Classification**
-- Machine learning for VUS interpretation
-- Pathogenicity prediction
-- Functional prediction from sequence
-
-**Clinical Decision Support**
-- Diagnosis assistance
-- Treatment recommendations
-- Outcome prediction
-
-### Regenerative Medicine
-
-**In Vitro Hematopoiesis**
-- Generate HSCs from iPSCs
-- Gene correction
-- Autologous transplantation
-
-**Thymic Organoids**
-- Reconstitution of thymic function
-- Support T-cell development
-
-## Ethical and Social Considerations
-
-### Genetic Screening
-
-**Newborn Screening**
-- What disorders to include?
-- Storage and use of samples
-- Parental right to refuse
-- Incidental findings
-
-**Prenatal Testing**
-- Preimplantation genetic diagnosis
-- Ethical considerations
-- Access and equity
-
-**Predictive Testing**
-- Asymptomatic family members
-- Psychological impact
-- Insurance discrimination concerns
-
-### Access and Equity
-
-**Treatment Costs**
-- IgG replacement: >$50,000/year
-- Gene therapy: millions per patient
-- Insurance coverage variability
-- Access to specialized centers
-
-**Global Disparities**
-- Diagnosis and treatment access
-- Newborn screening availability
-- HSCT accessibility
-
-### Research Ethics
-
-**Pediatric Research**
-- Assent and consent
-- Long-term follow-up
-- Gene therapy risks
-
-**Data Sharing**
-- Genetic data privacy
-- Database contribution
-- Return of results
-
-## Unanswered Questions and Future Directions
-
-### Biology Questions
-- How does genetic variation affect phenotype severity?
-- What explains incomplete penetrance?
-- How does the microbiome interact with immune deficiency?
-- What causes late-onset presentations?
-- How to predict complications?
-
-### Clinical Questions
-- Optimal IgG trough level targets?
-- Best prophylactic regimens?
-- When to HSCT vs. medical management?
-- How to monitor treatment response?
-- Long-term outcomes of gene therapy?
-
-### Therapeutic Questions
-- Can we develop curative therapies without HSCT?
-- How to make gene therapy safer and cheaper?
-- What disorders are amenable to small molecule therapy?
-- Can we prevent autoimmunity in PIDD?
-- Optimal management of subclinical PIDD?
-      `
+Tolerance induction:
+- For antibody deficiencies after transplant
+- Reduced need for immunosuppression
+- Enhances graft function
+
+Early intervention:
+- Presymptomatic diagnosis via genetic screening
+- Family screening of at-risk newborns
+- Early treatment before complications
+
+Registries and collaboration:
+- USIDNET (US Immunodeficiency Network)
+- ESID (European Society for Immunodeficiencies)
+- International data sharing
+- Natural history studies
+- Clinical trial networks
+
+Quality improvement:
+- Standardized diagnostic criteria
+- Treatment guidelines
+- Quality of life assessment
+- Patient-reported outcomes
+- Value-based care models
+
+Global health considerations:
+- SCID screening implementation worldwide
+- Access to immunoglobulin in resource-limited settings
+- HSCT access disparities
+- Gene therapy affordability
+- Training of specialists
+
+Research frontiers:
+- Understanding incomplete penetrance
+- Modifier genes affecting severity
+- Microbiome interactions
+- Immune reconstitution biology
+- Biomarkers for complications
+
+Patient advocacy:
+- Immune Deficiency Foundation
+- Jeffrey Modell Foundation
+- Patient education and support
+- Research funding
+- Awareness campaigns`,
+      keyTerms: [
+        { term: 'post-transplant cyclophosphamide', definition: 'High-dose cyclophosphamide after haploidentical transplant to prevent GVHD' },
+        { term: 'lentiviral vector', definition: 'Gene therapy delivery system with improved safety profile over retrovirus' },
+        { term: 'in utero HSCT', definition: 'Stem cell transplantation performed before birth; induces tolerance' },
+        { term: 'insertional oncogenesis', definition: 'Cancer development from gene therapy vector integration near oncogenes' },
+        { term: 'TREC screening', definition: 'Newborn screening test for severe combined immunodeficiency' }
+      ],
+      clinicalNotes: `Advanced clinical considerations:
+
+VUS management:
+- Do not over-interpret genetic variants
+- Correlate with clinical phenotype
+- Functional studies when possible
+- Family segregation analysis
+- Reclassification over time
+
+Mosaicism:
+- Somatic mosaicism may modify phenotype
+- Revertant mosaicism can lead to spontaneous improvement
+- Consider in atypical presentations
+
+Female carriers:
+- X-linked disorders: Skewed X-inactivation may cause symptoms
+- CGD carriers: Discoid lupus, photosensitivity
+- XLA carriers: Usually asymptomatic
+
+Combined immunodeficiency variants:
+- "Leaky" SCID: Some T-cell function, presents later
+- Omenn syndrome: Maternal engraftment, erythroderma, hepatosplenomegaly
+- Athabaskan SCID: DNA-PKcs deficiency; radiation sensitivity
+
+Autoinflammatory vs autoimmune:
+- Autoinflammatory: Innate immune activation, no autoantibodies, fever patterns
+- Autoimmune: Adaptive immunity, autoantibodies, tissue-specific damage
+- Some PIDs have both features
+
+Evolving nomenclature:
+- IEI (Inborn Errors of Immunity) replacing PIDD
+- Recognizes immune dysregulation, not just deficiency
+- Expanding spectrum of conditions
+
+Research participation:
+- Encourage enrollment in registries
+- Natural history studies improve understanding
+- Clinical trials for novel therapies
+- Patient-reported outcomes valuable
+
+Long-term survivors:
+- Transition from pediatric to adult care
+- Fertility preservation counseling
+- Cancer surveillance
+- Psychosocial support
+- Career and insurance planning`
     }
-  }
-}
+  },
+  media: [],
+  citations: [
+    { id: '1', type: 'textbook', title: 'Middleton\'s Allergy: Principles and Practice', authors: ['Burks AW', 'Holgate ST', 'O\'Hehir RE'], source: 'Elsevier', chapter: 'Chapter 60: Primary Immunodeficiency Diseases' },
+    { id: '2', type: 'article', title: 'International Union of Immunological Societies: 2022 Update', authors: ['Tangye SG', 'Al-Herz W', 'Bousfiha A'], source: 'Journal of Clinical Immunology', chapter: '2022' }
+  ],
+  crossReferences: [
+    { targetId: 'secondary-immunodeficiency', targetType: 'condition', relationship: 'sibling' },
+    { targetId: 'iga-deficiency', targetType: 'condition', relationship: 'child' },
+    { targetId: 'cvid', targetType: 'condition', relationship: 'child' }
+  ],
+  tags: {
+    systems: ['allergy-immunology'],
+    topics: ['immunodeficiency', 'genetic disorders', 'inborn errors of immunity'],
+    keywords: ['primary immunodeficiency', 'SCID', 'CVID', 'antibody deficiency', 'immunoglobulin'],
+    clinicalRelevance: 'high'
+  },
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  version: 1,
+  status: 'published'
+};

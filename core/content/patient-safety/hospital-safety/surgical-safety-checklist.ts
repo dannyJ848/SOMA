@@ -1,484 +1,490 @@
-/**
- * Surgical Safety Checklist
- *
- * Understanding and participating in surgical safety protocols.
- */
-
 import { EducationalContent } from '../../types';
 
-export const surgicalSafetyChecklist: EducationalContent = {
-  id: 'concept-surgical-safety-checklist',
+export const surgicalSafetyChecklistContent: EducationalContent = {
+  id: 'surgical-safety-checklist',
   type: 'concept',
   name: 'Surgical Safety Checklist',
-  alternateNames: ['Pre-Surgery Checklist', 'WHO Surgical Checklist', 'Operative Safety Protocol'],
-
+  alternateNames: ['WHO Surgical Checklist', 'Surgical Time Out', 'Pre-Surgery Checklist'],
   levels: {
     1: {
       level: 1,
-      summary: 'Before surgery, doctors and nurses check many things to keep you safe. You can help by answering their questions.',
-      explanation: `**What Happens Before Surgery:**
-Before your surgery, the medical team asks you lots of questions and does many checks. This is to make sure everything goes right!
+      summary: 'A surgical safety checklist is a list of important steps the surgical team completes before, during, and after surgery to keep patients safe.',
+      explanation: `## What is a Surgical Safety Checklist?
 
-**Questions They Will Ask:**
-- What is your name and birthday?
-- What surgery are you having?
-- Which body part is being operated on?
-- Do you have any allergies?
+A surgical safety checklist is a list of important steps the surgical team completes before, during, and after surgery to keep patients safe.
 
-**Why They Mark Your Body:**
-If you are having surgery on one side of your body (like your left knee), someone will draw on it with a marker. This helps everyone know exactly where to operate.
+### Before Surgery (Sign In)
 
-**What You Can Do:**
-- Answer all questions, even if you have answered them before
-- Tell them if the mark is in the wrong spot
-- Say something if anything seems wrong
-- Ask questions if you are confused
+The team checks:
+- Your identity and the surgery planned
+- Consent form is signed
+- Allergy information
+- Anesthesia safety checks
 
-**The Team Works Together:**
-Before surgery starts, everyone in the operating room stops and checks:
-- Patient name and procedure
-- All equipment is ready
-- Any special concerns
+### Before Incision (Time Out)
 
-**It's Good They Ask Many Times!**
-It might seem annoying to answer the same questions over and over, but this keeps you safe. Each check is like a safety net!`,
+The whole team pauses to confirm:
+- Correct patient
+- Correct surgery
+- Correct body part or side
+- Everyone is ready
+
+### After Surgery (Sign Out)
+
+Before finishing, the team checks:
+- Procedure done as planned
+- All equipment counted
+- Specimens labeled
+- Patient ready for recovery
+
+### Why Checklists Help
+
+- Prevent wrong surgery
+- Catch missed steps
+- Improve teamwork
+- Save lives
+
+### Your Role
+
+You can help by:
+- Confirming your identity
+- Marking the surgical site
+- Asking questions
+- Reporting any concerns`,
       keyTerms: [
-        { term: 'surgery', definition: 'An operation where doctors fix something inside your body' },
-        { term: 'operating room', definition: 'The special room where surgeries happen' },
-        { term: 'surgical site marking', definition: 'A mark drawn on your body to show where the surgery will be' },
+        { term: 'Surgical checklist', definition: 'List of safety steps for surgery' },
+        { term: 'Time out', definition: 'Pause before surgery to confirm details' },
+        { term: 'Sign in', definition: 'Checks before anesthesia' },
+        { term: 'Sign out', definition: 'Checks before leaving operating room' }
       ],
       analogies: [
-        'The surgery checklist is like a pilot checking the airplane before takeoff - it makes sure everything is ready for a safe trip.',
-        'Marking the surgery spot is like putting an X on a treasure map - it shows exactly where to go.',
+        'A surgical checklist is like a pilot checklist before flying a plane'
       ],
       examples: [
-        'A nurse asks your name and what surgery you are having, and you tell them clearly.',
-        'You notice the mark is on your right knee instead of your left, and you speak up.',
-      ],
+        'The surgical team marks the correct knee before knee replacement surgery',
+        'Everyone stops to confirm patient identity before starting the operation'
+      ]
     },
     2: {
       level: 2,
-      summary: 'Surgical safety checklists are proven tools that reduce complications. Patients play an active role by verifying their identity, procedure, and surgical site.',
-      explanation: `**The Surgical Safety Checklist:**
+      summary: 'The WHO Surgical Safety Checklist, introduced in 2008, reduced surgical complications and deaths by over 30% in pilot studies. It ensures communication, verifies critical steps, and promotes teamwork in the operating room.',
+      explanation: `## The WHO Surgical Safety Checklist
 
-The WHO Surgical Safety Checklist was developed to reduce surgical complications and deaths. Studies show it works - reducing deaths by 47% in some settings.
+The WHO Surgical Safety Checklist, introduced in 2008, reduced surgical complications and deaths by over 30% in pilot studies. It ensures communication, verifies critical steps, and promotes teamwork in the operating room.
 
-**Three Phases of the Checklist:**
+### History and Impact
 
-| Phase | When | Key Checks |
-|-------|------|------------|
-| Sign In | Before anesthesia | Identity, site, consent, allergies |
-| Time Out | Before incision | Team introduction, procedure confirmation |
-| Sign Out | Before leaving OR | Counts complete, specimen labeled, concerns |
+**Development:**
+- WHO World Alliance for Patient Safety
+- Launched in 2008
+- Tested in 8 countries
+- Now used worldwide
 
-**Your Role in Each Phase:**
+**Results:**
+- 36% reduction in deaths
+- 47% reduction in complications
+- Improved team communication
+- Better safety culture
 
-*Before Anesthesia (Sign In):*
-- Confirm your name and date of birth
-- State what procedure you are having
-- Confirm which side/site
-- Verify allergies are documented
-- Confirm you understand the consent
+### The Three Phases
 
-*Before Surgery Starts (Time Out):*
-- You may be asleep, but beforehand confirm:
-- Correct procedure
-- Correct site marked
-- Any concerns addressed
+**Sign In (Before Anesthesia):**
+- Patient identity confirmed
+- Site marked and verified
+- Consent completed
+- Anesthesia machine check
+- Pulse oximeter on
+- Known allergies
+- Difficult airway assessment
+- Aspiration risk
+- Blood loss estimation
+
+**Time Out (Before Incision):**
+- All team members introduce themselves
+- Patient identity confirmed
+- Site and procedure confirmed
+- Antibiotics given (if needed)
+- Essential imaging displayed
+- Special equipment available
+
+**Sign Out (Before Leaving OR):**
+- Procedure confirmed
+- Sponge and instrument counts correct
+- Specimens labeled
+- Equipment issues addressed
+- Recovery plan clear
+
+### Key Safety Checks
 
 **Site Marking:**
-- Required for procedures involving left/right, multiple structures, or levels
-- Should be done by surgeon or authorized person
-- You should verify the mark is correct
-- Mark should be visible after draping
+- Marked by surgeon
+- Visible after prep
+- Confirmed by patient when possible
+- For procedures with laterality
 
-**Questions to Ask:**
-- "Can you tell me what procedure I'm having today?"
-- "Can I see where you've marked the surgical site?"
-- "Have you received my complete allergy list?"
-- "What time will the surgery start and how long will it take?"
+**Antibiotic Prophylaxis:**
+- Given within 60 minutes before incision
+- Reduces surgical site infections
+- Discontinued within 24 hours
 
-**Red Flags to Report:**
-- Mark in wrong location
-- Team seems uncertain about procedure
-- Your identity or procedure seems confused
-- Allergies not confirmed
-
-**Why This Matters:**
-- Wrong-site surgery still occurs (1 in 100,000 procedures)
-- Wrong-patient surgery is rare but devastating
-- Retained surgical items happen
-- Checklists prevent these errors`,
+**Deep Vein Thrombosis Prevention:**
+- Mechanical prophylaxis
+- Medication when indicated
+- VTE risk assessment`,
       keyTerms: [
-        { term: 'WHO Surgical Safety Checklist', definition: 'A standardized checklist developed by the World Health Organization to improve surgical safety' },
-        { term: 'time out', definition: 'A pause before surgery begins where the entire team verifies patient, procedure, and site' },
-        { term: 'site marking', definition: 'Drawing on the patient to indicate the correct surgical location' },
-        { term: 'wrong-site surgery', definition: 'Surgery performed on the wrong body part or side' },
+        { term: 'Surgical site infection', definition: 'Infection at the surgical wound' },
+        { term: 'Pulse oximeter', definition: 'Device measuring blood oxygen' },
+        { term: 'Prophylaxis', definition: 'Prevention of disease' },
+        { term: 'VTE', definition: 'Venous thromboembolism (blood clots)' }
       ],
       analogies: [
-        'The surgical time out is like a team huddle before a big play - everyone confirms they know the plan.',
+        'The surgical checklist is like a team huddle before a big play in sports'
       ],
+      examples: [
+        'A time out catches that imaging is missing before starting spinal surgery',
+        'The checklist confirms all team members know the patient has a latex allergy'
+      ]
     },
     3: {
       level: 3,
-      summary: 'Surgical safety checklists represent a systems-based approach to error prevention, integrating standardized protocols with team communication and patient engagement.',
-      explanation: `## Surgical Safety: A Systems Approach
+      summary: 'Surgical checklists function as communication tools and standardization mechanisms. Implementation requires addressing barriers like culture change, time concerns, and appropriate modification for different surgical settings while maintaining core safety elements.',
+      explanation: `## Implementing Surgical Checklists
 
-**Evidence for Checklists:**
-- WHO Safe Surgery Saves Lives initiative (2008)
-- Landmark study: 47% reduction in deaths, 36% reduction in complications
-- Adopted globally as standard of care
-- Part of Joint Commission National Patient Safety Goals
+Surgical checklists function as communication tools and standardization mechanisms. Implementation requires addressing barriers like culture change, time concerns, and appropriate modification for different surgical settings while maintaining core safety elements.
 
-**Checklist Components:**
+### Checklist as Communication Tool
 
-*Sign In (Before Induction):*
-1. Patient identity confirmed
-2. Site marked and confirmed
-3. Consent documented
-4. Anesthesia safety check complete
-5. Pulse oximeter functioning
-6. Known allergies documented
-7. Difficult airway/aspiration risk assessed
-8. Blood loss risk assessed
+**Team Briefings:**
+- Case discussion before surgery
+- Anticipate problems
+- Assign roles
+- Share concerns
 
-*Time Out (Before Incision):*
-1. All team members introduced
-2. Patient identity, procedure, site confirmed
-3. Antibiotic prophylaxis given (within 60 min)
-4. Critical events anticipated
-5. Surgeon: Critical steps, expected duration, blood loss
-6. Anesthesia: Patient-specific concerns
-7. Nursing: Sterility confirmed, equipment concerns
-8. Imaging displayed if relevant
+**Structured Communication:**
+- Everyone speaks
+- Hierarchical barriers reduced
+- Shared mental model
+- Closed-loop communication
 
-*Sign Out (Before Leaving OR):*
-1. Procedure name recorded
-2. Instrument, sponge, needle counts complete
-3. Specimen labeling confirmed
-4. Equipment problems documented
-5. Key concerns for recovery discussed
+### Implementation Science
 
-**Patient Participation:**
+**Success Factors:**
+- Leadership commitment
+- Local modification
+- Team training
+- Ongoing feedback
+- Data collection
 
-*Active Engagement:*
-- Verify identity at each transition
-- Confirm procedure and laterality
-- Participate in site marking verification
-- Ask questions about the plan
-- Report concerns
+**Common Barriers:**
+- "We already do this"
+- Time pressure
+- Hierarchy issues
+- Lack of engagement
+- Poor design
 
-*Informed Consent:*
-- Understand the procedure
-- Know risks and alternatives
-- Have questions answered
-- Signed by correct patient
+**Overcoming Resistance:**
+- Show data on complications
+- Involve frontline staff in design
+- Start with champions
+- Regular feedback
+- Celebrate successes
 
-**Wrong-Site Surgery Prevention:**
+### Customization
 
-*Universal Protocol:*
-1. Pre-procedure verification
-2. Site marking
-3. Time out immediately before procedure
+**Specialty Adaptation:**
+- Cardiac surgery additions
+- Orthopedic protocols
+- Ophthalmology modifications
+- Ambulatory surgery adjustments
 
-*Risk Factors for Error:*
-- Multiple procedures
-- Multiple surgeons
-- Unusual time pressure
-- Unusual patient characteristics
+**Setting Variations:**
+- Operating rooms
+- Procedure rooms
+- Emergency surgery
+- Cesarean sections
 
-**Organizational Implementation:**
-- Leadership support required
-- Training for all team members
-- Audit and feedback
-- Culture of safety
-- No hierarchy in speaking up`,
+**Required Elements:**
+- Identity verification
+- Procedure confirmation
+- Site marking
+- Antibiotic timing
+- Count verification
+
+### Measuring Effectiveness
+
+**Process Measures:**
+- Checklist completion rates
+- Time out participation
+- Antibiotic timing
+- Site marking compliance
+
+**Outcome Measures:**
+- Wrong-site surgery rate
+- Retained foreign objects
+- Surgical site infections
+- Mortality rates
+
+**Balancing Measures:****
+- Time to incision
+- Case delays
+- Staff satisfaction
+- Efficiency metrics`,
       keyTerms: [
-        { term: 'Universal Protocol', definition: 'Joint Commission requirements for preventing wrong-site, wrong-procedure, wrong-person surgery' },
-        { term: 'sign in', definition: 'Checklist phase before anesthesia induction' },
-        { term: 'sign out', definition: 'Checklist phase before patient leaves operating room' },
-        { term: 'retained surgical item', definition: 'Sponge, instrument, or other item unintentionally left inside patient' },
-      ],
-      clinicalNotes: 'Checklist effectiveness depends on genuine engagement, not mere compliance. A culture supporting speaking up regardless of hierarchy is essential.',
+        { term: 'Implementation science', definition: 'Study of methods to promote adoption' },
+        { term: 'Closed-loop communication', definition: 'Confirming message received and understood' },
+        { term: 'Shared mental model', definition: 'Common understanding among team' },
+        { term: 'Retained foreign object', definition: 'Surgical item left inside patient' }
+      ]
     },
     4: {
       level: 4,
-      summary: 'Surgical safety systems integrate checklists, team training, human factors engineering, and safety culture to minimize preventable harm in operative settings.',
-      explanation: `## Advanced Surgical Safety Systems
+      summary: 'Surgical never events including wrong-site, wrong-procedure, and wrong-patient surgery require systems approaches beyond checklists. Universal Protocol mandates preoperative verification, site marking, and time out as Joint Commission requirements for all accredited organizations.',
+      explanation: `## Preventing Surgical Never Events
 
-**Theoretical Framework:**
-- Swiss cheese model of error
-- High-reliability organization principles
-- Human factors and ergonomics
-- Team training (CRM adaptation)
+Surgical never events including wrong-site, wrong-procedure, and wrong-patient surgery require systems approaches beyond checklists. Universal Protocol mandates preoperative verification, site marking, and time out as Joint Commission requirements for all accredited organizations.
 
-**Checklist Science:**
+### Universal Protocol
 
-*Evidence Synthesis:*
-| Study | Setting | Results |
-|-------|---------|---------|
-| Haynes 2009 | 8 hospitals global | 47% mortality reduction |
-| van Klei 2012 | Netherlands | 33% complication reduction |
-| Haugen 2015 | Norway | Improved team communication |
+**Joint Commission Requirement:**
+- Applies to all invasive procedures
+- Three components required
+- Monitored during surveys
+- Sentinel events if violated
 
-*Implementation Factors:*
-- Fidelity to protocol
-- Team engagement
-- Leadership support
-- Feedback mechanisms
-- Adaptation to local context
+**Component 1: Preoperative Verification:**
+- Reconciliation of documents
+- Consistent information
+- Missing information addressed
+- Completed before anesthesia
 
-**Human Factors in Surgery:**
+**Component 2: Site Marking:**
+- Marked by person performing procedure
+- Unambiguous marking
+- Visible after prep
+- Patient involvement when possible
+- For laterality or multiple structures
 
-*Error Types:*
-- Slips: Correct intention, wrong action
-- Lapses: Forgetting to do something
-- Mistakes: Wrong plan
-- Violations: Intentional deviation
+**Component 3: Time Out:**
+- Immediate before incision
+- Entire team participates
+- Active communication
+- Confirms: patient, site, procedure
 
-*Mitigation Strategies:*
-- Standardization
-- Checklists and protocols
-- Forcing functions
-- Team communication
-- Environmental design
+### Wrong-Site Surgery Prevention
 
-**Team Training:**
+**Risk Factors:**
+- Multiple surgeons/procedures
+- Time pressure
+- Unusual patient positioning
+- Obesity affecting anatomy
+- Multiple procedures on same patient
 
-*Crew Resource Management (CRM) Adaptation:*
-- Situation awareness
-- Communication
-- Decision-making
-- Workload management
-- Team building
+**High-Risk Procedures:**
+- Orthopedic (laterality)
+- Ophthalmology (eye)
+- Neurosurgery (level)
+- Urology (kidney/ureter)
+- Dental (quadrant/tooth)
 
-*Debriefing:*
-- Regular post-procedure review
-- Non-judgmental discussion
-- Identification of improvement opportunities
-- Celebration of successes
+**Additional Safeguards:**
+- Radiology confirmation
+- "Stop before you block" (regional)
+- Distinct site marking
+- Photographs when helpful
 
-**Enhanced Recovery Protocols:**
+### Retained Foreign Objects
 
-Integration with safety checklists:
-- Preoperative optimization
-- Multimodal analgesia
-- Early mobilization
-- Nutrition management
-- VTE prophylaxis
+**Prevention Strategies:**
+- Sponge counting systems
+- Radiopaque thread in sponges
+- Wound exploration before closure
+- X-ray when count incorrect
+- Technology-assisted counting
 
-**Special Circumstances:**
+**High-Risk Situations:**
+- Emergency surgery
+- High BMI
+- Multiple procedures
+- Team changes
+- Unanticipated change
 
-*Emergency Surgery:*
-- Abbreviated checklist may be needed
-- Core elements must remain
-- Document deviations and rationale
+**Technology Solutions:**
+- Barcode scanning
+- Radiofrequency detection
+- X-ray detectable items
+- Computerized tracking
 
-*Pediatric Surgery:*
-- Family involvement in verification
-- Age-appropriate communication
-- Special equipment considerations
+### Anesthesia Safety
 
-*High-Risk Procedures:*
-- Enhanced monitoring
-- Specialized team members
-- Explicit contingency planning
+**Pre-Anesthesia Check:**
+- Machine check
+- Suction working
+- Emergency drugs available
+- Backup ventilation
+- Difficult airway equipment
 
-**Quality Metrics:**
+**Surgical Fire Prevention:****
+- Fire risk assessment
+- O2 concentration minimized
+- Alcohol-based prep dry
+- Electrocautery safety
+- Fire extinguisher available
 
-| Metric | Target |
-|--------|--------|
-| Checklist compliance | >95% |
-| Time out completion | 100% |
-| Antibiotic timing | >95% within 60 min |
-| Site marking | 100% when applicable |
-| Never events | Zero |
-
-**Patient Safety Indicators:**
-- Death in low-mortality DRGs
-- PSI 90 composite
-- Retained surgical items
-- Wrong-site surgery
-- Perioperative complications`,
+**Medication Safety:**
+- Labeling in sterile field
+- Read-back for verbal orders
+- High-alert medication protocols
+- Syringe identification`,
       keyTerms: [
-        { term: 'Swiss cheese model', definition: 'Error theory describing how hazards pass through multiple defensive layers' },
-        { term: 'crew resource management', definition: 'Team training approach adapted from aviation to improve safety' },
-        { term: 'forcing function', definition: 'Design feature that prevents error by making it difficult or impossible' },
-        { term: 'enhanced recovery protocol', definition: 'Evidence-based perioperative care pathway to improve outcomes' },
+        { term: 'Never event', definition: 'Serious preventable medical error' },
+        { term: 'Universal Protocol', definition: 'Joint Commission wrong-site prevention' },
+        { term: 'Radiopaque', definition: 'Visible on x-ray' },
+        { term: 'High-alert medication', definition: 'Drugs with high risk of harm' }
       ],
-      clinicalNotes: 'Checklist implementation without culture change yields limited benefit. Briefing and debriefing practices, psychological safety for speaking up, and leadership modeling are essential complements.',
+      clinicalNotes: 'Time out must occur before incision for every procedure - no exceptions. Site marking must be unambiguous - "X" not acceptable alone as it could mean "not this side." Retained sponge count discrepancies require x-ray before leaving OR. Surgical fires require fire triad: oxidizer, fuel, ignition source - remove any one to prevent.'
     },
     5: {
       level: 5,
-      summary: 'Optimal surgical safety integrates checklists within high-reliability systems, incorporating human factors engineering, team science, technology, and continuous improvement.',
-      explanation: `## Surgical Safety Science: Current State and Future Directions
+      summary: 'Advanced surgical safety involves high-reliability organization principles, team training using crew resource management concepts, and continuous quality improvement. Emerging technologies including artificial intelligence, robotics integration, and augmented reality present new safety considerations for the operating room of the future.',
+      explanation: `## High-Reliability Surgical Care
 
-**Evolution of Surgical Safety:**
-- From individual skill focus to systems thinking
-- Recognition of teamwork and communication
-- Technology integration
-- Patient as safety partner
+Advanced surgical safety involves high-reliability organization principles, team training using crew resource management concepts, and continuous quality improvement. Emerging technologies including artificial intelligence, robotics integration, and augmented reality present new safety considerations for the operating room of the future.
 
-**Implementation Science:**
+### Crew Resource Management (CRM)
 
-*Adoption Barriers:*
-\`\`\`
-Organizational Culture
-        ↓
-Individual Attitudes → Implementation Fidelity
-        ↓                       ↓
-Resource Constraints      Outcome Achievement
-        ↓
-Sustainability
-\`\`\`
+**Aviation Origins:**
+- Applied to healthcare
+- Team communication
+- Flattened hierarchy
+- Speaking up encouraged
 
-*Success Factors:*
-- Leadership engagement
-- Front-line ownership
-- Adaptation to context
-- Audit and feedback
-- Integration with workflow
+**Key Elements:**
+- Briefings and debriefings
+- Call-outs for critical steps
+- Check-back communication
+- Handoff protocols
 
-**Technology Integration:**
-
-*Current Applications:*
-- Electronic checklists
-- Barcode specimen verification
-- Real-time data capture
-- Decision support
-- Communication platforms
-
-*Emerging Technologies:*
-- AI-assisted risk prediction
-- Smart OR integration
-- Voice-activated documentation
-- Video review systems
-- Simulation and training
-
-**Research Frontiers:**
-
-*Current Investigations:*
-- Optimal checklist design
-- Debriefing effectiveness
-- Team training outcomes
-- Technology impact
-- Patient engagement methods
-
-*Knowledge Gaps:*
-- Long-term sustainability
-- Context-specific adaptations
-- Cost-effectiveness
-- Implementation strategies
-
-**Global Surgical Safety:**
-
-*Disparities:*
-- Resource-limited settings
-- Access to safe surgery
-- Workforce development
-- Infrastructure limitations
-
-*Initiatives:*
-- Lancet Commission on Global Surgery
-- WHO Safe Surgery
-- G4 Alliance
-- Academic partnerships
-
-**Quality and Regulatory Framework:**
-
-*Accreditation:*
-- Joint Commission NPSG
-- CMS Conditions of Participation
-- Leapfrog Group standards
-- State regulations
-
-*Reporting:*
-- PSI measures
-- Hospital Compare
-- State adverse event reporting
-- PSO submissions
-
-**Safety Culture Assessment:**
-
-*Measurement Tools:*
-- Safety Attitudes Questionnaire
-- Hospital Survey on Patient Safety Culture
-- OR-specific assessments
-- Teamwork measures
-
-*Culture Interventions:*
-- Leadership WalkRounds
-- Comprehensive Unit-based Safety Program
+**Training Programs:**
 - TeamSTEPPS
-- Safety coaching
+- Simulation training
+- Crisis resource management
+- Communication skills
 
-**Patient Partnership:**
+### High-Reliability Organizations
 
-*Evolution:*
-- From passive recipient to active partner
-- Shared decision-making
-- Patient verification participation
-- Family presence options
-- Patient-reported outcomes
+**Characteristics:**
+- Preoccupation with failure
+- Reluctance to simplify
+- Sensitivity to operations
+- Commitment to resilience
+- Deference to expertise
 
-*Implementation:*
-- Health literacy accommodation
-- Cultural competency
-- Interpreter services
-- Accessible information
+**Surgical Applications:**
+- Safety huddles
+- Near-miss reporting
+- Just culture
+- Continuous learning
+- Adaptive capacity
 
-**Future Directions:**
+### Debriefings and Learning
 
-*System Evolution:*
-- Integrated safety management
-- Real-time risk adjustment
-- Predictive analytics
-- Personalized safety plans
+**Post-Operative Debriefings:**
+- What went well?
+- What could improve?
+- Equipment issues?
+- Communication problems?
+- Documentation of concerns
 
-*Research Priorities:*
-- Implementation effectiveness
-- Equity in safety
-- Technology evaluation
-- Global surgery safety`,
+**Morbidity and Mortality Conference:**
+- Case review
+- System focus
+- Learning culture
+- No-blame analysis
+- Improvement identification
+
+### Technology and Safety
+
+**Surgical Navigation:**
+- Image guidance
+- 3D visualization
+- Real-time tracking
+- Reduced complications
+
+**Robotic Surgery:**
+- New safety considerations
+- System check protocols
+- Backup plans
+- Training requirements
+
+**AI in Surgery:**
+- Predicting complications
+- Imaging analysis
+- Workflow optimization
+- Decision support
+
+**Augmented Reality:****
+- Overlay on surgical field
+- Anatomical guidance
+- Training applications
+- Ergonomic considerations
+
+### Quality Measurement
+
+**NSQIP (National Surgical Quality Improvement Program):**
+- Risk-adjusted outcomes
+- Benchmarking
+- Best practices
+- Participation growing
+
+**Surgeon-Specific Outcomes:**
+- Public reporting debate
+- Risk adjustment challenges
+- Small numbers problem
+- Gaming concerns
+
+**Patient-Reported Outcomes:**
+- Functional status
+- Quality of life
+- Satisfaction
+- Long-term follow-up
+
+### Future Directions
+
+**Precision Surgery:**
+- Personalized approaches
+- Genomic risk stratification
+- Targeted therapies
+- Outcome prediction
+
+**Global Surgery:****
+- Checklist implementation worldwide
+- Resource-limited adaptations
+- Training programs
+- Outcome disparities
+
+**Human Factors Engineering:****
+- OR design optimization
+- Equipment standardization
+- Fatigue management
+- Ergonomic improvements`,
       keyTerms: [
-        { term: 'implementation science', definition: 'Study of methods to promote adoption of evidence-based practices' },
-        { term: 'Safety Attitudes Questionnaire', definition: 'Validated instrument measuring safety culture dimensions' },
-        { term: 'TeamSTEPPS', definition: 'Evidence-based teamwork system developed by AHRQ and DoD' },
-        { term: 'Lancet Commission on Global Surgery', definition: 'Initiative addressing global access to safe surgical care' },
-        { term: 'patient safety indicator', definition: 'AHRQ-developed measures of potentially preventable complications' },
+        { term: 'Crew resource management', definition: 'Team training from aviation' },
+        { term: 'High-reliability organization', definition: 'Organization avoiding failures in complex settings' },
+        { term: 'Just culture', definition: 'Balancing accountability with learning' },
+        { term: 'NSQIP', definition: 'ACS surgical quality program' }
       ],
-      clinicalNotes: 'Surgical safety represents a mature patient safety domain with strong evidence base. Ongoing challenges include implementation fidelity, sustainability, and adaptation to new surgical technologies and settings.',
-    },
+      clinicalNotes: 'Debriefings improve team performance but often skipped due to time pressure. High-reliability principles require leadership commitment and cultural change. Robotic surgery adds complexity - specific system failures must be anticipated. NSQIP participation associated with improved outcomes through feedback and benchmarking.'
+    }
   },
-
   media: [],
-
-  citations: [
-    {
-      id: 'who-surgical-checklist',
-      type: 'website',
-      title: 'WHO Surgical Safety Checklist',
-      source: 'World Health Organization',
-      url: 'https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery',
-    },
-  ],
-
-  crossReferences: [
-    { targetId: 'concept-informed-consent', targetType: 'concept', relationship: 'related', label: 'Informed Consent' },
-    { targetId: 'concept-speaking-up-about-concerns', targetType: 'concept', relationship: 'related', label: 'Speaking Up About Concerns' },
-  ],
-
+  citations: [],
+  crossReferences: [],
   tags: {
-    systems: ['patient-safety'],
-    topics: ['surgical-safety', 'checklists', 'patient-advocacy'],
-    clinicalRelevance: 'critical',
-    keywords: ['surgery safety', 'checklist', 'time out', 'wrong-site surgery'],
+    topics: ['patient-safety', 'hospital-safety'],
+    keywords: ['surgical safety', 'checklist', 'time out', 'universal protocol', 'never events']
   },
-
-  createdAt: '2026-01-24T00:00:00.000Z',
-  updatedAt: '2026-01-24T00:00:00.000Z',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   version: 1,
-  status: 'published',
+  status: 'published'
 };
-
-export default surgicalSafetyChecklist;

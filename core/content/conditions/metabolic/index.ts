@@ -1,36 +1,24 @@
 /**
- * Metabolic/Endocrine Conditions Index
+ * Metabolic Conditions Index
  *
- * Comprehensive educational content for hormone and metabolism disorders
+ * Comprehensive educational content for metabolic and endocrine disorders
  */
 
-export { type2Diabetes } from './type2-diabetes';
+export { diabetes } from './diabetes';
 export { metabolicSyndrome } from './metabolic-syndrome';
-export { obesity } from './obesity';
-export { hypothyroidism } from './hypothyroidism';
-export { hyperthyroidism } from './hyperthyroidism';
-export { thyroidNodules } from './thyroid-nodules';
-export { adrenalInsufficiency } from './adrenal-insufficiency';
-export { pheochromocytoma } from './pheochromocytoma';
+export { thyroidDisorders } from './thyroid-disorders';
+export { adrenalDisorders } from './adrenal-disorders';
 
-import { type2Diabetes } from './type2-diabetes';
+import { diabetes } from './diabetes';
 import { metabolicSyndrome } from './metabolic-syndrome';
-import { obesity } from './obesity';
-import { hypothyroidism } from './hypothyroidism';
-import { hyperthyroidism } from './hyperthyroidism';
-import { thyroidNodules } from './thyroid-nodules';
-import { adrenalInsufficiency } from './adrenal-insufficiency';
-import { pheochromocytoma } from './pheochromocytoma';
+import { thyroidDisorders } from './thyroid-disorders';
+import { adrenalDisorders } from './adrenal-disorders';
 
 export const metabolicConditions = [
-  type2Diabetes,
+  diabetes,
   metabolicSyndrome,
-  obesity,
-  hypothyroidism,
-  hyperthyroidism,
-  thyroidNodules,
-  adrenalInsufficiency,
-  pheochromocytoma,
+  thyroidDisorders,
+  adrenalDisorders,
 ];
 
 export default metabolicConditions;

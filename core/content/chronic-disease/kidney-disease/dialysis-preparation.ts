@@ -1,337 +1,940 @@
 /**
- * Dialysis Preparation - Kidney Disease Management
+ * Dialysis Preparation - Dialysis Options and Vascular Access
  */
 
 import { EducationalContent } from '../../types';
 
 export const DIALYSIS_PREPARATION: EducationalContent = {
-  id: 'kidney-disease-dialysis-preparation',
+  id: 'chronic-kidney-dialysis-preparation',
   type: 'concept',
-  name: 'Preparing for Dialysis',
-  alternateNames: ['Kidney replacement therapy', 'Dialysis planning', 'End-stage kidney disease options'],
+  name: 'Dialysis Preparation and Options',
+  alternateNames: ['Kidney Replacement Therapy', 'Dialysis Options', 'Vascular Access', 'ESRD Planning', 'Dialysis Education'],
 
   levels: {
     1: {
       level: 1,
-      summary: 'When kidneys can no longer do their job, dialysis or a kidney transplant can keep you alive and healthy. Planning ahead gives you the best options.',
-      explanation: `**What Is Dialysis?**
-Dialysis does the work your kidneys can no longer do - cleaning your blood and removing extra fluid.
+      summary: 'When kidneys fail completely, dialysis or a transplant is needed to stay alive. Planning ahead helps you choose the best treatment for your life and ensures access is ready when needed.',
+      explanation: `**What Happens When Kidneys Fail?**
 
-**Two Types of Dialysis:**
+When kidneys stop working (Stage 5 CKD, also called kidney failure or ESRD), waste builds up in your blood. Without treatment, this is life-threatening. Your options are:
+
+1. Dialysis - a treatment that cleans your blood
+2. Kidney transplant - surgery to get a new kidney
+3. Conservative care - comfort-focused care without dialysis
+
+**Types of Dialysis:**
 
 *Hemodialysis (HD):*
-- Blood is cleaned by a machine
-- Usually done 3 times per week for 3-4 hours
+- Blood is filtered through a machine
 - Done at a dialysis center or at home
+- Usually 3 times per week
+- Each treatment takes about 3-4 hours
 
 *Peritoneal Dialysis (PD):*
-- Uses the lining of your belly to clean blood
-- Done every day at home
-- More flexibility in schedule
+- Uses your belly lining as a filter
+- Fluid goes in and out through a catheter
+- Can be done at home, even while sleeping
+- Done daily
 
-**When to Start Planning:**
-- Usually when eGFR is around 15-20
-- Gives time to prepare access (fistula or catheter)
-- Allows you to learn about options
+**Planning Ahead Is Important:**
+
+Do not wait until an emergency. When your kidney function drops to about 20% (Stage 4), it is time to:
+- Learn about treatment options
+- Choose what is right for you
+- Get access placed if needed
 
 **Vascular Access for Hemodialysis:**
-- Fistula: Surgery connects artery to vein (best option)
-- Graft: Tube connecting artery to vein
-- Catheter: Temporary tube in neck or chest
 
-**Planning Starts Early:**
-- Meet with the kidney team
-- Learn about all options
-- Start access surgery 6+ months before needed
-- Consider transplant evaluation
+Your blood needs a way to get to and from the machine:
 
-**Questions to Ask:**
-- What are my options?
-- What fits my lifestyle?
-- When should I start planning?
-- Am I a candidate for transplant?`,
+*Fistula (Best Option):*
+- Surgery connects an artery to a vein in your arm
+- Takes 2-3 months to mature
+- Lasts the longest
+- Fewest complications
+
+*Graft:*
+- Surgery uses a tube to connect artery and vein
+- Ready in 2-3 weeks
+- Good option if fistula not possible
+
+*Catheter:*
+- Tube placed in a large neck vein
+- Used immediately
+- Only for short-term if possible
+- Higher infection risk
+
+**Access for Peritoneal Dialysis:**
+
+*PD Catheter:*
+- Soft tube placed in your belly
+- Needs 2 weeks to heal before use
+- Stays in place permanently
+- Hidden under clothing
+
+**Choosing Your Treatment:**
+
+Think about:
+- Your schedule and activities
+- Travel preferences
+- Home situation and support
+- Your health conditions
+- Your personal preferences
+
+**Transplant as an Option:**
+
+A kidney transplant may be the best long-term option for many people:
+- Better quality of life than dialysis
+- No dialysis schedule
+- Requires lifelong medications
+- Need a suitable donor
+- Evaluation process takes time
+
+**Questions to Ask Your Doctor:**
+
+- What treatment options are best for me?
+- When should I get access placed?
+- Can I do dialysis at home?
+- Am I a candidate for transplant?
+- What should I expect with each option?
+
+**Getting Ready:**
+
+1. Attend education classes
+2. Meet with a surgeon about access
+3. Get transplant evaluation if interested
+4. Make your choice before an emergency
+5. Tell your family about your wishes
+
+Remember: Many people live active, fulfilling lives on dialysis or with a transplant. Planning ahead gives you the best start.`,
       keyTerms: [
-        { term: 'hemodialysis', definition: 'Dialysis using a machine to filter blood through a special filter' },
-        { term: 'peritoneal dialysis', definition: 'Dialysis using the lining of your belly to filter blood' },
-        { term: 'fistula', definition: 'Surgery creating an access point in your arm for hemodialysis' },
-        { term: 'transplant', definition: 'Surgery to put a healthy kidney from a donor into your body' },
+        { term: 'dialysis', definition: 'Treatment that does the job of kidneys when they fail' },
+        { term: 'hemodialysis', definition: 'Type of dialysis using a machine to filter blood' },
+        { term: 'peritoneal dialysis', definition: 'Type of dialysis using your belly lining as a filter' },
+        { term: 'vascular access', definition: 'The way blood travels to and from the dialysis machine' },
+        { term: 'fistula', definition: 'Connection of artery to vein for dialysis access; considered the best option' },
+        { term: 'ESRD', definition: 'End-Stage Renal Disease; permanent kidney failure' },
       ],
-      analogies: ['Dialysis is like an external kidney - it does the filtering job when your kidneys cannot.'],
-      examples: ['Maria started planning for dialysis when her eGFR was 18. She had fistula surgery, which gave it time to mature. When she needed dialysis 8 months later, her fistula was ready.'],
+      analogies: [
+        'Think of dialysis like a washing machine for your blood. Just like dirty clothes go in and come out clean, your blood goes through the machine and comes back without the waste products.',
+        'A fistula is like building a highway for your blood. It creates a stronger, larger pathway that can handle the traffic of dialysis treatments for years.',
+      ],
+      examples: [
+        'Maria chose peritoneal dialysis because she could do it overnight while sleeping, allowing her to work during the day without interruption. She had her PD catheter placed 3 weeks before starting treatment.',
+        'John wanted a transplant but needed dialysis while waiting. He got a fistula placed early, which was ready to use when his kidney function declined. His fistula has worked well for 5 years.',
+      ],
     },
     2: {
       level: 2,
-      summary: 'Timely dialysis preparation includes education, modality selection, vascular or peritoneal access creation, and transplant evaluation to optimize outcomes when kidney replacement therapy is needed.',
-      explanation: `**Timing of Preparation:**
+      summary: 'Kidney replacement therapy planning begins in Stage 4 CKD with modality education, access placement timing, and transplant evaluation to ensure optimal transition to dialysis or transplantation.',
+      explanation: `**Timing of Kidney Replacement Therapy Planning**
 
-*KDIGO Recommendations:*
-| eGFR | Actions |
-|------|---------|
-| <30 | Education about KRT options |
-| ~20 | Access planning |
-| ~15 | Access creation if HD planned |
-| <10-15 | Dialysis initiation (symptom-based) |
+*When to Begin Education:*
+---
+Stage 4 CKD (eGFR 15-29):
+- Begin formal education
+- Introduce treatment options
+- Assess home suitability
+- Discuss transplant evaluation
 
-**Modality Options:**
+Stage 5 CKD (eGFR less than 15):
+- Finalize modality choice
+- Place permanent access
+- Transplant workup completion
+- Plan initiation timing
+---
 
-| Modality | Frequency | Location | Independence |
-|----------|-----------|----------|--------------|
-| In-center HD | 3x/week | Facility | Less |
-| Home HD | Daily or 3x/week | Home | More |
-| CAPD | 4x/day | Home | More |
-| APD | Nightly | Home | More |
+*Initiation Timing:*
+- Planned start preferred over urgent
+- eGFR 5-10 or symptoms despite higher GFR
+- Avoid catheter starts when possible
+- "Healthy start" improves outcomes
 
-**Vascular Access:**
+**Treatment Modality Options:**
 
-*Hierarchy of Preference:*
-1. **Arteriovenous fistula (AVF)**: Best outcomes, needs maturation time
-2. **Arteriovenous graft (AVG)**: Second choice, faster maturation
-3. **Central venous catheter**: Last resort, highest infection risk
+*In-Center Hemodialysis:*
+- 3 times weekly, 3-4 hours per treatment
+- Professional staff present
+- Social support from other patients
+- Fixed schedule
+- Travel requires advance planning
 
-*Timing:*
-- AVF: Create 6+ months before anticipated need
-- AVG: Create 3-6 weeks before
-- Catheter: When urgent start needed
+*Home Hemodialysis:*
+- 3-6 times weekly (short daily or nocturnal)
+- Training required (4-8 weeks)
+- Partner may be needed
+- More dietary freedom
+- Better quality of life for many
 
-**Peritoneal Dialysis:**
-- Catheter placed 2+ weeks before start
-- Training required (1-2 weeks)
-- Good for patients wanting independence
+*Peritoneal Dialysis:*
+- CAPD: 4 exchanges daily
+- APD (CCPD): Overnight cycler
+- Home-based
+- Preserves residual kidney function longer
+- More infection risk than HD
 
-**Transplant:**
-- Evaluate early (eGFR <20)
-- Living donor preferred
-- Can be done pre-dialysis (preemptive)`,
+*Kidney Transplant:*
+- Best survival and quality of life
+- Preemptive (before dialysis) preferred
+- Requires lifelong immunosuppression
+- Living donor vs deceased donor
+- Not suitable for all patients
+
+*Conservative Care:*
+- Active medical management without dialysis
+- Focus on quality of life
+- Appropriate for some elderly/frail patients
+- Requires comprehensive support
+
+**Vascular Access Planning:**
+
+*Fistula First Initiative:*
+- AV fistula preferred over graft or catheter
+- Lower infection rates
+- Longer patency
+- Lower mortality
+
+*Fistula Creation Timing:*
+---
+When eGFR 15-20 or:
+- Progressive decline expected
+- Diabetes (faster progression)
+- Access surgeon availability
+- Patient preference
+
+Healing time: 6-12 weeks minimum
+Maturation: Often 2-4 months
+---
+
+*Preoperative Vessel Mapping:*
+- Ultrasound assessment
+- Identifies suitable vessels
+- Guides surgical planning
+- Increases fistula success
+
+**Peritoneal Dialysis Access:**
+
+*PD Catheter Placement:*
+- Laparoscopic or open insertion
+- 2-3 cm below umbilicus
+- Subcutaneous tunnel
+- 2+ weeks healing before use
+
+*Contraindications:*
+- Severe abdominal adhesions
+- Active inflammatory bowel disease
+- Morbid obesity (relative)
+- Large abdominal hernias
+
+**Transplant Evaluation:**
+
+*Referral Timing:*
+- eGFR less than 30 (earlier if progressive)
+- Before dialysis if possible (preemptive)
+
+*Evaluation Components:*
+---
+Medical:
+- Cardiac clearance
+- Cancer screening
+- Infectious disease testing
+- Immunologic testing
+
+Psychosocial:
+- Support system assessment
+- Financial evaluation
+- Medication adherence history
+- Mental health screening
+
+Surgical:
+- Anatomic assessment
+- Prior surgeries review
+- Vessel patency
+---
+
+*Listing Process:*
+- Waiting list time varies by region
+- Living donation can bypass wait
+- Paired exchange programs available
+
+**Modality Selection Considerations:**
+
+| Factor           | HD Preference   | PD Preference   | Transplant     |
+|------------------|-----------------|-----------------|----------------|
+| Patient choice   | Often selected  | Motivated       | Best candidate |
+| Home support     | Less critical   | More important  | Essential      |
+| Cardiac status   | May be better   | Hemodynamic     | Best option    |
+| Residual UF      | Less important  | Important       | N/A            |
+| Prior abdominal  | Better          | Contraindicated | N/A            |
+| Infection risk   | Access-related  | Peritonitis     | Immunosuppress |
+
+**Shared Decision-Making:**
+
+*Patient Education:*
+- Objective information about options
+- Quality of life considerations
+- Home visit for PD/HHD assessment
+- Peer support contacts
+
+*Decision Support Tools:*
+- Decision aids
+- Values clarification
+- Risk communication
+- Family involvement`,
       keyTerms: [
-        { term: 'CAPD', definition: 'Continuous ambulatory peritoneal dialysis; manual exchanges throughout day' },
-        { term: 'APD', definition: 'Automated peritoneal dialysis; machine does exchanges overnight' },
-        { term: 'preemptive transplant', definition: 'Kidney transplant before needing dialysis' },
-        { term: 'maturation', definition: 'Time for fistula to develop before it can be used' },
+        { term: 'modality', definition: 'Type of kidney replacement therapy (HD, PD, transplant)' },
+        { term: 'preemptive transplant', definition: 'Transplant performed before starting dialysis' },
+        { term: 'maturation', definition: 'Process of vein enlargement and strengthening after fistula creation' },
+        { term: 'patency', definition: 'Openness of blood vessel or access; ability to maintain flow' },
+        { term: 'residual renal function', definition: 'Remaining kidney function; better preserved with PD' },
+        { term: 'conservative care', definition: 'Non-dialysis medical management of ESRD' },
+      ],
+      analogies: [
+        'Choosing a dialysis modality is like choosing how to commute to work. In-center HD is like taking the train on a fixed schedule. PD is like driving your own car with flexibility. Home HD is like working from home with its own advantages and responsibilities.',
+        'A vascular access is like building a bridge before you need to cross the river. It takes time to construct properly, but trying to cross without it when the waters rise leads to dangerous emergency situations.',
+      ],
+      examples: [
+        'A 45-year-old employed patient chose home hemodialysis to maintain work schedule. After 6 weeks of training, they dialyzed 5 nights weekly for 6 hours, reporting better energy and fewer dietary restrictions than in-center treatment.',
+        'An 80-year-old with multiple comorbidities and frailty chose conservative care over dialysis after discussing goals of care with their family. They focused on quality of life and comfort with supportive care.',
       ],
     },
     3: {
       level: 3,
-      summary: 'Comprehensive kidney replacement therapy preparation integrates patient-centered modality selection, optimal access strategies, and transplant evaluation within a multidisciplinary care framework.',
-      explanation: `**Shared Decision-Making:**
+      summary: 'Comprehensive dialysis preparation integrates timely access placement, modality-specific education, transplant evaluation, and coordinated care to optimize outcomes for patients approaching ESRD.',
+      explanation: `**ESRD Preparation Guidelines**
 
-*Factors in Modality Choice:*
-\`\`\`
-Patient Factors:
-- Lifestyle preferences
-- Employment/travel
-- Home environment
-- Physical/cognitive abilities
-- Caregiver support
+*KDIGO Recommendations:*
+- Begin education when eGFR less than 30
+- Place permanent access when eGFR 15-20
+- Evaluate for transplant preemptively
+- Individualize initiation timing
 
-Clinical Factors:
-- Comorbidities
-- Residual renal function
-- Vascular access options
-- Abdominal surgery history
-- Cardiac status
-\`\`\`
+*"Fistula First" Principles:*
+- Native AV fistula preferred access
+- Timely referral to surgeon
+- Vessel mapping preoperatively
+- Avoid tunneled catheters when possible
 
-**Evidence on Modality:**
+**Vascular Access Types and Characteristics:**
 
-*Outcomes Comparison:*
-| Outcome | HD | PD | Notes |
-|---------|----|----|-------|
-| Survival (early) | Similar | May favor PD | First 2 years |
-| Survival (long-term) | Similar | May favor HD | After 2-3 years |
-| Quality of life | Varies | May favor | Patient preference matters |
-| Transplant rate | Lower | Higher | PD may preserve options |
+*Arteriovenous Fistula (AVF):*
+---
+Types by Location:
+- Radiocephalic (wrist): First choice
+- Brachiocephalic (elbow)
+- Brachial-basilic (transposition)
 
-**Vascular Access Planning:**
+Advantages:
+- Lowest infection rate (less than 0.5/1000 days)
+- Best long-term patency (65% at 2 years)
+- No synthetic material
+- Lowest mortality association
 
-*AVF Maturation:*
-- Adequate blood flow (>600 mL/min)
-- Adequate diameter (>6 mm)
-- Depth accessible for cannulation
-- Time: 2-6 months typically
+Disadvantages:
+- Long maturation time (6-12+ weeks)
+- 20-50% fail to mature
+- Not suitable for all patients
+- Aesthetic concerns
+---
 
-*Access Complications:*
-| Type | Complication Rate |
-|------|-------------------|
-| AVF | Lowest |
-| AVG | Intermediate |
-| CVC | Highest (infection) |
+*Arteriovenous Graft (AVG):*
+---
+Materials:
+- PTFE (polytetrafluoroethylene)
+- Biological grafts (less common)
 
-**Conservative Management:**
+Advantages:
+- Ready in 2-4 weeks
+- Multiple cannulation sites
+- Good for small vessels
 
-*Option for Some Patients:*
-- Elderly with multiple comorbidities
+Disadvantages:
+- Higher infection rate (1-3/1000 days)
+- Lower primary patency (50% at 1 year)
+- More interventions needed
+- Steal syndrome risk
+---
+
+*Tunneled Dialysis Catheter:*
+---
+Indications:
+- Urgent dialysis start
+- Maturing permanent access
+- Exhausted permanent access
+
+Complications:
+- Bacteremia (2-5/1000 days)
+- Central venous stenosis
+- Poor adequacy
+- Mortality risk highest
+
+Limited use to:
+- Less than 10% of prevalent patients
+- Temporary when possible
+---
+
+**Fistula Maturation and Surveillance:**
+
+*Maturation Assessment:*
+- Physical examination (thrill, bruit)
+- Ultrasound evaluation
+- Flow greater than 350-500 mL/min
+- Diameter greater than 4-5 mm
+- Depth less than 6 mm
+
+*Surveillance Protocol:*
+- Regular physical examination
+- Flow monitoring
+- Preemptive angioplasty controversial
+- Prompt intervention for dysfunction
+
+**Peritoneal Dialysis Access Details:**
+
+*Catheter Types:*
+- Straight Tenckhoff (most common)
+- Coiled Tenckhoff
+- Swan neck (pre-exit)
+- Moncrief-Popovich (buried)
+
+*Insertion Techniques:*
+- Open surgical
+- Laparoscopic (preferred if available)
+- Percutaneous
+- Peritoneoscopic
+
+*Complications:*
+- Pericatheter leak
+- Exit site infection
+- Tunnel infection
+- Hernia formation
+- Outflow failure
+
+**Transplant Evaluation Process:**
+
+*Absolute Contraindications:*
+- Active malignancy (most)
+- Active infection
+- Severe irreversible comorbidity
+- Non-adherence history
+- Active substance abuse
+
+*Relative Contraindications:*
+- Age greater than 75
+- Severe obesity
+- Severe vascular disease
 - Limited life expectancy
-- Patient preference
-- Focus on symptom management and QOL
-- Requires informed discussion
+- Poor social support
 
-**Transplant Evaluation:**
+*Immunologic Evaluation:*
+- ABO blood type
+- HLA typing
+- Panel Reactive Antibody (PRA)
+- Crossmatch potential donors
+- Desensitization if sensitized
 
-*Workup Components:*
-- Cardiac evaluation
-- Malignancy screening
-- Infectious disease testing
-- Psychosocial assessment
-- Immunological evaluation
+**Timing of Dialysis Initiation:**
 
-*Living Donor:*
-- Best outcomes
-- Can avoid dialysis entirely
-- Paired exchange programs available`,
+*Planned Initiation:*
+- eGFR 5-10 mL/min/1.73m2
+- Or earlier if symptoms present:
+  - Uremic pericarditis
+  - Progressive neuropathy
+  - Intractable volume overload
+  - Malnutrition despite optimization
+  - Refractory acidosis or hyperkalemia
+
+*IDEAL Trial:*
+- Early (eGFR 10-14) vs late (5-7) initiation
+- No survival benefit to early start
+- Quality of life similar
+- Supports symptom-guided initiation
+
+**Care Coordination:**
+
+*Multidisciplinary Team:*
+- Nephrologist
+- Vascular access surgeon
+- Transplant team
+- Dialysis nurses
+- Social worker
+- Dietitian
+- Pharmacist
+
+*Patient Education Components:*
+- Modality options
+- Access care
+- Transplant process
+- Conservative care option
+- Advance care planning
+
+**Outcomes by Modality:**
+
+*Survival:*
+- Transplant best (living greater than deceased)
+- Home HD and PD similar
+- In-center HD slightly lower
+- Catheter HD worst
+
+*Quality of Life:*
+- Home modalities generally preferred
+- Transplant best overall
+- Individual variation significant
+- Patient choice matters`,
       keyTerms: [
-        { term: 'conservative management', definition: 'Managing ESKD without dialysis, focusing on comfort and quality of life' },
-        { term: 'paired kidney exchange', definition: 'Program allowing incompatible donor-recipient pairs to exchange kidneys' },
-        { term: 'fistula first', definition: 'Initiative promoting AVF as preferred access' },
+        { term: 'AVF', definition: 'Arteriovenous Fistula; surgical connection of artery to vein' },
+        { term: 'AVG', definition: 'Arteriovenous Graft; synthetic tube connecting artery and vein' },
+        { term: 'maturation', definition: 'Process of arterialized vein enlargement for cannulation' },
+        { term: 'steal syndrome', definition: 'Ischemia of hand from diversion of blood to access' },
+        { term: 'PRA', definition: 'Panel Reactive Antibody; measure of sensitization to HLA' },
+        { term: 'desensitization', definition: 'Treatment to reduce antibody levels for incompatible transplant' },
       ],
-      clinicalNotes: 'Modality choice should be patient-centered after education about all options. AVF remains preferred access but requires planning. Conservative management is valid option for selected patients. Preemptive transplant offers best outcomes when possible.',
+      clinicalNotes: 'Fistula First Breakthrough Initiative goals: AVF in greater than 65% of incident patients, catheter in less than 10% of prevalent patients. Timely referral for access is critical - refer when eGFR 15-20. Preemptive transplant offers best outcomes. Conservative care is appropriate for some elderly/frail patients.',
     },
     4: {
       level: 4,
-      summary: 'Advanced KRT preparation integrates precision prognostication, optimized access strategies, and patient-centered decision frameworks to maximize outcomes and quality of life.',
-      explanation: `**Precision Prognostication:**
+      summary: 'Advanced dialysis preparation encompasses evidence-based access strategies, personalized modality selection, comprehensive transplant evaluation, and coordinated transition protocols to optimize ESRD outcomes.',
+      explanation: `**Evidence-Based Access Strategies**
 
-*Kidney Failure Risk Equation:*
-\`\`\`
-KFRE Variables: Age, sex, eGFR, ACR
-Output: 2-year and 5-year probability of kidney failure
+*AVF Creation Techniques:*
+---
+Preoperative Assessment:
+- Vessel mapping (ultrasound)
+- Allen test (hand circulation)
+- Cardiac evaluation (steal risk)
+- Anatomic considerations
 
-Clinical Application:
-- 2-year risk >10%: Intensify preparation
-- 5-year risk >10%: Begin education
-- Guides timing of access, transplant eval
-\`\`\`
+Surgical Approaches:
+- End-to-side anastomosis (most common)
+- Side-to-side
+- End-to-end (less common)
 
-**Optimized Access Strategies:**
+Adjunctive Procedures:
+- Proximalization for steal
+- DRIL procedure (ischemia)
+- Banding for high flow
+- Revision for stenosis
+---
 
-*Preoperative Assessment:*
-- Vein mapping (ultrasound)
-- Arterial assessment
-- Cardiac function
-- Dominant arm consideration
+*Enhancing Fistula Maturation:*
+- Preoperative exercise (handgrip)
+- Postoperative arm elevation
+- Avoidance of venipuncture/pressure
+- Far-infrared therapy (emerging)
+- Early endovascular intervention for stenosis
 
-*Maturation Enhancement:*
-- Hand exercises
-- Monitoring protocols
-- Salvage procedures for non-maturation
+**Access Complications and Management:****
 
-**Incremental Dialysis:**
+*Stenosis:*
+- Most common cause of dysfunction
+- Typically at venous anastomosis
+- Diagnosis: Decreased flow, elevated venous pressure
+- Treatment: Angioplasty, stenting
 
-*Concept:*
-- Start with less than full-dose dialysis
-- Preserve residual kidney function
-- Gradual intensification as RKF declines
+*Thrombosis:*
+- Requires urgent declotting
+- Surgical vs endovascular
+- Identify and treat underlying stenosis
 
-*Evidence:*
-- May preserve RKF longer
-- Patient satisfaction often higher
-- Outcomes appear non-inferior
+*Infection:*
+- AVF: Rare but serious
+- AVG: More common, may require excision
+- Catheter: Common, often requires removal
 
-**Decision Aids:**
+*Steal Syndrome:*
+- Grades: Mild (cool hand) to severe (ischemic pain/tissue loss)
+- Management: Banding, DRIL, ligation
 
-*Validated Tools:*
-- Option Grids
-- Question prompt lists
-- Visual aids
-- Online resources (NKF, AAKP)
+**Peritoneal Dialysis Optimization:**
 
-**Advance Care Planning:**
+*Catheter Function Issues:*
+- Outflow failure (constipation common cause)
+- One-way obstruction (fibrin, omentum)
+- Leaks (early vs late)
 
-*Components:*
-- Goals of care discussion
-- Preferences if dialysis fails
-- Surrogate decision-maker
-- Documentation
+*Prevention Strategies:*
+- Bowel regimen
+- Laparoscopic placement with omentopexy
+- Proper exit site care
+- Patient training quality
 
-*Timing:*
-- Should begin during CKD education
-- Revisit periodically
-- Document in medical record`,
+*Peritonitis Prophylaxis:*
+- Exit site care protocols
+- mupirocin prophylaxis if S. aureus carrier
+- Connection hygiene
+- Double-bag systems
+
+**Transplant Advances:**
+
+*Living Donor Options:*
+---
+Directed donation:
+- Known donor to specific recipient
+
+Non-directed donation:
+- Altruistic donor to chain
+
+Paired exchange:
+- Incompatible pairs swap donors
+- Can start donor chains
+
+Compatible pair participation:
+- Join exchange to optimize matching
+- May reduce waiting time
+---
+
+*ABO-Incompatible Transplant:*
+- Pre-transplant desensitization
+- Rituximab, IVIG, plasmapheresis
+- Outcomes approaching compatible
+
+*Sensitized Patient Strategies:*
+- Virtual crossmatch
+- Desensitization protocols
+- National sharing for highly sensitized
+- Acceptable mismatch programs
+
+**Modality Survival Analysis:**
+
+*Confounding Factors:*
+- Selection bias (healthier patients choose home)
+- Comorbidity differences
+- Age distribution
+- Switching between modalities
+
+*Intent-to-Treat Analysis:*
+- Transplant superior to all dialysis
+- Home HD and PD similar
+- In-center HD reference standard
+
+*Time on Modality:*
+- Early mortality higher on PD (less selection)
+- Long-term PD associated with technique failure
+- Transplant benefit persists decades
+
+**Conservative Care Program:**
+
+*Candidate Selection:*
+- Age greater than 75 with comorbidity
+- Severe frailty
+- Advanced dementia
+- Limited life expectancy
+- Patient preference
+
+*Program Components:*
+- Comprehensive symptom management
+- Advance care planning
+- Psychosocial support
+- Palliative care integration
+- Family support
+
+*Outcomes:*
+- Median survival 6-24 months
+- Quality of life focus
+- High satisfaction when chosen
+- Cost-effective
+
+**Transitional Care:**
+
+*Pre-ESRD Care Model:*
+- Multidisciplinary clinics
+- Integrated education
+- Timely access placement
+- Transplant referral
+- Psychosocial support
+
+*Outcomes:*
+- Reduced catheter starts
+- More home dialysis
+- More preemptive transplants
+- Better survival
+- Lower costs
+
+**Quality Metrics:**
+
+*Access:*
+- AVF rate in incident patients
+- Catheter rate (target less than 10%)
+- Time from referral to creation
+- Fistula maturation rate
+
+*Modality:*
+- Home dialysis prevalence (target 15%+)
+- Preemptive transplant rate
+- Patient education documentation
+
+*Outcomes:*
+- Mortality by modality
+- Hospitalization rates
+- Patient-reported outcomes
+- Quality of life measures`,
       keyTerms: [
-        { term: 'residual kidney function', definition: 'Remaining native kidney function in dialysis patients' },
-        { term: 'incremental dialysis', definition: 'Starting dialysis at less than standard dose based on residual function' },
-        { term: 'vein mapping', definition: 'Ultrasound assessment of arm veins for access planning' },
+        { term: 'DRIL', definition: 'Distal Revascularization Interval Ligation; surgical treatment for steal syndrome' },
+        { term: 'venous anastomosis', definition: 'Connection between graft/fistula and vein' },
+        { term: 'omentum', definition: 'Abdominal tissue that can obstruct PD catheters' },
+        { term: 'desensitization', definition: 'Reducing donor-specific antibodies to enable transplant' },
+        { term: 'virtual crossmatch', definition: 'Predicting compatibility using known HLA antibody profile' },
+        { term: 'transitional care', definition: 'Coordinated care during transition to ESRD' },
       ],
-      clinicalNotes: 'KFRE helps personalize timing of preparation. Incremental dialysis is gaining evidence support. Preserve residual kidney function - it matters for outcomes. Advance care planning is essential component of preparation.',
+      clinicalNotes: 'Endovascular interventions for AVF stenosis should be proactive but not too aggressive - balance intervention with fistula longevity. DRIL procedure preferred for severe steal syndrome. Conservative care programs provide excellent quality of life for appropriate patients. Transitional care clinics show improved outcomes across multiple metrics.',
     },
     5: {
       level: 5,
-      summary: 'State-of-the-art KRT preparation leverages precision prediction, patient-centered innovation, and systems approaches to optimize individualized kidney replacement therapy decisions.',
-      explanation: `**Precision KRT Planning:**
+      summary: 'State-of-the-art dialysis preparation integrates precision medicine, advanced access technologies, innovative transplant strategies, and patient-centered decision-making to optimize kidney replacement therapy outcomes.',
+      explanation: `**Precision Approaches to Access Creation**
 
-*Integrated Assessment:*
-\`\`\`
-Clinical Trajectory
-+ Patient Preferences
-+ Prognostic Models
-+ Social Support Assessment
-+ Frailty Evaluation
-         ↓
-Personalized KRT Plan
-         ↓
-Modality Match
-         ↓
-Optimal Timing
-\`\`\`
+*Predictive Modeling for AVF Success:*
+---
+Preoperative Factors:
+- Vessel diameter and quality
+- Age and sex
+- Comorbidities
+- Central vein patency
+- Inflammatory markers
 
-**Innovation in Access:**
+Machine Learning Applications:
+- Predict fistula maturation
+- Optimize surgical site selection
+- Individualize surveillance
+- Guide early intervention
+---
 
-*Emerging Approaches:*
-| Innovation | Status |
-|------------|--------|
-| Endovascular AVF creation | FDA approved |
-| Bioengineered vessels | Research |
-| Novel catheter designs | Available |
-| Access monitoring devices | Research |
+*Biological Enhancement:*
+- Stem cell therapy for maturation
+- Growth factor applications
+- Gene therapy approaches
+- Tissue engineering
 
-**Home Therapies Expansion:**
+**Advanced Access Technologies:**
 
-*Factors Driving Home Dialysis:*
-- Patient preference
-- COVID-19 impact
-- Technology improvements
-- Outcome data
-- Cost considerations
+*Novel Fistula Creation:*
+- Endovascular fistula creation (WavelinQ, Ellipsys)
+- No open surgery required
+- Faster maturation
+- Limited long-term data
+- Exciting development
 
-**Bioartificial Kidney:**
+*Vascular Access Grafts:*
+- Bioengineered grafts
+- Endothelialized surfaces
+- Infection-resistant coatings
+- Improved patency potential
 
-*Research Directions:*
-- Implantable device
-- Combines filtration + cell-based reabsorption
-- Potential to eliminate dialysis
-- Early development stage
+*Implantable Ports:*
+- Dual-lumen ports for dialysis
+- Lower infection risk than catheters
+- Subcutaneous placement
+- Emerging technology
 
-**Learning Health System:**
+**Transplant Innovation:****
 
-*Continuous Improvement:*
-- Registry data (USRDS, CMS)
-- Quality improvement programs
-- Comparative effectiveness research
-- Implementation science
+*Xenotransplantation:*
+- Genetically modified pigs
+- Decreased rejection potential
+- Clinical trials beginning
+- Potential unlimited organ supply
+
+*Organ Preservation:*
+- Machine perfusion technologies
+- Ex-vivo organ repair
+- Extended criteria utilization
+- Improved graft function
+
+*Tolerance Protocols:*
+- Mixed chimerism approaches
+- Minimize immunosuppression
+- Operational tolerance research
+- Living donor tolerance trials
+
+**Wearable and Implantable Dialysis:**
+
+*Wearable Artificial Kidney:*
+- Continuous ambulatory dialysis
+- Battery-operated
+- Clinical trials ongoing
+- Freedom from machines
+
+*Implantable Artificial Kidney:*
+- Biohybrid device
+- No immunosuppression needed
+- Powered by blood pressure
+- Development stage
+
+*Peritoneal Dialysis Innovations:*
+- Automated wearable system
+- Continuous flow PD
+- Sorbent technology
+- Remote monitoring integration
+
+**Decision Support and AI:**
+
+*Modality Selection Algorithms:*
+---
+Input Variables:
+- Clinical characteristics
+- Comorbidities
+- Psychosocial factors
+- Patient preferences
+- Geographic/access factors
+
+AI-Driven Recommendations:
+- Outcome predictions
+- Personalized matching
+- Shared decision support
+- Continuous learning
+---
+
+*Predictive Analytics:*
+- Timing of ESRD prediction
+- Access creation optimization
+- Transplant waitlist management
+- Outcome prediction
+
+**Patient-Centered Outcomes Research:****
+
+*Patient-Reported Outcome Measures:*
+- KDQOL-36 and -SF
+- Dialysis-specific measures
+- Treatment burden assessment
+- Preference elicitation
+
+*Shared Decision-Making Tools:*
+- Decision aids
+- Values clarification
+- Risk communication
+- Deliberation support
+
+*Patient Engagement:*
+- Peer support programs
+- Patient navigators
+- Digital health tools
+- Telehealth integration
+
+**Health Services Research:**
+
+*Access to Care:*
+- Racial disparities in access placement
+- Geographic variation
+- Socioeconomic factors
+- Intervention strategies
+
+*Economic Analyses:*
+- Cost-effectiveness by modality
+- Value-based care models
+- Home dialysis incentives
+- Transplant cost savings
+
+*Policy Implications:*
+- ESRD Prospective Payment System
+- Quality incentives
+- Transplant access policies
+- Innovation funding
 
 **Future Directions:**
 
-*Research Priorities:*
-- Wearable artificial kidney
-- Xenotransplantation
-- Kidney regeneration
-- Personalized dialysis
-- Expanded donor pool`,
+*Regenerative Medicine:*
+- Kidney organoids
+- 3D bioprinting
+- Decellularized scaffolds
+- Stem cell therapies
+
+*Prevention of ESRD:*
+- Earlier intervention
+- Disease-modifying therapies
+- Artificial intelligence prediction
+- Precision prevention
+
+*Global Disparities:*
+- Worldwide ESRD burden
+- Dialysis access inequities
+- Transplant tourism
+- Ethical considerations
+
+**Research Priorities:**
+
+*Clinical Trials Needed:*
+- Access surveillance strategies
+- Optimal dialysis initiation
+- Conservative care outcomes
+- Wearable dialysis efficacy
+
+*Implementation Science:*
+- Spread of best practices
+- Technology adoption
+- Behavior change
+- Quality improvement`,
       keyTerms: [
-        { term: 'endovascular AVF', definition: 'Minimally invasive fistula creation using catheter-based technique' },
-        { term: 'bioartificial kidney', definition: 'Implantable device combining synthetic filtration with living kidney cells' },
-        { term: 'xenotransplantation', definition: 'Transplantation of organs from animals to humans' },
+        { term: 'endovascular fistula', definition: 'Fistula created through minimally invasive catheter techniques' },
+        { term: 'xenotransplantation', definition: 'Transplantation of organs between species' },
+        { term: 'machine perfusion', definition: 'Technology to preserve and assess organs outside the body' },
+        { term: 'mixed chimerism', definition: 'Coexistence of donor and recipient immune cells; may enable tolerance' },
+        { term: 'operational tolerance', definition: 'Stable graft function without immunosuppression' },
+        { term: 'KDQOL', definition: 'Kidney Disease Quality of Life; validated assessment tool' },
       ],
-      clinicalNotes: 'Endovascular AVF creation expands options for patients. Home dialysis expansion is major trend. Bioartificial kidney and xenotransplantation are active research areas. Learning health systems enable continuous quality improvement.',
+      clinicalNotes: 'Endovascular fistula creation represents a paradigm shift in access surgery. Xenotransplantation may solve organ shortage in coming decades. Wearable and implantable dialysis devices promise to transform treatment. Patient-reported outcomes should guide innovation. Addressing disparities in access to care is a critical priority.',
     },
   },
 
-  media: [],
-  citations: [{ id: 'kdigo-ckd', type: 'article', title: 'KDIGO CKD Guidelines', source: 'Kidney International' }],
-  crossReferences: [{ targetId: 'kidney-disease-ckd-stages', targetType: 'topic', relationship: 'related', label: 'CKD Stages' }],
-  tags: { systems: ['renal'], topics: ['CKD', 'dialysis'], keywords: ['dialysis preparation', 'kidney transplant', 'vascular access', 'ESKD'], clinicalRelevance: 'critical' },
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+  media: [
+    {
+      id: 'dialysis-options-chart',
+      type: 'diagram',
+      filename: 'dialysis-modality-comparison.svg',
+      title: 'Dialysis Options Comparison',
+      description: 'Visual comparison of hemodialysis, peritoneal dialysis, and transplant options',
+    },
+    {
+      id: 'vascular-access-types',
+      type: 'diagram',
+      filename: 'vascular-access-guide.svg',
+      title: 'Types of Vascular Access',
+      description: 'Illustrations of fistula, graft, and catheter for hemodialysis',
+    },
+    {
+      id: 'pd-catheter-diagram',
+      type: 'diagram',
+      filename: 'pd-catheter-placement.svg',
+      title: 'Peritoneal Dialysis Catheter',
+      description: 'Diagram showing PD catheter placement in the abdomen',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'kdigo-2020-krt',
+      type: 'article',
+      title: 'KDIGO 2020 Clinical Practice Guideline on the Evaluation and Management of Candidates for Kidney Transplantation',
+      source: 'Transplantation',
+    },
+    {
+      id: 'fistula-first',
+      type: 'article',
+      title: 'Fistula First Breakthrough Initiative',
+      source: 'Centers for Medicare and Medicaid Services',
+    },
+    {
+      id: 'ideal-trial',
+      type: 'article',
+      title: 'Initiating Dialysis Early and Late (IDEAL) Study',
+      source: 'New England Journal of Medicine',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'chronic-kidney-ckd-stages', targetType: 'concept', relationship: 'related', label: 'CKD Stages' },
+    { targetId: 'chronic-kidney-fluid-management', targetType: 'concept', relationship: 'related', label: 'Fluid Management' },
+    { targetId: 'chronic-kidney-medication-adjustments', targetType: 'concept', relationship: 'related', label: 'Medication Adjustments' },
+  ],
+
+  tags: {
+    systems: ['renal'],
+    topics: ['chronic-disease', 'ckd', 'dialysis', 'transplant', 'vascular-access'],
+    keywords: ['dialysis', 'kidney transplant', 'vascular access', 'fistula', 'ESRD', 'kidney replacement therapy'],
+    clinicalRelevance: 'critical',
+    examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'nephrology', 'surgery'] },
+  },
+
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   version: 1,
   status: 'published',
-  contributors: ['Biological Self Content Team'],
 };

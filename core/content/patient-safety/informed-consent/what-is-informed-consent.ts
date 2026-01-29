@@ -1,938 +1,466 @@
-/**
- * What Is Informed Consent - Patient Safety Educational Content
- *
- * Explains the fundamental principles and process of informed consent
- * in healthcare settings.
- */
-
 import { EducationalContent } from '../../types';
 
 export const whatIsInformedConsentContent: EducationalContent = {
-  id: 'patient-safety-what-is-informed-consent',
+  id: 'what-is-informed-consent',
   type: 'concept',
-  name: 'What Is Informed Consent',
-  alternateNames: ['Informed Consent Process', 'Medical Consent', 'Treatment Consent'],
-
+  name: 'What is Informed Consent',
+  alternateNames: ['Medical Consent', 'Treatment Consent', 'Informed Decision-Making'],
   levels: {
     1: {
       level: 1,
-      summary: 'Informed consent means you understand your medical care before agreeing to it. It helps you make choices that are right for you.',
-      explanation: `What Is Informed Consent?
+      summary: 'Informed consent means your doctor explains your treatment options and you agree to the plan. It helps you make choices about your own healthcare.',
+      explanation: `## Understanding Informed Consent
 
-Informed consent means:
-1. You understand what the doctor wants to do
-2. You know the good things that could happen
-3. You know the bad things that could happen
-4. You know about other choices
-5. You agree freely without pressure
+Informed consent means your doctor explains your treatment options and you agree to the plan. It helps you make choices about your own healthcare.
 
-Why Informed Consent Matters
+### What You Should Know
 
-When you truly understand:
-- You can make the best choice for you
-- You know what to expect
-- You feel more confident
-- You are part of your own care team
+Before any treatment, your doctor should tell you:
+- What is wrong with your health
+- What treatment they recommend
+- What the treatment will do
+- Possible risks and side effects
+- Other options you could choose
+- What happens if you do nothing
 
-What Your Doctor Should Tell You
+### Your Right to Ask Questions
 
-1. What is wrong (your diagnosis)
-2. What treatment they suggest
-3. How the treatment helps
-4. What could go wrong (risks)
-5. Other ways to treat the problem
-6. What happens if you do nothing
-
-You Can Ask Questions
-
-Do not be afraid to ask:
-- "Can you explain that again?"
-- "What does that word mean?"
+You can ask:
+- "What will this procedure involve?"
+- "What are the risks?"
 - "Are there other choices?"
-- "What would you do if it were you?"
-- "Can I have time to think about it?"
+- "What if I wait or do nothing?"
 
-You Can Say No
+### You Can Say Yes or No
 
-Remember:
-- You can refuse any treatment
-- You can change your mind later
-- You can get a second opinion
-- It is your body and your choice
+- You have the right to agree to treatment
+- You have the right to refuse treatment
+- No one can force you without a very good reason
 
-The Consent Form
+### Written Consent
 
-A consent form:
-- Shows you were told the information
-- Shows you agreed
-- Does NOT replace the conversation
-- You should understand before you sign
-
-If You Do Not Understand
-
-Tell your doctor:
-- "I do not understand"
-- "Please use simpler words"
-- "Can you write this down for me?"
-- "I want someone else here to help me understand"
-
-Your doctor should explain until you feel comfortable with your decision.`,
-
+For serious procedures, you will sign a form. This shows you understand and agree.`,
       keyTerms: [
-        { term: 'informed consent', definition: 'Agreement to treatment after understanding what will happen' },
-        { term: 'diagnosis', definition: 'The name for what is wrong with your health' },
-        { term: 'treatment', definition: 'Medical care to help you get better' },
-        { term: 'risk', definition: 'Something bad that could happen' },
-        { term: 'benefit', definition: 'Something good that could happen' }
+        { term: 'Informed consent', definition: 'Agreeing to treatment after understanding it' },
+        { term: 'Treatment options', definition: 'Different ways to treat a health problem' },
+        { term: 'Risks', definition: 'Possible bad things that could happen' },
+        { term: 'Side effects', definition: 'Unwanted effects from treatment' }
       ],
-
       analogies: [
-        'Informed consent is like agreeing to let someone fix your car after they explain what is broken and what they will do.',
-        'It is like signing a permission slip for a school field trip - you need to know where your child is going and what they will do.'
+        'Informed consent is like reading the terms before signing a contract'
       ],
-
       examples: [
-        'Before surgery, your doctor explains the operation, how it helps, and possible problems like infection.',
-        'Your doctor suggests a new medicine and explains side effects so you can decide if benefits are worth the risks.',
-        'You are asked to join a research study. They explain it is experimental and you might get a placebo instead of real treatment.'
+        'Before surgery, the doctor explains the operation and you sign a form',
+        'A patient learns about medication side effects before starting a new drug'
       ]
     },
-
     2: {
       level: 2,
-      summary: 'Informed consent is a process ensuring patients understand and voluntarily agree to medical treatment after receiving complete information about benefits, risks, and alternatives.',
-      explanation: `Understanding Informed Consent
+      summary: 'Informed consent is both an ethical principle and legal requirement in healthcare. It ensures patients understand their condition, treatment options, risks, and alternatives before making healthcare decisions.',
+      explanation: `## The Process of Informed Consent
 
-Informed consent is both an ethical obligation and a legal requirement in healthcare. It represents respect for patient autonomy and ensures patients can make informed decisions about their care.
+Informed consent is both an ethical principle and legal requirement in healthcare. It ensures patients understand their condition, treatment options, risks, and alternatives before making healthcare decisions.
 
-Elements of Informed Consent
+### Elements of Informed Consent
 
-Required Information:
-- Nature of the proposed treatment or procedure
-- Purpose and expected benefits
-- Material risks and potential complications
-- Reasonable alternatives (including no treatment)
-- Consequences of refusing treatment
-- Prognosis with and without treatment
+**Information Provided:**
+- Nature of the proposed treatment
+- Risks and potential complications
+- Benefits and likelihood of success
+- Alternative treatments available
+- Consequences of declining treatment
 
-Process Requirements:
-- Disclosure in understandable language
+**Patient Understanding:**
+- Information presented clearly
 - Opportunity to ask questions
-- Assessment of patient understanding
-- Voluntary agreement without coercion
-- Documentation of the process
+- Time to consider options
+- Explanation in preferred language
+- Appropriate education level
 
-Legal Foundation
+**Voluntary Agreement:**
+- Decision made without coercion
+- Right to refuse without penalty
+- Freedom to change providers
+- No undue pressure
 
-The concept emerged from case law establishing that:
-- Patients have the right to self-determination
-- Physicians must disclose material information
-- Failure to obtain proper consent can constitute battery or negligence
-- Standards vary by jurisdiction (professional vs patient standard)
+### When Consent is Required
 
-Capacity and Consent
+**Always Required:**
+- Surgery and invasive procedures
+- Anesthesia
+- Experimental treatments
+- Blood transfusions
+- Major diagnostic procedures
 
-For consent to be valid, the patient must have capacity:
-- Ability to understand relevant information
-- Appreciation of the situation and consequences
-- Ability to reason through options
-- Ability to communicate a choice
+**Exceptions:**
+- Life-threatening emergencies
+- Patient lacks decision-making capacity
+- Therapeutic privilege (rare)
+- Waiver by patient (uncommon)
 
-If capacity is impaired:
-- Surrogate decision-maker may be needed
-- Emergency exceptions may apply
-- Assessment of decision-making ability required
+### Documentation
 
-Special Situations
+**Written Consent:**
+- Required for most procedures
+- Signed by patient or surrogate
+- Witnessed when appropriate
+- Kept in medical record
 
-Emergency Care:
-- Implied consent when patient cannot consent
-- Life-threatening situations
-- Attempt to obtain consent from surrogate when possible
+**Verbal Consent:**
+- May suffice for minor procedures
+- Documented in chart
+- Still requires full disclosure
 
-Therapeutic Privilege:
-- Rare exception where disclosure might harm patient
-- Generally discouraged
-- Must be carefully documented
+### Special Situations
 
-Waiver:
-- Patient may choose not to be informed
-- Must be voluntary and documented
-- General waiver not valid for specific procedures
+**Language Barriers:**
+- Professional interpreter required
+- Translated consent forms
+- Cannot use family for medical discussions
 
-Obtaining Consent
-
-Best Practices:
-- Begin with open discussion
-- Use plain language
-- Provide written materials
-- Use teach-back to confirm understanding
-- Allow time for questions
-- Include family if patient wishes
-- Document the conversation
-
-Documentation:
-- What was discussed
-- Questions asked and answered
-- Patient understanding confirmed
-- Decision made voluntarily
-- Signature obtained
-
-Revoking Consent
-
-Patients have the right to:
-- Withdraw consent at any time
-- Change their mind after initially agreeing
-- Refuse even previously agreed-to treatment
-- Leave against medical advice (with understanding of risks)
-
-Electronic Consent
-
-Modern approaches include:
-- Electronic signature capture
-- Video explanations
-- Interactive decision aids
-- Remote consent processes
-- Digital documentation
-
-Cultural Considerations
-
-Communication styles vary:
-- Family-centered decision-making
-- Language barriers
-- Health literacy levels
-- Trust in medical system
-- Religious or cultural beliefs
-
-Respecting diversity:
-- Use professional interpreters
-- Adapt to cultural preferences
-- Respect family involvement wishes
-- Be aware of health literacy
-- Address barriers to understanding`,
-
+**Cultural Considerations:**
+- Understanding of medical concepts
+- Family involvement preferences
+- Religious beliefs affecting care`,
       keyTerms: [
-        { term: 'informed consent', definition: 'Process ensuring patient understands and voluntarily agrees to medical intervention' },
-        { term: 'capacity', definition: 'Ability to understand information and make decisions' },
-        { term: 'material information', definition: 'Information a reasonable person would need for decision-making' },
-        { term: 'surrogate', definition: 'Person authorized to make decisions for someone else' },
-        { term: 'therapeutic privilege', definition: 'Withholding information believed to be harmful to patient' },
-        { term: 'autonomy', definition: 'Right to self-determination and personal decision-making' }
+        { term: 'Voluntary', definition: 'Done by choice without pressure' },
+        { term: 'Capacity', definition: 'Ability to understand and make decisions' },
+        { term: 'Surrogate', definition: 'Person making decisions for someone else' },
+        { term: 'Therapeutic privilege', definition: 'Withholding information believed harmful to patient' }
       ],
-
       analogies: [
-        'Informed consent is like a contract where both parties understand and agree to terms.',
-        'It is similar to reading terms of service before accepting - you should understand what you are agreeing to.'
+        'Informed consent is like a two-way street requiring both information sharing and understanding'
       ],
-
       examples: [
-        'A patient scheduled for knee replacement receives information about the procedure, anesthesia risks, recovery time, alternatives like injections or physical therapy, and chooses to proceed.',
-        'Before chemotherapy, a cancer patient learns about side effects including hair loss, nausea, and infection risk, and discusses these with family before consenting.',
-        'A patient with appendicitis in severe pain consents to emergency surgery after a brief explanation of the risks of delay and the surgical procedure.'
+        'A patient with diabetes learns about insulin therapy risks before starting treatment',
+        'Parents provide consent for their child\'s tonsillectomy after meeting with the surgeon'
       ]
     },
-
     3: {
       level: 3,
-      summary: 'Informed consent is a process grounded in bioethical principles and legal requirements, requiring disclosure, comprehension, voluntariness, and capacity for valid patient authorization.',
-      explanation: `Foundations of Informed Consent
+      summary: 'Informed consent rests on the ethical principles of autonomy and respect for persons. Legally, it protects both patient self-determination and providers from liability, with requirements varying by jurisdiction and procedure risk level.',
+      explanation: `## Legal and Ethical Foundations
 
-Ethical Framework:
+Informed consent rests on the ethical principles of autonomy and respect for persons. Legally, it protects both patient self-determination and providers from liability, with requirements varying by jurisdiction and procedure risk level.
 
-The Belmont Report principles:
-- Respect for persons (autonomy)
-- Beneficence (maximizing benefit, minimizing harm)
-- Justice (fair distribution of benefits and burdens)
+### Ethical Principles
 
-Beauchamp and Childress Four Principles:
-- Autonomy: Self-determination and informed consent
-- Beneficence: Acting in patient's best interest
-- Non-maleficence: Avoiding harm
-- Justice: Fairness in healthcare distribution
+**Autonomy:**
+- Right to self-determination
+- Control over one\'s body
+- Foundation of Western bioethics
+- Respects personhood
 
-Legal Standards
+**Beneficence and Non-Maleficence:**
+- Acting in patient best interest
+- Avoiding harm
+- Balancing with patient autonomy
+- Evidence-based recommendations
 
-Disclosure Standards:
-- Professional practice standard: What reasonable physician would disclose
-- Materiality standard: What reasonable patient would want to know
-- Subjective standard: What this specific patient wants to know
-- Causation requirement: Would different disclosure have changed decision?
+**Justice:**
+- Fair access to information
+- Equitable consent processes
+- Addressing health literacy disparities
+- Cultural sensitivity
 
-Legal Actions for Consent Violations:
-- Battery: Touching without consent (no consent obtained)
-- Negligence: Failure to meet disclosure standard (inadequate consent)
-- Fraud: Intentional misrepresentation
+### Legal Standards
 
-Informed Consent Process
+**Disclosure Standards:**
+- **Professional practice standard**: What reasonable provider would disclose
+- **Reasonable person standard**: What reasonable patient would want to know
+- **Subjective standard**: What this specific patient wants to know
 
-Step 1: Information Disclosure
-- Diagnosis and prognosis
-- Nature and purpose of treatment
-- Risks and benefits (material risks)
-- Alternatives and their risks/benefits
-- Consequences of no treatment
-- Uncertainty about outcomes
+**Negligence Claims:**
+- Duty to obtain consent
+- Breach of duty (inadequate disclosure)
+- Causation (patient would have chosen differently)
+- Damages (harm occurred)
 
-Step 2: Comprehension Assessment
-- Patient understanding of information
-- Health literacy considerations
-- Language barriers
-- Cognitive factors
-- Use of teach-back method
+**Battery vs Negligence:**
+- Battery: Touching without any consent
+- Negligence: Consent without adequate information
+- Battery requires only lack of permission
 
-Step 3: Capacity Evaluation
-- Understanding of relevant information
-- Appreciation of situation and consequences
-- Reasoning ability
-- Communication of choice
-- Consistency over time
+### Capacity Assessment
 
-Step 4: Voluntariness Confirmation
-- Absence of coercion
-- Absence of undue influence
-- Absence of manipulation
-- Time for deliberation
-- Opportunity for questions
+**Elements of Capacity:**
+- Understand relevant information
+- Appreciate situation and consequences
+- Reason about treatment options
+- Communicate choice
 
-Step 5: Authorization
-- Explicit agreement
-- Signature documentation
-- Right to withdraw
-- Ongoing process, not single event
-
-Special Populations
-
-Pediatric Consent:
-- Parental permission required
-- Child assent when appropriate (typically age 7+)
-- Age-appropriate explanation
-- Best interest standard
-- Mature minor exceptions
-
-Research Consent:
-- Additional requirements beyond clinical care
-- Voluntary participation emphasized
-- Right to withdraw anytime
-- Distinction between research and treatment
-- Institutional Review Board oversight
-
-Vulnerable Populations:
-- Cognitively impaired adults
-- Prisoners
-- Economically disadvantaged
-- Emergency situations
-- Pregnant women/fetuses
-
-Capacity Assessment
-
-Components of Capacity:
-- Understanding: Grasping relevant facts
-- Appreciation: Recognizing situation applies to self
-- Reasoning: Comparing options using consequences
-- Expression of choice: Communicating decision
-
-Capacity vs Competence:
-- Capacity: Clinical determination of decision-making ability
-- Competence: Legal status determined by court
-
-Assessment Tools:
-- MacArthur Competency Assessment Tool
-- Mini-Mental State Examination
-- Slides for Assessment of Capacity
+**Assessment Process:**
 - Clinical interview
+- Cognitive screening if indicated
+- Decision-specific evaluation
+- Documentation of findings
 
-Presumption of Capacity:
-- Adults presumed competent unless evidence otherwise
-- Capacity is decision-specific
-- Capacity can fluctuate
-- Assessment required when concern exists
+**Impaired Capacity Causes:**
+- Delirium
+- Dementia
+- Psychosis
+- Severe depression
+- Developmental disability
+- Intoxication
 
-Documentation Requirements
+### Research Consent
 
-Elements to Document:
-- Information provided
-- Questions and answers
-- Assessment of understanding
-- Confirmation of voluntariness
-- Capacity assessment if indicated
-- Patient decision
-- Signature and date
+**Additional Requirements:**
+- Institutional Review Board approval
+- Research-specific information
+- Right to withdraw anytime
+- No penalty for withdrawal
+- Compensation for research-related injury
 
-Electronic Documentation:
-- Electronic health record integration
-- Electronic signature standards
-- Audit trails
-- Version control
-- Accessibility requirements
-
-Shared Decision-Making
-
-Integration with Consent:
-- Evidence-based option presentation
-- Patient values elicitation
-- Decision support tools
-- Partnership approach
-- Documentation of shared decision
-
-Decision Aids:
-- Evidence-based information
-- Risk presentation
-- Values clarification
-- Preparation for consultation
-- Improved decision quality
-
-Emerging Issues
-
-Genomic Consent:
-- Incidental findings
-- Family implications
-- Re-contact for new findings
-- Variant reclassification
-- Data sharing
-
-Digital Health Consent:
-- Telehealth specific considerations
-- Remote monitoring
-- Artificial intelligence use
-- Data analytics
-- Privacy implications
-
-Global Variations
-
-Cultural Differences:
-- Family-centered vs individual autonomy
-- Truth-telling practices
-- Role of community elders
-- Religious considerations
-- Gender dynamics
-
-Legal Variations:
-- Civil law vs common law traditions
-- Religious law influence
-- National healthcare systems
-- Resource constraints
-- Enforcement mechanisms`,
-
+**Vulnerable Populations:**
+- Enhanced protections
+- Independent monitor
+- Community consultation
+- Limited inducements`,
       keyTerms: [
-        { term: 'material risk', definition: 'Risk that a reasonable person would consider significant in decision-making' },
-        { term: 'assent', definition: 'Affirmative agreement from a minor who cannot legally consent' },
-        { term: 'decisional capacity', definition: 'Clinical ability to make a specific healthcare decision' },
-        { term: 'shared decision-making', definition: 'Collaborative process where clinician and patient make decisions together' },
-        { term: 'therapeutic misconception', definition: 'Failure to distinguish research from treatment' },
-        { term: 'incidental finding', definition: 'Unrelated discovery made during testing for another purpose' }
+        { term: 'Battery', definition: 'Unlawful touching without consent' },
+        { term: 'Reasonable person standard', definition: 'What average patient would want to know' },
+        { term: 'Decisional capacity', definition: 'Ability to make specific healthcare decision' },
+        { term: 'Institutional Review Board', definition: 'Committee protecting research subjects' }
       ]
     },
-
     4: {
       level: 4,
-      summary: 'Informed consent requires systematic application of disclosure, comprehension assessment, and voluntariness verification. Understanding capacity assessment and special situations optimizes the consent process.',
-      explanation: `Comprehensive Informed Consent Framework
+      summary: 'Informed consent in clinical practice requires balancing comprehensive disclosure with patient understanding. Shared decision-making represents the gold standard, integrating patient values with clinical evidence to arrive at mutually acceptable treatment plans.',
+      explanation: `## Clinical Practice of Informed Consent
 
-The Consent Process in Practice:
+Informed consent in clinical practice requires balancing comprehensive disclosure with patient understanding. Shared decision-making represents the gold standard, integrating patient values with clinical evidence to arrive at mutually acceptable treatment plans.
 
-Pre-Visit Preparation:
-- Educational materials provided in advance
-- Decision aids distributed
-- Family members invited to participate
-- Questions solicited beforehand
-- Language and accessibility needs assessed
+### Shared Decision-Making Model
 
-The Clinical Encounter:
-- Rapport building and agenda setting
-- Assessment of baseline understanding
-- Information disclosure in manageable chunks
-- Comprehension checking throughout
-- Values and preferences exploration
-- Decision support and deliberation time
-- Authorization and documentation
+**Key Components:**
+- Information exchange (both directions)
+- Deliberation about options
+- Decision-making together
+- Implementation and follow-up
 
-Post-Decision:
-- Copy of consent document provided
-- Plan for follow-up questions
-- Opportunity to withdraw restated
-- Coordination of next steps
+**Tools and Aids:**
+- Decision aids (pamphlets, videos)
+- Risk visualizations
+- Option grids
+- Patient decision aids
 
-Advanced Communication Techniques
+### Risk Communication
 
-Eliciting-Providing-Eliciting:
-- Elicit: "What is your understanding of your condition?"
-- Provide: Information filling gaps
-- Elicit: "What questions do you have now?"
+**Presenting Statistics:**
+- Natural frequencies preferred
+- Absolute vs relative risk
+- Visual aids improve understanding
+- Avoid denominators of different sizes
 
-Ask-Tell-Ask:
-- Ask: "What would help you decide?"
-- Tell: Relevant information
-- Ask: "What are you thinking now?"
+**Framing Effects:**
+- Survival vs mortality framing
+- Impact on patient choices
+- Transparent presentation
+- Balance positive and negative
 
-Chunk and Check:
-- Break information into small segments
-- Check understanding after each chunk
-- Proceed based on comprehension
-- Back up if confusion evident
+**Uncertainty Communication:**
+- Honest about unknowns
+- Confidence intervals when appropriate
+- "Best guess" language
+- Ranges rather than point estimates
 
-Risk Communication in Consent
+### Documentation Best Practices
 
-Effective Risk Presentation:
-- Use absolute risk (X out of 100) not just relative risk
-- Provide visual displays when possible
-- Use natural frequencies
-- Contextualize with familiar risks
-- Present both positive and negative framing
+**Required Elements:**
+- Procedure description
+- Risks discussed
+- Alternatives presented
+- Questions answered
+- Voluntary agreement
 
-Addressing Uncertainty:
-- Acknowledge when evidence is limited
-- Distinguish known from unknown
-- Explain confidence intervals conceptually
-- Discuss individual vs population risk
+**Quality Indicators:**
+- Specific rather than generic
+- Signed before sedation
+- Witness when indicated
+- Copy provided to patient
 
-Addressing Rare Risks:
-- Disclose serious risks even if rare
-- Use "1 out of X" format
-- Provide context for understanding
-- Acknowledge difficulty grasping small numbers
-
-Capacity Assessment in Depth
-
-Structured Assessment:
-- Understanding of disclosed information
-- Appreciation of personal relevance
-- Reasoning through options
-- Expressing stable choice
-
-Tools and Instruments:
-- MacCAT-T (treatment)
-- MacCAT-CR (clinical research)
-- Hopkins Competency Assessment Test
-- Capacity to Consent to Treatment Instrument
-- Aid to Capacity Evaluation
-
-Red Flags for Impaired Capacity:
-- Inability to understand disclosed information
-- Fixed false beliefs about condition
-- Random or impulsive choices
-- Inability to state reasons
-- Fluctuating decisions without new information
-
-Supporting Capacity:
-- Simplify information
-- Use visual aids
-- Provide extra time
-- Minimize distractions
-- Treat reversible causes
-- Repeat assessment
-
-Surrogate Decision-Making
-
-Hierarchy (varies by jurisdiction):
-1. Advance directive (durable power of attorney)
-2. Court-appointed guardian
-3. Spouse or domestic partner
-4. Adult children
-5. Parents
-6. Adult siblings
-7. Other relatives
-8. Close friends
-
-Standards for Surrogates:
-- Substituted judgment (patient wishes known)
-- Best interest (wishes unknown)
-- Reasonable person standard
-
-Limitations and Challenges:
-- Family disagreement
-- Uncertainty about patient wishes
-- Conflict of interest
-- Emotional burden
-- Guilt and grief reactions
-
-Special Consent Situations
-
-Research Consent:
-- Purpose of research explained
-- Voluntary nature emphasized
-- Randomization explained
-- Placebo use disclosed
-- Right to withdraw stated
-- Compensation for injury
-- Privacy protections
-
-Surgical Consent:
-- Specific procedure details
-- Surgeon experience disclosure
-- Anesthesia risks
-- Blood product risks
-- Specific complications
-- Recovery expectations
-
-Blood Transfusion Consent:
-- Risks of transfusion
-- Alternatives (autologous, cell saver)
-- Religious objections
-- Jehovah's Witness considerations
-- Minor transfusion cases
-
-Mental Health Treatment:
-- Involuntary treatment standards
-- Capacity in psychiatric illness
-- Treatment over objection
-- Emergency medication
-- Rights of hospitalized patients
-
-Documentation Excellence
-
-Comprehensive Documentation:
-- Nature of discussion
-- Information provided
-- Questions and responses
-- Understanding confirmed
-- Voluntariness verified
-- Capacity assessed
-- Decision documented
-- Signature obtained
-
-Quality Indicators:
-- Time spent in discussion
-- Use of decision aids
-- Comprehension verification
-- Patient questions documented
-- Cultural accommodations noted
-
-Electronic Consent Systems:
-- Integration with EHR
-- Version control
+**Electronic Consent:**
+- Growing use in healthcare
 - Audit trails
-- Accessibility compliance
-- Security protections
+- Accessibility considerations
+- Legal validity
 
-Quality Improvement
+### Challenging Scenarios
 
-Measuring Consent Quality:
-- Patient understanding assessments
-- Decisional conflict scores
-- Decision regret measures
-- Satisfaction with process
-- Documentation audits
+**Low Health Literacy:**
+- Teach-back method
+- Simplified materials
+- Visual aids
+- Extra time for questions
 
-Process Improvement:
-- Standardized consent forms
-- Simplified language
-- Visual aids development
-- Staff training programs
-- Patient feedback integration
+**Cultural and Language Barriers:**
+- Professional interpreters
+- Culturally adapted materials
+- Family dynamics consideration
+- Health belief exploration
 
-Legal Risk Management:
-- Documentation completeness
-- Material risk disclosure
-- Capacity assessment
-- Surrogate authority verification
-- Refusal documentation`,
+**Time Pressures:**
+- Pre-visit information
+- Decision aids
+- Team-based consent
+- Staged consent process
 
+**Emotional Distress:**
+- Acknowledge emotions
+- Allow time to process
+- Offer support resources
+- Consider delaying if possible`,
       keyTerms: [
-        { term: 'natural frequency', definition: 'Expressing probability as X out of Y rather than percentage' },
-        { term: 'substituted judgment', definition: 'Making decision based on what patient would have wanted' },
-        { term: 'decisional conflict', definition: 'Personal uncertainty about which course of action to take' },
-        { term: 'MacCAT', definition: 'MacArthur Competency Assessment Tool - structured capacity evaluation' },
-        { term: 'IRB', definition: 'Institutional Review Board - ethics committee for research oversight' },
-        { term: 'advance directive', definition: 'Legal document specifying healthcare wishes for future incapacity' }
+        { term: 'Shared decision-making', definition: 'Collaborative process between patient and clinician' },
+        { term: 'Teach-back method', definition: 'Patient explains back to confirm understanding' },
+        { term: 'Natural frequency', definition: 'Presenting risk as X out of Y people' },
+        { term: 'Decision aid', definition: 'Tool helping patients understand options' }
       ],
-
-      clinicalNotes: `Obtaining truly informed consent requires time and skill. Best practices include:
-- Assume patients do not understand until teach-back confirms otherwise
-- Use plain language consistently
-- Provide decision aids when available
-- Allow adequate time for questions and deliberation
-- Document the conversation, not just the signature
-- Respect the right to refuse or withdraw consent
-- Re-visit consent if circumstances change
-
-For complex decisions, consider multiple discussions. For high-risk procedures, ensure patients understand potential serious outcomes. Cultural sensitivity and health literacy accommodation are essential.`
+      clinicalNotes: 'Teach-back method significantly improves comprehension - ask patients to explain in their own words. Decision aids reduce decisional conflict and improve knowledge. Document specific risks discussed, not just "risks explained." Professional interpreters required for informed consent - family members should not interpret medical information.'
     },
-
     5: {
       level: 5,
-      summary: 'Informed consent represents the practical application of autonomy and respect for persons in clinical practice, requiring sophisticated communication skills, systematic processes, and continuous quality improvement.',
-      explanation: `Expert-Level Informed Consent Practice
+      summary: 'Informed consent continues to evolve with technological advances, raising questions about genomic medicine disclosure obligations, artificial intelligence in decision-making, virtual consent processes, and the boundaries of provider responsibility for ensuring understanding.',
+      explanation: `## Evolving Frontiers of Informed Consent
 
-Theoretical Foundations:
+Informed consent continues to evolve with technological advances, raising questions about genomic medicine disclosure obligations, artificial intelligence in decision-making, virtual consent processes, and the boundaries of provider responsibility for ensuring understanding.
 
-Philosophical Bases:
-- Kantian autonomy and respect for persons
-- Mill's harm principle
-- Relational autonomy (feminist ethics)
-- Communitarian perspectives
-- Cultural variations in autonomy concepts
+### Genomic Medicine
 
-Legal Evolution:
-- Historical paternalism
-- Salgo v. Leland Stanford (1957) - patient right to know
-- Canterbury v. Spence (1972) - reasonable patient standard
-- Truman v. Thomas (1980) - informed refusal
-- Modern informed consent doctrine
+**Incidental Findings:**
+- Secondary discoveries in genome sequencing
+- Duty to return vs not looking
+- Patient preferences for categories
+- Variability in clinical significance
 
-Consent as Process vs Event:
-- Ongoing dialogue, not single transaction
-- Revisiting as circumstances change
-- Continuous right to withdraw
-- Documentation of process
-- Quality of conversation matters most
+**Familial Implications:**
+- Genetic information affects relatives
+- Duty to warn at-risk family members
+- Privacy vs beneficence tension
+- Legal precedents evolving
 
-Advanced Communication Science
+**Direct-to-Consumer Testing:**
+- Bypass traditional medical consultation
+- Variable clinical validity
+- Responsibility for result interpretation
+- Cascade testing considerations
 
-Health Literacy and Consent:
-- Universal precautions approach
-- Plain language standards (5th-8th grade)
-- Teach-back effectiveness evidence
-- Impact on understanding and outcomes
-- Reducing disparities
+### Artificial Intelligence and Consent
 
-Numeracy in Risk Communication:
-- Many patients struggle with probabilities
-- Icon arrays improve understanding
-- Natural frequencies superior to percentages
-- Absolute risk more informative than relative
-- Framing effects influence decisions
+**Algorithmic Transparency:**
+- Right to know AI involvement
+- Understanding AI limitations
+- "Black box" challenges
+- Explainable AI requirements
 
-Cognitive Biases in Decision-Making:
-- Optimism bias ("not me")
-- Affect heuristic (emotional responses)
-- Anchoring (first information dominates)
-- Availability (easily recalled examples)
-- Mitigation strategies in consent
+**AI-Specific Risks:**
+- Training data bias
+- Generalizability limitations
+- Error patterns different from humans
+- Liability allocation
 
-Cultural Competence in Consent:
-- Individual vs family-centered decision-making
-- Truth-telling variations
-- Role of community elders
-- Gender dynamics
-- Religious and spiritual considerations
-- Language and interpreter use
+**Consent for AI Training:**
+- Using patient data for algorithm development
+- De-identification limitations
+- Commercial uses
+- Opt-out rights
 
-Specialized Consent Scenarios
+### Digital and Remote Consent
 
-Surgical Consent Excellence:
-- Procedure-specific risk disclosure
-- Surgeon-specific outcomes when available
-- Enhanced recovery protocols
-- Prehabilitation expectations
-- Specific complication rates
-- Recovery milestones
+**Telehealth Consent:**
+- Technology limitations disclosure
+- Privacy and security risks
+- Emergency protocol differences
+- Cross-state licensing issues
 
-Genomic Consent Complexity:
-- Incidental findings management
-- Variant of uncertain significance
-- Family communication obligations
-- Re-contact policies
-- Data sharing and biobanks
-- Return of results over time
-- Commercial testing implications
+**Electronic Consent Platforms:**
+- Interactive multimedia presentations
+- Embedded comprehension checks
+- Digital signatures
+- Accessibility requirements
 
-Research Consent Challenges:
-- Therapeutic misconception prevention
-- Phase I trial realities
-- Randomization understanding
-- Placebo acceptance
-- Genetic research implications
-- Data sharing and future use
+**Remote Monitoring Consent:**
+- Continuous data collection
+- Third-party device manufacturers
+- Data sharing implications
+- Withdrawal procedures
+
+### Expanding Disclosure Obligations
+
+**Financial Conflicts:**
+- Device manufacturer relationships
+- Research funding sources
+- Equity ownership
+- Speaking fees and consulting
+
+**Provider Performance:**
+- Individual outcome statistics
+- Experience with specific procedures
+- Complication rates
+- Comparison to benchmarks
+
+**Institutional Factors:**
+- Teaching hospital involvement
+- Resident participation
+- Observational learning
+- Recording for quality improvement
+
+### Measuring Consent Quality
+
+**Process Measures:**
+- Time spent on consent
+- Questions asked by patients
+- Use of decision aids
+- Documentation quality
+
+**Outcome Measures:**
+- Comprehension testing
+- Decisional regret
+- Decisional conflict scores
+- Treatment adherence
+
+**System-Level Metrics:**
+- Consent-related complaints
+- Litigation patterns
+- Patient experience scores
+- Quality improvement initiatives
+
+### Policy Considerations
+
+**Standardization vs Individualization:**
+- Procedure-specific consent templates
+- Flexibility for patient needs
+- Quality vs efficiency trade-offs
+- Regulatory requirements
+
+**Consent as Process vs Event:****
+- Ongoing consent for long-term treatments
+- Re-consent for changes
+- Dynamic consent for research
+- Withdrawal procedures
+
+**Global Harmonization:****
 - International research ethics
-
-Emergency and Urgent Consent:
-- Implied consent doctrine limits
-- Surrogate availability
-- Time-limited interventions
-- Documentation of urgency
-- Follow-up when capacity returns
-- Ethics consultation for uncertainty
-
-Capacity and Vulnerability
-
-Neurocognitive Disorders:
-- Dementia and fluctuating capacity
-- Executive function impairments
-- Anosognosia (lack of insight)
-- Supported decision-making
-- Advance care planning value
-
-Psychiatric Illness:
-- Depression and decision-making
-- Psychosis and false beliefs
-- Mania and impulsivity
-- Treatment over objection standards
-- Capacity restoration attempts
-
-Developmental Disabilities:
-- Assessing understanding
-- Supported decision-making models
-- Guardian roles
-- Self-advocacy support
-- Rights protection
-
-Pediatric and Adolescent Consent:
-- Evolving capacity concepts
-- Gillick competence (UK)
-- Mature minor doctrine (US)
-- Assent vs consent
-- Parental authority limits
-- Refusal of life-saving treatment
-
-System-Level Implementation
-
-Organizational Infrastructure:
-- Consent policy development
-- Standardized procedures
-- Training and competency
-- Quality monitoring
-- Technology integration
-- Patient feedback mechanisms
-
-Electronic Consent Systems:
-- EHR integration
-- Video consent capabilities
-- Remote consent processes
-- Decision aid integration
-- Audit trails
-- Accessibility compliance
-
-Quality Metrics:
-- Process measures (time, materials)
-- Outcome measures (understanding, satisfaction)
-- Documentation audits
-- Patient experience surveys
-- Legal claims review
-
-Implementation Science:
-- Spread of evidence-based practices
-- Barrier identification
-- Stakeholder engagement
-- Continuous improvement
-- Sustainability planning
-
-Research Frontiers
-
-Decision Quality Measurement:
-- Decisional conflict scales
-- Decision regret instruments
-- Knowledge assessment tools
-- Values-concordance evaluation
-- Outcome correlation studies
-
-Decision Support Innovation:
-- Interactive digital tools
-- Personalized risk calculators
-- Values clarification exercises
-- Artificial intelligence applications
-- Virtual reality explanations
-
-Understudied Populations:
-- Limited health literacy
-- Limited English proficiency
-- Cognitive impairment
-- Serious mental illness
-- Substance use disorders
-- End-of-life decisions
-
-Policy and Ethics
-
-Regulatory Framework:
-- Common Rule revisions
-- FDA informed consent requirements
-- HIPAA research provisions
-- State law variations
-- International harmonization
-
-Emerging Ethical Issues:
-- Artificial intelligence in consent
-- Predictive analytics
-- Big data and privacy
-- Gene editing
-- Neurotechnologies
-- Artificial gametes
-
-Health Equity:
-- Disparities in consent quality
-- Access to decision support
-- Cultural adaptation needs
-- Interpreter quality
-- Trust and historical trauma
-- Structural competency
-
-Professional Development
-
-Consent Skills Training:
-- Communication skills curricula
-- Simulation-based practice
-- Direct observation and feedback
-- Health literacy training
-- Cultural competence development
-
-Assessment Methods:
-- OSCE stations
-- Standardized patient encounters
-- Chart review
-- Patient feedback
-- Peer review
-
-Maintenance of Competency:
-- Continuing education
-- Practice audit
-- Quality improvement participation
-- Patient advisory input
-- Interprofessional learning
-
-Global Health Context
-
-Resource-Limited Settings:
-- Consent challenges with limited time
-- Literacy barriers
-- Traditional healing integration
-- Community engagement
-- Research ethics
-
-Humanitarian Emergencies:
-- Disaster research ethics
-- Trauma care consent
-- Resource triage
-- Vulnerable population protection
-- Community consultation
-
-Universal Health Coverage:
-- Financial informed consent
-- Cost transparency
-- Value communication
-- Rationing considerations
-- Equity implications`,
-
+- Cultural adaptation
+- Regulatory convergence
+- Capacity building`,
       keyTerms: [
-        { term: 'anosognosia', definition: 'Lack of awareness of one\'s own illness or condition' },
-        { term: 'therapeutic misconception', definition: 'Participant failure to appreciate research differs from treatment' },
-        { term: 'variant of uncertain significance', definition: 'Genetic variant with unknown clinical impact' },
-        { term: 'supported decision-making', definition: 'Accommodations enabling person with disability to make own decisions' },
-        { term: 'Gillick competence', definition: 'UK standard for minor consent based on understanding, not age' },
-        { term: 'structural competency', definition: 'Capacity to recognize and respond to health effects of social structures' }
+        { term: 'Incidental findings', definition: 'Unexpected discoveries during testing' },
+        { term: 'Explainable AI', definition: 'Artificial intelligence whose decisions can be understood by humans' },
+        { term: 'Dynamic consent', definition: 'Ongoing consent with ability to modify preferences' },
+        { term: 'Decisional regret', definition: 'Remorse about treatment choice made' }
       ],
-
-      clinicalNotes: `Excellence in informed consent requires continuous attention to communication quality, patient understanding, and ethical practice. Key success factors:
-- Organizational commitment to patient-centered consent
-- Adequate time allocation for consent discussions
-- Training in health literacy and cultural competence
-- Integration of decision support tools
-- Quality monitoring and feedback
-- Responsiveness to patient concerns
-- Adaptation to emerging technologies and ethical challenges
-
-Consent quality reflects organizational culture and individual provider skill. Investment in consent process improvement benefits patients, providers, and institutions through better decisions, improved satisfaction, and reduced risk.`
+      clinicalNotes: 'Genomic consent requires discussion of incidental findings potential. AI decision support tools need validation before clinical use; consent should acknowledge AI limitations. Electronic consent platforms improve documentation but must not replace conversation. Performance transparency remains controversial - institutional averages may be more reliable than individual statistics.'
     }
   },
-
   media: [],
   citations: [],
   crossReferences: [],
-
   tags: {
-    systems: [],
-    topics: ['patient-safety'],
-    keywords: ['informed consent', 'patient autonomy', 'medical ethics', 'capacity']
+    topics: ['patient-safety', 'informed-consent'],
+    keywords: ['informed consent', 'autonomy', 'medical ethics', 'shared decision-making', 'patient rights']
   },
-
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   version: 1,

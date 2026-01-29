@@ -20,16 +20,25 @@ export { vitaminB12DeficiencyAnemia } from './anemias/vitamin-b12-deficiency';
 export { folateDeficiencyAnemia } from './anemias/folate-deficiency';
 export { hemolyticAnemia } from './anemias/hemolytic-anemia';
 export { aplasticAnemia } from './anemias/aplastic-anemia';
+export { microcyticAnemia } from './anemias/microcytic-anemia';
+export { normocyticAnemia } from './anemias/normocytic-anemia';
+export { macrocyticAnemia } from './anemias/macrocytic-anemia';
 
 // Leukemias
 export { acuteLymphoblasticLeukemia } from './leukemias/acute-lymphoblastic-leukemia';
 export { acuteMyeloidLeukemia } from './leukemias/acute-myeloid-leukemia';
 export { chronicLymphocyticLeukemia } from './leukemias/chronic-lymphocytic-leukemia';
 export { chronicMyeloidLeukemia } from './leukemias/chronic-myeloid-leukemia';
+export { allAmlContent } from './leukemias/all-aml';
+export { cllCmlContent } from './leukemias/cll-cml';
+export { acuteLeukemiaWorkup } from './leukemias/acute-leukemia-workup';
 
 // Lymphomas
 export { hodgkinLymphoma } from './lymphomas/hodgkin-lymphoma';
 export { nonHodgkinLymphoma } from './lymphomas/non-hodgkin-lymphoma';
+export { hodgkinLymphoma as hodgkinLymphomaDetailed } from './lymphomas/hodgkin-lymphoma';
+export { nhlTypes } from './lymphomas/nhl-types';
+export { lymphomaStaging } from './lymphomas/lymphoma-staging';
 
 // Plasma cell disorders
 export { multipleMyeloma } from './plasma-cell-disorders/multiple-myeloma';
@@ -63,16 +72,25 @@ export const hematologyContent = {
     'folateDeficiencyAnemia',
     'hemolyticAnemia',
     'aplasticAnemia',
+    'microcyticAnemia',
+    'normocyticAnemia',
+    'macrocyticAnemia',
   ],
   leukemias: [
     'acuteLymphoblasticLeukemia',
     'acuteMyeloidLeukemia',
     'chronicLymphocyticLeukemia',
     'chronicMyeloidLeukemia',
+    'allAmlContent',
+    'cllCmlContent',
+    'acuteLeukemiaWorkup',
   ],
   lymphomas: [
     'hodgkinLymphoma',
     'nonHodgkinLymphoma',
+    'hodgkinLymphomaDetailed',
+    'nhlTypes',
+    'lymphomaStaging',
   ],
   plasmaCellDisorders: [
     'multipleMyeloma',

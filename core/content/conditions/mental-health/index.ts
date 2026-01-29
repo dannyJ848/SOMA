@@ -1,36 +1,36 @@
 /**
  * Mental Health Conditions Index
  *
- * Comprehensive educational content for psychiatric and psychological conditions
+ * Comprehensive educational content for psychiatric disorders
  */
 
-export { majorDepression as depression } from './major-depression';
-export { anxiety } from './anxiety';
-export { bipolarDisorder as bipolar } from './bipolar';
-export { schizophrenia } from './schizophrenia';
-export { ptsd } from './ptsd';
-export { ocd } from './ocd';
 export { adhd } from './adhd';
-export { eatingDisorders as eatingDisorders } from './eating-disorders';
+export { anxiety } from './anxiety';
+export { bipolarDisorder } from './bipolar';
+export { eatingDisorders } from './eating-disorders';
+export { majorDepression } from './major-depression';
+export { ocd } from './ocd';
+export { ptsd } from './ptsd';
+export { schizophrenia } from './schizophrenia';
 
-import { majorDepression } from './major-depression';
+import { adhd } from './adhd';
 import { anxiety } from './anxiety';
 import { bipolarDisorder } from './bipolar';
-import { schizophrenia } from './schizophrenia';
-import { ptsd } from './ptsd';
-import { ocd } from './ocd';
-import { adhd } from './adhd';
 import { eatingDisorders } from './eating-disorders';
+import { majorDepression } from './major-depression';
+import { ocd } from './ocd';
+import { ptsd } from './ptsd';
+import { schizophrenia } from './schizophrenia';
 
 export const mentalHealthConditions = [
-  majorDepression,
+  adhd,
   anxiety,
   bipolarDisorder,
-  schizophrenia,
-  ptsd,
-  ocd,
-  adhd,
   eatingDisorders,
+  majorDepression,
+  ocd,
+  ptsd,
+  schizophrenia,
 ];
 
 export default mentalHealthConditions;

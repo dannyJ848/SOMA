@@ -9,6 +9,8 @@ export { staphInfections } from './staph-infections';
 export { strepInfections } from './strep-infections';
 export { gramNegative } from './gram-negative';
 export { atypicalBacteria } from './atypical-bacteria';
+export { staphylococcalInfections } from './staphylococcal-infections';
+export { streptococcalInfections } from './streptococcal-infections';
 
 // Content metadata
 export const bacterialInfectionsContent = {
@@ -17,7 +19,9 @@ export const bacterialInfectionsContent = {
   description: 'Educational content covering major bacterial pathogens including Staphylococcus, Streptococcus, gram-negative rods, and atypical bacteria.',
   topics: [
     { id: 'staph-infections', name: 'Staphylococcus aureus Infections' },
+    { id: 'staphylococcal-infections', name: 'Staphylococcal Infections (Comprehensive)' },
     { id: 'strep-infections', name: 'Streptococcal Infections' },
+    { id: 'streptococcal-infections', name: 'Streptococcal Infections (Comprehensive)' },
     { id: 'gram-negative', name: 'Gram-Negative Bacterial Infections' },
     { id: 'atypical-bacteria', name: 'Atypical Bacterial Infections' },
   ],

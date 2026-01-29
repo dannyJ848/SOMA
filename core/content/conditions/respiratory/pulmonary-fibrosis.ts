@@ -1,8 +1,7 @@
 /**
- * Pulmonary Fibrosis and ILD - Comprehensive Educational Content
+ * Pulmonary Fibrosis - Comprehensive Educational Content
  *
- * Covers pathophysiology, classification, diagnosis, and management of
- * pulmonary fibrosis and interstitial lung diseases.
+ * Covers interstitial lung disease, IPF pathophysiology, and management.
  */
 
 import { EducationalContent } from '../../types';
@@ -11,678 +10,447 @@ export const pulmonaryFibrosis: EducationalContent = {
   id: 'condition-pulmonary-fibrosis',
   type: 'condition',
   name: 'Pulmonary Fibrosis',
-  alternateNames: ['Interstitial Lung Disease', 'ILD', 'Pulmonary Fibrosis', 'IPF', 'Scarring of the Lungs'],
-  hpoId: 'HP:0002205',
+  alternateNames: ['Idiopathic Pulmonary Fibrosis', 'IPF', 'Interstitial Lung Disease', 'ILD'],
+  hpoId: 'HP:0002206',
 
   levels: {
     1: {
       level: 1,
-      summary: 'Pulmonary fibrosis is a condition where scar tissue builds up in the lungs, making it hard to breathe and get enough oxygen into the blood.',
-      explanation: `In pulmonary fibrosis, the tissue deep in your lungs becomes scarred and stiff. This scarring is called fibrosis. As the scar tissue builds up, it becomes harder for oxygen to pass from the lungs into the bloodstream.
+      summary: 'Pulmonary fibrosis is a lung disease where tissue becomes thickened and scarred, making it hard to breathe.',
+      explanation: `Pulmonary fibrosis is a condition where the lungs become scarred and stiff. Over time, this scarring makes it harder for oxygen to get into your blood.
 
 **What happens in the lungs:**
-- The tissue between the air sacs becomes thick and stiff
-- The lungs can't expand as fully
-- It takes more effort to breathe
-- Less oxygen gets into the blood
+- Lung tissue becomes thick and stiff
+- Scar tissue replaces healthy tissue
+- Lungs cannot expand fully
+- Oxygen has trouble passing into the blood
 
 **Common symptoms:**
 - Shortness of breath, especially with activity
-- Dry, hacking cough
+- Dry cough that does not go away
 - Feeling tired
 - Weight loss
-- Clubbing of fingers (widening and rounding of fingertips)
+- Clubbing of fingers (tips get wider and rounder)
 
 **Possible causes:**
-- Often the cause is unknown (idiopathic)
-- Long-term exposure to certain toxins (asbestos, silica, coal dust)
-- Autoimmune diseases (rheumatoid arthritis, scleroderma)
+- Often unknown (called idiopathic)
+- Exposure to certain chemicals or dust
 - Radiation therapy
-- Certain medications
-- Smoking
+- Some medications
+- Autoimmune diseases
 
-**Diagnosis:**
-- Chest X-ray or CT scan shows scarring
-- Pulmonary function tests
-- Sometimes lung biopsy
-
-**Treatment:**
-- Medications to slow down scarring
+**Treatment approaches:**
+- Medicines to slow scarring
 - Oxygen therapy
 - Pulmonary rehabilitation
 - Lung transplant in severe cases
-- Treating the underlying cause if found
-
-**Important:** Pulmonary fibrosis is usually progressive and cannot be completely cured, but treatments can help slow the disease and improve symptoms.`,
+- No cure, but treatment can help symptoms`,
       keyTerms: [
-        { term: 'fibrosis', definition: 'Formation of scar tissue in an organ or tissue' },
-        { term: 'interstitial', definition: 'Relating to the spaces and tissues between the air sacs in the lungs' },
-        { term: 'idiopathic', definition: 'Of unknown cause' },
-        { term: 'clubbing', definition: 'Changes in the shape of fingers and fingernails associated with some lung diseases' },
+        { term: 'fibrosis', definition: 'Thickening and scarring of tissue' },
+        { term: 'pulmonary', definition: 'Related to the lungs' },
+        { term: 'scar tissue', definition: 'Tough tissue that forms after injury, replacing normal tissue' },
+        { term: 'clubbing', definition: 'Changes in fingertips making them wider and rounder, often due to lung disease' },
       ],
       analogies: [
-        'Healthy lung tissue is like a soft sponge that expands easily. Fibrotic lung is like a stiff, dried-out sponge that doesn\'t stretch.',
-        'The lungs in pulmonary fibrosis are like honey that has crystallized - once the damage (crystals) form, it is hard to reverse.',
+        'Healthy lungs are like soft sponges; fibrotic lungs become stiff like leather.',
+        'Pulmonary fibrosis is like replacing a soft mesh screen with a solid piece of plastic - air cannot pass through easily.',
       ],
       examples: [
-        'A construction worker exposed to asbestos for 30 years might develop pulmonary fibrosis.',
-        'Someone with rheumatoid arthritis may develop lung scarring as part of their autoimmune disease.',
+        'A former construction worker who develops shortness of breath years after silica dust exposure.',
+        'An older adult who notices increasing breathlessness when climbing stairs.',
       ],
     },
     2: {
       level: 2,
-      summary: 'Pulmonary fibrosis encompasses interstitial lung diseases (ILDs) characterized by inflammation and scarring of lung interstitium. IPF is the most common idiopathic form, occurring mostly in older males, with progressive decline in lung function.',
-      explanation: `## Understanding Interstitial Lung Disease
+      summary: 'Pulmonary fibrosis is a progressive interstitial lung disease characterized by irreversible scarring of lung tissue, leading to restrictive physiology and impaired gas exchange, most commonly idiopathic in origin.',
+      explanation: `## Understanding Pulmonary Fibrosis
 
-**The Interstitium:**
-- The tissue and space between the air sacs (alveoli)
-- Contains blood vessels, connective tissue, and support structures
-- Site of gas exchange between air and blood
+**Types of Pulmonary Fibrosis:**
 
-## Classification of ILD
+**Idiopathic Pulmonary Fibrosis (IPF):**
+- Most common type
+- Cause unknown
+- Usually affects older adults
+- Progressive and irreversible
 
-**Major Categories:**
+**Secondary Pulmonary Fibrosis:**
+- Connective tissue diseases (rheumatoid arthritis, scleroderma)
+- Occupational exposures (asbestos, silica, coal dust)
+- Drug-induced (amiodarone, bleomycin, methotrexate)
+- Radiation-induced
+- Hypersensitivity pneumonitis
 
-**1. Idiopathic (Unknown Cause):**
-- Idiopathic Pulmonary Fibrosis (IPF) - most common
-- Nonspecific Interstitial Pneumonia (NSIP)
-- Desquamative Interstitial Pneumonia (DIP)
-- Cryptogenic Organizing Pneumonia (COP)
+## Pathophysiology Basics
 
-**2. Autoimmune-Associated:**
-- Rheumatoid arthritis ILD
-- Scleroderma (systemic sclerosis)
-- Sjogren's syndrome
-- Dermatomyositis/polymyositis
-- Sarcoidosis
+**Normal lung tissue:**
+- Thin alveolar walls allow gas exchange
+- Elastic tissue allows expansion and recoil
 
-**3. Environmental/Exposure-Related:**
-- Asbestosis (asbestos exposure)
-- Silicosis (silica exposure)
-- Coal worker's pneumoconiosis
-- Hypersensitivity pneumonitis (bird fancier's, farmer's lung)
-- Drug-induced
+**In pulmonary fibrosis:**
+- Chronic inflammation leads to fibroblast activation
+- Excess collagen deposition
+- Loss of elasticity
+- Thickening of alveolar walls
+- V/Q mismatch and hypoxemia
 
-**4. Sarcoidosis:**
-- Granulomatous inflammation
-- Can affect many organs
-- Often involves lymph nodes
-
-## Idiopathic Pulmonary Fibrosis (IPF)
-
-**Who gets IPF?**
-- Usually ages 60-80
-- More common in men
-- Former or current smokers
-- Family history in some cases
+## Clinical Presentation
 
 **Symptoms:**
-- Gradual onset of dyspnea
-- Dry, non-productive cough
-- "Velcro-like" crackles on lung exam
-- Clubbing in 25-50% of patients
+- Progressive dyspnea on exertion
+- Dry, nonproductive cough
+- Constitutional symptoms (fatigue, weight loss)
+- Digital clubbing (40-50% of IPF patients)
+- Fine bibasilar crackles (Velcro rales)
 
-**Diagnosis:**
-- HRCT chest: Usual Interstitial Pneumonia (UIP) pattern
-  - Basal and peripheral predominance
-  - Honeycombing
-  - Reticular opacities
-- Pulmonary function tests:
-  - Restrictive pattern (reduced lung volumes)
-  - Decreased DLCO (gas exchange)
-- Bronchoscopy with lavage (to exclude other causes)
-- Surgical lung biopsy (sometimes needed)
+**Physical exam findings:**
+- Tachypnea
+- Inspiratory crackles at lung bases
+- Signs of right heart failure in advanced disease
 
-**Treatment:**
-- Antifibrotic medications (pirfenidone, nintedanib) slow decline
-- Oxygen therapy
-- Pulmonary rehabilitation
-- Lung transplantation referral for eligible patients
-- Clinical trial participation
+## Diagnostic Approach
 
-**Prognosis:**
-- Median survival 3-5 years from diagnosis
-- Variable progression rate
-- Acute exacerbations can cause sudden worsening`,
+**Imaging:**
+- **High-resolution CT (HRCT)** - Gold standard
+  - Usual Interstitial Pneumonia (UIP) pattern:
+    - Reticular opacities
+    - Honeycombing
+    - Traction bronchiectasis
+    - Subpleural and basal predominance
+
+**Pulmonary function tests:**
+- Restrictive pattern
+- Reduced DLCO (diffusing capacity)
+- Normal or increased FEV1/FVC ratio`,
       keyTerms: [
-        { term: 'ILD', definition: 'Interstitial lung disease; group of disorders causing lung scarring' },
-        { term: 'IPF', definition: 'Idiopathic pulmonary fibrosis; progressive scarring of unknown cause' },
-        { term: 'HRCT', definition: 'High-resolution computed tomography; detailed CT scan for lung patterns' },
-        { term: 'UIP pattern', definition: 'Usual interstitial pneumonia; specific CT appearance of IPF' },
-        { term: 'honeycombing', definition: 'Pattern of small cystic spaces in scarred lung tissue on imaging' },
+        { term: 'interstitial lung disease', definition: 'Group of disorders affecting the tissue and space around the air sacs' },
+        { term: 'UIP pattern', definition: 'Usual Interstitial Pneumonia pattern on CT, characteristic of IPF' },
+        { term: 'honeycombing', definition: 'Cystic spaces on CT indicating end-stage fibrosis' },
         { term: 'DLCO', definition: 'Diffusing capacity of lung for carbon monoxide; measures gas exchange' },
       ],
       analogies: [
-        'The UIP pattern on CT looks like a honeycomb - with a network of small holes where healthy lung used to be.',
-        'Gas exchange in pulmonary fibrosis is like trying to breathe through a thick sweater instead of thin cloth.',
+        'Pulmonary fibrosis turns lungs from elastic rubber bands into stiff, brittle plastic.',
+        'The scarring is like patches of dried glue throughout a sponge - the sponge cannot expand or absorb properly.',
       ],
     },
     3: {
       level: 3,
-      summary: 'ILD classification uses clinical-radiologic-pathologic diagnosis, with IPF defined by UIP pattern on HRCT in appropriate clinical context. Antifibrotics (pirfenidone, nintedanib) slow progression. Sarcoidosis and hypersensitivity pneumonitis require distinct management.',
-      explanation: `## ILD Diagnostic Approach
+      summary: 'Idiopathic pulmonary fibrosis involves aberrant wound healing with myofibroblast proliferation and extracellular matrix deposition in a usual interstitial pneumonia pattern, diagnosed by characteristic HRCT or biopsy, managed with antifibrotic agents and supportive care.',
+      explanation: `## Pathophysiology
 
-### Stepwise Classification
-**Clinical Assessment:**
-- Detailed exposure history (birds, molds, dust, drugs)
-- Occupational history
-- Medication review
-- Autoimmune symptoms and serologies
+### Mechanism of Fibrosis
+**Normal wound healing:**
+- Injury -> Inflammation -> Tissue repair -> Resolution
 
-### HRCT Patterns
+**Aberrant healing in IPF:**
+1. **Epithelial injury** - Repeated micro-injuries to alveolar epithelium
+2. **Fibroblast activation** - Myofibroblast proliferation
+3. **ECM deposition** - Collagen types I and III accumulation
+4. **Failure of resolution** - Persistent fibrosis instead of repair
 
-**Usual Interstitial Pneumonia (UIP):**
-- Basal and peripheral predominance
-- Reticular opacities
+### Molecular Pathways
+**Key mediators:**
+- TGF-beta (transforming growth factor-beta) - primary driver
+- PDGF (platelet-derived growth factor)
+- CTGF (connective tissue growth factor)
+- Endothelin-1
+- IL-1, IL-6, TNF-alpha
+
+**Genetic factors:**
+- MUC5B promoter variant (strongest risk factor)
+- TERT, TERC mutations (telomerase)
+- Surfactant protein mutations
+
+## Radiographic Patterns
+
+**UIP Pattern (definite IPF):**
+- Subpleural, basal predominant reticular abnormalities
 - Honeycombing with traction bronchiectasis
-- Minimal ground glass
+- Absence of features inconsistent with UIP
 
 **Possible UIP:**
-- UIP pattern but lacking one feature
-- OR prominent ground glass
+- All UIP features except honeycombing
 
 **Inconsistent with UIP:**
-- Upper or mid-lung predominance
+- Upper/mid-lung predominance
+- Peribronchovascular predominance
 - Extensive ground glass
-- Nodules, cysts, or mosaic pattern
-- Findings suggesting alternative diagnosis
+- Consolidation, nodules, pleural effusion
 
-### Serologic Testing for CTD-ILD
-- RF, anti-CCP (rheumatoid arthritis)
-- ANA (screening)
-- Anti-Scl70 (scleroderma)
-- Anti-Jo1 (inflammatory myositis)
-- Anti-Ro/La (Sjogren's)
-- ACE (sarcoidosis - nonspecific)
+## Pulmonary Function
 
-### Multidisciplinary Discussion (MDD)
-- Radiologist, pulmonologist, pathologist, rheumatologist
-- Essential for accurate ILD classification
-- Increases diagnostic confidence
+**Restrictive pattern:**
+- Reduced FVC (forced vital capacity)
+- Reduced TLC (total lung capacity)
+- Normal or increased FEV1/FVC
+- Reduced DLCO (earliest abnormality)
 
-## Specific ILD Entities
+**6-minute walk test:**
+- Distance and desaturation predict mortality
 
-### Idiopathic Pulmonary Fibrosis (IPF)
+## Management
 
-**Diagnostic Criteria (ATS/ERS/JRS/ALAT 2018):**
-1. Exclude other causes (ILD due to CTD, environmental, drug)
-2. UIP pattern on HRCT (in appropriate clinical context)
-   - If UIP present: Diagnosis without biopsy
-   - If possible UIP: Consider biopsy
-   - If inconsistent: Biopsy required
+**Antifibrotic medications:**
+- **Nintedanib** (tyrosine kinase inhibitor)
+  - Targets VEGF, FGF, PDGF receptors
+  - Slows FVC decline by ~50%
+  - GI side effects common
 
-**Antifibrotic Therapy:**
+- **Pirfenidone**
+  - Mechanism unclear; reduces fibroblast proliferation
+  - Slows disease progression
+  - Photosensitivity, GI effects
 
-| Agent | Mechanism | Effect | Key Side Effects |
-|-------|-----------|--------|------------------|
-| Pirfenidone | Multiple (anti-fibrotic, anti-inflammatory) | Slows FVC decline ~50% | Photosensitivity, GI, liver |
-| Nintedanib | Tyrosine kinase inhibitor (VEGFR, FGFR, PDGFR) | Slows FVC decline ~50% | Diarrhea, liver, hypertension |
-
-**When to Start:**
-- Confirmed IPF
-- FVC 50-90% predicted
-- Not limited by comorbidities
-
-### Hypersensitivity Pneumonitis (HP)
-- Type III and IV hypersensitivity to inhaled antigen
-- Acute, subacute, and chronic forms
-- Common antigens: birds, mold, farmers lung, hot tub lung
-- Diagnosis: Exposure history, HRCT, bronchoalveolar lavage (lymphocytosis), sometimes biopsy
-- Treatment: Antigen avoidance, corticosteroids for acute/severe
-
-### Sarcoidosis
-- Non-caseating granulomas
-- Hilar lymphadenopathy + pulmonary infiltrates
-- Multi-system involvement (eyes, skin, liver, heart, calcium)
-- Diagnosis: Clinical-radiologic + biopsy showing granulomas (exclude other causes)
-- Treatment: Observation (mild), corticosteroids (moderate/severe), steroid-sparing agents (methotrexate, azathioprine)
-
-### Connective Tissue Disease-Associated ILD
-- RA-ILD: UIP pattern most common (similar to IPF but different behavior)
-- Scleroderma: NSIP pattern most common
-- Myositis: Anti-synthetase syndrome (anti-Jo1) with mechanic's hands
-- Treatment: Immunosuppression, consider antifibrotics for progressive fibrotic phenotype
-
-### Idiopathic NSIP
-- Cellular vs fibrotic subtypes
-- Better prognosis than IPF
-- Responsive to corticosteroids +/- immunosuppressants
-
-## Pulmonary Function in ILD
-**Restrictive Pattern:**
-- Decreased FVC, TLC, RV
-- Normal or increased FEV1/FVC ratio
-- Decreased DLCO (gas exchange impairment)
-
-**Monitoring:**
-- Serial FVC and DLCO every 3-6 months
-- Decline of ≥10% FVC or ≥15% DLCO clinically significant`,
+**Supportive care:**
+- Oxygen therapy for hypoxemia
+- Pulmonary rehabilitation
+- Vaccinations (influenza, pneumococcal)
+- Symptom management
+- Lung transplant evaluation`,
       keyTerms: [
-        { term: 'UIP', definition: 'Usual interstitial pneumonia; pathologic and radiologic pattern of IPF' },
-        { term: 'NSIP', definition: 'Nonspecific interstitial pneumonia; ILD with better prognosis than IPF' },
-        { term: 'traction bronchiectasis', definition: 'Bronchial dilation from surrounding lung fibrosis pulling on airways' },
-        { term: 'ground glass opacity', definition: 'Hazy increased lung attenuation on CT, obscuring vessels; may indicate inflammation' },
-        { term: 'BAL lymphocytosis', definition: 'Increased lymphocytes in bronchoalveolar lavage fluid; suggests hypersensitivity pneumonitis' },
-        { term: 'anti-synthetase syndrome', definition: 'Connective tissue disease with ILD, myositis, arthritis, fever, mechanic\'s hands, anti-Jo1 antibodies' },
+        { term: 'myofibroblast', definition: 'Cell type producing collagen; key driver of fibrosis' },
+        { term: 'traction bronchiectasis', definition: 'Irregular bronchial dilation caused by fibrotic retraction' },
+        { term: 'DLCO', definition: 'Diffusing capacity; measures efficiency of gas transfer across alveolar membrane' },
+        { term: 'TGF-beta', definition: 'Transforming growth factor-beta; master regulator of fibrogenesis' },
       ],
-      clinicalNotes: 'For IPF, both pirfenidone and nintedanib slow FVC decline by approximately 50%. Choice depends on side effect profile, drug interactions, and patient preference. Always obtain liver function tests before starting and monitor. Consider lung transplant referral early, not after treatment failure.',
+      clinicalNotes: 'IPF has median survival of 3-5 years without treatment. Nintedanib and pirfenidone slow progression but do not reverse fibrosis. Acute exacerbations (AE-IPF) have high mortality (>50%). GERD management may be important as microaspiration may contribute to progression.',
     },
     4: {
       level: 4,
-      summary: 'ILD management requires precise multidisciplinary classification, distinction of progressive fibrotic phenotypes, early antifibrotic therapy, recognition of treatable mimics, and integration of emerging biomarkers and targeted therapies.',
-      explanation: `## Progressive Fibrosing ILD Phenotype
+      summary: 'IPF represents a paradigm of aberrant wound healing in aging lungs with genetic susceptibility, characterized by histopathological temporal and spatial heterogeneity, requiring multidisciplinary diagnosis, antifibrotic therapy, and comprehensive management of comorbidities and complications including acute exacerbations.',
+      explanation: `## Advanced Pathophysiology
+
+### Epithelial-Mesenchymal Crosstalk
+**Alveolar epithelial injury:**
+- Type II pneumocyte dysfunction
+- Loss of regenerative capacity
+- Senescence-related secretory phenotype
+- Release of pro-fibrotic mediators
+
+**Fibroblast heterogeneity:**
+- Multiple origins: resident, bone marrow-derived, epithelial-to-mesenchymal transition
+- Myofibroblast differentiation
+- Resistance to apoptosis (persist after injury resolved)
+
+### Telomere Biology
+- Short telomeres in 15-20% of familial IPF
+- TERT/TERC mutations impair stem cell renewal
+- Links aging and fibrosis
+
+### Immunology
+- Not primarily an inflammatory disease
+- Innate immune activation
+- Autoantibodies present but role unclear
+
+## Histopathology
+
+**UIP pattern (surgical lung biopsy):**
+- Temporal heterogeneity (old and new fibrosis)
+- Spatial heterogeneity (varied involvement)
+- Fibroblast foci (leading edge of fibrosis)
+- Honeycomb remodeling
+- Scar emphysema
+
+**Differential diagnosis:**
+- Nonspecific interstitial pneumonia (NSIP)
+- Chronic hypersensitivity pneumonitis
+- Connective tissue disease-ILD
+
+## Acute Exacerbations
 
 **Definition:**
-- Decline in FVC ≥10% in 2 years despite appropriate management
-- OR Decline in FVC ≥5% + worsening symptoms/imaging
-- Applies to multiple ILDs beyond IPF
+- Acute worsening within 30 days
+- No identifiable cause (infection, heart failure, PE)
+- New bilateral ground-glass or consolidation
 
-**Progressive Fibrosing ILDs:**
-- IPF
-- Fibrotic NSIP
-- CTD-ILD with progressive fibrosis
-- Chronic hypersensitivity pneumonitis
-- Unclassifiable ILD
+**Risk factors:**
+- Lower baseline FVC
+- Prior exacerbation
+- Bronchoalveolar lavage neutrophilia
 
-**INBUILD Trial (Nintedanib):**
-- Showed benefit in progressive fibrosing ILDs (excluding IPF)
-- Extended indication for nintedanib beyond IPF
+**Management:**
+- Supportive care
+- Corticosteroids (uncertain benefit)
+- Mechanical ventilation often futile
+- High mortality (>50%)
 
-## Diagnostic Challenges
+## Comorbidities
 
-### Fibrotic Hypersensitivity Pneumonitis vs IPF
-**Differentiating Features:**
+**Common comorbid conditions:**
+- Pulmonary hypertension (pre-capillary)
+- Gastroesophageal reflux disease
+- Obstructive sleep apnea
+- Cardiovascular disease
+- Depression/anxiety
+- Lung cancer (increased risk)
 
-| Feature | fHP | IPF |
-|---------|-----|-----|
-| HRCT pattern | NSIP-like, possible centrilobular nodules | UIP |
-| Distribution | Mid-lung or upper lung predominance possible | Basal predominance |
-| Mosaic attenuation | Common | Rare |
-| Exposures | Present (birds, mold) | None relevant |
-| BAL | Lymphocytosis | Neutrophilia/eosinophilia |
+**Pulmonary hypertension:**
+- Portends poor prognosis
+- PH-specific therapy controversial
+- Best treatment is antifibrotics, oxygen, transplant
 
-**Diagnostic Approach:**
-- Detailed exposure assessment
-- Home inspection for hidden antigens
-- Serum precipitins (limited utility)
-- Surgical biopsy if uncertainty persists
+## Transplant Considerations
 
-### Unclassifiable ILD
-- Inadequate clinical, radiologic, or pathologic data
-- OR Conflicting findings
-- OR Features of multiple ILDs
-- Up to 10% of ILD referrals
-- Management based on dominant phenotype
+**Timing:**
+- List when FVC <80% predicted or DLCO <40%
+- Donor shortage a major limitation
+- Bilateral lung transplant preferred
 
-## Complications and Comorbidities
-
-### Pulmonary Hypertension in ILD
-- Prevalence 8-15% in IPF
-- Associated with worse prognosis
-- Diagnosis: Right heart catheterization (echocardiogram screening)
-- Treatment: Oxygen, consider pulmonary hypertension therapies if Group 3 predominant with significant PH
-
-### Acute Exacerbation of ILF
-- Sudden, unexplained worsening
-- Diagnosis of exclusion (infection, PE, heart failure)
-- Mortality 50% or higher
-- Treatment: High-dose corticosteroids (controversial), supportive care
-
-### Lung Cancer
-- Increased risk in IPF (lung cancer in 10-15%)
-- Makes both management and screening challenging
-- Screening not well-established
-
-### Gastroesophageal Reflux
-- Microaspiration may contribute to fibrosis
-- Prevalence up to 90% in IPF
-- Consider anti-reflux measures
-
-## Antifibrotic Therapy: Advanced Considerations
-
-### Pirfenidone
-**Mechanism:**
-- Multiple anti-fibrotic effects
-- Reduces TGF-beta production
-- Inhibits fibroblast proliferation
-
-**Practical Use:**
-- 2403 mg/day in divided doses
-- Start at lower dose and titrate
-- Avoid sun exposure (photosensitivity)
-- Monitor LFTs
-
-### Nintedanib
-**Mechanism:**
-- Tyrosine kinase inhibition
-- Blocks VEGF, FGF, PDGF receptors
-- Reduces fibroblast proliferation and matrix deposition
-
-**Practical Use:**
-- 150 mg BID
-- Take with food to reduce GI effects
-- Monitor LFTs
-- Hold for surgery/high bleeding risk
-
-### Choosing Between Them
-| Factor | Pirfenidone | Nintedanib |
-|--------|-------------|------------|
-| Liver disease | May be preferred | Avoid |
-| Anticoagulation | Preferred | Avoid |
-| Cardiovascular disease | Preferred | Avoid |
-| GI issues | Avoid | May be worse |
-| Photosensitivity risk | Avoid | Preferred |
-
-### Combination Therapy
-- NOT recommended (increased toxicity without benefit)
-
-## Emerging Therapies
-
-### Pamrevlumab (FGF-2 inhibitor)
-- Phase 3 trial ongoing
-- Added to nintedanib or pirfenidone
-
-### GLPG1690 (AUTOTAXIN inhibitor)
-- Phase 3 halted (futility)
-
-### LPA1 antagonist (BMS-986020)
-- Targeting lysophosphatidic acid pathway
-- Phase 2 showed signal
-
-### SAR156597 (dual IL-4/IL-13)
-- Anti-Th2 cytokine
-- Phase 2 in IPF`,
+**Outcomes:**
+- Better than medical therapy for appropriate candidates
+- 5-year survival ~50-60%
+- Age cutoff typically 65-70`,
       keyTerms: [
-        { term: 'progressive fibrosing ILD', definition: 'Group of ILDs with continuing fibrosis despite appropriate management' },
-        { term: 'acute exacerbation of IPF', definition: 'Sudden clinically significant respiratory deterioration without identifiable cause' },
-        { term: 'unclassifiable ILD', definition: 'ILD that cannot be confidently classified after comprehensive evaluation' },
-        { term: 'AUTOTAXIN', definition: 'Enzyme producing lysophosphatidic acid, mediator of fibrosis' },
+        { term: 'fibroblast foci', definition: 'Aggregates of fibroblasts and myofibroblasts; hallmark microscopic finding in UIP' },
+        { term: 'temporal heterogeneity', definition: 'Varying ages of fibrotic lesions seen microscopically' },
+        { term: 'AE-IPF', definition: 'Acute exacerbation of IPF; sudden deterioration of unknown cause' },
+        { term: 'senescence-associated secretory phenotype', definition: 'Pro-inflammatory state of aging cells contributing to fibrosis' },
       ],
-      clinicalNotes: 'For progressive fibrosing ILD (not IPF), nintedanib is indicated based on INBUILD trial. For IPF, both antifibrotics have equivalent efficacy - choose based on comorbidities and side effect profile. Consider early lung transplant referral - waitlist mortality for IPF remains high. Acute exacerbations have >50% mortality - advanced care planning discussions essential.',
+      clinicalNotes: 'Acute exacerbations are medical emergencies with limited therapeutic options. Consider early palliative care integration. GERD management with PPIs may reduce microaspiration risk. Screen for sleep apnea as it accelerates hypoxemia.',
     },
     5: {
       level: 5,
-      summary: 'Precision ILD care integrates genomic risk profiling, protein biomarker panels, deep learning radiomic analysis, novel antifibrotic targets, and personalized management incorporating comorbidity optimization, transplant timing, and emerging antifibrotic combinations.',
-      explanation: `## Molecular Pathogenesis and Therapeutic Targets
+      summary: 'Contemporary IPF management incorporates genetic counseling for telomere disorders, evaluation of combined pulmonary fibrosis and emphysema, emerging therapies targeting senescence and mechanotransduction, and precision approaches to heterogeneous disease trajectories.',
+      explanation: `## Genetics and Personalized Medicine
 
-### Fibrotic Cascade
+### Telomere Disorders
+**TERT/TERC mutations:**
+- Autosomal dominant inheritance
+- Variable penetrance
+- Associated with bone marrow failure, liver disease
+- Genetic counseling recommended
 
-**Epithelial Injury:**
-- Environmental triggers (smoke, microaspiration, pollution)
-- Telomere dysfunction (shortened telomeres in familial IPF)
-- ER stress and cellular senescence
+**Short telomere syndrome:**
+- Consider in familial cases
+- May predict worse transplant outcomes
+- Donor organ telomere length may matter
 
-**Pro-Fibrotic Signaling:**
-- TGF-beta: Master regulator of fibrosis
-- PDGF, FGF: Fibroblast proliferation
-- Wnt/beta-catenin: Epithelial-mesenchymal transition
-- Lysophosphatidic acid (LPA): Fibroblast recruitment
+### Combined Pulmonary Fibrosis and Emphysema (CPFE)
 
-**Extracellular Matrix Deposition:**
-- Fibroblast to myofibroblast differentiation
-- Excessive collagen production
-- Impaired matrix degradation
-
-### Genetic Risk Factors
-**Common Variants (GWAS):**
-- MUC5B promoter rs35705950: Strongest common risk factor
-  - OR ~6-8 for IPF
-  - Present in >30% of IPF patients
-  - Also present in ~10% of general population
-- Other loci: DSP, FAM13A, TERT, TERC
-
-**Rare Variants:**
-- Telomerase-related (TERT, TERC, RTEL1, PARN)
-- Surfactant-related (SFTPC, SFTPA2, ABCA3)
-- Telomere syndromes: Familial IPF, liver disease
-
-**Clinical Implications:**
-- Family history: 2-20% of IPF
-- Genetic counseling for familial cases
-- Consider telomere syndrome screening in younger patients
-- May impact lung transplant candidacy
-
-## Biomarker Development
-
-### Protein Biomarkers (PERFUMES, PROFILE studies)
-| Biomarker | Association | Clinical Utility |
-|-----------|-------------|------------------|
-| MMP7 | Elevated in IPF | Diagnosis, prognosis |
-| KL-6 (MUC1) | Japanese populations | Disease activity |
-| SP-D | Elevated in IPF | Diagnosis |
-| CXCL13 | Mortality risk | Prognosis |
-| YKL-40 | Fibrosis extent | Prognosis |
-
-### Biomarker Panels
-- Combined panels outperform single markers
-- Risk stratification models
-- May guide therapy intensity
-
-### Circulating Fibrocytes
-- Bone marrow-derived cells
-- Correlate with disease progression
-- Potential treatment target
-
-### Blood Gene Expression
-- 52-gene signature discriminating IPF from other ILDs
-- Commercially available (Envisia Genomic Classifier)
-- May reduce need for surgical biopsy
-
-## Imaging: Beyond Pattern Recognition
-
-### Radiomics and AI
-**Deep Learning Applications:**
-- Automated quantification of fibrosis extent
-- Prediction of progression (FVC decline, mortality)
-- Differentiation of ILD subtypes
-- Detection of subtle change over time
-
-### Parametric Response Mapping (PRM)
-- Co-registered inspiratory/expiratory CT
-- Quantifies functional lung impairment
-- May detect progression earlier
-
-### Micro-CT
-- Research tool for evaluating microstructure
-- May visualize early fibrosis
-
-## Novel Therapeutic Targets and Agents
-
-### Inhaled Therapies
-**Rationale:**
-- Direct lung delivery
-- Lower systemic exposure
-- Potential for antifibrotic effect
-
-**Agents in Development:**
-- Inhaled nintedanib
-- Inhaled pirfenidone
-- PBI-4050 (novel anti-fibrotic)
-
-### Combination Antifibrotic Approaches
-**Rationale:**
-- Target multiple pathways
-- Potential additive/synergistic effect
-- Safety concerns limit enthusiasm
-
-**Clinical Trials:**
-- Nintedanib + pirfenidone: Increased toxicity without clear benefit (not recommended)
-- Antifibrotic + novel agent: Ongoing
-
-### Anti-Inflammatory/Anti-Autoimmune
-**Rationale:**
-- Some IPF has inflammatory component
-- Lymphocyte aggregates present
-
-**Trials:**
-- Corticosteroids + azathioprine: PANTHER-IPF trial showed harm (mortality increased) - NOT recommended
-- Methotrexate: Not beneficial
-- Rituximab: Limited data
-
-### Targeting Specific Pathways
-**LOXL2 Inhibition (Simtuzumab):**
-- Lysyl oxidase-like 2 involved in crosslinking collagen
-- Phase 3 trials negative
-
-**CTGF Inhibition (Pamrevlumab):**
-- Connective tissue growth factor
-- Phase 3 ongoing
-
-**FGF-21 (Pegbelfermin):**
-- Anti-fibrotic and metabolic effects
-- Phase 2 in IPF completed
-
-## Comorbidity Management: Evidence-Based
-
-### Pulmonary Hypertension in ILD
-**Treatment Considerations:**
-- Group 3 PH: Limited evidence
-- Pulmonary vasodilators may worsen V/Q mismatch
-- INCREASE trial: Inhaled treprostinil improved exercise capacity in fibrotic ILD with PH
-- Select patients with mPAP ≥25 mmHg, PAWP ≤15 mmHg, PVR >3 WU
-
-### GERD and Microaspiration
-**Pathophysiology:**
-- GERD prevalence 80-90% in IPF
-- Pepsin detected in BAL of IPF patients
-- Animal models: Aspiration induces fibrosis
+**Characteristics:**
+- Upper lobe emphysema + lower lobe fibrosis
+- Preserved lung volumes (counteracting defects)
+- Severely reduced DLCO
+- High risk of pulmonary hypertension
+- Often male smokers
 
 **Management:**
-- High-dose PPI not shown to slow progression (WRAP-IPF trial)
-- Consider anti-reflux surgery in selected patients
-- Lifestyle modifications remain reasonable
+- Treat both components
+- Screen aggressively for PH
+- Lung transplant often required
 
-### Sleep Disordered Breathing
-- High prevalence in IPF (up to 70%)
-- Nocturnal hypoxemia common
-- CPAP improves oxygenation and quality of life
+## Emerging Therapeutics
 
-## Lung Transplantation in IPF
+### Antifibrotic Pipeline
+**Pamrevlumab:**
+- Anti-CTGF antibody
+- Phase 3 trials ongoing
 
-**Timing:**
-- Median survival after listing: 3-4 months
-- Listing threshold: FVC <50-60%, DLCO <30-40%, or clinical decline
-- Don't wait for treatment failure to refer
+**BMS-986278:**
+- LPA1 antagonist
+- Targeting lysophosphatidic acid pathway
 
-**Allocation:**
-- LAS (Lung Allocation Score) prioritizes sick patients
-- IPF has higher LAS than COPD (higher urgency)
+### Senolytics and Senomorphics
+**Rationale:**
+- Clear senescent cells
+- Reduce SASP-mediated fibrosis
 
-**Outcomes:**
-- Median survival 5-7 years post-transplant
-- Primary graft dysfunction risk higher in IPF
-- Recurrence of fibrosis rare but reported
+**Agents under study:**
+- Dasatinib + quercetin
+- Fisetin
 
-**Considerations:**
-- Age limit varies by center (usually <65-70)
-- Comorbidities affect candidacy
-- Antifibrotics often continued until transplant
+### Mechanotransduction Targets
+- Integrin inhibitors
+- LOXL2 inhibitors (simtuzumab failed, but concept remains)
 
-## Precision Medicine: Future Directions
-
-### Molecular Endotyping
-- IPF likely comprises multiple endotypes
-- MUC5B high vs low expressers
-- Telomere short vs normal
-- May guide therapy selection
-
-### Microbiome Modulation
-- Altered lung microbiome in IPF
-- Potential for probiotics or microbiome-based therapies
-
-### Senolytics
-- Senescent cell accumulation in fibrotic lung
-- Dasatinib + quercetin being studied
-- Early-stage clinical trials
-
-### Regenerative Approaches
+### Stem Cell Therapy
 - Mesenchymal stem cells
-- Lung progenitor cells
-- Decellularized lung scaffolding`,
+- Investigational; no proven efficacy yet
+
+## Biomarkers
+
+**Prognostic:**
+- Baseline FVC and decline rate
+- GAP score (Gender, Age, Physiology)
+- KL-6 (glycoprotein elevated in IPF)
+- CCL18 (chemokine)
+
+**Transcriptomic signatures:**
+- MUC5B genotype (protective but increases risk)
+- TOLLIP genotype (predicts pirfenidone response)
+
+## Clinical Trial Design
+
+**Endpoints:**
+- FVC decline (traditional)
+- Time to disease progression
+- Patient-reported outcomes
+- Mortality (challenging due to slow disease)
+
+**Challenges:**
+- Disease heterogeneity
+- Slow progression
+- Need for surrogate endpoints
+
+## Palliative and Supportive Care
+
+**Early integration:**
+- Advance care planning
+- Symptom management
+- Psychosocial support
+- End-of-life planning
+
+**Oxygen and dyspnea:**
+- Ambulatory oxygen for exertional desaturation
+- Opioids for refractory dyspnea
+- Non-pharmacologic strategies
+
+**Transplant alternatives:**
+- Mechanical support limited
+- Ex vivo lung perfusion expanding donor pool
+- Living lobar donation rare`,
       keyTerms: [
-        { term: 'MUC5B promoter variant', definition: 'Common genetic variant strongly associated with IPF risk; may affect mucus production' },
-        { term: 'radiomics', definition: 'Extraction of quantitative features from medical imaging for predictive modeling' },
-        { term: 'PERFUMES study', definition: 'Comprehensive biomarker study in IPF identifying multiple prognostic proteins' },
-        { term: 'LAS', definition: 'Lung Allocation Score; system prioritizing donor lung allocation based on medical urgency and survival benefit' },
-        { term: 'senolytics', definition: 'Drugs that selectively eliminate senescent cells to reduce chronic inflammation' },
+        { term: 'senolytics', definition: 'Drugs that selectively eliminate senescent cells' },
+        { term: 'mechanotransduction', definition: 'Cellular response to mechanical forces; implicated in fibrosis progression' },
+        { term: 'CPFE', definition: 'Combined pulmonary fibrosis and emphysema; distinct clinical entity' },
+        { term: 'SASP', definition: 'Senescence-associated secretory phenotype; pro-inflammatory factors from aging cells' },
       ],
-      clinicalNotes: `Key clinical considerations for advanced ILD management:
-
-1. **Antifibrotic timing**: Start as soon as IPF diagnosed, don't wait for decline. Both drugs slow progression but don't improve symptoms.
-
-2. **Transplant referral**: Refer early (FVC <60%, DLCO <40%). Waitlist mortality high - don't wait for treatment failure.
-
-3. **Comorbidity screening**: Screen for PH, GERD, OSA, CAD. Optimize comorbidities aggressively.
-
-4. **Acute exacerbations**: Have treatment plan in place. Discuss ICU preferences while patient stable. Mortality >50%.
-
-5. **Familial IPF**: Screen first-degree relatives with CT. Consider genetic testing and telomere length assessment.
-
-6. **Palliative care**: Integrate early. Symptom burden high despite preserved lung function in some.
-
-7. **Combination therapy**: Nintedanib + pirfenidone not recommended (increased toxicity). Monotherapy remains standard.
-
-8. **Biomarkers**: Envisia genomic classifier may avoid biopsy in some cases. MUC5B genotype testing increasingly available.`,
+      clinicalNotes: 'Consider genetic testing for TERT/TERC in familial cases or early-onset disease. CPFE patients need aggressive PH screening as it significantly impacts prognosis. Early palliative care referral improves quality of life and may extend survival.',
     },
   },
 
   media: [
     {
-      id: 'uip-pattern-ct',
-      type: 'diagram',
-      filename: 'uip-ct-pattern.svg',
-      title: 'UIP Pattern on HRCT',
-      description: 'Radiologic features of usual interstitial pneumonia including honeycombing and reticular opacities',
-    },
-    {
-      id: 'ild-classification',
-      type: 'diagram',
-      filename: 'ild-classification-tree.svg',
-      title: 'ILD Classification Algorithm',
-      description: 'Diagnostic approach to interstitial lung diseases',
+      id: 'ipf-honeycombing',
+      type: 'image',
+      filename: 'ipf-honeycombing-ct.jpg',
+      title: 'HRCT showing honeycombing in IPF',
+      description: 'Basal and subpleural predominant fibrosis with honeycombing',
     },
   ],
 
   citations: [
     {
-      id: 'ipf-guidelines-2018',
+      id: 'ats-ipf-2022',
       type: 'article',
-      title: 'Diagnosis and Management of Idiopathic Pulmonary Fibrosis: An Official ATS/ERS/JRS/ALAT Clinical Practice Guideline',
-      authors: ['Raghu G', 'Remy-Jardin M', 'Ryerson CJ', 'et al.'],
+      title: 'Idiopathic Pulmonary Fibrosis: An Update',
+      authors: ['Raghu G', 'Remy-Jardin M'],
       source: 'American Journal of Respiratory and Critical Care Medicine',
-      url: 'https://doi.org/10.1164/rccm.201809-1640ST',
-    },
-    {
-      id: 'inbuild-trial',
-      type: 'article',
-      title: 'Nintedanib for Progressive Fibrosing Interstitial Lung Diseases',
-      authors: ['Cottin V', 'Cottin H', 'Berkowitz N', 'et al.'],
-      source: 'New England Journal of Medicine',
-      url: 'https://doi.org/10.1056/NEJMoa1908681',
     },
   ],
 
   crossReferences: [
-    { targetId: 'condition-rheumatoid-arthritis', targetType: 'condition', relationship: 'related', label: 'Rheumatoid Arthritis' },
-    { targetId: 'condition-sarcoidosis', targetType: 'condition', relationship: 'related', label: 'Sarcoidosis' },
-    { targetId: 'condition-pulmonary-hypertension', targetType: 'condition', relationship: 'related', label: 'Pulmonary Hypertension' },
-    { targetId: 'condition-aspergillosis', targetType: 'condition', relationship: 'related', label: 'Aspergillosis' },
+    { targetId: 'condition-copd', targetType: 'condition', relationship: 'related', label: 'COPD' },
   ],
 
   tags: {
     systems: ['respiratory'],
-    topics: ['pulmonology', 'rheumatology', 'radiology', 'pathology'],
-    keywords: ['pulmonary fibrosis', 'ILD', 'IPF', 'sarcoidosis', 'hypersensitivity pneumonitis', 'antifibrotic'],
+    topics: ['pulmonology', 'interstitial lung disease'],
+    keywords: ['pulmonary fibrosis', 'IPF', 'interstitial lung disease', 'fibrosis', 'honeycombing'],
     clinicalRelevance: 'high',
-    examRelevance: {
-      usmle: true,
-      nbme: true,
-      shelf: ['medicine', 'radiology'],
-    },
   },
 
-  createdAt: '2025-01-26T00:00:00.000Z',
-  updatedAt: '2025-01-26T00:00:00.000Z',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   version: 1,
   status: 'published',
 };

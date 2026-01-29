@@ -41,9 +41,7 @@ export * from './mental-health';
 export * from './musculoskeletal';
 
 // Oncology Conditions
-// Note: lungCancer from oncology renamed to avoid conflict with respiratory.lungCancer
-export { lungCancer as lungCancerOncology } from './oncology/lung-cancer-oncology';
-export { breastCancer, colorectalCancer, prostateCancer, melanoma, lymphoma, leukemia, pancreaticCancer } from './oncology';
+export * from './oncology';
 
 // Infectious Disease Conditions
 export * from './infectious';

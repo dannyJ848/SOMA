@@ -2,6 +2,13 @@
 
 This file captures patterns, gotchas, and conventions discovered during development.
 
+## CURRENT STATUS (2026-01-28)
+- **TypeScript**: ✅ CLEAN BUILD (0 errors)
+- **Phase**: 4 - Advanced Medical Simulation Platform
+- **iOS**: TestFlight deployment configured and ready
+- **Content**: Nutrition science modules complete and working
+- **Next**: First TestFlight build upload
+
 ## Project Vision
 
 A local-first, privacy-preserving AI health repository with 3D anatomical interface for symptom tracking and physiological education. Counter-narrative to cloud-dependent healthcare AI.
@@ -166,6 +173,54 @@ When adding new data types:
 5. Add store method(s) (addX, addXBatch)
 6. Add date deserialization in `store.deserialize()`
 
+### 7. Template Literals in Content Files (CRITICAL)
+**Problem:** Escaped backticks (`\`\`\``) inside template literals cause TypeScript parsing errors
+**Root Cause:** The backslash-escaped backtick becomes a literal backtick, which prematurely closes the template literal
+**Solution:** Use `---` for markdown code blocks instead of `\`\`\``
+```typescript
+// WRONG - causes parsing errors
+explanation: `Here is a code block:
+\`\`\`
+code here
+\`\`\`
+`
+
+// CORRECT - use --- delimiter
+explanation: `Here is a code block:
+---
+code here
+---
+`
+```
+
+### 8. Unicode Characters in TypeScript
+**Problem:** Box-drawing characters (├, │, └) and symbols (×, →, ↑, α, β) can cause TypeScript parsing issues
+**Solution:** Replace with ASCII equivalents
+```typescript
+// Replace these patterns:
+'├─' → '+-'
+'│ ' → '| '
+'└─' → '+-'
+'×' → 'x'
+'→' → '->'
+'↑' → 'increased'
+'α' → 'alpha'
+'β' → 'beta'
+```
+
+### 9. Apostrophes in Single-Quoted Strings
+**Problem:** Apostrophes in single-quoted strings terminate the string prematurely
+**Solution:** Escape apostrophes with backslash
+```typescript
+// WRONG
+{ term: 'body's', definition: '...' }
+
+// CORRECT
+{ term: 'body\'s', definition: '...' }
+// OR use double quotes
+{ term: "body's", definition: "..." }
+```
+
 ## Performance Notes
 
 - Embedding generation: ~100-200ms per chunk with nomic-embed-text
@@ -187,12 +242,63 @@ When adding new data types:
 # Run any TypeScript file
 npx tsx <file>.ts
 
-# Check types
+# Check types (CRITICAL - run before committing)
 npx tsc --noEmit
+
+# Count TypeScript errors
+npx tsc --noEmit 2>&1 | grep -c "error TS"
+
+# Check TypeScript errors by file
+npx tsc --noEmit 2>&1 | grep "error TS" | cut -d'(' -f1 | sort | uniq -c
 
 # Run with passphrase
 BIOSELF_PASSPHRASE=test123 npx tsx <script>.ts
+
+# Fix common TypeScript issues in content files
+# (See Gotchas #7, #8, #9 above)
 ```
+```
+
+## TestFlight Deployment
+
+### Configuration
+- **Bundle ID**: com.dannygomez.biological-self
+- **Team ID**: NDJZ6S9Q4L
+- **Current Version**: 0.1.0
+- **Build Number**: Auto-incremented per deployment
+- **Min iOS Version**: 14.0
+
+### Build Scripts
+```bash
+# Increment build number
+./scripts/increment-build.sh [new-version]
+
+# Build for TestFlight
+./scripts/build-testflight.sh
+
+# Build and upload
+export APP_STORE_CONNECT_API_KEY=your_key
+./scripts/build-testflight.sh --upload
+
+# Or use Fastlane
+fastlane ios beta    # Build and upload
+fastlane ios build   # Build only
+```
+
+### Prerequisites for Upload
+1. Create app record in App Store Connect
+2. Generate API key (Users and Access → Keys)
+3. Set environment variables for API access
+4. Run increment-build.sh to update build number
+5. Build and upload
+
+### Required App Store Connect Metadata
+- App name: Biological Self
+- Primary category: Medical
+- Bundle ID must match: com.dannygomez.biological-self
+- Required capabilities: HealthKit (for future integration)
+
+See `docs/TESTFLIGHT.md` for detailed deployment guide.
 
 ## Next Phase: Desktop App
 

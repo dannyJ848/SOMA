@@ -7,6 +7,7 @@
 
 export { ANTIBIOTIC_RESISTANCE as antibioticResistance } from './antibiotic-resistance';
 export { APPROPRIATE_ANTIBIOTIC_USE as appropriateAntibioticUse } from './appropriate-antibiotic-use';
+export { appropriatePrescribing } from './appropriate-prescribing';
 
 // Content metadata
 export const antibioticStewardshipContent = {
@@ -16,6 +17,7 @@ export const antibioticStewardshipContent = {
   topics: [
     { id: 'antibiotic-resistance', name: 'Antibiotic Resistance' },
     { id: 'appropriate-antibiotic-use', name: 'Appropriate Antibiotic Use' },
+    { id: 'appropriate-prescribing', name: 'Appropriate Antibiotic Prescribing' },
   ],
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),

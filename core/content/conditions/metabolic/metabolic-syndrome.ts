@@ -1,5 +1,7 @@
 /**
  * Metabolic Syndrome - Comprehensive Educational Content
+ *
+ * Covers diagnostic criteria, pathophysiology, and cardiovascular risk management.
  */
 
 import { EducationalContent } from '../../types';
@@ -8,299 +10,378 @@ export const metabolicSyndrome: EducationalContent = {
   id: 'condition-metabolic-syndrome',
   type: 'condition',
   name: 'Metabolic Syndrome',
-  alternateNames: ['Syndrome X', 'Insulin Resistance Syndrome', 'Dysmetabolic Syndrome'],
-  hpoId: 'HP:0000825',
+  alternateNames: ['Insulin Resistance Syndrome', 'Syndrome X', 'Dysmetabolic Syndrome'],
+  hpoId: 'HP:0000831',
 
   levels: {
     1: {
       level: 1,
-      summary: 'Metabolic syndrome is a group of health problems that occur together, increasing your risk of heart disease, stroke, and diabetes.',
-      explanation: `Metabolic syndrome is not a single disease but a cluster of conditions that happen together. When you have several of these problems, your risk of serious health issues increases significantly.
+      summary: 'Metabolic syndrome is a group of conditions that increase the risk of heart disease, stroke, and diabetes.',
+      explanation: `Metabolic syndrome is not a single disease but a collection of health problems that often occur together. When you have several of these conditions, your risk of serious health problems increases.
 
-**The five parts of metabolic syndrome:**
-- Large waist size (belly fat)
-- High blood pressure
-- High blood sugar
-- High triglycerides (a type of fat in blood)
-- Low HDL cholesterol ("good" cholesterol)
+**The five main components:**
+1. **Large waist size** - carrying extra weight around the belly
+2. **High blood sugar** - higher than normal glucose levels
+3. **High blood pressure** - force of blood against artery walls too high
+4. **High triglycerides** - a type of fat in the blood
+5. **Low HDL cholesterol** - the "good" cholesterol is too low
 
 **Why it matters:**
-Having three or more of these conditions means you are at much higher risk for:
-- Heart attacks
-- Stroke
-- Developing type 2 diabetes
+- Increases risk of heart attack and stroke
+- Increases risk of Type 2 diabetes
+- Affects about 1 in 3 American adults
 
 **What you can do:**
-- Lose weight if overweight
+- Lose weight (even 5-10% helps)
 - Exercise regularly
 - Eat a healthy diet
-- Quit smoking
-- Take prescribed medications`,
+- Do not smoke
+- Take prescribed medications
+
+**Risk factors:**
+- Age (risk increases as you get older)
+- Family history
+- Obesity
+- Sedentary lifestyle
+- Poor diet`,
       keyTerms: [
-        { term: 'HDL cholesterol', definition: '"Good" cholesterol that helps remove other cholesterol from your body' },
-        { term: 'triglycerides', definition: 'A type of fat found in your blood that stores excess energy' },
-        { term: 'blood pressure', definition: 'The force of blood pushing against blood vessel walls' },
+        { term: 'triglycerides', definition: 'A type of fat found in your blood' },
+        { term: 'HDL cholesterol', definition: 'Good cholesterol that helps remove bad cholesterol from arteries' },
+        { term: 'insulin resistance', definition: 'When your body does not respond well to insulin' },
+        { term: 'waist circumference', definition: 'Measurement around your waist; indicates belly fat' },
       ],
       analogies: [
-        'Metabolic syndrome is like a car with multiple warning lights on—each problem makes the others worse and increases the chance of a breakdown.',
+        'Metabolic syndrome is like having multiple warning lights on your car dashboard - each one signals a problem that needs attention.',
+        'Think of your body as a factory; metabolic syndrome means several systems are not working efficiently together.',
       ],
       examples: [
-        'A man with a waist over 40 inches, high blood pressure, and high blood sugar has metabolic syndrome and needs lifestyle changes to prevent diabetes.',
+        'A person with a large belly, high blood pressure, and high blood sugar likely has metabolic syndrome.',
+        'Someone who is inactive, eats processed foods, and has a family history of diabetes is at risk.',
       ],
     },
     2: {
       level: 2,
-      summary: 'Metabolic syndrome is defined by three of five criteria (central obesity, hypertension, hyperglycemia, high triglycerides, low HDL) and confers increased cardiovascular and diabetes risk requiring aggressive lifestyle intervention.',
-      explanation: `## Diagnostic Criteria (NCEP ATP III)
+      summary: 'Metabolic syndrome is a clustering of cardiovascular risk factors including central obesity, hypertension, dyslipidemia, and insulin resistance, associated with increased risk of cardiovascular disease and Type 2 diabetes.',
+      explanation: `## Understanding Metabolic Syndrome
 
-Need **3 or more** of the following:
+**Diagnostic Criteria (need 3 of 5):**
 
-| Criterion | Cutoff |
-|-----------|--------|
-| Waist circumference | Men: >40 in (102 cm), Women: >35 in (88 cm) |
-| Triglycerides | ≥150 mg/dL or on treatment |
-| HDL cholesterol | Men: <40 mg/dL, Women: <50 mg/dL or on treatment |
-| Blood pressure | ≥130/85 mmHg or on treatment |
-| Fasting glucose | ≥100 mg/dL or on treatment |
+| Risk Factor | Threshold |
+|-------------|-----------|
+| Elevated waist circumference | Men >40 in (102 cm), Women >35 in (88 cm) |
+| Elevated triglycerides | >=150 mg/dL or on therapy |
+| Reduced HDL-C | Men <40 mg/dL, Women <50 mg/dL or on therapy |
+| Elevated blood pressure | >=130/85 mmHg or on therapy |
+| Elevated fasting glucose | >=100 mg/dL or on therapy |
 
 ## Pathophysiology
 
-**Core defect:** Insulin resistance
-- Excess abdominal fat releases inflammatory chemicals
-- Liver produces too much glucose and triglycerides
-- Blood vessels become stiff and narrowed
+**Central obesity as driver:**
+- Visceral adipose tissue is metabolically active
+- Releases inflammatory cytokines (adipokines)
+- Promotes insulin resistance
+- Contributes to dyslipidemia
 
-## Cardiovascular Risk
+**Insulin resistance:**
+- Impaired glucose uptake in muscle
+- Unsuppressed hepatic glucose production
+- Hyperinsulinemia develops
+- Leads to beta-cell exhaustion over time
 
-Metabolic syndrome confers:
-- **2x** risk of cardiovascular disease
-- **5x** risk of developing type 2 diabetes
-- Increased risk of fatty liver disease
+**Pro-inflammatory state:**
+- TNF-alpha, IL-6, CRP elevated
+- Endothelial dysfunction
+- Pro-thrombotic state
 
-## Management
+## Associated Conditions
 
-**Lifestyle (first-line):**
-- Weight loss (7-10% of body weight)
-- 150 minutes/week moderate activity
-- DASH or Mediterranean diet
-- Limit processed foods and added sugars
+**Cardiovascular:**
+- Coronary artery disease
+- Stroke
+- Peripheral artery disease
+- Heart failure
 
-**Medical management:**
-- Treat each component individually
-- Statins for dyslipidemia
-- Antihypertensives for BP
-- Metformin for prediabetes`,
+**Metabolic:**
+- Type 2 diabetes
+- Non-alcoholic fatty liver disease (NAFLD)
+- Polycystic ovary syndrome (PCOS)
+- Obstructive sleep apnea
+
+**Other:**
+- Chronic kidney disease
+- Certain cancers (colon, breast, prostate)
+- Dementia risk increased`,
       keyTerms: [
-        { term: 'insulin resistance', definition: 'When cells do not respond properly to insulin, causing higher blood sugar' },
-        { term: 'central obesity', definition: 'Excess fat around the abdomen, associated with metabolic dysfunction' },
-        { term: 'NCEP ATP III', definition: 'National Cholesterol Education Program Adult Treatment Panel III guidelines' },
+        { term: 'visceral adipose tissue', definition: 'Fat stored deep inside the abdomen around organs' },
+        { term: 'adipokines', definition: 'Hormones and cytokines released by fat tissue' },
+        { term: 'endothelial dysfunction', definition: 'Impaired function of blood vessel lining' },
+        { term: 'dyslipidemia', definition: 'Abnormal levels of lipids in the blood' },
+      ],
+      analogies: [
+        'Visceral fat is like a misbehaving organ factory that pumps out inflammatory chemicals into your bloodstream.',
+        'Insulin resistance is like a door with rusty hinges - the key (insulin) has trouble opening it.',
       ],
     },
     3: {
       level: 3,
-      summary: 'Metabolic syndrome represents a prothrombotic, proinflammatory state driven by visceral adiposity and insulin resistance, with hepatic steatosis, endothelial dysfunction, and dysregulated adipokine secretion contributing to cardiometabolic risk.',
+      summary: 'Metabolic syndrome involves ectopic fat deposition, chronic low-grade inflammation, and endothelial dysfunction creating a pro-atherogenic and pro-thrombotic state, requiring comprehensive lifestyle intervention and targeted pharmacotherapy for individual risk factors.',
       explanation: `## Pathophysiology
 
-**Visceral Adiposity as Endocrine Organ:**
-- Increased free fatty acid flux to liver
-- Adipokine dysregulation:
-  - ↓ Adiponectin (anti-inflammatory, insulin sensitizer)
-  - ↑ Leptin (resistance develops)
-  - ↑ TNF-α, IL-6 (pro-inflammatory cytokines)
+### Adipose Tissue Dysfunction
+**Visceral vs subcutaneous fat:**
+- Visceral fat drains directly to portal circulation
+- More metabolically active and inflammatory
+- Associated with "apple-shaped" obesity
 
-**Insulin Resistance Cascade:**
-- Hepatic: Increased gluconeogenesis, VLDL overproduction
-- Muscle: Decreased glucose uptake
-- Adipose: Increased lipolysis, more free fatty acids
+**Adipokine imbalance:**
+| Adipokine | Change in Obesity | Effect |
+|-----------|-------------------|--------|
+| Leptin | Increased | Leptin resistance, appetite dysregulation |
+| Adiponectin | Decreased | Reduced insulin sensitivity, anti-inflammatory |
+| TNF-alpha | Increased | Insulin resistance, inflammation |
+| IL-6 | Increased | Hepatic insulin resistance, CRP induction |
+| PAI-1 | Increased | Impaired fibrinolysis, thrombosis risk |
 
-**Endothelial Dysfunction:**
-- Reduced nitric oxide bioavailability
-- Increased endothelin-1 (vasoconstriction)
-- Prothrombotic state (PAI-1, fibrinogen)
+### Lipid Abnormalities
+**Atherogenic dyslipidemia:**
+- Elevated triglycerides
+- Low HDL cholesterol
+- Small dense LDL particles
+- Increased apolipoprotein B
 
-## Clinical Consequences
+**Mechanism:**
+- Insulin resistance increases lipolysis
+- Increased hepatic VLDL production
+- CETP-mediated HDL cholesterol ester depletion
 
-**Cardiovascular:**
-- Accelerated atherosclerosis
-- Increased plaque vulnerability
-- Heart failure with preserved EF
+### Insulin Resistance Mechanisms
+**Molecular level:**
+- Serine phosphorylation of IRS-1 (vs tyrosine)
+- Lipid metabolite accumulation (DAG, ceramides)
+- Mitochondrial dysfunction
+- Oxidative stress
+- ER stress
 
-**Metabolic:**
-- NAFLD progression to NASH
-- Impaired fasting glucose → T2DM
-- Hyperuricemia (gout)
+### Cardiovascular Risk
+**Framingham risk score enhancement:**
+- Metabolic syndrome approximately doubles CVD risk
+- Risk increases with number of components
+- Lifetime risk for CVD is significantly elevated
 
-## Risk Assessment
+## Management Approach
 
-**Framingham Risk Score adjustment:**
-- Metabolic syndrome adds equivalent risk as smoking
+**Lifestyle intervention (first-line):**
+- 7-10% weight loss goal
+- 150 min/week moderate exercise
+- Mediterranean or DASH diet
+- Smoking cessation
+- Limit alcohol
 
-**Reynolds Risk Score:**
-- Includes family history and hs-CRP
-
-## Treatment Approach
-
-**Lifestyle intervention remains cornerstone:**
-- Diabetes Prevention Program: 58% risk reduction with lifestyle
-- Look AHEAD trial: Significant weight loss and CV benefit
-
-**Pharmacotherapy targets each component:**
-- No single drug treats the syndrome`,
+**Pharmacologic targets:**
+| Component | First-line | Considerations |
+|-----------|------------|----------------|
+| Obesity | GLP-1 RA, SGLT2i | Orlistat, phentermine |
+| Hypertension | ACEi/ARB preferred | Thiazides, CCBs |
+| Dyslipidemia | Statin | Add fenofibrate if TG >500 |
+| Hyperglycemia | Metformin | Consider early insulin |
+| Prothrombotic | Aspirin (high risk) | Bleeding risk assessment |`,
       keyTerms: [
-        { term: 'adipokines', definition: 'Signaling proteins secreted by adipose tissue regulating metabolism and inflammation' },
-        { term: 'NAFLD', definition: 'Non-alcoholic fatty liver disease; fat accumulation in liver unrelated to alcohol' },
-        { term: 'PAI-1', definition: 'Plasminogen activator inhibitor-1; promotes clot formation, elevated in metabolic syndrome' },
+        { term: 'ectopic fat', definition: 'Fat deposited in organs like liver, muscle, pancreas (not subcutaneous)' },
+        { term: 'CETP', definition: 'Cholesteryl ester transfer protein; mediates HDL remodeling' },
+        { term: 'PAI-1', definition: 'Plasminogen activator inhibitor-1; promotes thrombosis' },
+        { term: 'IRS-1', definition: 'Insulin receptor substrate-1; key signaling molecule for insulin action' },
       ],
-      clinicalNotes: 'Screen for NAFLD with liver enzymes in metabolic syndrome. Consider fibroscan for advanced fibrosis risk assessment.',
+      clinicalNotes: 'Metabolic syndrome represents a state of heightened cardiovascular risk requiring aggressive management. Weight loss of 5-10% can significantly improve all components. Consider screening for NAFLD and sleep apnea. Aspirin primary prevention is controversial; use shared decision-making.',
     },
     4: {
       level: 4,
-      summary: 'Contemporary management of metabolic syndrome emphasizes lifestyle medicine as foundational therapy, with individualized risk assessment incorporating coronary artery calcium scoring, biomarkers like hs-CRP and Lp(a), and aggressive treatment of emerging cardiometabolic risk factors.',
-      explanation: `## Risk Stratification Beyond Traditional Factors
+      summary: 'Advanced understanding of metabolic syndrome encompasses the lipotoxicity hypothesis, hepatic insulin resistance pathways, role of gut microbiome, and application of advanced imaging for cardiovascular risk stratification beyond traditional risk calculators.',
+      explanation: `## Advanced Pathophysiology
 
-**Advanced Biomarkers:**
-- hs-CRP: Inflammatory risk marker
-- Lp(a): Genetic risk factor, treat with PCSK9 inhibitors if elevated
-- ApoB: Superior to LDL for particle number
-- Lipoprotein insulin resistance score
+### Lipotoxicity and Ectopic Lipid Storage
+**Mechanism:**
+- Adipose tissue storage capacity exceeded
+- Lipids "spill over" to liver, muscle, pancreas, heart
+- Lipid intermediates cause cellular dysfunction:
+  - Diacylglycerol (DAG) -> PKC activation -> insulin resistance
+  - Ceramides -> apoptosis, inflammation
+  - Acylcarnitines -> mitochondrial stress
 
-**Imaging:**
-- CAC scoring: Reclassify risk in intermediate patients
-- Carotid IMT: Assess subclinical atherosclerosis
+### Hepatic Insulin Resistance
+**Two-hit hypothesis for NAFLD/NASH:**
+1. Insulin resistance -> hepatic steatosis
+2. Oxidative stress, inflammation -> steatohepatitis, fibrosis
 
-## Controversies and Nuances
+**Mechanisms:**
+- Uninhibited gluconeogenesis (FoxO1, PEPCK)
+- Increased DNL (SREBP-1c activation)
+- Decreased VLDL export
+- Inflammation (Kupffer cells, hepatocyte injury)
 
-**Ethnicity-Sific Waist Criteria:**
-- South Asian: Men >90 cm, Women >80 cm
-- East Asian: Men >85 cm, Women >80 cm
-- European: Men >94 cm, Women >80 cm
+### Gut Microbiome
+**Dysbiosis in metabolic syndrome:**
+- Reduced diversity
+- Increased Firmicutes/Bacteroidetes ratio
+- Increased gut permeability ("leaky gut")
+- LPS translocation -> metabolic endotoxemia
 
-**Diagnostic Debate:**
-- Is metabolic syndrome better than individual risk assessment?
-- Some argue it adds little beyond Framingham
-- Value in identifying patients for intensive lifestyle
+**Mechanisms:**
+- Short-chain fatty acid production changes
+- Bile acid metabolism alterations
+- TMAO production (cardiovascular risk)
 
-## Pharmacotherapy Considerations
+### Advanced Lipid Assessment
+**Beyond standard lipid panel:**
+- Apolipoprotein B (atherogenic particle count)
+- LDL particle number (NMR spectroscopy)
+- Lipoprotein(a) - genetic CVD risk
+- Oxidized LDL
+- Small dense LDL concentration
 
-**Statins:** First-line regardless of LDL level
-**Metformin:** May prevent diabetes, not CV outcomes
-**GLP-1 RA/SGLT2i:** Emerging role in syndrome treatment
-**Pioglitazone:** Improves insulin resistance, weight gain concern
+**LDL heterogeneity:**
+- Pattern A: Large buoyant LDL (less atherogenic)
+- Pattern B: Small dense LDL (more atherogenic)
+- Metabolic syndrome typically Pattern B
 
-## Prevention Strategy
+### Imaging for Risk Stratification
+**Coronary artery calcium (CAC) scoring:**
+- CT-based quantification of coronary calcification
+- Strong predictor of CVD events
+- Guides statin intensity decisions
 
-**Primordial Prevention:**
-- Prevent risk factors from developing
-- Population-level interventions (sugar taxes, food labeling)
-- Focus on childhood obesity
+**Carotid intima-media thickness:**
+- Subclinical atherosclerosis marker
+- Predicts stroke and MI risk
 
-**Primary Prevention:**
-- Identify and treat prehypertension, prediabetes
-- Aggressive lifestyle before pharmacotherapy`,
+**Hepatic steatosis assessment:**
+- Ultrasound (qualitative)
+- CAP (controlled attenuation parameter) on FibroScan
+- MRI-PDFF (most accurate)`,
       keyTerms: [
-        { term: 'CAC', definition: 'Coronary artery calcium; CT-based measure of atherosclerotic plaque burden' },
-        { term: 'hs-CRP', definition: 'High-sensitivity C-reactive protein; marker of systemic inflammation' },
-        { term: 'primordial prevention', definition: 'Preventing risk factors from developing in the first place' },
+        { term: 'lipotoxicity', definition: 'Cellular dysfunction caused by excessive lipid accumulation' },
+        { term: 'TMAO', definition: 'Trimethylamine N-oxide; gut microbiome-derived metabolite linked to CVD' },
+        { term: 'CAC score', definition: 'Coronary artery calcium score; Agatston units quantify calcified plaque' },
+        { term: 'DNL', definition: 'De novo lipogenesis; synthesis of fatty acids from carbohydrates' },
       ],
-      clinicalNotes: 'Consider CAC scoring in patients aged 40-75 with intermediate 10-year risk to guide statin therapy decisions. Ethnicity-specific waist cutoffs improve sensitivity in non-white populations.',
+      clinicalNotes: 'CAC scoring can help guide statin therapy in intermediate-risk patients with metabolic syndrome. Zero CAC does not exclude non-calcified plaque. Consider advanced lipid testing when standard panel does not match apparent risk. NAFLD is the hepatic manifestation of metabolic syndrome - screen with ultrasound and fibrosis assessment.',
     },
     5: {
       level: 5,
-      summary: 'Metabolic syndrome research focuses on the gut microbiome role, ectopic fat depot phenotyping, precision nutrition, and novel therapeutics targeting inflammation and fibrosis while addressing socioeconomic and environmental determinants of cardiometabolic health.',
-      explanation: `## Precision Medicine Approaches
+      summary: 'Precision medicine approaches to metabolic syndrome include genetic risk stratification, targeted therapies addressing specific pathophysiologic mechanisms, and population-level interventions addressing social determinants of health to reduce the global burden of cardiometabolic disease.',
+      explanation: `## Precision Medicine in Metabolic Syndrome
 
-**Metabolic Phenotyping:**
-- Ectopic fat distribution vs subcutaneous
-- Hepatic vs muscle insulin resistance
-- Genetic polygenic risk scores
-- Epigenetic modifications
+### Genetic Risk Stratification
+**Polygenic risk scores:**
+- Aggregate thousands of SNPs for CVD and diabetes risk
+- May improve risk prediction beyond traditional factors
+- Clinical utility still being evaluated
 
-**Gut Microbiome:**
-- Dysbiosis contributes to insulin resistance
-- Short-chain fatty acid production
-- Bile acid metabolism and FXR signaling
-- Therapeutic potential of microbiome modulation
+**Monogenic forms to consider:**
+- Familial combined hyperlipidemia (USF1, LPL)
+- Familial hypertriglyceridemia
+- Lipodystrophy syndromes (LMNA, PPARG)
+- PCSK9 mutations
 
-**Ectopic Fat Depots:**
-- Visceral adipose tissue (VAT)
-- Epicardial fat
-- Pancreatic fat
-- Intermuscular fat
-- Each depot has distinct metabolic impact
+### Novel Therapeutic Targets
 
-## Novel Therapeutic Targets
+**Anti-inflammatory approaches:**
+- Canakinumab (IL-1beta antibody) - CANTOS trial
+  - Reduced CVD events independent of lipids
+  - Expensive, infection risk
+- Colchicine - repurposed for CVD prevention
+  - Low dose (0.5 mg daily)
+  - Reduces inflammation and events
 
-**Inflammation:**
-- IL-1β inhibition (canakinumab): CANTOS trial
-- NLRP3 inflammasome inhibitors
-- Colchicine for secondary prevention
+**Triglyceride-lowering beyond fibrates:**
+- Icosapent ethyl (pure EPA) - REDUCE-IT trial
+  - 4g daily reduces CVD events in high-TG patients
+  - Mechanism: membrane stabilization, anti-inflammatory
+- Volanesorsen (APOC3 antisense) - familial chylomicronemia
+- ANGPTL3 and APOC3 inhibitors (evolocumab pathway)
 
-**Fibrosis:**
-- NAFLD/NASH therapies (semaglutide, obeticholic acid)
-- Galectin-3 inhibitors
-- Thyroid hormone receptor-beta agonists
+**GLP-1 receptor agonists:**
+- Semaglutide 2.4 mg (Wegovy) - weight loss and CVD benefit
+- Tirzepatide (GIP/GLP-1 dual agonist) - superior glycemic and weight effects
 
-**Metabolic Surgery:**
+**SGLT2 inhibitors:**
+- Expanding indications: heart failure, CKD
+- Mechanisms: hemodynamic, metabolic, anti-fibrotic
+
+### Population Health Strategies
+
+**Social determinants:**
+- Food insecurity and metabolic syndrome
+- Built environment (walkability, food access)
+- Healthcare access disparities
+- Socioeconomic status and chronic stress
+
+**Interventions:**
+- Sugar-sweetened beverage taxes
+- Front-of-package labeling
+- Urban planning for physical activity
+- Workplace wellness programs
+- Community health worker models
+
+### Future Directions
+
+**Digital health:**
+- Continuous glucose monitoring for prediabetes
+- Wearable devices for activity tracking
+- AI-powered dietary assessment
+- Telemedicine for rural access
+
+**Microbiome therapeutics:**
+- Fecal microbiota transplantation
+- Precision probiotics
+- Postbiotics and metabolite supplementation
+
+**Bariatric/metabolic surgery:**
+- Expanding to lower BMI thresholds
 - Mechanisms beyond restriction/malabsorption
-- Gut hormone changes (GLP-1, PYY)
-- Microbiome alterations
-- Bile acid signaling changes
-
-## Social Determinants
-
-**Food Environment:**
-- Food deserts and swamps
-- Ultra-processed food prevalence
-- Sugar-sweetened beverage consumption
-
-**Built Environment:**
-- Walkability
-- Green space access
-- Transportation policy
-
-## Future Directions
-
-- Multi-omics integration for risk prediction
-- AI-driven dietary recommendations
-- Population health interventions
-- Health equity focus`,
+- Gut hormone effects
+- Long-term durability data`,
       keyTerms: [
-        { term: 'dysbiosis', definition: 'Imbalance in gut microbial communities contributing to metabolic disease' },
-        { term: 'NLRP3 inflammasome', definition: 'Intracellular protein complex activating IL-1β, linking metabolism to inflammation' },
-        { term: 'FXR', definition: 'Farnesoid X receptor; bile acid sensor regulating glucose and lipid metabolism' },
+        { term: 'polygenic risk score', definition: 'Aggregate measure of genetic risk based on multiple variants' },
+        { term: 'CANTOS trial', definition: 'Landmark study proving inflammation reduction lowers CVD risk' },
+        { term: 'REDUCE-IT', definition: 'Trial demonstrating icosapent ethyl CVD benefit' },
+        { term: 'postbiotics', definition: 'Bioactive compounds produced by gut bacteria' },
       ],
-      clinicalNotes: 'IL-1β inhibition reduces CV events but increases infection risk. The relationship between metabolic syndrome and CVD may be mediated more by inflammation than traditional risk factors alone.',
+      clinicalNotes: 'The CANTOS trial established inflammation as a CVD target. Consider colchicine for residual inflammatory risk in patients with metabolic syndrome and established CVD. Icosapent ethyl is indicated for CVD risk reduction in patients with TG 135-499 mg/dL on statins. Bariatric surgery should be considered earlier in the disease course for metabolic syndrome with obesity.',
     },
   },
 
-  media: [],
+  media: [
+    {
+      id: 'metabolic-syndrome-diagram',
+      type: 'diagram',
+      filename: 'metabolic-syndrome-components.svg',
+      title: 'Metabolic Syndrome Components',
+      description: 'The five components and their interrelationships',
+    },
+  ],
+
   citations: [
     {
-      id: 'ncep-atp-iii-2001',
+      id: 'aha-metabolic-syndrome',
       type: 'article',
-      title: 'Executive Summary of the Third Report of the National Cholesterol Education Program',
-      source: 'JAMA',
-    },
-    {
-      id: 'aha-metabolic-2023',
-      type: 'article',
-      title: 'Diagnosis and Management of Metabolic Syndrome: A Scientific Statement',
+      title: 'Diagnosis and Management of the Metabolic Syndrome',
       source: 'Circulation',
     },
   ],
+
   crossReferences: [
-    { targetId: 'condition-type2-diabetes', targetType: 'condition', relationship: 'related', label: 'Type 2 Diabetes' },
-    { targetId: 'condition-obesity', targetType: 'condition', relationship: 'related', label: 'Obesity' },
+    { targetId: 'condition-diabetes', targetType: 'condition', relationship: 'related', label: 'Diabetes' },
   ],
+
   tags: {
-    systems: ['endocrine', 'metabolic', 'cardiovascular'],
-    topics: ['endocrinology', 'cardiology', 'primary care'],
-    keywords: ['metabolic syndrome', 'insulin resistance', 'cardiovascular risk', 'dyslipidemia'],
+    systems: ['metabolic', 'cardiovascular'],
+    topics: ['cardiology', 'endocrinology', 'preventive medicine'],
+    keywords: ['metabolic syndrome', 'insulin resistance', 'obesity', 'cardiovascular risk'],
     clinicalRelevance: 'high',
-    examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'family medicine'] },
   },
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   version: 1,
   status: 'published',
 };

@@ -1,6 +1,6 @@
 import { LegacyEducationalContent } from '../../types';
 
-export const inclusiveCareContent: LegacyEducationalContent = {
+const inclusiveCareContent: LegacyEducationalContent = {
   id: 'inclusive-care-lgbtq',
   title: 'Inclusive Care for LGBTQ+ Patients',
   category: 'LGBTQ+ Health',
@@ -164,3 +164,6 @@ export const inclusiveCareContent: LegacyEducationalContent = {
     }
   }
 };
+
+export { inclusiveCareContent };
+export default inclusiveCareContent;

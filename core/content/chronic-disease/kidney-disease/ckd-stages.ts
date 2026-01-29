@@ -1,293 +1,622 @@
 /**
- * CKD Stages - Kidney Disease Management
+ * CKD Stages - Chronic Kidney Disease Staging and eGFR Interpretation
  */
 
 import { EducationalContent } from '../../types';
 
 export const CKD_STAGES: EducationalContent = {
-  id: 'kidney-disease-ckd-stages',
+  id: 'chronic-kidney-ckd-stages',
   type: 'concept',
-  name: 'Chronic Kidney Disease Stages',
-  alternateNames: ['CKD staging', 'Kidney function stages', 'GFR stages'],
+  name: 'CKD Stages and eGFR Interpretation',
+  alternateNames: ['Chronic Kidney Disease Staging', 'eGFR Categories', 'Kidney Function Stages', 'GFR Stages'],
 
   levels: {
     1: {
       level: 1,
-      summary: 'Chronic kidney disease (CKD) is divided into 5 stages based on how well your kidneys are working. Understanding your stage helps you and your doctor plan your care.',
+      summary: 'Chronic kidney disease is divided into 5 stages based on how well your kidneys filter blood. The eGFR number tells you your kidney function percentage.',
       explanation: `**What Do Kidneys Do?**
-Your kidneys are filters that clean your blood. They remove waste and extra water to make urine. When kidneys are damaged, they cannot filter as well.
 
-**How Do We Measure Kidney Function?**
-A blood test called eGFR (estimated glomerular filtration rate) shows how well your kidneys filter. Higher numbers mean better kidney function.
+Your kidneys are like filters that clean your blood. They remove waste and extra water to make urine. Healthy kidneys filter about 100% of your blood each day.
 
-**The 5 Stages of CKD:**
+**What Is eGFR?**
 
-| Stage | eGFR | What It Means |
-|-------|------|---------------|
-| 1 | 90+ | Kidney damage with normal function |
-| 2 | 60-89 | Mild decrease |
-| 3a | 45-59 | Mild to moderate decrease |
-| 3b | 30-44 | Moderate to severe decrease |
-| 4 | 15-29 | Severe decrease |
-| 5 | <15 | Kidney failure |
+eGFR stands for estimated Glomerular Filtration Rate. It is a blood test number that shows how well your kidneys are working:
+- Higher numbers mean better kidney function
+- Normal is 90 or above
+- Lower numbers mean reduced kidney function
 
-**What Stage Means for You:**
-- Stages 1-2: Usually no symptoms, focus on prevention
-- Stage 3: Start monitoring more closely
-- Stage 4: Prepare for possible dialysis or transplant
-- Stage 5: Dialysis or transplant usually needed
+**The 5 Stages of Kidney Disease:**
 
-**Important:** The stage tells you where you are now. Many people stay at the same stage for years with good care!
+---
+Stage 1: eGFR 90 or higher
+- Kidneys work normally but there is damage
+- Usually no symptoms
 
-**Tips for Every Stage:**
+Stage 2: eGFR 60-89
+- Mild decrease in function
+- Usually no symptoms
+
+Stage 3: eGFR 30-59
+- Moderate decrease in function
+- Some people start having symptoms
+
+Stage 4: eGFR 15-29
+- Severe decrease in function
+- Symptoms are more common
+
+Stage 5: eGFR less than 15
+- Kidney failure
+- Dialysis or transplant needed
+---
+
+**What Your Stage Means:**
+
+Stages 1-2: Focus on prevention and slowing progression
 - Control blood pressure
 - Manage diabetes if you have it
-- Avoid certain medications (like ibuprofen)
-- Eat a kidney-friendly diet
-- Don't smoke`,
+- Take medications as prescribed
+
+Stage 3: Start closer monitoring
+- See your doctor more often
+- Watch your diet more carefully
+- Monitor for complications
+
+Stage 4: Prepare for kidney replacement
+- Learn about dialysis options
+- Consider transplant evaluation
+- Plan ahead with your care team
+
+Stage 5: Begin kidney replacement therapy
+- Dialysis treatments
+- Or kidney transplant
+
+**Important:** Many people stay at the same stage for many years with good care. Finding out early gives you the best chance to protect your kidneys!`,
       keyTerms: [
-        { term: 'eGFR', definition: 'Estimated glomerular filtration rate - a measure of how well kidneys filter blood' },
-        { term: 'chronic kidney disease', definition: 'Long-term condition where kidneys do not work as well as they should' },
-        { term: 'kidney failure', definition: 'When kidneys can no longer work well enough to keep you alive without treatment' },
+        { term: 'eGFR', definition: 'Estimated Glomerular Filtration Rate - a blood test that measures how well kidneys filter blood' },
+        { term: 'chronic kidney disease', definition: 'A long-term condition where kidneys do not work as well as they should' },
+        { term: 'kidney failure', definition: 'When kidneys can no longer clean the blood well enough to keep someone alive without treatment' },
+        { term: 'dialysis', definition: 'A treatment that does the job of kidneys when they fail' },
+        { term: 'kidney transplant', definition: 'Surgery to place a healthy kidney from another person into your body' },
       ],
-      analogies: ['Think of your kidneys like water filters. The eGFR tells you what percentage of the filter is still working. Stage 1 is like a filter working at full capacity, while Stage 5 is like a filter that is almost completely clogged.'],
-      examples: ['Maria learned she has Stage 3a CKD with an eGFR of 50. Her doctor explained this means her kidneys are working at about half capacity. With medication and diet changes, she can help slow down any further decline.'],
+      analogies: [
+        'Think of your kidneys like coffee filters. The eGFR tells you what percentage of the filter is still working. Stage 1 is like a brand new filter, while Stage 5 is like a filter that is almost completely clogged and needs replacement.',
+        'Kidney stages are like warning levels on a fuel gauge. Stage 1 is a full tank, Stage 3 is half tank, and Stage 5 is running on empty.',
+      ],
+      examples: [
+        'Maria had an eGFR of 52, which put her at Stage 3 CKD. Her doctor explained this means her kidneys are working at about half capacity. With medication and diet changes, she was able to stay at this stage for years.',
+        'John discovered he had Stage 2 CKD during a routine checkup. Because it was caught early, he was able to make lifestyle changes that helped protect his kidney function.',
+      ],
     },
     2: {
       level: 2,
-      summary: 'CKD staging combines eGFR and albuminuria to classify kidney disease severity, guide management intensity, and predict outcomes.',
-      explanation: `**CKD Definition:**
-CKD is defined as kidney damage OR eGFR <60 for ≥3 months.
+      summary: 'CKD is staged using eGFR and urine albumin levels. This two-dimensional staging helps predict risk and guides treatment decisions.',
+      explanation: `**Understanding CKD Staging**
 
-**Two-Dimensional Staging:**
+Doctors use two main tests to stage chronic kidney disease:
+1. eGFR (blood test) - measures filtering function
+2. Urine albumin (urine test) - measures kidney damage
 
-*GFR Categories:*
-| Category | eGFR | Description |
-|----------|------|-------------|
-| G1 | ≥90 | Normal or high |
-| G2 | 60-89 | Mildly decreased |
-| G3a | 45-59 | Mild-moderate decrease |
-| G3b | 30-44 | Moderate-severe decrease |
-| G4 | 15-29 | Severely decreased |
-| G5 | <15 | Kidney failure |
+**eGFR Categories (G Stages):**
 
-*Albuminuria Categories:*
-| Category | ACR (mg/g) | Description |
-|----------|------------|-------------|
-| A1 | <30 | Normal/mildly increased |
-| A2 | 30-300 | Moderately increased |
-| A3 | >300 | Severely increased |
+---
+G1: eGFR 90 or greater
+- Normal or high function
+- Kidney damage may still be present
 
-**Risk Stratification:**
-Combining GFR and albuminuria predicts:
-- Disease progression
-- Cardiovascular events
-- Mortality
-- Need for specialist referral
+G2: eGFR 60-89
+- Mildly decreased function
+- Monitor for changes
 
-**Management by Stage:**
+G3a: eGFR 45-59
+- Mild to moderately decreased function
+- Increase monitoring frequency
 
-| Stage | Key Actions |
-|-------|-------------|
-| G1-G2 | Treat cause, BP control, CVD prevention |
-| G3a | Add monitoring, nephrology referral if progressing |
-| G3b-G4 | Nephrology care, prepare for kidney replacement |
-| G5 | Dialysis/transplant planning |
+G3b: eGFR 30-44
+- Moderate to severely decreased function
+- Referral to kidney specialist often needed
 
-**Causes of CKD:**
-- Diabetes (most common)
-- Hypertension
-- Glomerulonephritis
-- Polycystic kidney disease
-- Obstruction
-- Other`,
+G4: eGFR 15-29
+- Severely decreased function
+- Prepare for kidney replacement therapy
+
+G5: eGFR less than 15
+- Kidney failure
+- Dialysis or transplant required
+---
+
+**Albuminuria Categories (A Stages):**
+
+Albumin is a protein that should stay in your blood. When kidneys are damaged, albumin leaks into urine.
+
+---
+A1: ACR less than 30 mg/g
+- Normal to mildly increased
+- Lower risk
+
+A2: ACR 30-300 mg/g
+- Moderately increased
+- Moderate risk
+
+A3: ACR greater than 300 mg/g
+- Severely increased
+- Higher risk
+---
+
+**Risk Assessment:**
+
+Doctors combine G and A categories to determine risk:
+- Low risk: G1-G2 with A1
+- Moderate risk: G3a with A1, or G1-G2 with A2
+- High risk: G3b with A1-A2, or any G with A3
+- Very high risk: G4-G5 with any A level
+
+Higher risk means:
+- Faster disease progression
+- Higher chance of heart problems
+- Need for more intensive treatment
+- Earlier referral to specialists
+
+**Common Causes of CKD:**
+- Diabetes (most common cause)
+- High blood pressure
+- Glomerulonephritis (inflammation)
+- Polycystic kidney disease (genetic)
+- Repeated kidney infections
+- Obstruction (blocked urine flow)
+
+**Why Staging Matters:**
+- Guides treatment intensity
+- Determines monitoring frequency
+- Predicts risk of progression
+- Helps plan for future care`,
       keyTerms: [
-        { term: 'albuminuria', definition: 'Protein (albumin) in urine, indicating kidney damage' },
-        { term: 'ACR', definition: 'Albumin-to-creatinine ratio; urine test for albuminuria' },
-        { term: 'GFR', definition: 'Glomerular filtration rate; measure of kidney filtering capacity' },
+        { term: 'albuminuria', definition: 'Protein (albumin) in the urine, indicating kidney damage' },
+        { term: 'ACR', definition: 'Albumin-to-Creatinine Ratio; a urine test measuring albumin levels' },
+        { term: 'GFR', definition: 'Glomerular Filtration Rate; the rate at which kidneys filter blood' },
+        { term: 'creatinine', definition: 'A waste product in blood used to calculate eGFR' },
+        { term: 'progression', definition: 'Worsening of kidney disease over time' },
+      ],
+      analogies: [
+        'The G and A categories work together like a weather forecast. The G category is the temperature (how warm it is), and the A category is the chance of rain (risk of complications). You need both to plan your day.',
+        'Think of eGFR as the speed of a water filter, and albuminuria as the size of holes in the filter. Even if water flows fast (high eGFR), holes mean the filter is damaged.',
+      ],
+      examples: [
+        'A patient with eGFR 55 (G3a) and ACR 150 (A2) has moderate risk. They need regular monitoring and blood pressure control to prevent progression.',
+        'Another patient with eGFR 70 (G2) but ACR 400 (A3) has high risk due to significant protein leakage, requiring aggressive treatment even though overall function looks okay.',
       ],
     },
     3: {
       level: 3,
-      summary: 'CKD staging according to KDIGO guidelines integrates cause, GFR category, and albuminuria category to stratify risk and guide evidence-based management.',
-      explanation: `**KDIGO CGA Classification:**
+      summary: 'The KDIGO classification system uses Cause-GFR-Albuminuria (CGA) staging to stratify risk, guide management, and predict outcomes in chronic kidney disease.',
+      explanation: `**KDIGO CKD Classification System**
 
-*Cause-GFR-Albuminuria (CGA):*
-\`\`\`
-C - Cause of kidney disease
-G - GFR category (G1-G5)
-A - Albuminuria category (A1-A3)
-\`\`\`
+KDIGO (Kidney Disease: Improving Global Outcomes) developed a comprehensive staging system that considers three dimensions:
+- C: Cause of kidney disease
+- G: GFR category
+- A: Albuminuria category
 
-**eGFR Equations:**
+**eGFR Calculation Methods:**
 
-*CKD-EPI 2021:*
-- Removed race variable
-- Uses age, sex, creatinine
-- Optional cystatin C confirmation
+*CKD-EPI 2021 Equation:*
+- Most commonly used in clinical practice
+- Uses serum creatinine, age, and sex
+- Removed race-based coefficients in 2021 update
+- Validated across diverse populations
 
-**Risk Stratification Matrix:**
+*Cystatin C-based eGFR:*
+- Alternative marker less affected by muscle mass
+- Useful when creatinine may be inaccurate
+- Can be combined with creatinine for more precise estimation
+- Recommended for confirming CKD when eGFR is 45-59
 
-| | A1 (<30) | A2 (30-300) | A3 (>300) |
-|---|----------|-------------|-----------|
-| G1 | Low | Moderate | High |
-| G2 | Low | Moderate | High |
-| G3a | Moderate | High | Very High |
-| G3b | High | Very High | Very High |
-| G4 | Very High | Very High | Very High |
-| G5 | Very High | Very High | Very High |
+**Complete Risk Stratification Matrix:**
 
-**Clinical Implications:**
+---
+                    A1 (less than 30)    A2 (30-300)      A3 (greater than 300)
+G1 (greater than 90)   Low              Moderate        High
+G2 (60-89)             Low              Moderate        High
+G3a (45-59)            Moderate         High            Very High
+G3b (30-44)            High             Very High       Very High
+G4 (15-29)             Very High        Very High       Very High
+G5 (less than 15)      Very High        Very High       Very High
+---
 
-*Referral Criteria:*
-- eGFR <30 (all patients)
-- ACR ≥300 (persistent)
-- Rapid progression (eGFR decline >5 mL/min/year)
-- Refractory hypertension
+Risk categories determine:
+- Frequency of monitoring
+- Need for nephrology referral
+- Intensity of cardiovascular risk management
+- Patient education needs
+
+**Clinical Indications for Nephrology Referral:**
+
+Mandatory referral:
+- eGFR less than 30 mL/min/1.73m2
+- ACR greater than or equal to 300 mg/g persistently
+- Rapid progression (eGFR decline greater than 5 mL/min/year)
+- Resistant hypertension
+- Persistent electrolyte abnormalities
+
+Consider referral:
+- eGFR less than 45 with uncertain diagnosis
+- ACR 30-300 with concerning features
 - Hereditary kidney disease suspected
+- Recurrent kidney stones with CKD
 
 **Progression Monitoring:**
-- eGFR decline >3-5 mL/min/year is concerning
-- Increased albuminuria predicts faster decline
-- Use ACR, not dipstick alone`,
+
+Assessing rate of decline:
+- Require at least 3 eGFR values over 90+ days
+- Calculate slope of eGFR over time
+- Decline greater than 5 mL/min/year indicates rapid progression
+- Decline greater than 3 mL/min/year warrants closer monitoring
+
+Factors associated with progression:
+- Higher baseline albuminuria
+- Poorly controlled diabetes
+- Uncontrolled hypertension
+- Acute kidney injury episodes
+- Smoking
+- Obesity
+- Certain medications
+
+**Management by Stage:**
+
+G1-G2: Focus on primary prevention
+- Treat underlying cause
+- Blood pressure goal less than 130/80
+- Cardiovascular risk reduction
+- Avoid nephrotoxins
+
+G3a: Enhanced monitoring
+- Check eGFR every 6-12 months
+- Monitor for complications
+- Consider nephrology referral if progressing
+
+G3b-G4: Specialist care
+- Nephrology co-management
+- Prepare for kidney replacement therapy
+- Manage complications
+
+G5: Kidney replacement therapy
+- Dialysis initiation planning
+- Transplant evaluation
+- Conservative management option`,
       keyTerms: [
-        { term: 'KDIGO', definition: 'Kidney Disease: Improving Global Outcomes; organization providing clinical guidelines' },
-        { term: 'CKD-EPI', definition: 'Chronic Kidney Disease Epidemiology Collaboration equation for eGFR' },
-        { term: 'cystatin C', definition: 'Alternative marker for GFR estimation, less affected by muscle mass' },
+        { term: 'KDIGO', definition: 'Kidney Disease: Improving Global Outcomes; international organization that develops clinical practice guidelines' },
+        { term: 'CKD-EPI', definition: 'Chronic Kidney Disease Epidemiology Collaboration; developed the most widely used eGFR equation' },
+        { term: 'cystatin C', definition: 'A protein filtered by kidneys; alternative to creatinine for GFR estimation' },
+        { term: 'nephrology', definition: 'The medical specialty focused on kidney care' },
+        { term: 'nephrotoxins', definition: 'Substances that can damage kidneys, including certain medications' },
       ],
-      clinicalNotes: 'Use CKD-EPI 2021 equation without race. Confirm eGFR with cystatin C if concern about accuracy. Albuminuria is independent predictor of outcomes. Refer based on risk category, not just eGFR alone.',
+      clinicalNotes: 'The KDIGO CGA classification provides comprehensive risk assessment. Use CKD-EPI 2021 equation without race adjustment. Confirm eGFR with cystatin C when results seem inconsistent with clinical picture. Albuminuria is an independent risk factor for both CKD progression and cardiovascular disease.',
     },
     4: {
       level: 4,
-      summary: 'Advanced CKD staging integrates precision nephrology concepts, validated risk prediction models, and individualized prognostication for personalized management.',
-      explanation: `**Precision CKD Assessment:**
+      summary: 'Advanced CKD assessment integrates validated risk prediction models, biomarker profiles, and trajectory analysis for personalized prognostication and management planning.',
+      explanation: `**Precision Approaches to CKD Assessment**
 
-*Beyond Traditional Staging:*
-\`\`\`
-Standard: GFR + Albuminuria
-Enhanced Assessment:
-- Cause/pathophysiology
-- Rate of progression
-- Complication burden
-- Functional status
-- Patient goals
-- Biomarker profiles
-\`\`\`
+Beyond traditional staging, modern nephrology employs precision medicine approaches to individualize risk assessment and management.
 
-**Risk Prediction Models:**
+**Kidney Failure Risk Equation (KFRE):**
 
-*Kidney Failure Risk Equation (KFRE):*
-- Predicts 2- and 5-year risk of kidney failure
-- Variables: age, sex, eGFR, ACR
-- 4-variable version validated globally
-- 8-variable includes additional labs
+A validated prediction model that estimates the probability of kidney failure requiring dialysis or transplant within 2 or 5 years.
 
-*Application:*
-| 5-Year Risk | Clinical Use |
-|-------------|--------------|
-| <3% | Reassurance, routine monitoring |
-| 3-10% | Enhanced monitoring, referral |
-| >10% | Kidney replacement preparation |
+*4-Variable KFRE:*
+- Age
+- Sex
+- eGFR
+- Urine ACR
+
+*8-Variable KFRE:*
+Adds laboratory values:
+- Serum calcium
+- Serum phosphate
+- Serum bicarbonate
+- Serum albumin
+
+*Clinical Application:*
+---
+5-Year Risk          Action
+----------------     -------------------------
+Less than 3%         Reassurance, routine care
+3-10%                Enhanced monitoring,
+                     consider nephrology referral
+Greater than 10%     Prepare for kidney replacement,
+                     transplant evaluation
+Greater than 40%     Urgent dialysis planning
+---
+
+KFRE advantages:
+- More accurate than eGFR alone for predicting kidney failure
+- Helps prioritize resources
+- Facilitates shared decision-making
+- Better predicts timing of dialysis need
 
 **GFR Decline Trajectories:**
 
-*Patterns:*
-- Linear decline
-- Non-linear (accelerating)
-- Stable
-- Improving (with intervention)
+Understanding patterns of progression:
 
-*Monitoring:*
-- At least 3 eGFR values over ≥90 days
-- Calculate slope
-- Identify rapid progressors (>5 mL/min/year)
+*Linear Decline:*
+- Constant rate of eGFR loss over time
+- Most predictable pattern
+- Easier to project timeline
 
-**Biomarkers of Progression:**
+*Non-linear Decline:*
+- Accelerating deterioration
+- Often indicates active disease
+- May respond to intervention
 
-| Biomarker | Information |
-|-----------|-------------|
-| KIM-1 | Tubular injury |
-| NGAL | Acute injury/progression |
-| Uromodulin | Tubular function |
-| FGF-23 | Mineral metabolism |
-| TNFR-1/2 | Inflammation, progression |`,
+*Stepwise Decline:*
+- Periods of stability interrupted by acute drops
+- Often associated with AKI episodes
+- Common in diabetic kidney disease
+
+*Assessment Methods:*
+- At least 3 eGFR measurements over minimum 90 days
+- Calculate slope using linear regression
+- Adjust for acute changes
+- Consider seasonal variation
+
+**Novel Biomarkers in CKD:**
+
+| Biomarker      | Source     | Clinical Utility                          |
+|----------------|------------|-------------------------------------------|
+| KIM-1          | Urine      | Tubular injury, predicts progression      |
+| NGAL           | Blood/Urine| Acute kidney injury, early damage         |
+| Uromodulin     | Urine      | Tubular function, associated with risk    |
+| FGF-23         | Blood      | Mineral metabolism, cardiovascular risk   |
+| TNFR-1/2       | Blood      | Inflammation, strongly predicts ESRD      |
+| suPAR          | Blood      | Systemic inflammation, CKD progression    |
+
+Current status:
+- Research tools in most settings
+- May complement traditional markers
+- Not yet standard clinical practice
+- Commercial assays emerging
+
+**Risk Factor Modification:**
+
+Targeted approaches to slow progression:
+
+*Blood Pressure Control:*
+- Goal less than 130/80 mmHg for most patients
+- ACE inhibitors or ARBs preferred if albuminuria present
+- Intensive control shows greater benefit in heavy proteinuria
+
+*Glycemic Control:*
+- HbA1c target 7% for most diabetics with CKD
+- Individualize based on comorbidities
+- Avoid hypoglycemia risk
+
+*SGLT2 Inhibitors:*
+- Proven to slow CKD progression independent of glucose
+- Reduce heart failure hospitalizations
+- Now standard of care in diabetic CKD
+
+**Comprehensive Risk Assessment:**
+
+Integrating multiple factors:
+1. Traditional measures (eGFR, ACR)
+2. Risk prediction equations (KFRE)
+3. Rate of progression (slope)
+4. Complication burden
+5. Functional status
+6. Patient preferences and goals
+7. Psychosocial factors
+
+This holistic approach enables truly personalized care planning.`,
       keyTerms: [
-        { term: 'Kidney Failure Risk Equation', definition: 'Validated model predicting kidney failure requiring dialysis/transplant' },
-        { term: 'KIM-1', definition: 'Kidney injury molecule-1; biomarker of tubular injury' },
-        { term: 'progression slope', definition: 'Rate of eGFR decline over time' },
+        { term: 'Kidney Failure Risk Equation', definition: 'Validated clinical prediction model for estimating risk of kidney failure requiring dialysis or transplant' },
+        { term: 'KIM-1', definition: 'Kidney Injury Molecule-1; a biomarker of tubular damage' },
+        { term: 'NGAL', definition: 'Neutrophil Gelatinase-Associated Lipocalin; early marker of kidney injury' },
+        { term: 'FGF-23', definition: 'Fibroblast Growth Factor 23; regulates phosphate metabolism, elevated in CKD' },
+        { term: 'progression slope', definition: 'The rate of eGFR decline measured over time' },
+        { term: 'SGLT2 inhibitor', definition: 'Sodium-glucose cotransporter-2 inhibitor; class of medications that protect kidneys' },
       ],
-      clinicalNotes: 'KFRE better predicts kidney failure than eGFR alone. Use risk prediction to guide shared decision-making about dialysis planning. Novel biomarkers emerging but not yet standard clinical practice. Identify and target modifiable progression factors.',
+      clinicalNotes: 'KFRE should be calculated for all patients with G3a-G5 CKD. Use results to guide discussions about dialysis planning timing. Novel biomarkers show promise but await routine clinical integration. SGLT2 inhibitors have transformed CKD management in eligible patients.',
     },
     5: {
       level: 5,
-      summary: 'State-of-the-art CKD classification integrates multi-omics profiling, AI-driven prognostication, and precision medicine approaches for individualized risk stratification and management.',
-      explanation: `**Precision Nephrology:**
+      summary: 'Contemporary CKD classification integrates genomic profiling, multi-omics analysis, machine learning prediction models, and molecular phenotyping for precision nephrology approaches.',
+      explanation: `**Precision Nephrology: Future of CKD Classification**
 
-*Multi-Dimensional Phenotyping:*
-\`\`\`
-Clinical Phenotype
-+ Pathological diagnosis
-+ Genetic testing
-+ Biomarker profiles
-+ Imaging features
-+ Molecular signatures
-         ↓
-Integrated CKD Classification
-         ↓
-Personalized Prognosis & Treatment
-\`\`\`
+Modern nephrology is evolving toward comprehensive molecular characterization of kidney disease, enabling individualized risk stratification and targeted therapeutics.
 
-**Genomic Integration:**
+**Genomic Integration in CKD:**
 
-*Genetic Testing Indications:*
+*Indications for Genetic Testing:*
 - Family history of kidney disease
-- Early onset CKD
-- Unusual features
+- CKD onset before age 30
+- Atypical presentations
+- Syndromic features
 - Potential for targeted therapy
 
-*Monogenic CKD:*
-- ~10% of adult CKD may be genetic
-- Impacts family counseling
-- Some have targeted treatments
+*Yield of Genetic Testing:*
+- ~10% of adult CKD patients have monogenic cause
+- Higher yield in specific phenotypes:
+  - Polycystic kidney disease
+  - FSGS and steroid-resistant nephrotic syndrome
+  - Tubulointerstitial diseases
+  - Unexplained hematuria
 
-**AI/ML Applications:**
+*Clinical Impact:*
+- Diagnosis clarification
+- Prognosis refinement
+- Family screening and counseling
+- Treatment selection (e.g., ADPKD)
+- Clinical trial eligibility
 
-*Predictive Models:*
-| Application | Approach |
-|-------------|----------|
-| Progression prediction | Deep learning on trajectories |
-| Subtype classification | Clustering algorithms |
-| Treatment response | Supervised learning |
-| Imaging analysis | Convolutional networks |
+*Common Monogenic CKD:*
+---
+Gene          Phenotype                    Targeted Therapy
+----------------------------------------------------------------
+PKD1/PKD2     ADPKD                        Tolvaptan
+COL4A3-5      Alport syndrome              ACEi/ARB early
+NPHS1/2       Congenital nephrotic synd.   Specific approaches
+UMOD          Uromodulin kidney disease    Under investigation
+APOL1         FSGS (risk variants)         APOL1 targeting trials
+---
 
-**Future Directions:**
+**Multi-Omics Approaches:**
 
-*Research Priorities:*
-- Molecular classification of CKD
-- Precision biomarkers
-- Individualized risk prediction
-- Targeted therapies
+Integrating molecular data layers:
 
-*Emerging Concepts:*
-- CKD subtypes beyond etiology
-- Tubular vs. glomerular predominant
-- Fibrosis phenotyping
-- Immune vs. metabolic drivers`,
+*Genomics:*
+- GWAS identified risk loci (FAM13A, DAB2, DACH1)
+- Polygenic risk scores in development
+- Pharmacogenomic considerations
+
+*Proteomics:*
+- Plasma protein signatures predict progression
+- Identify novel therapeutic targets
+- Non-invasive phenotyping
+
+*Metabolomics:*
+- Metabolic profiles distinguish CKD subtypes
+- Uremic toxin characterization
+- Dietary intervention targets
+
+*Transcriptomics:*
+- Kidney tissue gene expression
+- Urine cell-free RNA analysis
+- Immune cell signatures
+
+**Artificial Intelligence Applications:**
+
+*Machine Learning in CKD:*
+
+| Application              | Method                      | Status           |
+|--------------------------|-----------------------------|------------------|
+| Progression prediction   | Deep learning on EHR data   | Validation phase |
+| Subtype classification   | Clustering algorithms       | Research         |
+| Treatment response       | Supervised learning         | Development      |
+| Imaging analysis         | Convolutional networks      | Emerging         |
+| Risk stratification      | Ensemble methods            | Clinical trials  |
+
+*Deep Learning for eGFR Trajectories:*
+- Pattern recognition in longitudinal data
+- Early identification of rapid progressors
+- Prediction of AKI-CKD transition
+
+**Molecular Phenotyping:**
+
+Beyond traditional etiologic classification:
+
+*Tubular vs Glomerular Predominant:*
+- Biomarker profiles differentiate
+- Different progression patterns
+- Targeted therapeutic approaches
+
+*Inflammatory Endotypes:*
+- High vs low inflammatory signature
+- May predict immunosuppression response
+- Clinical trials stratifying by type
+
+*Fibrosis Signatures:*
+- Tissue proteomics and imaging
+- Predictors of irreversible damage
+- Antifibrotic therapy targets
+
+**Emerging Risk Prediction:**
+
+*Next-Generation Models:*
+- Integrate clinical + molecular data
+- Dynamic updating with new measurements
+- Individualized confidence intervals
+- Explainable AI for clinical utility
+
+**Research Priorities:**
+
+*Current Initiatives:*
+- Kidney Precision Medicine Project (KPMP)
+- Human Kidney Atlas development
+- International CKD cohorts
+- Clinical trial enrichment strategies
+
+*Future Directions:*
+- Real-time molecular monitoring
+- Liquid biopsy for kidney disease
+- Organoid-based drug testing
+- Gene therapy approaches
+- Regenerative medicine strategies
+
+**Clinical Implementation:**
+
+Challenges and opportunities:
+- Cost-effectiveness of genetic testing
+- Data integration infrastructure
+- Provider education
+- Patient counseling complexity
+- Regulatory considerations
+
+The future of CKD classification will combine validated clinical tools with molecular characterization to enable truly precision nephrology.`,
       keyTerms: [
-        { term: 'monogenic CKD', definition: 'Kidney disease caused by single gene mutation' },
-        { term: 'molecular classification', definition: 'Disease categorization based on molecular/genetic features' },
+        { term: 'monogenic CKD', definition: 'Kidney disease caused by mutation in a single gene' },
+        { term: 'multi-omics', definition: 'Integration of multiple molecular data types (genomics, proteomics, metabolomics)' },
+        { term: 'polygenic risk score', definition: 'Aggregate measure of genetic risk across multiple variants' },
+        { term: 'endotype', definition: 'Disease subtype defined by distinct biological mechanism rather than clinical presentation' },
+        { term: 'GWAS', definition: 'Genome-Wide Association Study; identifies genetic variants associated with disease' },
+        { term: 'liquid biopsy', definition: 'Analysis of biomarkers in blood or urine to characterize disease' },
       ],
-      clinicalNotes: 'Genetic testing yield is higher than previously recognized in CKD. AI-based prediction tools are emerging but require validation. Molecular phenotyping may enable targeted therapies. Current management still anchored in validated clinical approaches.',
+      clinicalNotes: 'Genetic testing should be considered in younger patients, those with family history, and atypical presentations. Multi-omics approaches remain largely research tools but are rapidly advancing. AI-based prediction models require careful validation before clinical implementation. The field is moving toward molecular classification that may enable targeted therapeutics.',
     },
   },
 
-  media: [],
-  citations: [{ id: 'kdigo-ckd', type: 'article', title: 'KDIGO CKD Guidelines', source: 'Kidney International' }],
-  crossReferences: [{ targetId: 'kidney-disease-renal-diet', targetType: 'topic', relationship: 'related', label: 'Renal Diet' }],
-  tags: { systems: ['renal'], topics: ['CKD', 'staging'], keywords: ['CKD stages', 'eGFR', 'albuminuria'], clinicalRelevance: 'critical' },
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+  media: [
+    {
+      id: 'ckd-stages-diagram',
+      type: 'diagram',
+      filename: 'ckd-stages-chart.svg',
+      title: 'CKD Stages by eGFR',
+      description: 'Visual chart showing the five stages of chronic kidney disease',
+    },
+    {
+      id: 'egfr-risk-matrix',
+      type: 'diagram',
+      filename: 'ckd-risk-matrix.svg',
+      title: 'CKD Risk Stratification Matrix',
+      description: 'KDIGO heat map showing risk categories by GFR and albuminuria',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'kdigo-2024',
+      type: 'article',
+      title: 'KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease',
+      source: 'Kidney International',
+    },
+    {
+      id: 'ckd-epi-2021',
+      type: 'article',
+      title: 'New Creatinine- and Cystatin C-Based Equations to Estimate GFR without Race',
+      source: 'New England Journal of Medicine',
+    },
+    {
+      id: 'kfre-validation',
+      type: 'article',
+      title: 'The Kidney Failure Risk Equation: Validation and Application',
+      source: 'JAMA Internal Medicine',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'chronic-kidney-renal-diet', targetType: 'concept', relationship: 'related', label: 'Renal Diet' },
+    { targetId: 'chronic-kidney-fluid-management', targetType: 'concept', relationship: 'related', label: 'Fluid Management' },
+    { targetId: 'chronic-kidney-medication-adjustments', targetType: 'concept', relationship: 'related', label: 'Medication Adjustments' },
+    { targetId: 'chronic-kidney-dialysis-preparation', targetType: 'concept', relationship: 'related', label: 'Dialysis Preparation' },
+  ],
+
+  tags: {
+    systems: ['renal'],
+    topics: ['chronic-disease', 'ckd', 'staging'],
+    keywords: ['CKD stages', 'eGFR', 'kidney function', 'albuminuria', 'KDIGO', 'kidney disease staging'],
+    clinicalRelevance: 'critical',
+    examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'nephrology'] },
+  },
+
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   version: 1,
   status: 'published',
-  contributors: ['Biological Self Content Team'],
 };

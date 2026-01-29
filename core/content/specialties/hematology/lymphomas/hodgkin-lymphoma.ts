@@ -1,494 +1,470 @@
-/**
- * Hodgkin Lymphoma - Comprehensive Educational Content
- *
- * A lymphoid malignancy characterized by Reed-Sternberg cells
- * in a reactive inflammatory background.
- */
-
-import { EducationalContent } from '../../../types';
+import type { EducationalContent } from '../../../types';
 
 export const hodgkinLymphoma: EducationalContent = {
-  id: 'condition-hodgkin-lymphoma',
+  id: 'hodgkin-lymphoma',
   type: 'condition',
   name: 'Hodgkin Lymphoma',
-  alternateNames: ['HL', 'Hodgkin disease', 'Hodgkins lymphoma'],
-
+  alternateNames: ['Hodgkin Disease', 'Classical Hodgkin Lymphoma', 'Nodular Lymphocyte-Predominant Hodgkin Lymphoma'],
   levels: {
     1: {
       level: 1,
-      summary: 'Hodgkin lymphoma is a cancer of the lymph system that usually starts in lymph nodes and is highly curable with treatment.',
-      explanation: `Hodgkin lymphoma is a type of cancer that affects the lymph system, which is part of your immune system.
+      summary: 'Hodgkin lymphoma is a type of cancer that starts in white blood cells called lymphocytes and usually begins in lymph nodes, most commonly affecting young adults.',
+      explanation: `Hodgkin lymphoma is a cancer of the lymphatic system, which is part of your body is immune system. It starts in white blood cells called lymphocytes, specifically in cells called Reed-Sternberg cells that look very distinctive under a microscope.
 
-**What Happens:**
-- Cancer starts in white blood cells called lymphocytes
-- It usually begins in lymph nodes (most often in the neck or chest)
-- Special cancer cells called Reed-Sternberg cells are found
+The most common first sign is a painless lump or swelling in the neck, armpit, or groin. This is usually an enlarged lymph node. Other symptoms can include fever, night sweats, unexplained weight loss, and feeling very tired.
 
-**Common Signs:**
-- Swollen lymph nodes (lumps) that do not hurt
-- Fevers and night sweats
-- Unexplained weight loss
-- Itching all over the body
-- Tiredness
+Hodgkin lymphoma is one of the most curable forms of cancer, especially when found early. Treatment usually involves chemotherapy and sometimes radiation therapy. Many people, particularly young adults, are completely cured of this disease.
 
-**Who Gets It:**
-- Young adults (ages 15-35)
-- Adults over 55
-- Slightly more common in males
-
-**Treatment:**
-- Chemotherapy (drugs that kill cancer)
-- Sometimes radiation therapy
-- Treatment is very effective - most people are cured`,
+Doctors classify Hodgkin lymphoma into different types based on how the cells look under a microscope. The most common type is called classical Hodgkin lymphoma, which has several subtypes. There is also a rarer type called nodular lymphocyte-predominant Hodgkin lymphoma.`,
       keyTerms: [
-        { term: 'lymphoma', definition: 'Cancer that starts in the lymph system', pronunciation: 'lim-FOH-mah' },
-        { term: 'lymph nodes', definition: 'Small bean-shaped organs that filter fluid and help fight infection' },
-        { term: 'Reed-Sternberg cells', definition: 'Large abnormal cells seen in Hodgkin lymphoma' },
+        { term: 'lymphoma', definition: 'A cancer of the lymphatic system, which includes lymph nodes and white blood cells' },
+        { term: 'lymphocytes', definition: 'White blood cells that are part of the immune system' },
+        { term: 'Reed-Sternberg cells', definition: 'Large abnormal cells that are characteristic of Hodgkin lymphoma' },
+        { term: 'lymph nodes', definition: 'Small bean-shaped organs that filter lymph fluid and help fight infection' }
       ],
       analogies: [
-        'Lymph nodes are like security checkpoints in your body. In Hodgkin lymphoma, the guards (cells) at these checkpoints become abnormal and multiply.',
+        'Hodgkin lymphoma is like having a security checkpoint where some guards have gone rogue and multiplied',
+        'Reed-Sternberg cells are like troublemakers that send out signals calling more cells to join them'
       ],
       examples: [
-        'A college student notices a painless lump in his neck that does not go away. He also has night sweats. A biopsy shows Hodgkin lymphoma.',
-      ],
+        'A 20-year-old college student notices a painless lump in their neck that does not go away - diagnosed with classical Hodgkin lymphoma',
+        'A 35-year-old with drenching night sweats and weight loss over 3 months - found to have stage II Hodgkin lymphoma'
+      ]
     },
     2: {
       level: 2,
-      summary: 'Hodgkin lymphoma is distinguished by Reed-Sternberg cells in a reactive background, with classical and nodular lymphocyte-predominant subtypes having different biology and treatment.',
-      explanation: `Hodgkin lymphoma is a B-cell lymphoma with unique pathological features and high cure rates.
+      summary: 'Hodgkin lymphoma is a B-cell lymphoid malignancy characterized by Reed-Sternberg cells in an inflammatory background, with excellent cure rates exceeding 80% with modern therapy.',
+      explanation: `Hodgkin lymphoma (HL) is a distinct lymphoid neoplasm accounting for approximately 10% of all lymphomas. It has unique epidemiologic, pathologic, and clinical features that distinguish it from non-Hodgkin lymphomas.
 
-**Pathophysiology:**
-- Reed-Sternberg cells are the malignant cells (usually only 1-2% of tumor)
-- Surrounded by reactive inflammatory cells
-- EBV associated in ~40% of cases
+Pathology:
+The hallmark is the Reed-Sternberg (RS) cell, a large binucleated cell with prominent nucleoli, often described as "owl-eye" appearance. RS cells typically comprise only 1-2% of the cellular infiltrate, surrounded by a mixed inflammatory background.
 
-**Types:**
-1. **Classical Hodgkin lymphoma (95%)**
-   - Nodular sclerosis (most common)
-   - Mixed cellularity
-   - Lymphocyte-rich
-   - Lymphocyte-depleted
+Classification (WHO 2022):
 
-2. **Nodular lymphocyte-predominant (5%)**
-   - "Popcorn" cells (LP cells)
-   - CD20+, different biology
+Classical Hodgkin Lymphoma (95% of cases):
+1. Nodular sclerosis (most common, 70%): Bands of fibrosis, lacunar variant RS cells, affects younger patients, often mediastinal involvement
+2. Mixed cellularity (20-25%): Classic RS cells, mixed inflammatory infiltrate, associated with EBV, more common in older patients and HIV
+3. Lymphocyte-rich (5%): Abundant small lymphocytes, few RS cells, good prognosis
+4. Lymphocyte-depleted (<1%): Numerous RS cells, few lymphocytes, aggressive, associated with HIV
 
-**Clinical Features:**
-- Painless lymphadenopathy
-- Contiguous spread (predictable pattern)
-- B symptoms: Fever >38C, night sweats, weight loss >10%
-- Mediastinal mass common (nodular sclerosis)
-- Pel-Ebstein fever (rare, cyclic)
-- Alcohol-induced lymph node pain (rare but classic)
+Nodular Lymphocyte-Predominant Hodgkin Lymphoma (NLPHL, 5%):
+- "Popcorn" cells (lymphocyte-predominant cells) variant of RS cells
+- CD20 positive (unlike classical HL)
+- Nodular pattern with reactive background
+- Male predominance, indolent course, late relapses common
+- Different treatment approach from classical HL
 
-**Diagnosis:**
-- Excisional lymph node biopsy (not FNA)
-- Reed-Sternberg cells: CD15+, CD30+, CD20-
-- PET-CT for staging
+Epidemiology:
+- Bimodal age distribution: young adults (15-35) and older adults (>55)
+- Slight male predominance
+- Associated with Epstein-Barr virus (EBV) in 40-50% of cases
+- Increased risk with infectious mononucleosis history
+- Rare familial clustering
 
-**Staging (Ann Arbor):**
-- Stage I: Single lymph node region
-- Stage II: Two or more regions, same side of diaphragm
-- Stage III: Both sides of diaphragm
-- Stage IV: Extranodal involvement (bone marrow, liver)
+Clinical presentation:
+- Painless lymphadenopathy (cervical, supraclavicular most common)
+- B symptoms: fevers, drenching night sweats, unintentional weight loss (>10% in 6 months)
+- Mediastinal mass (especially nodular sclerosis)
+- Pruritus, alcohol-induced nodal pain (rare)
+- Extralymphatic involvement less common than NHL
 
-**Treatment:**
-- Early stage: ABVD x 2-4 + radiation or ABVD x 4-6
-- Advanced stage: ABVD or A+AVD (brentuximab vedotin)
-- Cure rates: 80-90%`,
+Prognosis:
+- Stage I-II: 90-95% cure rate
+- Stage III-IV: 70-85% cure rate
+- Relapsed disease often salvageable with high-dose therapy and stem cell transplant`,
       keyTerms: [
-        { term: 'Reed-Sternberg cell', definition: 'Large binucleated cells with "owl eyes" appearance, diagnostic of classical HL' },
-        { term: 'B symptoms', definition: 'Fever, night sweats, weight loss >10%; indicate more advanced disease' },
-        { term: 'ABVD', definition: 'Chemotherapy regimen: Adriamycin, bleomycin, vinblastine, dacarbazine' },
-        { term: 'Ann Arbor staging', definition: 'Staging system for lymphomas based on nodal involvement' },
+        { term: 'classical Hodgkin lymphoma', definition: 'The main type of Hodgkin lymphoma with four subtypes, characterized by CD30+, CD15+ RS cells' },
+        { term: 'nodular sclerosis', definition: 'Most common subtype of classical HL with collagen bands dividing lymph node into nodules' },
+        { term: 'B symptoms', definition: 'Systemic symptoms of fever, night sweats, and weight loss; affect staging and prognosis' },
+        { term: 'mediastinal mass', definition: 'Enlargement of lymph nodes in the center of the chest; common in nodular sclerosis HL' },
+        { term: 'nodular lymphocyte-predominant HL', definition: 'Distinct subtype with different RS cell variant, CD20 positivity, and indolent course' }
       ],
       analogies: [
-        'Reed-Sternberg cells are like corrupt mayors in a small town (the tumor mass) - few in number but causing all the trouble, while most residents (inflammatory cells) react to them.',
+        'Reed-Sternberg cells are like bad influencers that attract a crowd of inflammatory cells around them',
+        'Hodgkin lymphoma is like a small spark (rare RS cells) that creates a big inflammatory response'
       ],
+      examples: [
+        'A 22-year-old woman with mediastinal mass and neck nodes - nodular sclerosis classical Hodgkin lymphoma',
+        'A 50-year-old man with isolated cervical node, NLPHL subtype - managed with involved site radiation'
+      ]
     },
     3: {
       level: 3,
-      summary: 'Hodgkin lymphoma management requires risk-adapted therapy balancing cure rates against long-term toxicity, with PET-guided treatment and novel agents improving outcomes.',
-      explanation: `## Overview
+      summary: 'Hodgkin lymphoma pathogenesis involves EBV infection in many cases, with RS cells derived from germinal center B-cells that have lost B-cell receptor expression but maintained survival through NF-kappaB activation.',
+      explanation: `Hodgkin lymphoma represents a unique model of lymphomagenesis where malignant Reed-Sternberg cells rely heavily on the microenvironment for survival and proliferation signals.
 
-Hodgkin lymphoma is highly curable but treatment carries risk of significant late effects, driving PET-adapted strategies.
+Cell of origin:
+Reed-Sternberg cells are derived from germinal center B-cells that have undergone somatic hypermutation but failed to express functional B-cell receptors. In normal B-cell development, cells without functional BCR undergo apoptosis. RS cells have escaped this fate through genetic alterations.
 
-## Epidemiology
-- Bimodal age distribution: 15-35 years, >55 years
-- Incidence: 2-3/100,000
-- Higher in males
+Molecular pathogenesis:
 
-## Classification (WHO)
+NF-kappaB pathway activation:
+- Constitutive NF-kappaB activation is essential for RS cell survival
+- Mechanisms include amplification of REL, mutations in NFKBIA (IkappaB-alpha), TNFAIP3 (A20)
+- Viral LMP1 in EBV-positive cases activates NF-kappaB
+- Provides proliferation signals and anti-apoptotic effects
 
-**Classical Hodgkin Lymphoma:**
-| Subtype | Frequency | Features |
-|---------|-----------|----------|
-| Nodular sclerosis | 70% | Mediastinal mass, young women |
-| Mixed cellularity | 20% | EBV+, older patients |
-| Lymphocyte-rich | 5% | Best prognosis |
-| Lymphocyte-depleted | <5% | Worst prognosis, HIV-associated |
+JAK-STAT signaling:
+- Copy gains of JAK2 on chromosome 9p24
+- Activating mutations in STAT6
+- Contributes to proliferation and survival
 
-**Nodular Lymphocyte-Predominant HL:**
-- "Popcorn" or LP cells
-- CD20+, CD15-, CD30-
-- Indolent course
-- May transform to DLBCL
+Epigenetic alterations:
+- Aberrant DNA methylation patterns
+- Mutations in histone-modifying enzymes (KDM6B, EP300, CREBBP)
+- Altered transcriptional programs
 
-## Diagnosis
+EBV association:
+- EBV present in RS cells of 40-50% of classical HL
+- Viral latency pattern II: LMP1, LMP2A, EBNA1 expressed
+- LMP1 mimics CD40 signaling, providing survival signals
+- More common in mixed cellularity, immunocompromised, older and younger patients
+- Associated with specific epidemiologic patterns
 
-**Pathology:**
-- Excisional biopsy required
-- Classic RS cells: CD15+, CD30+, CD20-, CD45-
-- Background: Lymphocytes, eosinophils, plasma cells, fibrosis
+Genetic alterations by subtype:
 
-**Staging Workup:**
-- PET-CT (standard)
-- CT chest/abdomen/pelvis
-- Bone marrow biopsy (if PET negative)
-- Labs: CBC, LDH, ESR, albumin, HIV
+Nodular sclerosis:
+- 9p24.1 amplification (PD-L1, PD-L2, JAK2) - 60% of cases
+- CIITA rearrangements affecting MHC class II expression
+- Chromosome 4p and 16p abnormalities
 
-**Prognostic Factors (Advanced Stage - IPS):**
-- Male sex
-- Age ≥45
-- Stage IV
-- Hemoglobin <10.5
-- WBC ≥15,000
-- Lymphocyte <600 or <8%
-- Albumin <4
+Mixed cellularity:
+- Higher frequency of EBV association
+- Less 9p24 amplification
+- More diverse genetic profile
 
-## Treatment
+NLPHL:
+- Distinct from classical HL
+- Lymphocyte-predominant (LP) cells are CD20+, CD30-, CD15-
+- B-cell receptor functional and often clonally related to preceding/progressing DLBCL
+- Mutations in DUSP2, SGK1, TNFRSF14, sixq gains
 
-**Early Stage Favorable:**
-- ABVD x 2 cycles + IFRT (20 Gy)
-- Or ABVD x 4 cycles (radiation-free approach)
+Microenvironment:
+The RS cell constitutes less than 1% of the tumor mass. The surrounding inflammatory infiltrate provides essential survival signals:
+- CD4+ T-cells (Th2 and Treg phenotypes)
+- Eosinophils (IL-5 production)
+- Plasma cells
+- Macrophages (tumor-associated macrophages may be prognostic)
+- Fibroblasts in nodular sclerosis subtype
 
-**Early Stage Unfavorable:**
-- ABVD x 4-6 cycles +/- IFRT
-- Or escalated BEACOPP x 2 + ABVD x 2
+Immune evasion:
+- RS cells express PD-L1 and PD-L2 (especially with 9p24 amplification)
+- Downregulation of MHC class I and II
+- Secretion of immunosuppressive cytokines (TGF-beta, IL-10)
+- Recruitment of regulatory T-cells
 
-**Advanced Stage:**
-- A+AVD (brentuximab + AVD) x 6 - standard
-- Or ABVD x 6 cycles
-- Avoid bleomycin (A+AVD) - less pulmonary toxicity
-
-**PET-Adapted Therapy:**
-- Interim PET after 2 cycles
-- PET-negative: May de-escalate (omit bleomycin, reduce cycles)
-- PET-positive: May escalate (BEACOPP)
-
-## Relapsed/Refractory
-
-**Second Line:**
-- Salvage chemotherapy (ICE, DHAP, GDP)
-- High-dose chemotherapy + autologous stem cell transplant
-- 50% cure rate in relapse
-
-**Beyond Second Line:**
-- Brentuximab vedotin (anti-CD30 ADC)
-- Checkpoint inhibitors (nivolumab, pembrolizumab)
-- Allogeneic transplant`,
+This microenvironment dependency explains both the inflammatory symptoms (cytokine production) and the success of immunotherapy approaches targeting the microenvironment (checkpoint inhibitors).`,
       keyTerms: [
-        { term: 'IPS', definition: 'International Prognostic Score; 7-factor model for advanced HL prognosis' },
-        { term: 'BEACOPP', definition: 'Intensive regimen: bleomycin, etoposide, doxorubicin, cyclophosphamide, vincristine, procarbazine, prednisone' },
-        { term: 'brentuximab vedotin', definition: 'Anti-CD30 antibody-drug conjugate active in HL' },
-        { term: 'interim PET', definition: 'PET scan after 2 cycles to assess early response and guide therapy' },
-      ],
-      clinicalNotes: 'Bleomycin pulmonary toxicity is a major concern. Avoid supplemental O2, monitor DLCO. A+AVD eliminates bleomycin while maintaining efficacy.',
+        { term: 'NF-kappaB', definition: 'Transcription factor regulating inflammation, immunity, and cell survival; constitutively active in RS cells' },
+        { term: 'germinal center', definition: 'Site in lymph nodes where B-cells undergo maturation and somatic hypermutation' },
+        { term: 'somatic hypermutation', definition: 'Process introducing mutations into antibody genes to increase affinity' },
+        { term: 'PD-L1', definition: 'Programmed death ligand 1; immune checkpoint molecule often expressed in HL' },
+        { term: 'LMP1', definition: 'Latent membrane protein 1 of EBV; mimics CD40 signaling to promote survival' }
+      ]
     },
     4: {
       level: 4,
-      summary: 'Hodgkin lymphoma treatment balances high cure rates against late effects through risk-adapted PET-guided therapy, with checkpoint inhibitors transforming relapsed disease management.',
-      explanation: `## Pathobiology
+      summary: 'Hodgkin lymphoma staging uses the Ann Arbor system with Cotswolds modifications, combined with risk stratification to guide treatment selection between chemotherapy, radiation, and combined modality therapy.',
+      explanation: `The management of Hodgkin lymphoma requires accurate staging, risk stratification, and treatment selection to maximize cure rates while minimizing long-term toxicity.
 
-**Reed-Sternberg Cell Origin:**
-- Derived from germinal center B cells
-- Crippled B cells with non-functional BCR
-- Should undergo apoptosis but rescued by:
-  - NF-kB activation
-  - JAK-STAT signaling
-  - EBV (if present)
+Ann Arbor Staging (Cotswolds modifications):
 
-**Immune Evasion:**
-- PD-L1 overexpression (9p24.1 amplification)
-- Creates immunosuppressive microenvironment
-- Rationale for checkpoint inhibitor efficacy
+Stage I: Single lymph node region or single extralymphatic site (IE)
+Stage II: Two or more lymph node regions on same side of diaphragm
+Stage III: Lymph node regions on both sides of diaphragm
+Stage IV: Diffuse involvement of one or more extralymphatic organs
 
-**EBV Association:**
-- ~40% of cases in Western countries
-- >90% in immunocompromised
-- LMP1 activates NF-kB
+Modifiers:
+- A: No B symptoms
+- B: Presence of B symptoms (fevers, night sweats, weight loss >10%)
+- E: Involvement of single extralymphatic site contiguous to known nodal site
+- S: Spleen involvement
+- X: Bulky disease (mediastinal mass >1/3 chest diameter or nodal mass >10cm)
 
-## PET-Adapted Strategies
+Initial workup:
+- History and physical examination (lymph node regions, spleen, liver)
+- Laboratory: CBC, ESR, LDH, albumin, liver/renal function
+- Imaging: FDG-PET/CT (standard of care)
+- Bone marrow biopsy: Only if PET-negative and cytopenias present (PET has replaced routine BMB)
+- Echocardiogram or MUGA (baseline cardiac function for anthracyclines)
+- Pulmonary function tests (baseline for bleomycin)
+- Fertility counseling and preservation
 
-**Deauville Criteria:**
-| Score | Definition |
-|-------|------------|
-| 1 | No uptake |
-| 2 | ≤ mediastinum |
-| 3 | > mediastinum, ≤ liver |
-| 4 | > liver (moderate) |
-| 5 | > liver (markedly) or new lesions |
+Risk stratification:
 
-- Deauville 1-3: PET-negative (good response)
-- Deauville 4-5: PET-positive (poor response)
+Early-stage favorable:
+- Stage I-II without bulky disease or B symptoms
+- ESR <50 (or <30 if B symptoms)
+- Fewer than 3 nodal sites involved
 
-**Clinical Application:**
-- RAPID trial: PET-negative after 3 ABVD → omit radiation
-- RATHL trial: PET-negative after 2 ABVD → omit bleomycin
-- GHSG HD18: PET-negative after 2 BEACOPP → reduce to 4 total
+Early-stage unfavorable:
+- Stage I-II with bulky disease or B symptoms or ESR >50 or >3 nodal sites
 
-## Frontline Treatment Details
+Advanced stage:
+- Stage III-IV
 
-**Early Favorable (GHSG):**
-- 2 ABVD + 20 Gy IFRT (standard)
-- Alternative: 4 ABVD (no radiation)
-- Excellent PFS either approach
+International Prognostic Score (IPS) for advanced HL:
+- Serum albumin <4 g/dL
+- Hemoglobin <10.5 g/dL
+- Male sex
+- Age >=45 years
+- Stage IV disease
+- Leukocytosis >=15,000
+- Lymphocytopenia <600 or <8% of WBC
+Score 0-7 predicts freedom from progression
 
-**Early Unfavorable:**
-- Risk factors: Large mediastinal mass, extranodal, ESR elevated, >3 sites
-- 4-6 ABVD +/- IFRT
-- Or 2 eBEACOPP + 2 ABVD + IFRT
+Treatment approaches:
 
-**Advanced Stage:**
-- A+AVD x 6 (ECHELON-1): Superior PFS vs ABVD
-- Primary G-CSF required
-- Lower pulmonary toxicity (no bleomycin)
-- Alternative: ABVD x 6 (cost considerations)
+Early-stage favorable:
+- ABVD x 2 cycles + involved site radiation therapy (ISRT)
+- Or ABVD x 4-6 cycles alone (PET-guided de-escalation)
+- German approach: 2+2 (2 ABVD + 2 ABVD if PET-negative after 2)
 
-## Late Effects
+Early-stage unfavorable:
+- ABVD x 4-6 cycles + ISRT
+- Or escalated BEACOPP x 2 + ABVD x 2 + ISRT (European approach)
+- PET-adapted therapy increasingly used
 
-**Cardiovascular:**
-- Coronary artery disease
-- Valvular disease
-- Cardiomyopathy (anthracyclines)
-- Risk: Mediastinal radiation + doxorubicin
+Advanced stage:
+- ABVD x 6 cycles (standard in US)
+- Escalated BEACOPP x 6-8 cycles (European approach for high IPS)
+- PET-adapted: Switch to escalated BEACOPP if PET-positive after 2 cycles
 
-**Secondary Malignancies:**
-- Breast cancer (radiation field)
-- Lung cancer (radiation + smoking)
-- Leukemia (alkylators, etoposide)
-- NHL transformation
+Refractory/relapsed:
+- Second-line chemotherapy (ICE, DHAP, GVD) followed by autologous stem cell transplant
+- Brentuximab vedotin + nivolumab for transplant-ineligible or as bridge to transplant
+- Checkpoint inhibitors (nivolumab, pembrolizumab) for post-transplant relapse
 
-**Pulmonary:**
-- Bleomycin pneumonitis
-- Radiation fibrosis
+PET-adapted therapy:
+- Deauville score (1-5) on interim PET after 2 cycles
+- Score 1-2 (negative): Continue planned therapy
+- Score 3-5 (positive): Consider intensification or switch regimen
+- RATHL trial: PET-negative patients can omit bleomycin (AVD only)
 
-**Other:**
-- Thyroid dysfunction
-- Infertility
-- Hypothyroidism
-
-## Relapsed/Refractory Management
-
-**Salvage + ASCT:**
-- ICE, DHAP, GDP, GVD
-- Goal: Chemosensitive disease
-- BEAM conditioning
-- 50% long-term survival
-
-**Brentuximab Vedotin:**
-- Post-ASCT maintenance (AETHERA): Improved PFS
-- R/R disease: 75% ORR, 34% CR
-
-**Checkpoint Inhibitors:**
-- Nivolumab, pembrolizumab
-- ORR 65-70%
-- PFS ~15 months
-- Approved for post-ASCT and post-BV
-
-**Allogeneic HCT:**
-- For relapse post-ASCT
-- Reduced intensity preferred
-- Graft-vs-lymphoma effect`,
+Response criteria:
+- Complete metabolic response (CMR): Deauville 1-3 at end of treatment
+- Partial response: Greater than 50% reduction
+- Progressive disease: New lesions or increase in size`,
       keyTerms: [
-        { term: 'Deauville criteria', definition: '5-point scale for PET response assessment in lymphoma' },
-        { term: 'A+AVD', definition: 'Brentuximab vedotin + AVD (no bleomycin); standard for advanced HL' },
-        { term: '9p24.1 amplification', definition: 'Genetic alteration leading to PD-L1 overexpression in HL' },
-        { term: 'AETHERA', definition: 'Trial showing brentuximab maintenance benefit post-ASCT in high-risk HL' },
+        { term: 'Deauville score', definition: '5-point scale for interpreting PET scans in lymphoma; 1-2 negative, 4-5 positive' },
+        { term: 'ABVD', definition: 'Chemotherapy regimen: Adriamycin, Bleomycin, Vinblastine, Dacarbazine' },
+        { term: 'BEACOPP', definition: 'Intensive chemotherapy regimen used in Europe for advanced HL' },
+        { term: 'involved site radiation therapy', definition: 'Targeted radiation to initially involved lymph node regions with margin' },
+        { term: 'PET-adapted therapy', definition: 'Treatment modification based on interim PET scan results' }
       ],
-      clinicalNotes: 'Survivors need lifelong surveillance for late effects. Annual mammography starting 8 years post-radiation (or age 40) for chest radiation recipients. CV risk factor management essential.',
+      clinicalNotes: `Clinical pearls for Hodgkin lymphoma:
+
+1. PET/CT is essential for staging and response assessment; bone marrow biopsy rarely needed if PET performed
+2. Mediastinal bulk is defined as mass >1/3 of chest diameter on chest X-ray, or >10 cm on CT
+3. Pruritus and alcohol-induced pain are uncommon but specific symptoms
+4. NLPHL is managed differently - often localized radiation or rituximab-based approaches
+
+Treatment toxicities:
+- ABVD: Pulmonary toxicity (bleomycin), cardiac (doxorubicin), neuropathy (vinblastine), myelosuppression
+- Monitor pulmonary function if considering bleomycin continuation
+- Neutropenia is common but G-CSF not routinely used with ABVD
+
+Fertility preservation:
+- Sperm banking for men before chemotherapy
+- Oocyte/embryo cryopreservation for women
+- Oophoropexy if pelvic radiation planned
+- Discuss risk of premature ovarian failure
+
+Long-term follow-up:
+- Secondary malignancies (breast cancer in women with chest radiation, lung cancer, AML/MDS)
+- Cardiovascular disease (accelerated coronary disease, cardiomyopathy)
+- Thyroid dysfunction (neck radiation)
+- Infertility
+- Screening guidelines based on treatment received
+
+Relapsed disease management:
+- Confer relapse if PET-positive within 3 months of treatment completion
+- Late relapse (>12 months) has better prognosis than early relapse
+- Transplant-eligible patients: Second-line chemo + auto-SCT
+- Brentuximab + nivolumab for transplant-ineligible or as bridge
+- Checkpoint inhibitors effective in multiply relapsed disease
+
+Special situations:
+- Elderly/unfit: ABVD or AVD (no bleomycin), or brentuximab-based regimens
+- HIV-associated HL: Treat same with HAART; CD4 >100 for full-dose therapy
+- Pregnancy: Can delay treatment if early stage; if advanced, consider ABVD after first trimester`
     },
     5: {
       level: 5,
-      summary: 'Contemporary Hodgkin lymphoma management optimizes cure while minimizing toxicity through PET-adapted therapy, novel frontline combinations, and checkpoint immunotherapy.',
-      explanation: `## Precision Medicine in HL
+      summary: 'Advanced concepts include checkpoint inhibitor therapy, antibody-drug conjugates, CAR-T cell approaches, late effects monitoring, and novel strategies to reduce therapy-related complications in this curable disease.',
+      explanation: `Contemporary Hodgkin lymphoma management focuses on maintaining high cure rates while reducing treatment toxicity, developing novel immunotherapies for relapsed disease, and understanding long-term survivorship issues.
 
-**Biomarkers:**
-- Interim PET (Deauville score)
-- ctDNA for MRD (emerging)
-- TME characteristics (research)
+Immunotherapy in Hodgkin lymphoma:
 
-**Risk Stratification:**
-- Early vs advanced stage
-- Favorable vs unfavorable features
-- PET response (most important)
+Checkpoint inhibitors:
+The 9p24.1 amplification common in classical HL leads to high PD-L1/PD-L2 expression, making HL exceptionally responsive to PD-1 blockade.
 
-## Treatment Optimization Strategies
+Nivolumab and pembrolizumab:
+- Approved for relapsed/refractory HL after autologous transplant and brentuximab
+- High response rates (65-70%) even in heavily pretreated patients
+- Many responses are durable
+- Consider for consolidation after transplant (checkmate 205)
 
-**Frontline Advanced HL:**
+Mechanisms of response and resistance:
+- Primary resistance: Low PD-L1 expression, deficient antigen presentation
+- Acquired resistance: Mutations in JAK/STAT pathway, antigen presentation machinery
+- Combining with other agents to overcome resistance under investigation
 
-*ECHELON-1 (A+AVD vs ABVD):*
-- A+AVD: 6-year PFS 82% vs 75%
-- OS benefit in Stage IV
-- Requires G-CSF prophylaxis
-- Standard of care
+Brentuximab vedotin:
+- Anti-CD30 antibody-drug conjugate with monomethyl auristatin E (MMAE)
+- Approved for relapsed HL and frontline in combination with AVD
+- ECHELON-1 trial: Brentuximab-AVD superior to ABVD, less pulmonary toxicity
+- Peripheral neuropathy is dose-limiting toxicity
 
-*Alternative Approaches:*
-- ABVD with interim PET de-escalation
-- BEACOPP then step-down (German approach)
-- Escalation if PET+ (less used)
+Novel combination strategies:
+- Brentuximab + nivolumab (Transplant-ineligible and relapsed)
+- Checkpoint inhibitor + chemotherapy for previously untreated elderly
+- Bispecific antibodies targeting CD30
 
-**Early Stage Optimization:**
+CAR-T cell therapy:
+- CD30-directed CAR-T cells in development
+- Challenges: CD30 shedding, target antigen heterogeneity
+- Early clinical trials show promise in multiply relapsed disease
 
-*Radiation Omission:*
-- RAPID, H10, EORTC trials
-- PET-negative after chemo: Radiation may be omitted
-- Trade-off: Slightly higher relapse, fewer late effects
+Treatment de-escalation:
 
-*Chemotherapy Reduction:*
-- PET-adapted cycles
-- Goal: Minimum effective therapy
+Given excellent cure rates, focus on reducing toxicity:
 
-## Checkpoint Inhibitors in HL
+PET-guided therapy:
+- RATHL trial: PET-negative after 2 ABVD cycles can omit bleomycin (AVD)
+- Reduces pulmonary toxicity without compromising efficacy
+- FDA approved PET-adapted AVD approach
 
-**Mechanism:**
-- HL uniquely sensitive due to 9p24.1 amplification
-- PD-L1/PD-L2 overexpression
-- High tumor-infiltrating lymphocytes
+Radiation reduction:
+- Involved site radiation (ISRT) replaces involved field radiation
+- Smaller fields reduce late toxicity
+- Ongoing trials evaluating if radiation can be omitted in PET-negative patients
 
-**Clinical Results:**
-- CheckMate 205 (nivolumab): ORR 69%, CR 16%
-- KEYNOTE-087 (pembrolizumab): ORR 69%, CR 22%
-- Duration of response: Median 16-18 months
-- Some patients with prolonged responses
+Omission of alkylators:
+- AVD (no dacarbazine) being studied
+- Gemcitabine-based regimens for elderly/unfit
 
-**Frontline Investigation:**
-- Nivo + AVD (CheckMate 812): Promising
-- Pembro + ABVD/AVD: Under study
-- May replace brentuximab-based approaches
+Late effects and survivorship:
 
-## Nodular Lymphocyte-Predominant HL
+Secondary malignancies:
+- Breast cancer: Women treated with chest radiation before age 30 have 20-40% lifetime risk
+- Screening: Annual mammogram/MRI starting 8 years post-treatment or age 40
+- Lung cancer: Smoking cessation crucial; CT screening for high-risk
+- AML/MDS: Risk increased with alkylator exposure, especially with radiation
 
-**Biology:**
-- CD20+, CD15-, CD30-
-- Origin: Germinal center B cell
-- May transform to DLBCL
+Cardiovascular disease:
+- Mediastinal radiation accelerates coronary disease
+- Anthracycline cardiomyopathy
+- Screening: Stress testing 10 years post-treatment or age 30
+- Aggressive cardiovascular risk factor modification
 
-**Management:**
-- Stage IA: ISRT alone (if limited)
-- Advanced: Rituximab +/- chemo
-- Observation if asymptomatic
+Endocrine:
+- Hypothyroidism common after neck radiation (50% at 20 years)
+- Annual TSH monitoring
+- Premature menopause with alkylating agents
 
-## Special Populations
+Pulmonary:
+- Bleomycin toxicity: Reduced diffusion capacity, pulmonary fibrosis
+- Risk increased with older age, renal dysfunction, oxygen exposure
+- Baseline and follow-up PFTs
 
-**HIV-Associated:**
-- Full-dose ABVD with ART
-- Brentuximab-based regimens safe
-- Similar outcomes to HIV-negative if CD4 adequate
+Reproductive health:
+- Bank sperm/oocytes before therapy
+- Sperm banking success lower if already lymphoma-involved testes
+- Pregnancy possible after treatment; no increased fetal malformation risk
 
-**Elderly (>60 years):**
-- ABVD feasible, bleomycin concern
-- Consider A+AVD or AVD without bleomycin
-- PET-adapted approach
+Psychosocial:
+- Fatigue persists in 30-40% of survivors
+- Anxiety about recurrence
+- Employment and insurance discrimination
+- Survivorship care plans essential
 
-**Pregnancy:**
-- Delay treatment if possible (late pregnancy)
-- ABVD in 2nd/3rd trimester if urgent
-- Avoid radiation until postpartum
+Research directions:
 
-## Late Effects Surveillance
+Genomic risk stratification:
+- Beyond IPS, incorporating tumor genomics
+- Identifying patients who need more or less therapy
 
-**Cardiovascular:**
-- Echo/stress test every 5-10 years
-- Aggressive risk factor management
-- Screening starting 5-10 years post-treatment
+Immunotherapy in earlier lines:
+- Checkpoint inhibitors in first-line for elderly/unfit
+- Replacing chemotherapy entirely in selected patients
 
-**Secondary Malignancies:**
-- Breast: Annual screening starting 8 years or age 40
-- Lung: CT screening in smokers
-- Thyroid: Annual exam, TSH
-- Skin: Regular dermatology
+Biomarkers:
+- Circulating tumor DNA for early relapse detection
+- Predictive biomarkers for therapy selection
+- Immune profiling to predict checkpoint inhibitor response
 
-**Fertility:**
-- Pre-treatment counseling
-- Sperm/egg banking
-- ABVD: Usually preserves fertility
-- BEACOPP: Higher infertility risk
-
-## Emerging Therapies
-
-**CD30-Directed:**
-- Next-gen CD30 CAR-T
-- Bispecific antibodies
-
-**Novel Combinations:**
-- Checkpoint inhibitor + chemotherapy
-- BV + checkpoint inhibitor
-- Reduced chemotherapy approaches
-
-**ctDNA Monitoring:**
-- Emerging for response assessment
-- May complement PET
-- MRD detection`,
+Pediatric and AYA considerations:
+- Different chemotherapy approaches (OEPA, COPP)
+- Reduced radiation fields
+- Fertility preservation crucial
+- Late effects monitoring from young age`,
       keyTerms: [
-        { term: 'ctDNA', definition: 'Circulating tumor DNA; emerging biomarker for MRD detection in lymphoma' },
-        { term: 'TME', definition: 'Tumor microenvironment; reactive cells surrounding RS cells' },
-        { term: 'ISRT', definition: 'Involved-site radiation therapy; modern targeted radiation approach' },
-        { term: 'CheckMate 205', definition: 'Key trial establishing nivolumab efficacy in relapsed HL' },
+        { term: 'checkpoint inhibitor', definition: 'Antibody blocking PD-1 or PD-L1 to enhance anti-tumor immunity' },
+        { term: 'brentuximab vedotin', definition: 'Anti-CD30 antibody-drug conjugate approved for HL' },
+        { term: 'survivorship', definition: 'Care of patients after cancer treatment; focuses on late effects and quality of life' },
+        { term: 'treatment de-escalation', definition: 'Reducing therapy intensity based on favorable early response to minimize toxicity' },
+        { term: 'circulating tumor DNA', definition: 'Cell-free DNA from tumor detectable in blood; potential biomarker' }
       ],
-      clinicalNotes: `**Board Pearls:**
-- Reed-Sternberg cells: CD15+, CD30+, CD20-, "owl eyes"
-- Nodular sclerosis = most common, young women, mediastinal mass
-- A+AVD is standard for advanced HL (ECHELON-1)
-- PET response is most important prognostic factor
-- 9p24.1 amplification explains checkpoint inhibitor sensitivity
-- Late effects mandate lifelong surveillance
-- NLPHL: CD20+, may use rituximab, can transform to DLBCL`,
-    },
+      clinicalNotes: `Advanced clinical considerations:
+
+Refractory disease patterns:
+- Primary refractory: No response to initial therapy
+- Early relapse: Within 12 months of completing treatment
+- Late relapse: Greater than 12 months after treatment
+- Each has different prognosis and management approach
+
+Salvage therapy selection:
+- No standard second-line regimen
+- Consider prior therapy, toxicity, transplant eligibility
+- Brentuximab + nivolumab emerging as option for transplant-ineligible
+- Checkpoint inhibitors can reinduce response to subsequent chemotherapy
+
+Nodular lymphocyte-predominant HL:
+- CD20 positive; rituximab effective
+- Stage IA often treated with radiation alone
+- Late relapses (decades later) characteristic
+- Risk of transformation to DLBCL (3-5%)
+- Different natural history than classical HL
+
+HIV-associated HL:
+- More aggressive histology (mixed cellularity)
+- Higher stage at presentation
+- CD4 >100 for standard chemotherapy
+- Continue HAART; watch drug interactions
+- Similar cure rates with appropriate therapy
+
+Elderly HL:
+- Less tolerance for ABVD
+- Consider AVD, brentuximab-based, or gemcitabine regimens
+- IPS may not predict as well
+- Focus on quality of life and symptom control
+
+Clinical trials:
+- Many current trials focus on treatment de-escalation
+- Immunotherapy combinations
+- Novel agents for relapsed disease
+- Biomarker-driven therapy selection`
+    }
   },
-
-  media: [
-    {
-      id: 'reed-sternberg',
-      type: 'histology',
-      filename: 'reed-sternberg-cells.jpg',
-      title: 'Reed-Sternberg Cells',
-      description: 'Classic binucleated RS cells with "owl eyes" appearance',
-    },
-  ],
-
+  media: [],
   citations: [
-    {
-      id: 'ansell-2018',
-      type: 'article',
-      title: 'Hodgkin Lymphoma',
-      authors: ['Ansell SM'],
-      source: 'New England Journal of Medicine',
-      url: 'https://doi.org/10.1056/NEJMra1706961',
-    },
+    { id: '1', type: 'textbook', title: 'Hoffman Hematology: Basic Principles and Practice', authors: ['Hoffman R', 'Benz EJ', 'Silberstein LE'], source: 'Elsevier', chapter: 'Chapter 98: Hodgkin Lymphoma' },
+    { id: '2', type: 'article', title: 'NCCN Clinical Practice Guidelines: Hodgkin Lymphoma Version 3.2023', authors: ['National Comprehensive Cancer Network'], source: 'NCCN Guidelines' }
   ],
-
   crossReferences: [
-    { targetId: 'condition-non-hodgkin-lymphoma', targetType: 'condition', relationship: 'related', label: 'Non-Hodgkin Lymphoma' },
-    { targetId: 'condition-dlbcl', targetType: 'condition', relationship: 'related', label: 'DLBCL' },
+    { targetId: 'nhl-types', targetType: 'concept', relationship: 'sibling' },
+    { targetId: 'lymphoma-staging', targetType: 'concept', relationship: 'related' },
+    { targetId: 'non-hodgkin-lymphoma', targetType: 'condition', relationship: 'see-also' }
   ],
-
   tags: {
-    systems: ['hematologic', 'lymphatic'],
-    topics: ['lymphoma', 'oncology', 'hematologic malignancy'],
-    keywords: ['Hodgkin', 'Reed-Sternberg', 'ABVD', 'checkpoint inhibitor'],
-    clinicalRelevance: 'critical',
-    examRelevance: {
-      usmle: true,
-      nbme: true,
-      shelf: ['medicine'],
-    },
+    systems: ['hematology', 'oncology'],
+    topics: ['lymphoma', 'Hodgkin lymphoma', 'lymphoid malignancy'],
+    keywords: ['Hodgkin lymphoma', 'Reed-Sternberg', 'ABVD', 'PET scan', 'checkpoint inhibitor'],
+    clinicalRelevance: 'high'
   },
-
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   version: 1,
-  status: 'published',
+  status: 'published'
 };
-
-export default hodgkinLymphoma;

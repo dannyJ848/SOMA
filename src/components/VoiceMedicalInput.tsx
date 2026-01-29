@@ -3,13 +3,14 @@
  *
  * Medical-aware speech recognition component for the AI Medical Encyclopedia.
  * Features intelligent question detection, medical terminology recognition,
- * and context-aware follow-up question handling.
+ * context-aware follow-up question handling, and patient health context integration.
  *
  * @module components/VoiceMedicalInput
  */
 
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { useVoiceFallback } from '../hooks/useVoiceFallback';
+import type { UserCondition, UserMedication, UserLabResult } from '../../core/personalization/types';
 import './VoiceMedicalInput.css';
 
 // ============================================================================
@@ -27,6 +28,7 @@ export type QuestionType =
   | 'clinical'        // "How do doctors..." - Clinical practice
   | 'education'       // "What do medical students learn about..." - Educational content
   | 'followup'        // Follow-up questions ("What about...", "And the...")
+  | 'personal'        // Personal health-related educational questions
   | 'general';        // General medical questions
 
 /**
@@ -39,8 +41,23 @@ export type VoiceInputState = 'idle' | 'listening' | 'processing' | 'error';
  */
 export interface MedicalTermMatch {
   term: string;
-  category: 'anatomical' | 'condition' | 'procedure' | 'general';
+  category: 'anatomical' | 'condition' | 'procedure' | 'general' | 'personal';
   confidence: number;
+  isFromPatientData?: boolean;
+}
+
+/**
+ * Patient health context for personalized queries
+ */
+export interface PatientHealthContext {
+  conditions: UserCondition[];
+  medications: UserMedication[];
+  labResults: UserLabResult[];
+  symptoms?: Array<{
+    id: string;
+    description: string;
+    bodyLocation: string;
+  }>;
 }
 
 /**
@@ -53,6 +70,13 @@ export interface DetectedQuestion {
   medicalTerms: MedicalTermMatch[];
   isFollowUp: boolean;
   relatedRegion?: string;
+  isPersonalized: boolean;
+  personalContext?: {
+    mentionedConditions: string[];
+    mentionedMedications: string[];
+    mentionedSymptoms: string[];
+  };
+  suggestedEnhancements?: string[];
 }
 
 /**
@@ -69,12 +93,16 @@ export interface VoiceMedicalInputProps {
   isEnabled: boolean;
   /** Previous conversation context for follow-up detection */
   conversationContext?: string[];
+  /** Patient health data for personalized queries */
+  patientHealthContext?: PatientHealthContext;
   /** Custom class name */
   className?: string;
   /** Size variant */
   size?: 'small' | 'medium' | 'large';
   /** Language for speech recognition */
   language?: string;
+  /** Show personalized query suggestions */
+  showPersonalizedSuggestions?: boolean;
 }
 
 // ============================================================================
@@ -165,6 +193,28 @@ const PROCEDURE_TERMS = new Set([
   'vaccination', 'immunization', 'physical therapy', 'rehabilitation',
 ]);
 
+/**
+ * Personal health question indicators
+ */
+const PERSONAL_QUESTION_INDICATORS = [
+  'my condition',
+  'my medication',
+  'my medicine',
+  'my diagnosis',
+  'my treatment',
+  'my symptoms',
+  'my lab results',
+  'my test results',
+  'my health',
+  'for me',
+  'in my case',
+  'does this affect me',
+  'how does this relate to',
+  'what about my',
+  'understand my',
+  'learn about my',
+];
+
 // ============================================================================
 // Question Type Detection Patterns
 // ============================================================================
@@ -177,6 +227,20 @@ const QUESTION_PATTERNS: Array<{
   type: QuestionType;
   priority: number;
 }> = [
+  {
+    // Personal health educational questions
+    patterns: [
+      /\b(my\s+condition|my\s+medication|my\s+diagnosis|my\s+treatment|my\s+symptoms)\b/i,
+      /\bhow\s+does\s+.*\s+affect\s+me\b/i,
+      /\bwhat\s+does\s+this\s+mean\s+for\s+me\b/i,
+      /\bhelp\s+me\s+understand\s+my\b/i,
+      /\blearn\s+about\s+my\b/i,
+      /\bin\s+my\s+case\b/i,
+      /\bfor\s+someone\s+with\s+my\b/i,
+    ],
+    type: 'personal',
+    priority: 0,
+  },
   {
     // Definition questions
     patterns: [
@@ -309,16 +373,76 @@ const ErrorIcon: React.FC<IconProps> = ({ className }) => (
   </svg>
 );
 
+const HeartIcon: React.FC<IconProps> = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+);
+
 // ============================================================================
 // Utility Functions
 // ============================================================================
 
 /**
- * Detect medical terms in text
+ * Build a set of patient-specific terms from health context
  */
-function detectMedicalTerms(text: string): MedicalTermMatch[] {
+function buildPatientTerms(context?: PatientHealthContext): Set<string> {
+  const terms = new Set<string>();
+  if (!context) return terms;
+
+  // Add condition names
+  context.conditions.forEach(c => {
+    terms.add(c.name.toLowerCase());
+    if (c.icdCode) terms.add(c.icdCode.toLowerCase());
+  });
+
+  // Add medication names
+  context.medications.forEach(m => {
+    terms.add(m.name.toLowerCase());
+    terms.add(m.genericName.toLowerCase());
+    if (m.drugClass) terms.add(m.drugClass.toLowerCase());
+  });
+
+  // Add lab test names
+  context.labResults.forEach(l => {
+    terms.add(l.testName.toLowerCase());
+  });
+
+  // Add symptom descriptions
+  context.symptoms?.forEach(s => {
+    // Extract key terms from symptom description
+    const words = s.description.toLowerCase().split(/\s+/);
+    words.forEach(w => {
+      if (w.length > 3) terms.add(w);
+    });
+  });
+
+  return terms;
+}
+
+/**
+ * Detect medical terms in text, including patient-specific terms
+ */
+function detectMedicalTerms(
+  text: string,
+  patientTerms?: Set<string>
+): MedicalTermMatch[] {
   const lowerText = text.toLowerCase();
   const matches: MedicalTermMatch[] = [];
+
+  // Check patient-specific terms first (higher priority)
+  if (patientTerms) {
+    for (const term of patientTerms) {
+      if (lowerText.includes(term)) {
+        matches.push({
+          term,
+          category: 'personal',
+          confidence: 0.95,
+          isFromPatientData: true,
+        });
+      }
+    }
+  }
 
   // Check anatomical terms
   for (const term of ANATOMICAL_TERMS) {
@@ -357,10 +481,132 @@ function detectMedicalTerms(text: string): MedicalTermMatch[] {
 }
 
 /**
+ * Check if the text contains personal health question indicators
+ */
+function containsPersonalIndicators(text: string): boolean {
+  const lowerText = text.toLowerCase();
+  return PERSONAL_QUESTION_INDICATORS.some(indicator =>
+    lowerText.includes(indicator)
+  );
+}
+
+/**
+ * Extract personal context from question
+ */
+function extractPersonalContext(
+  text: string,
+  patientContext?: PatientHealthContext
+): {
+  mentionedConditions: string[];
+  mentionedMedications: string[];
+  mentionedSymptoms: string[];
+} | undefined {
+  if (!patientContext) return undefined;
+
+  const lowerText = text.toLowerCase();
+  const result = {
+    mentionedConditions: [] as string[],
+    mentionedMedications: [] as string[],
+    mentionedSymptoms: [] as string[],
+  };
+
+  // Check for mentioned conditions
+  patientContext.conditions.forEach(c => {
+    if (lowerText.includes(c.name.toLowerCase())) {
+      result.mentionedConditions.push(c.name);
+    }
+  });
+
+  // Check for mentioned medications
+  patientContext.medications.forEach(m => {
+    if (lowerText.includes(m.name.toLowerCase()) ||
+        lowerText.includes(m.genericName.toLowerCase())) {
+      result.mentionedMedications.push(m.name);
+    }
+  });
+
+  // Check for mentioned symptoms
+  patientContext.symptoms?.forEach(s => {
+    const descWords = s.description.toLowerCase().split(/\s+/);
+    if (descWords.some(word => word.length > 3 && lowerText.includes(word))) {
+      result.mentionedSymptoms.push(s.description);
+    }
+  });
+
+  // Only return if something was found
+  if (result.mentionedConditions.length > 0 ||
+      result.mentionedMedications.length > 0 ||
+      result.mentionedSymptoms.length > 0) {
+    return result;
+  }
+
+  return undefined;
+}
+
+/**
+ * Generate suggested enhancements for personalized queries
+ */
+function generateSuggestedEnhancements(
+  text: string,
+  questionType: QuestionType,
+  patientContext?: PatientHealthContext
+): string[] | undefined {
+  if (!patientContext) return undefined;
+
+  const suggestions: string[] = [];
+  const lowerText = text.toLowerCase();
+
+  // If asking about a condition they have
+  if (patientContext.conditions.length > 0 && !containsPersonalIndicators(lowerText)) {
+    const relevantCondition = patientContext.conditions.find(c =>
+      lowerText.includes(c.name.toLowerCase())
+    );
+    if (relevantCondition) {
+      suggestions.push(
+        `Add "for someone with ${relevantCondition.name}" for personalized education`
+      );
+    }
+  }
+
+  // If asking about a medication they take
+  if (patientContext.medications.length > 0 && !containsPersonalIndicators(lowerText)) {
+    const relevantMed = patientContext.medications.find(m =>
+      lowerText.includes(m.name.toLowerCase()) ||
+      lowerText.includes(m.genericName.toLowerCase())
+    );
+    if (relevantMed) {
+      suggestions.push(
+        `Add context about your use of ${relevantMed.name} for tailored education`
+      );
+    }
+  }
+
+  // For general anatomy questions when user has relevant conditions
+  if (questionType === 'definition' || questionType === 'physiology') {
+    if (patientContext.conditions.length > 0 && suggestions.length === 0) {
+      suggestions.push(
+        'Try asking "How does this relate to my health conditions?" for personalized learning'
+      );
+    }
+  }
+
+  return suggestions.length > 0 ? suggestions : undefined;
+}
+
+/**
  * Detect question type from text
  */
-function detectQuestionType(text: string, hasContext: boolean): QuestionType {
+function detectQuestionType(
+  text: string,
+  hasContext: boolean,
+  hasPatientContext: boolean
+): QuestionType {
   const normalizedText = text.trim().toLowerCase();
+
+  // Check for personal question indicators first
+  if (hasPatientContext && containsPersonalIndicators(normalizedText)) {
+    return 'personal';
+  }
 
   // Sort patterns by priority
   const sortedPatterns = [...QUESTION_PATTERNS].sort((a, b) => a.priority - b.priority);
@@ -460,8 +706,13 @@ interface MedicalTermBadgeProps {
 const MedicalTermBadges: React.FC<MedicalTermBadgeProps> = ({ terms }) => {
   if (terms.length === 0) return null;
 
-  // Show max 3 terms
-  const displayTerms = terms.slice(0, 3);
+  // Show max 3 terms, prioritizing personal terms
+  const sortedTerms = [...terms].sort((a, b) => {
+    if (a.isFromPatientData && !b.isFromPatientData) return -1;
+    if (!a.isFromPatientData && b.isFromPatientData) return 1;
+    return b.confidence - a.confidence;
+  });
+  const displayTerms = sortedTerms.slice(0, 3);
 
   return (
     <div className="voice-medical__terms" aria-label="Detected medical terms">
@@ -470,6 +721,9 @@ const MedicalTermBadges: React.FC<MedicalTermBadgeProps> = ({ terms }) => {
           key={`${term.term}-${index}`}
           className={`voice-medical__term-badge voice-medical__term-badge--${term.category}`}
         >
+          {term.isFromPatientData && (
+            <HeartIcon className="voice-medical__term-icon" />
+          )}
           {term.term}
         </span>
       ))}
@@ -488,6 +742,7 @@ const MedicalTermBadges: React.FC<MedicalTermBadgeProps> = ({ terms }) => {
 
 interface QuestionTypeIndicatorProps {
   type: QuestionType;
+  isPersonalized?: boolean;
 }
 
 const QUESTION_TYPE_LABELS: Record<QuestionType, string> = {
@@ -498,6 +753,7 @@ const QUESTION_TYPE_LABELS: Record<QuestionType, string> = {
   clinical: 'Clinical Practice',
   education: 'Educational Content',
   followup: 'Follow-up Question',
+  personal: 'Personalized Learning',
   general: 'General Question',
 };
 
@@ -509,14 +765,98 @@ const QUESTION_TYPE_ICONS: Record<QuestionType, string> = {
   clinical: 'RX',
   education: 'EDU',
   followup: '...',
+  personal: 'YOU',
   general: '?',
 };
 
-const QuestionTypeIndicator: React.FC<QuestionTypeIndicatorProps> = ({ type }) => {
+const QuestionTypeIndicator: React.FC<QuestionTypeIndicatorProps> = ({
+  type,
+  isPersonalized,
+}) => {
   return (
-    <div className={`voice-medical__question-type voice-medical__question-type--${type}`}>
-      <span className="voice-medical__question-type-icon">{QUESTION_TYPE_ICONS[type]}</span>
+    <div className={`voice-medical__question-type voice-medical__question-type--${type} ${isPersonalized ? 'voice-medical__question-type--personalized' : ''}`}>
+      <span className="voice-medical__question-type-icon">
+        {type === 'personal' && <HeartIcon className="voice-medical__heart-icon" />}
+        {type !== 'personal' && QUESTION_TYPE_ICONS[type]}
+      </span>
       <span className="voice-medical__question-type-label">{QUESTION_TYPE_LABELS[type]}</span>
+      {isPersonalized && type !== 'personal' && (
+        <span className="voice-medical__personalized-badge">Personalized</span>
+      )}
+    </div>
+  );
+};
+
+// ============================================================================
+// Patient Context Indicator Component
+// ============================================================================
+
+interface PatientContextIndicatorProps {
+  context: PatientHealthContext;
+  onSuggest: (suggestion: string) => void;
+}
+
+const PatientContextIndicator: React.FC<PatientContextIndicatorProps> = ({
+  context,
+  onSuggest,
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const hasData = context.conditions.length > 0 ||
+    context.medications.length > 0 ||
+    context.labResults.length > 0;
+
+  if (!hasData) return null;
+
+  const suggestions: string[] = [];
+  if (context.conditions.length > 0) {
+    suggestions.push(`How does my ${context.conditions[0].name} affect this region?`);
+  }
+  if (context.medications.length > 0) {
+    suggestions.push(`Tell me about ${context.medications[0].name} and this area`);
+  }
+
+  return (
+    <div className="voice-medical__patient-context">
+      <button
+        className="voice-medical__patient-context-toggle"
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-expanded={isExpanded}
+      >
+        <HeartIcon className="voice-medical__patient-icon" />
+        <span>Health context available</span>
+        <svg
+          className={`voice-medical__chevron ${isExpanded ? 'voice-medical__chevron--open' : ''}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {isExpanded && (
+        <div className="voice-medical__patient-context-content">
+          <p className="voice-medical__patient-context-intro">
+            Ask personalized questions about your health. Try:
+          </p>
+          <div className="voice-medical__patient-suggestions">
+            {suggestions.map((suggestion, i) => (
+              <button
+                key={i}
+                className="voice-medical__patient-suggestion"
+                onClick={() => onSuggest(suggestion)}
+              >
+                "{suggestion}"
+              </button>
+            ))}
+          </div>
+          <p className="voice-medical__patient-disclaimer">
+            Educational only - not medical advice
+          </p>
+        </div>
+      )}
     </div>
   );
 };
@@ -535,6 +875,7 @@ const QuestionTypeIndicator: React.FC<QuestionTypeIndicatorProps> = ({ type }) =
  * - Medical terminology recognition
  * - Smart question type detection
  * - Context-aware follow-up question handling
+ * - Patient health context integration for personalized education
  *
  * @example
  * ```tsx
@@ -543,6 +884,11 @@ const QuestionTypeIndicator: React.FC<QuestionTypeIndicatorProps> = ({ type }) =
  *   onQuestionDetected={(q, type) => console.log('Question:', q, 'Type:', type)}
  *   selectedRegion="cardiovascular.heart"
  *   isEnabled={true}
+ *   patientHealthContext={{
+ *     conditions: [{ conditionId: '1', name: 'Hypertension', status: 'active' }],
+ *     medications: [],
+ *     labResults: [],
+ *   }}
  * />
  * ```
  */
@@ -552,9 +898,11 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
   selectedRegion,
   isEnabled,
   conversationContext = [],
+  patientHealthContext,
   className = '',
   size = 'large',
   language = 'en-US',
+  showPersonalizedSuggestions = true,
 }) => {
   // State
   const [inputState, setInputState] = useState<VoiceInputState>('idle');
@@ -562,6 +910,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
   const [detectedTerms, setDetectedTerms] = useState<MedicalTermMatch[]>([]);
   const [questionType, setQuestionType] = useState<QuestionType>('general');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isPersonalized, setIsPersonalized] = useState(false);
 
   // Refs
   const processingTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -575,10 +924,25 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
   // Voice hook
   const voice = useVoiceFallback(language, true);
 
+  // Build patient-specific terms for detection
+  const patientTerms = useMemo(
+    () => buildPatientTerms(patientHealthContext),
+    [patientHealthContext]
+  );
+
   // Determine if there's conversation context
   const hasContext = useMemo(
     () => conversationContext.length > 0 || !!selectedRegion,
     [conversationContext, selectedRegion]
+  );
+
+  const hasPatientContext = useMemo(
+    () => !!patientHealthContext && (
+      patientHealthContext.conditions.length > 0 ||
+      patientHealthContext.medications.length > 0 ||
+      patientHealthContext.labResults.length > 0
+    ),
+    [patientHealthContext]
   );
 
   // Process transcript and detect medical content
@@ -587,21 +951,28 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
       if (!text.trim()) {
         setDetectedTerms([]);
         setQuestionType('general');
+        setIsPersonalized(false);
         return;
       }
 
-      // Detect medical terms
-      const terms = detectMedicalTerms(text);
+      // Detect medical terms including patient-specific ones
+      const terms = detectMedicalTerms(text, patientTerms);
       setDetectedTerms(terms);
 
       // Detect question type
-      const qType = detectQuestionType(text, hasContext);
+      const qType = detectQuestionType(text, hasContext, hasPatientContext);
       setQuestionType(qType);
+
+      // Check if personalized
+      const personalized = qType === 'personal' ||
+        terms.some(t => t.isFromPatientData) ||
+        containsPersonalIndicators(text.toLowerCase());
+      setIsPersonalized(personalized);
 
       // Call transcript callback
       onTranscript(text);
     },
-    [hasContext, onTranscript]
+    [hasContext, hasPatientContext, patientTerms, onTranscript]
   );
 
   // Handle voice transcription changes
@@ -625,9 +996,14 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
       processingTimerRef.current = setTimeout(() => {
         const finalText = transcriptRef.current;
         if (finalText) {
-          const terms = detectMedicalTerms(finalText);
-          const qType = detectQuestionType(finalText, hasContext);
+          const terms = detectMedicalTerms(finalText, patientTerms);
+          const qType = detectQuestionType(finalText, hasContext, hasPatientContext);
           const relatedRegion = detectRegionReference(finalText, selectedRegion);
+          const personalContext = extractPersonalContext(finalText, patientHealthContext);
+          const suggestions = generateSuggestedEnhancements(finalText, qType, patientHealthContext);
+          const personalized = qType === 'personal' ||
+            terms.some(t => t.isFromPatientData) ||
+            !!personalContext;
 
           const detectedQuestion: DetectedQuestion = {
             originalText: finalText,
@@ -636,6 +1012,9 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
             medicalTerms: terms,
             isFollowUp: qType === 'followup',
             relatedRegion,
+            isPersonalized: personalized,
+            personalContext,
+            suggestedEnhancements: suggestions,
           };
 
           onQuestionDetected(finalText, qType, detectedQuestion);
@@ -646,6 +1025,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
         setTranscript('');
         setDetectedTerms([]);
         setQuestionType('general');
+        setIsPersonalized(false);
       }, 500);
     }
 
@@ -654,7 +1034,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
         clearTimeout(processingTimerRef.current);
       }
     };
-  }, [voice.isRecording, inputState, hasContext, selectedRegion, onQuestionDetected]);
+  }, [voice.isRecording, inputState, hasContext, hasPatientContext, selectedRegion, patientHealthContext, patientTerms, onQuestionDetected]);
 
   // Handle voice errors
   useEffect(() => {
@@ -689,6 +1069,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
       setTranscript('');
       setDetectedTerms([]);
       setQuestionType('general');
+      setIsPersonalized(false);
       setErrorMessage(null);
       voice.startRecording();
     }
@@ -701,6 +1082,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
     setTranscript('');
     setDetectedTerms([]);
     setQuestionType('general');
+    setIsPersonalized(false);
     setErrorMessage(null);
   }, [voice]);
 
@@ -710,6 +1092,26 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
     setErrorMessage(null);
     voice.clearError();
   }, [voice.clearError]);
+
+  // Handle suggestion click
+  const handleSuggestion = useCallback((suggestion: string) => {
+    onTranscript(suggestion);
+    const terms = detectMedicalTerms(suggestion, patientTerms);
+    const qType = detectQuestionType(suggestion, hasContext, hasPatientContext);
+    const personalContext = extractPersonalContext(suggestion, patientHealthContext);
+
+    const detectedQuestion: DetectedQuestion = {
+      originalText: suggestion,
+      type: qType,
+      normalizedText: suggestion,
+      medicalTerms: terms,
+      isFollowUp: false,
+      isPersonalized: true,
+      personalContext,
+    };
+
+    onQuestionDetected(suggestion, qType, detectedQuestion);
+  }, [onTranscript, onQuestionDetected, patientTerms, hasContext, hasPatientContext, patientHealthContext]);
 
   // Keyboard support
   const handleKeyDown = useCallback(
@@ -758,7 +1160,7 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
   // Render
   return (
     <div
-      className={`voice-medical ${className} voice-medical--${size} voice-medical--${inputState}`}
+      className={`voice-medical ${className} voice-medical--${size} voice-medical--${inputState} ${isPersonalized ? 'voice-medical--personalized' : ''}`}
       role="region"
       aria-label="Medical voice input"
     >
@@ -770,10 +1172,18 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
         </div>
       )}
 
+      {/* Patient context indicator */}
+      {showPersonalizedSuggestions && patientHealthContext && inputState === 'idle' && (
+        <PatientContextIndicator
+          context={patientHealthContext}
+          onSuggest={handleSuggestion}
+        />
+      )}
+
       {/* Main microphone button */}
       <button
         type="button"
-        className={`voice-medical__button voice-medical__button--${inputState}`}
+        className={`voice-medical__button voice-medical__button--${inputState} ${isPersonalized ? 'voice-medical__button--personalized' : ''}`}
         onClick={handleToggleRecording}
         onKeyDown={handleKeyDown}
         disabled={!isEnabled || inputState === 'processing'}
@@ -815,8 +1225,8 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
           </div>
 
           {/* Question type indicator */}
-          {transcript && questionType !== 'general' && (
-            <QuestionTypeIndicator type={questionType} />
+          {transcript && (questionType !== 'general' || isPersonalized) && (
+            <QuestionTypeIndicator type={questionType} isPersonalized={isPersonalized} />
           )}
 
           {/* Medical terms detected */}
@@ -857,11 +1267,24 @@ export const VoiceMedicalInput: React.FC<VoiceMedicalInputProps> = ({
           <p className="voice-medical__hint">
             Try asking: "What is hypertension?" or "How does the heart pump blood?"
           </p>
-          {selectedRegion && (
+          {hasPatientContext && (
+            <p className="voice-medical__hint voice-medical__hint--personalized">
+              <HeartIcon className="voice-medical__hint-icon" />
+              Ask "How does this relate to my condition?" for personalized learning
+            </p>
+          )}
+          {selectedRegion && !hasPatientContext && (
             <p className="voice-medical__hint voice-medical__hint--context">
               Ask follow-up questions about the selected region
             </p>
           )}
+        </div>
+      )}
+
+      {/* Educational disclaimer for personalized queries */}
+      {isPersonalized && (
+        <div className="voice-medical__disclaimer">
+          Educational content only - not medical advice. Consult your healthcare provider for medical decisions.
         </div>
       )}
     </div>

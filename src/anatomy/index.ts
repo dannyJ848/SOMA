@@ -279,3 +279,119 @@ export {
   FXAAEffect,
   AdaptiveFXAA,
 } from './FXAAPostProcessing';
+
+// Condition Visualization System
+export {
+  // Main Component
+  ConditionVisualizationSystem,
+  // Hook
+  useConditionVisualization,
+  // Utility Functions
+  getConditionColor,
+  getSeverityProperties,
+  createConditionData,
+  // Types
+  type ConditionType,
+  type SeverityLevel,
+  type PatientConditionData,
+  type AffectedRegion,
+  type ConditionVisualizationProps,
+  type UseConditionVisualizationOptions,
+} from './ConditionVisualizationSystem';
+
+// Personalized Body Model (Patient Visualization)
+export {
+  // Main Component
+  PersonalizedBodyModel,
+  // UI Panel
+  PersonalizedBodyModelPanel,
+  // Hook for controls
+  usePersonalizedBodyModelControls,
+  // Types
+  type BodyViewMode,
+  type ProgressionPlaybackState,
+  type ConditionVisibility,
+  type PriorityArea,
+  type ProgressionStage,
+  type PersonalizedBodyModelProps,
+  type PersonalizedBodyModelControls,
+  type PersonalizedBodyModelPanelProps,
+} from './PersonalizedBodyModel';
+
+// Condition Overlay System (3D Disease Visualization)
+export {
+  // Main Component
+  ConditionOverlaySystem,
+  // UI Panel Component
+  ConditionOverlayPanel,
+  // Hook for managing overlays
+  useConditionOverlays,
+  // Condition configuration data
+  CONDITION_CONFIGS,
+  // Types (with Overlay prefix to avoid conflicts)
+  type ConditionType as OverlayConditionType,
+  type SeverityLevel as OverlaySeverityLevel,
+  type ConditionAnnotation,
+  type ConditionOverlayConfig,
+  type ConditionOverlaySystemProps,
+  type ConditionVisualConfig,
+  type ConditionOverlayPanelProps,
+  type UseConditionOverlaysOptions,
+  type UseConditionOverlaysReturn,
+} from './ConditionOverlaySystem';
+
+// Condition Animation System (Disease State Animations)
+export {
+  // Main Component
+  ConditionAnimationSystem,
+  // Sub-components
+  InflammationGlow,
+  NervePainEffect,
+  BloodCellParticles,
+  ImmuneCellParticles,
+  EducationalAnnotationDisplay,
+  ConditionAnimationControlsUI,
+  // Hook
+  useConditionAnimation,
+  // Utility Functions (Animation Calculations)
+  easeInOutSine,
+  heartbeatEase,
+  arrhythmiaEase,
+  generateLightningPath,
+  createBloodCellParticles,
+  createImmuneCellParticles,
+  updateBloodCellParticles,
+  updateImmuneCellParticles,
+  calculateInflammationState,
+  calculateArrhythmiaState,
+  calculateEdemaState,
+  calculateMuscleSpamState,
+  calculateRespiratoryRestrictionState,
+  calculateTumorGrowthState,
+  // Constants
+  SEVERITY_INTENSITY,
+  COLORS as CONDITION_COLORS,
+  ANIMATION_TIMING,
+  DEFAULT_ANNOTATIONS,
+  // Shader exports
+  inflammationGlowVertexShader,
+  inflammationGlowFragmentShader,
+  nervePainVertexShader,
+  nervePainFragmentShader,
+  bloodCellVertexShader,
+  bloodCellFragmentShader,
+  // Types (with ConditionAnim prefix to avoid conflicts)
+  type ConditionAnimationType as ConditionAnimAnimationType,
+  type SeverityLevel as ConditionAnimSeverityLevel,
+  type ConditionPlaybackState,
+  type EducationalAnnotation,
+  type ConditionAnimationConfig,
+  type ConditionAnimationState,
+  type BloodCellParticle,
+  type ImmuneCellParticle,
+  type LightningSegment,
+  type ParticleSystemState,
+  type ConditionAnimationControls,
+  type UseConditionAnimationOptions,
+  type UseConditionAnimationReturn,
+} from './ConditionAnimationSystem';

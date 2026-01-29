@@ -913,3 +913,185 @@
     display: none;
   }
 }
+
+/* ============================================
+   Personalized/Patient Context Styles
+   ============================================ */
+
+/* Personalized state */
+.voice-medical--personalized {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.05) 0%,
+    rgba(16, 185, 129, 0.1) 100%
+  );
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.voice-medical__button--personalized {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.voice-medical__button--personalized:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
+}
+
+/* Patient context indicator */
+.voice-medical__patient-context {
+  width: 100%;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.voice-medical__patient-context-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: #10b981;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.voice-medical__patient-context-toggle:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.voice-medical__patient-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.voice-medical__chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+
+.voice-medical__chevron--open {
+  transform: rotate(180deg);
+}
+
+.voice-medical__patient-context-content {
+  padding: 0 16px 16px;
+}
+
+.voice-medical__patient-context-intro {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: var(--vm-text-muted);
+}
+
+.voice-medical__patient-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.voice-medical__patient-suggestion {
+  padding: 10px 14px;
+  background: var(--vm-surface-elevated);
+  border: 1px solid var(--vm-border);
+  border-radius: 8px;
+  color: var(--vm-text-primary);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.voice-medical__patient-suggestion:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.voice-medical__patient-disclaimer {
+  margin: 12px 0 0 0;
+  padding: 8px 12px;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 6px;
+  font-size: 10px;
+  color: #ffc107;
+  text-align: center;
+}
+
+/* Personal term badge */
+.voice-medical__term-badge--personal {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.voice-medical__term-icon {
+  width: 10px;
+  height: 10px;
+}
+
+/* Personal question type */
+.voice-medical__question-type--personal {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.voice-medical__heart-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.voice-medical__personalized-badge {
+  padding: 2px 8px;
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #10b981;
+  margin-left: auto;
+}
+
+/* Personalized hints */
+.voice-medical__hint--personalized {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #10b981 !important;
+  font-style: normal !important;
+}
+
+.voice-medical__hint-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Disclaimer */
+.voice-medical__disclaimer {
+  width: 100%;
+  padding: 10px 16px;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: 8px;
+  font-size: 11px;
+  color: #ffc107;
+  text-align: center;
+  animation: voice-medical-fade-in 0.3s ease;
+}
+
+/* Question type personalized modifier */
+.voice-medical__question-type--personalized:not(.voice-medical__question-type--personal) {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.2);
+}

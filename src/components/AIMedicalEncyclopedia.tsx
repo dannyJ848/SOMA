@@ -4,11 +4,18 @@
  * The core AI assistant interface for region-specific medical education.
  * Integrates with the Physiology, Histology, and Pathology content
  * and provides complexity-adaptive explanations.
+ *
+ * Enhanced with patient health data integration for personalized education.
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { invoke } from '../tauri-invoke';
-import type { UserCondition } from '../../core/personalization/types';
+import type {
+  UserCondition,
+  UserMedication,
+  UserLabResult,
+  UserHealthProfile,
+} from '../../core/personalization/types';
 import { COMPLEXITY_LEVELS, type ComplexityLevel } from '../ComplexityLevel';
 
 // ============================================
@@ -37,6 +44,14 @@ interface ChatMessage {
   citations?: Citation[];
   diagramReferences?: DiagramReference[];
   complexityLevel?: ComplexityLevel;
+  personalizedContext?: PersonalizedMessageContext;
+}
+
+interface PersonalizedMessageContext {
+  relatedConditions: string[];
+  relatedMedications: string[];
+  relatedLabs: string[];
+  personalRelevance: 'high' | 'medium' | 'low';
 }
 
 interface AIChatRAGResponse {
@@ -58,10 +73,68 @@ interface QuickAction {
   prompt: string;
 }
 
+/**
+ * Patient symptom data
+ */
+export interface PatientSymptom {
+  id: string;
+  description: string;
+  bodyLocation: string;
+  severity: number;
+  startDate?: Date;
+}
+
+/**
+ * Patient health data for personalized education
+ */
+export interface PatientHealthData {
+  conditions: UserCondition[];
+  medications: UserMedication[];
+  labResults: UserLabResult[];
+  symptoms: PatientSymptom[];
+  allergies?: string[];
+  profile?: UserHealthProfile;
+}
+
+/**
+ * Region-specific health context
+ */
+export interface RegionHealthContext {
+  relevantConditions: UserCondition[];
+  relevantMedications: UserMedication[];
+  relevantLabs: UserLabResult[];
+  relevantSymptoms: PatientSymptom[];
+  overallRelevance: 'high' | 'medium' | 'low' | 'none';
+}
+
+/**
+ * Educational module suggestion
+ */
+interface EducationalModule {
+  id: string;
+  title: string;
+  description: string;
+  relevanceReason: string;
+  complexity: ComplexityLevel;
+  duration: string;
+}
+
+/**
+ * "Did you know?" fact
+ */
+interface DidYouKnowFact {
+  fact: string;
+  relatedTo: string;
+  source?: string;
+}
+
 export interface AIMedicalEncyclopediaProps {
   regionId: string;
   regionName: string;
+  /** @deprecated Use patientHealthData instead */
   userConditions?: UserCondition[];
+  /** Patient health data for personalized education */
+  patientHealthData?: PatientHealthData;
   initialComplexity: 1 | 2 | 3 | 4 | 5;
   onClose: () => void;
   onNavigateToRegion: (regionId: string) => void;
@@ -79,13 +152,314 @@ const COMPLEXITY_LABELS: Record<ComplexityLevel, string> = {
   5: 'Physician',
 };
 
-const generateSuggestedQuestions = (regionName: string): string[] => [
-  `What doctors specialize in treating the ${regionName}?`,
-  `What do medical students learn about the ${regionName}?`,
-  `What conditions commonly affect the ${regionName}?`,
-  `How does the ${regionName} function?`,
-  `What tests examine the ${regionName}?`,
-];
+/**
+ * Mapping of body regions to relevant condition keywords
+ */
+const REGION_CONDITION_KEYWORDS: Record<string, string[]> = {
+  head: ['headache', 'migraine', 'concussion', 'meningitis', 'stroke', 'brain', 'neurological', 'seizure', 'epilepsy', 'sinusitis'],
+  neck: ['thyroid', 'hypothyroid', 'hyperthyroid', 'goiter', 'cervical', 'neck pain', 'lymphadenopathy'],
+  chest: ['heart', 'cardiac', 'coronary', 'angina', 'arrhythmia', 'heart failure', 'lung', 'pneumonia', 'asthma', 'copd', 'bronchitis', 'pulmonary'],
+  abdomen: ['gastric', 'ulcer', 'liver', 'hepatitis', 'cirrhosis', 'pancreatitis', 'cholecystitis', 'appendicitis', 'colitis', 'crohn', 'ibd', 'kidney', 'renal'],
+  pelvis: ['bladder', 'urinary', 'kidney', 'prostate', 'ovarian', 'uterine', 'pelvic', 'hip'],
+  heart: ['heart', 'cardiac', 'coronary', 'myocardial', 'angina', 'arrhythmia', 'heart failure', 'valve', 'cardiomyopathy', 'hypertension', 'blood pressure'],
+  lungs: ['lung', 'pulmonary', 'pneumonia', 'asthma', 'copd', 'bronchitis', 'fibrosis', 'embolism', 'respiratory'],
+  brain: ['brain', 'stroke', 'aneurysm', 'tumor', 'dementia', 'alzheimer', 'parkinson', 'ms', 'epilepsy', 'seizure', 'neurological'],
+  spine: ['back pain', 'sciatica', 'herniated', 'stenosis', 'scoliosis', 'degenerative', 'vertebral'],
+  liver: ['liver', 'hepatitis', 'cirrhosis', 'fatty liver', 'hepatic'],
+  kidney: ['kidney', 'renal', 'nephritis', 'nephropathy', 'dialysis', 'creatinine'],
+  stomach: ['gastric', 'ulcer', 'gastritis', 'gerd', 'reflux', 'h pylori'],
+  intestine: ['intestinal', 'bowel', 'colitis', 'crohn', 'ibs', 'celiac', 'diverticulitis'],
+};
+
+/**
+ * Mapping of regions to relevant lab keywords
+ */
+const REGION_LAB_KEYWORDS: Record<string, string[]> = {
+  head: ['csf', 'neurological', 'ammonia', 'b12'],
+  neck: ['tsh', 'thyroid', 't3', 't4', 'pth', 'calcium'],
+  chest: ['troponin', 'bnp', 'ck-mb', 'lipid', 'cholesterol', 'ldl', 'hdl', 'd-dimer'],
+  abdomen: ['liver', 'ast', 'alt', 'bilirubin', 'albumin', 'lipase', 'amylase', 'creatinine', 'bun', 'gfr', 'glucose', 'a1c'],
+  heart: ['troponin', 'bnp', 'nt-probnp', 'ck-mb', 'lipid', 'cholesterol', 'ldl', 'hdl'],
+  lungs: ['abg', 'pco2', 'po2', 'd-dimer', 'bicarbonate'],
+  brain: ['csf', 'ammonia', 'b12', 'glucose'],
+  liver: ['ast', 'alt', 'bilirubin', 'albumin', 'inr', 'ggt', 'alp', 'hepatitis'],
+  kidney: ['creatinine', 'bun', 'gfr', 'potassium', 'sodium', 'urinalysis', 'protein'],
+  stomach: ['h pylori', 'gastrin', 'pepsinogen'],
+};
+
+/**
+ * Mapping of regions to medication classes
+ */
+const REGION_MEDICATION_CLASSES: Record<string, string[]> = {
+  heart: ['beta blocker', 'ace inhibitor', 'arb', 'calcium channel', 'anticoagulant', 'statin', 'diuretic', 'antiarrhythmic', 'antiplatelet'],
+  lungs: ['bronchodilator', 'inhaler', 'corticosteroid', 'leukotriene', 'antihistamine'],
+  brain: ['antidepressant', 'antipsychotic', 'anticonvulsant', 'anxiolytic', 'stimulant', 'parkinson'],
+  liver: ['hepatoprotective', 'ursodiol', 'interferon'],
+  kidney: ['ace inhibitor', 'arb', 'diuretic', 'phosphate binder', 'epo'],
+  stomach: ['ppi', 'proton pump', 'antacid', 'h2 blocker', 'antiemetic'],
+};
+
+const EDUCATIONAL_DISCLAIMER = `IMPORTANT: This content is for educational purposes only and is not intended as medical advice, diagnosis, or treatment. Always consult qualified healthcare professionals for medical decisions.`;
+
+// ============================================
+// Helper Functions
+// ============================================
+
+const generateMessageId = () => `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+
+/**
+ * Get region health context by filtering patient data relevant to the selected region
+ */
+function getRegionHealthContext(
+  regionId: string,
+  regionName: string,
+  patientData?: PatientHealthData
+): RegionHealthContext | null {
+  if (!patientData) return null;
+
+  const normalizedRegionId = regionId.toLowerCase();
+  const normalizedRegionName = regionName.toLowerCase();
+
+  // Get relevant keywords for this region
+  const conditionKeywords = REGION_CONDITION_KEYWORDS[normalizedRegionId] ||
+    REGION_CONDITION_KEYWORDS[normalizedRegionName] ||
+    [normalizedRegionId, normalizedRegionName];
+
+  const labKeywords = REGION_LAB_KEYWORDS[normalizedRegionId] ||
+    REGION_LAB_KEYWORDS[normalizedRegionName] || [];
+
+  const medKeywords = REGION_MEDICATION_CLASSES[normalizedRegionId] ||
+    REGION_MEDICATION_CLASSES[normalizedRegionName] || [];
+
+  // Filter conditions
+  const relevantConditions = patientData.conditions.filter(condition => {
+    const name = condition.name.toLowerCase();
+    const structures = condition.relatedStructures?.map(s => s.toLowerCase()) || [];
+    const systems = condition.relatedSystems?.map(s => s.toLowerCase()) || [];
+
+    return conditionKeywords.some(keyword =>
+      name.includes(keyword) ||
+      structures.some(s => s.includes(keyword)) ||
+      systems.some(s => s.includes(keyword))
+    );
+  });
+
+  // Filter medications
+  const relevantMedications = patientData.medications.filter(med => {
+    const name = med.name.toLowerCase();
+    const genericName = med.genericName.toLowerCase();
+    const drugClass = med.drugClass.toLowerCase();
+    const targets = med.targetStructures?.map(s => s.toLowerCase()) || [];
+
+    return medKeywords.some(keyword =>
+      name.includes(keyword) ||
+      genericName.includes(keyword) ||
+      drugClass.includes(keyword) ||
+      targets.some(t => t.includes(normalizedRegionId) || t.includes(normalizedRegionName))
+    );
+  });
+
+  // Filter lab results
+  const relevantLabs = patientData.labResults.filter(lab => {
+    const testName = lab.testName.toLowerCase();
+    const organs = lab.relatedOrgans?.map(o => o.toLowerCase()) || [];
+
+    return labKeywords.some(keyword => testName.includes(keyword)) ||
+      organs.some(o => o.includes(normalizedRegionId) || o.includes(normalizedRegionName));
+  });
+
+  // Filter symptoms
+  const relevantSymptoms = patientData.symptoms.filter(symptom => {
+    const location = symptom.bodyLocation.toLowerCase();
+    const description = symptom.description.toLowerCase();
+
+    return location.includes(normalizedRegionId) ||
+      location.includes(normalizedRegionName) ||
+      description.includes(normalizedRegionId) ||
+      description.includes(normalizedRegionName);
+  });
+
+  // Determine overall relevance
+  let overallRelevance: 'high' | 'medium' | 'low' | 'none' = 'none';
+  const totalRelevant = relevantConditions.length + relevantMedications.length +
+    relevantLabs.length + relevantSymptoms.length;
+
+  if (totalRelevant >= 3) overallRelevance = 'high';
+  else if (totalRelevant >= 1) overallRelevance = 'medium';
+  else if (patientData.conditions.length > 0) overallRelevance = 'low';
+
+  return {
+    relevantConditions,
+    relevantMedications,
+    relevantLabs,
+    relevantSymptoms,
+    overallRelevance,
+  };
+}
+
+/**
+ * Generate suggested questions based on region and patient context
+ */
+function generateSuggestedQuestions(
+  regionName: string,
+  healthContext?: RegionHealthContext | null
+): string[] {
+  const baseQuestions = [
+    `What doctors specialize in treating the ${regionName}?`,
+    `What do medical students learn about the ${regionName}?`,
+    `What conditions commonly affect the ${regionName}?`,
+    `How does the ${regionName} function?`,
+    `What tests examine the ${regionName}?`,
+  ];
+
+  // Add personalized questions if there's health context
+  if (healthContext && healthContext.overallRelevance !== 'none') {
+    const personalizedQuestions: string[] = [];
+
+    // Add condition-based questions
+    healthContext.relevantConditions.slice(0, 2).forEach(condition => {
+      personalizedQuestions.push(
+        `How does ${condition.name} affect the ${regionName}? (Educational overview)`
+      );
+    });
+
+    // Add medication-based questions
+    healthContext.relevantMedications.slice(0, 1).forEach(med => {
+      personalizedQuestions.push(
+        `How does ${med.name} work in relation to the ${regionName}? (Educational)`
+      );
+    });
+
+    // Add lab-based questions
+    if (healthContext.relevantLabs.some(lab => lab.status !== 'normal')) {
+      personalizedQuestions.push(
+        `What do abnormal lab results tell us about ${regionName} health? (General education)`
+      );
+    }
+
+    // Add symptom-based questions
+    healthContext.relevantSymptoms.slice(0, 1).forEach(symptom => {
+      personalizedQuestions.push(
+        `What are common causes of ${symptom.description} in the ${regionName}? (Educational)`
+      );
+    });
+
+    // Combine and limit
+    return [...personalizedQuestions.slice(0, 3), ...baseQuestions.slice(0, 2)];
+  }
+
+  return baseQuestions;
+}
+
+/**
+ * Generate "Did you know?" facts based on patient health context
+ */
+function generateDidYouKnowFacts(
+  regionName: string,
+  healthContext?: RegionHealthContext | null
+): DidYouKnowFact[] {
+  const facts: DidYouKnowFact[] = [];
+
+  if (!healthContext || healthContext.overallRelevance === 'none') {
+    // Return general facts
+    return [
+      {
+        fact: `The ${regionName} is one of the most complex structures studied in anatomy.`,
+        relatedTo: 'General anatomy',
+      },
+    ];
+  }
+
+  // Add condition-related facts
+  healthContext.relevantConditions.forEach(condition => {
+    if (condition.name.toLowerCase().includes('diabetes')) {
+      facts.push({
+        fact: `Diabetes can affect multiple organ systems. Learning how blood sugar impacts the ${regionName} can help you understand your health better.`,
+        relatedTo: condition.name,
+      });
+    }
+    if (condition.name.toLowerCase().includes('hypertension') || condition.name.toLowerCase().includes('blood pressure')) {
+      facts.push({
+        fact: `High blood pressure affects blood vessel walls throughout the body. Understanding this can help you appreciate why management is important.`,
+        relatedTo: condition.name,
+      });
+    }
+  });
+
+  // Add medication-related facts
+  healthContext.relevantMedications.forEach(med => {
+    if (med.mechanism) {
+      facts.push({
+        fact: `Your medication ${med.name} works by: ${med.mechanism}. Understanding the mechanism can help you learn about your treatment.`,
+        relatedTo: med.name,
+      });
+    }
+  });
+
+  // Limit facts
+  return facts.slice(0, 3);
+}
+
+/**
+ * Generate educational modules based on patient health profile
+ */
+function generateEducationalModules(
+  regionName: string,
+  healthContext?: RegionHealthContext | null,
+  complexityLevel: ComplexityLevel = 1
+): EducationalModule[] {
+  const modules: EducationalModule[] = [];
+
+  // Always include basic anatomy module
+  modules.push({
+    id: 'basic-anatomy',
+    title: `Understanding ${regionName} Anatomy`,
+    description: `Learn the basic structure and function of the ${regionName}.`,
+    relevanceReason: 'Foundational knowledge',
+    complexity: 1,
+    duration: '5-10 min',
+  });
+
+  if (healthContext && healthContext.overallRelevance !== 'none') {
+    // Add condition-specific modules
+    healthContext.relevantConditions.forEach(condition => {
+      modules.push({
+        id: `condition-${condition.conditionId}`,
+        title: `${condition.name}: What You Should Know`,
+        description: `Educational overview of ${condition.name} and how it relates to the ${regionName}.`,
+        relevanceReason: `Related to your condition: ${condition.name}`,
+        complexity: complexityLevel,
+        duration: '10-15 min',
+      });
+    });
+
+    // Add medication education modules
+    if (healthContext.relevantMedications.length > 0) {
+      modules.push({
+        id: 'medication-education',
+        title: 'Understanding Your Medications',
+        description: `Learn how your medications work in relation to the ${regionName}.`,
+        relevanceReason: 'Based on your current medications',
+        complexity: complexityLevel,
+        duration: '10-15 min',
+      });
+    }
+
+    // Add lab understanding module
+    if (healthContext.relevantLabs.length > 0) {
+      modules.push({
+        id: 'lab-education',
+        title: 'Understanding Your Lab Results',
+        description: `Learn what your lab tests measure and what the results mean for ${regionName} health.`,
+        relevanceReason: 'Based on your recent labs',
+        complexity: complexityLevel,
+        duration: '10-15 min',
+      });
+    }
+  }
+
+  return modules.slice(0, 5);
+}
 
 const QUICK_ACTIONS: QuickAction[] = [
   {
@@ -113,6 +487,158 @@ const QUICK_ACTIONS: QuickAction[] = [
     prompt: 'How does this region compare anatomically and functionally to similar regions in the body?',
   },
 ];
+
+/**
+ * Build system prompt with patient health context for personalized education
+ */
+const buildSystemPrompt = (
+  regionId: string,
+  regionName: string,
+  complexityLevel: ComplexityLevel,
+  healthContext?: RegionHealthContext | null,
+  patientData?: PatientHealthData
+): string => {
+  const levelDef = COMPLEXITY_LEVELS[complexityLevel];
+
+  let healthContextSection = '';
+
+  if (healthContext && healthContext.overallRelevance !== 'none') {
+    const contextParts: string[] = [];
+
+    if (healthContext.relevantConditions.length > 0) {
+      const conditions = healthContext.relevantConditions
+        .map(c => `${c.name}${c.severity ? ` (${c.severity})` : ''}${c.status === 'chronic' ? ' - chronic' : ''}`)
+        .join(', ');
+      contextParts.push(`Conditions: ${conditions}`);
+    }
+
+    if (healthContext.relevantMedications.length > 0) {
+      const meds = healthContext.relevantMedications
+        .map(m => `${m.name}${m.dose ? ` ${m.dose}` : ''}`)
+        .join(', ');
+      contextParts.push(`Medications: ${meds}`);
+    }
+
+    if (healthContext.relevantLabs.length > 0) {
+      const labs = healthContext.relevantLabs
+        .filter(l => l.status !== 'normal')
+        .map(l => `${l.testName}: ${l.value} ${l.unit} (${l.status})`)
+        .join(', ');
+      if (labs) {
+        contextParts.push(`Notable Labs: ${labs}`);
+      }
+    }
+
+    if (healthContext.relevantSymptoms.length > 0) {
+      const symptoms = healthContext.relevantSymptoms
+        .map(s => `${s.description} at ${s.bodyLocation}`)
+        .join(', ');
+      contextParts.push(`Reported Symptoms: ${symptoms}`);
+    }
+
+    if (contextParts.length > 0) {
+      healthContextSection = `
+=== PATIENT EDUCATIONAL CONTEXT ===
+The user has shared the following health information to help personalize their learning experience:
+${contextParts.join('\n')}
+
+IMPORTANT EDUCATIONAL FRAMING:
+- Use this context ONLY to personalize educational content
+- Connect explanations to how this region relates to their conditions
+- Explain how their medications may interact with this region's function
+- Help them understand their lab results in the context of this region
+- NEVER provide diagnoses or treatment recommendations
+- ALWAYS encourage discussing specific health concerns with their healthcare provider
+- Frame all content as "This is what you can learn about..." rather than "You have..."
+`;
+    }
+  }
+
+  // Include any user conditions from the deprecated prop for backwards compatibility
+  if (!healthContextSection && patientData?.conditions && patientData.conditions.length > 0) {
+    const activeConditions = patientData.conditions.filter(c => c.status === 'active' || c.status === 'chronic');
+    if (activeConditions.length > 0) {
+      healthContextSection = `
+=== USER'S HEALTH CONTEXT ===
+The user has the following relevant conditions: ${activeConditions.map(c => c.name).join(', ')}
+When relevant, connect explanations to how this region may be affected by or relate to their conditions.
+Frame all information as educational content, not medical advice.
+`;
+    }
+  }
+
+  return `You are the AI Medical Encyclopedia, an advanced medical education assistant. You specialize in providing evidence-based anatomical and clinical education about the ${regionName}.
+
+${EDUCATIONAL_DISCLAIMER}
+
+=== COMPLEXITY LEVEL: ${levelDef.name} (Level ${complexityLevel}/5) ===
+Target audience: ${levelDef.audience}
+Content characteristics:
+${levelDef.characteristics.map(c => `- ${c}`).join('\n')}
+
+=== CURRENT ANATOMICAL REGION ===
+Region ID: ${regionId}
+Region Name: ${regionName}
+
+${healthContextSection}
+
+=== CONTENT FRAMEWORK ===
+
+When explaining this anatomical region, integrate knowledge from:
+
+1. PHYSIOLOGY
+   - Normal functions and mechanisms
+   - Homeostatic processes
+   - Normal parameters and values
+   - System integration
+
+2. HISTOLOGY
+   - Tissue types and cellular composition
+   - Microscopic anatomy
+   - Cell types and their roles
+   - Ultrastructure when relevant
+
+3. PATHOLOGY
+   - Common conditions affecting this region
+   - Disease mechanisms and pathophysiology
+   - Clinical presentations
+   - Diagnostic approaches
+
+4. CLINICAL CORRELATIONS
+   - What physicians look for when examining this region
+   - Relevant diagnostic tests and imaging
+   - Treatment approaches (educational context only)
+   - Specialties that treat conditions in this region
+
+=== PERSONALIZED EDUCATION GUIDELINES ===
+
+When the user has shared health context:
+1. Include a "What This Means For Your Learning" section when relevant
+2. Connect anatomical concepts to their specific conditions/medications
+3. Explain why certain labs are relevant to this region
+4. Use phrases like "In conditions like [their condition]..." to make content relevant
+5. Suggest what questions they might want to ask their healthcare provider
+6. ALWAYS end personalized sections with a reminder to consult their healthcare team
+
+=== RESPONSE GUIDELINES ===
+
+1. Adjust terminology complexity to the selected level
+2. Use proper anatomical terminology with definitions at lower complexity levels
+3. Include Latin/Greek terms with explanations when helpful
+4. Reference diagrams and anatomical structures that could be visualized
+5. Provide citations [1], [2], etc. for educational sources
+6. Connect to the user's conditions when relevant and appropriate
+7. Be thorough but organized - use headers and bullet points
+8. NEVER diagnose or prescribe - always refer to healthcare providers
+9. Mention which medical specialties would treat conditions when asked
+10. Include "Questions to Ask Your Doctor" when discussing the user's conditions
+
+For Level 5 (Physician) responses:
+- Include clinical pearls and board-relevant content
+- Discuss differential diagnoses
+- Reference current clinical guidelines
+- Use appropriate medical abbreviations`;
+};
 
 // ============================================
 // Icon Components
@@ -164,6 +690,50 @@ const BookIcon = () => (
   </svg>
 );
 
+const HeartIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+);
+
+const PillIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
+    <path d="m8.5 8.5 7 7" />
+  </svg>
+);
+
+const TestTubeIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5h0c-1.4 0-2.5-1.1-2.5-2.5V2" />
+    <path d="M8.5 2h7" />
+    <path d="M14.5 16h-5" />
+  </svg>
+);
+
+const LightbulbIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M9 18h6" />
+    <path d="M10 22h4" />
+    <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+  </svg>
+);
+
+const InfoIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 16v-4M12 8h.01" />
+  </svg>
+);
+
+const AlertTriangleIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+    <line x1="12" y1="9" x2="12" y2="13" />
+    <line x1="12" y1="17" x2="12.01" y2="17" />
+  </svg>
+);
+
 const getQuickActionIcon = (iconName: string) => {
   switch (iconName) {
     case 'stethoscope':
@@ -202,91 +772,217 @@ const getQuickActionIcon = (iconName: string) => {
 };
 
 // ============================================
-// Helper Functions
+// Sub-Components
 // ============================================
 
-const generateMessageId = () => `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+/**
+ * Your Health Context Section - Shows relevant patient data for the selected region
+ */
+interface YourHealthContextProps {
+  healthContext: RegionHealthContext;
+  regionName: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+}
 
-const buildSystemPrompt = (
-  regionId: string,
-  regionName: string,
-  complexityLevel: ComplexityLevel,
-  userConditions?: UserCondition[]
-): string => {
-  const levelDef = COMPLEXITY_LEVELS[complexityLevel];
+const YourHealthContextSection: React.FC<YourHealthContextProps> = ({
+  healthContext,
+  regionName,
+  isExpanded,
+  onToggle,
+}) => {
+  if (healthContext.overallRelevance === 'none') return null;
 
-  let conditionsContext = '';
-  if (userConditions && userConditions.length > 0) {
-    const activeConditions = userConditions.filter(c => c.status === 'active' || c.status === 'chronic');
-    if (activeConditions.length > 0) {
-      conditionsContext = `
-=== USER'S HEALTH CONTEXT ===
-The user has the following relevant conditions: ${activeConditions.map(c => c.name).join(', ')}
-When relevant, connect explanations to how this region may be affected by or relate to their conditions.
-`;
-    }
-  }
+  const relevanceColors = {
+    high: '#10b981',
+    medium: '#f59e0b',
+    low: '#6b7280',
+    none: '#6b7280',
+  };
 
-  return `You are the AI Medical Encyclopedia, an advanced medical education assistant. You specialize in providing evidence-based anatomical and clinical education about the ${regionName}.
+  return (
+    <div className="health-context-section">
+      <button className="health-context-header" onClick={onToggle}>
+        <div className="health-context-title">
+          <HeartIcon />
+          <span>Your Health Context</span>
+          <span
+            className="relevance-badge"
+            style={{ backgroundColor: relevanceColors[healthContext.overallRelevance] }}
+          >
+            {healthContext.overallRelevance} relevance
+          </span>
+        </div>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
 
-IMPORTANT DISCLAIMER: You provide educational information only, NOT medical advice. Always encourage consulting qualified healthcare professionals for diagnoses and treatment decisions.
+      {isExpanded && (
+        <div className="health-context-content">
+          <p className="health-context-disclaimer">
+            <AlertTriangleIcon />
+            This information is shown to personalize your educational experience.
+            Always consult your healthcare provider for medical advice.
+          </p>
 
-=== COMPLEXITY LEVEL: ${levelDef.name} (Level ${complexityLevel}/5) ===
-Target audience: ${levelDef.audience}
-Content characteristics:
-${levelDef.characteristics.map(c => `- ${c}`).join('\n')}
+          {healthContext.relevantConditions.length > 0 && (
+            <div className="context-group">
+              <h4>
+                <HeartIcon /> Conditions Related to {regionName}
+              </h4>
+              <div className="context-items">
+                {healthContext.relevantConditions.map(condition => (
+                  <div key={condition.conditionId} className="context-item condition">
+                    <span className="item-name">{condition.name}</span>
+                    {condition.severity && (
+                      <span className={`severity-badge ${condition.severity}`}>
+                        {condition.severity}
+                      </span>
+                    )}
+                    {condition.status === 'chronic' && (
+                      <span className="status-badge chronic">chronic</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
-=== CURRENT ANATOMICAL REGION ===
-Region ID: ${regionId}
-Region Name: ${regionName}
+          {healthContext.relevantMedications.length > 0 && (
+            <div className="context-group">
+              <h4>
+                <PillIcon /> Medications That May Affect {regionName}
+              </h4>
+              <div className="context-items">
+                {healthContext.relevantMedications.map(med => (
+                  <div key={med.medicationId} className="context-item medication">
+                    <span className="item-name">{med.name}</span>
+                    {med.dose && <span className="item-detail">{med.dose}</span>}
+                    <span className="item-class">{med.drugClass}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
-${conditionsContext}
+          {healthContext.relevantLabs.length > 0 && (
+            <div className="context-group">
+              <h4>
+                <TestTubeIcon /> Relevant Lab Results
+              </h4>
+              <div className="context-items">
+                {healthContext.relevantLabs.map(lab => (
+                  <div key={lab.labId} className={`context-item lab ${lab.status}`}>
+                    <span className="item-name">{lab.testName}</span>
+                    <span className="lab-value">
+                      {lab.value} {lab.unit}
+                    </span>
+                    <span className={`lab-status ${lab.status}`}>
+                      {lab.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
-=== CONTENT FRAMEWORK ===
+          {healthContext.relevantSymptoms.length > 0 && (
+            <div className="context-group">
+              <h4>Reported Symptoms in This Area</h4>
+              <div className="context-items">
+                {healthContext.relevantSymptoms.map(symptom => (
+                  <div key={symptom.id} className="context-item symptom">
+                    <span className="item-name">{symptom.description}</span>
+                    <span className="item-detail">{symptom.bodyLocation}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
-When explaining this anatomical region, integrate knowledge from:
+/**
+ * Educational Modules Section
+ */
+interface EducationalModulesProps {
+  modules: EducationalModule[];
+  onSelectModule: (moduleId: string) => void;
+}
 
-1. PHYSIOLOGY
-   - Normal functions and mechanisms
-   - Homeostatic processes
-   - Normal parameters and values
-   - System integration
+const EducationalModulesSection: React.FC<EducationalModulesProps> = ({
+  modules,
+  onSelectModule,
+}) => {
+  if (modules.length === 0) return null;
 
-2. HISTOLOGY
-   - Tissue types and cellular composition
-   - Microscopic anatomy
-   - Cell types and their roles
-   - Ultrastructure when relevant
+  return (
+    <div className="educational-modules">
+      <h3>
+        <BookIcon /> Suggested Learning Modules
+      </h3>
+      <div className="modules-grid">
+        {modules.map(module => (
+          <button
+            key={module.id}
+            className="module-card"
+            onClick={() => onSelectModule(module.id)}
+          >
+            <div className="module-header">
+              <span className="module-title">{module.title}</span>
+              <span className="module-duration">{module.duration}</span>
+            </div>
+            <p className="module-description">{module.description}</p>
+            <div className="module-footer">
+              <span className="module-relevance">{module.relevanceReason}</span>
+              <span className="module-complexity">
+                Level {module.complexity}
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-3. PATHOLOGY
-   - Common conditions affecting this region
-   - Disease mechanisms and pathophysiology
-   - Clinical presentations
-   - Diagnostic approaches
+/**
+ * Did You Know Facts Section
+ */
+interface DidYouKnowProps {
+  facts: DidYouKnowFact[];
+}
 
-4. CLINICAL CORRELATIONS
-   - What physicians look for when examining this region
-   - Relevant diagnostic tests and imaging
-   - Treatment approaches (educational context only)
-   - Specialties that treat conditions in this region
+const DidYouKnowSection: React.FC<DidYouKnowProps> = ({ facts }) => {
+  if (facts.length === 0) return null;
 
-=== RESPONSE GUIDELINES ===
-
-1. Adjust terminology complexity to the selected level
-2. Use proper anatomical terminology with definitions at lower complexity levels
-3. Include Latin/Greek terms with explanations when helpful
-4. Reference diagrams and anatomical structures that could be visualized
-5. Provide citations [1], [2], etc. for educational sources
-6. Connect to the user's conditions when relevant and appropriate
-7. Be thorough but organized - use headers and bullet points
-8. NEVER diagnose or prescribe - always refer to healthcare providers
-9. Mention which medical specialties would treat conditions when asked
-
-For Level 5 (Physician) responses:
-- Include clinical pearls and board-relevant content
-- Discuss differential diagnoses
-- Reference current clinical guidelines
-- Use appropriate medical abbreviations`;
+  return (
+    <div className="did-you-know">
+      <h3>
+        <LightbulbIcon /> Did You Know?
+      </h3>
+      <div className="facts-list">
+        {facts.map((fact, index) => (
+          <div key={index} className="fact-card">
+            <p className="fact-text">{fact.fact}</p>
+            <span className="fact-related">Related to: {fact.relatedTo}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 // ============================================
@@ -297,6 +993,7 @@ export function AIMedicalEncyclopedia({
   regionId,
   regionName,
   userConditions,
+  patientHealthData,
   initialComplexity,
   onClose,
   onNavigateToRegion,
@@ -309,13 +1006,49 @@ export function AIMedicalEncyclopedia({
   const [isRecording, setIsRecording] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
   const [ragStats, setRagStats] = useState<{ chunks: number; time: number } | null>(null);
+  const [showHealthContext, setShowHealthContext] = useState(true);
 
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // Suggested questions based on region
-  const suggestedQuestions = generateSuggestedQuestions(regionName);
+  // Merge userConditions into patientHealthData for backwards compatibility
+  const mergedPatientData = useMemo(() => {
+    if (patientHealthData) return patientHealthData;
+    if (userConditions && userConditions.length > 0) {
+      return {
+        conditions: userConditions,
+        medications: [],
+        labResults: [],
+        symptoms: [],
+      } as PatientHealthData;
+    }
+    return undefined;
+  }, [patientHealthData, userConditions]);
+
+  // Compute health context for the current region
+  const healthContext = useMemo(
+    () => getRegionHealthContext(regionId, regionName, mergedPatientData),
+    [regionId, regionName, mergedPatientData]
+  );
+
+  // Suggested questions based on region and health context
+  const suggestedQuestions = useMemo(
+    () => generateSuggestedQuestions(regionName, healthContext),
+    [regionName, healthContext]
+  );
+
+  // Educational modules based on health profile
+  const educationalModules = useMemo(
+    () => generateEducationalModules(regionName, healthContext, complexityLevel),
+    [regionName, healthContext, complexityLevel]
+  );
+
+  // Did you know facts
+  const didYouKnowFacts = useMemo(
+    () => generateDidYouKnowFacts(regionName, healthContext),
+    [regionName, healthContext]
+  );
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -346,7 +1079,13 @@ export function AIMedicalEncyclopedia({
     setIsLoading(true);
 
     try {
-      const systemPrompt = buildSystemPrompt(regionId, regionName, complexityLevel, userConditions);
+      const systemPrompt = buildSystemPrompt(
+        regionId,
+        regionName,
+        complexityLevel,
+        healthContext,
+        mergedPatientData
+      );
 
       // Build message history for context
       const chatMessages = messages.map(m => ({
@@ -383,6 +1122,17 @@ export function AIMedicalEncyclopedia({
         });
       }
 
+      // Determine personalized context for the message
+      let personalizedContext: PersonalizedMessageContext | undefined;
+      if (healthContext && healthContext.overallRelevance !== 'none') {
+        personalizedContext = {
+          relatedConditions: healthContext.relevantConditions.map(c => c.name),
+          relatedMedications: healthContext.relevantMedications.map(m => m.name),
+          relatedLabs: healthContext.relevantLabs.map(l => l.testName),
+          personalRelevance: healthContext.overallRelevance as 'high' | 'medium' | 'low',
+        };
+      }
+
       const assistantMessage: ChatMessage = {
         id: generateMessageId(),
         role: 'assistant',
@@ -391,6 +1141,7 @@ export function AIMedicalEncyclopedia({
         citations: response.citations,
         diagramReferences: diagramReferences.length > 0 ? diagramReferences : undefined,
         complexityLevel: complexityLevel,
+        personalizedContext,
       };
 
       setMessages(prev => [...prev, assistantMessage]);
@@ -413,7 +1164,7 @@ export function AIMedicalEncyclopedia({
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, messages, regionId, regionName, complexityLevel, userConditions]);
+  }, [input, isLoading, messages, regionId, regionName, complexityLevel, healthContext, mergedPatientData]);
 
   // Handle keyboard shortcuts
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -452,6 +1203,14 @@ export function AIMedicalEncyclopedia({
   // Handle diagram reference click
   const handleDiagramClick = (ref: DiagramReference) => {
     onNavigateToRegion(ref.id);
+  };
+
+  // Handle module selection
+  const handleModuleSelect = (moduleId: string) => {
+    const module = educationalModules.find(m => m.id === moduleId);
+    if (module) {
+      sendMessage(`Please teach me about: ${module.title}. ${module.description}`);
+    }
   };
 
   return (
@@ -510,10 +1269,7 @@ export function AIMedicalEncyclopedia({
 
       {/* Disclaimer */}
       <div className="encyclopedia-disclaimer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 16v-4M12 8h.01" />
-        </svg>
+        <AlertTriangleIcon />
         <span>Educational information only - not medical advice. Consult healthcare professionals for medical decisions.</span>
       </div>
 
@@ -533,21 +1289,27 @@ export function AIMedicalEncyclopedia({
                 complexity level.
               </p>
 
-              {/* User conditions context */}
-              {userConditions && userConditions.length > 0 && (
-                <div className="conditions-context">
-                  <span className="context-label">Your health context is active:</span>
-                  <div className="condition-tags">
-                    {userConditions
-                      .filter(c => c.status === 'active' || c.status === 'chronic')
-                      .slice(0, 3)
-                      .map(c => (
-                        <span key={c.conditionId} className="condition-tag">
-                          {c.name}
-                        </span>
-                      ))}
-                  </div>
-                </div>
+              {/* Your Health Context Section */}
+              {healthContext && healthContext.overallRelevance !== 'none' && (
+                <YourHealthContextSection
+                  healthContext={healthContext}
+                  regionName={regionName}
+                  isExpanded={showHealthContext}
+                  onToggle={() => setShowHealthContext(!showHealthContext)}
+                />
+              )}
+
+              {/* Did You Know Facts */}
+              {didYouKnowFacts.length > 0 && (
+                <DidYouKnowSection facts={didYouKnowFacts} />
+              )}
+
+              {/* Educational Modules */}
+              {educationalModules.length > 0 && (
+                <EducationalModulesSection
+                  modules={educationalModules}
+                  onSelectModule={handleModuleSelect}
+                />
               )}
 
               {/* Suggested Questions */}
@@ -557,11 +1319,17 @@ export function AIMedicalEncyclopedia({
                   {suggestedQuestions.map((question, i) => (
                     <button
                       key={i}
-                      className="suggested-question-btn"
+                      className={`suggested-question-btn ${question.includes('Educational') || question.includes('education') ? 'personalized' : ''}`}
                       onClick={() => handleSuggestedQuestion(question)}
                       disabled={isLoading}
                     >
-                      <span className="question-icon">?</span>
+                      <span className="question-icon">
+                        {question.includes('Educational') || question.includes('education') ? (
+                          <HeartIcon />
+                        ) : (
+                          '?'
+                        )}
+                      </span>
                       <span className="question-text">{question}</span>
                     </button>
                   ))}
@@ -593,7 +1361,34 @@ export function AIMedicalEncyclopedia({
                     </div>
                   )}
 
+                  {/* Personalized context indicator */}
+                  {message.role === 'assistant' && message.personalizedContext && (
+                    <div className="personalized-indicator">
+                      <HeartIcon />
+                      <span>Personalized for your health profile</span>
+                    </div>
+                  )}
+
                   <div className="message-content">{message.content}</div>
+
+                  {/* What This Means For You - for personalized messages */}
+                  {message.role === 'assistant' && message.personalizedContext &&
+                   message.personalizedContext.personalRelevance === 'high' && (
+                    <div className="what-this-means">
+                      <div className="what-this-means-header">
+                        <InfoIcon />
+                        <span>What This Means For Your Learning</span>
+                      </div>
+                      <p className="what-this-means-content">
+                        This information relates to your health context. The content above has been
+                        tailored to help you better understand the {regionName} in relation to your
+                        conditions ({message.personalizedContext.relatedConditions.join(', ') || 'your health profile'}).
+                        <br /><br />
+                        <strong>Remember:</strong> This is educational content. For specific medical
+                        advice about your condition, please consult your healthcare provider.
+                      </p>
+                    </div>
+                  )}
 
                   {/* Diagram References */}
                   {message.diagramReferences && message.diagramReferences.length > 0 && (
@@ -697,6 +1492,27 @@ export function AIMedicalEncyclopedia({
                 </button>
               ))}
             </div>
+
+            {/* Questions to Ask Your Doctor */}
+            {healthContext && healthContext.overallRelevance !== 'none' && (
+              <div className="doctor-questions">
+                <h4>
+                  <InfoIcon /> Questions for Your Doctor
+                </h4>
+                <p className="doctor-questions-intro">
+                  Consider asking your healthcare provider:
+                </p>
+                <ul className="doctor-questions-list">
+                  {healthContext.relevantConditions.length > 0 && (
+                    <li>How does my {healthContext.relevantConditions[0].name} affect my {regionName}?</li>
+                  )}
+                  {healthContext.relevantMedications.length > 0 && (
+                    <li>Are there any effects of {healthContext.relevantMedications[0].name} I should watch for?</li>
+                  )}
+                  <li>What signs or symptoms should I report to you?</li>
+                </ul>
+              </div>
+            )}
 
             {/* RAG Stats */}
             {ragStats && (
@@ -923,8 +1739,9 @@ export function AIMedicalEncyclopedia({
         .welcome-section {
           padding: 40px;
           text-align: center;
-          max-width: 700px;
+          max-width: 800px;
           margin: 0 auto;
+          overflow-y: auto;
         }
 
         .welcome-icon {
@@ -960,34 +1777,307 @@ export function AIMedicalEncyclopedia({
           color: #4a9eff;
         }
 
-        .conditions-context {
+        /* Health Context Section */
+        .health-context-section {
           margin-bottom: 24px;
-          padding: 12px 16px;
-          background: rgba(74, 158, 255, 0.1);
-          border-radius: 8px;
-          display: inline-flex;
-          align-items: center;
-          gap: 12px;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          border-radius: 12px;
+          overflow: hidden;
+          text-align: left;
         }
 
-        .context-label {
+        .health-context-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 16px;
+          background: transparent;
+          border: none;
+          color: #10b981;
+          cursor: pointer;
+          transition: background 0.15s;
+        }
+
+        .health-context-header:hover {
+          background: rgba(16, 185, 129, 0.1);
+        }
+
+        .health-context-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 600;
+        }
+
+        .relevance-badge {
+          padding: 2px 8px;
+          border-radius: 10px;
+          font-size: 10px;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+
+        .health-context-content {
+          padding: 0 16px 16px;
+        }
+
+        .health-context-disclaimer {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          padding: 12px;
+          background: rgba(255, 193, 7, 0.1);
+          border-radius: 8px;
           font-size: 12px;
+          color: #ffc107;
+          margin-bottom: 16px;
+        }
+
+        .context-group {
+          margin-bottom: 16px;
+        }
+
+        .context-group h4 {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin: 0 0 8px 0;
+          font-size: 13px;
+          color: #ccc;
+        }
+
+        .context-items {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .context-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 12px;
+          background: #1a1a2e;
+          border-radius: 8px;
+          font-size: 13px;
+        }
+
+        .context-item.condition {
+          border-left: 3px solid #ef4444;
+        }
+
+        .context-item.medication {
+          border-left: 3px solid #8b5cf6;
+        }
+
+        .context-item.lab {
+          border-left: 3px solid #3b82f6;
+        }
+
+        .context-item.lab.high,
+        .context-item.lab.critical {
+          border-left-color: #ef4444;
+        }
+
+        .context-item.lab.low {
+          border-left-color: #f59e0b;
+        }
+
+        .context-item.symptom {
+          border-left: 3px solid #f59e0b;
+        }
+
+        .item-name {
+          color: #fff;
+          font-weight: 500;
+        }
+
+        .item-detail,
+        .item-class {
+          color: #888;
+          font-size: 11px;
+        }
+
+        .severity-badge,
+        .status-badge {
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: 10px;
+          text-transform: uppercase;
+        }
+
+        .severity-badge.mild {
+          background: rgba(16, 185, 129, 0.2);
+          color: #10b981;
+        }
+
+        .severity-badge.moderate {
+          background: rgba(245, 158, 11, 0.2);
+          color: #f59e0b;
+        }
+
+        .severity-badge.severe {
+          background: rgba(239, 68, 68, 0.2);
+          color: #ef4444;
+        }
+
+        .status-badge.chronic {
+          background: rgba(139, 92, 246, 0.2);
+          color: #8b5cf6;
+        }
+
+        .lab-value {
+          color: #ccc;
+          font-family: monospace;
+        }
+
+        .lab-status {
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: 10px;
+          text-transform: uppercase;
+        }
+
+        .lab-status.normal {
+          background: rgba(16, 185, 129, 0.2);
+          color: #10b981;
+        }
+
+        .lab-status.high,
+        .lab-status.critical {
+          background: rgba(239, 68, 68, 0.2);
+          color: #ef4444;
+        }
+
+        .lab-status.low {
+          background: rgba(245, 158, 11, 0.2);
+          color: #f59e0b;
+        }
+
+        /* Did You Know Section */
+        .did-you-know {
+          margin-bottom: 24px;
+          text-align: left;
+        }
+
+        .did-you-know h3 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 12px 0;
+          font-size: 14px;
+          color: #f59e0b;
+        }
+
+        .facts-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .fact-card {
+          padding: 12px 16px;
+          background: rgba(245, 158, 11, 0.1);
+          border: 1px solid rgba(245, 158, 11, 0.2);
+          border-radius: 8px;
+        }
+
+        .fact-text {
+          margin: 0 0 8px 0;
+          font-size: 13px;
+          color: #ccc;
+          line-height: 1.5;
+        }
+
+        .fact-related {
+          font-size: 11px;
           color: #888;
         }
 
-        .condition-tags {
-          display: flex;
-          gap: 6px;
+        /* Educational Modules Section */
+        .educational-modules {
+          margin-bottom: 24px;
+          text-align: left;
         }
 
-        .condition-tag {
-          padding: 4px 10px;
-          background: #4a9eff;
-          border-radius: 12px;
-          font-size: 11px;
+        .educational-modules h3 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 12px 0;
+          font-size: 14px;
+          color: #4a9eff;
+        }
+
+        .modules-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .module-card {
+          padding: 14px 16px;
+          background: #1a1a2e;
+          border: 1px solid #2a2a4a;
+          border-radius: 10px;
+          text-align: left;
+          cursor: pointer;
+          transition: all 0.15s;
+        }
+
+        .module-card:hover {
+          background: #252538;
+          border-color: #4a9eff;
+        }
+
+        .module-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 6px;
+        }
+
+        .module-title {
+          font-size: 14px;
+          font-weight: 600;
           color: #fff;
         }
 
+        .module-duration {
+          font-size: 11px;
+          color: #888;
+        }
+
+        .module-description {
+          margin: 0 0 8px 0;
+          font-size: 12px;
+          color: #888;
+          line-height: 1.4;
+        }
+
+        .module-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .module-relevance {
+          font-size: 11px;
+          color: #4a9eff;
+        }
+
+        .module-complexity {
+          padding: 2px 8px;
+          background: rgba(74, 158, 255, 0.15);
+          border-radius: 10px;
+          font-size: 10px;
+          color: #4a9eff;
+        }
+
+        /* Suggested Questions */
         .suggested-questions {
           text-align: left;
         }
@@ -1026,6 +2116,14 @@ export function AIMedicalEncyclopedia({
           color: #fff;
         }
 
+        .suggested-question-btn.personalized {
+          border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .suggested-question-btn.personalized:hover:not(:disabled) {
+          border-color: #10b981;
+        }
+
         .suggested-question-btn:disabled {
           opacity: 0.5;
           cursor: not-allowed;
@@ -1042,6 +2140,11 @@ export function AIMedicalEncyclopedia({
           justify-content: center;
           font-weight: 600;
           flex-shrink: 0;
+        }
+
+        .suggested-question-btn.personalized .question-icon {
+          background: rgba(16, 185, 129, 0.15);
+          color: #10b981;
         }
 
         .question-text {
@@ -1116,6 +2219,18 @@ export function AIMedicalEncyclopedia({
           letter-spacing: 0.05em;
         }
 
+        .personalized-indicator {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px;
+          background: rgba(16, 185, 129, 0.15);
+          border-radius: 12px;
+          font-size: 11px;
+          color: #10b981;
+          width: fit-content;
+        }
+
         .message-content {
           padding: 14px 18px;
           border-radius: 16px;
@@ -1134,6 +2249,31 @@ export function AIMedicalEncyclopedia({
           background: linear-gradient(135deg, #4a9eff 0%, #3a8eef 100%);
           color: #fff;
           border-top-right-radius: 4px;
+        }
+
+        /* What This Means For You */
+        .what-this-means {
+          padding: 12px 16px;
+          background: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          border-radius: 10px;
+        }
+
+        .what-this-means-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #10b981;
+        }
+
+        .what-this-means-content {
+          margin: 0;
+          font-size: 13px;
+          color: #a0a0b8;
+          line-height: 1.5;
         }
 
         /* Diagram References */
@@ -1263,13 +2403,14 @@ export function AIMedicalEncyclopedia({
 
         /* Quick Actions Sidebar */
         .quick-actions-sidebar {
-          width: 240px;
+          width: 260px;
           padding: 20px;
           background: #151520;
           border-left: 1px solid #2a2a4a;
           display: flex;
           flex-direction: column;
           gap: 16px;
+          overflow-y: auto;
         }
 
         .quick-actions-sidebar h3 {
@@ -1325,6 +2466,41 @@ export function AIMedicalEncyclopedia({
         .action-label {
           font-size: 13px;
           line-height: 1.3;
+        }
+
+        /* Doctor Questions */
+        .doctor-questions {
+          padding: 14px;
+          background: rgba(139, 92, 246, 0.1);
+          border: 1px solid rgba(139, 92, 246, 0.2);
+          border-radius: 10px;
+        }
+
+        .doctor-questions h4 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 8px 0;
+          font-size: 12px;
+          color: #a855f7;
+        }
+
+        .doctor-questions-intro {
+          margin: 0 0 8px 0;
+          font-size: 11px;
+          color: #888;
+        }
+
+        .doctor-questions-list {
+          margin: 0;
+          padding-left: 16px;
+          font-size: 12px;
+          color: #ccc;
+          line-height: 1.6;
+        }
+
+        .doctor-questions-list li {
+          margin-bottom: 4px;
         }
 
         /* RAG Stats */

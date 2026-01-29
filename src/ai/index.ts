@@ -58,6 +58,25 @@ export {
   buildHealthContext,
 } from './prompts';
 
+// Educational Context Builder
+export {
+  EducationalContextBuilder,
+  createEducationalContextBuilder,
+  dashboardToPatientData,
+  profileToPatientData,
+} from './EducationalContextBuilder';
+
+// Educational Context Builder Types
+export type {
+  PatientHealthData,
+  EducationalContext,
+  RelatedTopic,
+  EducationModuleReference,
+  LearningPath,
+  LearningStep,
+  ContextBuildOptions,
+} from './EducationalContextBuilder';
+
 // Types
 export type {
   // Core Types

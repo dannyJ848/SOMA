@@ -7,6 +7,16 @@
 // Provider
 export { AIProvider, useAIContext, useAIAvailability, useAISettings } from './AIProvider';
 
+// AI Navigation Provider
+export {
+  AINavigationProvider,
+  useAINavigation,
+  useAINavigationHistory,
+  useAINavigationSuggestions,
+  type AINavigationContextValue,
+  type NavigationSuggestion,
+} from './AINavigationProvider';
+
 // Hooks
 export {
   useAI,
@@ -15,10 +25,26 @@ export {
   usePatientEducationAI,
 } from './useAI';
 
+// AI Navigation Hooks
+export {
+  useSmartNavigation,
+  useHasNavigationCommands,
+  useNavigationActionsFromText,
+  type UseSmartNavigationReturn,
+  type AnatomyMention,
+  type NavigationAction,
+  type ParsedAIResponse,
+} from './hooks';
+
 // Components
 export { AIExplainer } from './components/AIExplainer';
 export { AISearch } from './components/AISearch';
 export { AIQuiz } from './components/AIQuiz';
+
+// AI Chat Voice Components
+export { AIChatVoiceInput } from './components/AIChatVoiceInput';
+export { AINavigationSuggestions } from './components/AINavigationSuggestions';
+export { SmartAnatomyResponse } from './components/SmartAnatomyResponse';
 
 // Prompts
 export {
@@ -56,3 +82,12 @@ export type {
   AIExplanation,
   AISearchResult,
 } from './types';
+
+// AI Chat Voice Component Types
+export type { AIChatVoiceInputProps } from './components/AIChatVoiceInput';
+export type { AINavigationSuggestionsProps } from './components/AINavigationSuggestions';
+export type {
+  SmartAnatomyResponseProps,
+  SmartResponse,
+  ResponseNavigationAction,
+} from './components/SmartAnatomyResponse';

@@ -1,0 +1,980 @@
+/**
+ * Panel Styles
+ *
+ * Comprehensive styles for panel components including:
+ * - PhysiologyPanel
+ * - Future panel components
+ *
+ * Uses design system variables for consistency.
+ */
+
+/* ============================================================================
+   PHYSIOLOGY PANEL - Main Container
+   ============================================================================ */
+
+.physiology-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card, #1a2332);
+  border-radius: var(--radius-xl, 16px);
+  border: 1px solid var(--border-light, #1e293b);
+  overflow: hidden;
+  max-height: 100%;
+  box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* ============================================================================
+   PANEL HEADER
+   ============================================================================ */
+
+.physiology-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+  background: linear-gradient(135deg, var(--bg-tertiary, #1f2937) 0%, var(--bg-secondary, #111827) 100%);
+  border-bottom: 1px solid var(--border-light, #1e293b);
+}
+
+.physiology-panel-header .header-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+}
+
+.physiology-panel-header .header-icon {
+  font-size: 24px;
+  color: var(--accent-primary, #3b82f6);
+}
+
+.physiology-panel-header h3 {
+  margin: 0;
+  font-size: var(--text-lg, 18px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--text-primary, #f8fafc);
+}
+
+.physiology-panel-header .header-subtitle {
+  display: block;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  margin-top: var(--space-0-5, 2px);
+}
+
+.physiology-panel-header .close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-full, 9999px);
+  background: transparent;
+  color: var(--text-tertiary, #64748b);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.physiology-panel-header .close-btn:hover {
+  background: var(--bg-hover, #243044);
+  color: var(--text-primary, #f8fafc);
+}
+
+.physiology-panel-header .close-btn:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   COMPLEXITY SELECTOR
+   ============================================================================ */
+
+.physiology-complexity-selector {
+  padding: var(--space-4, 16px);
+  background: var(--bg-secondary, #111827);
+  border-bottom: 1px solid var(--border-light, #1e293b);
+}
+
+.physiology-complexity-selector .complexity-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 4px);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.physiology-complexity-selector .complexity-title {
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--text-primary, #f8fafc);
+}
+
+.physiology-complexity-selector .complexity-description {
+  font-size: var(--text-xs, 12px);
+  color: var(--text-secondary, #94a3b8);
+}
+
+.physiology-complexity-selector .complexity-buttons {
+  display: flex;
+  gap: var(--space-1-5, 6px);
+}
+
+.physiology-complexity-selector .complexity-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2, 8px) var(--space-1, 4px);
+  background: var(--bg-tertiary, #1f2937);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg, 12px);
+  color: var(--text-secondary, #94a3b8);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 56px;
+}
+
+.physiology-complexity-selector .complexity-btn:hover {
+  background: var(--bg-hover, #243044);
+  color: var(--text-primary, #f8fafc);
+  border-color: var(--border-secondary, #475569);
+}
+
+.physiology-complexity-selector .complexity-btn.active {
+  background: var(--accent-primary, #3b82f6);
+  border-color: var(--accent-primary, #3b82f6);
+  color: white;
+  box-shadow: 0 0 12px var(--accent-primary-glow, rgba(59, 130, 246, 0.25));
+}
+
+.physiology-complexity-selector .complexity-btn .level-number {
+  font-size: var(--text-lg, 18px);
+  font-weight: var(--font-bold, 700);
+}
+
+.physiology-complexity-selector .complexity-btn .level-label {
+  font-size: 10px;
+  margin-top: var(--space-0-5, 2px);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   PANEL CONTENT CONTAINER
+   ============================================================================ */
+
+.physiology-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3, 12px);
+}
+
+/* Custom scrollbar */
+.physiology-panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.physiology-panel-content::-webkit-scrollbar-track {
+  background: var(--bg-tertiary, #1f2937);
+  border-radius: 3px;
+}
+
+.physiology-panel-content::-webkit-scrollbar-thumb {
+  background: var(--border-secondary, #475569);
+  border-radius: 3px;
+}
+
+.physiology-panel-content::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary, #3b82f6);
+}
+
+/* ============================================================================
+   COLLAPSIBLE SECTIONS
+   ============================================================================ */
+
+.physiology-section {
+  margin-bottom: var(--space-2, 8px);
+  background: var(--bg-tertiary, #1f2937);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+}
+
+.physiology-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  width: 100%;
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  background: transparent;
+  border: none;
+  color: var(--text-primary, #f8fafc);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: left;
+}
+
+.physiology-section .section-header:hover {
+  background: var(--bg-hover, #243044);
+}
+
+.physiology-section .section-header.expanded {
+  background: var(--bg-hover, #243044);
+  border-bottom: 1px solid var(--border-light, #1e293b);
+}
+
+.physiology-section .section-header.static {
+  cursor: default;
+  background: var(--bg-hover, #243044);
+  border-bottom: 1px solid var(--border-light, #1e293b);
+}
+
+.physiology-section .section-header.static:hover {
+  background: var(--bg-hover, #243044);
+}
+
+.physiology-section .section-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.physiology-section .section-title {
+  flex: 1;
+  font-size: var(--text-base, 16px);
+  font-weight: var(--font-medium, 500);
+}
+
+.physiology-section .section-count {
+  font-size: var(--text-xs, 12px);
+  color: var(--text-tertiary, #64748b);
+  background: var(--bg-secondary, #111827);
+  padding: var(--space-1, 4px) var(--space-2, 8px);
+  border-radius: var(--radius-full, 9999px);
+}
+
+.physiology-section .expand-icon {
+  font-size: 18px;
+  color: var(--text-tertiary, #64748b);
+  font-weight: var(--font-bold, 700);
+  transition: transform 0.2s ease;
+}
+
+.physiology-section .section-content {
+  padding: var(--space-4, 16px);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   OVERVIEW SECTION
+   ============================================================================ */
+
+.overview-content {
+  color: var(--text-secondary, #94a3b8);
+  line-height: var(--leading-relaxed, 1.625);
+}
+
+.overview-content .overview-summary {
+  font-size: var(--text-base, 16px);
+  color: var(--text-primary, #f8fafc);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.overview-content .overview-explanation {
+  font-size: var(--text-sm, 14px);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.overview-content .analogies-section {
+  background: var(--bg-secondary, #111827);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px);
+  border-left: 3px solid var(--accent-primary, #3b82f6);
+}
+
+.overview-content .analogies-section h5 {
+  margin: 0 0 var(--space-2, 8px) 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--accent-primary, #3b82f6);
+}
+
+.overview-content .analogies-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overview-content .analogy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 8px);
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+}
+
+.overview-content .analogy-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============================================================================
+   CARDS (Functions, Mechanisms, Parameters)
+   ============================================================================ */
+
+.physiology-card {
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-light, #1e293b);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 16px);
+  margin-bottom: var(--space-3, 12px);
+  transition: border-color 0.2s ease;
+}
+
+.physiology-card:last-child {
+  margin-bottom: 0;
+}
+
+.physiology-card:hover {
+  border-color: var(--border-secondary, #475569);
+}
+
+.physiology-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  margin-bottom: var(--space-2, 8px);
+}
+
+.physiology-card .card-title {
+  margin: 0;
+  font-size: var(--text-base, 16px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--text-primary, #f8fafc);
+}
+
+.physiology-card .card-description {
+  margin: 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  line-height: var(--leading-relaxed, 1.625);
+}
+
+.physiology-card .importance-badge {
+  padding: var(--space-1, 4px) var(--space-2, 8px);
+  border-radius: var(--radius-md, 8px);
+  font-size: 11px;
+  font-weight: var(--font-semibold, 600);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.physiology-card .range-badge {
+  padding: var(--space-1, 4px) var(--space-3, 12px);
+  background: var(--accent-primary-light, rgba(59, 130, 246, 0.15));
+  color: var(--accent-primary, #3b82f6);
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--font-medium, 500);
+  white-space: nowrap;
+}
+
+/* Mechanism Steps */
+.mechanism-steps {
+  margin-top: var(--space-3, 12px);
+  padding-top: var(--space-3, 12px);
+  border-top: 1px solid var(--border-light, #1e293b);
+}
+
+.mechanism-steps .steps-label {
+  font-size: var(--text-xs, 12px);
+  color: var(--text-tertiary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.mechanism-steps .steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.mechanism-steps .step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3, 12px);
+  margin-bottom: var(--space-2, 8px);
+}
+
+.mechanism-steps .step-item:last-child {
+  margin-bottom: 0;
+}
+
+.mechanism-steps .step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-primary, #3b82f6);
+  color: white;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--text-xs, 12px);
+  font-weight: var(--font-bold, 700);
+  flex-shrink: 0;
+}
+
+.mechanism-steps .step-text {
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  line-height: 24px;
+}
+
+/* Parameter Implications */
+.parameter-implications {
+  margin-top: var(--space-3, 12px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.parameter-implications .implication {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--text-sm, 14px);
+}
+
+.parameter-implications .implication.high {
+  background: var(--error-light, rgba(239, 68, 68, 0.15));
+  color: var(--error, #ef4444);
+}
+
+.parameter-implications .implication.low {
+  background: var(--warning-light, rgba(245, 158, 11, 0.15));
+  color: var(--warning, #f59e0b);
+}
+
+.parameter-implications .arrow {
+  font-weight: var(--font-bold, 700);
+  font-size: 16px;
+}
+
+.parameter-implications .implication-text {
+  flex: 1;
+}
+
+/* ============================================================================
+   KEY TERMS
+   ============================================================================ */
+
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-3, 12px);
+}
+
+.term-card {
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-light, #1e293b);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px);
+}
+
+.term-card .term-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2, 8px);
+  margin-bottom: var(--space-1, 4px);
+}
+
+.term-card .term-name {
+  font-weight: var(--font-semibold, 600);
+  color: var(--accent-primary, #3b82f6);
+}
+
+.term-card .term-pronunciation {
+  font-size: var(--text-xs, 12px);
+  color: var(--text-tertiary, #64748b);
+  font-style: italic;
+}
+
+.term-card .term-definition {
+  margin: 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  line-height: var(--leading-relaxed, 1.625);
+}
+
+/* ============================================================================
+   DIAGRAMS PLACEHOLDER
+   ============================================================================ */
+
+.diagrams-placeholder {
+  text-align: center;
+}
+
+.diagrams-placeholder .placeholder-content {
+  padding: var(--space-6, 24px);
+  background: var(--bg-secondary, #111827);
+  border-radius: var(--radius-lg, 12px);
+  border: 2px dashed var(--border-primary, #334155);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.diagrams-placeholder .placeholder-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: var(--space-3, 12px);
+  opacity: 0.6;
+}
+
+.diagrams-placeholder .placeholder-text {
+  margin: 0;
+  font-size: var(--text-base, 16px);
+  color: var(--text-primary, #f8fafc);
+}
+
+.diagrams-placeholder .placeholder-subtext {
+  margin: var(--space-1, 4px) 0 0 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-tertiary, #64748b);
+}
+
+.media-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  justify-content: center;
+}
+
+.media-preview-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-light, #1e293b);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+}
+
+.media-preview-item .media-type-icon {
+  font-size: 16px;
+}
+
+/* ============================================================================
+   RELATED SYSTEMS
+   ============================================================================ */
+
+.related-systems-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  margin-bottom: var(--space-4, 16px);
+}
+
+.related-system-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-light, #1e293b);
+  border-radius: var(--radius-full, 9999px);
+  color: var(--text-primary, #f8fafc);
+  font-size: var(--text-sm, 14px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.related-system-link:hover {
+  background: var(--accent-primary-light, rgba(59, 130, 246, 0.15));
+  border-color: var(--accent-primary, #3b82f6);
+  color: var(--accent-primary, #3b82f6);
+}
+
+.related-system-link .link-icon {
+  font-size: 14px;
+}
+
+.system-interactions {
+  background: var(--bg-secondary, #111827);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 12px);
+}
+
+.system-interactions h5 {
+  margin: 0 0 var(--space-2, 8px) 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-tertiary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.system-interactions .interactions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.system-interactions .interaction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  border-bottom: 1px solid var(--border-light, #1e293b);
+}
+
+.system-interactions .interaction-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.system-interactions .interaction-icon {
+  color: var(--accent-primary, #3b82f6);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   CLINICAL NOTES
+   ============================================================================ */
+
+.clinical-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+}
+
+.clinical-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3, 12px);
+  padding: var(--space-3, 12px);
+  background: var(--warning-bg, rgba(245, 158, 11, 0.1));
+  border-left: 3px solid var(--warning, #f59e0b);
+  border-radius: var(--radius-md, 8px);
+}
+
+.clinical-note .note-icon {
+  color: var(--warning, #f59e0b);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.clinical-note .note-text {
+  margin: 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--text-secondary, #94a3b8);
+  line-height: var(--leading-relaxed, 1.625);
+}
+
+/* ============================================================================
+   ASK AI SECTION
+   ============================================================================ */
+
+.ask-ai-container {
+  background: linear-gradient(135deg, var(--bg-tertiary, #1f2937) 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+.ask-ai-section {
+  padding: var(--space-4, 16px);
+}
+
+.ask-ai-form {
+  display: flex;
+  gap: var(--space-2, 8px);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.ask-ai-input {
+  flex: 1;
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-primary, #334155);
+  border-radius: var(--radius-lg, 12px);
+  color: var(--text-primary, #f8fafc);
+  font-size: var(--text-sm, 14px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ask-ai-input::placeholder {
+  color: var(--text-muted, #475569);
+}
+
+.ask-ai-input:focus {
+  outline: none;
+  border-color: var(--accent-primary, #3b82f6);
+  box-shadow: 0 0 0 3px var(--accent-primary-light, rgba(59, 130, 246, 0.15));
+}
+
+.ask-ai-button {
+  padding: var(--space-3, 12px) var(--space-5, 20px);
+  background: var(--gradient-primary, linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%));
+  border: none;
+  border-radius: var(--radius-lg, 12px);
+  color: white;
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--font-semibold, 600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ask-ai-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-primary-glow, rgba(59, 130, 246, 0.25));
+}
+
+.ask-ai-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ask-ai-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.suggested-questions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.suggested-questions .suggestions-label {
+  font-size: var(--text-xs, 12px);
+  color: var(--text-tertiary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.suggested-questions .suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+}
+
+.suggested-questions .suggestion-chip {
+  padding: var(--space-1-5, 6px) var(--space-3, 12px);
+  background: var(--bg-secondary, #111827);
+  border: 1px solid var(--border-light, #1e293b);
+  border-radius: var(--radius-full, 9999px);
+  color: var(--text-secondary, #94a3b8);
+  font-size: var(--text-xs, 12px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggested-questions .suggestion-chip:hover {
+  background: var(--accent-primary-light, rgba(59, 130, 246, 0.15));
+  border-color: var(--accent-primary, #3b82f6);
+  color: var(--accent-primary, #3b82f6);
+}
+
+/* ============================================================================
+   CITATIONS SECTION
+   ============================================================================ */
+
+.citations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.citation-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  background: var(--bg-secondary, #111827);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--text-sm, 14px);
+}
+
+.citation-item .citation-type {
+  color: var(--text-tertiary, #64748b);
+  font-size: var(--text-xs, 12px);
+  text-transform: uppercase;
+}
+
+.citation-item .citation-title {
+  color: var(--text-primary, #f8fafc);
+  font-weight: var(--font-medium, 500);
+}
+
+.citation-item .citation-source,
+.citation-item .citation-chapter {
+  color: var(--text-secondary, #94a3b8);
+}
+
+.citation-item .citation-link {
+  color: var(--accent-primary, #3b82f6);
+  text-decoration: none;
+  font-size: var(--text-xs, 12px);
+  margin-left: auto;
+}
+
+.citation-item .citation-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   LOADING & ERROR STATES
+   ============================================================================ */
+
+.physiology-loading {
+  padding: var(--space-5, 20px);
+}
+
+.physiology-loading .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary, #1f2937) 0%,
+    var(--bg-hover, #243044) 50%,
+    var(--bg-tertiary, #1f2937) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md, 8px);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.physiology-loading .skeleton-header {
+  height: 24px;
+  width: 60%;
+}
+
+.physiology-loading .skeleton-text {
+  height: 16px;
+  width: 100%;
+}
+
+.physiology-loading .skeleton-text.short {
+  width: 40%;
+}
+
+.physiology-loading .skeleton-card {
+  height: 100px;
+  width: 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.physiology-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8, 32px);
+  text-align: center;
+}
+
+.physiology-error .error-icon {
+  font-size: 48px;
+  color: var(--error, #ef4444);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.physiology-error .error-message {
+  margin: 0 0 var(--space-4, 16px) 0;
+  font-size: var(--text-base, 16px);
+  color: var(--text-secondary, #94a3b8);
+}
+
+.physiology-error .retry-button {
+  padding: var(--space-2, 8px) var(--space-4, 16px);
+  background: var(--accent-primary, #3b82f6);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  color: white;
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--font-medium, 500);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.physiology-error .retry-button:hover {
+  background: var(--accent-primary-hover, #2563eb);
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  .physiology-panel-header {
+    padding: var(--space-3, 12px);
+  }
+
+  .physiology-complexity-selector .complexity-btn .level-label {
+    display: none;
+  }
+
+  .physiology-complexity-selector .complexity-btn {
+    min-height: 44px;
+  }
+
+  .physiology-section .section-header {
+    padding: var(--space-3, 12px);
+  }
+
+  .physiology-section .section-content {
+    padding: var(--space-3, 12px);
+  }
+
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ask-ai-form {
+    flex-direction: column;
+  }
+
+  .ask-ai-button {
+    width: 100%;
+  }
+
+  .suggested-questions .suggestion-chip {
+    font-size: 11px;
+    padding: var(--space-1, 4px) var(--space-2, 8px);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .physiology-section .section-content,
+  .physiology-loading .skeleton,
+  .physiology-complexity-selector .complexity-btn,
+  .physiology-card,
+  .ask-ai-button,
+  .related-system-link,
+  .suggestion-chip {
+    animation: none;
+    transition: none;
+  }
+}

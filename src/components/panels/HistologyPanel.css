@@ -1,0 +1,942 @@
+/**
+ * Histology Panel Styles
+ *
+ * Styles for the microscopic anatomy viewer panel including
+ * virtual microscope, magnification controls, content sections,
+ * and clinical correlations.
+ */
+
+/* ============================================
+   CSS Custom Properties (Theme Variables)
+   ============================================ */
+
+.histology-panel {
+  --histology-bg: var(--background-primary, #1a1a1a);
+  --histology-bg-secondary: var(--background-secondary, #222);
+  --histology-bg-tertiary: var(--background-tertiary, #2a2a2a);
+  --histology-text-primary: var(--text-primary, #fff);
+  --histology-text-secondary: var(--text-secondary, #888);
+  --histology-text-muted: var(--text-muted, #666);
+  --histology-border: var(--border-color, #333);
+  --histology-accent: var(--accent-primary, #4a9eff);
+  --histology-accent-hover: var(--accent-hover, #3a8eef);
+
+  /* Tissue type colors */
+  --histology-epithelial: #4a9eff;
+  --histology-connective: #22c55e;
+  --histology-muscle: #f97316;
+  --histology-nervous: #a855f7;
+
+  /* Severity colors */
+  --histology-severity-mild: #22c55e;
+  --histology-severity-moderate: #f97316;
+  --histology-severity-severe: #ef4444;
+}
+
+/* ============================================
+   Main Panel Container
+   ============================================ */
+
+.histology-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  background-color: var(--histology-bg);
+  color: var(--histology-text-primary);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.histology-panel--loading,
+.histology-panel--error {
+  min-height: 400px;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.histology-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: var(--histology-bg-secondary);
+  border-bottom: 1px solid var(--histology-border);
+}
+
+.histology-panel__title-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.histology-panel__title-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--histology-accent);
+  flex-shrink: 0;
+}
+
+.histology-panel__title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.histology-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--histology-text-primary);
+  line-height: 1.2;
+}
+
+.histology-panel__subtitle {
+  font-size: 12px;
+  color: var(--histology-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.histology-panel__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--histology-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.histology-panel__close-btn:hover {
+  background-color: var(--histology-bg-tertiary);
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__close-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================
+   Complexity Selector
+   ============================================ */
+
+.histology-panel__complexity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background-color: var(--histology-bg-secondary);
+  border-bottom: 1px solid var(--histology-border);
+}
+
+.histology-panel__complexity-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__complexity-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.histology-panel__complexity-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: var(--histology-bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: var(--histology-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.histology-panel__complexity-btn:hover {
+  background-color: var(--histology-bg);
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__complexity-btn.active {
+  background-color: var(--histology-accent);
+  border-color: var(--histology-accent);
+  color: white;
+}
+
+/* ============================================
+   Scrollable Content Area
+   ============================================ */
+
+.histology-panel__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.histology-panel__loading-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--histology-border);
+  border-top-color: var(--histology-accent);
+  border-radius: 50%;
+  animation: histology-spin 1s linear infinite;
+}
+
+@keyframes histology-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   Error State
+   ============================================ */
+
+.histology-panel__error-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+}
+
+.histology-panel__error-text {
+  color: var(--histology-severity-severe);
+  font-size: 14px;
+  text-align: center;
+}
+
+.histology-panel__retry-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: var(--histology-bg-tertiary);
+  border: 1px solid var(--histology-border);
+  border-radius: 8px;
+  color: var(--histology-text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.histology-panel__retry-btn:hover {
+  background-color: var(--histology-bg-secondary);
+  border-color: var(--histology-accent);
+}
+
+.histology-panel__retry-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================
+   Virtual Microscope Viewer
+   ============================================ */
+
+.histology-panel__viewer {
+  margin-bottom: 20px;
+  background-color: var(--histology-bg-secondary);
+  border: 1px solid var(--histology-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.histology-panel__viewer-display {
+  position: relative;
+  height: 200px;
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(74, 158, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+}
+
+.histology-panel__viewer-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.histology-panel__viewer-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--histology-accent);
+  opacity: 0.6;
+}
+
+.histology-panel__viewer-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__viewer-subtext {
+  font-size: 12px;
+  color: var(--histology-text-muted);
+}
+
+/* Labels Overlay */
+.histology-panel__viewer-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.histology-panel__viewer-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: histology-label-fade 0.3s ease-out;
+}
+
+@keyframes histology-label-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.histology-panel__viewer-label-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--histology-accent);
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.histology-panel__viewer-label-text {
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  font-size: 11px;
+  color: white;
+  white-space: nowrap;
+}
+
+/* Viewer Controls */
+.histology-panel__viewer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--histology-bg-tertiary);
+  border-top: 1px solid var(--histology-border);
+}
+
+.histology-panel__viewer-zoom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.histology-panel__zoom-level {
+  min-width: 80px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--histology-text-secondary);
+  text-align: center;
+}
+
+.histology-panel__viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.histology-panel__control-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: var(--histology-bg-secondary);
+  border: 1px solid var(--histology-border);
+  border-radius: 6px;
+  color: var(--histology-text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.histology-panel__control-btn:hover {
+  background-color: var(--histology-bg);
+  color: var(--histology-text-primary);
+  border-color: var(--histology-accent);
+}
+
+.histology-panel__control-btn.active {
+  background-color: var(--histology-accent);
+  border-color: var(--histology-accent);
+  color: white;
+}
+
+.histology-panel__control-btn--3d {
+  background-color: transparent;
+  border-style: dashed;
+}
+
+.histology-panel__control-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.histology-panel__control-text {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .histology-panel__control-text {
+    display: inline;
+  }
+}
+
+/* ============================================
+   Overview Section
+   ============================================ */
+
+.histology-panel__overview {
+  margin-bottom: 20px;
+  padding: 16px;
+  background-color: var(--histology-bg-secondary);
+  border-radius: 8px;
+  border-left: 3px solid var(--histology-accent);
+}
+
+.histology-panel__overview-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--histology-text-primary);
+}
+
+/* ============================================
+   Content Sections
+   ============================================ */
+
+.histology-panel__section {
+  margin-bottom: 12px;
+  background-color: var(--histology-bg-secondary);
+  border: 1px solid var(--histology-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.histology-panel__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  color: var(--histology-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.histology-panel__section-header:hover {
+  background-color: var(--histology-bg-tertiary);
+}
+
+.histology-panel__section-title {
+  text-align: left;
+}
+
+.histology-panel__section-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--histology-text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.histology-panel__section.expanded .histology-panel__section-icon {
+  transform: rotate(45deg);
+}
+
+.histology-panel__section-content {
+  padding: 0 16px 16px;
+  animation: histology-section-expand 0.2s ease-out;
+}
+
+@keyframes histology-section-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Lists and Items
+   ============================================ */
+
+.histology-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.histology-panel__item {
+  padding: 12px;
+  background-color: var(--histology-bg-tertiary);
+  border-radius: 6px;
+}
+
+.histology-panel__item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.histology-panel__item-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.histology-panel__item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__item-description {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__item-detail {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__item-detail strong {
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__item-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 12px;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__item-list li {
+  margin-bottom: 4px;
+}
+
+.histology-panel__item-markers {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__item-markers strong {
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__marker-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.histology-panel__marker-tag {
+  padding: 3px 8px;
+  background-color: var(--histology-bg-secondary);
+  border: 1px solid var(--histology-border);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--histology-accent);
+}
+
+/* ============================================
+   Staining Methods Grid
+   ============================================ */
+
+.histology-panel__staining-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.histology-panel__staining-card {
+  padding: 12px;
+  background-color: var(--histology-bg-tertiary);
+  border-radius: 6px;
+}
+
+.histology-panel__staining-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.histology-panel__staining-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__staining-color {
+  font-size: 11px;
+  color: var(--histology-accent);
+}
+
+.histology-panel__staining-purpose {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__staining-targets {
+  font-size: 11px;
+  color: var(--histology-text-muted);
+}
+
+.histology-panel__staining-targets strong {
+  color: var(--histology-text-secondary);
+}
+
+/* ============================================
+   Clinical Correlations
+   ============================================ */
+
+.histology-panel__clinical-item {
+  padding: 12px;
+  background-color: var(--histology-bg-tertiary);
+  border-radius: 6px;
+  border-left: 3px solid var(--histology-severity-moderate);
+}
+
+.histology-panel__clinical-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.histology-panel__clinical-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--histology-text-primary);
+}
+
+.histology-panel__clinical-severity {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+.histology-panel__clinical-findings,
+.histology-panel__clinical-significance {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--histology-text-secondary);
+}
+
+.histology-panel__clinical-findings:last-child,
+.histology-panel__clinical-significance:last-child {
+  margin-bottom: 0;
+}
+
+.histology-panel__clinical-findings strong,
+.histology-panel__clinical-significance strong {
+  color: var(--histology-text-primary);
+}
+
+/* ============================================
+   Key Terms
+   ============================================ */
+
+.histology-panel__terms {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.histology-panel__term {
+  padding: 12px;
+  background-color: var(--histology-bg-tertiary);
+  border-radius: 6px;
+}
+
+.histology-panel__term-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.histology-panel__term-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--histology-accent);
+}
+
+.histology-panel__term-pronunciation {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--histology-text-muted);
+}
+
+.histology-panel__term-definition {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--histology-text-secondary);
+}
+
+/* ============================================
+   Analogies
+   ============================================ */
+
+.histology-panel__analogies {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.histology-panel__analogy {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  background-color: var(--histology-bg-tertiary);
+  border-radius: 6px;
+}
+
+.histology-panel__analogy-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.histology-panel__analogy-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--histology-text-secondary);
+}
+
+/* ============================================
+   Clinical Notes
+   ============================================ */
+
+.histology-panel__clinical-notes {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  border-radius: 8px;
+}
+
+.histology-panel__clinical-notes-title {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--histology-severity-moderate);
+}
+
+.histology-panel__clinical-notes-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--histology-text-primary);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.histology-panel__footer {
+  padding: 16px 20px;
+  background-color: var(--histology-bg-secondary);
+  border-top: 1px solid var(--histology-border);
+}
+
+.histology-panel__ask-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--histology-accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.histology-panel__ask-btn:hover {
+  background-color: var(--histology-accent-hover);
+}
+
+.histology-panel__ask-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================
+   Dark Mode Overrides (if needed)
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .histology-panel {
+    --histology-bg: #ffffff;
+    --histology-bg-secondary: #f8f9fa;
+    --histology-bg-tertiary: #f0f1f3;
+    --histology-text-primary: #1a1a1a;
+    --histology-text-secondary: #666;
+    --histology-text-muted: #999;
+    --histology-border: #e0e0e0;
+  }
+
+  .histology-panel__viewer-display {
+    background-color: #f5f5f5;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(74, 158, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+  }
+
+  .histology-panel__viewer-label-text {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 480px) {
+  .histology-panel__header {
+    padding: 14px 16px;
+  }
+
+  .histology-panel__title-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .histology-panel__title {
+    font-size: 16px;
+  }
+
+  .histology-panel__content {
+    padding: 12px 16px;
+  }
+
+  .histology-panel__viewer-display {
+    height: 160px;
+  }
+
+  .histology-panel__staining-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .histology-panel__complexity {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .histology-panel__complexity-buttons {
+    width: 100%;
+  }
+
+  .histology-panel__complexity-btn {
+    flex: 1;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .histology-panel {
+    background-color: white;
+    color: black;
+  }
+
+  .histology-panel__close-btn,
+  .histology-panel__viewer-controls,
+  .histology-panel__footer {
+    display: none;
+  }
+
+  .histology-panel__section {
+    break-inside: avoid;
+  }
+
+  .histology-panel__section.expanded .histology-panel__section-content {
+    display: block;
+  }
+}

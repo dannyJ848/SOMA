@@ -1,0 +1,482 @@
+/**
+ * Anatomy Main Screen Styles
+ *
+ * Styling for the main anatomy screen with 3D canvas,
+ * layer controls, and context menus.
+ */
+
+/* ============================================
+   Main Screen Layout
+   ============================================ */
+
+.anatomy-main-screen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 50%, #0f0f1a 100%);
+  overflow: hidden;
+  display: flex;
+}
+
+/* ============================================
+   3D Canvas Container
+   ============================================ */
+
+.anatomy-canvas-container {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+.anatomy-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.anatomy-canvas-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #4a90d9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Health overlay toggle */
+.health-overlay-toggle {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(26, 26, 46, 0.9);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.health-overlay-toggle:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.health-overlay-toggle.active {
+  border-color: #4a90d9;
+  color: #4a90d9;
+  background: rgba(74, 144, 217, 0.15);
+}
+
+/* ============================================
+   Layer Controller Panel
+   ============================================ */
+
+.layer-controller {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 240px;
+  background: rgba(26, 26, 46, 0.95);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.layer-controller-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.layer-controller-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.layer-quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.layer-quick-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.layer-quick-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Layer presets */
+.layer-presets {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+}
+
+.layer-preset-btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.layer-preset-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.layer-preset-btn.active {
+  background: #4a90d9;
+  border-color: #4a90d9;
+  color: white;
+}
+
+/* Layer list */
+.layer-list {
+  padding: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.layer-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+}
+
+.layer-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.layer-toggle-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.layer-color-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.layer-name {
+  flex: 1;
+  text-align: left;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.layer-toggle-btn.active .layer-name {
+  color: white;
+}
+
+.layer-visibility-icon {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.layer-toggle-btn.active .layer-visibility-icon {
+  color: #4a90d9;
+}
+
+/* ============================================
+   Regional Context Menu
+   ============================================ */
+
+.regional-context-menu {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(400px, calc(100% - 48px));
+  background: rgba(26, 26, 46, 0.98);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.context-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.context-menu-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.context-menu-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.context-menu-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.context-menu-content {
+  padding: 16px 20px 20px;
+}
+
+/* Health summary badges */
+.context-health-summary {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.health-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.health-badge.condition {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.health-badge.symptom {
+  background: rgba(255, 170, 0, 0.15);
+  color: #ffaa00;
+  border: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.health-badge.medication {
+  background: rgba(74, 144, 217, 0.15);
+  color: #4a90d9;
+  border: 1px solid rgba(74, 144, 217, 0.3);
+}
+
+/* Action buttons */
+.context-menu-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.context-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.context-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.context-action-btn.primary {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #4a90d9, #357abd);
+  border-color: transparent;
+  color: white;
+  justify-content: center;
+}
+
+.context-action-btn.primary:hover {
+  background: linear-gradient(135deg, #5a9fe9, #4588cb);
+}
+
+.context-action-btn.ai {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(75, 0, 130, 0.2));
+  border-color: rgba(138, 43, 226, 0.3);
+}
+
+.context-action-btn.ai:hover {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.3));
+  border-color: rgba(138, 43, 226, 0.5);
+}
+
+/* ============================================
+   Help Hint
+   ============================================ */
+
+.anatomy-help-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: rgba(26, 26, 46, 0.8);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.anatomy-help-hint span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .layer-controller {
+    top: auto;
+    bottom: 100px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 300px;
+  }
+
+  .regional-context-menu {
+    width: calc(100% - 32px);
+    bottom: 16px;
+  }
+
+  .context-menu-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .context-action-btn.primary {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .layer-controller {
+    max-height: 250px;
+  }
+
+  .layer-presets {
+    padding: 8px 12px;
+  }
+
+  .layer-preset-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  .context-menu-header h4 {
+    font-size: 16px;
+  }
+
+  .context-action-btn {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   Dark Mode Scrollbar
+   ============================================ */
+
+.layer-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.layer-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.layer-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.layer-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,915 @@
+/**
+ * Voice Medical Input Styles
+ *
+ * Medical-aware speech recognition component with visual feedback,
+ * waveform animations, and medical terminology highlighting.
+ */
+
+/* ============================================
+   CSS Variables
+   ============================================ */
+
+.voice-medical {
+  --vm-primary: #4f46e5;
+  --vm-primary-dark: #4338ca;
+  --vm-primary-light: #818cf8;
+  --vm-listening: #ef4444;
+  --vm-listening-dark: #dc2626;
+  --vm-processing: #f59e0b;
+  --vm-processing-dark: #d97706;
+  --vm-error: #ef4444;
+  --vm-success: #10b981;
+  --vm-background: #1a1a2e;
+  --vm-surface: #252540;
+  --vm-surface-elevated: #2d2d4a;
+  --vm-text-primary: #f0f0f5;
+  --vm-text-secondary: #a0a0b8;
+  --vm-text-muted: #6b6b80;
+  --vm-border: rgba(255, 255, 255, 0.1);
+
+  /* Term badge colors */
+  --vm-term-anatomical: #3b82f6;
+  --vm-term-condition: #ef4444;
+  --vm-term-procedure: #10b981;
+  --vm-term-general: #8b5cf6;
+
+  /* Question type colors */
+  --vm-question-definition: #3b82f6;
+  --vm-question-physiology: #10b981;
+  --vm-question-mechanism: #f59e0b;
+  --vm-question-etiology: #ef4444;
+  --vm-question-clinical: #ec4899;
+  --vm-question-education: #8b5cf6;
+  --vm-question-followup: #6366f1;
+  --vm-question-general: #6b7280;
+}
+
+/* ============================================
+   Container
+   ============================================ */
+
+.voice-medical {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--vm-surface);
+  border-radius: 16px;
+  border: 1px solid var(--vm-border);
+  transition: all 0.3s ease;
+}
+
+.voice-medical:focus-within {
+  border-color: var(--vm-primary-light);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* ============================================
+   Size Variants
+   ============================================ */
+
+.voice-medical--small {
+  padding: 16px;
+  gap: 12px;
+}
+
+.voice-medical--small .voice-medical__button {
+  width: 56px;
+  height: 56px;
+}
+
+.voice-medical--small .voice-medical__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.voice-medical--medium {
+  padding: 20px;
+  gap: 14px;
+}
+
+.voice-medical--medium .voice-medical__button {
+  width: 72px;
+  height: 72px;
+}
+
+.voice-medical--medium .voice-medical__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.voice-medical--large {
+  padding: 24px;
+  gap: 16px;
+}
+
+.voice-medical--large .voice-medical__button {
+  width: 96px;
+  height: 96px;
+}
+
+.voice-medical--large .voice-medical__icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* ============================================
+   State Variants
+   ============================================ */
+
+.voice-medical--listening {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.05) 0%,
+    rgba(239, 68, 68, 0.1) 100%
+  );
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.voice-medical--processing {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.05) 0%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.voice-medical--error {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.05) 0%,
+    rgba(239, 68, 68, 0.1) 100%
+  );
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   Context Indicator
+   ============================================ */
+
+.voice-medical__context {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(79, 70, 229, 0.1);
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.voice-medical__context-label {
+  color: var(--vm-text-muted);
+}
+
+.voice-medical__context-region {
+  color: var(--vm-primary-light);
+  font-weight: 500;
+}
+
+/* ============================================
+   Microphone Button
+   ============================================ */
+
+.voice-medical__button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--vm-primary) 0%, var(--vm-primary-dark) 100%);
+  color: white;
+  box-shadow:
+    0 4px 16px rgba(79, 70, 229, 0.4),
+    0 0 0 0 rgba(79, 70, 229, 0);
+  overflow: visible;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.voice-medical__button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow:
+    0 6px 24px rgba(79, 70, 229, 0.5),
+    0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+.voice-medical__button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.voice-medical__button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 4px 16px rgba(79, 70, 229, 0.4),
+    0 0 0 4px rgba(79, 70, 229, 0.3);
+}
+
+.voice-medical__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Listening state */
+.voice-medical__button--listening {
+  background: linear-gradient(135deg, var(--vm-listening) 0%, var(--vm-listening-dark) 100%);
+  box-shadow:
+    0 4px 24px rgba(239, 68, 68, 0.5),
+    0 0 0 0 rgba(239, 68, 68, 0);
+  animation: voice-medical-pulse-glow 1.5s ease-in-out infinite;
+}
+
+.voice-medical__button--listening:hover:not(:disabled) {
+  box-shadow:
+    0 6px 32px rgba(239, 68, 68, 0.6),
+    0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+/* Processing state */
+.voice-medical__button--processing {
+  background: linear-gradient(135deg, var(--vm-processing) 0%, var(--vm-processing-dark) 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+  cursor: wait;
+}
+
+/* Error state */
+.voice-medical__button--error {
+  background: linear-gradient(135deg, var(--vm-error) 0%, #b91c1c 100%);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+}
+
+/* ============================================
+   Button Content & Icons
+   ============================================ */
+
+.voice-medical__button-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.voice-medical__icon {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.voice-medical__icon--listening {
+  animation: voice-medical-icon-bounce 0.6s ease-in-out infinite;
+}
+
+.voice-medical__icon--processing {
+  animation: voice-medical-spin 1s linear infinite;
+}
+
+.voice-medical__icon--error {
+  animation: voice-medical-shake 0.5s ease-in-out;
+}
+
+/* ============================================
+   Pulse Animations
+   ============================================ */
+
+.voice-medical__pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 3px solid var(--vm-listening);
+  animation: voice-medical-pulse-ring 1.5s ease-out infinite;
+  pointer-events: none;
+}
+
+.voice-medical__pulse--delayed {
+  animation-delay: 0.5s;
+}
+
+/* ============================================
+   Status Text
+   ============================================ */
+
+.voice-medical__status {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vm-text-secondary);
+  text-align: center;
+  min-height: 20px;
+}
+
+.voice-medical--listening .voice-medical__status {
+  color: var(--vm-listening);
+}
+
+.voice-medical--processing .voice-medical__status {
+  color: var(--vm-processing);
+}
+
+.voice-medical--error .voice-medical__status {
+  color: var(--vm-error);
+}
+
+/* ============================================
+   Waveform Visualization
+   ============================================ */
+
+.voice-medical__waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 48px;
+  width: 100%;
+  max-width: 280px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+}
+
+.voice-medical__waveform-bar {
+  width: 4px;
+  min-height: 8px;
+  max-height: 40px;
+  height: 20%;
+  background: linear-gradient(
+    180deg,
+    var(--vm-listening) 0%,
+    var(--vm-listening-dark) 100%
+  );
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+.voice-medical__waveform--active .voice-medical__waveform-bar {
+  animation: voice-medical-wave 0.5s ease-in-out infinite alternate;
+}
+
+/* Varying bar heights for more natural waveform */
+.voice-medical__waveform-bar:nth-child(4n+1) { animation-duration: 0.35s; }
+.voice-medical__waveform-bar:nth-child(4n+2) { animation-duration: 0.45s; }
+.voice-medical__waveform-bar:nth-child(4n+3) { animation-duration: 0.4s; }
+.voice-medical__waveform-bar:nth-child(4n) { animation-duration: 0.5s; }
+
+/* ============================================
+   Transcript Container
+   ============================================ */
+
+.voice-medical__transcript-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  animation: voice-medical-fade-in 0.3s ease;
+}
+
+.voice-medical__transcript {
+  width: 100%;
+  padding: 16px;
+  background: var(--vm-surface-elevated);
+  border-radius: 12px;
+  border: 1px solid var(--vm-border);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--vm-text-primary);
+  text-align: center;
+  min-height: 56px;
+  word-wrap: break-word;
+}
+
+.voice-medical__transcript:empty::before,
+.voice-medical__transcript:has(:not(*))::before {
+  content: 'Speak your medical question...';
+  color: var(--vm-text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   Question Type Indicator
+   ============================================ */
+
+.voice-medical__question-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(79, 70, 229, 0.15);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  color: var(--vm-primary-light);
+  animation: voice-medical-slide-up 0.2s ease;
+}
+
+.voice-medical__question-type-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.voice-medical__question-type-label {
+  white-space: nowrap;
+}
+
+/* Question type color variants */
+.voice-medical__question-type--definition {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: var(--vm-question-definition);
+}
+
+.voice-medical__question-type--physiology {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--vm-question-physiology);
+}
+
+.voice-medical__question-type--mechanism {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--vm-question-mechanism);
+}
+
+.voice-medical__question-type--etiology {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--vm-question-etiology);
+}
+
+.voice-medical__question-type--clinical {
+  background: rgba(236, 72, 153, 0.15);
+  border-color: rgba(236, 72, 153, 0.3);
+  color: var(--vm-question-clinical);
+}
+
+.voice-medical__question-type--education {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: var(--vm-question-education);
+}
+
+.voice-medical__question-type--followup {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--vm-question-followup);
+}
+
+.voice-medical__question-type--general {
+  background: rgba(107, 114, 128, 0.15);
+  border-color: rgba(107, 114, 128, 0.3);
+  color: var(--vm-question-general);
+}
+
+/* ============================================
+   Medical Term Badges
+   ============================================ */
+
+.voice-medical__terms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  animation: voice-medical-slide-up 0.3s ease;
+}
+
+.voice-medical__term-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  animation: voice-medical-pop 0.2s ease;
+}
+
+.voice-medical__term-badge--anatomical {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--vm-term-anatomical);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.voice-medical__term-badge--condition {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--vm-term-condition);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.voice-medical__term-badge--procedure {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--vm-term-procedure);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.voice-medical__term-badge--general {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--vm-term-general);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.voice-medical__term-badge--more {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--vm-text-muted);
+  border: 1px solid var(--vm-border);
+}
+
+/* ============================================
+   Error State
+   ============================================ */
+
+.voice-medical__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 300px;
+  animation: voice-medical-shake 0.5s ease;
+}
+
+.voice-medical__error-message {
+  font-size: 14px;
+  color: var(--vm-error);
+  text-align: center;
+}
+
+.voice-medical__retry-button {
+  padding: 10px 24px;
+  background: var(--vm-error);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.voice-medical__retry-button:hover {
+  background: var(--vm-listening-dark);
+  transform: translateY(-1px);
+}
+
+.voice-medical__retry-button:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   Cancel Button
+   ============================================ */
+
+.voice-medical__cancel-button {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--vm-border);
+  border-radius: 8px;
+  color: var(--vm-text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.voice-medical__cancel-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--vm-text-muted);
+  color: var(--vm-text-primary);
+}
+
+/* ============================================
+   Hints
+   ============================================ */
+
+.voice-medical__hints {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.voice-medical__hint {
+  font-size: 12px;
+  color: var(--vm-text-muted);
+  text-align: center;
+  margin: 0;
+  font-style: italic;
+}
+
+.voice-medical__hint--context {
+  color: var(--vm-primary-light);
+  font-style: normal;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes voice-medical-pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 24px rgba(239, 68, 68, 0.5),
+      0 0 0 0 rgba(239, 68, 68, 0);
+  }
+  50% {
+    box-shadow:
+      0 4px 32px rgba(239, 68, 68, 0.7),
+      0 0 24px rgba(239, 68, 68, 0.3);
+  }
+}
+
+@keyframes voice-medical-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes voice-medical-wave {
+  0% {
+    height: 15%;
+    opacity: 0.7;
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes voice-medical-icon-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes voice-medical-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes voice-medical-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes voice-medical-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes voice-medical-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes voice-medical-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   Dark Mode Support (default is dark)
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .voice-medical {
+    --vm-background: #f8fafc;
+    --vm-surface: #ffffff;
+    --vm-surface-elevated: #f1f5f9;
+    --vm-text-primary: #1e293b;
+    --vm-text-secondary: #64748b;
+    --vm-text-muted: #94a3b8;
+    --vm-border: rgba(0, 0, 0, 0.1);
+  }
+
+  .voice-medical__button {
+    box-shadow:
+      0 4px 16px rgba(79, 70, 229, 0.25),
+      0 0 0 0 rgba(79, 70, 229, 0);
+  }
+
+  .voice-medical__button--listening {
+    box-shadow:
+      0 4px 24px rgba(239, 68, 68, 0.35),
+      0 0 0 0 rgba(239, 68, 68, 0);
+  }
+
+  .voice-medical__waveform {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .voice-medical,
+  .voice-medical__button,
+  .voice-medical__icon,
+  .voice-medical__pulse,
+  .voice-medical__waveform-bar,
+  .voice-medical__transcript-container,
+  .voice-medical__question-type,
+  .voice-medical__terms,
+  .voice-medical__term-badge,
+  .voice-medical__error {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+
+  .voice-medical__button--listening {
+    box-shadow: 0 4px 24px rgba(239, 68, 68, 0.5);
+  }
+
+  .voice-medical__pulse {
+    display: none;
+  }
+
+  .voice-medical__waveform--active .voice-medical__waveform-bar {
+    animation: none;
+    height: 50%;
+  }
+
+  /* Keep spinner animation for processing state */
+  .voice-medical__icon--processing {
+    animation: voice-medical-spin 2s linear infinite !important;
+  }
+}
+
+/* ============================================
+   Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 768px) {
+  .voice-medical {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  /* Larger touch targets on mobile */
+  .voice-medical--large .voice-medical__button {
+    width: 88px;
+    height: 88px;
+  }
+
+  .voice-medical--medium .voice-medical__button {
+    width: 72px;
+    height: 72px;
+  }
+
+  .voice-medical__transcript {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .voice-medical__waveform {
+    max-width: 240px;
+    gap: 2px;
+  }
+
+  .voice-medical__waveform-bar {
+    width: 3px;
+  }
+
+  .voice-medical__hints {
+    padding: 0 8px;
+  }
+
+  .voice-medical__hint {
+    font-size: 11px;
+  }
+
+  .voice-medical__terms {
+    gap: 6px;
+  }
+
+  .voice-medical__term-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .voice-medical__question-type {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .voice-medical__cancel-button,
+  .voice-medical__retry-button {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 375px) {
+  .voice-medical {
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .voice-medical--large .voice-medical__button {
+    width: 80px;
+    height: 80px;
+  }
+
+  .voice-medical__transcript-container {
+    gap: 10px;
+  }
+
+  .voice-medical__transcript {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  .voice-medical {
+    border-width: 2px;
+    border-color: currentColor;
+  }
+
+  .voice-medical__button {
+    border: 2px solid white;
+  }
+
+  .voice-medical__transcript {
+    border-width: 2px;
+  }
+
+  .voice-medical__term-badge,
+  .voice-medical__question-type {
+    border-width: 2px;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .voice-medical {
+    display: none;
+  }
+}

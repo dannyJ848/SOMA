@@ -1,8 +1,8 @@
 # The Biological Self - Master Blueprint
 
-> **Version**: 2.2
+> **Version**: 2.3
 > **Last Updated**: 2026-01-28
-> **Status**: Active Development (Phase 6) - Layer-Condition Integration & AI Voice Navigation
+> **Status**: Active Development (Phase 6) - Layer-Condition Integration, AI Voice Navigation & i18n Bilingual Support
 
 ---
 
@@ -36,7 +36,8 @@ Follow the continuation protocol. Launch agents in batches of 10.
 6. [**Layer-Condition Integration**](#layer-condition-integration) ⭐ NEW
 7. [**Universal 5-Level Complexity**](#universal-5-level-complexity) ⭐ NEW
 8. [**AI Voice Navigation**](#ai-voice-navigation) ⭐ NEW
-9. [Feature Status (100 User Stories)](#feature-status)
+9. [**Bilingual i18n Support**](#bilingual-i18n-support) ⭐ NEW
+10. [Feature Status (100 User Stories)](#feature-status)
 10. [Content Module Blueprint](#content-module-blueprint)
 11. [Batch Completion Plan](#batch-completion-plan)
 12. [Technical Specifications](#technical-specifications)
@@ -829,6 +830,130 @@ navigateFromAI('heart', 'User asked about cardiac function');
 - ✅ Smart Navigation Suggestions
 - ✅ Voice-Activated Anatomy Search
 - ✅ TypeScript declarations (0 errors)
+
+---
+
+## Bilingual i18n Support
+
+### Vision
+
+The Biological Self app supports **English and Spanish** (bilingual) throughout the entire UI. Users can switch languages instantly, and all text - from navigation to medical terminology - is properly translated.
+
+**Language Switching:**
+- Toggle between English (🇺🇸) and Spanish (🇪🇸)
+- Persistent preference (saved to localStorage)
+- Instant switching without page reload
+- Language switcher in header/settings
+
+**AI Chat Bilingual:**
+- AI responds in user's selected language
+- Spanish medical terminology support
+- System prompts adapted for Spanish
+
+### Architecture
+
+```
+src/i18n/
+├── types.ts                        # TypeScript types
+├── I18nContext.tsx                 # React context provider
+├── useI18n.ts                      # Translation hooks
+├── loader.ts                       # Translation file loader
+├── utils.ts                        # Date/number formatting
+├── i18n.css                        # Language switcher styles
+├── translations/
+│   ├── en/                         # English translations
+│   │   ├── common.ts               # App, actions, status
+│   │   ├── navigation.ts           # Nav items
+│   │   ├── dashboard.ts            # Dashboard widgets
+│   │   ├── symptoms.ts             # Symptom tracking
+│   │   ├── anatomy.ts              # 3D viewer
+│   │   ├── chat.ts                 # AI chat
+│   │   ├── medications.ts          # Medications
+│   │   ├── labs.ts                 # Lab results
+│   │   ├── settings.ts             # Settings
+│   │   ├── errors.ts               # Error messages
+│   │   ├── onboarding.ts           # First-time setup
+│   │   ├── voice.ts                # Voice commands
+│   │   └── complexity.ts           # Learning levels
+│   └── es/                         # Spanish translations
+│       └── (same structure)
+```
+
+### Components
+
+**1. Language Switcher** (`src/components/LanguageSwitcher.tsx`)
+- 4 variants: dropdown, buttons, toggle, minimal
+- `LanguageToggle` - Compact toggle button
+- `LanguageMenu` - Header dropdown menu
+- Flag icons + native language names
+
+**2. Translation Hooks** (`src/i18n/useI18n.ts`)
+- `useI18n()` - Full i18n context access
+- `useTranslation(namespace)` - Namespaced translations
+- `useCommonTranslation()` - Common namespace shortcut
+- Interpolation support: `t('key', { name: 'John' })`
+
+**3. Translation Loader** (`src/i18n/loader.ts`)
+- Lazy loading of translation files
+- Caching for performance
+- Namespace organization
+- Preloading support
+
+**4. Formatting Utilities** (`src/i18n/utils.ts`)
+- `formatDate()` - Locale-aware dates
+- `formatNumber()` - Locale-aware numbers
+- `formatRelativeTime()` - "2 hours ago" / "hace 2 horas"
+- `detectBrowserLanguage()` - Auto-detect preference
+
+### Usage Example
+
+```tsx
+import { useTranslation } from './i18n/useI18n';
+import { LanguageToggle } from './components/LanguageSwitcher';
+
+function Dashboard() {
+  const { t } = useTranslation('dashboard');
+  
+  return (
+    <div>
+      <LanguageToggle />
+      <h1>{t('dashboard.title')}</h1>
+      <p>{t('dashboard.vitals.heartRate')}</p>
+    </div>
+  );
+}
+```
+
+### AI Bilingual Support
+
+The medical educator AI supports Spanish responses:
+
+```typescript
+const response = await askEducator({
+  question: userQuestion,
+  context: {
+    domain: 'symptoms',
+    language: 'es',  // Spanish response
+  }
+});
+```
+
+Spanish system prompts include:
+- Full Spanish base prompt
+- Spanish domain-specific prompts (symptoms, anatomy, pharmacology, etc.)
+- Medical terminology in Spanish
+- Disclaimer in Spanish
+
+### Implementation Status
+
+- ✅ I18n Infrastructure (types, context, loader, utils)
+- ✅ 26 Translation Files (13 namespaces × 2 languages)
+- ✅ Language Switcher Components (4 variants)
+- ✅ App.tsx Integration (navigation, dashboard, auth)
+- ✅ ChatView.tsx Integration (chat interface)
+- ✅ Timeline View Integration
+- ✅ AI Bilingual Support (Spanish prompts)
+- ✅ TypeScript: Clean build
 
 ---
 

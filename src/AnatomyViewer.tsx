@@ -2,11 +2,12 @@ import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHand
 import { Canvas, useThree, useFrame, ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
-import { LayerPanel, useLayerState } from './LayerPanel';
+import { LayerPanel, useLayerState, LAYER_PRESETS } from './LayerPanel';
 import { StructureInfoPanel } from './StructureInfoPanel';
 import { AnatomyChatPanel } from './AnatomyChatPanel';
 import { HistologyViewer } from './HistologyViewer';
 import { UnifiedEducationPanel } from './education';
+import { RegionExplorer, type SelectedRegion, type UserHealthData } from './components/RegionExplorer';
 import { type DashboardData } from './utils/anatomyContextBuilder';
 import { type BodyProportions, applyProportionsToStructure } from './utils/bodyProportionCalculator';
 import {
@@ -615,6 +616,10 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   // Education panel state
   const [showEducationPanel, setShowEducationPanel] = useState(false);
 
+  // RegionExplorer integration state
+  const [useRegionExplorer, setUseRegionExplorer] = useState(true);
+  const [regionExplorerComplexity, setRegionExplorerComplexity] = useState<1 | 2 | 3 | 4 | 5>(3);
+
   // External highlight state
   const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
 
@@ -771,6 +776,54 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const handleCloseEducationPanel = useCallback(() => {
     setShowEducationPanel(false);
   }, []);
+
+  // RegionExplorer callbacks
+  const handleRegionExplorerDeselect = useCallback(() => {
+    setSelectedStructure(null);
+    setShowChatPanel(false);
+    if (onStructureDeselect) {
+      onStructureDeselect();
+    }
+  }, [onStructureDeselect]);
+
+  const handleRegionExplorerLayerChange = useCallback((layerId: string, visible: boolean, opacity?: number) => {
+    if (visible !== isVisible(layerId)) {
+      toggleLayer(layerId);
+    }
+    if (opacity !== undefined) {
+      setOpacity(layerId, opacity);
+    }
+  }, [isVisible, toggleLayer, setOpacity]);
+
+  const handleRegionExplorerAIQuery = useCallback((query: string, context: { regionId: string; regionName: string }) => {
+    // Open the chat panel with the query
+    setShowChatPanel(true);
+    // In a real implementation, you would pass the query to the chat panel
+    console.log('AI Query:', query, 'Context:', context);
+  }, []);
+
+  const handleRegionExplorerOpenEncyclopedia = useCallback((entryId: string) => {
+    // Navigate to encyclopedia entry - could open a modal or navigate
+    console.log('Open encyclopedia entry:', entryId);
+  }, []);
+
+  // Wrapper to convert preset ID to LayerPreset object for RegionExplorer
+  const handleRegionExplorerApplyPreset = useCallback((presetId: string) => {
+    // Find the preset by ID from LAYER_PRESETS
+    const preset = LAYER_PRESETS.find(p => p.id === presetId);
+    if (preset) {
+      applyPreset(preset);
+    }
+  }, [applyPreset]);
+
+  // Create SelectedRegion object for RegionExplorer
+  const selectedRegionForExplorer: SelectedRegion | null = useMemo(() => {
+    if (!selectedStructure) return null;
+    return {
+      id: selectedStructure.id,
+      name: selectedStructure.name,
+    };
+  }, [selectedStructure]);
 
   // Handle clicking a structure from within histology viewer
   const handleHistologyStructureClick = useCallback((structureId: string) => {
@@ -1270,6 +1323,13 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
               >
                 Mem
               </button>
+              <button
+                className={useRegionExplorer ? 'active' : ''}
+                onClick={() => setUseRegionExplorer(!useRegionExplorer)}
+                title={useRegionExplorer ? 'Switch to legacy panels' : 'Switch to Region Explorer'}
+              >
+                {useRegionExplorer ? 'Explorer' : 'Legacy'}
+              </button>
             </>
           )}
         </div>
@@ -1471,8 +1531,27 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
           </div>
         )}
 
-        {/* Structure Info Panel */}
-        {selectedStructure && !showChatPanel && !showHistologyViewer && !showEducationPanel && (
+        {/* RegionExplorer - New integrated panel system */}
+        {useRegionExplorer && selectedStructure && !showHistologyViewer && (
+          <div className="region-explorer-container">
+            <RegionExplorer
+              selectedRegion={selectedRegionForExplorer}
+              onDeselect={handleRegionExplorerDeselect}
+              onLayerChange={handleRegionExplorerLayerChange}
+              onShowAllLayers={showAll}
+              onHideAllLayers={hideAll}
+              onApplyLayerPreset={handleRegionExplorerApplyPreset}
+              layerStates={layerStates}
+              onAIQuery={handleRegionExplorerAIQuery}
+              onOpenEncyclopedia={handleRegionExplorerOpenEncyclopedia}
+              dashboardData={dashboardData as Record<string, unknown> | null}
+              initialComplexityLevel={regionExplorerComplexity}
+            />
+          </div>
+        )}
+
+        {/* Legacy panels - shown when RegionExplorer is disabled */}
+        {!useRegionExplorer && selectedStructure && !showChatPanel && !showHistologyViewer && !showEducationPanel && (
           <div className="structure-info-container">
             <StructureInfoPanel
               structureId={selectedStructure.id}
@@ -1490,7 +1569,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
         )}
 
         {/* Anatomy Chat Panel */}
-        {selectedStructure && showChatPanel && !showHistologyViewer && (
+        {!useRegionExplorer && selectedStructure && showChatPanel && !showHistologyViewer && (
           <AnatomyChatPanel
             structureId={selectedStructure.id}
             structureName={selectedStructure.name}
@@ -1512,8 +1591,8 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
           </div>
         )}
 
-        {/* Unified Education Panel - Histology, Pathology, Physiology */}
-        {selectedStructure && showEducationPanel && (
+        {/* Unified Education Panel - Histology, Pathology, Physiology (legacy) */}
+        {!useRegionExplorer && selectedStructure && showEducationPanel && (
           <div className="education-panel-container">
             <UnifiedEducationPanel
               regionId={selectedStructure.id}

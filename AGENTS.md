@@ -3,11 +3,12 @@
 This file captures patterns, gotchas, and conventions discovered during development.
 
 ## CURRENT STATUS (2026-01-28)
-- **TypeScript**: ✅ CLEAN BUILD (0 errors)
-- **Phase**: 4 - Advanced Medical Simulation Platform
+- **TypeScript**: 🔄 22 errors (pre-existing, not i18n related)
+- **i18n**: ✅ CLEAN (0 errors) - Bilingual support complete
+- **Phase**: 6 - Layer-Condition Integration, AI Voice Navigation & i18n
 - **iOS**: TestFlight deployment configured and ready
-- **Content**: Nutrition science modules complete and working
-- **Next**: First TestFlight build upload
+- **Content**: 2,719 educational files
+- **Next**: Fix remaining TypeScript errors, TestFlight deployment
 
 ## Project Vision
 
@@ -258,6 +259,63 @@ BIOSELF_PASSPHRASE=test123 npx tsx <script>.ts
 # (See Gotchas #7, #8, #9 above)
 ```
 ```
+
+## Bilingual Support (i18n)
+
+The app now supports **English** and **Spanish** throughout.
+
+### Usage in Components
+
+```tsx
+import { useTranslation } from './i18n/useI18n';
+
+function MyComponent() {
+  const { t } = useTranslation('namespace');
+  return <h1>{t('key')}</h1>;
+}
+```
+
+### Language Switcher
+
+```tsx
+import { LanguageSwitcher, LanguageToggle } from './components/LanguageSwitcher';
+
+<LanguageSwitcher variant="dropdown" />  // Full dropdown
+<LanguageToggle />                        // Compact toggle
+```
+
+### Translation Files
+
+Located in `src/i18n/translations/{en,es}/`:
+- `common.ts` - Shared UI strings
+- `navigation.ts` - Nav items
+- `dashboard.ts` - Dashboard widgets
+- `symptoms.ts` - Symptom tracking
+- `anatomy.ts` - 3D viewer
+- `chat.ts` - AI chat
+- `medications.ts` - Medications
+- `labs.ts` - Lab results
+- `settings.ts` - Settings
+- `errors.ts` - Error messages
+- `onboarding.ts` - First-time setup
+- `voice.ts` - Voice commands
+- `complexity.ts` - Learning levels
+
+### AI Bilingual Support
+
+The medical educator AI supports Spanish:
+
+```typescript
+const response = await askEducator({
+  question: userQuestion,
+  context: {
+    domain: 'symptoms',
+    language: 'es',  // Spanish response
+  }
+});
+```
+
+See `src/i18n/README.md` for full documentation.
 
 ## TestFlight Deployment
 

@@ -1,4 +1,4 @@
-# The Biological Self - Master Blueprint
+# SOMA - Master Blueprint
 
 > **Version**: 3.0
 > **Last Updated**: 2026-01-28
@@ -49,7 +49,7 @@ Follow the continuation protocol. Launch agents in batches of 10.
 
 ## Project Vision
 
-**The Biological Self** is a privacy-first, offline-capable medical education and health tracking desktop application built with Tauri (Rust) and React. It combines:
+**SOMA** is a privacy-first, offline-capable medical education and health tracking desktop application built with Tauri (Rust) and React. It combines:
 
 - **3D Anatomical Visualization** (Three.js with Z-Anatomy models)
 - **Personal Health Data Tracking** (encrypted local storage)
@@ -85,7 +85,7 @@ biological-self/
 │   ├── content/            # Educational Content (521+ files)
 │   ├── ai/                 # Ollama Integration
 │   ├── rag/                # RAG Pipeline
-│   ├── biological-self/    # Health Data Store
+│   ├── soma/               # Health Data Store
 │   ├── exploration/        # Symptom-Anatomy Mapping
 │   ├── medical-simulation/ # Medications, Conditions
 │   └── intent-prediction/  # Adaptive UI System
@@ -330,7 +330,7 @@ interface AnatomyPatientBridge {
 }
 
 interface PatientCondition {
-  condition: Condition;          // From BiologicalSelf
+  condition: Condition;          // From SOMA
   affectedRegions: {
     regionId: string;            // 'body.upper-limb.forearm.right'
     laterality: 'left' | 'right' | 'bilateral';
@@ -344,7 +344,7 @@ interface PatientCondition {
 ### Extended Condition Model
 
 ```typescript
-// core/biological-self/types.ts - EXTENDED
+// core/soma/types.ts - EXTENDED
 
 interface Condition {
   // ... existing fields ...
@@ -447,7 +447,7 @@ const LAB_ORGAN_MAP: Record<string, OrganMapping> = {
 // src/anatomy/HealthOverlay.tsx
 
 interface HealthOverlayProps {
-  patientData: BiologicalSelf;
+  patientData: SomaHealthData;
   anatomyBridge: AnatomyPatientBridge;
 }
 
@@ -905,7 +905,7 @@ const config: VoiceConfig = {
 
 ### Vision
 
-The Biological Self app supports **English and Spanish** (bilingual) throughout the entire UI. Users can switch languages instantly, and all text - from navigation to medical terminology - is properly translated.
+The SOMA app supports **English and Spanish** (bilingual) throughout the entire UI. Users can switch languages instantly, and all text - from navigation to medical terminology - is properly translated.
 
 **Language Switching:**
 - Toggle between English (🇺🇸) and Spanish (🇪🇸)
@@ -2234,4 +2234,4 @@ find core/content -type d | sort
 
 ---
 
-*This document is the master reference for The Biological Self project. Update it when major changes occur.*
+*This document is the master reference for the SOMA project. Update it when major changes occur.*

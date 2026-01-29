@@ -1,6 +1,6 @@
 name: biological-self
 options:
-  bundleIdPrefix: com.dannygomez.biological-self
+  bundleIdPrefix: com.dannygomez.soma
   deploymentTarget:
     iOS: 14.0
 fileGroups: [../../src]
@@ -10,8 +10,8 @@ configs:
 settingGroups:
   app:
     base:
-      PRODUCT_NAME: Biological Self
-      PRODUCT_BUNDLE_IDENTIFIER: com.dannygomez.biological-self
+      PRODUCT_NAME: SOMA
+      PRODUCT_BUNDLE_IDENTIFIER: com.dannygomez.soma
 targetTemplates:
   app:
     type: application

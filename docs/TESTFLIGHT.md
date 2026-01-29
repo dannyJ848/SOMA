@@ -1,6 +1,6 @@
 # TestFlight Deployment Guide
 
-This guide covers building and deploying Biological Self to TestFlight for beta testing.
+This guide covers building and deploying SOMA to TestFlight for beta testing.
 
 ## Prerequisites
 
@@ -21,10 +21,10 @@ This guide covers building and deploying Biological Self to TestFlight for beta 
 2. Go to "My Apps" → "+" → "New App"
 3. Fill in:
    - **Platforms**: iOS
-   - **Name**: Biological Self
+   - **Name**: SOMA
    - **Primary Language**: English
-   - **Bundle ID**: com.dannygomez.biological-self
-   - **SKU**: biological-self-001
+   - **Bundle ID**: com.dannygomez.soma
+   - **SKU**: soma-001
    - **User Access**: Full Access
 
 #### Generate API Key (Recommended for CI/CD)
@@ -66,7 +66,7 @@ fastlane ios screenshots
 
 ### Method 3: Xcode GUI (For Debugging)
 
-1. Open `src-tauri/gen/apple/biological-self.xcworkspace` in Xcode
+1. Open `src-tauri/gen/apple/soma.xcworkspace` in Xcode
 2. Select "Any iOS Device (arm64)" as the target
 3. Product → Archive
 4. Once archived, click "Distribute App"

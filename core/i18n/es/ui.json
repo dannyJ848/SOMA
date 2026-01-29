@@ -283,7 +283,7 @@
     "privacyNotice": "Sus datos estan cifrados y almacenados solo en este dispositivo"
   },
   "onboarding": {
-    "welcome": "Bienvenido a Biological Self",
+    "welcome": "Bienvenido a SOMA",
     "letsGetStarted": "Comencemos",
     "tellUsAboutYourself": "Cuentenos sobre usted",
     "personalizeExperience": "Personalizar su experiencia",
@@ -448,7 +448,7 @@
     "creating": "Creando..."
   },
   "welcome": {
-    "title": "Bienvenido a Biological Self",
+    "title": "Bienvenido a SOMA",
     "subtitle": "Su companero de salud privado",
     "yourDataStaysHere": "Sus datos se quedan aqui",
     "encryptedStorageDesc": "El cifrado AES-256 protege todos sus datos de salud",

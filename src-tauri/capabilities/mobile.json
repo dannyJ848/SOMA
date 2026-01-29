@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/mobile-schema.json",
   "identifier": "mobile",
-  "description": "Mobile-specific capabilities for Biological Self",
+  "description": "Mobile-specific capabilities for SOMA",
   "platforms": ["iOS", "android"],
   "windows": ["main"],
   "permissions": [

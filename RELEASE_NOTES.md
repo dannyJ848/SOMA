@@ -1,4 +1,4 @@
-# Release Notes - The Biological Self v1.0.0
+# Release Notes - SOMA v1.0.0
 
 ## First TestFlight Release
 
@@ -33,4 +33,4 @@
 - Voice commands work best in quiet environments
 
 ### Feedback
-Report issues at: https://github.com/dannyJ848/biological-self/issues
+Report issues at: https://github.com/dannyJ848/soma/issues

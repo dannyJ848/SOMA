@@ -322,7 +322,7 @@ export const es: TranslationBundle = {
     },
 
     onboarding: {
-      welcome: 'Bienvenido a Biological Self',
+      welcome: 'Bienvenido a SOMA',
       letsGetStarted: 'Comencemos',
       tellUsAboutYourself: 'Cuentenos sobre usted',
       personalizeExperience: 'Personalizar su experiencia',

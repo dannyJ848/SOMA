@@ -1,4 +1,4 @@
-# Biological Self - Current Handoff
+# SOMA - Current Handoff
 
 > **Date**: 2026-01-28
 > **Blueprint Version**: 2.3
@@ -65,7 +65,7 @@ npx tsx src/i18n/test-i18n.tsx
 npm run tauri:build -- --target aarch64-apple-ios
 
 # 2. Open in Xcode
-open src-tauri/gen/apple/biological-self.xcodeproj
+open src-tauri/gen/apple/soma.xcodeproj
 
 # 3. Archive and upload via Xcode Organizer
 ```

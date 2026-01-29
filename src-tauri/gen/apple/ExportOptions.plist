@@ -15,7 +15,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>com.dannygomez.biological-self</key>
-        <string>Biological Self App Store</string>
+        <string>SOMA App Store</string>
     </dict>
     <key>signingStyle</key>
     <string>automatic</string>

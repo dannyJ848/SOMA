@@ -1,7 +1,7 @@
 /**
  * English Base Translations
  *
- * Primary language bundle for Biological Self.
+ * Primary language bundle for SOMA.
  * All translations should be medically accurate and patient-friendly.
  */
 
@@ -318,7 +318,7 @@ export const en: TranslationBundle = {
     },
 
     onboarding: {
-      welcome: 'Welcome to Biological Self',
+      welcome: 'Welcome to SOMA',
       letsGetStarted: "Let's get started",
       tellUsAboutYourself: 'Tell us about yourself',
       personalizeExperience: 'Personalize your experience',
@@ -381,7 +381,7 @@ export const en: TranslationBundle = {
     },
 
     sections: {
-      biologicalSelf: 'Biological Self',
+      biologicalSelf: 'SOMA',
       symptomExplorer: 'Symptom Explorer',
       medicationExplorer: 'Medication Explorer',
       conditionSimulator: 'Condition Simulator',

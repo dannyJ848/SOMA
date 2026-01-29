@@ -368,12 +368,12 @@ function App() {
 
   function getEventTypeLabel(type: TimelineEventType): string {
     const labels: Record<TimelineEventType, string> = {
-      lab: 'Lab',
-      imaging: 'Imaging',
-      condition: 'Condition',
-      medication: 'Medication',
-      surgery: 'Surgery',
-      symptom: 'Symptom',
+      lab: t('medical.lab') || 'Lab',
+      imaging: t('medical.imaging') || 'Imaging',
+      condition: t('medical.condition') || 'Condition',
+      medication: t('medical.medication') || 'Medication',
+      surgery: t('medical.surgery') || 'Surgery',
+      symptom: t('medical.symptom') || 'Symptom',
     };
     return labels[type];
   }
@@ -747,10 +747,10 @@ function App() {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            Back
+            {t('action.back')}
           </button>
-          <h1>Health Timeline</h1>
-          <div className="header-spacer" />
+          <h1>{tNav('nav.timeline')}</h1>
+          <LanguageToggle />
         </header>
 
         {/* Filter Controls */}
@@ -776,18 +776,18 @@ function App() {
               type="date"
               value={dateRange.start || ''}
               onChange={(e) => handleDateRangeChange('start', e.target.value)}
-              placeholder="Start date"
+              placeholder={t('action.startDate') || 'Start date'}
             />
-            <span className="date-separator">to</span>
+            <span className="date-separator">{t('action.to') || 'to'}</span>
             <input
               type="date"
               value={dateRange.end || ''}
               onChange={(e) => handleDateRangeChange('end', e.target.value)}
-              placeholder="End date"
+              placeholder={t('action.endDate') || 'End date'}
             />
             {(dateRange.start || dateRange.end) && (
               <button className="clear-dates" onClick={handleClearDateRange}>
-                Clear
+                {t('action.clear')}
               </button>
             )}
           </div>
@@ -796,7 +796,7 @@ function App() {
         {/* Timeline */}
         <div className="timeline-container">
           {timelineLoading ? (
-            <div className="loading">Loading timeline...</div>
+            <div className="loading">{t('action.loading')}</div>
           ) : timeline && timeline.events.length > 0 ? (
             <>
               <div className="timeline-count">
@@ -1095,22 +1095,22 @@ function App() {
   }
 
   return (
-    <div className="container dashboard" role="main" aria-label="Health Dashboard">
+    <div className="container dashboard" role="main" aria-label={tDash('dashboard.title')}>
       {/* Skip link for keyboard users */}
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <a href="#main-content" className="skip-link">{t('a11y.skipToMain')}</a>
 
       <header className="app-header" role="banner">
         <div className="header-spacer" />
         <div className="header-title">
-          <h1>Biological Self</h1>
-          <p className="subtitle">Your health, understood</p>
+          <h1>{t('app.name')}</h1>
+          <p className="subtitle">{t('app.tagline')}</p>
         </div>
         <nav className="header-actions" aria-label="Quick actions">
           <button className="header-action-button" onClick={() => handleNavigate('chat')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            Chat
+            {tNav('nav.chat')}
           </button>
           <button className="header-action-button" onClick={() => handleNavigate('anatomy')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1118,7 +1118,7 @@ function App() {
               <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
               <circle cx="12" cy="16" r="2"/>
             </svg>
-            3D Anatomy
+            {tNav('nav.anatomy')}
           </button>
           <button className="header-action-button" onClick={() => handleNavigate('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1127,56 +1127,57 @@ function App() {
               <path d="M8 12h8"/>
               <path d="M8 22l4-4 4 4"/>
             </svg>
-            Body
+            {tNav('nav.body')}
           </button>
           <button className="header-action-button" onClick={() => handleNavigate('timeline')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 6v6l4 2"/>
             </svg>
-            Timeline
+            {tNav('nav.timeline')}
           </button>
+          <LanguageToggle />
         </nav>
       </header>
 
       <main id="main-content">
         {/* Vitals Summary Card */}
         <section className="dashboard-section" aria-labelledby="vitals-heading">
-          <h2 id="vitals-heading" className="section-title">Vitals Summary</h2>
+          <h2 id="vitals-heading" className="section-title">{tDash('dashboard.vitals.title')}</h2>
           <div className="vitals-grid" role="list" aria-label="Vital signs">
             {vitalsSummary.restingHeartRate ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Resting HR</span>
+                <span className="vital-label">{tDash('dashboard.vitals.heartRate')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.restingHeartRate)}</span>
                 <span className="vital-unit">bpm</span>
               </div>
             ) : null}
             {vitalsSummary.hrv ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">HRV</span>
+                <span className="vital-label">{tDash('dashboard.vitals.hrv')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.hrv)}</span>
                 <span className="vital-unit">ms</span>
               </div>
             ) : null}
             {vitalsSummary.recoveryScore ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Recovery</span>
+                <span className="vital-label">{tDash('dashboard.vitals.recovery')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.recoveryScore)}</span>
                 <span className="vital-unit">%</span>
               </div>
             ) : null}
             {vitalsSummary.sleepHours ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Sleep</span>
+                <span className="vital-label">{tDash('dashboard.vitals.sleep')}</span>
                 <span className="vital-value">{vitalsSummary.sleepHours}</span>
                 <span className="vital-unit">hrs</span>
               </div>
             ) : null}
             {vitalsSummary.steps ? (
               <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Steps</span>
+                <span className="vital-label">{tDash('dashboard.vitals.steps')}</span>
                 <span className="vital-value">{vitalsSummary.steps.toLocaleString()}</span>
-                <span className="vital-unit">today</span>
+                <span className="vital-unit">{t('time.today')}</span>
               </div>
             ) : null}
             {!vitalsSummary.restingHeartRate && !vitalsSummary.hrv && !vitalsSummary.steps && (
@@ -1186,7 +1187,7 @@ function App() {
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                   </svg>
                 }
-                message="No vital signs recorded yet"
+                message={tDash('dashboard.vitals.empty')}
               />
             )}
           </div>

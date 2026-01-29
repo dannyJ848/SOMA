@@ -12,5 +12,9 @@ export type { AudioPlayerProps, SpeakingIndicatorProps } from './AudioPlayer';
 
 export { VoiceSettings } from './VoiceSettings';
 export type { VoiceSettingsProps } from './VoiceSettings';
+
 export { VoiceSymptomInput } from "./VoiceSymptomInput";
 export type { VoiceSymptomInputProps } from "./VoiceSymptomInput";
+
+export { VoiceFeedback, VoiceWave, ListeningIndicator, CommandConfirmation, CommandProgress, CommandSuccessToast, VoiceErrorDisplay, useVoiceAudioFeedback } from '../VoiceFeedback';
+export type { VoiceFeedbackProps, VoiceFeedbackState, ParsedVoiceCommand } from '../VoiceFeedback';

@@ -1,0 +1,16 @@
+export const labs = {
+  'labs.title': 'Resultados de Laboratorio',
+  'labs.add': 'Agregar Resultado',
+  'labs.testName': 'Nombre de la Prueba',
+  'labs.value': 'Valor',
+  'labs.unit': 'Unidad',
+  'labs.referenceRange': 'Rango de Referencia',
+  'labs.status': 'Estado',
+  'labs.date': 'Fecha de Recolección',
+  'labs.trend': 'Tendencia',
+  'labs.trend.up': 'Aumentando',
+  'labs.trend.down': 'Disminuyendo',
+  'labs.trend.stable': 'Estable',
+  'labs.history': 'Historial',
+  'labs.empty': 'No hay resultados de laboratorio',
+};

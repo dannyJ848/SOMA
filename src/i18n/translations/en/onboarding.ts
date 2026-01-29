@@ -1,0 +1,15 @@
+export const onboarding = {
+  'onboarding.welcome.title': 'Welcome to Biological Self',
+  'onboarding.welcome.subtitle': 'Your personal medical education companion',
+  'onboarding.step1.title': 'Your Health Data',
+  'onboarding.step1.description': 'Import or manually enter your health information',
+  'onboarding.step2.title': 'Explore Your Body',
+  'onboarding.step2.description': 'Learn anatomy with our interactive 3D model',
+  'onboarding.step3.title': 'Ask Questions',
+  'onboarding.step3.description': 'Get educational answers about your health',
+  'onboarding.getStarted': 'Get Started',
+  'onboarding.skip': 'Skip',
+  'onboarding.next': 'Next',
+  'onboarding.back': 'Back',
+  'onboarding.finish': 'Finish',
+};

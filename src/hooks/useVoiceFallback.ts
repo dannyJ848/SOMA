@@ -12,15 +12,7 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 // Web Speech API Type Declarations
 // ============================================
 
-// Extend Window interface for Web Speech API
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
-}
-
-// SpeechRecognition types (not in standard lib.dom.d.ts)
+// SpeechRecognition event map
 interface SpeechRecognitionEventMap {
   audioend: Event;
   audiostart: Event;

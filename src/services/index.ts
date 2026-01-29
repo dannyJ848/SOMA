@@ -27,7 +27,7 @@ export {
   PatientContextService,
   patientContextService,
   buildPatientContext,
-  getConditionsForRegion,
+  getConditionsForRegion as getPatientConditionsForRegion,
   getMedicationsAffectingRegion,
   getSymptomsInRegion,
   getLabsRelevantToRegion,
@@ -45,3 +45,25 @@ export {
   type UnifiedPatientContext,
   type RegionEducationalContext
 } from './PatientContextService';
+
+// Regional Condition Mapper Service
+export {
+  RegionalConditionMapper,
+  regionalConditionMapper,
+  getRegionsForCondition,
+  getConditionsForRegion,
+  searchConditions,
+  getCondition,
+  getConditionByICD10,
+  getAllConditionIds,
+  getConditionsByCategory,
+  getConditionsBySystem,
+  CONDITION_MAPPINGS,
+  type VisualizationType,
+  type ConditionSeverity,
+  type EducationalFocusPoint,
+  type AffectedRegion,
+  type SeverityVisualization,
+  type ConditionMapping,
+  type RegionConditionEntry
+} from './RegionalConditionMapper';

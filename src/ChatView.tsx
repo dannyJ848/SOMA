@@ -5,6 +5,8 @@ import { useJourneyContext, getContextualSuggestions } from './hooks/useJourneyC
 import type { ChatAction } from '../core/intent-prediction/types';
 import { useVoice, useVoiceConfig } from './contexts/VoiceContext';
 import { VoiceButton, SpeakingIndicator } from './components/voice';
+import { useTranslation } from './i18n/useI18n';
+import { LanguageToggle } from './components/LanguageSwitcher';
 
 interface DashboardData {
   summary: {
@@ -171,6 +173,8 @@ Use bracketed citations [1], [2], etc. when referencing educational sources:
 
 
 export function ChatView({ onBack, dashboardData }: ChatViewProps) {
+  const { t } = useTranslation('chat');
+  const { t: tCommon } = useTranslation('common');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -347,10 +351,10 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
-          Back
+          {tCommon('action.back')}
         </button>
-        <h1>Health Assistant</h1>
-        <div className="header-spacer" />
+        <h1>{t('chat.title')}</h1>
+        <LanguageToggle />
       </header>
 
       {/* Medical Disclaimer */}
@@ -359,14 +363,14 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 16v-4M12 8h.01"/>
         </svg>
-        <span>This is for educational purposes only, not medical advice. Always consult a healthcare professional.</span>
+        <span>{t('chat.disclaimer')}</span>
       </div>
 
       {/* AI Status */}
       {aiStatus === 'checking' && (
         <div className="ai-status checking">
           <span className="status-indicator"></span>
-          Checking AI availability...
+          {t('chat.thinking')}
         </div>
       )}
       {aiStatus === 'unavailable' && (
@@ -376,11 +380,11 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
             <path d="M15 9l-6 6M9 9l6 6"/>
           </svg>
           <div className="status-content">
-            <strong>AI Unavailable</strong>
+            <strong>{t('error.unavailable')}</strong>
             <span>{aiError}</span>
-            <span className="status-hint">Make sure Ollama is running: <code>ollama serve</code></span>
+            <span className="status-hint">{t('error.ollamaHint')}</span>
           </div>
-          <button onClick={checkAIHealth} className="retry-button">Retry</button>
+          <button onClick={checkAIHealth} className="retry-button">{tCommon('action.retry')}</button>
         </div>
       )}
 
@@ -391,17 +395,31 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <h3>Ask me about your health data</h3>
-            <p>I can help you understand your conditions, medications, lab results, and symptoms.</p>
+            <h3>{t('chat.welcome.title')}</h3>
+            <p>{t('chat.welcome.subtitle')}</p>
             <div className="suggested-questions">
-              {contextualSuggestions.map((suggestion, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSuggestionClick(suggestion)}
-                >
-                  {suggestion}
-                </button>
-              ))}
+              {contextualSuggestions.length > 0 ? (
+                contextualSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))
+              ) : (
+                <>
+                  <button onClick={() => handleSuggestionClick(t('chat.examples.anatomy'))}>
+                    {t('chat.examples.anatomy')}
+                  </button>
+                  <button onClick={() => handleSuggestionClick(t('chat.examples.symptom'))}>
+                    {t('chat.examples.symptom')}
+                  </button>
+                  <button onClick={() => handleSuggestionClick(t('chat.examples.medication'))}>
+                    {t('chat.examples.medication')}
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -432,7 +450,7 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
                       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                     </svg>
-                    Sources
+                    {t('chat.sources')}
                   </div>
                   <div className="citations-list">
                     {message.citations.map((citation) => (
@@ -484,7 +502,7 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
       {/* Speaking Indicator */}
       {(playbackState === 'playing' || playbackState === 'loading') && (
         <div className="chat-speaking-indicator">
-          <SpeakingIndicator text="Reading response..." />
+          <SpeakingIndicator text={t('chat.reading')} />
         </div>
       )}
 
@@ -503,12 +521,12 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
           onKeyDown={handleKeyDown}
           placeholder={
             recordingState === 'recording'
-              ? 'Listening...'
+              ? t('voice.listening')
               : recordingState === 'transcribing'
-              ? 'Transcribing...'
+              ? t('voice.processing')
               : aiStatus === 'available'
-              ? 'Ask a question about your health...'
-              : 'AI unavailable'
+              ? t('chat.placeholder')
+              : t('error.unavailable')
           }
           disabled={aiStatus !== 'available' || isLoading || recordingState !== 'idle'}
           rows={1}

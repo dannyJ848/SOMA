@@ -1,0 +1,20 @@
+# Matchfile for Biological Self
+# Fastlane Match configuration for code signing
+
+# The git URL where the certificates and provisioning profiles are stored
+git_url("https://github.com/dannygomez/biological-self-certificates")
+
+# The bundle identifier(s) to use
+app_identifier(["com.dannygomez.biological-self"])
+
+# Your Apple Developer Portal Team ID
+team_id("NDJZ6S9Q4L")
+
+# Storage mode (git, google_cloud, s3, etc.)
+storage_mode("git")
+
+# The type of provisioning profile to generate
+type("appstore")
+
+# For more information about the Matchfile, see:
+# https://docs.fastlane.tools/actions/match/

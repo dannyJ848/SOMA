@@ -1,0 +1,16 @@
+export const dashboard = {
+  'dashboard.title': 'Panel de Salud',
+  'dashboard.summary.conditions': 'Condiciones Activas',
+  'dashboard.summary.medications': 'Medicamentos Actuales',
+  'dashboard.summary.labs': 'Resultados de Laboratorio',
+  'dashboard.vitals.title': 'Resumen de Signos Vitales',
+  'dashboard.vitals.heartRate': 'Frecuencia Cardíaca',
+  'dashboard.vitals.hrv': 'VFC',
+  'dashboard.vitals.recovery': 'Recuperación',
+  'dashboard.vitals.sleep': 'Sueño',
+  'dashboard.vitals.steps': 'Pasos',
+  'dashboard.vitals.empty': 'No hay signos vitales registrados',
+  'dashboard.recent.title': 'Actividad Reciente',
+  'dashboard.empty.title': 'Bienvenido a Biological Self',
+  'dashboard.empty.subtitle': 'Comience agregando su información de salud',
+};

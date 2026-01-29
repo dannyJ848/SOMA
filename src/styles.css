@@ -3598,6 +3598,28 @@ input:disabled {
 }
 
 /* ============================================
+   Region Explorer Container (Anatomy Viewer)
+   ============================================ */
+
+.region-explorer-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 100%;
+  z-index: 100;
+  animation: slideInRight 0.2s ease-out;
+}
+
+@media (max-width: 768px) {
+  .region-explorer-container {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* ============================================
    Chat Citations (ChatView & AnatomyChatPanel)
    ============================================ */
 

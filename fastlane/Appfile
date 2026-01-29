@@ -1,0 +1,14 @@
+# Fastlane Appfile for Biological Self
+# App Store Connect configuration
+
+# The bundle identifier of your app
+app_identifier("com.dannygomez.biological-self")
+
+# Your Apple Developer Portal Team ID
+team_id("NDJZ6S9Q4L")
+
+# Your Apple Developer Program Team ID for the Developer Portal
+itc_team_id("NDJZ6S9Q4L")
+
+# For more information about the Appfile, see:
+# https://docs.fastlane.tools/advanced/#appfile

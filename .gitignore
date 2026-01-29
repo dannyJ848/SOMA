@@ -70,6 +70,12 @@ temp/
 .transformers-cache/
 .cache/
 
+# Backup files
+*.backup
+*.bak
+*.bak2
+*.save
+
 # Code signing (never commit)
 *.p12
 *.mobileprovision
@@ -109,3 +115,25 @@ docs/.docusaurus/
 # Performance profiles
 *.cpuprofile
 *.heapprofile
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
+fastlane/test_output
+
+# App Store Connect API Keys
+*.p8
+AuthKey_*
+
+# Build artifacts
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode
+*.xcarchive
+*.xcuserstate
+project.xcworkspace/xcuserdata/

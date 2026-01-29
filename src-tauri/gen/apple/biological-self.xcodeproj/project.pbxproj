@@ -14,7 +14,6 @@
 		6E061A10222DF4195F246BDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677883B16D7E2522C6A71A49 /* UIKit.framework */; };
 		77184B0D25A7345322F0356F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78ECE76EFC3F1613F7617F8 /* MetalKit.framework */; };
 		817510CD1F7564D7DA0ACAB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53F96E106FA30CEC2614696 /* CoreGraphics.framework */; };
-		AA28A1DC03A37CD549F65A7D /* libapp.a in Resources */ = {isa = PBXBuildFile; fileRef = 071DC21CAEA38C3A16C9807C /* libapp.a */; };
 		BCB1F4859C352B742740BDD2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3AC17A59B14029A268BA94 /* WebKit.framework */; };
 		D485EF7F1DF5973AAFDFEA1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */; };
 		D768B46382EAF7710BE48B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAE341E48671C1CFCE46548 /* Metal.framework */; };
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		027BB2B4447C0B764CFA8813 /* biological-self_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "biological-self_iOS.entitlements"; sourceTree = "<group>"; };
-		071DC21CAEA38C3A16C9807C /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
 		111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A3AC17A59B14029A268BA94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		380DD725F48A5D8385641DD3 /* llm.rs */ = {isa = PBXFileReference; path = llm.rs; sourceTree = "<group>"; };
@@ -67,22 +65,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1870306456E55E2E0D8A077E /* arm64 */ = {
-			isa = PBXGroup;
-			children = (
-				1FC595B0DE6589ABE5AA9283 /* release */,
-			);
-			path = arm64;
-			sourceTree = "<group>";
-		};
-		1FC595B0DE6589ABE5AA9283 /* release */ = {
-			isa = PBXGroup;
-			children = (
-				071DC21CAEA38C3A16C9807C /* libapp.a */,
-			);
-			path = release;
-			sourceTree = "<group>";
-		};
 		47FC1191D3BE5A3DA98E59DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,20 +122,11 @@
 				789A1E119CF3A9CE7E383675 /* Assets.xcassets */,
 				411159BF11DAADB1D54F92BB /* LaunchScreen.storyboard */,
 				8AB8CFD79630CA34FE3D3F99 /* biological-self_iOS */,
-				E1BBA470445797792D40BEFC /* Externals */,
 				E7D4DB6B5B3254341032D785 /* Sources */,
 				FA2E925A49F64D2328BEE03A /* src */,
 				47FC1191D3BE5A3DA98E59DA /* Frameworks */,
 				9FEE756F415B2D7376776DA2 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		E1BBA470445797792D40BEFC /* Externals */ = {
-			isa = PBXGroup;
-			children = (
-				1870306456E55E2E0D8A077E /* arm64 */,
-			);
-			path = Externals;
 			sourceTree = "<group>";
 		};
 		E7D4DB6B5B3254341032D785 /* Sources */ = {
@@ -173,13 +146,6 @@
 			);
 			name = src;
 			path = ../../src;
-			sourceTree = "<group>";
-		};
-		"TEMP_2E1F3694-865D-4EDB-8048-553A1E22EA7A" /* x86_64 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = x86_64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,7 +207,6 @@
 				E5351719AF0A1C79140897DC /* Assets.xcassets in Resources */,
 				E531BAA3593642A513221D6D /* LaunchScreen.storyboard in Resources */,
 				4EB0877D66C383CE06BC01F3 /* assets in Resources */,
-				AA28A1DC03A37CD549F65A7D /* libapp.a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +390,7 @@
 				);
 				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.soma;
 				PRODUCT_NAME = "SOMA";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -457,7 +422,7 @@
 				);
 				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.soma;
 				PRODUCT_NAME = "SOMA";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

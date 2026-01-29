@@ -110,3 +110,30 @@ export type {
   HomeostasisInfo,
   ParameterInfo,
 } from '../../education/regionContentMapping';
+
+// Smart Panel Manager
+export {
+  SmartPanelManager,
+  PanelManagerProvider,
+  usePanelManager,
+  usePanel,
+  useDock,
+  useMinimizedPanels,
+  useBottomSheet,
+  DockContainer,
+  FloatingPanel,
+  MinimizedPanelBar,
+  MobileBottomSheet,
+  STORAGE_KEY as PANEL_STORAGE_KEY,
+  MOBILE_BREAKPOINT as PANEL_MOBILE_BREAKPOINT,
+  TRANSITION_DURATION as PANEL_TRANSITION_DURATION,
+  DEFAULT_Z_INDEX as PANEL_DEFAULT_Z_INDEX,
+} from './SmartPanelManager';
+export type {
+  DockPosition,
+  PanelConfig,
+  PanelState,
+  PanelSize,
+  PanelPosition,
+  PanelContentProps,
+} from './SmartPanelManager';

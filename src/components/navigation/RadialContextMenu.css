@@ -1,0 +1,720 @@
+/**
+ * RadialContextMenu Styles
+ *
+ * Glass morphism radial/pie menu with smooth expand animations
+ * and depth effects for anatomy region context actions.
+ */
+
+/* ============================================================================
+   CSS Variables
+   ============================================================================ */
+
+.radial-context-overlay {
+  --rcm-glass-bg: rgba(17, 24, 39, 0.85);
+  --rcm-glass-border: rgba(255, 255, 255, 0.12);
+  --rcm-glass-highlight: rgba(255, 255, 255, 0.08);
+  --rcm-blur: 16px;
+  --rcm-item-size: 56px;
+  --rcm-center-size: 80px;
+  --rcm-shadow-color: rgba(0, 0, 0, 0.4);
+  --rcm-transition-fast: 150ms;
+  --rcm-transition-normal: 250ms;
+  --rcm-transition-slow: 350ms;
+}
+
+/* ============================================================================
+   Overlay
+   ============================================================================ */
+
+.radial-context-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--rcm-transition-normal) ease-out;
+}
+
+.radial-context-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.radial-context-overlay.closing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Subtle backdrop blur for focus */
+.radial-context-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--menu-x) var(--menu-y),
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 30%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--rcm-transition-slow) ease-out;
+}
+
+.radial-context-overlay.open::before {
+  opacity: 1;
+}
+
+/* ============================================================================
+   Main Menu Container
+   ============================================================================ */
+
+.radial-context-menu {
+  position: absolute;
+  left: var(--menu-x);
+  top: var(--menu-y);
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  pointer-events: auto;
+}
+
+/* ============================================================================
+   Center Hub
+   ============================================================================ */
+
+.radial-context-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: var(--rcm-center-size);
+  height: var(--rcm-center-size);
+  border-radius: 50%;
+  background: var(--rcm-glass-bg);
+  backdrop-filter: blur(var(--rcm-blur));
+  -webkit-backdrop-filter: blur(var(--rcm-blur));
+  border: 1px solid var(--rcm-glass-border);
+  box-shadow:
+    0 8px 32px var(--rcm-shadow-color),
+    0 0 0 1px var(--rcm-glass-highlight) inset,
+    0 0 40px rgba(59, 130, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transition:
+    transform var(--rcm-transition-slow) cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity var(--rcm-transition-normal) ease-out;
+}
+
+.radial-context-menu.open .radial-context-center {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.radial-context-menu.closing .radial-context-center {
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition-timing-function: ease-in;
+}
+
+.radial-context-center-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+}
+
+.radial-context-region-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary, #f8fafc);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+  line-height: 1.2;
+}
+
+.radial-context-region-hint {
+  font-size: 9px;
+  color: var(--text-tertiary, #64748b);
+  margin-top: 2px;
+}
+
+/* Close Button */
+.radial-context-close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity var(--rcm-transition-fast) ease-out,
+    transform var(--rcm-transition-fast) ease-out,
+    background var(--rcm-transition-fast) ease-out;
+  z-index: 11;
+}
+
+.radial-context-close svg {
+  width: 12px;
+  height: 12px;
+  color: white;
+}
+
+.radial-context-menu.open .radial-context-close {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 200ms;
+}
+
+.radial-context-close:hover {
+  background: rgba(239, 68, 68, 1);
+  transform: scale(1.1);
+}
+
+.radial-context-close:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   Menu Items
+   ============================================================================ */
+
+.radial-context-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--rcm-item-size);
+  height: var(--rcm-item-size);
+  margin-left: calc(var(--rcm-item-size) / -2);
+  margin-top: calc(var(--rcm-item-size) / -2);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0;
+  background: transparent;
+  z-index: 5;
+
+  /* Initial state - at center, scaled down */
+  transform: translate(0, 0) scale(0);
+  opacity: 0;
+  transition:
+    transform var(--rcm-transition-slow) cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity var(--rcm-transition-normal) ease-out;
+  transition-delay: var(--item-delay);
+}
+
+.radial-context-menu.open .radial-context-item {
+  /* Fan out to final position */
+  transform: translate(var(--item-x), var(--item-y)) scale(1);
+  opacity: 1;
+}
+
+.radial-context-menu.closing .radial-context-item {
+  /* Collapse back to center */
+  transform: translate(0, 0) scale(0);
+  opacity: 0;
+  transition-timing-function: ease-in;
+  transition-delay: calc(var(--item-delay) / 2);
+}
+
+/* Item Background */
+.radial-context-item-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--rcm-glass-bg);
+  backdrop-filter: blur(var(--rcm-blur));
+  -webkit-backdrop-filter: blur(var(--rcm-blur));
+  border: 1px solid var(--rcm-glass-border);
+  box-shadow:
+    0 4px 16px var(--rcm-shadow-color),
+    0 0 0 1px var(--rcm-glass-highlight) inset;
+  transition:
+    transform var(--rcm-transition-fast) ease-out,
+    box-shadow var(--rcm-transition-fast) ease-out,
+    border-color var(--rcm-transition-fast) ease-out;
+}
+
+.radial-context-item:hover .radial-context-item-bg,
+.radial-context-item.active .radial-context-item-bg {
+  transform: scale(1.12);
+  border-color: var(--item-color);
+  box-shadow:
+    0 8px 24px var(--rcm-shadow-color),
+    0 0 0 1px var(--item-color) inset,
+    0 0 20px color-mix(in srgb, var(--item-color) 30%, transparent);
+}
+
+/* Item Glow Effect */
+.radial-context-item-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--item-color) 25%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--rcm-transition-fast) ease-out;
+  pointer-events: none;
+}
+
+.radial-context-item:hover .radial-context-item-glow,
+.radial-context-item.active .radial-context-item-glow {
+  opacity: 1;
+}
+
+/* Item Icon */
+.radial-context-item-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  color: var(--text-secondary, #94a3b8);
+  transition: color var(--rcm-transition-fast) ease-out;
+  z-index: 2;
+}
+
+.radial-context-item-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.radial-context-item:hover .radial-context-item-icon,
+.radial-context-item.active .radial-context-item-icon {
+  color: var(--item-color);
+}
+
+/* Item Label */
+.radial-context-item-label {
+  position: relative;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-tertiary, #64748b);
+  white-space: nowrap;
+  transition: color var(--rcm-transition-fast) ease-out;
+  z-index: 2;
+}
+
+.radial-context-item:hover .radial-context-item-label,
+.radial-context-item.active .radial-context-item-label {
+  color: var(--text-primary, #f8fafc);
+}
+
+/* Focus Ring */
+.radial-context-item:focus {
+  outline: none;
+}
+
+.radial-context-item:focus-visible .radial-context-item-bg {
+  box-shadow:
+    0 4px 16px var(--rcm-shadow-color),
+    0 0 0 2px var(--item-color),
+    0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Active/Pressed State */
+.radial-context-item:active .radial-context-item-bg {
+  transform: scale(1.05);
+}
+
+/* ============================================================================
+   Connecting Lines
+   ============================================================================ */
+
+.radial-context-lines {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.radial-context-line {
+  stroke: var(--rcm-glass-border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  stroke-linecap: round;
+  opacity: 0;
+  transform-origin: center;
+  transition:
+    opacity var(--rcm-transition-normal) ease-out,
+    stroke var(--rcm-transition-fast) ease-out;
+  transition-delay: var(--line-delay);
+}
+
+.radial-context-menu.open .radial-context-line {
+  opacity: 0.5;
+  animation: radial-line-draw var(--rcm-transition-slow) ease-out forwards;
+  animation-delay: var(--line-delay);
+}
+
+.radial-context-line.active {
+  stroke: var(--item-color);
+  opacity: 0.8;
+  stroke-dasharray: none;
+}
+
+.radial-context-menu.closing .radial-context-line {
+  opacity: 0;
+}
+
+/* ============================================================================
+   Tooltip
+   ============================================================================ */
+
+.radial-context-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--menu-radius, 110px) + 80px);
+  transform: translateX(-50%) translateY(10px);
+  background: var(--rcm-glass-bg);
+  backdrop-filter: blur(var(--rcm-blur));
+  -webkit-backdrop-filter: blur(var(--rcm-blur));
+  border: 1px solid var(--rcm-glass-border);
+  border-radius: 12px;
+  padding: 10px 16px;
+  text-align: center;
+  min-width: 140px;
+  max-width: 200px;
+  box-shadow: 0 8px 32px var(--rcm-shadow-color);
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltip-fade-in var(--rcm-transition-fast) ease-out forwards;
+}
+
+.radial-context-tooltip-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #f8fafc);
+  margin-bottom: 2px;
+}
+
+.radial-context-tooltip-desc {
+  display: block;
+  font-size: 11px;
+  color: var(--text-tertiary, #64748b);
+  line-height: 1.3;
+}
+
+/* ============================================================================
+   Keyframe Animations
+   ============================================================================ */
+
+/* Radial expand animation for items */
+@keyframes radial-expand {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--item-x), var(--item-y)) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Radial collapse animation for items */
+@keyframes radial-collapse {
+  0% {
+    transform: translate(var(--item-x), var(--item-y)) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Center hub pop animation */
+@keyframes center-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Line draw animation */
+@keyframes radial-line-draw {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}
+
+/* Tooltip fade in */
+@keyframes tooltip-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Glow pulse for active items */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* Rotation animation for special items (like AI) */
+@keyframes subtle-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   Reduced Motion
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .radial-context-overlay,
+  .radial-context-center,
+  .radial-context-item,
+  .radial-context-item-bg,
+  .radial-context-item-glow,
+  .radial-context-item-icon,
+  .radial-context-item-label,
+  .radial-context-line,
+  .radial-context-tooltip,
+  .radial-context-close {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .radial-context-menu.open .radial-context-item {
+    transform: translate(var(--item-x), var(--item-y)) scale(1);
+    opacity: 1;
+  }
+
+  .radial-context-menu.open .radial-context-center {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .radial-context-menu.open .radial-context-line {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================================
+   Touch Device Optimizations
+   ============================================================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  .radial-context-item {
+    --rcm-item-size: 64px;
+  }
+
+  .radial-context-center {
+    --rcm-center-size: 90px;
+  }
+
+  .radial-context-item-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .radial-context-item-label {
+    font-size: 10px;
+  }
+
+  .radial-context-close {
+    width: 28px;
+    height: 28px;
+    top: -10px;
+    right: -10px;
+  }
+
+  .radial-context-close svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* ============================================================================
+   Small Screens
+   ============================================================================ */
+
+@media (max-width: 480px) {
+  .radial-context-overlay {
+    --rcm-item-size: 52px;
+    --rcm-center-size: 72px;
+  }
+
+  .radial-context-item-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .radial-context-item-label {
+    font-size: 8px;
+  }
+
+  .radial-context-region-name {
+    font-size: 10px;
+    max-width: 50px;
+  }
+
+  .radial-context-region-hint {
+    font-size: 8px;
+  }
+
+  .radial-context-tooltip {
+    min-width: 120px;
+    padding: 8px 12px;
+  }
+
+  .radial-context-tooltip-title {
+    font-size: 12px;
+  }
+
+  .radial-context-tooltip-desc {
+    font-size: 10px;
+  }
+}
+
+/* ============================================================================
+   High Contrast Mode
+   ============================================================================ */
+
+@media (prefers-contrast: high) {
+  .radial-context-overlay {
+    --rcm-glass-bg: rgba(0, 0, 0, 0.95);
+    --rcm-glass-border: rgba(255, 255, 255, 0.3);
+  }
+
+  .radial-context-item-bg {
+    border-width: 2px;
+  }
+
+  .radial-context-item:hover .radial-context-item-bg,
+  .radial-context-item.active .radial-context-item-bg {
+    border-width: 2px;
+  }
+
+  .radial-context-line {
+    stroke-width: 2;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Enhancements
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .radial-context-overlay {
+    --rcm-glass-bg: rgba(10, 15, 26, 0.9);
+    --rcm-shadow-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ============================================================================
+   Light Mode Support
+   ============================================================================ */
+
+@media (prefers-color-scheme: light) {
+  .radial-context-overlay {
+    --rcm-glass-bg: rgba(255, 255, 255, 0.85);
+    --rcm-glass-border: rgba(0, 0, 0, 0.1);
+    --rcm-glass-highlight: rgba(255, 255, 255, 0.5);
+    --rcm-shadow-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .radial-context-region-name {
+    color: #1f2937;
+  }
+
+  .radial-context-region-hint {
+    color: #6b7280;
+  }
+
+  .radial-context-item-icon {
+    color: #6b7280;
+  }
+
+  .radial-context-item:hover .radial-context-item-icon,
+  .radial-context-item.active .radial-context-item-icon {
+    color: var(--item-color);
+  }
+
+  .radial-context-item-label {
+    color: #9ca3af;
+  }
+
+  .radial-context-item:hover .radial-context-item-label,
+  .radial-context-item.active .radial-context-item-label {
+    color: #1f2937;
+  }
+
+  .radial-context-tooltip-title {
+    color: #1f2937;
+  }
+
+  .radial-context-tooltip-desc {
+    color: #6b7280;
+  }
+
+  .radial-context-line {
+    stroke: rgba(0, 0, 0, 0.1);
+  }
+
+  .radial-context-line.active {
+    stroke: var(--item-color);
+  }
+}

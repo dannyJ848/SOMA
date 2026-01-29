@@ -88,9 +88,7 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "resources": {
-      "models/*": "models/"
-    },
+    "resources": {},
     "externalBin": [],
     "copyright": "Copyright 2024-2025 Danny Gomez",
     "category": "Medical",
@@ -167,8 +165,7 @@
   },
   "plugins": {
     "shell": {
-      "open": true,
-      "scope": []
+      "open": true
     },
     "updater": {
       "active": true,
@@ -180,13 +177,6 @@
       "windows": {
         "installMode": "passive"
       }
-    },
-    "log": {
-      "maxFileSize": 10485760,
-      "rotation": {
-        "strategy": "KeepOne"
-      },
-      "timezone": "Local"
     }
   }
 }

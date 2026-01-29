@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ACC123456789ABCDEF12345 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACC123456789ABCDEF12345 /* Accelerate.framework */; };
-		0MPS123456789ABCDEF12345 /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1MPS123456789ABCDEF12345 /* MetalPerformanceShaders.framework */; };
 		3CE548A8DEEB7221A607DA4E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 574F69ED9A66D958C4B99E21 /* main.mm */; };
 		4BBA6E78B0CDAE38232A16B5 /* libapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5F7AC5192F4EAEE5C1E068B /* libapp.a */; };
 		4EB0877D66C383CE06BC01F3 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = AC7E72EA8446FBFC158C9DB7 /* assets */; };
@@ -16,35 +14,34 @@
 		6E061A10222DF4195F246BDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677883B16D7E2522C6A71A49 /* UIKit.framework */; };
 		77184B0D25A7345322F0356F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78ECE76EFC3F1613F7617F8 /* MetalKit.framework */; };
 		817510CD1F7564D7DA0ACAB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53F96E106FA30CEC2614696 /* CoreGraphics.framework */; };
+		AA28A1DC03A37CD549F65A7D /* libapp.a in Resources */ = {isa = PBXBuildFile; fileRef = 071DC21CAEA38C3A16C9807C /* libapp.a */; };
 		BCB1F4859C352B742740BDD2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3AC17A59B14029A268BA94 /* WebKit.framework */; };
 		D485EF7F1DF5973AAFDFEA1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */; };
 		D768B46382EAF7710BE48B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAE341E48671C1CFCE46548 /* Metal.framework */; };
-		E479F8F62EEFABA611F34B1A /* libPods-biological-self_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED33725D92C0930A473529F /* libPods-biological-self_iOS.a */; };
 		E531BAA3593642A513221D6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 411159BF11DAADB1D54F92BB /* LaunchScreen.storyboard */; };
 		E5351719AF0A1C79140897DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789A1E119CF3A9CE7E383675 /* Assets.xcassets */; };
+		F7D31979501F596906047B41 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C879B1348A629995F056CCD4 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		027BB2B4447C0B764CFA8813 /* biological-self_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "biological-self_iOS.entitlements"; sourceTree = "<group>"; };
-		1ACC123456789ABCDEF12345 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		1MPS123456789ABCDEF12345 /* MetalPerformanceShaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalPerformanceShaders.framework; path = System/Library/Frameworks/MetalPerformanceShaders.framework; sourceTree = SDKROOT; };
+		071DC21CAEA38C3A16C9807C /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
 		111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A3AC17A59B14029A268BA94 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		3C59BDCA93C23E486C2B348B /* main.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.rs; sourceTree = "<group>"; };
+		380DD725F48A5D8385641DD3 /* llm.rs */ = {isa = PBXFileReference; path = llm.rs; sourceTree = "<group>"; };
+		3C59BDCA93C23E486C2B348B /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
 		411159BF11DAADB1D54F92BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4ED33725D92C0930A473529F /* libPods-biological-self_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-biological-self_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53877E4FA6A0E149CAB46D6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		574F69ED9A66D958C4B99E21 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		677883B16D7E2522C6A71A49 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6AAE341E48671C1CFCE46548 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		789A1E119CF3A9CE7E383675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7F0AA83961D85B47B84773C9 /* Pods-biological-self_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-biological-self_iOS.debug.xcconfig"; path = "Target Support Files/Pods-biological-self_iOS/Pods-biological-self_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		8D67E6F39DC9C20206C92C78 /* lib.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = lib.rs; sourceTree = "<group>"; };
+		8D67E6F39DC9C20206C92C78 /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
 		925D15F6B341A7CD3E195C80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AC7E72EA8446FBFC158C9DB7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
 		C78ECE76EFC3F1613F7617F8 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
-		D0DEB622C23A2A51E71FA956 /* Pods-biological-self_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-biological-self_iOS.release.xcconfig"; path = "Target Support Files/Pods-biological-self_iOS/Pods-biological-self_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		D486941D7A6691FDC4DC8B23 /* Biological Self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Biological Self.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C879B1348A629995F056CCD4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "biological-self_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7433F69C427CF88CB194DF9 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
 		E53F96E106FA30CEC2614696 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E5F7AC5192F4EAEE5C1E068B /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
@@ -55,48 +52,51 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ACC123456789ABCDEF12345 /* Accelerate.framework in Frameworks */,
 				4BBA6E78B0CDAE38232A16B5 /* libapp.a in Frameworks */,
+				F7D31979501F596906047B41 /* Accelerate.framework in Frameworks */,
 				817510CD1F7564D7DA0ACAB7 /* CoreGraphics.framework in Frameworks */,
 				D768B46382EAF7710BE48B48 /* Metal.framework in Frameworks */,
 				77184B0D25A7345322F0356F /* MetalKit.framework in Frameworks */,
-				0MPS123456789ABCDEF12345 /* MetalPerformanceShaders.framework in Frameworks */,
 				D485EF7F1DF5973AAFDFEA1B /* QuartzCore.framework in Frameworks */,
 				62583B6C5D510BFD682486BE /* Security.framework in Frameworks */,
 				6E061A10222DF4195F246BDC /* UIKit.framework in Frameworks */,
 				BCB1F4859C352B742740BDD2 /* WebKit.framework in Frameworks */,
-				E479F8F62EEFABA611F34B1A /* libPods-biological-self_iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1870306456E55E2E0D8A077E /* arm64 */ = {
+			isa = PBXGroup;
+			children = (
+				1FC595B0DE6589ABE5AA9283 /* release */,
+			);
+			path = arm64;
+			sourceTree = "<group>";
+		};
+		1FC595B0DE6589ABE5AA9283 /* release */ = {
+			isa = PBXGroup;
+			children = (
+				071DC21CAEA38C3A16C9807C /* libapp.a */,
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
 		47FC1191D3BE5A3DA98E59DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1ACC123456789ABCDEF12345 /* Accelerate.framework */,
+				C879B1348A629995F056CCD4 /* Accelerate.framework */,
 				E53F96E106FA30CEC2614696 /* CoreGraphics.framework */,
 				E5F7AC5192F4EAEE5C1E068B /* libapp.a */,
 				6AAE341E48671C1CFCE46548 /* Metal.framework */,
 				C78ECE76EFC3F1613F7617F8 /* MetalKit.framework */,
-				1MPS123456789ABCDEF12345 /* MetalPerformanceShaders.framework */,
 				111BB88EAEF6F06C012ECDD1 /* QuartzCore.framework */,
 				925D15F6B341A7CD3E195C80 /* Security.framework */,
 				677883B16D7E2522C6A71A49 /* UIKit.framework */,
 				1A3AC17A59B14029A268BA94 /* WebKit.framework */,
-				4ED33725D92C0930A473529F /* libPods-biological-self_iOS.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		757FF9A43092005E5B017283 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7F0AA83961D85B47B84773C9 /* Pods-biological-self_iOS.debug.xcconfig */,
-				D0DEB622C23A2A51E71FA956 /* Pods-biological-self_iOS.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		89FE696AF7210B60350EDEB1 /* bindings */ = {
@@ -128,7 +128,7 @@
 		9FEE756F415B2D7376776DA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D486941D7A6691FDC4DC8B23 /* Biological Self.app */,
+				D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,13 +145,13 @@
 				FA2E925A49F64D2328BEE03A /* src */,
 				47FC1191D3BE5A3DA98E59DA /* Frameworks */,
 				9FEE756F415B2D7376776DA2 /* Products */,
-				757FF9A43092005E5B017283 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		E1BBA470445797792D40BEFC /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				1870306456E55E2E0D8A077E /* arm64 */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -168,10 +168,18 @@
 			isa = PBXGroup;
 			children = (
 				8D67E6F39DC9C20206C92C78 /* lib.rs */,
+				380DD725F48A5D8385641DD3 /* llm.rs */,
 				3C59BDCA93C23E486C2B348B /* main.rs */,
 			);
 			name = src;
 			path = ../../src;
+			sourceTree = "<group>";
+		};
+		"TEMP_2E1F3694-865D-4EDB-8048-553A1E22EA7A" /* x86_64 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = x86_64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,7 +189,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5266781F5C66BEBD74F9904 /* Build configuration list for PBXNativeTarget "biological-self_iOS" */;
 			buildPhases = (
-				8F424741274DC9BFFF58984A /* [CP] Check Pods Manifest.lock */,
 				035346B5E9AF32F2D94BC860 /* Build Rust Code */,
 				35C3467A380D68A994A199DC /* Sources */,
 				321B0DD805A56AA303800987 /* Resources */,
@@ -192,8 +199,10 @@
 			dependencies = (
 			);
 			name = "biological-self_iOS";
+			packageProductDependencies = (
+			);
 			productName = "biological-self_iOS";
-			productReference = D486941D7A6691FDC4DC8B23 /* Biological Self.app */;
+			productReference = D486941D7A6691FDC4DC8B23 /* biological-self_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +224,7 @@
 			);
 			mainGroup = BBF1E3DE40CE7F524D074719;
 			minimizedProjectReferenceProxies = 1;
-			productRefGroup = 9FEE756F415B2D7376776DA2 /* Products */;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -232,6 +241,7 @@
 				E5351719AF0A1C79140897DC /* Assets.xcassets in Resources */,
 				E531BAA3593642A513221D6D /* LaunchScreen.storyboard in Resources */,
 				4EB0877D66C383CE06BC01F3 /* assets in Resources */,
+				AA28A1DC03A37CD549F65A7D /* libapp.a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,28 +268,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cargo tauri ios xcode-script -v --platform ${PLATFORM_DISPLAY_NAME:?} --sdk-root ${SDKROOT:?} --framework-search-paths \"${FRAMEWORK_SEARCH_PATHS:?}\" --header-search-paths \"${HEADER_SEARCH_PATHS:?}\" --gcc-preprocessor-definitions \"${GCC_PREPROCESSOR_DEFINITIONS:-}\" --configuration ${CONFIGURATION:?} ${FORCE_COLOR} ${ARCHS:?}";
-		};
-		8F424741274DC9BFFF58984A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-biological-self_iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -416,14 +404,14 @@
 		};
 		C3DC78962068F8D03148B290 /* release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0DEB622C23A2A51E71FA956 /* Pods-biological-self_iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ARCHS = arm64;
+				ARCHS = (
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "biological-self_iOS/biological-self_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = NDJZ6S9Q4L;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -435,38 +423,27 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=arm64]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION)",
-					"$(SDKROOT)/usr/lib/swift",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
-				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION)",
-					"$(SDKROOT)/usr/lib/swift",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
 				PRODUCT_NAME = "Biological Self";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
+				DEVELOPMENT_TEAM = "NDJZ6S9Q4L";
 			};
 			name = release;
 		};
 		D81FA63892187199B7EBE3DE /* debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F0AA83961D85B47B84773C9 /* Pods-biological-self_iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ARCHS = arm64;
+				ARCHS = (
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "biological-self_iOS/biological-self_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = NDJZ6S9Q4L;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -478,25 +455,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=arm64]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION)",
-					"$(SDKROOT)/usr/lib/swift",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
-				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION)",
-					"$(SDKROOT)/usr/lib/swift",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dannygomez.biological-self;
 				PRODUCT_NAME = "Biological Self";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
+				DEVELOPMENT_TEAM = "NDJZ6S9Q4L";
 			};
 			name = debug;
 		};

@@ -3666,6 +3666,526 @@ const ADDITIONAL_CONDITIONS: Record<string, ConditionMapping> = {
     diagnosticTests: ['Clinical diagnosis', 'CT sinuses (chronic/complicated)'],
     specialists: ['ENT', 'Allergist'],
     keywords: ['sinusitis', 'sinus infection', 'rhinosinusitis']
+  },
+
+  // More conditions to reach 100+
+  'bph': {
+    conditionId: 'bph',
+    conditionName: 'Benign Prostatic Hyperplasia',
+    alternateNames: ['BPH', 'Enlarged Prostate', 'Prostate Enlargement'],
+    icd10Codes: ['N40.0', 'N40.1'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'reproductive.male.prostate',
+      regionName: 'Prostate',
+      system: 'reproductive',
+      impactLevel: 'primary',
+      visualizationType: 'hypertrophy',
+      educationalFocus: {
+        topic: 'Prostatic Enlargement',
+        description: 'Non-malignant enlargement of prostate gland',
+        keyPoints: ['LUTS', 'IPSS score', 'Alpha-blockers and 5-ARI'],
+        clinicalPearl: 'PSA may be elevated but typically <10 ng/mL'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'urinary.bladder',
+      regionName: 'Bladder',
+      system: 'urinary',
+      impactLevel: 'secondary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Bladder Outlet Obstruction',
+        description: 'Enlarged prostate obstructs urine flow',
+        keyPoints: ['Detrusor hypertrophy', 'Post-void residual', 'Urinary retention risk'],
+        clinicalPearl: 'Acute retention may be precipitated by anticholinergics or decongestants'
+      }
+    }],
+    visualizationType: 'hypertrophy',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'IPSS 1-7', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'IPSS 8-19', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'IPSS 20-35', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Acute retention', urgency: 'emergent' }
+    ],
+    relatedConditions: ['urinary_retention', 'uti', 'bladder_stones'],
+    commonSymptoms: ['Weak stream', 'Frequency', 'Nocturia', 'Hesitancy', 'Incomplete emptying'],
+    riskFactors: ['Age', 'Family history', 'Obesity', 'Diabetes', 'Heart disease'],
+    diagnosticTests: ['PSA', 'DRE', 'Urinalysis', 'Post-void residual', 'Uroflowmetry'],
+    specialists: ['Urologist'],
+    keywords: ['bph', 'prostate', 'enlarged prostate', 'luts']
+  },
+
+  'pcos': {
+    conditionId: 'pcos',
+    conditionName: 'Polycystic Ovary Syndrome',
+    alternateNames: ['PCOS', 'Polycystic Ovarian Syndrome'],
+    icd10Codes: ['E28.2'],
+    category: 'immunologic',
+    primaryRegions: [{
+      regionId: 'reproductive.female.ovaries',
+      regionName: 'Ovaries',
+      system: 'reproductive',
+      impactLevel: 'primary',
+      visualizationType: 'structural',
+      educationalFocus: {
+        topic: 'Ovarian Dysfunction',
+        description: 'Hormonal disorder with polycystic ovaries',
+        keyPoints: ['Rotterdam criteria', 'Hyperandrogenism', 'Anovulation'],
+        clinicalPearl: 'Need 2 of 3: oligo/anovulation, hyperandrogenism, polycystic ovaries'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'digestive.pancreas',
+      regionName: 'Pancreas',
+      system: 'digestive',
+      impactLevel: 'secondary',
+      visualizationType: 'metabolic',
+      educationalFocus: {
+        topic: 'Insulin Resistance',
+        description: 'PCOS associated with metabolic syndrome',
+        keyPoints: ['Metformin as adjunct', 'Weight loss beneficial', 'Diabetes screening'],
+        clinicalPearl: '50-70% of PCOS women have insulin resistance'
+      }
+    }],
+    visualizationType: 'structural',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Mild symptoms', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Moderate symptoms', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Severe symptoms with metabolic', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'With significant complications', urgency: 'routine' }
+    ],
+    relatedConditions: ['diabetes', 'obesity', 'infertility', 'endometrial_cancer'],
+    commonSymptoms: ['Irregular periods', 'Hirsutism', 'Acne', 'Weight gain', 'Infertility'],
+    riskFactors: ['Family history', 'Obesity', 'Insulin resistance'],
+    diagnosticTests: ['Pelvic ultrasound', 'LH/FSH ratio', 'Free testosterone', 'DHEA-S', 'Glucose/insulin'],
+    specialists: ['OB/GYN', 'Endocrinologist', 'Reproductive Endocrinologist'],
+    keywords: ['pcos', 'polycystic ovary', 'irregular periods', 'hirsutism']
+  },
+
+  'endometriosis': {
+    conditionId: 'endometriosis',
+    conditionName: 'Endometriosis',
+    alternateNames: ['Endo'],
+    icd10Codes: ['N80.9', 'N80.0', 'N80.1'],
+    category: 'immunologic',
+    primaryRegions: [{
+      regionId: 'reproductive.female.uterus',
+      regionName: 'Pelvis',
+      system: 'reproductive',
+      impactLevel: 'primary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'Ectopic Endometrial Tissue',
+        description: 'Endometrial tissue outside uterus',
+        keyPoints: ['Cyclic pelvic pain', 'Dysmenorrhea', 'Laparoscopy gold standard'],
+        clinicalPearl: 'Average delay from symptoms to diagnosis is 7-10 years'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'reproductive.female.ovaries',
+      regionName: 'Ovaries',
+      system: 'reproductive',
+      impactLevel: 'secondary',
+      visualizationType: 'structural',
+      educationalFocus: {
+        topic: 'Endometriomas',
+        description: 'Chocolate cysts from endometriosis',
+        keyPoints: ['Ovarian cysts', 'Infertility', 'Surgical excision'],
+        clinicalPearl: 'Endometriomas appear as "chocolate cysts" on imaging'
+      }
+    }],
+    visualizationType: 'inflammation',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Stage I-II', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Stage III', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Stage IV', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'With bowel/bladder involvement', urgency: 'urgent' }
+    ],
+    relatedConditions: ['infertility', 'adenomyosis', 'ovarian_cyst'],
+    commonSymptoms: ['Pelvic pain', 'Dysmenorrhea', 'Dyspareunia', 'Infertility', 'Heavy periods'],
+    riskFactors: ['Family history', 'Early menarche', 'Short menstrual cycles', 'Nulliparity'],
+    diagnosticTests: ['Pelvic exam', 'Transvaginal ultrasound', 'MRI', 'Laparoscopy'],
+    specialists: ['OB/GYN', 'Reproductive Endocrinologist'],
+    keywords: ['endometriosis', 'pelvic pain', 'painful periods']
+  },
+
+  'fibromyalgia': {
+    conditionId: 'fibromyalgia',
+    conditionName: 'Fibromyalgia',
+    alternateNames: ['FM', 'Fibromyalgia Syndrome'],
+    icd10Codes: ['M79.7'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'musculoskeletal.muscle',
+      regionName: 'Muscles',
+      system: 'musculoskeletal',
+      impactLevel: 'primary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Central Sensitization',
+        description: 'Chronic widespread pain disorder',
+        keyPoints: ['Widespread pain index', 'Symptom severity scale', 'Multimodal treatment'],
+        clinicalPearl: 'Often coexists with depression, anxiety, IBS, and migraine'
+      }
+    }],
+    secondaryRegions: [],
+    visualizationType: 'functional',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Mild symptoms', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Moderate symptoms', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Severe, disabling', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Severe with comorbidities', urgency: 'routine' }
+    ],
+    relatedConditions: ['chronic_fatigue_syndrome', 'depression', 'ibs', 'migraine'],
+    commonSymptoms: ['Widespread pain', 'Fatigue', 'Sleep disturbance', 'Cognitive dysfunction', 'Headaches'],
+    riskFactors: ['Female sex', 'Trauma', 'Infections', 'Genetics', 'Other rheumatic conditions'],
+    diagnosticTests: ['Clinical diagnosis', '2016 ACR criteria', 'Lab tests to exclude other causes'],
+    specialists: ['Rheumatologist', 'Pain Management'],
+    keywords: ['fibromyalgia', 'widespread pain', 'chronic pain']
+  },
+
+  'vertigo': {
+    conditionId: 'vertigo',
+    conditionName: 'Benign Paroxysmal Positional Vertigo',
+    alternateNames: ['BPPV', 'Vertigo', 'Positional Vertigo'],
+    icd10Codes: ['H81.10', 'H81.13'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'sensory.ear',
+      regionName: 'Inner Ear',
+      system: 'nervous',
+      impactLevel: 'primary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Canalithiasis',
+        description: 'Otoconia displaced into semicircular canals',
+        keyPoints: ['Dix-Hallpike test', 'Epley maneuver', 'Brief episodes with position change'],
+        clinicalPearl: 'Episodes typically <1 minute; triggered by head position changes'
+      }
+    }],
+    secondaryRegions: [],
+    visualizationType: 'functional',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Infrequent episodes', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Frequent episodes', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Persistent, affecting function', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Intractable', urgency: 'urgent' }
+    ],
+    relatedConditions: ['menieres_disease', 'vestibular_neuritis'],
+    commonSymptoms: ['Vertigo', 'Nystagmus', 'Nausea', 'Imbalance'],
+    riskFactors: ['Age', 'Head trauma', 'Vestibular neuritis', 'Prolonged bed rest'],
+    diagnosticTests: ['Dix-Hallpike test', 'Roll test', 'MRI (if central features)'],
+    specialists: ['ENT', 'Neurologist', 'Physical Therapist'],
+    keywords: ['bppv', 'vertigo', 'dizziness', 'room spinning']
+  },
+
+  'carpal_tunnel_syndrome': {
+    conditionId: 'carpal_tunnel_syndrome',
+    conditionName: 'Carpal Tunnel Syndrome',
+    alternateNames: ['CTS', 'Median Nerve Compression'],
+    icd10Codes: ['G56.00', 'G56.01', 'G56.02'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'nervous.peripheral_nerves',
+      regionName: 'Median Nerve',
+      system: 'nervous',
+      impactLevel: 'primary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'Median Nerve Entrapment',
+        description: 'Compression at carpal tunnel',
+        keyPoints: ['Phalen and Tinel tests', 'Nocturnal symptoms', 'EMG/NCS for confirmation'],
+        clinicalPearl: 'Symptoms in median nerve distribution (thumb, index, middle, radial ring finger)'
+      }
+    }],
+    secondaryRegions: [],
+    visualizationType: 'inflammation',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Intermittent paresthesias', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Frequent symptoms', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Constant symptoms with weakness', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Thenar atrophy', urgency: 'urgent' }
+    ],
+    relatedConditions: ['diabetes', 'hypothyroidism', 'rheumatoid_arthritis'],
+    commonSymptoms: ['Hand numbness', 'Tingling', 'Weakness', 'Nocturnal symptoms', 'Dropping objects'],
+    riskFactors: ['Repetitive hand use', 'Female sex', 'Pregnancy', 'Diabetes', 'Obesity'],
+    diagnosticTests: ['Clinical exam', 'EMG/NCS', 'Ultrasound'],
+    specialists: ['Hand Surgeon', 'Neurologist'],
+    keywords: ['carpal tunnel', 'cts', 'hand numbness', 'median nerve']
+  },
+
+  'herniated_disc': {
+    conditionId: 'herniated_disc',
+    conditionName: 'Herniated Disc',
+    alternateNames: ['Slipped Disc', 'Disc Herniation', 'Disc Prolapse'],
+    icd10Codes: ['M51.16', 'M51.06', 'M51.26'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'musculoskeletal.spine',
+      regionName: 'Spine',
+      system: 'musculoskeletal',
+      impactLevel: 'primary',
+      visualizationType: 'structural',
+      educationalFocus: {
+        topic: 'Disc Herniation',
+        description: 'Nucleus pulposus protrudes through annulus fibrosus',
+        keyPoints: ['L4-L5 and L5-S1 most common', 'Dermatomal symptoms', 'Red flags'],
+        clinicalPearl: 'Most improve with conservative treatment in 6-12 weeks'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'nervous.spinalCord',
+      regionName: 'Nerve Roots',
+      system: 'nervous',
+      impactLevel: 'secondary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'Radiculopathy',
+        description: 'Nerve root compression from disc',
+        keyPoints: ['Straight leg raise', 'Motor/sensory deficits', 'Cauda equina red flags'],
+        clinicalPearl: 'Cauda equina: bladder dysfunction, saddle anesthesia = emergency'
+      }
+    }],
+    visualizationType: 'structural',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Pain only', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'With sensory symptoms', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'With motor weakness', urgency: 'urgent' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Cauda equina syndrome', urgency: 'emergent' }
+    ],
+    relatedConditions: ['sciatica', 'spinal_stenosis'],
+    commonSymptoms: ['Back pain', 'Radiating leg pain', 'Numbness', 'Weakness'],
+    riskFactors: ['Age', 'Heavy lifting', 'Obesity', 'Smoking', 'Sedentary lifestyle'],
+    diagnosticTests: ['Clinical exam', 'MRI spine', 'EMG/NCS'],
+    specialists: ['Orthopedic Spine Surgeon', 'Neurosurgeon', 'Physical Medicine'],
+    keywords: ['herniated disc', 'slipped disc', 'bulging disc', 'disc prolapse']
+  },
+
+  'allergic_rhinitis': {
+    conditionId: 'allergic_rhinitis',
+    conditionName: 'Allergic Rhinitis',
+    alternateNames: ['Hay Fever', 'Nasal Allergies'],
+    icd10Codes: ['J30.9', 'J30.1', 'J30.2'],
+    category: 'immunologic',
+    primaryRegions: [{
+      regionId: 'respiratory.nasalCavity',
+      regionName: 'Nasal Cavity',
+      system: 'respiratory',
+      impactLevel: 'primary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'IgE-Mediated Nasal Inflammation',
+        description: 'Allergic inflammation of nasal mucosa',
+        keyPoints: ['Intranasal steroids first-line', 'Antihistamines', 'Allergen avoidance'],
+        clinicalPearl: 'Allergic shiners and nasal crease ("allergic salute") in children'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'sensory.eye',
+      regionName: 'Eyes',
+      system: 'nervous',
+      impactLevel: 'secondary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'Allergic Conjunctivitis',
+        description: 'Often coexists with allergic rhinitis',
+        keyPoints: ['Itchy watery eyes', 'Antihistamine eye drops', 'Mast cell stabilizers'],
+        clinicalPearl: 'Ocular symptoms present in majority of AR patients'
+      }
+    }],
+    visualizationType: 'inflammation',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Intermittent, mild', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Moderate symptoms', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Severe, affecting QoL', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Severe with asthma', urgency: 'routine' }
+    ],
+    relatedConditions: ['asthma', 'eczema', 'sinusitis'],
+    commonSymptoms: ['Sneezing', 'Rhinorrhea', 'Nasal congestion', 'Itching', 'Post-nasal drip'],
+    riskFactors: ['Family history', 'Other atopic conditions', 'Early antibiotic use', 'Urban living'],
+    diagnosticTests: ['Clinical diagnosis', 'Skin prick testing', 'Serum IgE levels'],
+    specialists: ['Allergist', 'ENT'],
+    keywords: ['allergic rhinitis', 'hay fever', 'allergies', 'sneezing']
+  },
+
+  'hypothyroidism_hashimotos': {
+    conditionId: 'hypothyroidism_hashimotos',
+    conditionName: 'Hashimoto\'s Thyroiditis',
+    alternateNames: ['Chronic Lymphocytic Thyroiditis', 'Autoimmune Thyroiditis'],
+    icd10Codes: ['E06.3'],
+    category: 'immunologic',
+    primaryRegions: [{
+      regionId: 'endocrine.thyroid',
+      regionName: 'Thyroid Gland',
+      system: 'endocrine',
+      impactLevel: 'primary',
+      visualizationType: 'inflammation',
+      educationalFocus: {
+        topic: 'Autoimmune Thyroid Destruction',
+        description: 'Lymphocytic infiltration of thyroid',
+        keyPoints: ['Anti-TPO antibodies', 'Gradual hypothyroidism', 'Goiter possible'],
+        clinicalPearl: 'Most common cause of hypothyroidism in iodine-sufficient areas'
+      }
+    }],
+    secondaryRegions: [],
+    visualizationType: 'inflammation',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Subclinical', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Overt hypothyroidism', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Severe hypothyroidism', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Myxedema', urgency: 'emergent' }
+    ],
+    relatedConditions: ['other_autoimmune_diseases', 'type_1_diabetes', 'vitiligo'],
+    commonSymptoms: ['Fatigue', 'Weight gain', 'Cold intolerance', 'Constipation', 'Dry skin'],
+    riskFactors: ['Female sex', 'Family history', 'Other autoimmune disease', 'Radiation exposure'],
+    diagnosticTests: ['TSH', 'Free T4', 'Anti-TPO antibodies', 'Anti-thyroglobulin antibodies'],
+    specialists: ['Endocrinologist'],
+    keywords: ['hashimotos', 'autoimmune thyroid', 'thyroiditis']
+  },
+
+  'anxiety_disorder': {
+    conditionId: 'anxiety_disorder',
+    conditionName: 'Generalized Anxiety Disorder',
+    alternateNames: ['GAD', 'Anxiety'],
+    icd10Codes: ['F41.1', 'F41.9'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'nervous.brain',
+      regionName: 'Brain',
+      system: 'nervous',
+      impactLevel: 'primary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Excessive Worry',
+        description: 'Persistent anxiety about multiple domains',
+        keyPoints: ['GAD-7 screening', 'CBT first-line', 'SSRIs/SNRIs pharmacotherapy'],
+        clinicalPearl: 'Worry about multiple things most days for >6 months'
+      }
+    }],
+    secondaryRegions: [{
+      regionId: 'cardiovascular.heart',
+      regionName: 'Heart',
+      system: 'cardiovascular',
+      impactLevel: 'secondary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Somatic Symptoms',
+        description: 'Anxiety manifests with physical symptoms',
+        keyPoints: ['Palpitations', 'Chest pain', 'Rule out cardiac causes'],
+        clinicalPearl: 'Somatic symptoms often prompt medical evaluation first'
+      }
+    }],
+    visualizationType: 'functional',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'GAD-7 5-9', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'GAD-7 10-14', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'GAD-7 15-21', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'With suicidal ideation', urgency: 'emergent' }
+    ],
+    relatedConditions: ['depression', 'panic_disorder', 'ptsd'],
+    commonSymptoms: ['Excessive worry', 'Restlessness', 'Fatigue', 'Difficulty concentrating', 'Sleep problems', 'Muscle tension'],
+    riskFactors: ['Female sex', 'Family history', 'Trauma', 'Chronic illness', 'Stressful life events'],
+    diagnosticTests: ['GAD-7', 'Clinical interview', 'Rule out medical causes'],
+    specialists: ['Psychiatrist', 'Psychologist', 'Primary Care'],
+    keywords: ['anxiety', 'gad', 'worry', 'nervous']
+  },
+
+  'depression': {
+    conditionId: 'depression',
+    conditionName: 'Major Depressive Disorder',
+    alternateNames: ['MDD', 'Depression', 'Clinical Depression'],
+    icd10Codes: ['F32.9', 'F33.0', 'F33.1'],
+    category: 'degenerative',
+    primaryRegions: [{
+      regionId: 'nervous.brain',
+      regionName: 'Brain',
+      system: 'nervous',
+      impactLevel: 'primary',
+      visualizationType: 'functional',
+      educationalFocus: {
+        topic: 'Mood Dysregulation',
+        description: 'Persistent depressed mood or anhedonia',
+        keyPoints: ['PHQ-9 screening', 'SIGECAPS criteria', 'SSRIs first-line'],
+        clinicalPearl: 'Always assess for suicidal ideation'
+      }
+    }],
+    secondaryRegions: [],
+    visualizationType: 'functional',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'PHQ-9 5-9', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'PHQ-9 10-14', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'PHQ-9 15-27', urgency: 'urgent' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'With suicidal ideation', urgency: 'emergent' }
+    ],
+    relatedConditions: ['anxiety_disorder', 'bipolar_disorder', 'substance_use'],
+    commonSymptoms: ['Depressed mood', 'Anhedonia', 'Sleep changes', 'Appetite changes', 'Fatigue', 'Concentration problems', 'Guilt', 'Suicidal thoughts'],
+    riskFactors: ['Family history', 'Trauma', 'Chronic illness', 'Substance use', 'Social isolation'],
+    diagnosticTests: ['PHQ-9', 'Clinical interview', 'TSH to rule out thyroid', 'Screen for bipolar'],
+    specialists: ['Psychiatrist', 'Psychologist', 'Primary Care'],
+    keywords: ['depression', 'mdd', 'sad', 'depressed mood']
+  },
+
+  'obesity': {
+    conditionId: 'obesity',
+    conditionName: 'Obesity',
+    alternateNames: ['Morbid Obesity', 'Severe Obesity'],
+    icd10Codes: ['E66.9', 'E66.01', 'E66.2'],
+    category: 'nutritional',
+    primaryRegions: [{
+      regionId: 'integumentary.skin',
+      regionName: 'Adipose Tissue',
+      system: 'integumentary',
+      impactLevel: 'primary',
+      visualizationType: 'metabolic',
+      educationalFocus: {
+        topic: 'Excess Adiposity',
+        description: 'Abnormal fat accumulation affecting health',
+        keyPoints: ['BMI classification', 'Waist circumference', 'Metabolic syndrome'],
+        clinicalPearl: 'Central obesity (waist circumference) may be more predictive than BMI'
+      }
+    }],
+    secondaryRegions: [
+      {
+        regionId: 'cardiovascular.heart',
+        regionName: 'Heart',
+        system: 'cardiovascular',
+        impactLevel: 'secondary',
+        visualizationType: 'hypertrophy',
+        educationalFocus: {
+          topic: 'Cardiovascular Risk',
+          description: 'Obesity is major CV risk factor',
+          keyPoints: ['Hypertension', 'Dyslipidemia', 'Heart failure'],
+          clinicalPearl: '5-10% weight loss significantly improves CV risk factors'
+        }
+      },
+      {
+        regionId: 'digestive.pancreas',
+        regionName: 'Pancreas',
+        system: 'digestive',
+        impactLevel: 'secondary',
+        visualizationType: 'metabolic',
+        educationalFocus: {
+          topic: 'Insulin Resistance',
+          description: 'Obesity strongly linked to type 2 diabetes',
+          keyPoints: ['Prediabetes screening', 'HbA1c', 'Metformin'],
+          clinicalPearl: 'Screen for diabetes if BMI >= 25 with risk factors'
+        }
+      }
+    ],
+    visualizationType: 'metabolic',
+    severityMapping: [
+      { severity: 'mild', intensity: 0.25, color: '#FFC107', description: 'Class I (BMI 30-34.9)', urgency: 'routine' },
+      { severity: 'moderate', intensity: 0.5, color: '#FF9800', description: 'Class II (BMI 35-39.9)', urgency: 'routine' },
+      { severity: 'severe', intensity: 0.75, color: '#F44336', description: 'Class III (BMI >= 40)', urgency: 'routine' },
+      { severity: 'critical', intensity: 1.0, color: '#B71C1C', description: 'Super obesity (BMI >= 50)', urgency: 'routine' }
+    ],
+    relatedConditions: ['diabetes', 'hypertension', 'sleep_apnea', 'nafld', 'osteoarthritis'],
+    commonSymptoms: ['Elevated BMI', 'Fatigue', 'Joint pain', 'Dyspnea', 'Sleep problems'],
+    riskFactors: ['Diet', 'Physical inactivity', 'Genetics', 'Medications', 'Endocrine disorders'],
+    diagnosticTests: ['BMI', 'Waist circumference', 'Lipid panel', 'Glucose/HbA1c', 'Liver function'],
+    specialists: ['Endocrinologist', 'Bariatric Surgeon', 'Dietitian'],
+    keywords: ['obesity', 'overweight', 'bmi', 'weight']
   }
 };
 

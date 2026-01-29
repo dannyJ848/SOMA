@@ -75,6 +75,17 @@ Use BIOSELF_PASSPHRASE environment variable for non-interactive scripts.
 - **File Naming**: Use kebab-case (e.g., `acute-kidney-injury.ts`)
 - **Content Organization**: Group by specialty/topic in subdirectories
 
+### Content Databases (core/content/, core/medical-simulation/)
+- **Compact Format**: Content database entries use compact format (8-10 lines per entry) to stay within generation limits
+- **Bilingual Requirement**: All medical content must have Spanish translations (nameEs field)
+- **ICD-11 Identifiers**: ICD-11 codes are the universal identifier for conditions
+- **Complexity Levels**: 5 levels: child(1), patient(2), nursing(3), medical-student(4), physician(5)
+- **Knowledge Graph**: Connects conditions <-> anatomy <-> symptoms <-> medications <-> procedures <-> specialties
+
+### iOS / Mobile
+- **iOS Canvas Config**: gl={{antialias:false, alpha:true, powerPreference:'default', failIfMajorPerformanceCaveat:false}}, dpr max 2
+- **MobileBottomNav**: Toggleable, hidden by default, auto-hides after 5s
+
 ---
 
 ## 2026-01-20 - US-009
@@ -5214,4 +5225,100 @@ fn get_data_dir() -> PathBuf {
 - Entitlements: com.apple.security.files.documents.read-write enabled
 - Build command: ./scripts/build-testflight.sh
 - IPA location: build/TestFlight/SOMA.ipa
+
+---
+
+## Session Progress (January 29, 2026 - Continuation Session)
+
+### Completed This Session:
+
+**Build & TypeScript:**
+- TypeScript compiles cleanly (npx tsc --noEmit exits 0)
+- Vite build passes (npm run build succeeds)
+- Only warning: chunk size >500KB (expected with large content databases)
+
+**Content Pipeline - Wave 1 (10 agents):**
+- core/content/specialties/specialty-map.ts - 42 medical specialties across 7 categories
+- core/content/symptoms/symptom-database.ts - 155 symptoms with bilingual names
+- core/education/explanation-levels.ts - 5-level explanation system with examples
+- core/ai/local-llm-service.ts - DeepSeek 14B integration layer
+- core/knowledge-graph/knowledge-index.ts - Unified knowledge graph (280+ relationships)
+- core/knowledge-graph/search-engine.ts - Fuzzy bilingual search engine
+
+**Content Pipeline - Wave 2 (5 agents):**
+- core/medical-simulation/conditions/condition-generator.ts - 390 ICD-11 conditions
+- core/content/procedures/procedure-database.ts - 127 medical procedures
+- core/content/anatomy/anatomy-encyclopedia.ts - 119 anatomical structures
+- core/i18n/medical-translations-es.ts - 578 Spanish medical translations
+- core/i18n/medical-glossary.ts - 352 bilingual glossary entries
+
+**Content Pipeline - Wave 3 (in progress):**
+- core/content/medications/medication-database.ts - 150+ medications (building)
+- src/services/ContentService.ts - Unified content service (building)
+- src/hooks/useContent.ts - React hooks for content access (building)
+
+**New Conditions in Store:**
+- IBS (K58), Carpal Tunnel (G56.0), Plantar Fasciitis (M72.2), Tension Headache (G44.2), Seasonal Allergies (J30.1)
+
+**Content Totals:**
+- 390 ICD-11 condition entries
+- 42 medical specialties
+- 155 symptoms
+- 127 procedures
+- 119 anatomy structures
+- 578+ Spanish translations + 352 glossary entries
+- 280+ knowledge graph relationships
+- 5-level explanation system
+- DeepSeek 14B integration ready
+
+### UI Fixes This Session:
+- DebugPanel: Removed console interception infinite loop
+- SmartPanelManager: Fixed re-render loop with useMemo
+- AnatomyViewer: iOS-compatible Canvas config, decluttered UI
+- MobileBottomNav: Toggleable with pull-up handle, auto-hide
+- InteractiveBodyModel: 21 anatomically proportioned body regions
+- SimplifiedAnatomyViewer: Human body silhouette replaces polygons
+- RadialContextMenu: Fixed CSS class names and positioning
+
+### Architecture Decisions:
+- BYOK (Bring Your Own Key) model - $0 hosting cost
+- DeepSeek 14B as primary local LLM
+- Offline-first, everything bundled in-app
+- Open source, free forever
+- Bilingual EN/ES throughout
+
+### Learnings:
+- Keep content database entries compact to avoid token limits
+- iOS WebGL: antialias=false, alpha=true, failIfMajorPerformanceCaveat=false, DPR capped at 2
+- React infinite loops: avoid console interception in debug panels
+- Use useMemo + refs for expensive computations in frequently re-rendering components
+- Vite chunk warnings expected with large content; will need code-splitting later
+
+---
+
+## 2026-01-29 - Phase 8 Continuation: Integration & Wiring
+
+### What was done:
+1. **Verified all Phase 8 agent outputs exist on disk** — ContentService.ts, KnowledgeRAGService.ts, useContent.ts, MedicalEncyclopediaView.tsx, medication-database.ts all confirmed present
+2. **Wired ContentProvider into main.tsx** — ContentProvider now wraps the entire app inside VoiceProvider, making the unified content service available to all components via React context
+3. **Wired KnowledgeRAGService into useAIChat.ts** — AI chat now automatically enriches system prompts with knowledge graph context (conditions, medications, anatomy, symptoms) before sending to LLM. Best-effort: RAG failure doesn't block chat.
+4. **Updated BLUEPRINT.md to v3.2** — Added Phase 8 section documenting all content pipeline infrastructure, totals, and architecture flow
+5. **Build verification** — TypeScript 0 errors, production build passes
+
+### Files changed:
+- `src/main.tsx` — Added ContentProvider import and wrapper
+- `src/hooks/useAIChat.ts` — Added buildRAGContext import and enrichment step in sendMessage
+- `BLUEPRINT.md` — Updated to v3.2 with Phase 8 content pipeline documentation
+
+### Key Integration Points:
+- ContentProvider → React Context → useContentService() hook → any component
+- User query → buildRAGContext() → contextString prepended to system prompt → AI chat
+- RAG enrichment includes: knowledge graph traversal, complexity-level framing, Spanish translation, glossary definitions
+
+### Learnings:
+- Glob tool can sometimes miss files that exist — verify with `ls` if glob returns empty
+- RAG integration should always be try/catch best-effort to avoid blocking primary functionality
+- ContentProvider must be inside I18nProvider (for translations) but can be inside or outside VoiceProvider
+
+---
 

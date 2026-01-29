@@ -17,6 +17,8 @@ import {
   buildLabInterpretationPrompt,
   buildHealthSummaryPrompt,
 } from '../ai/prompts/enhanced-prompts';
+import { buildRAGContext } from '../services/KnowledgeRAGService';
+import type { RAGUserContext } from '../services/KnowledgeRAGService';
 import type {
   AIMessage,
   AIResponse,
@@ -240,6 +242,19 @@ Explanation Level: ${userContext?.complexityLevel || aiContext.explanationLevel}
 
 Provide accurate, educational health information. Never diagnose or prescribe.
 Include citations for medical facts. Suggest relevant follow-up questions.`;
+
+      // Enrich system prompt with knowledge graph RAG context
+      try {
+        const ragUserCtx: RAGUserContext | undefined = userContext
+          ? { complexityLevel: getLevelNumber(userContext.complexityLevel || aiContext.explanationLevel) }
+          : undefined;
+        const ragResult = buildRAGContext(content, ragUserCtx);
+        if (ragResult.contextString) {
+          systemPrompt = `${ragResult.contextString}\n\n${systemPrompt}`;
+        }
+      } catch (_ragErr) {
+        // RAG enrichment is best-effort; do not block chat on failure
+      }
 
       // Use RAG for enhanced responses
       const response = await aiContext.chatWithRAG({

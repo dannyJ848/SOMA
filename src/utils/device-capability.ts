@@ -292,9 +292,20 @@ export function detectDeviceCapabilities(): DeviceCapabilities {
     return cachedCapabilities;
   }
 
+  // iOS Simulator detection - use conservative defaults
+  const isIOSSimulator = typeof navigator !== 'undefined' &&
+    /iPhone|iPad/.test(navigator.userAgent) &&
+    (navigator.userAgent.includes('Simulator') ||
+     // iOS Simulator often reports as Safari but with specific WebGL quirks
+     (typeof window !== 'undefined' && window.devicePixelRatio === 2));
+
   // Create temporary canvas for WebGL context
   const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  // iOS WebKit: Try webgl first for better compatibility, then webgl2
+  // iOS Simulator has issues with some WebGL2 features
+  const gl = isIOSSimulator
+    ? (canvas.getContext('webgl') || canvas.getContext('webgl2'))
+    : (canvas.getContext('webgl2') || canvas.getContext('webgl'));
 
   if (!gl) {
     // WebGL not supported - return minimal capabilities

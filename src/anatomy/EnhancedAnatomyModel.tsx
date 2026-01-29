@@ -478,18 +478,19 @@ export function SystemFilterPanel({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   lodState: _lodState,
 }: SystemFilterPanelProps) {
-  // All anatomical systems - always show all for Complete Anatomy-style layer control
-  const systems: { id: AnatomicalSystem; name: string; icon: string }[] = [
-    { id: 'integumentary', name: 'Skin', icon: '🧑' },
-    { id: 'muscular', name: 'Muscles', icon: '💪' },
-    { id: 'skeletal', name: 'Skeleton', icon: '🦴' },
-    { id: 'cardiovascular', name: 'Heart & Vessels', icon: '❤️' },
-    { id: 'respiratory', name: 'Lungs', icon: '🫁' },
-    { id: 'digestive', name: 'Digestive', icon: '🍽️' },
-    { id: 'nervous', name: 'Brain & Nerves', icon: '🧠' },
-    { id: 'urinary', name: 'Kidneys', icon: '🫘' },
-    { id: 'lymphatic', name: 'Lymphatic', icon: '🛡️' },
-    { id: 'endocrine', name: 'Hormones', icon: '⚗️' },
+  // All 11 anatomical systems - always show all for Complete Anatomy-style layer control
+  const systems: { id: AnatomicalSystem; name: string }[] = [
+    { id: 'integumentary', name: 'Integumentary' },
+    { id: 'muscular', name: 'Muscular' },
+    { id: 'skeletal', name: 'Skeletal' },
+    { id: 'cardiovascular', name: 'Cardiovascular' },
+    { id: 'respiratory', name: 'Respiratory' },
+    { id: 'digestive', name: 'Digestive' },
+    { id: 'nervous', name: 'Nervous' },
+    { id: 'urinary', name: 'Urinary' },
+    { id: 'reproductive', name: 'Reproductive' },
+    { id: 'lymphatic', name: 'Lymphatic' },
+    { id: 'endocrine', name: 'Endocrine' },
   ];
 
   // Show all systems at all zoom levels for Complete Anatomy-style layer toggling
@@ -509,7 +510,18 @@ export function SystemFilterPanel({
             }}
             onClick={() => onToggleSystem(system.id)}
           >
-            <span className="system-icon">{system.icon}</span>
+            <span
+              className="system-color-dot"
+              style={{
+                display: 'inline-block',
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                backgroundColor: SYSTEM_COLORS[system.id],
+                marginRight: 6,
+                flexShrink: 0,
+              }}
+            />
             <span className="system-name">{system.name}</span>
           </button>
         ))}

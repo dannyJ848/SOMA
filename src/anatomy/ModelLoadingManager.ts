@@ -12,6 +12,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { resolveAssetPath, getDracoDecoderPath, getPlatformInfo } from '../utils/assetPathResolver';
 
 // ============================================
 // Types
@@ -275,9 +276,19 @@ class ModelLoadingManagerClass {
   private constructor() {
     this.loader = new GLTFLoader();
     this.dracoLoader = new DRACOLoader();
-    this.dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+
+    // Use platform-appropriate Draco decoder path
+    const dracoPath = getDracoDecoderPath();
+    this.dracoLoader.setDecoderPath(dracoPath);
     this.dracoLoader.setDecoderConfig({ type: 'js' });
     this.loader.setDRACOLoader(this.dracoLoader);
+
+    // Log platform info for debugging
+    if (process.env.NODE_ENV === 'development') {
+      const platformInfo = getPlatformInfo();
+      console.log('[ModelLoadingManager] Initialized with platform:', platformInfo);
+      console.log('[ModelLoadingManager] Using Draco decoder from:', dracoPath);
+    }
   }
 
   static getInstance(): ModelLoadingManagerClass {
@@ -527,13 +538,33 @@ class ModelLoadingManagerClass {
   }
 
   private executeLoad(task: LoadTask): Promise<THREE.Group> {
+    // Resolve the asset path for the current platform
+    const resolvedUrl = resolveAssetPath(task.url);
+    const platformInfo = getPlatformInfo();
+
+    // Always log on iOS for debugging, or in dev mode
+    if (platformInfo.isIOS || process.env.NODE_ENV === 'development') {
+      console.log(`[ModelLoadingManager] Loading model:`, {
+        originalUrl: task.url,
+        resolvedUrl,
+        platform: platformInfo.platform,
+        isIOS: platformInfo.isIOS,
+        baseUrl: platformInfo.baseUrl,
+        windowOrigin: typeof window !== 'undefined' ? window.location.origin : 'N/A',
+        windowHref: typeof window !== 'undefined' ? window.location.href : 'N/A',
+      });
+    }
+
     return new Promise((resolve, reject) => {
       this.loader.load(
-        task.url,
+        resolvedUrl,
         (gltf) => {
           if (task.abortController?.signal.aborted) {
             reject(new Error('Load cancelled'));
             return;
+          }
+          if (platformInfo.isIOS) {
+            console.log(`[ModelLoadingManager] Successfully loaded on iOS: ${task.url}`);
           }
           resolve(gltf.scene);
         },
@@ -544,6 +575,27 @@ class ModelLoadingManagerClass {
           }
         },
         (error) => {
+          // Enhanced error logging for iOS debugging
+          const errorDetails = {
+            url: task.url,
+            resolvedUrl,
+            platform: platformInfo.platform,
+            isIOS: platformInfo.isIOS,
+            error: error instanceof Error ? error.message : String(error),
+            errorType: error?.constructor?.name || 'Unknown',
+          };
+          console.error(`[ModelLoadingManager] Failed to load model:`, errorDetails);
+
+          // On iOS, try to provide more helpful error information
+          if (platformInfo.isIOS) {
+            console.error('[ModelLoadingManager] iOS-specific debug info:', {
+              windowOrigin: typeof window !== 'undefined' ? window.location.origin : 'N/A',
+              documentBaseURI: typeof document !== 'undefined' ? document.baseURI : 'N/A',
+              // Check if the URL is accessible
+              testFetch: 'Try fetching the URL manually to check accessibility',
+            });
+          }
+
           reject(error);
         }
       );

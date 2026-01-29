@@ -64,3 +64,26 @@ export {
   type PubMedArticle,
   type PubMedSearchResult,
 } from './pubmed-search.js';
+
+// Local LLM Service (DeepSeek 14B integration layer)
+export {
+  TauriLLMBridge,
+  MockLLMService,
+  ContextBuilder,
+  createLLMService,
+  EXPLAIN_CONDITION_PROMPT,
+  EXPLAIN_PROCEDURE_PROMPT,
+  EXPLAIN_MEDICATION_PROMPT,
+  EXPLAIN_SYMPTOM_PROMPT,
+  ANSWER_QUESTION_PROMPT,
+  TRANSLATE_MEDICAL_PROMPT,
+  SIMPLIFY_TEXT_PROMPT,
+  type LocalLLMService,
+  type GenerateOptions,
+  type ExplanationLevel,
+  type SupportedLanguage,
+  type ModelInfo,
+  type LLMHealthStatus,
+  type ContextChunk,
+  type ContextBuilderConfig,
+} from './local-llm-service.js';

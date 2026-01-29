@@ -6,9 +6,13 @@
  * and view health overlays based on patient data.
  */
 
-import React, { useState, useCallback, useRef, Suspense, useMemo } from 'react';
+import React, { useState, useCallback, useRef, Suspense, useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
+
+// iOS-specific imports for error handling and debugging
+import { ThreeJSErrorBoundary } from '../errors/ErrorBoundary';
+import { addDebugLog, logWebGLContext, checkWebGLSupport } from '../components/DebugPanel';
 import { PersonalizedBodyModel } from './PersonalizedBodyModel';
 import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from '../hooks/useUserDemographics';
 import { calculateBodyProportions, type BodyProportions } from '../utils/bodyProportionCalculator';
@@ -484,6 +488,37 @@ export function AnatomyMainScreen({
   const [activeLayers, setActiveLayers] = useState<string[]>(['integumentary', 'muscular', 'skeletal']);
   const [showHealthOverlay, setShowHealthOverlay] = useState(true);
 
+  // iOS WebGL context loss recovery state
+  const [isContextLost, setIsContextLost] = useState(false);
+  const [contextLossMessage, setContextLossMessage] = useState<string | null>(null);
+  const contextLossTimestamps = useRef<number[]>([]);
+  const [memoryReductionActive, setMemoryReductionActive] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Detect iOS device for conservative WebGL settings
+  const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  // Log component mount for iOS debugging
+  useEffect(() => {
+    addDebugLog({
+      type: 'info',
+      message: 'AnatomyMainScreen component mounted',
+      details: {
+        isIOS,
+        webglSupport: checkWebGLSupport(),
+        devicePixelRatio: window.devicePixelRatio,
+        viewportSize: { width: window.innerWidth, height: window.innerHeight },
+      },
+    });
+
+    return () => {
+      addDebugLog({
+        type: 'info',
+        message: 'AnatomyMainScreen component unmounting',
+      });
+    };
+  }, [isIOS]);
+
   // New navigation state
   const [radialMenuOpen, setRadialMenuOpen] = useState(false);
   const [radialMenuPosition, setRadialMenuPosition] = useState({ x: 0, y: 0 });
@@ -731,11 +766,151 @@ export function AnatomyMainScreen({
           className="anatomy-canvas-container"
           onContextMenu={handleContextMenu}
           {...longPressHandlers}
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            minHeight: '300px',
+            overflow: 'hidden',
+          }}
         >
-          <Suspense fallback={<CanvasLoading />}>
+          {/* ThreeJS Error Boundary - catches WebGL and rendering errors */}
+          <ThreeJSErrorBoundary
+            onError={(error) => {
+              addDebugLog({
+                type: 'error',
+                message: `ThreeJS Error in AnatomyMainScreen: ${error.message}`,
+                details: {
+                  code: error.code,
+                  severity: error.severity,
+                },
+                stack: error.stack,
+              });
+            }}
+            onFallback2D={() => {
+              addDebugLog({
+                type: 'info',
+                message: 'AnatomyMainScreen falling back to 2D view',
+              });
+            }}
+          >
+          {/* Canvas Loading Fallback with explicit min-height for iOS */}
+          <Suspense fallback={
+            <div className="anatomy-canvas-loading" style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#0a0a0f',
+              color: 'white',
+              minHeight: '300px', // CRITICAL: iOS needs explicit min-height
+            }}>
+              <div style={{ textAlign: 'center' }}>
+                <div className="loading-spinner" style={{
+                  width: 40,
+                  height: 40,
+                  border: '3px solid rgba(255,255,255,0.1)',
+                  borderTopColor: '#3b82f6',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite',
+                  margin: '0 auto 16px',
+                }} />
+                <span>Loading 3D model...</span>
+              </div>
+            </div>
+          }>
             <Canvas
               camera={{ position: [0, 0.5, 4], fov: 50 }}
-              gl={{ antialias: true, alpha: true }}
+              gl={{
+                // iOS-safe WebGL settings (matching SimplifiedAnatomyViewer pattern)
+                antialias: false,
+                alpha: true,
+                powerPreference: 'default',
+                preserveDrawingBuffer: false,
+                failIfMajorPerformanceCaveat: false,
+              }}
+              dpr={Math.min(window.devicePixelRatio, 2)}
+              frameloop={isContextLost ? 'never' : 'always'}
+              style={{
+                width: '100%',
+                height: '100%',
+                touchAction: 'none',
+                display: 'block',
+                position: 'absolute',
+                inset: 0,
+              }}
+              onCreated={(state) => {
+                console.log('[AnatomyMainScreen] Canvas created successfully');
+
+                // Capture canvas reference for context loss event handling
+                canvasRef.current = state.gl.domElement;
+
+                // Log WebGL context creation for iOS debugging
+                const contextInfo = {
+                  size: state.size,
+                  dpr: state.gl.getPixelRatio(),
+                  webglVersion: state.gl.capabilities.isWebGL2 ? 'WebGL2' : 'WebGL1',
+                  maxTextures: state.gl.capabilities.maxTextures,
+                  precision: state.gl.capabilities.precision,
+                };
+                logWebGLContext('created', {
+                  ...contextInfo,
+                  isIOS,
+                  devicePixelRatio: window.devicePixelRatio,
+                  webglSupport: checkWebGLSupport(),
+                });
+
+                // Setup WebGL context loss/restore event listeners
+                const canvas = state.gl.domElement;
+                canvas.addEventListener('webglcontextlost', (event) => {
+                  event.preventDefault();
+                  console.error('[AnatomyMainScreen] WebGL context lost!');
+                  setIsContextLost(true);
+                  setContextLossMessage('3D rendering paused due to memory pressure. Attempting to restore...');
+                  logWebGLContext('lost', { preventDefaultCalled: true });
+
+                  // Track context loss frequency
+                  const now = Date.now();
+                  contextLossTimestamps.current.push(now);
+                  contextLossTimestamps.current = contextLossTimestamps.current.filter(
+                    ts => now - ts < 5 * 60 * 1000 // 5 minute window
+                  );
+
+                  // If frequent context losses, activate memory reduction mode
+                  if (contextLossTimestamps.current.length >= 3) {
+                    setMemoryReductionActive(true);
+                    setContextLossMessage(
+                      '3D rendering paused due to repeated memory pressure. ' +
+                      'Quality has been reduced to improve stability.'
+                    );
+                  }
+                });
+
+                canvas.addEventListener('webglcontextrestored', () => {
+                  console.log('[AnatomyMainScreen] WebGL context restored');
+                  setIsContextLost(false);
+                  setContextLossMessage('3D rendering restored successfully.');
+                  logWebGLContext('restored', {});
+                  setTimeout(() => setContextLossMessage(null), 3000);
+                });
+
+                // CRITICAL for iOS: Force an initial render
+                try {
+                  state.gl.render(state.scene, state.camera);
+                  addDebugLog({
+                    type: 'info',
+                    message: 'AnatomyMainScreen initial render completed',
+                    details: { sceneChildren: state.scene.children.length },
+                  });
+                } catch (renderError) {
+                  console.error('[AnatomyMainScreen] Initial render failed:', renderError);
+                  logWebGLContext('error', {
+                    phase: 'initial-render',
+                    error: renderError instanceof Error ? renderError.message : String(renderError),
+                  });
+                }
+              }}
             >
               {/* Lighting */}
               <ambientLight intensity={0.5} />
@@ -777,6 +952,85 @@ export function AnatomyMainScreen({
               />
             </Canvas>
           </Suspense>
+          </ThreeJSErrorBoundary>
+
+          {/* WebGL Context Loss Message Overlay */}
+          {contextLossMessage && (
+            <div
+              className="webgl-context-message"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                padding: '20px 32px',
+                background: isContextLost ? 'rgba(239, 68, 68, 0.95)' : 'rgba(34, 197, 94, 0.95)',
+                borderRadius: '12px',
+                color: 'white',
+                textAlign: 'center',
+                zIndex: 100,
+                maxWidth: '80%',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <div style={{ marginBottom: '8px' }}>
+                {isContextLost ? (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ margin: '0 auto', display: 'block' }}>
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                ) : (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ margin: '0 auto', display: 'block' }}>
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                )}
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 600, marginBottom: '4px' }}>
+                {isContextLost ? 'WebGL Context Lost' : 'Restored'}
+              </div>
+              <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                {contextLossMessage}
+              </div>
+              {isContextLost && (
+                <div style={{ marginTop: '12px', fontSize: '12px', opacity: 0.8 }}>
+                  {memoryReductionActive
+                    ? 'Memory-intensive features have been disabled.'
+                    : 'The 3D viewer will automatically restore when memory is available.'}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Memory Reduction Mode Indicator */}
+          {memoryReductionActive && !isContextLost && !contextLossMessage && (
+            <div
+              className="memory-reduction-indicator"
+              style={{
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+                padding: '6px 12px',
+                background: 'rgba(251, 191, 36, 0.9)',
+                borderRadius: '6px',
+                color: '#1a1a1a',
+                fontSize: '12px',
+                fontWeight: 500,
+                zIndex: 50,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              Low Memory Mode
+            </div>
+          )}
 
           {/* Health overlay toggle - now positioned to not conflict with toolbar */}
           <button

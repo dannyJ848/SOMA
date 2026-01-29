@@ -256,18 +256,20 @@ export function applyProportionsToStructure(
     id: string;
     name: string;
     position: [number, number, number];
-    geometry: 'sphere' | 'cylinder' | 'capsule';
+    geometry: 'sphere' | 'cylinder' | 'capsule' | 'box';
     args: number[];
     rotation?: [number, number, number];
+    scale?: [number, number, number];
   },
   proportions: BodyProportions
 ): {
   id: string;
   name: string;
   position: [number, number, number];
-  geometry: 'sphere' | 'cylinder' | 'capsule';
+  geometry: 'sphere' | 'cylinder' | 'capsule' | 'box';
   args: number[];
   rotation?: [number, number, number];
+  scale?: [number, number, number];
 } {
   const transforms = generateStructureTransforms(proportions);
   const transform = transforms.find(t => t.id === baseStructure.id);

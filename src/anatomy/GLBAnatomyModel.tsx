@@ -2,7 +2,7 @@
  * GLB Anatomy Model with Enhanced LOD System
  *
  * Loads and displays real GLB anatomical models from Z-Anatomy.
- * Falls back to procedural geometry when models aren't available.
+ * Falls back to procedural body outline when models fail to load (iOS resilience).
  *
  * Features:
  * - Geometry LOD (4 levels of mesh complexity)
@@ -10,12 +10,16 @@
  * - Occlusion culling (hidden structure optimization)
  * - Dynamic triangle budgeting (500K budget for mobile)
  * - Smooth LOD transitions with morphing
+ * - iOS-resilient loading with assetPathResolver
+ * - Procedural fallback body outline when GLB fails
+ * - Visible loading indicators and debug logging
  */
 
-import { useEffect, useRef, useMemo, useCallback, Suspense, memo, useState } from 'react';
-import { ThreeEvent, useThree } from '@react-three/fiber';
+import { useEffect, useRef, useMemo, useCallback, Suspense, memo, useState, Component } from 'react';
+import { ThreeEvent, useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, Clone } from '@react-three/drei';
 import * as THREE from 'three';
+import { addDebugLogEntry, updateModelStatus } from '../components/iOS3DDebugOverlay';
 import {
   useLOD,
   useLODManager,
@@ -40,6 +44,7 @@ import {
   getStructuresAtDetailLevel,
 } from './AnatomyStructures';
 import { SYSTEM_MODELS } from '../ModelLoader';
+import { resolveAssetPath, getPlatformInfo } from '../utils/assetPathResolver';
 
 // ============================================
 // Types
@@ -130,6 +135,145 @@ function getCachedLODGeometries(
 }
 
 // ============================================
+// Procedural Body Outline Fallback
+// ============================================
+// When GLB models fail to load (common on iOS due to path/memory issues),
+// render a procedural skeletal body outline so the user sees something useful.
+
+function ProceduralBodyOutline({ opacity = 0.7 }: { opacity?: number }) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  // Slowly pulse to indicate this is a fallback / loading state
+  useFrame(({ clock }) => {
+    if (groupRef.current) {
+      const pulse = 0.85 + Math.sin(clock.getElapsedTime() * 1.5) * 0.15;
+      groupRef.current.scale.setScalar(pulse);
+    }
+  });
+
+  const boneColor = '#f5f5dc';
+  const jointColor = '#e8dcc8';
+  const wireOpacity = opacity * 0.6;
+
+  return (
+    <group ref={groupRef}>
+      {/* Skull */}
+      <mesh position={[0, 0.75, 0]}>
+        <sphereGeometry args={[0.11, 10, 10]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Spine (vertebral column) */}
+      <mesh position={[0, 0.15, 0]}>
+        <cylinderGeometry args={[0.03, 0.03, 1.1, 6]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Ribcage outline */}
+      <mesh position={[0, 0.35, 0]}>
+        <capsuleGeometry args={[0.18, 0.15, 4, 8]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={wireOpacity} wireframe />
+      </mesh>
+
+      {/* Pelvis */}
+      <mesh position={[0, -0.35, 0]}>
+        <sphereGeometry args={[0.15, 8, 6]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={wireOpacity} wireframe />
+      </mesh>
+
+      {/* Left arm */}
+      <mesh position={[-0.25, 0.25, 0]} rotation={[0, 0, 0.3]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.55, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+      {/* Left forearm */}
+      <mesh position={[-0.4, -0.05, 0]} rotation={[0, 0, 0.15]}>
+        <cylinderGeometry args={[0.018, 0.018, 0.5, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Right arm */}
+      <mesh position={[0.25, 0.25, 0]} rotation={[0, 0, -0.3]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.55, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+      {/* Right forearm */}
+      <mesh position={[0.4, -0.05, 0]} rotation={[0, 0, -0.15]}>
+        <cylinderGeometry args={[0.018, 0.018, 0.5, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Left leg */}
+      <mesh position={[-0.1, -0.7, 0]}>
+        <cylinderGeometry args={[0.025, 0.025, 0.6, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+      {/* Left shin */}
+      <mesh position={[-0.1, -1.15, 0]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.55, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Right leg */}
+      <mesh position={[0.1, -0.7, 0]}>
+        <cylinderGeometry args={[0.025, 0.025, 0.6, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+      {/* Right shin */}
+      <mesh position={[0.1, -1.15, 0]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.55, 5]} />
+        <meshStandardMaterial color={boneColor} transparent opacity={opacity} roughness={0.6} />
+      </mesh>
+
+      {/* Joints (shoulders, hips, knees) */}
+      {([
+        [-0.2, 0.45, 0],  // Left shoulder
+        [0.2, 0.45, 0],   // Right shoulder
+        [-0.1, -0.42, 0], // Left hip
+        [0.1, -0.42, 0],  // Right hip
+        [-0.1, -0.95, 0], // Left knee
+        [0.1, -0.95, 0],  // Right knee
+      ] as [number, number, number][]).map((pos, i) => (
+        <mesh key={`joint-${i}`} position={pos}>
+          <sphereGeometry args={[0.025, 6, 6]} />
+          <meshStandardMaterial color={jointColor} transparent opacity={opacity} roughness={0.4} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+// ============================================
+// Loading Spinner (3D) - visible in scene during load
+// ============================================
+
+function LoadingSpinner3D({ position = [0, 0, 0] as [number, number, number] }) {
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (ringRef.current) {
+      ringRef.current.rotation.z = clock.getElapsedTime() * 2;
+      ringRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.5) * 0.3;
+    }
+  });
+
+  return (
+    <group position={position}>
+      {/* Spinning ring */}
+      <mesh ref={ringRef}>
+        <torusGeometry args={[0.15, 0.015, 8, 24]} />
+        <meshStandardMaterial color="#4488ff" emissive="#2244aa" emissiveIntensity={0.5} transparent opacity={0.8} />
+      </mesh>
+      {/* Center dot */}
+      <mesh>
+        <sphereGeometry args={[0.03, 8, 8]} />
+        <meshStandardMaterial color="#88aaff" emissive="#4466cc" emissiveIntensity={0.3} />
+      </mesh>
+    </group>
+  );
+}
+
+// ============================================
 // Individual GLB Model Component
 // ============================================
 
@@ -149,6 +293,8 @@ interface LoadedGLBModelProps {
   onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
   onPointerOut: (e: ThreeEvent<PointerEvent>) => void;
   onClick: (e: ThreeEvent<MouseEvent>) => void;
+  onLoadSuccess?: () => void;
+  onLoadError?: (error: string) => void;
 }
 
 function LoadedGLBModel({
@@ -167,9 +313,77 @@ function LoadedGLBModel({
   onPointerOver,
   onPointerOut,
   onClick,
+  onLoadSuccess,
+  onLoadError,
 }: LoadedGLBModelProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF(url);
+
+  // Resolve the asset path for cross-platform compatibility (iOS, Android, Desktop)
+  const resolvedUrl = useMemo(() => {
+    const resolved = resolveAssetPath(url);
+    const platformInfo = getPlatformInfo();
+
+    const logMsg = `[GLB] Resolving: ${url} -> ${resolved} (${platformInfo.platform}, iOS=${platformInfo.isIOS})`;
+    console.log(logMsg);
+    addDebugLogEntry('info', logMsg);
+
+    return resolved;
+  }, [url]);
+
+  // Use try-catch pattern for GLTF loading
+  let scene: THREE.Group | null = null;
+  try {
+    const modelName = url.split('/').pop() || 'GLB';
+    console.log(`[GLB] Stage: LOADING ${modelName} from ${resolvedUrl}`);
+    addDebugLogEntry('info', `Loading GLB: ${modelName}`);
+    updateModelStatus({ loading: true, modelType: modelName });
+
+    const result = useGLTF(resolvedUrl);
+    scene = result.scene;
+
+    console.log(`[GLB] Stage: LOADED ${modelName} successfully`);
+    addDebugLogEntry('success', `GLB loaded: ${modelName}`);
+    updateModelStatus({ loading: false, loaded: true, progress: 1 });
+    // Notify parent on next tick to avoid render-time setState
+    if (onLoadSuccess) {
+      setTimeout(() => onLoadSuccess(), 0);
+    }
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    const platformInfo = getPlatformInfo();
+    const modelName = url.split('/').pop() || 'GLB';
+
+    // Check if this is a Suspense throw (promise) - that's normal, not an error
+    if (error instanceof Promise) {
+      // useGLTF throws a promise while loading (React Suspense protocol)
+      // This is expected -- Suspense boundary will catch it
+      console.log(`[GLB] Stage: SUSPENSE ${modelName} - loading in progress`);
+      addDebugLogEntry('info', `GLB suspense: ${modelName} loading...`);
+      updateModelStatus({ loading: true, modelType: modelName });
+      throw error; // Re-throw for Suspense to catch
+    }
+
+    // Actual error
+    console.error(`[GLB] Stage: FAILED ${modelName}:`, {
+      url,
+      resolvedUrl,
+      error: errorMsg,
+      platform: platformInfo.platform,
+      isIOS: platformInfo.isIOS,
+      isTauri: platformInfo.isTauri,
+      baseUrl: platformInfo.baseUrl,
+    });
+    addDebugLogEntry('error', `GLB FAILED: ${modelName} - ${errorMsg}`);
+    updateModelStatus({ loading: false, loaded: false, error: errorMsg });
+
+    // Notify parent on next tick
+    if (onLoadError) {
+      setTimeout(() => onLoadError(errorMsg), 0);
+    }
+
+    // Return the procedural body outline as fallback instead of a tiny red box
+    return <ProceduralBodyOutline opacity={opacity} />;
+  }
 
   // Calculate colors
   const systemColor = SYSTEM_COLORS[system] || '#ffffff';
@@ -248,16 +462,74 @@ function LoadedGLBModel({
 }
 
 // ============================================
-// Fallback Loading Component
+// Fallback Loading Component (Suspense fallback)
 // ============================================
+// Must be visible height -- a zero-height or tiny fallback is invisible on iOS.
+// Shows a loading spinner + faint body outline so the user sees something.
 
 function ModelLoadingFallback() {
+  useEffect(() => {
+    console.log('[GLB] Stage: SUSPENSE_FALLBACK rendered - model is loading');
+    addDebugLogEntry('info', 'Suspense fallback: showing loading spinner');
+  }, []);
+
   return (
-    <mesh>
-      <sphereGeometry args={[0.1, 8, 8]} />
-      <meshStandardMaterial color="#333" wireframe />
-    </mesh>
+    <group>
+      {/* Loading spinner at chest height */}
+      <LoadingSpinner3D position={[0, 0.2, 0.3]} />
+      {/* Faint procedural outline so the scene isn't empty */}
+      <ProceduralBodyOutline opacity={0.25} />
+    </group>
   );
+}
+
+// ============================================
+// Error Boundary for Model Loading
+// ============================================
+
+interface ModelErrorBoundaryProps {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+  onError?: (error: Error) => void;
+}
+
+interface ModelErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ModelErrorBoundary extends Component<ModelErrorBoundaryProps, ModelErrorBoundaryState> {
+  constructor(props: ModelErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): ModelErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    const platformInfo = getPlatformInfo();
+    const errorDetail = {
+      error: error.message,
+      stack: error.stack?.substring(0, 300),
+      platform: platformInfo.platform,
+      isIOS: platformInfo.isIOS,
+      componentStack: errorInfo.componentStack?.substring(0, 200),
+    };
+    console.error('[GLB] Stage: ERROR_BOUNDARY caught:', errorDetail);
+    addDebugLogEntry('error', `ErrorBoundary: ${error.message}`);
+    this.props.onError?.(error);
+  }
+
+  override render() {
+    if (this.state.hasError) {
+      // Use procedural body outline as the error fallback (not a tiny invisible sphere)
+      return this.props.fallback || <ProceduralBodyOutline opacity={0.5} />;
+    }
+
+    return this.props.children;
+  }
 }
 
 // ============================================
@@ -288,8 +560,30 @@ function SystemModel({
   onSelect,
 }: SystemModelProps) {
   const modelUrls = SYSTEM_MODELS[system] || [];
+  const [loadState, setLoadState] = useState<'pending' | 'loading' | 'loaded' | 'error'>('pending');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  if (!isEnabled || modelUrls.length === 0) return null;
+  // Log system model init
+  useEffect(() => {
+    if (isEnabled && modelUrls.length > 0) {
+      const platformInfo = getPlatformInfo();
+      const logMsg = `[GLB] SystemModel init: ${system}, ${modelUrls.length} model(s), platform=${platformInfo.platform}, iOS=${platformInfo.isIOS}`;
+      console.log(logMsg);
+      addDebugLogEntry('info', logMsg);
+      setLoadState('loading');
+    }
+  }, [system, isEnabled, modelUrls.length]);
+
+  if (!isEnabled || modelUrls.length === 0) {
+    return null;
+  }
+
+  // Only load the FIRST model to keep it simple and avoid iOS memory pressure
+  const url = modelUrls[0];
+  const parts = url.split('/');
+  const filename = parts[parts.length - 1];
+  const structureName = filename.replace('.glb', '').replace(/_/g, ' ');
+  const structureId = `${system}-0`;
 
   const handlePointerOver = useCallback((structureId: string) => (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
@@ -311,34 +605,57 @@ function SystemModel({
     });
   }, [onSelect]);
 
+  const handleLoadSuccess = useCallback(() => {
+    console.log(`[GLB] SystemModel: ${system} loaded successfully`);
+    addDebugLogEntry('success', `System ${system} GLB loaded`);
+    setLoadState('loaded');
+    setErrorMsg(null);
+  }, [system]);
+
+  const handleLoadError = useCallback((error: string) => {
+    console.error(`[GLB] SystemModel: ${system} failed - ${error}`);
+    addDebugLogEntry('error', `System ${system} GLB failed: ${error}`);
+    setLoadState('error');
+    setErrorMsg(error);
+  }, [system]);
+
   return (
     <group>
-      {modelUrls.map((url, index) => {
-        // Extract structure name from URL
-        const parts = url.split('/');
-        const filename = parts[parts.length - 1];
-        const structureName = filename.replace('.glb', '').replace(/_/g, ' ');
-        const structureId = `${system}-${index}`;
+      <ModelErrorBoundary
+        fallback={<ProceduralBodyOutline opacity={opacity * 0.6} />}
+        onError={(error) => {
+          console.error(`[GLB] ErrorBoundary caught for ${system}: ${error.message}`);
+          addDebugLogEntry('error', `ErrorBoundary: ${system} - ${error.message}`);
+          setLoadState('error');
+          setErrorMsg(error.message);
+        }}
+      >
+        <Suspense fallback={<ModelLoadingFallback />}>
+          <LoadedGLBModel
+            url={url}
+            structureId={structureId}
+            structureName={structureName}
+            system={system}
+            isHovered={hoveredStructure === structureId}
+            isSelected={selectedStructure === structureId}
+            opacity={opacity}
+            lodLevel={lodLevel}
+            morphWeight={morphWeight}
+            onPointerOver={handlePointerOver(structureId)}
+            onPointerOut={handlePointerOut()}
+            onClick={handleClick(structureId, structureName)}
+            onLoadSuccess={handleLoadSuccess}
+            onLoadError={handleLoadError}
+          />
+        </Suspense>
+      </ModelErrorBoundary>
 
-        return (
-          <Suspense key={url} fallback={<ModelLoadingFallback />}>
-            <LoadedGLBModel
-              url={url}
-              structureId={structureId}
-              structureName={structureName}
-              system={system}
-              isHovered={hoveredStructure === structureId}
-              isSelected={selectedStructure === structureId}
-              opacity={opacity}
-              lodLevel={lodLevel}
-              morphWeight={morphWeight}
-              onPointerOver={handlePointerOver(structureId)}
-              onPointerOut={handlePointerOut()}
-              onClick={handleClick(structureId, structureName)}
-            />
-          </Suspense>
-        );
-      })}
+      {/* If in error state, the ErrorBoundary or LoadedGLBModel already shows ProceduralBodyOutline */}
+      {/* Log the error state for debug panel visibility */}
+      {loadState === 'error' && errorMsg && (
+        // Invisible marker group -- the actual fallback is rendered by ErrorBoundary/LoadedGLBModel
+        <group userData={{ glbError: errorMsg, system }} />
+      )}
     </group>
   );
 }
@@ -489,6 +806,14 @@ export function GLBAnatomyModel({
   const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
 
+  // Log mount for debug panel
+  useEffect(() => {
+    const platformInfo = getPlatformInfo();
+    const logMsg = `[GLB] GLBAnatomyModel mounted. Systems: [${enabledSystems.join(', ')}], skeleton=${showSkeleton}, platform=${platformInfo.platform}, iOS=${platformInfo.isIOS}`;
+    console.log(logMsg);
+    addDebugLogEntry('info', logMsg);
+  }, []); // Only on mount
+
   // Get procedural structures
   const proceduralStructures = useMemo(() => {
     const structures = getStructuresAtDetailLevel('body');
@@ -631,11 +956,49 @@ export function GLBAnatomyModel({
   );
 }
 
-// Preload common models
+// Preload the primary skeletal model only (keep it simple for iOS)
 export function preloadAnatomyModels() {
-  SYSTEM_MODELS.skeletal.forEach((url) => {
-    useGLTF.preload(url);
-  });
+  const platformInfo = getPlatformInfo();
+
+  const logMsg = `[GLB] preloadAnatomyModels called. platform=${platformInfo.platform}, iOS=${platformInfo.isIOS}, origin=${typeof window !== 'undefined' ? window.location.origin : 'N/A'}`;
+  console.log(logMsg);
+  addDebugLogEntry('info', logMsg);
+
+  // Only preload the first skeletal model to keep memory low on iOS
+  const modelsToPreload = SYSTEM_MODELS.skeletal.slice(0, 1);
+
+  if (modelsToPreload.length === 0) {
+    console.log('[GLB] No skeletal models configured to preload');
+    addDebugLogEntry('warn', 'No skeletal models to preload');
+    return;
+  }
+
+  // On iOS, defer preloading to ensure the WebView is fully initialized
+  const preloadDelay = platformInfo.isIOS ? 1000 : 100;
+  console.log(`[GLB] Will preload ${modelsToPreload.length} model(s) after ${preloadDelay}ms delay`);
+
+  setTimeout(() => {
+    modelsToPreload.forEach((url, index) => {
+      // Resolve the path for the current platform before preloading
+      const resolvedUrl = resolveAssetPath(url);
+      const modelName = url.split('/').pop() || 'unknown';
+
+      console.log(`[GLB] Preloading model ${index + 1}/${modelsToPreload.length}: ${modelName} -> ${resolvedUrl}`);
+      addDebugLogEntry('info', `Preloading: ${modelName}`);
+
+      try {
+        useGLTF.preload(resolvedUrl);
+        console.log(`[GLB] Preload queued: ${modelName}`);
+        addDebugLogEntry('success', `Preload queued: ${modelName}`);
+      } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : String(error);
+        console.error(`[GLB] Preload FAILED: ${modelName} - ${errorMsg}`);
+        addDebugLogEntry('error', `Preload failed: ${modelName} - ${errorMsg}`);
+        // Don't re-throw -- preload failure is non-fatal, model will load on demand
+        // and fall back to procedural body outline if that also fails
+      }
+    });
+  }, preloadDelay);
 }
 
 export default GLBAnatomyModel;

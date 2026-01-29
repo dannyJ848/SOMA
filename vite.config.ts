@@ -200,13 +200,16 @@ export default defineConfig(({ command, mode }): UserConfig => {
                 id.includes('node_modules/scheduler/')) {
               return 'vendor-react';
             }
-            // Three.js core - heavy, separate chunk
-            if (id.includes('node_modules/three/')) {
-              return 'vendor-three';
-            }
-            // React-three ecosystem - separate from core three
-            if (id.includes('node_modules/@react-three/')) {
-              return 'vendor-three-react';
+            // Three.js + React-three ecosystem + their deps - single heavy vendor chunk
+            if (id.includes('node_modules/three/') ||
+                id.includes('node_modules/@react-three/') ||
+                id.includes('node_modules/troika-') ||
+                id.includes('node_modules/meshline') ||
+                id.includes('node_modules/camera-controls') ||
+                id.includes('node_modules/detect-gpu') ||
+                id.includes('node_modules/maath') ||
+                id.includes('node_modules/zustand')) {
+              return 'three-vendor';
             }
             // Tauri API - platform-specific
             if (id.includes('node_modules/@tauri-apps/')) {
@@ -242,7 +245,15 @@ export default defineConfig(({ command, mode }): UserConfig => {
             if (id.includes('/src/ai/')) {
               return 'feature-ai';
             }
-            // Core data modules
+            // Medical content databases - lazy loaded, large data modules
+            if (id.includes('/core/content/') ||
+                id.includes('/core/medical-simulation/') ||
+                id.includes('/core/knowledge-graph/') ||
+                id.includes('/core/education/') ||
+                id.includes('/core/i18n/')) {
+              return 'medical-content';
+            }
+            // Remaining core library modules
             if (id.includes('/core/')) {
               return 'core-lib';
             }
@@ -250,10 +261,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
             if (id.includes('/src/components/')) {
               return 'shared-components';
             }
-            // Other node_modules (smaller libs)
-            if (id.includes('node_modules/')) {
-              return 'vendor-misc';
-            }
+            // Let Vite handle remaining node_modules naturally to avoid circular chunks
           } : undefined,
           // Compact output
           compact: isProd,
@@ -280,8 +288,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
       cssCodeSplit: true,
       // CSS minification
       cssMinify: isProd ? 'lightningcss' : false,
-      // Chunk size warning limit (500kb)
-      chunkSizeWarningLimit: 500,
+      // Chunk size warning limit - raised to accommodate medical content databases
+      chunkSizeWarningLimit: 1000,
       // Report compressed size only in production
       reportCompressedSize: isProd,
       // Module preload polyfill

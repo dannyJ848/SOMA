@@ -280,6 +280,14 @@ export {
   AdaptiveFXAA,
 } from './FXAAPostProcessing';
 
+// Enhanced Anatomical Lighting (iOS-safe adaptive lighting)
+export {
+  EnhancedAnatomicalLighting,
+  SimpleAnatomicalLighting,
+  SIMPLE_LIGHTING_PRESETS,
+  type SimpleLightingPreset,
+} from './EnhancedAnatomicalLighting';
+
 // Condition Visualization System
 export {
   // Main Component
@@ -395,3 +403,12 @@ export {
   type UseConditionAnimationOptions,
   type UseConditionAnimationReturn,
 } from './ConditionAnimationSystem';
+
+// Interactive Body Model (Touch-friendly Region Selection)
+export {
+  InteractiveBodyModel,
+  DEFAULT_BODY_REGIONS,
+  LEGACY_REGION_MAP,
+  type BodyRegion,
+  type InteractiveBodyModelProps,
+} from './InteractiveBodyModel';

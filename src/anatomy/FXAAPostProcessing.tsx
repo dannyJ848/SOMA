@@ -8,7 +8,7 @@
  * Optimized for iPhone 14+ at 60fps with DPR 1.5-2.0
  */
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -278,15 +278,40 @@ interface AdaptiveFXAAProps {
 
 /**
  * Quality-aware FXAA that automatically enables/disables based on device capability
+ *
+ * Note: On iOS, FXAA post-processing can interfere with initial WebGL context
+ * creation. The effect delays enabling for a few frames to ensure the scene
+ * renders first.
  */
 export function AdaptiveFXAA({ qualityPreset = 'balanced', forceEnabled }: AdaptiveFXAAProps) {
+  const [delayedEnabled, setDelayedEnabled] = useState(false);
+
   const enabled = useMemo(() => {
     if (forceEnabled !== undefined) return forceEnabled;
     // Enable FXAA for balanced and quality presets
     return qualityPreset !== 'performance';
   }, [qualityPreset, forceEnabled]);
 
-  return <FXAAEffect enabled={enabled} />;
+  // Delay enabling FXAA to allow initial scene render (iOS fix)
+  useEffect(() => {
+    if (!enabled) {
+      setDelayedEnabled(false);
+      return;
+    }
+
+    // Wait for a few frames before enabling post-processing
+    // This ensures the base WebGL context renders first
+    const timeoutId = setTimeout(() => {
+      setDelayedEnabled(true);
+    }, 100); // 100ms delay, ~6 frames at 60fps
+
+    return () => clearTimeout(timeoutId);
+  }, [enabled]);
+
+  // Don't render anything until ready (iOS needs clean initial render)
+  if (!delayedEnabled) return null;
+
+  return <FXAAEffect enabled={true} />;
 }
 
 export default FXAAEffect;

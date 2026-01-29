@@ -5,7 +5,7 @@ import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 import { useActionTracker } from './hooks/useActionTracker';
-import { useUserDemographics } from './hooks/useUserDemographics';
+import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from './hooks/useUserDemographics';
 import { useTranslation, useI18n } from './i18n/useI18n';
 import { LanguageToggle } from './components/LanguageSwitcher';
 import { ViewTransition, getSlideDirection } from './components/ViewTransition';
@@ -31,6 +31,9 @@ const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ 
 // Body-centric components
 const OnboardingFlow = lazy(() => import('./onboarding/OnboardingFlow').then(m => ({ default: m.OnboardingFlow })));
 const BodyCentricHome = lazy(() => import('./BodyCentricHome').then(m => ({ default: m.BodyCentricHome })));
+
+// Settings
+const SettingsPage = lazy(() => import('./settings/SettingsPage'));
 
 interface HealthSummary {
   totalConditions: number;
@@ -112,7 +115,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
 
 // MobileBottomNav is now imported from ./components/MobileBottomNav
 
@@ -121,14 +124,63 @@ function App() {
   const { t } = useTranslation('common');
   const { t: tNav } = useTranslation('navigation');
   const { t: tDash } = useTranslation('dashboard');
-  const [unlocked, setUnlocked] = useState(false);
+  // DEV MODE: Skip passcode and onboarding for development
+  // Set to false to test the full onboarding flow as a new user
+  // When true: Bypasses passcode, provides mock dashboard data, and auto-saves default demographics
+  const DEV_SKIP_AUTH = true;
+
+  // Mock data for DEV mode to ensure the app renders properly without onboarding
+  // Provides realistic sample data so the dashboard looks functional during development
+  const DEV_MOCK_DASHBOARD: DashboardData = {
+    summary: {
+      totalConditions: 4,
+      totalMedications: 3,
+      totalLabResults: 5,
+      totalWhoopCycles: 42,
+      totalAppleHealthDays: 90,
+      lastUpdated: new Date().toISOString(),
+    },
+    activeConditions: [
+      { id: 'dev-cond-1', name: 'Seasonal Allergies', status: 'active', severity: 'mild', diagnosedDate: '2024-03-15' },
+      { id: 'dev-cond-2', name: 'Mild Asthma', status: 'managed', severity: 'moderate', diagnosedDate: '2021-06-01' },
+      { id: 'dev-cond-3', name: 'GERD', status: 'active', severity: 'mild', diagnosedDate: '2023-11-20' },
+      { id: 'dev-cond-4', name: 'Lower Back Pain', status: 'monitoring', severity: 'moderate', diagnosedDate: '2025-01-10' },
+    ],
+    currentMedications: [
+      { id: 'dev-med-1', name: 'Cetirizine', dosage: '10mg', frequency: 'Daily' },
+      { id: 'dev-med-2', name: 'Albuterol Inhaler', dosage: '90mcg', frequency: 'As needed' },
+      { id: 'dev-med-3', name: 'Omeprazole', dosage: '20mg', frequency: 'Daily' },
+    ],
+    recentLabs: [
+      { id: 'dev-lab-1', testName: 'HbA1c', value: 5.4, unit: '%', status: 'normal', collectedAt: '2025-12-15', trend: 'stable', previousValue: 5.5 },
+      { id: 'dev-lab-2', testName: 'TSH', value: 2.1, unit: 'mIU/L', status: 'normal', collectedAt: '2025-12-15', trend: 'down', previousValue: 2.8 },
+      { id: 'dev-lab-3', testName: 'Vitamin D', value: 32, unit: 'ng/mL', status: 'normal', collectedAt: '2025-12-15', trend: 'up', previousValue: 24 },
+      { id: 'dev-lab-4', testName: 'LDL Cholesterol', value: 118, unit: 'mg/dL', status: 'borderline', collectedAt: '2025-12-15', trend: 'up', previousValue: 105 },
+      { id: 'dev-lab-5', testName: 'Hemoglobin', value: 14.2, unit: 'g/dL', status: 'normal', collectedAt: '2025-12-15', trend: 'stable', previousValue: 14.0 },
+    ],
+    vitalsSummary: {
+      restingHeartRate: 62,
+      hrv: 48,
+      sleepHours: 7.3,
+      recoveryScore: 72,
+      steps: 8547,
+      lastUpdated: new Date().toISOString(),
+    },
+    recentSymptoms: [
+      { id: 'dev-sym-1', description: 'Mild nasal congestion', severity: 3, location: 'head_front', onsetDate: '2026-01-27' },
+      { id: 'dev-sym-2', description: 'Lower back stiffness', severity: 4, location: 'lower_back', onsetDate: '2026-01-25' },
+    ],
+  };
+
+  const [unlocked, setUnlocked] = useState(DEV_SKIP_AUTH);
   const [passphrase, setPassphrase] = useState('');
   const [confirmPassphrase, setConfirmPassphrase] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [hasDatabase, setHasDatabase] = useState(false);
+  const [loading, setLoading] = useState(!DEV_SKIP_AUTH);
+  const [hasDatabase, setHasDatabase] = useState(DEV_SKIP_AUTH);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  // In DEV mode, start with mock dashboard to prevent null errors
+  const [dashboard, setDashboard] = useState<DashboardData | null>(DEV_SKIP_AUTH ? DEV_MOCK_DASHBOARD : null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
   const [currentView, setCurrentView] = useState<View>('body-centric');
   const [timeline, setTimeline] = useState<TimelineData | null>(null);
@@ -149,7 +201,7 @@ function App() {
   // Track previous view for transition direction
   const previousViewRef = useRef<View | null>(null);
   // View order for determining slide direction
-  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry'];
+  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'settings'];
   // Transition type based on navigation direction
   const [transitionType, setTransitionType] = useState<'fade' | 'slide-left' | 'slide-right'>('fade');
   // Global keyboard shortcuts state
@@ -163,7 +215,7 @@ function App() {
   const { track: trackBodyMap } = useActionTracker<BodyMapAction>('body-map', 'App');
 
   // Demographics hook for body-centric home
-  const { isOnboarded, isLoading: demographicsLoading, refreshDemographics } = useUserDemographics();
+  const { isOnboarded, isLoading: demographicsLoading, refreshDemographics, saveDemographics } = useUserDemographics();
 
   // Navigate with history tracking and transition animation
   const navigateWithHistory = useCallback((newView: View) => {
@@ -200,6 +252,21 @@ function App() {
   useEffect(() => {
     checkDatabase();
   }, []);
+
+  // DEV MODE: Initialize with default demographics if not onboarded
+  // This ensures the body model renders correctly in dev mode
+  // Use a ref to track if we've attempted to save, preventing repeated calls on error
+  const devDemographicsSavedRef = useRef(false);
+  useEffect(() => {
+    if (DEV_SKIP_AUTH && !isOnboarded && !demographicsLoading && !devDemographicsSavedRef.current) {
+      // Mark as attempted to prevent infinite retries on error
+      devDemographicsSavedRef.current = true;
+      // Save default demographics to localStorage so the body model works
+      saveDemographics(DEFAULT_DEMOGRAPHICS).catch(err => {
+        console.log('DEV MODE: Could not save default demographics:', err);
+      });
+    }
+  }, [DEV_SKIP_AUTH, isOnboarded, demographicsLoading, saveDemographics]);
 
   useEffect(() => {
     if (unlocked) {
@@ -310,6 +377,10 @@ function App() {
   }, [currentView, isSearchOpen, isShortcutsHelpOpen, selectedEvent, showSymptomForm]);
 
   async function checkDatabase() {
+    // In DEV mode, skip the database check entirely - we already initialized
+    // hasDatabase=true and loading=false, so don't let a failed or negative
+    // check_database_exists call override those values
+    if (DEV_SKIP_AUTH) return;
     try {
       const exists = await invoke<boolean>('check_database_exists');
       setHasDatabase(exists);
@@ -321,6 +392,11 @@ function App() {
   }
 
   async function loadDashboard() {
+    // In DEV mode with mock data already loaded, skip the Tauri call
+    // to avoid a brief dashboardLoading=true flash that shows the skeleton
+    if (DEV_SKIP_AUTH && dashboard) {
+      return;
+    }
     setDashboardLoading(true);
     try {
       const data = await invoke<DashboardData>('get_dashboard');
@@ -761,7 +837,8 @@ function App() {
   }
 
   // Onboarding flow for new users (show after unlock, before main content)
-  if (!isOnboarded && !demographicsLoading) {
+  // DEV MODE: Skip onboarding when DEV_SKIP_AUTH is enabled
+  if (!DEV_SKIP_AUTH && !isOnboarded && !demographicsLoading) {
     return (
       <Suspense fallback={
         <div className="container">
@@ -781,7 +858,11 @@ function App() {
   }
 
   // Dashboard or Timeline (unlocked) - show skeleton loader
-  if (dashboardLoading || !dashboard || demographicsLoading) {
+  // Always show skeleton when dashboard is not loaded, regardless of DEV_SKIP_AUTH
+  // This prevents null access errors when destructuring dashboard properties
+  // In DEV mode, skip the demographicsLoading gate since we provide mock data and
+  // auto-save default demographics - waiting for that async op would block rendering
+  if (dashboardLoading || !dashboard || (!DEV_SKIP_AUTH && demographicsLoading)) {
     return (
       <div className="container" role="main" aria-busy="true">
         <div className="dashboard-skeleton" role="status" aria-live="polite">
@@ -805,7 +886,9 @@ function App() {
     );
   }
 
-  const { summary, activeConditions, currentMedications, recentLabs, vitalsSummary } = dashboard;
+  // Use DEV mock data as fallback if dashboard is null (shouldn't happen but safety first)
+  const dashboardData = dashboard ?? DEV_MOCK_DASHBOARD;
+  const { summary, activeConditions, currentMedications, recentLabs, vitalsSummary } = dashboardData;
 
   // Event detail modal
   const EventDetailModal = ({ event, onClose }: { event: TimelineEvent; onClose: () => void }) => (
@@ -850,7 +933,7 @@ function App() {
       return (
         <div className="container timeline-view">
           <header className="app-header">
-            <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+            <button className="back-button" onClick={() => setCurrentView('body-centric')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
@@ -977,10 +1060,30 @@ function App() {
   // Chat View
   if (currentView === 'chat') {
     return (
-      <ChatView
-        onBack={() => setCurrentView('dashboard')}
-        dashboardData={dashboard}
-      />
+      <>
+        <ChatView
+          onBack={() => setCurrentView('body-centric')}
+          dashboardData={dashboard}
+        />
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
     );
   }
 
@@ -1004,7 +1107,7 @@ function App() {
           </div>
         }>
           <AnatomyViewer
-            onBack={() => handleNavigate('dashboard')}
+            onBack={() => handleNavigate('body-centric')}
             dashboardData={dashboard}
           />
         </Suspense>
@@ -1030,111 +1133,246 @@ function App() {
   // Phase 4: Symptom Explorer
   if (currentView === 'symptom-explorer') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading Symptom Explorer...</div>
-        </div>
-      }>
-        <SymptomExplorer
-          onBack={() => setCurrentView('dashboard')}
-          dashboardData={dashboard}
-          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Symptom Explorer...</div>
+          </div>
+        }>
+          <SymptomExplorer
+            onBack={() => setCurrentView('body-centric')}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </>
     );
   }
 
   // Phase 4: Medication Explorer
   if (currentView === 'medication-explorer') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading Medication Explorer...</div>
-        </div>
-      }>
-        <MedicationExplorer
-          onBack={() => {
-            setInitialMedicationId(undefined);
-            // Try to navigate back through history, otherwise go to dashboard
-            if (!navigateBack()) {
-              setCurrentView('dashboard');
-            }
-          }}
-          dashboardData={dashboard}
-          onNavigateToAnatomy={() => setCurrentView('anatomy')}
-          initialMedicationId={initialMedicationId}
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Medication Explorer...</div>
+          </div>
+        }>
+          <MedicationExplorer
+            onBack={() => {
+              setInitialMedicationId(undefined);
+              // Try to navigate back through history, otherwise go to body-centric home
+              if (!navigateBack()) {
+                setCurrentView('body-centric');
+              }
+            }}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            initialMedicationId={initialMedicationId}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </>
     );
   }
 
   // Phase 4: Condition Simulator
   if (currentView === 'condition-simulator') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading Condition Simulator...</div>
-        </div>
-      }>
-        <ConditionSimulator
-          onBack={() => {
-            setInitialConditionId(undefined);
-            setCurrentView('dashboard');
-          }}
-          dashboardData={dashboard}
-          onNavigateToAnatomy={() => setCurrentView('anatomy')}
-          onNavigateToMedication={(medId: string) => {
-            setInitialMedicationId(medId);
-            navigateWithHistory('medication-explorer');
-          }}
-          initialConditionId={initialConditionId}
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Condition Simulator...</div>
+          </div>
+        }>
+          <ConditionSimulator
+            onBack={() => {
+              setInitialConditionId(undefined);
+              setCurrentView('body-centric');
+            }}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onNavigateToMedication={(medId: string) => {
+              setInitialMedicationId(medId);
+              navigateWithHistory('medication-explorer');
+            }}
+            initialConditionId={initialConditionId}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </>
     );
   }
 
   // Phase 4: Medical Encyclopedia
   if (currentView === 'encyclopedia') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading Medical Encyclopedia...</div>
-        </div>
-      }>
-        <MedicalEncyclopedia
-          onBack={() => setCurrentView('dashboard')}
-          dashboardData={dashboard}
-          onNavigateToAnatomy={() => setCurrentView('anatomy')}
-          onOpenEntry={(entryId) => {
-            setSelectedEncyclopediaEntryId(entryId);
-            setCurrentView('encyclopedia-entry');
-          }}
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Medical Encyclopedia...</div>
+          </div>
+        }>
+          <MedicalEncyclopedia
+            onBack={() => setCurrentView('body-centric')}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onOpenEntry={(entryId) => {
+              setSelectedEncyclopediaEntryId(entryId);
+              setCurrentView('encyclopedia-entry');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </>
     );
   }
 
   // Phase 4: Encyclopedia Entry
   if (currentView === 'encyclopedia-entry' && selectedEncyclopediaEntryId) {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading Encyclopedia Entry...</div>
-        </div>
-      }>
-        <EncyclopediaEntry
-          entryId={selectedEncyclopediaEntryId}
-          onBack={() => {
-            setSelectedEncyclopediaEntryId(null);
-            setCurrentView('encyclopedia');
-          }}
-          onNavigateToEntry={(entryId) => {
-            setSelectedEncyclopediaEntryId(entryId);
-            // Stay on encyclopedia-entry view
-          }}
-          onNavigateToAnatomy={() => setCurrentView('anatomy')}
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Encyclopedia Entry...</div>
+          </div>
+        }>
+          <EncyclopediaEntry
+            entryId={selectedEncyclopediaEntryId}
+            onBack={() => {
+              setSelectedEncyclopediaEntryId(null);
+              setCurrentView('encyclopedia');
+            }}
+            onNavigateToEntry={(entryId) => {
+              setSelectedEncyclopediaEntryId(entryId);
+              // Stay on encyclopedia-entry view
+            }}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </>
+    );
+  }
+
+  // Settings View
+  if (currentView === 'settings') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Settings...</div>
+          </div>
+        }>
+          <SettingsPage
+            onBack={() => setCurrentView('body-centric')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
     );
   }
 
@@ -1215,7 +1453,7 @@ function App() {
     return (
       <div className="container body-view">
         <header className="app-header">
-          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+          <button className="back-button" onClick={() => setCurrentView('body-centric')}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>

@@ -50,14 +50,14 @@
     ],
     "security": {
       "csp": {
-        "default-src": "'self'",
-        "img-src": "'self' data: blob: asset: https://asset.localhost",
+        "default-src": "'self' tauri://localhost https://tauri.localhost asset: https://asset.localhost",
+        "img-src": "'self' data: blob: asset: https://asset.localhost http://asset.localhost tauri://localhost https://tauri.localhost",
         "style-src": "'self' 'unsafe-inline'",
-        "script-src": "'self'",
-        "connect-src": "'self' http://localhost:* https://localhost:* ws://localhost:* wss://localhost:* ipc: tauri:",
+        "script-src": "'self' 'wasm-unsafe-eval'",
+        "connect-src": "'self' blob: data: http://localhost:* https://localhost:* ws://localhost:* wss://localhost:* ipc: tauri: asset: https://www.gstatic.com https://tauri.localhost http://tauri.localhost tauri://localhost https://asset.localhost http://asset.localhost",
         "font-src": "'self' data:",
-        "media-src": "'self' blob:",
-        "worker-src": "'self' blob:",
+        "media-src": "'self' blob: data: tauri://localhost https://tauri.localhost asset: https://asset.localhost",
+        "worker-src": "'self' blob: https://www.gstatic.com",
         "object-src": "'none'",
         "frame-src": "'none'",
         "base-uri": "'self'",
@@ -68,7 +68,7 @@
       "assetProtocol": {
         "enable": true,
         "scope": {
-          "allow": ["$APPDATA/**", "$RESOURCE/**"],
+          "allow": ["$APPDATA/**", "$RESOURCE/**", "$DOCUMENT/**"],
           "deny": []
         }
       },

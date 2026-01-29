@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import * as THREE from 'three';
+import { resolveAssetPath, getDracoDecoderPath, getPlatformInfo } from './utils/assetPathResolver';
 
 /**
  * 3D ANATOMICAL MODEL SOURCES
@@ -85,8 +86,23 @@ export function useModelLoader() {
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
 
-    // Use CDN for Draco decoder (can be changed to local path)
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+    // Use platform-appropriate Draco decoder path
+    const dracoPath = getDracoDecoderPath();
+
+    // Log platform info for debugging (always log on mobile)
+    const platformInfo = getPlatformInfo();
+    console.log('[ModelLoader] Initializing GLTF loader:', {
+      platform: platformInfo.platform,
+      isIOS: platformInfo.isIOS,
+      isTauri: platformInfo.isTauri,
+      baseUrl: platformInfo.baseUrl,
+      dracoPath,
+      locationOrigin: typeof window !== 'undefined' ? window.location.origin : 'N/A',
+    });
+
+    dracoLoader.setDecoderPath(dracoPath);
+    // Use JS decoder for maximum compatibility on iOS
+    // WASM decoder can have issues with some WebKit versions
     dracoLoader.setDecoderConfig({ type: 'js' });
 
     loader.setDRACOLoader(dracoLoader);
@@ -99,7 +115,10 @@ export function useModelLoader() {
 
   // Load a model
   const loadModel = useCallback(async (url: string): Promise<THREE.Group | null> => {
-    // Check cache first
+    // Resolve the asset path for the current platform
+    const resolvedUrl = resolveAssetPath(url);
+
+    // Check cache first (use original URL as key for consistency)
     if (modelCache.has(url)) {
       return modelCache.get(url)!.clone();
     }
@@ -134,6 +153,11 @@ export function useModelLoader() {
       return newMap;
     });
 
+    // Log the resolved URL for debugging
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[ModelLoader] Loading model: ${url} -> ${resolvedUrl}`);
+    }
+
     return new Promise((resolve, reject) => {
       if (!loaderRef.current) {
         reject(new Error('Loader not initialized'));
@@ -141,7 +165,7 @@ export function useModelLoader() {
       }
 
       loaderRef.current.load(
-        url,
+        resolvedUrl,
         // Success callback
         (gltf) => {
           if (abortController.signal.aborted) {
@@ -191,6 +215,23 @@ export function useModelLoader() {
           }
 
           const errorMessage = error instanceof Error ? error.message : 'Failed to load model';
+          const platformInfo = getPlatformInfo();
+
+          // Detailed error logging for iOS debugging
+          console.error('[ModelLoader] Model load error:', {
+            url,
+            resolvedUrl,
+            errorMessage,
+            errorType: error?.constructor?.name,
+            platform: platformInfo.platform,
+            isIOS: platformInfo.isIOS,
+            isTauri: platformInfo.isTauri,
+            baseUrl: platformInfo.baseUrl,
+            // Check if it's a network error
+            isNetworkError: errorMessage.includes('Failed to fetch') ||
+                           errorMessage.includes('NetworkError') ||
+                           errorMessage.includes('404'),
+          });
 
           setLoadStates(prev => {
             const newMap = new Map(prev);
@@ -198,13 +239,13 @@ export function useModelLoader() {
               url,
               progress: 0,
               loaded: false,
-              error: errorMessage,
+              error: `${errorMessage} (URL: ${resolvedUrl})`,
               cancelled: false,
             });
             return newMap;
           });
 
-          reject(new Error(errorMessage));
+          reject(new Error(`${errorMessage} (URL: ${resolvedUrl})`));
         }
       );
     });
@@ -408,23 +449,60 @@ export type AnatomicalSystem =
 // Model paths by system
 // PERFORMANCE: Only load ONE main model per system to avoid loading 80+ MB of data
 // The full system models contain all components, so we don't need the sub-parts
+//
+// Available model files (from Z-Anatomy):
+//   - assets/models/skeletal/  -> Skeletal system + sub-parts (bones, vertebrae, ribs, etc.)
+//   - assets/models/digestive/ -> Digestive_system.glb
+//   - assets/models/organs/    -> Regional body parts (Head, Thorax, Abdomen, Trunk, limbs, etc.)
+//
+// Since Z-Anatomy organizes most organs regionally rather than by physiological system,
+// we map regional models to the most relevant body system. Visceral_systems.glb contains
+// internal organs spanning multiple systems and is used as the primary model for several.
 export const SYSTEM_MODELS: Record<AnatomicalSystem, string[]> = {
   skeletal: [
-    // Only load the main 1.6MB skeleton, not all the 8MB component files
+    // Main skeletal system model (1.6MB, 1244 meshes) - compact full skeleton
     'assets/models/skeletal/1_Skeletal_system.glb',
   ],
-  muscular: [],
-  cardiovascular: [],
-  nervous: [],
-  respiratory: [],
+  muscular: [
+    // Trunk contains major muscle groups of the torso (710 meshes)
+    'assets/models/organs/Trunk.glb',
+  ],
+  cardiovascular: [
+    // Thorax contains the heart, great vessels, and chest cavity structures (135 meshes)
+    'assets/models/organs/Thorax.glb',
+  ],
+  nervous: [
+    // Head contains the brain and cranial nerves (877 meshes)
+    'assets/models/organs/Head.glb',
+  ],
+  respiratory: [
+    // Visceral systems includes lungs and airways (177 meshes)
+    'assets/models/organs/Visceral_systems.glb',
+  ],
   digestive: [
+    // Dedicated digestive system model (78 meshes)
     'assets/models/digestive/Digestive_system.glb',
   ],
-  urinary: [],
-  reproductive: [],
-  endocrine: [],
-  lymphatic: [],
-  integumentary: [],
+  urinary: [
+    // Abdomen contains kidneys, bladder, and urinary tract structures (81 meshes)
+    'assets/models/organs/Abdomen.glb',
+  ],
+  reproductive: [
+    // Abdomen also contains reproductive organs - shares model with urinary
+    'assets/models/organs/Abdomen.glb',
+  ],
+  endocrine: [
+    // Neck contains thyroid and parathyroid glands (189 meshes)
+    'assets/models/organs/Neck.glb',
+  ],
+  lymphatic: [
+    // Neck region has prominent lymph node chains (189 meshes)
+    'assets/models/organs/Neck.glb',
+  ],
+  integumentary: [
+    // Regions of human body shows body surface and skin regions (2726 meshes)
+    'assets/models/organs/Regions_of_human_body.glb',
+  ],
 };
 
 // Quality tiers for progressive loading

@@ -1,14 +1,14 @@
 # SOMA - Master Blueprint
 
-> **Version**: 3.1
-> **Last Updated**: 2026-01-28 23:00
-> **Status**: Phase 7 Complete - iOS Database Fix v2 - Ready for TestFlight Upload
+> **Version**: 3.2
+> **Last Updated**: 2026-01-29
+> **Status**: Phase 8 - Content Pipeline & Knowledge Integration
 
 ---
 
 ## ⚡ START HERE - NEW SESSION
 
-**Phase 7 Complete** - All 100 user stories implemented and passing. Use this section for future development phases.
+**Phase 8 Complete** - All 100 user stories implemented and passing. Use this section for future development phases.
 
 **Copy-paste this prompt when starting a new Claude Code session:**
 
@@ -1022,6 +1022,53 @@ Spanish system prompts include:
 - ✅ Timeline View Integration
 - ✅ AI Bilingual Support (Spanish prompts)
 - ✅ TypeScript: Clean build
+
+---
+
+## Content Pipeline & Knowledge Integration
+
+### New Infrastructure Created (Phase 8)
+
+**Content Services:**
+- `src/services/ContentService.ts` — Unified content service wiring all 9 databases into React context
+- `src/services/KnowledgeRAGService.ts` — RAG context enricher for AI chat (bridges knowledge graph → LLM)
+- `src/services/PatientContextService.ts` — Patient data contextualization service
+- `src/hooks/useContent.ts` — 4 React hooks: useContentSearch, useConditionInfo, useSymptomLookup, useExplanation
+
+**Content Databases:**
+- `core/content/medications/medication-database.ts` — 180 medications across 12+ drug categories
+- `core/knowledge-graph/` — 280+ relationships connecting conditions ↔ anatomy ↔ symptoms ↔ medications ↔ procedures ↔ specialties
+- `core/i18n/medical-translations-es.ts` — 578+ Spanish medical translations
+- `core/i18n/medical-glossary.ts` — 352 glossary entries with 5-level definitions
+
+**UI Components:**
+- `src/views/MedicalEncyclopediaView.tsx` — Full encyclopedia search view with bilingual search, category filters, complexity selector
+
+**Content Totals:**
+
+| Category | Count |
+|----------|-------|
+| ICD-11 Conditions | 390 |
+| Medications | 180 |
+| Symptoms | 155 |
+| Procedures | 127 |
+| Anatomy Structures | 119 |
+| Medical Specialties | 42 |
+| Spanish Translations | 578+ |
+| Glossary Entries | 352 |
+| Knowledge Graph Relationships | 280+ |
+
+**Architecture:**
+
+```
+User Query → MedicalSearchEngine (fuzzy bilingual)
+     ↓
+Knowledge Graph (traverse relationships)
+     ↓
+KnowledgeRAGService (build context string)
+     ↓
+AI Chat (enriched system prompt with medical context)
+```
 
 ---
 
@@ -2112,7 +2159,7 @@ src/vitals/
 
 ### ALL BATCHES COMPLETE
 
-All content batches have been completed for Phase 7 (TestFlight Ready).
+All content batches have been completed through Phase 8 (Content Pipeline & Knowledge Integration).
 
 | Batch | Status |
 |-------|--------|
@@ -2120,6 +2167,7 @@ All content batches have been completed for Phase 7 (TestFlight Ready).
 | Batch 2 - Content Modules | COMPLETE |
 | Batch 3 - Import Path Fixes & Validation | COMPLETE |
 | Batch 4 - Enhancement & Polish | COMPLETE |
+| Batch 5 - Content Pipeline & Knowledge Integration | COMPLETE |
 
 ### Future Enhancement Ideas (Post-Launch)
 
@@ -2297,6 +2345,7 @@ find core/content -type d | sort
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.2 | 2026-01-29 | Phase 8 - Content Pipeline & Knowledge Integration |
 | 3.0 | 2026-01-28 | Phase 7 Complete - TestFlight Ready for First Build |
 | 2.3 | 2026-01-28 | Phase 6 - Layer-Condition Integration, AI Voice Navigation & i18n |
 | 1.0 | 2026-01-24 | Initial blueprint creation |

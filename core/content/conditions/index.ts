@@ -142,6 +142,7 @@ export const conditionCategories = {
       'bells-palsy',
       'essential-tremor',
       'meningitis',
+      'tension-headache',
     ],
   },
   mentalHealth: {
@@ -176,6 +177,7 @@ export const conditionCategories = {
       'ankylosing-spondylitis',
       'carpal-tunnel-syndrome',
       'rotator-cuff-injury',
+      'plantar-fasciitis',
     ],
   },
   oncology: {
@@ -249,6 +251,14 @@ export const conditionCategories = {
       'thrombocytopenia',
       'hemophilia',
       'dvt-pe',
+    ],
+  },
+  immunologic: {
+    name: 'Immunologic',
+    description: 'Immune system and allergic disorders',
+    icon: 'shield',
+    conditions: [
+      'seasonal-allergies',
     ],
   },
 };

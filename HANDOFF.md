@@ -1,8 +1,8 @@
 # SOMA - Current Handoff
 
-> **Date**: 2026-01-28 23:00
-> **Blueprint Version**: 3.1
-> **Phase**: 7 - PROJECT COMPLETE - iOS Build Ready
+> **Date**: 2026-01-29
+> **Blueprint Version**: 3.2
+> **Phase**: 8 - Content Pipeline & UI Polish
 
 ---
 
@@ -23,13 +23,15 @@ npx tsx src/i18n/test-i18n.tsx
 
 ## Current Status Summary
 
-### Project Complete
+### Project Status: Content Pipeline Active
 
 | Metric | Status |
 |--------|--------|
 | User Stories | All 100 COMPLETE |
-| TypeScript | 0 errors |
+| TypeScript | 0 errors (npx tsc --noEmit clean) |
+| Vite Build | Passes (npm run build) |
 | TestFlight | READY TO BUILD |
+| Content Pipeline | Wave 1-2 complete, Wave 3 in progress |
 
 ### Features Complete
 
@@ -42,6 +44,31 @@ npx tsx src/i18n/test-i18n.tsx
 | **Text-to-Speech (TTS)** | Built-in | `src/contexts/VoiceContext.tsx` |
 | Bilingual i18n | Complete | `src/i18n/` (31 files) |
 | TestFlight Config | Ready | `scripts/build-testflight.sh` |
+| **Content Pipeline** | Waves 1-2 done | `core/content/`, `core/knowledge-graph/`, `core/i18n/` |
+| **DeepSeek 14B Integration** | Ready | `core/ai/local-llm-service.ts` |
+
+### Content Pipeline Summary (Jan 29 Session)
+
+| Content Type | Count | File |
+|-------------|-------|------|
+| ICD-11 Conditions | 390 | `core/medical-simulation/conditions/condition-generator.ts` |
+| Medical Specialties | 42 | `core/content/specialties/specialty-map.ts` |
+| Symptoms (bilingual) | 155 | `core/content/symptoms/symptom-database.ts` |
+| Procedures | 127 | `core/content/procedures/procedure-database.ts` |
+| Anatomy Structures | 119 | `core/content/anatomy/anatomy-encyclopedia.ts` |
+| Spanish Translations | 578+ | `core/i18n/medical-translations-es.ts` |
+| Glossary Entries | 352 | `core/i18n/medical-glossary.ts` |
+| Knowledge Graph Relations | 280+ | `core/knowledge-graph/knowledge-index.ts` |
+| Explanation Levels | 5 | `core/education/explanation-levels.ts` |
+
+### UI Fixes This Session
+- **DebugPanel**: Removed console interception infinite loop
+- **SmartPanelManager**: Fixed re-render loop with useMemo
+- **AnatomyViewer**: iOS-compatible Canvas config, decluttered UI
+- **MobileBottomNav**: Toggleable with pull-up handle, auto-hide after 5s
+- **InteractiveBodyModel**: 21 anatomically proportioned body regions
+- **SimplifiedAnatomyViewer**: Human body silhouette replaces polygons
+- **RadialContextMenu**: Fixed CSS class names and positioning
 
 ### CRITICAL FIX - iOS Database Permissions ✅ v2
 
@@ -61,13 +88,22 @@ npx tsx src/i18n/test-i18n.tsx
 
 ✅ **Build Successful** - `build/TestFlight/SOMA.ipa` (4.8 MB)
 
+### Architecture Decisions
+- **BYOK** (Bring Your Own Key) model - $0 hosting cost
+- **DeepSeek 14B** as primary local LLM
+- **Offline-first**, everything bundled in-app
+- **Open source**, free forever
+- **Bilingual EN/ES** throughout all content
+
 ### What's Next
 
-1. **Upload to TestFlight**: Use Transporter app with `build/TestFlight/SOMA.ipa`
-2. Test database creation on physical device
-3. Test voice commands (microphone permission)
-4. Begin beta testing
-5. Gather user feedback
+1. **Complete Wave 3**: Finish medication database, ContentService, useContent hooks
+2. **Code-splitting**: Address Vite chunk size warnings (>500KB) with lazy loading
+3. **Upload to TestFlight**: Use Transporter app with `build/TestFlight/SOMA.ipa`
+4. Test database creation on physical device
+5. Test voice commands (microphone permission)
+6. Begin beta testing
+7. Gather user feedback
 
 ---
 
@@ -100,14 +136,17 @@ open src-tauri/gen/apple/soma.xcodeproj
 ## Project Stats
 
 ```
-Total TypeScript Files: ~3,032
+Total TypeScript Files: ~3,032+
 ├── src:        313 files
-├── core:     2,719 files
+├── core:     2,719+ files (content pipeline adding more)
 └── i18n:      31 files
 
 TypeScript Errors: 0
-Content Coverage: 2,719 educational files
-Languages: English, Spanish
+Vite Build: Clean (chunk size warning only)
+Content Coverage: 2,719 educational files + structured databases
+Content Databases: 390 conditions, 155 symptoms, 127 procedures, 119 anatomy, 42 specialties
+Languages: English, Spanish (578+ translations, 352 glossary entries)
+Knowledge Graph: 280+ cross-domain relationships
 ```
 
 ---
@@ -262,6 +301,22 @@ find core -name "*.ts" | wc -l
 - **Text-to-Speech (TTS)**: Built-in (System TTS + Local AI)
 - **Voice Languages**: 10 languages supported (en, es, zh, ja, ko, de, fr, ru, pt, it)
 - **Voice Presets**: 8 options (Chelsie, Ethan, Alloy, Echo, Fable, Onyx, Nova, Shimmer)
+
+### Wave 3 In-Progress Files
+These files were being built when the session ended:
+- `core/content/medications/medication-database.ts` - 150+ medications
+- `src/services/ContentService.ts` - Unified content service
+- `src/hooks/useContent.ts` - React hooks for content access
+
+### Key Technical Learnings (Jan 29 Session)
+- Content database entries must use compact format (8-10 lines each) to stay within generation limits
+- iOS WebGL: antialias=false, alpha=true, failIfMajorPerformanceCaveat=false, DPR capped at 2
+- React infinite loops: avoid console interception in debug panels
+- Use useMemo + refs for expensive computations in frequently re-rendering components
+- Vite chunk warnings expected with large content; will need code-splitting later
+- ICD-11 codes are the universal identifier for all conditions
+- 5 complexity levels: child(1), patient(2), nursing(3), medical-student(4), physician(5)
+- Knowledge graph connects: conditions <-> anatomy <-> symptoms <-> medications <-> procedures <-> specialties
 
 ### IMPORTANT: Voice Already Built-In
 Do NOT add external TTS/STT services. The application already has:

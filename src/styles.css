@@ -33,12 +33,33 @@
   padding: 0;
 }
 
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.5;
+  height: 100%;
+  height: -webkit-fill-available;
+  margin: 0;
+  /* iOS safe area insets on body */
+  padding:
+    env(safe-area-inset-top, 0)
+    env(safe-area-inset-right, 0)
+    env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -2191,8 +2212,17 @@ input:disabled {
 .anatomy-viewer {
   display: flex;
   flex-direction: column;
+  /* iOS WebKit fix: Use viewport units with 100% fallback */
+  height: 100%;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for iOS Safari */
+  width: 100%;
+  min-height: 0; /* Allow flex children to shrink */
   background: var(--bg-primary);
+  /* iOS safe area support */
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  box-sizing: border-box;
 }
 
 .anatomy-header {
@@ -2302,13 +2332,39 @@ input:disabled {
 .canvas-container {
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Do not clip 3D content on iOS */
+  /* iOS WebKit fix: Explicit min-height prevents 0-height collapse */
+  min-height: 300px;
+  width: 100%;
+  height: 100%;
+  /* iOS WebKit: Ensure container takes available space */
+  -webkit-flex: 1 1 0%;
+  flex: 1 1 0%;
 }
 
 .canvas-container canvas {
   display: block;
   width: 100% !important;
   height: 100% !important;
+  position: absolute;
+  inset: 0;
+  /* iOS WebKit: Ensure proper touch handling */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* iOS WebKit: Fallback loading state */
+.canvas-loading-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary, #1a1a2e);
+  color: var(--text-primary, white);
+  z-index: 1;
 }
 
 .anatomy-footer {
@@ -4129,14 +4185,52 @@ textarea,
 
 /* Fix 100vh issue on iOS Safari */
 @supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available;
+  }
+
+  #root {
+    height: -webkit-fill-available;
+  }
+
+  .app-view-container {
+    min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
+  }
+
   .app-container,
   .chat-view,
   .symptom-explorer,
   .medication-explorer,
   .condition-simulator,
   .medical-encyclopedia,
-  .encyclopedia-entry {
+  .encyclopedia-entry,
+  .anatomy-viewer,
+  .body-centric-home {
     min-height: -webkit-fill-available;
+  }
+
+  /* iOS WebKit: Ensure 3D viewer containers have explicit dimensions */
+  .body-viewer-container {
+    height: 100%;
+    height: -webkit-fill-available;
+    min-height: 300px;
+  }
+
+  .canvas-container {
+    /* iOS flex collapse fix: ensure minimum height */
+    min-height: 300px;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .canvas-container canvas {
+    /* iOS WebKit: Force canvas to fill container */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -4166,19 +4260,99 @@ textarea,
 }
 
 /* ============================================================================
-   Mobile Bottom Navigation Bar
+   Mobile Bottom Navigation Bar (toggleable, hidden by default)
    ============================================================================ */
 
-.mobile-bottom-nav {
-  display: flex;
+/* Wrapper anchors everything to the bottom of the viewport */
+.mobile-bottom-nav-wrapper {
   position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  pointer-events: none; /* let taps pass through except on children */
+}
+
+/* Pull-up handle - always visible at the very bottom center */
+.mobile-nav-handle {
+  pointer-events: auto;
+  position: absolute;
+  bottom: env(safe-area-inset-bottom, 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  transition: bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s ease;
+}
+
+.mobile-nav-handle:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* When nav is showing, push the handle above the nav bar */
+.mobile-bottom-nav-wrapper:has(.mobile-bottom-nav--visible) .mobile-nav-handle {
+  bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+.mobile-nav-handle-pill {
+  display: block;
+  width: 36px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: background 0.2s ease;
+}
+
+@media (prefers-color-scheme: light) {
+  .mobile-nav-handle-pill {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+.mobile-nav-handle:active .mobile-nav-handle-pill {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-color-scheme: light) {
+  .mobile-nav-handle:active .mobile-nav-handle-pill {
+    background: rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* The nav bar itself - hidden by default, slides up when visible */
+.mobile-bottom-nav {
+  pointer-events: auto;
+  display: flex;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background: var(--bg-card);
   border-top: 1px solid var(--border);
-  padding-bottom: var(--safe-area-inset-bottom);
-  z-index: 10000;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  /* Hidden state: translated below the viewport */
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+}
+
+/* Visible state */
+.mobile-bottom-nav--visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .mobile-nav-items {
@@ -4232,33 +4406,33 @@ textarea,
    GlassUI Mobile Navigation - Premium Glass Morphism Styles
    ============================================================================ */
 
-/* Glass mobile nav container */
+/* Glass mobile nav container - overrides base .mobile-bottom-nav positioning */
 .glass-mobile-nav {
-  position: fixed;
+  /* Position is handled by .mobile-bottom-nav (absolute within wrapper) */
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10000;
-  padding-bottom: var(--safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   /* Remove default background - glass layers provide it */
   background: transparent;
   border-top: none;
 }
 
-/* Glass backdrop layer - provides the blur and translucency */
+/* Glass backdrop layer - dark glassmorphism by default */
 .glass-nav-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(15, 15, 20, 0.75);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   z-index: -2;
 }
 
-/* Dark mode glass backdrop */
-@media (prefers-color-scheme: dark) {
+/* Light mode glass backdrop */
+@media (prefers-color-scheme: light) {
   .glass-nav-backdrop {
-    background: rgba(28, 28, 30, 0.78);
+    background: rgba(255, 255, 255, 0.72);
   }
 }
 
@@ -4447,9 +4621,13 @@ textarea,
    ============================================================================ */
 
 .mobile-nav-fab {
-  position: fixed;
-  bottom: calc(70px + var(--safe-area-inset-bottom));
+  pointer-events: auto;
+  position: absolute;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   right: 16px;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s ease,
+              bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   width: 56px;
   height: 56px;
   border-radius: 28px;
@@ -4476,9 +4654,11 @@ textarea,
     0 4px 16px rgba(59, 130, 246, 0.35),
     0 8px 32px rgba(99, 102, 241, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
 
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.2s ease;
+/* Move FAB up when nav is visible */
+.mobile-nav-fab--nav-visible {
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
 }
 
 .mobile-nav-fab:active {
@@ -4527,8 +4707,11 @@ textarea,
   }
 }
 
-/* Hide FAB on larger screens */
-@media (min-width: 769px) {
+/* Hide mobile nav on very large screens (desktop only) */
+@media (min-width: 1200px) {
+  .mobile-bottom-nav-wrapper {
+    display: none;
+  }
   .mobile-nav-fab {
     display: none;
   }
@@ -4551,9 +4734,9 @@ textarea,
 
 /* Mobile-specific responsive rules */
 @media (max-width: 768px) {
-  /* Show bottom nav on mobile */
-  .mobile-bottom-nav {
-    display: flex;
+  /* Bottom nav wrapper is always present on mobile (handle is always visible) */
+  .mobile-bottom-nav-wrapper {
+    display: block;
   }
 
   /* Hide header actions on mobile (nav moves to bottom) */
@@ -4570,11 +4753,11 @@ textarea,
     display: none;
   }
 
-  /* Add bottom padding to account for fixed nav */
+  /* Add minimal bottom padding for the handle area */
   .dashboard,
   .body-view,
   .timeline-view {
-    padding-bottom: calc(80px + var(--safe-area-inset-bottom));
+    padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px));
   }
 
   /* Container padding adjustments */
@@ -5249,11 +5432,28 @@ textarea,
   inset: 0;
   background: var(--bg-primary);
   overflow: hidden;
+  /* iOS WebKit fix: Explicit dimensions prevent collapse */
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for iOS Safari */
+  /* iOS safe area insets */
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  box-sizing: border-box;
 }
 
 .body-viewer-container {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  /* iOS WebKit fix: Explicit height prevents collapse */
+  height: 100%;
+  width: 100%;
+  min-height: 300px; /* Safety net: never collapse below 300px */
 }
 
 .body-viewer-loading {
@@ -9302,11 +9502,17 @@ button:disabled,
 .anatomy-viewer .canvas-container {
   position: relative;
   flex: 1;
-  overflow: hidden;
+  overflow: visible; /* Do not clip 3D content on iOS */
+  /* iOS WebKit fix: Explicit min-height prevents flex collapse to 0 */
+  min-height: 300px;
+  width: 100%;
+  height: 100%;
 }
 
 .anatomy-viewer canvas {
   display: block;
+  width: 100% !important;
+  height: 100% !important;
   outline: none;
 }
 

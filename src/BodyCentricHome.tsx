@@ -5,12 +5,20 @@
  * Users select body regions to access contextual health information.
  */
 
-import { useState, useCallback, useRef, Suspense, lazy, useMemo } from 'react';
+import React, { useState, useCallback, useRef, Suspense, lazy, useMemo, useEffect } from 'react';
 import { RadialContextMenu, type ContextMenuAction } from './ui/RadialContextMenu';
 import { HealthStatusOverlay } from './ui/HealthStatusOverlay';
 import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from './hooks/useUserDemographics';
 import { getRegionMapping, type RegionMapping } from './utils/regionToSystemMapper';
 import { calculateBodyProportions } from './utils/bodyProportionCalculator';
+import {
+  IOS3DDebugOverlay,
+  markComponentMounted,
+  addDebugLogEntry,
+  updateCanvasStatus,
+  updateModelStatus,
+} from './components/iOS3DDebugOverlay';
+import { ModelLoadingScreen } from './components/ModelLoadingScreen';
 
 // Extended DashboardData type for body-centric home
 // This combines the base type with additional fields from the app
@@ -29,9 +37,76 @@ interface DashboardData {
   };
 }
 
-// Lazy load heavy components
-const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
+// Lazy load heavy components with debug logging
+const AnatomyViewer = lazy(() => {
+  addDebugLogEntry('info', 'Starting lazy load of AnatomyViewer...');
+  return import('./AnatomyViewer').then(m => {
+    addDebugLogEntry('success', 'AnatomyViewer module loaded successfully');
+    return { default: m.AnatomyViewer };
+  }).catch(err => {
+    addDebugLogEntry('error', `Failed to load AnatomyViewer: ${err.message || err}`);
+    throw err;
+  });
+});
+const SimplifiedAnatomyViewer = lazy(() => {
+  addDebugLogEntry('info', 'Starting lazy load of SimplifiedAnatomyViewer...');
+  return import('./SimplifiedAnatomyViewer').then(m => {
+    addDebugLogEntry('success', 'SimplifiedAnatomyViewer module loaded successfully');
+    return { default: m.SimplifiedAnatomyViewer };
+  }).catch(err => {
+    addDebugLogEntry('error', `Failed to load SimplifiedAnatomyViewer: ${err.message || err}`);
+    throw err;
+  });
+});
 const AnatomyChatPanel = lazy(() => import('./AnatomyChatPanel').then(m => ({ default: m.AnatomyChatPanel })));
+
+// ============================================
+// AnatomyViewer Error Boundary
+// If the full AnatomyViewer throws at any point (import, render, etc.),
+// this catches the error, logs it visibly, and triggers fallback to
+// SimplifiedAnatomyViewer so the user always sees something.
+// ============================================
+
+interface AnatomyViewerErrorBoundaryProps {
+  children: React.ReactNode;
+  onFallbackToSimplified: () => void;
+}
+
+interface AnatomyViewerErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class AnatomyViewerErrorBoundary extends React.Component<
+  AnatomyViewerErrorBoundaryProps,
+  AnatomyViewerErrorBoundaryState
+> {
+  constructor(props: AnatomyViewerErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    const msg = `AnatomyViewer crashed: ${error.message}`;
+    console.error('[BodyCentricHome]', msg, error, errorInfo);
+    addDebugLogEntry('error', msg);
+    addDebugLogEntry('error', `Component stack: ${errorInfo.componentStack?.slice(0, 200) || 'N/A'}`);
+    // Trigger parent to switch to simplified viewer
+    this.props.onFallbackToSimplified();
+  }
+
+  override render() {
+    if (this.state.hasError) {
+      // Return null - the parent will show SimplifiedAnatomyViewer
+      return null;
+    }
+    return this.props.children;
+  }
+}
 
 // ============================================
 // Types
@@ -49,7 +124,7 @@ type ActivePanel =
   | 'physiology';
 
 // View type matching App.tsx
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
 
 interface BodyCentricHomeProps {
   dashboardData: DashboardData | null;
@@ -94,9 +169,37 @@ export function BodyCentricHome({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePanel, setActivePanel] = useState<ActivePanel>('none');
 
+  // Health overlay hidden by default to maximize 3D model visibility
+  const [showHealthOverlay, setShowHealthOverlay] = useState(false);
+
+  // Detect iOS device (used for logging only, no longer forces simplified viewer)
+  const isIOSDevice = typeof window !== 'undefined' &&
+    (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+     window.location.origin.startsWith('tauri://') ||
+     window.location.hostname === 'tauri.localhost');
+
+  // Always start with the full AnatomyViewer (WebGL confirmed working on iOS)
+  // User can toggle to simplified mode via the status indicator if needed
+  const [useSimplifiedViewer, setUseSimplifiedViewer] = useState(false);
+
   // Refs
   const anatomyViewerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track component mount/unmount for debug overlay
+  useEffect(() => {
+    markComponentMounted('bodyCentricHome', true);
+    addDebugLogEntry('info', `BodyCentricHome mounted (iOS: ${isIOSDevice}, simplified: ${useSimplifiedViewer})`);
+
+    return () => {
+      markComponentMounted('bodyCentricHome', false);
+    };
+  }, []);
+
+  // Log viewer mode changes
+  useEffect(() => {
+    addDebugLogEntry('info', `Viewer mode: ${useSimplifiedViewer ? 'SIMPLIFIED' : 'FULL'}`);
+  }, [useSimplifiedViewer]);
 
   // Handle radial menu action selection
   const handleMenuSelect = useCallback((action: ContextMenuAction) => {
@@ -181,27 +284,103 @@ export function BodyCentricHome({
 
   return (
     <div ref={containerRef} className="body-centric-home">
+      {/* Minimal viewer status indicator with toggle - small, bottom-right, unobtrusive */}
+      <button
+        onClick={() => setUseSimplifiedViewer(!useSimplifiedViewer)}
+        title={useSimplifiedViewer ? 'Switch to Full 3D Viewer' : 'Switch to Simplified Viewer'}
+        style={{
+          position: 'fixed',
+          bottom: '56px',
+          right: '12px',
+          zIndex: 100,
+          padding: '4px 8px',
+          background: 'rgba(0, 0, 0, 0.35)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          backdropFilter: 'blur(4px)',
+          color: 'rgba(255, 255, 255, 0.5)',
+          fontSize: '9px',
+          fontWeight: 500,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+        }}
+      >
+        <span style={{
+          width: '5px',
+          height: '5px',
+          borderRadius: '50%',
+          background: useSimplifiedViewer ? '#f59e0b' : '#22c55e',
+        }} />
+        {useSimplifiedViewer ? 'Simple' : '3D'}
+      </button>
+
+      {/* Health overlay toggle button - top-right, small */}
+      <button
+        onClick={() => setShowHealthOverlay(!showHealthOverlay)}
+        title={showHealthOverlay ? 'Hide health status' : 'Show health status'}
+        style={{
+          position: 'fixed',
+          top: '12px',
+          right: '12px',
+          zIndex: 100,
+          width: '36px',
+          height: '36px',
+          borderRadius: '10px',
+          background: showHealthOverlay ? 'rgba(34, 197, 94, 0.3)' : 'rgba(0, 0, 0, 0.4)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
+          backdropFilter: 'blur(6px)',
+          color: showHealthOverlay ? 'rgba(134, 239, 172, 0.9)' : 'rgba(255, 255, 255, 0.6)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 0,
+        }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+
       {/* 3D Body Viewer - Takes full viewport */}
       <div className="body-viewer-container">
         <Suspense fallback={<BodyViewerLoading />}>
-          <AnatomyViewer
-            ref={anatomyViewerRef}
-            onBack={() => onNavigate('dashboard')}
-            dashboardData={dashboardData}
-            onStructureSelect={handleStructureSelect}
-            onStructureDeselect={handleStructureDeselect}
-            bodyProportions={bodyProportions}
-          />
+          {useSimplifiedViewer ? (
+            <SimplifiedAnatomyViewer
+              onBack={() => onNavigate('dashboard')}
+              onStructureSelect={handleStructureSelect}
+            />
+          ) : (
+            <AnatomyViewerErrorBoundary
+              onFallbackToSimplified={() => {
+                addDebugLogEntry('error', 'AnatomyViewer error boundary triggered - switching to SimplifiedAnatomyViewer');
+                setUseSimplifiedViewer(true);
+              }}
+            >
+              <AnatomyViewer
+                ref={anatomyViewerRef}
+                onBack={() => onNavigate('dashboard')}
+                dashboardData={dashboardData}
+                onStructureSelect={handleStructureSelect}
+                onStructureDeselect={handleStructureDeselect}
+                bodyProportions={bodyProportions}
+              />
+            </AnatomyViewerErrorBoundary>
+          )}
         </Suspense>
       </div>
 
-      {/* Health Status Overlay - Top of screen */}
-      <HealthStatusOverlay
-        dashboardData={dashboardData}
-        isLoading={isLoading}
-        onVitalsClick={() => onNavigate('timeline')}
-        onAlertsClick={() => onNavigate('dashboard')}
-      />
+      {/* Health Status Overlay - Top of screen, hidden by default */}
+      {showHealthOverlay && (
+        <HealthStatusOverlay
+          dashboardData={dashboardData}
+          isLoading={isLoading}
+          onVitalsClick={() => onNavigate('timeline')}
+          onAlertsClick={() => onNavigate('dashboard')}
+        />
+      )}
 
       {/* Radial Context Menu - Appears on region selection */}
       <RadialContextMenu
@@ -225,9 +404,22 @@ export function BodyCentricHome({
         />
       )}
 
-      {/* Quick navigation hint */}
-      {!isMenuOpen && !selection.regionId && (
-        <div className="body-centric-hint">
+      {/* Quick navigation hint - subtle, bottom center */}
+      {!isMenuOpen && !selection.regionId && activePanel === 'none' && (
+        <div className="body-centric-hint" style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '6px 14px',
+          background: 'rgba(0, 0, 0, 0.3)',
+          borderRadius: '16px',
+          backdropFilter: 'blur(4px)',
+          color: 'rgba(255, 255, 255, 0.45)',
+          fontSize: '12px',
+          zIndex: 50,
+          pointerEvents: 'none',
+        }}>
           <span>Tap any body region to explore</span>
         </div>
       )}
@@ -421,8 +613,8 @@ function RegionMedicationsContent({
             You are taking {relevantMeds.length} medication{relevantMeds.length > 1 ? 's' : ''} that affect{relevantMeds.length === 1 ? 's' : ''} the {regionName.toLowerCase()}.
           </p>
           <div className="medications-list">
-            {relevantMeds.map(med => (
-              <div key={med.id} className="medication-card">
+            {relevantMeds.map((med, idx) => (
+              <div key={med.id ?? `med-${idx}`} className="medication-card">
                 <div className="med-name">{med.name}</div>
                 <div className="med-dose">{med.dosage}</div>
                 {med.indication && (
@@ -479,8 +671,8 @@ function RegionSymptomsContent({
             Recent symptoms in the {regionName.toLowerCase()} region:
           </p>
           <div className="symptoms-list">
-            {regionSymptoms.map(symptom => (
-              <div key={symptom.id} className="symptom-card">
+            {regionSymptoms.map((symptom, idx) => (
+              <div key={symptom.id ?? `symptom-${idx}`} className="symptom-card">
                 <div className="symptom-desc">{symptom.description}</div>
                 <div className="symptom-meta">
                   <span className={`severity severity-${Math.ceil(symptom.severity / 3)}`}>
@@ -740,12 +932,11 @@ function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMappin
 // ============================================
 
 function BodyViewerLoading() {
-  return (
-    <div className="body-viewer-loading">
-      <div className="loading-spinner" />
-      <span>Loading body model...</span>
-    </div>
-  );
+  // Log when this component renders - helps trace Suspense behavior
+  console.log('[BodyCentricHome] BodyViewerLoading fallback is rendering');
+  addDebugLogEntry('info', 'Suspense fallback: BodyViewerLoading is rendering');
+
+  return <ModelLoadingScreen />;
 }
 
 function PanelLoading() {

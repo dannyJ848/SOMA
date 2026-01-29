@@ -744,15 +744,32 @@ export function SmartPanelManager({
   const { state, closePanel } = useUnifiedNavigation();
   const [panelPositions, setPanelPositions] = useState<Record<string, { x: number; y: number }>>({});
   const containerRef = useRef<HTMLDivElement>(null);
+  const lastPositionsRef = useRef<string>('');
 
-  // Filter to only active panels
-  const activePanels = panels.filter(
-    (p) => p.isOpen && state.activePanels.includes(p.id)
-  );
+  // Memoize active panels to prevent unnecessary recalculations
+  // This creates a stable reference that only changes when the actual panel IDs change
+  const activePanels = useMemo(() => {
+    return panels.filter(
+      (p) => p.isOpen && state.activePanels.includes(p.id)
+    );
+  }, [panels, state.activePanels]);
+
+  // Create a stable key for the active panels based on their IDs and positions
+  const activePanelKey = useMemo(() => {
+    return activePanels.map(p => `${p.id}:${p.position}:${p.width}:${p.height}`).join(',');
+  }, [activePanels]);
 
   // Auto-position panels to avoid overlap
   useEffect(() => {
     if (!containerRef.current) return;
+    if (activePanels.length === 0) {
+      // Clear positions if no active panels
+      if (lastPositionsRef.current !== '') {
+        lastPositionsRef.current = '';
+        setPanelPositions({});
+      }
+      return;
+    }
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const newPositions: Record<string, { x: number; y: number }> = {};
@@ -768,8 +785,13 @@ export function SmartPanelManager({
       };
     });
 
-    setPanelPositions(newPositions);
-  }, [activePanels]);
+    // Only update state if positions actually changed
+    const positionsKey = JSON.stringify(newPositions);
+    if (positionsKey !== lastPositionsRef.current) {
+      lastPositionsRef.current = positionsKey;
+      setPanelPositions(newPositions);
+    }
+  }, [activePanelKey, activePanels]);
 
   if (!state.isUIVisible) {
     return null;

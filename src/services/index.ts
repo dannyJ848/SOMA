@@ -67,3 +67,16 @@ export {
   type ConditionMapping,
   type RegionConditionEntry
 } from './RegionalConditionMapper';
+
+// Unified Content Service (knowledge graph, search, all databases)
+export {
+  ContentService,
+  ContentContext,
+  ContentProvider,
+  useContentService,
+  getContentService,
+  type ContentType,
+  type UnifiedSearchResult,
+  type ConditionInfo,
+  type SymptomInfo,
+} from './ContentService';

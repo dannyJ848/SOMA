@@ -2726,6 +2726,294 @@ input:disabled {
 }
 
 /* ============================================
+   Enhanced Layer Panel Styles
+   ============================================ */
+
+/* Depth-based indentation for nested layers */
+.layer-item.depth-0 .layer-row {
+  background: var(--bg-secondary);
+}
+
+.layer-item.depth-1 .layer-row {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.layer-item.depth-2 .layer-row {
+  background: rgba(255, 255, 255, 0.01);
+  font-size: 0.9em;
+}
+
+.layer-item.depth-3 .layer-row {
+  background: transparent;
+  font-size: 0.85em;
+}
+
+/* Clinical Presets Panel */
+.clinical-presets-panel {
+  border-bottom: 1px solid var(--border);
+}
+
+.clinical-presets-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  background: var(--bg-secondary);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.clinical-presets-toggle:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.clinical-presets-toggle.expanded {
+  background: var(--bg-primary);
+  color: var(--accent);
+}
+
+.clinical-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.375rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+}
+
+.clinical-preset-btn {
+  padding: 0.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.clinical-preset-btn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.clinical-preset-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.clinical-preset-btn .preset-name {
+  display: block;
+  line-height: 1.3;
+}
+
+.preset-badge,
+.filter-badge {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: 0.25rem;
+}
+
+/* Layer Filter Panel */
+.layer-filter-panel {
+  border-bottom: 1px solid var(--border);
+}
+
+.layer-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+}
+
+.layer-filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.625rem 1rem;
+  background: var(--bg-secondary);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.layer-filter-toggle:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.layer-filter-toggle.expanded {
+  background: var(--bg-primary);
+  color: var(--accent);
+}
+
+.clear-filters-btn {
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: auto;
+}
+
+.clear-filters-btn:hover {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.layer-filter-content {
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+}
+
+.filter-section {
+  margin-bottom: 0.75rem;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.375rem;
+}
+
+.layer-search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+}
+
+.layer-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.layer-search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.filter-chip {
+  padding: 0.25rem 0.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: auto;
+}
+
+.filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Complexity Indicators */
+.complexity-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-left: 0.25rem;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.complexity-intermediate {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--accent);
+}
+
+.complexity-advanced {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning);
+}
+
+.complexity-expert {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--error);
+}
+
+/* Latin name tooltip styling */
+.layer-name[title] {
+  cursor: help;
+}
+
+/* Enhanced sublayer list for deep nesting */
+.sublayer-list {
+  margin-left: 0;
+  padding: 0.125rem 0;
+}
+
+/* Make panel wider for complex hierarchies */
+.layer-panel {
+  width: 280px;
+}
+
+/* Scrollbar styling for layer list */
+.layer-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.layer-list::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.layer-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.layer-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ============================================
    Selection Info Panel Styles
    ============================================ */
 

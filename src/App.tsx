@@ -6,6 +6,8 @@ import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 import { useActionTracker } from './hooks/useActionTracker';
 import { useUserDemographics } from './hooks/useUserDemographics';
+import { useTranslation, useI18n } from './i18n/useI18n';
+import { LanguageToggle } from './components/LanguageSwitcher';
 import type {
   DashboardAction,
   NavigationAction,
@@ -109,15 +111,17 @@ type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-ex
 
 // Mobile Bottom Navigation Component
 function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNavigate: (view: View) => void }) {
+  const { t } = useTranslation('navigation');
+
   return (
-    <nav className="mobile-bottom-nav" role="navigation" aria-label="Main navigation">
+    <nav className="mobile-bottom-nav" role="navigation" aria-label={t('nav.title') || 'Main navigation'}>
       <div className="mobile-nav-items" role="menubar">
         <button
           className={`mobile-nav-item ${currentView === 'body-centric' ? 'active' : ''}`}
           onClick={() => onNavigate('body-centric')}
           role="menuitem"
           aria-current={currentView === 'body-centric' ? 'page' : undefined}
-          aria-label="Body - 3D body explorer"
+          aria-label={`${t('nav.body')} - 3D body explorer`}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <circle cx="12" cy="5" r="3"/>
@@ -125,45 +129,45 @@ function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNav
             <path d="M8 12h8"/>
             <path d="M8 22l4-4 4 4"/>
           </svg>
-          <span>Body</span>
+          <span>{t('nav.body')}</span>
         </button>
         <button
           className={`mobile-nav-item ${currentView === 'chat' ? 'active' : ''}`}
           onClick={() => onNavigate('chat')}
           role="menuitem"
           aria-current={currentView === 'chat' ? 'page' : undefined}
-          aria-label="Chat - AI health assistant"
+          aria-label={`${t('nav.chat')} - AI health assistant`}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
-          <span>Chat</span>
+          <span>{t('nav.chat')}</span>
         </button>
         <button
           className={`mobile-nav-item ${currentView === 'timeline' ? 'active' : ''}`}
           onClick={() => onNavigate('timeline')}
           role="menuitem"
           aria-current={currentView === 'timeline' ? 'page' : undefined}
-          aria-label="Timeline - Health history"
+          aria-label={`${t('nav.timeline')} - Health history`}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
             <path d="M12 6v6l4 2"/>
           </svg>
-          <span>Timeline</span>
+          <span>{t('nav.timeline')}</span>
         </button>
         <button
           className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
           onClick={() => onNavigate('dashboard')}
           role="menuitem"
           aria-current={currentView === 'dashboard' ? 'page' : undefined}
-          aria-label="Stats - Health dashboard"
+          aria-label={`${t('nav.dashboard')} - Health dashboard`}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-          <span>Stats</span>
+          <span>{t('nav.dashboard')}</span>
         </button>
       </div>
     </nav>
@@ -171,6 +175,9 @@ function MobileBottomNav({ currentView, onNavigate }: { currentView: View; onNav
 }
 
 function App() {
+  const { t } = useTranslation('common');
+  const { t: tNav } = useTranslation('navigation');
+  const { t: tDash } = useTranslation('dashboard');
   const [unlocked, setUnlocked] = useState(false);
   const [passphrase, setPassphrase] = useState('');
   const [confirmPassphrase, setConfirmPassphrase] = useState('');
@@ -382,7 +389,7 @@ function App() {
 
   async function handleUnlock() {
     if (!passphrase) {
-      setError('Please enter your passphrase');
+      setError(t('error.enterPassphrase') || 'Please enter your passphrase');
       return;
     }
 
@@ -395,9 +402,9 @@ function App() {
     } catch (err) {
       const errorMsg = String(err);
       if (errorMsg.includes('Incorrect passphrase') || errorMsg.includes('bad decrypt')) {
-        setError('Incorrect passphrase. Please try again.');
+        setError(t('error.incorrectPassphrase') || 'Incorrect passphrase. Please try again.');
       } else {
-        setError(`Failed to unlock: ${errorMsg}`);
+        setError(`${t('error.unlockFailed') || 'Failed to unlock'}: ${errorMsg}`);
       }
     } finally {
       setIsSubmitting(false);
@@ -408,12 +415,12 @@ function App() {
     setError('');
 
     if (passphrase.length < 8) {
-      setError('Passphrase must be at least 8 characters');
+      setError(t('error.passphraseTooShort') || 'Passphrase must be at least 8 characters');
       return;
     }
 
     if (passphrase !== confirmPassphrase) {
-      setError('Passphrases do not match');
+      setError(t('error.passphrasesDoNotMatch') || 'Passphrases do not match');
       return;
     }
 
@@ -433,18 +440,19 @@ function App() {
   function getPassphraseStrength(): { label: string; color: string; width: string } {
     const len = passphrase.length;
     if (len === 0) return { label: '', color: 'transparent', width: '0%' };
-    if (len < 8) return { label: 'Too short', color: 'var(--error)', width: '25%' };
-    if (len < 12) return { label: 'Weak', color: 'var(--warning)', width: '50%' };
-    if (len < 16) return { label: 'Good', color: 'var(--accent)', width: '75%' };
-    return { label: 'Strong', color: 'var(--success)', width: '100%' };
+    if (len < 8) return { label: t('password.tooShort') || 'Too short', color: 'var(--error)', width: '25%' };
+    if (len < 12) return { label: t('password.weak') || 'Weak', color: 'var(--warning)', width: '50%' };
+    if (len < 16) return { label: t('password.good') || 'Good', color: 'var(--accent)', width: '75%' };
+    return { label: t('password.strong') || 'Strong', color: 'var(--success)', width: '100%' };
   }
 
   function TrendIcon({ trend }: { trend?: 'up' | 'down' | 'stable' | null }) {
+    const { t } = useTranslation('labs');
     if (!trend) return null;
 
     if (trend === 'up') {
       return (
-        <span className="trend-icon trend-up" title="Increased">
+        <span className="trend-icon trend-up" title={t('labs.trend.up')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 15l-6-6-6 6"/>
           </svg>
@@ -453,7 +461,7 @@ function App() {
     }
     if (trend === 'down') {
       return (
-        <span className="trend-icon trend-down" title="Decreased">
+        <span className="trend-icon trend-down" title={t('labs.trend.down')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M6 9l6 6 6-6"/>
           </svg>
@@ -461,7 +469,7 @@ function App() {
       );
     }
     return (
-      <span className="trend-icon trend-stable" title="Stable">
+      <span className="trend-icon trend-stable" title={t('labs.trend.stable')}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M5 12h14"/>
         </svg>
@@ -480,10 +488,10 @@ function App() {
 
   if (loading) {
     return (
-      <div className="container" role="main" aria-busy="true" aria-label="Loading application">
+      <div className="container" role="main" aria-busy="true" aria-label={t('app.loading') || 'Loading application'}>
         <div className="loading" role="status" aria-live="polite">
           <div className="loading-spinner" aria-hidden="true" />
-          <span>Loading...</span>
+          <span>{t('action.loading')}</span>
         </div>
       </div>
     );
@@ -496,6 +504,9 @@ function App() {
     return (
       <div className="container">
         <div className="auth-card auth-card-wide">
+          <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+            <LanguageToggle />
+          </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="2"/>
@@ -503,11 +514,11 @@ function App() {
                     stroke="currentColor" strokeWidth="2" fill="none"/>
             </svg>
           </div>
-          <h1>Welcome to Biological Self</h1>
-          <p className="subtitle">Your private health companion</p>
+          <h1>{t('app.welcome')}</h1>
+          <p className="subtitle">{t('app.tagline')}</p>
 
           <div className="privacy-section">
-            <h2>Your Data Stays Here</h2>
+            <h2>{t('privacy.control')}</h2>
             <div className="privacy-features">
               <div className="privacy-feature">
                 <span className="privacy-icon">
@@ -517,8 +528,8 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>Encrypted Storage</strong>
-                  <span>AES-256 encryption protects all your health data</span>
+                  <strong>{t('privacy.encryptedStorage')}</strong>
+                  <span>{t('privacy.encryptedStorageDesc')}</span>
                 </div>
               </div>
               <div className="privacy-feature">
@@ -531,8 +542,8 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>100% Local</strong>
-                  <span>No servers, no cloud, no network calls</span>
+                  <strong>{t('privacy.local')}</strong>
+                  <span>{t('privacy.localDesc')}</span>
                 </div>
               </div>
               <div className="privacy-feature">
@@ -542,21 +553,21 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>You Control Your Data</strong>
-                  <span>Only you can access it with your passphrase</span>
+                  <strong>{t('privacy.control')}</strong>
+                  <span>{t('privacy.controlDesc')}</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="create-form">
-            <h2>Create Your Passphrase</h2>
-            <p className="form-hint">Choose a strong passphrase you'll remember. This cannot be recovered if lost.</p>
+            <h2>{t('password.create')}</h2>
+            <p className="form-hint">{t('password.hint')}</p>
 
             <div className="input-group">
               <input
                 type="password"
-                placeholder="Enter passphrase (min 8 characters)"
+                placeholder={`${t('password.enter')} (${t('password.minLength')})`}
                 value={passphrase}
                 onChange={(e) => setPassphrase(e.target.value)}
                 disabled={isSubmitting}
@@ -571,7 +582,7 @@ function App() {
 
             <input
               type="password"
-              placeholder="Confirm passphrase"
+              placeholder={t('password.confirm')}
               value={confirmPassphrase}
               onChange={(e) => setConfirmPassphrase(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
@@ -581,7 +592,7 @@ function App() {
             {error && <div className="error">{error}</div>}
 
             <button onClick={handleCreate} disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Secure Database'}
+              {isSubmitting ? t('action.loading') : t('action.create')}
             </button>
           </div>
         </div>
@@ -594,6 +605,9 @@ function App() {
     return (
       <div className="container">
         <div className="auth-card">
+          <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+            <LanguageToggle />
+          </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="2"/>
@@ -601,8 +615,8 @@ function App() {
                     stroke="currentColor" strokeWidth="2" fill="none"/>
             </svg>
           </div>
-          <h1>Biological Self</h1>
-          <p className="subtitle">Enter your passphrase to unlock your health data</p>
+          <h1>{t('app.name')}</h1>
+          <p className="subtitle">{t('password.enter')}</p>
 
           <div className="privacy-notice">
             <span className="lock-icon">
@@ -611,12 +625,12 @@ function App() {
                 <path d="M7 11V7a5 5 0 0110 0v4"/>
               </svg>
             </span>
-            <span>Your data is encrypted and stored only on this device</span>
+            <span>{t('password.encrypted')}</span>
           </div>
 
           <input
             type="password"
-            placeholder="Enter passphrase"
+            placeholder={t('password.enter')}
             value={passphrase}
             onChange={(e) => setPassphrase(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
@@ -628,13 +642,13 @@ function App() {
             <div className="error">
               {error}
               <button className="retry-link" onClick={() => { setError(''); setPassphrase(''); }}>
-                Clear and try again
+                {t('error.clearAndRetry')}
               </button>
             </div>
           )}
 
           <button onClick={handleUnlock} disabled={isSubmitting}>
-            {isSubmitting ? 'Unlocking...' : 'Unlock'}
+            {isSubmitting ? t('action.loading') : t('action.unlock')}
           </button>
         </div>
       </div>

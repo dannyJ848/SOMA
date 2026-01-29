@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { VoiceProvider } from './contexts/VoiceContext';
 import { AccessibilityProvider } from './accessibility/AccessibilityProvider';
+import { I18nProvider } from './i18n/I18nContext';
 import './styles.css';
 import './accessibility/accessibility.css';
+import './i18n/i18n.css';
 
 // Detect keyboard navigation for focus styling
 function KeyboardNavigationDetector() {
@@ -39,11 +41,13 @@ function KeyboardNavigationDetector() {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AccessibilityProvider>
-      <VoiceProvider>
-        <KeyboardNavigationDetector />
-        <App />
-      </VoiceProvider>
-    </AccessibilityProvider>
+    <I18nProvider>
+      <AccessibilityProvider>
+        <VoiceProvider>
+          <KeyboardNavigationDetector />
+          <App />
+        </VoiceProvider>
+      </AccessibilityProvider>
+    </I18nProvider>
   </React.StrictMode>
 );

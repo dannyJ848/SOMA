@@ -242,6 +242,65 @@ export function clearTextureCache(): void {
 }
 
 // ============================================
+// Procedural Texture Integration
+// ============================================
+
+// Re-export procedural texture utilities for convenience
+export {
+  generateTextureSet,
+  createTexturedMaterial,
+  createBasicTexturedMaterial,
+  LazyTextureLoader,
+  getTextureConfigForStructure,
+  clearTextureCache as clearProceduralTextureCache,
+  getTextureCacheStats,
+  ANATOMICAL_TEXTURE_MAP,
+  QUALITY_RESOLUTION,
+  type TextureQuality,
+  type TextureType,
+  type TextureSet,
+  type TextureConfig,
+  type ProceduralTextureOptions,
+} from '../textures/ProceduralTextures';
+
+import {
+  LazyTextureLoader,
+  type TextureQuality,
+} from '../textures/ProceduralTextures';
+
+// Global lazy loader instance for the application
+let globalTextureLoader: LazyTextureLoader | null = null;
+
+/**
+ * Get or create the global texture loader
+ */
+export function getGlobalTextureLoader(quality: TextureQuality = 'medium'): LazyTextureLoader {
+  if (!globalTextureLoader) {
+    globalTextureLoader = new LazyTextureLoader(quality);
+  }
+  return globalTextureLoader;
+}
+
+/**
+ * Set texture quality for the global loader
+ */
+export function setGlobalTextureQuality(quality: TextureQuality): void {
+  if (globalTextureLoader) {
+    globalTextureLoader.setQuality(quality);
+  }
+}
+
+/**
+ * Dispose of the global texture loader
+ */
+export function disposeGlobalTextureLoader(): void {
+  if (globalTextureLoader) {
+    globalTextureLoader.dispose();
+    globalTextureLoader = null;
+  }
+}
+
+// ============================================
 // Object Pool for Reusable Objects
 // ============================================
 
@@ -478,6 +537,7 @@ export function cleanupAllCaches(): void {
   clearMaterialCache();
   clearGeometryCache();
   clearTextureCache();
+  disposeGlobalTextureLoader();
   vector3Pool.clear();
   matrix4Pool.clear();
   colorPool.clear();

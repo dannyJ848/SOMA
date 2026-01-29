@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle, useMemo } from 'react';
-import { Canvas, useThree, ThreeEvent } from '@react-three/fiber';
+import { Canvas, useThree, useFrame, ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import * as THREE from 'three';
 import { LayerPanel, useLayerState } from './LayerPanel';
@@ -19,15 +19,34 @@ import type { HistologyImage } from '../core/histology/types';
 import {
   EnhancedAnatomyModel,
   GLBAnatomyModel,
+  ProgressiveAnatomyModel,
+  MemoryBudgetIndicator,
+  LoadingProgressOverlay,
   SystemFilterPanel,
   DetailLevelIndicator,
   useLOD,
   type AnatomicalSystem,
+  type ModelRegion,
 } from './anatomy';
 import {
   EnhancedCameraControls,
   ANATOMICAL_VIEW_PRESETS,
 } from './anatomy/EnhancedCameraControls';
+import {
+  useAdaptiveQualitySettings,
+  useAdaptiveDPR,
+  type QualityPreset,
+  type QualitySettings,
+} from './utils/device-capability';
+import { AdaptiveFXAA } from './anatomy/FXAAPostProcessing';
+import {
+  AnatomyLighting,
+  LightingProvider,
+  LightingControls,
+  useLighting,
+  type LightingPreset,
+  LIGHTING_PRESETS,
+} from './lighting';
 
 
 interface AnatomyViewerProps {
@@ -82,8 +101,77 @@ function PerformanceMonitor() {
   return <Stats />;
 }
 
-// Lighting setup optimized for anatomical visualization
-function AnatomicalLighting() {
+// FPS Reporter component - reports FPS to adaptive DPR system
+interface FPSReporterProps {
+  onFPSReport: (fps: number) => void;
+  enabled: boolean;
+}
+
+function FPSReporter({ onFPSReport, enabled }: FPSReporterProps) {
+  const frameTimesRef = useRef<number[]>([]);
+  const lastTimeRef = useRef<number>(performance.now());
+  const frameCountRef = useRef<number>(0);
+
+  useFrame(() => {
+    if (!enabled) return;
+
+    const now = performance.now();
+    const delta = now - lastTimeRef.current;
+    lastTimeRef.current = now;
+
+    frameTimesRef.current.push(delta);
+    if (frameTimesRef.current.length > 30) {
+      frameTimesRef.current.shift();
+    }
+
+    frameCountRef.current++;
+
+    // Report FPS every 30 frames
+    if (frameCountRef.current % 30 === 0 && frameTimesRef.current.length > 0) {
+      const avgFrameTime = frameTimesRef.current.reduce((a, b) => a + b, 0) / frameTimesRef.current.length;
+      const fps = Math.round(1000 / avgFrameTime);
+      onFPSReport(fps);
+    }
+  });
+
+  return null;
+}
+
+// Enhanced Lighting wrapper that uses the new lighting system with state
+interface EnhancedAnatomicalLightingProps {
+  preset: LightingPreset;
+  intensity: number;
+  shadowsEnabled: boolean;
+  ssaoEnabled: boolean;
+  environmentEnabled: boolean;
+  spotlightFollowsFocus: boolean;
+  focusPoint: THREE.Vector3;
+}
+
+function EnhancedAnatomicalLighting({
+  preset,
+  intensity,
+  shadowsEnabled,
+  ssaoEnabled,
+  environmentEnabled,
+  spotlightFollowsFocus,
+  focusPoint,
+}: EnhancedAnatomicalLightingProps) {
+  return (
+    <AnatomyLighting
+      preset={preset}
+      intensity={intensity}
+      shadowsEnabled={shadowsEnabled}
+      ssaoEnabled={ssaoEnabled}
+      environmentEnabled={environmentEnabled}
+      spotlightFollowsFocus={spotlightFollowsFocus}
+      focusPoint={focusPoint}
+    />
+  );
+}
+
+// Fallback simple lighting for when enhanced lighting is disabled
+function SimpleLighting() {
   return (
     <>
       {/* Ambient light for base visibility */}
@@ -499,6 +587,9 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   // Enhanced mode state (LOD-based multimodal rendering)
   const [enhancedMode, setEnhancedMode] = useState(true);
   const [useRealModels, setUseRealModels] = useState(false); // Toggle for real GLB models
+  const [useProgressiveLoading, setUseProgressiveLoading] = useState(true); // Toggle for progressive loading
+  const [focusedRegion, setFocusedRegion] = useState<ModelRegion | undefined>(undefined);
+  const [showMemoryStats, setShowMemoryStats] = useState(false);
   const [lodState, setLodState] = useState<ReturnType<typeof useLOD> | null>(null);
   // Start with ALL systems enabled for Complete Anatomy-style layer control
   // Users can toggle individual systems on/off as needed
@@ -526,6 +617,40 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
 
   // External highlight state
   const [externalHighlights, setExternalHighlights] = useState<Map<string, ExternalHighlight>>(new Map());
+
+  // Enhanced lighting state
+  const [lightingPreset, setLightingPreset] = useState<LightingPreset>('clinical');
+  const [lightingIntensity, setLightingIntensity] = useState(1.0);
+  const [shadowsEnabled, setShadowsEnabled] = useState(true);
+  const [ssaoEnabled, setSsaoEnabled] = useState(true);
+  const [environmentEnabled, setEnvironmentEnabled] = useState(true);
+  const [spotlightFollowsFocus, setSpotlightFollowsFocus] = useState(true);
+  const [showLightingControls, setShowLightingControls] = useState(false);
+
+  // Focus point for spotlight (updates when structure is selected)
+  const lightingFocusPoint = useMemo(() => {
+    if (selectedStructure) {
+      // Find the structure position for focus point
+      const structure = BODY_STRUCTURES.find(s => s.id === selectedStructure.id);
+      if (structure) {
+        return new THREE.Vector3(...structure.position);
+      }
+    }
+    return new THREE.Vector3(0, 0.5, 0);
+  }, [selectedStructure]);
+
+  // Adaptive quality settings for DPR and resolution
+  const {
+    dpr: adaptiveDPR,
+    isAdapting,
+    preset: qualityPreset,
+    setPreset: setQualityPreset,
+    reportFPS,
+    capabilities,
+  } = useAdaptiveDPR('balanced', true);
+
+  // Get full quality settings based on current preset
+  const { settings: qualitySettings } = useAdaptiveQualitySettings(qualityPreset);
 
   // Toggle anatomical system
   const handleToggleSystem = useCallback((system: AnatomicalSystem) => {
@@ -982,13 +1107,16 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
       <div className="canvas-container">
         <Canvas
           gl={{
-            antialias: false,  // Disable for performance
+            antialias: qualitySettings.antialias,  // Adaptive - use FXAA instead for better perf
             alpha: false,
             powerPreference: 'high-performance',
-            precision: 'lowp',  // Lower precision for mobile
+            precision: qualitySettings.precision,  // Adaptive: lowp/mediump/highp based on device
+            stencil: false,  // Disable stencil buffer for performance
+            depth: true,
+            preserveDrawingBuffer: false,  // Better performance
           }}
-          dpr={1}  // Force 1x pixel ratio for performance (was [1,2] = 4x on Retina!)
-          frameloop="always"  // Can change to "demand" for even more savings
+          dpr={adaptiveDPR}  // Adaptive DPR: 1.0-2.0 based on device capability (iPhone 14+: 1.5-2.0)
+          frameloop="always"
         >
           <color attach="background" args={['#1a1a2e']} />
 
@@ -1001,12 +1129,47 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
           />
 
           <CameraController controlsRef={controlsRef} />
-          <AnatomicalLighting />
+
+          {/* Enhanced Lighting System with shadows, environment, and presets */}
+          {enhancedMode ? (
+            <EnhancedAnatomicalLighting
+              preset={lightingPreset}
+              intensity={lightingIntensity}
+              shadowsEnabled={shadowsEnabled}
+              ssaoEnabled={ssaoEnabled}
+              environmentEnabled={environmentEnabled}
+              spotlightFollowsFocus={spotlightFollowsFocus}
+              focusPoint={lightingFocusPoint}
+            />
+          ) : (
+            <SimpleLighting />
+          )}
+
+          {/* FXAA Post-Processing - quality antialiasing without MSAA cost */}
+          <AdaptiveFXAA qualityPreset={qualityPreset} />
+
+          {/* FPS Reporter for adaptive DPR adjustment */}
+          <FPSReporter onFPSReport={reportFPS} enabled={true} />
 
           {/* Render enhanced or basic model based on mode */}
           {enhancedMode ? (
             <>
-              {useRealModels ? (
+              {useProgressiveLoading ? (
+                /* Progressive Loading: streams GLB models with memory management */
+                <ProgressiveAnatomyModel
+                  hoveredStructure={hoveredStructure}
+                  selectedStructure={selectedStructure?.id || null}
+                  enabledSystems={enabledSystems}
+                  onHover={setHoveredStructure}
+                  onSelect={handleEnhancedStructureSelect}
+                  showSkeleton={true}
+                  showOrgans={true}
+                  animateOrgans={animateOrgans}
+                  focusedRegion={focusedRegion}
+                  preferredQuality="standard"
+                  enableMultiRegion={true}
+                />
+              ) : useRealModels ? (
                 <GLBAnatomyModel
                   hoveredStructure={hoveredStructure}
                   selectedStructure={selectedStructure?.id || null}
@@ -1073,27 +1236,93 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
             onClick={() => setEnhancedMode(!enhancedMode)}
             title={enhancedMode ? 'Switch to basic view' : 'Switch to enhanced view'}
           >
-            {enhancedMode ? '🔬 Enhanced' : '👤 Basic'}
+            {enhancedMode ? 'Enhanced' : 'Basic'}
           </button>
           {enhancedMode && (
             <>
               <button
-                className={useRealModels ? 'active' : ''}
-                onClick={() => setUseRealModels(!useRealModels)}
-                title={useRealModels ? 'Switch to procedural models' : 'Switch to real 3D models'}
+                className={useProgressiveLoading ? 'active' : ''}
+                onClick={() => setUseProgressiveLoading(!useProgressiveLoading)}
+                title={useProgressiveLoading ? 'Disable progressive loading' : 'Enable progressive loading (recommended)'}
               >
-                {useRealModels ? '🦴 Real' : '📐 Procedural'}
+                {useProgressiveLoading ? 'Progressive' : 'Standard'}
               </button>
+              {!useProgressiveLoading && (
+                <button
+                  className={useRealModels ? 'active' : ''}
+                  onClick={() => setUseRealModels(!useRealModels)}
+                  title={useRealModels ? 'Switch to procedural models' : 'Switch to real 3D models'}
+                >
+                  {useRealModels ? 'Real' : 'Procedural'}
+                </button>
+              )}
               <button
                 className={animateOrgans ? 'active' : ''}
                 onClick={() => setAnimateOrgans(!animateOrgans)}
                 title={animateOrgans ? 'Pause animations' : 'Start animations'}
               >
-                {animateOrgans ? '⏸️ Pause' : '▶️ Animate'}
+                {animateOrgans ? 'Pause' : 'Animate'}
+              </button>
+              <button
+                className={showMemoryStats ? 'active' : ''}
+                onClick={() => setShowMemoryStats(!showMemoryStats)}
+                title={showMemoryStats ? 'Hide memory stats' : 'Show memory stats'}
+              >
+                Mem
               </button>
             </>
           )}
         </div>
+
+        {/* Memory Budget Indicator - shows loaded models and memory usage */}
+        {enhancedMode && useProgressiveLoading && showMemoryStats && (
+          <MemoryBudgetIndicator />
+        )}
+
+        {/* Loading Progress Overlay - shows model streaming progress */}
+        {enhancedMode && useProgressiveLoading && (
+          <LoadingProgressOverlay />
+        )}
+
+        {/* Quality preset selector - Adaptive DPR and resolution */}
+        <div className="quality-preset-selector">
+          <span className="quality-label">Quality:</span>
+          <button
+            className={qualityPreset === 'performance' ? 'active' : ''}
+            onClick={() => setQualityPreset('performance')}
+            title="Performance mode: DPR 1.0, no FXAA - Best for older devices"
+          >
+            Perf
+          </button>
+          <button
+            className={qualityPreset === 'balanced' ? 'active' : ''}
+            onClick={() => setQualityPreset('balanced')}
+            title="Balanced mode: DPR 1.5, FXAA - Recommended for iPhone 14+"
+          >
+            Balanced
+          </button>
+          <button
+            className={qualityPreset === 'quality' ? 'active' : ''}
+            onClick={() => setQualityPreset('quality')}
+            title="Quality mode: DPR 2.0, FXAA - Best visuals for high-end devices"
+          >
+            Quality
+          </button>
+          {isAdapting && (
+            <span className="adapting-indicator" title="Adjusting quality for optimal performance">
+              ...
+            </span>
+          )}
+        </div>
+
+        {/* Device capability indicator (development only) */}
+        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
+          <div className="device-capability-info">
+            <span title="GPU Performance Tier">GPU: {capabilities.gpuTier}</span>
+            <span title="Current Device Pixel Ratio">DPR: {adaptiveDPR.toFixed(2)}</span>
+            {capabilities.isiPhone14Plus && <span title="iPhone 14+ Detected">iPhone 14+</span>}
+          </div>
+        )}
 
         {/* Layer toggle button */}
         <button
@@ -1107,6 +1336,115 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
             <polyline points="2 12 12 17 22 12"/>
           </svg>
         </button>
+
+        {/* Lighting Controls toggle button (enhanced mode only) */}
+        {enhancedMode && (
+          <button
+            className="lighting-toggle-btn"
+            onClick={() => setShowLightingControls(!showLightingControls)}
+            title={showLightingControls ? 'Hide Lighting' : 'Show Lighting Controls'}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="5" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+          </button>
+        )}
+
+        {/* Lighting Controls Panel (enhanced mode only) */}
+        {enhancedMode && showLightingControls && (
+          <div className="lighting-controls">
+            <div className="lighting-controls-header">
+              <h3>Lighting</h3>
+              <button
+                className="lighting-controls-close"
+                onClick={() => setShowLightingControls(false)}
+                aria-label="Close lighting controls"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Preset Selector */}
+            <div className="lighting-control-group">
+              <label htmlFor="lighting-preset">Preset</label>
+              <select
+                id="lighting-preset"
+                value={lightingPreset}
+                onChange={(e) => setLightingPreset(e.target.value as LightingPreset)}
+              >
+                <option value="clinical">Clinical</option>
+                <option value="studio">Studio</option>
+                <option value="ambient">Ambient</option>
+                <option value="surgical">Surgical</option>
+              </select>
+              <span className="lighting-preset-description">
+                {LIGHTING_PRESETS[lightingPreset].description}
+              </span>
+            </div>
+
+            {/* Intensity Slider */}
+            <div className="lighting-control-group">
+              <label htmlFor="lighting-intensity">
+                Intensity: {Math.round(lightingIntensity * 100)}%
+              </label>
+              <input
+                id="lighting-intensity"
+                type="range"
+                min="0"
+                max="200"
+                value={lightingIntensity * 100}
+                onChange={(e) => setLightingIntensity(parseInt(e.target.value) / 100)}
+              />
+            </div>
+
+            {/* Shadow Toggle */}
+            <div className="lighting-control-group lighting-control-toggle">
+              <label htmlFor="lighting-shadows">Shadows</label>
+              <input
+                id="lighting-shadows"
+                type="checkbox"
+                checked={shadowsEnabled}
+                onChange={(e) => setShadowsEnabled(e.target.checked)}
+              />
+            </div>
+
+            {/* SSAO Toggle */}
+            <div className="lighting-control-group lighting-control-toggle">
+              <label htmlFor="lighting-ssao">Ambient Occlusion</label>
+              <input
+                id="lighting-ssao"
+                type="checkbox"
+                checked={ssaoEnabled}
+                onChange={(e) => setSsaoEnabled(e.target.checked)}
+              />
+            </div>
+
+            {/* Environment Toggle */}
+            <div className="lighting-control-group lighting-control-toggle">
+              <label htmlFor="lighting-environment">Environment Reflections</label>
+              <input
+                id="lighting-environment"
+                type="checkbox"
+                checked={environmentEnabled}
+                onChange={(e) => setEnvironmentEnabled(e.target.checked)}
+              />
+            </div>
+
+            {/* Focus Spotlight Toggle */}
+            <div className="lighting-control-group lighting-control-toggle">
+              <label htmlFor="lighting-spotlight">Focus Spotlight</label>
+              <input
+                id="lighting-spotlight"
+                type="checkbox"
+                checked={spotlightFollowsFocus}
+                onChange={(e) => setSpotlightFollowsFocus(e.target.checked)}
+              />
+            </div>
+          </div>
+        )}
 
         {/* Layer Panel (classic mode only) */}
         {!enhancedMode && showLayerPanel && (

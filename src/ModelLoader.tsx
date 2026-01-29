@@ -427,6 +427,68 @@ export const SYSTEM_MODELS: Record<AnatomicalSystem, string[]> = {
   integumentary: [],
 };
 
+// Quality tiers for progressive loading
+export type ModelQualityTier = 'preview' | 'standard' | 'high';
+
+// Model quality tier configuration
+export interface ModelQualityConfig {
+  tier: ModelQualityTier;
+  description: string;
+  maxPolygons: number;
+  textureSize: number;
+  compressionLevel: 'none' | 'low' | 'high';
+}
+
+export const QUALITY_TIERS: Record<ModelQualityTier, ModelQualityConfig> = {
+  preview: {
+    tier: 'preview',
+    description: 'Procedural geometry placeholder',
+    maxPolygons: 500,
+    textureSize: 0,
+    compressionLevel: 'none',
+  },
+  standard: {
+    tier: 'standard',
+    description: 'Draco-compressed GLB',
+    maxPolygons: 50000,
+    textureSize: 512,
+    compressionLevel: 'high',
+  },
+  high: {
+    tier: 'high',
+    description: 'Full-quality GLB',
+    maxPolygons: 200000,
+    textureSize: 2048,
+    compressionLevel: 'low',
+  },
+};
+
+// Memory budget for different devices (in MB)
+export const MEMORY_BUDGETS = {
+  low: 75,       // Older devices
+  medium: 150,   // iPhone 14 / mid-range Android
+  high: 300,     // iPad Pro / high-end devices
+};
+
+// Detect device memory tier
+export function detectMemoryTier(): keyof typeof MEMORY_BUDGETS {
+  if (typeof navigator === 'undefined') return 'medium';
+
+  // Check deviceMemory API (Chrome)
+  const deviceMemory = (navigator as any).deviceMemory;
+  if (deviceMemory) {
+    if (deviceMemory < 2) return 'low';
+    if (deviceMemory < 4) return 'medium';
+    return 'high';
+  }
+
+  // Fallback: check hardwareConcurrency
+  const cores = navigator.hardwareConcurrency || 4;
+  if (cores <= 2) return 'low';
+  if (cores <= 4) return 'medium';
+  return 'high';
+}
+
 // Regional model paths for body parts
 export const REGIONAL_MODELS: Record<string, string> = {
   head: 'assets/models/organs/Head.glb',

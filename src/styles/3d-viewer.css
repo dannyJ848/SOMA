@@ -866,3 +866,563 @@
     padding: var(--space-2) var(--space-4);
   }
 }
+
+/* ============================================================================
+   LIGHTING CONTROLS
+   ============================================================================ */
+
+/* Lighting Toggle Button */
+.lighting-toggle-btn {
+  position: absolute;
+  bottom: 80px;
+  left: 60px;
+  width: 40px;
+  height: 40px;
+  background: var(--glass-bg, rgba(26, 26, 46, 0.95));
+  backdrop-filter: var(--glass-blur, blur(10px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-lg, 8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  transition: var(--transition-fast, all 0.2s ease);
+  z-index: var(--z-raised, 100);
+}
+
+.lighting-toggle-btn:hover {
+  background: var(--bg-hover, rgba(40, 40, 70, 0.95));
+  border-color: var(--accent-primary, #6495ed);
+  color: var(--text-primary, #ffffff);
+}
+
+.lighting-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Lighting Controls Panel */
+.lighting-controls {
+  position: absolute;
+  bottom: 130px;
+  left: 16px;
+  background: var(--glass-bg, rgba(26, 26, 46, 0.95));
+  backdrop-filter: var(--glass-blur, blur(10px));
+  border-radius: var(--radius-xl, 12px);
+  padding: var(--space-4, 16px);
+  min-width: 220px;
+  box-shadow: var(--shadow-lg, 0 4px 20px rgba(0, 0, 0, 0.4));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  z-index: var(--z-raised, 100);
+  animation: slideIn var(--duration-normal, 0.3s) var(--ease-spring, ease-out);
+}
+
+.lighting-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3, 12px);
+  padding-bottom: var(--space-2, 8px);
+  border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+}
+
+.lighting-controls-header h3 {
+  margin: 0;
+  font-size: var(--text-sm, 14px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--text-primary, #ffffff);
+}
+
+.lighting-controls-close {
+  background: none;
+  border: none;
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.6));
+  cursor: pointer;
+  padding: var(--space-1, 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm, 4px);
+  transition: var(--transition-fast, all 0.2s ease);
+}
+
+.lighting-controls-close:hover {
+  color: var(--text-primary, #ffffff);
+  background: var(--bg-hover, rgba(255, 255, 255, 0.1));
+}
+
+.lighting-device-info {
+  font-size: var(--text-xs, 11px);
+  color: rgba(255, 200, 100, 0.8);
+  background: rgba(255, 200, 100, 0.1);
+  padding: var(--space-2, 6px) var(--space-3, 10px);
+  border-radius: var(--radius-md, 6px);
+  margin-bottom: var(--space-3, 12px);
+}
+
+.lighting-control-group {
+  margin-bottom: var(--space-3, 12px);
+}
+
+.lighting-control-group:last-child {
+  margin-bottom: 0;
+}
+
+.lighting-control-group label {
+  display: block;
+  font-size: var(--text-xs, 12px);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  margin-bottom: var(--space-1, 4px);
+}
+
+.lighting-control-group select {
+  width: 100%;
+  padding: var(--space-2, 8px) var(--space-3, 10px);
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--border-primary, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-primary, #ffffff);
+  font-size: var(--text-sm, 13px);
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.2s ease);
+}
+
+.lighting-control-group select:hover {
+  border-color: var(--border-secondary, rgba(255, 255, 255, 0.3));
+}
+
+.lighting-control-group select:focus {
+  outline: none;
+  border-color: var(--accent-primary, rgba(100, 150, 255, 0.5));
+}
+
+.lighting-control-group select option {
+  background: var(--bg-primary, #1a1a2e);
+  color: var(--text-primary, #ffffff);
+}
+
+.lighting-preset-description {
+  display: block;
+  font-size: var(--text-xs, 10px);
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.4));
+  margin-top: var(--space-1, 4px);
+}
+
+.lighting-control-group input[type="range"] {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-full, 2px);
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.lighting-control-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-primary, #6495ed);
+  border-radius: var(--radius-full, 50%);
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.2s ease);
+}
+
+.lighting-control-group input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  background: var(--accent-primary-hover, #7aa5ff);
+}
+
+.lighting-control-group input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent-primary, #6495ed);
+  border-radius: var(--radius-full, 50%);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.2s ease);
+}
+
+.lighting-control-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lighting-control-toggle label {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 6px);
+}
+
+.lighting-control-toggle input[type="checkbox"] {
+  width: 36px;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.2s ease);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.lighting-control-toggle input[type="checkbox"]:checked {
+  background: var(--accent-primary-light, rgba(100, 150, 255, 0.5));
+}
+
+.lighting-control-toggle input[type="checkbox"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.lighting-control-toggle input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--text-primary, #ffffff);
+  border-radius: var(--radius-full, 50%);
+  top: 2px;
+  left: 2px;
+  transition: var(--transition-fast, all 0.2s ease);
+}
+
+.lighting-control-toggle input[type="checkbox"]:checked::before {
+  transform: translateX(16px);
+}
+
+.lighting-disabled-hint {
+  font-size: var(--text-xs, 9px);
+  color: rgba(255, 200, 100, 0.6);
+  margin-left: var(--space-1, 4px);
+}
+
+/* Responsive adjustments for lighting controls */
+@media (max-width: 768px) {
+  .lighting-toggle-btn {
+    bottom: 140px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lighting-controls {
+    left: var(--space-3, 12px);
+    right: var(--space-3, 12px);
+    bottom: 190px;
+    min-width: auto;
+  }
+}
+
+@media (pointer: coarse) {
+  .lighting-toggle-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .lighting-control-toggle input[type="checkbox"] {
+    width: 44px;
+    height: 24px;
+  }
+
+  .lighting-control-toggle input[type="checkbox"]::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lighting-control-toggle input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+  }
+}
+
+/* ============================================================================
+   PROGRESSIVE MODEL LOADING SYSTEM
+   ============================================================================ */
+
+/* Memory Budget Indicator */
+.memory-budget-indicator {
+  position: absolute;
+  bottom: var(--space-4, 16px);
+  left: var(--space-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 4px);
+  padding: var(--space-3, 12px);
+  background: var(--glass-bg, rgba(20, 20, 35, 0.9));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-lg, 12px);
+  min-width: 160px;
+  z-index: 100;
+}
+
+.memory-budget-indicator .memory-bar {
+  height: 6px;
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-full, 999px);
+  overflow: hidden;
+}
+
+.memory-budget-indicator .memory-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full, 999px);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.memory-budget-indicator .memory-text {
+  font-size: var(--text-xs, 11px);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  font-family: var(--font-mono, monospace);
+}
+
+.memory-budget-indicator .model-count {
+  font-size: var(--text-xs, 10px);
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+/* Loading Progress Overlay */
+.loading-progress-overlay {
+  position: absolute;
+  top: var(--space-4, 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  pointer-events: none;
+}
+
+.loading-progress-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  background: var(--glass-bg, rgba(20, 20, 35, 0.95));
+  backdrop-filter: var(--glass-blur, blur(16px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.3));
+  min-width: 200px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.loading-progress-panel h4 {
+  font-size: var(--text-sm, 13px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--text-primary, white);
+  margin: 0 0 var(--space-2, 8px) 0;
+  text-align: center;
+}
+
+.loading-progress-panel .overall-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+}
+
+.loading-progress-panel .progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-full, 999px);
+  overflow: hidden;
+}
+
+.loading-progress-panel .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary, #4488ff), var(--accent-secondary, #88ff44));
+  border-radius: var(--radius-full, 999px);
+  transition: width 0.2s ease;
+}
+
+.loading-progress-panel .overall-progress span {
+  font-size: var(--text-xs, 11px);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  font-family: var(--font-mono, monospace);
+  min-width: 35px;
+  text-align: right;
+}
+
+.loading-progress-panel .loading-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 4px);
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.loading-progress-panel .loading-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs, 10px);
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+.loading-progress-panel .loading-item .model-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.loading-progress-panel .loading-item .model-progress {
+  font-family: var(--font-mono, monospace);
+  color: var(--accent-primary, #4488ff);
+}
+
+/* Model Loading Ring Indicator (in-scene) */
+.model-loading-ring {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Quality Tier Badges */
+.quality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1, 4px);
+  padding: var(--space-1, 4px) var(--space-2, 8px);
+  border-radius: var(--radius-sm, 6px);
+  font-size: var(--text-xs, 10px);
+  font-weight: var(--font-medium, 500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quality-badge--preview {
+  background: rgba(100, 100, 100, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+}
+
+.quality-badge--standard {
+  background: rgba(68, 136, 255, 0.2);
+  color: rgba(68, 136, 255, 0.9);
+  border: 1px solid rgba(68, 136, 255, 0.4);
+}
+
+.quality-badge--high {
+  background: rgba(136, 255, 68, 0.2);
+  color: rgba(136, 255, 68, 0.9);
+  border: 1px solid rgba(136, 255, 68, 0.4);
+}
+
+/* Model Transition Fade */
+.model-transition-enter {
+  opacity: 0;
+}
+
+.model-transition-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.model-transition-exit {
+  opacity: 1;
+}
+
+.model-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Region Selection Buttons */
+.region-selector {
+  position: absolute;
+  bottom: var(--space-4, 16px);
+  right: var(--space-4, 16px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  max-width: 200px;
+  z-index: 100;
+}
+
+.region-selector-btn {
+  padding: var(--space-1-5, 6px) var(--space-2-5, 10px);
+  background: var(--glass-bg, rgba(20, 20, 35, 0.8));
+  backdrop-filter: var(--glass-blur, blur(8px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--text-xs, 11px);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.region-selector-btn:hover {
+  background: rgba(68, 136, 255, 0.2);
+  border-color: rgba(68, 136, 255, 0.5);
+  color: var(--text-primary, white);
+}
+
+.region-selector-btn.active {
+  background: rgba(68, 136, 255, 0.3);
+  border-color: var(--accent-primary, #4488ff);
+  color: var(--text-primary, white);
+}
+
+.region-selector-btn.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.region-selector-btn.loading::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: var(--space-1, 4px);
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Responsive adjustments for progressive loading */
+@media (max-width: 768px) {
+  .memory-budget-indicator {
+    bottom: 60px;
+    left: var(--space-3, 12px);
+    min-width: 140px;
+    padding: var(--space-2, 8px);
+  }
+
+  .loading-progress-panel {
+    min-width: 180px;
+    padding: var(--space-2, 8px) var(--space-3, 12px);
+  }
+
+  .loading-progress-panel .loading-items {
+    max-height: 80px;
+  }
+
+  .region-selector {
+    bottom: 60px;
+    right: var(--space-3, 12px);
+    max-width: 160px;
+  }
+}

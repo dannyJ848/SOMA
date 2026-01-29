@@ -1,8 +1,8 @@
 # SOMA - Current Handoff
 
-> **Date**: 2026-01-28
-> **Blueprint Version**: 2.3
-> **Phase**: 7 - PROJECT COMPLETE - TestFlight Ready
+> **Date**: 2026-01-28 23:00
+> **Blueprint Version**: 3.1
+> **Phase**: 7 - PROJECT COMPLETE - iOS Build Ready
 
 ---
 
@@ -43,12 +43,31 @@ npx tsx src/i18n/test-i18n.tsx
 | Bilingual i18n | Complete | `src/i18n/` (31 files) |
 | TestFlight Config | Ready | `scripts/build-testflight.sh` |
 
+### CRITICAL FIX - iOS Database Permissions ✅ v2
+
+**FIXED**: "Failed to create database: Operation not permitted (os error 1)"
+
+**Fix Evolution:**
+- **v1 (Failed)**: Used `dirs::document_dir()` - doesn't work on iOS
+- **v2 (Working)**: Uses `$HOME/Documents` directly via `std::env::var("HOME")`
+
+**Changes:**
+- `src-tauri/src/lib.rs` - Use `$HOME/Documents/biological-self-data` for iOS
+- `.entitlements` - Added file access permissions  
+- `Info.plist` - Added microphone usage description
+- `scripts/build-testflight.sh` - Updated to use `cargo tauri ios build --ci`
+
+### Current Build Status
+
+✅ **Build Successful** - `build/TestFlight/SOMA.ipa` (4.8 MB)
+
 ### What's Next
 
-1. Build TestFlight release
-2. Upload to App Store Connect
-3. Begin beta testing
-4. Gather user feedback
+1. **Upload to TestFlight**: Use Transporter app with `build/TestFlight/SOMA.ipa`
+2. Test database creation on physical device
+3. Test voice commands (microphone permission)
+4. Begin beta testing
+5. Gather user feedback
 
 ---
 

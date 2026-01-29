@@ -2,7 +2,7 @@
 #
 # TestFlight Build Script for Biological Self
 #
-# This script builds the iOS app and prepares it for TestFlight upload
+# This script builds the iOS app using Tauri CLI and prepares it for TestFlight upload
 #
 # Usage:
 #   ./scripts/build-testflight.sh           # Build only
@@ -27,9 +27,6 @@ NC='\033[0m' # No Color
 APP_NAME="Biological Self"
 BUNDLE_ID="com.dannygomez.biological-self"
 TEAM_ID="NDJZ6S9Q4L"
-SCHEME="biological-self_iOS"
-WORKSPACE="src-tauri/gen/apple/biological-self.xcworkspace"
-EXPORT_OPTIONS="src-tauri/gen/apple/ExportOptions.TestFlight.plist"
 BUILD_DIR="build/TestFlight"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -64,9 +61,7 @@ verify_dependencies() {
     log_info "Verifying required tools..."
     local missing=0
 
-    check_command "xcodebuild" || missing=1
     check_command "cargo" || missing=1
-    check_command "pod" || missing=1
     check_command "npm" || missing=1
 
     if [ $missing -eq 1 ]; then
@@ -100,107 +95,60 @@ cd "$PROJECT_ROOT"
 verify_dependencies
 
 # Step 1: Clean previous builds
-log_info "Step 1/8: Cleaning previous builds..."
+log_info "Step 1/5: Cleaning previous builds..."
 rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
+rm -rf "$PROJECT_ROOT/src-tauri/gen/apple/build"
 log_success "Build directory cleaned."
 
 # Step 2: Install dependencies
-log_info "Step 2/8: Installing npm dependencies..."
+log_info "Step 2/5: Installing npm dependencies..."
 npm ci
 log_success "npm dependencies installed."
 
 # Step 3: Build the frontend
-log_info "Step 3/8: Building frontend..."
+log_info "Step 3/5: Building frontend..."
 npm run build:prod
 log_success "Frontend built."
 
 # Step 4: Generate iOS project (if needed)
-log_info "Step 4/8: Ensuring iOS project is up to date..."
+log_info "Step 4/5: Ensuring iOS project is up to date..."
 cd "$PROJECT_ROOT/src-tauri"
 cargo tauri ios init 2>/dev/null || log_warning "iOS project already initialized or init skipped."
 cd "$PROJECT_ROOT"
 log_success "iOS project ready."
 
-# Step 5: Install CocoaPods dependencies
-log_info "Step 5/8: Installing CocoaPods dependencies..."
-cd "$PROJECT_ROOT/src-tauri/gen/apple"
-pod install --repo-update
+# Step 5: Build iOS release using Tauri CLI
+log_info "Step 5/5: Building iOS release with Tauri (this may take 10-20 minutes)..."
+cd "$PROJECT_ROOT/src-tauri"
+
+# Build for iOS using Tauri CLI which properly sets up the WebSocket server
+# The --ci flag skips interactive prompts
+if ! cargo tauri ios build --target aarch64 --ci -v 2>&1; then
+    log_error "Tauri iOS build failed"
+    exit 1
+fi
+
 cd "$PROJECT_ROOT"
-log_success "CocoaPods dependencies installed."
 
-# Step 6: Build archive
-log_info "Step 6/8: Building archive (this may take several minutes)..."
-ARCHIVE_PATH="$BUILD_DIR/$SCHEME.xcarchive"
+# Find the generated IPA
+IPA_PATH=$(find "$PROJECT_ROOT/src-tauri/gen/apple/build" -name "*.ipa" -type f 2>/dev/null | head -1)
 
-# Check if xcpretty is available for prettier output
-if command -v xcpretty &> /dev/null; then
-    set -o pipefail
-    xcodebuild archive \
-      -workspace "$WORKSPACE" \
-      -scheme "$SCHEME" \
-      -configuration Release \
-      -destination "generic/platform=iOS" \
-      -archivePath "$ARCHIVE_PATH" \
-      -allowProvisioningUpdates \
-      CODE_SIGN_STYLE=Automatic \
-      DEVELOPMENT_TEAM="$TEAM_ID" \
-      2>&1 | xcpretty
-else
-    xcodebuild archive \
-      -workspace "$WORKSPACE" \
-      -scheme "$SCHEME" \
-      -configuration Release \
-      -destination "generic/platform=iOS" \
-      -archivePath "$ARCHIVE_PATH" \
-      -allowProvisioningUpdates \
-      CODE_SIGN_STYLE=Automatic \
-      DEVELOPMENT_TEAM="$TEAM_ID"
+# If not found in build directory, try alternative locations
+if [ -z "$IPA_PATH" ] || [ ! -f "$IPA_PATH" ]; then
+    IPA_PATH=$(find "$PROJECT_ROOT" -name "*.ipa" -type f -not -path "*/node_modules/*" 2>/dev/null | head -1)
 fi
-
-# Verify archive was created
-if [ ! -d "$ARCHIVE_PATH" ]; then
-    log_error "Archive was not created at $ARCHIVE_PATH"
-    exit 1
-fi
-log_success "Archive created successfully."
-
-# Step 7: Export IPA
-log_info "Step 7/8: Exporting IPA..."
-
-# Verify export options file exists
-if [ ! -f "$EXPORT_OPTIONS" ]; then
-    log_error "Export options file not found: $EXPORT_OPTIONS"
-    exit 1
-fi
-
-if command -v xcpretty &> /dev/null; then
-    set -o pipefail
-    xcodebuild -exportArchive \
-      -archivePath "$ARCHIVE_PATH" \
-      -exportOptionsPlist "$EXPORT_OPTIONS" \
-      -exportPath "$BUILD_DIR" \
-      -allowProvisioningUpdates \
-      2>&1 | xcpretty
-else
-    xcodebuild -exportArchive \
-      -archivePath "$ARCHIVE_PATH" \
-      -exportOptionsPlist "$EXPORT_OPTIONS" \
-      -exportPath "$BUILD_DIR" \
-      -allowProvisioningUpdates
-fi
-
-log_success "IPA exported."
-
-# Step 8: Validate IPA
-log_info "Step 8/8: Validating IPA..."
-IPA_PATH=$(find "$BUILD_DIR" -name "*.ipa" -type f 2>/dev/null | head -1)
 
 if [ -z "$IPA_PATH" ] || [ ! -f "$IPA_PATH" ]; then
-    log_error "IPA file not found in $BUILD_DIR"
-    log_error "Build may have failed. Check xcodebuild output above."
+    log_error "IPA file not found after build"
+    log_info "Searching in src-tauri/gen/apple/build:"
+    find "$PROJECT_ROOT/src-tauri/gen/apple/build" -type f -name "*.ipa" 2>/dev/null || echo "No IPA files found"
     exit 1
 fi
+
+# Copy IPA to build directory
+cp "$IPA_PATH" "$BUILD_DIR/"
+IPA_PATH="$BUILD_DIR/$(basename "$IPA_PATH")"
 
 # Get IPA file size
 IPA_SIZE=$(du -h "$IPA_PATH" | cut -f1)
@@ -217,10 +165,10 @@ echo "  IPA Size:     $IPA_SIZE"
 echo "=================================================="
 echo ""
 
-# Step 9: Upload to App Store Connect (optional)
+# Optional upload step
 if [ "${1:-}" == "--upload" ]; then
     echo ""
-    log_info "Step 9: Uploading to App Store Connect..."
+    log_info "Uploading to App Store Connect..."
 
     # Check for required API key environment variables
     MISSING_VARS=0

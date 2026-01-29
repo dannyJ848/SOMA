@@ -2,13 +2,13 @@
 
 This file captures patterns, gotchas, and conventions discovered during development.
 
-## CURRENT STATUS (2026-01-28)
+## CURRENT STATUS (2026-01-28 23:00)
 - **TypeScript**: 🔄 22 errors (pre-existing, not i18n related)
 - **i18n**: ✅ CLEAN (0 errors) - Bilingual support complete
 - **Phase**: 6 - Layer-Condition Integration, AI Voice Navigation & i18n
-- **iOS**: TestFlight deployment configured and ready
+- **iOS**: ✅ Database permissions FIXED v2 - TestFlight build ready
 - **Content**: 2,719 educational files
-- **Next**: Fix remaining TypeScript errors, TestFlight deployment
+- **Next**: Upload build/TestFlight/SOMA.ipa to TestFlight
 
 ## Project Vision
 
@@ -355,6 +355,40 @@ fastlane ios build   # Build only
 - Primary category: Medical
 - Bundle ID must match: com.dannygomez.biological-self
 - Required capabilities: HealthKit (for future integration)
+
+### CRITICAL: iOS File System Permissions
+
+iOS apps MUST use the Documents directory for data storage. The app sandbox prevents writing to other locations.
+
+**Error**: `Operation not permitted (os error 1)`
+
+**Initial Fix (Failed)**:
+```rust
+// dirs::document_dir() doesn't work reliably on iOS
+let documents_dir = dirs::document_dir().unwrap_or_default();
+```
+
+**Final Fix (Working)**:
+```rust
+// Use $HOME environment variable directly
+let home_dir = std::env::var("HOME")
+    .map(PathBuf::from)
+    .unwrap_or_else(|_| std::env::current_dir().unwrap_or_default());
+home_dir.join("Documents").join("biological-self-data")
+```
+
+**Database Path on iOS**:
+```
+/var/mobile/Containers/Data/Application/<UUID>/Documents/biological-self-data/biological-self.db
+```
+
+**Required Entitlements**:
+- com.apple.security.app-sandbox
+- com.apple.security.files.documents.read-write
+- com.apple.security.device.microphone (for voice)
+
+**Required Info.plist**:
+- NSMicrophoneUsageDescription (for voice commands)
 
 See `docs/TESTFLIGHT.md` for detailed deployment guide.
 

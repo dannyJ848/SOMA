@@ -1,8 +1,8 @@
 # SOMA - Master Blueprint
 
-> **Version**: 3.0
-> **Last Updated**: 2026-01-28
-> **Status**: Phase 7 Complete - TestFlight Ready for First Build
+> **Version**: 3.1
+> **Last Updated**: 2026-01-28 23:00
+> **Status**: Phase 7 Complete - iOS Database Fix v2 - Ready for TestFlight Upload
 
 ---
 
@@ -2185,6 +2185,75 @@ export { heartFailureContent } from './heart-failure';
 export { coronaryArteryDiseaseContent } from './coronary-artery-disease';
 // ... etc
 ```
+
+---
+
+## iOS Configuration
+
+### Critical: iOS File System Permissions
+
+iOS apps run in a sandbox and can only write to specific directories. The app MUST use the Documents directory for database storage.
+
+#### Database Path Configuration (src-tauri/src/lib.rs)
+
+```rust
+fn get_data_dir() -> PathBuf {
+    // On iOS, use the Documents directory which is the only writable location
+    #[cfg(target_os = "ios")]
+    {
+        let documents_dir = dirs::document_dir()
+            .expect("Cannot find Documents directory");
+        documents_dir.join("biological-self-data")
+    }
+    
+    // On desktop platforms, use project root
+    #[cfg(not(target_os = "ios"))]
+    {
+        get_project_root().join("data")
+    }
+}
+```
+
+#### iOS Entitlements (biological-self_iOS.entitlements)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <key>com.apple.security.files.documents.read-write</key>
+    <true/>
+    <key>com.apple.security.files.user-selected.read-write</key>
+    <true/>
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <key>com.apple.security.device.microphone</key>
+    <true/>
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+</dict>
+</plist>
+```
+
+#### Info.plist Permissions
+
+```xml
+<!-- Microphone access for voice commands -->
+<key>NSMicrophoneUsageDescription</key>
+<string>Biological Self uses the microphone for voice commands 
+and dictation to help you interact with the app hands-free.</string>
+```
+
+### Common iOS Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "Operation not permitted (os error 1)" | Writing to non-writable directory | Use dirs::document_dir() |
+| "App sandbox violation" | Missing entitlements | Update .entitlements file |
+| "Microphone access denied" | Missing NSMicrophoneUsageDescription | Update Info.plist |
 
 ---
 

@@ -343,7 +343,24 @@ fn get_project_root() -> PathBuf {
 }
 
 fn get_data_dir() -> PathBuf {
-    get_project_root().join("data")
+    // On iOS, use the Documents directory which is the only writable location
+    #[cfg(target_os = "ios")]
+    {
+        // Use home directory + Documents - more reliable than dirs crate on iOS
+        let home_dir = std::env::var("HOME")
+            .map(PathBuf::from)
+            .unwrap_or_else(|_| std::env::current_dir().unwrap_or_default());
+        
+        // iOS app home is like: /var/mobile/Containers/Data/Application/<UUID>/
+        // Documents is directly under home
+        home_dir.join("Documents").join("biological-self-data")
+    }
+    
+    // On desktop platforms, use project root
+    #[cfg(not(target_os = "ios"))]
+    {
+        get_project_root().join("data")
+    }
 }
 
 fn get_db_path() -> PathBuf {

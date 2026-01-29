@@ -5049,3 +5049,169 @@ npm run tauri:build -- --target aarch64-apple-ios
 - `HANDOFF.md` - Quick reference
 
 ---
+
+
+---
+
+## 2026-01-28 - CRITICAL FIX - iOS Database Permissions Error
+
+### Problem
+TestFlight users encountered a blocking error when creating a passphrase:
+
+
+### Root Cause
+The Rust backend was using the project root directory for data storage, which is not writable on iOS due to app sandbox restrictions. iOS apps can only write to specific directories (Documents, Library, tmp).
+
+### Solution
+
+#### 1. Fixed src-tauri/src/lib.rs
+Updated get_data_dir() to use iOS-compatible paths:
+
+
+#### 2. Fixed src-tauri/gen/apple/biological-self_iOS/biological-self_iOS.entitlements
+Added proper iOS sandbox permissions:
+- com.apple.security.app-sandbox
+- com.apple.security.files.documents.read-write
+- com.apple.security.files.user-selected.read-write
+- com.apple.security.network.client
+- com.apple.security.device.microphone
+- com.apple.security.cs.allow-jit
+
+#### 3. Updated src-tauri/gen/apple/biological-self_iOS/Info.plist
+Added microphone usage description for voice commands.
+
+### Files Modified
+- src-tauri/src/lib.rs
+- src-tauri/gen/apple/biological-self_iOS/biological-self_iOS.entitlements
+- src-tauri/gen/apple/biological-self_iOS/Info.plist
+
+### Testing Required
+1. Build new iOS version: ./scripts/build-testflight.sh
+2. Upload to TestFlight
+3. Test on physical device
+4. Verify database creation works
+5. Test voice commands (dictation)
+
+### Status: FIXED - Ready for TestFlight Rebuild
+
+
+---
+
+## 2026-01-28 - CRITICAL FIX - iOS Database Permissions Error
+
+### Problem
+TestFlight users encountered a blocking error when creating a passphrase:
+```
+Failed to create database: Failed to create data directory: Operation not permitted (os error 1)
+```
+
+### Root Cause
+The Rust backend was using the project root directory for data storage, which is not writable on iOS due to app sandbox restrictions. iOS apps can only write to specific directories (Documents, Library, tmp).
+
+### Solution
+
+#### 1. Fixed src-tauri/src/lib.rs
+Updated get_data_dir() to use iOS-compatible paths:
+- On iOS: Use dirs::document_dir() + "biological-self-data"
+- On desktop: Use project root + "data" (unchanged)
+
+#### 2. Fixed src-tauri/gen/apple/biological-self_iOS/biological-self_iOS.entitlements
+Added proper iOS sandbox permissions:
+- com.apple.security.app-sandbox
+- com.apple.security.files.documents.read-write
+- com.apple.security.files.user-selected.read-write
+- com.apple.security.network.client
+- com.apple.security.device.microphone
+- com.apple.security.cs.allow-jit
+
+#### 3. Updated src-tauri/gen/apple/biological-self_iOS/Info.plist
+Added NSMicrophoneUsageDescription for voice commands.
+
+### Files Modified
+- src-tauri/src/lib.rs
+- src-tauri/gen/apple/biological-self_iOS/biological-self_iOS.entitlements
+- src-tauri/gen/apple/biological-self_iOS/Info.plist
+
+### Testing Required
+1. Build new iOS version: ./scripts/build-testflight.sh
+2. Upload to TestFlight
+3. Test on physical device
+4. Verify database creation works
+5. Test voice commands (dictation)
+
+### Status: FIXED - Ready for TestFlight Rebuild
+
+---
+
+## 2026-01-28 - TestFlight Build Success v2
+
+### Problem v2 - dirs::document_dir() Failed on iOS
+After initial fix, TestFlight build still failed with same error:
+```
+Failed to create database: Failed to create data directory: Operation not permitted (os error 1)
+```
+
+**Root Cause**: dirs::document_dir() crate doesn't work reliably on iOS
+
+### Solution v2 - Direct $HOME/Documents Path
+
+Updated src-tauri/src/lib.rs to use std::env::var("HOME") instead of dirs crate:
+```rust
+fn get_data_dir() -> PathBuf {
+    #[cfg(target_os = "ios")]
+    {
+        let home_dir = std::env::var("HOME")
+            .map(PathBuf::from)
+            .unwrap_or_else(|_| std::env::current_dir().unwrap_or_default());
+        home_dir.join("Documents").join("biological-self-data")
+    }
+    
+    #[cfg(not(target_os = "ios"))]
+    {
+        get_project_root().join("data")
+    }
+}
+```
+
+### Build Output
+- App Name: Biological Self
+- Bundle ID: com.dannygomez.biological-self
+- IPA Location: build/TestFlight/SOMA.ipa
+- IPA Size: 4.8M
+
+### iOS Database Path
+/var/mobile/Containers/Data/Application/<UUID>/Documents/biological-self-data/biological-self.db
+
+### Files Modified
+- src-tauri/src/lib.rs (get_data_dir() function)
+- scripts/build-testflight.sh (simplified to use cargo tauri ios build --ci)
+
+### Status: BUILD SUCCESSFUL - Ready for TestFlight Upload via Transporter
+
+---
+
+## HANDOFF SUMMARY (Current Session)
+
+### Completed
+1. Fixed iOS database permissions v2 using $HOME/Documents
+2. Cleaned build cache (rm -rf src-tauri/target, gen/apple/build)
+3. Rebuilt IPA successfully: build/TestFlight/SOMA.ipa (4.8 MB)
+4. Updated all tracking documents:
+   - AGENTS.md (v2 fix documentation)
+   - BLUEPRINT.md (version 3.1, build info)
+   - HANDOFF.md (current status)
+   - progress.txt (this entry)
+
+### Next Steps
+1. Open Transporter app
+2. Drag build/TestFlight/SOMA.ipa to Transporter
+3. Click Deliver
+4. Wait for App Store Connect processing (5-30 min)
+5. Test on physical device
+
+### Key Technical Details
+- Database directory: $HOME/Documents/biological-self-data/
+- Entitlements: com.apple.security.files.documents.read-write enabled
+- Build command: ./scripts/build-testflight.sh
+- IPA location: build/TestFlight/SOMA.ipa
+

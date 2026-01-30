@@ -12,3 +12,14 @@ export { appendicitis } from './appendicitis';
 export { bronchiolitis } from './bronchiolitis';
 export { croup } from './croup';
 export { febrileSeizures } from './febrile-seizures';
+
+// Pediatric Conditions Database
+export {
+  PEDIATRIC_CONDITIONS,
+  getPediatricCondition,
+  searchPediatricConditions,
+  getPediatricByAgeGroup,
+  getPediatricByCategory,
+  getPediatricConditionCount,
+} from './pediatric-conditions-database';
+export type { PediatricConditionEntry } from './pediatric-conditions-database';

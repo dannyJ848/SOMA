@@ -5322,3 +5322,57 @@ fn get_data_dir() -> PathBuf {
 
 ---
 
+
+## 2026-01-29 - Wave 1 Content Buildout: 20 Parallel Agents
+
+### What was implemented:
+20 parallel agents launched to fill content gaps across the entire medical knowledge base. All agents completed successfully.
+
+**New Database Files Created (18 files, ~1.1MB total):**
+
+| # | File | Size | Entries |
+|---|------|------|---------|
+| 1 | core/content/pharmacology/drug-classes.ts | 61KB | 30+ drug class entries |
+| 2 | core/content/nutrition/nutrition-database.ts | 53KB | 50+ nutrition entries |
+| 3 | core/content/first-aid/first-aid-database.ts | 47KB | 35+ first-aid entries |
+| 4 | core/content/exercise/exercise-database.ts | 55KB | 40+ exercise entries |
+| 5 | core/content/imaging/imaging-database.ts | 45KB | 30+ imaging modalities |
+| 6 | core/content/pathophysiology/pathophysiology-database.ts | 104KB | 30+ pathophysiology entries |
+| 7 | core/content/treatment-algorithms/algorithm-database.ts | 58KB | 25+ treatment algorithms |
+| 8 | core/content/conditions/pediatric/pediatric-conditions-database.ts | 55KB | 40+ pediatric conditions |
+| 9 | core/content/conditions/dermatology/derm-conditions-database.ts | 40KB | 30+ skin conditions |
+| 10 | core/content/conditions/respiratory/resp-conditions-database.ts | 45KB | 25+ respiratory conditions |
+| 11 | core/content/specialties/endocrinology/endocrinology-database.ts | 64KB | 25+ endocrine entries |
+| 12 | core/content/specialties/gastroenterology/gi-database.ts | 58KB | 25+ GI entries |
+| 13 | core/content/specialties/obgyn/obgyn-database.ts | 45KB | 25+ OB/GYN entries |
+| 14 | core/content/specialties/orthopedics/ortho-database.ts | 62KB | 30+ orthopedic entries |
+| 15 | core/content/specialties/psychiatry/psychiatry-database.ts | 40KB | 25+ psychiatry entries |
+| 16 | core/content/specialties/hematology/hematology-database.ts | 48KB | 25+ hematology entries |
+| 17 | core/content/specialties/ent/ent-database.ts | 47KB | 25+ ENT entries |
+| 18 | core/content/preventive-care/preventive-guidelines-database.ts | 42KB | 35+ preventive care entries |
+
+**Expanded Existing Files:**
+- core/i18n/medical-translations-es.ts: 578 → 898 terms (+320 new Spanish medical translations)
+- core/i18n/medical-glossary.ts: 352 → 552+ entries (+200 new glossary definitions)
+
+**Quality Verification:**
+- TypeScript: 0 errors (npx tsc --noEmit)
+- Production build: passes (npm run build)
+- Fixed: core/content/first-aid/index.ts had isolatedModules re-export issue (type re-export)
+
+### Files changed:
+- 18 new database files (listed above)
+- core/i18n/medical-translations-es.ts (expanded)
+- core/i18n/medical-glossary.ts (expanded)
+- core/content/first-aid/index.ts (isolatedModules fix)
+- Various index.ts files created by agents for new modules
+
+### Learnings for future iterations:
+- 20 concurrent agents can cause CPU contention on tsc --noEmit (all running TypeScript checks simultaneously)
+- Compact helper functions (m(), dc(), n(), fa()) are effective for dense database entries
+- Each specialty database averages ~50KB with 25-30 entries
+- Pathophysiology was the largest file at 104KB due to detailed mechanism descriptions
+- isolatedModules requires `export type` for type-only re-exports
+- Total content files now: 2,488 in core/content/, 2,757 in core/ overall
+
+---

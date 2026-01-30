@@ -73,6 +73,16 @@ export * from './medications/insulin-types';
 export * from './medications/oral-diabetes-medications';
 export * from './medications/injectable-non-insulin';
 
+// Endocrinology Database (consolidated specialty entries)
+export {
+  ENDOCRINOLOGY_ENTRIES,
+  getEndocrinologyEntry,
+  searchEndocrinology,
+  getEndoBySubcategory,
+  getEndocrinologyCount,
+} from './endocrinology-database';
+export type { EndocrinologyEntry, EndocrinologySubcategory } from './endocrinology-database';
+
 // Content registry
 export const ENDOCRINOLOGY_CONTENT_CATEGORIES = [
   'diabetes',

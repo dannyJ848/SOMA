@@ -58,6 +58,16 @@ export * from './medications/antipsychotics';
 export * from './medications/mood-stabilizers';
 export * from './medications/anxiolytics';
 
+// Psychiatry Database (comprehensive entries with query functions)
+export {
+  PSYCHIATRY_ENTRIES,
+  getPsychiatryEntry,
+  searchPsychiatry,
+  getPsychiatryBySubcategory,
+  getPsychiatryCount,
+} from './psychiatry-database';
+export type { PsychiatryEntry } from './psychiatry-database';
+
 // Content registry
 export const PSYCHIATRY_CONTENT_CATEGORIES = [
   'neuroscience',

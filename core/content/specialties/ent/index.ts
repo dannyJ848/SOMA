@@ -77,3 +77,13 @@ export const ENT_CONTENT_REGISTRY = {
   'tonsils-adenoids': ['tonsillitis-adenoids'],
   sleep: ['sleep-apnea'],
 } as const;
+
+// ENT clinical database
+export {
+  ENT_ENTRIES,
+  getENTEntry,
+  searchENT,
+  getENTBySubcategory,
+  getENTCount,
+} from './ent-database';
+export type { ENTEntry } from './ent-database';

@@ -31,20 +31,20 @@ npx tsx src/i18n/test-i18n.tsx
 | TypeScript | 0 errors (npx tsc --noEmit clean) |
 | Vite Build | Passes (npm run build) |
 | TestFlight | READY TO BUILD |
-| Content Pipeline | Wave 1-2 complete, Wave 3 in progress |
+| Content Pipeline | Waves 1-4 complete, Wave 5 next |
 
 ### Features Complete
 
 | Feature | Status | Files |
 |---------|--------|-------|
-| Educational Content | Complete | `core/content/` (2,719 files) |
+| Educational Content | Complete | `core/content/` (2,757+ files) |
 | Anatomy Main Screen | Complete | `src/AnatomyMainScreen/` |
 | AI Voice Navigation | Complete | `src/voice/`, `src/ai/` (15 components) |
 | **Dictation (STT)** | Built-in | `src/contexts/VoiceContext.tsx` |
 | **Text-to-Speech (TTS)** | Built-in | `src/contexts/VoiceContext.tsx` |
 | Bilingual i18n | Complete | `src/i18n/` (31 files) |
 | TestFlight Config | Ready | `scripts/build-testflight.sh` |
-| **Content Pipeline** | Waves 1-2 done | `core/content/`, `core/knowledge-graph/`, `core/i18n/` |
+| **Content Pipeline** | Waves 1-4 done | `core/content/`, `core/knowledge-graph/`, `core/i18n/` |
 | **DeepSeek 14B Integration** | Ready | `core/ai/local-llm-service.ts` |
 
 ### Content Pipeline Summary (Jan 29 Session)
@@ -56,8 +56,8 @@ npx tsx src/i18n/test-i18n.tsx
 | Symptoms (bilingual) | 155 | `core/content/symptoms/symptom-database.ts` |
 | Procedures | 127 | `core/content/procedures/procedure-database.ts` |
 | Anatomy Structures | 119 | `core/content/anatomy/anatomy-encyclopedia.ts` |
-| Spanish Translations | 578+ | `core/i18n/medical-translations-es.ts` |
-| Glossary Entries | 352 | `core/i18n/medical-glossary.ts` |
+| Spanish Translations | 898+ | `core/i18n/medical-translations-es.ts` |
+| Glossary Entries | 552+ | `core/i18n/medical-glossary.ts` |
 | Knowledge Graph Relations | 280+ | `core/knowledge-graph/knowledge-index.ts` |
 | Explanation Levels | 5 | `core/education/explanation-levels.ts` |
 
@@ -97,7 +97,7 @@ npx tsx src/i18n/test-i18n.tsx
 
 ### What's Next
 
-1. **Complete Wave 3**: Finish medication database, ContentService, useContent hooks
+1. **Launch Wave 5**: Next 20 agents for expanded content
 2. **Code-splitting**: Address Vite chunk size warnings (>500KB) with lazy loading
 3. **Upload to TestFlight**: Use Transporter app with `build/TestFlight/SOMA.ipa`
 4. Test database creation on physical device
@@ -138,14 +138,14 @@ open src-tauri/gen/apple/soma.xcodeproj
 ```
 Total TypeScript Files: ~3,032+
 ├── src:        313 files
-├── core:     2,719+ files (content pipeline adding more)
+├── core:     2,757+ files
 └── i18n:      31 files
 
 TypeScript Errors: 0
 Vite Build: Clean (chunk size warning only)
-Content Coverage: 2,719 educational files + structured databases
+Content Coverage: 2,757+ educational files + 18 new structured databases
 Content Databases: 390 conditions, 155 symptoms, 127 procedures, 119 anatomy, 42 specialties
-Languages: English, Spanish (578+ translations, 352 glossary entries)
+Languages: English, Spanish (898+ translations, 552+ glossary entries)
 Knowledge Graph: 280+ cross-domain relationships
 ```
 
@@ -302,8 +302,8 @@ find core -name "*.ts" | wc -l
 - **Voice Languages**: 10 languages supported (en, es, zh, ja, ko, de, fr, ru, pt, it)
 - **Voice Presets**: 8 options (Chelsie, Ethan, Alloy, Echo, Fable, Onyx, Nova, Shimmer)
 
-### Wave 3 In-Progress Files
-These files were being built when the session ended:
+### Wave 1 Content Buildout Complete
+18 new database files created (1.1MB total): pharmacology, nutrition, first-aid, exercise, imaging, pathophysiology, treatment-algorithms, pediatric, dermatology, respiratory, endocrinology, GI, OB/GYN, orthopedics, psychiatry, hematology, ENT, preventive-care.
 - `core/content/medications/medication-database.ts` - 150+ medications
 - `src/services/ContentService.ts` - Unified content service
 - `src/hooks/useContent.ts` - React hooks for content access

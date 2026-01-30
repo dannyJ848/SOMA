@@ -14,6 +14,16 @@
  * - Anticoagulation therapy
  */
 
+// Hematology Database (25+ structured entries)
+export {
+  HEMATOLOGY_ENTRIES,
+  getHematologyEntry,
+  searchHematology,
+  getHematologyBySubcategory,
+  getHematologyCount,
+} from './hematology-database';
+export type { HematologyEntry, HematologySubcategory } from './hematology-database';
+
 // Anemias
 export { ironDeficiencyAnemia } from './anemias/iron-deficiency-anemia';
 export { vitaminB12DeficiencyAnemia } from './anemias/vitamin-b12-deficiency';

@@ -31,6 +31,16 @@ export { celiacAndMalabsorption } from './conditions/celiac-malabsorption';
 export { upperEndoscopy } from './procedures/upper-endoscopy';
 export { colonoscopy } from './procedures/colonoscopy';
 
+// GI Specialty Database
+export {
+  GI_SPECIALTY_ENTRIES,
+  getGIEntry,
+  searchGIEntries,
+  getGIBySubcategory,
+  getGIEntryCount,
+} from './gi-database';
+export type { GISpecialtyEntry } from './gi-database';
+
 // Content categories
 export const GI_CONTENT_CATEGORIES = [
   'upper-gi',

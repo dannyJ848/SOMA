@@ -2,10 +2,12 @@
  * medical-glossary.ts
  *
  * Bilingual medical glossary mapping clinical jargon to plain language
- * in both English and Spanish. 300+ entries covering cardiology,
+ * in both English and Spanish. 550+ entries covering cardiology,
  * pulmonology, gastroenterology, neurology, orthopedics, oncology,
  * endocrinology, nephrology, hematology, dermatology, ophthalmology,
- * psychiatry, obstetrics, infectious disease, and general medicine.
+ * psychiatry, obstetrics, infectious disease, general medicine,
+ * pharmacology, nutrition, pathophysiology, imaging, surgical,
+ * laboratory, genetics, and pediatrics.
  */
 
 export { MEDICAL_TERMS_ES, translateTerm } from './medical-translations-es';
@@ -442,6 +444,250 @@ export const MEDICAL_GLOSSARY: Array<GlossaryEntry> = [
   { term: 'Status epilepticus', plainEN: 'Prolonged seizure lasting more than 5 minutes, a medical emergency', plainES: 'Convulsión prolongada que dura más de 5 minutos, una emergencia médica' },
   { term: 'Code blue', plainEN: 'Hospital emergency alert for cardiac or respiratory arrest', plainES: 'Alerta de emergencia hospitalaria por paro cardíaco o respiratorio' },
   { term: 'Do not resuscitate', plainEN: 'Legal order to not perform CPR if the heart or breathing stops', plainES: 'Orden legal de no realizar RCP si el corazón o la respiración se detienen' },
+
+  // ──────────────────────────────────────────────
+  // Pharmacology (30)
+  // ──────────────────────────────────────────────
+  { term: 'Bioavailability', plainEN: 'Percentage of a drug that reaches the bloodstream when taken', plainES: 'Porcentaje de un medicamento que llega al torrente sanguíneo al tomarlo' },
+  { term: 'Half-life', plainEN: 'Time it takes for half of a drug to be eliminated from the body', plainES: 'Tiempo que tarda en eliminarse la mitad de un medicamento del cuerpo' },
+  { term: 'First-pass metabolism', plainEN: 'Drug is partially broken down by the liver before reaching the bloodstream', plainES: 'El medicamento es parcialmente descompuesto por el hígado antes de llegar al torrente sanguíneo' },
+  { term: 'Therapeutic index', plainEN: 'Range between the effective dose and the toxic dose of a drug', plainES: 'Rango entre la dosis eficaz y la dosis tóxica de un medicamento' },
+  { term: 'Loading dose', plainEN: 'Higher initial dose of a drug to quickly reach effective levels', plainES: 'Dosis inicial más alta de un medicamento para alcanzar rápidamente niveles eficaces' },
+  { term: 'Maintenance dose', plainEN: 'Regular dose given to keep the drug at a steady level in the body', plainES: 'Dosis regular administrada para mantener el medicamento a un nivel estable en el cuerpo' },
+  { term: 'Pharmacokinetics', plainEN: 'How the body absorbs, distributes, breaks down, and removes a drug', plainES: 'Cómo el cuerpo absorbe, distribuye, descompone y elimina un medicamento' },
+  { term: 'Pharmacodynamics', plainEN: 'How a drug affects the body and produces its effects', plainES: 'Cómo un medicamento afecta al cuerpo y produce sus efectos' },
+  { term: 'Agonist', plainEN: 'Drug that activates a receptor to produce a biological response', plainES: 'Medicamento que activa un receptor para producir una respuesta biológica' },
+  { term: 'Antagonist', plainEN: 'Drug that blocks a receptor and prevents its activation', plainES: 'Medicamento que bloquea un receptor e impide su activación' },
+  { term: 'Adverse drug reaction', plainEN: 'Unwanted or harmful effect caused by a medication', plainES: 'Efecto no deseado o dañino causado por un medicamento' },
+  { term: 'Drug interaction', plainEN: 'One drug affecting how another drug works in the body', plainES: 'Un medicamento que afecta cómo funciona otro medicamento en el cuerpo' },
+  { term: 'Steady state', plainEN: 'Point where the amount of drug entering the body equals the amount leaving', plainES: 'Punto donde la cantidad de medicamento que entra al cuerpo iguala la que sale' },
+  { term: 'Trough level', plainEN: 'Lowest concentration of a drug in the blood before the next dose', plainES: 'Concentración más baja de un medicamento en la sangre antes de la siguiente dosis' },
+  { term: 'Peak level', plainEN: 'Highest concentration of a drug in the blood after a dose', plainES: 'Concentración más alta de un medicamento en la sangre después de una dosis' },
+  { term: 'Titration', plainEN: 'Gradually adjusting the dose of a drug to find the right amount', plainES: 'Ajustar gradualmente la dosis de un medicamento para encontrar la cantidad correcta' },
+  { term: 'Polypharmacy', plainEN: 'Taking multiple medications at the same time', plainES: 'Tomar múltiples medicamentos al mismo tiempo' },
+  { term: 'Black box warning', plainEN: 'Most serious FDA warning about dangerous side effects of a drug', plainES: 'Advertencia más seria de la FDA sobre efectos secundarios peligrosos de un medicamento' },
+  { term: 'Anticoagulant', plainEN: 'Blood thinner - drug that prevents blood clots from forming', plainES: 'Anticoagulante - medicamento que previene la formación de coágulos' },
+  { term: 'Antiplatelet', plainEN: 'Drug that prevents blood cells called platelets from clumping together', plainES: 'Medicamento que evita que las células sanguíneas llamadas plaquetas se agrupen' },
+  { term: 'Beta blocker', plainEN: 'Drug that slows the heart rate and lowers blood pressure', plainES: 'Medicamento que reduce la frecuencia cardíaca y baja la presión arterial' },
+  { term: 'ACE inhibitor', plainEN: 'Drug that relaxes blood vessels to lower blood pressure', plainES: 'Medicamento que relaja los vasos sanguíneos para bajar la presión arterial' },
+  { term: 'Statin', plainEN: 'Drug that lowers cholesterol levels in the blood', plainES: 'Medicamento que reduce los niveles de colesterol en la sangre' },
+  { term: 'NSAID', plainEN: 'Non-steroidal anti-inflammatory drug for pain and inflammation', plainES: 'Medicamento antiinflamatorio no esteroideo para el dolor y la inflamación' },
+  { term: 'Corticosteroid', plainEN: 'Drug that reduces inflammation by mimicking natural hormones', plainES: 'Medicamento que reduce la inflamación imitando hormonas naturales' },
+  { term: 'Bronchodilator', plainEN: 'Drug that opens the airways in the lungs to ease breathing', plainES: 'Medicamento que abre las vías respiratorias en los pulmones para facilitar la respiración' },
+  { term: 'Diuretic', plainEN: 'Water pill - drug that helps the body get rid of excess fluid', plainES: 'Diurético - medicamento que ayuda al cuerpo a eliminar el exceso de líquido' },
+  { term: 'Proton pump inhibitor', plainEN: 'Drug that reduces stomach acid production', plainES: 'Medicamento que reduce la producción de ácido estomacal' },
+  { term: 'SSRI', plainEN: 'Selective serotonin reuptake inhibitor - antidepressant that increases serotonin', plainES: 'Inhibidor selectivo de la recaptación de serotonina - antidepresivo que aumenta la serotonina' },
+  { term: 'Opioid', plainEN: 'Strong pain medication that carries a risk of addiction', plainES: 'Medicamento fuerte para el dolor que conlleva riesgo de adicción' },
+
+  // ──────────────────────────────────────────────
+  // Nutrition (20)
+  // ──────────────────────────────────────────────
+  { term: 'Glycemic index', plainEN: 'Measure of how quickly a food raises blood sugar levels', plainES: 'Medida de la rapidez con que un alimento eleva los niveles de azúcar en la sangre' },
+  { term: 'Micronutrient', plainEN: 'Vitamin or mineral needed in small amounts for proper body function', plainES: 'Vitamina o mineral necesario en pequeñas cantidades para el funcionamiento adecuado del cuerpo' },
+  { term: 'Macronutrient', plainEN: 'Nutrient needed in large amounts: protein, carbohydrates, or fat', plainES: 'Nutriente necesario en grandes cantidades: proteína, carbohidratos o grasa' },
+  { term: 'Antioxidant', plainEN: 'Substance that protects cells from damage caused by free radicals', plainES: 'Sustancia que protege las células del daño causado por los radicales libres' },
+  { term: 'Biotin', plainEN: 'B vitamin important for hair, skin, nails, and metabolism', plainES: 'Vitamina B importante para el cabello, la piel, las uñas y el metabolismo' },
+  { term: 'Omega-3 fatty acids', plainEN: 'Healthy fats found in fish and nuts that support heart and brain health', plainES: 'Grasas saludables encontradas en pescado y nueces que apoyan la salud del corazón y el cerebro' },
+  { term: 'Electrolyte', plainEN: 'Mineral in the body that carries an electric charge and regulates body functions', plainES: 'Mineral en el cuerpo que porta carga eléctrica y regula funciones corporales' },
+  { term: 'Malnutrition', plainEN: 'Lack of proper nutrition from not eating enough or not eating the right foods', plainES: 'Falta de nutrición adecuada por no comer suficiente o no comer los alimentos correctos' },
+  { term: 'Body mass index', plainEN: 'BMI - number calculated from height and weight used to screen for weight categories', plainES: 'IMC - número calculado a partir de la altura y el peso para clasificar categorías de peso' },
+  { term: 'Caloric deficit', plainEN: 'Consuming fewer calories than the body uses, leading to weight loss', plainES: 'Consumir menos calorías de las que el cuerpo usa, lo que lleva a la pérdida de peso' },
+  { term: 'Total parenteral nutrition', plainEN: 'Feeding through an IV when eating by mouth is not possible', plainES: 'Alimentación por vía intravenosa cuando no es posible comer por boca' },
+  { term: 'Enteral nutrition', plainEN: 'Feeding through a tube placed in the stomach or intestine', plainES: 'Alimentación a través de un tubo colocado en el estómago o intestino' },
+  { term: 'Folate', plainEN: 'B vitamin essential for cell growth, especially important during pregnancy', plainES: 'Vitamina B esencial para el crecimiento celular, especialmente importante durante el embarazo' },
+  { term: 'Iron supplementation', plainEN: 'Taking extra iron to treat or prevent iron deficiency', plainES: 'Tomar hierro adicional para tratar o prevenir la deficiencia de hierro' },
+  { term: 'Vitamin D deficiency', plainEN: 'Not enough vitamin D, which is needed for bone health and immune function', plainES: 'Insuficiente vitamina D, necesaria para la salud ósea y la función inmunológica' },
+  { term: 'Ketosis', plainEN: 'Body burns fat for energy instead of carbohydrates', plainES: 'El cuerpo quema grasa para obtener energía en lugar de carbohidratos' },
+  { term: 'Dyslipidemia', plainEN: 'Abnormal levels of fats like cholesterol or triglycerides in the blood', plainES: 'Niveles anormales de grasas como colesterol o triglicéridos en la sangre' },
+  { term: 'Hyperkalemia', plainEN: 'Dangerously high potassium levels in the blood', plainES: 'Niveles peligrosamente altos de potasio en la sangre' },
+  { term: 'Hyponatremia', plainEN: 'Dangerously low sodium levels in the blood', plainES: 'Niveles peligrosamente bajos de sodio en la sangre' },
+  { term: 'Cachexia', plainEN: 'Severe weight loss and muscle wasting from serious illness', plainES: 'Pérdida severa de peso y desgaste muscular por enfermedad grave' },
+
+  // ──────────────────────────────────────────────
+  // Pathophysiology (25)
+  // ──────────────────────────────────────────────
+  { term: 'Fibrosis', plainEN: 'Thickening and scarring of tissue, often from chronic damage', plainES: 'Engrosamiento y cicatrización de tejido, a menudo por daño crónico' },
+  { term: 'Stenosis', plainEN: 'Abnormal narrowing of a body passage or opening', plainES: 'Estrechamiento anormal de un conducto o abertura del cuerpo' },
+  { term: 'Thrombosis', plainEN: 'Formation of a blood clot inside a blood vessel', plainES: 'Formación de un coágulo de sangre dentro de un vaso sanguíneo' },
+  { term: 'Infarction', plainEN: 'Tissue death caused by blocked blood supply', plainES: 'Muerte de tejido causada por suministro de sangre bloqueado' },
+  { term: 'Atrophy', plainEN: 'Wasting away or decrease in size of a body part or tissue', plainES: 'Desgaste o disminución del tamaño de una parte del cuerpo o tejido' },
+  { term: 'Hypertrophy', plainEN: 'Increase in the size of an organ or tissue from cell enlargement', plainES: 'Aumento del tamaño de un órgano o tejido por agrandamiento celular' },
+  { term: 'Hyperplasia', plainEN: 'Increase in the number of cells in a tissue or organ', plainES: 'Aumento del número de células en un tejido u órgano' },
+  { term: 'Dysplasia', plainEN: 'Abnormal development or growth of cells or tissue', plainES: 'Desarrollo o crecimiento anormal de células o tejido' },
+  { term: 'Metaplasia', plainEN: 'One type of mature cell changes into another type', plainES: 'Un tipo de célula madura cambia a otro tipo' },
+  { term: 'Apoptosis', plainEN: 'Programmed cell death - normal process to remove damaged cells', plainES: 'Muerte celular programada - proceso normal para eliminar células dañadas' },
+  { term: 'Gangrene', plainEN: 'Death of body tissue from loss of blood supply or serious infection', plainES: 'Muerte de tejido corporal por pérdida de suministro de sangre o infección grave' },
+  { term: 'Abscess formation', plainEN: 'Body creates a walled-off pocket of pus to contain an infection', plainES: 'El cuerpo crea una bolsa de pus aislada para contener una infección' },
+  { term: 'Granuloma', plainEN: 'Small area of inflammation from the immune system walling off a foreign substance', plainES: 'Pequeña área de inflamación por el sistema inmunológico que aísla una sustancia extraña' },
+  { term: 'Effusion', plainEN: 'Abnormal buildup of fluid in a body cavity', plainES: 'Acumulación anormal de líquido en una cavidad corporal' },
+  { term: 'Calcification', plainEN: 'Abnormal deposit of calcium in body tissues', plainES: 'Depósito anormal de calcio en los tejidos del cuerpo' },
+  { term: 'Adhesion', plainEN: 'Bands of scar tissue that form between organs or tissues', plainES: 'Bandas de tejido cicatricial que se forman entre órganos o tejidos' },
+  { term: 'Perforation', plainEN: 'Hole that forms through the wall of an organ', plainES: 'Agujero que se forma a través de la pared de un órgano' },
+  { term: 'Obstruction', plainEN: 'Blockage that prevents normal flow through a body passage', plainES: 'Bloqueo que impide el flujo normal a través de un conducto corporal' },
+  { term: 'Herniation', plainEN: 'Organ or tissue pushes through a weak spot in surrounding muscle or tissue', plainES: 'Un órgano o tejido empuja a través de un punto débil en el músculo o tejido circundante' },
+  { term: 'Ulceration', plainEN: 'Open sore on the skin or mucous membrane that is slow to heal', plainES: 'Llaga abierta en la piel o membrana mucosa que tarda en sanar' },
+  { term: 'Fistula', plainEN: 'Abnormal connection between two body parts that should not be connected', plainES: 'Conexión anormal entre dos partes del cuerpo que no deberían estar conectadas' },
+  { term: 'Stricture', plainEN: 'Abnormal narrowing of a body passage caused by scarring', plainES: 'Estrechamiento anormal de un conducto corporal causado por cicatrización' },
+  { term: 'Vasoconstriction', plainEN: 'Narrowing of blood vessels that reduces blood flow', plainES: 'Estrechamiento de los vasos sanguíneos que reduce el flujo sanguíneo' },
+  { term: 'Vasodilation', plainEN: 'Widening of blood vessels that increases blood flow', plainES: 'Ensanchamiento de los vasos sanguíneos que aumenta el flujo sanguíneo' },
+  { term: 'Cytokine storm', plainEN: 'Dangerous overreaction of the immune system releasing too many inflammatory signals', plainES: 'Reacción exagerada peligrosa del sistema inmunológico que libera demasiadas señales inflamatorias' },
+
+  // ──────────────────────────────────────────────
+  // Imaging (15)
+  // ──────────────────────────────────────────────
+  { term: 'Contrast enhancement', plainEN: 'Using a special dye to make certain areas show up more clearly on imaging', plainES: 'Uso de un tinte especial para que ciertas áreas se muestren más claramente en las imágenes' },
+  { term: 'Radiolucent', plainEN: 'Area that appears dark on X-ray because it lets radiation pass through', plainES: 'Área que aparece oscura en la radiografía porque deja pasar la radiación' },
+  { term: 'Radiopaque', plainEN: 'Area that appears white on X-ray because it blocks radiation', plainES: 'Área que aparece blanca en la radiografía porque bloquea la radiación' },
+  { term: 'Hounsfield units', plainEN: 'Scale used in CT scans to measure tissue density', plainES: 'Escala utilizada en tomografías para medir la densidad del tejido' },
+  { term: 'T1-weighted MRI', plainEN: 'MRI setting that shows fat as bright and fluid as dark', plainES: 'Configuración de resonancia que muestra la grasa brillante y el líquido oscuro' },
+  { term: 'T2-weighted MRI', plainEN: 'MRI setting that shows fluid as bright, useful for detecting swelling', plainES: 'Configuración de resonancia que muestra el líquido brillante, útil para detectar hinchazón' },
+  { term: 'Fluoroscopy', plainEN: 'Real-time X-ray imaging to watch movement inside the body', plainES: 'Imagen de rayos X en tiempo real para observar movimiento dentro del cuerpo' },
+  { term: 'Ultrasound', plainEN: 'Imaging using sound waves to create pictures of structures inside the body', plainES: 'Imagen que usa ondas de sonido para crear imágenes de estructuras dentro del cuerpo' },
+  { term: 'Doppler ultrasound', plainEN: 'Ultrasound that measures blood flow through vessels', plainES: 'Ultrasonido que mide el flujo sanguíneo a través de los vasos' },
+  { term: 'Mammography', plainEN: 'X-ray of the breast used to screen for breast cancer', plainES: 'Radiografía del seno utilizada para detectar cáncer de mama' },
+  { term: 'Angiography', plainEN: 'Imaging test that uses dye to see blood vessels on X-ray', plainES: 'Prueba de imagen que usa tinte para ver los vasos sanguíneos en radiografías' },
+  { term: 'Bone density scan', plainEN: 'DEXA scan - measures bone strength to check for osteoporosis', plainES: 'Escaneo DEXA - mide la fortaleza ósea para detectar osteoporosis' },
+  { term: 'Nuclear medicine scan', plainEN: 'Imaging using small amounts of radioactive material to diagnose disease', plainES: 'Imagen que usa pequeñas cantidades de material radiactivo para diagnosticar enfermedades' },
+  { term: 'Contrast allergy', plainEN: 'Allergic reaction to the dye used in imaging tests', plainES: 'Reacción alérgica al tinte utilizado en pruebas de imagen' },
+  { term: 'Incidental finding', plainEN: 'Unexpected abnormality discovered on an imaging test done for another reason', plainES: 'Anomalía inesperada descubierta en una prueba de imagen realizada por otra razón' },
+
+  // ──────────────────────────────────────────────
+  // Surgical (20)
+  // ──────────────────────────────────────────────
+  { term: 'Laparoscopic surgery', plainEN: 'Minimally invasive surgery using small incisions and a camera', plainES: 'Cirugía mínimamente invasiva usando pequeñas incisiones y una cámara' },
+  { term: 'Debridement', plainEN: 'Removing dead, damaged, or infected tissue to help healing', plainES: 'Eliminación de tejido muerto, dañado o infectado para ayudar a la curación' },
+  { term: 'Anastomosis', plainEN: 'Surgical connection between two body structures, such as intestines or blood vessels', plainES: 'Conexión quirúrgica entre dos estructuras corporales, como intestinos o vasos sanguíneos' },
+  { term: 'Resection', plainEN: 'Surgical removal of part or all of an organ or tissue', plainES: 'Extirpación quirúrgica de parte o todo un órgano o tejido' },
+  { term: 'Ablation', plainEN: 'Destroying abnormal tissue using heat, cold, or other energy', plainES: 'Destrucción de tejido anormal usando calor, frío u otra energía' },
+  { term: 'Excision', plainEN: 'Cutting out or removing tissue surgically', plainES: 'Cortar o remover tejido quirúrgicamente' },
+  { term: 'Incision and drainage', plainEN: 'Cutting open and draining an abscess or fluid collection', plainES: 'Cortar y drenar un absceso o acumulación de líquido' },
+  { term: 'Cauterization', plainEN: 'Burning tissue to stop bleeding or remove abnormal tissue', plainES: 'Quemar tejido para detener el sangrado o eliminar tejido anormal' },
+  { term: 'Grafting', plainEN: 'Transplanting tissue from one area to another', plainES: 'Trasplantar tejido de un área a otra' },
+  { term: 'Thoracotomy', plainEN: 'Surgery that opens the chest to access the lungs, heart, or other structures', plainES: 'Cirugía que abre el pecho para acceder a los pulmones, corazón u otras estructuras' },
+  { term: 'Laparotomy', plainEN: 'Surgery that opens the abdomen to examine or treat organs inside', plainES: 'Cirugía que abre el abdomen para examinar o tratar los órganos internos' },
+  { term: 'Cholecystectomy', plainEN: 'Surgery to remove the gallbladder', plainES: 'Cirugía para remover la vesícula biliar' },
+  { term: 'Appendectomy', plainEN: 'Surgery to remove the appendix', plainES: 'Cirugía para remover el apéndice' },
+  { term: 'Colectomy', plainEN: 'Surgery to remove all or part of the colon', plainES: 'Cirugía para remover todo o parte del colon' },
+  { term: 'Nephrectomy', plainEN: 'Surgery to remove a kidney', plainES: 'Cirugía para remover un riñón' },
+  { term: 'Thyroidectomy', plainEN: 'Surgery to remove all or part of the thyroid gland', plainES: 'Cirugía para remover toda o parte de la glándula tiroides' },
+  { term: 'General anesthesia', plainEN: 'Medicine that puts you into a deep sleep for surgery', plainES: 'Medicamento que lo pone en un sueño profundo para la cirugía' },
+  { term: 'Local anesthesia', plainEN: 'Medicine that numbs a small area of the body for a procedure', plainES: 'Medicamento que adormece una pequeña área del cuerpo para un procedimiento' },
+  { term: 'Postoperative', plainEN: 'The period of care and recovery after surgery', plainES: 'El período de cuidado y recuperación después de la cirugía' },
+  { term: 'Surgical margin', plainEN: 'Edge of tissue removed during surgery, checked for cancer cells', plainES: 'Borde del tejido removido durante la cirugía, revisado por células cancerosas' },
+
+  // ──────────────────────────────────────────────
+  // Laboratory (20)
+  // ──────────────────────────────────────────────
+  { term: 'Sensitivity', plainEN: 'How well a test detects a condition when it is truly present', plainES: 'Qué tan bien una prueba detecta una condición cuando realmente está presente' },
+  { term: 'Specificity', plainEN: 'How well a test correctly identifies people who do not have a condition', plainES: 'Qué tan bien una prueba identifica correctamente a personas que no tienen una condición' },
+  { term: 'Titer', plainEN: 'Measurement of the amount of antibodies in the blood', plainES: 'Medición de la cantidad de anticuerpos en la sangre' },
+  { term: 'Assay', plainEN: 'Laboratory test to measure the presence or amount of a substance', plainES: 'Prueba de laboratorio para medir la presencia o cantidad de una sustancia' },
+  { term: 'Culture and sensitivity', plainEN: 'Lab test that grows bacteria and tests which antibiotics kill them', plainES: 'Prueba de laboratorio que cultiva bacterias y analiza qué antibióticos las eliminan' },
+  { term: 'Electrophoresis', plainEN: 'Lab technique that separates proteins or DNA by size and charge', plainES: 'Técnica de laboratorio que separa proteínas o ADN por tamaño y carga' },
+  { term: 'Serology', plainEN: 'Blood test that looks for antibodies to detect infections or immune responses', plainES: 'Análisis de sangre que busca anticuerpos para detectar infecciones o respuestas inmunes' },
+  { term: 'Urinalysis', plainEN: 'Test that examines the content of urine for signs of disease', plainES: 'Prueba que examina el contenido de la orina en busca de signos de enfermedad' },
+  { term: 'Hemoglobin', plainEN: 'Protein in red blood cells that carries oxygen throughout the body', plainES: 'Proteína en los glóbulos rojos que transporta oxígeno por todo el cuerpo' },
+  { term: 'Hematocrit', plainEN: 'Percentage of blood volume made up of red blood cells', plainES: 'Porcentaje del volumen sanguíneo compuesto por glóbulos rojos' },
+  { term: 'Creatinine', plainEN: 'Waste product measured in blood to check how well the kidneys work', plainES: 'Producto de desecho medido en sangre para verificar qué tan bien funcionan los riñones' },
+  { term: 'Blood urea nitrogen', plainEN: 'BUN - blood test measuring waste products to assess kidney function', plainES: 'BUN - análisis de sangre que mide productos de desecho para evaluar la función renal' },
+  { term: 'Liver function tests', plainEN: 'Blood tests that check how well the liver is working', plainES: 'Análisis de sangre que verifican qué tan bien funciona el hígado' },
+  { term: 'Lipid panel', plainEN: 'Blood test measuring cholesterol and triglyceride levels', plainES: 'Análisis de sangre que mide los niveles de colesterol y triglicéridos' },
+  { term: 'Troponin', plainEN: 'Protein released into the blood when the heart muscle is damaged', plainES: 'Proteína liberada en la sangre cuando el músculo cardíaco está dañado' },
+  { term: 'Prothrombin time', plainEN: 'Blood test measuring how long it takes blood to clot', plainES: 'Análisis de sangre que mide cuánto tarda la sangre en coagularse' },
+  { term: 'INR', plainEN: 'International normalized ratio - standardized measure of blood clotting time', plainES: 'Razón normalizada internacional - medida estandarizada del tiempo de coagulación sanguínea' },
+  { term: 'Blood gas analysis', plainEN: 'Test measuring oxygen, carbon dioxide, and acid levels in the blood', plainES: 'Prueba que mide niveles de oxígeno, dióxido de carbono y ácido en la sangre' },
+  { term: 'Erythrocyte sedimentation rate', plainEN: 'ESR - blood test that detects inflammation in the body', plainES: 'VSG - análisis de sangre que detecta inflamación en el cuerpo' },
+  { term: 'C-reactive protein', plainEN: 'CRP - blood marker that rises when there is inflammation in the body', plainES: 'PCR - marcador sanguíneo que se eleva cuando hay inflamación en el cuerpo' },
+
+  // ──────────────────────────────────────────────
+  // Genetics (15)
+  // ──────────────────────────────────────────────
+  { term: 'Allele', plainEN: 'One of two or more versions of a gene inherited from each parent', plainES: 'Una de dos o más versiones de un gen heredadas de cada padre' },
+  { term: 'Phenotype', plainEN: 'Observable physical characteristics resulting from a person\'s genes', plainES: 'Características físicas observables resultantes de los genes de una persona' },
+  { term: 'Genotype', plainEN: 'The genetic makeup of an individual for a particular trait', plainES: 'La composición genética de un individuo para un rasgo particular' },
+  { term: 'Penetrance', plainEN: 'Likelihood that a gene mutation will actually cause the associated condition', plainES: 'Probabilidad de que una mutación genética cause realmente la condición asociada' },
+  { term: 'Autosomal dominant', plainEN: 'Genetic trait that only needs one copy of the gene to be expressed', plainES: 'Rasgo genético que solo necesita una copia del gen para expresarse' },
+  { term: 'Autosomal recessive', plainEN: 'Genetic trait that requires two copies of the gene to be expressed', plainES: 'Rasgo genético que requiere dos copias del gen para expresarse' },
+  { term: 'X-linked', plainEN: 'Genetic condition caused by a mutation on the X chromosome', plainES: 'Condición genética causada por una mutación en el cromosoma X' },
+  { term: 'Chromosomal abnormality', plainEN: 'Missing, extra, or irregular chromosomes causing genetic conditions', plainES: 'Cromosomas faltantes, extras o irregulares que causan condiciones genéticas' },
+  { term: 'Carrier', plainEN: 'Person who has one copy of a gene mutation but does not show symptoms', plainES: 'Persona que tiene una copia de una mutación genética pero no muestra síntomas' },
+  { term: 'Genetic counseling', plainEN: 'Professional guidance about inherited conditions and genetic testing', plainES: 'Orientación profesional sobre condiciones hereditarias y pruebas genéticas' },
+  { term: 'Gene mutation', plainEN: 'Change in the DNA sequence of a gene that may affect how it works', plainES: 'Cambio en la secuencia de ADN de un gen que puede afectar cómo funciona' },
+  { term: 'Pharmacogenomics', plainEN: 'Using genetic information to predict how a person will respond to drugs', plainES: 'Usar información genética para predecir cómo una persona responderá a los medicamentos' },
+  { term: 'Trisomy', plainEN: 'Having three copies of a chromosome instead of the usual two', plainES: 'Tener tres copias de un cromosoma en lugar de las dos habituales' },
+  { term: 'BRCA mutation', plainEN: 'Gene mutation that significantly increases risk of breast and ovarian cancer', plainES: 'Mutación genética que aumenta significativamente el riesgo de cáncer de mama y ovario' },
+  { term: 'Epigenetics', plainEN: 'Changes in gene activity that do not alter the DNA sequence itself', plainES: 'Cambios en la actividad genética que no alteran la secuencia de ADN en sí' },
+
+  // ──────────────────────────────────────────────
+  // Infectious Disease - additional (15)
+  // ──────────────────────────────────────────────
+  { term: 'Viremia', plainEN: 'Presence of viruses in the bloodstream', plainES: 'Presencia de virus en el torrente sanguíneo' },
+  { term: 'Nosocomial infection', plainEN: 'Infection acquired while staying in a hospital', plainES: 'Infección adquirida durante la estancia en un hospital' },
+  { term: 'Empiric therapy', plainEN: 'Treatment started before the exact cause of infection is identified', plainES: 'Tratamiento iniciado antes de identificar la causa exacta de la infección' },
+  { term: 'Minimum inhibitory concentration', plainEN: 'MIC - lowest amount of an antibiotic that stops bacteria from growing', plainES: 'CMI - cantidad más baja de un antibiótico que detiene el crecimiento de bacterias' },
+  { term: 'Antibiogram', plainEN: 'Summary of bacteria resistance patterns to help choose the right antibiotic', plainES: 'Resumen de patrones de resistencia bacteriana para ayudar a elegir el antibiótico correcto' },
+  { term: 'Broad-spectrum antibiotic', plainEN: 'Antibiotic that works against many different types of bacteria', plainES: 'Antibiótico que funciona contra muchos tipos diferentes de bacterias' },
+  { term: 'Narrow-spectrum antibiotic', plainEN: 'Antibiotic that targets only specific types of bacteria', plainES: 'Antibiótico que solo ataca tipos específicos de bacterias' },
+  { term: 'Superinfection', plainEN: 'New infection occurring during treatment for another infection', plainES: 'Nueva infección que ocurre durante el tratamiento de otra infección' },
+  { term: 'Opportunistic infection', plainEN: 'Infection that occurs mainly in people with weakened immune systems', plainES: 'Infección que ocurre principalmente en personas con sistemas inmunológicos debilitados' },
+  { term: 'Pandemic', plainEN: 'Disease outbreak that spreads across multiple countries or worldwide', plainES: 'Brote de enfermedad que se propaga por múltiples países o a nivel mundial' },
+  { term: 'Endemic', plainEN: 'Disease regularly found in a particular region or population', plainES: 'Enfermedad que se encuentra regularmente en una región o población particular' },
+  { term: 'Zoonotic', plainEN: 'Disease that can spread from animals to humans', plainES: 'Enfermedad que puede transmitirse de animales a humanos' },
+  { term: 'Incubation period', plainEN: 'Time between exposure to a germ and the appearance of symptoms', plainES: 'Tiempo entre la exposición a un germen y la aparición de síntomas' },
+  { term: 'Seroconversion', plainEN: 'Point when antibodies become detectable in the blood after infection', plainES: 'Punto en que los anticuerpos se hacen detectables en la sangre después de la infección' },
+  { term: 'Viral load', plainEN: 'Amount of virus present in the blood', plainES: 'Cantidad de virus presente en la sangre' },
+
+  // ──────────────────────────────────────────────
+  // Pediatric - additional (10)
+  // ──────────────────────────────────────────────
+  { term: 'Growth percentile', plainEN: 'Ranking of a child\'s size compared to other children of the same age', plainES: 'Clasificación del tamaño de un niño comparado con otros niños de la misma edad' },
+  { term: 'Fontanelle', plainEN: 'Soft spot on a baby\'s skull where the bones have not yet fused', plainES: 'Punto blando en el cráneo del bebé donde los huesos aún no se han fusionado' },
+  { term: 'Meconium', plainEN: 'First stool passed by a newborn, dark and sticky', plainES: 'Primera deposición del recién nacido, oscura y pegajosa' },
+  { term: 'Neonatal intensive care', plainEN: 'NICU - specialized hospital unit for newborns needing critical care', plainES: 'UCIN - unidad hospitalaria especializada para recién nacidos que necesitan cuidados críticos' },
+  { term: 'Developmental milestone', plainEN: 'Skill or behavior most children can do by a certain age', plainES: 'Habilidad o comportamiento que la mayoría de los niños pueden hacer a cierta edad' },
+  { term: 'Immunization schedule', plainEN: 'Recommended timeline for childhood vaccinations', plainES: 'Calendario recomendado para las vacunas infantiles' },
+  { term: 'Jaundice in newborns', plainEN: 'Yellowing of a baby\'s skin from immature liver function', plainES: 'Coloración amarilla de la piel del bebé por función hepática inmadura' },
+  { term: 'Cradle cap', plainEN: 'Crusty, scaly patches on a baby\'s scalp that are harmless', plainES: 'Parches costrosos y escamosos en el cuero cabelludo del bebé que son inofensivos' },
+  { term: 'Pediatric dosing', plainEN: 'Drug doses calculated based on a child\'s weight or body surface area', plainES: 'Dosis de medicamentos calculadas según el peso o área de superficie corporal del niño' },
+  { term: 'Neonatal screening', plainEN: 'Tests done on newborns to detect serious conditions early', plainES: 'Pruebas realizadas en recién nacidos para detectar condiciones graves tempranamente' },
+
+  // ──────────────────────────────────────────────
+  // Psychiatry - additional (15)
+  // ──────────────────────────────────────────────
+  { term: 'Affect', plainEN: 'Outward expression of emotion as observed by others', plainES: 'Expresión externa de la emoción observada por otros' },
+  { term: 'Flat affect', plainEN: 'Showing little or no emotional expression', plainES: 'Mostrar poca o ninguna expresión emocional' },
+  { term: 'Mania', plainEN: 'Period of abnormally elevated mood, energy, and activity', plainES: 'Período de estado de ánimo, energía y actividad anormalmente elevados' },
+  { term: 'Anosognosia', plainEN: 'Inability to recognize that one has a mental illness', plainES: 'Incapacidad de reconocer que uno tiene una enfermedad mental' },
+  { term: 'Anhedonia', plainEN: 'Inability to feel pleasure from activities normally enjoyed', plainES: 'Incapacidad de sentir placer de actividades que normalmente se disfrutan' },
+  { term: 'Suicidal ideation', plainEN: 'Thinking about or planning suicide', plainES: 'Pensar en o planificar el suicidio' },
+  { term: 'Delusion', plainEN: 'Firmly held false belief that does not change despite evidence', plainES: 'Creencia falsa firmemente sostenida que no cambia a pesar de la evidencia' },
+  { term: 'Hallucination', plainEN: 'Seeing, hearing, or feeling things that are not really there', plainES: 'Ver, oír o sentir cosas que realmente no están ahí' },
+  { term: 'Dissociation', plainEN: 'Feeling disconnected from your thoughts, feelings, or identity', plainES: 'Sentirse desconectado de sus pensamientos, sentimientos o identidad' },
+  { term: 'Catatonia', plainEN: 'State of unresponsiveness with rigid posture or lack of movement', plainES: 'Estado de falta de respuesta con postura rígida o falta de movimiento' },
+  { term: 'Dysthymia', plainEN: 'Persistent mild depression lasting two or more years', plainES: 'Depresión leve persistente que dura dos o más años' },
+  { term: 'Akathisia', plainEN: 'Restlessness and inability to sit still, often a medication side effect', plainES: 'Inquietud e incapacidad de permanecer quieto, a menudo efecto secundario de un medicamento' },
+  { term: 'Tardive dyskinesia', plainEN: 'Involuntary movements, especially of the face, from long-term medication use', plainES: 'Movimientos involuntarios, especialmente de la cara, por uso prolongado de medicamentos' },
+  { term: 'Neuroleptic', plainEN: 'Antipsychotic medication used to treat severe mental illness', plainES: 'Medicamento antipsicótico utilizado para tratar enfermedades mentales graves' },
+  { term: 'Therapeutic alliance', plainEN: 'Trust-based relationship between a patient and their mental health provider', plainES: 'Relación basada en la confianza entre un paciente y su proveedor de salud mental' },
+
+  // ──────────────────────────────────────────────
+  // General / Common Patient Terms (15)
+  // ──────────────────────────────────────────────
+  { term: 'Informed consent', plainEN: 'Patient agrees to treatment after understanding the risks and benefits', plainES: 'El paciente acepta el tratamiento después de entender los riesgos y beneficios' },
+  { term: 'Second opinion', plainEN: 'Seeking advice from another doctor about a diagnosis or treatment plan', plainES: 'Buscar consejo de otro médico sobre un diagnóstico o plan de tratamiento' },
+  { term: 'Advance directive', plainEN: 'Legal document stating your wishes for medical care if you cannot speak for yourself', plainES: 'Documento legal que establece sus deseos de atención médica si no puede hablar por sí mismo' },
+  { term: 'Palliative', plainEN: 'Treatment focused on relieving symptoms rather than curing disease', plainES: 'Tratamiento enfocado en aliviar síntomas en lugar de curar la enfermedad' },
+  { term: 'Hospice', plainEN: 'End-of-life care focused on comfort for patients with terminal illness', plainES: 'Cuidado al final de la vida enfocado en la comodidad de pacientes con enfermedad terminal' },
+  { term: 'Outpatient', plainEN: 'Medical care that does not require an overnight hospital stay', plainES: 'Atención médica que no requiere una estancia hospitalaria nocturna' },
+  { term: 'Inpatient', plainEN: 'Medical care requiring admission and overnight stay in a hospital', plainES: 'Atención médica que requiere ingreso y estancia nocturna en un hospital' },
+  { term: 'Referral', plainEN: 'Being sent to a specialist doctor for further evaluation or treatment', plainES: 'Ser enviado a un médico especialista para evaluación o tratamiento adicional' },
+  { term: 'Follow-up', plainEN: 'Return visit to check on progress after treatment or a procedure', plainES: 'Visita de retorno para verificar el progreso después de un tratamiento o procedimiento' },
+  { term: 'Side effect', plainEN: 'Unwanted effect of a medication or treatment', plainES: 'Efecto no deseado de un medicamento o tratamiento' },
+  { term: 'Generic drug', plainEN: 'Medication with the same active ingredient as a brand-name drug but usually cheaper', plainES: 'Medicamento con el mismo ingrediente activo que uno de marca pero generalmente más barato' },
+  { term: 'Over-the-counter', plainEN: 'Medication you can buy without a prescription', plainES: 'Medicamento que puede comprar sin receta médica' },
+  { term: 'Relapse', plainEN: 'Return of a disease or symptoms after a period of improvement', plainES: 'Regreso de una enfermedad o síntomas después de un período de mejora' },
+  { term: 'Exacerbation', plainEN: 'Worsening or flare-up of symptoms of an existing condition', plainES: 'Empeoramiento o brote de síntomas de una condición existente' },
+  { term: 'Baseline', plainEN: 'Initial measurements used for comparison during treatment', plainES: 'Mediciones iniciales utilizadas para comparación durante el tratamiento' },
 ];
 
 /**

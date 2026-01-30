@@ -87,6 +87,16 @@ export { papSmearContent } from './screening/pap-smear';
 export { hpvTestingContent } from './screening/hpv-testing';
 export { breastCancerScreeningContent } from './screening/breast-cancer-screening';
 
+// OB/GYN Clinical Database
+export {
+  OBGYN_ENTRIES,
+  getOBGYNEntry,
+  searchOBGYN,
+  getOBGYNBySubcategory,
+  getOBGYNCount,
+} from './obgyn-database';
+export type { OBGYNEntry, OBGYNSubcategory } from './obgyn-database';
+
 // Content categories
 export const OBGYN_CATEGORIES = [
   'anatomy',

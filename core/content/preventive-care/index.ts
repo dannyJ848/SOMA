@@ -88,3 +88,33 @@ export const LIFESTYLE_MEDICINE_SUBCATEGORIES = [
   'mental-wellness',
   'substance-use',
 ] as const;
+
+// Preventive Guidelines Database
+export { PREVENTIVE_GUIDELINES } from './preventive-guidelines-database';
+export type { PreventiveGuidelineEntry } from './preventive-guidelines-database';
+
+import { PREVENTIVE_GUIDELINES, type PreventiveGuidelineEntry } from './preventive-guidelines-database';
+
+/** Retrieve a single preventive guideline by its ID. Returns undefined if not found. */
+export function getPreventiveGuideline(id: string): PreventiveGuidelineEntry | undefined {
+  return PREVENTIVE_GUIDELINES[id];
+}
+
+/** Search preventive guidelines by keyword across name, nameEs, whatItDetects, howItsDone, and patientTip fields. Case-insensitive. */
+export function searchPreventiveGuidelines(query: string): PreventiveGuidelineEntry[] {
+  const q = query.toLowerCase();
+  return Object.values(PREVENTIVE_GUIDELINES).filter(g => {
+    const haystack = [g.name, g.nameEs, g.whatItDetects, g.howItsDone, g.patientTip, g.targetPopulation, g.guidelineSource].join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+/** Get all preventive guidelines that belong to a given category. */
+export function getGuidelinesByCategory(category: PreventiveGuidelineEntry['category']): PreventiveGuidelineEntry[] {
+  return Object.values(PREVENTIVE_GUIDELINES).filter(g => g.category === category);
+}
+
+/** Return the total number of entries in the preventive guidelines database. */
+export function getPreventiveGuidelineCount(): number {
+  return Object.keys(PREVENTIVE_GUIDELINES).length;
+}

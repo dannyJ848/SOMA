@@ -22,3 +22,13 @@ export const respiratoryConditions = [
 ];
 
 export default respiratoryConditions;
+
+// Respiratory conditions database (compact reference)
+export {
+  RESP_CONDITIONS,
+  getRespCondition,
+  searchRespConditions,
+  getRespByCategory,
+  getRespConditionCount,
+} from './resp-conditions-database';
+export type { RespConditionEntry, RespCategory } from './resp-conditions-database';

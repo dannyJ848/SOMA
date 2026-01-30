@@ -39,6 +39,16 @@ export { fractureManagementContent } from './procedures/fracture-management';
 export { physicalTherapyContent } from './rehabilitation/physical-therapy';
 export { rehabilitationPrinciplesContent } from './rehabilitation/rehabilitation-principles';
 
+// Ortho database exports
+export {
+  ORTHO_ENTRIES,
+  getOrthoEntry,
+  searchOrtho,
+  getOrthoBySubcategory,
+  getOrthoCount,
+} from './ortho-database';
+export type { OrthoEntry, OrthoSubcategory } from './ortho-database';
+
 // Content categories
 export const ORTHOPEDICS_CATEGORIES = [
   'bone-anatomy',

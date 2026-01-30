@@ -22,3 +22,12 @@ export const neurologicalConditions = [
 ];
 
 export default neurologicalConditions;
+
+export {
+  NEURO_CONDITIONS,
+  NEURO_CONDITION_CATEGORY_LABELS,
+  getNeuroConditionsByCategory,
+  searchNeuroConditions,
+  getNeuroConditionCount,
+} from './neuro-conditions-database';
+export type { NeuroConditionEntry, NeuroConditionCategory } from './neuro-conditions-database';

@@ -16,6 +16,19 @@
  * Physician-level detail with multi-level complexity (5 tiers)
  */
 
+// Nephrology Database (45 structured entries)
+export {
+  NEPHROLOGY_ENTRIES,
+  getNephrologyEntry,
+  searchNephrology,
+  getNephrologyByCategory,
+  getNephrologyCount,
+} from './nephrology-database';
+export type {
+  NephrologyEntry,
+  NephrologyCategory as NephrologyDatabaseCategory,
+} from './nephrology-database';
+
 // Content exports
 export { acuteKidneyInjury } from './acute-kidney-injury';
 export { chronicKidneyDisease } from './chronic-kidney-disease';

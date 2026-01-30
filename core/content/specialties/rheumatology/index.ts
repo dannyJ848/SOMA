@@ -13,6 +13,13 @@
  * Multi-level complexity from patient education to physician-level detail.
  */
 
+// Rheumatology database exports
+export {
+  RHEUMATOLOGY_ENTRIES,
+  type RheumatologyEntry,
+  type RheumatologyCategory as RheumatologyDatabaseCategory,
+} from './rheumatology-database';
+
 // Condition content exports
 export { rheumatoidArthritisContent } from './rheumatoid-arthritis';
 export { osteoarthritisContent } from './osteoarthritis';

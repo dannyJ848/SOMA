@@ -82,6 +82,17 @@ export const OPHTHALMOLOGY_EMERGENCIES = [
   'giant-cell-arteritis-vision-loss',
 ] as const;
 
+// Ophthalmology Database (comprehensive condition entries)
+export {
+  OPHTHALMOLOGY_ENTRIES,
+  OPHTHALMOLOGY_ENTRY_IDS,
+  OPHTHALMOLOGY_DATABASE_CATEGORIES,
+  getOphthalmologyByCategory,
+  getOphthalmologyEntry,
+  getOphthalmologyCategoryCounts,
+} from './ophthalmology-database';
+export type { OphthalmologyEntry, OphthalmologyDatabaseCategory } from './ophthalmology-database';
+
 // Specialty overview
 export const ophthalmologyContent = {
   specialty: 'ophthalmology',

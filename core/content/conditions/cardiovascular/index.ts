@@ -15,6 +15,17 @@ export { aorticAneurysm } from './aortic-aneurysm';
 export { valvularHeartDisease } from './valvular-heart-disease';
 export { cardiomyopathy } from './cardiomyopathy';
 
+// CV Conditions Database (comprehensive 40+ entry reference)
+export {
+  CV_CONDITIONS,
+  getCVCondition,
+  searchCVConditions,
+  getCVByCategory,
+  getCVConditionCount,
+  getCVByRiskFactor,
+} from './cv-conditions-database';
+export type { CVConditionEntry, CVCategory } from './cv-conditions-database';
+
 import { hypertension } from './hypertension';
 import { heartFailure } from './heart-failure';
 import { coronaryArteryDisease } from './coronary-artery-disease';

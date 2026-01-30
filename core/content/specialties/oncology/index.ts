@@ -14,6 +14,16 @@
  * Content is physician-level for patient education with multi-level complexity.
  */
 
+// Oncology Database (44 structured entries)
+export {
+  ONCOLOGY_ENTRIES,
+  getOncologyEntry,
+  searchOncology,
+  getOncologyByCategory,
+  getOncologyCount,
+} from './oncology-database';
+export type { OncologyEntry, OncologyCategory as OncologyDatabaseCategory } from './oncology-database';
+
 // Cancer Biology
 export { cancerBiologyContent } from './cancer-biology';
 export { cellCycleContent, mutationsContent, metastasisContent } from './cancer-biology';

@@ -12,6 +12,7 @@
  * - Healthcare-associated infections
  * - Antibiotic stewardship and resistance
  * - Vaccination science and schedules
+ * - Infectious disease database (48 entries across 10 categories)
  */
 
 // Bacterial Infections
@@ -46,6 +47,16 @@ export { antibioticStewardship } from './antibiotic-stewardship';
 
 // Vaccination
 export { vaccinationScience } from './vaccination-science';
+
+// Infectious Disease Database (48 entries)
+export {
+  INFECTIOUS_DISEASE_ENTRIES,
+  getInfectiousDiseaseEntry,
+  searchInfectiousDisease,
+  getInfectiousDiseaseByCategory,
+  getInfectiousDiseaseCount,
+} from './infectious-disease-database';
+export type { InfectiousDiseaseEntry, InfectiousDiseaseCategory } from './infectious-disease-database';
 
 // Collect all content for registration
 import { bacterialInfectionsOverview } from './bacterial-infections-overview';

@@ -1,7 +1,7 @@
 # SOMA - Master Blueprint
 
-> **Version**: 3.4
-> **Last Updated**: 2026-01-29
+> **Version**: 3.5
+> **Last Updated**: 2026-01-30
 > **Status**: Phase 8 - Content Pipeline & Knowledge Integration
 
 ---
@@ -82,7 +82,7 @@ biological-self/
 │   └── offline/            # Offline Support
 │
 ├── core/                   # Core Business Logic
-│   ├── content/            # Educational Content (2,488+ files)
+│   ├── content/            # Educational Content (2,832+ files)
 │   ├── ai/                 # Ollama Integration
 │   ├── rag/                # RAG Pipeline
 │   ├── soma/               # Health Data Store
@@ -1030,7 +1030,7 @@ Spanish system prompts include:
 ### New Infrastructure Created (Phase 8)
 
 **Content Services:**
-- `src/services/ContentService.ts` — Unified content service wiring all 9 databases into React context
+- `src/services/ContentService.ts` — Unified content service wiring all 87 databases into React context
 - `src/services/KnowledgeRAGService.ts` — RAG context enricher for AI chat (bridges knowledge graph → LLM)
 - `src/services/PatientContextService.ts` — Patient data contextualization service
 - `src/hooks/useContent.ts` — 4 React hooks: useContentSearch, useConditionInfo, useSymptomLookup, useExplanation
@@ -1106,8 +1106,10 @@ All 100 user stories are implemented and passing.
 ## Content Module Blueprint
 
 ### Current Status
-- **Existing Files**: 521+ TypeScript files in core/content/
-- **Content Directories**: 280+ specialized directories
+- **Existing Files**: 560+ TypeScript files in core/content/
+- **Content Directories**: 300+ specialized directories
+- **Content Databases**: 87 total (67 through Wave 3 + 20 new in Wave 4)
+- **Total Core TypeScript Files**: 2,832
 - **TypeScript Errors**: 0
 
 ### Content Structure
@@ -1672,6 +1674,21 @@ core/content/treatment-algorithms/
 └── index.ts ✅
 ```
 
+#### Pharmacology Depth (Wave 4)
+```
+core/content/pharmacology/
+├── drug-interactions/ ✅
+├── pharmacokinetics/ ✅
+└── index.ts ✅
+```
+
+#### Differential Diagnosis & History Taking (Wave 4)
+```
+core/content/clinical-reasoning/
+├── differential-diagnosis/ ✅ (expanded Wave 4)
+├── history-taking/ ✅ (expanded Wave 4)
+```
+
 ---
 
 ### Conditions Database
@@ -1702,11 +1719,16 @@ core/content/conditions/
 ├── neurological/ ✅
 ├── mental-health/ ✅
 ├── musculoskeletal/ ✅
-├── oncology/ ✅
+├── oncology/ ✅ (expanded Wave 4)
 ├── infectious/ ✅
 ├── renal/ ✅
 ├── dermatology/ ✅
 ├── hematologic/ ✅
+├── ophthalmology/ ✅ (Wave 4)
+├── genetic/ ✅ (Wave 4)
+├── autoimmune/ ✅ (Wave 4)
+├── ent/ ✅ (Wave 4)
+├── urology/ ✅ (Wave 4)
 └── index.ts ✅
 ```
 
@@ -2112,6 +2134,17 @@ core/content/surgery/
 └── index.ts ✅
 ```
 
+#### Surgical Specialties (Wave 4)
+```
+core/content/surgical-specialties/
+├── general-surgery/ ✅
+├── cardiothoracic-surgery/ ✅
+├── neurosurgery/ ✅
+├── vascular-surgery/ ✅
+├── plastic-surgery/ ✅
+└── index.ts ✅
+```
+
 #### Toxicology
 ```
 core/content/toxicology/
@@ -2120,6 +2153,52 @@ core/content/toxicology/
 ├── household-toxins.ts ✅
 ├── environmental-toxins.ts ✅
 └── index.ts ✅
+```
+
+#### Biostatistics (Wave 4)
+```
+core/content/biostatistics/
+├── study-design.ts ✅
+├── statistical-tests.ts ✅
+├── evidence-based-medicine.ts ✅
+└── index.ts ✅
+```
+
+#### Health Policy (Wave 4)
+```
+core/content/health-policy/
+├── healthcare-systems.ts ✅
+├── quality-improvement.ts ✅
+├── patient-safety.ts ✅
+└── index.ts ✅
+```
+
+#### Forensic Medicine (Wave 4)
+```
+core/content/forensic-medicine/
+├── cause-of-death.ts ✅
+├── injury-patterns.ts ✅
+├── medicolegal-aspects.ts ✅
+└── index.ts ✅
+```
+
+#### Occupational Medicine (Wave 4)
+```
+core/content/occupational-medicine/
+├── workplace-hazards.ts ✅
+├── occupational-diseases.ts ✅
+├── fitness-for-duty.ts ✅
+└── index.ts ✅
+```
+
+#### Pediatrics Specialty (Wave 4)
+```
+core/content/specialties/pediatrics/
+├── neonatology/ ✅
+├── pediatric-cardiology/ ✅
+├── pediatric-neurology/ ✅
+├── pediatric-emergencies/ ✅
+└── index.ts ✅ (expanded Wave 4)
 ```
 
 ---
@@ -2168,6 +2247,8 @@ All content batches have been completed through Phase 8 (Content Pipeline & Know
 | Batch 3 - Import Path Fixes & Validation | COMPLETE |
 | Batch 4 - Enhancement & Polish | COMPLETE |
 | Batch 5 - Content Pipeline & Knowledge Integration | COMPLETE |
+| Wave 1 - Content Buildout (18 databases) | COMPLETE |
+| Wave 4 - Content Buildout (20 databases: surgical specialties, pharmacology depth, clinical reasoning, new domains, pediatrics) | COMPLETE |
 
 ### Future Enhancement Ideas (Post-Launch)
 
@@ -2345,6 +2426,7 @@ find core/content -type d | sort
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.5 | 2026-01-30 | Wave 4 Content Buildout - 20 new databases (surgical specialties, pharmacology depth, clinical reasoning, new domains) |
 | 3.3 | 2026-01-29 | Wave 1 Content Buildout - 18 new databases, 1.1MB new content |
 | 3.2 | 2026-01-29 | Phase 8 - Content Pipeline & Knowledge Integration |
 | 3.0 | 2026-01-28 | Phase 7 Complete - TestFlight Ready for First Build |

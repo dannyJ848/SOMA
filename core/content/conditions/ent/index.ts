@@ -13,6 +13,19 @@ export { epistaxis } from './epistaxis';
 export { vertigo } from './vertigo';
 export { hoarseness } from './hoarseness';
 
+// ENT Conditions Database (30+ conditions)
+export {
+  ENT_CONDITION_ENTRIES,
+  type ENTConditionEntry,
+  type ENTConditionCategory,
+  getENTConditionById,
+  getENTByCategory,
+  getENTConditionCount,
+  getAllENTConditionIds,
+  searchENTConditions,
+  getENTCategories,
+} from './ent-conditions-database';
+
 import { otitisMedia } from './otitis-media';
 import { sinusitis } from './sinusitis';
 import { pharyngitis } from './pharyngitis';

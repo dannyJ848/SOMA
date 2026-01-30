@@ -20,6 +20,18 @@ export { erectileDysfunction } from './erectile-dysfunction';
 export { hematuria } from './hematuria';
 export { interstitialCystitis } from './interstitial-cystitis';
 
+// Comprehensive urology conditions database
+export {
+  UROLOGY_CONDITION_ENTRIES,
+  getUrologyCondition,
+  searchUrologyConditions,
+  getUrologyByCategory,
+  getUrologyConditionCount,
+  getAllUrologyConditionIds,
+  getUrologyByPresentation,
+} from './urology-conditions-database';
+export type { UrologyConditionEntry, UrologyConditionCategory } from './urology-conditions-database';
+
 export default {
   kidneyStones,
   bph,

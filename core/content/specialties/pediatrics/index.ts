@@ -40,6 +40,10 @@ export { adhdAndLearningDisorders } from './adhd-learning-disorders';
 // Emergencies
 export { pediatricEmergencies } from './pediatric-emergencies';
 
+// Pediatrics database
+export { PEDIATRICS_ENTRIES, getPediatricsEntry, searchPediatrics, getPediatricsByCategory, getPediatricsCount } from './pediatrics-database';
+export type { PediatricsEntry, PediatricsCategory } from './pediatrics-database';
+
 // Collect all content for registration
 import { developmentalMilestones } from './developmental-milestones';
 import { wellChildVisits } from './well-child-visits';

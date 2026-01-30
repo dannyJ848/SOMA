@@ -46,6 +46,20 @@ export type {
   ComplexityLevel,
 } from '../types';
 
+// Critical care database
+export {
+  CRITICAL_CARE_ENTRIES,
+  getCriticalCareByCategory,
+  searchCriticalCare,
+  getCriticalCareById,
+  getCriticalCareCategories,
+  filterCriticalCare,
+} from './critical-care-database';
+export type {
+  CriticalCareCategory as CriticalCareDatabaseCategory,
+  CriticalCareEntry,
+} from './critical-care-database';
+
 // Content categories
 export const CRITICAL_CARE_CATEGORIES = [
   'icu-basics',

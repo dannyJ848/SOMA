@@ -43,3 +43,15 @@ export { URINALYSIS_PANEL } from './urinalysis';
 export { COAGULATION_PANEL } from './coagulation';
 export { INFLAMMATORY_MARKER_PANEL } from './inflammatory-markers';
 export { ABG_PANEL } from './abg';
+
+// Lab interpretation database (consolidated entries with search utilities)
+// Note: LabCategory is already exported from ./types, so we use explicit re-exports to avoid ambiguity
+export {
+  LAB_INTERPRETATION_ENTRIES,
+  searchLabEntries,
+  filterLabEntriesByCategory,
+  getLabEntryById,
+  getAvailableLabCategories,
+  fullTextSearchLabs,
+} from './lab-interpretation-database';
+export type { LabInterpretationEntry } from './lab-interpretation-database';

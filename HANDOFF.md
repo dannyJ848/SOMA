@@ -31,20 +31,20 @@ npx tsx src/i18n/test-i18n.tsx
 | TypeScript | 0 errors (npx tsc --noEmit clean) |
 | Vite Build | Passes (npm run build) |
 | TestFlight | READY TO BUILD |
-| Content Pipeline | Waves 1-4 complete, Wave 5 next |
+| Content Pipeline | Waves 1-5 complete, Wave 6 next |
 
 ### Features Complete
 
 | Feature | Status | Files |
 |---------|--------|-------|
-| Educational Content | Complete | `core/content/` (2,757+ files) |
+| Educational Content | Complete | `core/content/` (2,843+ files) |
 | Anatomy Main Screen | Complete | `src/AnatomyMainScreen/` |
 | AI Voice Navigation | Complete | `src/voice/`, `src/ai/` (15 components) |
 | **Dictation (STT)** | Built-in | `src/contexts/VoiceContext.tsx` |
 | **Text-to-Speech (TTS)** | Built-in | `src/contexts/VoiceContext.tsx` |
 | Bilingual i18n | Complete | `src/i18n/` (31 files) |
 | TestFlight Config | Ready | `scripts/build-testflight.sh` |
-| **Content Pipeline** | Waves 1-4 done | `core/content/`, `core/knowledge-graph/`, `core/i18n/` |
+| **Content Pipeline** | Waves 1-5 done | `core/content/`, `core/knowledge-graph/`, `core/i18n/` |
 | **DeepSeek 14B Integration** | Ready | `core/ai/local-llm-service.ts` |
 
 ### Content Pipeline Summary (Jan 29 Session)

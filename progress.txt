@@ -5376,3 +5376,36 @@ fn get_data_dir() -> PathBuf {
 - Total content files now: 2,488 in core/content/, 2,757 in core/ overall
 
 ---
+
+### Wave 3 Content Buildout (Jan 29 overnight - Batch 3)
+**14 new database files (~940KB total)**
+
+| # | File | Size | Content |
+|---|------|------|---------|
+| 1 | core/content/conditions/infectious/infectious-conditions-database.ts | 72KB | Infectious disease conditions |
+| 2 | core/content/conditions/mental-health/mental-health-conditions-database.ts | 92KB | Mental health conditions |
+| 3 | core/content/conditions/musculoskeletal/musculoskeletal-conditions-database.ts | 92KB | Musculoskeletal conditions |
+| 4 | core/content/critical-care/critical-care-database.ts | 100KB | Critical care & ICU protocols |
+| 5 | core/content/dental-health/dental-health-database.ts | 72KB | Dental health conditions |
+| 6 | core/content/integrative-medicine/integrative-medicine-database.ts | 44KB | Integrative/complementary medicine |
+| 7 | core/content/lab-interpretation/lab-interpretation-database.ts | 40KB | Lab value interpretation |
+| 8 | core/content/medical-terminology/medical-terminology-database.ts | 28KB | Medical terminology/etymology |
+| 9 | core/content/patient-advocacy/patient-advocacy-database.ts | 44KB | Patient advocacy & health literacy |
+| 10 | core/content/sleep-medicine/sleep-medicine-database.ts | 68KB | Sleep medicine entries |
+| 11 | core/content/specialties/geriatrics/geriatrics-database.ts | 60KB | Geriatrics specialty |
+| 12 | core/content/specialties/urology/urology-database.ts | 64KB | Urology specialty |
+| 13 | core/content/surgery/surgery-database.ts | 88KB | Surgical procedures & conditions |
+| 14 | core/content/transplant-medicine/transplant-medicine-database.ts | 76KB | Transplant medicine |
+
+**Quality Verification:**
+- TypeScript: 0 errors (npx tsc --noEmit)
+- Production build: passes (npm run build)
+- Fixed: core/content/lab-interpretation/index.ts had LabCategory ambiguous re-export (switched to explicit re-exports)
+
+**Running totals:**
+- 43 database files in core/content/
+- 2,843 content files total
+- 33,096 lines of database code
+- Content directory: 59MB
+
+---

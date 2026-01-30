@@ -60,6 +60,20 @@ export { pronunciationGuidesModule } from './pronunciation-guides';
 export * from './common-abbreviations';
 export { commonAbbreviationsModule } from './common-abbreviations';
 
+// Medical terminology database - unified searchable database
+export {
+  MEDICAL_TERMINOLOGY_ENTRIES,
+  searchMedicalTerms,
+  filterByCategory,
+  getTermById,
+  getAllCategories,
+  getTermCount,
+} from './medical-terminology-database';
+export type {
+  TermCategory as DatabaseTermCategory,
+  MedicalTermEntry,
+} from './medical-terminology-database';
+
 // All terminology content summary
 export const medicalTerminologyContent = {
   category: 'medical-terminology',

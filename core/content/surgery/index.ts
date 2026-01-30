@@ -50,6 +50,19 @@ export { suturesAndWoundCare } from './sutures-and-wound-care';
 // Surgical Drains
 export { surgicalDrains } from './surgical-drains';
 
+// Surgery Database (comprehensive reference entries with search utilities)
+export {
+  SURGERY_ENTRIES,
+  getAllSurgeryEntries,
+  getSurgeryEntryById,
+  getSurgeryEntriesByCategory,
+  searchSurgeryEntries,
+  filterSurgeryEntries,
+  getSurgeryDatabaseCategories,
+  getSurgeryEntryCounts,
+} from './surgery-database';
+export type { SurgeryDatabaseCategory, SurgeryEntry } from './surgery-database';
+
 // Surgery vs Conservative Treatment
 // TODO: Create surgery-vs-conservative.ts module
 // export { surgeryVsConservative } from './surgery-vs-conservative';

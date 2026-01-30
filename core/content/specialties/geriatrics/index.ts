@@ -48,6 +48,20 @@ export { ageRelatedSensoryChanges } from './age-related-sensory-changes';
 export { endOfLifePlanning } from './end-of-life-planning';
 export { caregiverSupport } from './caregiver-support';
 
+// Geriatrics database
+export {
+  GERIATRICS_ENTRIES,
+  getGeriatricsEntry,
+  searchGeriatrics,
+  getGeriatricsByCategory,
+  getGeriatricsCategoryCounts,
+  getGeriatricsCount,
+} from './geriatrics-database';
+export type {
+  GeriatricsEntry,
+  GeriatricsCategory as GeriatricsDatabaseCategory,
+} from './geriatrics-database';
+
 // Re-export types
 export type {
   EducationalContent,

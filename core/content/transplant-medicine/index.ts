@@ -28,6 +28,17 @@ export { postTransplantCare } from './post-transplant-care';
 export { longTermOutcomes } from './long-term-outcomes';
 export { boneMarrowTransplant } from './bone-marrow-transplant';
 
+// Transplant medicine database & utilities
+export {
+  TRANSPLANT_MEDICINE_ENTRIES,
+  getAllTransplantEntries,
+  getTransplantEntriesByCategory,
+  searchTransplantEntries,
+  getTransplantEntryById,
+  getTransplantCategories,
+} from './transplant-medicine-database';
+export type { TransplantCategory, TransplantMedicineEntry } from './transplant-medicine-database';
+
 // Content categories
 export const TRANSPLANT_MEDICINE_CATEGORIES = [
   'fundamentals',

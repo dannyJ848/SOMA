@@ -13,6 +13,17 @@ export { ocd } from './ocd';
 export { ptsd } from './ptsd';
 export { schizophrenia } from './schizophrenia';
 
+// Mental Health Conditions Database
+export {
+  MENTAL_HEALTH_CONDITIONS,
+  searchMentalHealthConditions,
+  filterByCategory,
+  getMentalHealthCondition,
+  getMentalHealthCategoryStats,
+  getAllMentalHealthConditionIds,
+} from './mental-health-conditions-database';
+export type { MentalHealthCategory, MentalHealthEntry } from './mental-health-conditions-database';
+
 import { adhd } from './adhd';
 import { anxiety } from './anxiety';
 import { bipolarDisorder } from './bipolar';

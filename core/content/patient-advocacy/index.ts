@@ -17,6 +17,17 @@ export { reportingMedicalErrors } from './reporting-medical-errors';
 export { advanceDirectives } from './advance-directives';
 export { healthcareProxy } from './healthcare-proxy';
 
+// Patient Advocacy Database
+export {
+  PATIENT_ADVOCACY_ENTRIES,
+  searchAdvocacyEntries,
+  filterByCategory,
+  getAdvocacyEntryById,
+  getAvailableCategories,
+  countAdvocacyEntries,
+} from './patient-advocacy-database';
+export type { AdvocacyCategory, PatientAdvocacyEntry } from './patient-advocacy-database';
+
 // Convenience export of all advocacy content
 import { patientBillOfRights } from './patient-bill-of-rights';
 import { informedConsent } from './informed-consent';

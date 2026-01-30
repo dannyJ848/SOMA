@@ -46,6 +46,19 @@ export { discussingWithDoctor } from './discussing-with-doctor';
 // Red Flags for Quackery
 export { redFlagsQuackery } from './red-flags-quackery';
 
+// Integrative Medicine Structured Database
+export {
+  INTEGRATIVE_MEDICINE_ENTRIES,
+  searchIntegrativeMedicine,
+  filterByCategory,
+  getCategorySummary,
+  getEntryById,
+} from './integrative-medicine-database';
+export type {
+  IntegrativeCategory,
+  IntegrativeMedicineEntry,
+} from './integrative-medicine-database';
+
 // Content categories
 export const INTEGRATIVE_MEDICINE_CATEGORIES = [
   'evidence-overview',

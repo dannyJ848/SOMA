@@ -12,6 +12,18 @@
  * All content features 5 complexity levels from 8th grade to MD/Professional
  */
 
+// Dental Health Database
+export {
+  type DentalCategory,
+  type DentalHealthEntry,
+  DENTAL_HEALTH_ENTRIES,
+  DENTAL_CATEGORIES,
+  getDentalEntriesByCategory,
+  searchDentalEntries,
+  getDentalEntryById,
+  getDentalEntriesGroupedByCategory,
+} from './dental-health-database';
+
 // Flat structure content files
 export { oralAnatomy } from './oral-anatomy';
 export { toothStructure } from './tooth-structure';

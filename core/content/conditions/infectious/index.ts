@@ -15,6 +15,19 @@ export { osteomyelitis } from './osteomyelitis';
 export { sepsis } from './sepsis';
 export { uti } from './uti';
 
+// Infectious Conditions Database (structured database with search & filter utilities)
+export {
+  INFECTIOUS_CONDITIONS,
+  searchInfectiousConditions,
+  getInfectiousConditionsByCategory,
+  getInfectiousConditionById,
+  getInfectiousConditionCategoryCounts,
+} from './infectious-conditions-database';
+export type {
+  InfectiousCondCategory,
+  InfectiousConditionEntry,
+} from './infectious-conditions-database';
+
 import { cellulitis } from './cellulitis';
 import { covid19 } from './covid-19';
 import { hepatitisB } from './hepatitis-b';

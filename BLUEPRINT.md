@@ -1,6 +1,6 @@
 # SOMA - Master Blueprint
 
-> **Version**: 3.3
+> **Version**: 3.4
 > **Last Updated**: 2026-01-29
 > **Status**: Phase 8 - Content Pipeline & Knowledge Integration
 

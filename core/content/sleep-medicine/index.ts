@@ -37,6 +37,17 @@ export { sleepStudies } from './sleep-studies';
 // Clinical correlations
 export { sleepAndChronicDisease } from './sleep-and-chronic-disease';
 
+// Sleep Medicine Database
+export {
+  SLEEP_MEDICINE_ENTRIES,
+  searchSleepMedicineEntries,
+  filterSleepMedicineByCategory,
+  getSleepMedicineEntryById,
+  getSleepMedicineCategories,
+  getSleepMedicineCategoryCounts,
+} from './sleep-medicine-database';
+export type { SleepCategory, SleepMedicineEntry } from './sleep-medicine-database';
+
 // Content categories
 export const SLEEP_MEDICINE_CATEGORIES = [
   'physiology',

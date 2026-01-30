@@ -71,6 +71,18 @@ export const UROLOGY_CONTENT_IDS = [
   'process-urological-procedures',
 ] as const;
 
+// Urology database (structured entries with ICD-11, diagnostics, treatment, etc.)
+export {
+  UROLOGY_ENTRIES,
+  type UrologyCategory as UrologyCategoryDB,
+  type UrologyEntry,
+  getUrologyEntry,
+  searchUrology,
+  getUrologyByCategory,
+  getUrologyCount,
+  getUrologyCategories,
+} from './urology-database';
+
 // Specialty metadata
 export const urologyContent = {
   specialty: 'urology',

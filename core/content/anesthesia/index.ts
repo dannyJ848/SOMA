@@ -32,6 +32,19 @@ export { preoperativeEvaluationContent as preoperativeEvaluation } from './preop
 export { postoperativeCareContent as postoperativeCare } from './postoperative-care';
 export { specialPopulationsContent as specialPopulations } from './special-populations';
 
+// Anesthesia database
+export type { AnesthesiaCategory, AnesthesiaEntry } from './anesthesia-database';
+export {
+  ANESTHESIA_ENTRIES,
+  getAllAnesthesiaEntries,
+  getAnesthesiaEntryById,
+  searchAnesthesiaEntries,
+  filterByCategory,
+  filterAnesthesiaEntries,
+  getAnesthesiaDatabaseCategories,
+  getAnesthesiaEntryCounts,
+} from './anesthesia-database';
+
 /**
  * Anesthesia module exports
  *

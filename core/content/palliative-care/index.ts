@@ -46,6 +46,18 @@ export { polstForms } from './care-planning/polst-forms';
 export { comfortCareMeasures } from './comfort-care/comfort-measures';
 export { familySupportAndGrief } from './comfort-care/family-support-grief';
 
+// Palliative care database
+export {
+  palliativeCareDatabase,
+  searchPalliativeEntries,
+  filterByCategory,
+  getEntryById,
+} from './palliative-care-database';
+export type {
+  PalliativeCareDBCategory,
+  PalliativeCareEntry,
+} from './palliative-care-database';
+
 // Re-export types
 export type {
   EducationalContent,

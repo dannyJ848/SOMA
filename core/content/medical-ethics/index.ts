@@ -19,3 +19,12 @@ export {
   researchMisconduct,
   animalResearch
 } from './research-ethics';
+
+// Medical Ethics Database
+export type { MedicalEthicsCategory, MedicalEthicsEntry } from './medical-ethics-database';
+export {
+  MEDICAL_ETHICS_ENTRIES,
+  searchEthicsEntries,
+  filterByCategory,
+  getEntryById,
+} from './medical-ethics-database';

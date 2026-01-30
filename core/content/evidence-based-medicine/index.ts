@@ -47,3 +47,16 @@ export const ALL_EBM_CONTENT = [
   'shared-decision-making',
   'patient-centered-outcomes',
 ] as const;
+
+// EBM Database - comprehensive evidence-based medicine reference
+export {
+  EBM_DATABASE,
+  searchEBMEntries,
+  filterByCategory,
+  getEntryById,
+} from './ebm-database';
+
+export type {
+  EBMCategory as EBMDatabaseCategory,
+  EBMEntry,
+} from './ebm-database';

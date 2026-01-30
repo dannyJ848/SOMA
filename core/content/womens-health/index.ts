@@ -89,6 +89,19 @@ export { postpartumDepression } from './mental-health/postpartum-depression';
 export { premenstrualDisorders } from './mental-health/premenstrual-disorders';
 export { perimenopauseMoodChanges } from './mental-health/perimenopause-mood-changes';
 
+// Women's Health Database
+export {
+  WOMENS_HEALTH_ENTRIES,
+  searchWomensHealthEntries,
+  filterByCategory,
+  getEntryById,
+  getWomensHealthCount,
+} from './womens-health-database';
+export type {
+  WomensHealthCategory as WomensHealthDatabaseCategory,
+  WomensHealthEntry,
+} from './womens-health-database';
+
 // Content categories
 export const WOMENS_HEALTH_CATEGORIES = [
   'menstrual-health',

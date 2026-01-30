@@ -33,3 +33,15 @@ export type {
   VocabularyTerm,
   AddictionContent
 } from './types';
+
+export {
+  addictionMedicineDatabase,
+  searchAddictionEntries,
+  filterByCategory,
+  getEntryById,
+} from './addiction-medicine-database';
+
+export type {
+  AddictionCategory,
+  AddictionMedicineEntry,
+} from './addiction-medicine-database';

@@ -50,6 +50,18 @@ export { diagnosticReasoningContent } from './diagnostic-reasoning';
 export { clinicalDecisionMakingContent } from './clinical-decision-making';
 export { evidenceBasedMedicineContent } from './evidence-based-medicine';
 
+// Clinical Reasoning Database
+export {
+  clinicalReasoningDatabase,
+  searchClinicalReasoningEntries,
+  filterByCategory,
+  getEntryById,
+} from './clinical-reasoning-database';
+export type {
+  ClinicalReasoningCategory as ClinicalReasoningDatabaseCategory,
+  ClinicalReasoningEntry,
+} from './clinical-reasoning-database';
+
 // Content registry for discovery
 export const CLINICAL_REASONING_CATEGORIES = [
   'diagnostic-algorithms',

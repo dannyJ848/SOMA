@@ -50,6 +50,16 @@ export { autoimmunePrinciplesContent } from './autoimmune-principles';
 export { allergyTestingContent } from './allergy-testing';
 export { immunotherapyContent } from './immunotherapy';
 
+// Allergy-Immunology structured database
+export {
+  ALLERGY_IMMUNOLOGY_ENTRIES,
+  getAllergyImmunologyEntry,
+  searchAllergyImmunology,
+  getAllergyImmunologyByCategory,
+  getAllergyImmunologyCount,
+} from './allergy-immunology-database';
+export type { AllergyCategory, AllergyImmunologyEntry } from './allergy-immunology-database';
+
 // Content categories
 export const ALLERGY_IMMUNOLOGY_CATEGORIES = [
   'immune-fundamentals',

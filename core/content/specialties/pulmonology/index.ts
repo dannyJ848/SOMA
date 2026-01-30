@@ -43,6 +43,21 @@ export { pulmonaryFunctionTests } from './pulmonary-function-tests';
 // Pharmacology
 export { respiratoryMedications } from './respiratory-medications';
 
+// Pulmonology specialty database
+export {
+  PULMONOLOGY_ENTRIES,
+  getPulmonologyEntry,
+  searchPulmonology,
+  getPulmonologyByCategory,
+  getPulmonologyCount,
+  searchPulmonologyEmergencies,
+  getPulmonologyICD11Map,
+} from './pulmonology-database';
+export type {
+  PulmonologyCategory as PulmonologyDatabaseCategory,
+  PulmonologyEntry,
+} from './pulmonology-database';
+
 // Content categories
 export const PULMONOLOGY_CATEGORIES = [
   'obstructive',

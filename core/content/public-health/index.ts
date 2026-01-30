@@ -25,3 +25,12 @@ export {
   healthEquityPH,
   oneHealth
 } from './global-health-issues';
+
+// Public Health & Epidemiology Database
+export type { PublicHealthCategory, PublicHealthEntry } from './public-health-database';
+export {
+  publicHealthDatabase,
+  searchPublicHealthEntries,
+  filterByCategory,
+  getEntryById
+} from './public-health-database';

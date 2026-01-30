@@ -25,6 +25,18 @@ export { anaphylaxisContent } from './anaphylaxis';
 export { allergyTestingContent } from './allergy-testing';
 export { immunotherapyContent } from './immunotherapy';
 
+// Allergy & Immunology Database
+export {
+  allergyImmunologyDatabase,
+  searchAllergyEntries,
+  filterByCategory,
+  getEntryById,
+} from './allergy-immunology-database';
+export type {
+  AllergyImmunologyCategory,
+  AllergyImmunologyEntry,
+} from './allergy-immunology-database';
+
 /**
  * All allergy-immunology content modules
  */

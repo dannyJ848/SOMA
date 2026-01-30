@@ -51,6 +51,17 @@ export { scarManagementContent } from './scar-management';
 export { sunProtectionContent } from './sun-protection';
 export { skinAgingContent } from './skin-aging';
 
+// Dermatology Database (structured clinical entries with search utilities)
+export {
+  DERMATOLOGY_ENTRIES,
+  searchDermatologyEntries,
+  filterByDermCategory,
+  getDermatologyEntry,
+  getDermCategoryCounts,
+  getAllDermatologyIds,
+} from './dermatology-database';
+export type { DermCategory, DermatologyEntry } from './dermatology-database';
+
 // Content categories
 export const DERMATOLOGY_CATEGORIES = [
   'skin-anatomy',

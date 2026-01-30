@@ -15,6 +15,19 @@ export { nephriticSyndrome } from './nephritic-syndrome';
 export { nephroticSyndrome } from './nephrotic-syndrome';
 export { polycysticKidneyDisease } from './polycystic-kidney';
 
+// Renal Conditions Database (comprehensive 30-entry reference)
+export {
+  RENAL_CONDITIONS,
+  getRenalCondition,
+  searchRenalConditions,
+  getRenalByCategory,
+  getRenalConditionCount,
+  getRenalByClinicalFeature,
+  getRenalByEmergencySign,
+  getRenalCategorySummary,
+} from './renal-conditions-database';
+export type { RenalConditionEntry, RenalCategory } from './renal-conditions-database';
+
 import { acidBaseDisorders } from './acid-base-disorders';
 import { aki } from './aki';
 import { chronicKidneyDisease } from './chronic-kidney-disease';

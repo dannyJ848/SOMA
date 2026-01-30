@@ -65,6 +65,18 @@ export { geneticCounselingOverviewContent } from './counseling/overview';
 export { riskAssessmentContent } from './counseling/risk-assessment';
 export { informedConsentContent } from './counseling/informed-consent';
 
+// Genetics & Genomics Structured Database
+export {
+  GENETICS_ENTRIES,
+  searchGeneticsEntries,
+  filterByCategory as filterGeneticsByCategory,
+  getEntryById as getGeneticsEntryById,
+} from './genetics-database';
+export type {
+  GeneticsCategory as GeneticsDatabaseCategory,
+  GeneticsEntry,
+} from './genetics-database';
+
 // Content categories
 export const GENETICS_CATEGORIES = [
   'basics',

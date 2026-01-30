@@ -53,6 +53,18 @@ export { burnCare } from './burn-care';
 export { scarManagement } from './scar-management';
 export { tetanusProphylaxis } from './tetanus-prophylaxis';
 
+// Wound care database
+export {
+  woundCareDatabase,
+  searchWoundCareEntries,
+  filterByCategory,
+  getEntryById,
+} from './wound-care-database';
+export type {
+  WoundCareCategory as WoundCareDatabaseCategory,
+  WoundCareEntry,
+} from './wound-care-database';
+
 // Re-export types
 export type {
   EducationalContent,

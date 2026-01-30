@@ -14,6 +14,20 @@ export { ironDeficiencyAnemia } from './iron-deficiency-anemia';
 export { itp } from './itp';
 export { vonWillebrand } from './von-willebrand';
 
+// Hematologic Conditions Database (structured reference)
+export {
+  HEMATOLOGIC_CONDITIONS,
+  searchHematologicConditions,
+  filterHematologicByCategory,
+  getHematologicConditionById,
+  getHematologicCategories,
+  getHematologicConditionCount,
+} from './hematologic-conditions-database';
+export type {
+  HematologicCategory,
+  HematologicConditionEntry,
+} from './hematologic-conditions-database';
+
 import { anemia } from './anemia';
 import { anemiaOfChronicDisease } from './anemia-of-chronic-disease';
 import { b12Deficiency } from './b12-deficiency';

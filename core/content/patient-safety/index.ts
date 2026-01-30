@@ -21,3 +21,15 @@ export * from './medication-safety/index.js';
 
 // Communication
 export * from './communication/index.js';
+
+// Patient Safety Database
+export {
+  PATIENT_SAFETY_ENTRIES,
+  searchPatientSafetyEntries,
+  filterByCategory,
+  getEntryById,
+} from './patient-safety-database.js';
+export type {
+  PatientSafetyCategory,
+  PatientSafetyEntry,
+} from './patient-safety-database.js';

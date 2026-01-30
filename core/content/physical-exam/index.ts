@@ -22,3 +22,12 @@ export * from './respiratory/index.js';
 
 // Skin Examination
 export * from './skin/index.js';
+
+// Physical Exam Database
+export type { PhysicalExamCategory, PhysicalExamEntry } from './physical-exam-database.js';
+export {
+  physicalExamDatabase,
+  searchPhysicalExamEntries,
+  filterByCategory,
+  getEntryById,
+} from './physical-exam-database.js';

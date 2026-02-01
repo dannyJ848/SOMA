@@ -157,6 +157,20 @@ export function getEntrySummaries(): EncyclopediaEntrySummary[] {
   }));
 }
 
+/**
+ * Get the total count of entries in the encyclopedia
+ */
+export function getEntryCount(): number {
+  return encyclopediaDatabase.size;
+}
+
+/**
+ * Check if the encyclopedia has been populated with entries
+ */
+export function isEncyclopediaPopulated(): boolean {
+  return encyclopediaDatabase.size > 0;
+}
+
 // ============================================
 // Search Operations
 // ============================================

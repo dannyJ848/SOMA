@@ -12,6 +12,8 @@ import type { EncyclopediaAction } from '../core/intent-prediction/types';
 import {
   searchEntries,
   getEntrySummaries,
+  getEntryCount,
+  isEncyclopediaPopulated,
 } from '../core/medical-simulation/encyclopedia/store';
 import type {
   EncyclopediaEntrySummary,
@@ -309,6 +311,16 @@ export function MedicalEncyclopedia({
 }: MedicalEncyclopediaProps) {
   // Initialize 3D navigation (will be used in EncyclopediaEntry component)
   useAnatomy3DNavigation({ componentId: 'encyclopedia' });
+
+  // Debug: Log encyclopedia status on mount
+  useEffect(() => {
+    const entryCount = getEntryCount();
+    const isPopulated = isEncyclopediaPopulated();
+    console.log(`[MedicalEncyclopedia] Encyclopedia status: ${entryCount} entries, populated: ${isPopulated}`);
+    if (!isPopulated) {
+      console.warn('[MedicalEncyclopedia] Encyclopedia is empty! Seed function may not have run.');
+    }
+  }, []);
 
   // Action tracking for intent prediction
   const { track } = useActionTracker<EncyclopediaAction>('encyclopedia', 'MedicalEncyclopedia');

@@ -532,6 +532,12 @@ export function seedEncyclopedia(): void {
   if (_seeded) return;
   _seeded = true;
 
-  const entries = buildEntries();
-  addEntries(entries);
+  try {
+    const entries = buildEntries();
+    console.log(`[Encyclopedia] Building ${entries.length} entries from region content map...`);
+    addEntries(entries);
+    console.log(`[Encyclopedia] Successfully seeded ${entries.length} entries`);
+  } catch (error) {
+    console.error('[Encyclopedia] Error seeding encyclopedia:', error);
+  }
 }

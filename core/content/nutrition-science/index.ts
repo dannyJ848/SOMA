@@ -2,14 +2,13 @@
 export { macronutrients } from './macronutrients';
 export { micronutrients } from './micronutrients';
 export { hydration } from './hydration';
-// TODO: Recreate nutrition-through-lifecycle.ts (corrupted during fix attempt)
-// export { nutritionThroughLifecycle } from './nutrition-through-lifecycle';
+export { nutritionThroughLifecycle } from './nutrition-through-lifecycle';
 export { sportsNutrition } from './sports-nutrition';
 export { vegetarianDiets } from './vegetarian-diets';
 export { medicalNutritionTherapy } from './medical-nutrition-therapy';
-// export { foodSafety } from './food-safety'; // TODO: create
+export { foodSafety } from './food-safety';
 export { obesityNutrition } from './obesity-nutrition';
-// export { eatingDisordersNutrition } from './eating-disorders-nutrition'; // TODO: create
+export { eatingDisordersNutrition } from './eating-disorders-nutrition';
 
 // Vitamins and Minerals
 export { fatSolubleVitamins } from './vitamins-minerals/fat-soluble-vitamins';

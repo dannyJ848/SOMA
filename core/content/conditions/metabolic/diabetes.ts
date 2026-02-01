@@ -10,6 +10,7 @@ export const diabetes: EducationalContent = {
   id: 'condition-diabetes',
   type: 'condition',
   name: 'Diabetes Mellitus',
+  nameEs: 'Diabetes Mellitus',
   alternateNames: ['Diabetes', 'Type 1 Diabetes', 'Type 2 Diabetes', 'High Blood Sugar'],
   hpoId: 'HP:0000819',
 

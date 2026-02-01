@@ -22,7 +22,7 @@
 import React, { createContext, useContext, useRef, useMemo } from 'react';
 
 // ---------------------------------------------------------------------------
-// Knowledge graph & search
+// Knowledge graph & search (eagerly loaded — core infrastructure)
 // ---------------------------------------------------------------------------
 import {
   getKnowledgeGraph,
@@ -41,79 +41,108 @@ import {
 } from '@core/knowledge-graph/search-engine';
 
 // ---------------------------------------------------------------------------
-// Content databases
+// Content database types (type-only imports — zero runtime cost)
 // ---------------------------------------------------------------------------
-import {
-  MEDICAL_SPECIALTIES,
-  getSpecialty,
-  getSpecialtiesForCondition,
-  getSpecialtiesForRegion,
-  getSpecialtiesForBodySystem,
-  searchSpecialties,
-  type MedicalSpecialty,
-  type BodySystemFocus,
+import type {
+  MedicalSpecialty,
+  BodySystemFocus,
 } from '@core/content/specialties/specialty-map';
 
-import {
-  SYMPTOM_DATABASE,
-  getSymptomById,
-  searchSymptomsByName,
-  getSymptomsByBodyRegion,
-  getSymptomsByBodySystem,
-  getSymptomsByCondition,
-  getDoNotMissConditions,
-  getExplanation as getSymptomExplanation,
-  type SymptomEntry,
+import type {
+  SymptomEntry,
 } from '@core/content/symptoms/symptom-database';
 
-import {
-  MEDICAL_PROCEDURES,
-  getProcedure,
-  searchProcedures,
-  getProceduresByCategory,
-  getProceduresBySpecialty,
-  type MedicalProcedureEntry,
-  type ProcedureCategory,
+import type {
+  MedicalProcedureEntry,
+  ProcedureCategory,
 } from '@core/content/procedures/procedure-database';
 
-import {
-  ANATOMY_REGIONS,
-  getAnatomyRegion,
-  searchAnatomyRegions,
-  getAnatomyBySystem,
-  getAnatomyForCondition,
-  type AnatomyRegion,
-  type AnatomySystem,
+import type {
+  AnatomyRegion,
+  AnatomySystem,
 } from '@core/content/anatomy/anatomy-encyclopedia';
 
-// ---------------------------------------------------------------------------
-// Education / explanation levels
-// ---------------------------------------------------------------------------
-import {
-  EXPLANATION_LEVELS,
-  EXPLANATION_TEMPLATES,
-  getConditionExplanation,
-  getAllLevelsForCondition,
-  getPromptForLevel,
-  type ExplanationLevelNumber,
-  type ExplanationLevel,
-  type ExplanationTemplate,
-  type ConditionKey,
+import type {
+  ExplanationLevelNumber,
+  ExplanationLevel,
+  ExplanationTemplate,
+  ConditionKey,
 } from '@core/education/explanation-levels';
 
-// ---------------------------------------------------------------------------
-// i18n
-// ---------------------------------------------------------------------------
-import {
-  MEDICAL_TERMS_ES,
-  translateTerm,
-} from '@core/i18n/medical-translations-es';
-
-import {
-  MEDICAL_GLOSSARY,
-  getPlainLanguage,
-  type GlossaryEntry,
+import type {
+  GlossaryEntry,
 } from '@core/i18n/medical-glossary';
+
+// ---------------------------------------------------------------------------
+// Lazy-loaded module caches
+// ---------------------------------------------------------------------------
+
+type SpecialtyModule = typeof import('@core/content/specialties/specialty-map');
+type SymptomModule = typeof import('@core/content/symptoms/symptom-database');
+type ProcedureModule = typeof import('@core/content/procedures/procedure-database');
+type AnatomyModule = typeof import('@core/content/anatomy/anatomy-encyclopedia');
+type EducationModule = typeof import('@core/education/explanation-levels');
+type TranslationsModule = typeof import('@core/i18n/medical-translations-es');
+type GlossaryModule = typeof import('@core/i18n/medical-glossary');
+
+let _specialtyMod: SpecialtyModule | null = null;
+let _symptomMod: SymptomModule | null = null;
+let _procedureMod: ProcedureModule | null = null;
+let _anatomyMod: AnatomyModule | null = null;
+let _educationMod: EducationModule | null = null;
+let _translationsMod: TranslationsModule | null = null;
+let _glossaryMod: GlossaryModule | null = null;
+
+async function loadSpecialties(): Promise<SpecialtyModule> {
+  if (!_specialtyMod) _specialtyMod = await import('@core/content/specialties/specialty-map');
+  return _specialtyMod;
+}
+
+async function loadSymptoms(): Promise<SymptomModule> {
+  if (!_symptomMod) _symptomMod = await import('@core/content/symptoms/symptom-database');
+  return _symptomMod;
+}
+
+async function loadProcedures(): Promise<ProcedureModule> {
+  if (!_procedureMod) _procedureMod = await import('@core/content/procedures/procedure-database');
+  return _procedureMod;
+}
+
+async function loadAnatomy(): Promise<AnatomyModule> {
+  if (!_anatomyMod) _anatomyMod = await import('@core/content/anatomy/anatomy-encyclopedia');
+  return _anatomyMod;
+}
+
+async function loadEducation(): Promise<EducationModule> {
+  if (!_educationMod) _educationMod = await import('@core/education/explanation-levels');
+  return _educationMod;
+}
+
+async function loadTranslations(): Promise<TranslationsModule> {
+  if (!_translationsMod) _translationsMod = await import('@core/i18n/medical-translations-es');
+  return _translationsMod;
+}
+
+async function loadGlossary(): Promise<GlossaryModule> {
+  if (!_glossaryMod) _glossaryMod = await import('@core/i18n/medical-glossary');
+  return _glossaryMod;
+}
+
+/**
+ * Pre-load all content modules in parallel.
+ * Called by ContentProvider so data is ready before first render.
+ */
+export async function preloadContentModules(): Promise<void> {
+  await Promise.all([
+    loadSpecialties(),
+    loadSymptoms(),
+    loadProcedures(),
+    loadAnatomy(),
+    loadEducation(),
+    loadTranslations(),
+    loadGlossary(),
+  ]);
+}
 
 // ===========================================================================
 // Unified Search Result (wraps all content types)
@@ -202,10 +231,10 @@ export class ContentService {
    * and supplement with direct database searches for types not fully indexed
    * in the knowledge graph.
    */
-  searchAll(
+  async searchAll(
     query: string,
     options?: SearchOptions & { includeGlossary?: boolean },
-  ): UnifiedSearchResult[] {
+  ): Promise<UnifiedSearchResult[]> {
     if (!query.trim()) return [];
 
     const results: UnifiedSearchResult[] = [];
@@ -236,8 +265,17 @@ export class ContentService {
       });
     }
 
+    // Load supplemental databases in parallel
+    const [symptomMod, procedureMod, specialtyMod, anatomyMod, glossaryMod] = await Promise.all([
+      loadSymptoms(),
+      loadProcedures(),
+      loadSpecialties(),
+      loadAnatomy(),
+      loadGlossary(),
+    ]);
+
     // --- Supplement with direct symptom DB search (catches entries not in graph) ---
-    const symptomHits = searchSymptomsByName(query);
+    const symptomHits = symptomMod.searchSymptomsByName(query);
     for (const s of symptomHits) {
       const syntheticId = `symptom:${s.symptomId}`;
       if (seenIds.has(syntheticId) || seenIds.has(s.symptomId)) continue;
@@ -254,7 +292,7 @@ export class ContentService {
     }
 
     // --- Supplement with direct procedure DB search ---
-    const procedureHits = searchProcedures(query);
+    const procedureHits = procedureMod.searchProcedures(query);
     for (const p of procedureHits) {
       const syntheticId = `procedure:${p.procedureId}`;
       if (seenIds.has(syntheticId) || seenIds.has(p.procedureId)) continue;
@@ -271,7 +309,7 @@ export class ContentService {
     }
 
     // --- Supplement with direct specialty search ---
-    const specialtyHits = searchSpecialties(query);
+    const specialtyHits = specialtyMod.searchSpecialties(query);
     for (const sp of specialtyHits) {
       const syntheticId = `specialty:${sp.specialtyId}`;
       if (seenIds.has(syntheticId) || seenIds.has(sp.specialtyId)) continue;
@@ -288,7 +326,7 @@ export class ContentService {
     }
 
     // --- Supplement with anatomy search ---
-    const anatomyHits = searchAnatomyRegions(query);
+    const anatomyHits = anatomyMod.searchAnatomyRegions(query);
     for (const a of anatomyHits) {
       const syntheticId = `anatomy:${a.id}`;
       if (seenIds.has(syntheticId) || seenIds.has(a.id)) continue;
@@ -307,7 +345,7 @@ export class ContentService {
     // --- Optional: glossary search ---
     if (options?.includeGlossary !== false) {
       const q = query.toLowerCase();
-      for (const g of MEDICAL_GLOSSARY) {
+      for (const g of glossaryMod.MEDICAL_GLOSSARY) {
         if (
           g.term.toLowerCase().includes(q) ||
           g.plainEN.toLowerCase().includes(q) ||
@@ -340,7 +378,7 @@ export class ContentService {
   // 2. Condition info (aggregated)
   // -----------------------------------------------------------------------
 
-  getConditionInfo(conditionId: string): ConditionInfo | undefined {
+  async getConditionInfo(conditionId: string): Promise<ConditionInfo | undefined> {
     // Normalise: allow both "hypertension" and "condition:hypertension"
     const fullId = conditionId.startsWith('condition:')
       ? conditionId
@@ -354,8 +392,15 @@ export class ContentService {
     const procedures = this.graph.getProceduresForCondition(fullId);
     const specialists = this.graph.getSpecialistsForCondition(fullId);
     const relatedEdges = this.graph.getEdgesForNode(fullId);
-    const anatomyRegions = getAnatomyForCondition(conditionId);
-    const glossaryEntry = getPlainLanguage(node.name);
+
+    const [anatomyMod, glossaryMod, educationMod] = await Promise.all([
+      loadAnatomy(),
+      loadGlossary(),
+      loadEducation(),
+    ]);
+
+    const anatomyRegions = anatomyMod.getAnatomyForCondition(conditionId);
+    const glossaryEntry = glossaryMod.getPlainLanguage(node.name);
 
     // Try to pull pre-built explanations if this condition is a known key
     let explanations: Record<ExplanationLevelNumber, string> | undefined;
@@ -376,7 +421,7 @@ export class ContentService {
     };
     const condKey = keyMap[fullId];
     if (condKey) {
-      explanations = getAllLevelsForCondition(condKey);
+      explanations = educationMod.getAllLevelsForCondition(condKey);
     }
 
     return {
@@ -396,8 +441,13 @@ export class ContentService {
   // 3. Symptom lookup
   // -----------------------------------------------------------------------
 
-  getSymptomInfo(symptomId: string): SymptomInfo | undefined {
-    const entry = getSymptomById(symptomId);
+  async getSymptomInfo(symptomId: string): Promise<SymptomInfo | undefined> {
+    const [symptomMod, glossaryMod] = await Promise.all([
+      loadSymptoms(),
+      loadGlossary(),
+    ]);
+
+    const entry = symptomMod.getSymptomById(symptomId);
     if (!entry) return undefined;
 
     const graphNodeId = `symptom:${symptomId}`;
@@ -424,13 +474,13 @@ export class ContentService {
       }
     }
 
-    const doNotMiss = getDoNotMissConditions(symptomId);
+    const doNotMiss = symptomMod.getDoNotMissConditions(symptomId);
 
     const anatomyRegions = graphNode
       ? this.graph.getAnatomyForSymptom(graphNodeId)
       : [];
 
-    const glossaryEntry = getPlainLanguage(entry.name);
+    const glossaryEntry = glossaryMod.getPlainLanguage(entry.name);
 
     return {
       entry,
@@ -451,12 +501,18 @@ export class ContentService {
    * Looks in symptom database explanations, condition explanations,
    * and the glossary in that order.
    */
-  getExplanation(
+  async getExplanation(
     topicId: string,
     level: ExplanationLevelNumber,
-  ): string | undefined {
+  ): Promise<string | undefined> {
+    const [symptomMod, educationMod, glossaryMod] = await Promise.all([
+      loadSymptoms(),
+      loadEducation(),
+      loadGlossary(),
+    ]);
+
     // 1. Try symptom explanation (symptom entries have level1-5 built in)
-    const symptomExpl = getSymptomExplanation(topicId, level);
+    const symptomExpl = symptomMod.getExplanation(topicId, level);
     if (symptomExpl) return symptomExpl;
 
     // 2. Try condition explanation
@@ -475,12 +531,12 @@ export class ContentService {
     const stripped = topicId.replace(/^condition:/, '');
     const condKey = keyMap[stripped];
     if (condKey) {
-      return getConditionExplanation(condKey, level);
+      return educationMod.getConditionExplanation(condKey, level);
     }
 
     // 3. Fall back to glossary plain language (always level-2 style)
     if (level <= 2) {
-      const glossary = getPlainLanguage(stripped) ?? getPlainLanguage(topicId);
+      const glossary = glossaryMod.getPlainLanguage(stripped) ?? glossaryMod.getPlainLanguage(topicId);
       if (glossary) return glossary.plainEN;
     }
 
@@ -490,25 +546,28 @@ export class ContentService {
   /**
    * Get the explanation level metadata (constraints, audience, etc.)
    */
-  getExplanationLevel(level: ExplanationLevelNumber): ExplanationLevel {
-    return EXPLANATION_LEVELS[level];
+  async getExplanationLevel(level: ExplanationLevelNumber): Promise<ExplanationLevel> {
+    const mod = await loadEducation();
+    return mod.EXPLANATION_LEVELS[level];
   }
 
   /**
    * Get the template for a given level
    */
-  getExplanationTemplate(level: ExplanationLevelNumber): ExplanationTemplate {
-    return EXPLANATION_TEMPLATES[level];
+  async getExplanationTemplate(level: ExplanationLevelNumber): Promise<ExplanationTemplate> {
+    const mod = await loadEducation();
+    return mod.EXPLANATION_TEMPLATES[level];
   }
 
   /**
    * Get the LLM prompts for generating a level-appropriate explanation.
    */
-  getExplanationPrompt(
+  async getExplanationPrompt(
     level: ExplanationLevelNumber,
     condition: string,
-  ): { systemPrompt: string; userPrompt: string } {
-    return getPromptForLevel(level, condition);
+  ): Promise<{ systemPrompt: string; userPrompt: string }> {
+    const mod = await loadEducation();
+    return mod.getPromptForLevel(level, condition);
   }
 
   // -----------------------------------------------------------------------
@@ -541,97 +600,119 @@ export class ContentService {
   }
 
   // -- Specialties --
-  getAllSpecialties(): MedicalSpecialty[] {
-    return MEDICAL_SPECIALTIES;
+  async getAllSpecialties(): Promise<MedicalSpecialty[]> {
+    const mod = await loadSpecialties();
+    return mod.MEDICAL_SPECIALTIES;
   }
 
-  getSpecialty(id: string): MedicalSpecialty | undefined {
-    return getSpecialty(id);
+  async getSpecialty(id: string): Promise<MedicalSpecialty | undefined> {
+    const mod = await loadSpecialties();
+    return mod.getSpecialty(id);
   }
 
-  getSpecialtiesForCondition(conditionId: string): MedicalSpecialty[] {
-    return getSpecialtiesForCondition(conditionId);
+  async getSpecialtiesForCondition(conditionId: string): Promise<MedicalSpecialty[]> {
+    const mod = await loadSpecialties();
+    return mod.getSpecialtiesForCondition(conditionId);
   }
 
-  getSpecialtiesForBodySystem(system: BodySystemFocus): MedicalSpecialty[] {
-    return getSpecialtiesForBodySystem(system);
+  async getSpecialtiesForBodySystem(system: BodySystemFocus): Promise<MedicalSpecialty[]> {
+    const mod = await loadSpecialties();
+    return mod.getSpecialtiesForBodySystem(system);
   }
 
   // -- Symptoms --
-  getAllSymptoms(): SymptomEntry[] {
-    return SYMPTOM_DATABASE;
+  async getAllSymptoms(): Promise<SymptomEntry[]> {
+    const mod = await loadSymptoms();
+    return mod.SYMPTOM_DATABASE;
   }
 
-  getSymptom(id: string): SymptomEntry | undefined {
-    return getSymptomById(id);
+  async getSymptom(id: string): Promise<SymptomEntry | undefined> {
+    const mod = await loadSymptoms();
+    return mod.getSymptomById(id);
   }
 
-  getSymptomsByRegion(region: string): SymptomEntry[] {
-    return getSymptomsByBodyRegion(region);
+  async getSymptomsByRegion(region: string): Promise<SymptomEntry[]> {
+    const mod = await loadSymptoms();
+    return mod.getSymptomsByBodyRegion(region);
   }
 
-  getSymptomsBySystem(system: string): SymptomEntry[] {
-    return getSymptomsByBodySystem(system);
+  async getSymptomsBySystem(system: string): Promise<SymptomEntry[]> {
+    const mod = await loadSymptoms();
+    return mod.getSymptomsByBodySystem(system);
   }
 
-  getSymptomsByCondition(conditionId: string): SymptomEntry[] {
-    return getSymptomsByCondition(conditionId);
+  async getSymptomsByCondition(conditionId: string): Promise<SymptomEntry[]> {
+    const mod = await loadSymptoms();
+    return mod.getSymptomsByCondition(conditionId);
   }
 
   // -- Procedures --
-  getAllProcedures(): MedicalProcedureEntry[] {
-    return MEDICAL_PROCEDURES;
+  async getAllProcedures(): Promise<MedicalProcedureEntry[]> {
+    const mod = await loadProcedures();
+    return mod.MEDICAL_PROCEDURES;
   }
 
-  getProcedure(id: string): MedicalProcedureEntry | undefined {
-    return getProcedure(id);
+  async getProcedure(id: string): Promise<MedicalProcedureEntry | undefined> {
+    const mod = await loadProcedures();
+    return mod.getProcedure(id);
   }
 
-  getProceduresByCategory(cat: ProcedureCategory): MedicalProcedureEntry[] {
-    return getProceduresByCategory(cat);
+  async getProceduresByCategory(cat: ProcedureCategory): Promise<MedicalProcedureEntry[]> {
+    const mod = await loadProcedures();
+    return mod.getProceduresByCategory(cat);
   }
 
-  getProceduresBySpecialty(specialty: string): MedicalProcedureEntry[] {
-    return getProceduresBySpecialty(specialty);
+  async getProceduresBySpecialty(specialty: string): Promise<MedicalProcedureEntry[]> {
+    const mod = await loadProcedures();
+    return mod.getProceduresBySpecialty(specialty);
   }
 
   // -- Anatomy --
-  getAllAnatomyRegions(): AnatomyRegion[] {
-    return ANATOMY_REGIONS;
+  async getAllAnatomyRegions(): Promise<AnatomyRegion[]> {
+    const mod = await loadAnatomy();
+    return mod.ANATOMY_REGIONS;
   }
 
-  getAnatomyRegion(id: string): AnatomyRegion | undefined {
-    return getAnatomyRegion(id);
+  async getAnatomyRegion(id: string): Promise<AnatomyRegion | undefined> {
+    const mod = await loadAnatomy();
+    return mod.getAnatomyRegion(id);
   }
 
-  getAnatomyBySystem(system: AnatomySystem): AnatomyRegion[] {
-    return getAnatomyBySystem(system);
+  async getAnatomyBySystem(system: AnatomySystem): Promise<AnatomyRegion[]> {
+    const mod = await loadAnatomy();
+    return mod.getAnatomyBySystem(system);
   }
 
-  getAnatomyForCondition(conditionId: string): AnatomyRegion[] {
-    return getAnatomyForCondition(conditionId);
+  async getAnatomyForCondition(conditionId: string): Promise<AnatomyRegion[]> {
+    const mod = await loadAnatomy();
+    return mod.getAnatomyForCondition(conditionId);
   }
 
   // -- i18n --
-  translateTerm(term: string): string {
-    return translateTerm(term);
+  async translateTerm(term: string): Promise<string> {
+    const mod = await loadTranslations();
+    return mod.translateTerm(term);
   }
 
-  getGlossaryEntry(term: string): GlossaryEntry | undefined {
-    return getPlainLanguage(term);
+  async getGlossaryEntry(term: string): Promise<GlossaryEntry | undefined> {
+    const mod = await loadGlossary();
+    return mod.getPlainLanguage(term);
   }
 
-  getAllGlossaryEntries(): GlossaryEntry[] {
-    return MEDICAL_GLOSSARY;
+  async getAllGlossaryEntries(): Promise<GlossaryEntry[]> {
+    const mod = await loadGlossary();
+    return mod.MEDICAL_GLOSSARY;
   }
 
-  getSpanishTranslations(): Record<string, string> {
-    return MEDICAL_TERMS_ES;
+  async getSpanishTranslations(): Promise<Record<string, string>> {
+    const mod = await loadTranslations();
+    return mod.MEDICAL_TERMS_ES;
   }
 
   // -- Explanation levels --
-  getAllExplanationLevels(): Record<ExplanationLevelNumber, ExplanationLevel> {
-    return EXPLANATION_LEVELS;
+  async getAllExplanationLevels(): Promise<Record<ExplanationLevelNumber, ExplanationLevel>> {
+    const mod = await loadEducation();
+    return mod.EXPLANATION_LEVELS;
   }
 }
 

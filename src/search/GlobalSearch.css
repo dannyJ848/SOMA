@@ -1,0 +1,124 @@
+/* ============================================
+ * Global Search Styles
+ *
+ * Styles for the GlobalSearch component, SearchResults,
+ * and knowledge-graph related item chips.
+ * ============================================ */
+
+/* --- Related Items (knowledge graph cross-references) --- */
+
+.related-items {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 12px 8px 44px; /* left padding aligns with result content (past icon) */
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.related-items-label {
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  padding-top: 3px;
+  font-weight: 500;
+}
+
+.related-items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.related-item-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 12px;
+  background: rgba(128, 128, 128, 0.06);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #374151;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.related-item-chip:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #1d4ed8;
+}
+
+.related-item-chip:active {
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.related-item-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.related-item-name {
+  font-weight: 500;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-item-rel {
+  color: #9ca3af;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+/* --- Result Item Wrapper (contains result + related items) --- */
+
+.result-item-wrapper {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.08);
+}
+
+.result-item-wrapper:last-child {
+  border-bottom: none;
+}
+
+.result-item-wrapper.selected {
+  background: rgba(59, 130, 246, 0.04);
+}
+
+/* --- Dark mode support --- */
+
+@media (prefers-color-scheme: dark) {
+  .related-items {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .related-items-label {
+    color: #9ca3af;
+  }
+
+  .related-item-chip {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #d1d5db;
+  }
+
+  .related-item-chip:hover {
+    background: rgba(96, 165, 250, 0.15);
+    border-color: rgba(96, 165, 250, 0.3);
+    color: #93c5fd;
+  }
+
+  .related-item-rel {
+    color: #6b7280;
+  }
+
+  .result-item-wrapper {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .result-item-wrapper.selected {
+    background: rgba(96, 165, 250, 0.06);
+  }
+}

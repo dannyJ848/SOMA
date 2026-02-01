@@ -10,6 +10,7 @@ export const prostateCancer: EducationalContent = {
   id: 'condition-prostate-cancer',
   type: 'condition',
   name: 'Prostate Cancer',
+  nameEs: 'Cáncer de Próstata',
   alternateNames: ['Prostate Adenocarcinoma', 'Prostatic Carcinoma', 'CaP'],
   hpoId: 'HP:0012125',
 

@@ -17,7 +17,27 @@ import { PersonalizedBodyModel } from './PersonalizedBodyModel';
 import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from '../hooks/useUserDemographics';
 import { calculateBodyProportions, type BodyProportions } from '../utils/bodyProportionCalculator';
 import { ANATOMICAL_LAYERS, type LayerDefinition } from '../LayerPanel';
-import type { BiologicalSelf } from './types';
+import type { BiologicalSelf, AnatomyPatientBridge, PatientCondition } from './types';
+import {
+  ControlledHealthOverlay,
+  useHealthOverlayControls,
+  HealthOverlayPanel,
+} from './HealthOverlay';
+import { createBridge } from './utils';
+
+// Content loading
+import {
+  useContentService,
+  type AnatomyRegion as ContentAnatomyRegion,
+  type AnatomySystem,
+  type BodySystemFocus,
+  type SymptomEntry,
+  type MedicalSpecialty,
+  type UnifiedSearchResult,
+} from '../services/ContentService';
+
+// Data-driven symptom indicators backed by the 155-symptom database
+import { DataDrivenSymptomIndicators } from './SymptomIndicators';
 
 // New navigation components
 import {
@@ -38,13 +58,40 @@ import {
 import {
   PanelManagerProvider,
   SmartPanelManager,
+  usePanelManager,
+  type PanelConfig,
+  type PanelContentProps,
 } from '../components/panels/SmartPanelManager';
 import { LayerController } from './LayerController';
+
+// Content panels for radial menu actions
+import { PathologyPanel } from '../components/panels/PathologyPanel';
+import { usePathologyContent } from '../components/panels/usePathologyContent';
+import { PhysiologyPanel } from '../components/panels/PhysiologyPanel';
+import { HistologyPanel } from '../components/panels/HistologyPanel';
+import { getRegionDisplayName } from '../utils/regionToSystemMapper';
+
+/** Structured anatomy context for the AI chat (mirrors ai/types.ts AnatomyChatContext) */
+interface AnatomyChatContext {
+  regionId: string;
+  regionName: string;
+  bodySystems: string[];
+  anatomyStructures: string[];
+  symptoms: string[];
+  conditions: string[];
+  specialties: string[];
+  complexityLevel: 1 | 2 | 3 | 4 | 5;
+  initialQuestion?: string;
+}
 
 interface AnatomyMainScreenProps {
   patientData?: BiologicalSelf;
   onRegionSelect?: (regionId: string, regionName: string) => void;
   onNavigateToDetail?: (regionId: string) => void;
+  /** Navigate to AI chat view with region context (structured context included when available) */
+  onNavigateToChat?: (regionId: string, regionName: string, chatContext?: AnatomyChatContext) => void;
+  /** Called when patient data is mutated (e.g. user marks a condition as theirs) */
+  onPatientDataChange?: (updatedData: BiologicalSelf) => void;
 }
 
 interface RegionContextMenuProps {
@@ -57,9 +104,74 @@ interface RegionContextMenuProps {
   onAskAI?: () => void;
 }
 
-interface HealthOverlayProps {
-  patientData: BiologicalSelf;
+// ============================================
+// Region-to-System Mapping
+// ============================================
+
+/**
+ * Maps UI region IDs (from the 3D body model) to the body system identifiers
+ * that ContentService understands. Some regions map to multiple systems.
+ *
+ * AnatomySystem values: 'nervous' | 'cardiovascular' | 'respiratory' | 'digestive'
+ *   | 'urinary' | 'reproductive' | 'musculoskeletal' | 'endocrine' | 'integumentary'
+ *   | 'lymphatic' | 'sensory'
+ *
+ * BodySystemFocus values: 'cardiovascular' | 'respiratory' | 'gastrointestinal'
+ *   | 'neurological' | 'musculoskeletal' | 'endocrine' | 'renal' | 'reproductive'
+ *   | 'hematologic' | 'immune' | 'integumentary' | 'hepatic' | 'lymphatic'
+ *   | 'psychiatric' | 'sensory' | 'multi-system'
+ */
+const REGION_TO_SYSTEMS: Record<string, { anatomy: AnatomySystem[]; specialty: BodySystemFocus[] }> = {
+  head:     { anatomy: ['nervous', 'sensory'],                  specialty: ['neurological', 'sensory'] },
+  neck:     { anatomy: ['nervous', 'endocrine', 'lymphatic'],   specialty: ['neurological', 'endocrine', 'lymphatic'] },
+  chest:    { anatomy: ['cardiovascular', 'respiratory'],       specialty: ['cardiovascular', 'respiratory'] },
+  heart:    { anatomy: ['cardiovascular'],                      specialty: ['cardiovascular'] },
+  abdomen:  { anatomy: ['digestive', 'urinary'],                specialty: ['gastrointestinal', 'renal'] },
+  stomach:  { anatomy: ['digestive'],                           specialty: ['gastrointestinal'] },
+  liver:    { anatomy: ['digestive'],                           specialty: ['hepatic', 'gastrointestinal'] },
+  leftArm:  { anatomy: ['musculoskeletal'],                     specialty: ['musculoskeletal'] },
+  rightArm: { anatomy: ['musculoskeletal'],                     specialty: ['musculoskeletal'] },
+  leftLeg:  { anatomy: ['musculoskeletal'],                     specialty: ['musculoskeletal'] },
+  rightLeg: { anatomy: ['musculoskeletal'],                     specialty: ['musculoskeletal'] },
+};
+
+/** Fallback when a region has no explicit mapping */
+const DEFAULT_REGION_SYSTEMS: { anatomy: AnatomySystem[]; specialty: BodySystemFocus[] } = {
+  anatomy: ['musculoskeletal'],
+  specialty: ['multi-system'],
+};
+
+// ============================================
+// Region Content Types
+// ============================================
+
+/** Content loaded from ContentService for a selected body region */
+export interface RegionContent {
+  /** The region ID this content was loaded for */
+  regionId: string;
+  /** Anatomy structures relevant to this region */
+  anatomyRegions: ContentAnatomyRegion[];
+  /** Symptoms associated with this region's body systems */
+  symptoms: SymptomEntry[];
+  /** Medical specialties relevant to this region */
+  specialties: MedicalSpecialty[];
+  /** Cross-content search results for the region name */
+  relatedContent: UnifiedSearchResult[];
+  /** Whether the content is currently being loaded */
+  isLoading: boolean;
+  /** Error message if content loading failed */
+  error: string | null;
 }
+
+const EMPTY_REGION_CONTENT: RegionContent = {
+  regionId: '',
+  anatomyRegions: [],
+  symptoms: [],
+  specialties: [],
+  relatedContent: [],
+  isLoading: false,
+  error: null,
+};
 
 // ============================================
 // Regional Context Menu Component
@@ -164,72 +276,44 @@ function RegionalContextMenu({
 // Health Overlay Component (3D)
 // ============================================
 
-function HealthOverlay({ patientData }: HealthOverlayProps) {
-  // Create visual indicators for health conditions in 3D space
-  // This component renders inside the Canvas
+/**
+ * HealthOverlay that uses the anatomy-patient bridge to map patient
+ * conditions, symptoms, lab results, and medications to 3D body regions.
+ *
+ * Accepts external controls via `useHealthOverlayControls` hook so the
+ * UI panel outside the Canvas can toggle individual layers and animations.
+ */
+interface WiredHealthOverlayProps {
+  patientData: BiologicalSelf;
+  controls: ReturnType<typeof useHealthOverlayControls>;
+  onRegionHover?: (regionId: string | null) => void;
+  onRegionClick?: (regionId: string) => void;
+}
 
-  const conditionMarkers = useMemo(() => {
-    if (!patientData.conditions || patientData.conditions.length === 0) return [];
+function HealthOverlay({
+  patientData,
+  controls,
+  onRegionHover,
+  onRegionClick,
+}: WiredHealthOverlayProps) {
+  // Build the anatomy-patient bridge from live patient data.
+  // The bridge maps conditions/symptoms/labs/medications to anatomical
+  // region IDs, producing Maps consumed by the sub-components.
+  const bridge: AnatomyPatientBridge = useMemo(() => {
+    return createBridge(patientData);
+  }, [patientData]);
 
-    return patientData.conditions
-      .filter(c => c.status === 'active')
-      .map(condition => ({
-        id: condition.id,
-        regions: [...condition.affectedRegions, ...condition.affectedOrgans],
-        severity: condition.severity,
-        color: condition.severity === 'severe'
-          ? '#ff4444'
-          : condition.severity === 'moderate'
-            ? '#ffaa00'
-            : '#44aa44',
-      }));
-  }, [patientData.conditions]);
-
-  const symptomMarkers = useMemo(() => {
-    if (!patientData.symptoms || patientData.symptoms.length === 0) return [];
-
-    return patientData.symptoms
-      .filter(s => s.severity > 3)
-      .map(symptom => ({
-        id: symptom.id,
-        location: symptom.location,
-        intensity: symptom.severity / 10,
-      }));
-  }, [patientData.symptoms]);
-
-  // Render health indicator spheres at affected regions
+  // Delegate rendering to the ControlledHealthOverlay which renders
+  // ConditionHighlights, SymptomIndicators, LabBadges, and
+  // MedicationTargets using the bridge Maps.
   return (
-    <group name="health-overlay">
-      {conditionMarkers.map(marker => (
-        <mesh
-          key={marker.id}
-          position={getRegionPosition(marker.regions[0])}
-          scale={[0.05, 0.05, 0.05]}
-        >
-          <sphereGeometry args={[1, 8, 8]} />
-          <meshBasicMaterial
-            color={marker.color}
-            transparent
-            opacity={0.6}
-          />
-        </mesh>
-      ))}
-
-      {symptomMarkers.map(marker => (
-        <mesh
-          key={marker.id}
-          position={getRegionPosition(marker.location)}
-          scale={[0.03 * marker.intensity, 0.03 * marker.intensity, 0.03 * marker.intensity]}
-        >
-          <sphereGeometry args={[1, 6, 6]} />
-          <meshBasicMaterial
-            color="#ff6600"
-            transparent
-            opacity={0.4 + marker.intensity * 0.4}
-          />
-        </mesh>
-      ))}
-    </group>
+    <ControlledHealthOverlay
+      patientData={patientData}
+      anatomyBridge={bridge}
+      onRegionHover={onRegionHover}
+      onRegionClick={onRegionClick}
+      controls={controls}
+    />
   );
 }
 
@@ -477,16 +561,622 @@ const TOOLBAR_SECTIONS = [
   { id: 'tools', label: 'Tools' },
 ];
 
+// ============================================
+// Panel IDs for SmartPanelManager
+// ============================================
+
+const PANEL_IDS = {
+  DETAIL: 'region-detail-panel',
+  PATHOLOGY: 'region-pathology-panel',
+  PHYSIOLOGY: 'region-physiology-panel',
+  HISTOLOGY: 'region-histology-panel',
+} as const;
+
+// ============================================
+// Shared region context for panel content
+// ============================================
+
+/**
+ * Module-level variable to share selected region data with panel wrapper
+ * components. This avoids prop-drilling through the SmartPanelManager
+ * component registry which only accepts PanelContentProps.
+ */
+let _sharedRegionContext: {
+  regionId: string;
+  regionName: string;
+  patientData?: BiologicalSelf;
+  regionContent?: RegionContent;
+  onAskAI?: (question: string) => void;
+  onNavigateToRegion?: (regionId: string) => void;
+  onPatientDataChange?: (updatedData: BiologicalSelf) => void;
+} | null = null;
+
+// ============================================
+// Panel Content Wrappers
+// ============================================
+
+/**
+ * Detail panel content showing anatomy overview + conditions summary
+ * for the selected region. Rendered by SmartPanelManager.
+ */
+function RegionDetailPanelContent({ onClose }: PanelContentProps) {
+  const ctx = _sharedRegionContext;
+  if (!ctx) {
+    return <div style={{ padding: 20, color: '#888' }}>No region selected.</div>;
+  }
+
+  const rc = ctx.regionContent;
+
+  const regionConditions = ctx.patientData?.conditions?.filter(c =>
+    c.affectedRegions?.some(r => r.toLowerCase().includes(ctx.regionId.toLowerCase())) ||
+    c.affectedOrgans?.some(r => r.toLowerCase().includes(ctx.regionId.toLowerCase()))
+  ) || [];
+
+  const regionSymptoms = ctx.patientData?.symptoms?.filter(s =>
+    s.location?.toLowerCase().includes(ctx.regionId.toLowerCase())
+  ) || [];
+
+  const regionMedications = ctx.patientData?.medications?.filter(m =>
+    m.targetOrgans?.some(r => r.toLowerCase().includes(ctx.regionId.toLowerCase())) ||
+    m.targetSystems?.some(r => r.toLowerCase().includes(ctx.regionId.toLowerCase()))
+  ) || [];
+
+  const sectionHeader = (title: string, color: string, count?: number) => (
+    <h4 style={{ margin: '0 0 8px', fontSize: 14, color }}>
+      {title}{count !== undefined ? ` (${count})` : ''}
+    </h4>
+  );
+
+  const card = (bg: string, borderColor: string | null, children: React.ReactNode, key?: string) => (
+    <div key={key} style={{
+      padding: '8px 12px',
+      marginBottom: 6,
+      background: bg,
+      borderRadius: 6,
+      fontSize: 13,
+      ...(borderColor ? { borderLeft: `3px solid ${borderColor}` } : {}),
+    }}>
+      {children}
+    </div>
+  );
+
+  return (
+    <div style={{ padding: 20, color: '#e0e0e0', fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif', overflowY: 'auto', maxHeight: '100%' }}>
+      <h3 style={{ margin: '0 0 4px', color: '#fff' }}>{ctx.regionName}</h3>
+      <p style={{ margin: '0 0 16px', fontSize: 13, color: '#888' }}>Region Details</p>
+
+      {/* --- ContentService: Anatomy Structures --- */}
+      {rc && rc.anatomyRegions.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Anatomy', '#818cf8')}
+          {rc.anatomyRegions.slice(0, 8).map(a => (
+            card('rgba(129,140,248,0.08)', null, (
+              <>
+                <div style={{ fontWeight: 500, fontSize: 14 }}>{a.name}</div>
+                {a.system && <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>{a.system}</div>}
+              </>
+            ), a.id)
+          ))}
+        </div>
+      )}
+
+      {/* --- ContentService: Common Symptoms --- */}
+      {rc && rc.symptoms.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Common Symptoms', '#a78bfa', rc.symptoms.length)}
+          {rc.symptoms.slice(0, 6).map(s => (
+            card('rgba(167,139,250,0.08)', null, (
+              <>
+                <div style={{ fontWeight: 500, fontSize: 13 }}>{s.name}</div>
+                {s.description && <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>{s.description}</div>}
+              </>
+            ), s.symptomId)
+          ))}
+        </div>
+      )}
+
+      {/* --- ContentService: Medical Specialties --- */}
+      {rc && rc.specialties.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Specialties', '#60a5fa', rc.specialties.length)}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {rc.specialties.map(sp => (
+              <span key={sp.specialtyId} style={{
+                padding: '4px 10px',
+                background: 'rgba(96,165,250,0.12)',
+                borderRadius: 12,
+                fontSize: 12,
+                color: '#93c5fd',
+              }}>
+                {sp.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* --- Patient Data: Conditions --- */}
+      {regionConditions.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Your Conditions', '#ef4444', regionConditions.length)}
+          {regionConditions.map(c => (
+            card('rgba(239,68,68,0.08)',
+              c.severity === 'severe' ? '#ef4444' : c.severity === 'moderate' ? '#f59e0b' : '#22c55e',
+              <>
+                <div style={{ fontWeight: 500, fontSize: 14 }}>{c.name}</div>
+                <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>
+                  {c.status} &middot; {c.severity}
+                </div>
+              </>, c.id)
+          ))}
+        </div>
+      )}
+
+      {/* --- Patient Data: Symptoms --- */}
+      {regionSymptoms.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Your Symptoms', '#f59e0b', regionSymptoms.length)}
+          {regionSymptoms.map(s => (
+            card('rgba(245,158,11,0.08)', null, (
+              <>{s.description} &middot; severity {s.severity}/10</>
+            ), s.id)
+          ))}
+        </div>
+      )}
+
+      {/* --- Patient Data: Medications --- */}
+      {regionMedications.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Your Medications', '#3b82f6', regionMedications.length)}
+          {regionMedications.map(m => (
+            card('rgba(59,130,246,0.08)', null, (
+              <>{m.name} &middot; {m.dosage}</>
+            ), m.id)
+          ))}
+        </div>
+      )}
+
+      {/* --- ContentService: Related Content --- */}
+      {rc && rc.relatedContent.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {sectionHeader('Related Topics', '#34d399', rc.relatedContent.length)}
+          {rc.relatedContent.slice(0, 5).map((r, i) => (
+            card('rgba(52,211,153,0.08)', null, (
+              <>
+                <div style={{ fontWeight: 500, fontSize: 13 }}>{r.name}</div>
+                <div style={{ fontSize: 11, color: '#888', marginTop: 2 }}>{r.type}</div>
+              </>
+            ), `related-${i}`)
+          ))}
+        </div>
+      )}
+
+      {/* --- Loading state --- */}
+      {rc?.isLoading && (
+        <p style={{ color: '#888', fontSize: 13 }}>Loading content...</p>
+      )}
+
+      {/* --- Empty state --- */}
+      {(!rc || (!rc.isLoading && rc.anatomyRegions.length === 0 && rc.symptoms.length === 0)) &&
+       regionConditions.length === 0 && regionSymptoms.length === 0 && regionMedications.length === 0 && (
+        <p style={{ color: '#666', fontSize: 14 }}>
+          No health data found for this region. Explore the encyclopedia panels for educational content.
+        </p>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Pathology panel wrapper that reads shared region context.
+ */
+function PathologyPanelContent({ onClose }: PanelContentProps) {
+  const ctx = _sharedRegionContext;
+  const [complexityLevel, setComplexityLevel] = useState<1 | 2 | 3 | 4 | 5>(3);
+
+  // Fetch pathology conditions so we can look up full condition data when marking as "my condition"
+  const { conditions: pathologyConditions } = usePathologyContent(
+    ctx?.regionId ?? '',
+    complexityLevel,
+  );
+
+  const handleMarkAsMyCondition = useCallback((conditionId: string) => {
+    if (!ctx?.patientData) return;
+
+    // Prevent duplicates: skip if the condition is already in the patient's list
+    if (ctx.patientData.conditions.some(c => c.id === conditionId)) return;
+
+    // Look up the full condition from the pathology content database
+    const pathCondition = pathologyConditions?.find(c => c.id === conditionId);
+
+    // Build a PatientCondition from the pathology content data
+    const newCondition: PatientCondition = {
+      id: conditionId,
+      name: pathCondition?.name ?? conditionId,
+      status: 'active',
+      severity: (pathCondition?.severity === 'critical' ? 'severe' : pathCondition?.severity) as PatientCondition['severity'] ?? 'moderate',
+      affectedRegions: pathCondition?.affectedRegions ?? (ctx.regionId ? [ctx.regionId] : []),
+      affectedOrgans: [],
+      icdCode: pathCondition?.icdCodes?.[0],
+    };
+
+    // Create an updated copy of patient data with the new condition appended
+    const updatedPatientData: BiologicalSelf = {
+      ...ctx.patientData,
+      conditions: [...ctx.patientData.conditions, newCondition],
+    };
+
+    // Notify the parent so it can persist the change and trigger a re-render
+    if (ctx.onPatientDataChange) {
+      ctx.onPatientDataChange(updatedPatientData);
+    }
+  }, [ctx, pathologyConditions]);
+
+  if (!ctx) {
+    return <div style={{ padding: 20, color: '#888' }}>No region selected.</div>;
+  }
+
+  const userConditionIds = ctx.patientData?.conditions?.map(c => c.id) || [];
+
+  return (
+    <PathologyPanel
+      regionId={ctx.regionId}
+      regionName={ctx.regionName}
+      complexityLevel={complexityLevel}
+      userConditions={userConditionIds}
+      onComplexityChange={(level) => setComplexityLevel(level as 1 | 2 | 3 | 4 | 5)}
+      onConditionSelect={(conditionId) => {
+        if (ctx.onAskAI) {
+          ctx.onAskAI(`Tell me about the condition "${conditionId}" affecting the ${ctx.regionName}. What are its causes, symptoms, diagnosis, and treatment options?`);
+        }
+      }}
+      onMarkAsMyCondition={handleMarkAsMyCondition}
+      onAskAI={(question) => ctx.onAskAI ? ctx.onAskAI(question) : console.log('[PathologyPanel] Ask AI:', question)}
+      onClose={onClose}
+    />
+  );
+}
+
+/**
+ * Physiology panel wrapper that reads shared region context.
+ */
+function PhysiologyPanelContent({ onClose }: PanelContentProps) {
+  const ctx = _sharedRegionContext;
+  const [complexityLevel, setComplexityLevel] = useState<1 | 2 | 3 | 4 | 5>(3);
+
+  if (!ctx) {
+    return <div style={{ padding: 20, color: '#888' }}>No region selected.</div>;
+  }
+
+  return (
+    <PhysiologyPanel
+      regionId={ctx.regionId}
+      regionName={ctx.regionName}
+      complexityLevel={complexityLevel}
+      onComplexityChange={(level) => setComplexityLevel(level as 1 | 2 | 3 | 4 | 5)}
+      onAskAI={(question) => ctx.onAskAI ? ctx.onAskAI(question) : console.log('[PhysiologyPanel] Ask AI:', question)}
+      onNavigateToRegion={(regionId) => ctx.onNavigateToRegion ? ctx.onNavigateToRegion(regionId) : console.log('[PhysiologyPanel] Navigate to region:', regionId)}
+      onClose={onClose}
+    />
+  );
+}
+
+/**
+ * Histology panel wrapper that reads shared region context.
+ */
+function HistologyPanelContent({ onClose }: PanelContentProps) {
+  const ctx = _sharedRegionContext;
+  const [complexityLevel, setComplexityLevel] = useState<1 | 2 | 3 | 4 | 5>(3);
+
+  if (!ctx) {
+    return <div style={{ padding: 20, color: '#888' }}>No region selected.</div>;
+  }
+
+  return (
+    <HistologyPanel
+      regionId={ctx.regionId}
+      regionName={ctx.regionName}
+      complexityLevel={complexityLevel}
+      onComplexityChange={(level) => setComplexityLevel(level as 1 | 2 | 3 | 4 | 5)}
+      onAskAI={(question) => ctx.onAskAI ? ctx.onAskAI(question) : console.log('[HistologyPanel] Ask AI:', question)}
+      onClose={onClose}
+    />
+  );
+}
+
+// ============================================
+// Panel Configurations
+// ============================================
+
+const DETAIL_PANEL_CONFIG: PanelConfig = {
+  id: PANEL_IDS.DETAIL,
+  title: 'Region Details',
+  component: RegionDetailPanelContent,
+  defaultPosition: 'left',
+  minSize: { width: 300, height: 300 },
+  defaultSize: { width: 360, height: 500 },
+  resizable: true,
+  priority: 20,
+};
+
+const PATHOLOGY_PANEL_CONFIG: PanelConfig = {
+  id: PANEL_IDS.PATHOLOGY,
+  title: 'Pathology',
+  component: PathologyPanelContent,
+  defaultPosition: 'left',
+  minSize: { width: 320, height: 400 },
+  defaultSize: { width: 380, height: 600 },
+  resizable: true,
+  priority: 15,
+};
+
+const PHYSIOLOGY_PANEL_CONFIG: PanelConfig = {
+  id: PANEL_IDS.PHYSIOLOGY,
+  title: 'Physiology',
+  component: PhysiologyPanelContent,
+  defaultPosition: 'left',
+  minSize: { width: 320, height: 400 },
+  defaultSize: { width: 380, height: 600 },
+  resizable: true,
+  priority: 15,
+};
+
+const HISTOLOGY_PANEL_CONFIG: PanelConfig = {
+  id: PANEL_IDS.HISTOLOGY,
+  title: 'Histology',
+  component: HistologyPanelContent,
+  defaultPosition: 'right',
+  minSize: { width: 360, height: 400 },
+  defaultSize: { width: 400, height: 600 },
+  resizable: true,
+  priority: 15,
+};
+
+// ============================================
+// Panel Registration Hook
+// ============================================
+
+/**
+ * Registers the content panels with SmartPanelManager.
+ * Must be used inside PanelManagerProvider.
+ */
+function useRegisterContentPanels() {
+  const panelManager = usePanelManager();
+
+  useEffect(() => {
+    panelManager.registerPanel(DETAIL_PANEL_CONFIG);
+    panelManager.registerPanel(PATHOLOGY_PANEL_CONFIG);
+    panelManager.registerPanel(PHYSIOLOGY_PANEL_CONFIG);
+    panelManager.registerPanel(HISTOLOGY_PANEL_CONFIG);
+
+    return () => {
+      panelManager.unregisterPanel(PANEL_IDS.DETAIL);
+      panelManager.unregisterPanel(PANEL_IDS.PATHOLOGY);
+      panelManager.unregisterPanel(PANEL_IDS.PHYSIOLOGY);
+      panelManager.unregisterPanel(PANEL_IDS.HISTOLOGY);
+    };
+  }, [panelManager]);
+
+  return panelManager;
+}
+
+/**
+ * Inner component that registers content panels with SmartPanelManager
+ * and keeps the shared region context in sync.
+ */
+function ContentPanelRegistrar({
+  contextMenuRegion,
+  selectedRegion,
+  selectedRegionName,
+  patientData,
+  regionContent,
+  onAskAI,
+  onNavigateToRegion,
+  onPatientDataChange,
+  panelActionsRef,
+}: {
+  contextMenuRegion: { id: string; name: string } | null;
+  selectedRegion: string | null;
+  selectedRegionName: string;
+  patientData?: BiologicalSelf;
+  regionContent?: RegionContent;
+  onAskAI?: (question: string) => void;
+  onNavigateToRegion?: (regionId: string) => void;
+  onPatientDataChange?: (updatedData: BiologicalSelf) => void;
+  panelActionsRef: React.MutableRefObject<{
+    openPanel: (id: string) => void;
+    closePanel: (id: string) => void;
+  } | null>;
+}) {
+  const panelManager = useRegisterContentPanels();
+
+  // Expose panel manager actions to the parent via ref
+  useEffect(() => {
+    panelActionsRef.current = {
+      openPanel: panelManager.openPanel,
+      closePanel: panelManager.closePanel,
+    };
+    return () => {
+      panelActionsRef.current = null;
+    };
+  }, [panelManager, panelActionsRef]);
+
+  // Keep shared context in sync so panel wrapper components can read it.
+  // Prefer contextMenuRegion when available, fall back to selectedRegion.
+  useEffect(() => {
+    if (contextMenuRegion) {
+      _sharedRegionContext = {
+        regionId: contextMenuRegion.id,
+        regionName: contextMenuRegion.name,
+        patientData,
+        regionContent,
+        onAskAI,
+        onNavigateToRegion,
+        onPatientDataChange,
+      };
+    } else if (selectedRegion) {
+      _sharedRegionContext = {
+        regionId: selectedRegion,
+        regionName: selectedRegionName,
+        patientData,
+        regionContent,
+        onAskAI,
+        onNavigateToRegion,
+        onPatientDataChange,
+      };
+    }
+  }, [contextMenuRegion, selectedRegion, selectedRegionName, patientData, regionContent, onAskAI, onNavigateToRegion, onPatientDataChange]);
+
+  return null;
+}
+
+// ============================================
+// Category Panel Buttons
+// ============================================
+
+/**
+ * Displays Pathology / Physiology / Histology category buttons when a region
+ * is selected. Clicking a button opens the corresponding panel via
+ * SmartPanelManager (panels dock to the right and slide in; on mobile they
+ * become bottom sheets).
+ *
+ * Must be rendered inside PanelManagerProvider.
+ */
+function CategoryPanelButtons() {
+  const { openPanel, closePanel, getPanelState } = usePanelManager();
+
+  const handleTogglePanel = useCallback((panelId: string) => {
+    const state = getPanelState(panelId);
+    if (state?.isOpen) {
+      closePanel(panelId);
+    } else {
+      openPanel(panelId);
+    }
+  }, [openPanel, closePanel, getPanelState]);
+
+  const pathologyOpen = getPanelState(PANEL_IDS.PATHOLOGY)?.isOpen ?? false;
+  const physiologyOpen = getPanelState(PANEL_IDS.PHYSIOLOGY)?.isOpen ?? false;
+  const histologyOpen = getPanelState(PANEL_IDS.HISTOLOGY)?.isOpen ?? false;
+
+  const btnBase: React.CSSProperties = {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '4px',
+    padding: '10px 14px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontSize: '13px',
+    fontWeight: 500,
+    transition: 'all 0.2s ease',
+  };
+
+  return (
+    <div
+      className="category-panel-buttons"
+      style={{
+        display: 'flex',
+        gap: '8px',
+        padding: '12px 16px',
+        background: 'rgba(26, 26, 26, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderRadius: '12px',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+      }}
+    >
+      <button
+        onClick={() => handleTogglePanel(PANEL_IDS.PATHOLOGY)}
+        style={{
+          ...btnBase,
+          background: pathologyOpen ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.05)',
+          border: pathologyOpen ? '1px solid rgba(239,68,68,0.4)' : '1px solid rgba(255,255,255,0.1)',
+          color: pathologyOpen ? '#f87171' : '#ccc',
+        }}
+        aria-pressed={pathologyOpen}
+        title="View pathology panel"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+        </svg>
+        Pathology
+      </button>
+
+      <button
+        onClick={() => handleTogglePanel(PANEL_IDS.PHYSIOLOGY)}
+        style={{
+          ...btnBase,
+          background: physiologyOpen ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.05)',
+          border: physiologyOpen ? '1px solid rgba(59,130,246,0.4)' : '1px solid rgba(255,255,255,0.1)',
+          color: physiologyOpen ? '#60a5fa' : '#ccc',
+        }}
+        aria-pressed={physiologyOpen}
+        title="View physiology panel"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+        Physiology
+      </button>
+
+      <button
+        onClick={() => handleTogglePanel(PANEL_IDS.HISTOLOGY)}
+        style={{
+          ...btnBase,
+          background: histologyOpen ? 'rgba(168,85,247,0.2)' : 'rgba(255,255,255,0.05)',
+          border: histologyOpen ? '1px solid rgba(168,85,247,0.4)' : '1px solid rgba(255,255,255,0.1)',
+          color: histologyOpen ? '#c084fc' : '#ccc',
+        }}
+        aria-pressed={histologyOpen}
+        title="View histology panel"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="5" r="2"/>
+          <path d="M12 7v3M9 10h6M12 10v8"/>
+          <ellipse cx="12" cy="18" rx="4" ry="2"/>
+        </svg>
+        Histology
+      </button>
+    </div>
+  );
+}
+
 export function AnatomyMainScreen({
   patientData,
   onRegionSelect,
   onNavigateToDetail,
+  onNavigateToChat,
+  onPatientDataChange,
 }: AnatomyMainScreenProps) {
+  // Content service for loading region-specific content
+  const contentService = useContentService();
+
   // State
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedRegionName, setSelectedRegionName] = useState<string>('');
   const [activeLayers, setActiveLayers] = useState<string[]>(['integumentary', 'muscular', 'skeletal']);
   const [showHealthOverlay, setShowHealthOverlay] = useState(true);
+  const healthOverlayControls = useHealthOverlayControls();
+  const [regionContent, setRegionContent] = useState<RegionContent>(EMPTY_REGION_CONTENT);
+
+  // Compute summary stats for the HealthOverlayPanel UI
+  const healthOverlayStats = useMemo(() => {
+    if (!patientData) return undefined;
+    return {
+      conditionCount: patientData.conditions?.length ?? 0,
+      activeConditions: patientData.conditions?.filter(
+        c => c.status === 'active' || c.status === 'chronic'
+      ).length ?? 0,
+      symptomCount: patientData.symptoms?.length ?? 0,
+      severeSymptoms: patientData.symptoms?.filter(s => s.severity >= 7).length ?? 0,
+      abnormalLabs: patientData.labResults?.filter(l => l.status !== 'normal').length ?? 0,
+      criticalLabs: patientData.labResults?.filter(
+        l => l.status?.includes('critical')
+      ).length ?? 0,
+      medicationCount: patientData.medications?.length ?? 0,
+    };
+  }, [patientData]);
 
   // iOS WebGL context loss recovery state
   const [isContextLost, setIsContextLost] = useState(false);
@@ -564,7 +1254,93 @@ export function AnatomyMainScreen({
         true
       );
     }
-  }, [onRegionSelect]);
+
+    // ------------------------------------------------------------------
+    // Load content from ContentService for the selected region
+    // ------------------------------------------------------------------
+    setRegionContent({
+      ...EMPTY_REGION_CONTENT,
+      regionId,
+      isLoading: true,
+    });
+
+    const systemMapping = REGION_TO_SYSTEMS[regionId] ?? DEFAULT_REGION_SYSTEMS;
+
+    // Fire all content lookups in parallel
+    const anatomyPromises = systemMapping.anatomy.map((sys) =>
+      contentService.getAnatomyBySystem(sys),
+    );
+    const symptomPromises = systemMapping.anatomy.map((sys) =>
+      contentService.getSymptomsBySystem(sys),
+    );
+    const specialtyPromises = systemMapping.specialty.map((sys) =>
+      contentService.getSpecialtiesForBodySystem(sys),
+    );
+    const searchPromise = contentService.searchAll(regionName, { limit: 10 });
+
+    Promise.all([
+      Promise.all(anatomyPromises),
+      Promise.all(symptomPromises),
+      Promise.all(specialtyPromises),
+      searchPromise,
+    ])
+      .then(([anatomyArrays, symptomArrays, specialtyArrays, searchResults]) => {
+        // Flatten and deduplicate by id/name
+        const seenAnatomy = new Set<string>();
+        const dedupedAnatomy: ContentAnatomyRegion[] = [];
+        for (const arr of anatomyArrays) {
+          for (const r of arr) {
+            if (!seenAnatomy.has(r.id)) {
+              seenAnatomy.add(r.id);
+              dedupedAnatomy.push(r);
+            }
+          }
+        }
+
+        const seenSymptom = new Set<string>();
+        const dedupedSymptoms: SymptomEntry[] = [];
+        for (const arr of symptomArrays) {
+          for (const s of arr) {
+            const key = s.name;
+            if (!seenSymptom.has(key)) {
+              seenSymptom.add(key);
+              dedupedSymptoms.push(s);
+            }
+          }
+        }
+
+        const seenSpecialty = new Set<string>();
+        const dedupedSpecialties: MedicalSpecialty[] = [];
+        for (const arr of specialtyArrays) {
+          for (const sp of arr) {
+            const key = sp.name;
+            if (!seenSpecialty.has(key)) {
+              seenSpecialty.add(key);
+              dedupedSpecialties.push(sp);
+            }
+          }
+        }
+
+        setRegionContent({
+          regionId,
+          anatomyRegions: dedupedAnatomy,
+          symptoms: dedupedSymptoms,
+          specialties: dedupedSpecialties,
+          relatedContent: searchResults,
+          isLoading: false,
+          error: null,
+        });
+      })
+      .catch((err) => {
+        console.error('[AnatomyMainScreen] Failed to load region content:', err);
+        setRegionContent({
+          ...EMPTY_REGION_CONTENT,
+          regionId,
+          isLoading: false,
+          error: err instanceof Error ? err.message : 'Failed to load content',
+        });
+      });
+  }, [onRegionSelect, contentService]);
 
   const handleCloseContextMenu = useCallback(() => {
     setSelectedRegion(null);
@@ -591,12 +1367,111 @@ export function AnatomyMainScreen({
     }
   }, [selectedRegion, selectedRegionName]);
 
+  // Ref to hold panel manager open/close actions.
+  // Populated by ContentPanelRegistrar which is rendered inside PanelManagerProvider.
+  const panelActionsRef = useRef<{
+    openPanel: (id: string) => void;
+    closePanel: (id: string) => void;
+  } | null>(null);
+
+  /**
+   * Build a structured AnatomyChatContext from the current region selection,
+   * loaded ContentService data, and the REGION_TO_SYSTEMS mapping.
+   */
+  const buildChatContext = useCallback((rId: string, rName: string): AnatomyChatContext => {
+    const systemMapping = REGION_TO_SYSTEMS[rId] ?? DEFAULT_REGION_SYSTEMS;
+
+    // Pull data from the regionContent state (populated by ContentService)
+    const content = regionContent.regionId === rId ? regionContent : EMPTY_REGION_CONTENT;
+
+    // Anatomy structure names
+    const anatomyStructures = content.anatomyRegions.map(a => a.name ?? a.id);
+
+    // Symptom names
+    const symptoms = content.symptoms.map(s => s.name);
+
+    // Condition names from patient data that match this region
+    const patientConditions = patientData?.conditions
+      ?.filter(c =>
+        c.affectedRegions?.some(r => r.toLowerCase().includes(rId.toLowerCase())) ||
+        c.affectedOrgans?.some(r => r.toLowerCase().includes(rId.toLowerCase()))
+      )
+      .map(c => c.name) ?? [];
+
+    // Specialty names
+    const specialties = content.specialties.map(s => s.name);
+
+    return {
+      regionId: rId,
+      regionName: rName,
+      bodySystems: [...systemMapping.anatomy, ...systemMapping.specialty.filter(s => !systemMapping.anatomy.includes(s as any))],
+      anatomyStructures,
+      symptoms,
+      conditions: patientConditions,
+      specialties,
+      complexityLevel: 3,
+      initialQuestion: `Tell me about the ${rName}. What is its structure, function, and clinical significance?`,
+    };
+  }, [regionContent, patientData]);
+
+  /**
+   * Handler for "Ask AI" buttons inside panel wrappers.
+   * Navigates to the AI chat view with the current region context and the user's question.
+   */
+  const handlePanelAskAI = useCallback((question: string) => {
+    if (!onNavigateToChat) return;
+    const rId = _sharedRegionContext?.regionId ?? selectedRegion ?? '';
+    const rName = _sharedRegionContext?.regionName ?? selectedRegionName ?? '';
+    if (!rId) return;
+    const chatCtx = buildChatContext(rId, rName);
+    chatCtx.initialQuestion = question;
+    onNavigateToChat(rId, rName, chatCtx);
+  }, [onNavigateToChat, buildChatContext, selectedRegion, selectedRegionName]);
+
+  /**
+   * Handler for "navigate to region" actions from panel wrappers (e.g. PhysiologyPanel).
+   * Moves the 3D camera to focus on the target region and updates the selected region state.
+   */
+  const handleNavigateToRegion = useCallback((regionId: string) => {
+    const regionName = getRegionDisplayName(regionId) || formatRegionName(regionId);
+
+    // Update selected region state
+    setSelectedRegion(regionId);
+    setSelectedRegionName(regionName);
+
+    // Update anatomical breadcrumbs
+    const hierarchy = ANATOMICAL_HIERARCHY[regionId] || [];
+    setAnatomicalPath(hierarchy);
+
+    // Move camera to the target region
+    if (cameraControlsRef.current) {
+      const position = getRegionPosition(regionId);
+      cameraControlsRef.current.focusOnPoint(
+        new THREE.Vector3(...position),
+        2,
+        true
+      );
+    }
+  }, []);
+
   const handleRadialMenuSelect = useCallback((action: RadialMenuAction) => {
     if (!contextMenuRegion) return;
 
+    // Update shared region context so panel wrappers display the correct region data
+    _sharedRegionContext = {
+      regionId: contextMenuRegion.id,
+      regionName: contextMenuRegion.name,
+      patientData,
+      regionContent,
+      onAskAI: handlePanelAskAI,
+      onNavigateToRegion: handleNavigateToRegion,
+      onPatientDataChange,
+    };
+
     switch (action) {
       case 'view-details':
-        onNavigateToDetail?.(contextMenuRegion.id);
+        // Open the region detail panel via SmartPanelManager
+        panelActionsRef.current?.openPanel(PANEL_IDS.DETAIL);
         break;
       case 'isolate-region':
         // Isolate to just the selected region layers
@@ -615,21 +1490,33 @@ export function AnatomyMainScreen({
         setActiveLayers(['skeletal']);
         break;
       case 'show-layers':
-        // Show all layers
-        setActiveLayers(ANATOMICAL_LAYERS.map(l => l.id));
+        // Toggle layer visibility: if all visible, reset to defaults; otherwise show all
+        setActiveLayers(prev => {
+          const allLayerIds = ANATOMICAL_LAYERS.map(l => l.id);
+          const allShowing = allLayerIds.every(id => prev.includes(id));
+          return allShowing ? ['integumentary', 'muscular', 'skeletal'] : allLayerIds;
+        });
         break;
       case 'ask-ai':
-        console.log('Ask AI about', contextMenuRegion.name);
+        // Navigate to AI chat with the selected region as context
+        if (onNavigateToChat) {
+          const chatCtx = buildChatContext(contextMenuRegion.id, contextMenuRegion.name);
+          onNavigateToChat(contextMenuRegion.id, contextMenuRegion.name, chatCtx);
+        } else {
+          // Fallback: open the detail panel when no chat handler is provided
+          panelActionsRef.current?.openPanel(PANEL_IDS.DETAIL);
+        }
         break;
       case 'add-favorite':
-        console.log('Add to favorites:', contextMenuRegion.id);
+        // Open pathology panel (repurposed as "My Health" when patient data exists)
+        panelActionsRef.current?.openPanel(PANEL_IDS.PATHOLOGY);
         break;
       case 'share':
-        console.log('Share:', contextMenuRegion.id);
+        console.log('[AnatomyMainScreen] Share:', contextMenuRegion.id);
         break;
     }
     setRadialMenuOpen(false);
-  }, [contextMenuRegion, onNavigateToDetail]);
+  }, [contextMenuRegion, patientData, onNavigateToChat, buildChatContext, handleNavigateToRegion, onPatientDataChange]);
 
   const handleRadialMenuClose = useCallback(() => {
     setRadialMenuOpen(false);
@@ -749,6 +1636,19 @@ export function AnatomyMainScreen({
 
   return (
     <PanelManagerProvider storageKey="anatomy-main-screen-panels">
+      {/* Register content panels and sync region context with SmartPanelManager */}
+      <ContentPanelRegistrar
+        contextMenuRegion={contextMenuRegion}
+        selectedRegion={selectedRegion}
+        selectedRegionName={selectedRegionName}
+        patientData={patientData}
+        regionContent={regionContent}
+        onAskAI={handlePanelAskAI}
+        onNavigateToRegion={handleNavigateToRegion}
+        onPatientDataChange={onPatientDataChange}
+        panelActionsRef={panelActionsRef}
+      />
+
       <div className="anatomy-main-screen">
         {/* Spatial Breadcrumbs - shows anatomical hierarchy */}
         <SpatialBreadcrumbs
@@ -917,18 +1817,38 @@ export function AnatomyMainScreen({
               <directionalLight position={[10, 10, 5]} intensity={0.8} />
               <directionalLight position={[-5, 5, -5]} intensity={0.3} />
 
-              {/* 3D Body Model */}
+              {/* 3D Body Model - wired to display patient-specific data */}
               <PersonalizedBodyModel
                 bodyProportions={bodyProportions}
                 activeLayers={activeLayers}
                 onRegionSelect={handleRegionSelect}
                 selectedRegion={selectedRegion}
+                patientData={patientData}
+                showHealthOverlay={showHealthOverlay}
+                animationsEnabled={healthOverlayControls.animationsEnabled}
+                medicationHighlightMode="hover"
               />
 
-              {/* Health Overlay */}
+              {/* Health Overlay - bridge-based visualization of patient data
+                  rendered as a sibling so its shader-based highlights layer on
+                  top of the body model meshes with correct depth ordering */}
               {showHealthOverlay && patientData && (
-                <HealthOverlay patientData={patientData} />
+                <HealthOverlay
+                  patientData={patientData}
+                  controls={healthOverlayControls}
+                />
               )}
+
+              {/* Data-driven symptom indicators — fetches real symptoms from the
+                  155-symptom database for the selected body region. Clicking an
+                  indicator loads full SymptomInfo (possible causes, red flags,
+                  home management, when-to-see-doctor guidance). */}
+              <DataDrivenSymptomIndicators
+                regionId={selectedRegion}
+                visible={showHealthOverlay}
+                showLabels={false}
+                maxSymptoms={8}
+              />
 
               {/* Enhanced Camera Controls - replaces OrbitControls */}
               <EnhancedCameraControls
@@ -1043,6 +1963,32 @@ export function AnatomyMainScreen({
               <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
             </svg>
           </button>
+
+          {/* Health Overlay Panel - granular controls for overlay layers */}
+          {showHealthOverlay && patientData && (
+            <div
+              className="health-overlay-panel-container"
+              style={{
+                position: 'absolute',
+                bottom: '120px',
+                left: '16px',
+                zIndex: 50,
+                maxWidth: '260px',
+                background: 'rgba(26, 26, 26, 0.85)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                borderRadius: '12px',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                color: '#e0e0e0',
+                fontSize: '13px',
+              }}
+            >
+              <HealthOverlayPanel
+                controls={healthOverlayControls}
+                stats={healthOverlayStats}
+              />
+            </div>
+          )}
         </div>
 
         {/* Floating Toolbar - anatomy-specific tools */}
@@ -1083,17 +2029,77 @@ export function AnatomyMainScreen({
           radius={110}
         />
 
-        {/* Regional context menu - shows when region selected (legacy, can be removed or kept as additional info panel) */}
+        {/* Regional context menu - shows when region selected */}
         {selectedRegion && (
-          <RegionalContextMenu
-            regionId={selectedRegion}
-            patientData={patientData}
-            onClose={handleCloseContextMenu}
-            onViewDetails={handleViewDetails}
-            onViewSymptoms={() => console.log('View symptoms for', selectedRegion)}
-            onViewMedications={() => console.log('View medications for', selectedRegion)}
-            onAskAI={() => console.log('Ask AI about', selectedRegionName)}
-          />
+          <>
+            <RegionalContextMenu
+              regionId={selectedRegion}
+              patientData={patientData}
+              onClose={handleCloseContextMenu}
+              onViewDetails={handleViewDetails}
+              onViewSymptoms={() => {
+                // Update shared context so the detail panel shows the correct region
+                _sharedRegionContext = {
+                  regionId: selectedRegion,
+                  regionName: selectedRegionName,
+                  patientData,
+                  regionContent,
+                  onAskAI: handlePanelAskAI,
+                  onNavigateToRegion: handleNavigateToRegion,
+                  onPatientDataChange,
+                };
+                // Open the detail panel which displays symptoms from ContentService + patient data
+                panelActionsRef.current?.openPanel(PANEL_IDS.DETAIL);
+                // If AI chat is available, navigate with a symptoms-focused question
+                if (onNavigateToChat) {
+                  const chatCtx = buildChatContext(selectedRegion, selectedRegionName);
+                  chatCtx.initialQuestion = `What are the common symptoms affecting the ${selectedRegionName}?`;
+                  onNavigateToChat(selectedRegion, selectedRegionName, chatCtx);
+                }
+              }}
+              onViewMedications={() => {
+                // Update shared context so the detail panel shows the correct region
+                _sharedRegionContext = {
+                  regionId: selectedRegion,
+                  regionName: selectedRegionName,
+                  patientData,
+                  regionContent,
+                  onAskAI: handlePanelAskAI,
+                  onNavigateToRegion: handleNavigateToRegion,
+                  onPatientDataChange,
+                };
+                // Open the detail panel which displays medications from patient data
+                panelActionsRef.current?.openPanel(PANEL_IDS.DETAIL);
+                // If AI chat is available, navigate with a medications-focused question
+                if (onNavigateToChat) {
+                  const chatCtx = buildChatContext(selectedRegion, selectedRegionName);
+                  chatCtx.initialQuestion = `What medications are commonly used for conditions affecting the ${selectedRegionName}?`;
+                  onNavigateToChat(selectedRegion, selectedRegionName, chatCtx);
+                }
+              }}
+              onAskAI={() => {
+                if (onNavigateToChat && selectedRegion) {
+                  const chatCtx = buildChatContext(selectedRegion, selectedRegionName);
+                  onNavigateToChat(selectedRegion, selectedRegionName, chatCtx);
+                }
+              }}
+            />
+            {/* Category buttons: open Pathology / Physiology / Histology panels */}
+            <div
+              className="category-panel-buttons-container"
+              style={{
+                position: 'absolute',
+                bottom: '16px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 90,
+                maxWidth: '340px',
+                width: '90%',
+              }}
+            >
+              <CategoryPanelButtons />
+            </div>
+          </>
         )}
 
         {/* Help hint when nothing selected */}

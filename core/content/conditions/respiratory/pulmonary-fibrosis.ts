@@ -10,6 +10,7 @@ export const pulmonaryFibrosis: EducationalContent = {
   id: 'condition-pulmonary-fibrosis',
   type: 'condition',
   name: 'Pulmonary Fibrosis',
+  nameEs: 'Fibrosis Pulmonar',
   alternateNames: ['Idiopathic Pulmonary Fibrosis', 'IPF', 'Interstitial Lung Disease', 'ILD'],
   hpoId: 'HP:0002206',
 

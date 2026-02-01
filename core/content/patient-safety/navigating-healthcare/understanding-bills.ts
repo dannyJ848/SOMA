@@ -4,6 +4,7 @@ export const understandingBillsContent: EducationalContent = {
   id: 'understanding-bills',
   type: 'concept',
   name: 'Understanding Medical Bills',
+  nameEs: 'Entendiendo las Facturas Médicas',
   alternateNames: ['Medical Billing', 'Healthcare Costs', 'Medical Charges'],
   levels: {
     1: {

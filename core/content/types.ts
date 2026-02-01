@@ -115,6 +115,7 @@ export interface EducationalContent {
   id: string;                // Unique identifier
   type: ContentType;
   name: string;              // Primary name
+  nameEs?: string;           // Spanish name
   alternateNames?: string[]; // Synonyms, abbreviations
   fmaId?: string;            // Foundational Model of Anatomy ID
   hpoId?: string;            // Human Phenotype Ontology ID (for conditions/symptoms)

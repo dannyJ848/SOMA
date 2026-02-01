@@ -13,3 +13,18 @@ export type {
 
 export { usePatientDataForRegion } from './usePatientDataForRegion';
 export type { PatientRegionData } from './usePatientDataForRegion';
+
+export { useMedicationPharmacology } from './useMedicationPharmacology';
+export type {
+  EnrichedMedicationTarget,
+  EnrichedMedicationData,
+  SideEffectExplanationSummary,
+  InteractionSummary,
+  PKSummary,
+} from './useMedicationPharmacology';
+
+export { useConditionHighlightsBridge } from './useConditionHighlightsBridge';
+export type {
+  BridgeableCondition,
+  ConditionHighlightsBridgeResult,
+} from './useConditionHighlightsBridge';

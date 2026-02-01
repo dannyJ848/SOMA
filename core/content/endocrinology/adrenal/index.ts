@@ -2,9 +2,9 @@
  * Adrenal Endocrinology Content Index
  */
 
-export { cushingSyndrome } from './cushing-syndrome.js';
-export { addisonDisease } from './addison-disease.js';
-export { pheochromocytoma } from './pheochromocytoma.js';
+export { cushingSyndrome } from './cushing-syndrome';
+export { addisonDisease } from './addison-disease';
+export { pheochromocytoma } from './pheochromocytoma';
 
 export const ADRENAL_CONTENT = {
   id: 'endocrinology-adrenal',

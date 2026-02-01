@@ -226,6 +226,36 @@ export interface AIQuiz {
 }
 
 // ============================================================================
+// Anatomy Chat Context Types
+// ============================================================================
+
+/**
+ * Structured context passed from the anatomy screen to the AI chat interface.
+ * Carries region data, body system info, conditions, and complexity so the
+ * chat can build a rich, contextual system prompt.
+ */
+export interface AnatomyChatContext {
+  /** The region ID from the 3D model (e.g. "heart", "chest", "leftArm") */
+  regionId: string;
+  /** Human-readable region name (e.g. "Heart", "Chest") */
+  regionName: string;
+  /** Body systems associated with this region */
+  bodySystems: string[];
+  /** Anatomy structures discovered via ContentService */
+  anatomyStructures: string[];
+  /** Symptoms associated with this region's body systems */
+  symptoms: string[];
+  /** Conditions relevant to this region (from patient data or content) */
+  conditions: string[];
+  /** Medical specialties relevant to this region */
+  specialties: string[];
+  /** Complexity / explanation level (1-5) */
+  complexityLevel: ComplexityLevel;
+  /** Optional initial question the user wants answered */
+  initialQuestion?: string;
+}
+
+// ============================================================================
 // Navigation Types
 // ============================================================================
 

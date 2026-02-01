@@ -2,8 +2,8 @@
  * Metabolic Disorders Content Index
  */
 
-export { metabolicSyndrome } from './metabolic-syndrome.js';
-export { obesityEndocrine } from './obesity-endocrine.js';
+export { metabolicSyndrome } from './metabolic-syndrome';
+export { obesityEndocrine } from './obesity-endocrine';
 
 export const METABOLIC_CONTENT = {
   id: 'endocrinology-metabolic',

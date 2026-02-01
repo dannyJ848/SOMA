@@ -1,619 +1,455 @@
 /**
- * Growth Charts Explained
+ * Growth Charts
  *
- * Understanding pediatric growth charts, percentiles, and growth
- * monitoring for tracking child health and development.
+ * Educational content on pediatric growth monitoring including WHO and CDC
+ * growth charts, percentile interpretation, z-scores, failure to thrive,
+ * obesity screening, and growth velocity assessment.
  */
 
 import { EducationalContent } from '../../types';
 
 export const GROWTH_CHARTS_EXPLAINED: EducationalContent = {
-  id: 'concept-growth-charts',
+  id: 'pediatrics-growth-charts-comprehensive',
   type: 'concept',
-  name: 'Growth Charts Explained',
-  alternateNames: ['Pediatric growth curves', 'Growth percentiles', 'Height and weight charts'],
+  name: 'Growth Charts',
+  nameEs: 'Tablas de Crecimiento',
+  alternateNames: [
+    'Pediatric growth charts',
+    'Growth monitoring',
+    'Anthropometric assessment',
+    'Growth percentiles',
+  ],
 
   levels: {
     1: {
       level: 1,
-      summary: 'Growth charts show how your child\'s height and weight compare to other children the same age. They help doctors check that your child is growing well.',
-      explanation: `Growth charts are tools that help track how children grow over time.
+      summary:
+        'Growth charts show how your child is growing compared to other children the same age and sex. Doctors use them at every checkup to track height, weight, and head size.',
+      explanation: `Doctors measure your child at every checkup and plot these numbers on a special chart called a growth chart. This helps them see if your child is growing in a healthy pattern.
 
-**What Is a Growth Chart?**
-A growth chart is like a map that shows the typical growth patterns for children at different ages. When your doctor measures your child, they can see where your child fits on this map.
+**What Gets Measured**
+- **Weight:** How heavy your child is
+- **Length/Height:** How tall your child is (lying down for babies, standing up for older children)
+- **Head circumference:** The size of your child's head (measured until age 2-3)
+- **BMI (Body Mass Index):** A number that compares weight to height (used for children 2 and older)
 
-**What Gets Measured:**
-- **Weight** - How heavy your child is
-- **Length/Height** - How tall your child is
-- **Head size** - How big around the head is (important for babies)
-- **BMI** - A number that compares weight to height (for older kids)
+**What the Lines Mean**
+Growth charts have curved lines called percentiles. If your child is at the 50th percentile for weight, it means half of children the same age weigh more and half weigh less. There is no single "perfect" percentile.
 
-**Understanding Percentiles:**
-Percentiles tell you how your child compares to 100 other kids the same age:
-- 50th percentile = Right in the middle
-- 90th percentile = Taller or heavier than 90 out of 100 kids
-- 10th percentile = Taller or heavier than 10 out of 100 kids
+**What Matters Most**
+- **Staying on their curve:** A child who follows the same percentile line over time is growing well
+- **Crossing lines:** If a child's measurements suddenly jump up or drop down across percentile lines, the doctor will want to look into why
+- **Head growth in babies:** The head grows quickly in the first year because the brain is growing fast
 
-**Important Points:**
-- Being at a high or low percentile is usually NORMAL
-- What matters most is staying on YOUR child's curve
-- Children come in all sizes - that's healthy!
-- Genetics plays a big role (tall parents often have tall kids)
-
-**Why Doctors Track Growth:**
-- To make sure your child is getting enough nutrition
-- To catch any health problems early
-- To see patterns over time
-- To check that development is on track
-
-**When to Be Concerned:**
-Your doctor will watch for:
-- Sudden drops in percentile
-- Crossing many lines on the chart
-- Not gaining weight or height over time
-- Head growing too fast or too slow
-
-Talk to your pediatrician if you have questions about your child's growth!`,
+**When Doctors Are Concerned**
+- Weight dropping across two or more percentile lines
+- Very rapid weight gain compared to height
+- Head growing too fast or too slowly
+- Not gaining enough weight in the first few months of life`,
       keyTerms: [
-        { term: 'percentile', definition: 'A number showing how your child compares to 100 other children the same age' },
-        { term: 'growth chart', definition: 'A graph showing normal height and weight ranges for children at each age' },
-        { term: 'BMI', definition: 'Body Mass Index - a number that shows if weight is healthy for a certain height' },
+        {
+          term: 'percentile',
+          definition:
+            'A number that shows where your child falls compared to other children. The 75th percentile means your child is bigger than 75 out of 100 children the same age.',
+        },
+        {
+          term: 'growth chart',
+          definition:
+            'A special graph that doctors use to track a child\'s height, weight, and head size over time',
+        },
+        {
+          term: 'BMI',
+          definition:
+            'Body Mass Index; a number calculated from height and weight that helps determine if a child is at a healthy weight',
+        },
       ],
       analogies: [
-        'Growth charts are like a road with many lanes - it\'s okay to be in any lane, as long as you stay in your lane.',
-        'Percentiles are like being in a race with 100 kids - 50th percentile means 50 kids are ahead and 50 are behind.',
+        'A growth chart is like a road map for your child\'s growth. It shows the expected path and helps the doctor spot any detours.',
+        'Percentiles are like lanes on a highway. What matters is staying in your lane, not which lane you are in.',
       ],
-      examples: [
-        'A baby in the 25th percentile for weight is lighter than average but perfectly healthy.',
-        'A toddler who was always at the 75th percentile suddenly dropping to the 25th would concern the doctor.',
+      patientCounselingPoints: [
+        'A child at the 25th percentile is not "too small." What matters is consistent growth along their own curve.',
+        'Breastfed babies often grow differently than formula-fed babies in the first year.',
+        'If your child\'s growth crosses percentile lines, the doctor may want to investigate further.',
+        'Head circumference is measured because rapid or slow head growth can signal brain problems.',
       ],
     },
     2: {
       level: 2,
-      summary: 'Growth charts plot children\'s measurements against population norms using percentile curves. Consistent tracking identifies concerning growth patterns that may indicate nutritional, endocrine, or other health issues.',
-      explanation: `**Types of Growth Charts:**
+      summary:
+        'Pediatric growth monitoring uses WHO growth standards (birth to 2 years) and CDC growth references (2-20 years) to track weight, length/height, head circumference, and BMI.',
+      explanation: `**Types of Growth Charts**
 
-**WHO Growth Standards (0-2 years):**
-- Based on healthy breastfed infants worldwide
-- Describes how children SHOULD grow
-- Used in the US for children under 2
+| Chart | Ages | Standard | Best For |
+|-------|------|----------|----------|
+| WHO Growth Standards | 0-24 months | International, breastfed-infant based | All children birth to 2 |
+| CDC Growth References | 2-20 years | US population-based | Children and adolescents 2-20 |
+| Specialized charts | Variable | Condition-specific | Down syndrome, Turner syndrome, premature infants |
 
-**CDC Growth Reference (2-20 years):**
-- Based on US population data
-- Describes how children DO grow
-- Used for children 2 and older
+**Growth Parameters**
+| Measurement | Ages | Chart Type |
+|------------|------|-----------|
+| Weight-for-age | 0-20 years | WHO (0-2), CDC (2-20) |
+| Length-for-age (recumbent) | 0-36 months | WHO |
+| Stature-for-age (standing) | 2-20 years | CDC |
+| Weight-for-length | 0-36 months | WHO |
+| Head circumference-for-age | 0-36 months | WHO |
+| BMI-for-age | 2-20 years | CDC |
 
-**What's Measured and When:**
+**Key Percentile Cutoffs**
+| Percentile | Interpretation |
+|-----------|---------------|
+| <3rd | Underweight or short stature (evaluate) |
+| 3rd-85th | Normal range |
+| 85th-95th | Overweight (BMI) |
+| >95th | Obese (BMI); tall stature (height) |
 
-| Measurement | Birth-2 years | 2-20 years |
-|-------------|---------------|------------|
-| Weight | Every visit | Every visit |
-| Length/Height | Every visit | Every visit |
-| Head circumference | Every visit | Not routine |
-| BMI | Not calculated | Every visit (2+) |
+**Failure to Thrive (FTT)**
+- Weight <3rd percentile OR weight crossing down through 2 major percentile lines
+- Most common cause: Inadequate caloric intake
+- Other causes: Malabsorption (celiac, cystic fibrosis), chronic illness, neglect
+- Initial workup: Dietary history, CBC, CMP, celiac screen, urinalysis, thyroid function
 
-**Understanding Percentile Curves:**
+**Growth Patterns to Recognize**
+| Pattern | Suggests |
+|---------|---------|
+| Weight dropping, length preserved | Nutritional deficiency (FTT) |
+| Weight and length both dropping | Chronic illness or endocrine disorder |
+| Weight crossing up, length normal | Excess caloric intake, developing obesity |
+| Head circumference crossing up | Hydrocephalus (evaluate urgently) |
+| Head circumference crossing down | Microcephaly (evaluate for genetic/infectious cause) |
 
-The chart shows curves for:
-- 3rd percentile (near bottom)
-- 5th percentile
-- 10th percentile
-- 25th percentile
-- 50th percentile (median)
-- 75th percentile
-- 90th percentile
-- 95th percentile
-- 97th percentile (near top)
-
-**Normal Growth Patterns:**
-
-*Infants (0-12 months):*
-- Most rapid growth period
-- Birth weight doubles by 4-5 months
-- Birth weight triples by 12 months
-- Length increases by 50% in first year
-
-*Toddlers (1-3 years):*
-- Growth rate slows
-- Weight gain: 4-6 pounds/year
-- Height gain: 2-3 inches/year
-- Appetite often decreases (normal!)
-
-*School Age (3-10 years):*
-- Steady, predictable growth
-- Weight gain: 4-7 pounds/year
-- Height gain: 2-2.5 inches/year
-
-*Puberty:*
-- Growth spurt begins
-- Girls: typically 10-14 years
-- Boys: typically 12-16 years
-- Can gain 3-4 inches/year during peak
-
-**Patterns of Concern:**
-
-| Pattern | Possible Causes |
-|---------|-----------------|
-| Weight crossing down 2+ percentile lines | Inadequate intake, malabsorption, chronic illness |
-| Height crossing down 2+ percentile lines | Endocrine issues, chronic disease, genetic conditions |
-| Head circumference too large | Hydrocephalus, familial macrocephaly |
-| Head circumference too small | Microcephaly, developmental concerns |
-| BMI >95th percentile | Obesity |
-| BMI >85th percentile | Overweight |
-| BMI <5th percentile | Underweight, failure to thrive |
-
-**Growth Velocity:**
-- More informative than single measurements
-- Should stay relatively constant for age
-- Expected ranges differ by age
-- Slowing velocity often precedes percentile drop
-
-**Genetic Potential:**
-- Mid-parental height prediction:
-  - Girls: (father's height - 5" + mother's height) ÷ 2
-  - Boys: (father's height + mother's height + 5") ÷ 2
-- Actual height typically within 2 inches of prediction`,
+**Mid-Parental Height (Target Height)**
+- Boys: (Mother's height + 5 inches + Father's height) / 2
+- Girls: (Father's height - 5 inches + Mother's height) / 2
+- Expected adult height within +/- 2 inches of mid-parental height`,
       keyTerms: [
-        { term: 'WHO growth standards', definition: 'International growth charts based on healthy breastfed infants, showing optimal growth' },
-        { term: 'CDC growth reference', definition: 'US-based growth charts for ages 2-20, describing how American children grow' },
-        { term: 'growth velocity', definition: 'Rate of growth over time, measured in inches or cm per year' },
-        { term: 'mid-parental height', definition: 'Calculated target height based on parents\' heights' },
-        { term: 'failure to thrive', definition: 'Poor weight gain or weight loss in young children' },
+        {
+          term: 'WHO growth standards',
+          definition:
+            'International growth charts based on healthy breastfed infants from 6 countries, used for children birth to 24 months',
+        },
+        {
+          term: 'CDC growth references',
+          definition:
+            'US population-based growth charts used for children and adolescents ages 2-20 years',
+        },
+        {
+          term: 'failure to thrive',
+          definition:
+            'Poor weight gain defined as weight below the 3rd percentile or crossing down through 2 major percentile lines',
+        },
+        {
+          term: 'BMI-for-age',
+          definition:
+            'Body Mass Index plotted on age- and sex-specific charts for children 2-20 years; screens for overweight and obesity',
+        },
+        {
+          term: 'mid-parental height',
+          definition:
+            'Estimate of expected adult height calculated from parents\' heights; helps determine if short stature is familial',
+        },
       ],
       analogies: [
-        'Growth velocity is like checking your car\'s speedometer - the measurement tells you how fast you\'re going, not just where you are.',
+        'WHO charts describe how children SHOULD grow (the ideal), while CDC charts describe how a large group of US children DID grow (a reference).',
+        'Failure to thrive is like a plant that stops growing. The first thing to check is whether it is getting enough water and sunlight.',
       ],
     },
     3: {
       level: 3,
-      summary: 'Growth chart interpretation requires understanding statistical distributions, recognizing normal variants, differentiating organic from non-organic causes of growth abnormalities, and initiating appropriate workup when indicated.',
-      explanation: `**Statistical Basis of Growth Charts:**
+      summary:
+        'Clinical growth assessment integrates z-scores, growth velocity, bone age, and endocrine evaluation to differentiate normal variants from pathological growth disorders.',
+      explanation: `**Z-Scores vs. Percentiles**
 
-**Normal Distribution:**
-- Growth parameters follow Gaussian distribution
-- Percentiles represent standard deviations from mean
-- 3rd-97th percentile contains ~94% of population
-- Values outside this range warrant evaluation
+Z-scores express distance from the median in standard deviations:
+| Z-Score | Approx. Percentile | Significance |
+|---------|-------------------|-------------|
+| -3 | 0.1st | Severe growth failure |
+| -2 | 2.3rd | Growth failure (WHO definition) |
+| -1 | 15.9th | Low normal |
+| 0 | 50th | Median |
+| +1 | 84.1th | High normal |
+| +2 | 97.7th | Above normal |
+| +3 | 99.9th | Significantly above normal |
 
-**Z-Scores vs Percentiles:**
-| Percentile | Z-Score | Interpretation |
-|------------|---------|----------------|
-| 97th | +1.88 | High normal |
-| 95th | +1.64 | High normal |
-| 90th | +1.28 | High normal |
-| 75th | +0.67 | Above average |
-| 50th | 0 | Average |
-| 25th | -0.67 | Below average |
-| 10th | -1.28 | Low normal |
-| 5th | -1.64 | Low normal |
-| 3rd | -1.88 | Low normal |
-| <3rd | <-1.88 | Warrants evaluation |
+Z-scores are preferred for severe growth abnormalities because they provide linear scaling at the extremes.
 
-*Z-score advantages:*
-- Allows tracking at extremes
-- Better for research/comparison
-- Can quantify change over time
+**Growth Velocity**
 
-**Growth Parameters Interpretation:**
+Growth velocity (cm/year) is more sensitive than single measurements:
+| Age | Expected Velocity |
+|-----|------------------|
+| 0-12 months | 25 cm/year |
+| 1-2 years | 12.5 cm/year |
+| 2-4 years | 7-8 cm/year |
+| 4-puberty | 5-6 cm/year |
+| Pubertal spurt (girls) | 8-12 cm/year (peak ~12 years) |
+| Pubertal spurt (boys) | 10-14 cm/year (peak ~14 years) |
 
-**Weight for Age:**
-- Most sensitive to acute changes
-- Affected by hydration, recent illness
-- First to change with nutritional issues
+Declining velocity warrants investigation even if absolute height is within normal percentiles.
 
-**Length/Height for Age:**
-- More stable, reflects chronic nutrition
-- Affected by endocrine disorders
-- Genetic factors significant
+**Short Stature Evaluation**
 
-**Weight for Length/Height:**
-- Best indicator of nutritional status
-- Differentiates stunting from wasting
-- Basis for WHO acute malnutrition classification
+| Category | Features | Bone Age | Growth Velocity |
+|----------|----------|----------|-----------------|
+| Familial short stature | Short parents, normal velocity | Normal | Normal |
+| Constitutional delay | Late puberty, family history | Delayed | Normal (slow peri-pubertal) |
+| GH deficiency | Cherubic facies, central adiposity | Delayed | Decreased (<4 cm/yr) |
+| Hypothyroidism | Fatigue, constipation | Delayed | Decreased |
+| Turner syndrome (45,X) | Girls: webbed neck, amenorrhea | Delayed | Decreased |
+| Celiac disease | GI symptoms or asymptomatic | Delayed | Decreased |
+| Cushing syndrome | Central obesity, striae | Delayed | Severely decreased |
 
-**Head Circumference:**
-- Reflects brain growth
-- Fastest growth in first year
-- Affected by:
-  - Familial variation
-  - Hydrocephalus
-  - Craniosynostosis
-  - Microcephaly syndromes
+*Short Stature Workup:*
+1. Growth velocity (minimum 6-month interval)
+2. Bone age (left hand/wrist X-ray, Greulich-Pyle atlas)
+3. Labs: CBC, CMP, ESR/CRP, celiac screen (tTG-IgA), IGF-1, free T4/TSH
+4. If female: karyotype (Turner syndrome)
+5. If low IGF-1 and low velocity: GH stimulation testing
 
-**BMI Interpretation (Children):**
+**Bone Age Interpretation**
+| Finding | Interpretation |
+|---------|---------------|
+| Bone age = chronologic age | Familial short stature |
+| Bone age < chronologic age | Constitutional delay or pathology |
+| Bone age > chronologic age | Precocious puberty, obesity, hyperthyroidism |
 
-| BMI Percentile | Category |
-|----------------|----------|
-| <5th | Underweight |
-| 5th-84th | Healthy weight |
+**Obesity Assessment**
+| BMI Percentile | Classification |
+|---------------|---------------|
 | 85th-94th | Overweight |
-| ≥95th | Obesity |
-| ≥120% of 95th | Severe obesity |
-
-**Differential Diagnosis by Growth Pattern:**
-
-**Short Stature (<3rd percentile or >2 SD below mean):**
-
-*Proportionate Short Stature:*
-| Category | Features |
-|----------|----------|
-| Familial short stature | Normal velocity, short parents |
-| Constitutional delay | Delayed bone age, family history |
-| GH deficiency | Slow velocity, central fat |
-| Hypothyroidism | Slow velocity, delayed bone age |
-| Chronic disease | Associated symptoms |
-| Psychosocial | Adverse environment |
-
-*Disproportionate Short Stature:*
-| Category | Features |
-|----------|----------|
-| Skeletal dysplasias | Abnormal limb/trunk ratio |
-| Rickets | Bowing, metaphyseal changes |
-| Spinal abnormalities | Shortened trunk |
-
-**Failure to Thrive (Weight <3rd or crossing >2 lines):**
-
-*Organic Causes:*
-- GI: Celiac, IBD, GERD, malabsorption
-- Cardiac: CHD with failure
-- Pulmonary: Cystic fibrosis, chronic lung disease
-- Renal: CKD, RTA
-- Endocrine: Hypothyroid, adrenal insufficiency
-- Neurologic: Cerebral palsy (feeding difficulty)
-- Genetic: Chromosomal abnormalities
-
-*Non-organic Causes:*
-- Inadequate intake (feeding technique, poverty)
-- Neglect
-- Feeding behavior problems
-- Psychosocial stress
-
-**Initial Workup Algorithm:**
-
-*Short Stature:*
-1. Bone age (left wrist radiograph)
-2. CBC, CMP, celiac panel
-3. TSH, free T4
-4. IGF-1, IGFBP-3
-5. Karyotype (girls with unexplained short stature - Turner)
-
-*Failure to Thrive:*
-1. Detailed feeding history
-2. CBC, CMP
-3. Urinalysis
-4. Lead level
-5. Celiac screen
-6. Consider sweat chloride, stool studies
-
-**Special Populations:**
-
-*Preterm Infants:*
-- Use WHO preterm charts or Fenton charts
-- Plot by corrected age until 2-3 years
-- Catch-up growth expected in first 2-3 years
-
-*Down Syndrome:*
-- Use DS-specific growth charts
-- Different normal ranges
-- Monitor for obesity tendency`,
+| 95th-99th | Class I obesity |
+| 120-139% of 95th | Class II (severe) |
+| >140% of 95th | Class III (severe) |`,
       keyTerms: [
-        { term: 'z-score', definition: 'Number of standard deviations from the mean, used to quantify growth parameters' },
-        { term: 'bone age', definition: 'Skeletal maturity assessed by wrist X-ray, compared to chronological age' },
-        { term: 'constitutional delay', definition: 'Variant of normal growth with delayed puberty and bone age, eventual normal height' },
-        { term: 'stunting', definition: 'Low height-for-age reflecting chronic undernutrition' },
-        { term: 'wasting', definition: 'Low weight-for-height reflecting acute undernutrition' },
+        {
+          term: 'z-score',
+          definition:
+            'Standard deviation score expressing distance from the median; preferred for tracking severe growth abnormalities due to linear scaling',
+        },
+        {
+          term: 'growth velocity',
+          definition:
+            'Rate of growth over time (cm/year); declining velocity warrants investigation even if height percentile appears normal',
+        },
+        {
+          term: 'bone age',
+          definition:
+            'Radiographic skeletal maturity assessment using left hand/wrist X-ray and Greulich-Pyle atlas; indicates remaining growth potential',
+        },
+        {
+          term: 'constitutional delay',
+          definition:
+            'Normal variant with delayed puberty and growth spurt; bone age delayed; adult height typically normal',
+        },
+        {
+          term: 'IGF-1',
+          definition:
+            'Insulin-like Growth Factor 1; liver-produced mediator of growth hormone; screening test for GH deficiency',
+        },
+        {
+          term: 'Turner syndrome',
+          definition:
+            '45,X chromosomal condition in females causing short stature, ovarian failure, and characteristic features',
+          pronunciation: 'TUR-ner',
+        },
       ],
-      clinicalNotes: 'Always calculate and plot growth velocity. Single measurements are less informative than trends. Consider bone age for any child with growth concerns. Girls with unexplained short stature need karyotype to rule out Turner syndrome.',
+      clinicalNotes:
+        'Growth velocity is the most important parameter. A normal percentile with declining velocity will be missed without serial measurements. Always obtain bone age for short stature. In girls with unexplained short stature, obtain karyotype to rule out Turner syndrome even without classic features. The 2023 AAP obesity guidelines endorse pharmacotherapy including GLP-1 agonists for adolescents 12+ with severe obesity.',
     },
     4: {
       level: 4,
-      summary: 'Advanced growth assessment integrates endocrine physiology, genetic syndromes, and targeted interventions while recognizing the complex interplay between nutrition, hormones, and chronic disease affecting childhood growth.',
-      explanation: `**Endocrine Regulation of Growth:**
+      summary:
+        'Advanced growth assessment encompasses GH-IGF1 axis physiology, stimulation testing protocols, genetic short stature syndromes, and evolving pharmacologic interventions.',
+      explanation: `**GH-IGF1 Axis Physiology**
 
-**Growth Hormone Axis:**
+- Pulsatile GH release from anterior pituitary somatotrophs
+- Hypothalamic regulation: GHRH (stimulatory) vs. somatostatin (inhibitory)
+- GH binds hepatic GH receptors, stimulating IGF-1 production
+- IGF-1 mediates growth-promoting effects at the epiphyseal growth plate
+- Negative feedback: IGF-1 inhibits GH secretion
 
-\`\`\`
-Hypothalamus
-    ↓ GHRH (+) / Somatostatin (-)
-Anterior Pituitary
-    ↓ GH
-Liver (and other tissues)
-    ↓ IGF-1
-Growth Plates → Linear Growth
-\`\`\`
+*Growth Plate Biology:*
+| Zone | Function |
+|------|----------|
+| Resting (germinal) | Stem cell reservoir |
+| Proliferative | Chondrocyte division (GH-dependent) |
+| Hypertrophic | Chondrocyte enlargement (IGF-1-dependent) |
+| Calcification | Mineralization and vascular invasion |
 
-*Regulatory Factors:*
-| Stimulatory | Inhibitory |
-|-------------|------------|
-| Sleep (deep) | Hyperglycemia |
-| Exercise | Elevated IGF-1 |
-| Hypoglycemia | Cortisol excess |
-| Fasting | Hypothyroidism |
-| Stress (acute) | Psychosocial deprivation |
-| Estrogen (low dose) | Estrogen (high dose) |
+Epiphyseal fusion occurs under estrogen influence (in both sexes).
 
-**GH Deficiency Evaluation:**
+**GH Stimulation Testing**
+| Test | Stimulus | GH Cutoff |
+|------|----------|-----------|
+| Insulin tolerance | Hypoglycemia | <10 ng/mL (gold standard) |
+| Arginine | Amino acid | <10 ng/mL |
+| Clonidine | Alpha-2 agonist | <10 ng/mL |
+| Glucagon | Counterregulatory | <10 ng/mL |
 
-*Clinical Features:*
-- Height velocity <4-5 cm/year (prepubertal)
-- Bone age delayed >2 years
-- Relative adiposity (central)
-- Characteristic facies (frontal bossing, midface hypoplasia)
-- Micropenis, hypoglycemia in infancy
+Two failed tests required for diagnosis. Must prime with sex steroids in peripubertal children. MRI of pituitary mandatory if confirmed.
 
-*Diagnostic Algorithm:*
-1. IGF-1, IGFBP-3 screening (age/sex-adjusted)
-2. GH stimulation testing if IGF-1 low
-   - Arginine, clonidine, glucagon, insulin tolerance test
-   - Peak GH <10 ng/mL (traditional) or <5-7 ng/mL (newer)
-3. Brain MRI (pituitary evaluation)
-4. Assess other pituitary hormones
+**Genetic Short Stature Syndromes**
+| Syndrome | Gene | Features | Treatment |
+|----------|------|----------|-----------|
+| Turner (45,X) | Monosomy X | Short stature, ovarian failure, cardiac | GH + estrogen |
+| Noonan | PTPN11, SOS1 | Pulmonary stenosis, webbed neck | GH approved |
+| Silver-Russell | IGF2, 11p15 | SGA, limb asymmetry | GH approved |
+| Prader-Willi | 15q11 deletion | Hypotonia, obesity | GH (body composition) |
+| SHOX deficiency | SHOX | Madelung deformity | GH approved |
+| Achondroplasia | FGFR3 | Rhizomelic short limbs | Vosoritide approved |
 
-*Conditions with GH Deficiency:*
-| Congenital | Acquired |
-|------------|----------|
-| Septo-optic dysplasia | Craniopharyngioma |
-| Pituitary hypoplasia | Radiation therapy |
-| Transcription factor defects (PROP1, POU1F1) | Trauma/surgery |
-| Midline defects | Langerhans cell histiocytosis |
+**FDA-Approved GH Indications**
+| Indication | Dose (mg/kg/day) |
+|-----------|-----------------|
+| GH deficiency | 0.024-0.034 |
+| Turner syndrome | 0.045-0.050 |
+| Chronic renal insufficiency | 0.045-0.050 |
+| Prader-Willi syndrome | 0.024 |
+| SGA without catch-up | 0.048 |
+| Idiopathic short stature (<-2.25 SD) | 0.037-0.047 |
+| Noonan syndrome | 0.066 |
 
-**Genetic Causes of Short Stature:**
-
-*Syndromic Short Stature:*
-| Syndrome | Gene/Cause | Features |
-|----------|------------|----------|
-| Turner | 45,X or variants | Female, lymphedema, cardiac, streak gonads |
-| Noonan | PTPN11, others | Cardiac, facial features, cryptorchidism |
-| Silver-Russell | 11p15 / chr 7 | SGA, asymmetry, triangular face |
-| Prader-Willi | 15q11 paternal | Hypotonia, hyperphagia, hypogonadism |
-| SHOX deficiency | SHOX | Madelung deformity, short forearms |
-
-*Primary Growth Plate Disorders:*
-| Gene | Condition | Features |
-|------|-----------|----------|
-| FGFR3 | Achondroplasia | Rhizomelic shortening, macrocephaly |
-| COL2A1 | SED congenita | Short trunk, eye abnormalities |
-| COMP | Pseudoachondroplasia | Normal facies, limb shortening |
-| SHOX | Léri-Weill | Madelung, mild short stature |
-
-**Growth Hormone Treatment:**
-
-*FDA-Approved Indications:*
-- GH deficiency
-- Turner syndrome
-- Chronic kidney disease
-- Prader-Willi syndrome
-- Small for gestational age (SGA) without catch-up
-- Idiopathic short stature (height <-2.25 SD)
-- SHOX deficiency
-- Noonan syndrome
-
-*Expected Response:*
-| Condition | First-Year Velocity Gain |
-|-----------|-------------------------|
-| GH deficiency | +4-6 cm/year |
-| Turner syndrome | +2-4 cm/year |
-| Idiopathic short stature | +1-3 cm/year |
-| SGA | +2-3 cm/year |
-
-*Monitoring on GH:*
-- Height velocity q3-6 months
-- IGF-1 levels (target upper normal)
-- Bone age annually
-- Glucose monitoring (GH → insulin resistance)
-- Scoliosis monitoring (Prader-Willi)
-
-**Advanced Nutritional Growth Assessment:**
-
-*Catch-Up Growth:*
-| Setting | Expected Pattern |
-|---------|------------------|
-| Preterm | 40 weeks - 2 years for weight, up to 3 years for head |
-| Post-illness | Rapid, exceeds baseline velocity |
-| Post-malnutrition | Weight first, then height |
-| Post-celiac treatment | Significant in first 1-2 years |
-
-*Refeeding Considerations:*
-- Avoid refeeding syndrome in severe malnutrition
-- Gradual caloric increase
-- Monitor phosphorus, potassium, magnesium
-- Thiamine supplementation
-
-**Obesity Evaluation:**
-
-*Screening for Comorbidities:*
-| Test | When to Screen |
-|------|----------------|
-| Lipid panel | All with BMI ≥85th at age 10+ |
-| Fasting glucose, HbA1c | BMI ≥85th + risk factors, or ≥95th |
-| ALT | BMI ≥85th, annually |
-| Sleep study | Symptoms of OSA |
-| BP | Every visit |
-
-*Obesity Requiring Further Workup:*
-- Rapid onset obesity
-- Hyperphagia
-- Developmental delay
-- Height deceleration with weight gain → endocrine
-- Dysmorphic features → genetic syndrome`,
+**Pediatric Obesity Pharmacotherapy (AAP 2023)**
+| Agent | Age | Mechanism | BMI Reduction |
+|-------|-----|-----------|--------------|
+| Orlistat | >12 yr | Lipase inhibitor | ~3% |
+| Liraglutide | >12 yr | GLP-1 agonist | 4-5% |
+| Semaglutide | >12 yr | GLP-1 agonist | 16% |
+| Setmelanotide | >6 yr | MC4R agonist | Genetic obesity only |
+| Bariatric surgery | Tanner 4-5 | Sleeve, RYGB | 25-30% |`,
       keyTerms: [
-        { term: 'IGF-1', definition: 'Insulin-like Growth Factor 1, mediator of GH effects; used for screening' },
-        { term: 'bone age delay', definition: 'Skeletal maturity younger than chronological age, seen in GH deficiency and constitutional delay' },
-        { term: 'GH stimulation test', definition: 'Provocative testing using pharmacologic agents to assess GH secretion capacity' },
-        { term: 'SGA', definition: 'Small for Gestational Age, birth weight <10th percentile for gestational age' },
-        { term: 'catch-up growth', definition: 'Accelerated growth velocity following period of growth restriction' },
+        {
+          term: 'GH-IGF1 axis',
+          definition:
+            'Neuroendocrine pathway: GHRH stimulates pituitary GH, which stimulates hepatic IGF-1 production mediating growth plate effects',
+        },
+        {
+          term: 'GH stimulation test',
+          definition:
+            'Provocative test assessing pituitary GH secretory capacity; two failed tests with different stimuli required for diagnosis',
+        },
+        {
+          term: 'epiphyseal fusion',
+          definition:
+            'Growth plate closure under estrogen influence marking end of linear growth; earlier in precocious puberty',
+        },
+        {
+          term: 'vosoritide',
+          definition:
+            'C-type natriuretic peptide analog approved for achondroplasia; modulates FGFR3 signaling to promote bone growth',
+        },
+        {
+          term: 'idiopathic short stature',
+          definition:
+            'Height below -2.25 SD without identifiable cause; FDA-approved GH indication though cost-effectiveness is debated',
+        },
+        {
+          term: 'sex steroid priming',
+          definition:
+            'Estrogen or testosterone given before GH stimulation testing in peripubertal children to reduce false-positive results',
+        },
       ],
-      clinicalNotes: 'GH deficiency diagnosis requires two failed stimulation tests. Always evaluate for Turner syndrome in short girls before extensive workup. IGF-1 alone is insufficient for diagnosis. Consider SHOX deficiency in short children with Madelung deformity or disproportionate shortening.',
+      clinicalNotes:
+        'Sex steroid priming is essential in peripubertal children to avoid false GH deficiency diagnosis. Ectopic posterior pituitary on MRI strongly predicts permanent GH deficiency. Semaglutide showed 16% BMI reduction in STEP TEENS. The combination of GH + aromatase inhibitors for height augmentation remains controversial due to uncertain long-term safety.',
     },
     5: {
       level: 5,
-      summary: 'Contemporary growth assessment integrates precision diagnostics including advanced genetics, epigenetics, and growth plate biology with emerging therapeutics and evidence-based management algorithms for complex growth disorders.',
-      explanation: `**Molecular Biology of Growth:**
+      summary:
+        'Expert growth assessment incorporates genomic diagnostics, next-generation GH therapies, epigenetic programming, and global nutrition surveillance.',
+      explanation: `**Genomics of Short Stature**
 
-**Growth Plate Physiology:**
+| Gene | Pathway | Phenotype |
+|------|---------|-----------|
+| SHOX | Growth plate development | Leri-Weill dyschondrosteosis, ISS |
+| NPR2 | Natriuretic peptide signaling | Heterozygous = ISS; homozygous = acromesomelic dysplasia |
+| ACAN | Aggrecan (cartilage matrix) | Short stature with advanced bone age, early-onset OA |
+| IHH | Indian Hedgehog signaling | Brachydactyly type A1 |
+| FGFR3 | Growth plate regulation | Achondroplasia spectrum |
 
-*Zones of Growth Plate:*
-| Zone | Function | Key Regulators |
-|------|----------|----------------|
-| Resting | Stem cell reserve | PTHrP, SOX9 |
-| Proliferative | Chondrocyte division | IHH, FGF |
-| Hypertrophic | Matrix production, signaling | VEGF, MMP13 |
-| Calcification | Mineralization, vascular invasion | Type X collagen |
+Exome sequencing identifies monogenic cause in 20-40% of severe unexplained short stature.
 
-*Molecular Regulation:*
-- IHH-PTHrP feedback loop controls proliferation
-- GH/IGF-1 axis promotes proliferation and hypertrophy
-- Thyroid hormone essential for hypertrophic differentiation
-- Sex steroids → proliferation initially, then fusion
+**Next-Generation Growth Therapies**
+| Agent | Mechanism | Advantage | Status |
+|-------|-----------|-----------|--------|
+| Somapacitan | Long-acting GH (albumin-binding) | Weekly injection | FDA approved (adults) |
+| Lonapegsomatropin (Skytrofa) | PEGylated GH | Weekly injection | FDA approved (pediatric GHD) |
+| Somatrogon | GH fusion protein | Weekly | Approved (some countries) |
+| Vosoritide | CNP analog | 1.6 cm/yr additional growth | Approved (achondroplasia) |
+| TransCon GH | Prodrug GH | Weekly, sustained release | Phase 3 |
 
-**Genetic Testing Approaches:**
+**Epigenetic Influences on Growth**
+| Factor | Mechanism | Significance |
+|--------|-----------|-------------|
+| Genomic imprinting (IGF2, H19) | Parent-of-origin expression | Silver-Russell, Beckwith-Wiedemann |
+| Maternal nutrition | Fetal programming | SGA, metabolic risk (Barker hypothesis) |
+| Early-life microbiome | GH-IGF1 axis modulation | Microbial metabolites influence IGF-1 |
+| Psychosocial deprivation | Functional GH suppression | Reversible with environmental change |
 
-*Testing Algorithm:*
-1. Chromosomal microarray (if dysmorphic/ID)
-2. Targeted gene panels (skeletal dysplasia, short stature)
-3. Whole exome sequencing (unexplained)
-4. Whole genome sequencing (research/complex cases)
+**Global Growth Surveillance**
+- WHO MGRS: 8,440 children from 6 countries; prescriptive standard
+- Stunting (length/height-for-age <-2 SD): 149 million children globally
+- Wasting (weight-for-length <-2 SD): 45 million globally
+- Double burden of malnutrition: simultaneous undernutrition and obesity in LMICs
 
-*Gene Panels for Short Stature:*
-| Panel Type | Genes | Yield |
-|------------|-------|-------|
-| GH axis | GH1, GHR, GHRHR, IGF1, IGF1R, STAT5B | 5-10% idiopathic |
-| SHOX analysis | SHOX deletions/mutations | 2-3% idiopathic |
-| Skeletal dysplasia | >100 genes | Variable |
-| Comprehensive short stature | 100+ genes | 15-25% |
-
-*Emerging Genetic Discoveries:*
-| Gene | Discovery | Clinical Impact |
-|------|-----------|-----------------|
-| ACAN | Aggrecan mutations | Short stature + early OA |
-| NPR2 | Natriuretic peptide receptor | Mild skeletal dysplasia |
-| IHH | Indian hedgehog | Brachydactyly + short stature |
-| FGFR3 activating | Beyond achondroplasia | Hypochondroplasia spectrum |
-
-**Advanced Endocrine Evaluation:**
-
-*GH-IGF1 Axis Defects:*
-| Level | Defect | IGF-1 | GH |
-|-------|--------|-------|-----|
-| Hypothalamus | GHRH deficiency | Low | Low/normal (to stim) |
-| Pituitary | GH gene defect | Low | Low |
-| GH action | GHR mutation (Laron) | Low | High |
-| IGF-1 | IGF1 gene defect | Low | High |
-| IGF-1 action | IGF1R mutation | High | High |
-
-*Testing Refinements:*
-- Spontaneous GH sampling vs. stimulation tests
-- ALS (acid-labile subunit) deficiency
-- GHBP (GH binding protein) for GHR assessment
-- IGF-1 generation test
-
-**Novel Therapeutics:**
-
-*Growth Hormone Formulations:*
-| Product | Type | Dosing |
-|---------|------|--------|
-| Standard rhGH | Daily injection | 0.025-0.05 mg/kg/day |
-| Long-acting (somapacitan) | Weekly | Once weekly |
-| Long-acting (lonapegsomatropin) | Weekly | Once weekly |
-
-*Targeted Therapies:*
-| Drug | Mechanism | Indication |
-|------|-----------|------------|
-| Vosoritide | C-type natriuretic peptide analog | Achondroplasia |
-| Mecasermin | Recombinant IGF-1 | Severe primary IGF deficiency |
-| Setmelanotide | MC4R agonist | Genetic obesity syndromes |
-
-**Population Health and Growth:**
-
-*Secular Trends:*
-- Height increase plateauing in developed countries
-- Obesity epidemic affecting growth patterns
-- Earlier puberty timing
-- Environmental endocrine disruptors concerns
-
-*Growth Monitoring Systems:*
-| System | Coverage | Function |
-|--------|----------|----------|
-| WIC | Low-income | Nutrition support, growth monitoring |
-| School health | School-age | Annual BMI screening |
-| EHR systems | Clinical | Automatic percentile calculation |
-| Growth calculator apps | Parent | Home tracking (variable quality) |
-
-**Research Frontiers:**
-
-*Biomarkers for Growth Prediction:*
-- Bone age AI interpretation
-- Growth plate imaging (MRI)
-- Circulating microRNAs
-- Metabolomic signatures
-
-*Interventions Under Investigation:*
-| Intervention | Target | Status |
-|--------------|--------|--------|
-| CNP analogs | Achondroplasia | Approved (vosoritide) |
-| Anti-FGFR3 | Achondroplasia | Phase 2-3 trials |
-| Gene therapy | GH deficiency | Preclinical |
-| Stem cell approaches | Growth plate | Research |
-
-**Special Circumstances:**
-
-*Transition of Care:*
-| Condition | Adult Considerations |
-|-----------|---------------------|
-| GH deficiency | Retesting, adult GH replacement decision |
-| Turner syndrome | Cardiovascular surveillance, estrogen replacement |
-| Achondroplasia | Spinal stenosis, orthopedic issues |
-| Obesity | Metabolic syndrome, bariatric candidacy |
-
-*Growth in Cancer Survivors:*
-- Cranial radiation → GH deficiency (>30 Gy dose-dependent)
-- Spinal radiation → Sitting height loss
-- TBI → Multiple hormone deficiencies
-- Chemotherapy → Potential ovarian/testicular effects
-- Surveillance guidelines for endocrine screening
-
-**Ethical Considerations:**
-
-*Growth Hormone Treatment Ethics:*
-| Issue | Considerations |
-|-------|----------------|
-| Idiopathic short stature | Medical vs. enhancement |
-| Cost-benefit | High cost, modest gains |
-| Child assent | Age-appropriate discussion |
-| Outcome expectations | Managing unrealistic hopes |
-| Height bias | Societal vs. medical |`,
+**Emerging Frontiers**
+| Topic | Status |
+|-------|--------|
+| AI bone age assessment | FDA-cleared; concordant with expert reads |
+| Pharmacogenomics of GH response | GHR d3-polymorphism predicts better response |
+| Machine learning height prediction | Serial measurements + genetic data |
+| Aromatase inhibitors for height | Off-label; long-term safety unclear |
+| Catch-up growth tension in SGA | Prevents short stature vs. increases metabolic risk |`,
       keyTerms: [
-        { term: 'vosoritide', definition: 'C-type natriuretic peptide analog approved for achondroplasia, acts on growth plate' },
-        { term: 'IHH-PTHrP loop', definition: 'Indian hedgehog-PTH related peptide feedback system regulating growth plate proliferation' },
-        { term: 'ACAN mutations', definition: 'Aggrecan gene defects causing short stature with early osteoarthritis' },
-        { term: 'Laron syndrome', definition: 'GH receptor deficiency causing severe short stature with high GH, low IGF-1' },
-        { term: 'secular trend', definition: 'Long-term generational changes in growth patterns of a population' },
+        {
+          term: 'ACAN',
+          definition:
+            'Aggrecan gene; heterozygous mutations cause short stature with advanced bone age and early-onset osteoarthritis; common monogenic cause of ISS',
+        },
+        {
+          term: 'lonapegsomatropin',
+          definition:
+            'FDA-approved weekly PEGylated growth hormone for pediatric GH deficiency; reduces injection burden from daily to weekly',
+        },
+        {
+          term: 'Barker hypothesis',
+          definition:
+            'Developmental origins of disease; fetal undernutrition programs lifelong metabolic risk, explaining increased cardiovascular risk in SGA individuals',
+        },
+        {
+          term: 'stunting',
+          definition:
+            'Chronic undernutrition (height-for-age <-2 SD); affects 149 million children globally; largely irreversible after age 2',
+        },
+        {
+          term: 'double burden of malnutrition',
+          definition:
+            'Coexistence of undernutrition and obesity within the same population or household; growing challenge in LMICs',
+        },
       ],
-      clinicalNotes: `**Clinical Integration:**
-- Comprehensive genetic testing increasingly valuable
-- Long-acting GH formulations improving adherence
-- Vosoritide changing achondroplasia management
-- Monitor adult height outcomes for treatment efficacy
-- Consider transition planning early for chronic conditions
-- Stay current on emerging targeted therapies
-- Address ethical considerations in enhancement vs treatment`,
+      clinicalNotes: `**Expert Integration:**
+- ACAN mutations are among the most common monogenic causes of short stature; short stature with ADVANCED bone age should prompt ACAN testing.
+- Weekly GH formulations are transforming adherence but raise questions about sustained vs. pulsatile GH exposure.
+- Vosoritide for achondroplasia is the first targeted skeletal dysplasia therapy.
+- AI bone age is FDA-cleared and concordant with expert reads.
+- For SGA: tension between promoting catch-up (prevent short stature) and limiting it (reduce metabolic programming risk) remains unresolved.`,
     },
   },
 
   media: [
     {
-      id: 'growth-chart-boys',
+      id: 'who-growth-chart-sample',
       type: 'diagram',
-      filename: 'growth-chart-boys-0-36.svg',
-      title: 'WHO Growth Chart Boys 0-36 Months',
-      description: 'Length-for-age and weight-for-age percentiles for boys',
+      filename: 'who-weight-for-age-boys.svg',
+      title: 'WHO Weight-for-Age Growth Chart (Boys)',
+      description: 'WHO growth chart showing percentile curves for weight-for-age boys birth to 24 months',
     },
     {
-      id: 'growth-chart-girls',
+      id: 'gh-igf1-axis-diagram',
       type: 'diagram',
-      filename: 'growth-chart-girls-0-36.svg',
-      title: 'WHO Growth Chart Girls 0-36 Months',
-      description: 'Length-for-age and weight-for-age percentiles for girls',
+      filename: 'gh-igf1-axis-diagram.svg',
+      title: 'GH-IGF1 Axis',
+      description: 'Growth hormone signaling pathway from hypothalamus through pituitary to growth plate',
     },
   ],
 
@@ -624,38 +460,41 @@ Growth Plates → Linear Growth
       title: 'WHO Child Growth Standards',
       source: 'World Health Organization',
       url: 'https://www.who.int/tools/child-growth-standards',
-      accessedDate: '2025-01-24',
     },
     {
-      id: 'cdc-growth-charts',
-      type: 'website',
-      title: 'CDC Growth Charts',
-      source: 'Centers for Disease Control and Prevention',
-      url: 'https://www.cdc.gov/growthcharts/',
-      accessedDate: '2025-01-24',
+      id: 'aap-obesity-2023',
+      type: 'article',
+      title: 'Clinical Practice Guideline for the Evaluation and Treatment of Children and Adolescents With Obesity',
+      authors: ['Hampl, S.E.', 'Hassink, S.G.', 'et al.'],
+      source: 'Pediatrics',
+      url: 'https://doi.org/10.1542/peds.2022-060640',
+    },
+    {
+      id: 'nelson-growth',
+      type: 'textbook',
+      title: 'Nelson Textbook of Pediatrics',
+      authors: ['Kliegman, R.M.', 'St. Geme, J.W.'],
+      source: 'Elsevier',
+      chapter: 'Assessment of Growth',
+      license: 'Proprietary',
     },
   ],
 
   crossReferences: [
-    { targetId: 'concept-developmental-milestones', targetType: 'concept', relationship: 'related', label: 'Developmental Milestones' },
-    { targetId: 'concept-childhood-obesity', targetType: 'condition', relationship: 'related', label: 'Childhood Obesity' },
-    { targetId: 'concept-failure-to-thrive', targetType: 'condition', relationship: 'related', label: 'Failure to Thrive' },
+    { targetId: 'pediatrics-dev-milestones', targetType: 'topic', relationship: 'sibling', label: 'Developmental Milestones' },
+    { targetId: 'pediatrics-newborn-screening', targetType: 'topic', relationship: 'related', label: 'Newborn Screening' },
   ],
 
   tags: {
-    systems: ['endocrine'],
-    topics: ['pediatrics', 'growth', 'nutrition', 'endocrinology'],
-    keywords: ['growth charts', 'percentiles', 'height', 'weight', 'BMI', 'failure to thrive', 'short stature'],
+    systems: ['endocrine', 'musculoskeletal'],
+    topics: ['pediatrics', 'endocrinology', 'nutrition', 'genetics'],
+    keywords: ['growth charts', 'percentiles', 'z-score', 'failure to thrive', 'short stature', 'obesity', 'BMI', 'growth hormone', 'IGF-1', 'bone age', 'Turner syndrome'],
     clinicalRelevance: 'critical',
-    examRelevance: {
-      usmle: true,
-      nbme: true,
-      shelf: ['pediatrics', 'family medicine'],
-    },
+    examRelevance: { usmle: true, nbme: true, shelf: ['pediatrics', 'endocrinology', 'family medicine'] },
   },
 
-  createdAt: '2025-01-24T00:00:00.000Z',
-  updatedAt: '2025-01-24T00:00:00.000Z',
+  createdAt: '2025-01-30T00:00:00.000Z',
+  updatedAt: '2025-01-30T00:00:00.000Z',
   version: 1,
   status: 'published',
   contributors: ['Biological Self Content Team'],

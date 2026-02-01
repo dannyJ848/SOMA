@@ -4,6 +4,7 @@ export const surgicalSafetyChecklistContent: EducationalContent = {
   id: 'surgical-safety-checklist',
   type: 'concept',
   name: 'Surgical Safety Checklist',
+  nameEs: 'Lista de Verificación de Seguridad Quirúrgica',
   alternateNames: ['WHO Surgical Checklist', 'Surgical Time Out', 'Pre-Surgery Checklist'],
   levels: {
     1: {

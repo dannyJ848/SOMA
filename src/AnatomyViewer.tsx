@@ -85,6 +85,8 @@ interface AnatomyViewerProps {
   onStructureDeselect?: () => void;
   /** Body proportions for customizing the 3D model based on user demographics */
   bodyProportions?: BodyProportions;
+  /** Called when user wants to view pathology content for a structure */
+  onViewPathology?: (structureId: string, structureName: string) => void;
 }
 
 // Imperative API exposed via ref
@@ -852,7 +854,7 @@ class EnhancedModelSafeWrapper extends React.Component<
 }
 
 export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
-  function AnatomyViewer({ onBack, dashboardData, onStructureSelect, onStructureDeselect, bodyProportions }, ref) {
+  function AnatomyViewer({ onBack, dashboardData, onStructureSelect, onStructureDeselect, bodyProportions, onViewPathology }, ref) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
   const [showLayerPanel, setShowLayerPanel] = useState(false);
@@ -1127,6 +1129,27 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
   const handleCloseEducationPanel = useCallback(() => {
     setShowEducationPanel(false);
   }, []);
+
+  // Handle viewing pathology for current structure
+  const handleViewPathology = useCallback(async (structureId: string, structureName: string) => {
+    console.log(`[Content Retrieval] Searching for pathology: ${structureName}`);
+    
+    if (onViewPathology) {
+      // Use the callback prop if provided
+      onViewPathology(structureId, structureName);
+    } else {
+      // Fallback: dynamically import and search
+      const { searchPathology } = await import('./contentRetrieval');
+      const doc = await searchPathology(structureName, 3);
+      
+      if (doc) {
+        console.log(`[Content Retrieval] Found pathology content: ${doc.title}`);
+        // Could show a modal or notification here
+      } else {
+        console.warn(`[Content Retrieval] No pathology content found for: ${structureName}`);
+      }
+    }
+  }, [onViewPathology]);
 
   // RegionExplorer callbacks
   const handleRegionExplorerDeselect = useCallback(() => {
@@ -2272,6 +2295,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
                 () => handleViewHistology(getHistologyIdForStructure(selectedStructure.id)!) :
                 undefined
               }
+              onViewPathology={handleViewPathology}
               onViewEducation={handleViewEducation}
             />
           </div>

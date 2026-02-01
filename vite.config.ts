@@ -245,14 +245,47 @@ export default defineConfig(({ command, mode }): UserConfig => {
             if (id.includes('/src/ai/')) {
               return 'feature-ai';
             }
-            // Medical content databases - lazy loaded, large data modules
-            if (id.includes('/core/content/') ||
-                id.includes('/core/medical-simulation/') ||
-                id.includes('/core/knowledge-graph/') ||
-                id.includes('/core/education/') ||
-                id.includes('/core/i18n/')) {
-              return 'medical-content';
-            }
+            // Medical content databases - split by domain for smaller chunks
+
+            // Condition simulation data
+            if (id.includes('/core/medical-simulation/conditions/')) return 'data-conditions';
+            if (id.includes('/core/medical-simulation/medications/')) return 'data-medications';
+            if (id.includes('/core/medical-simulation/encyclopedia/')) return 'data-encyclopedia';
+
+            // Content by domain
+            if (id.includes('/core/content/specialties/')) return 'data-specialties';
+            if (id.includes('/core/content/conditions/')) return 'data-conditions-content';
+            if (id.includes('/core/content/procedures/')) return 'data-procedures';
+            if (id.includes('/core/content/pharmacology/') ||
+                id.includes('/core/content/medications/')) return 'data-pharmacology';
+            if (id.includes('/core/content/lab-interpretation/')) return 'data-labs';
+            if (id.includes('/core/content/anatomy/')) return 'data-anatomy-content';
+            if (id.includes('/core/content/symptoms/')) return 'data-symptoms';
+            if (id.includes('/core/content/physiology/')) return 'data-physiology';
+            if (id.includes('/core/content/clinical-reasoning/')) return 'data-clinical-reasoning';
+            if (id.includes('/core/content/cardiology/') ||
+                id.includes('/core/content/cardiovascular/')) return 'data-cardiology';
+            if (id.includes('/core/content/neurology/') ||
+                id.includes('/core/content/nervous/')) return 'data-neurology';
+            if (id.includes('/core/content/emergency/') ||
+                id.includes('/core/content/emergency-medicine/') ||
+                id.includes('/core/content/emergency-warning-signs/') ||
+                id.includes('/core/content/critical-care/')) return 'data-emergency';
+            if (id.includes('/core/content/pediatrics/') ||
+                id.includes('/core/content/child-adolescent/')) return 'data-pediatrics';
+            if (id.includes('/core/content/mental-health/') ||
+                id.includes('/core/content/psychiatry/')) return 'data-mental-health';
+            if (id.includes('/core/content/surgery/') ||
+                id.includes('/core/content/surgical-specialties/') ||
+                id.includes('/core/content/anesthesia/')) return 'data-surgery';
+            if (id.includes('/core/content/imaging/') ||
+                id.includes('/core/content/radiology/')) return 'data-imaging';
+            if (id.includes('/core/content/')) return 'data-content-misc';
+
+            // Infrastructure
+            if (id.includes('/core/knowledge-graph/')) return 'data-knowledge-graph';
+            if (id.includes('/core/education/')) return 'data-education';
+            if (id.includes('/core/i18n/')) return 'data-i18n';
             // Remaining core library modules
             if (id.includes('/core/')) {
               return 'core-lib';
@@ -288,8 +321,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
       cssCodeSplit: true,
       // CSS minification
       cssMinify: isProd ? 'lightningcss' : false,
-      // Chunk size warning limit - raised to accommodate medical content databases
-      chunkSizeWarningLimit: 1000,
+      // Chunk size warning limit
+      chunkSizeWarningLimit: 500,
       // Report compressed size only in production
       reportCompressedSize: isProd,
       // Module preload polyfill

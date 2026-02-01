@@ -10,6 +10,7 @@ export const meningitis: EducationalContent = {
   id: 'condition-meningitis',
   type: 'condition',
   name: 'Meningitis',
+  nameEs: 'Meningitis',
   alternateNames: ['Brain Inflammation', 'Meningeal Infection', 'Spinal Meningitis'],
   hpoId: 'HP:0001287',
 

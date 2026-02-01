@@ -29,7 +29,7 @@
         "visible": true,
         "focus": true,
         "alwaysOnTop": false,
-        "contentProtected": false,
+        "contentProtected": true,
         "skipTaskbar": false,
         "dragDropEnabled": true,
         "shadow": true,
@@ -54,7 +54,7 @@
         "img-src": "'self' data: blob: asset: https://asset.localhost http://asset.localhost tauri://localhost https://tauri.localhost",
         "style-src": "'self' 'unsafe-inline'",
         "script-src": "'self' 'wasm-unsafe-eval'",
-        "connect-src": "'self' blob: data: http://localhost:* https://localhost:* ws://localhost:* wss://localhost:* ipc: tauri: asset: https://www.gstatic.com https://tauri.localhost http://tauri.localhost tauri://localhost https://asset.localhost http://asset.localhost",
+        "connect-src": "'self' blob: data: http://localhost:1420 https://localhost:1420 ws://localhost:1420 wss://localhost:1420 http://localhost:11434 ipc: tauri: asset: https://www.gstatic.com https://tauri.localhost http://tauri.localhost tauri://localhost https://asset.localhost http://asset.localhost",
         "font-src": "'self' data:",
         "media-src": "'self' blob: data: tauri://localhost https://tauri.localhost asset: https://asset.localhost",
         "worker-src": "'self' blob: https://www.gstatic.com",
@@ -73,9 +73,9 @@
         }
       },
       "pattern": { "use": "brownfield" },
-      "capabilities": []
+      "capabilities": ["main-window-capability"]
     },
-    "withGlobalTauri": true,
+    "withGlobalTauri": false,
     "trayIcon": null
   },
   "bundle": {

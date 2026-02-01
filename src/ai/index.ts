@@ -64,6 +64,7 @@ export {
   createEducationalContextBuilder,
   dashboardToPatientData,
   profileToPatientData,
+  buildAnatomyChatSystemPrompt,
 } from './EducationalContextBuilder';
 
 // Educational Context Builder Types
@@ -92,6 +93,7 @@ export type {
   HistologyContext,
   ConditionContext,
   DashboardData,
+  AnatomyChatContext,
 
   // Feature Types
   NavigationIntent,

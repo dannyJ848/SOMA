@@ -50,6 +50,7 @@ interface StructureInfoPanelProps {
   onSelectStructure?: (id: string) => void;
   onViewInIsolation?: () => void;
   onViewHistology?: (histologyId: string) => void;
+  onViewPathology?: (structureId: string, structureName: string) => void;
   onViewEducation?: () => void;
   onAskAI?: (query: string) => void;
 }
@@ -71,6 +72,7 @@ export function StructureInfoPanel({
   onSelectStructure,
   onViewInIsolation,
   onViewHistology,
+  onViewPathology,
   onViewEducation,
   onAskAI,
 }: StructureInfoPanelProps) {
@@ -192,6 +194,15 @@ export function StructureInfoPanel({
           )}
           {info?.histologyId && onViewHistology && (
             <button onClick={() => onViewHistology(info.histologyId!)}>View Histology</button>
+          )}
+          {onViewPathology && (
+            <button
+              onClick={() => onViewPathology(structureId, structureName)}
+              className="pathology-btn"
+              style={{ backgroundColor: '#5c3d2e', color: '#ffccbc' }}
+            >
+              View Pathology
+            </button>
           )}
           {onViewEducation && (
             <button onClick={onViewEducation} className="education-btn">

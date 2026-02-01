@@ -2,7 +2,11 @@
  * useRegionalEncyclopedia Hook
  *
  * Fetches all educational content for a specific anatomical region.
- * Combines data from region content mapping, histology, pathology, and physiology sources.
+ * Combines data from:
+ *   - regionContentMapping (REGION_CONTENT_MAP) for histology, pathology, physiology, models
+ *   - ContentService (knowledge graph, symptoms DB, specialties, anatomy encyclopedia)
+ *
+ * The hook merges both sources so tabs get the richest data available.
  */
 
 import { useState, useEffect, useMemo } from 'react';
@@ -14,6 +18,13 @@ import {
   type HistologyContent,
   type ModelReference,
 } from '../../education/regionContentMapping';
+import {
+  useContentService,
+  type AnatomyRegion,
+  type SymptomEntry,
+  type MedicalSpecialty,
+  type KnowledgeNode,
+} from '../../services/ContentService';
 import type { HistologyImage } from '../../../core/histology/types';
 
 /**
@@ -76,6 +87,24 @@ export interface UseRegionalEncyclopediaResult extends RegionalEncyclopediaData 
   error: Error | null;
   refetch: () => void;
 }
+
+// ---------------------------------------------------------------------------
+// Internal: enrichment data fetched from ContentService
+// ---------------------------------------------------------------------------
+
+interface ContentServiceData {
+  anatomyRegion: AnatomyRegion | undefined;
+  symptoms: SymptomEntry[];
+  specialties: MedicalSpecialty[];
+  relatedNodes: KnowledgeNode[];
+}
+
+const EMPTY_CONTENT_SERVICE_DATA: ContentServiceData = {
+  anatomyRegion: undefined,
+  symptoms: [],
+  specialties: [],
+  relatedNodes: [],
+};
 
 /**
  * Convert region content to anatomical structures
@@ -191,16 +220,174 @@ function generateHistologyImages(regionContent: RegionContent): HistologyImage[]
   return images;
 }
 
+// ---------------------------------------------------------------------------
+// Enrichment helpers: merge ContentService data into regional content
+// ---------------------------------------------------------------------------
+
 /**
- * Hook to fetch all encyclopedia content for a region
+ * Enrich structures with anatomy encyclopedia data from ContentService.
+ * Merges extra AnatomyRegion details into existing structures without duplicates.
+ */
+function enrichStructuresWithAnatomyRegion(
+  existing: AnatomicalStructure[],
+  anatomyRegion: AnatomyRegion | undefined,
+  regionId: string,
+): AnatomicalStructure[] {
+  if (!anatomyRegion) return existing;
+
+  const existingIds = new Set(existing.map(s => s.id));
+
+  // The AnatomyRegion may have a richer description - use it to augment the
+  // main region structure if present.
+  const enriched = existing.map(s => {
+    if (s.id === regionId && anatomyRegion.function) {
+      return {
+        ...s,
+        description: s.description || anatomyRegion.function,
+      };
+    }
+    return s;
+  });
+
+  // If the anatomy region has a different id that is not already present, add it
+  const encyclopediaId = `anatomy:${anatomyRegion.id}`;
+  if (!existingIds.has(encyclopediaId) && !existingIds.has(anatomyRegion.id)) {
+    if (anatomyRegion.id !== regionId) {
+      enriched.push({
+        id: encyclopediaId,
+        name: anatomyRegion.name,
+        description: anatomyRegion.function ?? '',
+        type: 'other',
+        parentId: regionId,
+      });
+    }
+  }
+
+  return enriched;
+}
+
+/**
+ * Merge symptoms from the symptom database into the pathology section.
+ * Adds symptom names to clinical presentations if not already present,
+ * and enriches condition symptom lists with matching symptom DB entries.
+ */
+function enrichPathologyWithSymptoms(
+  pathology: PathologyContent,
+  symptoms: SymptomEntry[],
+): PathologyContent {
+  if (symptoms.length === 0) return pathology;
+
+  const existingPresentations = new Set(
+    pathology.clinicalPresentations.map(p => p.toLowerCase()),
+  );
+
+  const additionalPresentations: string[] = [];
+  for (const symptom of symptoms) {
+    const name = symptom.name;
+    if (!existingPresentations.has(name.toLowerCase())) {
+      additionalPresentations.push(name);
+      existingPresentations.add(name.toLowerCase());
+    }
+  }
+
+  // Enrich common conditions with symptom names from the DB
+  const enrichedConditions = pathology.commonConditions.map(condition => {
+    const matchingSymptoms = symptoms.filter(s =>
+      s.possibleCauses?.some(
+        cause =>
+          condition.name.toLowerCase().includes(cause.conditionId.toLowerCase()) ||
+          cause.conditionId.toLowerCase().includes(
+            condition.name.toLowerCase().replace(/\s+/g, '-'),
+          ),
+      ),
+    );
+
+    if (matchingSymptoms.length === 0) return condition;
+
+    const existingSymptomNames = new Set(condition.symptoms.map(s => s.toLowerCase()));
+    const newSymptomNames = matchingSymptoms
+      .map(s => s.name)
+      .filter(name => !existingSymptomNames.has(name.toLowerCase()));
+
+    return {
+      ...condition,
+      symptoms: [...condition.symptoms, ...newSymptomNames],
+    };
+  });
+
+  return {
+    ...pathology,
+    commonConditions: enrichedConditions,
+    clinicalPresentations: [
+      ...pathology.clinicalPresentations,
+      ...additionalPresentations,
+    ],
+  };
+}
+
+/**
+ * Add relevant specialties to clinical notes.
+ */
+function enrichClinicalNotesWithSpecialties(
+  existingNotes: string[],
+  specialties: MedicalSpecialty[],
+): string[] {
+  if (specialties.length === 0) return existingNotes;
+
+  const specialtyNames = specialties.map(s => s.name).join(', ');
+  const specialtyNote = `Relevant medical specialties: ${specialtyNames}`;
+
+  if (existingNotes.some(n => n.startsWith('Relevant medical specialties:'))) {
+    return existingNotes;
+  }
+
+  return [...existingNotes, specialtyNote];
+}
+
+/**
+ * Merge related structure IDs from content service knowledge graph nodes.
+ */
+function enrichRelatedRegions(
+  existing: string[],
+  relatedNodes: KnowledgeNode[],
+): string[] {
+  const existingSet = new Set(existing.map(r => r.toLowerCase()));
+  const additional: string[] = [];
+
+  for (const node of relatedNodes) {
+    const shortId = node.id.replace(/^anatomy:/, '');
+    if (
+      !existingSet.has(shortId.toLowerCase()) &&
+      !existingSet.has(node.id.toLowerCase())
+    ) {
+      additional.push(shortId);
+      existingSet.add(shortId.toLowerCase());
+    }
+  }
+
+  return [...existing, ...additional];
+}
+
+/**
+ * Hook to fetch all encyclopedia content for a region.
+ *
+ * Combines:
+ *   1. REGION_CONTENT_MAP (via getRegionContent) for static educational content
+ *   2. ContentService (via useContentService) for live data from the knowledge
+ *      graph, symptom database, specialty map, and anatomy encyclopedia
  */
 export function useRegionalEncyclopedia(regionId: string): UseRegionalEncyclopediaResult {
+  const contentService = useContentService();
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [regionContent, setRegionContent] = useState<RegionContent | null>(null);
+  const [serviceData, setServiceData] = useState<ContentServiceData>(
+    EMPTY_CONTENT_SERVICE_DATA,
+  );
   const [fetchKey, setFetchKey] = useState(0);
 
-  // Fetch region content
+  // Fetch region content from both sources in parallel
   useEffect(() => {
     let mounted = true;
 
@@ -209,21 +396,73 @@ export function useRegionalEncyclopedia(regionId: string): UseRegionalEncycloped
       setError(null);
 
       try {
-        // Simulate async fetch - in production this would be an API call
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        const content = getRegionContent(regionId);
+        // 1. Get static region content from REGION_CONTENT_MAP
+        const staticContent = getRegionContent(regionId);
 
         if (!mounted) return;
 
-        if (!content) {
+        if (!staticContent) {
           throw new Error(`Region "${regionId}" not found in encyclopedia`);
         }
 
-        setRegionContent(content);
+        // 2. Fetch enrichment data from ContentService in parallel
+        const bodySystems = staticContent.bodySystems;
+
+        const [anatomyRegion, symptoms, specialtiesArrays, relatedNodes] =
+          await Promise.all([
+            // Get anatomy region details from the encyclopedia
+            contentService.getAnatomyRegion(regionId),
+
+            // Get symptoms for this region
+            contentService
+              .getSymptomsByRegion(regionId)
+              .catch(() => [] as SymptomEntry[]),
+
+            // Get specialties for each body system the region belongs to
+            Promise.all(
+              bodySystems.map(system =>
+                contentService
+                  .getSpecialtiesForBodySystem(system as any)
+                  .catch(() => [] as MedicalSpecialty[]),
+              ),
+            ),
+
+            // Get related anatomy nodes from knowledge graph
+            Promise.resolve(
+              contentService.getRelated(
+                `anatomy:${regionId}`,
+                undefined,
+                'anatomy',
+              ),
+            ),
+          ]);
+
+        if (!mounted) return;
+
+        // Flatten and deduplicate specialties
+        const seenSpecialtyIds = new Set<string>();
+        const uniqueSpecialties: MedicalSpecialty[] = [];
+        for (const arr of specialtiesArrays) {
+          for (const sp of arr) {
+            if (!seenSpecialtyIds.has(sp.specialtyId)) {
+              seenSpecialtyIds.add(sp.specialtyId);
+              uniqueSpecialties.push(sp);
+            }
+          }
+        }
+
+        setRegionContent(staticContent);
+        setServiceData({
+          anatomyRegion,
+          symptoms,
+          specialties: uniqueSpecialties,
+          relatedNodes,
+        });
       } catch (err) {
         if (!mounted) return;
-        setError(err instanceof Error ? err : new Error('Failed to load region content'));
+        setError(
+          err instanceof Error ? err : new Error('Failed to load region content'),
+        );
       } finally {
         if (mounted) {
           setIsLoading(false);
@@ -236,9 +475,9 @@ export function useRegionalEncyclopedia(regionId: string): UseRegionalEncycloped
     return () => {
       mounted = false;
     };
-  }, [regionId, fetchKey]);
+  }, [regionId, fetchKey, contentService]);
 
-  // Build encyclopedia data from region content
+  // Build encyclopedia data by merging static and service content
   const encyclopediaData = useMemo<RegionalEncyclopediaData>(() => {
     if (!regionContent) {
       return {
@@ -275,27 +514,63 @@ export function useRegionalEncyclopedia(regionId: string): UseRegionalEncycloped
       };
     }
 
+    // Build base structures & layers from static region content
+    const baseStructures = buildStructuresFromRegion(regionContent);
+    const layers = buildLayersFromRegion(regionContent);
+
+    // Enrich structures with anatomy encyclopedia data
+    const structures = enrichStructuresWithAnatomyRegion(
+      baseStructures,
+      serviceData.anatomyRegion,
+      regionContent.id,
+    );
+
+    // Enrich pathology with real symptoms from symptom database
+    const enrichedPathology = enrichPathologyWithSymptoms(
+      regionContent.pathology,
+      serviceData.symptoms,
+    );
+
+    // Enrich clinical notes with specialty info
+    const enrichedClinicalNotes = enrichClinicalNotesWithSpecialties(
+      regionContent.clinicalNotes,
+      serviceData.specialties,
+    );
+
+    // Enrich related regions from knowledge graph
+    const enrichedRelatedRegions = enrichRelatedRegions(
+      regionContent.relatedStructures,
+      serviceData.relatedNodes,
+    );
+
+    // Use the anatomy encyclopedia description if it is richer
+    const regionDescription =
+      serviceData.anatomyRegion?.function &&
+      serviceData.anatomyRegion.function.length > regionContent.description.length
+        ? `${regionContent.description} ${serviceData.anatomyRegion.function}`
+        : regionContent.description;
+
     return {
       region: {
         id: regionContent.id,
         name: regionContent.name,
-        description: regionContent.description,
+        description: regionDescription,
       },
-      structures: buildStructuresFromRegion(regionContent),
-      layers: buildLayersFromRegion(regionContent),
+      structures,
+      layers,
       models: regionContent.models,
       content: {
         physiology: regionContent.physiology,
-        pathology: regionContent.pathology,
+        pathology: enrichedPathology,
         histology: {
           ...regionContent.histology,
           images: generateHistologyImages(regionContent),
         },
       },
-      relatedRegions: regionContent.relatedStructures,
-      clinicalNotes: regionContent.clinicalNotes,
+      relatedRegions: enrichedRelatedRegions,
+      clinicalNotes: enrichedClinicalNotes,
     };
-  }, [regionContent, regionId]);
+  }, [regionContent, regionId, serviceData]);
 
   const refetch = () => {
     setFetchKey(prev => prev + 1);

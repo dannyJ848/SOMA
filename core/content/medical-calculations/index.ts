@@ -10,9 +10,9 @@
  * - Unit conversions
  */
 
-export { bmiCalculator } from './bmi-calculator.js';
-export { creatinineClearance } from './creatinine-clearance.js';
-export { dosingCalculations } from './dosing-calculations.js';
-export { fluidCalculations } from './fluid-calculations.js';
-export { riskScores } from './risk-scores.js';
-export { unitConversions } from './unit-conversions.js';
+export { bmiCalculator } from './bmi-calculator';
+export { creatinineClearance } from './creatinine-clearance';
+export { dosingCalculations } from './dosing-calculations';
+export { fluidCalculations } from './fluid-calculations';
+export { riskScores } from './risk-scores';
+export { unitConversions } from './unit-conversions';

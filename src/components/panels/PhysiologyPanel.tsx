@@ -1,19 +1,24 @@
 /**
  * Physiology Panel Component
  *
- * Displays physiological information for a selected anatomical region with
- * complexity level selection (1-5) from "Simple" to "MD Level".
+ * Displays real physiological content from the core/content/physiology databases
+ * when a body region is selected. Uses the region-to-physiology mapping to
+ * discover relevant topics, then loads EducationalContent at the user's
+ * complexity level from ComplexityContext.
  *
  * Features:
  * - Header with region name and "Physiology" title
- * - Complexity level selector (1-5)
- * - Content sections: Overview, Key Functions, Mechanisms, Interactive diagrams, Related Systems
+ * - Topic list: clickable physiology topics mapped to the region
+ * - Complexity level selector (1-5) integrated with ComplexityContext
+ * - Content sections: Overview, Key Functions, Mechanisms, Key Terms, Parameters
+ * - Interactive diagrams placeholder, Related Systems
  * - "Ask AI" button for questions about physiology
  * - Citations/sources section
  */
 
 import { useState, useCallback, useMemo } from 'react';
-import { usePhysiologyContent, type PhysiologyContentData } from '../../hooks/usePhysiologyContent';
+import { usePhysiologyContent, type PhysiologyContentData, type PhysiologyTopic } from '../../hooks/usePhysiologyContent';
+import { useComplexity, type ComplexityLevel as ContextComplexityLevel } from '../../contexts/ComplexityContext';
 import { GlassPanel, GlassButton } from '../ui/GlassUI';
 import './panels.css';
 
@@ -26,10 +31,11 @@ export type ComplexityLevel = 1 | 2 | 3 | 4 | 5;
 export interface PhysiologyPanelProps {
   regionId: string;
   regionName: string;
-  complexityLevel: ComplexityLevel;
-  onComplexityChange: (level: number) => void;
-  onAskAI: (question: string) => void;
-  onNavigateToRegion: (regionId: string) => void;
+  /** Override complexity — if omitted, uses ComplexityContext */
+  complexityLevel?: ComplexityLevel;
+  onComplexityChange?: (level: number) => void;
+  onAskAI?: (question: string) => void;
+  onNavigateToRegion?: (regionId: string) => void;
   onClose: () => void;
 }
 
@@ -51,6 +57,21 @@ const COMPLEXITY_DESCRIPTIONS: Record<ComplexityLevel, string> = {
   3: 'Clinical-level detail for healthcare students',
   4: 'Advanced mechanisms and pathophysiology',
   5: 'Expert-level detail for medical professionals',
+};
+
+const SYSTEM_COLORS: Record<string, string> = {
+  cardiovascular: '#ef4444',
+  respiratory: '#3b82f6',
+  digestive: '#f59e0b',
+  gastrointestinal: '#f59e0b',
+  renal: '#8b5cf6',
+  musculoskeletal: '#22c55e',
+  nervous: '#ec4899',
+  endocrine: '#14b8a6',
+  immune: '#6366f1',
+  hematology: '#dc2626',
+  integumentary: '#a78bfa',
+  reproductive: '#f472b6',
 };
 
 // ============================================================================
@@ -84,6 +105,50 @@ function ComplexityLevelSelector({ level, onChange }: ComplexitySelectorProps) {
             <span className="level-label">{COMPLEXITY_LABELS[l]}</span>
           </button>
         ))}
+      </div>
+    </div>
+  );
+}
+
+interface TopicListProps {
+  topics: PhysiologyTopic[];
+  selectedTopicId: string | null;
+  onSelect: (topicId: string) => void;
+}
+
+function TopicList({ topics, selectedTopicId, onSelect }: TopicListProps) {
+  if (topics.length === 0) return null;
+
+  return (
+    <div className="physiology-topic-list">
+      <div className="topic-list-header">
+        <span className="topic-list-title">Physiology Topics</span>
+        <span className="topic-list-count">{topics.length} topics</span>
+      </div>
+      <div className="topic-list-items">
+        {topics.map((topic) => {
+          const systemColor = SYSTEM_COLORS[topic.system] ?? '#6b7280';
+          const isSelected = topic.id === selectedTopicId;
+          return (
+            <button
+              key={topic.id}
+              className={`topic-item ${isSelected ? 'selected' : ''}`}
+              onClick={() => onSelect(topic.id)}
+              aria-pressed={isSelected}
+            >
+              <span
+                className="topic-system-dot"
+                style={{ backgroundColor: systemColor }}
+                title={topic.system}
+              />
+              <div className="topic-item-content">
+                <span className="topic-item-label">{topic.label}</span>
+                <span className="topic-item-summary">{topic.summary.slice(0, 80)}{topic.summary.length > 80 ? '...' : ''}</span>
+              </div>
+              {isSelected && <span className="topic-item-active-marker">&#9654;</span>}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -344,13 +409,28 @@ function ErrorState({ message, onRetry }: { message: string; onRetry?: () => voi
 export function PhysiologyPanel({
   regionId,
   regionName,
-  complexityLevel,
+  complexityLevel: complexityLevelProp,
   onComplexityChange,
   onAskAI,
   onNavigateToRegion,
   onClose,
 }: PhysiologyPanelProps) {
-  const { content, isLoading, error, refetch } = usePhysiologyContent(regionId, complexityLevel);
+  // Use ComplexityContext as default, allow prop override
+  let contextLevel: ComplexityLevel = 3;
+  let contextSetLevel: ((l: ComplexityLevel) => void) | undefined;
+  try {
+    const complexity = useComplexity();
+    contextLevel = complexity.level as ComplexityLevel;
+    contextSetLevel = complexity.setLevel as (l: ComplexityLevel) => void;
+  } catch {
+    // Not inside ComplexityProvider — use prop or default
+  }
+
+  const activeLevel: ComplexityLevel = complexityLevelProp ?? contextLevel;
+
+  const { content, isLoading, error, refetch, selectTopic, selectedTopicId } =
+    usePhysiologyContent(regionId, activeLevel);
+
   const [expandedSection, setExpandedSection] = useState<string>('overview');
 
   const handleToggleSection = useCallback((section: string) => {
@@ -358,8 +438,31 @@ export function PhysiologyPanel({
   }, []);
 
   const handleComplexityChange = useCallback((level: ComplexityLevel) => {
-    onComplexityChange(level);
-  }, [onComplexityChange]);
+    if (onComplexityChange) {
+      onComplexityChange(level);
+    }
+    if (contextSetLevel) {
+      contextSetLevel(level);
+    }
+  }, [onComplexityChange, contextSetLevel]);
+
+  const handleTopicSelect = useCallback((topicId: string) => {
+    selectTopic(topicId);
+    // Expand overview when switching topics
+    setExpandedSection('overview');
+  }, [selectTopic]);
+
+  const handleAskAI = useCallback((question: string) => {
+    if (onAskAI) {
+      onAskAI(question);
+    }
+  }, [onAskAI]);
+
+  const handleNavigate = useCallback((id: string) => {
+    if (onNavigateToRegion) {
+      onNavigateToRegion(id);
+    }
+  }, [onNavigateToRegion]);
 
   // Render loading state
   if (isLoading) {
@@ -443,9 +546,18 @@ export function PhysiologyPanel({
 
       {/* Complexity Selector */}
       <ComplexityLevelSelector
-        level={complexityLevel}
+        level={activeLevel}
         onChange={handleComplexityChange}
       />
+
+      {/* Topic List — shows available physiology topics for this region */}
+      {content?.topics && content.topics.length > 0 && (
+        <TopicList
+          topics={content.topics}
+          selectedTopicId={content.selectedTopicId}
+          onSelect={handleTopicSelect}
+        />
+      )}
 
       {/* Content Sections */}
       <div className="physiology-panel-content">
@@ -459,7 +571,18 @@ export function PhysiologyPanel({
           <div className="overview-content">
             <p className="overview-summary">{content?.summary}</p>
             {content?.explanation && (
-              <p className="overview-explanation">{content.explanation}</p>
+              <div
+                className="overview-explanation"
+                dangerouslySetInnerHTML={{
+                  __html: content.explanation
+                    .replace(/^## (.+)$/gm, '<h4>$1</h4>')
+                    .replace(/^### (.+)$/gm, '<h5>$1</h5>')
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n- /g, '<br/>- ')
+                    .replace(/\n\d+\. /g, (m) => `<br/>${m.trim()} `)
+                }}
+              />
             )}
             {content?.analogies && content.analogies.length > 0 && (
               <div className="analogies-section">
@@ -469,6 +592,18 @@ export function PhysiologyPanel({
                     <li key={index} className="analogy-item">
                       <span className="analogy-icon">&#128161;</span>
                       {analogy}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {content?.examples && content.examples.length > 0 && (
+              <div className="examples-section">
+                <h5>Real-World Examples</h5>
+                <ul className="examples-list">
+                  {content.examples.map((example, index) => (
+                    <li key={index} className="example-item">
+                      {example}
                     </li>
                   ))}
                 </ul>
@@ -617,7 +752,7 @@ export function PhysiologyPanel({
                   key={index}
                   id={system.targetId}
                   label={system.label}
-                  onClick={onNavigateToRegion}
+                  onClick={handleNavigate}
                 />
               ))}
             </div>
@@ -638,7 +773,7 @@ export function PhysiologyPanel({
         )}
 
         {/* Clinical Notes Section (for higher complexity levels) */}
-        {complexityLevel >= 3 && content?.clinicalNotes && content.clinicalNotes.length > 0 && (
+        {activeLevel >= 3 && content?.clinicalNotes && content.clinicalNotes.length > 0 && (
           <CollapsibleSection
             title="Clinical Notes"
             icon="&#129658;"
@@ -657,13 +792,15 @@ export function PhysiologyPanel({
         )}
 
         {/* Ask AI Section */}
-        <div className="physiology-section ask-ai-container">
-          <div className="section-header static">
-            <span className="section-icon">&#129302;</span>
-            <span className="section-title">Ask AI</span>
+        {onAskAI && (
+          <div className="physiology-section ask-ai-container">
+            <div className="section-header static">
+              <span className="section-icon">&#129302;</span>
+              <span className="section-title">Ask AI</span>
+            </div>
+            <AskAIForm onSubmit={handleAskAI} regionName={regionName} />
           </div>
-          <AskAIForm onSubmit={onAskAI} regionName={regionName} />
-        </div>
+        )}
 
         {/* Citations Section */}
         {content?.citations && content.citations.length > 0 && (

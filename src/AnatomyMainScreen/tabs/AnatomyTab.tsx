@@ -4,11 +4,18 @@
  * Lists anatomical structures within the region with 3D preview capability.
  * Displays layers for progressive visualization of anatomy.
  * Supports 5-level complexity for adaptive content display.
+ *
+ * Wired to ContentService for real anatomy data (AnatomyRegion, body systems)
+ * and regionContentMapping for rich educational content (clinical notes,
+ * related structures, pathology, physiology).
  */
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import type { AnatomicalStructure, AnatomicalLayer } from '../hooks/useRegionalEncyclopedia';
-import type { ModelReference } from '../../education/regionContentMapping';
+import type { ModelReference, RegionContent } from '../../education/regionContentMapping';
+import { getRegionContent } from '../../education/regionContentMapping';
+import { useContentService } from '../../services/ContentService';
+import type { AnatomyRegion } from '../../services/ContentService';
 import {
   useComplexityLevel,
   ComplexitySelector,
@@ -20,6 +27,7 @@ interface AnatomyTabProps {
   layers: AnatomicalLayer[];
   models: ModelReference[];
   regionName: string;
+  regionId?: string;
 }
 
 interface StructureCardProps {
@@ -28,14 +36,19 @@ interface StructureCardProps {
   onSelect: (id: string) => void;
   onPreview3D: (structure: AnatomicalStructure) => void;
   complexityLevel: ComplexityLevel;
+  regionContent: RegionContent | null;
+  anatomyRegions: AnatomyRegion[];
 }
 
 /**
- * Get structure display content based on complexity level
+ * Get structure display content based on complexity level,
+ * enriched with real data from regionContent and anatomyRegions.
  */
 function getStructureDisplayContent(
   structure: AnatomicalStructure,
-  complexityLevel: ComplexityLevel
+  complexityLevel: ComplexityLevel,
+  regionContent: RegionContent | null,
+  anatomyRegions: AnatomyRegion[],
 ): { name: string; description: string; additionalInfo?: string[] } {
   const baseDescription = structure.description;
 
@@ -52,7 +65,7 @@ function getStructureDisplayContent(
       return {
         name: structure.name,
         description: baseDescription.split('.').slice(0, 2).join('.') + '.',
-        additionalInfo: getLocationInfo(structure),
+        additionalInfo: getLocationInfo(structure, regionContent, anatomyRegions),
       };
 
     case 3:
@@ -60,7 +73,7 @@ function getStructureDisplayContent(
       return {
         name: structure.name,
         description: baseDescription,
-        additionalInfo: getRelationshipInfo(structure),
+        additionalInfo: getRelationshipInfo(structure, regionContent, anatomyRegions),
       };
 
     case 4:
@@ -69,9 +82,9 @@ function getStructureDisplayContent(
         name: structure.name,
         description: baseDescription,
         additionalInfo: [
-          ...getRelationshipInfo(structure),
-          ...getInnervationInfo(structure),
-          ...getVascularInfo(structure),
+          ...getRelationshipInfo(structure, regionContent, anatomyRegions),
+          ...getInnervationInfo(structure, regionContent, anatomyRegions),
+          ...getVascularInfo(structure, regionContent, anatomyRegions),
         ],
       };
 
@@ -81,10 +94,10 @@ function getStructureDisplayContent(
         name: structure.name,
         description: baseDescription,
         additionalInfo: [
-          ...getRelationshipInfo(structure),
-          ...getInnervationInfo(structure),
-          ...getVascularInfo(structure),
-          ...getClinicalInfo(structure),
+          ...getRelationshipInfo(structure, regionContent, anatomyRegions),
+          ...getInnervationInfo(structure, regionContent, anatomyRegions),
+          ...getVascularInfo(structure, regionContent, anatomyRegions),
+          ...getClinicalInfo(structure, regionContent, anatomyRegions),
         ],
       };
 
@@ -106,20 +119,44 @@ function simplifyDescription(description: string): string {
 }
 
 /**
- * Get location information for level 2+
+ * Get location information for level 2+ enriched with real anatomy data
  */
-function getLocationInfo(structure: AnatomicalStructure): string[] {
+function getLocationInfo(
+  structure: AnatomicalStructure,
+  regionContent: RegionContent | null,
+  anatomyRegions: AnatomyRegion[],
+): string[] {
   const info: string[] = [];
   if (structure.parentId) {
     info.push(`Located within: ${structure.parentId}`);
   }
+
+  // Enrich with real anatomy region location data
+  const matchingRegion = anatomyRegions.find(
+    (r) => r.name.toLowerCase() === structure.name.toLowerCase() ||
+      r.id.toLowerCase() === structure.id.toLowerCase()
+  );
+  if (matchingRegion) {
+    info.push(`Location: ${matchingRegion.location}`);
+    info.push(`Function: ${matchingRegion.function}`);
+  }
+
+  // Add body system membership from region content
+  if (regionContent && regionContent.bodySystems.length > 0) {
+    info.push(`Body systems: ${regionContent.bodySystems.join(', ')}`);
+  }
+
   return info;
 }
 
 /**
- * Get relationship information for level 3+
+ * Get relationship information for level 3+ enriched with real data
  */
-function getRelationshipInfo(structure: AnatomicalStructure): string[] {
+function getRelationshipInfo(
+  structure: AnatomicalStructure,
+  regionContent: RegionContent | null,
+  anatomyRegions: AnatomyRegion[],
+): string[] {
   const info: string[] = [];
   if (structure.children && structure.children.length > 0) {
     info.push(`Contains: ${structure.children.join(', ')}`);
@@ -127,55 +164,203 @@ function getRelationshipInfo(structure: AnatomicalStructure): string[] {
   if (structure.parentId) {
     info.push(`Part of: ${structure.parentId}`);
   }
+
+  // Related structures from regionContentMapping
+  if (regionContent && regionContent.relatedStructures.length > 0) {
+    info.push(`Related structures: ${regionContent.relatedStructures.join(', ')}`);
+  }
+
+  // Related conditions and procedures from anatomy encyclopedia
+  const matchingRegion = anatomyRegions.find(
+    (r) => r.name.toLowerCase() === structure.name.toLowerCase() ||
+      r.id.toLowerCase() === structure.id.toLowerCase()
+  );
+  if (matchingRegion) {
+    if (matchingRegion.conditions.length > 0) {
+      info.push(`Associated conditions: ${matchingRegion.conditions.join(', ')}`);
+    }
+    if (matchingRegion.symptoms.length > 0) {
+      info.push(`Associated symptoms: ${matchingRegion.symptoms.join(', ')}`);
+    }
+  }
+
+  // Physiology system interactions
+  if (regionContent && regionContent.physiology.systemInteractions.length > 0) {
+    for (const interaction of regionContent.physiology.systemInteractions) {
+      info.push(`System interaction: ${interaction}`);
+    }
+  }
+
   return info;
 }
 
 /**
- * Get innervation information for level 4+
+ * Get innervation information for level 4+ using real physiology and histology data
  */
-function getInnervationInfo(structure: AnatomicalStructure): string[] {
-  // In a full implementation, this would come from actual data
-  if (structure.type === 'muscle') {
-    return ['Innervation: Motor nerves from regional plexus'];
-  }
-  if (structure.type === 'organ') {
-    return ['Innervation: Autonomic nervous system'];
-  }
-  return [];
-}
-
-/**
- * Get vascular information for level 4+
- */
-function getVascularInfo(structure: AnatomicalStructure): string[] {
-  // In a full implementation, this would come from actual data
-  if (structure.type === 'muscle' || structure.type === 'organ') {
-    return ['Blood supply: Regional arterial branches'];
-  }
-  return [];
-}
-
-/**
- * Get clinical information for level 5
- */
-function getClinicalInfo(structure: AnatomicalStructure): string[] {
-  // In a full implementation, this would come from actual data
+function getInnervationInfo(
+  structure: AnatomicalStructure,
+  regionContent: RegionContent | null,
+  _anatomyRegions: AnatomyRegion[],
+): string[] {
   const info: string[] = [];
-  if (structure.type === 'muscle') {
-    info.push('Clinical: Common site for strain injuries');
-    info.push('Surgical landmark: Palpable at surface');
+
+  if (regionContent) {
+    // Pull real tissue types from histology content for nerve-related tissue
+    const nervousTissue = regionContent.histology.tissueTypes.find(
+      (t) => t.category === 'nervous'
+    );
+    if (nervousTissue) {
+      info.push(`Innervation: ${nervousTissue.description} -- ${nervousTissue.function}`);
+    }
+
+    // Pull nerve-related cell types
+    const nerveCells = regionContent.histology.cellTypes.filter(
+      (c) => c.toLowerCase().includes('neuron') ||
+        c.toLowerCase().includes('nerve') ||
+        c.toLowerCase().includes('schwann') ||
+        c.toLowerCase().includes('glia') ||
+        c.toLowerCase().includes('astrocyte') ||
+        c.toLowerCase().includes('oligodendrocyte')
+    );
+    if (nerveCells.length > 0) {
+      info.push(`Neural cell types: ${nerveCells.join(', ')}`);
+    }
+
+    // Pull relevant physiological processes (e.g., action potential propagation)
+    const neuralProcesses = regionContent.physiology.processes.filter(
+      (p) => p.name.toLowerCase().includes('neural') ||
+        p.name.toLowerCase().includes('nerve') ||
+        p.name.toLowerCase().includes('action potential') ||
+        p.name.toLowerCase().includes('synaptic') ||
+        p.name.toLowerCase().includes('innervation')
+    );
+    for (const proc of neuralProcesses) {
+      info.push(`${proc.name}: ${proc.description}`);
+    }
   }
-  if (structure.type === 'nerve') {
-    info.push('Clinical: Vulnerable to compression');
-    info.push('Variations: May have accessory branches');
+
+  // Fallback for structures that clearly are nerve/muscle types with no regionContent match
+  if (info.length === 0) {
+    if (structure.type === 'muscle') {
+      info.push('Innervation: Motor nerves from regional plexus');
+    } else if (structure.type === 'organ') {
+      info.push('Innervation: Autonomic nervous system');
+    }
   }
-  if (structure.type === 'vessel') {
-    info.push('Clinical: Used for vascular access');
-    info.push('Variations: Variable branching patterns');
+
+  return info;
+}
+
+/**
+ * Get vascular information for level 4+ using real physiology data
+ */
+function getVascularInfo(
+  structure: AnatomicalStructure,
+  regionContent: RegionContent | null,
+  _anatomyRegions: AnatomyRegion[],
+): string[] {
+  const info: string[] = [];
+
+  if (regionContent) {
+    // Homeostasis parameters related to blood supply
+    const vascularHomeostasis = regionContent.physiology.homeostasis.filter(
+      (h) => h.variable.toLowerCase().includes('blood') ||
+        h.variable.toLowerCase().includes('pressure') ||
+        h.variable.toLowerCase().includes('cardiac') ||
+        h.variable.toLowerCase().includes('oxygen') ||
+        h.variable.toLowerCase().includes('flow')
+    );
+    for (const param of vascularHomeostasis) {
+      info.push(`${param.variable}: ${param.normalRange} ${param.unit} (${param.regulationMechanism})`);
+    }
+
+    // Normal parameters related to vasculature
+    const vascularParams = regionContent.physiology.normalParameters.filter(
+      (p) => p.name.toLowerCase().includes('cardiac') ||
+        p.name.toLowerCase().includes('blood') ||
+        p.name.toLowerCase().includes('ejection') ||
+        p.name.toLowerCase().includes('pressure') ||
+        p.name.toLowerCase().includes('output')
+    );
+    for (const param of vascularParams) {
+      info.push(`${param.name}: normal ${param.normalRange} ${param.unit}`);
+    }
+
+    // Vascular-related system interactions
+    const vascularInteractions = regionContent.physiology.systemInteractions.filter(
+      (s) => s.toLowerCase().includes('blood') ||
+        s.toLowerCase().includes('vascular') ||
+        s.toLowerCase().includes('arterial') ||
+        s.toLowerCase().includes('coronary') ||
+        s.toLowerCase().includes('venous')
+    );
+    for (const interaction of vascularInteractions) {
+      info.push(`Blood supply: ${interaction}`);
+    }
   }
+
+  // Fallback
+  if (info.length === 0 && (structure.type === 'muscle' || structure.type === 'organ')) {
+    info.push('Blood supply: Regional arterial branches');
+  }
+
+  return info;
+}
+
+/**
+ * Get clinical information for level 5 using real pathology and clinical data
+ */
+function getClinicalInfo(
+  structure: AnatomicalStructure,
+  regionContent: RegionContent | null,
+  anatomyRegions: AnatomyRegion[],
+): string[] {
+  const info: string[] = [];
+
+  if (regionContent) {
+    // Real clinical notes from regionContentMapping
+    for (const note of regionContent.clinicalNotes) {
+      info.push(`Clinical: ${note}`);
+    }
+
+    // Pathology: common conditions with real mechanisms and symptoms
+    for (const condition of regionContent.pathology.commonConditions) {
+      const severityLabel = condition.severity === 'life-threatening'
+        ? ' [CRITICAL]'
+        : condition.severity === 'severe'
+          ? ' [SEVERE]'
+          : '';
+      info.push(
+        `${condition.name}${severityLabel}: ${condition.mechanism} -- Presents with: ${condition.symptoms.join(', ')}`
+      );
+    }
+
+    // Diagnostic markers
+    for (const marker of regionContent.pathology.diagnosticMarkers) {
+      info.push(`Diagnostic (${marker.type}): ${marker.name} -- ${marker.significance}`);
+    }
+
+    // Clinical presentations
+    if (regionContent.pathology.clinicalPresentations.length > 0) {
+      info.push(
+        `Key presentations: ${regionContent.pathology.clinicalPresentations.join(', ')}`
+      );
+    }
+  }
+
+  // Enrich from anatomy encyclopedia (procedures associated with the structure)
+  const matchingRegion = anatomyRegions.find(
+    (r) => r.name.toLowerCase() === structure.name.toLowerCase() ||
+      r.id.toLowerCase() === structure.id.toLowerCase()
+  );
+  if (matchingRegion && matchingRegion.procedures.length > 0) {
+    info.push(`Associated procedures: ${matchingRegion.procedures.join(', ')}`);
+  }
+
   if (structure.fmaId) {
     info.push(`FMA ID: ${structure.fmaId}`);
   }
+
   return info;
 }
 
@@ -185,6 +370,8 @@ function StructureCard({
   onSelect,
   onPreview3D,
   complexityLevel,
+  regionContent,
+  anatomyRegions,
 }: StructureCardProps) {
   const typeIcons: Record<string, string> = {
     organ: '\u{1FAC0}',
@@ -207,8 +394,8 @@ function StructureCard({
   };
 
   const displayContent = useMemo(
-    () => getStructureDisplayContent(structure, complexityLevel),
-    [structure, complexityLevel]
+    () => getStructureDisplayContent(structure, complexityLevel, regionContent, anatomyRegions),
+    [structure, complexityLevel, regionContent, anatomyRegions]
   );
 
   return (
@@ -348,18 +535,262 @@ function ModelCard({ model, complexityLevel, index }: ModelCardProps) {
   );
 }
 
+/**
+ * Body Systems section -- shows which body systems the region belongs to,
+ * pulled from regionContentMapping data.
+ */
+function BodySystemsSection({
+  regionContent,
+  complexityLevel,
+}: {
+  regionContent: RegionContent;
+  complexityLevel: ComplexityLevel;
+}) {
+  if (regionContent.bodySystems.length === 0) return null;
+
+  return (
+    <section className="body-systems-section">
+      <h4 className="section-title">
+        {complexityLevel <= 2 ? 'Body Systems' : 'Constituent Body Systems'}
+      </h4>
+      <div className="body-systems-list">
+        {regionContent.bodySystems.map((system) => (
+          <span key={system} className="body-system-badge">
+            {system}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Related Structures section -- pulled from regionContentMapping
+ */
+function RelatedStructuresSection({
+  regionContent,
+  complexityLevel,
+}: {
+  regionContent: RegionContent;
+  complexityLevel: ComplexityLevel;
+}) {
+  if (regionContent.relatedStructures.length === 0) return null;
+
+  return (
+    <section className="related-structures-section">
+      <h4 className="section-title">
+        {complexityLevel <= 2 ? 'Related Parts' : 'Related Anatomical Structures'}
+      </h4>
+      <div className="related-structures-list">
+        {regionContent.relatedStructures.map((structure) => (
+          <span key={structure} className="related-structure-badge">
+            {structure}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Clinical Notes section -- real clinical education content
+ * pulled from regionContentMapping, only shown at complexity >= 3.
+ */
+function ClinicalNotesSection({
+  regionContent,
+  complexityLevel,
+  anatomyRegions,
+}: {
+  regionContent: RegionContent;
+  complexityLevel: ComplexityLevel;
+  anatomyRegions: AnatomyRegion[];
+}) {
+  if (complexityLevel < 3) return null;
+
+  const allNotes = [...regionContent.clinicalNotes];
+
+  // Supplement with real anatomy-encyclopedia conditions
+  for (const ar of anatomyRegions) {
+    if (ar.conditions.length > 0) {
+      allNotes.push(
+        `${ar.name} (${ar.system}): associated conditions include ${ar.conditions.join(', ')}`
+      );
+    }
+  }
+
+  if (allNotes.length === 0) return null;
+
+  return (
+    <section className="clinical-notes-section">
+      <h4 className="section-title">Clinical Notes</h4>
+      {complexityLevel >= 4 && (
+        <p className="section-description">
+          Clinically relevant information for medical education and reference.
+        </p>
+      )}
+      <ul className="clinical-notes-list">
+        {allNotes.map((note, index) => (
+          <li key={index} className="clinical-note-item">
+            {note}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/**
+ * Anatomy Regions section -- real data from ContentService (anatomy encyclopedia)
+ * Shows regions matching the current body systems.
+ */
+function AnatomyRegionsSection({
+  anatomyRegions,
+  complexityLevel,
+}: {
+  anatomyRegions: AnatomyRegion[];
+  complexityLevel: ComplexityLevel;
+}) {
+  if (anatomyRegions.length === 0) return null;
+
+  return (
+    <section className="anatomy-regions-section">
+      <h4 className="section-title">
+        {complexityLevel <= 2
+          ? 'Anatomy Encyclopedia'
+          : 'Anatomy Encyclopedia Entries'}
+        <span className="count">({anatomyRegions.length})</span>
+      </h4>
+      {complexityLevel >= 3 && (
+        <p className="section-description">
+          Detailed anatomical structures from the medical encyclopedia database.
+        </p>
+      )}
+      <div className="anatomy-region-cards">
+        {anatomyRegions.map((region) => (
+          <div key={region.id} className="anatomy-region-card">
+            <div className="anatomy-region-header">
+              <strong className="anatomy-region-name">{region.name}</strong>
+              <span className="anatomy-region-system">{region.system}</span>
+            </div>
+            <p className="anatomy-region-location">{region.location}</p>
+            {complexityLevel >= 2 && (
+              <p className="anatomy-region-function">{region.function}</p>
+            )}
+            {complexityLevel >= 3 && region.spanish && (
+              <p className="anatomy-region-spanish">
+                <em>Spanish: {region.spanish}</em>
+              </p>
+            )}
+            {complexityLevel >= 4 && region.conditions.length > 0 && (
+              <div className="anatomy-region-conditions">
+                <span className="label">Conditions:</span>{' '}
+                {region.conditions.join(', ')}
+              </div>
+            )}
+            {complexityLevel >= 4 && region.symptoms.length > 0 && (
+              <div className="anatomy-region-symptoms">
+                <span className="label">Symptoms:</span>{' '}
+                {region.symptoms.join(', ')}
+              </div>
+            )}
+            {complexityLevel >= 5 && region.procedures.length > 0 && (
+              <div className="anatomy-region-procedures">
+                <span className="label">Procedures:</span>{' '}
+                {region.procedures.join(', ')}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function AnatomyTab({
   structures,
   layers,
   models,
   regionName,
+  regionId,
 }: AnatomyTabProps) {
   const { level: complexityLevel } = useComplexityLevel();
+  const contentService = useContentService();
   const [selectedStructure, setSelectedStructure] = useState<string | null>(null);
   const [visibleLayers, setVisibleLayers] = useState<Set<string>>(
     new Set(layers.map(l => l.id))
   );
   const [previewModel, setPreviewModel] = useState<AnatomicalStructure | null>(null);
+
+  // ----- Fetch real data from ContentService and regionContentMapping -----
+  const [anatomyRegions, setAnatomyRegions] = useState<AnatomyRegion[]>([]);
+  const [isLoadingContent, setIsLoadingContent] = useState(false);
+
+  // Region content from regionContentMapping (synchronous lookup)
+  const regionContent: RegionContent | null = useMemo(() => {
+    if (!regionId) return null;
+    // Try exact match, then lowercase, then regionName-based key
+    return (
+      getRegionContent(regionId) ??
+      getRegionContent(regionId.toLowerCase()) ??
+      getRegionContent(regionName.toLowerCase()) ??
+      null
+    );
+  }, [regionId, regionName]);
+
+  // Anatomy regions from ContentService (async)
+  useEffect(() => {
+    let cancelled = false;
+    setIsLoadingContent(true);
+
+    async function fetchAnatomyData() {
+      try {
+        const regions: AnatomyRegion[] = [];
+
+        // 1. Try to get the specific anatomy region by ID/name
+        if (regionId) {
+          const region = await contentService.getAnatomyRegion(regionId);
+          if (region) regions.push(region);
+        }
+
+        // 2. Also fetch all anatomy regions for the body systems this region belongs to
+        if (regionContent) {
+          const systemFetches = regionContent.bodySystems.map(async (system) => {
+            try {
+              const systemRegions = await contentService.getAnatomyBySystem(
+                system as Parameters<typeof contentService.getAnatomyBySystem>[0]
+              );
+              return systemRegions;
+            } catch {
+              return [];
+            }
+          });
+          const allSystemRegions = (await Promise.all(systemFetches)).flat();
+          // Deduplicate by id
+          for (const r of allSystemRegions) {
+            if (!regions.some((existing) => existing.id === r.id)) {
+              regions.push(r);
+            }
+          }
+        }
+
+        if (!cancelled) {
+          setAnatomyRegions(regions);
+        }
+      } catch {
+        // Silently handle -- display with whatever data we have
+      } finally {
+        if (!cancelled) {
+          setIsLoadingContent(false);
+        }
+      }
+    }
+
+    fetchAnatomyData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [regionId, regionContent, contentService]);
 
   const toggleLayer = useCallback((layerId: string) => {
     setVisibleLayers(prev => {
@@ -379,7 +810,6 @@ export function AnatomyTab({
 
   const handlePreview3D = useCallback((structure: AnatomicalStructure) => {
     setPreviewModel(structure);
-    // In a full implementation, this would open a 3D viewer modal
     console.log('Opening 3D preview for:', structure.name);
   }, []);
 
@@ -396,19 +826,32 @@ export function AnatomyTab({
 
   // Get intro text based on complexity level
   const getIntroText = (): string => {
+    const desc = regionContent?.description;
     switch (complexityLevel) {
       case 1:
-        return `Learn about the parts of the ${regionName}. Toggle layers to see different types.`;
+        return desc
+          ? `${desc.split('.')[0]}. Learn about the parts of the ${regionName}.`
+          : `Learn about the parts of the ${regionName}. Toggle layers to see different types.`;
       case 2:
-        return `Explore the structures within the ${regionName} region. Toggle layers to focus on specific tissue types.`;
+        return desc
+          ? `${desc} Explore the structures within the ${regionName} region.`
+          : `Explore the structures within the ${regionName} region. Toggle layers to focus on specific tissue types.`;
       case 3:
-        return `Examine the anatomical structures within the ${regionName} region. Use layer controls for progressive visualization of anatomy from superficial to deep structures.`;
+        return desc
+          ? `${desc} Examine the anatomical structures within the ${regionName} region. Use layer controls for progressive visualization of anatomy from superficial to deep structures.`
+          : `Examine the anatomical structures within the ${regionName} region. Use layer controls for progressive visualization of anatomy from superficial to deep structures.`;
       case 4:
-        return `Study the detailed anatomy of the ${regionName} region including relationships, innervation, and blood supply. Layer controls enable systematic dissection-style exploration.`;
+        return desc
+          ? `${desc} Study the detailed anatomy including relationships, innervation, and blood supply. Layer controls enable systematic dissection-style exploration.`
+          : `Study the detailed anatomy of the ${regionName} region including relationships, innervation, and blood supply. Layer controls enable systematic dissection-style exploration.`;
       case 5:
-        return `Clinical anatomy of the ${regionName} region with surgical landmarks, anatomical variations, and clinically relevant relationships. Use layers for surgical approach planning.`;
+        return desc
+          ? `${desc} Clinical anatomy with surgical landmarks, anatomical variations, and clinically relevant relationships. Use layers for surgical approach planning.`
+          : `Clinical anatomy of the ${regionName} region with surgical landmarks, anatomical variations, and clinically relevant relationships. Use layers for surgical approach planning.`;
       default:
-        return `Explore the structures within the ${regionName} region.`;
+        return desc
+          ? desc
+          : `Explore the structures within the ${regionName} region.`;
     }
   };
 
@@ -418,9 +861,20 @@ export function AnatomyTab({
         <div className="tab-intro">
           <h3>Anatomical Structures</h3>
           <p>{getIntroText()}</p>
+          {isLoadingContent && (
+            <p className="loading-indicator">Loading anatomy data...</p>
+          )}
         </div>
         <ComplexitySelector compact showDescription={false} />
       </div>
+
+      {/* Body Systems -- from regionContentMapping */}
+      {regionContent && (
+        <BodySystemsSection
+          regionContent={regionContent}
+          complexityLevel={complexityLevel}
+        />
+      )}
 
       {/* Layer controls */}
       {layers.length > 0 && (
@@ -468,6 +922,12 @@ export function AnatomyTab({
         </section>
       )}
 
+      {/* Anatomy Regions from ContentService (encyclopedia data) */}
+      <AnatomyRegionsSection
+        anatomyRegions={anatomyRegions}
+        complexityLevel={complexityLevel}
+      />
+
       {/* Structure list */}
       <section className="structures-section">
         <h4 className="section-title">
@@ -483,6 +943,8 @@ export function AnatomyTab({
               onSelect={handleStructureSelect}
               onPreview3D={handlePreview3D}
               complexityLevel={complexityLevel}
+              regionContent={regionContent}
+              anatomyRegions={anatomyRegions}
             />
           ))}
         </div>
@@ -493,7 +955,24 @@ export function AnatomyTab({
         )}
       </section>
 
-      {/* 3D Preview Modal Placeholder */}
+      {/* Related Structures -- from regionContentMapping */}
+      {regionContent && (
+        <RelatedStructuresSection
+          regionContent={regionContent}
+          complexityLevel={complexityLevel}
+        />
+      )}
+
+      {/* Clinical Notes -- real medical education content */}
+      {regionContent && (
+        <ClinicalNotesSection
+          regionContent={regionContent}
+          complexityLevel={complexityLevel}
+          anatomyRegions={anatomyRegions}
+        />
+      )}
+
+      {/* 3D Preview Modal */}
       {previewModel && (
         <div className="preview-modal-overlay" onClick={() => setPreviewModel(null)}>
           <div className="preview-modal" onClick={e => e.stopPropagation()}>
@@ -547,6 +1026,13 @@ export function AnatomyTab({
           line-height: 1.5;
         }
 
+        .loading-indicator {
+          font-size: 12px;
+          color: var(--accent-primary, #4a9eff);
+          font-style: italic;
+          margin-top: 4px;
+        }
+
         .section-title {
           margin: 0 0 12px 0;
           font-size: 14px;
@@ -569,6 +1055,153 @@ export function AnatomyTab({
           font-size: 13px;
           color: var(--text-tertiary, #666);
           line-height: 1.5;
+        }
+
+        /* Body Systems section */
+        .body-systems-section {
+          background: var(--background-secondary, #1a1a1a);
+          border-radius: 12px;
+          padding: 16px;
+        }
+
+        .body-systems-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .body-system-badge {
+          padding: 4px 12px;
+          background: rgba(74, 158, 255, 0.15);
+          border: 1px solid rgba(74, 158, 255, 0.3);
+          border-radius: 16px;
+          font-size: 13px;
+          color: var(--accent-primary, #4a9eff);
+          text-transform: capitalize;
+        }
+
+        /* Related Structures section */
+        .related-structures-section {
+          background: var(--background-secondary, #1a1a1a);
+          border-radius: 12px;
+          padding: 16px;
+        }
+
+        .related-structures-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .related-structure-badge {
+          padding: 4px 12px;
+          background: rgba(168, 85, 247, 0.15);
+          border: 1px solid rgba(168, 85, 247, 0.3);
+          border-radius: 16px;
+          font-size: 13px;
+          color: #a855f7;
+          text-transform: capitalize;
+        }
+
+        /* Clinical Notes section */
+        .clinical-notes-section {
+          background: var(--background-secondary, #1a1a1a);
+          border-radius: 12px;
+          padding: 16px;
+        }
+
+        .clinical-notes-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .clinical-note-item {
+          padding: 10px 14px;
+          background: var(--background-tertiary, #2a2a2a);
+          border-left: 3px solid #f59e0b;
+          border-radius: 0 8px 8px 0;
+          font-size: 13px;
+          color: var(--text-secondary, #888);
+          line-height: 1.5;
+        }
+
+        /* Anatomy Regions from encyclopedia */
+        .anatomy-regions-section {
+          background: var(--background-secondary, #1a1a1a);
+          border-radius: 12px;
+          padding: 16px;
+        }
+
+        .anatomy-region-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 12px;
+        }
+
+        .anatomy-region-card {
+          padding: 14px;
+          background: var(--background-tertiary, #2a2a2a);
+          border: 1px solid var(--border-color, #333);
+          border-radius: 8px;
+        }
+
+        .anatomy-region-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 6px;
+        }
+
+        .anatomy-region-name {
+          color: var(--text-primary, #fff);
+          font-size: 14px;
+        }
+
+        .anatomy-region-system {
+          padding: 2px 8px;
+          background: rgba(59, 130, 246, 0.2);
+          border-radius: 4px;
+          font-size: 11px;
+          color: #3b82f6;
+          text-transform: capitalize;
+        }
+
+        .anatomy-region-location {
+          margin: 4px 0;
+          font-size: 12px;
+          color: var(--text-tertiary, #666);
+        }
+
+        .anatomy-region-function {
+          margin: 4px 0;
+          font-size: 13px;
+          color: var(--text-secondary, #888);
+          line-height: 1.4;
+        }
+
+        .anatomy-region-spanish {
+          margin: 4px 0;
+          font-size: 12px;
+          color: var(--text-tertiary, #666);
+        }
+
+        .anatomy-region-conditions,
+        .anatomy-region-symptoms,
+        .anatomy-region-procedures {
+          margin: 4px 0;
+          font-size: 12px;
+          color: var(--text-tertiary, #666);
+        }
+
+        .anatomy-region-conditions .label,
+        .anatomy-region-symptoms .label,
+        .anatomy-region-procedures .label {
+          color: var(--text-secondary, #888);
+          font-weight: 500;
         }
 
         /* Layers section */
@@ -915,6 +1548,10 @@ export function AnatomyTab({
 
           .model-card {
             min-width: 100%;
+          }
+
+          .anatomy-region-cards {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

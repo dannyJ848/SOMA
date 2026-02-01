@@ -2,7 +2,7 @@
  * Abdominal Physical Examination Module
  */
 
-export { inspectionPalpation } from './inspection-palpation.js';
-export { percussionAuscultation } from './percussion-auscultation.js';
-export { liverSpleenExam } from './liver-spleen-exam.js';
-export { herniaDetection } from './hernia-detection.js';
+export { inspectionPalpation } from './inspection-palpation';
+export { percussionAuscultation } from './percussion-auscultation';
+export { liverSpleenExam } from './liver-spleen-exam';
+export { herniaDetection } from './hernia-detection';

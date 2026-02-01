@@ -126,10 +126,25 @@ type ActivePanel =
 // View type matching App.tsx
 type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
 
+/** Structured anatomy context for the AI chat (mirrors ai/types.ts AnatomyChatContext) */
+interface AnatomyChatContext {
+  regionId: string;
+  regionName: string;
+  bodySystems: string[];
+  anatomyStructures: string[];
+  symptoms: string[];
+  conditions: string[];
+  specialties: string[];
+  complexityLevel: 1 | 2 | 3 | 4 | 5;
+  initialQuestion?: string;
+}
+
 interface BodyCentricHomeProps {
   dashboardData: DashboardData | null;
   isLoading: boolean;
   onNavigate: (view: View) => void;
+  /** Called when "Ask AI" is triggered from a body region's radial menu, with region context string */
+  onAskAI?: (regionContext: string, anatomyChatContext?: AnatomyChatContext) => void;
 }
 
 interface RegionSelectionState {
@@ -147,6 +162,7 @@ export function BodyCentricHome({
   dashboardData,
   isLoading,
   onNavigate,
+  onAskAI,
 }: BodyCentricHomeProps) {
   // Get demographics for body model customization
   const { demographics } = useUserDemographics();
@@ -216,7 +232,39 @@ export function BodyCentricHome({
         setActivePanel('encyclopedia');
         break;
       case 'chat':
-        setActivePanel('chat');
+        if (onAskAI && selection.regionId) {
+          const regionName = selection.regionName || selection.regionId;
+          const mapping = selection.regionMapping;
+
+          // Build structured context from RegionMapping when available
+          const structuredContext: AnatomyChatContext = {
+            regionId: selection.regionId,
+            regionName,
+            bodySystems: mapping?.bodySystems ?? [],
+            anatomyStructures: [
+              ...(mapping?.organs ?? []),
+              ...(mapping?.structures ?? []),
+            ],
+            symptoms: mapping?.commonSymptoms ?? [],
+            conditions: [
+              ...(mapping?.commonConditions ?? []),
+              // Also include patient's active conditions that mention this region
+              ...(dashboardData?.activeConditions
+                ?.filter(c => c.name.toLowerCase().includes(selection.regionId!.toLowerCase()))
+                .map(c => c.name) ?? []),
+            ],
+            specialties: mapping?.encyclopediaCategories ?? [],
+            complexityLevel: 3,
+            initialQuestion: `Tell me about the ${regionName}. What is its structure, function, and clinical significance?`,
+          };
+
+          onAskAI(
+            `I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`,
+            structuredContext,
+          );
+        } else {
+          setActivePanel('chat');
+        }
         break;
       case 'layers':
         setActivePanel('layers');
@@ -404,23 +452,209 @@ export function BodyCentricHome({
         />
       )}
 
-      {/* Quick navigation hint - subtle, bottom center */}
+      {/* Quick Action Buttons - visible when no region is selected */}
       {!isMenuOpen && !selection.regionId && activePanel === 'none' && (
-        <div className="body-centric-hint" style={{
+        <div className="body-centric-quick-actions" style={{
           position: 'fixed',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          padding: '6px 14px',
-          background: 'rgba(0, 0, 0, 0.3)',
-          borderRadius: '16px',
-          backdropFilter: 'blur(4px)',
-          color: 'rgba(255, 255, 255, 0.45)',
-          fontSize: '12px',
-          zIndex: 50,
+          bottom: '72px',
+          left: '0',
+          right: '0',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          zIndex: 60,
           pointerEvents: 'none',
         }}>
-          <span>Tap any body region to explore</span>
+          {/* Action button row */}
+          <div style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '0 16px',
+            pointerEvents: 'auto',
+          }}>
+            <button
+              onClick={() => onNavigate('anatomy')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(59, 130, 246, 0.25)',
+                border: '1px solid rgba(59, 130, 246, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(147, 197, 253, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Explore Anatomy"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
+                <circle cx="12" cy="16" r="2"/>
+              </svg>
+              Explore Anatomy
+            </button>
+
+            <button
+              onClick={() => onNavigate('encyclopedia')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(168, 85, 247, 0.25)',
+                border: '1px solid rgba(168, 85, 247, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(216, 180, 254, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Encyclopedia"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              Encyclopedia
+            </button>
+
+            <button
+              onClick={() => onNavigate('chat')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(34, 197, 94, 0.25)',
+                border: '1px solid rgba(34, 197, 94, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(134, 239, 172, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Ask AI"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              Ask AI
+            </button>
+          </div>
+
+          {/* Second row */}
+          <div style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '0 16px',
+            pointerEvents: 'auto',
+          }}>
+            <button
+              onClick={() => onNavigate('symptom-explorer')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(249, 115, 22, 0.25)',
+                border: '1px solid rgba(249, 115, 22, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(253, 186, 116, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Symptoms"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              Symptoms
+            </button>
+
+            <button
+              onClick={() => onNavigate('medication-explorer')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(14, 165, 233, 0.25)',
+                border: '1px solid rgba(14, 165, 233, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(125, 211, 252, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Medications"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.5 20.5L3.5 13.5C2.5 12.5 2.5 10.5 3.5 9.5L9.5 3.5C10.5 2.5 12.5 2.5 13.5 3.5L20.5 10.5C21.5 11.5 21.5 13.5 20.5 14.5L14.5 20.5C13.5 21.5 11.5 21.5 10.5 20.5Z"/>
+                <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/>
+              </svg>
+              Medications
+            </button>
+
+            <button
+              onClick={() => onNavigate('dashboard')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(236, 72, 153, 0.25)',
+                border: '1px solid rgba(236, 72, 153, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(249, 168, 212, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="My Health"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+              My Health
+            </button>
+          </div>
+
+          {/* Hint text */}
+          <div style={{
+            padding: '4px 14px',
+            color: 'rgba(255, 255, 255, 0.35)',
+            fontSize: '11px',
+            pointerEvents: 'none',
+          }}>
+            <span>or tap any body region to explore</span>
+          </div>
         </div>
       )}
     </div>

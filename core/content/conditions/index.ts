@@ -55,6 +55,48 @@ export * from './dermatology';
 // Hematologic Conditions
 export * from './hematologic';
 
+// Genetic Conditions
+export * from './genetic';
+
+// Autoimmune Conditions
+export * from './autoimmune';
+
+// ENT Conditions
+export * from './ent';
+
+// Ophthalmology Conditions
+export * from './ophthalmology';
+
+// Pediatric Conditions
+export * from './pediatric';
+
+// Urology Conditions (selective exports to avoid name conflicts with infectious/renal)
+export {
+  bph,
+  prostatitis,
+  urinaryIncontinence,
+  erectileDysfunction,
+  hematuria,
+  interstitialCystitis,
+  UROLOGY_CONDITION_ENTRIES,
+  getUrologyCondition,
+  searchUrologyConditions,
+  getUrologyByCategory,
+  getUrologyConditionCount,
+  getAllUrologyConditionIds,
+  getUrologyByPresentation,
+} from './urology';
+export type { UrologyConditionEntry, UrologyConditionCategory } from './urology';
+
+// Ophthalmic Conditions (database)
+export * from './ophthalmic';
+
+// Geriatric Conditions
+export * from './geriatric';
+
+// Pregnancy & Obstetric Conditions
+export * from './pregnancy-obstetric';
+
 /**
  * Condition Categories for Navigation
  */

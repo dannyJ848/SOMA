@@ -4,6 +4,7 @@ export const highAlertMedicationsContent: EducationalContent = {
   id: 'high-alert-medications',
   type: 'concept',
   name: 'High-Alert Medications',
+  nameEs: 'Medicamentos de Alto Riesgo',
   alternateNames: ['High-Risk Medications', 'Dangerous Drugs', 'Critical Medications'],
   levels: {
     1: {

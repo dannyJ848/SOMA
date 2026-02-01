@@ -2,8 +2,8 @@
  * Endocrine Pathology Content Index
  */
 
-export { autoimmuneEndocrine } from './autoimmune-endocrine.js';
-export { endocrineNeoplasia } from './endocrine-neoplasia.js';
+export { autoimmuneEndocrine } from './autoimmune-endocrine';
+export { endocrineNeoplasia } from './endocrine-neoplasia';
 
 export const ENDOCRINE_PATHOLOGY_CONTENT = {
   id: 'endocrine-pathology',

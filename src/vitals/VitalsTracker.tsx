@@ -57,6 +57,7 @@ export function VitalsTracker({ summaries, onClose }: VitalsTrackerProps) {
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [selectedPeriod, setSelectedPeriod] = useState<TrendPeriod>('7d');
   const [selectedVital, setSelectedVital] = useState<VitalType | null>(null);
+  const [acknowledgedAlertIds, setAcknowledgedAlertIds] = useState<Set<string>>(new Set());
 
   // Calculate key metrics from summaries
   const metrics = useMemo(() => {
@@ -111,8 +112,22 @@ export function VitalsTracker({ summaries, onClose }: VitalsTrackerProps) {
   const alerts = useMemo(() => {
     // Convert summaries to readings format for alert processing
     // In a real implementation, this would use actual VitalReading objects
-    return filterAlerts([], 5, false);
-  }, [summaries]);
+    const raw = filterAlerts([], 5, false);
+    return raw.map((alert) =>
+      acknowledgedAlertIds.has(alert.id)
+        ? { ...alert, acknowledged: true, acknowledgedAt: new Date() }
+        : alert
+    );
+  }, [summaries, acknowledgedAlertIds]);
+
+  // Handle acknowledging an alert
+  const handleAcknowledgeAlert = useCallback((alertId: string) => {
+    setAcknowledgedAlertIds((prev) => {
+      const next = new Set(prev);
+      next.add(alertId);
+      return next;
+    });
+  }, []);
 
   // Build vital cards for overview
   const vitalCards: VitalCardData[] = useMemo(() => {
@@ -335,7 +350,7 @@ export function VitalsTracker({ summaries, onClose }: VitalsTrackerProps) {
         return (
           <VitalAlerts
             alerts={alerts}
-            onAcknowledge={(id) => console.log('Acknowledge', id)}
+            onAcknowledge={handleAcknowledgeAlert}
           />
         );
 
@@ -390,8 +405,8 @@ export function VitalsTracker({ summaries, onClose }: VitalsTrackerProps) {
             onClick={() => setActiveTab(tab)}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            {tab === 'alerts' && alerts.length > 0 && (
-              <span className="alert-badge">{alerts.length}</span>
+            {tab === 'alerts' && alerts.filter(a => !a.acknowledged).length > 0 && (
+              <span className="alert-badge">{alerts.filter(a => !a.acknowledged).length}</span>
             )}
           </button>
         ))}

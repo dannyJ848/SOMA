@@ -67,6 +67,7 @@ export interface LabResult {
   status: 'normal' | 'high' | 'low' | 'critical-high' | 'critical-low';
   collectedDate: string;
   relatedOrgan?: string;  // Organ this lab relates to
+  loincCode?: string;      // LOINC code for standardized lab identification
 }
 
 export interface PatientMedication {

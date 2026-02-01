@@ -10,6 +10,7 @@ export const stroke: EducationalContent = {
   id: 'condition-stroke',
   type: 'condition',
   name: 'Stroke',
+  nameEs: 'Accidente Cerebrovascular',
   alternateNames: ['Cerebrovascular Accident', 'CVA', 'Brain Attack', 'Cerebral Infarction'],
   hpoId: 'HP:0001297',
 

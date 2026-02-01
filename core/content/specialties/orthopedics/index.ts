@@ -13,6 +13,12 @@
  * - Physical Therapy and Rehabilitation
  * - Osteoporosis and Bone Health
  *
+ * In-depth specialty modules:
+ * - Fractures (classification, management principles)
+ * - Joint Replacement (hip and knee arthroplasty)
+ * - Sports Medicine (ACL/meniscus, rotator cuff/shoulder)
+ * - Spine (disc herniation/stenosis, scoliosis/deformity)
+ *
  * Multi-level complexity for patient education (8th grade to MD-level)
  */
 
@@ -38,6 +44,22 @@ export { fractureManagementContent } from './procedures/fracture-management';
 // Rehabilitation exports
 export { physicalTherapyContent } from './rehabilitation/physical-therapy';
 export { rehabilitationPrinciplesContent } from './rehabilitation/rehabilitation-principles';
+
+// In-depth fractures module
+export { commonFractureTypes } from './fractures/common-fracture-types';
+export { fractureManagementPrinciples } from './fractures/fracture-management-principles';
+
+// In-depth joint replacement module
+export { hipArthroplasty } from './joint-replacement/hip-arthroplasty';
+export { kneeArthroplasty } from './joint-replacement/knee-arthroplasty';
+
+// In-depth sports medicine module
+export { aclAndMeniscus } from './sports-medicine/acl-and-meniscus';
+export { rotatorCuffShoulder } from './sports-medicine/rotator-cuff-shoulder';
+
+// In-depth spine module
+export { discHerniationStenosis } from './spine/disc-herniation-stenosis';
+export { scoliosisDeformity } from './spine/scoliosis-deformity';
 
 // Ortho database exports
 export {
@@ -99,6 +121,15 @@ export const getAllOrthopedicsContent = async () => {
     import('./procedures/fracture-management'),
     import('./rehabilitation/physical-therapy'),
     import('./rehabilitation/rehabilitation-principles'),
+    // In-depth modules
+    import('./fractures/common-fracture-types'),
+    import('./fractures/fracture-management-principles'),
+    import('./joint-replacement/hip-arthroplasty'),
+    import('./joint-replacement/knee-arthroplasty'),
+    import('./sports-medicine/acl-and-meniscus'),
+    import('./sports-medicine/rotator-cuff-shoulder'),
+    import('./spine/disc-herniation-stenosis'),
+    import('./spine/scoliosis-deformity'),
   ]);
 
   return modules.map((m) => m.default);

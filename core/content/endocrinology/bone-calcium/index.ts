@@ -2,9 +2,9 @@
  * Bone and Calcium Metabolism Content Index
  */
 
-export { osteoporosis } from './osteoporosis.js';
-export { hyperparathyroidism } from './hyperparathyroidism.js';
-export { vitaminDDisorders } from './vitamin-d-disorders.js';
+export { osteoporosis } from './osteoporosis';
+export { hyperparathyroidism } from './hyperparathyroidism';
+export { vitaminDDisorders } from './vitamin-d-disorders';
 
 export const BONE_CALCIUM_CONTENT = {
   id: 'endocrinology-bone-calcium',

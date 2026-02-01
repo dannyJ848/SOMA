@@ -16,7 +16,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from '../i18n/useI18n';
 
 // Re-export the View type for external use
-export type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
+export type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
 
 export interface MobileBottomNavProps {
   currentView: View;
@@ -35,7 +35,7 @@ export function MobileBottomNav({
 }: MobileBottomNavProps) {
   const { t } = useTranslation('navigation');
   const [activeIndicatorStyle, setActiveIndicatorStyle] = useState<React.CSSProperties>({});
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const navRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const autoHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);

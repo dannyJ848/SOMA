@@ -4,6 +4,7 @@ export const preventingFallsContent: EducationalContent = {
   id: 'preventing-falls',
   type: 'concept',
   name: 'Preventing Falls in Healthcare Settings',
+  nameEs: 'Prevención de Caídas en Entornos de Salud',
   alternateNames: ['Fall Prevention', 'Patient Falls', 'Hospital Fall Safety'],
   levels: {
     1: {

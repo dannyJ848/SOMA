@@ -8,6 +8,7 @@ export const FLUID_MANAGEMENT: EducationalContent = {
   id: 'chronic-kidney-fluid-management',
   type: 'concept',
   name: 'Fluid Management in Kidney Disease',
+  nameEs: 'Manejo de Líquidos en la Enfermedad Renal',
   alternateNames: ['Fluid Restriction', 'Fluid Balance', 'Hydration in CKD', 'Fluid Monitoring'],
 
   levels: {

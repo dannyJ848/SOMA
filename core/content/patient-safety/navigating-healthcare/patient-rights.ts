@@ -4,6 +4,7 @@ export const patientRightsContent: EducationalContent = {
   id: 'patient-rights',
   type: 'concept',
   name: 'Patient Rights',
+  nameEs: 'Derechos del Paciente',
   alternateNames: ['Patient Bill of Rights', 'Healthcare Rights', 'Medical Rights'],
   levels: {
     1: {

@@ -4,6 +4,7 @@ export const dischargePlanningContent: EducationalContent = {
   id: 'discharge-planning',
   type: 'concept',
   name: 'Discharge Planning',
+  nameEs: 'Planificación del Alta Hospitalaria',
   alternateNames: ['Hospital Discharge', 'Care Transition', 'Discharge Process'],
   levels: {
     1: {

@@ -8,7 +8,14 @@
  * - Small floating badges near affected organs
  * - Up arrow for high values, down arrow for low values
  * - Color indicates urgency level
- * - Displays lab value on hover
+ * - Displays lab name, value, normal range, organ system, and
+ *   clinical interpretation on hover
+ *
+ * Data flow:
+ *   Patient LabResults
+ *     -> useLabOrganBridge / buildLabOrganMap (resolves organ via LAB_ORGAN_MAP)
+ *     -> bridge.labsByOrgan (Map<organKey, OrganLab[]>)
+ *     -> LabBadges component
  */
 
 import React, { useRef, useMemo, memo, useState } from 'react';
@@ -22,6 +29,7 @@ import {
   LAB_STATUS_COLORS,
 } from './types';
 import { getRegionCenter, getOrganCenter } from './utils';
+import type { EnrichedOrganLab } from './useLabOrganBridge';
 
 // ============================================
 // Constants
@@ -64,6 +72,21 @@ const LabBadge = memo(function LabBadge({
 }: LabBadgeProps) {
   const groupRef = useRef<THREE.Group>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Extract enriched data if present (from useLabOrganBridge / buildLabOrganMap)
+  const enrichedData = useMemo(() => {
+    const maybeEnriched = lab as Partial<EnrichedOrganLab>;
+    if (maybeEnriched.organSystem || maybeEnriched.fullLabName || maybeEnriched.interpretation) {
+      return {
+        organSystem: maybeEnriched.organSystem,
+        fullLabName: maybeEnriched.fullLabName,
+        interpretation: maybeEnriched.interpretation,
+        relatedLabIds: maybeEnriched.relatedLabIds,
+        regionId: maybeEnriched.regionId,
+      };
+    }
+    return undefined;
+  }, [lab]);
 
   // Calculate badge properties
   const badgeProps = useMemo(() => {
@@ -175,7 +198,7 @@ const LabBadge = memo(function LabBadge({
         </mesh>
       )}
 
-      {/* Detail popup on hover */}
+      {/* Detail popup on hover - shows enriched data when available */}
       {isHovered && (
         <Html
           position={[0, badgeProps.size * 2 + 0.01, 0]}
@@ -184,7 +207,15 @@ const LabBadge = memo(function LabBadge({
           style={{ pointerEvents: 'none' }}
         >
           <div className="lab-badge-popup">
-            <div className="lab-badge-name">{lab.lab.testName}</div>
+            {/* Full lab name from medical database, with organ system tag */}
+            <div className="lab-badge-name">
+              {enrichedData?.fullLabName || lab.lab.testName}
+            </div>
+            {enrichedData?.organSystem && (
+              <div className="lab-badge-organ-system">
+                {enrichedData.organSystem}
+              </div>
+            )}
             <div className="lab-badge-value">
               <span className={`lab-status lab-status-${lab.lab.status}`}>
                 {lab.direction === 'up' && '↑'}
@@ -195,6 +226,18 @@ const LabBadge = memo(function LabBadge({
             <div className="lab-badge-range">
               Ref: {lab.lab.referenceRange.low} - {lab.lab.referenceRange.high} {lab.lab.unit}
             </div>
+            {/* Clinical interpretation from LAB_ORGAN_MAP */}
+            {enrichedData?.interpretation && (
+              <div className="lab-badge-interpretation">
+                {enrichedData.interpretation}
+              </div>
+            )}
+            {/* Related labs hint */}
+            {enrichedData?.relatedLabIds && enrichedData.relatedLabIds.length > 0 && (
+              <div className="lab-badge-related">
+                Related: {enrichedData.relatedLabIds.slice(0, 3).join(', ')}
+              </div>
+            )}
           </div>
         </Html>
       )}

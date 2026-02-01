@@ -10,6 +10,7 @@ import type {
   SearchResults as SearchResultsType,
   SearchResult,
   SearchCategory,
+  RelatedItem,
 } from './types';
 
 // ============================================
@@ -28,6 +29,9 @@ interface SearchResultsProps {
     structureId?: string;
     entryId?: string;
   }) => void;
+
+  /** Callback when a related item chip is clicked */
+  onRelatedItemClick?: (item: RelatedItem) => void;
 
   /** Currently selected result index for keyboard navigation */
   selectedIndex?: number;
@@ -72,6 +76,7 @@ const CATEGORY_CONFIG: Record<SearchCategory, {
 export function SearchResults({
   results,
   onResultClick,
+  onRelatedItemClick,
   selectedIndex = -1,
   query,
   isLoading = false,
@@ -186,6 +191,7 @@ export function SearchResults({
                     query={query}
                     isSelected={false}
                     onClick={() => handleResultClick(result)}
+                    onRelatedItemClick={onRelatedItemClick}
                   />
                 ))}
                 {totalInCategory > maxPerCategory && (
@@ -211,6 +217,7 @@ export function SearchResults({
           query={query}
           isSelected={index === selectedIndex}
           onClick={() => handleResultClick(result)}
+          onRelatedItemClick={onRelatedItemClick}
         />
       ))}
 
@@ -240,51 +247,90 @@ interface ResultItemProps {
   query: string;
   isSelected: boolean;
   onClick: () => void;
+  onRelatedItemClick?: (item: RelatedItem) => void;
 }
 
-function ResultItem({ result, query, isSelected, onClick }: ResultItemProps) {
+/** Icon map for related item types */
+const RELATED_TYPE_ICON: Record<RelatedItem['type'], string> = {
+  condition: '\uD83C\uDFE5',
+  symptom: '\uD83E\uDE7A',
+  anatomy: '\uD83E\uDEC0',
+  medication: '\uD83D\uDC8A',
+  procedure: '\uD83D\uDD2C',
+  specialty: '\uD83D\uDC68\u200D\u2695\uFE0F',
+};
+
+function ResultItem({ result, query, isSelected, onClick, onRelatedItemClick }: ResultItemProps) {
   const config = CATEGORY_CONFIG[result.category] || CATEGORY_CONFIG.all;
 
   return (
-    <button
-      className={`result-item ${isSelected ? 'selected' : ''}`}
-      onClick={onClick}
-      style={{ '--result-color': config.color } as React.CSSProperties}
-    >
-      <span className="result-icon">{result.icon || config.icon}</span>
-      <div className="result-content">
-        <div className="result-header">
-          <span className="result-title">
-            <HighlightText text={result.title} query={query} />
-          </span>
-          <span
-            className="result-category"
-            style={{ backgroundColor: `${config.color}20`, color: config.color }}
-          >
-            {config.label}
-          </span>
-        </div>
-        <p className="result-description">
-          {result.snippet ? (
-            <HighlightText text={result.snippet} query={query} />
-          ) : (
-            <HighlightText text={result.description} query={query} />
+    <div className={`result-item-wrapper ${isSelected ? 'selected' : ''}`}>
+      <button
+        className={`result-item ${isSelected ? 'selected' : ''}`}
+        onClick={onClick}
+        style={{ '--result-color': config.color } as React.CSSProperties}
+      >
+        <span className="result-icon">{result.icon || config.icon}</span>
+        <div className="result-content">
+          <div className="result-header">
+            <span className="result-title">
+              <HighlightText text={result.title} query={query} />
+            </span>
+            <span
+              className="result-category"
+              style={{ backgroundColor: `${config.color}20`, color: config.color }}
+            >
+              {config.label}
+            </span>
+          </div>
+          <p className="result-description">
+            {result.snippet ? (
+              <HighlightText text={result.snippet} query={query} />
+            ) : (
+              <HighlightText text={result.description} query={query} />
+            )}
+          </p>
+          {result.matchedTerms && result.matchedTerms.length > 0 && (
+            <div className="result-matched-terms">
+              {result.matchedTerms.slice(0, 3).map((term, i) => (
+                <span key={i} className="matched-term">
+                  {term}
+                </span>
+              ))}
+            </div>
           )}
-        </p>
-        {result.matchedTerms && result.matchedTerms.length > 0 && (
-          <div className="result-matched-terms">
-            {result.matchedTerms.slice(0, 3).map((term, i) => (
-              <span key={i} className="matched-term">
-                {term}
-              </span>
+        </div>
+        <span className="result-score" title={`Relevance: ${result.score}%`}>
+          {result.matchType === 'exact' && '\u2B50'}
+        </span>
+      </button>
+
+      {/* Related items from knowledge graph */}
+      {result.relatedItems && result.relatedItems.length > 0 && (
+        <div className="related-items">
+          <span className="related-items-label">Related:</span>
+          <div className="related-items-list">
+            {result.relatedItems.map((item) => (
+              <button
+                key={item.id}
+                className="related-item-chip"
+                title={`${item.relationship}: ${item.name}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRelatedItemClick?.(item);
+                }}
+              >
+                <span className="related-item-icon">
+                  {RELATED_TYPE_ICON[item.type] || '\uD83D\uDD17'}
+                </span>
+                <span className="related-item-name">{item.name}</span>
+                <span className="related-item-rel">{item.relationship}</span>
+              </button>
             ))}
           </div>
-        )}
-      </div>
-      <span className="result-score" title={`Relevance: ${result.score}%`}>
-        {result.matchType === 'exact' && '⭐'}
-      </span>
-    </button>
+        </div>
+      )}
+    </div>
   );
 }
 

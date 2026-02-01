@@ -27,6 +27,23 @@ export { giCancers } from './conditions/gi-cancers';
 export { giBleeding } from './conditions/gi-bleeding';
 export { celiacAndMalabsorption } from './conditions/celiac-malabsorption';
 
+// Upper GI subdirectory exports
+export { gerdContent } from './upper-gi/gerd';
+export { pepticUlcerContent } from './upper-gi/peptic-ulcer-disease';
+
+// Lower GI subdirectory exports
+export { ibdContent } from './lower-gi/inflammatory-bowel-disease';
+export { ibsContent } from './lower-gi/irritable-bowel-syndrome';
+
+// Hepatology subdirectory exports
+export { cirrhosisContent } from './hepatology/cirrhosis';
+export { hepatitisContent } from './hepatology/hepatitis';
+export { fattyLiverContent } from './hepatology/fatty-liver-disease';
+
+// Pancreatic subdirectory exports
+export { acutePancreatitisContent } from './pancreatic/acute-pancreatitis';
+export { chronicPancreatitisContent } from './pancreatic/chronic-pancreatitis';
+
 // Procedure exports
 export { upperEndoscopy } from './procedures/upper-endoscopy';
 export { colonoscopy } from './procedures/colonoscopy';

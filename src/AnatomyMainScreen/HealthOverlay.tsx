@@ -373,6 +373,10 @@ export {
 export {
   // Utilities
   createBridge,
+  buildConditionRegionMap,
+  resolveConditionAnatomyMapping,
+  getConditionHighlightColor,
+  getConditionHighlightIntensity,
   getRegionMesh,
   getRegionCenter,
   getOrganCenter,
@@ -380,8 +384,22 @@ export {
 } from './utils';
 
 export { ConditionHighlights } from './ConditionHighlights';
-export { SymptomIndicators } from './SymptomIndicators';
+export { ConnectedConditionHighlights } from './ConnectedConditionHighlights';
+export { SymptomIndicators, DataDrivenSymptomIndicators } from './SymptomIndicators';
 export { LabBadges } from './LabBadges';
 export { MedicationTargets } from './MedicationTargets';
+
+export { useConditionHighlightsBridge } from './hooks/useConditionHighlightsBridge';
+export type {
+  BridgeableCondition,
+  ConditionHighlightsBridgeResult,
+} from './hooks/useConditionHighlightsBridge';
+
+export {
+  useLabOrganBridge,
+  buildLabOrganMap,
+  type EnrichedOrganLab,
+  type LabOrganBridgeOptions,
+} from './useLabOrganBridge';
 
 export default HealthOverlay;

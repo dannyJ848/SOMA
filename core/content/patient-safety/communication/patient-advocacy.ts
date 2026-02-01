@@ -4,6 +4,7 @@ export const patientAdvocacyContent: EducationalContent = {
   id: 'patient-advocacy',
   type: 'concept',
   name: 'Patient Advocacy',
+  nameEs: 'Defensa del Paciente',
   alternateNames: ['Healthcare Advocacy', 'Patient Support', 'Patient Representation'],
   levels: {
     1: {

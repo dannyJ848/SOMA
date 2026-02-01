@@ -1,8 +1,9 @@
 /**
- * Anatomical Variations Main Index
+ * Anatomy Content Main Index
  *
- * Central export point for all anatomical variations content including
- * congenital variations, common anomalies, and surgical relevance.
+ * Central export point for all anatomical content including
+ * congenital variations, common anomalies, surgical relevance,
+ * and body system anatomy.
  */
 
 // Congenital Variations
@@ -26,3 +27,39 @@ export {
   IMAGING_VARIANTS,
   ANOMALY_DETECTION,
 } from './surgical-relevance';
+
+// Body System Anatomy Encyclopedia
+export {
+  ANATOMY_REGIONS,
+  type AnatomyRegion,
+  type AnatomySystem,
+} from './anatomy-encyclopedia';
+
+// Sensory System Anatomy
+export {
+  // Vision
+  visualSystemAnatomy,
+  eyeAnatomy,
+  // Auditory
+  auditorySystemAnatomy,
+  earAnatomy,
+  vestibularSystemAnatomy,
+  // Chemical Senses
+  olfactorySystemAnatomy,
+  gustatorySystemAnatomy,
+  // Somatosensory
+  somatosensorySystemAnatomy,
+  sensoryReceptorsAnatomy,
+  // Collections
+  sensoryAnatomyAll,
+} from '../sensory/anatomy';
+
+// Import all for default export
+import { sensoryAnatomyAll } from '../sensory/anatomy';
+
+// Combined exports for convenience
+export const allAnatomyContent = {
+  sensory: sensoryAnatomyAll,
+};
+
+export default allAnatomyContent;

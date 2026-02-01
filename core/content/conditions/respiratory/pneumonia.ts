@@ -10,6 +10,7 @@ export const pneumonia: EducationalContent = {
   id: 'condition-pneumonia',
   type: 'condition',
   name: 'Pneumonia',
+  nameEs: 'Neumonía',
   alternateNames: ['Lung Infection', 'Lower Respiratory Tract Infection', 'Pneumonitis'],
   hpoId: 'HP:0002090',
 

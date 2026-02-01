@@ -10,6 +10,7 @@ export const metabolicSyndrome: EducationalContent = {
   id: 'condition-metabolic-syndrome',
   type: 'condition',
   name: 'Metabolic Syndrome',
+  nameEs: 'Síndrome Metabólico',
   alternateNames: ['Insulin Resistance Syndrome', 'Syndrome X', 'Dysmetabolic Syndrome'],
   hpoId: 'HP:0000831',
 

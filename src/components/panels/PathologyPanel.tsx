@@ -459,7 +459,12 @@ function ConditionCard({
       {/* Card Header */}
       <button className="card-header" onClick={onToggleExpand}>
         <div className="card-title-row">
-          <h4 className="card-title">{condition.name}</h4>
+          <div className="card-title-group">
+            <h4 className="card-title">{condition.name}</h4>
+            {condition.nameEs && (
+              <span className="card-title-es">{condition.nameEs}</span>
+            )}
+          </div>
           {condition.isEmergency && (
             <span className="emergency-badge">EMERGENCY</span>
           )}
@@ -1007,11 +1012,23 @@ function PanelStyles() {
         margin-bottom: 8px;
       }
 
+      .card-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
       .card-title {
         margin: 0;
         font-size: 15px;
         font-weight: 500;
         color: #fff;
+      }
+
+      .card-title-es {
+        font-size: 12px;
+        color: #888;
+        font-style: italic;
       }
 
       .emergency-badge {

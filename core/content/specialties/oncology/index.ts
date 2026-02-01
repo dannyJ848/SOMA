@@ -50,6 +50,12 @@ export { oncologicEmergenciesContent } from './oncologic-emergencies';
 export { palliativeCareContent } from './palliative-care';
 export { cancerSurvivorshipContent } from './survivorship';
 
+// In-depth specialty content (EducationalContent format)
+export { breastCancerScreening, breastCancerStaging, breastCancerTreatment } from './breast';
+export { lungCancerTypes, lungCancerStagingTreatment } from './lung';
+export { leukemia, lymphoma } from './hematologic';
+export { chemotherapyPrinciples, immunotherapy, radiationTherapy } from './treatment-modalities';
+
 // Content categories
 export const ONCOLOGY_CATEGORIES = [
   'cancer-biology',
@@ -63,6 +69,16 @@ export const ONCOLOGY_CATEGORIES = [
   'emergencies',
   'palliative-care',
   'survivorship',
+  'breast-screening',
+  'breast-staging',
+  'breast-treatment',
+  'lung-types',
+  'lung-staging-treatment',
+  'hematologic-leukemia',
+  'hematologic-lymphoma',
+  'chemotherapy-principles',
+  'immunotherapy-principles',
+  'radiation-therapy-principles',
 ] as const;
 
 export type OncologyCategory = (typeof ONCOLOGY_CATEGORIES)[number];

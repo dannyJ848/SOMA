@@ -618,11 +618,10 @@ export function HistologyTab({ images, regionName }: HistologyTabProps) {
                 )}
 
                 <div className="image-gallery">
-                  {(filteredImages as unknown as HistologyImage[]).map((typedImage, idx) => (
+                  {filteredImages.map((typedImage, idx) => (
                     <ImageCard
                       key={typedImage.id || idx}
                       image={typedImage}
-                      // @ts-expect-error TypeScript incorrectly infers typedImage as never
                       isSelected={Boolean(selectedImage && selectedImage.id === typedImage.id)}
                       onSelect={handleImageSelect}
                       complexityLevel={complexityLevel}

@@ -86,9 +86,9 @@ describe('useAnatomy3DNavigation', () => {
         })
       );
 
-      // Fast-forward timers to resolve promise
-      act(() => {
-        vi.advanceTimersByTime(500);
+      // Fast-forward timers to resolve promise (async to flush microtasks)
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(500);
       });
 
       expect(resolved).toBe(true);
@@ -104,13 +104,13 @@ describe('useAnatomy3DNavigation', () => {
         });
       });
 
-      act(() => {
-        vi.advanceTimersByTime(500);
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(500);
       });
       expect(resolved).toBe(false);
 
-      act(() => {
-        vi.advanceTimersByTime(500);
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(500);
       });
       expect(resolved).toBe(true);
     });

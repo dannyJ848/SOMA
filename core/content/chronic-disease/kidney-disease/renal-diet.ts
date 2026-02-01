@@ -8,6 +8,7 @@ export const RENAL_DIET: EducationalContent = {
   id: 'chronic-kidney-renal-diet',
   type: 'concept',
   name: 'Renal Diet and Nutrition',
+  nameEs: 'Dieta Renal y Nutrición',
   alternateNames: ['Kidney Diet', 'CKD Diet', 'Low Sodium Diet', 'Renal Nutrition', 'Kidney-Friendly Eating'],
 
   levels: {

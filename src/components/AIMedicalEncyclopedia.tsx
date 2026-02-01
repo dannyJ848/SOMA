@@ -17,6 +17,7 @@ import type {
   UserHealthProfile,
 } from '../../core/personalization/types';
 import { COMPLEXITY_LEVELS, type ComplexityLevel } from '../ComplexityLevel';
+import type { AnatomyChatContext } from '../ai/types';
 
 // ============================================
 // Types
@@ -135,6 +136,8 @@ export interface AIMedicalEncyclopediaProps {
   userConditions?: UserCondition[];
   /** Patient health data for personalized education */
   patientHealthData?: PatientHealthData;
+  /** Structured anatomy chat context from the body-centric view */
+  anatomyChatContext?: AnatomyChatContext | null;
   initialComplexity: 1 | 2 | 3 | 4 | 5;
   onClose: () => void;
   onNavigateToRegion: (regionId: string) => void;
@@ -496,7 +499,8 @@ const buildSystemPrompt = (
   regionName: string,
   complexityLevel: ComplexityLevel,
   healthContext?: RegionHealthContext | null,
-  patientData?: PatientHealthData
+  patientData?: PatientHealthData,
+  anatomyChatContext?: AnatomyChatContext | null
 ): string => {
   const levelDef = COMPLEXITY_LEVELS[complexityLevel];
 
@@ -567,6 +571,40 @@ Frame all information as educational content, not medical advice.
     }
   }
 
+  // Build anatomy chat context section if available
+  let anatomyContextSection = '';
+  if (anatomyChatContext) {
+    const parts: string[] = [];
+    if (anatomyChatContext.bodySystems.length > 0) {
+      parts.push(`Body Systems: ${anatomyChatContext.bodySystems.join(', ')}`);
+    }
+    if (anatomyChatContext.anatomyStructures.length > 0) {
+      parts.push(`Anatomy Structures: ${anatomyChatContext.anatomyStructures.join(', ')}`);
+    }
+    if (anatomyChatContext.symptoms.length > 0) {
+      parts.push(`Associated Symptoms: ${anatomyChatContext.symptoms.join(', ')}`);
+    }
+    if (anatomyChatContext.conditions.length > 0) {
+      parts.push(`Related Conditions: ${anatomyChatContext.conditions.join(', ')}`);
+    }
+    if (anatomyChatContext.specialties.length > 0) {
+      parts.push(`Relevant Specialties: ${anatomyChatContext.specialties.join(', ')}`);
+    }
+    if (anatomyChatContext.initialQuestion) {
+      parts.push(`User's Initial Question: ${anatomyChatContext.initialQuestion}`);
+    }
+    if (parts.length > 0) {
+      anatomyContextSection = `
+=== ANATOMY NAVIGATION CONTEXT ===
+The user navigated from the body model with the following context:
+Region: ${anatomyChatContext.regionName} (${anatomyChatContext.regionId})
+${parts.join('\n')}
+
+Use this context to provide more targeted and relevant educational content.
+`;
+    }
+  }
+
   return `You are the AI Medical Encyclopedia, an advanced medical education assistant. You specialize in providing evidence-based anatomical and clinical education about the ${regionName}.
 
 ${EDUCATIONAL_DISCLAIMER}
@@ -581,6 +619,7 @@ Region ID: ${regionId}
 Region Name: ${regionName}
 
 ${healthContextSection}
+${anatomyContextSection}
 
 === CONTENT FRAMEWORK ===
 
@@ -994,6 +1033,7 @@ export function AIMedicalEncyclopedia({
   regionName,
   userConditions,
   patientHealthData,
+  anatomyChatContext,
   initialComplexity,
   onClose,
   onNavigateToRegion,
@@ -1084,7 +1124,8 @@ export function AIMedicalEncyclopedia({
         regionName,
         complexityLevel,
         healthContext,
-        mergedPatientData
+        mergedPatientData,
+        anatomyChatContext
       );
 
       // Build message history for context

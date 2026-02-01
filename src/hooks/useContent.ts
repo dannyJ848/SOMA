@@ -11,7 +11,7 @@
  *   useExplanation(topicId, level)   — level-appropriate explanation
  */
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   useContentService,
   type UnifiedSearchResult,
@@ -82,11 +82,14 @@ export function useContentSearch(
       // Only run if the query hasn't changed during the debounce window
       if (latestQuery.current.trim() !== trimmed) return;
 
-      const results = service.searchAll(trimmed, options);
-      setState({
-        results,
-        isSearching: false,
-        totalCount: results.length,
+      service.searchAll(trimmed, options).then((results) => {
+        // Check again after async — query may have changed
+        if (latestQuery.current.trim() !== trimmed) return;
+        setState({
+          results,
+          isSearching: false,
+          totalCount: results.length,
+        });
       });
     }, 150);
 
@@ -135,25 +138,34 @@ export interface ConditionInfoState {
  */
 export function useConditionInfo(conditionId: string): ConditionInfoState {
   const service = useContentService();
+  const [state, setState] = useState<ConditionInfoState>({
+    info: null,
+    isLoading: true,
+    error: null,
+  });
 
-  const result = useMemo<ConditionInfoState>(() => {
+  useEffect(() => {
     if (!conditionId) {
-      return { info: null, isLoading: false, error: 'No condition ID provided' };
+      setState({ info: null, isLoading: false, error: 'No condition ID provided' });
+      return;
     }
 
-    const info = service.getConditionInfo(conditionId);
-    if (!info) {
-      return {
-        info: null,
-        isLoading: false,
-        error: `Condition "${conditionId}" not found in the knowledge graph`,
-      };
-    }
+    setState((prev) => ({ ...prev, isLoading: true }));
 
-    return { info, isLoading: false, error: null };
+    service.getConditionInfo(conditionId).then((info) => {
+      if (!info) {
+        setState({
+          info: null,
+          isLoading: false,
+          error: `Condition "${conditionId}" not found in the knowledge graph`,
+        });
+      } else {
+        setState({ info, isLoading: false, error: null });
+      }
+    });
   }, [conditionId, service]);
 
-  return result;
+  return state;
 }
 
 // ===========================================================================
@@ -188,25 +200,34 @@ export interface SymptomLookupState {
  */
 export function useSymptomLookup(symptomId: string): SymptomLookupState {
   const service = useContentService();
+  const [state, setState] = useState<SymptomLookupState>({
+    info: null,
+    isLoading: true,
+    error: null,
+  });
 
-  const result = useMemo<SymptomLookupState>(() => {
+  useEffect(() => {
     if (!symptomId) {
-      return { info: null, isLoading: false, error: 'No symptom ID provided' };
+      setState({ info: null, isLoading: false, error: 'No symptom ID provided' });
+      return;
     }
 
-    const info = service.getSymptomInfo(symptomId);
-    if (!info) {
-      return {
-        info: null,
-        isLoading: false,
-        error: `Symptom "${symptomId}" not found in the database`,
-      };
-    }
+    setState((prev) => ({ ...prev, isLoading: true }));
 
-    return { info, isLoading: false, error: null };
+    service.getSymptomInfo(symptomId).then((info) => {
+      if (!info) {
+        setState({
+          info: null,
+          isLoading: false,
+          error: `Symptom "${symptomId}" not found in the database`,
+        });
+      } else {
+        setState({ info, isLoading: false, error: null });
+      }
+    });
   }, [symptomId, service]);
 
-  return result;
+  return state;
 }
 
 // ===========================================================================
@@ -259,39 +280,51 @@ export function useExplanation(
   level: 1 | 2 | 3 | 4 | 5,
 ): ExplanationState {
   const service = useContentService();
+  const [state, setState] = useState<ExplanationState>({
+    text: null,
+    levelInfo: { name: '', label: '', audience: '', constraints: [] },
+    isLoading: true,
+    error: null,
+  });
 
-  const result = useMemo<ExplanationState>(() => {
-    const levelMeta = service.getExplanationLevel(level as ExplanationLevelNumber);
-    const levelInfo = {
-      name: levelMeta.name,
-      label: levelMeta.label,
-      audience: levelMeta.audience,
-      constraints: levelMeta.constraints,
-    };
+  useEffect(() => {
+    const lvl = level as ExplanationLevelNumber;
 
-    if (!topicId) {
-      return {
-        text: null,
-        levelInfo,
-        isLoading: false,
-        error: 'No topic ID provided',
+    Promise.all([
+      service.getExplanationLevel(lvl),
+      topicId ? service.getExplanation(topicId, lvl) : Promise.resolve(undefined),
+    ]).then(([levelMeta, text]) => {
+      const levelInfo = {
+        name: levelMeta.name,
+        label: levelMeta.label,
+        audience: levelMeta.audience,
+        constraints: levelMeta.constraints,
       };
-    }
 
-    const text = service.getExplanation(topicId, level as ExplanationLevelNumber);
+      if (!topicId) {
+        setState({
+          text: null,
+          levelInfo,
+          isLoading: false,
+          error: 'No topic ID provided',
+        });
+        return;
+      }
 
-    if (!text) {
-      return {
-        text: null,
-        levelInfo,
-        isLoading: false,
-        error: `No level-${level} explanation found for "${topicId}". ` +
-          'Use getExplanationPrompt() to generate one via an LLM.',
-      };
-    }
+      if (!text) {
+        setState({
+          text: null,
+          levelInfo,
+          isLoading: false,
+          error: `No level-${level} explanation found for "${topicId}". ` +
+            'Use getExplanationPrompt() to generate one via an LLM.',
+        });
+        return;
+      }
 
-    return { text, levelInfo, isLoading: false, error: null };
+      setState({ text, levelInfo, isLoading: false, error: null });
+    });
   }, [topicId, level, service]);
 
-  return result;
+  return state;
 }

@@ -7,6 +7,7 @@ import { useVoice, useVoiceConfig } from './contexts/VoiceContext';
 import { VoiceButton, SpeakingIndicator } from './components/voice';
 import { useTranslation } from './i18n/useI18n';
 import { LanguageToggle } from './components/LanguageSwitcher';
+import { buildAnatomyChatSystemPrompt, dashboardToPatientData } from './ai';
 
 interface DashboardData {
   summary: {
@@ -67,9 +68,26 @@ interface ChatMessage {
   citations?: Citation[];
 }
 
+/** Structured anatomy context from the 3D body model */
+interface AnatomyChatContext {
+  regionId: string;
+  regionName: string;
+  bodySystems: string[];
+  anatomyStructures: string[];
+  symptoms: string[];
+  conditions: string[];
+  specialties: string[];
+  complexityLevel: 1 | 2 | 3 | 4 | 5;
+  initialQuestion?: string;
+}
+
 interface ChatViewProps {
   onBack: () => void;
   dashboardData: DashboardData | null;
+  /** Optional region context pre-populated when navigating from "Ask AI" on a body region */
+  regionContext?: string | null;
+  /** Structured anatomy context (preferred over regionContext when available) */
+  anatomyChatContext?: AnatomyChatContext | null;
 }
 
 function buildHealthContext(dashboard: DashboardData | null): string {
@@ -172,7 +190,7 @@ Use bracketed citations [1], [2], etc. when referencing educational sources:
 - Recommend professional consultation for concerning symptoms`;
 
 
-export function ChatView({ onBack, dashboardData }: ChatViewProps) {
+export function ChatView({ onBack, dashboardData, regionContext, anatomyChatContext }: ChatViewProps) {
   const { t } = useTranslation('chat');
   const { t: tCommon } = useTranslation('common');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -225,6 +243,81 @@ export function ChatView({ onBack, dashboardData }: ChatViewProps) {
       }
     }
   }, [messages, voiceConfig.autoSpeak, isLoading, speak]);
+
+  // Pre-populate chat with region context when navigating from "Ask AI" on a body region.
+  // When anatomyChatContext is provided we build a rich, structured system prompt via
+  // EducationalContextBuilder. Otherwise fall back to the plain regionContext string.
+  const regionContextProcessedRef = useRef(false);
+  useEffect(() => {
+    const hasContext = anatomyChatContext || regionContext;
+    if (!hasContext || regionContextProcessedRef.current || aiStatus !== 'available') return;
+
+    regionContextProcessedRef.current = true;
+
+    // Determine the user message and system prompt
+    let userMessage: string;
+    let systemPrompt: string;
+    let ragOptions: { complexityLevel: 1 | 2 | 3 | 4 | 5; maxTokens: number; structureName?: string; system?: string } = {
+      complexityLevel: 3,
+      maxTokens: 3000,
+    };
+
+    if (anatomyChatContext) {
+      // -- Structured context path: build enriched system prompt --
+      userMessage = anatomyChatContext.initialQuestion
+        || `Tell me about the ${anatomyChatContext.regionName}. What is its structure, function, and clinical relevance?`;
+
+      // Convert dashboard data to PatientHealthData for the builder
+      const patientData = dashboardData ? dashboardToPatientData(dashboardData) : null;
+      systemPrompt = buildAnatomyChatSystemPrompt(anatomyChatContext, patientData);
+
+      // Append journey context if available
+      if (chatContext) {
+        systemPrompt = systemPrompt + '\n\n' + chatContext;
+      }
+
+      ragOptions = {
+        complexityLevel: anatomyChatContext.complexityLevel,
+        maxTokens: 3000,
+        structureName: anatomyChatContext.regionName,
+        system: anatomyChatContext.bodySystems[0],
+      };
+    } else {
+      // -- Legacy plain-string path --
+      userMessage = regionContext!;
+      const healthContext = buildHealthContext(dashboardData);
+      systemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{HEALTH_CONTEXT}', healthContext);
+      if (chatContext) {
+        systemPrompt = systemPrompt + '\n\n' + chatContext;
+      }
+    }
+
+    setMessages([{ role: 'user', content: userMessage }]);
+    setIsLoading(true);
+
+    invoke<AIChatRAGResponse>('ai_chat_rag', {
+      request: {
+        messages: [{ role: 'user', content: userMessage }],
+        systemPrompt,
+        temperature: 0.7,
+        ragOptions,
+      },
+    }).then((response) => {
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: response.content,
+        citations: response.citations,
+      }]);
+    }).catch((err) => {
+      console.error('Region context chat error:', err);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `I'm sorry, I encountered an error: ${String(err)}. Please try again.`,
+      }]);
+    }).finally(() => {
+      setIsLoading(false);
+    });
+  }, [regionContext, anatomyChatContext, aiStatus, dashboardData, chatContext]);
 
   async function checkAIHealth() {
     try {

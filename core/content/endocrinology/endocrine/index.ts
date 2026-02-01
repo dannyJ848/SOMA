@@ -2,9 +2,9 @@
  * General Endocrine Content Index
  */
 
-export { ENDOCRINE_HISTOLOGY_CONTENT } from './histology/index.js';
-export { ENDOCRINE_CLINICAL_CONTENT } from './clinical/index.js';
-export { ENDOCRINE_PATHOLOGY_CONTENT } from './pathology/index.js';
+export { ENDOCRINE_HISTOLOGY_CONTENT } from './histology/index';
+export { ENDOCRINE_CLINICAL_CONTENT } from './clinical/index';
+export { ENDOCRINE_PATHOLOGY_CONTENT } from './pathology/index';
 
 export const ENDOCRINE_GENERAL_CONTENT = {
   id: 'endocrine-general',

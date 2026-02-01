@@ -34,3 +34,18 @@ export const ophthalmologyConditions = [
 ];
 
 export default ophthalmologyConditions;
+
+// Ophthalmology Conditions Database
+export {
+  OPHTHALMOLOGY_CONDITION_ENTRIES,
+  getOphthalmologyCondition,
+  searchOphthalmologyConditions,
+  getOphthalmologyByCategory,
+  getOphthalmologyConditionCount,
+  getOphthalmologyByClinicalFinding,
+  getOphthalmologyCategories,
+} from './ophthalmology-conditions-database';
+export type {
+  OphthalmologyConditionCategory,
+  OphthalmologyConditionEntry,
+} from './ophthalmology-conditions-database';

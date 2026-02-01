@@ -1,8 +1,8 @@
 // Health Literacy: Communication Skills Module
-export { askMe3 } from './ask-me-3.js';
-export { teachBackMethod } from './teach-back-method.js';
-export { sharedDecisionMaking } from './shared-decision-making.js';
-export { askingQuestions } from './asking-questions.js';
-export { teachBackCommunication } from './teach-back-communication.js';
-export { patientProviderCommunication } from './patient-provider-communication.js';
-export { healthAdvocacy } from './health-advocacy.js';
+export { askMe3 } from './ask-me-3';
+export { teachBackMethod } from './teach-back-method';
+export { sharedDecisionMaking } from './shared-decision-making';
+export { askingQuestions } from './asking-questions';
+export { teachBackCommunication } from './teach-back-communication';
+export { patientProviderCommunication } from './patient-provider-communication';
+export { healthAdvocacy } from './health-advocacy';

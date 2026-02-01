@@ -546,11 +546,12 @@ export function SimplifiedAnatomyViewer({ onBack, onStructureSelect }: Simplifie
   }, []);
 
   // Handle WebGL errors
-  const handleError = useCallback((error: Error) => {
-    addDebugLogEntry('error', `Canvas error: ${error.message}`);
-    updateCanvasStatus({ error: error.message, rendering: false });
+  const handleCanvasError = useCallback((event: React.SyntheticEvent<HTMLDivElement, Event>) => {
+    const message = event.nativeEvent instanceof ErrorEvent ? event.nativeEvent.message : 'Unknown canvas error';
+    addDebugLogEntry('error', `Canvas error: ${message}`);
+    updateCanvasStatus({ error: message, rendering: false });
     setRenderStatus('error');
-    setErrorMessage(error.message);
+    setErrorMessage(message);
   }, []);
 
   return (
@@ -714,8 +715,7 @@ export function SimplifiedAnatomyViewer({ onBack, onStructureSelect }: Simplifie
               state.gl.render(state.scene, state.camera);
               addDebugLogEntry('success', 'Initial render complete');
             }}
-            // @ts-expect-error - onError exists but types may be incomplete
-            onError={handleError}
+            onError={handleCanvasError}
           >
             {/* BRIGHT GREEN background for easy visibility when debugging iOS rendering */}
             <color attach="background" args={['#00ff00']} />

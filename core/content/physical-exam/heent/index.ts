@@ -2,7 +2,7 @@
  * HEENT Physical Examination Module
  */
 
-export { fundoscopicExam } from './fundoscopic-exam.js';
-export { earExamOtoscopy } from './ear-exam-otoscopy.js';
-export { throatExam } from './throat-exam.js';
-export { thyroidExam } from './thyroid-exam.js';
+export { fundoscopicExam } from './fundoscopic-exam';
+export { earExamOtoscopy } from './ear-exam-otoscopy';
+export { throatExam } from './throat-exam';
+export { thyroidExam } from './thyroid-exam';

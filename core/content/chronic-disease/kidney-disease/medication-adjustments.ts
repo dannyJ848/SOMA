@@ -8,6 +8,7 @@ export const MEDICATION_ADJUSTMENTS: EducationalContent = {
   id: 'chronic-kidney-medication-adjustments',
   type: 'concept',
   name: 'Medication Adjustments in Kidney Disease',
+  nameEs: 'Ajustes de Medicamentos en la Enfermedad Renal',
   alternateNames: ['Drug Dosing in CKD', 'Renal Dosing', 'Kidney-Safe Medications', 'Medication Management in CKD'],
 
   levels: {

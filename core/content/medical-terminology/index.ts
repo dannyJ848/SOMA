@@ -60,6 +60,10 @@ export { pronunciationGuidesModule } from './pronunciation-guides';
 export * from './common-abbreviations';
 export { commonAbbreviationsModule } from './common-abbreviations';
 
+// Word building - medical word construction fundamentals
+export * from './word-building';
+export { wordBuildingModule } from './word-building';
+
 // Medical terminology database - unified searchable database
 export {
   MEDICAL_TERMINOLOGY_ENTRIES,
@@ -88,5 +92,6 @@ export const medicalTerminologyContent = {
     'diagnosis-terminology',
     'pronunciation-guides',
     'common-abbreviations',
+    'word-building',
   ],
 };

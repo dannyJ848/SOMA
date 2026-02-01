@@ -2,8 +2,8 @@
  * Endocrine Clinical Content Index
  */
 
-export { hormoneTesting } from './hormone-testing.js';
-export { endocrineEmergencies } from './endocrine-emergencies.js';
+export { hormoneTesting } from './hormone-testing';
+export { endocrineEmergencies } from './endocrine-emergencies';
 
 export const ENDOCRINE_CLINICAL_CONTENT = {
   id: 'endocrine-clinical',

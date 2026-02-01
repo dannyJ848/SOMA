@@ -68,6 +68,7 @@ export interface EducationalContent {
   id: string;
   type: ContentType;
   name: string;
+  nameEs?: string;
   alternateNames?: string[];
   fmaId?: string;
   hpoId?: string;

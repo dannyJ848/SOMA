@@ -3,12 +3,27 @@
  *
  * A 3D body model that adjusts to patient demographics (height, weight,
  * body type, sex) for a more personalized anatomical representation.
+ *
+ * Now wired to the anatomy-patient bridge so patient conditions, symptoms,
+ * lab results, and medication targets are rendered as visual overlays on the
+ * 3D body via ConnectedConditionHighlights, LabBadges, SymptomIndicators, and
+ * MedicationTargets sub-components.
  */
 
 import React, { useRef, useMemo, useCallback, memo } from 'react';
 import { useFrame, ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { BodyProportions } from '../utils/bodyProportionCalculator';
+import type {
+  BiologicalSelf,
+  AnatomyPatientBridge,
+} from './types';
+import { SEVERITY_COLORS } from './types';
+import { createBridge } from './utils';
+import { ConnectedConditionHighlights } from './ConnectedConditionHighlights';
+import { LabBadges } from './LabBadges';
+import { SymptomIndicators } from './SymptomIndicators';
+import { MedicationTargets } from './MedicationTargets';
 
 // ============================================
 // Types
@@ -19,6 +34,16 @@ interface PersonalizedBodyModelProps {
   activeLayers: string[];
   onRegionSelect: (regionId: string, regionName: string) => void;
   selectedRegion: string | null;
+  /** Optional patient data for health visualization overlays */
+  patientData?: BiologicalSelf;
+  /** Pre-built bridge; if omitted, one is created from patientData */
+  anatomyBridge?: AnatomyPatientBridge;
+  /** Whether to show health overlays (conditions, labs, symptoms, meds) */
+  showHealthOverlay?: boolean;
+  /** Whether overlay animations are enabled */
+  animationsEnabled?: boolean;
+  /** Medication target highlight mode */
+  medicationHighlightMode?: 'always' | 'hover' | 'toggle';
 }
 
 interface BodyPartProps {
@@ -33,6 +58,10 @@ interface BodyPartProps {
   layer: string;
   isSelected: boolean;
   isHovered: boolean;
+  /** Whether this region has an active condition mapped to it */
+  hasCondition: boolean;
+  /** Severity-based tint color when a condition is present */
+  conditionTint: string | null;
   opacity: number;
   onClick: (e: ThreeEvent<MouseEvent>) => void;
   onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
@@ -416,6 +445,8 @@ const BodyPart = memo(function BodyPart({
   color,
   isSelected,
   isHovered,
+  hasCondition,
+  conditionTint,
   opacity,
   onClick,
   onPointerOver,
@@ -424,13 +455,16 @@ const BodyPart = memo(function BodyPart({
   // Don't render if fully transparent
   if (opacity <= 0) return null;
 
-  // Calculate emissive based on state
+  // Calculate emissive based on state - conditions take precedence over hover
   let emissiveColor = '#000000';
   let emissiveIntensity = 0;
 
   if (isSelected) {
     emissiveColor = '#22ff44';
     emissiveIntensity = 0.4;
+  } else if (hasCondition && conditionTint) {
+    emissiveColor = conditionTint;
+    emissiveIntensity = 0.25;
   } else if (isHovered) {
     emissiveColor = '#2244ff';
     emissiveIntensity = 0.3;
@@ -519,6 +553,35 @@ function AnimationController({ heartRef, leftLungRef, rightLungRef }: AnimationC
 }
 
 // ============================================
+// Helper: get the highest-severity condition tint for a region
+// ============================================
+
+function getConditionTintForRegion(
+  regionId: string,
+  bridge: AnatomyPatientBridge | null
+): string | null {
+  if (!bridge) return null;
+
+  const regionConditions = bridge.conditionsByRegion.get(regionId);
+  if (!regionConditions || regionConditions.length === 0) return null;
+
+  // Pick the most severe condition's color
+  const severityOrder = { severe: 3, moderate: 2, mild: 1 };
+  let maxSeverity = 0;
+  let bestColor: string = SEVERITY_COLORS.mild;
+
+  for (const rc of regionConditions) {
+    const sev = severityOrder[rc.condition.severity] ?? 0;
+    if (sev > maxSeverity) {
+      maxSeverity = sev;
+      bestColor = rc.color;
+    }
+  }
+
+  return bestColor;
+}
+
+// ============================================
 // Main Component
 // ============================================
 
@@ -527,6 +590,11 @@ export function PersonalizedBodyModel({
   activeLayers,
   onRegionSelect,
   selectedRegion,
+  patientData,
+  anatomyBridge,
+  showHealthOverlay = true,
+  animationsEnabled = true,
+  medicationHighlightMode = 'hover',
 }: PersonalizedBodyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const heartRef = useRef<THREE.Mesh>(null);
@@ -535,6 +603,27 @@ export function PersonalizedBodyModel({
 
   // Track hovered structure
   const [hoveredStructure, setHoveredStructure] = React.useState<string | null>(null);
+
+  // Build the anatomy-patient bridge from patient data (memoized)
+  const bridge: AnatomyPatientBridge | null = useMemo(() => {
+    if (anatomyBridge) return anatomyBridge;
+    if (patientData) return createBridge(patientData);
+    return null;
+  }, [patientData, anatomyBridge]);
+
+  // Pre-compute which structure IDs have conditions mapped to them
+  const conditionTintMap = useMemo(() => {
+    const map = new Map<string, string>();
+    if (!bridge) return map;
+
+    for (const regionId of bridge.conditionsByRegion.keys()) {
+      const tint = getConditionTintForRegion(regionId, bridge);
+      if (tint) {
+        map.set(regionId, tint);
+      }
+    }
+    return map;
+  }, [bridge]);
 
   // Apply body proportions to structures
   const adjustedStructures = useMemo(() => {
@@ -621,6 +710,9 @@ export function PersonalizedBodyModel({
     document.body.style.cursor = 'auto';
   }, []);
 
+  // Determine whether to render the overlay sub-components
+  const hasHealthData = bridge !== null && showHealthOverlay;
+
   return (
     <group ref={groupRef}>
       {/* Animation controller for organs */}
@@ -635,9 +727,26 @@ export function PersonalizedBodyModel({
         const opacity = getLayerOpacity(structure.layer);
         const isSelected = selectedRegion === structure.id;
         const isHovered = hoveredStructure === structure.id;
+        const conditionTint = conditionTintMap.get(structure.id) || null;
+        const hasCondition = conditionTint !== null;
 
         // Special handling for animated organs
         if (structure.id === 'heart') {
+          // Condition-aware emissive for heart
+          const heartConditionTint = conditionTint;
+          const heartEmissive = isSelected
+            ? '#22ff44'
+            : isHovered
+              ? '#2244ff'
+              : heartConditionTint || '#ff4444';
+          const heartEmissiveIntensity = isSelected
+            ? 0.4
+            : isHovered
+              ? 0.3
+              : heartConditionTint
+                ? 0.35
+                : 0.2;
+
           return (
             <mesh
               key={structure.id}
@@ -653,8 +762,8 @@ export function PersonalizedBodyModel({
               <sphereGeometry args={[structure.geometryArgs[0], SEGMENTS_MED, SEGMENTS_MED]} />
               <meshLambertMaterial
                 color={structure.color}
-                emissive={isSelected ? '#22ff44' : isHovered ? '#2244ff' : '#ff4444'}
-                emissiveIntensity={isSelected ? 0.4 : isHovered ? 0.3 : 0.2}
+                emissive={heartEmissive}
+                emissiveIntensity={heartEmissiveIntensity}
                 transparent={opacity < 1}
                 opacity={opacity}
               />
@@ -663,6 +772,19 @@ export function PersonalizedBodyModel({
         }
 
         if (structure.id === 'leftLung') {
+          const lungEmissive = isSelected
+            ? '#22ff44'
+            : isHovered
+              ? '#2244ff'
+              : conditionTint || '#000000';
+          const lungEmissiveIntensity = isSelected
+            ? 0.4
+            : isHovered
+              ? 0.3
+              : conditionTint
+                ? 0.25
+                : 0;
+
           return (
             <mesh
               key={structure.id}
@@ -678,8 +800,8 @@ export function PersonalizedBodyModel({
               <capsuleGeometry args={[structure.geometryArgs[0], structure.geometryArgs[1], SEGMENTS_LOW, SEGMENTS_LOW]} />
               <meshLambertMaterial
                 color={structure.color}
-                emissive={isSelected ? '#22ff44' : isHovered ? '#2244ff' : '#000000'}
-                emissiveIntensity={isSelected ? 0.4 : isHovered ? 0.3 : 0}
+                emissive={lungEmissive}
+                emissiveIntensity={lungEmissiveIntensity}
                 transparent={opacity < 1}
                 opacity={opacity}
               />
@@ -688,6 +810,19 @@ export function PersonalizedBodyModel({
         }
 
         if (structure.id === 'rightLung') {
+          const lungEmissive = isSelected
+            ? '#22ff44'
+            : isHovered
+              ? '#2244ff'
+              : conditionTint || '#000000';
+          const lungEmissiveIntensity = isSelected
+            ? 0.4
+            : isHovered
+              ? 0.3
+              : conditionTint
+                ? 0.25
+                : 0;
+
           return (
             <mesh
               key={structure.id}
@@ -703,8 +838,8 @@ export function PersonalizedBodyModel({
               <capsuleGeometry args={[structure.geometryArgs[0], structure.geometryArgs[1], SEGMENTS_LOW, SEGMENTS_LOW]} />
               <meshLambertMaterial
                 color={structure.color}
-                emissive={isSelected ? '#22ff44' : isHovered ? '#2244ff' : '#000000'}
-                emissiveIntensity={isSelected ? 0.4 : isHovered ? 0.3 : 0}
+                emissive={lungEmissive}
+                emissiveIntensity={lungEmissiveIntensity}
                 transparent={opacity < 1}
                 opacity={opacity}
               />
@@ -727,6 +862,8 @@ export function PersonalizedBodyModel({
             layer={structure.layer}
             isSelected={isSelected}
             isHovered={isHovered}
+            hasCondition={hasCondition}
+            conditionTint={conditionTint}
             opacity={opacity}
             onClick={handleClick}
             onPointerOver={handlePointerOver}
@@ -734,6 +871,44 @@ export function PersonalizedBodyModel({
           />
         );
       })}
+
+      {/* ============================================ */}
+      {/* Patient Health Data Overlay Sub-Components   */}
+      {/* ============================================ */}
+      {hasHealthData && bridge && (
+        <group name="patient-health-overlays">
+          {/* Condition Highlights - color-coded pulsing regions by severity.
+              Uses ConnectedConditionHighlights which auto-resolves raw
+              conditions to anatomical regions via the condition-anatomy-map
+              database, even when affectedRegions are not pre-set. */}
+          <ConnectedConditionHighlights
+            conditions={patientData?.conditions}
+            visible={true}
+            animationEnabled={animationsEnabled}
+          />
+
+          {/* Symptom Indicators - floating severity spheres at symptom locations */}
+          <SymptomIndicators
+            symptoms={bridge.symptomsByRegion}
+            visible={true}
+            showLabels={false}
+          />
+
+          {/* Lab Badges - directional badges on organs with abnormal labs */}
+          <LabBadges
+            labs={bridge.labsByOrgan}
+            visible={true}
+            showOnlyAbnormal={true}
+          />
+
+          {/* Medication Targets - subtle highlights on medication target organs */}
+          <MedicationTargets
+            medications={bridge.medicationTargets}
+            visible={true}
+            highlightMode={medicationHighlightMode}
+          />
+        </group>
+      )}
 
       {/* Ground plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.3, 0]}>

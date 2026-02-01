@@ -8,6 +8,7 @@ export const DIALYSIS_PREPARATION: EducationalContent = {
   id: 'chronic-kidney-dialysis-preparation',
   type: 'concept',
   name: 'Dialysis Preparation and Options',
+  nameEs: 'Preparación para Diálisis y Opciones',
   alternateNames: ['Kidney Replacement Therapy', 'Dialysis Options', 'Vascular Access', 'ESRD Planning', 'Dialysis Education'],
 
   levels: {

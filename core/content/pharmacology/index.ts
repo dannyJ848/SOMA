@@ -42,3 +42,28 @@ export {
 } from './drug-interactions-database';
 
 export type { DrugInteractionEntry, InteractionCategory } from './drug-interactions-database';
+
+export {
+  MECHANISMS_EXPLAINED,
+  getMechanismExplained,
+  searchMechanisms,
+  getAllMechanisms,
+  getMechanismCount,
+} from './mechanisms-explained';
+
+export type { MechanismExplained } from './mechanisms-explained';
+
+// Drug Basics — Pharmacokinetics & Pharmacodynamics educational content
+export {
+  admeOverview,
+  bioavailability,
+  halfLife,
+  steadyState,
+  firstPassMetabolism,
+  volumeOfDistribution,
+  clearance,
+  doseResponse,
+  therapeuticIndex,
+  agonistsAntagonists,
+  potencyVsEfficacy,
+} from './drug-basics';

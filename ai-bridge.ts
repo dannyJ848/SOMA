@@ -17,6 +17,7 @@ import {
   type OllamaStatus,
 } from './core/ai/ollama.js';
 import { RAGRetrieval, type RetrievedContext } from './core/rag/retrieval.js';
+import { ensurePopulated } from './core/rag/populate.js';
 import {
   searchHealthTopic,
   formatPubMedContext,
@@ -186,6 +187,13 @@ async function main() {
         const rag = new RAGRetrieval();
         let context: RetrievedContext | null = null;
         const ragOpts = request.ragOptions || {};
+
+        // Ensure the vector store is populated before retrieval
+        try {
+          await ensurePopulated();
+        } catch (populateError) {
+          console.error('RAG population warning:', populateError);
+        }
 
         try {
           // Get the user's query from the last message

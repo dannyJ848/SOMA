@@ -6,12 +6,16 @@ import { AccessibilityProvider } from './accessibility/AccessibilityProvider';
 import { I18nProvider } from './i18n/I18nContext';
 import { ContentProvider } from './services/ContentService';
 import { DebugPanel, setupGlobalErrorHandlers, addDebugLog, checkWebGLSupport } from './components/DebugPanel';
+import { seedEncyclopedia } from '../core/medical-simulation/encyclopedia/seed';
 import './styles.css';
 import './accessibility/accessibility.css';
 import './i18n/i18n.css';
 
 // Initialize global error handlers early
 setupGlobalErrorHandlers();
+
+// Seed the encyclopedia store with region content data
+seedEncyclopedia();
 
 // Import any early errors captured before React loaded
 declare global {

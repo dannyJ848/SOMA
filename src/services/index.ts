@@ -75,8 +75,20 @@ export {
   ContentProvider,
   useContentService,
   getContentService,
+  preloadContentModules,
   type ContentType,
   type UnifiedSearchResult,
   type ConditionInfo,
   type SymptomInfo,
 } from './ContentService';
+
+// Content Navigator (cross-reference resolution & navigation)
+export {
+  ContentNavigator,
+  getContentNavigator,
+  resetContentNavigator,
+  type ResolvedCrossReference,
+  type NavigableCategory,
+  type NavigationTarget,
+  type RelatedContentItem,
+} from './ContentNavigator';

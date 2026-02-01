@@ -11,6 +11,13 @@ import { LanguageToggle } from './components/LanguageSwitcher';
 import { ViewTransition, getSlideDirection } from './components/ViewTransition';
 import './components/ViewTransition.css';
 import { UnifiedNavigation, KeyboardShortcutsHelp } from './components/navigation';
+import { ContentViewer, type ContentDocument } from './ContentViewer';
+import {
+  retrieveVitalContent,
+  searchConditions,
+  searchMedications,
+  searchLabTests
+} from './contentRetrieval';
 import { GlobalSearch } from './search/GlobalSearch';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import type {
@@ -27,6 +34,10 @@ const MedicationExplorer = lazy(() => import('./MedicationExplorer').then(m => (
 const ConditionSimulator = lazy(() => import('./ConditionSimulator'));
 const MedicalEncyclopedia = lazy(() => import('./MedicalEncyclopedia').then(m => ({ default: m.MedicalEncyclopedia })));
 const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ default: m.EncyclopediaEntry })));
+const SpecialtyBrowser = lazy(() => import('./components/SpecialtyBrowser').then(m => ({ default: m.SpecialtyBrowser })));
+const ProcedureBrowser = lazy(() => import('./components/ProcedureBrowser').then(m => ({ default: m.ProcedureBrowser })));
+const AnatomyMainScreen = lazy(() => import('./AnatomyMainScreen/AnatomyMainScreen').then(m => ({ default: m.AnatomyMainScreen })));
+const RegionalDetailView = lazy(() => import('./AnatomyMainScreen/RegionalDetailView').then(m => ({ default: m.RegionalDetailView })));
 
 // Body-centric components
 const OnboardingFlow = lazy(() => import('./onboarding/OnboardingFlow').then(m => ({ default: m.OnboardingFlow })));
@@ -34,6 +45,9 @@ const BodyCentricHome = lazy(() => import('./BodyCentricHome').then(m => ({ defa
 
 // Settings
 const SettingsPage = lazy(() => import('./settings/SettingsPage'));
+
+// Vitals
+const VitalsTracker = lazy(() => import('./vitals/VitalsTracker'));
 
 interface HealthSummary {
   totalConditions: number;
@@ -115,7 +129,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
 
 // MobileBottomNav is now imported from ./components/MobileBottomNav
 
@@ -196,17 +210,26 @@ function App() {
   const [selectedEncyclopediaEntryId, setSelectedEncyclopediaEntryId] = useState<string | null>(null);
   const [initialMedicationId, setInitialMedicationId] = useState<string | undefined>(undefined);
   const [initialConditionId, setInitialConditionId] = useState<string | undefined>(undefined);
+  // Regional detail view state
+  const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
+  // Chat context from body region "Ask AI" action
+  const [chatContext, setChatContext] = useState<string | null>(null);
+  // Structured anatomy chat context (carries region data, body systems, conditions, etc.)
+  const [anatomyChatContext, setAnatomyChatContext] = useState<import('./ai/types').AnatomyChatContext | null>(null);
   // Navigation history for breadcrumb support
   const [navigationHistory, setNavigationHistory] = useState<View[]>([]);
   // Track previous view for transition direction
   const previousViewRef = useRef<View | null>(null);
   // View order for determining slide direction
-  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'settings'];
+  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'regional-detail', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'specialty-browser', 'procedure-browser', 'settings'];
   // Transition type based on navigation direction
   const [transitionType, setTransitionType] = useState<'fade' | 'slide-left' | 'slide-right'>('fade');
   // Global keyboard shortcuts state
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false);
+  // Content viewer state for displaying educational content
+  const [showContentViewer, setShowContentViewer] = useState(false);
+  const [contentDoc, setContentDoc] = useState<ContentDocument | null>(null);
 
   // Action tracking hooks for intent prediction
   const { track: trackDashboard } = useActionTracker<DashboardAction>('dashboard', 'App');
@@ -485,6 +508,9 @@ function App() {
   }, [currentView, trackDashboard, trackNavigation]);
 
   // Handle search result selection
+  // Note: GlobalSearch sends SearchCategory values which use plural forms
+  // ('conditions', 'symptoms', 'medications', 'procedures') or singular
+  // ('anatomy', 'encyclopedia'). We handle both singular and plural variants.
   const handleSearchResultSelect = useCallback((result: {
     id: string;
     category: string;
@@ -498,25 +524,31 @@ function App() {
     switch (result.category) {
       case 'anatomy':
       case 'structure':
-        if (result.structureId) {
-          // Navigate to anatomy view with the selected structure
-          trackNavigation('view-change', { fromView: currentView, toView: 'anatomy', metadata: { structureId: result.structureId } });
-          setCurrentView('anatomy');
-        }
+        // Navigate to anatomy view; use structureId if provided, otherwise just open anatomy
+        trackNavigation('view-change', { fromView: currentView, toView: 'anatomy', metadata: { structureId: result.structureId || result.id } });
+        setCurrentView('anatomy');
         break;
       case 'condition':
+      case 'conditions':
         setInitialConditionId(result.entryId || result.id);
         trackNavigation('view-change', { fromView: currentView, toView: 'condition-simulator' });
         setCurrentView('condition-simulator');
         break;
       case 'medication':
+      case 'medications':
         setInitialMedicationId(result.entryId || result.id);
         trackNavigation('view-change', { fromView: currentView, toView: 'medication-explorer' });
         setCurrentView('medication-explorer');
         break;
       case 'symptom':
+      case 'symptoms':
         trackNavigation('view-change', { fromView: currentView, toView: 'symptom-explorer' });
         setCurrentView('symptom-explorer');
+        break;
+      case 'procedure':
+      case 'procedures':
+        trackNavigation('view-change', { fromView: currentView, toView: 'procedure-browser' });
+        setCurrentView('procedure-browser');
         break;
       case 'encyclopedia':
         if (result.entryId) {
@@ -590,6 +622,21 @@ function App() {
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  async function handleLock() {
+    try {
+      await invoke<void>('lock_database');
+    } catch (err) {
+      console.error('Failed to lock database:', err);
+    }
+    // Always return to lock screen regardless of backend result
+    setUnlocked(false);
+    setPassphrase('');
+    setDashboard(null);
+    setTimeline(null);
+    setCurrentView('body-centric');
+    setError('');
   }
 
   async function handleCreate() {
@@ -666,6 +713,61 @@ function App() {
       </div>
     );
   }
+
+  // Content retrieval handlers
+  const handleVitalClick = async (vitalType: 'heart-rate' | 'hrv' | 'recovery' | 'sleep' | 'steps') => {
+    const doc = await retrieveVitalContent(vitalType, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for vital: ${vitalType}`);
+      // Fallback to vitals view
+      setCurrentView('vitals');
+    }
+  };
+
+  const handleConditionClick = async (conditionName: string) => {
+    console.log(`[Content Retrieval] Searching for condition: ${conditionName}`);
+    const doc = await searchConditions(conditionName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for condition: ${conditionName}`);
+      // Fallback to condition simulator
+      setInitialConditionId(conditionName);
+      setCurrentView('condition-simulator');
+    }
+  };
+
+  const handleMedicationClick = async (medicationName: string) => {
+    console.log(`[Content Retrieval] Searching for medication: ${medicationName}`);
+    const doc = await searchMedications(medicationName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for medication: ${medicationName}`);
+      // Fallback to medication explorer
+      setInitialMedicationId(medicationName);
+      setCurrentView('medication-explorer');
+    }
+  };
+
+  const handleLabClick = async (labTestName: string) => {
+    console.log(`[Content Retrieval] Searching for lab: ${labTestName}`);
+    const doc = await searchLabTests(labTestName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for lab: ${labTestName}`);
+      // Fallback to timeline with lab filter
+      setActiveFilters(['lab']);
+      setCurrentView('timeline');
+    }
+  };
 
   if (loading) {
     return (
@@ -1062,8 +1164,14 @@ function App() {
     return (
       <>
         <ChatView
-          onBack={() => setCurrentView('body-centric')}
+          onBack={() => {
+            setChatContext(null);
+            setAnatomyChatContext(null);
+            setCurrentView('body-centric');
+          }}
           dashboardData={dashboard}
+          regionContext={chatContext}
+          anatomyChatContext={anatomyChatContext}
         />
 
         {/* Mobile Bottom Navigation */}
@@ -1106,9 +1214,18 @@ function App() {
             <div className="loading">Loading 3D Anatomy Viewer...</div>
           </div>
         }>
-          <AnatomyViewer
-            onBack={() => handleNavigate('body-centric')}
-            dashboardData={dashboard}
+          <AnatomyMainScreen
+            onNavigateToDetail={(regionId: string) => {
+              setSelectedRegionId(regionId);
+              trackNavigation('view-change', { fromView: currentView, toView: 'regional-detail' });
+              navigateWithHistory('regional-detail');
+            }}
+            onNavigateToChat={(regionId: string, regionName: string, chatContext?: import('./ai/types').AnatomyChatContext) => {
+              setChatContext(`I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`);
+              setAnatomyChatContext(chatContext ?? null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
+            }}
           />
         </Suspense>
 
@@ -1317,6 +1434,164 @@ function App() {
               // Stay on encyclopedia-entry view
             }}
             onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onAskAI={(topicContext) => {
+              setChatContext(topicContext);
+              setAnatomyChatContext(null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Specialty Browser View
+  if (currentView === 'specialty-browser') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Specialty Browser...</div>
+          </div>
+        }>
+          <SpecialtyBrowser
+            onBack={() => setCurrentView('body-centric')}
+            onNavigateToCondition={(conditionId) => {
+              setInitialConditionId(conditionId);
+              navigateWithHistory('condition-simulator');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Procedure Browser
+  if (currentView === 'procedure-browser') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Procedure Browser...</div>
+          </div>
+        }>
+          <ProcedureBrowser
+            onBack={() => setCurrentView('body-centric')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Vitals View
+  if (currentView === 'vitals') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Vitals...</div>
+          </div>
+        }>
+          <VitalsTracker
+            summaries={[]}
+            onClose={() => setCurrentView('body-centric')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Regional Detail View - tabbed detail view for a selected anatomical region
+  if (currentView === 'regional-detail' && selectedRegionId) {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Regional Detail...</div>
+          </div>
+        }>
+          <RegionalDetailView
+            regionId={selectedRegionId}
+            patientData={undefined}
+            onClose={() => {
+              setSelectedRegionId(null);
+              if (!navigateBack()) {
+                setCurrentView('anatomy');
+              }
+            }}
           />
         </Suspense>
 
@@ -1352,6 +1627,7 @@ function App() {
         }>
           <SettingsPage
             onBack={() => setCurrentView('body-centric')}
+            onLock={handleLock}
           />
         </Suspense>
 
@@ -1401,6 +1677,12 @@ function App() {
             onNavigate={(view: View) => {
               trackNavigation('view-change', { fromView: currentView, toView: view });
               setCurrentView(view);
+            }}
+            onAskAI={(regionContext: string, structuredContext?: import('./ai/types').AnatomyChatContext) => {
+              setChatContext(regionContext);
+              setAnatomyChatContext(structuredContext ?? null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
             }}
           />
         </Suspense>
@@ -1558,35 +1840,35 @@ function App() {
           <h2 id="vitals-heading" className="section-title">{tDash('dashboard.vitals.title')}</h2>
           <div className="vitals-grid" role="list" aria-label="Vital signs">
             {vitalsSummary.restingHeartRate ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
+              <div className="vital-item" onClick={() => handleVitalClick('heart-rate')}>
                 <span className="vital-label">{tDash('dashboard.vitals.heartRate')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.restingHeartRate)}</span>
                 <span className="vital-unit">bpm</span>
               </div>
             ) : null}
             {vitalsSummary.hrv ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
+              <div className="vital-item" onClick={() => handleVitalClick('hrv')}>
                 <span className="vital-label">{tDash('dashboard.vitals.hrv')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.hrv)}</span>
                 <span className="vital-unit">ms</span>
               </div>
             ) : null}
             {vitalsSummary.recoveryScore ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
+              <div className="vital-item" onClick={() => handleVitalClick('recovery')}>
                 <span className="vital-label">{tDash('dashboard.vitals.recovery')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.recoveryScore)}</span>
                 <span className="vital-unit">%</span>
               </div>
             ) : null}
             {vitalsSummary.sleepHours ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
+              <div className="vital-item" onClick={() => handleVitalClick('sleep')}>
                 <span className="vital-label">{tDash('dashboard.vitals.sleep')}</span>
                 <span className="vital-value">{vitalsSummary.sleepHours}</span>
                 <span className="vital-unit">hrs</span>
               </div>
             ) : null}
             {vitalsSummary.steps ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
+              <div className="vital-item" onClick={() => handleVitalClick('steps')}>
                 <span className="vital-label">{tDash('dashboard.vitals.steps')}</span>
                 <span className="vital-value">{vitalsSummary.steps.toLocaleString()}</span>
                 <span className="vital-unit">{t('time.today')}</span>
@@ -1652,6 +1934,26 @@ function App() {
                 <span className="btn-subtitle">Medical knowledge base</span>
               </span>
             </button>
+            <button
+              className="quick-access-btn specialty-btn"
+              onClick={() => handleQuickAccessClick('specialty-browser', 'specialty')}
+            >
+              <span className="btn-icon">🩻</span>
+              <span className="btn-text">
+                <span className="btn-title">Specialties</span>
+                <span className="btn-subtitle">Browse by medical specialty</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn procedure-btn"
+              onClick={() => handleQuickAccessClick('procedure-browser', 'procedure')}
+            >
+              <span className="btn-icon">🔬</span>
+              <span className="btn-text">
+                <span className="btn-title">Procedures</span>
+                <span className="btn-subtitle">Browse 127 medical procedures</span>
+              </span>
+            </button>
           </div>
         </section>
 
@@ -1663,10 +1965,10 @@ function App() {
               Active Conditions
               <span className="count-badge">{activeConditions.length}</span>
             </h2>
-            <div className="card-list" onClick={() => console.log('Navigate to conditions')}>
+            <div className="card-list">
               {activeConditions.length > 0 ? (
                 activeConditions.slice(0, 5).map((condition) => (
-                  <div key={condition.id} className="list-item">
+                  <div key={condition.id} className="list-item" onClick={() => handleConditionClick(condition.name)}>
                     <span className="item-name">{condition.name}</span>
                     <span className={`status-badge status-${condition.status}`}>
                       {condition.status}
@@ -1693,10 +1995,10 @@ function App() {
               Current Medications
               <span className="count-badge">{currentMedications.length}</span>
             </h2>
-            <div className="card-list" onClick={() => console.log('Navigate to medications')}>
+            <div className="card-list">
               {currentMedications.length > 0 ? (
                 currentMedications.slice(0, 5).map((med) => (
-                  <div key={med.id} className="list-item">
+                  <div key={med.id} className="list-item" onClick={() => handleMedicationClick(med.name)}>
                     <div className="item-details">
                       <span className="item-name">{med.name}</span>
                       {med.dosage && <span className="item-meta">{med.dosage}</span>}
@@ -1726,10 +2028,10 @@ function App() {
             Recent Labs
             <span className="count-badge">{summary.totalLabResults}</span>
           </h2>
-          <div className="labs-grid" onClick={() => console.log('Navigate to labs')}>
+          <div className="labs-grid">
             {recentLabs.length > 0 ? (
               recentLabs.slice(0, 8).map((lab) => (
-                <div key={lab.id} className={`lab-card ${lab.status ? `lab-${lab.status}` : ''}`}>
+                <div key={lab.id} className={`lab-card ${lab.status ? `lab-${lab.status}` : ''}`} onClick={() => handleLabClick(lab.testName)}>
                   <div className="lab-header">
                     <span className="lab-name">{lab.testName}</span>
                     <TrendIcon trend={lab.trend} />
@@ -1792,6 +2094,37 @@ function App() {
         isOpen={isShortcutsHelpOpen}
         onClose={() => setIsShortcutsHelpOpen(false)}
       />
+
+      {/* Content Viewer Overlay */}
+      {showContentViewer && contentDoc && (
+        <div className="content-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '800px',
+            maxHeight: '90vh',
+            backgroundColor: '#1e1e1e',
+            borderRadius: '8px',
+            overflow: 'hidden'
+          }}>
+            <ContentViewer
+              contentDoc={contentDoc}
+              onClose={() => setShowContentViewer(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
   }; // End of renderViewContent

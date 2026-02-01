@@ -67,6 +67,8 @@ export async function invoke<T>(cmd: string, args?: Record<string, unknown>): Pr
         return true as T;
       case 'unlock_database':
         return true as T;
+      case 'lock_database':
+        return undefined as T;
       case 'get_dashboard':
         return mockDashboard as T;
       case 'get_timeline':
@@ -207,6 +209,8 @@ export async function invoke<T>(cmd: string, args?: Record<string, unknown>): Pr
         return true as T;
       case 'unlock_database':
         return true as T; // Return boolean success, not dashboard data
+      case 'lock_database':
+        return undefined as T;
       case 'get_dashboard':
         return mockDashboard as T;
       case 'get_timeline':

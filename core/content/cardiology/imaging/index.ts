@@ -1,0 +1,1 @@
+export { echocardiography } from './echocardiography';

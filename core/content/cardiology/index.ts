@@ -37,6 +37,24 @@ export { pci } from './interventions/pci';
 export { cabg } from './interventions/cabg';
 export { pacemakerImplant } from './interventions/pacemaker-implant';
 
+// Electrophysiology
+export { ecgInterpretation } from './electrophysiology/ecg-interpretation';
+export { arrhythmias } from './electrophysiology/arrhythmias';
+
+// Heart Failure
+export { heartFailureClassification } from './heart-failure/classification';
+export { heartFailureManagement } from './heart-failure/management';
+
+// Valvular (In-Depth)
+export { aorticStenosis } from './valvular/aortic-stenosis';
+export { mitralRegurgitation } from './valvular/mitral-regurgitation';
+
+// Imaging
+export { echocardiography } from './imaging/echocardiography';
+
+// Interventional
+export { coronaryStenting } from './interventional/coronary-stenting';
+
 // Content metadata for discovery
 export const cardiologyContent = {
   id: 'cardiology',
@@ -68,6 +86,19 @@ export const cardiologyContent = {
     { id: 'pci', name: 'Percutaneous Coronary Intervention', category: 'interventions' },
     { id: 'cabg', name: 'Coronary Artery Bypass Grafting', category: 'interventions' },
     { id: 'pacemaker-implant', name: 'Pacemaker Implantation', category: 'interventions' },
+    // Electrophysiology
+    { id: 'ecg-interpretation', name: 'ECG Interpretation', category: 'electrophysiology' },
+    { id: 'cardiac-arrhythmias', name: 'Cardiac Arrhythmias', category: 'electrophysiology' },
+    // Heart Failure
+    { id: 'heart-failure-classification', name: 'Heart Failure Classification', category: 'heart-failure' },
+    { id: 'heart-failure-management', name: 'Heart Failure Management', category: 'heart-failure' },
+    // Valvular (In-Depth)
+    { id: 'aortic-stenosis', name: 'Aortic Stenosis', category: 'valvular' },
+    { id: 'mitral-regurgitation', name: 'Mitral Regurgitation', category: 'valvular' },
+    // Imaging
+    { id: 'echocardiography', name: 'Echocardiography', category: 'imaging' },
+    // Interventional
+    { id: 'coronary-stenting', name: 'Coronary Stenting', category: 'interventional' },
   ],
   categories: [
     { id: 'vascular-disease', name: 'Vascular Disease', description: 'Disorders of blood vessels outside the heart' },
@@ -76,11 +107,16 @@ export const cardiologyContent = {
     { id: 'congenital-heart', name: 'Congenital Heart Disease', description: 'Structural heart defects present at birth' },
     { id: 'cardiac-testing', name: 'Cardiac Testing', description: 'Diagnostic and prognostic cardiac tests' },
     { id: 'interventions', name: 'Cardiac Interventions', description: 'Procedural treatments for heart disease' },
+    { id: 'electrophysiology', name: 'Electrophysiology', description: 'Cardiac electrical conduction, ECG interpretation, and arrhythmia management' },
+    { id: 'heart-failure', name: 'Heart Failure', description: 'Classification, diagnosis, and management of heart failure syndromes' },
+    { id: 'valvular', name: 'Valvular Disease (In-Depth)', description: 'Detailed coverage of specific valvular pathologies and interventions' },
+    { id: 'imaging', name: 'Cardiac Imaging', description: 'Advanced cardiac imaging modalities and interpretation' },
+    { id: 'interventional', name: 'Interventional Cardiology', description: 'Coronary and structural heart interventions' },
   ],
   levels: ['beginner', 'intermediate', 'advanced', 'expert', 'master'],
   createdAt: '2025-01-25',
-  updatedAt: '2025-01-25',
-  version: '1.0.0',
+  updatedAt: '2025-01-30',
+  version: '2.0.0',
 };
 
 // Type exports for TypeScript

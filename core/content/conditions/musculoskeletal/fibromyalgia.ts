@@ -10,6 +10,7 @@ export const fibromyalgia: EducationalContent = {
   id: 'condition-fibromyalgia',
   type: 'condition',
   name: 'Fibromyalgia',
+  nameEs: 'Fibromialgia',
   alternateNames: ['Fibromyalgia Syndrome', 'FMS', 'Chronic Widespread Pain'],
   hpoId: 'HP:0030960',
 

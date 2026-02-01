@@ -898,7 +898,7 @@ function App() {
                     stroke="currentColor" strokeWidth="2" fill="none"/>
             </svg>
           </div>
-          <h1>{t('app.name')}</h1>
+          <h1>{t('app.name')} <span style={{fontSize: '0.5em', background: '#ff6b6b', color: 'white', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'middle'}}>KIMI BUILD</span></h1>
           <p className="subtitle">{t('password.enter')}</p>
 
           <div className="privacy-notice">
@@ -1796,7 +1796,7 @@ function App() {
       <header className="app-header" role="banner">
         <div className="header-spacer" />
         <div className="header-title">
-          <h1>{t('app.name')}</h1>
+          <h1>{t('app.name')} <span style={{fontSize: '0.5em', background: '#ff6b6b', color: 'white', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'middle'}}>KIMI BUILD</span></h1>
           <p className="subtitle">{t('app.tagline')}</p>
         </div>
         <nav className="header-actions" aria-label="Quick actions">

@@ -6,4 +6,3 @@ export * from './gi-cancers';
 export * from './inflammatory-bowel-disease';
 export * from './irritable-bowel-syndrome';
 export * from './liver-diseases';
-export * from './pancreatitis';

@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500" height="600">
+  <defs>
+    <linearGradient id="arteryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="veinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tubuleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glomerulusGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="500" height="600" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="250" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Nephron Structure
+  </text>
+  
+  <!-- Renal Corpuscle (Glomerulus + Bowman's Capsule) -->
+  <g transform="translate(100, 80)">
+    <!-- Bowman's Capsule -->
+    <path d="M 50 60 Q 20 60 20 90 Q 20 120 50 120 Q 80 120 80 90 Q 80 60 50 60" 
+          fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+    
+    <!-- Glomerulus (capillary tuft) -->
+    <g fill="none" stroke="#dc2626" stroke-width="2">
+      <path d="M 35 80 Q 45 75 55 85"/>
+      <path d="M 40 95 Q 50 90 60 100"/>
+      <path d="M 30 90 Q 40 85 50 95"/>
+      <path d="M 45 75 Q 55 70 65 80"/>
+      <path d="M 50 100 Q 60 95 70 105"/>
+    </g>
+    
+    <!-- Afferent Arteriole -->
+    <path d="M 10 90 L 30 90" fill="none" stroke="#dc2626" stroke-width="4"/>
+    <text x="5" y="85" font-family="Arial" font-size="8" fill="#dc2626">Afferent</text>
+    
+    <!-- Efferent Arteriole -->
+    <path d="M 70 90 L 90 90" fill="none" stroke="#b91c1c" stroke-width="3"/>
+    <text x="85" y="85" font-family="Arial" font-size="8" fill="#b91c1c">Efferent</text>
+    
+    <!-- Label -->
+    <text x="50" y="140" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#7c3aed">
+      Renal Corpuscle
+    </text>
+    <text x="50" y="155" text-anchor="middle" font-family="Arial" font-size="8" fill="#6d28d9">
+      (Glomerulus + Bowman's Capsule)
+    </text>
+  </g>
+  
+  <!-- Proximal Convoluted Tubule (PCT) -->
+  <g transform="translate(200, 100)">
+    <path d="M 20 20 Q 40 10 50 30 Q 60 50 40 60 Q 20 70 10 50 Q 0 30 20 20" 
+          fill="none" stroke="#a855f7" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 10 50 Q 30 70 50 60" 
+          fill="none" stroke="#a855f7" stroke-width="8" stroke-linecap="round"/>
+    <text x="70" y="40" font-family="Arial" font-size="9" fill="#7c3aed">PCT</text>
+    <text x="70" y="55" font-family="Arial" font-size="8" fill="#6d28d9">(reabsorption)</text>
+  </g>
+  
+  <!-- Loop of Henle -->
+  <g transform="translate(200, 180)">
+    <!-- Descending limb -->
+    <path d="M 30 20 L 30 100" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round"/>
+    <!-- Ascending limb -->
+    <path d="M 50 100 L 50 20" fill="none" stroke="#7c3aed" stroke-width="6" stroke-linecap="round"/>
+    <!-- Bottom turn -->
+    <path d="M 30 100 Q 40 120 50 100" fill="none" stroke="#7c3aed" stroke-width="6" stroke-linecap="round"/>
+    
+    <!-- Thin/thick segments labels -->
+    <text x="5" y="60" font-family="Arial" font-size="8" fill="#7c3aed">Thin limb</text>
+    <text x="60" y="60" font-family="Arial" font-size="8" fill="#6d28d9">Thick limb</text>
+    
+    <!-- Loop label -->
+    <text x="40" y="145" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#7c3aed">
+      Loop of Henle
+    </text>
+    <text x="40" y="160" text-anchor="middle" font-family="Arial" font-size="8" fill="#6d28d9">
+      (concentration)
+    </text>
+  </g>
+  
+  <!-- Distal Convoluted Tubule (DCT) -->
+  <g transform="translate(280, 100)">
+    <path d="M 20 20 Q 35 15 45 30 Q 50 45 35 50 Q 20 55 15 40 Q 10 25 20 20" 
+          fill="none" stroke="#9333ea" stroke-width="6" stroke-linecap="round"/>
+    <text x="55" y="35" font-family="Arial" font-size="9" fill="#7c3aed">DCT</text>
+    <text x="55" y="50" font-family="Arial" font-size="8" fill="#6d28d9">(fine-tuning)</text>
+  </g>
+  
+  <!-- Collecting Duct -->
+  <g transform="translate(350, 80)">
+    <rect x="25" y="20" width="15" height="220" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" rx="3"/>
+    
+    <!-- Multiple nephrons joining -->
+    <path d="M 20 60 L 25 60" stroke="#9333ea" stroke-width="4"/>
+    <path d="M 15 120 L 25 120" stroke="#8b5cf6" stroke-width="4"/>
+    <path d="M 10 180 L 25 180" stroke="#a855f7" stroke-width="4"/>
+    
+    <text x="50" y="130" font-family="Arial" font-size="9" fill="#7c3aed">Collecting</text>
+    <text x="50" y="145" font-family="Arial" font-size="9" fill="#7c3aed">Duct</text>
+    <text x="50" y="165" font-family="Arial" font-size="8" fill="#6d28d9">(final urine)</text>
+  </g>
+  
+  <!-- Peritubular Capillaries (surrounding tubules) -->
+  <g transform="translate(160, 220)">
+    <path d="M 0 0 Q 10 30 5 60" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="3,2"/>
+    <path d="M 15 10 Q 25 35 20 70" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="3,2"/>
+    <text x="-40" y="40" font-family="Arial" font-size="8" fill="#2563eb">Peritubular</text>
+    <text x="-40" y="55" font-family="Arial" font-size="8" fill="#2563eb">Capillaries</text>
+  </g>
+  
+  <!-- Vasa Recta (around loop of Henle) -->
+  <g transform="translate(160, 350)">
+    <path d="M 60 20 L 60 100" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="2,2"/>
+    <path d="M 70 20 L 70 100" stroke="#2563eb" stroke-width="2" stroke-dasharray="2,2"/>
+    <text x="80" y="60" font-family="Arial" font-size="8" fill="#1e40af">Vasa Recta</text>
+  </g>
+  
+  <!-- Process Arrows -->
+  <g transform="translate(50, 350)">
+    <text x="0" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#374151">Filtration →</text>
+    <text x="0" y="25" font-family="Arial" font-size="11" font-weight="bold" fill="#374151">Reabsorption →</text>
+    <text x="0" y="50" font-family="Arial" font-size="11" font-weight="bold" fill="#374151">Secretion →</text>
+  </g>
+  
+  <!-- Legend Box -->
+  <rect x="20" y="480" width="460" height="100" fill="#ede9fe" stroke="#8b5cf6" rx="8"/>
+  <text x="250" y="505" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#6d28d9">
+    Nephron Functions
+  </text>
+  
+  <text x="30" y="530" font-family="Arial" font-size="10" fill="#7c3aed">
+    • <tspan font-weight="bold">Glomerular Filtration:</tspan> Blood filtered under pressure; water, ions, wastes enter tubule
+  </text>
+  
+  <text x="30" y="550" font-family="Arial" font-size="10" fill="#7c3aed">
+    • <tspan font-weight="bold">Tubular Reabsorption:</tspan> Nutrients, water, ions return to blood via peritubular capillaries
+  </text>
+  
+  <text x="30" y="570" font-family="Arial" font-size="10" fill="#7c3aed">
+    • <tspan font-weight="bold">Tubular Secretion:</tspan> Additional wastes, H+, K+ actively transported into urine
+  </text>
+  
+  <!-- Attribution -->
+  <text x="250" y="595" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

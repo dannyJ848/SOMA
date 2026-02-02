@@ -26,12 +26,8 @@ export { refractiveErrors } from './refractive-errors';
 export { cataracts } from './cataracts';
 
 // Optic Nerve and Pressure
-export { glaucoma } from './glaucoma';
 
 // Retinal Conditions
-export { macularDegeneration } from './macular-degeneration';
-export { diabeticRetinopathy } from './diabetic-retinopathy';
-export { retinalDetachment } from './retinal-detachment';
 
 // Ocular Surface
 export { dryEyeDisease } from './dry-eye-disease';

@@ -551,7 +551,7 @@ export function BodyCentricHome({
             overflow: 'auto',
           }}>
             <ContentViewer
-              document={selectedContent}
+              contentDoc={selectedContent}
               onClose={() => setSelectedContent(null)}
             />
           </div>

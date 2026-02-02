@@ -117,6 +117,57 @@ export interface ContentImage {
   credit?: string;
 }
 
+/**
+ * Encyclopedia image types
+ */
+export type EncyclopediaImageType =
+  | 'anatomical'
+  | 'imaging'
+  | 'histology'
+  | 'pathology'
+  | 'clinical'
+  | 'cross-section'
+  | 'diagram'
+  | 'chart';
+
+/**
+ * Encyclopedia image reference
+ * Links to images from the image-manifest.ts
+ */
+export interface EncyclopediaImage {
+  /** Image identifier (matches image-manifest.ts) */
+  imageId: string;
+
+  /** Type of image */
+  type: EncyclopediaImageType;
+
+  /** Display title */
+  title: string;
+
+  /** Path to image file */
+  path: string;
+
+  /** Alt text for accessibility */
+  altText: string;
+
+  /** Optional caption */
+  caption?: string;
+
+  /** Attribution information */
+  attribution: {
+    source: string;
+    author?: string;
+    license: string;
+    url?: string;
+  };
+
+  /** Display order priority (lower = first) */
+  displayOrder?: number;
+
+  /** Whether this is a featured/main image */
+  isFeatured?: boolean;
+}
+
 // ============================================
 // Anatomy Links
 // ============================================
@@ -326,6 +377,9 @@ export interface EncyclopediaEntry {
 
   /** Links to 3D anatomy structures */
   anatomyLinks: AnatomyLink[];
+
+  /** Associated images/diagrams */
+  images?: EncyclopediaImage[];
 
   /** References and citations */
   references: Reference[];

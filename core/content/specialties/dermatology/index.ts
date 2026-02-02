@@ -21,9 +21,6 @@ export { skinAnatomyContent } from './skin-anatomy';
 
 // Common Conditions
 export { rashesContent } from './common-rashes';
-export { acneContent } from './acne';
-export { eczemaContent } from './eczema';
-export { psoriasisContent } from './psoriasis';
 
 // Infections
 export { bacterialSkinInfectionsContent } from './infections/bacterial-infections';
@@ -82,9 +79,7 @@ export const getAllDermatologyContent = async () => {
   const modules = await Promise.all([
     import('./skin-anatomy'),
     import('./common-rashes'),
-    import('./acne'),
-    import('./eczema'),
-    import('./psoriasis'),
+
     import('./infections/bacterial-infections'),
     import('./infections/viral-infections'),
     import('./infections/fungal-infections'),

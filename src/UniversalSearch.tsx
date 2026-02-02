@@ -17,18 +17,25 @@ interface UniversalSearchProps {
 export const UniversalSearch: React.FC<UniversalSearchProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
   const [selectedContent, setSelectedContent] = useState<ContentDocument | null>(null);
-  const { search, getDocument, isLoading } = useUniversalContentRAG();
+  const { search, isLoading } = useUniversalContentRAG();
 
-  const handleSearch = useCallback((e: React.FormEvent) => {
+  const handleSearch = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!query.trim()) return;
 
-    const results = search(query);
+    const results = await search(query);
     if (results.length > 0) {
-      const doc = getDocument(results[0]);
-      setSelectedContent(doc);
+      setSelectedContent(results[0]);
     }
-  }, [query, search, getDocument]);
+  }, [query, search]);
+
+  const handleTermClick = useCallback(async (term: string) => {
+    setQuery(term);
+    const results = await search(term);
+    if (results.length > 0) {
+      setSelectedContent(results[0]);
+    }
+  }, [search]);
 
   if (!isOpen) return null;
 
@@ -109,13 +116,7 @@ export const UniversalSearch: React.FC<UniversalSearchProps> = ({ isOpen, onClos
               {['heart', 'brain', 'lungs', 'liver', 'stroke', 'diabetes'].map(term => (
                 <button
                   key={term}
-                  onClick={() => {
-                    setQuery(term);
-                    const results = search(term);
-                    if (results.length > 0) {
-                      setSelectedContent(getDocument(results[0]));
-                    }
-                  }}
+                  onClick={() => handleTermClick(term)}
                   style={{
                     padding: '5px 10px',
                     background: 'rgba(255, 255, 255, 0.1)',

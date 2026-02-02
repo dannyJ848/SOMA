@@ -92,7 +92,7 @@ function encyclopediaEntryToDocument(
     source,
     content: content.trim() || entry.summary,
     url: primaryRef?.url,
-    license: primaryRef?.type === 'open-source' ? 'Open Access' : undefined,
+    license: undefined,
   };
 }
 
@@ -107,7 +107,7 @@ function encyclopediaEntryToDocument(
 export async function retrieveContentDocument(
   name: string,
   options: {
-    type?: 'anatomy' | 'condition' | 'physiology' | 'histology' | 'concept' | 'process';
+    type?: 'anatomy' | 'condition' | 'physiology' | 'symptom' | 'medication' | 'procedure' | 'lab-test' | 'imaging' | 'terminology';
     level?: ComplexityLevel;
     fallback?: boolean;
   } = {}

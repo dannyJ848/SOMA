@@ -11,7 +11,6 @@
  */
 
 // Ear content
-export { earAnatomy } from './ear/ear-anatomy';
 export { hearingPhysiology } from './ear/hearing-physiology';
 export { hearingLoss } from './ear/hearing-loss';
 export { otitisMedia } from './ear/otitis-media';

@@ -6,5 +6,4 @@
  * - Major depressive disorder
  */
 
-export { bipolarDisorderContent } from './bipolar-disorder';
 export { majorDepressiveDisorderContent } from './major-depressive-disorder';

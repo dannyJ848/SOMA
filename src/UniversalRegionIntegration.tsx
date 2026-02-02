@@ -7,6 +7,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { useUniversalContentRAG } from './hooks/useUniversalContentRAG';
+import { resolveMenuItemContent } from './regionMenuContentResolver';
 import { ContentViewer } from './ContentViewer';
 import { ComprehensiveMenuItem, generateRegionMenu } from './comprehensiveRegionMenu';
 import { ANATOMICAL_REGIONS } from './anatomicalRegionMenu';
@@ -21,7 +22,7 @@ export const UniversalRegionIntegration: React.FC<UniversalRegionIntegrationProp
   selectedRegionId,
   onRegionSelect,
 }) => {
-  const { isLoading, stats, getByStructure, getDocument, getDocumentByStructure } = useUniversalContentRAG();
+  const { isLoading, stats, getDocumentByStructure } = useUniversalContentRAG();
   const [selectedContent, setSelectedContent] = useState<ContentDocument | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,28 +33,17 @@ export const UniversalRegionIntegration: React.FC<UniversalRegionIntegrationProp
   
   const menu = selectedRegion ? generateRegionMenu(selectedRegion) : null;
 
-  // Handle menu item click
-  const handleMenuClick = useCallback((item: ComprehensiveMenuItem) => {
+  // Handle menu item click - using content resolver
+  const handleMenuClick = useCallback(async (item: ComprehensiveMenuItem) => {
     console.log(`[Universal RAG] Clicked: ${item.id} - ${item.label}`);
 
-    // Try to get content by structure name
-    let content = getDocumentByStructure(item.id);
-
-    // If not found, try variations
-    if (!content) {
-      // Try with hyphens replaced by spaces
-      const variations = [
-        item.id,
-        item.id.replace(/-/g, ' '),
-        item.label.toLowerCase().replace(/\s+/g, '-'),
-        item.label.toLowerCase(),
-      ];
-
-      for (const variant of variations) {
-        content = getDocumentByStructure(variant);
-        if (content) break;
-      }
-    }
+    // Use the comprehensive content resolver
+    const content = await resolveMenuItemContent(
+      item.id,
+      item.label,
+      item.description,
+      item.contentType
+    );
 
     if (content) {
       setSelectedContent(content);
@@ -67,7 +57,7 @@ export const UniversalRegionIntegration: React.FC<UniversalRegionIntegrationProp
         content: `# ${item.label}\n\n${item.description}\n\n*Content coming soon...*\n\nTry searching for related terms or check back later.`,
       });
     }
-  }, [getByStructure, getDocument, getDocumentByStructure]);
+  }, []);
 
   if (isLoading) {
     return (

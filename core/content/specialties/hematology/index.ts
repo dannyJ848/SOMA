@@ -25,16 +25,12 @@ export {
 export type { HematologyEntry, HematologySubcategory } from './hematology-database';
 
 // Anemias
-export { ironDeficiencyAnemia } from './anemias/iron-deficiency-anemia';
 export { vitaminB12DeficiencyAnemia } from './anemias/vitamin-b12-deficiency';
 export { folateDeficiencyAnemia } from './anemias/folate-deficiency';
-export { hemolyticAnemia } from './anemias/hemolytic-anemia';
 export { aplasticAnemia } from './anemias/aplastic-anemia';
 export { microcyticAnemia } from './anemias/microcytic-anemia';
 export { normocyticAnemia } from './anemias/normocytic-anemia';
 export { macrocyticAnemia } from './anemias/macrocytic-anemia';
-export { sickleCellDisease } from './anemias/sickle-cell-disease';
-export { thalassemia } from './anemias/thalassemia';
 
 // Leukemias
 export { acuteLymphoblasticLeukemia } from './leukemias/acute-lymphoblastic-leukemia';
@@ -56,20 +52,15 @@ export { lymphomaStaging } from './lymphomas/lymphoma-staging';
 export { multipleMyeloma } from './plasma-cell-disorders/multiple-myeloma';
 
 // Bleeding disorders
-export { hemophilia } from './bleeding-disorders/hemophilia';
-export { vonWillebrandDisease } from './bleeding-disorders/von-willebrand-disease';
 
 // Thrombotic disorders
 export { thrombophilia } from './thrombotic-disorders/thrombophilia';
-export { deepVeinThrombosis } from './thrombotic-disorders/deep-vein-thrombosis';
 
 // Platelet disorders
-export { immuneThrombocytopenia } from './platelet-disorders/immune-thrombocytopenia';
 export { thromboticThrombocytopenicPurpura } from './platelet-disorders/thrombotic-thrombocytopenic-purpura';
 
 // Coagulation disorders
 export { disseminatedIntravascularCoagulation } from './coagulation/disseminated-intravascular-coagulation';
-export { pulmonaryEmbolism as hematologyPulmonaryEmbolism } from './coagulation/pulmonary-embolism';
 
 // Transfusion medicine
 export { bloodTransfusionMedicine } from './transfusion/blood-transfusion-medicine';

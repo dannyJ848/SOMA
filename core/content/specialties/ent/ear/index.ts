@@ -11,7 +11,6 @@
  * - Vertigo
  */
 
-export { earAnatomy } from './ear-anatomy';
 export { hearingLoss } from './hearing-loss';
 export { hearingPhysiology } from './hearing-physiology';
 export { otitisExterna } from './otitis-externa';

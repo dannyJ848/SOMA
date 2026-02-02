@@ -22,7 +22,7 @@ export { inflammatoryBowelDisease } from './conditions/inflammatory-bowel-diseas
 export { irritableBowelSyndrome } from './conditions/irritable-bowel-syndrome';
 export { liverDiseases } from './conditions/liver-diseases';
 export { gallbladderDisease } from './conditions/gallbladder-disease';
-export { pancreatitis } from './conditions/pancreatitis';
+
 export { giCancers } from './conditions/gi-cancers';
 export { giBleeding } from './conditions/gi-bleeding';
 export { celiacAndMalabsorption } from './conditions/celiac-malabsorption';

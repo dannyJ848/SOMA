@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 450" width="650" height="450">
+  <defs>
+    <linearGradient id="depolarGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="repolarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="650" height="450" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="325" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Action Potential Phases
+  </text>
+  
+  <!-- Grid Lines -->
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="80" y1="80" x2="80" y2="350"/>
+    <line x1="600" y1="80" x2="600" y2="350"/>
+    <line x1="80" y1="80" x2="600" y2="80"/>
+    <line x1="80" y1="350" x2="600" y2="350"/>
+    <!-- Horizontal grid lines -->
+    <line x1="80" y1="140" x2="600" y2="140" stroke-dasharray="3,3"/>
+    <line x1="80" y1="215" x2="600" y2="215" stroke-dasharray="3,3"/>
+    <line x1="80" y1="290" x2="600" y2="290" stroke-dasharray="3,3"/>
+  </g>
+  
+  <!-- Axes -->
+  <line x1="80" y1="350" x2="600" y2="350" stroke="#374151" stroke-width="2"/>
+  <line x1="80" y1="80" x2="80" y2="350" stroke="#374151" stroke-width="2"/>
+  
+  <!-- Arrow heads -->
+  <polygon points="600,350 592,345 592,355" fill="#374151"/>
+  <polygon points="80,80 75,88 85,88" fill="#374151"/>
+  
+  <!-- Y-Axis Labels -->
+  <text x="70" y="85" text-anchor="end" font-family="Arial" font-size="10" fill="#6b7280">+40</text>
+  <text x="70" y="145" text-anchor="end" font-family="Arial" font-size="10" fill="#6b7280">0</text>
+  <text x="70" y="220" text-anchor="end" font-family="Arial" font-size="10" fill="#6b7280">-70</text>
+  <text x="70" y="295" text-anchor="end" font-family="Arial" font-size="10" fill="#6b7280">-90</text>
+  <text x="70" y="360" text-anchor="end" font-family="Arial" font-size="10" fill="#6b7280">(mV)</text>
+  
+  <!-- Y-Axis Title -->
+  <text x="30" y="215" text-anchor="middle" font-family="Arial" font-size="11" fill="#374151" transform="rotate(-90 30 215)">
+    Membrane Potential
+  </text>
+  
+  <!-- X-Axis Title -->
+  <text x="340" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#374151">
+    Time (ms)
+  </text>
+  
+  <!-- Threshold line -->
+  <line x1="80" y1="170" x2="600" y2="170" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="605" y="175" font-family="Arial" font-size="9" fill="#d97706">Threshold (-55mV)</text>
+  
+  <!-- Resting potential line -->
+  <line x1="80" y1="215" x2="600" y2="215" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="605" y="220" font-family="Arial" font-size="9" fill="#6b7280">Resting (-70mV)</text>
+  
+  <!-- Action Potential Curve -->
+  <path d="M 100 215 
+           L 140 215 
+           Q 155 215 160 200
+           Q 165 185 180 140
+           Q 200 80 250 85
+           Q 300 90 320 140
+           Q 340 190 350 250
+           Q 360 310 380 300
+           L 420 295
+           L 480 295
+           L 520 295
+           L 580 295" 
+        fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Phase Labels -->
+  <!-- Resting -->
+  <rect x="85" y="190" width="50" height="18" fill="#f3f4f6" stroke="#9ca3af" rx="3"/>
+  <text x="110" y="203" text-anchor="middle" font-family="Arial" font-size="9" fill="#4b5563">Resting</text>
+  
+  <!-- Depolarization -->
+  <rect x="185" y="100" width="70" height="18" fill="#fee2e2" stroke="#ef4444" rx="3"/>
+  <text x="220" y="113" text-anchor="middle" font-family="Arial" font-size="9" fill="#dc2626">Depolarization</text>
+  
+  <!-- Repolarization -->
+  <rect x="300" y="160" width="70" height="18" fill="#dbeafe" stroke="#3b82f6" rx="3"/>
+  <text x="335" y="173" text-anchor="middle" font-family="Arial" font-size="9" fill="#2563eb">Repolarization</text>
+  
+  <!-- Hyperpolarization -->
+  <rect x="360" y="310" width="80" height="18" fill="#e0e7ff" stroke="#6366f1" rx="3"/>
+  <text x="400" y="323" text-anchor="middle" font-family="Arial" font-size="9" fill="#4f46e5">Hyperpolarization</text>
+  
+  <!-- Phase Arrows -->
+  <line x1="160" y1="200" x2="180" y2="150" fill="none" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  
+  <!-- Ion Channel Legend -->
+  <rect x="400" y="80" width="180" height="130" fill="#f9fafb" stroke="#d1d5db" rx="8"/>
+  <text x="490" y="100" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#374151">Ion Movements</text>
+  
+  <!-- Na+ influx -->
+  <circle cx="420" cy="120" r="8" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="420" y="124" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#92400e">Na+</text>
+  <text x="440" y="125" font-family="Arial" font-size="9" fill="#4b5563">→ Influx (depolarize)</text>
+  
+  <!-- K+ efflux -->
+  <circle cx="420" cy="150" r="8" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="420" y="154" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#1e40af">K+</text>
+  <text x="440" y="155" font-family="Arial" font-size="9" fill="#4b5563">→ Efflux (repolarize)</text>
+  
+  <!-- Na+/K+ pump -->
+  <rect x="412" y="175" width="16" height="16" fill="#d1fae5" stroke="#10b981"/>
+  <text x="440" y="187" font-family="Arial" font-size="9" fill="#4b5563">ATPase pump</text>
+  <text x="440" y="200" font-family="Arial" font-size="8" fill="#6b7280">(restores gradient)</text>
+  
+  <!-- Summary Box -->
+  <rect x="20" y="400" width="610" height="40" fill="#fef3c7" stroke="#fbbf24" rx="8"/>
+  <text x="325" y="420" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#92400e">
+    All-or-None Principle: Once threshold is reached, action potential fires at maximum amplitude
+  </text>
+  <text x="325" y="435" text-anchor="middle" font-family="Arial" font-size="9" fill="#b45309">
+    Refractory Period: Brief period after firing when neuron cannot fire again
+  </text>
+  
+  <!-- Attribution -->
+  <text x="325" y="448" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

@@ -176,7 +176,7 @@ function encyclopediaEntryToDocument(
     source,
     content: content.trim() || entry.summary,
     url: primaryRef?.url,
-    license: primaryRef?.type === 'open-source' ? 'Open Access' : undefined,
+    license: undefined,
   };
 }
 

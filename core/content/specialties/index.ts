@@ -13,7 +13,6 @@ export * from "./endocrinology";
 
 // --- ENT (explicit re-exports to avoid allergicRhinitis collision) ---
 export {
-  earAnatomy,
   hearingPhysiology,
   hearingLoss,
   otitisMedia,
@@ -87,15 +86,10 @@ export * from "./pulmonology";
 // --- Rheumatology (explicit re-exports to avoid osteoarthritisContent collision) ---
 export {
   RHEUMATOLOGY_ENTRIES,
-  rheumatoidArthritisContent,
-  osteoarthritisContent as rheumatologyOsteoarthritisContent,
-  systemicLupusContent,
   goutContent,
   pseudogoutContent,
   ankylosingSpondylitisContent,
   spondyloarthropathiesContent,
-  fibromyalgiaContent,
-  vasculitisContent,
   sclerodermaContent,
   connectiveTissueDiseasesContent,
   autoimmuneSerogyContent,

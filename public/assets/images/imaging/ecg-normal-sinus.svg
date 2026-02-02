@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400">
+  <defs>
+    <!-- Grid pattern -->
+    <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="#fecaca" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect width="50" height="50" fill="url(#smallGrid)"/>
+      <path d="M 50 0 L 0 0 L 0 50" fill="none" stroke="#fca5a5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="700" height="400" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Normal Sinus Rhythm ECG
+  </text>
+  
+  <!-- ECG Grid -->
+  <rect x="50" y="60" width="600" height="250" fill="url(#grid)" stroke="#dc2626" stroke-width="1"/>
+  
+  <!-- Axes -->
+  <line x1="50" y1="185" x2="650" y2="185" stroke="#374151" stroke-width="1"/>
+  <text x="660" y="190" font-family="Arial" font-size="10" fill="#6b7280">0 mV</text>
+  
+  <!-- Time markers -->
+  <g font-family="Arial" font-size="9" fill="#6b7280">
+    <text x="50" y="325">0</text>
+    <text x="150" y="325">0.2s</text>
+    <text x="250" y="325">0.4s</text>
+    <text x="350" y="325">0.6s</text>
+    <text x="450" y="325">0.8s</text>
+    <text x="550" y="325">1.0s</text>
+    <text x="630" y="325">1.2s</text>
+  </g>
+  <text x="350" y="345" text-anchor="middle" font-family="Arial" font-size="11" fill="#374151">Time (seconds)</text>
+  
+  <!-- Voltage markers -->
+  <g font-family="Arial" font-size="9" fill="#6b7280">
+    <text x="40" y="85" text-anchor="end">+2</text>
+    <text x="40" y="135" text-anchor="end">+1</text>
+    <text x="40" y="235" text-anchor="end">-1</text>
+    <text x="30" y="190" text-anchor="end" font-size="8">mV</text>
+  </g>
+  
+  <!-- ECG Tracing - 3 complete cycles -->
+  <path d="M 50 185 
+           L 70 185 
+           L 75 175 
+           L 80 185 
+           L 85 135 
+           L 95 235 
+           L 100 185 
+           L 110 155 
+           L 120 185 
+           L 140 185
+           L 145 175
+           L 150 185
+           L 155 135
+           L 165 235
+           L 170 185
+           L 180 155
+           L 190 185
+           L 210 185
+           L 215 175
+           L 220 185
+           L 225 135
+           L 235 235
+           L 240 185
+           L 250 155
+           L 260 185
+           L 280 185
+           L 285 175
+           L 290 185
+           L 295 135
+           L 305 235
+           L 310 185
+           L 320 155
+           L 330 185
+           L 350 185
+           L 355 175
+           L 360 185
+           L 365 135
+           L 375 235
+           L 380 185
+           L 390 155
+           L 400 185
+           L 420 185
+           L 425 175
+           L 430 185
+           L 435 135
+           L 445 235
+           L 450 185
+           L 460 155
+           L 470 185
+           L 490 185
+           L 495 175
+           L 500 185
+           L 505 135
+           L 515 235
+           L 520 185
+           L 530 155
+           L 540 185
+           L 560 185
+           L 565 175
+           L 570 185
+           L 575 135
+           L 585 235
+           L 590 185
+           L 600 155
+           L 610 185
+           L 650 185" 
+        fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Wave Labels -->
+  <!-- P wave -->
+  <circle cx="77" cy="165" r="12" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="60" y="155" font-family="Arial" font-size="11" font-weight="bold" fill="#2563eb">P</text>
+  <text x="95" y="155" font-family="Arial" font-size="8" fill="#6b7280">Atrial depolarization</text>
+  
+  <!-- QRS Complex -->
+  <rect x="83" y="115" width="15" height="130" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="88" y="105" font-family="Arial" font-size="11" font-weight="bold" fill="#dc2626">QRS</text>
+  <text x="103" y="110" font-family="Arial" font-size="8" fill="#6b7280">Ventricular depolarization</text>
+  
+  <!-- T wave -->
+  <circle cx="115" cy="155" r="15" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="132" y="150" font-family="Arial" font-size="11" font-weight="bold" fill="#16a34a">T</text>
+  <text x="150" y="155" font-family="Arial" font-size="8" fill="#6b7280">Ventricular repolarization</text>
+  
+  <!-- Intervals -->
+  <!-- PR Interval -->
+  <line x1="75" y1="260" x2="88" y2="260" stroke="#7c3aed" stroke-width="2" marker-start="url(#arrowLeft)" marker-end="url(#arrowRight)"/>
+  <text x="81" y="275" font-family="Arial" font-size="8" fill="#7c3aed">PR Interval</text>
+  <text x="75" y="290" font-family="Arial" font-size="7" fill="#6b7280">0.12-0.20s</text>
+  
+  <!-- QRS Duration -->
+  <line x1="85" y1="300" x2="95" y2="300" stroke="#dc2626" stroke-width="2" marker-start="url(#arrowLeft)" marker-end="url(#arrowRight)"/>
+  <text x="85" y="315" font-family="Arial" font-size="8" fill="#dc2626">QRS</text>
+  <text x="80" y="325" font-family="Arial" font-size="7" fill="#6b7280">&lt;0.12s</text>
+  
+  <!-- QT Interval -->
+  <line x1="75" y1="350" x2="115" y2="350" stroke="#059669" stroke-width="2" marker-start="url(#arrowLeft)" marker-end="url(#arrowRight)"/>
+  <text x="85" y="365" font-family="Arial" font-size="8" fill="#059669">QT Interval</text>
+  <text x="80" y="378" font-family="Arial" font-size="7" fill="#6b7280">&lt;0.44s (varies with HR)</text>
+  
+  <!-- Normal Values Box -->
+  <rect x="420" y="60" width="230" height="130" fill="#ecfdf5" stroke="#10b981" rx="8"/>
+  <text x="535" y="85" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#047857">
+    Normal Sinus Rhythm
+  </text>
+  
+  <text x="430" y="105" font-family="Arial" font-size="9" fill="#059669">• Rate: 60-100 bpm</text>
+  <text x="430" y="122" font-family="Arial" font-size="9" fill="#059669">• Rhythm: Regular</text>
+  <text x="430" y="139" font-family="Arial" font-size="9" fill="#059669">• P wave: Before each QRS</text>
+  <text x="430" y="156" font-family="Arial" font-size="9" fill="#059669">• PR interval: 0.12-0.20s</text>
+  <text x="430" y="173" font-family="Arial" font-size="9" fill="#059669">• QRS duration: &lt;0.12s</text>
+  
+  <!-- Attribution -->
+  <text x="350" y="395" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

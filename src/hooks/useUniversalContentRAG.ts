@@ -10,26 +10,29 @@ import {
   searchUniversalContent,
   getContentByStructure,
   getContentBySystem,
-  getContentByCategory,
-  contentToDocument,
+  getContentByType,
   getUniversalContentStats,
 } from '../universalContentRAG';
-import type { EducationalContent } from '../../core/content/types';
 import type { ContentDocument } from '../ContentViewer';
 
 export function useUniversalContentRAG() {
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({
     totalContent: 0,
-    bySystem: {},
-    byCategory: {},
+    bySystem: {} as Record<string, number>,
+    byType: {} as Record<string, number>,
   });
 
   // Initialize on mount
   useEffect(() => {
     const init = async () => {
       await initializeUniversalContentIndex();
-      setStats(getUniversalContentStats());
+      const statsData = await getUniversalContentStats();
+      setStats({
+        totalContent: statsData.totalContent,
+        bySystem: statsData.bySystem,
+        byType: statsData.byType,
+      });
       setIsLoading(false);
     };
     init();
@@ -38,45 +41,36 @@ export function useUniversalContentRAG() {
   /**
    * Search all content
    */
-  const search = useCallback((query: string): EducationalContent[] => {
+  const search = useCallback(async (query: string): Promise<ContentDocument[]> => {
     return searchUniversalContent(query);
   }, []);
 
   /**
    * Get content by structure name
    */
-  const getByStructure = useCallback((structureName: string): EducationalContent | null => {
+  const getByStructure = useCallback(async (structureName: string): Promise<ContentDocument | null> => {
     return getContentByStructure(structureName);
   }, []);
 
   /**
    * Get content by body system
    */
-  const getBySystem = useCallback((system: string): EducationalContent[] => {
-    return getContentBySystem(system);
+  const getBySystem = useCallback(async (system: string): Promise<ContentDocument[]> => {
+    return getContentBySystem(system as any);
   }, []);
 
   /**
-   * Get content by category
+   * Get content by type
    */
-  const getByCategory = useCallback((category: string): EducationalContent[] => {
-    return getContentByCategory(category);
-  }, []);
-
-  /**
-   * Get content document for display
-   */
-  const getDocument = useCallback((content: EducationalContent, level: 1 | 2 | 3 | 4 | 5 = 3): ContentDocument => {
-    return contentToDocument(content, level);
+  const getByType = useCallback(async (type: string): Promise<ContentDocument[]> => {
+    return getContentByType(type as any);
   }, []);
 
   /**
    * Quick content retrieval by structure name
    */
-  const getDocumentByStructure = useCallback((structureName: string, level: 1 | 2 | 3 | 4 | 5 = 3): ContentDocument | null => {
-    const content = getContentByStructure(structureName);
-    if (!content) return null;
-    return contentToDocument(content, level);
+  const getDocumentByStructure = useCallback(async (structureName: string): Promise<ContentDocument | null> => {
+    return getContentByStructure(structureName);
   }, []);
 
   return {
@@ -85,8 +79,7 @@ export function useUniversalContentRAG() {
     search,
     getByStructure,
     getBySystem,
-    getByCategory,
-    getDocument,
+    getByType,
     getDocumentByStructure,
   };
 }

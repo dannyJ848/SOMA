@@ -1237,14 +1237,13 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     console.log(`[Universal RAG] Searching for pathology: ${structureName}`);
     
     // Import Universal RAG
-    const { getContentByStructure, contentToDocument } = await import('./universalContentRAG');
+    const { getContentByStructure } = await import('./universalContentRAG');
     
     // Try to get pathology content
-    const content = getContentByStructure(structureName.toLowerCase().replace(/\s+/g, '-'));
+    const doc = await getContentByStructure(structureName.toLowerCase().replace(/\s+/g, '-'));
     
-    if (content) {
-      console.log(`[Universal RAG] Found content: ${content.name}`);
-      const doc = contentToDocument(content);
+    if (doc) {
+      console.log(`[Universal RAG] Found content: ${doc.title}`);
       // Display in ContentViewer
       setSelectedContent(doc);
     } else {
@@ -1285,14 +1284,13 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     console.log('[Universal RAG] Opening encyclopedia entry:', entryId);
     
     // Import Universal RAG
-    const { getContentByStructure, contentToDocument } = await import('./universalContentRAG');
+    const { getContentByStructure } = await import('./universalContentRAG');
     
     // Try to get content
-    const content = getContentByStructure(entryId);
+    const doc = await getContentByStructure(entryId);
     
-    if (content) {
-      console.log(`[Universal RAG] Found encyclopedia content: ${content.name}`);
-      const doc = contentToDocument(content);
+    if (doc) {
+      console.log(`[Universal RAG] Found encyclopedia content: ${doc.title}`);
       // Display in ContentViewer
       setSelectedContent(doc);
     } else {

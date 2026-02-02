@@ -21,15 +21,10 @@ export {
 } from './rheumatology-database';
 
 // Condition content exports
-export { rheumatoidArthritisContent } from './rheumatoid-arthritis';
-export { osteoarthritisContent } from './osteoarthritis';
-export { systemicLupusContent } from './systemic-lupus-erythematosus';
 export { goutContent } from './gout';
 export { pseudogoutContent } from './pseudogout';
 export { ankylosingSpondylitisContent } from './ankylosing-spondylitis';
 export { spondyloarthropathiesContent } from './spondyloarthropathies';
-export { fibromyalgiaContent } from './fibromyalgia';
-export { vasculitisContent } from './vasculitis-syndromes';
 export { sclerodermaContent } from './scleroderma';
 export { connectiveTissueDiseasesContent } from './connective-tissue-diseases';
 
@@ -56,15 +51,10 @@ export type RheumatologyCategory = (typeof RHEUMATOLOGY_CATEGORIES)[number];
 // All rheumatology content for bulk operations
 export const getAllRheumatologyContent = async () => {
   const modules = await Promise.all([
-    import('./rheumatoid-arthritis'),
-    import('./osteoarthritis'),
-    import('./systemic-lupus-erythematosus'),
     import('./gout'),
     import('./pseudogout'),
     import('./ankylosing-spondylitis'),
     import('./spondyloarthropathies'),
-    import('./fibromyalgia'),
-    import('./vasculitis-syndromes'),
     import('./scleroderma'),
     import('./connective-tissue-diseases'),
     import('./autoimmune-serology'),

@@ -7,4 +7,3 @@
  */
 
 export { schizoaffectiveDisorderContent } from './schizoaffective-disorder';
-export { schizophreniaContent } from './schizophrenia';

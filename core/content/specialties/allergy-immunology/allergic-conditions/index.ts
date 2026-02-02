@@ -11,7 +11,6 @@
  */
 
 export { allergicRhinitis } from './allergic-rhinitis';
-export { anaphylaxis } from './anaphylaxis';
 export { asthmaAllergy } from './asthma-allergy';
 export { atopicDermatitis } from './atopic-dermatitis';
 export { drugAllergies } from './drug-allergies';

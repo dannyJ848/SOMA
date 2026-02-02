@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 650" width="400" height="650">
+  <defs>
+    <linearGradient id="giGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="liverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pancreasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f472b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="650" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Gastrointestinal Tract
+  </text>
+  
+  <!-- Oral Cavity -->
+  <ellipse cx="200" cy="70" rx="35" ry="20" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+  <text x="200" y="75" text-anchor="middle" font-family="Arial" font-size="10" fill="#991b1b">Oral Cavity</text>
+  <text x="250" y="70" font-family="Arial" font-size="9" fill="#6b7280">(mechanical &amp; chemical digestion)</text>
+  
+  <!-- Pharynx -->
+  <path d="M 185 90 L 185 120 L 215 120 L 215 90 Z" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+  <text x="225" y="110" font-family="Arial" font-size="9" fill="#dc2626">Pharynx</text>
+  
+  <!-- Esophagus -->
+  <rect x="190" y="120" width="20" height="80" fill="url(#giGrad)" stroke="#d97706" stroke-width="2" rx="3"/>
+  <text x="220" y="165" font-family="Arial" font-size="9" fill="#b45309">Esophagus</text>
+  
+  <!-- Stomach -->
+  <path d="M 170 210 Q 150 230 160 270 Q 170 310 200 310 Q 230 310 240 270 Q 245 240 230 220 Q 210 200 170 210" 
+        fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <text x="185" y="260" font-family="Arial" font-size="10" font-weight="bold" fill="#b45309">Stomach</text>
+  
+  <!-- Small Intestine (coiled) -->
+  <g transform="translate(130, 330)">
+    <!-- Duodenum -->
+    <path d="M 70 0 Q 90 20 70 40" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/>
+    <!-- Jejunum/Ileum coils -->
+    <path d="M 70 40 Q 40 60 50 90 Q 60 120 90 110 Q 110 100 100 70" 
+          fill="none" stroke="#fbbf24" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 100 70 Q 130 60 120 90 Q 110 130 80 140 Q 50 145 40 110" 
+          fill="none" stroke="#fbbf24" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 40 110 Q 30 150 60 160 Q 90 165 100 140" 
+          fill="none" stroke="#fbbf24" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text x="200" y="360" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#d97706">
+    Small Intestine
+  </text>
+  <text x="200" y="375" text-anchor="middle" font-family="Arial" font-size="8" fill="#b45309">
+    (duodenum, jejunum, ileum)
+  </text>
+  
+  <!-- Large Intestine -->
+  <path d="M 140 500 Q 120 520 130 550 Q 140 580 170 590 Q 200 600 230 590 Q 260 580 270 550 Q 275 520 260 500 Q 250 490 240 500" 
+        fill="none" stroke="#d97706" stroke-width="15" stroke-linecap="round" opacity="0.6"/>
+  <!-- Frame of large intestine -->
+  <path d="M 135 490 Q 110 510 120 555 Q 130 590 170 600 Q 200 610 240 600 Q 280 590 285 555 Q 290 510 265 490 Q 250 475 230 485" 
+        fill="none" stroke="#b45309" stroke-width="3" stroke-linecap="round"/>
+  <text x="295" y="550" font-family="Arial" font-size="9" fill="#b45309">Large Intestine</text>
+  
+  <!-- Rectum -->
+  <rect x="190" y="600" width="20" height="30" fill="#fde68a" stroke="#d97706" stroke-width="2" rx="3"/>
+  <text x="220" y="620" font-family="Arial" font-size="9" fill="#b45309">Rectum</text>
+  
+  <!-- Anus -->
+  <ellipse cx="200" cy="645" rx="12" ry="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+  <text x="225" y="650" font-family="Arial" font-size="8" fill="#dc2626">Anus</text>
+  
+  <!-- Liver -->
+  <path d="M 260 200 Q 300 190 320 210 Q 335 230 325 250 Q 310 270 280 265 Q 260 260 255 240 Z" 
+        fill="url(#liverGrad)" stroke="#7c3aed" stroke-width="2"/>
+  <text x="290" y="235" font-family="Arial" font-size="10" font-weight="bold" fill="#6d28d9">Liver</text>
+  
+  <!-- Gallbladder -->
+  <ellipse cx="265" cy="270" rx="15" ry="20" fill="#fde047" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="285" y="275" font-family="Arial" font-size="8" fill="#a16207">Gallbladder</text>
+  
+  <!-- Pancreas -->
+  <path d="M 250 290 Q 280 285 300 300 Q 310 315 295 325 Q 275 330 260 320 Z" 
+        fill="url(#pancreasGrad)" stroke="#db2777" stroke-width="1.5"/>
+  <text x="310" y="310" font-family="Arial" font-size="9" fill="#be185d">Pancreas</text>
+  
+  <!-- Appendix -->
+  <path d="M 135 550 Q 120 560 115 575" fill="none" stroke="#d97706" stroke-width="4" stroke-linecap="round"/>
+  <text x="85" y="580" font-family="Arial" font-size="8" fill="#b45309">Appendix</text>
+  
+  <!-- Accessory Organs Box -->
+  <rect x="20" y="530" width="360" height="70" fill="#ede9fe" stroke="#8b5cf6" rx="8"/>
+  <text x="200" y="555" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#6d28d9">
+    Accessory Digestive Organs
+  </text>
+  <text x="200" y="575" text-anchor="middle" font-family="Arial" font-size="9" fill="#7c3aed">
+    Liver: produces bile | Gallbladder: stores bile | Pancreas: produces digestive enzymes
+  </text>
+  <text x="200" y="590" text-anchor="middle" font-family="Arial" font-size="9" fill="#7c3aed">
+    Salivary glands: produce saliva (not shown)
+  </text>
+  
+  <!-- Attribution -->
+  <text x="200" y="610" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

@@ -18,7 +18,6 @@
 // Bacterial Infections
 export { bacterialInfectionsOverview } from './bacterial-infections-overview';
 export { gramPositiveBacteria } from './gram-positive-bacteria';
-export { gramNegativeBacteria } from './gram-negative-bacteria';
 
 // Viral Infections
 export { viralInfectionsOverview } from './viral-infections-overview';
@@ -37,7 +36,6 @@ export { hivAidsPathophysiology } from './hiv-aids-pathophysiology';
 export { tuberculosis } from './tuberculosis';
 
 // Sepsis
-export { sepsisAndSepticShock } from './sepsis-septic-shock';
 
 // Healthcare-Associated Infections
 export { healthcareAssociatedInfections } from './healthcare-associated-infections';
@@ -61,14 +59,12 @@ export type { InfectiousDiseaseEntry, InfectiousDiseaseCategory } from './infect
 // Collect all content for registration
 import { bacterialInfectionsOverview } from './bacterial-infections-overview';
 import { gramPositiveBacteria } from './gram-positive-bacteria';
-import { gramNegativeBacteria } from './gram-negative-bacteria';
 import { viralInfectionsOverview } from './viral-infections-overview';
 import { antiviralTherapy } from './antiviral-therapy';
 import { fungalInfectionsOverview } from './fungal-infections-overview';
 import { parasiticInfections } from './parasitic-infections';
 import { hivAidsPathophysiology } from './hiv-aids-pathophysiology';
 import { tuberculosis } from './tuberculosis';
-import { sepsisAndSepticShock } from './sepsis-septic-shock';
 import { healthcareAssociatedInfections } from './healthcare-associated-infections';
 import { antibioticStewardship } from './antibiotic-stewardship';
 import { vaccinationScience } from './vaccination-science';
@@ -76,14 +72,12 @@ import { vaccinationScience } from './vaccination-science';
 export const infectiousDiseaseContent = [
   bacterialInfectionsOverview,
   gramPositiveBacteria,
-  gramNegativeBacteria,
   viralInfectionsOverview,
   antiviralTherapy,
   fungalInfectionsOverview,
   parasiticInfections,
   hivAidsPathophysiology,
   tuberculosis,
-  sepsisAndSepticShock,
   healthcareAssociatedInfections,
   antibioticStewardship,
   vaccinationScience,

@@ -6,5 +6,4 @@
  * - Thrombophilia
  */
 
-export { deepVeinThrombosis } from './deep-vein-thrombosis';
 export { thrombophilia } from './thrombophilia';

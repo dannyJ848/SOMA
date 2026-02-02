@@ -16,6 +16,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAdaptiveAnatomy } from './adaptiveAnatomy';
 import { getRegionMenu, ANATOMICAL_REGIONS, type AnatomicalRegion, type RegionMenuItem } from './anatomicalRegionMenu';
 import { useUniversalContentRAG } from './hooks/useUniversalContentRAG';
+import { resolveMenuItemContent } from './regionMenuContentResolver';
 import { ContentViewer } from './ContentViewer';
 import type { ContentDocument } from './ContentViewer';
 
@@ -358,13 +359,19 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
     });
   }, [selectRegion, getRegionContext]);
 
-  // Handle menu item click - WIRED TO RAG
-  const handleMenuItemClick = useCallback((item: RegionMenuItem) => {
+  // Handle menu item click - WIRED TO CONTENT RESOLVER
+  const handleMenuItemClick = useCallback(async (item: RegionMenuItem) => {
     if (!state.selectedRegion) return;
 
-    // Try to get content from RAG first
-    const contentId = item.id;
-    const content = getDocumentByStructure(contentId);
+    console.log(`[AnatomyLaunchpad] Menu item clicked: ${item.id} - ${item.label}`);
+
+    // Use the content resolver for all content items
+    const content = await resolveMenuItemContent(
+      item.id,
+      item.label,
+      item.description,
+      item.contentType
+    );
 
     if (content) {
       // We have content - display it
@@ -374,7 +381,7 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
       return;
     }
 
-    // Fallback to old behavior if no content found
+    // Fallback for special action items
     switch (item.id) {
       case 'view-anatomy':
       case 'view-histology':
@@ -401,7 +408,7 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
     // Close menu
     setMenuPosition(null);
     selectRegion(null);
-  }, [state.selectedRegion, regionContext, onAnatomyViewRequest, onAIRequest, selectRegion, getDocumentByStructure]);
+  }, [state.selectedRegion, regionContext, onAnatomyViewRequest, onAIRequest, selectRegion]);
 
   // Close menu when clicking outside
   useEffect(() => {

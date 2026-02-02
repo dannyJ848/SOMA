@@ -20,10 +20,8 @@
 export { urinaryTractAnatomy } from './urinary-tract-anatomy';
 
 // Infectious conditions
-export { urinaryTractInfections } from './urinary-tract-infections';
 
 // Stone disease
-export { kidneyStones } from './kidney-stones';
 
 // Prostate conditions
 export { benignProstaticHyperplasia } from './benign-prostatic-hyperplasia';
@@ -33,8 +31,6 @@ export { prostateCancerScreening } from './prostate-cancer-screening';
 export { bladderConditions } from './bladder-conditions';
 
 // Sexual and reproductive health
-export { erectileDysfunction } from './erectile-dysfunction';
-export { maleInfertility } from './male-infertility';
 
 // Testicular conditions
 export { testicularConditions } from './testicular-conditions';

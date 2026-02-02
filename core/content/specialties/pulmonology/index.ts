@@ -16,17 +16,12 @@
  */
 
 // Obstructive diseases
-export { asthma } from './asthma';
-export { copd } from './copd';
 
 // Infectious diseases
-export { pneumonia } from './pneumonia';
 
 // Vascular diseases
-export { pulmonaryEmbolism } from './pulmonary-embolism';
 
 // Neoplastic diseases
-export { lungCancer } from './lung-cancer';
 
 // Interstitial lung diseases
 export { interstitialLungDiseases } from './interstitial-lung-diseases';

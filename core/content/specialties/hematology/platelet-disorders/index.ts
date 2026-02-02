@@ -6,5 +6,4 @@
  * - Thrombotic thrombocytopenic purpura (TTP)
  */
 
-export { immuneThrombocytopenia } from './immune-thrombocytopenia';
 export { thromboticThrombocytopenicPurpura } from './thrombotic-thrombocytopenic-purpura';

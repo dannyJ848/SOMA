@@ -20,6 +20,28 @@ import type {
   EntryType,
 } from './types';
 import { REGION_CONTENT_MAP } from '../../../src/education/regionContentMapping';
+import { nervousSystemPhysiologyEntries } from './entries/nervous-system-physiology';
+import { nervousSystemAnatomyEntries } from './entries/nervous-system-anatomy';
+import { brainAnatomyEntries } from './entries/brain-anatomy';
+import { cardiovascularSystemEntries } from './entries/cardiovascular-system';
+import { cardiovascularPhysiologyEntries } from './entries/cardiovascular-physiology';
+import { bloodVesselsEntries } from './entries/blood-vessels';
+import { respiratorySystemEntries } from './entries/respiratory-system';
+import { immuneSystemEntries } from './entries/immune-system';
+import { digestiveSystemEntries } from './entries/digestive-system';
+import { urinarySystemEntries } from './entries/urinary-system';
+import { endocrineSystemEntries } from './entries/endocrine-system';
+import { musculoskeletalSystemEntries } from './entries/musculoskeletal-system';
+import { integumentarySystemEntries } from './entries/integumentary-system';
+import { reproductiveSystemEntries } from './entries/reproductive-system';
+import { tissueTypesEntries } from './entries/tissue-types';
+
+// Comprehensive pathology and clinical medicine entries
+import { pathologyEntries } from './entries/pathology-comprehensive';
+import { diabetesEntries } from './entries/diabetes-comprehensive';
+import { hypertensionEntries } from './entries/hypertension-comprehensive';
+import { strokeEntries } from './entries/stroke-comprehensive';
+import { cancerOncologyEntries } from './entries/cancer-oncology-comprehensive';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -533,5 +555,25 @@ export function seedEncyclopedia(): void {
   _seeded = true;
 
   const entries = buildEntries();
+  
+  // Add comprehensive nervous system entries
+  entries.push(...nervousSystemPhysiologyEntries);
+  entries.push(...nervousSystemAnatomyEntries);
+  entries.push(...brainAnatomyEntries);
+  
+  // Add comprehensive cardiovascular entries
+  entries.push(...cardiovascularSystemEntries);
+  entries.push(...cardiovascularPhysiologyEntries);
+  entries.push(...bloodVesselsEntries);
+  
+  // Add respiratory system entries
+  entries.push(...respiratorySystemEntries);
+  
+  // Add endocrine system entries
+  entries.push(...endocrineSystemEntries);
+  
+  // Add integumentary system entries
+  entries.push(...integumentarySystemEntries);
+  
   addEntries(entries);
 }

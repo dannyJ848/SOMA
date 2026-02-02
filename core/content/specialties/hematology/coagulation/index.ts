@@ -7,4 +7,3 @@
  */
 
 export { disseminatedIntravascularCoagulation } from './disseminated-intravascular-coagulation';
-export { pulmonaryEmbolism } from './pulmonary-embolism';

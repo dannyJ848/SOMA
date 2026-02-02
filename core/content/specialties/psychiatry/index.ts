@@ -21,7 +21,6 @@ export * from './neuroscience/brain-chemistry-mental-health';
 
 // Mood Disorders
 export * from './mood-disorders/major-depressive-disorder';
-export * from './mood-disorders/bipolar-disorder';
 
 // Anxiety Disorders
 export * from './anxiety-disorders/generalized-anxiety-disorder';
@@ -30,7 +29,6 @@ export * from './anxiety-disorders/specific-phobias';
 export * from './anxiety-disorders/social-anxiety-disorder';
 
 // Psychotic Disorders
-export * from './psychotic-disorders/schizophrenia';
 export * from './psychotic-disorders/schizoaffective-disorder';
 
 // Trauma and Stress-Related Disorders

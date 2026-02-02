@@ -30,17 +30,12 @@ export type {
 } from './nephrology-database';
 
 // Content exports
-export { acuteKidneyInjury } from './acute-kidney-injury';
-export { chronicKidneyDisease } from './chronic-kidney-disease';
-export { glomerulonephritis } from './glomerulonephritis';
 export { nephroticNephriticSyndrome } from './nephrotic-nephritic-syndrome';
 export { sodiumDisorders } from './sodium-disorders';
 export { potassiumDisorders } from './potassium-disorders';
 export { calciumPhosphorusDisorders } from './calcium-phosphorus-disorders';
-export { acidBaseDisorders } from './acid-base-disorders';
 export { dialysis } from './dialysis';
 export { kidneyTransplantation } from './kidney-transplantation';
-export { polycysticKidneyDisease } from './polycystic-kidney-disease';
 export { nephrotoxicDrugs } from './nephrotoxic-drugs';
 
 // In-depth subdirectory content

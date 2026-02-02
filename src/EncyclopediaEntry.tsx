@@ -12,6 +12,7 @@ import { RelatedContent } from './components/RelatedContent';
 import type { EncyclopediaEntryAction } from '../core/intent-prediction/types';
 import type { ViewPreset } from './utils/anatomy3DEventBus';
 import { getEntry } from '../core/medical-simulation/encyclopedia/store';
+import { getEntryImages } from '../core/medical-simulation/encyclopedia/image-resolver';
 import type {
   AnatomyLink,
   RelatedEntry,
@@ -19,6 +20,7 @@ import type {
   ContentSection,
   EntryType,
   RelationshipType,
+  EncyclopediaImage,
 } from '../core/medical-simulation/encyclopedia/types';
 import './EncyclopediaEntry.css';
 
@@ -288,6 +290,106 @@ function ContentSectionView({ section, complexityLevel, depth = 0 }: ContentSect
 }
 
 // ============================================
+// Image Gallery Component
+// ============================================
+
+interface ImageGalleryProps {
+  images: EncyclopediaImage[];
+}
+
+function ImageGallery({ images }: ImageGalleryProps) {
+  const [selectedImage, setSelectedImage] = useState<EncyclopediaImage | null>(null);
+  
+  if (images.length === 0) {
+    return (
+      <div className="no-images">
+        <p>No images available for this entry.</p>
+      </div>
+    );
+  }
+
+  const featuredImage = images.find(img => img.isFeatured) || images[0];
+  const otherImages = images.filter(img => img.imageId !== featuredImage.imageId);
+
+  return (
+    <div className="image-gallery">
+      {/* Featured Image */}
+      <div className="featured-image-container">
+        <h3>Featured Image</h3>
+        <figure 
+          className="featured-image"
+          onClick={() => setSelectedImage(featuredImage)}
+        >
+          <img src={featuredImage.path} alt={featuredImage.altText} />
+          <figcaption>
+            <span className="image-title">{featuredImage.title}</span>
+            {featuredImage.caption && (
+              <span className="image-caption">{featuredImage.caption}</span>
+            )}
+          </figcaption>
+          <div className="image-meta">
+            <span className={`image-type-badge ${featuredImage.type}`}>
+              {featuredImage.type}
+            </span>
+            <span className="attribution">
+              © {featuredImage.attribution.source}
+            </span>
+          </div>
+        </figure>
+      </div>
+
+      {/* Image Grid */}
+      {otherImages.length > 0 && (
+        <div className="image-grid-section">
+          <h3>Additional Images ({otherImages.length})</h3>
+          <div className="image-grid">
+            {otherImages.map(img => (
+              <figure 
+                key={img.imageId}
+                className="gallery-image"
+                onClick={() => setSelectedImage(img)}
+              >
+                <img src={img.path} alt={img.altText} loading="lazy" />
+                <figcaption>{img.title}</figcaption>
+                <span className={`image-type-badge small ${img.type}`}>
+                  {img.type}
+                </span>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="image-lightbox"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button className="lightbox-close">×</button>
+          <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+            <img src={selectedImage.path} alt={selectedImage.altText} />
+            <div className="lightbox-info">
+              <h4>{selectedImage.title}</h4>
+              <p>{selectedImage.altText}</p>
+              <div className="lightbox-meta">
+                <span className={`image-type-badge ${selectedImage.type}`}>
+                  {selectedImage.type}
+                </span>
+                <span className="attribution">
+                  Source: {selectedImage.attribution.source} | 
+                  License: {selectedImage.attribution.license}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================
 // Main Component
 // ============================================
 
@@ -307,10 +409,19 @@ export function EncyclopediaEntry({
 
   // State
   const [complexityLevel, setComplexityLevel] = useState<ComplexityLevel>(2);
-  const [activeTab, setActiveTab] = useState<'content' | 'anatomy' | 'related' | 'references'>('content');
+  const [activeTab, setActiveTab] = useState<'content' | 'images' | 'anatomy' | 'related' | 'references'>('content');
 
   // Get entry data
   const entry = useMemo(() => getEntry(entryId), [entryId]);
+
+  // Get images for this entry
+  const entryImages = useMemo(() => {
+    if (!entry) return [];
+    // First check if entry has embedded images
+    if (entry.images && entry.images.length > 0) return entry.images;
+    // Otherwise use image resolver
+    return getEntryImages(entry.entryId);
+  }, [entry]);
 
   // Get related entries with full data
   const relatedEntriesData = useMemo(() => {
@@ -500,6 +611,14 @@ export function EncyclopediaEntry({
         >
           📄 Content
         </button>
+        {entryImages.length > 0 && (
+          <button
+            className={`tab-btn ${activeTab === 'images' ? 'active' : ''}`}
+            onClick={() => setActiveTab('images')}
+          >
+            🖼️ Images ({entryImages.length})
+          </button>
+        )}
         {entry.anatomyLinks.length > 0 && (
           <button
             className={`tab-btn ${activeTab === 'anatomy' ? 'active' : ''}`}
@@ -575,6 +694,16 @@ export function EncyclopediaEntry({
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'images' && (
+          <div className="images-tab">
+            <h2>🖼️ Visual Content</h2>
+            <p className="tab-description">
+              Medical diagrams, histology, imaging, and clinical photos related to {entry.name}.
+            </p>
+            <ImageGallery images={entryImages} />
           </div>
         )}
 

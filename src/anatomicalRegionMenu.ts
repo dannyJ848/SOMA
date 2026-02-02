@@ -39,7 +39,7 @@ export type MenuAction =
 
 // Menu item definition
 export interface RegionMenuItem {
-  id: MenuAction;
+  id: string;
   label: string;
   icon: string;
   description: string;
@@ -50,6 +50,7 @@ export interface RegionMenuItem {
   };
   disabled?: boolean;
   requiresAuth?: boolean;
+  contentType?: string;
 }
 
 // Patient data for this region

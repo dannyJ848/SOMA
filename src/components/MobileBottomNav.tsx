@@ -16,7 +16,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from '../i18n/useI18n';
 
 // Re-export the View type for external use
-export type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals';
+export type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
 
 export interface MobileBottomNavProps {
   currentView: View;

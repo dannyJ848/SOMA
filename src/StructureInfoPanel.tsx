@@ -6,14 +6,6 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import {
-  retrieveContentByStructure,
-  searchHistology,
-  searchPathology,
-  retrieveContentDocument,
-  type ComplexityLevel,
-} from './contentRetrieval';
-import { ContentViewer, type ContentDocument } from './ContentViewer';
 
 /**
  * Structure information with multi-level content
@@ -53,7 +45,7 @@ export interface StructureInfo {
 interface StructureInfoPanelProps {
   structureId: string;
   structureName: string;
-  complexityLevel: ComplexityLevel;
+  complexityLevel: 1 | 2 | 3 | 4 | 5;
   onClose?: () => void;
   onSelectStructure?: (id: string) => void;
   onViewInIsolation?: () => void;
@@ -61,7 +53,6 @@ interface StructureInfoPanelProps {
   onViewPathology?: (structureId: string, structureName: string) => void;
   onViewEducation?: () => void;
   onAskAI?: (query: string) => void;
-  onContentSelect?: (content: ContentDocument) => void;
 }
 
 // Complexity level labels
@@ -84,13 +75,11 @@ export function StructureInfoPanel({
   onViewPathology,
   onViewEducation,
   onAskAI,
-  onContentSelect,
 }: StructureInfoPanelProps) {
   const [info, setInfo] = useState<StructureInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['explanation', 'keyFacts']));
-  const [contentLoading, setContentLoading] = useState(false);
 
   // Load structure information
   useEffect(() => {
@@ -144,72 +133,6 @@ export function StructureInfoPanel({
   // Handle AI question
   const handleAskQuestion = (question: string) => {
     onAskAI?.(`Tell me about ${info?.name || structureName}: ${question}`);
-  };
-
-  // Handle view pathology - fetch real content
-  const handleViewPathology = async () => {
-    if (onContentSelect) {
-      setContentLoading(true);
-      try {
-        const content = await searchPathology(structureName, complexityLevel);
-        if (content) {
-          onContentSelect(content);
-        } else {
-          onViewPathology?.(structureId, structureName);
-        }
-      } catch (err) {
-        console.error('[StructureInfoPanel] Error loading pathology:', err);
-        onViewPathology?.(structureId, structureName);
-      } finally {
-        setContentLoading(false);
-      }
-    } else {
-      onViewPathology?.(structureId, structureName);
-    }
-  };
-
-  // Handle view histology - fetch real content
-  const handleViewHistology = async () => {
-    if (onContentSelect) {
-      setContentLoading(true);
-      try {
-        const content = await searchHistology(structureName, complexityLevel);
-        if (content) {
-          onContentSelect(content);
-        } else {
-          onViewHistology?.(structureId);
-        }
-      } catch (err) {
-        console.error('[StructureInfoPanel] Error loading histology:', err);
-        onViewHistology?.(structureId);
-      } finally {
-        setContentLoading(false);
-      }
-    } else {
-      onViewHistology?.(structureId);
-    }
-  };
-
-  // Handle view education - fetch real content
-  const handleViewEducation = async () => {
-    if (onContentSelect) {
-      setContentLoading(true);
-      try {
-        const content = await retrieveContentByStructure(structureId, complexityLevel);
-        if (content) {
-          onContentSelect(content);
-        } else {
-          onViewEducation?.();
-        }
-      } catch (err) {
-        console.error('[StructureInfoPanel] Error loading education content:', err);
-        onViewEducation?.();
-      } finally {
-        setContentLoading(false);
-      }
-    } else {
-      onViewEducation?.();
-    }
   };
 
   if (loading) {
@@ -269,31 +192,21 @@ export function StructureInfoPanel({
           {onViewInIsolation && (
             <button onClick={onViewInIsolation}>View in Isolation</button>
           )}
-          {(info?.histologyId || onViewHistology) && (
-            <button
-              onClick={handleViewHistology}
-              disabled={contentLoading}
-            >
-              {contentLoading ? 'Loading...' : 'View Histology'}
-            </button>
+          {info?.histologyId && onViewHistology && (
+            <button onClick={() => onViewHistology(info.histologyId!)}>View Histology</button>
           )}
           {onViewPathology && (
             <button
-              onClick={handleViewPathology}
+              onClick={() => onViewPathology(structureId, structureName)}
               className="pathology-btn"
               style={{ backgroundColor: '#5c3d2e', color: '#ffccbc' }}
-              disabled={contentLoading}
             >
-              {contentLoading ? 'Loading...' : 'View Pathology'}
+              View Pathology
             </button>
           )}
-          {(onViewEducation || onContentSelect) && (
-            <button
-              onClick={handleViewEducation}
-              className="education-btn"
-              disabled={contentLoading}
-            >
-              {contentLoading ? 'Loading...' : 'Education'}
+          {onViewEducation && (
+            <button onClick={onViewEducation} className="education-btn">
+              Education
             </button>
           )}
         </div>

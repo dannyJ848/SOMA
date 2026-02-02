@@ -26,7 +26,7 @@ import type {
 
 const CONTENT_DIR = resolve(__dirname, '../core/content');
 const MAX_FILE_LINES = 600;
-const VALID_PLACEHOLDER_PATTERNS = [/\bTODO\b/i, /\bFIXME\b/i, /\bplaceholder\b/i, /\bXXX+\b/i];
+const VALID_PLACEHOLDER_PATTERNS = [/\bTODO\b/i, /\bFIXME\b/i, /\bplaceholder\b/i];
 const VALID_ICD11_PATTERN = /^[A-Z]\d{1,2}\.?\d{0,3}$/;
 const VALID_CONTENT_TYPES = ['structure', 'system', 'pathway', 'process', 'condition', 'concept', 'topic'] as const;
 const VALID_CATEGORIES = ['primary-care', 'surgical', 'medical', 'womens-reproductive', 'mental-health', 'diagnostic', 'other'] as const;
@@ -801,7 +801,7 @@ describe('Content Validation', () => {
         console.error('Placeholder text errors:', errors);
       }
 
-      expect(errors.length).toBeLessThan(10);
+      expect(errors.length).toBeLessThan(5);
     });
 
     it('should have non-empty string content', () => {

@@ -26,7 +26,6 @@ import type {
   TimelineAction,
   BodyMapAction,
 } from '../core/intent-prediction/types';
-import { BrainRegionTest } from './BrainRegionTest';
 
 // Lazy load heavy components to prevent blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
@@ -37,7 +36,8 @@ const MedicalEncyclopedia = lazy(() => import('./MedicalEncyclopedia').then(m =>
 const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ default: m.EncyclopediaEntry })));
 const SpecialtyBrowser = lazy(() => import('./components/SpecialtyBrowser').then(m => ({ default: m.SpecialtyBrowser })));
 const ProcedureBrowser = lazy(() => import('./components/ProcedureBrowser').then(m => ({ default: m.ProcedureBrowser })));
-
+const AnatomyMainScreen = lazy(() => import('./AnatomyMainScreen/AnatomyMainScreen').then(m => ({ default: m.AnatomyMainScreen })));
+const RegionalDetailView = lazy(() => import('./AnatomyMainScreen/RegionalDetailView').then(m => ({ default: m.RegionalDetailView })));
 
 // Body-centric components
 const OnboardingFlow = lazy(() => import('./onboarding/OnboardingFlow').then(m => ({ default: m.OnboardingFlow })));
@@ -129,7 +129,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'brain-test';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
 
 // MobileBottomNav is now imported from ./components/MobileBottomNav
 
@@ -221,7 +221,7 @@ function App() {
   // Track previous view for transition direction
   const previousViewRef = useRef<View | null>(null);
   // View order for determining slide direction
-  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'specialty-browser', 'procedure-browser', 'settings'];
+  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'regional-detail', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'specialty-browser', 'procedure-browser', 'settings'];
   // Transition type based on navigation direction
   const [transitionType, setTransitionType] = useState<'fade' | 'slide-left' | 'slide-right'>('fade');
   // Global keyboard shortcuts state
@@ -369,8 +369,8 @@ function App() {
         // H - Toggle UI visibility
         case 'h':
         case 'H':
-          // Only in body-centric view - handled by UnifiedNavigation
-          if (currentView === 'body-centric') {
+          // Only in anatomy views - handled by UnifiedNavigation
+          if (currentView === 'anatomy' || currentView === 'body-centric') {
             // Let UnifiedNavigation handle this
             return;
           }
@@ -524,9 +524,9 @@ function App() {
     switch (result.category) {
       case 'anatomy':
       case 'structure':
-        // Navigate to body-centric view; use structureId if provided, otherwise just open body-centric
-        trackNavigation('view-change', { fromView: currentView, toView: 'body-centric', metadata: { structureId: result.structureId || result.id } });
-        setCurrentView('body-centric');
+        // Navigate to anatomy view; use structureId if provided, otherwise just open anatomy
+        trackNavigation('view-change', { fromView: currentView, toView: 'anatomy', metadata: { structureId: result.structureId || result.id } });
+        setCurrentView('anatomy');
         break;
       case 'condition':
       case 'conditions':
@@ -788,8 +788,7 @@ function App() {
       <div className="container">
         <div className="auth-card auth-card-wide">
           <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-            <button className="header-action-button" onClick={() => handleNavigate('brain-test')}>🧠 Brain Test</button>
-          <LanguageToggle />
+            <LanguageToggle />
           </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -890,8 +889,7 @@ function App() {
       <div className="container">
         <div className="auth-card">
           <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-            <button className="header-action-button" onClick={() => handleNavigate('brain-test')}>🧠 Brain Test</button>
-          <LanguageToggle />
+            <LanguageToggle />
           </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -1044,7 +1042,6 @@ function App() {
             {t('action.back')}
           </button>
           <h1>{tNav('nav.timeline')}</h1>
-          <button className="header-action-button" onClick={() => handleNavigate('brain-test')}>🧠 Brain Test</button>
           <LanguageToggle />
         </header>
 
@@ -1198,6 +1195,58 @@ function App() {
     );
   }
 
+  // 3D Anatomy View - lazy loaded with Suspense, uses UnifiedNavigation for 3D canvas controls
+  if (currentView === 'anatomy') {
+    return (
+      <UnifiedNavigation
+        toolbarPosition="left"
+        showBreadcrumbs={true}
+        showCameraIndicator={true}
+        onCameraPresetChange={(preset) => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { cameraPreset: preset } });
+        }}
+        onResetView={() => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
+        }}
+      >
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading 3D Anatomy Viewer...</div>
+          </div>
+        }>
+          <AnatomyMainScreen
+            onNavigateToDetail={(regionId: string) => {
+              setSelectedRegionId(regionId);
+              trackNavigation('view-change', { fromView: currentView, toView: 'regional-detail' });
+              navigateWithHistory('regional-detail');
+            }}
+            onNavigateToChat={(regionId: string, regionName: string, chatContext?: import('./ai/types').AnatomyChatContext) => {
+              setChatContext(`I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`);
+              setAnatomyChatContext(chatContext ?? null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
+            }}
+          />
+        </Suspense>
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </UnifiedNavigation>
+    );
+  }
+
   // Phase 4: Symptom Explorer
   if (currentView === 'symptom-explorer') {
     return (
@@ -1210,7 +1259,7 @@ function App() {
           <SymptomExplorer
             onBack={() => setCurrentView('body-centric')}
             dashboardData={dashboard}
-            onNavigateToAnatomy={() => setCurrentView('body-centric')}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
           />
         </Suspense>
 
@@ -1253,7 +1302,7 @@ function App() {
               }
             }}
             dashboardData={dashboard}
-            onNavigateToAnatomy={() => setCurrentView('body-centric')}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
             initialMedicationId={initialMedicationId}
           />
         </Suspense>
@@ -1294,7 +1343,7 @@ function App() {
               setCurrentView('body-centric');
             }}
             dashboardData={dashboard}
-            onNavigateToAnatomy={() => setCurrentView('body-centric')}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
             onNavigateToMedication={(medId: string) => {
               setInitialMedicationId(medId);
               navigateWithHistory('medication-explorer');
@@ -1336,7 +1385,7 @@ function App() {
           <MedicalEncyclopedia
             onBack={() => setCurrentView('body-centric')}
             dashboardData={dashboard}
-            onNavigateToAnatomy={() => setCurrentView('body-centric')}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
             onOpenEntry={(entryId) => {
               setSelectedEncyclopediaEntryId(entryId);
               setCurrentView('encyclopedia-entry');
@@ -1366,9 +1415,7 @@ function App() {
   }
 
   // Phase 4: Encyclopedia Entry
-  // Check sessionStorage as fallback if state is not set
-  const encyclopediaEntryId = selectedEncyclopediaEntryId || sessionStorage.getItem('soma_encyclopedia_entry_id');
-  if (currentView === 'encyclopedia-entry' && encyclopediaEntryId) {
+  if (currentView === 'encyclopedia-entry' && selectedEncyclopediaEntryId) {
     return (
       <>
         <Suspense fallback={
@@ -1377,7 +1424,7 @@ function App() {
           </div>
         }>
           <EncyclopediaEntry
-            entryId={encyclopediaEntryId}
+            entryId={selectedEncyclopediaEntryId}
             onBack={() => {
               setSelectedEncyclopediaEntryId(null);
               setCurrentView('encyclopedia');
@@ -1386,7 +1433,7 @@ function App() {
               setSelectedEncyclopediaEntryId(entryId);
               // Stay on encyclopedia-entry view
             }}
-            onNavigateToAnatomy={() => setCurrentView('body-centric')}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
             onAskAI={(topicContext) => {
               setChatContext(topicContext);
               setAnatomyChatContext(null);
@@ -1527,6 +1574,48 @@ function App() {
     );
   }
 
+  // Regional Detail View - tabbed detail view for a selected anatomical region
+  if (currentView === 'regional-detail' && selectedRegionId) {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Regional Detail...</div>
+          </div>
+        }>
+          <RegionalDetailView
+            regionId={selectedRegionId}
+            patientData={undefined}
+            onClose={() => {
+              setSelectedRegionId(null);
+              if (!navigateBack()) {
+                setCurrentView('anatomy');
+              }
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
   // Settings View
   if (currentView === 'settings') {
     return (
@@ -1594,10 +1683,6 @@ function App() {
               setAnatomyChatContext(structuredContext ?? null);
               trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
               setCurrentView('chat');
-            }}
-            onContentSelect={(content: ContentDocument) => {
-              setContentDoc(content);
-              setShowContentViewer(true);
             }}
           />
         </Suspense>
@@ -1703,23 +1788,6 @@ function App() {
     );
   }
 
-
-  // Brain Region Test View
-  if (currentView === 'brain-test') {
-    return (
-      <div className="container">
-        <header className="app-header">
-          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
-            ← Back to Dashboard
-          </button>
-          <div className="header-title">
-            <h1>Brain Region Test</h1>
-          </div>
-        </header>
-        <BrainRegionTest />
-      </div>
-    );
-  }
   return (
     <div className="container dashboard" role="main" aria-label={tDash('dashboard.title')}>
       {/* Skip link for keyboard users */}
@@ -1728,7 +1796,7 @@ function App() {
       <header className="app-header" role="banner">
         <div className="header-spacer" />
         <div className="header-title">
-          <h1>{t('app.name')} <span style={{fontSize: '0.5em', background: '#ff6b6b', color: 'white', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'middle'}}>KIMI BUILD</span></h1>
+          <h1>{t('app.name')}</h1>
           <p className="subtitle">{t('app.tagline')}</p>
         </div>
         <nav className="header-actions" aria-label="Quick actions">
@@ -1738,7 +1806,7 @@ function App() {
             </svg>
             {tNav('nav.chat')}
           </button>
-          <button className="header-action-button" onClick={() => handleNavigate('body-centric')}>
+          <button className="header-action-button" onClick={() => handleNavigate('anatomy')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
               <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
@@ -1762,7 +1830,6 @@ function App() {
             </svg>
             {tNav('nav.timeline')}
           </button>
-          <button className="header-action-button" onClick={() => handleNavigate('brain-test')}>🧠 Brain Test</button>
           <LanguageToggle />
         </nav>
       </header>

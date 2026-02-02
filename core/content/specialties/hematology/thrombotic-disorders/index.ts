@@ -6,4 +6,8 @@
  * - Thrombophilia
  */
 
+<<<<<<< HEAD
+=======
+export { deepVeinThrombosis } from './deep-vein-thrombosis';
+>>>>>>> origin/ralph/advanced-medical-intelligence
 export { thrombophilia } from './thrombophilia';

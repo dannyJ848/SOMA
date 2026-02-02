@@ -753,7 +753,11 @@ These cells surround and swallow germs whole, like Pac-Man!
         { term: 'myeloid-derived suppressor cell', definition: 'Immature myeloid cells that suppress T cell responses', pronunciation: 'MY-eh-loyd deh-RYV-ed suh-PRES-or sel' },
         { term: 'calprotectin', definition: 'S100A8/A9 heterodimer; antimicrobial and inflammatory protein', pronunciation: 'kal-pro-TEK-tin' },
         { term: 'HLA-DM', definition: 'MHC-like molecule that facilitates peptide loading on MHC II', pronunciation: 'H-L-A-D-M' },
+<<<<<<< HEAD
         { term: 'CLIP', definition: 'Class II-associated invariant chain peptide; temporary peptide on MHC II', pronunciation: 'klip' },
+=======
+        { term: 'CLIP', definition: 'Class II-associated invariant chain peptide; placeholder on MHC II', pronunciation: 'klip' },
+>>>>>>> origin/ralph/advanced-medical-intelligence
         { term: 'NKG2C', definition: 'Activating NK receptor recognizing HLA-E; expands in CMV infection', pronunciation: 'N-K-G-two-C' },
         { term: 'carboxypeptidase A3', definition: 'Mast cell-specific protease; marker for MCTC subset', pronunciation: 'kar-bok-see-PEP-tih-days A-three' },
         { term: 'FIP1L1-PDGFRA', definition: 'Fusion oncogene causing hypereosinophilic syndrome', pronunciation: 'F-I-P-one-L-one P-D-G-F-R-A' },

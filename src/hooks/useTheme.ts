@@ -98,9 +98,16 @@ export function useTheme() {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-  }, [theme]);
+    setThemeState((prev: Theme) => {
+      const newTheme: 'dark' | 'light' = prev === 'dark' ? 'light' : 'dark';
+      try {
+        localStorage.setItem(STORAGE_KEY, newTheme);
+      } catch (e) {
+        console.error('Failed to save theme:', e);
+      }
+      return newTheme;
+    });
+  }, []);
 
   return {
     theme,

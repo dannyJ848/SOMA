@@ -6,4 +6,8 @@
  * - Thrombotic thrombocytopenic purpura (TTP)
  */
 
+<<<<<<< HEAD
+=======
+export { immuneThrombocytopenia } from './immune-thrombocytopenia';
+>>>>>>> origin/ralph/advanced-medical-intelligence
 export { thromboticThrombocytopenicPurpura } from './thrombotic-thrombocytopenic-purpura';

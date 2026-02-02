@@ -1518,9 +1518,6 @@ export const REGION_CONTENT_MAP: Record<string, RegionContent> = {
       commonConditions: [
         { name: 'Ischemic Stroke', mechanism: 'Arterial occlusion causing regional brain infarction', symptoms: ['Sudden focal neurological deficit', 'Hemiparesis', 'Aphasia'], severity: 'life-threatening' },
         { name: 'Alzheimer Disease', mechanism: 'Amyloid-beta plaques and neurofibrillary tau tangles', symptoms: ['Progressive memory loss', 'Cognitive decline', 'Behavioral changes'], severity: 'severe' },
-        { name: 'Parkinson Disease', mechanism: 'Degeneration of dopaminergic neurons in substantia nigra with Lewy body formation', symptoms: ['Resting tremor', 'Bradykinesia', 'Rigidity', 'Postural instability'], severity: 'severe' },
-        { name: 'Multiple Sclerosis', mechanism: 'Autoimmune demyelination of CNS white matter', symptoms: ['Visual loss', 'Weakness', 'Sensory deficits', 'Ataxia'], severity: 'severe' },
-        { name: 'Neurodegeneration', mechanism: 'Progressive neuronal loss through protein aggregation, oxidative stress, and mitochondrial dysfunction', symptoms: ['Cognitive impairment', 'Motor dysfunction', 'Behavioral changes'], severity: 'severe' },
         { name: 'Glioblastoma', mechanism: 'High-grade astrocytic neoplasm', symptoms: ['Headache', 'Seizures', 'Focal deficits'], severity: 'life-threatening' },
         { name: 'Meningitis', mechanism: 'Infection of meninges surrounding the brain', symptoms: ['Headache', 'Fever', 'Neck stiffness', 'Photophobia'], severity: 'severe' },
       ],

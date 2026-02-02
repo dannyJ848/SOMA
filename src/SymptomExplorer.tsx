@@ -490,7 +490,7 @@ export function SymptomExplorer({
         entityName: selectedSymptomEntry.name,
       });
     }
-   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [complexityLevel]);
 
   // User's relevant symptoms from dashboard

@@ -41,7 +41,8 @@ export const ModelAutoLoader: React.FC<ModelAutoLoaderProps> = ({
     // Simulate load check
     const checkInterval = setInterval(() => {
       // Check if Three.js context is ready
-      if ((window as unknown as { THREE?: unknown }).THREE || (window as unknown as { __THREE__?: unknown }).__THREE__) {
+      const win = window as any;
+      if (win.THREE || win.__THREE__) {
         clearInterval(checkInterval);
         setIsLoading(false);
         onLoad();

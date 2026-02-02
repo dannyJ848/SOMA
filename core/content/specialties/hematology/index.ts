@@ -31,6 +31,8 @@ export { aplasticAnemia } from './anemias/aplastic-anemia';
 export { microcyticAnemia } from './anemias/microcytic-anemia';
 export { normocyticAnemia } from './anemias/normocytic-anemia';
 export { macrocyticAnemia } from './anemias/macrocytic-anemia';
+export { sickleCellDisease } from './anemias/sickle-cell-disease';
+export { thalassemia } from './anemias/thalassemia';
 
 // Leukemias
 export { acuteLymphoblasticLeukemia } from './leukemias/acute-lymphoblastic-leukemia';
@@ -61,6 +63,10 @@ export { thromboticThrombocytopenicPurpura } from './platelet-disorders/thrombot
 
 // Coagulation disorders
 export { disseminatedIntravascularCoagulation } from './coagulation/disseminated-intravascular-coagulation';
+<<<<<<< HEAD
+=======
+export { pulmonaryEmbolism as hematologyPulmonaryEmbolism } from './coagulation/pulmonary-embolism';
+>>>>>>> origin/ralph/advanced-medical-intelligence
 
 // Transfusion medicine
 export { bloodTransfusionMedicine } from './transfusion/blood-transfusion-medicine';

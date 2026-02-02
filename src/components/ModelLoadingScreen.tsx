@@ -117,12 +117,18 @@ export function ModelLoadingScreen({
   const [systemIndex, setSystemIndex] = useState(0);
   // Controls the fade-out opacity
   const [opacity, setOpacity] = useState(1);
+  // Whether the component has reported to debug overlay
+  const reportedRef = useRef(false);
+
   // --------------------------------------------------
-  // Debug logging on mount - disabled to prevent infinite loop
+  // Debug logging on mount
   // --------------------------------------------------
-  // useEffect(() => {
-  //   addDebugLogEntry('info', 'ModelLoadingScreen mounted');
-  // }, []);
+  useEffect(() => {
+    if (!reportedRef.current) {
+      reportedRef.current = true;
+      addDebugLogEntry('info', 'ModelLoadingScreen mounted');
+    }
+  }, []);
 
   // --------------------------------------------------
   // Simulated loading progress
@@ -159,7 +165,7 @@ export function ModelLoadingScreen({
     if (isComplete || autoCompleted || progress < 95) return;
 
     const timeout = setTimeout(() => {
-      // addDebugLogEntry('warn', 'ModelLoadingScreen: auto-completing after timeout');
+      addDebugLogEntry('warn', 'ModelLoadingScreen: auto-completing after timeout');
       setAutoCompleted(true);
     }, 8000);
 
@@ -175,7 +181,7 @@ export function ModelLoadingScreen({
     if (!shouldComplete) return;
 
     setProgress(100);
-    // addDebugLogEntry('success', 'ModelLoadingScreen: loading complete, fading out');
+    addDebugLogEntry('success', 'ModelLoadingScreen: loading complete, fading out');
 
     // Small delay so the user sees 100% before fade
     const timer = setTimeout(() => {

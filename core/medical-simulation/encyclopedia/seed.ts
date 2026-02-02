@@ -20,6 +20,7 @@ import type {
   EntryType,
 } from './types';
 import { REGION_CONTENT_MAP } from '../../../src/education/regionContentMapping';
+<<<<<<< HEAD
 import { nervousSystemPhysiologyEntries } from './entries/nervous-system-physiology';
 import { nervousSystemAnatomyEntries } from './entries/nervous-system-anatomy';
 import { brainAnatomyEntries } from './entries/brain-anatomy';
@@ -42,6 +43,8 @@ import { diabetesEntries } from './entries/diabetes-comprehensive';
 import { hypertensionEntries } from './entries/hypertension-comprehensive';
 import { strokeEntries } from './entries/stroke-comprehensive';
 import { cancerOncologyEntries } from './entries/cancer-oncology-comprehensive';
+=======
+>>>>>>> origin/ralph/advanced-medical-intelligence
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -554,6 +557,7 @@ export function seedEncyclopedia(): void {
   if (_seeded) return;
   _seeded = true;
 
+<<<<<<< HEAD
   const entries = buildEntries();
   
   // Add comprehensive nervous system entries
@@ -576,4 +580,14 @@ export function seedEncyclopedia(): void {
   entries.push(...integumentarySystemEntries);
   
   addEntries(entries);
+=======
+  try {
+    const entries = buildEntries();
+    console.log(`[Encyclopedia] Building ${entries.length} entries from region content map...`);
+    addEntries(entries);
+    console.log(`[Encyclopedia] Successfully seeded ${entries.length} entries`);
+  } catch (error) {
+    console.error('[Encyclopedia] Error seeding encyclopedia:', error);
+  }
+>>>>>>> origin/ralph/advanced-medical-intelligence
 }

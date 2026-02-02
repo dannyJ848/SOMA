@@ -1,99 +1,102 @@
 /**
  * Content Retrieval Utilities
- *
+ * 
  * Helper functions for retrieving educational content and converting it
  * to display formats. Follows the SOMA Button-to-Content Integration Protocol.
- *
+ * 
  * This module provides the "wiring" between UI buttons and the educational
- * content stored in the core/medical-simulation/encyclopedia/ directory.
+ * content stored in the core/content/ directory.
  */
 
-import {
-  getEntry,
-  getAllEntries,
-  searchEntries,
-  getEntriesByType,
-  getEntriesForAnatomyStructure,
-  mapComplexityLevel,
-} from '../core/medical-simulation/encyclopedia/store';
-import { seedEncyclopedia } from '../core/medical-simulation/encyclopedia/seed';
-import type {
-  EncyclopediaEntry,
-  EncyclopediaSearchResult,
-} from '../core/medical-simulation/encyclopedia/types';
+import { searchContent, getContentForLevel } from '../core/content/store';
+import type { 
+  EducationalContent, 
+  PartialEducationalContent, 
+  ComplexityLevel,
+  LevelContent 
+} from '../core/content/types';
 import type { ContentDocument } from './ContentViewer';
 
-// Ensure encyclopedia is seeded
-let seeded = false;
-function ensureSeeded() {
-  if (!seeded) {
-    seedEncyclopedia();
-    seeded = true;
-  }
-}
-
-// Complexity level type
-export type ComplexityLevel = 1 | 2 | 3 | 4 | 5;
+// In-memory content cache
+let contentCache: (EducationalContent | PartialEducationalContent)[] | null = null;
+let contentCachePromise: Promise<(EducationalContent | PartialEducationalContent)[]> | null = null;
 
 /**
- * Convert encyclopedia entry to ContentDocument format
+ * Dynamically load all educational content from the content directory
+ * This is done lazily to avoid loading all content at startup
  */
-function encyclopediaEntryToDocument(
-  entry: EncyclopediaEntry,
-  level: ComplexityLevel = 3
-): ContentDocument {
-  const complexityKey = mapComplexityLevel(level);
+async function loadAllContent(): Promise<(EducationalContent | PartialEducationalContent)[]> {
+  if (contentCache) return contentCache;
+  if (contentCachePromise) return contentCachePromise;
 
-  // Build content markdown
-  let content = '';
+  contentCachePromise = (async () => {
+    const allContent: (EducationalContent | PartialEducationalContent)[] = [];
 
-  // Add overview at requested complexity level
-  if (entry.overview[complexityKey]) {
-    content += `## Overview\n${entry.overview[complexityKey]}\n\n`;
-  }
-
-  // Add content sections
-  if (entry.content && entry.content.length > 0) {
-    for (const section of entry.content) {
-      const sectionContent = section.content[complexityKey];
-      if (sectionContent) {
-        content += `## ${section.title}\n${sectionContent}\n\n`;
+    // Load content from various modules
+    // Note: In production, this would be replaced with a proper content index
+    try {
+      // Load cardiology content
+      const cardioModule = await import('../core/content/cardiology/index');
+      if (cardioModule.cardiologyContent && Array.isArray(cardioModule.cardiologyContent)) {
+        allContent.push(...cardioModule.cardiologyContent);
       }
+    } catch (e) {
+      console.log('[Content Retrieval] Cardiology content not available');
     }
-  }
 
-  // Add related entries if available
-  if (entry.relatedEntries && entry.relatedEntries.length > 0) {
-    content += `## Related Topics\n`;
-    for (const related of entry.relatedEntries.slice(0, 5)) {
-      content += `- **${related.name}**: ${related.description || ''}\n`;
+    try {
+      // Load respiratory content
+      const respModule = await import('../core/content/respiratory/index');
+      if (respModule.respiratoryContent && Array.isArray(respModule.respiratoryContent)) {
+        allContent.push(...respModule.respiratoryContent);
+      }
+    } catch (e) {
+      console.log('[Content Retrieval] Respiratory content not available');
     }
-    content += `\n`;
-  }
 
-  // Add anatomy links if available
-  if (entry.anatomyLinks && entry.anatomyLinks.length > 0) {
-    content += `## Anatomy Links\n`;
-    for (const link of entry.anatomyLinks.slice(0, 5)) {
-      content += `- **${link.structureName}**: ${link.relevance || ''}\n`;
+    try {
+      // Load anatomy content
+      const anatomyModule = await import('../core/content/anatomy/index');
+      if (anatomyModule.allAnatomyContent && Array.isArray(anatomyModule.allAnatomyContent)) {
+        allContent.push(...anatomyModule.allAnatomyContent);
+      }
+    } catch (e) {
+      console.log('[Content Retrieval] Anatomy content not available');
     }
-    content += `\n`;
-  }
 
-  // Build source from references
-  const primaryRef = entry.references?.[0];
-  const source = primaryRef
-    ? `${primaryRef.authors || primaryRef.source} (${primaryRef.year})`
-    : 'SOMA Medical Encyclopedia';
+    try {
+      // Load digestive content
+      const digestiveModule = await import('../core/content/digestive/index');
+      if (digestiveModule.digestiveContent && Array.isArray(digestiveModule.digestiveContent)) {
+        allContent.push(...digestiveModule.digestiveContent);
+      }
+    } catch (e) {
+      console.log('[Content Retrieval] Digestive content not available');
+    }
 
-  return {
-    id: entry.entryId,
-    title: entry.name,
-    source,
-    content: content.trim() || entry.summary,
-    url: primaryRef?.url,
-    license: undefined,
-  };
+    try {
+      // Load musculoskeletal content
+      const musculoskeletalModule = await import('../core/content/musculoskeletal/index');
+      if (musculoskeletalModule.musculoskeletalContent && Array.isArray(musculoskeletalModule.musculoskeletalContent)) {
+        allContent.push(...musculoskeletalModule.musculoskeletalContent);
+      }
+    } catch (e) {
+      console.log('[Content Retrieval] Musculoskeletal content not available');
+    }
+
+    contentCache = allContent;
+    return allContent;
+  })();
+
+  return contentCachePromise;
+}
+
+/**
+ * Clear the content cache (useful for testing or after content updates)
+ */
+export function clearContentCache(): void {
+  contentCache = null;
+  contentCachePromise = null;
 }
 
 /**
@@ -102,89 +105,70 @@ function encyclopediaEntryToDocument(
  * @param options - Search options (type, level, fallback)
  * @returns ContentDocument or null if not found
  * @example
- * const doc = await retrieveContentDocument('Heart', { type: 'anatomy', level: 3 });
+ * const doc = await retrieveContentDocument('Heart', { type: 'structure', level: 3 });
  */
 export async function retrieveContentDocument(
   name: string,
   options: {
-    type?: 'anatomy' | 'condition' | 'physiology' | 'symptom' | 'medication' | 'procedure' | 'lab-test' | 'imaging' | 'terminology';
+    type?: EducationalContent['type'] | EducationalContent['type'][];
     level?: ComplexityLevel;
     fallback?: boolean;
   } = {}
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   const { type, level = 3, fallback = true } = options;
 
   console.log(`[Content Retrieval] Searching for: ${name}`);
 
-  // Search encyclopedia entries
-  const searchResults = searchEntries(name, {
-    entryType: type,
-    limit: 5,
+  const allContent = await loadAllContent();
+
+  const results = searchContent(allContent, {
+    text: name,
+    type,
+    status: 'published',
+    limit: 1,
   });
 
-  console.log(`[Content Retrieval] Found ${searchResults.length} results for: ${name}`);
+  console.log(`[Content Retrieval] Found ${results.length} results for: ${name}`);
 
-  if (searchResults.length === 0) {
-    // Try fallback search with broader terms
-    if (fallback) {
-      const fallbackResults = searchEntries(name.split(' ')[0], { limit: 3 });
-      if (fallbackResults.length > 0) {
-        console.log(`[Content Retrieval] Using fallback match: ${fallbackResults[0].name}`);
-        return encyclopediaEntryToDocument(getEntry(fallbackResults[0].entryId)!, level);
-      }
-    }
-    return null;
-  }
+  if (results.length === 0) return null;
 
-  // Get the best match
-  const bestMatch = searchResults[0];
-  const entry = getEntry(bestMatch.entryId);
+  const content = results[0].content;
+  const levelContent = getContentForLevel(content, level, fallback);
 
-  if (!entry) return null;
+  if (!levelContent) return null;
 
-  return encyclopediaEntryToDocument(entry, level);
+  return educationalContentToDocument(content, levelContent);
 }
 
 /**
- * Retrieve content by structure/region ID
- * @param structureId - Structure ID (e.g., 'head', 'chest', 'heart')
+ * Retrieve content by FMA structure ID
+ * @param fmaId - FMA ID (e.g., 'FMA:7088')
  * @param level - Complexity level (1-5)
  * @returns ContentDocument or null
  */
 export async function retrieveContentByStructure(
-  structureId: string,
+  fmaId: string,
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
+  console.log(`[Content Retrieval] Searching by FMA ID: ${fmaId}`);
 
-  console.log(`[Content Retrieval] Searching by structure ID: ${structureId}`);
+  const allContent = await loadAllContent();
 
-  // Try to find region entry directly
-  const regionEntryId = `region-${structureId.toLowerCase()}`;
-  let entry = getEntry(regionEntryId);
+  const results = searchContent(allContent, {
+    text: fmaId,
+    level,
+    status: 'published',
+    limit: 1,
+  });
 
-  if (entry) {
-    return encyclopediaEntryToDocument(entry, level);
-  }
+  if (results.length === 0) return null;
 
-  // Search for entries related to this structure
-  const entries = getEntriesForAnatomyStructure(structureId.toLowerCase());
-  if (entries.length > 0) {
-    return encyclopediaEntryToDocument(entries[0], level);
-  }
+  const content = results[0].content;
+  const levelContent = getContentForLevel(content, level, true);
 
-  // Fallback: search by name
-  const searchResults = searchEntries(structureId, { limit: 3 });
-  if (searchResults.length > 0) {
-    entry = getEntry(searchResults[0].entryId);
-    if (entry) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
-  }
+  if (!levelContent) return null;
 
-  return null;
+  return educationalContentToDocument(content, levelContent);
 }
 
 /**
@@ -197,78 +181,12 @@ export async function searchConditions(
   conditionName: string,
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   console.log(`[Content Retrieval] Searching for condition: ${conditionName}`);
-
-  // Search for condition entries
-  const searchResults = searchEntries(conditionName, {
-    entryType: 'condition',
-    limit: 5,
+  return retrieveContentDocument(conditionName, {
+    type: 'condition',
+    level,
+    fallback: true,
   });
-
-  if (searchResults.length === 0) {
-    // Try broader search
-    const broadResults = searchEntries(conditionName, { limit: 3 });
-    if (broadResults.length === 0) return null;
-
-    const entry = getEntry(broadResults[0].entryId);
-    if (!entry) return null;
-
-    return encyclopediaEntryToDocument(entry, level);
-  }
-
-  const entry = getEntry(searchResults[0].entryId);
-  if (!entry) return null;
-
-  return encyclopediaEntryToDocument(entry, level);
-}
-
-/**
- * Search for histology content
- * @param tissueName - Name of the tissue
- * @param level - Complexity level
- * @returns ContentDocument or null
- */
-export async function searchHistology(
-  tissueName: string,
-  level: ComplexityLevel = 3
-): Promise<ContentDocument | null> {
-  ensureSeeded();
-
-  console.log(`[Content Retrieval] Searching for histology: ${tissueName}`);
-
-  // Try tissue entry directly
-  const tissueId = `tissue-${tissueName.toLowerCase().replace(/\s+/g, '-')}`;
-  let entry = getEntry(tissueId);
-
-  if (entry) {
-    return encyclopediaEntryToDocument(entry, level);
-  }
-
-  // Search for anatomy entries with histology content
-  const searchResults = searchEntries(tissueName, {
-    entryType: 'anatomy',
-    limit: 5,
-  });
-
-  // Look for entries with histology in content sections
-  for (const result of searchResults) {
-    entry = getEntry(result.entryId);
-    if (entry?.content?.some(c => c.title.toLowerCase().includes('histology'))) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
-  }
-
-  // Return first anatomy match if no specific histology found
-  if (searchResults.length > 0) {
-    entry = getEntry(searchResults[0].entryId);
-    if (entry) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
-  }
-
-  return null;
 }
 
 /**
@@ -281,19 +199,46 @@ export async function searchLabTests(
   labTestName: string,
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   console.log(`[Content Retrieval] Searching for lab test: ${labTestName}`);
 
-  // Search encyclopedia for lab-related content
-  const searchResults = searchEntries(labTestName, { limit: 5 });
+  const allContent = await loadAllContent();
 
-  if (searchResults.length === 0) return null;
+  const results = searchContent(allContent, {
+    text: labTestName,
+    type: 'concept',
+    status: 'published',
+    limit: 1,
+  });
 
-  const entry = getEntry(searchResults[0].entryId);
-  if (!entry) return null;
+  if (results.length === 0) return null;
 
-  return encyclopediaEntryToDocument(entry, level);
+  const content = results[0].content;
+  
+  // Check if it has lab-test tag
+  const hasLabTag = content.tags?.keywords?.includes('lab-test');
+  
+  if (!hasLabTag) {
+    // Try to find content that mentions this lab test
+    const labResults = searchContent(allContent, {
+      text: labTestName,
+      tags: ['lab-test'],
+      status: 'published',
+      limit: 1,
+    });
+    
+    if (labResults.length > 0) {
+      const labContent = labResults[0].content;
+      const levelContent = getContentForLevel(labContent, level, true);
+      if (levelContent) {
+        return educationalContentToDocument(labContent, levelContent);
+      }
+    }
+  }
+
+  const levelContent = getContentForLevel(content, level, true);
+  if (!levelContent) return null;
+
+  return educationalContentToDocument(content, levelContent);
 }
 
 /**
@@ -306,19 +251,43 @@ export async function searchMedications(
   medicationName: string,
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   console.log(`[Content Retrieval] Searching for medication: ${medicationName}`);
 
-  // Search encyclopedia for medication-related content
-  const searchResults = searchEntries(medicationName, { limit: 5 });
+  const allContent = await loadAllContent();
 
-  if (searchResults.length === 0) return null;
+  // First try exact match on medication name
+  const results = searchContent(allContent, {
+    text: medicationName,
+    type: 'concept',
+    status: 'published',
+    limit: 1,
+  });
 
-  const entry = getEntry(searchResults[0].entryId);
-  if (!entry) return null;
+  if (results.length > 0) {
+    const content = results[0].content;
+    const levelContent = getContentForLevel(content, level, true);
+    if (levelContent) {
+      return educationalContentToDocument(content, levelContent);
+    }
+  }
 
-  return encyclopediaEntryToDocument(entry, level);
+  // Try searching with medication tag
+  const medResults = searchContent(allContent, {
+    text: medicationName,
+    tags: ['medication', 'pharmacology'],
+    status: 'published',
+    limit: 1,
+  });
+
+  if (medResults.length > 0) {
+    const content = medResults[0].content;
+    const levelContent = getContentForLevel(content, level, true);
+    if (levelContent) {
+      return educationalContentToDocument(content, levelContent);
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -331,96 +300,109 @@ export async function searchPathology(
   structureName: string,
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   console.log(`[Content Retrieval] Searching for pathology: ${structureName}`);
 
-  // First try condition entries
-  const conditionResults = searchEntries(structureName, {
-    entryType: 'condition',
-    limit: 5,
+  const allContent = await loadAllContent();
+
+  // Search for pathology-related content
+  const results = searchContent(allContent, {
+    text: `${structureName} pathology`,
+    type: ['condition', 'concept'],
+    tags: ['pathology'],
+    status: 'published',
+    limit: 1,
   });
 
-  if (conditionResults.length > 0) {
-    const entry = getEntry(conditionResults[0].entryId);
-    if (entry) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
+  if (results.length === 0) {
+    // Try broader search
+    const broadResults = searchContent(allContent, {
+      text: structureName,
+      type: 'condition',
+      status: 'published',
+      limit: 1,
+    });
+    
+    if (broadResults.length === 0) return null;
+    
+    const content = broadResults[0].content;
+    const levelContent = getContentForLevel(content, level, true);
+    if (!levelContent) return null;
+    
+    return educationalContentToDocument(content, levelContent);
   }
 
-  // Try region entries and look for pathology section
-  const regionResults = searchEntries(structureName, {
-    entryType: 'anatomy',
-    limit: 5,
-  });
+  const content = results[0].content;
+  const levelContent = getContentForLevel(content, level, true);
 
-  for (const result of regionResults) {
-    const entry = getEntry(result.entryId);
-    if (entry?.content?.some(c => c.title.toLowerCase().includes('pathology'))) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
-  }
+  if (!levelContent) return null;
 
-  // Fallback to any match
-  if (regionResults.length > 0) {
-    const entry = getEntry(regionResults[0].entryId);
-    if (entry) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
-  }
-
-  return null;
+  return educationalContentToDocument(content, levelContent);
 }
 
 /**
- * Search for physiology content
- * @param processName - Name of the physiological process
- * @param level - Complexity level
- * @returns ContentDocument or null
+ * Convert EducationalContent to ContentDocument format
  */
-export async function searchPhysiology(
-  processName: string,
-  level: ComplexityLevel = 3
-): Promise<ContentDocument | null> {
-  ensureSeeded();
+function educationalContentToDocument(
+  content: EducationalContent | PartialEducationalContent,
+  levelContent: LevelContent
+): ContentDocument {
+  return {
+    id: content.id,
+    title: content.name,
+    source: content.citations?.[0]?.source || 'Medical Encyclopedia',
+    content: formatLevelContent(levelContent),
+    url: content.citations?.[0]?.url,
+    license: content.citations?.[0]?.license,
+  };
+}
 
-  console.log(`[Content Retrieval] Searching for physiology: ${processName}`);
+/**
+ * Format LevelContent as markdown string
+ */
+function formatLevelContent(levelContent: LevelContent): string {
+  let formatted = '';
 
-  // Try process entries directly
-  const processId = `process-${processName.toLowerCase().replace(/\s+/g, '-')}`;
-  let entry = getEntry(processId);
-
-  if (entry) {
-    return encyclopediaEntryToDocument(entry, level);
+  if (levelContent.summary) {
+    formatted += `## Summary\n${levelContent.summary}\n\n`;
   }
 
-  // Search for physiology entries
-  const searchResults = searchEntries(processName, {
-    entryType: 'physiology',
-    limit: 5,
-  });
-
-  if (searchResults.length > 0) {
-    entry = getEntry(searchResults[0].entryId);
-    if (entry) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
+  if (levelContent.explanation) {
+    formatted += `## Explanation\n${levelContent.explanation}\n\n`;
   }
 
-  // Try region entries and look for physiology section
-  const regionResults = searchEntries(processName, {
-    entryType: 'anatomy',
-    limit: 5,
-  });
-
-  for (const result of regionResults) {
-    entry = getEntry(result.entryId);
-    if (entry?.content?.some(c => c.title.toLowerCase().includes('physiology'))) {
-      return encyclopediaEntryToDocument(entry, level);
-    }
+  if (levelContent.keyTerms?.length) {
+    formatted += `## Key Terms\n`;
+    levelContent.keyTerms.forEach(term => {
+      formatted += `- **${term.term}**`;
+      if (term.pronunciation) {
+        formatted += ` (${term.pronunciation})`;
+      }
+      formatted += `: ${term.definition}\n`;
+    });
+    formatted += `\n`;
   }
 
-  return null;
+  if (levelContent.analogies?.length) {
+    formatted += `## Analogies\n`;
+    levelContent.analogies.forEach(analogy => {
+      formatted += `- ${analogy}\n`;
+    });
+    formatted += `\n`;
+  }
+
+  if (levelContent.examples?.length) {
+    formatted += `## Examples\n`;
+    levelContent.examples.forEach(example => {
+      formatted += `- ${example}\n`;
+    });
+    formatted += `\n`;
+  }
+
+  if (levelContent.clinicalNotes) {
+    formatted += `## Clinical Notes\n${levelContent.clinicalNotes}\n`;
+  }
+
+  return formatted.trim();
 }
 
 /**
@@ -444,10 +426,8 @@ export async function retrieveVitalContent(
   vitalType: 'heart-rate' | 'hrv' | 'recovery' | 'sleep' | 'steps',
   level: ComplexityLevel = 3
 ): Promise<ContentDocument | null> {
-  ensureSeeded();
-
   const searchTerm = VITAL_SEARCH_TERMS[vitalType];
-
+  
   if (!searchTerm) {
     console.warn(`[Content Retrieval] Unknown vital type: ${vitalType}`);
     return null;
@@ -455,43 +435,23 @@ export async function retrieveVitalContent(
 
   console.log(`[Content Retrieval] Searching for vital: ${vitalType}`);
 
-  const searchResults = searchEntries(searchTerm, { limit: 5 });
+  const allContent = await loadAllContent();
 
-  console.log(`[Content Retrieval] Found ${searchResults.length} results for ${vitalType}`);
+  const results = searchContent(allContent, {
+    text: searchTerm,
+    type: ['concept', 'process'],
+    status: 'published',
+    limit: 1,
+  });
 
-  if (searchResults.length === 0) return null;
+  console.log(`[Content Retrieval] Found ${results.length} results for ${vitalType}`);
 
-  const entry = getEntry(searchResults[0].entryId);
-  if (!entry) return null;
+  if (results.length === 0) return null;
 
-  return encyclopediaEntryToDocument(entry, level);
-}
+  const content = results[0].content;
+  const levelContent = getContentForLevel(content, level, true);
 
-/**
- * Get all available content entries (for indexing/debugging)
- */
-export function getAllContentEntries(): EncyclopediaEntry[] {
-  ensureSeeded();
-  return getAllEntries();
-}
+  if (!levelContent) return null;
 
-/**
- * Search encyclopedia and return raw results
- * @param query - Search query
- * @param limit - Maximum results
- * @returns Array of search results
- */
-export function searchEncyclopedia(
-  query: string,
-  limit: number = 10
-): EncyclopediaSearchResult[] {
-  ensureSeeded();
-  return searchEntries(query, { limit });
-}
-
-/**
- * Clear any cached data (useful for testing)
- */
-export function clearContentCache(): void {
-  seeded = false;
+  return educationalContentToDocument(content, levelContent);
 }

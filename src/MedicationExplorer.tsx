@@ -472,7 +472,7 @@ export function MedicationExplorer({
     if (initialMedicationId) {
       handleSelectMedicationById(initialMedicationId);
     }
-   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMedicationId]);
 
   // 3D Navigation API
@@ -741,7 +741,7 @@ export function MedicationExplorer({
         tabName: activeTab,
       });
     }
-   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   // Helper: format class name for display

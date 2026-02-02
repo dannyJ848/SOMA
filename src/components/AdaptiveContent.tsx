@@ -199,7 +199,7 @@ export const AdaptiveContent = memo(function AdaptiveContent({
       handleLevelChange(currentLevel);
     }
     // We only want to react to external context changes
-     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLevel]);
 
   // Cleanup

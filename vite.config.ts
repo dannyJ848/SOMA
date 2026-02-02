@@ -290,7 +290,10 @@ export default defineConfig(({ command, mode }): UserConfig => {
             if (id.includes('/core/')) {
               return 'core-lib';
             }
-            // Shared components - intentionally NOT chunked to avoid circular deps
+            // Shared components
+            if (id.includes('/src/components/')) {
+              return 'shared-components';
+            }
             // Let Vite handle remaining node_modules naturally to avoid circular chunks
           } : undefined,
           // Compact output
@@ -318,8 +321,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
       cssCodeSplit: true,
       // CSS minification
       cssMinify: isProd ? 'lightningcss' : false,
-      // Chunk size warning limit (increased for medical content)
-      chunkSizeWarningLimit: 1000,
+      // Chunk size warning limit
+      chunkSizeWarningLimit: 500,
       // Report compressed size only in production
       reportCompressedSize: isProd,
       // Module preload polyfill

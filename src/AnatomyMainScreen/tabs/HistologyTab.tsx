@@ -618,11 +618,11 @@ export function HistologyTab({ images, regionName }: HistologyTabProps) {
                 )}
 
                 <div className="image-gallery">
-                  {filteredImages.map((typedImage: HistologyImage, idx: number) => (
+                  {filteredImages.map((typedImage, idx) => (
                     <ImageCard
                       key={typedImage.id || idx}
                       image={typedImage}
-                      isSelected={Boolean(selectedImage && (selectedImage as HistologyImage).id === typedImage.id)}
+                      isSelected={Boolean(selectedImage && selectedImage.id === typedImage.id)}
                       onSelect={handleImageSelect}
                       complexityLevel={complexityLevel}
                     />

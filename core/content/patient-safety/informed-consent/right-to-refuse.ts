@@ -4,6 +4,7 @@ export const rightToRefuseContent: EducationalContent = {
   id: 'right-to-refuse',
   type: 'concept',
   name: 'Right to Refuse Treatment',
+  nameEs: 'Derecho a Rechazar Tratamiento',
   alternateNames: ['Treatment Refusal', 'Refusal of Care', 'Declining Treatment'],
   levels: {
     1: {

@@ -2,13 +2,18 @@
  * Reproductive System Educational Content
  *
  * Comprehensive content covering:
+ * - Anatomy: Male and female reproductive system anatomy
  * - Clinical: Fertility evaluation, contraception, menstrual disorders
  * - Histology: Ovary, testis, and uterus microscopic anatomy
  * - Pathology: Breast, female, male, pregnancy, and STI conditions
  * - Physiology: Menstrual cycle, spermatogenesis, pregnancy physiology
  *
- * Total: 23 content modules across 8 subdirectories
+ * Total: 25 content modules across 10 subdirectories
  */
+
+// Anatomy content (2 files)
+export { maleReproductiveAnatomy } from './male/male-reproductive-anatomy';
+export { femaleReproductiveAnatomy } from './female/female-reproductive-anatomy';
 
 // Clinical content (3 files)
 export { fertilityEvaluation } from './clinical/fertility-evaluation';
@@ -51,6 +56,9 @@ export { pregnancyPhysiology } from './physiology/pregnancy-physiology';
 
 // Content registry for module enumeration
 export const REPRODUCTIVE_CONTENT_MODULES = [
+  // Anatomy (2)
+  'male-reproductive-anatomy',
+  'female-reproductive-anatomy',
   // Clinical (3)
   'fertility-evaluation',
   'contraception-methods',
@@ -88,6 +96,8 @@ export type ReproductiveContentModule = (typeof REPRODUCTIVE_CONTENT_MODULES)[nu
 
 // Directory structure
 export const REPRODUCTIVE_DIRECTORIES = {
+  'male': 1,
+  'female': 1,
   clinical: 3,
   histology: 3,
   'pathology/breast': 2,
@@ -99,4 +109,4 @@ export const REPRODUCTIVE_DIRECTORIES = {
 } as const;
 
 // Total count
-export const REPRODUCTIVE_TOTAL_MODULES = 23;
+export const REPRODUCTIVE_TOTAL_MODULES = 25;

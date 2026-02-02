@@ -446,6 +446,60 @@ export function getContentAtComplexity(
 }
 
 // ============================================
+// Additional Helper Functions
+// ============================================
+
+/**
+ * Get an entry by name (case-insensitive)
+ */
+export function getEntryByName(name: string): EncyclopediaEntry | undefined {
+  const normalizedName = name.toLowerCase().trim();
+  for (const entry of encyclopediaDatabase.values()) {
+    if (entry.name.toLowerCase() === normalizedName) {
+      return entry;
+    }
+    // Check aliases
+    if (entry.aliases?.some(alias => alias.toLowerCase() === normalizedName)) {
+      return entry;
+    }
+    // Check synonyms
+    if (entry.searchMetadata.synonyms?.some(syn => syn.toLowerCase() === normalizedName)) {
+      return entry;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Get entries by keyword/tag
+ */
+export function getEntriesByKeyword(keyword: string): EncyclopediaEntry[] {
+  const normalizedKeyword = keyword.toLowerCase().trim();
+  const entryIds = keywordIndex.get(normalizedKeyword);
+  if (!entryIds) return [];
+  return Array.from(entryIds)
+    .map((id) => encyclopediaDatabase.get(id)!)
+    .filter(Boolean);
+}
+
+/**
+ * Check if store has been seeded
+ */
+export function isStoreSeeded(): boolean {
+  return encyclopediaDatabase.size > 0;
+}
+
+/**
+ * Clear all entries from the store
+ */
+export function clearStore(): void {
+  encyclopediaDatabase.clear();
+  typeIndex.clear();
+  categoryIndex.clear();
+  keywordIndex.clear();
+}
+
+// ============================================
 // Statistics
 // ============================================
 

@@ -13,7 +13,7 @@ export {
   surgeryClerkship,
   pediatricsClerkship,
   familyMedicineClerkship,
-} from './clinical-clerkships/index.js';
+} from './clinical-clerkships/index';
 
 // Rotation Guides
 export {
@@ -24,4 +24,4 @@ export {
   internalMedicineRotation,
   pediatricsRotation,
   surgeryRotation,
-} from './rotation-guides/index.js';
+} from './rotation-guides/index';

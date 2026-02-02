@@ -255,7 +255,7 @@ export function AINavigationSuggestions({
   // Get suggestions from provider
   const providerSuggestions = useMemo(
     () => aiNavigation.getSuggestions(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
     [aiNavigation.suggestedRegions]
   );
 

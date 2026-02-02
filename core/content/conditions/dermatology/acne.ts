@@ -10,6 +10,7 @@ export const acne: EducationalContent = {
   id: 'condition-acne',
   type: 'condition',
   name: 'Acne',
+  nameEs: 'Acné',
   alternateNames: ['Acne Vulgaris', 'Pimples', 'Zits', 'Breakouts'],
   hpoId: 'HP:0001061',
 

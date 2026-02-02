@@ -795,7 +795,7 @@ export function GLBAnatomyModel({
   onSelect,
   showSkeleton = true,
   showOrgans = true,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   animateOrgans: _animateOrgans = true,
   showLODDebug = false,
   enableFrustumCulling = true,

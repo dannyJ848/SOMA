@@ -4,6 +4,7 @@ export const accessingRecordsContent: EducationalContent = {
   id: 'accessing-records',
   type: 'concept',
   name: 'Accessing Your Medical Records',
+  nameEs: 'Acceso a sus Registros Médicos',
   alternateNames: ['Medical Record Access', 'Patient Records', 'Health Information Access'],
   levels: {
     1: {

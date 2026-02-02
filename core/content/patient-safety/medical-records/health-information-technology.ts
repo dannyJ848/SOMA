@@ -4,6 +4,7 @@ export const healthInformationTechnologyContent: EducationalContent = {
   id: 'health-information-technology',
   type: 'concept',
   name: 'Health Information Technology',
+  nameEs: 'Tecnología de Información en Salud',
   alternateNames: ['Health IT', 'Electronic Health Records', 'Digital Health', 'EHR'],
   levels: {
     1: {

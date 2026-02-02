@@ -10,6 +10,7 @@ export const thyroidDisorders: EducationalContent = {
   id: 'condition-thyroid-disorders',
   type: 'condition',
   name: 'Thyroid Disorders',
+  nameEs: 'Trastornos de la Tiroides',
   alternateNames: ['Hypothyroidism', 'Hyperthyroidism', 'Thyroid Disease', 'Goiter'],
   hpoId: 'HP:0000820',
 

@@ -141,7 +141,7 @@ export function InsightsPanel({ dashboardData, dataVersion }: InsightsPanelProps
     if (aiAvailable && dashboardData && dataVersion !== lastGeneratedVersion) {
       generateInsights();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [aiAvailable, dataVersion]);
 
   async function generateInsights() {

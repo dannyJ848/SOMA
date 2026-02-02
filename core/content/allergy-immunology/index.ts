@@ -15,6 +15,9 @@ import { anaphylaxisContent } from './anaphylaxis';
 import { allergyTestingContent } from './allergy-testing';
 import { immunotherapyContent } from './immunotherapy';
 
+// Import from allergies subdirectory
+import { allergicReactionsContent } from './allergies/allergic-reactions';
+
 export { allergyBasicsContent } from './basics';
 export { allergicRhinitisContent } from './allergic-rhinitis';
 export { foodAllergiesContent } from './food-allergies';
@@ -24,6 +27,10 @@ export { allergicAsthmaContent } from './asthma-allergy';
 export { anaphylaxisContent } from './anaphylaxis';
 export { allergyTestingContent } from './allergy-testing';
 export { immunotherapyContent } from './immunotherapy';
+
+// Export from allergies subdirectory
+export { allergicReactionsContent } from './allergies/allergic-reactions';
+export * from './allergies';
 
 // Allergy & Immunology Database
 export {
@@ -50,6 +57,7 @@ export const allergyImmunologyModules = [
   anaphylaxisContent,
   allergyTestingContent,
   immunotherapyContent,
+  allergicReactionsContent,
 ];
 
 /**
@@ -70,7 +78,7 @@ export function getAllergyModuleIds(): string[] {
  * Module categories
  */
 export const allergyCategories = {
-  overview: ['allergy-basics'],
+  overview: ['allergy-basics', 'allergic-reactions'],
   conditions: [
     'allergic-rhinitis',
     'food-allergies',

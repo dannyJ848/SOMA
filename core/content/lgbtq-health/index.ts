@@ -8,10 +8,10 @@
  */
 
 // General Principles
-export * from './general-principles/index.js';
+export * from './general-principles/index';
 
 // Sexual Minority Health
-export * from './sexual-minority-health/index.js';
+export * from './sexual-minority-health/index';
 
 // Transgender Health
-export * from './transgender-health/index.js';
+export * from './transgender-health/index';

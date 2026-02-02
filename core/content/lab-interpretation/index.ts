@@ -15,6 +15,14 @@
  * - Coagulation Studies
  * - Inflammatory Markers
  * - Arterial Blood Gas (ABG)
+ * - Synovial Fluid Analysis
+ * - Stool Studies
+ * - Toxicology Labs
+ * - CSF Analysis
+ * - Tumor Markers
+ * - Hormone Panels
+ * - Bone Metabolism Panel
+ * - Vitamin & Micronutrient Levels
  */
 
 // Types
@@ -31,6 +39,15 @@ export * from './urinalysis';
 export * from './coagulation';
 export * from './inflammatory-markers';
 export * from './abg';
+export * from './synovial-fluid';
+export * from './stool-studies';
+export * from './toxicology-labs';
+export * from './csf-analysis';
+export * from './tumor-markers';
+export * from './hormone-panels';
+export * from './bone-metabolism';
+export * from './bone-metabolism-panels';
+export * from './vitamin-levels';
 
 // Panel collections
 export { CBC_PANEL } from './cbc';
@@ -43,6 +60,8 @@ export { URINALYSIS_PANEL } from './urinalysis';
 export { COAGULATION_PANEL } from './coagulation';
 export { INFLAMMATORY_MARKER_PANEL } from './inflammatory-markers';
 export { ABG_PANEL } from './abg';
+export { BONE_METABOLISM_PANEL } from './bone-metabolism-panels';
+export { VITAMIN_LEVELS_PANEL } from './vitamin-levels';
 
 // Lab interpretation database (consolidated entries with search utilities)
 // Note: LabCategory is already exported from ./types, so we use explicit re-exports to avoid ambiguity

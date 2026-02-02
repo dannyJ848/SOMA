@@ -417,7 +417,7 @@ export function MedicalEncyclopedia({
     if (activeView === 'browse') {
       track('browse-category', {});
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [activeView]); // Only track when view changes
 
   // Handle recent search selection

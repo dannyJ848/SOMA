@@ -210,6 +210,27 @@ export interface ParsedQuery {
 // ============================================
 
 /**
+ * A related item discovered via knowledge graph traversal.
+ * Displayed as cross-reference chips beneath a search result.
+ */
+export interface RelatedItem {
+  /** Node ID in the knowledge graph */
+  id: string;
+
+  /** Display name */
+  name: string;
+
+  /** Content type for icon/color selection */
+  type: 'condition' | 'symptom' | 'anatomy' | 'medication' | 'procedure' | 'specialty';
+
+  /** Semantic relationship label (e.g. "causes", "treats", "manifests-in") */
+  relationship: string;
+
+  /** Navigation path for click-through */
+  navigationPath: string;
+}
+
+/**
  * Individual search result
  */
 export interface SearchResult {
@@ -254,6 +275,9 @@ export interface SearchResult {
 
   /** Accent color for category */
   color?: string;
+
+  /** Related items from knowledge graph traversal */
+  relatedItems?: RelatedItem[];
 }
 
 /**

@@ -5,22 +5,22 @@
  */
 
 // Navigating Healthcare
-export * from './navigating-healthcare/index.js';
+export * from './navigating-healthcare/index';
 
 // Informed Consent
-export * from './informed-consent/index.js';
+export * from './informed-consent/index';
 
 // Hospital Safety
-export * from './hospital-safety/index.js';
+export * from './hospital-safety/index';
 
 // Medical Records
-export * from './medical-records/index.js';
+export * from './medical-records/index';
 
 // Medication Safety
-export * from './medication-safety/index.js';
+export * from './medication-safety/index';
 
 // Communication
-export * from './communication/index.js';
+export * from './communication/index';
 
 // Patient Safety Database
 export {
@@ -28,8 +28,8 @@ export {
   searchPatientSafetyEntries,
   filterByCategory,
   getEntryById,
-} from './patient-safety-database.js';
+} from './patient-safety-database';
 export type {
   PatientSafetyCategory,
   PatientSafetyEntry,
-} from './patient-safety-database.js';
+} from './patient-safety-database';

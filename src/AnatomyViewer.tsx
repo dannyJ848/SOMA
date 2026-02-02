@@ -27,6 +27,7 @@ import {
 } from './utils/anatomy3DEventBus';
 import { useAnatomy3DTracking } from './hooks/useAnatomy3DTracking';
 import type { HistologyImage } from '../core/histology/types';
+import { ContentViewer, type ContentDocument } from './ContentViewer';
 import {
   EnhancedAnatomyModel,
   GLBAnatomyModel,
@@ -85,6 +86,8 @@ interface AnatomyViewerProps {
   onStructureDeselect?: () => void;
   /** Body proportions for customizing the 3D model based on user demographics */
   bodyProportions?: BodyProportions;
+  /** Called when user wants to view pathology content for a structure */
+  onViewPathology?: (structureId: string, structureName: string) => void;
 }
 
 // Imperative API exposed via ref
@@ -624,11 +627,15 @@ interface CameraControllerProps {
 
 function CameraController({ controlsRef }: CameraControllerProps) {
   const { camera } = useThree();
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    // Set initial camera position
-    camera.position.set(0, 1, 4);
-    camera.lookAt(0, 0.5, 0);
+    // Set initial camera position only once
+    if (!initializedRef.current) {
+      initializedRef.current = true;
+      camera.position.set(0, 1, 4);
+      camera.lookAt(0, 0.5, 0);
+    }
   }, [camera]);
 
   return (
@@ -658,19 +665,19 @@ interface LODStateReporterProps {
 function LODStateReporter({ onLODStateChange }: LODStateReporterProps) {
   const lodState = useLOD();
   const prevLevelRef = useRef<string | null>(null);
-  // Store the current lodState in a ref to avoid dependency on the full object
-  const lodStateRef = useRef(lodState);
-  lodStateRef.current = lodState;
+  // Store the callback in a ref to avoid dependency issues
+  const callbackRef = useRef(onLODStateChange);
+  callbackRef.current = onLODStateChange;
 
   useEffect(() => {
     // Only trigger parent update when detail level changes (not every distance change)
     // This prevents excessive re-renders of the entire component tree
     if (prevLevelRef.current !== lodState.detailLevel) {
       prevLevelRef.current = lodState.detailLevel;
-      // Use the ref to get the current state without adding it as a dependency
-      onLODStateChange(lodStateRef.current);
+      // Use the ref to get the current callback without adding it as a dependency
+      callbackRef.current(lodState);
     }
-  }, [lodState.detailLevel, onLODStateChange]);
+  }, [lodState.detailLevel]);
 
   return null;
 }
@@ -852,7 +859,7 @@ class EnhancedModelSafeWrapper extends React.Component<
 }
 
 export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
-  function AnatomyViewer({ onBack, dashboardData, onStructureSelect, onStructureDeselect, bodyProportions }, ref) {
+  function AnatomyViewer({ onBack, dashboardData, onStructureSelect, onStructureDeselect, bodyProportions, onViewPathology }, ref) {
   const controlsRef = useRef<any>(null);
   const [currentView, setCurrentView] = useState<ViewPreset | null>(null);
   const [showLayerPanel, setShowLayerPanel] = useState(false);
@@ -893,6 +900,9 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
 
   // Education panel state
   const [showEducationPanel, setShowEducationPanel] = useState(false);
+
+  // Content viewer state for RAG content display
+  const [selectedContent, setSelectedContent] = useState<ContentDocument | null>(null);
 
   // RegionExplorer integration state
   const [useRegionExplorer, setUseRegionExplorer] = useState(true);
@@ -994,13 +1004,54 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     }
   }, []);
 
+  // Memoized error handler for EnhancedModelSafeWrapper to prevent infinite re-renders
+  const handleEnhancedModelError = useCallback((err: Error) => {
+    const msg = err instanceof Error ? err.message : String(err);
+    addDebugLogEntry('error', `Enhanced model render error: ${msg}`);
+    console.error('[AnatomyViewer] Enhanced model error, reverting to basic:', err);
+    setRenderError(msg);
+    setEnhancedMode(false);
+  }, []);
+
+  // Track if we've already handled a render error to prevent infinite loops
+  const renderErrorHandledRef = useRef(false);
+
+  // Memoized callbacks for ThreeJSErrorBoundary to prevent infinite re-renders
+  const handleThreeJSError = useCallback((error: { message: string; code?: string; severity?: string; recoveryStrategy?: string; stack?: string }) => {
+    addDebugLog({
+      type: 'error',
+      message: `ThreeJS Error: ${error.message}`,
+      details: {
+        code: error.code,
+        severity: error.severity,
+        recoveryStrategy: error.recoveryStrategy,
+      },
+      stack: error.stack,
+    });
+  }, []);
+
+  const handleThreeJSFallback = useCallback(() => {
+    addDebugLog({
+      type: 'info',
+      message: 'Falling back to 2D view due to WebGL error',
+    });
+  }, []);
+
   // If renderError is set and we're in enhanced mode, force back to basic
   useEffect(() => {
-    if (renderError && enhancedMode) {
+    if (renderError && enhancedMode && !renderErrorHandledRef.current) {
+      renderErrorHandledRef.current = true;
       addDebugLogEntry('error', `Render error detected in enhanced mode, reverting to basic: ${renderError}`);
       setEnhancedMode(false);
     }
   }, [renderError, enhancedMode]);
+
+  // Reset the handled flag when renderError is cleared
+  useEffect(() => {
+    if (!renderError) {
+      renderErrorHandledRef.current = false;
+    }
+  }, [renderError]);
 
   // Bridge anatomy events to intent tracking
   useAnatomy3DTracking();
@@ -1052,6 +1103,59 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     isVisible,
     getOpacity,
   } = useLayerState();
+
+  // Memoized Canvas onCreated callback to prevent infinite re-renders
+  const handleCanvasCreated = useCallback((state: { gl: { domElement: HTMLCanvasElement; capabilities: { isWebGL2: boolean; maxTextures: number; precision: string }; getPixelRatio: () => number }; size: { width: number; height: number } }) => {
+    console.log('[AnatomyViewer] Canvas created successfully');
+
+    // Capture canvas reference for context loss event handling
+    canvasRef.current = state.gl.domElement;
+
+    // Log to iOS3DDebugOverlay
+    markComponentMounted('canvas', true);
+    updateCanvasStatus({ mounted: true, created: true, rendering: true });
+    addDebugLogEntry('success', `Canvas created (WebGL${state.gl.capabilities.isWebGL2 ? '2' : '1'}, DPR: ${state.gl.getPixelRatio()})`);
+    addDebugLogEntry('info', `Canvas size: ${state.size.width}x${state.size.height}`);
+
+    // Log to debug panel for iOS where console is hard to access
+    const contextInfo = {
+      size: state.size,
+      dpr: state.gl.getPixelRatio(),
+      webglVersion: state.gl.capabilities.isWebGL2 ? 'WebGL2' : 'WebGL1',
+      maxTextures: state.gl.capabilities.maxTextures,
+      precision: state.gl.capabilities.precision,
+    };
+    try {
+      logWebGLContext('created', {
+        ...contextInfo,
+        isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
+        isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
+        devicePixelRatio: window.devicePixelRatio,
+        screenSize: { width: window.screen.width, height: window.screen.height },
+        canvasSize: { width: state.size.width, height: state.size.height },
+        webglSupport: checkWebGLSupport(),
+      });
+    } catch (e) {
+      console.error('[AnatomyViewer] Failed to log WebGL context:', e);
+    }
+
+    // Setup WebGL context loss/restore event listeners on the canvas
+    const canvas = state.gl.domElement;
+    canvas.addEventListener('webglcontextlost', (event) => {
+      event.preventDefault();
+      console.error('[AnatomyViewer] WebGL context lost!');
+      addDebugLogEntry('error', 'WebGL context LOST!');
+      updateCanvasStatus({ error: 'WebGL context lost', rendering: false });
+      logWebGLContext('lost', { preventDefaultCalled: true });
+    });
+
+    canvas.addEventListener('webglcontextrestored', () => {
+      console.log('[AnatomyViewer] WebGL context restored');
+      addDebugLogEntry('success', 'WebGL context restored');
+      updateCanvasStatus({ error: null, rendering: true });
+      logWebGLContext('restored', {});
+    });
+  }, []);
 
   // Memoize transformed structures based on body proportions
   const transformedStructures = useMemo(() => {
@@ -1128,6 +1232,30 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     setShowEducationPanel(false);
   }, []);
 
+  // Handle viewing pathology for current structure - WIRED TO UNIVERSAL RAG
+  const handleViewPathology = useCallback(async (structureId: string, structureName: string) => {
+    console.log(`[Universal RAG] Searching for pathology: ${structureName}`);
+    
+    // Import Universal RAG
+    const { getContentByStructure, contentToDocument } = await import('./universalContentRAG');
+    
+    // Try to get pathology content
+    const content = getContentByStructure(structureName.toLowerCase().replace(/\s+/g, '-'));
+    
+    if (content) {
+      console.log(`[Universal RAG] Found content: ${content.name}`);
+      const doc = contentToDocument(content);
+      // Display in ContentViewer
+      setSelectedContent(doc);
+    } else {
+      console.warn(`[Universal RAG] No content found for: ${structureName}`);
+      // Fallback to callback if provided
+      if (onViewPathology) {
+        onViewPathology(structureId, structureName);
+      }
+    }
+  }, [onViewPathology]);
+
   // RegionExplorer callbacks
   const handleRegionExplorerDeselect = useCallback(() => {
     setSelectedStructure(null);
@@ -1153,9 +1281,23 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
     console.log('AI Query:', query, 'Context:', context);
   }, []);
 
-  const handleRegionExplorerOpenEncyclopedia = useCallback((entryId: string) => {
-    // Navigate to encyclopedia entry - could open a modal or navigate
-    console.log('Open encyclopedia entry:', entryId);
+  const handleRegionExplorerOpenEncyclopedia = useCallback(async (entryId: string) => {
+    console.log('[Universal RAG] Opening encyclopedia entry:', entryId);
+    
+    // Import Universal RAG
+    const { getContentByStructure, contentToDocument } = await import('./universalContentRAG');
+    
+    // Try to get content
+    const content = getContentByStructure(entryId);
+    
+    if (content) {
+      console.log(`[Universal RAG] Found encyclopedia content: ${content.name}`);
+      const doc = contentToDocument(content);
+      // Display in ContentViewer
+      setSelectedContent(doc);
+    } else {
+      console.warn(`[Universal RAG] No encyclopedia content found for: ${entryId}`);
+    }
   }, []);
 
   // Wrapper to convert preset ID to LayerPreset object for RegionExplorer
@@ -1694,25 +1836,8 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
       }}>
         {/* ThreeJS Error Boundary - catches WebGL and rendering errors */}
         <ThreeJSErrorBoundary
-          onError={(error) => {
-            // Log to debug panel for iOS visibility
-            addDebugLog({
-              type: 'error',
-              message: `ThreeJS Error: ${error.message}`,
-              details: {
-                code: error.code,
-                severity: error.severity,
-                recoveryStrategy: error.recoveryStrategy,
-              },
-              stack: error.stack,
-            });
-          }}
-          onFallback2D={() => {
-            addDebugLog({
-              type: 'info',
-              message: 'Falling back to 2D view due to WebGL error',
-            });
-          }}
+          onError={handleThreeJSError}
+          onFallback2D={handleThreeJSFallback}
         >
         {/* Canvas Loading Fallback - shows body silhouette with progress */}
         <Suspense fallback={<ModelLoadingScreen />}>
@@ -1735,74 +1860,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
             position: 'absolute',
             inset: 0,
           }}
-          onCreated={(state) => {
-            console.log('[AnatomyViewer] Canvas created successfully');
-
-            // Capture canvas reference for context loss event handling
-            canvasRef.current = state.gl.domElement;
-
-            // Log to iOS3DDebugOverlay
-            markComponentMounted('canvas', true);
-            updateCanvasStatus({ mounted: true, created: true, rendering: true });
-            addDebugLogEntry('success', `Canvas created (WebGL${state.gl.capabilities.isWebGL2 ? '2' : '1'}, DPR: ${state.gl.getPixelRatio()})`);
-            addDebugLogEntry('info', `Canvas size: ${state.size.width}x${state.size.height}`);
-
-            // Log to debug panel for iOS where console is hard to access
-            const contextInfo = {
-              size: state.size,
-              dpr: state.gl.getPixelRatio(),
-              webglVersion: state.gl.capabilities.isWebGL2 ? 'WebGL2' : 'WebGL1',
-              maxTextures: state.gl.capabilities.maxTextures,
-              precision: state.gl.capabilities.precision,
-            };
-            try {
-              logWebGLContext('created', {
-                ...contextInfo,
-                isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
-                isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
-                devicePixelRatio: window.devicePixelRatio,
-                screenSize: { width: window.screen.width, height: window.screen.height },
-                canvasSize: { width: state.size.width, height: state.size.height },
-                webglSupport: checkWebGLSupport(),
-              });
-            } catch (e) {
-              console.error('[AnatomyViewer] Failed to log WebGL context:', e);
-            }
-
-            // Setup WebGL context loss/restore event listeners on the canvas
-            const canvas = state.gl.domElement;
-            canvas.addEventListener('webglcontextlost', (event) => {
-              event.preventDefault();
-              console.error('[AnatomyViewer] WebGL context lost!');
-              addDebugLogEntry('error', 'WebGL context LOST!');
-              updateCanvasStatus({ error: 'WebGL context lost', rendering: false });
-              logWebGLContext('lost', { preventDefaultCalled: true });
-            });
-
-            canvas.addEventListener('webglcontextrestored', () => {
-              console.log('[AnatomyViewer] WebGL context restored');
-              addDebugLogEntry('success', 'WebGL context restored');
-              updateCanvasStatus({ error: null, rendering: true });
-              logWebGLContext('restored', {});
-            });
-
-            // CRITICAL for iOS: Force an initial render
-            try {
-              state.gl.render(state.scene, state.camera);
-              addDebugLogEntry('success', 'Initial render complete');
-              addDebugLog({
-                type: 'info',
-                message: 'Initial Canvas render completed successfully',
-                details: { sceneChildren: state.scene.children.length },
-              });
-            } catch (renderError) {
-              console.error('[AnatomyViewer] Initial render failed:', renderError);
-              logWebGLContext('error', {
-                phase: 'initial-render',
-                error: renderError instanceof Error ? renderError.message : String(renderError),
-              });
-            }
-          }}
+          onCreated={handleCanvasCreated}
         >
           {/* Background color - dark blue-gray for professional look */}
           <color attach="background" args={['#1a1a2e']} />
@@ -1848,15 +1906,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
               InteractiveBodyModel (procedural shapes) is the safe default.
               Enhanced/GLB models are only rendered when explicitly toggled on. */}
           {enhancedMode && !renderError ? (
-            <EnhancedModelSafeWrapper
-              onError={(err) => {
-                const msg = err instanceof Error ? err.message : String(err);
-                addDebugLogEntry('error', `Enhanced model render error: ${msg}`);
-                console.error('[AnatomyViewer] Enhanced model error, reverting to basic:', err);
-                setRenderError(msg);
-                setEnhancedMode(false);
-              }}
-            >
+            <EnhancedModelSafeWrapper onError={handleEnhancedModelError}>
               {useProgressiveLoading ? (
                 /* Progressive Loading: streams GLB models with memory management */
                 <ProgressiveAnatomyModel
@@ -2272,6 +2322,7 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
                 () => handleViewHistology(getHistologyIdForStructure(selectedStructure.id)!) :
                 undefined
               }
+              onViewPathology={handleViewPathology}
               onViewEducation={handleViewEducation}
             />
           </div>
@@ -2325,6 +2376,37 @@ export const AnatomyViewer = forwardRef<AnatomyViewerAPI, AnatomyViewerProps>(
             <span>
               <strong>Pan:</strong> Right-drag
             </span>
+          </div>
+        </div>
+      )}
+
+      {/* Content Viewer Overlay - Displays RAG content */}
+      {selectedContent && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.85)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+          zIndex: 1000,
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '900px',
+            maxHeight: '90vh',
+            background: '#1e1e2e',
+            borderRadius: '12px',
+            overflow: 'hidden',
+          }}>
+            <ContentViewer
+              contentDoc={selectedContent}
+              onClose={() => setSelectedContent(null)}
+            />
           </div>
         </div>
       )}

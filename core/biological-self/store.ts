@@ -35,18 +35,63 @@ import type {
 // ============================================================================
 
 const ALGORITHM = 'aes-256-gcm';
-const IV_LENGTH = 16;
+// NIST SP 800-38D recommends 96-bit (12-byte) IVs for AES-GCM. Non-96-bit IVs
+// trigger an internal GHASH reduction that slightly increases collision probability.
+// Changed from 16 to 12 per security audit FINDING-03.
+//
+// Backward compatibility: existing data encrypted with 16-byte IVs will still
+// decrypt correctly because decrypt() parses the IV from the stored hex string
+// (salt:iv:authTag:ciphertext format) rather than relying on this constant.
+// This constant only governs newly generated IVs in encrypt().
+const IV_LENGTH = 12;
 const SALT_LENGTH = 32;
 const KEY_LENGTH = 32;
 
-function deriveKey(passphrase: string, salt: Buffer): Buffer {
+// ---------------------------------------------------------------------------
+// KDF versioning (FINDING-01 fix)
+// ---------------------------------------------------------------------------
+// Version prefix added to encrypted data format to support KDF migration.
+//
+// v0 (implicit/no prefix): Original scrypt with Node.js defaults (N=16384, r=8, p=1).
+//     Data format: salt:iv:authTag:ciphertext
+//
+// v1: Hardened scrypt with OWASP-recommended parameters (N=131072, r=8, p=1).
+//     Data format: $v1$salt:iv:authTag:ciphertext
+//
+// All new encryptions use v1. Decryption auto-detects the version and uses
+// the correct parameters, so existing data remains accessible without migration.
+// ---------------------------------------------------------------------------
+const KDF_VERSION_PREFIX = '$v1$';
+
+// OWASP-recommended scrypt parameters for sensitive data (2023 guidelines):
+// N=2^17 (131072) provides ~17-bit cost, r=8, p=1, maxmem raised to accommodate.
+// This is 8x harder than Node.js defaults (N=2^14=16384).
+const SCRYPT_PARAMS = {
+  N: 131072,  // CPU/memory cost parameter (2^17)
+  r: 8,       // Block size
+  p: 1,       // Parallelization
+  maxmem: 256 * 1024 * 1024,  // 256 MB — must be >= 128 * N * r
+};
+
+/**
+ * Derive an AES-256 key from a passphrase and salt using hardened scrypt (v1).
+ */
+function deriveKeyV1(passphrase: string, salt: Buffer): Buffer {
+  return scryptSync(passphrase, salt, KEY_LENGTH, SCRYPT_PARAMS);
+}
+
+/**
+ * Derive an AES-256 key using legacy scrypt defaults (v0).
+ * Used only for decrypting data that was encrypted before the KDF hardening.
+ */
+function deriveKeyV0(passphrase: string, salt: Buffer): Buffer {
   return scryptSync(passphrase, salt, KEY_LENGTH);
 }
 
 function encrypt(data: string, passphrase: string): string {
   const salt = randomBytes(SALT_LENGTH);
   const iv = randomBytes(IV_LENGTH);
-  const key = deriveKey(passphrase, salt);
+  const key = deriveKeyV1(passphrase, salt);
 
   const cipher = createCipheriv(ALGORITHM, key, iv);
   let encrypted = cipher.update(data, 'utf8', 'hex');
@@ -54,12 +99,26 @@ function encrypt(data: string, passphrase: string): string {
 
   const authTag = cipher.getAuthTag();
 
-  // Format: salt:iv:authTag:encrypted
-  return `${salt.toString('hex')}:${iv.toString('hex')}:${authTag.toString('hex')}:${encrypted}`;
+  // Format: $v1$salt:iv:authTag:encrypted
+  return `${KDF_VERSION_PREFIX}${salt.toString('hex')}:${iv.toString('hex')}:${authTag.toString('hex')}:${encrypted}`;
 }
 
 function decrypt(encryptedData: string, passphrase: string): string {
-  const [saltHex, ivHex, authTagHex, encrypted] = encryptedData.split(':');
+  // Detect KDF version from prefix
+  let payload: string;
+  let deriveKey: (passphrase: string, salt: Buffer) => Buffer;
+
+  if (encryptedData.startsWith(KDF_VERSION_PREFIX)) {
+    // v1: hardened scrypt parameters
+    payload = encryptedData.slice(KDF_VERSION_PREFIX.length);
+    deriveKey = deriveKeyV1;
+  } else {
+    // v0 (legacy): no prefix, Node.js default scrypt parameters
+    payload = encryptedData;
+    deriveKey = deriveKeyV0;
+  }
+
+  const [saltHex, ivHex, authTagHex, encrypted] = payload.split(':');
 
   const salt = Buffer.from(saltHex, 'hex');
   const iv = Buffer.from(ivHex, 'hex');

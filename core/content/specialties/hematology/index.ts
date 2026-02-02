@@ -33,6 +33,8 @@ export { aplasticAnemia } from './anemias/aplastic-anemia';
 export { microcyticAnemia } from './anemias/microcytic-anemia';
 export { normocyticAnemia } from './anemias/normocytic-anemia';
 export { macrocyticAnemia } from './anemias/macrocytic-anemia';
+export { sickleCellDisease } from './anemias/sickle-cell-disease';
+export { thalassemia } from './anemias/thalassemia';
 
 // Leukemias
 export { acuteLymphoblasticLeukemia } from './leukemias/acute-lymphoblastic-leukemia';
@@ -65,8 +67,13 @@ export { deepVeinThrombosis } from './thrombotic-disorders/deep-vein-thrombosis'
 export { immuneThrombocytopenia } from './platelet-disorders/immune-thrombocytopenia';
 export { thromboticThrombocytopenicPurpura } from './platelet-disorders/thrombotic-thrombocytopenic-purpura';
 
+// Coagulation disorders
+export { disseminatedIntravascularCoagulation } from './coagulation/disseminated-intravascular-coagulation';
+export { pulmonaryEmbolism as hematologyPulmonaryEmbolism } from './coagulation/pulmonary-embolism';
+
 // Transfusion medicine
 export { bloodTransfusionMedicine } from './transfusion/blood-transfusion-medicine';
+export { transfusionReactions } from './transfusion/transfusion-reactions';
 
 // Bone marrow evaluation
 export { boneMarrowEvaluation } from './diagnostics/bone-marrow-evaluation';
@@ -85,6 +92,8 @@ export const hematologyContent = {
     'microcyticAnemia',
     'normocyticAnemia',
     'macrocyticAnemia',
+    'sickleCellDisease',
+    'thalassemia',
   ],
   leukemias: [
     'acuteLymphoblasticLeukemia',
@@ -117,8 +126,13 @@ export const hematologyContent = {
     'immuneThrombocytopenia',
     'thromboticThrombocytopenicPurpura',
   ],
+  coagulation: [
+    'disseminatedIntravascularCoagulation',
+    'pulmonaryEmbolism',
+  ],
   transfusion: [
     'bloodTransfusionMedicine',
+    'transfusionReactions',
   ],
   diagnostics: [
     'boneMarrowEvaluation',

@@ -4,6 +4,7 @@ export const medicationReconciliationContent: EducationalContent = {
   id: 'medication-reconciliation',
   type: 'concept',
   name: 'Medication Reconciliation',
+  nameEs: 'Conciliación de Medicamentos',
   alternateNames: ['Med Rec', 'Medication History Verification', 'Medication Review'],
   levels: {
     1: {

@@ -10,6 +10,7 @@ export const adrenalDisorders: EducationalContent = {
   id: 'condition-adrenal-disorders',
   type: 'condition',
   name: 'Adrenal Disorders',
+  nameEs: 'Trastornos Suprarrenales',
   alternateNames: ['Adrenal Insufficiency', 'Addison Disease', 'Cushing Syndrome', 'Adrenal Gland Disease'],
   hpoId: 'HP:0008207',
 

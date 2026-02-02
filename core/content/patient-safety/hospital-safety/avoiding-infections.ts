@@ -4,6 +4,7 @@ export const avoidingInfectionsContent: EducationalContent = {
   id: 'avoiding-infections',
   type: 'concept',
   name: 'Avoiding Healthcare-Associated Infections',
+  nameEs: 'Prevención de Infecciones Asociadas a la Atención Médica',
   alternateNames: ['Hospital Infection Prevention', 'HAI Prevention', 'Infection Control'],
   levels: {
     1: {

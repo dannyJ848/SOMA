@@ -2,8 +2,11 @@
  * Respiratory System Content Index
  *
  * Comprehensive educational content for the respiratory system including
- * clinical medicine, histology, pathology, and physiology.
+ * anatomy, clinical medicine, histology, pathology, and physiology.
  */
+
+// Anatomy content
+export { respiratoryAnatomyContent as respiratoryAnatomy } from './anatomy/respiratory-anatomy';
 
 // Clinical content
 export { pulmonaryFunctionTestsContent as pulmonaryFunctionTests } from './clinical/pulmonary-function-tests';
@@ -30,6 +33,8 @@ export { oxygenTransportContent as oxygenTransport } from './physiology/oxygen-t
 export { respiratoryControlContent as respiratoryControl } from './physiology/respiratory-control';
 
 // Import all content for aggregate arrays
+import { respiratoryAnatomyContent } from './anatomy/respiratory-anatomy';
+
 import { pulmonaryFunctionTestsContent } from './clinical/pulmonary-function-tests';
 import { arterialBloodGasesContent } from './clinical/arterial-blood-gases';
 import { respiratoryFailureContent } from './clinical/respiratory-failure';
@@ -51,6 +56,10 @@ import { oxygenTransportContent } from './physiology/oxygen-transport';
 import { respiratoryControlContent } from './physiology/respiratory-control';
 
 // Category exports
+export const respiratoryAnatomyAll = [
+  respiratoryAnatomyContent,
+];
+
 export const respiratoryClinical = [
   pulmonaryFunctionTestsContent,
   arterialBloodGasesContent,
@@ -81,6 +90,7 @@ export const respiratoryPhysiology = [
 
 // All respiratory content
 export const respiratoryContent = [
+  ...respiratoryAnatomyAll,
   ...respiratoryClinical,
   ...respiratoryHistology,
   ...respiratoryPathology,

@@ -3,12 +3,16 @@
  *
  * Utility functions for the Health Overlay visualization system.
  * Includes helpers for mesh lookup, bridge creation, and coordinate mapping.
+ *
+ * Enhanced to use the condition-anatomy-map for automatically resolving
+ * anatomical regions from patient conditions (by name, ICD code, or search).
  */
 
 import * as THREE from 'three';
 
 import {
   type BiologicalSelf,
+  type PatientCondition,
   type AnatomyPatientBridge,
   type RegionCondition,
   type RegionSymptom,
@@ -20,6 +24,22 @@ import {
   MEDICATION_EFFECT_COLORS,
   DEFAULT_HIGHLIGHT_OPTIONS,
 } from './types';
+
+import {
+  CONDITION_ANATOMY_MAP,
+  getConditionById,
+  getConditionByIcdCode,
+  searchConditions,
+  type ConditionAnatomyMapping,
+} from '../../core/anatomy-patient-bridge/condition-anatomy-map';
+
+import { buildLabOrganMap } from './useLabOrganBridge';
+
+import {
+  MEDICATION_TARGET_MAP,
+  getMedicationMapping,
+  type MedicationTargetMapping,
+} from '../../core/anatomy-patient-bridge/medication-target-map';
 
 // ============================================
 // Region/Organ Center Positions
@@ -58,13 +78,22 @@ const ORGAN_CENTERS: Record<string, THREE.Vector3Like> = {
   stomach: { x: 0.04, y: 0.35, z: 0.06 },
   spleen: { x: 0.1, y: 0.32, z: 0.02 },
   pancreas: { x: 0.02, y: 0.3, z: 0.03 },
+  kidneys: { x: 0, y: 0.28, z: -0.04 },
   'left-kidney': { x: 0.06, y: 0.28, z: -0.04 },
   'right-kidney': { x: -0.06, y: 0.28, z: -0.04 },
   'small-intestine': { x: 0, y: 0.2, z: 0.04 },
   'large-intestine': { x: 0, y: 0.15, z: 0.03 },
+  prostate: { x: 0, y: 0.05, z: 0.03 },
 
   // Neck
   thyroid: { x: 0, y: 0.68, z: 0.05 },
+
+  // Skeletal (used by bone-marrow-related labs like CBC)
+  'bone-marrow': { x: 0, y: 0.1, z: -0.03 },
+  bones: { x: 0, y: 0.1, z: -0.02 },
+
+  // Pelvis
+  pelvis: { x: 0, y: 0.05, z: 0.02 },
 };
 
 // ============================================
@@ -147,12 +176,94 @@ export function getOrganCenter(
 }
 
 // ============================================
+// Condition-Anatomy Map Resolution
+// ============================================
+
+/**
+ * Resolve a patient condition to its anatomical regions using the
+ * condition-anatomy-map database. Tries multiple lookup strategies:
+ *   1. Exact match by normalized condition name (kebab-case ID)
+ *   2. ICD-10 code lookup
+ *   3. Fuzzy search by condition name
+ *
+ * Returns the ConditionAnatomyMapping if found, or undefined.
+ */
+export function resolveConditionAnatomyMapping(
+  condition: PatientCondition
+): ConditionAnatomyMapping | undefined {
+  // Strategy 1: Normalize name to kebab-case ID and do exact lookup
+  const normalizedId = condition.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+  const exactMatch = getConditionById(normalizedId);
+  if (exactMatch) return exactMatch;
+
+  // Strategy 2: Try ICD code lookup
+  if (condition.icdCode) {
+    const icdMatch = getConditionByIcdCode(condition.icdCode);
+    if (icdMatch) return icdMatch;
+  }
+
+  // Strategy 3: Fuzzy search by condition name
+  const searchResults = searchConditions(condition.name);
+  if (searchResults.length > 0) {
+    return searchResults[0];
+  }
+
+  return undefined;
+}
+
+/**
+ * Get the highlight color for a condition, using the condition-anatomy-map's
+ * visualization hint if available, falling back to severity-based colors.
+ */
+export function getConditionHighlightColor(
+  condition: PatientCondition,
+  anatomyMapping?: ConditionAnatomyMapping
+): string {
+  // Use the anatomy map's suggested color if available
+  if (anatomyMapping?.visualizationHint?.color) {
+    return anatomyMapping.visualizationHint.color;
+  }
+
+  // Fall back to severity-based color
+  return SEVERITY_COLORS[condition.severity];
+}
+
+/**
+ * Get the highlight intensity for a condition, using the condition-anatomy-map's
+ * visualization hint if available, falling back to severity-based intensity.
+ */
+export function getConditionHighlightIntensity(
+  condition: PatientCondition,
+  anatomyMapping?: ConditionAnatomyMapping
+): number {
+  // Use the anatomy map's suggested intensity if available
+  if (anatomyMapping?.visualizationHint?.intensity) {
+    switch (anatomyMapping.visualizationHint.intensity) {
+      case 'low': return 0.3;
+      case 'medium': return 0.6;
+      case 'high': return 1.0;
+    }
+  }
+
+  // Fall back to severity-based intensity
+  return getSeverityIntensity(condition.severity);
+}
+
+// ============================================
 // Bridge Creation Functions
 // ============================================
 
 /**
- * Create an AnatomyPatientBridge from patient data
- * Maps medical data to anatomical visualization regions
+ * Create an AnatomyPatientBridge from patient data.
+ * Maps medical data to anatomical visualization regions.
+ *
+ * Enhanced: When a condition has empty affectedRegions/affectedOrgans,
+ * the bridge now consults the condition-anatomy-map database to
+ * automatically resolve the affected anatomical regions from the
+ * condition's name or ICD code.
  */
 export function createBridge(patientData: BiologicalSelf): AnatomyPatientBridge {
   const conditionsByRegion = new Map<string, RegionCondition[]>();
@@ -162,32 +273,71 @@ export function createBridge(patientData: BiologicalSelf): AnatomyPatientBridge 
 
   // Map conditions to regions
   patientData.conditions.forEach((condition) => {
-    const highlightIntensity = getSeverityIntensity(condition.severity);
-    const color = SEVERITY_COLORS[condition.severity];
+    // Try to resolve from the condition-anatomy-map for richer data
+    const anatomyMapping = resolveConditionAnatomyMapping(condition);
 
-    // Add to each affected region
-    condition.affectedRegions.forEach((regionId, index) => {
-      const regionConditions = conditionsByRegion.get(regionId) || [];
-      regionConditions.push({
-        condition,
-        highlightIntensity,
-        color,
-        isPrimary: index === 0,
-      });
-      conditionsByRegion.set(regionId, regionConditions);
-    });
+    const highlightIntensity = getConditionHighlightIntensity(condition, anatomyMapping);
+    const color = getConditionHighlightColor(condition, anatomyMapping);
 
-    // Also add to affected organs
-    condition.affectedOrgans.forEach((organId, index) => {
-      const organConditions = conditionsByRegion.get(organId) || [];
-      organConditions.push({
-        condition,
-        highlightIntensity,
-        color,
-        isPrimary: index === 0,
+    // Determine the regions to highlight.
+    // Priority:
+    //   1. Explicitly set affectedRegions/affectedOrgans on the condition
+    //   2. Regions from the condition-anatomy-map (primary + secondary)
+    const hasExplicitRegions =
+      (condition.affectedRegions && condition.affectedRegions.length > 0) ||
+      (condition.affectedOrgans && condition.affectedOrgans.length > 0);
+
+    if (hasExplicitRegions) {
+      // Use explicit regions (original behavior)
+      condition.affectedRegions.forEach((regionId, index) => {
+        const regionConditions = conditionsByRegion.get(regionId) || [];
+        regionConditions.push({
+          condition,
+          highlightIntensity,
+          color,
+          isPrimary: index === 0,
+        });
+        conditionsByRegion.set(regionId, regionConditions);
       });
-      conditionsByRegion.set(organId, organConditions);
-    });
+
+      condition.affectedOrgans.forEach((organId, index) => {
+        const organConditions = conditionsByRegion.get(organId) || [];
+        organConditions.push({
+          condition,
+          highlightIntensity,
+          color,
+          isPrimary: index === 0,
+        });
+        conditionsByRegion.set(organId, organConditions);
+      });
+    } else if (anatomyMapping) {
+      // Auto-resolve from condition-anatomy-map
+      // Add primary regions with full intensity
+      anatomyMapping.primaryRegions.forEach((regionId, index) => {
+        const regionConditions = conditionsByRegion.get(regionId) || [];
+        regionConditions.push({
+          condition,
+          highlightIntensity,
+          color,
+          isPrimary: index === 0,
+        });
+        conditionsByRegion.set(regionId, regionConditions);
+      });
+
+      // Add secondary regions with reduced intensity
+      if (anatomyMapping.secondaryRegions) {
+        anatomyMapping.secondaryRegions.forEach((regionId) => {
+          const regionConditions = conditionsByRegion.get(regionId) || [];
+          regionConditions.push({
+            condition,
+            highlightIntensity: highlightIntensity * 0.5, // Dimmer for secondary
+            color,
+            isPrimary: false,
+          });
+          conditionsByRegion.set(regionId, regionConditions);
+        });
+      }
+    }
   });
 
   // Map symptoms to regions
@@ -204,33 +354,108 @@ export function createBridge(patientData: BiologicalSelf): AnatomyPatientBridge 
     symptomsByRegion.set(regionId, regionSymptoms);
   });
 
-  // Map lab results to organs
-  patientData.labResults.forEach((lab) => {
-    if (!lab.relatedOrgan) return;
-
-    const organLabs = labsByOrgan.get(lab.relatedOrgan) || [];
-
-    organLabs.push({
-      lab,
-      direction: getLabDirection(lab),
-      urgency: getLabUrgency(lab),
-    });
-
-    labsByOrgan.set(lab.relatedOrgan, organLabs);
+  // Map lab results to organs using the lab-organ-map database.
+  // This automatically resolves organ mapping from lab test names/LOINC codes,
+  // applies real medical reference ranges, and enriches with clinical interpretations.
+  // Falls back to lab.relatedOrgan for unmapped tests.
+  const enrichedLabMap = buildLabOrganMap(patientData.labResults, {
+    abnormalOnly: false,
   });
-
-  // Map medications to target organs
-  patientData.medications.forEach((medication) => {
-    // Primary targets (therapeutic)
-    medication.targetOrgans.forEach((organId, index) => {
-      const organMeds = medicationTargets.get(organId) || [];
-      organMeds.push({
-        medication,
-        effectType: 'therapeutic',
-        isPrimaryTarget: index === 0,
+  for (const [organKey, enrichedLabs] of enrichedLabMap) {
+    const existing = labsByOrgan.get(organKey) || [];
+    for (const enrichedLab of enrichedLabs) {
+      existing.push({
+        lab: enrichedLab.lab,
+        direction: enrichedLab.direction,
+        urgency: enrichedLab.urgency,
       });
-      medicationTargets.set(organId, organMeds);
-    });
+    }
+    labsByOrgan.set(organKey, existing);
+  }
+
+  // Map medications to target organs using the medication-target-map
+  // for real pharmacology-backed organ targeting
+  patientData.medications.forEach((medication) => {
+    // Normalize the medication ID/name for lookup
+    const normalizedId = medication.id
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+    const normalizedName = medication.name
+      .toLowerCase()
+      .replace(/\s+\d+\s*mg.*$/i, '')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+
+    // Try to find the real target mapping
+    const targetMapping =
+      getMedicationMapping(medication.id) ??
+      getMedicationMapping(normalizedId) ??
+      getMedicationMapping(normalizedName) ??
+      Object.values(MEDICATION_TARGET_MAP).find(
+        (m) => m.medicationName.toLowerCase() === medication.name.toLowerCase()
+      );
+
+    if (targetMapping) {
+      // Use real pharmacology data for organ targeting
+      // Primary targets are therapeutic
+      for (const target of targetMapping.primaryTargets) {
+        const organMeds = medicationTargets.get(target.organ) || [];
+        organMeds.push({
+          medication,
+          effectType: 'therapeutic',
+          isPrimaryTarget: true,
+        });
+        medicationTargets.set(target.organ, organMeds);
+      }
+
+      // Secondary targets: classify as protective or side-effect
+      if (targetMapping.secondaryTargets) {
+        for (const target of targetMapping.secondaryTargets) {
+          const effectText = target.effect.toLowerCase();
+          let effectType: MedicationTarget['effectType'] = 'therapeutic';
+
+          if (
+            effectText.includes('protect') ||
+            effectText.includes('reduces remodeling') ||
+            effectText.includes('nephroprotect') ||
+            (effectText.includes('cardiovascular') && effectText.includes('benefit'))
+          ) {
+            effectType = 'protective';
+          } else if (
+            effectText.includes('may cause') ||
+            effectText.includes('risk of') ||
+            effectText.includes('may affect') ||
+            effectText.includes('toxicity') ||
+            effectText.includes('sensitivity') ||
+            effectText.includes('damage') ||
+            effectText.includes('disrupt') ||
+            effectText.includes('prolong')
+          ) {
+            effectType = 'side-effect';
+          }
+
+          const organMeds = medicationTargets.get(target.organ) || [];
+          organMeds.push({
+            medication,
+            effectType,
+            isPrimaryTarget: false,
+          });
+          medicationTargets.set(target.organ, organMeds);
+        }
+      }
+    } else {
+      // Fallback: use the targetOrgans from PatientMedication (original behavior)
+      medication.targetOrgans.forEach((organId, index) => {
+        const organMeds = medicationTargets.get(organId) || [];
+        organMeds.push({
+          medication,
+          effectType: 'therapeutic',
+          isPrimaryTarget: index === 0,
+        });
+        medicationTargets.set(organId, organMeds);
+      });
+    }
   });
 
   return {
@@ -239,6 +464,76 @@ export function createBridge(patientData: BiologicalSelf): AnatomyPatientBridge 
     labsByOrgan,
     medicationTargets,
   };
+}
+
+/**
+ * Create a condition-only bridge map from core BiologicalSelf conditions.
+ *
+ * This is a convenience function for components that only need
+ * the conditionsByRegion map (like ConditionHighlights). It accepts
+ * conditions that may not have affectedRegions/affectedOrgans set,
+ * and resolves regions automatically from the condition-anatomy-map.
+ *
+ * @param conditions - Array of patient conditions (from core or UI types)
+ * @returns Map of regionId -> RegionCondition[] ready for ConditionHighlights
+ */
+export function buildConditionRegionMap(
+  conditions: Array<{
+    id: string;
+    name: string;
+    status: string;
+    severity?: 'mild' | 'moderate' | 'severe';
+    icdCode?: string;
+    affectedRegions?: string[];
+    affectedOrgans?: string[];
+  }>
+): Map<string, RegionCondition[]> {
+  const conditionsByRegion = new Map<string, RegionCondition[]>();
+
+  for (const condition of conditions) {
+    // Skip resolved conditions
+    if (condition.status === 'resolved') continue;
+
+    // Normalize to PatientCondition shape for resolution
+    const patientCondition: PatientCondition = {
+      id: condition.id,
+      name: condition.name,
+      status: (condition.status as PatientCondition['status']) || 'active',
+      severity: condition.severity || 'moderate',
+      affectedRegions: condition.affectedRegions || [],
+      affectedOrgans: condition.affectedOrgans || [],
+      icdCode: condition.icdCode,
+    };
+
+    const anatomyMapping = resolveConditionAnatomyMapping(patientCondition);
+    const highlightIntensity = getConditionHighlightIntensity(patientCondition, anatomyMapping);
+    const color = getConditionHighlightColor(patientCondition, anatomyMapping);
+
+    const hasExplicitRegions =
+      patientCondition.affectedRegions.length > 0 ||
+      patientCondition.affectedOrgans.length > 0;
+
+    const addToRegion = (regionId: string, isPrimary: boolean, intensity: number) => {
+      const existing = conditionsByRegion.get(regionId) || [];
+      existing.push({
+        condition: patientCondition,
+        highlightIntensity: intensity,
+        color,
+        isPrimary,
+      });
+      conditionsByRegion.set(regionId, existing);
+    };
+
+    if (hasExplicitRegions) {
+      patientCondition.affectedRegions.forEach((r, i) => addToRegion(r, i === 0, highlightIntensity));
+      patientCondition.affectedOrgans.forEach((o, i) => addToRegion(o, i === 0, highlightIntensity));
+    } else if (anatomyMapping) {
+      anatomyMapping.primaryRegions.forEach((r, i) => addToRegion(r, i === 0, highlightIntensity));
+      anatomyMapping.secondaryRegions?.forEach((r) => addToRegion(r, false, highlightIntensity * 0.5));
+    }
+  }
+
+  return conditionsByRegion;
 }
 
 // ============================================

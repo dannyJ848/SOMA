@@ -4,6 +4,7 @@ export const avoidingErrorsContent: EducationalContent = {
   id: 'avoiding-medication-errors',
   type: 'concept',
   name: 'Avoiding Medication Errors',
+  nameEs: 'Prevención de Errores de Medicación',
   alternateNames: ['Medication Error Prevention', 'Medication Safety', 'Safe Medication Use'],
   levels: {
     1: {

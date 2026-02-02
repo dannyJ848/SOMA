@@ -62,6 +62,37 @@ export type {
   ClinicalReasoningEntry,
 } from './clinical-reasoning-database';
 
+// Differential Diagnosis Database
+export {
+  DIFFERENTIAL_DIAGNOSIS_ENTRIES,
+  getDifferentialById,
+  filterDifferentialsByCategory,
+  searchDifferentialDiagnoses,
+  getAllDifferentialEntries,
+  getAllChiefComplaints,
+  searchByRedFlag as searchDifferentialByRedFlag,
+  findEntriesByDiagnosis,
+} from './differential-diagnosis-database';
+export type {
+  ChiefComplaintCategory,
+  DifferentialDiagnosisEntry,
+} from './differential-diagnosis-database';
+
+// History-Taking Database
+export {
+  HISTORY_TAKING_ENTRIES,
+  searchHistoryTakingEntries,
+  filterHistoryByCategory,
+  getHistoryEntryById,
+  getAllHistoryEntryIds,
+  searchByRedFlag as searchHistoryByRedFlag,
+  getHistoryCategoryCounts,
+} from './history-taking-database';
+export type {
+  HistoryCategory,
+  HistoryTakingEntry,
+} from './history-taking-database';
+
 // Content registry for discovery
 export const CLINICAL_REASONING_CATEGORIES = [
   'diagnostic-algorithms',

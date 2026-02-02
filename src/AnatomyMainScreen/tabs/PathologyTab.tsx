@@ -10,6 +10,7 @@ import { useState, useMemo } from 'react';
 import { useSectionComplexity, ComplexityLevel, COMPLEXITY_LABELS } from '../../contexts/ComplexityContext';
 import { ComplexitySelector } from '../../components/ComplexitySelector';
 import { LayerFilterBar, AnatomicalLayer } from '../../components/LayerFilterBar';
+import { usePathologyContent, type PathologyCondition } from '../../components/panels/usePathologyContent';
 import type {
   PathologyContent,
   ConditionInfo,
@@ -33,6 +34,7 @@ interface ExtendedConditionInfo extends ConditionInfo {
 
 interface PathologyTabProps {
   content: PathologyContent;
+  regionId: string;
   regionName: string;
   selectedLayer?: AnatomicalLayer | null;
   onLayerChange?: (layer: AnatomicalLayer | null) => void;
@@ -455,6 +457,7 @@ function inferAffectedLayers(condition: ConditionInfo): AnatomicalLayer[] {
 
 export function PathologyTab({
   content,
+  regionId,
   regionName,
   selectedLayer: externalSelectedLayer,
   onLayerChange: externalOnLayerChange,
@@ -470,6 +473,40 @@ export function PathologyTab({
   // Complexity state using the section-specific hook
   const { level: complexityLevel, setLevel: setComplexityLevel } = useSectionComplexity('pathology');
 
+  // Load real condition data from the condition databases via usePathologyContent.
+  // This hook is wired to 12 condition category modules (cardiovascular, respiratory, etc.)
+  // and resolves regionId -> body system -> real condition mappings.
+  const {
+    conditions: realConditions,
+    loading: realConditionsLoading,
+  } = usePathologyContent(regionId, complexityLevel as 1 | 2 | 3 | 4 | 5);
+
+  // Convert real PathologyConditions to the ConditionInfo shape used by this tab's UI.
+  // This bridges the usePathologyContent hook (real condition DB data) into the existing rendering.
+  const realConditionsAsConditionInfo: ConditionInfo[] = useMemo(() => {
+    if (!realConditions || realConditions.length === 0) return [];
+    return realConditions.map((rc: PathologyCondition) => {
+      const levelContent = rc.content[complexityLevel as 1 | 2 | 3 | 4 | 5] || rc.content[3];
+      return {
+        name: rc.name,
+        mechanism: levelContent?.pathophysiology || levelContent?.definition || '',
+        symptoms: levelContent?.symptoms || [],
+        severity: rc.severity === 'critical' ? ('life-threatening' as const) : (rc.severity as 'mild' | 'moderate' | 'severe'),
+      };
+    });
+  }, [realConditions, complexityLevel]);
+
+  // Merge: prefer real conditions from the hook when available, fall back to static content prop
+  const mergedContent: PathologyContent = useMemo(() => {
+    if (realConditionsAsConditionInfo.length > 0) {
+      return {
+        ...content,
+        commonConditions: realConditionsAsConditionInfo,
+      };
+    }
+    return content;
+  }, [content, realConditionsAsConditionInfo]);
+
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
@@ -480,11 +517,11 @@ export function PathologyTab({
 
   // Extend conditions with inferred layers
   const extendedConditions: ExtendedConditionInfo[] = useMemo(() => {
-    return content.commonConditions.map(condition => ({
+    return mergedContent.commonConditions.map(condition => ({
       ...condition,
       affectedLayers: inferAffectedLayers(condition),
     }));
-  }, [content.commonConditions]);
+  }, [mergedContent.commonConditions]);
 
   // Filter conditions based on layer and complexity
   const filteredConditions = useMemo(() => {
@@ -530,9 +567,9 @@ export function PathologyTab({
   }, [extendedConditions]);
 
   const isEmpty =
-    content.commonConditions.length === 0 &&
-    content.injuryMechanisms.length === 0 &&
-    content.diagnosticMarkers.length === 0;
+    mergedContent.commonConditions.length === 0 &&
+    mergedContent.injuryMechanisms.length === 0 &&
+    mergedContent.diagnosticMarkers.length === 0;
 
   if (isEmpty) {
     return (
@@ -546,7 +583,7 @@ export function PathologyTab({
     );
   }
 
-  const noFilteredResults = filteredConditions.length === 0 && content.commonConditions.length > 0;
+  const noFilteredResults = filteredConditions.length === 0 && mergedContent.commonConditions.length > 0;
 
   return (
     <div className="pathology-tab">
@@ -622,7 +659,7 @@ export function PathologyTab({
         )}
 
         {/* Injury Mechanisms Section (Level 2+) */}
-        {complexityLevel >= 2 && content.injuryMechanisms.length > 0 && (
+        {complexityLevel >= 2 && mergedContent.injuryMechanisms.length > 0 && (
           <section className="content-section">
             <button
               className={`section-header ${expandedSection === 'mechanisms' ? 'expanded' : ''}`}
@@ -632,13 +669,13 @@ export function PathologyTab({
               <span className="section-title">
                 {complexityLevel >= 3 ? 'Injury Mechanisms' : 'How injuries happen'}
               </span>
-              <span className="section-count">{content.injuryMechanisms.length}</span>
+              <span className="section-count">{mergedContent.injuryMechanisms.length}</span>
               <span className="expand-icon">{expandedSection === 'mechanisms' ? '-' : '+'}</span>
             </button>
             {expandedSection === 'mechanisms' && (
               <div className="section-content">
                 <div className="mechanism-chips">
-                  {content.injuryMechanisms.map((mechanism, index) => (
+                  {mergedContent.injuryMechanisms.map((mechanism, index) => (
                     <span key={index} className="mechanism-chip">
                       {mechanism}
                     </span>
@@ -650,7 +687,7 @@ export function PathologyTab({
         )}
 
         {/* Disease Categories Section (Level 3+) */}
-        {complexityLevel >= 3 && content.diseaseCategories.length > 0 && (
+        {complexityLevel >= 3 && mergedContent.diseaseCategories.length > 0 && (
           <section className="content-section">
             <button
               className={`section-header ${expandedSection === 'categories' ? 'expanded' : ''}`}
@@ -658,13 +695,13 @@ export function PathologyTab({
             >
               <span className="section-icon">{'\u{1F4C2}'}</span>
               <span className="section-title">Disease Categories</span>
-              <span className="section-count">{content.diseaseCategories.length}</span>
+              <span className="section-count">{mergedContent.diseaseCategories.length}</span>
               <span className="expand-icon">{expandedSection === 'categories' ? '-' : '+'}</span>
             </button>
             {expandedSection === 'categories' && (
               <div className="section-content">
                 <div className="category-chips">
-                  {content.diseaseCategories.map((category, index) => (
+                  {mergedContent.diseaseCategories.map((category, index) => (
                     <CategoryChip key={index} category={category} />
                   ))}
                 </div>
@@ -674,7 +711,7 @@ export function PathologyTab({
         )}
 
         {/* Diagnostic Markers Section (Level 2+) */}
-        {complexityLevel >= 2 && content.diagnosticMarkers.length > 0 && (
+        {complexityLevel >= 2 && mergedContent.diagnosticMarkers.length > 0 && (
           <section className="content-section">
             <button
               className={`section-header ${expandedSection === 'diagnostics' ? 'expanded' : ''}`}
@@ -684,13 +721,13 @@ export function PathologyTab({
               <span className="section-title">
                 {complexityLevel >= 3 ? 'Diagnostic Markers' : 'Medical Tests'}
               </span>
-              <span className="section-count">{content.diagnosticMarkers.length}</span>
+              <span className="section-count">{mergedContent.diagnosticMarkers.length}</span>
               <span className="expand-icon">{expandedSection === 'diagnostics' ? '-' : '+'}</span>
             </button>
             {expandedSection === 'diagnostics' && (
               <div className="section-content">
                 <div className="markers-grid">
-                  {content.diagnosticMarkers.map((marker, index) => (
+                  {mergedContent.diagnosticMarkers.map((marker, index) => (
                     <DiagnosticMarkerCard
                       key={index}
                       marker={marker}
@@ -704,7 +741,7 @@ export function PathologyTab({
         )}
 
         {/* Clinical Presentations Section */}
-        {content.clinicalPresentations.length > 0 && (
+        {mergedContent.clinicalPresentations.length > 0 && (
           <section className="content-section">
             <button
               className={`section-header ${expandedSection === 'presentations' ? 'expanded' : ''}`}
@@ -714,13 +751,13 @@ export function PathologyTab({
               <span className="section-title">
                 {complexityLevel >= 3 ? 'Clinical Presentations' : 'Common Signs'}
               </span>
-              <span className="section-count">{content.clinicalPresentations.length}</span>
+              <span className="section-count">{mergedContent.clinicalPresentations.length}</span>
               <span className="expand-icon">{expandedSection === 'presentations' ? '-' : '+'}</span>
             </button>
             {expandedSection === 'presentations' && (
               <div className="section-content">
                 <div className="presentation-chips">
-                  {content.clinicalPresentations.map((presentation, index) => (
+                  {mergedContent.clinicalPresentations.map((presentation, index) => (
                     <span key={index} className="presentation-chip">
                       {presentation}
                     </span>

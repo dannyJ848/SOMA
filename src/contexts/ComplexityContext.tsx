@@ -9,7 +9,7 @@
  * Level 5 = MD/Professional (Clinical)
  */
 
-import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 
 export type ComplexityLevel = 1 | 2 | 3 | 4 | 5;
 
@@ -69,17 +69,19 @@ export function ComplexityProvider({ children, defaultLevel = 3 }: { children: R
     });
   }, []);
 
+  const contextValue = useMemo<ComplexityContextValue>(() => ({
+    level,
+    setLevel,
+    label: COMPLEXITY_LABELS[level],
+    description: COMPLEXITY_DESCRIPTIONS[level],
+    sectionLevels,
+    setSectionLevel,
+    getSectionLevel,
+    clearSectionLevel,
+  }), [level, sectionLevels, setLevel, setSectionLevel, getSectionLevel, clearSectionLevel]);
+
   return (
-    <ComplexityContext.Provider value={{
-      level,
-      setLevel,
-      label: COMPLEXITY_LABELS[level],
-      description: COMPLEXITY_DESCRIPTIONS[level],
-      sectionLevels,
-      setSectionLevel,
-      getSectionLevel,
-      clearSectionLevel,
-    }}>
+    <ComplexityContext.Provider value={contextValue}>
       {children}
     </ComplexityContext.Provider>
   );

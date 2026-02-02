@@ -4,6 +4,7 @@ export const recordCorrectionsContent: EducationalContent = {
   id: 'record-corrections',
   type: 'concept',
       name: 'Correcting Medical Records',
+  nameEs: 'Corrección de Registros Médicos',
   alternateNames: ['Medical Record Amendments', 'Record Errors', 'Health Information Correction'],
   levels: {
     1: {

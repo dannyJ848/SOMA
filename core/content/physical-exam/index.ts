@@ -3,31 +3,31 @@
  */
 
 // Abdominal Examination
-export * from './abdominal/index.js';
+export * from './abdominal/index';
 
 // Cardiovascular Examination
-export * from './cardiovascular/index.js';
+export * from './cardiovascular/index';
 
 // HEENT Examination
-export * from './heent/index.js';
+export * from './heent/index';
 
 // Musculoskeletal Examination
-export * from './musculoskeletal/index.js';
+export * from './musculoskeletal/index';
 
 // Neurological Examination
-export * from './neurological/index.js';
+export * from './neurological/index';
 
 // Respiratory Examination
-export * from './respiratory/index.js';
+export * from './respiratory/index';
 
 // Skin Examination
-export * from './skin/index.js';
+export * from './skin/index';
 
 // Physical Exam Database
-export type { PhysicalExamCategory, PhysicalExamEntry } from './physical-exam-database.js';
+export type { PhysicalExamCategory, PhysicalExamEntry } from './physical-exam-database';
 export {
   physicalExamDatabase,
   searchPhysicalExamEntries,
   filterByCategory,
   getEntryById,
-} from './physical-exam-database.js';
+} from './physical-exam-database';

@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
-use std::process::Command;
+use std::io::Write;
+use std::process::{Command, Stdio};
 use std::path::PathBuf;
+use zeroize::Zeroize;
 
 // On-device LLM module for iOS/native inference
 mod llm;
@@ -328,6 +330,26 @@ fn set_passphrase(passphrase: String) {
     }
 }
 
+/// Securely clear the passphrase from memory by zeroing the bytes before dropping.
+fn clear_passphrase() {
+    if let Some(mutex) = PASSPHRASE.get() {
+        if let Ok(mut guard) = mutex.lock() {
+            if let Some(ref mut s) = *guard {
+                // SAFETY: Zeroize the underlying String bytes before dropping
+                s.zeroize();
+            }
+            *guard = None;
+        }
+    }
+}
+
+#[tauri::command]
+fn lock_database() -> Result<(), String> {
+    clear_passphrase();
+    clear_demographics_store();
+    Ok(())
+}
+
 fn get_project_root() -> PathBuf {
     // When running via Tauri, we might be in src-tauri, so go up one level
     let current_dir = std::env::current_dir().unwrap_or_default();
@@ -367,6 +389,50 @@ fn get_db_path() -> PathBuf {
     get_data_dir().join("biological-self.db")
 }
 
+/// Spawn a bridge child process with the passphrase delivered via stdin pipe
+/// instead of an environment variable. This prevents exposure via `ps eww`
+/// or `/proc/[pid]/environ`. (Remediation for FINDING-05)
+fn spawn_bridge_with_passphrase(
+    project_root: &std::path::Path,
+    bridge_script: &str,
+    args: &[&str],
+    passphrase: &str,
+    db_path: &str,
+) -> Result<std::process::Output, String> {
+    let mut cmd = Command::new("npx");
+    cmd.current_dir(project_root)
+        .arg("tsx")
+        .arg(bridge_script);
+
+    for arg in args {
+        cmd.arg(arg);
+    }
+
+    cmd.env("BIOSELF_DB_PATH", db_path)
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+
+    let mut child = cmd
+        .spawn()
+        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+
+    // Write passphrase to stdin and close it so the child reads exactly one line
+    if let Some(mut stdin) = child.stdin.take() {
+        stdin
+            .write_all(passphrase.as_bytes())
+            .map_err(|e| format!("Failed to write passphrase to stdin: {}", e))?;
+        stdin
+            .write_all(b"\n")
+            .map_err(|e| format!("Failed to write newline to stdin: {}", e))?;
+        // stdin is dropped here, closing the pipe
+    }
+
+    child
+        .wait_with_output()
+        .map_err(|e| format!("Failed to wait for bridge process: {}", e))
+}
+
 #[tauri::command]
 fn check_database_exists() -> bool {
     get_db_path().exists()
@@ -381,15 +447,13 @@ fn unlock_database(passphrase: String) -> Result<HealthSummary, String> {
     }
 
     let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("tauri-bridge.ts")
-        .arg("get-summary")
-        .env("BIOSELF_PASSPHRASE", &passphrase)
-        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap())
-        .output()
-        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+    let output = spawn_bridge_with_passphrase(
+        &project_root,
+        "tauri-bridge.ts",
+        &["get-summary"],
+        &passphrase,
+        db_path.to_str().unwrap(),
+    )?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
@@ -417,15 +481,13 @@ fn create_database(passphrase: String) -> Result<HealthSummary, String> {
     }
 
     let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("tauri-bridge.ts")
-        .arg("create")
-        .env("BIOSELF_PASSPHRASE", &passphrase)
-        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap())
-        .output()
-        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+    let output = spawn_bridge_with_passphrase(
+        &project_root,
+        "tauri-bridge.ts",
+        &["create"],
+        &passphrase,
+        db_path.to_str().unwrap(),
+    )?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
@@ -448,15 +510,13 @@ fn get_dashboard() -> Result<DashboardData, String> {
         .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
 
     let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("tauri-bridge.ts")
-        .arg("get-dashboard")
-        .env("BIOSELF_PASSPHRASE", &passphrase)
-        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap())
-        .output()
-        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+    let output = spawn_bridge_with_passphrase(
+        &project_root,
+        "tauri-bridge.ts",
+        &["get-dashboard"],
+        &passphrase,
+        db_path.to_str().unwrap(),
+    )?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
@@ -480,33 +540,24 @@ fn get_timeline(
         .ok_or_else(|| "Not authenticated. Please unlock the database first.".to_string())?;
 
     let project_root = get_project_root();
-    let mut cmd = Command::new("npx");
-    cmd.current_dir(&project_root)
-        .arg("tsx")
-        .arg("tauri-bridge.ts")
-        .arg("get-timeline")
-        .env("BIOSELF_PASSPHRASE", &passphrase)
-        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap());
 
-    // Add optional filter arguments
-    if let Some(ref t) = types {
-        cmd.arg(t.join(","));
-    } else {
-        cmd.arg(""); // Empty types arg
+    // Build optional filter arguments
+    let types_str = types.as_ref().map(|t| t.join(",")).unwrap_or_default();
+    let start_str = start_date.as_deref().unwrap_or("").to_string();
+    let end_str = end_date.as_deref().unwrap_or("").to_string();
+
+    let mut args: Vec<&str> = vec!["get-timeline", &types_str, &start_str];
+    if end_date.is_some() {
+        args.push(&end_str);
     }
 
-    if let Some(ref sd) = start_date {
-        cmd.arg(sd);
-    } else {
-        cmd.arg(""); // Empty start date arg
-    }
-
-    if let Some(ref ed) = end_date {
-        cmd.arg(ed);
-    }
-
-    let output = cmd.output()
-        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+    let output = spawn_bridge_with_passphrase(
+        &project_root,
+        "tauri-bridge.ts",
+        &args,
+        &passphrase,
+        db_path.to_str().unwrap(),
+    )?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
@@ -530,16 +581,13 @@ fn add_symptom(symptom: SymptomInput) -> Result<AddSymptomResult, String> {
         .map_err(|e| format!("Failed to serialize symptom: {}", e))?;
 
     let project_root = get_project_root();
-    let output = Command::new("npx")
-        .current_dir(&project_root)
-        .arg("tsx")
-        .arg("tauri-bridge.ts")
-        .arg("add-symptom")
-        .arg(&symptom_json)
-        .env("BIOSELF_PASSPHRASE", &passphrase)
-        .env("BIOSELF_DB_PATH", db_path.to_str().unwrap())
-        .output()
-        .map_err(|e| format!("Failed to execute bridge: {}", e))?;
+    let output = spawn_bridge_with_passphrase(
+        &project_root,
+        "tauri-bridge.ts",
+        &["add-symptom", &symptom_json],
+        &passphrase,
+        db_path.to_str().unwrap(),
+    )?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
@@ -1326,6 +1374,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             check_database_exists,
             unlock_database,
+            lock_database,
             create_database,
             get_dashboard,
             get_timeline,

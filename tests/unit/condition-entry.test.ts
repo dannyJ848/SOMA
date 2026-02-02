@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 /**
  * Condition Entry Test Suite
  *
@@ -14,6 +15,19 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+// Polyfill localStorage if not available in test environment
+if (typeof globalThis.localStorage === 'undefined' || typeof globalThis.localStorage.setItem !== 'function') {
+  const store: Record<string, string> = {};
+  globalThis.localStorage = {
+    getItem: (key: string) => store[key] ?? null,
+    setItem: (key: string, value: string) => { store[key] = value; },
+    removeItem: (key: string) => { delete store[key]; },
+    clear: () => { Object.keys(store).forEach(k => delete store[k]); },
+    get length() { return Object.keys(store).length; },
+    key: (index: number) => Object.keys(store)[index] ?? null,
+  } as Storage;
+}
 
 // Mock the settings hook
 vi.mock('../../src/settings/useSettings', () => ({
@@ -39,7 +53,7 @@ vi.mock('../../src/settings/useSettings', () => ({
 }));
 
 // Mock the condition store
-vi.mock('../../../core/medical-simulation/conditions/store', () => ({
+vi.mock('../../core/medical-simulation/conditions/store', () => ({
   searchConditions: vi.fn(),
   getCondition: vi.fn(),
   getAllConditions: vi.fn(() => []),
@@ -155,7 +169,7 @@ describe('Condition Entry System', () => {
   describe('ConditionSimulator Search', () => {
     it('should search for conditions containing edema as a symptom', async () => {
       const { searchConditions } = await import(
-        '../../../core/medical-simulation/conditions/store'
+        '../../core/medical-simulation/conditions/store'
       );
 
       // Mock search results - edema is found as a symptom of other conditions

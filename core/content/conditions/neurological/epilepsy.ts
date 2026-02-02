@@ -10,6 +10,7 @@ export const epilepsy: EducationalContent = {
   id: 'condition-epilepsy',
   type: 'condition',
   name: 'Epilepsy',
+  nameEs: 'Epilepsia',
   alternateNames: ['Seizure Disorder', 'Epileptic Syndrome', 'Convulsive Disorder'],
   hpoId: 'HP:0001250',
 

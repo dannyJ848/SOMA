@@ -43,6 +43,12 @@ export { kidneyTransplantation } from './kidney-transplantation';
 export { polycysticKidneyDisease } from './polycystic-kidney-disease';
 export { nephrotoxicDrugs } from './nephrotoxic-drugs';
 
+// In-depth subdirectory content
+export { glomerulonephritis as glomerulonephritisDetailed, nephroticSyndrome } from './glomerular';
+export { acuteTubularNecrosis, renalTubularAcidosis } from './tubular';
+export { ckdStagingDialysisTransplant, dialysisAndTransplant } from './chronic-kidney-disease/index';
+export { hyponatremia, hyperkalemia } from './electrolytes';
+
 // Content categories
 export const NEPHROLOGY_CATEGORIES = [
   'acute-conditions',
@@ -71,4 +77,13 @@ export const NEPHROLOGY_CONTENT_IDS = [
   'process-kidney-transplantation',
   'condition-polycystic-kidney-disease',
   'concept-nephrotoxic-drugs',
+  // In-depth content
+  'nephro-glomerulonephritis',
+  'nephro-nephrotic-syndrome',
+  'nephro-acute-tubular-necrosis',
+  'nephro-renal-tubular-acidosis',
+  'nephro-chronic-kidney-disease',
+  'nephro-dialysis-transplant',
+  'nephro-hyponatremia',
+  'nephro-hyperkalemia',
 ] as const;

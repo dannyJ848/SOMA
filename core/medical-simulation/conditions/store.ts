@@ -12,6 +12,12 @@ import type {
   ConditionCategory,
 } from './types';
 
+import {
+  ICD11_CONDITIONS,
+  generateConditionTemplate,
+} from './condition-generator';
+import type { ICD11ConditionEntry } from './condition-generator';
+
 // ============================================
 // Condition Database
 // ============================================
@@ -21139,4 +21145,234 @@ export function getConditionAnatomyHighlights(
   }
 
   return highlights;
+}
+
+// ============================================
+// ICD-11 Integration (390+ conditions)
+// ============================================
+
+/** Cache for generated condition templates from ICD-11 entries */
+const generatedConditionCache: Map<string, ConditionSimulation> = new Map();
+
+/**
+ * Get a condition by ID, checking the detailed store first,
+ * then falling back to auto-generated templates from ICD-11 entries.
+ */
+export function getConditionWithFallback(conditionId: string): ConditionSimulation | undefined {
+  // First, check the detailed database
+  const detailed = conditionDatabase.get(conditionId.toLowerCase());
+  if (detailed) return detailed;
+
+  // Check cache of generated templates
+  const cached = generatedConditionCache.get(conditionId.toLowerCase());
+  if (cached) return cached;
+
+  // Generate from ICD-11 entry
+  const icd11Entry = ICD11_CONDITIONS.find(
+    (e) => e.id === conditionId.toLowerCase()
+  );
+  if (icd11Entry) {
+    const generated = generateConditionTemplate({
+      conditionId: icd11Entry.id,
+      name: icd11Entry.name,
+      icdCode: icd11Entry.icd,
+      category: icd11Entry.cat,
+      description: icd11Entry.desc,
+      systems: icd11Entry.sys,
+    });
+    generatedConditionCache.set(conditionId.toLowerCase(), generated);
+    return generated;
+  }
+
+  return undefined;
+}
+
+/**
+ * Get all conditions: detailed database + ICD-11 entries that aren't already in the store.
+ * Returns all ~425 conditions, preferring detailed versions when available.
+ */
+export function getAllConditionsWithICD11(): ConditionSimulation[] {
+  const result: Map<string, ConditionSimulation> = new Map();
+
+  // Add all detailed conditions first
+  for (const [key, value] of conditionDatabase) {
+    result.set(key, value);
+  }
+
+  // Add ICD-11 conditions that don't have detailed entries
+  for (const entry of ICD11_CONDITIONS) {
+    if (!result.has(entry.id)) {
+      const generated = getConditionWithFallback(entry.id);
+      if (generated) {
+        result.set(entry.id, generated);
+      }
+    }
+  }
+
+  return Array.from(result.values());
+}
+
+/**
+ * Get all ICD-11 condition entries (lightweight, no full simulation data).
+ * Useful for browse/search without loading full simulation templates.
+ */
+export function getICD11Entries(): ICD11ConditionEntry[] {
+  return ICD11_CONDITIONS;
+}
+
+/**
+ * Check whether a condition has detailed simulation data in the store
+ * vs. a generated template from ICD-11 index.
+ */
+export function hasDetailedConditionData(conditionId: string): boolean {
+  return conditionDatabase.has(conditionId.toLowerCase());
+}
+
+/**
+ * Search across ALL conditions (detailed + ICD-11).
+ * Returns results sorted by relevance with match type information.
+ */
+export function searchAllConditions(query: string): ConditionSearchResult[] {
+  const normalizedQuery = query.toLowerCase().trim();
+  if (!normalizedQuery) return [];
+
+  const results: ConditionSearchResult[] = [];
+  const seenIds = new Set<string>();
+
+  // First search the detailed database (higher relevance)
+  for (const condition of conditionDatabase.values()) {
+    let matchType: ConditionSearchResult['matchType'] | null = null;
+    let relevanceScore = 0;
+
+    if (condition.name.toLowerCase() === normalizedQuery) {
+      matchType = 'exact';
+      relevanceScore = 100;
+    } else if (
+      condition.aliases?.some((a) => a.toLowerCase() === normalizedQuery)
+    ) {
+      matchType = 'alias';
+      relevanceScore = 95;
+    } else if (condition.icdCode.toLowerCase() === normalizedQuery) {
+      matchType = 'exact';
+      relevanceScore = 90;
+    } else if (condition.name.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'partial';
+      relevanceScore = 75;
+    } else if (
+      condition.aliases?.some((a) => a.toLowerCase().includes(normalizedQuery))
+    ) {
+      matchType = 'partial';
+      relevanceScore = 65;
+    } else if (condition.category.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'category';
+      relevanceScore = 45;
+    } else if (
+      condition.clinicalPresentation.primarySymptoms.some((s) =>
+        s.name.toLowerCase().includes(normalizedQuery)
+      )
+    ) {
+      matchType = 'symptom';
+      relevanceScore = 35;
+    } else if (condition.description.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'partial';
+      relevanceScore = 25;
+    }
+
+    if (matchType) {
+      seenIds.add(condition.conditionId);
+      results.push({
+        conditionId: condition.conditionId,
+        name: condition.name,
+        aliases: condition.aliases,
+        category: condition.category,
+        matchType,
+        relevanceScore,
+      });
+    }
+  }
+
+  // Then search ICD-11 entries not already found
+  for (const entry of ICD11_CONDITIONS) {
+    if (seenIds.has(entry.id)) continue;
+
+    let matchType: ConditionSearchResult['matchType'] | null = null;
+    let relevanceScore = 0;
+
+    if (entry.name.toLowerCase() === normalizedQuery) {
+      matchType = 'exact';
+      relevanceScore = 95;
+    } else if (entry.icd.toLowerCase() === normalizedQuery) {
+      matchType = 'exact';
+      relevanceScore = 85;
+    } else if (entry.name.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'partial';
+      relevanceScore = 60;
+    } else if (entry.cat.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'category';
+      relevanceScore = 35;
+    } else if (entry.desc.toLowerCase().includes(normalizedQuery)) {
+      matchType = 'partial';
+      relevanceScore = 20;
+    } else if (
+      entry.sys.some((s) => s.toLowerCase().includes(normalizedQuery))
+    ) {
+      matchType = 'partial';
+      relevanceScore = 15;
+    }
+
+    if (matchType) {
+      seenIds.add(entry.id);
+      results.push({
+        conditionId: entry.id,
+        name: entry.name,
+        category: entry.cat,
+        matchType,
+        relevanceScore,
+      });
+    }
+  }
+
+  return results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+}
+
+/**
+ * Get ICD-11 conditions filtered by category.
+ * Returns ICD11ConditionEntry[] for lightweight browsing.
+ */
+export function getICD11ByCategory(category: ConditionCategory): ICD11ConditionEntry[] {
+  return ICD11_CONDITIONS.filter((e) => e.cat === category);
+}
+
+/**
+ * Get count of conditions per category across all ICD-11 entries.
+ */
+export function getConditionCountByCategory(): Record<ConditionCategory, number> {
+  const counts = {} as Record<ConditionCategory, number>;
+  for (const entry of ICD11_CONDITIONS) {
+    counts[entry.cat] = (counts[entry.cat] || 0) + 1;
+  }
+  return counts;
+}
+
+/**
+ * Get all unique body systems mentioned across ICD-11 conditions.
+ */
+export function getAllBodySystems(): string[] {
+  const systems = new Set<string>();
+  for (const entry of ICD11_CONDITIONS) {
+    for (const sys of entry.sys) {
+      systems.add(sys);
+    }
+  }
+  return Array.from(systems).sort();
+}
+
+/**
+ * Get conditions that affect a specific body system.
+ */
+export function getConditionsBySystem(system: string): ICD11ConditionEntry[] {
+  const normalizedSystem = system.toLowerCase();
+  return ICD11_CONDITIONS.filter((e) =>
+    e.sys.some((s) => s.toLowerCase() === normalizedSystem)
+  );
 }

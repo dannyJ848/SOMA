@@ -10,6 +10,7 @@ export const celiac: EducationalContent = {
   id: 'condition-celiac',
   type: 'condition',
   name: 'Celiac Disease',
+  nameEs: 'Enfermedad Celíaca',
   alternateNames: ['Celiac Sprue', 'Gluten-Sensitive Enteropathy', 'Coeliac Disease'],
   hpoId: 'HP:0002608',
 

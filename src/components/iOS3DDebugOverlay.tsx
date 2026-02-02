@@ -98,62 +98,52 @@ export const iOS3DDebugState = {
   listeners: new Set<() => void>(),
 };
 
-// Helper to update debug state and notify listeners
+// Safety guard to prevent recursive logging
+let isAddingLog = false;
+
+// Helper to update debug state - listener notifications DISABLED to prevent infinite loops
 export function updateiOS3DDebugState(
   updater: (state: typeof iOS3DDebugState) => void
 ) {
   updater(iOS3DDebugState);
-  iOS3DDebugState.listeners.forEach((listener) => listener());
+  // NOTE: Listener notifications disabled to prevent infinite render loops
+  // The overlay uses a polling mechanism instead
+  // iOS3DDebugState.listeners.forEach((listener) => listener());
 }
 
-// Helper to add a debug log
+// Helper to add a debug log - TEMPORARILY DISABLED to prevent infinite loops
 export function addDebugLogEntry(
-  level: DebugLog['level'],
-  message: string
+  _level: DebugLog['level'],
+  _message: string
 ) {
-  const log: DebugLog = {
-    timestamp: Date.now(),
-    level,
-    message,
-  };
-
-  // Keep last 50 logs
-  if (iOS3DDebugState.logs.length >= 50) {
-    iOS3DDebugState.logs.shift();
-  }
-  iOS3DDebugState.logs.push(log);
-
-  // Also log to console with prefix
-  const prefix = '[iOS3DDebug]';
-  switch (level) {
-    case 'error':
-      console.error(prefix, message);
-      break;
-    case 'warn':
-      console.warn(prefix, message);
-      break;
-    case 'success':
-      console.log(prefix, '%c' + message, 'color: #22c55e');
-      break;
-    default:
-      console.log(prefix, message);
-  }
-
-  iOS3DDebugState.listeners.forEach((listener) => listener());
+  // DISABLED: This function is temporarily disabled to prevent infinite render loops
+  // All calls to this function will be silently ignored
+  return;
 }
+
+// Safety guard for markComponentMounted
+let isMarkingComponent = false;
 
 // Helper to mark component as mounted/unmounted
 export function markComponentMounted(
   component: keyof ComponentStatus,
   mounted: boolean
 ) {
-  updateiOS3DDebugState((state) => {
-    state.componentStatus[component] = mounted;
-  });
-  addDebugLogEntry(
-    mounted ? 'success' : 'info',
-    `${component} ${mounted ? 'MOUNTED' : 'UNMOUNTED'}`
-  );
+  // Safety guard to prevent recursive calls
+  if (isMarkingComponent) return;
+  isMarkingComponent = true;
+
+  try {
+    updateiOS3DDebugState((state) => {
+      state.componentStatus[component] = mounted;
+    });
+    addDebugLogEntry(
+      mounted ? 'success' : 'info',
+      `${component} ${mounted ? 'MOUNTED' : 'UNMOUNTED'}`
+    );
+  } finally {
+    isMarkingComponent = false;
+  }
 }
 
 // Helper to update canvas status
@@ -272,13 +262,12 @@ export function IOS3DDebugOverlay({
   const [, forceUpdate] = useState({});
   const logContainerRef = useRef<HTMLDivElement>(null);
 
-  // Subscribe to state changes
+  // Use polling instead of listeners to prevent infinite render loops
   useEffect(() => {
-    const listener = () => forceUpdate({});
-    iOS3DDebugState.listeners.add(listener);
-    return () => {
-      iOS3DDebugState.listeners.delete(listener);
-    };
+    const interval = setInterval(() => {
+      forceUpdate({});
+    }, 500); // Poll every 500ms
+    return () => clearInterval(interval);
   }, []);
 
   // Check WebGL on mount

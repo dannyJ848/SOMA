@@ -4,6 +4,7 @@ export const capacityDecisionMakingContent: EducationalContent = {
   id: 'capacity-decision-making',
   type: 'concept',
   name: 'Capacity and Decision-Making',
+  nameEs: 'Capacidad y Toma de Decisiones',
   alternateNames: ['Decision-Making Capacity', 'Mental Capacity', 'Competency'],
   levels: {
     1: {

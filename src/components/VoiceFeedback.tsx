@@ -37,6 +37,7 @@ export interface VoiceFeedbackProps {
   error?: { message: string; type: string; recoverable: boolean } | null;
   confidence?: number;
   onRetry?: () => void;
+  onConfirm?: () => void;
   onDismiss?: () => void;
   onHelp?: () => void;
   size?: 'small' | 'medium' | 'large';
@@ -291,7 +292,7 @@ function NotSupportedDisplay({ onHelp }: { onHelp?: () => void }): React.ReactEl
 // ============================================================================
 
 export function VoiceFeedback({
-  state, transcript, interimTranscript, command, error, confidence, onRetry, onDismiss, onHelp,
+  state, transcript, interimTranscript, command, error, confidence, onRetry, onConfirm, onDismiss, onHelp,
   size = 'medium', position = 'bottom', showTranscript = true, showConfidence = false, autoHideDelay = 3000, className = ''
 }: VoiceFeedbackProps): React.ReactElement {
   const [progress, setProgress] = useState(0);
@@ -337,11 +338,11 @@ export function VoiceFeedback({
           </div>
         );
       case 'recognized':
-        return command ? <CommandConfirmation command={command} onConfirm={() => {}} onCancel={onDismiss || (() => {})} onEdit={onRetry} /> : null;
+        return command ? <CommandConfirmation command={command} onConfirm={onConfirm || (() => { console.warn('VoiceFeedback: onConfirm handler not provided for recognized command'); })} onCancel={onDismiss || (() => { console.warn('VoiceFeedback: onCancel/onDismiss handler not provided'); })} onEdit={onRetry} /> : null;
       case 'executing':
         return command ? <CommandProgress command={command} progress={progress} status="Executing command..." /> : null;
       case 'success':
-        return command ? <CommandSuccessToast command={command} onDismiss={onDismiss || (() => {})} autoHideDelay={autoHideDelay} /> : null;
+        return command ? <CommandSuccessToast command={command} onDismiss={onDismiss || (() => { console.warn('VoiceFeedback: onDismiss handler not provided for success toast'); })} autoHideDelay={autoHideDelay} /> : null;
       case 'error':
         return error ? <VoiceErrorDisplay error={error} onRetry={onRetry} onDismiss={onDismiss} onHelp={onHelp} /> : null;
       case 'not-supported':

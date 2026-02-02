@@ -487,7 +487,7 @@ export function useSmartNavigation(): UseSmartNavigationReturn {
    */
   const currentSuggestions = useMemo(
     () => aiNavigation.getSuggestions(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
     [aiNavigation.suggestedRegions]
   );
 

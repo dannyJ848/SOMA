@@ -3,11 +3,24 @@
  *
  * Displays alerts for abnormal vital signs with
  * severity indicators and threshold configuration.
+ * Thresholds are derived from the real medical reference ranges
+ * in core/vitals/reference-ranges.ts.
  */
 
 import { useState, useCallback, useMemo } from 'react';
 import type { VitalAlert, AlertSeverity, VitalType } from '../../core/vitals/types.js';
 import { getVitalDisplayName, getSeverityColor } from '../../core/vitals/index.js';
+import {
+  HEART_RATE_RANGES,
+  BLOOD_PRESSURE_SYSTOLIC_RANGES,
+  OXYGEN_SATURATION_RANGES,
+  RESPIRATORY_RATE_RANGES,
+  TEMPERATURE_RANGES,
+  BLOOD_GLUCOSE_FASTING_RANGES,
+  HRV_RMSSD_RANGES,
+  RECOVERY_SCORE_RANGES,
+  type ReferenceRange,
+} from '../../core/vitals/reference-ranges.js';
 
 // ============================================
 // Types
@@ -29,40 +42,38 @@ interface AlertThreshold {
 }
 
 // ============================================
-// Constants
+// Derive thresholds from real reference ranges
 // ============================================
 
+/**
+ * Build an AlertThreshold from a ReferenceRange.
+ * Uses the normal range boundaries for warnings, and the
+ * critical values for critical thresholds.
+ */
+function deriveThreshold(range: ReferenceRange): AlertThreshold {
+  return {
+    vitalType: range.vitalType,
+    lowWarning: range.low?.max ?? range.normal.min,
+    lowCritical: range.critical?.low,
+    highWarning: range.elevated?.min ?? range.high?.min ?? range.normal.max,
+    highCritical: range.critical?.high,
+    unit: range.unit,
+  };
+}
+
+/**
+ * Default thresholds derived from real medical reference ranges
+ * defined in core/vitals/reference-ranges.ts.
+ */
 const DEFAULT_THRESHOLDS: AlertThreshold[] = [
-  {
-    vitalType: 'heart-rate',
-    lowWarning: 50,
-    lowCritical: 40,
-    highWarning: 100,
-    highCritical: 120,
-    unit: 'bpm',
-  },
-  {
-    vitalType: 'blood-pressure',
-    lowWarning: 90,
-    lowCritical: 80,
-    highWarning: 140,
-    highCritical: 180,
-    unit: 'mmHg',
-  },
-  {
-    vitalType: 'oxygen-saturation',
-    lowWarning: 95,
-    lowCritical: 90,
-    unit: '%',
-  },
-  {
-    vitalType: 'temperature',
-    lowWarning: 36.0,
-    lowCritical: 35.0,
-    highWarning: 38.0,
-    highCritical: 39.0,
-    unit: 'C',
-  },
+  deriveThreshold(HEART_RATE_RANGES),
+  deriveThreshold(BLOOD_PRESSURE_SYSTOLIC_RANGES),
+  deriveThreshold(OXYGEN_SATURATION_RANGES),
+  deriveThreshold(RESPIRATORY_RATE_RANGES),
+  deriveThreshold(TEMPERATURE_RANGES),
+  deriveThreshold(BLOOD_GLUCOSE_FASTING_RANGES),
+  deriveThreshold(HRV_RMSSD_RANGES),
+  deriveThreshold(RECOVERY_SCORE_RANGES),
 ];
 
 // ============================================
@@ -223,7 +234,8 @@ export function VitalAlerts({
         <div className="threshold-config">
           <h3>Alert Thresholds</h3>
           <p className="config-description">
-            Set custom thresholds for when you want to be alerted about your vital signs
+            Set custom thresholds for when you want to be alerted about your vital signs.
+            Defaults are derived from clinical reference ranges.
           </p>
           <div className="threshold-list">
             {thresholds.map((threshold) => (
@@ -316,7 +328,7 @@ export function VitalAlerts({
               className="reset-btn"
               onClick={() => setThresholds(DEFAULT_THRESHOLDS)}
             >
-              Reset to Defaults
+              Reset to Clinical Defaults
             </button>
           </div>
         </div>

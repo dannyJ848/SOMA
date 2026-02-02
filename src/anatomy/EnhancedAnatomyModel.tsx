@@ -475,7 +475,7 @@ interface SystemFilterPanelProps {
 export function SystemFilterPanel({
   enabledSystems,
   onToggleSystem,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   lodState: _lodState,
 }: SystemFilterPanelProps) {
   // All 11 anatomical systems - always show all for Complete Anatomy-style layer control

@@ -1,4 +1,4 @@
-import type { EducationalContent } from '../../types.js';
+import type { EducationalContent } from '../../types';
 
 export const transitionsOfCare: EducationalContent = {
   id: 'transitions-of-care',

@@ -117,18 +117,12 @@ export function ModelLoadingScreen({
   const [systemIndex, setSystemIndex] = useState(0);
   // Controls the fade-out opacity
   const [opacity, setOpacity] = useState(1);
-  // Whether the component has reported to debug overlay
-  const reportedRef = useRef(false);
-
   // --------------------------------------------------
-  // Debug logging on mount
+  // Debug logging on mount - disabled to prevent infinite loop
   // --------------------------------------------------
-  useEffect(() => {
-    if (!reportedRef.current) {
-      reportedRef.current = true;
-      addDebugLogEntry('info', 'ModelLoadingScreen mounted');
-    }
-  }, []);
+  // useEffect(() => {
+  //   addDebugLogEntry('info', 'ModelLoadingScreen mounted');
+  // }, []);
 
   // --------------------------------------------------
   // Simulated loading progress
@@ -157,13 +151,31 @@ export function ModelLoadingScreen({
   }, [isComplete, errorMessage]);
 
   // --------------------------------------------------
+  // Auto-complete if stuck at 95% for too long (8 seconds)
+  // --------------------------------------------------
+  const [autoCompleted, setAutoCompleted] = useState(false);
+
+  useEffect(() => {
+    if (isComplete || autoCompleted || progress < 95) return;
+
+    const timeout = setTimeout(() => {
+      // addDebugLogEntry('warn', 'ModelLoadingScreen: auto-completing after timeout');
+      setAutoCompleted(true);
+    }, 8000);
+
+    return () => clearTimeout(timeout);
+  }, [progress, isComplete, autoCompleted]);
+
+  // --------------------------------------------------
   // Jump to 100% and fade out when loading finishes
   // --------------------------------------------------
+  const shouldComplete = isComplete || autoCompleted;
+
   useEffect(() => {
-    if (!isComplete) return;
+    if (!shouldComplete) return;
 
     setProgress(100);
-    addDebugLogEntry('success', 'ModelLoadingScreen: loading complete, fading out');
+    // addDebugLogEntry('success', 'ModelLoadingScreen: loading complete, fading out');
 
     // Small delay so the user sees 100% before fade
     const timer = setTimeout(() => {
@@ -171,7 +183,7 @@ export function ModelLoadingScreen({
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [isComplete]);
+  }, [shouldComplete]);
 
   // Handle CSS transition end to notify parent
   const handleTransitionEnd = useCallback(() => {

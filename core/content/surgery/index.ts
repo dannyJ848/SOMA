@@ -64,12 +64,10 @@ export {
 export type { SurgeryDatabaseCategory, SurgeryEntry } from './surgery-database';
 
 // Surgery vs Conservative Treatment
-// TODO: Create surgery-vs-conservative.ts module
-// export { surgeryVsConservative } from './surgery-vs-conservative';
+export { surgeryVsConservative } from './surgery-vs-conservative';
 
 // Minimally Invasive Surgery
-// TODO: Create minimally-invasive-surgery.ts module
-// export { minimallyInvasiveSurgery } from './minimally-invasive-surgery';
+export { minimallyInvasiveSurgery } from './minimally-invasive-surgery';
 
 // Content registry for discovery
 export const SURGERY_CATEGORIES = [
@@ -95,8 +93,8 @@ export const ALL_SURGERY_CONTENT = [
   'wound-healing',
   'sutures-and-wound-care',
   'surgical-drains',
-  // 'surgery-vs-conservative', // TODO: Create module
-  // 'minimally-invasive-surgery', // TODO: Create module
+  'surgery-vs-conservative',
+  'minimally-invasive-surgery',
 ] as const;
 
 /**

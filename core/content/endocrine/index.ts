@@ -7,15 +7,9 @@
  * - Histology: Microscopic structure of endocrine tissues
  * - Pathology: Endocrine disorders and diseases
  * - Clinical: Diagnostic testing and examination
- *
- * NOTE: Content modules are planned for future implementation.
- * This file exports placeholder types until content is created.
  */
 
-// Placeholder exports - content files to be implemented
-export const ENDOCRINE_CONTENT_PLACEHOLDER = 'placeholder';
-
-// Content categories for future implementation
+// Content categories
 export const ENDOCRINE_CATEGORIES = [
   'anatomy',
   'physiology',
@@ -25,3 +19,22 @@ export const ENDOCRINE_CATEGORIES = [
 ] as const;
 
 export type EndocrineCategory = (typeof ENDOCRINE_CATEGORIES)[number];
+
+// Endocrine System Database
+export {
+  // Types
+  type EndocrineDbCategory,
+  type EndocrineSubcategory,
+  type ComplexityLevels,
+  type EndocrineEntry,
+  // Data
+  ENDOCRINE_ENTRIES,
+  // Lookup functions
+  getEndocrineEntry,
+  searchEndocrineEntries,
+  getEndocrineByCategory,
+  getEndocrineBySubcategory,
+  getEndocrineCount,
+  getEndocrineAtLevel,
+  getAllEndocrineIds,
+} from './endocrine-database';

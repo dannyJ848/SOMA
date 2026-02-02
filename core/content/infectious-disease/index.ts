@@ -2,8 +2,9 @@
  * Infectious Disease Content Module
  *
  * Comprehensive educational content covering bacterial infections,
- * viral infections, prevention strategies, antibiotic stewardship,
- * and serious infectious diseases.
+ * viral infections, fungal infections, parasitic infections,
+ * prevention strategies, antibiotic stewardship, and serious
+ * infectious diseases.
  */
 
 // Antibiotic Stewardship
@@ -18,6 +19,17 @@ export { staphInfections } from './bacterial-infections/staph-infections';
 export { strepInfections } from './bacterial-infections/strep-infections';
 export { gramNegative } from './bacterial-infections/gram-negative';
 export { atypicalBacteria } from './bacterial-infections/atypical-bacteria';
+
+// Fungal Infections
+export { CANDIDIASIS } from './fungal-infections/candidiasis';
+export { ASPERGILLOSIS } from './fungal-infections/aspergillosis';
+export { CRYPTOCOCCOSIS } from './fungal-infections/cryptococcosis';
+export { ENDEMIC_MYCOSES } from './fungal-infections/endemic-mycoses';
+
+// Parasitic Infections
+export { MALARIA } from './parasitic-infections/malaria';
+export { TOXOPLASMOSIS } from './parasitic-infections/toxoplasmosis';
+export { HELMINTH_INFECTIONS } from './parasitic-infections/helminth-infections';
 
 // Prevention
 export { vaccinationBasics } from './prevention/vaccination-basics';
@@ -41,7 +53,8 @@ export { COVID_19 } from './viral-infections/covid-19';
 export const infectiousDiseaseContent = {
   id: 'infectious-disease',
   name: 'Infectious Disease',
-  description: 'Comprehensive educational content covering bacterial infections, viral infections, prevention strategies, antibiotic stewardship, and serious infectious diseases.',
+  nameEs: 'Enfermedades Infecciosas',
+  description: 'Comprehensive educational content covering bacterial infections, viral infections, fungal infections, parasitic infections, prevention strategies, antibiotic stewardship, and serious infectious diseases.',
   categories: [
     {
       id: 'antibiotic-stewardship',
@@ -62,6 +75,25 @@ export const infectiousDiseaseContent = {
         { id: 'strep-infections', name: 'Streptococcal Infections' },
         { id: 'gram-negative', name: 'Gram-Negative Bacterial Infections' },
         { id: 'atypical-bacteria', name: 'Atypical Bacterial Infections' },
+      ],
+    },
+    {
+      id: 'fungal-infections',
+      name: 'Fungal Infections',
+      topics: [
+        { id: 'candidiasis', name: 'Candidiasis' },
+        { id: 'aspergillosis', name: 'Aspergillosis' },
+        { id: 'cryptococcosis', name: 'Cryptococcosis' },
+        { id: 'endemic-mycoses', name: 'Endemic Mycoses' },
+      ],
+    },
+    {
+      id: 'parasitic-infections',
+      name: 'Parasitic Infections',
+      topics: [
+        { id: 'malaria', name: 'Malaria' },
+        { id: 'toxoplasmosis', name: 'Toxoplasmosis' },
+        { id: 'helminth-infections', name: 'Helminth Infections' },
       ],
     },
     {

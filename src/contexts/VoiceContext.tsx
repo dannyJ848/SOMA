@@ -326,11 +326,18 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
   return bytes.buffer;
 }
 
+/** Handle returned from playAudioBase64 to control playback */
+interface PlaybackHandle {
+  /** The AudioContext driving playback; suspend/resume to pause/resume */
+  audioContext: AudioContext;
+}
+
 async function playAudioBase64(
   base64: string,
   onProgress: (progress: number) => void,
   onEnded: () => void,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  onHandle?: (handle: PlaybackHandle) => void
 ): Promise<void> {
   const audioContext = new AudioContext();
   const arrayBuffer = base64ToArrayBuffer(base64);
@@ -345,6 +352,11 @@ async function playAudioBase64(
 
   // Progress tracking
   let progressInterval: ReturnType<typeof setInterval> | null = null;
+
+  // Expose the handle so callers can suspend/resume the context
+  if (onHandle) {
+    onHandle({ audioContext });
+  }
 
   return new Promise((resolve, reject) => {
     source.onended = () => {
@@ -386,6 +398,7 @@ export function VoiceProvider({ children }: VoiceProviderProps) {
   const [state, dispatch] = useReducer(voiceReducer, initialState);
   const recorderRef = useRef<AudioRecorderState>(createAudioRecorder());
   const playbackAbortRef = useRef<AbortController | null>(null);
+  const playbackHandleRef = useRef<PlaybackHandle | null>(null);
   const audioLevelIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const healthStatusRef = useRef<VoiceHealthStatus | null>(null);
   const availableVoicesRef = useRef<string[]>([
@@ -395,7 +408,7 @@ export function VoiceProvider({ children }: VoiceProviderProps) {
   // Check health on mount
   useEffect(() => {
     checkHealth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   // Health check
@@ -632,8 +645,12 @@ export function VoiceProvider({ children }: VoiceProviderProps) {
           await playAudioBase64(
             response.data.audioBase64,
             (progress) => dispatch({ type: 'SET_PLAYBACK_PROGRESS', payload: progress }),
-            () => dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'idle' }),
-            playbackAbortRef.current?.signal
+            () => {
+              playbackHandleRef.current = null;
+              dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'idle' });
+            },
+            playbackAbortRef.current?.signal,
+            (handle) => { playbackHandleRef.current = handle; }
           );
         } else {
           dispatch({
@@ -662,21 +679,27 @@ export function VoiceProvider({ children }: VoiceProviderProps) {
       playbackAbortRef.current.abort();
       playbackAbortRef.current = null;
     }
+    playbackHandleRef.current = null;
     dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'idle' });
   }, []);
 
-  // Pause speaking (not fully supported - just stops for now)
+  // Pause speaking via AudioContext.suspend()
   const pauseSpeaking = useCallback((): void => {
-    // Web Audio API doesn't support true pause, so we stop
-    stopSpeaking();
-    dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'paused' });
-  }, [stopSpeaking]);
+    const handle = playbackHandleRef.current;
+    if (handle && state.playbackState === 'playing') {
+      handle.audioContext.suspend();
+      dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'paused' });
+    }
+  }, [state.playbackState]);
 
-  // Resume speaking (not fully supported)
+  // Resume speaking via AudioContext.resume()
   const resumeSpeaking = useCallback((): void => {
-    // Would need to re-synthesize or cache audio
-    console.warn('Resume speaking not yet implemented');
-  }, []);
+    const handle = playbackHandleRef.current;
+    if (handle && state.playbackState === 'paused') {
+      handle.audioContext.resume();
+      dispatch({ type: 'SET_PLAYBACK_STATE', payload: 'playing' });
+    }
+  }, [state.playbackState]);
 
   // Update config
   const updateConfig = useCallback((config: Partial<VoiceConfig>): void => {

@@ -300,7 +300,7 @@ export function useFetch<T>(
     if (immediate) {
       fetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [immediate, ...deps]);
 
   return {

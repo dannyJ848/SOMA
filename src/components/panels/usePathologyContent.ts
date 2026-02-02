@@ -2,10 +2,23 @@
  * usePathologyContent Hook
  *
  * Fetches and manages pathology content for a specific anatomical region
- * at the requested complexity level.
+ * at the requested complexity level. Loads real condition data from:
+ *   - CONDITION_ANATOMY_MAP (region/system -> condition mappings)
+ *   - EducationalContent condition files (multi-level educational content)
  */
 
 import { useState, useEffect, useMemo } from 'react';
+import type { EducationalContent, LevelContent } from '@core/content/types';
+import {
+  CONDITION_ANATOMY_MAP,
+  getConditionsByRegion,
+  getConditionsBySystem,
+  type BodySystem,
+  type ConditionAnatomyMapping,
+  type AnatomicalEffectType,
+} from '@core/anatomy-patient-bridge/condition-anatomy-map';
+// conditionCategories is available from '@core/content/conditions' if needed
+// for additional category-based lookups beyond the anatomy bridge.
 
 // ============================================================================
 // Types
@@ -51,6 +64,7 @@ export interface ConditionContent {
 export interface PathologyCondition {
   id: string;
   name: string;
+  nameEs?: string;
   category: ConditionCategory;
   severity: Severity;
   prevalence: Prevalence;
@@ -75,274 +89,434 @@ export interface UsePathologyContentResult {
 }
 
 // ============================================================================
-// Sample Data Generator
+// Region-to-BodySystem Mapping
 // ============================================================================
 
-function generateSampleConditions(regionId: string, regionName: string): PathologyCondition[] {
-  const conditions: PathologyCondition[] = [];
+/**
+ * Maps body region IDs (from the 3D anatomy model or UI selection)
+ * to BodySystem identifiers used by CONDITION_ANATOMY_MAP.
+ *
+ * Region IDs typically follow a dotted path like:
+ *   body.torso.thorax.heart
+ *   body.head.brain
+ *   body.torso.abdomen.liver
+ */
+export const REGION_TO_BODY_SYSTEM: Record<string, BodySystem> = {
+  // Cardiovascular
+  heart: 'cardiovascular',
+  cardiac: 'cardiovascular',
+  aorta: 'cardiovascular',
+  artery: 'cardiovascular',
+  vein: 'cardiovascular',
+  vessel: 'cardiovascular',
+  vascular: 'cardiovascular',
+  coronary: 'cardiovascular',
+  // Respiratory
+  lung: 'respiratory',
+  lungs: 'respiratory',
+  bronchi: 'respiratory',
+  bronchus: 'respiratory',
+  trachea: 'respiratory',
+  pulmonary: 'respiratory',
+  respiratory: 'respiratory',
+  airway: 'respiratory',
+  pleura: 'respiratory',
+  diaphragm: 'respiratory',
+  // Digestive
+  stomach: 'digestive',
+  liver: 'digestive',
+  hepatic: 'digestive',
+  pancreas: 'digestive',
+  gallbladder: 'digestive',
+  intestine: 'digestive',
+  colon: 'digestive',
+  esophagus: 'digestive',
+  bowel: 'digestive',
+  duodenum: 'digestive',
+  rectum: 'digestive',
+  appendix: 'digestive',
+  digestive: 'digestive',
+  gastrointestinal: 'digestive',
+  // Nervous
+  brain: 'nervous',
+  cerebral: 'nervous',
+  cerebellum: 'nervous',
+  spinal: 'nervous',
+  nerve: 'nervous',
+  neuro: 'nervous',
+  nervous: 'nervous',
+  cortex: 'nervous',
+  brainstem: 'nervous',
+  hypothalamus: 'nervous',
+  thalamus: 'nervous',
+  // Musculoskeletal
+  bone: 'musculoskeletal',
+  muscle: 'musculoskeletal',
+  joint: 'musculoskeletal',
+  spine: 'musculoskeletal',
+  vertebra: 'musculoskeletal',
+  femur: 'musculoskeletal',
+  tibia: 'musculoskeletal',
+  humerus: 'musculoskeletal',
+  pelvis: 'musculoskeletal',
+  hip: 'musculoskeletal',
+  knee: 'musculoskeletal',
+  shoulder: 'musculoskeletal',
+  skeletal: 'musculoskeletal',
+  musculoskeletal: 'musculoskeletal',
+  tendon: 'musculoskeletal',
+  ligament: 'musculoskeletal',
+  cartilage: 'musculoskeletal',
+  // Endocrine
+  thyroid: 'endocrine',
+  adrenal: 'endocrine',
+  pituitary: 'endocrine',
+  endocrine: 'endocrine',
+  parathyroid: 'endocrine',
+  // Urinary
+  kidney: 'urinary',
+  renal: 'urinary',
+  bladder: 'urinary',
+  ureter: 'urinary',
+  urethra: 'urinary',
+  urinary: 'urinary',
+  // Reproductive
+  uterus: 'reproductive',
+  ovary: 'reproductive',
+  prostate: 'reproductive',
+  testis: 'reproductive',
+  reproductive: 'reproductive',
+  // Integumentary
+  skin: 'integumentary',
+  dermis: 'integumentary',
+  epidermis: 'integumentary',
+  integumentary: 'integumentary',
+  // Lymphatic
+  lymph: 'lymphatic',
+  spleen: 'lymphatic',
+  tonsil: 'lymphatic',
+  lymphatic: 'lymphatic',
+  // Hematologic
+  blood: 'hematologic',
+  marrow: 'hematologic',
+  hematologic: 'hematologic',
+};
 
-  // Determine conditions based on region
-  const lowerRegion = regionId.toLowerCase();
+/**
+ * Maps condition category strings from conditionCategories index
+ * to PathologyPanel ConditionCategory type.
+ */
+const EFFECT_TYPE_TO_CATEGORY: Record<AnatomicalEffectType, ConditionCategory> = {
+  structural: 'traumatic',
+  functional: 'functional',
+  inflammatory: 'inflammatory',
+  infectious: 'infectious',
+  degenerative: 'degenerative',
+  neoplastic: 'neoplastic',
+  vascular: 'vascular',
+  metabolic: 'metabolic',
+  autoimmune: 'autoimmune',
+  congenital: 'congenital',
+  traumatic: 'traumatic',
+};
 
-  if (lowerRegion.includes('heart') || lowerRegion.includes('cardiac')) {
-    conditions.push(
-      createCondition('coronary-artery-disease', 'Coronary Artery Disease', 'vascular', 'severe', 'common', false, regionId),
-      createCondition('myocardial-infarction', 'Myocardial Infarction', 'vascular', 'critical', 'common', true, regionId),
-      createCondition('heart-failure', 'Heart Failure', 'functional', 'severe', 'common', false, regionId),
-      createCondition('atrial-fibrillation', 'Atrial Fibrillation', 'functional', 'moderate', 'common', false, regionId),
-      createCondition('pericarditis', 'Pericarditis', 'inflammatory', 'moderate', 'uncommon', false, regionId),
-      createCondition('endocarditis', 'Infective Endocarditis', 'infectious', 'severe', 'rare', true, regionId),
-      createCondition('cardiomyopathy', 'Cardiomyopathy', 'degenerative', 'severe', 'uncommon', false, regionId),
-    );
-  } else if (lowerRegion.includes('lung') || lowerRegion.includes('pulmonary') || lowerRegion.includes('respiratory')) {
-    conditions.push(
-      createCondition('pneumonia', 'Pneumonia', 'infectious', 'moderate', 'common', false, regionId),
-      createCondition('copd', 'Chronic Obstructive Pulmonary Disease', 'degenerative', 'moderate', 'common', false, regionId),
-      createCondition('asthma', 'Asthma', 'inflammatory', 'moderate', 'very-common', false, regionId),
-      createCondition('lung-cancer', 'Lung Cancer', 'neoplastic', 'critical', 'common', false, regionId),
-      createCondition('pulmonary-embolism', 'Pulmonary Embolism', 'vascular', 'critical', 'uncommon', true, regionId),
-      createCondition('pulmonary-fibrosis', 'Pulmonary Fibrosis', 'degenerative', 'severe', 'rare', false, regionId),
-      createCondition('tuberculosis', 'Tuberculosis', 'infectious', 'severe', 'uncommon', false, regionId),
-    );
-  } else if (lowerRegion.includes('brain') || lowerRegion.includes('cerebral') || lowerRegion.includes('neuro')) {
-    conditions.push(
-      createCondition('stroke', 'Stroke', 'vascular', 'critical', 'common', true, regionId),
-      createCondition('alzheimers', "Alzheimer's Disease", 'degenerative', 'severe', 'common', false, regionId),
-      createCondition('parkinsons', "Parkinson's Disease", 'degenerative', 'moderate', 'uncommon', false, regionId),
-      createCondition('meningitis', 'Meningitis', 'infectious', 'critical', 'rare', true, regionId),
-      createCondition('brain-tumor', 'Brain Tumor', 'neoplastic', 'severe', 'rare', false, regionId),
-      createCondition('multiple-sclerosis', 'Multiple Sclerosis', 'autoimmune', 'moderate', 'uncommon', false, regionId),
-      createCondition('epilepsy', 'Epilepsy', 'functional', 'moderate', 'common', false, regionId),
-    );
-  } else if (lowerRegion.includes('liver') || lowerRegion.includes('hepatic')) {
-    conditions.push(
-      createCondition('hepatitis', 'Hepatitis', 'infectious', 'moderate', 'common', false, regionId),
-      createCondition('cirrhosis', 'Cirrhosis', 'degenerative', 'severe', 'uncommon', false, regionId),
-      createCondition('liver-cancer', 'Hepatocellular Carcinoma', 'neoplastic', 'critical', 'uncommon', false, regionId),
-      createCondition('fatty-liver', 'Non-Alcoholic Fatty Liver Disease', 'metabolic', 'mild', 'very-common', false, regionId),
-      createCondition('liver-failure', 'Acute Liver Failure', 'functional', 'critical', 'rare', true, regionId),
-    );
-  } else if (lowerRegion.includes('kidney') || lowerRegion.includes('renal')) {
-    conditions.push(
-      createCondition('chronic-kidney-disease', 'Chronic Kidney Disease', 'degenerative', 'severe', 'common', false, regionId),
-      createCondition('acute-kidney-injury', 'Acute Kidney Injury', 'functional', 'severe', 'common', true, regionId),
-      createCondition('kidney-stones', 'Nephrolithiasis', 'metabolic', 'moderate', 'common', false, regionId),
-      createCondition('glomerulonephritis', 'Glomerulonephritis', 'inflammatory', 'moderate', 'uncommon', false, regionId),
-      createCondition('polycystic-kidney', 'Polycystic Kidney Disease', 'congenital', 'moderate', 'rare', false, regionId),
-      createCondition('renal-cell-carcinoma', 'Renal Cell Carcinoma', 'neoplastic', 'severe', 'uncommon', false, regionId),
-    );
-  } else {
-    // Generic conditions for any region
-    conditions.push(
-      createCondition('inflammation-generic', 'Inflammatory Condition', 'inflammatory', 'moderate', 'common', false, regionId),
-      createCondition('infection-generic', 'Infection', 'infectious', 'moderate', 'common', false, regionId),
-      createCondition('tumor-generic', 'Neoplasm', 'neoplastic', 'severe', 'uncommon', false, regionId),
-      createCondition('trauma-generic', 'Traumatic Injury', 'traumatic', 'moderate', 'common', false, regionId),
-    );
+/**
+ * Resolves a regionId to one or more BodySystem values.
+ * Checks the last segment of dotted paths, then broader segments.
+ */
+export function resolveBodySystems(regionId: string): BodySystem[] {
+  const lower = regionId.toLowerCase();
+  const systems = new Set<BodySystem>();
+
+  // Check against all known keywords
+  for (const [keyword, system] of Object.entries(REGION_TO_BODY_SYSTEM)) {
+    if (lower.includes(keyword)) {
+      systems.add(system);
+    }
   }
 
-  return conditions;
+  return Array.from(systems);
 }
 
-function createCondition(
-  id: string,
-  name: string,
-  category: ConditionCategory,
-  severity: Severity,
-  prevalence: Prevalence,
-  isEmergency: boolean,
-  regionId: string
-): PathologyCondition {
+// ============================================================================
+// EducationalContent Loader
+// ============================================================================
+
+/**
+ * Lazy-loads the EducationalContent arrays for each condition category.
+ * Returns a map from condition ID (slug form) to EducationalContent.
+ */
+let _conditionContentCache: Map<string, EducationalContent> | null = null;
+let _conditionContentPromise: Promise<Map<string, EducationalContent>> | null = null;
+
+async function loadAllConditionContent(): Promise<Map<string, EducationalContent>> {
+  if (_conditionContentCache) return _conditionContentCache;
+  if (_conditionContentPromise) return _conditionContentPromise;
+
+  _conditionContentPromise = (async () => {
+    const map = new Map<string, EducationalContent>();
+
+    // Load all condition category modules in parallel
+    const [
+      cvMod,
+      respMod,
+      metabMod,
+      giMod,
+      neuroMod,
+      mhMod,
+      mskMod,
+      oncoMod,
+      infectMod,
+      renalMod,
+      dermMod,
+      hemMod,
+    ] = await Promise.all([
+      import('@core/content/conditions/cardiovascular'),
+      import('@core/content/conditions/respiratory'),
+      import('@core/content/conditions/metabolic'),
+      import('@core/content/conditions/gastrointestinal'),
+      import('@core/content/conditions/neurological'),
+      import('@core/content/conditions/mental-health'),
+      import('@core/content/conditions/musculoskeletal'),
+      import('@core/content/conditions/oncology'),
+      import('@core/content/conditions/infectious'),
+      import('@core/content/conditions/renal'),
+      import('@core/content/conditions/dermatology'),
+      import('@core/content/conditions/hematologic'),
+    ]);
+
+    const allArrays: EducationalContent[][] = [
+      cvMod.cardiovascularConditions ?? [],
+      respMod.respiratoryConditions ?? [],
+      metabMod.metabolicConditions ?? [],
+      giMod.gastrointestinalConditions ?? [],
+      neuroMod.neurologicalConditions ?? [],
+      mhMod.mentalHealthConditions ?? [],
+      mskMod.musculoskeletalConditions ?? [],
+      oncoMod.oncologyConditions ?? [],
+      infectMod.infectiousConditions ?? [],
+      renalMod.renalConditions ?? [],
+      dermMod.dermatologyConditions ?? [],
+      hemMod.hematologicConditions ?? [],
+    ];
+
+    for (const arr of allArrays) {
+      for (const ec of arr) {
+        if (!ec || !ec.id) continue;
+        // Index by full id (e.g., "condition-hypertension")
+        map.set(ec.id, ec);
+        // Also index by slug (e.g., "hypertension")
+        const slug = ec.id.replace(/^condition-/, '');
+        map.set(slug, ec);
+        // Also by name lowercase
+        map.set(ec.name.toLowerCase(), ec);
+      }
+    }
+
+    _conditionContentCache = map;
+    return map;
+  })();
+
+  return _conditionContentPromise;
+}
+
+// ============================================================================
+// Transform EducationalContent -> ConditionContent
+// ============================================================================
+
+function levelContentToConditionContent(lc: LevelContent, level: ComplexityLevel): ConditionContent {
+  // Parse the explanation markdown to extract structured sections
+  const explanation = lc.explanation || '';
+
+  // Extract key terms as key facts
+  const keyFacts = lc.keyTerms?.map(kt => `${kt.term}: ${kt.definition}`) ?? [];
+  if (lc.analogies) {
+    keyFacts.push(...lc.analogies);
+  }
+
   return {
-    id,
-    name,
+    definition: lc.summary || '',
+    keyFacts: keyFacts.length > 0 ? keyFacts : undefined,
+    causes: lc.examples,
+    riskFactors: undefined,
+    pathophysiology: explanation,
+    molecularMechanisms: level >= 4 ? lc.clinicalNotes : undefined,
+    clinicalPresentation: lc.summary || '',
+    symptoms: lc.patientCounselingPoints ?? undefined,
+    signs: undefined,
+    diagnosis: explanation,
+    diagnosticTests: undefined,
+    differentialDiagnosis: undefined,
+    treatment: lc.clinicalNotes || explanation,
+    medications: undefined,
+    prognosis: undefined,
+  };
+}
+
+/**
+ * Builds a full ConditionContent record for all 5 levels from EducationalContent.
+ */
+function buildConditionContentLevels(
+  ec: EducationalContent
+): Record<ComplexityLevel, ConditionContent> {
+  const result = {} as Record<ComplexityLevel, ConditionContent>;
+  for (const lvl of [1, 2, 3, 4, 5] as ComplexityLevel[]) {
+    const levelData = ec.levels[lvl];
+    if (levelData) {
+      result[lvl] = levelContentToConditionContent(levelData, lvl);
+    } else {
+      // Fallback: use the closest available level
+      const fallback = ec.levels[3] || ec.levels[2] || ec.levels[1];
+      result[lvl] = fallback
+        ? levelContentToConditionContent(fallback, lvl)
+        : createFallbackContent(ec.name, lvl);
+    }
+  }
+  return result;
+}
+
+function createFallbackContent(name: string, level: ComplexityLevel): ConditionContent {
+  return {
+    definition: `${name} is a medical condition that affects the body's normal function.`,
+    pathophysiology: `The pathophysiology of ${name} involves disruption of normal physiological processes.`,
+    clinicalPresentation: `Patients with ${name} may present with a variety of symptoms depending on severity.`,
+    diagnosis: `Diagnosis of ${name} involves clinical evaluation and appropriate diagnostic testing.`,
+    treatment: `Treatment of ${name} depends on severity and individual patient factors.`,
+  };
+}
+
+// ============================================================================
+// Map ConditionAnatomyMapping -> PathologyCondition
+// ============================================================================
+
+/**
+ * Determines the severity from the anatomy mapping's clinical context
+ * and visualization intensity.
+ */
+function inferSeverity(mapping: ConditionAnatomyMapping): Severity {
+  const intensity = mapping.visualizationHint?.intensity;
+  if (intensity === 'high') return 'severe';
+  if (intensity === 'low') return 'mild';
+  return 'moderate';
+}
+
+/**
+ * Determines if a condition is an emergency based on red flags presence
+ * or known emergency conditions.
+ */
+const KNOWN_EMERGENCIES = new Set([
+  'myocardial-infarction', 'pulmonary-embolism', 'stroke', 'aortic-dissection',
+  'tension-pneumothorax', 'cardiac-tamponade', 'meningitis', 'sepsis',
+  'anaphylaxis', 'status-epilepticus', 'acute-liver-failure', 'ruptured-aortic-aneurysm',
+  'acute-kidney-injury', 'diabetic-ketoacidosis', 'hypertensive-emergency',
+  'subarachnoid-hemorrhage',
+]);
+
+function inferIsEmergency(mapping: ConditionAnatomyMapping): boolean {
+  if (KNOWN_EMERGENCIES.has(mapping.conditionId)) return true;
+  if (mapping.clinicalContext?.redFlags && mapping.clinicalContext.redFlags.length > 0) return true;
+  return false;
+}
+
+/**
+ * Maps the effectType from ConditionAnatomyMapping to a ConditionCategory.
+ */
+function mapEffectTypeToCategory(effectType: AnatomicalEffectType): ConditionCategory {
+  return EFFECT_TYPE_TO_CATEGORY[effectType] || 'idiopathic';
+}
+
+/**
+ * Converts a ConditionAnatomyMapping + optional EducationalContent
+ * into a full PathologyCondition.
+ */
+function toPathologyCondition(
+  mapping: ConditionAnatomyMapping,
+  educationalContent: EducationalContent | undefined,
+): PathologyCondition {
+  const category = mapEffectTypeToCategory(mapping.effectType);
+  const severity = inferSeverity(mapping);
+
+  let content: Record<ComplexityLevel, ConditionContent>;
+  let nameEs: string | undefined;
+
+  if (educationalContent) {
+    content = buildConditionContentLevels(educationalContent);
+    nameEs = educationalContent.nameEs;
+  } else {
+    // Build from mapping's clinicalContext alone
+    content = {} as Record<ComplexityLevel, ConditionContent>;
+    for (const lvl of [1, 2, 3, 4, 5] as ComplexityLevel[]) {
+      content[lvl] = {
+        definition: mapping.clinicalContext?.commonPresentation || `${mapping.conditionName} affects the ${mapping.affectedSystems.join(', ')} system(s).`,
+        pathophysiology: `${mapping.conditionName} is a ${mapping.effectType} condition.`,
+        clinicalPresentation: mapping.clinicalContext?.commonPresentation || '',
+        diagnosis: `Clinical evaluation with relevant imaging and laboratory studies.`,
+        treatment: `Treatment depends on severity and individual patient factors.`,
+        symptoms: mapping.clinicalContext?.redFlags,
+      };
+    }
+  }
+
+  return {
+    id: mapping.conditionId,
+    name: mapping.conditionName,
+    nameEs,
     category,
     severity,
-    prevalence,
-    isEmergency,
-    affectedRegions: [regionId],
-    content: {
-      1: generateLevel1Content(name, category),
-      2: generateLevel2Content(name, category),
-      3: generateLevel3Content(name, category),
-      4: generateLevel4Content(name, category),
-      5: generateLevel5Content(name, category),
-    },
+    prevalence: 'common', // Default; could be enriched with epidemiological data
+    isEmergency: inferIsEmergency(mapping),
+    icdCodes: mapping.icdCodes,
+    affectedRegions: [...mapping.primaryRegions, ...(mapping.secondaryRegions || [])],
+    content,
   };
 }
 
-function generateLevel1Content(name: string, category: ConditionCategory): ConditionContent {
-  return {
-    definition: `${name} is a health problem that affects your body. Think of it like when something goes wrong with a machine - parts don't work the way they should.`,
-    keyFacts: [
-      'This is a condition doctors see regularly',
-      'It can usually be treated with medicine or other care',
-      'Early detection helps with better outcomes',
-    ],
-    causes: ['Sometimes we know what causes it', 'Other times our body just develops it'],
-    riskFactors: ['Age', 'Family history', 'Lifestyle choices'],
-    pathophysiology: `When you have ${name}, something in your body stops working correctly. Imagine a car that needs a tune-up - the parts are still there but they're not running smoothly.`,
-    clinicalPresentation: 'You might feel unwell, tired, or have specific symptoms depending on the condition.',
-    symptoms: ['Feeling unwell', 'Tiredness', 'Discomfort'],
-    diagnosis: 'Doctors use tests and examinations to figure out if you have this condition.',
-    treatment: 'Treatment depends on how serious it is. You might need medicine, lifestyle changes, or other care.',
-  };
-}
+// ============================================================================
+// Build Related Conditions
+// ============================================================================
 
-function generateLevel2Content(name: string, category: ConditionCategory): ConditionContent {
-  return {
-    definition: `${name} is a ${category} condition that affects normal body function. It occurs when specific tissues or organs are affected by disease processes.`,
-    keyFacts: [
-      'Classified as a ${category} condition',
-      'Diagnosis requires clinical evaluation and testing',
-      'Treatment options vary based on severity',
-    ],
-    causes: [
-      'Genetic factors may play a role',
-      'Environmental exposures can contribute',
-      'Lifestyle factors are often involved',
-    ],
-    riskFactors: ['Age over 50', 'Family history', 'Smoking', 'Poor diet', 'Sedentary lifestyle'],
-    pathophysiology: `${name} develops when normal cellular and tissue function is disrupted. This can be due to damage, inflammation, abnormal growth, or loss of function in affected areas.`,
-    clinicalPresentation: 'Patients typically present with characteristic symptoms that vary in severity.',
-    symptoms: ['Primary symptoms related to affected organ', 'Secondary symptoms from body response', 'Systemic symptoms if widespread'],
-    diagnosis: 'Diagnosis involves physical examination, laboratory tests, and imaging studies as needed.',
-    diagnosticTests: ['Blood tests', 'Imaging (X-ray, CT, MRI)', 'Biopsy if needed'],
-    treatment: 'Treatment may include medications, procedures, lifestyle modifications, or surgery depending on the condition.',
-    prognosis: 'Prognosis depends on early detection, treatment adherence, and individual factors.',
-  };
-}
+function buildRelatedConditions(
+  mappings: ConditionAnatomyMapping[],
+  contentMap: Map<string, EducationalContent>,
+): RelatedCondition[] {
+  const related: RelatedCondition[] = [];
+  const seenIds = new Set<string>();
 
-function generateLevel3Content(name: string, category: ConditionCategory): ConditionContent {
-  return {
-    definition: `${name} is a ${category} disorder characterized by specific pathological changes in affected tissues. It represents a significant clinical entity requiring systematic diagnostic evaluation and management.`,
-    keyFacts: [
-      'Pathogenesis involves specific cellular mechanisms',
-      'Classification based on etiology, severity, and clinical features',
-      'Evidence-based treatment protocols available',
-      'Complications can occur without proper management',
-    ],
-    causes: [
-      'Primary etiological factors identified through research',
-      'Secondary causes may contribute',
-      'Multifactorial in many cases',
-    ],
-    riskFactors: [
-      'Modifiable: smoking, diet, physical activity, alcohol',
-      'Non-modifiable: age, genetics, sex',
-      'Comorbid conditions increase risk',
-    ],
-    pathophysiology: `The pathophysiology of ${name} involves specific cellular and molecular mechanisms. Initial insult leads to cascade of events including cellular stress, inflammatory response, and tissue remodeling. Chronic cases show progressive changes with potential for irreversible damage.`,
-    molecularMechanisms: 'At the molecular level, signaling pathways are disrupted, leading to altered gene expression and protein function.',
-    clinicalPresentation: 'Clinical presentation varies from asymptomatic early stages to symptomatic disease with characteristic findings on examination.',
-    symptoms: ['Cardinal symptoms specific to condition', 'Associated symptoms', 'Complications-related symptoms'],
-    signs: ['Physical examination findings', 'Laboratory abnormalities', 'Imaging findings'],
-    diagnosis: 'Diagnosis requires integration of clinical presentation, laboratory findings, and imaging studies. Differential diagnosis should be considered.',
-    diagnosticTests: ['Complete blood count', 'Metabolic panel', 'Specific biomarkers', 'Imaging modalities', 'Tissue biopsy when indicated'],
-    differentialDiagnosis: ['Related conditions', 'Mimics', 'Overlapping syndromes'],
-    treatment: 'Management includes addressing underlying cause, symptomatic treatment, and prevention of complications. Guidelines recommend stepped approach based on severity.',
-    medications: ['First-line agents', 'Second-line options', 'Adjunctive therapy'],
-    prognosis: 'Prognosis varies based on stage at diagnosis, treatment response, and presence of complications.',
-  };
-}
+  for (const mapping of mappings) {
+    // Check clinicalContext.relatedConditions
+    if (mapping.clinicalContext?.relatedConditions) {
+      for (const relId of mapping.clinicalContext.relatedConditions) {
+        if (seenIds.has(relId)) continue;
+        seenIds.add(relId);
 
-function generateLevel4Content(name: string, category: ConditionCategory): ConditionContent {
-  return {
-    definition: `${name} represents a ${category} pathological process characterized by specific histopathological changes, molecular alterations, and clinical manifestations. Understanding its pathogenesis is essential for targeted therapeutic intervention.`,
-    keyFacts: [
-      'Defined by specific pathological criteria',
-      'Molecular subtypes may have prognostic significance',
-      'Treatment algorithms based on staging and risk stratification',
-      'Ongoing research investigating novel therapeutic targets',
-    ],
-    causes: [
-      'Primary etiology established through epidemiological and mechanistic studies',
-      'Genetic susceptibility loci identified',
-      'Gene-environment interactions documented',
-    ],
-    riskFactors: [
-      'Quantified risk ratios for major risk factors',
-      'Risk prediction models available',
-      'Screening recommendations based on risk stratification',
-    ],
-    pathophysiology: `The pathogenesis of ${name} involves complex interplay of cellular and molecular mechanisms. Initial trigger activates inflammatory cascades, oxidative stress pathways, and cellular signaling networks. Progressive disease involves tissue remodeling, fibrosis, and functional deterioration. Understanding these mechanisms guides therapeutic targeting.`,
-    molecularMechanisms: 'Key molecular pathways include cytokine signaling (TNF-alpha, IL-6), transcription factor activation (NF-kB), and metabolic alterations. Epigenetic modifications contribute to disease progression.',
-    clinicalPresentation: 'Presentation ranges from subclinical disease detected on screening to fulminant presentations requiring urgent intervention. Staging systems incorporate clinical, laboratory, and imaging parameters.',
-    symptoms: ['Early symptoms often nonspecific', 'Progressive symptoms correlate with disease burden', 'Complications manifest with advanced disease'],
-    signs: ['Specific examination findings', 'Staging-relevant physical findings', 'Signs of complications'],
-    diagnosis: 'Diagnostic workup follows systematic approach: clinical assessment, laboratory evaluation, imaging, and tissue diagnosis when indicated. Molecular testing increasingly important for prognosis and treatment selection.',
-    diagnosticTests: ['Standard laboratory panels', 'Disease-specific biomarkers', 'Advanced imaging (PET, MRI protocols)', 'Histopathological examination', 'Molecular and genetic testing'],
-    differentialDiagnosis: ['Primary differential diagnoses', 'Rare mimics', 'Overlapping conditions'],
-    treatment: 'Evidence-based treatment follows guidelines from professional societies. Approach includes disease-modifying therapy, symptomatic management, and complication prevention. Multidisciplinary care improves outcomes.',
-    medications: ['Mechanism-based first-line therapy', 'Alternative agents', 'Biologics and targeted therapy where applicable', 'Supportive care medications'],
-    prognosis: 'Prognostic factors include disease stage, molecular features, treatment response, and comorbidities. Risk stratification guides intensity of management and follow-up.',
-  };
-}
+        const relMapping = CONDITION_ANATOMY_MAP[relId];
+        const relContent = contentMap.get(relId);
+        const name = relMapping?.conditionName || relContent?.name || relId;
+        related.push({
+          id: relId,
+          name,
+          relationship: `related to ${mapping.conditionName}`,
+        });
+      }
+    }
 
-function generateLevel5Content(name: string, category: ConditionCategory): ConditionContent {
-  return {
-    definition: `${name} is a ${category} disorder with well-characterized pathobiology. Contemporary understanding integrates molecular pathogenesis, clinical phenotyping, and precision medicine approaches to optimize patient outcomes.`,
-    keyFacts: [
-      'Pathogenesis involves specific molecular pathways amenable to targeted intervention',
-      'Molecular classification refines prognostication beyond traditional staging',
-      'Clinical trials investigating novel therapeutic approaches',
-      'Biomarker-driven treatment selection improving outcomes',
-    ],
-    causes: [
-      'Established etiopathogenesis with defined genetic and environmental contributors',
-      'Genome-wide association studies identified susceptibility variants',
-      'Functional genomics elucidating causal mechanisms',
-    ],
-    riskFactors: [
-      'Polygenic risk scores under development',
-      'Modifiable risk factors with quantified impact',
-      'Risk-adapted screening protocols',
-    ],
-    pathophysiology: `Contemporary understanding of ${name} pathogenesis encompasses cellular, molecular, and systems-level mechanisms. Initiating events trigger signaling cascades involving multiple pathways. Disease progression involves epigenetic reprogramming, metabolic adaptation, and microenvironmental changes. Single-cell analyses reveal cellular heterogeneity and dynamic disease evolution.`,
-    molecularMechanisms: 'Key pathways include specific receptor-ligand interactions, downstream signaling cascades (MAPK, PI3K/AKT, JAK/STAT), transcriptional programs, and metabolic reprogramming. Therapeutic targeting of these pathways forms basis for precision approaches. Resistance mechanisms involve pathway crosstalk and clonal evolution.',
-    clinicalPresentation: 'Clinical phenotypes correlate with underlying molecular subtypes. Integration of -omics data with clinical parameters enables refined patient stratification. Real-world evidence informing clinical practice guidelines.',
-    symptoms: ['Phenotype-specific symptom profiles', 'Quality-of-life impact quantified', 'Patient-reported outcomes integrated'],
-    signs: ['Objective clinical findings', 'Composite clinical scores', 'Response assessment criteria'],
-    diagnosis: 'Diagnostic approach integrates clinical evaluation, advanced imaging, tissue characterization including molecular profiling, and liquid biopsy where applicable. Machine learning models augmenting diagnostic accuracy.',
-    diagnosticTests: [
-      'Comprehensive molecular profiling',
-      'Next-generation sequencing panels',
-      'Circulating biomarkers and liquid biopsy',
-      'Advanced imaging with quantitative analysis',
-      'Functional assays',
-    ],
-    differentialDiagnosis: ['Molecular differential diagnosis', 'Phenocopies', 'Overlap syndromes'],
-    treatment: 'Treatment paradigm incorporating biomarker-driven selection, adaptive trial designs informing practice, and integration of novel modalities. Combination strategies targeting multiple mechanisms. Immunotherapy and cellular therapy where applicable.',
-    medications: [
-      'Targeted therapies based on molecular features',
-      'Immunomodulatory agents',
-      'Combination regimens',
-      'Novel agents in clinical development',
-      'Supportive care optimization',
-    ],
-    prognosis: 'Prognostication incorporates molecular features, treatment response dynamics, and minimal residual disease assessment. Precision prognostic models under development.',
-  };
-}
-
-function generateRelatedConditions(regionId: string): RelatedCondition[] {
-  const lowerRegion = regionId.toLowerCase();
-
-  if (lowerRegion.includes('heart')) {
-    return [
-      { id: 'hypertension', name: 'Hypertension', relationship: 'risk factor' },
-      { id: 'diabetes', name: 'Diabetes Mellitus', relationship: 'comorbidity' },
-      { id: 'hyperlipidemia', name: 'Hyperlipidemia', relationship: 'risk factor' },
-    ];
-  } else if (lowerRegion.includes('lung')) {
-    return [
-      { id: 'smoking-related', name: 'Smoking-Related Conditions', relationship: 'shared risk factor' },
-      { id: 'allergies', name: 'Allergic Conditions', relationship: 'related' },
-    ];
+    // Check EducationalContent crossReferences
+    const ec = contentMap.get(mapping.conditionId);
+    if (ec?.crossReferences) {
+      for (const xref of ec.crossReferences) {
+        const xrefSlug = xref.targetId.replace(/^condition-/, '');
+        if (seenIds.has(xrefSlug)) continue;
+        seenIds.add(xrefSlug);
+        related.push({
+          id: xrefSlug,
+          name: xref.label || xrefSlug,
+          relationship: xref.relationship,
+        });
+      }
+    }
   }
 
-  return [
-    { id: 'systemic-condition', name: 'Systemic Conditions', relationship: 'may be associated' },
-  ];
+  return related.slice(0, 15); // Limit to 15 related conditions
 }
 
 // ============================================================================
@@ -367,18 +541,45 @@ export function usePathologyContent(
       setError(null);
 
       try {
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // 1. Resolve region to body systems
+        const bodySystems = resolveBodySystems(regionId);
+
+        // 2. Get condition mappings from CONDITION_ANATOMY_MAP
+        //    Try region-based lookup first, then system-based
+        let mappings: ConditionAnatomyMapping[] = getConditionsByRegion(regionId);
+
+        // If no direct region match, try by body system
+        if (mappings.length === 0 && bodySystems.length > 0) {
+          const systemMappings: ConditionAnatomyMapping[] = [];
+          const seenIds = new Set<string>();
+          for (const system of bodySystems) {
+            const sysMappings = getConditionsBySystem(system);
+            for (const m of sysMappings) {
+              if (!seenIds.has(m.conditionId)) {
+                seenIds.add(m.conditionId);
+                systemMappings.push(m);
+              }
+            }
+          }
+          mappings = systemMappings;
+        }
 
         if (!isMounted) return;
 
-        // In production, this would fetch from API/database
-        // For now, generate sample data
-        const regionName = regionId.split('.').pop() || regionId;
-        const fetchedConditions = generateSampleConditions(regionId, regionName);
-        const related = generateRelatedConditions(regionId);
+        // 3. Load educational content for each condition
+        const contentMap = await loadAllConditionContent();
 
-        setConditions(fetchedConditions);
+        if (!isMounted) return;
+
+        // 4. Build PathologyCondition objects
+        const pathologyConditions: PathologyCondition[] = mappings.map(mapping =>
+          toPathologyCondition(mapping, contentMap.get(mapping.conditionId))
+        );
+
+        // 5. Build related conditions
+        const related = buildRelatedConditions(mappings, contentMap);
+
+        setConditions(pathologyConditions);
         setRelatedConditions(related);
       } catch (err) {
         if (!isMounted) return;

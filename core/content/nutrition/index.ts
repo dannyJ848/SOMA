@@ -8,6 +8,10 @@
 export type { NutritionEntry, NutritionCategory } from './nutrition-database';
 export { NUTRITION_ENTRIES } from './nutrition-database';
 
+// Educational content modules
+export { macronutrientsOverview } from './macronutrients';
+export { micronutrientsOverview } from './micronutrients';
+
 import { NUTRITION_ENTRIES, type NutritionEntry, type NutritionCategory } from './nutrition-database';
 
 /** Retrieve a single nutrition entry by ID, or undefined if not found. */

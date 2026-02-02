@@ -1,26 +1,29 @@
 // Hematology Module Index
 // Central export point for all hematology educational content
 
-// Anemias
-export * from './anemias/index.js';
+// Anemia Overview
+export * from './anemia/index';
+
+// Anemias (Detailed)
+export * from './anemias/index';
 
 // Bleeding Disorders
-export * from './bleeding-disorders/index.js';
+export * from './bleeding-disorders/index';
 
 // Blood Cancers
-export * from './blood-cancers/index.js';
+export * from './blood-cancers/index';
 
 // Bone Marrow
-export * from './bone-marrow/index.js';
+export * from './bone-marrow/index';
 
 // Clotting Disorders
-export * from './clotting-disorders/index.js';
+export * from './clotting-disorders/index';
 
 // Lab Understanding
-export * from './lab-understanding/index.js';
+export * from './lab-understanding/index';
 
 // Living With
-export * from './living-with/index.js';
+export * from './living-with/index';
 
 // Transfusion
-export * from './transfusion/index.js';
+export * from './transfusion/index';

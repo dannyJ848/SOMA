@@ -10,6 +10,7 @@ export const anemia: EducationalContent = {
   id: 'condition-anemia',
   type: 'condition',
   name: 'Anemia',
+  nameEs: 'Anemia',
   alternateNames: ['Low Blood Count', 'Low Hemoglobin', 'Iron Deficiency', 'Blood Loss Anemia'],
   hpoId: 'HP:0001903',
 

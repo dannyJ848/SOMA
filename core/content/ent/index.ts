@@ -1,14 +1,25 @@
 import { EducationalContent } from '../types';
+import { earContent, earDisordersContent } from './ear';
+import { noseContent } from './nose';
+import { throatContent } from './throat';
+import { voiceContent, voiceDisordersContent } from './voice';
+import { headNeckCancerContent } from './head-neck-cancer';
+import { allergyEntContent } from './allergy-ent';
+import { pediatricEntContent } from './pediatric-ent';
+import { entProceduresContent } from './ent-procedures';
+import { entEmergenciesContent } from './ent-emergencies';
 
-export const earContent = require('./ear').default || { id: 'placeholder' };
-export const noseContent = require('./nose').default || { id: 'placeholder' };
-export const throatContent = require('./throat').default || { id: 'placeholder' };
-export const voiceContent = require('./voice').default || { id: 'placeholder' };
-export const headNeckCancerContent = require('./head-neck-cancer').default || { id: 'placeholder' };
-export const allergyEntContent = require('./allergy-ent').default || { id: 'placeholder' };
-export const pediatricEntContent = require('./pediatric-ent').default || { id: 'placeholder' };
-export const entProceduresContent = require('./ent-procedures').default || { id: 'placeholder' };
-export const entEmergenciesContent = require('./ent-emergencies').default || { id: 'placeholder' };
+export { earContent };
+export { earDisordersContent };
+export { noseContent };
+export { throatContent };
+export { voiceContent };
+export { voiceDisordersContent };
+export { headNeckCancerContent };
+export { allergyEntContent };
+export { pediatricEntContent };
+export { entProceduresContent };
+export { entEmergenciesContent };
 
 /**
  * ENT (Otolaryngology) Educational Content
@@ -82,6 +93,7 @@ export const ENT_CONTENT_REGISTRY = {
 // All content exports
 export const entContentModules = {
   earContent,
+  earDisordersContent,
   noseContent,
   throatContent,
   voiceContent,

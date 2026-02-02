@@ -8,6 +8,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
 import { useActionTracker } from './hooks/useActionTracker';
+import { RelatedContent } from './components/RelatedContent';
 import type { ConditionSimulatorAction } from '../core/intent-prediction/types';
 import {
   getCondition,
@@ -15,6 +16,11 @@ import {
   searchConditions,
   getConditionsByCategory,
   getConditionAnatomyHighlights,
+  getConditionWithFallback,
+  getAllConditionsWithICD11,
+  searchAllConditions,
+  hasDetailedConditionData,
+  getConditionCountByCategory,
 } from '../core/medical-simulation/conditions/store';
 import type {
   ConditionSimulation,
@@ -170,6 +176,8 @@ interface ConditionCardProps {
 
 function ConditionCard({ condition, onSelect, isUserCondition }: ConditionCardProps) {
   const config = CATEGORY_CONFIG[condition.category];
+  const hasDetailed = hasDetailedConditionData(condition.conditionId);
+  const systems = condition.anatomyMapping.systemsInvolved;
 
   return (
     <div
@@ -179,13 +187,30 @@ function ConditionCard({ condition, onSelect, isUserCondition }: ConditionCardPr
     >
       <div className="condition-card-header">
         <span className="condition-name">{condition.name}</span>
-        {isUserCondition && <span className="user-badge">Your Condition</span>}
+        <div className="condition-card-badges">
+          {isUserCondition && <span className="user-badge">Your Condition</span>}
+          <span className="icd-code">{condition.icdCode}</span>
+        </div>
       </div>
       <CategoryBadge category={condition.category} />
       <p className="condition-description">{condition.description}</p>
+      {systems.length > 0 && (
+        <div className="condition-systems">
+          {systems.map((sys) => (
+            <span key={sys} className="system-tag">{sys}</span>
+          ))}
+        </div>
+      )}
       <div className="condition-meta">
-        <span>{condition.progression.timelineSteps.length} phases</span>
-        <span>{condition.treatmentOptions.length} treatments</span>
+        {hasDetailed ? (
+          <>
+            <span>{condition.progression.timelineSteps.length} phases</span>
+            <span>{condition.treatmentOptions.length} treatments</span>
+            <span className="detailed-badge">Detailed</span>
+          </>
+        ) : (
+          <span className="overview-badge">ICD-11 Overview</span>
+        )}
       </div>
     </div>
   );
@@ -360,19 +385,22 @@ export default function ConditionSimulator({
     );
   }, [dashboardData]);
 
-  // Get all conditions
-  const allConditions = useMemo(() => getAllConditions(), []);
+  // Get all conditions (detailed store + ICD-11 generated templates)
+  const allConditions = useMemo(() => getAllConditionsWithICD11(), []);
 
-  // Search results
+  // Category counts from full ICD-11 index
+  const categoryCounts = useMemo(() => getConditionCountByCategory(), []);
+
+  // Search results across all conditions (detailed + ICD-11)
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
-    return searchConditions(searchQuery);
+    return searchAllConditions(searchQuery);
   }, [searchQuery]);
 
-  // Filtered conditions by category
+  // Filtered conditions by category (from full ICD-11 set)
   const filteredConditions = useMemo(() => {
     if (selectedCategory) {
-      return getConditionsByCategory(selectedCategory);
+      return allConditions.filter((c) => c.category === selectedCategory);
     }
     return allConditions;
   }, [selectedCategory, allConditions]);
@@ -383,10 +411,10 @@ export default function ConditionSimulator({
     return selectedCondition.progression.timelineSteps[activePhaseIndex];
   }, [selectedCondition, activePhaseIndex]);
 
-  // Handle initial condition
+  // Handle initial condition (checks detailed store, then ICD-11 fallback)
   useEffect(() => {
     if (initialConditionId) {
-      const condition = getCondition(initialConditionId);
+      const condition = getConditionWithFallback(initialConditionId);
       if (condition) {
         setSelectedCondition(condition);
       }
@@ -462,7 +490,7 @@ export default function ConditionSimulator({
         phaseName: currentPhase.displayName,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [activePhaseIndex]); // Only track when phase changes
 
   // Track tab changes for view-phase and view-treatments
@@ -482,7 +510,7 @@ export default function ConditionSimulator({
         });
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [activeTab]); // Only track when tab changes
 
   const handleHighlightStructure = useCallback(
@@ -495,7 +523,7 @@ export default function ConditionSimulator({
 
   const handleSearchSelect = useCallback(
     (result: ConditionSearchResult) => {
-      const condition = getCondition(result.conditionId);
+      const condition = getConditionWithFallback(result.conditionId);
       if (condition) {
         handleSelectCondition(condition);
         setSearchQuery('');
@@ -522,16 +550,29 @@ export default function ConditionSimulator({
 
     return (
       <div className="search-results">
-        {searchResults.slice(0, 8).map((result) => (
-          <div
-            key={result.conditionId}
-            className="search-result-item"
-            onClick={() => handleSearchSelect(result)}
-          >
-            <span className="result-name">{result.name}</span>
-            <CategoryBadge category={result.category} />
-          </div>
-        ))}
+        {searchResults.slice(0, 12).map((result) => {
+          const icd11Entry = allConditions.find((c) => c.conditionId === result.conditionId);
+          return (
+            <div
+              key={result.conditionId}
+              className="search-result-item"
+              onClick={() => handleSearchSelect(result)}
+            >
+              <div className="result-info">
+                <span className="result-name">{result.name}</span>
+                {icd11Entry && (
+                  <span className="result-icd">{icd11Entry.icdCode}</span>
+                )}
+              </div>
+              <div className="result-badges">
+                <CategoryBadge category={result.category} />
+                {hasDetailedConditionData(result.conditionId) && (
+                  <span className="detailed-badge-sm">Detailed</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -541,7 +582,7 @@ export default function ConditionSimulator({
     <div className="condition-browser">
       <div className="browser-header">
         <h2>Explore Medical Conditions</h2>
-        <p>Learn about disease progression, mechanisms, and treatments</p>
+        <p>Browse {allConditions.length} ICD-11 classified conditions across {Object.keys(categoryCounts).length} categories</p>
       </div>
 
       <div className="search-section">
@@ -570,11 +611,11 @@ export default function ConditionSimulator({
           className={`category-filter ${selectedCategory === null ? 'active' : ''}`}
           onClick={() => setSelectedCategory(null)}
         >
-          All
+          All ({allConditions.length})
         </button>
         {Object.entries(CATEGORY_CONFIG).map(([cat, config]) => {
-          const hasConditions = allConditions.some((c) => c.category === cat);
-          if (!hasConditions) return null;
+          const count = categoryCounts[cat as ConditionCategory] || 0;
+          if (count === 0) return null;
 
           return (
             <button
@@ -590,7 +631,7 @@ export default function ConditionSimulator({
               }
             >
               <span className="filter-icon">{config.icon}</span>
-              {config.label}
+              {config.label} ({count})
             </button>
           );
         })}
@@ -651,11 +692,23 @@ export default function ConditionSimulator({
             <h2>{selectedCondition.name}</h2>
             <div className="condition-meta-badges">
               <CategoryBadge category={selectedCondition.category} />
-              <span className="icd-code">{selectedCondition.icdCode}</span>
+              <span className="icd-code" title="ICD-11 Code">{selectedCondition.icdCode}</span>
               {userConditionIds.has(selectedCondition.conditionId) && (
                 <span className="user-badge">Your Condition</span>
               )}
+              {!hasDetailedConditionData(selectedCondition.conditionId) && (
+                <span className="overview-badge">ICD-11 Overview</span>
+              )}
             </div>
+            <p className="condition-detail-description">{selectedCondition.description}</p>
+            {selectedCondition.anatomyMapping.systemsInvolved.length > 0 && (
+              <div className="condition-systems detail-systems">
+                <span className="systems-label">Affected systems:</span>
+                {selectedCondition.anatomyMapping.systemsInvolved.map((sys) => (
+                  <span key={sys} className="system-tag">{sys}</span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -717,6 +770,18 @@ export default function ConditionSimulator({
           {activeTab === 'complications' && renderComplicationsTab()}
           {activeTab === 'treatments' && renderTreatmentsTab()}
         </div>
+
+        {/* Knowledge Graph Related Content */}
+        <RelatedContent
+          nodeId={`condition:${selectedCondition.conditionId}`}
+          onItemPress={(node) => {
+            if (node.type === 'condition') {
+              const condId = node.id.includes(':') ? node.id.split(':').slice(1).join(':') : node.id;
+              const target = allConditions.find((c) => c.conditionId === condId);
+              if (target) handleSelectCondition(target);
+            }
+          }}
+        />
       </div>
     );
   };

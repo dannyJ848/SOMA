@@ -34,6 +34,7 @@ type SettingsSection =
 interface SettingsPageProps {
   onBack: () => void;
   initialSection?: SettingsSection;
+  onLock?: () => void;
 }
 
 interface SettingsMenuItemProps {
@@ -101,7 +102,7 @@ function SectionHeader({ title, onBack }: SectionHeaderProps) {
 // Main Component
 // ============================================
 
-export function SettingsPage({ onBack, initialSection = 'main' }: SettingsPageProps) {
+export function SettingsPage({ onBack, initialSection = 'main', onLock }: SettingsPageProps) {
   const [currentSection, setCurrentSection] = useState<SettingsSection>(initialSection);
   const { settings, isLoading, lastSaved } = useSettings();
 
@@ -347,6 +348,26 @@ export function SettingsPage({ onBack, initialSection = 'main' }: SettingsPagePr
               />
             </div>
           </section>
+
+          {/* Security Section */}
+          {onLock && (
+            <section className="settings-section">
+              <h2 className="settings-section-title">Security</h2>
+              <div className="settings-menu">
+                <SettingsMenuItem
+                  icon={
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                  }
+                  title="Lock Database"
+                  description="Clear passphrase from memory and lock"
+                  onClick={onLock}
+                />
+              </div>
+            </section>
+          )}
 
           {/* Footer */}
           <footer className="settings-footer">

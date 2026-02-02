@@ -4,6 +4,7 @@ export const speakingUpContent: EducationalContent = {
   id: 'speaking-up',
   type: 'concept',
   name: 'Speaking Up for Patient Safety',
+  nameEs: 'Hablar por su Seguridad como Paciente',
   alternateNames: ['Patient Voice', 'Advocating for Yourself', 'Questioning Care'],
   levels: {
     1: {

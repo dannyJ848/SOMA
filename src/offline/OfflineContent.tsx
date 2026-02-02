@@ -137,7 +137,7 @@ export function OfflineContent({
   // Load content on mount and when dependencies change
   useEffect(() => {
     loadContent();
-  }, [contentId, contentType, isOffline]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [contentId, contentType, isOffline]);  
 
   // Freshness indicator component
   const freshnessIndicator = useMemo(() => {

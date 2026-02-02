@@ -30,6 +30,7 @@ export { usePhysiologyContent } from '../../hooks/usePhysiologyContent';
 export type {
   PhysiologyContentData,
   UsePhysiologyContentReturn,
+  PhysiologyTopic,
   KeyTerm,
   FunctionInfo as PhysiologyFunctionInfo,
   MechanismInfo,

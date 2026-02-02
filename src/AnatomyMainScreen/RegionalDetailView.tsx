@@ -391,6 +391,7 @@ function RegionalDetailViewContent({
             layers={regionalContent.layers}
             models={regionalContent.models}
             regionName={regionalContent.region.name}
+            regionId={regionalContent.region.id}
           />
         )}
         {activeTab === 'physiology' && (
@@ -402,6 +403,7 @@ function RegionalDetailViewContent({
         {activeTab === 'pathology' && (
           <PathologyTab
             content={regionalContent.content.pathology}
+            regionId={regionId}
             regionName={regionalContent.region.name}
             selectedLayer={selectedLayer === 'all' ? null : selectedLayer}
             onLayerChange={handleLayerChange as any}

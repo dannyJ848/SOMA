@@ -439,7 +439,7 @@ export function AINavigationProvider({
  * ```
  */
 export function useAINavigation(): AINavigationContextValue {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+   
   const context = useContext(AINavigationContext);
   if (!context) {
     throw new Error('useAINavigation must be used within an AINavigationProvider');

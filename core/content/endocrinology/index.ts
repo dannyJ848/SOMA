@@ -14,56 +14,67 @@
  */
 
 // Adrenal disorders
-export { ADRENAL_CONTENT } from './adrenal/index.js';
-export { cushingSyndrome } from './adrenal/cushing-syndrome.js';
-export { addisonDisease } from './adrenal/addison-disease.js';
-export { pheochromocytoma } from './adrenal/pheochromocytoma.js';
+export { ADRENAL_CONTENT } from './adrenal/index';
+export { cushingSyndrome } from './adrenal/cushing-syndrome';
+export { addisonDisease } from './adrenal/addison-disease';
+export { pheochromocytoma } from './adrenal/pheochromocytoma';
 
 // Bone and calcium metabolism
-export { BONE_CALCIUM_CONTENT } from './bone-calcium/index.js';
-export { osteoporosis } from './bone-calcium/osteoporosis.js';
-export { hyperparathyroidism } from './bone-calcium/hyperparathyroidism.js';
-export { vitaminDDisorders } from './bone-calcium/vitamin-d-disorders.js';
+export { BONE_CALCIUM_CONTENT } from './bone-calcium/index';
+export { osteoporosis } from './bone-calcium/osteoporosis';
+export { hyperparathyroidism } from './bone-calcium/hyperparathyroidism';
+export { vitaminDDisorders } from './bone-calcium/vitamin-d-disorders';
 
 // Metabolic disorders
-export { METABOLIC_CONTENT } from './metabolic/index.js';
-export { metabolicSyndrome } from './metabolic/metabolic-syndrome.js';
-export { obesityEndocrine } from './metabolic/obesity-endocrine.js';
+export { METABOLIC_CONTENT } from './metabolic/index';
+export { metabolicSyndrome } from './metabolic/metabolic-syndrome';
+export { obesityEndocrine } from './metabolic/obesity-endocrine';
+
+// Diabetes
+export { DIABETES_CONTENT } from './diabetes/index';
+export { TYPE_1_DIABETES_PATIENT_ED } from './diabetes/type-1-diabetes';
+export { TYPE_2_DIABETES_PATIENT_ED } from './diabetes/type-2-diabetes';
+export { dkaManagement } from './diabetes/dka-management';
 
 // Pituitary disorders
-export { PITUITARY_CONTENT } from './pituitary/index.js';
-export { pituitaryAdenomas } from './pituitary/pituitary-adenomas.js';
-export { hypopituitarism } from './pituitary/hypopituitarism.js';
-export { diabetesInsipidus } from './pituitary/diabetes-insipidus.js';
+export { PITUITARY_CONTENT } from './pituitary/index';
+export { pituitaryAdenomas } from './pituitary/pituitary-adenomas';
+export { acromegaly } from './pituitary/acromegaly';
+export { prolactinoma } from './pituitary/prolactinoma';
+export { hypopituitarism } from './pituitary/hypopituitarism';
+export { diabetesInsipidus } from './pituitary/diabetes-insipidus';
 
 // Reproductive hormones
-export { REPRODUCTIVE_HORMONES_CONTENT } from './reproductive-hormones/index.js';
-export { pcos } from './reproductive-hormones/pcos.js';
-export { hirsutism } from './reproductive-hormones/hirsutism.js';
-export { infertilityEndocrine } from './reproductive-hormones/infertility-endocrine.js';
+export { REPRODUCTIVE_HORMONES_CONTENT } from './reproductive-hormones/index';
+export { pcos } from './reproductive-hormones/pcos';
+export { hirsutism } from './reproductive-hormones/hirsutism';
+export { infertilityEndocrine } from './reproductive-hormones/infertility-endocrine';
 
 // Thyroid disorders
-export { THYROID_CONTENT } from './thyroid/index.js';
-export { thyroidNodules } from './thyroid/thyroid-nodules.js';
-export { thyroidCancer } from './thyroid/thyroid-cancer.js';
-export { thyroiditis } from './thyroid/thyroiditis.js';
+export { THYROID_CONTENT } from './thyroid/index';
+export { HYPOTHYROIDISM } from './thyroid/hypothyroidism';
+export { HYPERTHYROIDISM } from './thyroid/hyperthyroidism';
+export { thyroidNodules } from './thyroid/thyroid-nodules';
+export { thyroidCancer } from './thyroid/thyroid-cancer';
+export { thyroiditis } from './thyroid/thyroiditis';
 
 // General endocrine topics
-export { ENDOCRINE_GENERAL_CONTENT } from './endocrine/index.js';
-export { hormoneTesting } from './endocrine/clinical/hormone-testing.js';
-export { endocrineEmergencies } from './endocrine/clinical/endocrine-emergencies.js';
-export { thyroidHistology } from './endocrine/histology/thyroid-histology.js';
-export { adrenalHistology } from './endocrine/histology/adrenal-histology.js';
-export { autoimmuneEndocrine } from './endocrine/pathology/autoimmune-endocrine.js';
-export { endocrineNeoplasia } from './endocrine/pathology/endocrine-neoplasia.js';
+export { ENDOCRINE_GENERAL_CONTENT } from './endocrine/index';
+export { hormoneTesting } from './endocrine/clinical/hormone-testing';
+export { endocrineEmergencies } from './endocrine/clinical/endocrine-emergencies';
+export { thyroidHistology } from './endocrine/histology/thyroid-histology';
+export { adrenalHistology } from './endocrine/histology/adrenal-histology';
+export { autoimmuneEndocrine } from './endocrine/pathology/autoimmune-endocrine';
+export { endocrineNeoplasia } from './endocrine/pathology/endocrine-neoplasia';
 
 // Module metadata
 export const ENDOCRINOLOGY_MODULE = {
   id: 'endocrinology',
   name: 'Endocrine System',
-  description: 'Comprehensive educational content for endocrine disorders covering adrenal, thyroid, pituitary, reproductive hormones, bone/calcium metabolism, and metabolic disorders.',
-  version: '1.0.0',
+  description: 'Comprehensive educational content for endocrine disorders covering diabetes, adrenal, thyroid, pituitary, reproductive hormones, bone/calcium metabolism, and metabolic disorders.',
+  version: '2.0.0',
   categories: [
+    'diabetes',
     'adrenal',
     'bone-calcium',
     'metabolic',
@@ -74,5 +85,5 @@ export const ENDOCRINOLOGY_MODULE = {
     'histology',
     'pathology',
   ],
-  totalContentItems: 20,
+  totalContentItems: 25,
 };

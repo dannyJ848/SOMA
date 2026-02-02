@@ -7,6 +7,12 @@
  *
  * IMPORTANT: This system EDUCATES, it does NOT diagnose. All content is framed as
  * "understanding your health" rather than "diagnosing your condition".
+ *
+ * Integrates with ContentService to enrich context with:
+ *   - Knowledge graph relationships (conditions <-> anatomy <-> symptoms)
+ *   - Region-specific educational content from the anatomy encyclopedia
+ *   - Glossary definitions for medical terms
+ *   - Complexity-level-appropriate explanations (1-5 tier system)
  */
 
 import type {
@@ -14,6 +20,7 @@ import type {
   ComplexityLevel,
   DashboardData,
   Citation,
+  AnatomyChatContext,
 } from './types';
 
 import type {
@@ -23,6 +30,17 @@ import type {
   UserLabResult,
   RelevanceLevel,
 } from '../../core/personalization/types';
+
+import type {
+  ContentService,
+  KnowledgeNode,
+  AnatomyRegion,
+  GlossaryEntry,
+  ConditionInfo,
+  ExplanationLevelNumber,
+} from '../services/ContentService';
+
+import { getContentService } from '../services/ContentService';
 
 // ============================================================================
 // Types
@@ -173,6 +191,23 @@ export interface ContextBuildOptions {
   maxContextLength?: number;
 }
 
+/**
+ * Enriched knowledge context fetched from ContentService.
+ * Used internally to inject knowledge graph data into prompts.
+ */
+interface KnowledgeEnrichment {
+  /** Knowledge graph relationships formatted as text */
+  graphRelationships: string;
+  /** Glossary definitions for relevant medical terms */
+  glossaryDefinitions: string;
+  /** Region-specific educational content (anatomy details) */
+  anatomyContent: string;
+  /** Pre-built explanation at the requested complexity level */
+  levelExplanation: string;
+  /** Explanation level metadata (audience, constraints) */
+  levelGuidance: string;
+}
+
 // ============================================================================
 // Constants
 // ============================================================================
@@ -197,6 +232,12 @@ const COMPLEXITY_DESCRIPTIONS: Record<ComplexityLevel, string> = {
   5: 'Comprehensive coverage at healthcare professional level',
 };
 
+/** Maximum number of knowledge graph neighbours to include per category */
+const MAX_GRAPH_NEIGHBOURS = 6;
+
+/** Maximum glossary definitions to include in context */
+const MAX_GLOSSARY_TERMS = 5;
+
 // ============================================================================
 // Educational Context Builder Class
 // ============================================================================
@@ -206,8 +247,14 @@ const COMPLEXITY_DESCRIPTIONS: Record<ComplexityLevel, string> = {
  *
  * Builds personalized educational context for the AI Medical Encyclopedia.
  * Focuses on education and understanding, never diagnosis.
+ *
+ * Uses ContentService to enrich prompts with knowledge graph relationships,
+ * anatomy encyclopedia data, glossary definitions, and level-appropriate
+ * explanation guidance.
  */
 export class EducationalContextBuilder {
+  private contentService: ContentService;
+
   private defaultOptions: ContextBuildOptions = {
     includeMedicationContext: true,
     includeLabContext: true,
@@ -218,6 +265,14 @@ export class EducationalContextBuilder {
   };
 
   /**
+   * @param contentService - Optional ContentService instance. Falls back to
+   *   the global singleton via getContentService() if not provided.
+   */
+  constructor(contentService?: ContentService) {
+    this.contentService = contentService ?? getContentService();
+  }
+
+  /**
    * Build educational context for an anatomical region
    *
    * @param regionId - The anatomical region identifier
@@ -226,12 +281,12 @@ export class EducationalContextBuilder {
    * @param options - Additional context building options
    * @returns Educational context for the AI
    */
-  buildRegionContext(
+  async buildRegionContext(
     regionId: string,
     patientData: PatientHealthData,
     complexity: ComplexityLevel = 3,
     options: ContextBuildOptions = {}
-  ): EducationalContext {
+  ): Promise<EducationalContext> {
     const opts = { ...this.defaultOptions, ...options };
     const regionName = this.formatRegionName(regionId);
 
@@ -240,6 +295,9 @@ export class EducationalContextBuilder {
     const relevantMedications = this.findMedicationsRelatedToRegion(regionId, patientData.medications);
     const relevantLabs = this.findLabsRelatedToRegion(regionId, patientData.labs);
     const relevantSymptoms = this.findSymptomsRelatedToRegion(regionId, patientData.symptoms);
+
+    // Enrich with ContentService knowledge graph data
+    const enrichment = await this.enrichForRegion(regionId, regionName, complexity, opts);
 
     // Build the educational context
     const relevanceExplanation = this.buildRegionRelevanceExplanation(
@@ -291,7 +349,8 @@ export class EducationalContextBuilder {
       patientDataContext,
       relevanceExplanation,
       learningObjectives,
-      opts
+      opts,
+      enrichment
     );
 
     return {
@@ -316,12 +375,12 @@ export class EducationalContextBuilder {
    * @param options - Additional context building options
    * @returns Educational context for the AI
    */
-  buildConditionContext(
+  async buildConditionContext(
     conditionId: string,
     patientData: PatientHealthData,
     complexity: ComplexityLevel = 3,
     options: ContextBuildOptions = {}
-  ): EducationalContext {
+  ): Promise<EducationalContext> {
     const opts = { ...this.defaultOptions, ...options };
     const conditionName = this.formatConditionName(conditionId);
 
@@ -334,6 +393,9 @@ export class EducationalContextBuilder {
     const relatedMedications = this.findMedicationsForCondition(conditionId, patientData.medications);
     const relatedLabs = this.findLabsForCondition(conditionId, patientData.labs);
     const relatedSymptoms = this.findSymptomsForCondition(conditionId, patientData.symptoms);
+
+    // Enrich with ContentService knowledge graph data
+    const enrichment = await this.enrichForCondition(conditionId, conditionName, complexity, opts);
 
     // Build context
     const relevanceExplanation = this.buildConditionRelevanceExplanation(
@@ -384,7 +446,8 @@ export class EducationalContextBuilder {
       patientDataContext,
       relevanceExplanation,
       learningObjectives,
-      opts
+      opts,
+      enrichment
     );
 
     return {
@@ -409,12 +472,12 @@ export class EducationalContextBuilder {
    * @param options - Additional context building options
    * @returns Educational context for the AI
    */
-  buildMedicationContext(
+  async buildMedicationContext(
     medicationId: string,
     patientData: PatientHealthData,
     complexity: ComplexityLevel = 3,
     options: ContextBuildOptions = {}
-  ): EducationalContext {
+  ): Promise<EducationalContext> {
     const opts = { ...this.defaultOptions, ...options };
     const medicationName = this.formatMedicationName(medicationId);
 
@@ -438,6 +501,9 @@ export class EducationalContextBuilder {
     const otherMedications = patientData.medications.filter(
       m => m.id !== medicationId && m.name.toLowerCase() !== medicationName.toLowerCase()
     );
+
+    // Enrich with ContentService knowledge graph data
+    const enrichment = await this.enrichForMedication(medicationId, medicationName, complexity, opts);
 
     // Build context
     const relevanceExplanation = this.buildMedicationRelevanceExplanation(
@@ -488,7 +554,8 @@ export class EducationalContextBuilder {
       relevanceExplanation,
       learningObjectives,
       otherMedications,
-      opts
+      opts,
+      enrichment
     );
 
     return {
@@ -513,12 +580,12 @@ export class EducationalContextBuilder {
    * @param options - Additional context building options
    * @returns Educational context for the AI
    */
-  buildLabContext(
+  async buildLabContext(
     labId: string,
     patientData: PatientHealthData,
     complexity: ComplexityLevel = 3,
     options: ContextBuildOptions = {}
-  ): EducationalContext {
+  ): Promise<EducationalContext> {
     const opts = { ...this.defaultOptions, ...options };
     const labName = this.formatLabName(labId);
 
@@ -532,6 +599,9 @@ export class EducationalContextBuilder {
     // Find related data
     const relatedConditions = this.findConditionsRelatedToLab(labId, patientData.conditions);
     const relatedMedications = this.findMedicationsAffectingLab(labId, patientData.medications);
+
+    // Enrich with ContentService knowledge graph data
+    const enrichment = await this.enrichForLab(labId, labName, complexity, opts);
 
     // Build context
     const relevanceExplanation = this.buildLabRelevanceExplanation(
@@ -582,7 +652,8 @@ export class EducationalContextBuilder {
       learningObjectives,
       relatedConditions,
       relatedMedications,
-      opts
+      opts,
+      enrichment
     );
 
     return {
@@ -733,6 +804,402 @@ export class EducationalContextBuilder {
       ],
       prerequisites: [],
     };
+  }
+
+  // ============================================================================
+  // Private Methods - ContentService Enrichment
+  // ============================================================================
+
+  /**
+   * Enrich context for an anatomical region using ContentService.
+   * Fetches anatomy encyclopedia data, knowledge graph relationships,
+   * glossary terms, and explanation-level guidance.
+   */
+  private async enrichForRegion(
+    regionId: string,
+    regionName: string,
+    complexity: ComplexityLevel,
+    opts: ContextBuildOptions,
+  ): Promise<KnowledgeEnrichment> {
+    const level = complexity as ExplanationLevelNumber;
+
+    // Fetch data in parallel from ContentService
+    const [
+      anatomyRegion,
+      graphNode,
+      glossaryEntry,
+      explanationLevel,
+      explanationPrompt,
+    ] = await Promise.all([
+      this.contentService.getAnatomyRegion(regionId).catch(() => undefined),
+      Promise.resolve(this.contentService.getGraphNode(`anatomy:${regionId}`)),
+      this.contentService.getGlossaryEntry(regionName).catch(() => undefined),
+      this.contentService.getExplanationLevel(level).catch(() => undefined),
+      this.contentService.getExplanationPrompt(level, regionName).catch(() => undefined),
+    ]);
+
+    // Build anatomy content section
+    let anatomyContent = '';
+    if (anatomyRegion) {
+      const parts: string[] = [];
+      parts.push(`Anatomy Reference: ${anatomyRegion.name}`);
+      if (anatomyRegion.spanish) parts.push(`  Spanish: ${anatomyRegion.spanish}`);
+      if (anatomyRegion.function) parts.push(`  Function: ${anatomyRegion.function}`);
+      if ((anatomyRegion as AnatomyRegion & { location?: string }).location) {
+        parts.push(`  Location: ${(anatomyRegion as AnatomyRegion & { location?: string }).location}`);
+      }
+      anatomyContent = parts.join('\n');
+    }
+
+    // Build graph relationships section
+    let graphRelationships = '';
+    if (graphNode) {
+      const related = this.contentService.getRelated(`anatomy:${regionId}`);
+      const conditions = related.filter(n => n.type === 'condition').slice(0, MAX_GRAPH_NEIGHBOURS);
+      const symptoms = related.filter(n => n.type === 'symptom').slice(0, MAX_GRAPH_NEIGHBOURS);
+      const procedures = related.filter(n => n.type === 'procedure').slice(0, MAX_GRAPH_NEIGHBOURS);
+
+      const parts: string[] = [];
+      if (conditions.length > 0) {
+        parts.push(`Conditions affecting this region: ${conditions.map(n => n.name).join(', ')}`);
+      }
+      if (symptoms.length > 0) {
+        parts.push(`Symptoms associated with this region: ${symptoms.map(n => n.name).join(', ')}`);
+      }
+      if (procedures.length > 0) {
+        parts.push(`Procedures involving this region: ${procedures.map(n => n.name).join(', ')}`);
+      }
+      if (graphNode.description) {
+        parts.push(`Medical description: ${graphNode.description}`);
+      }
+      graphRelationships = parts.join('\n');
+    }
+
+    // Build glossary section
+    const glossaryDefinitions = await this.buildGlossarySection(regionName, opts);
+
+    // Build level guidance
+    const levelGuidance = this.buildLevelGuidance(explanationLevel, level);
+    const levelExplanation = explanationPrompt?.systemPrompt
+      ? `Level-specific instruction: ${explanationPrompt.systemPrompt}`
+      : '';
+
+    return {
+      graphRelationships,
+      glossaryDefinitions,
+      anatomyContent,
+      levelExplanation,
+      levelGuidance,
+    };
+  }
+
+  /**
+   * Enrich context for a medical condition using ContentService.
+   * Fetches condition info from knowledge graph (symptoms, medications,
+   * procedures, anatomy regions), glossary, and explanation levels.
+   */
+  private async enrichForCondition(
+    conditionId: string,
+    conditionName: string,
+    complexity: ComplexityLevel,
+    opts: ContextBuildOptions,
+  ): Promise<KnowledgeEnrichment> {
+    const level = complexity as ExplanationLevelNumber;
+
+    // Fetch data in parallel from ContentService
+    const [
+      conditionInfo,
+      explanationText,
+      explanationLevel,
+      explanationPrompt,
+    ] = await Promise.all([
+      this.contentService.getConditionInfo(conditionId).catch(() => undefined),
+      this.contentService.getExplanation(conditionId, level).catch(() => undefined),
+      this.contentService.getExplanationLevel(level).catch(() => undefined),
+      this.contentService.getExplanationPrompt(level, conditionName).catch(() => undefined),
+    ]);
+
+    // Build graph relationships from condition info
+    let graphRelationships = '';
+    let anatomyContent = '';
+    if (conditionInfo) {
+      const parts: string[] = [];
+
+      if (conditionInfo.node.description) {
+        parts.push(`Medical description: ${conditionInfo.node.description}`);
+      }
+
+      if (conditionInfo.symptoms.length > 0) {
+        const symptomNames = conditionInfo.symptoms.slice(0, MAX_GRAPH_NEIGHBOURS).map(n => n.name);
+        parts.push(`Known symptoms: ${symptomNames.join(', ')}`);
+      }
+
+      if (conditionInfo.medications.length > 0) {
+        const medNames = conditionInfo.medications.slice(0, MAX_GRAPH_NEIGHBOURS).map(n => n.name);
+        parts.push(`Treatment medications: ${medNames.join(', ')}`);
+      }
+
+      if (conditionInfo.procedures.length > 0) {
+        const procNames = conditionInfo.procedures.slice(0, MAX_GRAPH_NEIGHBOURS).map(n => n.name);
+        parts.push(`Diagnostic/treatment procedures: ${procNames.join(', ')}`);
+      }
+
+      if (conditionInfo.specialists.length > 0) {
+        const specNames = conditionInfo.specialists.slice(0, MAX_GRAPH_NEIGHBOURS).map(n => n.name);
+        parts.push(`Relevant specialties: ${specNames.join(', ')}`);
+      }
+
+      graphRelationships = parts.join('\n');
+
+      // Build anatomy content from condition info
+      if (conditionInfo.anatomyRegions.length > 0) {
+        const anatomyParts = conditionInfo.anatomyRegions.slice(0, MAX_GRAPH_NEIGHBOURS).map(region => {
+          let line = `  - ${region.name}`;
+          if (region.function) line += `: ${region.function}`;
+          return line;
+        });
+        anatomyContent = `Affected anatomy:\n${anatomyParts.join('\n')}`;
+      }
+    }
+
+    // Build glossary section (include condition name + related terms)
+    const glossaryDefinitions = await this.buildGlossarySection(conditionName, opts);
+
+    // Build level guidance and pre-built explanation
+    const levelGuidance = this.buildLevelGuidance(explanationLevel, level);
+
+    let levelExplanation = '';
+    if (explanationText) {
+      levelExplanation = `Pre-built level-${level} explanation:\n${explanationText}`;
+    } else if (explanationPrompt?.systemPrompt) {
+      levelExplanation = `Level-specific instruction: ${explanationPrompt.systemPrompt}`;
+    }
+
+    return {
+      graphRelationships,
+      glossaryDefinitions,
+      anatomyContent,
+      levelExplanation,
+      levelGuidance,
+    };
+  }
+
+  /**
+   * Enrich context for a medication using ContentService.
+   * Fetches medication node from knowledge graph, related conditions/anatomy,
+   * glossary definitions, and explanation-level guidance.
+   */
+  private async enrichForMedication(
+    medicationId: string,
+    medicationName: string,
+    complexity: ComplexityLevel,
+    opts: ContextBuildOptions,
+  ): Promise<KnowledgeEnrichment> {
+    const level = complexity as ExplanationLevelNumber;
+
+    const graphNode = this.contentService.getGraphNode(`medication:${medicationId}`);
+
+    const [
+      explanationLevel,
+      explanationPrompt,
+    ] = await Promise.all([
+      this.contentService.getExplanationLevel(level).catch(() => undefined),
+      this.contentService.getExplanationPrompt(level, medicationName).catch(() => undefined),
+    ]);
+
+    // Build graph relationships
+    let graphRelationships = '';
+    if (graphNode) {
+      const related = this.contentService.getRelated(`medication:${medicationId}`);
+      const conditions = related.filter(n => n.type === 'condition').slice(0, MAX_GRAPH_NEIGHBOURS);
+      const anatomy = related.filter(n => n.type === 'anatomy').slice(0, MAX_GRAPH_NEIGHBOURS);
+      const symptoms = related.filter(n => n.type === 'symptom').slice(0, MAX_GRAPH_NEIGHBOURS);
+
+      const parts: string[] = [];
+      if (graphNode.description) {
+        parts.push(`Medical description: ${graphNode.description}`);
+      }
+      if (conditions.length > 0) {
+        parts.push(`Conditions treated: ${conditions.map(n => n.name).join(', ')}`);
+      }
+      if (anatomy.length > 0) {
+        parts.push(`Body systems affected: ${anatomy.map(n => n.name).join(', ')}`);
+      }
+      if (symptoms.length > 0) {
+        parts.push(`Related symptoms: ${symptoms.map(n => n.name).join(', ')}`);
+      }
+      graphRelationships = parts.join('\n');
+    }
+
+    const glossaryDefinitions = await this.buildGlossarySection(medicationName, opts);
+    const levelGuidance = this.buildLevelGuidance(explanationLevel, level);
+    const levelExplanation = explanationPrompt?.systemPrompt
+      ? `Level-specific instruction: ${explanationPrompt.systemPrompt}`
+      : '';
+
+    return {
+      graphRelationships,
+      glossaryDefinitions,
+      anatomyContent: '',
+      levelExplanation,
+      levelGuidance,
+    };
+  }
+
+  /**
+   * Enrich context for a lab test using ContentService.
+   * Fetches related conditions/anatomy from knowledge graph, glossary
+   * definitions, and explanation-level guidance.
+   */
+  private async enrichForLab(
+    labId: string,
+    labName: string,
+    complexity: ComplexityLevel,
+    opts: ContextBuildOptions,
+  ): Promise<KnowledgeEnrichment> {
+    const level = complexity as ExplanationLevelNumber;
+
+    // Search the knowledge graph for the lab topic
+    const searchResults = await this.contentService.searchAll(labName, {
+      limit: 5,
+      language: opts.language,
+    }).catch(() => []);
+
+    const [
+      explanationLevel,
+      explanationPrompt,
+    ] = await Promise.all([
+      this.contentService.getExplanationLevel(level).catch(() => undefined),
+      this.contentService.getExplanationPrompt(level, labName).catch(() => undefined),
+    ]);
+
+    // Build graph relationships from search results
+    let graphRelationships = '';
+    if (searchResults.length > 0) {
+      const parts: string[] = [];
+      const conditions = searchResults.filter(r => r.type === 'condition').slice(0, MAX_GRAPH_NEIGHBOURS);
+      const anatomy = searchResults.filter(r => r.type === 'anatomy').slice(0, MAX_GRAPH_NEIGHBOURS);
+
+      if (conditions.length > 0) {
+        parts.push(`Related conditions: ${conditions.map(r => r.name).join(', ')}`);
+      }
+      if (anatomy.length > 0) {
+        parts.push(`Related anatomy: ${anatomy.map(r => r.name).join(', ')}`);
+      }
+      // Include the best match description if available
+      const bestMatch = searchResults[0];
+      if (bestMatch.description) {
+        parts.push(`Reference: ${bestMatch.description}`);
+      }
+      graphRelationships = parts.join('\n');
+    }
+
+    const glossaryDefinitions = await this.buildGlossarySection(labName, opts);
+    const levelGuidance = this.buildLevelGuidance(explanationLevel, level);
+    const levelExplanation = explanationPrompt?.systemPrompt
+      ? `Level-specific instruction: ${explanationPrompt.systemPrompt}`
+      : '';
+
+    return {
+      graphRelationships,
+      glossaryDefinitions,
+      anatomyContent: '',
+      levelExplanation,
+      levelGuidance,
+    };
+  }
+
+  /**
+   * Build a glossary definitions section by looking up the primary term
+   * and any related medical terms in the ContentService glossary.
+   */
+  private async buildGlossarySection(
+    primaryTerm: string,
+    opts: ContextBuildOptions,
+  ): Promise<string> {
+    const entries: string[] = [];
+
+    // Look up the primary term
+    const primaryEntry = await this.contentService.getGlossaryEntry(primaryTerm).catch(() => undefined);
+    if (primaryEntry) {
+      const definition = opts.language === 'es' ? primaryEntry.plainES : primaryEntry.plainEN;
+      entries.push(`${primaryEntry.term}: ${definition}`);
+    }
+
+    // Search for additional related glossary terms
+    const searchResults = await this.contentService.searchAll(primaryTerm, {
+      limit: MAX_GLOSSARY_TERMS + 1,
+      includeGlossary: true,
+      language: opts.language,
+    }).catch(() => []);
+
+    for (const result of searchResults) {
+      if (result.type === 'glossary' && entries.length < MAX_GLOSSARY_TERMS) {
+        const glossarySource = result.source as GlossaryEntry;
+        if (glossarySource && glossarySource.term !== primaryEntry?.term) {
+          const definition = opts.language === 'es' ? glossarySource.plainES : glossarySource.plainEN;
+          entries.push(`${glossarySource.term}: ${definition}`);
+        }
+      }
+    }
+
+    if (entries.length === 0) return '';
+    return `Glossary definitions:\n${entries.map(e => `  - ${e}`).join('\n')}`;
+  }
+
+  /**
+   * Build explanation level guidance text from the explanation level metadata.
+   * This tells the AI what audience it is targeting and what communication
+   * constraints to follow.
+   */
+  private buildLevelGuidance(
+    explanationLevel: { name: string; audience: string; constraints: string[] } | undefined,
+    level: ExplanationLevelNumber,
+  ): string {
+    if (!explanationLevel) return '';
+
+    const parts: string[] = [];
+    parts.push(`Explanation Level ${level}: "${explanationLevel.name}" (Audience: ${explanationLevel.audience})`);
+
+    if (explanationLevel.constraints && explanationLevel.constraints.length > 0) {
+      parts.push(`Communication constraints:`);
+      explanationLevel.constraints.slice(0, 4).forEach(constraint => {
+        parts.push(`  - ${constraint}`);
+      });
+    }
+
+    return parts.join('\n');
+  }
+
+  /**
+   * Format the enrichment data into a prompt section string.
+   * Only includes non-empty sections.
+   */
+  private formatEnrichmentSection(enrichment: KnowledgeEnrichment): string {
+    const sections: string[] = [];
+
+    if (enrichment.levelGuidance) {
+      sections.push(enrichment.levelGuidance);
+    }
+
+    if (enrichment.graphRelationships) {
+      sections.push(`\n=== MEDICAL KNOWLEDGE GRAPH ===\n${enrichment.graphRelationships}`);
+    }
+
+    if (enrichment.anatomyContent) {
+      sections.push(`\n=== ANATOMY REFERENCE ===\n${enrichment.anatomyContent}`);
+    }
+
+    if (enrichment.glossaryDefinitions) {
+      sections.push(`\n=== MEDICAL GLOSSARY ===\n${enrichment.glossaryDefinitions}`);
+    }
+
+    if (enrichment.levelExplanation) {
+      sections.push(`\n=== LEVEL-APPROPRIATE REFERENCE ===\n${enrichment.levelExplanation}`);
+    }
+
+    if (sections.length === 0) return '';
+    return '\n' + sections.join('\n') + '\n';
   }
 
   // ============================================================================
@@ -1672,8 +2139,11 @@ export class EducationalContextBuilder {
     patientDataContext: string,
     relevanceExplanation: string,
     learningObjectives: string[],
-    options: ContextBuildOptions
+    options: ContextBuildOptions,
+    enrichment?: KnowledgeEnrichment
   ): string {
+    const enrichmentSection = enrichment ? this.formatEnrichmentSection(enrichment) : '';
+
     return `You are an expert medical educator helping a patient understand the ${regionName}.
 
 === EDUCATIONAL CONTEXT ===
@@ -1682,7 +2152,7 @@ WHY THIS IS RELEVANT TO THIS PATIENT:
 ${relevanceExplanation}
 
 ${patientDataContext}
-
+${enrichmentSection}
 === LEARNING OBJECTIVES ===
 ${learningObjectives.map((obj, i) => `${i + 1}. ${obj}`).join('\n')}
 
@@ -1696,6 +2166,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
    - Explain the main functions
    - Connect to the patient's specific health context when relevant
    - Build understanding progressively
+   - Use the medical knowledge graph facts above to ground your explanation in verified medical relationships
 
 2. PERSONALIZATION (when relevant):
    - Reference the patient's conditions to explain why this anatomy matters to them
@@ -1711,6 +2182,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
    - Always maintain educational, not diagnostic, framing
    - Use "your healthcare provider can tell you..." instead of suggesting diagnoses
    - Empower with knowledge, not anxiety
+   - Define medical terms using the glossary definitions provided above when available
 
 ${EDUCATIONAL_DISCLAIMER}
 
@@ -1724,11 +2196,14 @@ Now, please explain the ${regionName} at complexity level ${complexity}, persona
     patientDataContext: string,
     relevanceExplanation: string,
     learningObjectives: string[],
-    options: ContextBuildOptions
+    options: ContextBuildOptions,
+    enrichment?: KnowledgeEnrichment
   ): string {
     const personalizedNote = patientHasCondition
       ? `The patient has ${conditionName} in their health profile. Frame this as helping them understand their own condition.`
       : `The patient is learning about ${conditionName} for general knowledge. Frame this as educational information.`;
+
+    const enrichmentSection = enrichment ? this.formatEnrichmentSection(enrichment) : '';
 
     return `You are an expert medical educator helping a patient understand ${conditionName}.
 
@@ -1740,7 +2215,7 @@ WHY THIS IS RELEVANT TO THIS PATIENT:
 ${relevanceExplanation}
 
 ${patientDataContext}
-
+${enrichmentSection}
 === LEARNING OBJECTIVES ===
 ${learningObjectives.map((obj, i) => `${i + 1}. ${obj}`).join('\n')}
 
@@ -1752,8 +2227,8 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
 1. STRUCTURE YOUR EXPLANATION:
    - What is this condition? (definition and overview)
    - What happens in the body? (pathophysiology appropriate to complexity level)
-   - How does it manifest? (signs and symptoms)
-   - How is it managed? (general treatment approaches - educational only)
+   - How does it manifest? (signs and symptoms -- use the knowledge graph symptoms above as reference)
+   - How is it managed? (general treatment approaches - educational only, reference medications from the knowledge graph)
 
 2. PERSONALIZATION:
    - If patient has this condition: Connect to their specific medications and labs
@@ -1769,6 +2244,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
    - NEVER diagnose or suggest the patient has undiagnosed conditions
    - NEVER recommend specific treatments or medication changes
    - Always defer to their healthcare provider for personalized medical advice
+   - Define medical terms using the glossary definitions provided above when available
 
 ${EDUCATIONAL_DISCLAIMER}
 
@@ -1783,7 +2259,8 @@ Now, please explain ${conditionName} at complexity level ${complexity}, personal
     relevanceExplanation: string,
     learningObjectives: string[],
     otherMedications: PatientHealthData['medications'],
-    options: ContextBuildOptions
+    options: ContextBuildOptions,
+    enrichment?: KnowledgeEnrichment
   ): string {
     const personalizedNote = patientTakesMedication
       ? `The patient currently takes ${medicationName}. Help them understand their medication.`
@@ -1792,6 +2269,8 @@ Now, please explain ${conditionName} at complexity level ${complexity}, personal
     const interactionNote = otherMedications.length > 0
       ? `\nThe patient also takes: ${otherMedications.map(m => m.name).join(', ')}. If there are common educational points about drug interactions with ${medicationName}, include them in an educational context.`
       : '';
+
+    const enrichmentSection = enrichment ? this.formatEnrichmentSection(enrichment) : '';
 
     return `You are an expert pharmacology educator helping a patient understand ${medicationName}.
 
@@ -1803,7 +2282,7 @@ WHY THIS IS RELEVANT TO THIS PATIENT:
 ${relevanceExplanation}
 
 ${patientDataContext}
-
+${enrichmentSection}
 === LEARNING OBJECTIVES ===
 ${learningObjectives.map((obj, i) => `${i + 1}. ${obj}`).join('\n')}
 
@@ -1813,7 +2292,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
 === EDUCATIONAL GUIDELINES ===
 
 1. STRUCTURE YOUR EXPLANATION:
-   - What is this medication and what is it used for?
+   - What is this medication and what is it used for? (reference conditions from the knowledge graph above)
    - How does it work? (mechanism of action appropriate to complexity)
    - What should you expect? (effects, timeline)
    - What should you be aware of? (common considerations - educational)
@@ -1833,6 +2312,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
    - NEVER provide dosing advice
    - Frame all side effect information as educational, not predictive
    - Always defer to healthcare provider for medication decisions
+   - Define medical terms using the glossary definitions provided above when available
 
 ${EDUCATIONAL_DISCLAIMER}
 
@@ -1848,11 +2328,14 @@ Now, please explain ${medicationName} at complexity level ${complexity}, persona
     learningObjectives: string[],
     relatedConditions: PatientHealthData['conditions'],
     relatedMedications: PatientHealthData['medications'],
-    options: ContextBuildOptions
+    options: ContextBuildOptions,
+    enrichment?: KnowledgeEnrichment
   ): string {
     const resultNote = labResult
       ? `The patient has a ${labName} result: ${labResult.value}${labResult.unit ? ' ' + labResult.unit : ''} (${labResult.status}). Help them understand what this test measures - not diagnose based on the result.`
       : `The patient is learning about the ${labName} test. Provide educational information.`;
+
+    const enrichmentSection = enrichment ? this.formatEnrichmentSection(enrichment) : '';
 
     return `You are an expert clinical laboratory educator helping a patient understand ${labName}.
 
@@ -1864,7 +2347,7 @@ WHY THIS IS RELEVANT TO THIS PATIENT:
 ${relevanceExplanation}
 
 ${patientDataContext}
-
+${enrichmentSection}
 === LEARNING OBJECTIVES ===
 ${learningObjectives.map((obj, i) => `${i + 1}. ${obj}`).join('\n')}
 
@@ -1876,8 +2359,8 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
 1. STRUCTURE YOUR EXPLANATION:
    - What does this test measure? (biological significance)
    - What do the numbers mean? (reference ranges, units)
-   - What can affect this test? (factors, variations)
-   - Why is this test ordered? (clinical context - educational)
+   - What can affect this test? (factors, variations -- use knowledge graph relationships above)
+   - Why is this test ordered? (clinical context - educational, reference related conditions from the knowledge graph)
 
 2. PERSONALIZATION:
    - If patient has a result: Help them understand what the test measures, not diagnose
@@ -1894,6 +2377,7 @@ ${COMPLEXITY_DESCRIPTIONS[complexity]}
    - NEVER suggest the result means they have a specific condition
    - Always emphasize that interpretation requires clinical context
    - Defer to healthcare provider for result interpretation
+   - Define medical terms using the glossary definitions provided above when available
 
 ${EDUCATIONAL_DISCLAIMER}
 
@@ -2030,10 +2514,15 @@ Now, please explain ${labName} at complexity level ${complexity}, personalized f
 export default EducationalContextBuilder;
 
 /**
- * Create a new EducationalContextBuilder instance
+ * Create a new EducationalContextBuilder instance.
+ *
+ * @param contentService - Optional ContentService instance. If omitted, uses
+ *   the global singleton from getContentService().
  */
-export function createEducationalContextBuilder(): EducationalContextBuilder {
-  return new EducationalContextBuilder();
+export function createEducationalContextBuilder(
+  contentService?: ContentService,
+): EducationalContextBuilder {
+  return new EducationalContextBuilder(contentService);
 }
 
 /**
@@ -2110,4 +2599,97 @@ export function profileToPatientData(profile: UserHealthProfile): PatientHealthD
       sex: profile.demographics.sex,
     },
   };
+}
+
+/**
+ * Build a system prompt for the anatomy chat view, combining the structured
+ * AnatomyChatContext (from the 3D body model) with optional patient health
+ * data. This is a synchronous convenience wrapper -- it does not call
+ * ContentService async methods (the caller in ChatView already has the
+ * pre-resolved data from the anatomy screen).
+ *
+ * For richer context that includes knowledge graph traversal, glossary
+ * definitions, and level-appropriate explanations, use the async
+ * `buildRegionContext` method on `EducationalContextBuilder` instead.
+ */
+export function buildAnatomyChatSystemPrompt(
+  ctx: AnatomyChatContext,
+  patientData: PatientHealthData | null,
+): string {
+  const complexity = ctx.complexityLevel ?? 3;
+
+  const sections: string[] = [];
+
+  sections.push(
+    `You are an expert medical educator helping a patient understand the ${ctx.regionName} region of the body.`,
+  );
+
+  // Complexity / explanation level
+  sections.push(`\n=== COMPLEXITY LEVEL: ${complexity}/5 ===`);
+  sections.push(COMPLEXITY_DESCRIPTIONS[complexity as ComplexityLevel]);
+
+  // Anatomy structures
+  if (ctx.anatomyStructures.length > 0) {
+    sections.push(`\n=== ANATOMY STRUCTURES ===`);
+    sections.push(ctx.anatomyStructures.join(', '));
+  }
+
+  // Body systems
+  if (ctx.bodySystems.length > 0) {
+    sections.push(`\n=== BODY SYSTEMS ===`);
+    sections.push(ctx.bodySystems.join(', '));
+  }
+
+  // Related conditions
+  if (ctx.conditions.length > 0) {
+    sections.push(`\n=== RELATED CONDITIONS ===`);
+    sections.push(ctx.conditions.join(', '));
+  }
+
+  // Related symptoms
+  if (ctx.symptoms.length > 0) {
+    sections.push(`\n=== RELATED SYMPTOMS ===`);
+    sections.push(ctx.symptoms.join(', '));
+  }
+
+  // Relevant specialties
+  if (ctx.specialties.length > 0) {
+    sections.push(`\n=== RELEVANT SPECIALTIES ===`);
+    sections.push(ctx.specialties.join(', '));
+  }
+
+  // Patient health context (if available)
+  if (patientData) {
+    const healthParts: string[] = [];
+    healthParts.push('\n=== PATIENT HEALTH CONTEXT (For Educational Personalization) ===');
+    healthParts.push('NOTE: Used only to personalize educational content, not for diagnosis.');
+
+    if (patientData.conditions.length > 0) {
+      healthParts.push(`\nActive Conditions: ${patientData.conditions.map(c => c.name).join(', ')}`);
+    }
+    if (patientData.medications.length > 0) {
+      healthParts.push(`Current Medications: ${patientData.medications.map(m => m.name).join(', ')}`);
+    }
+    if (patientData.labs.length > 0) {
+      const abnormal = patientData.labs.filter(l => l.status !== 'normal');
+      if (abnormal.length > 0) {
+        healthParts.push(`Abnormal Labs: ${abnormal.map(l => `${l.testName} (${l.status})`).join(', ')}`);
+      }
+    }
+
+    sections.push(healthParts.join('\n'));
+  }
+
+  // Educational guidelines
+  sections.push(`\n=== EDUCATIONAL GUIDELINES ===
+1. Focus on the ${ctx.regionName} -- explain its anatomy, function, and clinical relevance.
+2. Use the related conditions, symptoms, and specialties above to provide grounded medical facts.
+3. Match complexity level ${complexity}/5: ${COMPLEXITY_DESCRIPTIONS[complexity as ComplexityLevel]}.
+4. Frame everything as educational -- NEVER diagnose or recommend treatments.
+5. Suggest questions the patient could ask their healthcare provider.
+6. ${EDUCATIONAL_FRAMING.region}`);
+
+  sections.push(`\n${EDUCATIONAL_DISCLAIMER}`);
+
+  return sections.join('\n');
 }

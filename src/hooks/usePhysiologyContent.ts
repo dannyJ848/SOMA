@@ -5,7 +5,9 @@
  * content at the appropriate complexity level with loading states.
  *
  * This hook:
- * - Fetches physiology content from core/content files
+ * - Loads real EducationalContent from core/content/physiology databases
+ * - Uses the region-to-physiology mapping for topic discovery
+ * - Falls back to regionContentMapping for basic region data
  * - Adapts content based on complexity level (1-5)
  * - Handles loading and error states
  * - Caches content for performance
@@ -13,6 +15,20 @@
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { REGION_CONTENT_MAP, type RegionContent, type PhysiologyContent } from '../education/regionContentMapping';
+import {
+  getRegionPhysiologyEntry,
+  getPhysiologyTopicsForRegion,
+  type PhysiologyTopicRef,
+  type RegionPhysiologyEntry,
+} from './regionPhysiologyMapping';
+import type {
+  EducationalContent,
+  LevelContent,
+  ComplexityLevel as ContentComplexityLevel,
+  CrossReference,
+  Citation as ContentCitation,
+  MediaAsset,
+} from '@core/content/types';
 
 // ============================================================================
 // Types
@@ -73,13 +89,34 @@ export interface Citation {
   license?: string;
 }
 
+/** A loaded physiology topic with its EducationalContent */
+export interface PhysiologyTopic {
+  id: string;
+  label: string;
+  system: string;
+  name: string;
+  summary: string;
+  explanation?: string;
+  keyTerms: KeyTerm[];
+  analogies?: string[];
+  examples?: string[];
+  clinicalNotes?: string;
+  patientCounselingPoints?: string[];
+}
+
 export interface PhysiologyContentData {
   // Basic info
   regionId: string;
   regionName: string;
   complexityLevel: ComplexityLevel;
 
-  // Overview content
+  // All available physiology topics for this region
+  topics: PhysiologyTopic[];
+
+  // Currently selected topic (full detail)
+  selectedTopicId: string | null;
+
+  // Overview content (from selected topic or region fallback)
   summary: string;
   explanation?: string;
   analogies?: string[];
@@ -120,6 +157,10 @@ export interface UsePhysiologyContentReturn {
   isLoading: boolean;
   error: string | null;
   refetch: () => void;
+  /** Select a specific physiology topic by its id */
+  selectTopic: (topicId: string) => void;
+  /** The currently selected topic ID */
+  selectedTopicId: string | null;
 }
 
 // ============================================================================
@@ -134,12 +175,12 @@ interface CacheEntry {
 const contentCache = new Map<string, CacheEntry>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-function getCacheKey(regionId: string, level: ComplexityLevel): string {
-  return `${regionId}:${level}`;
+function getCacheKey(regionId: string, level: ComplexityLevel, topicId?: string | null): string {
+  return `${regionId}:${level}:${topicId ?? 'all'}`;
 }
 
-function getCachedContent(regionId: string, level: ComplexityLevel): PhysiologyContentData | null {
-  const key = getCacheKey(regionId, level);
+function getCachedContent(regionId: string, level: ComplexityLevel, topicId?: string | null): PhysiologyContentData | null {
+  const key = getCacheKey(regionId, level, topicId);
   const cached = contentCache.get(key);
 
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
@@ -149,31 +190,133 @@ function getCachedContent(regionId: string, level: ComplexityLevel): PhysiologyC
   return null;
 }
 
-function setCachedContent(regionId: string, level: ComplexityLevel, content: PhysiologyContentData): void {
-  const key = getCacheKey(regionId, level);
+function setCachedContent(regionId: string, level: ComplexityLevel, topicId: string | null, content: PhysiologyContentData): void {
+  const key = getCacheKey(regionId, level, topicId);
   contentCache.set(key, { content, timestamp: Date.now() });
 }
 
 // ============================================================================
-// Content Adapters
+// Content Transformers — EducationalContent -> PhysiologyContentData
 // ============================================================================
 
 /**
- * Adapts summary content based on complexity level
+ * Extract level-specific content from an EducationalContent object.
+ * Handles both standard LevelContent and legacy formats.
  */
+function getLevelContent(ec: EducationalContent, level: ComplexityLevel): LevelContent | null {
+  const levels = ec.levels;
+  if (!levels) return null;
+  const lc = levels[level];
+  if (!lc) return null;
+  return lc;
+}
+
+/**
+ * Transform an EducationalContent into a PhysiologyTopic at a given level.
+ */
+function toPhysiologyTopic(
+  ec: EducationalContent,
+  level: ComplexityLevel,
+  topicRef: PhysiologyTopicRef
+): PhysiologyTopic {
+  const lc = getLevelContent(ec, level);
+
+  return {
+    id: ec.id,
+    label: topicRef.label,
+    system: topicRef.system,
+    name: ec.name,
+    summary: lc?.summary ?? `${ec.name} - educational content`,
+    explanation: lc?.explanation,
+    keyTerms: (lc?.keyTerms ?? []).map((kt) => ({
+      term: kt.term,
+      definition: kt.definition,
+      pronunciation: kt.pronunciation,
+      etymology: kt.etymology,
+    })),
+    analogies: lc?.analogies,
+    examples: lc?.examples,
+    clinicalNotes: lc?.clinicalNotes ?? undefined,
+    patientCounselingPoints: lc?.patientCounselingPoints ?? undefined,
+  };
+}
+
+/**
+ * Build citations from EducationalContent
+ */
+function buildCitationsFromContent(ec: EducationalContent): Citation[] {
+  if (!ec.citations || ec.citations.length === 0) {
+    return defaultCitations();
+  }
+  return ec.citations.map((c: ContentCitation) => ({
+    id: c.id,
+    type: c.type,
+    title: c.title,
+    source: c.source,
+    url: c.url,
+    authors: c.authors,
+    chapter: c.chapter,
+    license: c.license,
+  }));
+}
+
+/**
+ * Build media items from EducationalContent
+ */
+function buildMediaFromContent(ec: EducationalContent): MediaItem[] {
+  if (!ec.media || ec.media.length === 0) return [];
+  return ec.media.map((m: MediaAsset) => ({
+    id: m.id,
+    type: m.type,
+    filename: m.filename,
+    title: m.title,
+    description: m.description,
+  }));
+}
+
+/**
+ * Build related systems from EducationalContent cross-references
+ */
+function buildRelatedFromContent(ec: EducationalContent): RelatedSystem[] {
+  if (!ec.crossReferences || ec.crossReferences.length === 0) return [];
+  return ec.crossReferences.map((cr: CrossReference) => ({
+    targetId: cr.targetId,
+    targetType: cr.targetType,
+    relationship: cr.relationship,
+    label: cr.label ?? cr.targetId,
+  }));
+}
+
+function defaultCitations(): Citation[] {
+  return [
+    {
+      id: 'openstax-ap',
+      type: 'textbook',
+      title: 'Anatomy and Physiology 2e',
+      source: 'OpenStax',
+      url: 'https://openstax.org/details/books/anatomy-and-physiology-2e',
+      license: 'CC BY 4.0',
+    },
+    {
+      id: 'grays-anatomy',
+      type: 'textbook',
+      title: "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
+      source: 'Elsevier',
+    },
+  ];
+}
+
+// ============================================================================
+// Fallback adapters (for regions without database content)
+// ============================================================================
+
 function adaptSummaryForLevel(
   regionContent: RegionContent,
   level: ComplexityLevel
 ): { summary: string; explanation?: string; analogies?: string[]; examples?: string[] } {
-  // Default summary from physiology
   const basePhysiology = regionContent.physiology;
+  const functionSummary = basePhysiology.functions.map((f) => f.description).join(' ');
 
-  // Build summary from functions
-  const functionSummary = basePhysiology.functions
-    .map((f) => f.description)
-    .join(' ');
-
-  // Adapt based on level
   switch (level) {
     case 1:
       return {
@@ -207,66 +350,29 @@ function adaptSummaryForLevel(
   }
 }
 
-/**
- * Adapts functions based on complexity level
- */
-function adaptFunctionsForLevel(
-  physiology: PhysiologyContent,
-  level: ComplexityLevel
-): FunctionInfo[] {
+function adaptFunctionsForLevel(physiology: PhysiologyContent, level: ComplexityLevel): FunctionInfo[] {
   return physiology.functions.map((func) => {
     let description = func.description;
-
-    // Simplify descriptions for lower levels
     if (level <= 2) {
-      // Take first sentence only for simpler levels
       const firstSentence = description.split('.')[0];
       description = firstSentence.endsWith('.') ? firstSentence : `${firstSentence}.`;
     }
-
-    return {
-      name: func.name,
-      description,
-      importance: func.importance,
-    };
+    return { name: func.name, description, importance: func.importance };
   });
 }
 
-/**
- * Adapts mechanisms/processes based on complexity level
- */
-function adaptMechanismsForLevel(
-  physiology: PhysiologyContent,
-  level: ComplexityLevel
-): MechanismInfo[] {
-  // For lower levels, simplify or omit detailed steps
+function adaptMechanismsForLevel(physiology: PhysiologyContent, level: ComplexityLevel): MechanismInfo[] {
   return physiology.processes.map((process) => {
-    const mechanism: MechanismInfo = {
-      name: process.name,
-      description: process.description,
-    };
-
-    // Only include steps for intermediate and above
+    const mechanism: MechanismInfo = { name: process.name, description: process.description };
     if (level >= 3 && process.steps.length > 0) {
       mechanism.steps = process.steps;
     }
-
     return mechanism;
   });
 }
 
-/**
- * Adapts parameters based on complexity level
- */
-function adaptParametersForLevel(
-  physiology: PhysiologyContent,
-  level: ComplexityLevel
-): ParameterInfo[] {
-  // Only show parameters for level 2 and above
-  if (level < 2) {
-    return [];
-  }
-
+function adaptParametersForLevel(physiology: PhysiologyContent, level: ComplexityLevel): ParameterInfo[] {
+  if (level < 2) return [];
   return physiology.normalParameters.map((param) => ({
     name: param.name,
     normalRange: param.normalRange,
@@ -276,46 +382,7 @@ function adaptParametersForLevel(
   }));
 }
 
-/**
- * Generates key terms based on complexity level
- */
-function generateKeyTermsForLevel(
-  regionContent: RegionContent,
-  level: ComplexityLevel
-): KeyTerm[] {
-  const terms: KeyTerm[] = [];
-
-  // Extract terms from physiology content
-  const physiology = regionContent.physiology;
-
-  // Add function names as terms
-  physiology.functions.forEach((func) => {
-    terms.push({
-      term: func.name,
-      definition: func.description,
-    });
-  });
-
-  // Add homeostasis variables as terms for level 3+
-  if (level >= 3) {
-    physiology.homeostasis.forEach((h) => {
-      terms.push({
-        term: h.variable,
-        definition: `${h.regulationMechanism}. Normal range: ${h.normalRange} ${h.unit}`,
-      });
-    });
-  }
-
-  // Limit terms based on level
-  const maxTerms = level <= 2 ? 3 : level <= 4 ? 6 : 10;
-  return terms.slice(0, maxTerms);
-}
-
-/**
- * Builds related systems from cross-references
- */
 function buildRelatedSystems(regionContent: RegionContent): RelatedSystem[] {
-  // Use relatedStructures from region content
   return regionContent.relatedStructures.map((structureId) => {
     const relatedRegion = REGION_CONTENT_MAP[structureId];
     return {
@@ -327,95 +394,174 @@ function buildRelatedSystems(regionContent: RegionContent): RelatedSystem[] {
   });
 }
 
-/**
- * Builds citations from region content
- */
-function buildCitations(): Citation[] {
-  // Default citations for all physiological content
-  return [
-    {
-      id: 'openstax-ap',
-      type: 'textbook',
-      title: 'Anatomy and Physiology 2e',
-      source: 'OpenStax',
-      url: 'https://openstax.org/details/books/anatomy-and-physiology-2e',
-      license: 'CC BY 4.0',
-    },
-    {
-      id: 'grays-anatomy',
-      type: 'textbook',
-      title: "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
-      source: 'Elsevier',
-    },
-  ];
-}
-
 // ============================================================================
-// Content Loading
+// Content Loading (real database content)
 // ============================================================================
 
 /**
- * Loads and transforms physiology content for a region
+ * Loads real EducationalContent from physiology databases for a region,
+ * falling back to regionContentMapping if no database content exists.
  */
 async function loadPhysiologyContent(
   regionId: string,
-  level: ComplexityLevel
+  level: ComplexityLevel,
+  selectedTopicId: string | null
 ): Promise<PhysiologyContentData> {
-  // Check if region exists in mapping
+  const regionEntry = getRegionPhysiologyEntry(regionId);
   const regionContent = REGION_CONTENT_MAP[regionId];
 
-  if (!regionContent) {
+  if (!regionEntry && !regionContent) {
     throw new Error(`No physiology content found for region: ${regionId}`);
   }
 
-  // Simulate async loading (in real app, this might fetch from API or file system)
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  const regionName = regionEntry?.regionName ?? regionContent?.name ?? regionId;
+  const topicRefs = getPhysiologyTopicsForRegion(regionId);
 
-  const physiology = regionContent.physiology;
+  // Load all topics for this region in parallel
+  const loadedTopics: PhysiologyTopic[] = [];
+  const loadedContents: EducationalContent[] = [];
 
-  // Build adapted content
-  const summaryData = adaptSummaryForLevel(regionContent, level);
-  const functions = adaptFunctionsForLevel(physiology, level);
-  const mechanisms = adaptMechanismsForLevel(physiology, level);
-  const parameters = adaptParametersForLevel(physiology, level);
-  const keyTerms = generateKeyTermsForLevel(regionContent, level);
-  const relatedSystems = buildRelatedSystems(regionContent);
-  const citations = buildCitations();
+  if (topicRefs.length > 0) {
+    const contentPromises = topicRefs.map(async (ref) => {
+      try {
+        return await ref.load();
+      } catch {
+        return null;
+      }
+    });
+    const results = await Promise.all(contentPromises);
 
-  // Build homeostasis data (for level 3+)
-  const homeostasis = level >= 3 ? physiology.homeostasis : undefined;
+    for (let i = 0; i < results.length; i++) {
+      const ec = results[i];
+      if (ec) {
+        loadedContents.push(ec);
+        loadedTopics.push(toPhysiologyTopic(ec, level, topicRefs[i]));
+      }
+    }
+  }
 
-  // Build system interactions (for level 2+)
-  const systemInteractions = level >= 2 ? physiology.systemInteractions : undefined;
+  // Determine selected topic
+  let activeTopicId = selectedTopicId;
+  if (!activeTopicId && loadedTopics.length > 0) {
+    activeTopicId = loadedTopics[0].id;
+  }
 
-  // Build clinical notes (for level 3+)
-  const clinicalNotes = level >= 3 ? regionContent.clinicalNotes : undefined;
+  // Find the selected EducationalContent
+  const selectedIdx = loadedContents.findIndex((ec) => ec.id === activeTopicId);
+  const selectedEc = selectedIdx >= 0 ? loadedContents[selectedIdx] : null;
+  const selectedTopic = selectedIdx >= 0 ? loadedTopics[selectedIdx] : null;
 
-  // Build media references
-  const media: MediaItem[] = regionContent.models.map((model) => ({
-    id: model.name,
-    type: '3d-model',
-    filename: model.path,
-    title: model.name,
-    description: `${model.detailLevel} view`,
-  }));
+  // Build content from the selected EducationalContent if available
+  if (selectedEc && selectedTopic) {
+    const lc = getLevelContent(selectedEc, level);
+    const relatedFromContent = buildRelatedFromContent(selectedEc);
+    const relatedFromRegion = regionContent ? buildRelatedSystems(regionContent) : [];
+    const allRelated = [...relatedFromContent, ...relatedFromRegion];
 
-  return {
-    regionId,
-    regionName: regionContent.name,
-    complexityLevel: level,
-    ...summaryData,
-    keyTerms,
-    functions,
-    mechanisms,
-    normalParameters: parameters,
-    homeostasis,
-    relatedSystems,
-    systemInteractions,
-    clinicalNotes,
-    media,
-    citations,
-  };
+    // Build clinical notes
+    const clinicalNotes: string[] = [];
+    if (level >= 3 && lc?.clinicalNotes) {
+      clinicalNotes.push(lc.clinicalNotes);
+    }
+    if (level >= 3 && regionContent?.clinicalNotes) {
+      clinicalNotes.push(...regionContent.clinicalNotes);
+    }
+
+    // Build functions from the topic content + region content
+    const functions: FunctionInfo[] = [];
+    if (regionContent) {
+      functions.push(...adaptFunctionsForLevel(regionContent.physiology, level));
+    }
+
+    // Build mechanisms from region content
+    const mechanisms: MechanismInfo[] = [];
+    if (regionContent) {
+      mechanisms.push(...adaptMechanismsForLevel(regionContent.physiology, level));
+    }
+
+    // Build parameters from region content
+    const parameters = regionContent ? adaptParametersForLevel(regionContent.physiology, level) : [];
+
+    // Build homeostasis from region content
+    const homeostasis = level >= 3 && regionContent ? regionContent.physiology.homeostasis : undefined;
+
+    // System interactions from region content
+    const systemInteractions = level >= 2 && regionContent ? regionContent.physiology.systemInteractions : undefined;
+
+    return {
+      regionId,
+      regionName,
+      complexityLevel: level,
+      topics: loadedTopics,
+      selectedTopicId: activeTopicId,
+      summary: selectedTopic.summary,
+      explanation: selectedTopic.explanation,
+      analogies: selectedTopic.analogies,
+      examples: selectedTopic.examples,
+      keyTerms: selectedTopic.keyTerms,
+      functions,
+      mechanisms,
+      normalParameters: parameters,
+      homeostasis,
+      relatedSystems: allRelated,
+      systemInteractions,
+      clinicalNotes: clinicalNotes.length > 0 ? clinicalNotes : undefined,
+      media: buildMediaFromContent(selectedEc),
+      citations: buildCitationsFromContent(selectedEc),
+    };
+  }
+
+  // Fallback: use regionContentMapping data with generic adapters
+  if (regionContent) {
+    const summaryData = adaptSummaryForLevel(regionContent, level);
+    const functions = adaptFunctionsForLevel(regionContent.physiology, level);
+    const mechanisms = adaptMechanismsForLevel(regionContent.physiology, level);
+    const parameters = adaptParametersForLevel(regionContent.physiology, level);
+    const relatedSystems = buildRelatedSystems(regionContent);
+    const homeostasis = level >= 3 ? regionContent.physiology.homeostasis : undefined;
+    const systemInteractions = level >= 2 ? regionContent.physiology.systemInteractions : undefined;
+    const clinicalNotes = level >= 3 ? regionContent.clinicalNotes : undefined;
+    const media: MediaItem[] = regionContent.models.map((model) => ({
+      id: model.name,
+      type: '3d-model',
+      filename: model.path,
+      title: model.name,
+      description: `${model.detailLevel} view`,
+    }));
+
+    // Generate key terms from region content
+    const terms: KeyTerm[] = [];
+    regionContent.physiology.functions.forEach((func) => {
+      terms.push({ term: func.name, definition: func.description });
+    });
+    if (level >= 3) {
+      regionContent.physiology.homeostasis.forEach((h) => {
+        terms.push({ term: h.variable, definition: `${h.regulationMechanism}. Normal range: ${h.normalRange} ${h.unit}` });
+      });
+    }
+    const maxTerms = level <= 2 ? 3 : level <= 4 ? 6 : 10;
+
+    return {
+      regionId,
+      regionName: regionContent.name,
+      complexityLevel: level,
+      topics: loadedTopics,
+      selectedTopicId: null,
+      ...summaryData,
+      keyTerms: terms.slice(0, maxTerms),
+      functions,
+      mechanisms,
+      normalParameters: parameters,
+      homeostasis,
+      relatedSystems,
+      systemInteractions,
+      clinicalNotes,
+      media,
+      citations: defaultCitations(),
+    };
+  }
+
+  throw new Error(`No physiology content found for region: ${regionId}`);
 }
 
 // ============================================================================
@@ -423,11 +569,14 @@ async function loadPhysiologyContent(
 // ============================================================================
 
 /**
- * Hook for fetching and managing physiology content
+ * Hook for fetching and managing physiology content.
+ *
+ * Loads real EducationalContent from core/content/physiology databases,
+ * mapped by region. Supports topic selection within a region.
  *
  * @param regionId - The anatomical region identifier
  * @param complexityLevel - The desired complexity level (1-5)
- * @returns Content data, loading state, error state, and refetch function
+ * @returns Content data, loading state, error state, refetch, and topic selection
  */
 export function usePhysiologyContent(
   regionId: string,
@@ -436,16 +585,16 @@ export function usePhysiologyContent(
   const [content, setContent] = useState<PhysiologyContentData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
 
   // Track current request to handle race conditions
   const requestIdRef = useRef(0);
 
   const fetchContent = useCallback(async () => {
-    // Increment request ID
     const currentRequestId = ++requestIdRef.current;
 
-    // Check cache first
-    const cached = getCachedContent(regionId, complexityLevel);
+    // Check cache
+    const cached = getCachedContent(regionId, complexityLevel, selectedTopicId);
     if (cached) {
       setContent(cached);
       setIsLoading(false);
@@ -453,43 +602,50 @@ export function usePhysiologyContent(
       return;
     }
 
-    // Start loading
     setIsLoading(true);
     setError(null);
 
     try {
-      const data = await loadPhysiologyContent(regionId, complexityLevel);
+      const data = await loadPhysiologyContent(regionId, complexityLevel, selectedTopicId);
 
-      // Only update if this is still the current request
       if (currentRequestId === requestIdRef.current) {
-        setCachedContent(regionId, complexityLevel, data);
+        setCachedContent(regionId, complexityLevel, selectedTopicId, data);
         setContent(data);
         setIsLoading(false);
       }
     } catch (err) {
-      // Only update if this is still the current request
       if (currentRequestId === requestIdRef.current) {
         const message = err instanceof Error ? err.message : 'Failed to load physiology content';
         setError(message);
         setIsLoading(false);
       }
     }
-  }, [regionId, complexityLevel]);
+  }, [regionId, complexityLevel, selectedTopicId]);
+
+  // Reset selected topic when region changes
+  useEffect(() => {
+    setSelectedTopicId(null);
+  }, [regionId]);
 
   // Fetch content when dependencies change
   useEffect(() => {
     fetchContent();
   }, [fetchContent]);
 
-  // Memoize return value
+  const selectTopic = useCallback((topicId: string) => {
+    setSelectedTopicId(topicId);
+  }, []);
+
   return useMemo(
     () => ({
       content,
       isLoading,
       error,
       refetch: fetchContent,
+      selectTopic,
+      selectedTopicId,
     }),
-    [content, isLoading, error, fetchContent]
+    [content, isLoading, error, fetchContent, selectTopic, selectedTopicId]
   );
 }
 

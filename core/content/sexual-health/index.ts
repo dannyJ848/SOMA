@@ -9,3 +9,5 @@ export type {
   SexualHealthCategory,
   SexualHealthEntry,
 } from './sexual-health-database';
+
+export { stiPreventionOverview } from './sti-prevention';

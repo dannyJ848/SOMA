@@ -4,6 +4,7 @@ export const whatIsInformedConsentContent: EducationalContent = {
   id: 'what-is-informed-consent',
   type: 'concept',
   name: 'What is Informed Consent',
+  nameEs: 'Qué es el Consentimiento Informado',
   alternateNames: ['Medical Consent', 'Treatment Consent', 'Informed Decision-Making'],
   levels: {
     1: {

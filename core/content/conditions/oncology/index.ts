@@ -34,3 +34,17 @@ export const oncologyConditions = [
 ];
 
 export default oncologyConditions;
+
+// Oncology Conditions Database
+export {
+  ONCOLOGY_CONDITION_ENTRIES,
+  getOncologyConditionById,
+  searchOncologyConditions,
+  filterOncologyByCategory,
+  getOncologyConditionCount,
+  filterOncologyBySymptom,
+} from './oncology-conditions-database';
+export type {
+  OncologyConditionCategory,
+  OncologyConditionEntry,
+} from './oncology-conditions-database';

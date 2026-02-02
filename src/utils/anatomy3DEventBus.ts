@@ -236,6 +236,7 @@ class Anatomy3DEventBusImpl {
   clear(): void {
     this.listeners.forEach(handlers => handlers.clear());
     this.globalListeners.clear();
+    this.eventHistory.length = 0;
   }
 
   /**

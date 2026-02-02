@@ -8,6 +8,7 @@ export const CKD_STAGES: EducationalContent = {
   id: 'chronic-kidney-ckd-stages',
   type: 'concept',
   name: 'CKD Stages and eGFR Interpretation',
+  nameEs: 'Etapas de la Enfermedad Renal Crónica e Interpretación del eGFR',
   alternateNames: ['Chronic Kidney Disease Staging', 'eGFR Categories', 'Kidney Function Stages', 'GFR Stages'],
 
   levels: {

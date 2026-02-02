@@ -12,6 +12,15 @@ import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from './hooks/useUserDemogr
 import { getRegionMapping, type RegionMapping } from './utils/regionToSystemMapper';
 import { calculateBodyProportions } from './utils/bodyProportionCalculator';
 import {
+  retrieveContentByStructure,
+  searchHistology,
+  searchPathology,
+  searchPhysiology,
+  retrieveContentDocument,
+  type ComplexityLevel,
+} from './contentRetrieval';
+import { ContentViewer, type ContentDocument } from './ContentViewer';
+import {
   IOS3DDebugOverlay,
   markComponentMounted,
   addDebugLogEntry,
@@ -37,27 +46,9 @@ interface DashboardData {
   };
 }
 
-// Lazy load heavy components with debug logging
-const AnatomyViewer = lazy(() => {
-  addDebugLogEntry('info', 'Starting lazy load of AnatomyViewer...');
-  return import('./AnatomyViewer').then(m => {
-    addDebugLogEntry('success', 'AnatomyViewer module loaded successfully');
-    return { default: m.AnatomyViewer };
-  }).catch(err => {
-    addDebugLogEntry('error', `Failed to load AnatomyViewer: ${err.message || err}`);
-    throw err;
-  });
-});
-const SimplifiedAnatomyViewer = lazy(() => {
-  addDebugLogEntry('info', 'Starting lazy load of SimplifiedAnatomyViewer...');
-  return import('./SimplifiedAnatomyViewer').then(m => {
-    addDebugLogEntry('success', 'SimplifiedAnatomyViewer module loaded successfully');
-    return { default: m.SimplifiedAnatomyViewer };
-  }).catch(err => {
-    addDebugLogEntry('error', `Failed to load SimplifiedAnatomyViewer: ${err.message || err}`);
-    throw err;
-  });
-});
+// Lazy load heavy components
+const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
+const SimplifiedAnatomyViewer = lazy(() => import('./SimplifiedAnatomyViewer').then(m => ({ default: m.SimplifiedAnatomyViewer })));
 const AnatomyChatPanel = lazy(() => import('./AnatomyChatPanel').then(m => ({ default: m.AnatomyChatPanel })));
 
 // ============================================
@@ -124,12 +115,29 @@ type ActivePanel =
   | 'physiology';
 
 // View type matching App.tsx
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
+
+/** Structured anatomy context for the AI chat (mirrors ai/types.ts AnatomyChatContext) */
+interface AnatomyChatContext {
+  regionId: string;
+  regionName: string;
+  bodySystems: string[];
+  anatomyStructures: string[];
+  symptoms: string[];
+  conditions: string[];
+  specialties: string[];
+  complexityLevel: 1 | 2 | 3 | 4 | 5;
+  initialQuestion?: string;
+}
 
 interface BodyCentricHomeProps {
   dashboardData: DashboardData | null;
   isLoading: boolean;
   onNavigate: (view: View) => void;
+  /** Called when "Ask AI" is triggered from a body region's radial menu, with region context string */
+  onAskAI?: (regionContext: string, anatomyChatContext?: AnatomyChatContext) => void;
+  /** Called when content is selected to be displayed in the ContentViewer */
+  onContentSelect?: (content: ContentDocument) => void;
 }
 
 interface RegionSelectionState {
@@ -147,6 +155,8 @@ export function BodyCentricHome({
   dashboardData,
   isLoading,
   onNavigate,
+  onAskAI,
+  onContentSelect: externalContentSelect,
 }: BodyCentricHomeProps) {
   // Get demographics for body model customization
   const { demographics } = useUserDemographics();
@@ -168,6 +178,11 @@ export function BodyCentricHome({
   // Menu and panel state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePanel, setActivePanel] = useState<ActivePanel>('none');
+
+  // Content display state
+  const [selectedContent, setSelectedContent] = useState<ContentDocument | null>(null);
+  const [contentLoading, setContentLoading] = useState(false);
+  const [complexityLevel, setComplexityLevel] = useState<ComplexityLevel>(3);
 
   // Health overlay hidden by default to maximize 3D model visibility
   const [showHealthOverlay, setShowHealthOverlay] = useState(false);
@@ -216,7 +231,39 @@ export function BodyCentricHome({
         setActivePanel('encyclopedia');
         break;
       case 'chat':
-        setActivePanel('chat');
+        if (onAskAI && selection.regionId) {
+          const regionName = selection.regionName || selection.regionId;
+          const mapping = selection.regionMapping;
+
+          // Build structured context from RegionMapping when available
+          const structuredContext: AnatomyChatContext = {
+            regionId: selection.regionId,
+            regionName,
+            bodySystems: mapping?.bodySystems ?? [],
+            anatomyStructures: [
+              ...(mapping?.organs ?? []),
+              ...(mapping?.structures ?? []),
+            ],
+            symptoms: mapping?.commonSymptoms ?? [],
+            conditions: [
+              ...(mapping?.commonConditions ?? []),
+              // Also include patient's active conditions that mention this region
+              ...(dashboardData?.activeConditions
+                ?.filter(c => c.name.toLowerCase().includes(selection.regionId!.toLowerCase()))
+                .map(c => c.name) ?? []),
+            ],
+            specialties: mapping?.encyclopediaCategories ?? [],
+            complexityLevel: 3,
+            initialQuestion: `Tell me about the ${regionName}. What is its structure, function, and clinical significance?`,
+          };
+
+          onAskAI(
+            `I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`,
+            structuredContext,
+          );
+        } else {
+          setActivePanel('chat');
+        }
         break;
       case 'layers':
         setActivePanel('layers');
@@ -280,7 +327,41 @@ export function BodyCentricHome({
   const handlePanelClose = useCallback(() => {
     setActivePanel('none');
     setSelection(prev => ({ ...prev, regionId: null, regionName: '', regionMapping: null }));
+    setSelectedContent(null);
   }, []);
+
+  // Load content for a region
+  const loadRegionContent = useCallback(async (regionId: string, regionName: string) => {
+    setContentLoading(true);
+    try {
+      const content = await retrieveContentByStructure(regionId, complexityLevel);
+      if (content) {
+        setSelectedContent(content);
+      }
+    } catch (error) {
+      console.error('[BodyCentricHome] Error loading content:', error);
+    } finally {
+      setContentLoading(false);
+    }
+  }, [complexityLevel]);
+
+  // Handle content selection from panels
+  const handleContentSelect = useCallback((content: ContentDocument) => {
+    if (externalContentSelect) {
+      externalContentSelect(content);
+    } else {
+      setSelectedContent(content);
+    }
+  }, [externalContentSelect]);
+
+  // Handle complexity level change
+  const handleComplexityChange = useCallback((level: ComplexityLevel) => {
+    setComplexityLevel(level);
+    // Reload content if currently displayed
+    if (selectedContent && selection.regionId) {
+      loadRegionContent(selection.regionId, selection.regionName);
+    }
+  }, [selectedContent, selection.regionId, selection.regionName, loadRegionContent]);
 
   return (
     <div ref={containerRef} className="body-centric-home">
@@ -401,26 +482,257 @@ export function BodyCentricHome({
           dashboardData={dashboardData}
           onClose={handlePanelClose}
           onNavigate={onNavigate}
+          onContentSelect={handleContentSelect}
+          complexityLevel={complexityLevel}
         />
       )}
 
-      {/* Quick navigation hint - subtle, bottom center */}
-      {!isMenuOpen && !selection.regionId && activePanel === 'none' && (
-        <div className="body-centric-hint" style={{
+      {/* Content Viewer - Displays selected encyclopedia content */}
+      {selectedContent && (
+        <div className="content-viewer-overlay" style={{
           position: 'fixed',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          padding: '6px 14px',
-          background: 'rgba(0, 0, 0, 0.3)',
-          borderRadius: '16px',
-          backdropFilter: 'blur(4px)',
-          color: 'rgba(255, 255, 255, 0.45)',
-          fontSize: '12px',
-          zIndex: 50,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 200,
+          background: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            zIndex: 201,
+            display: 'flex',
+            gap: '8px',
+          }}>
+            {/* Complexity Level Selector */}
+            <select
+              value={complexityLevel}
+              onChange={(e) => handleComplexityChange(Number(e.target.value) as ComplexityLevel)}
+              style={{
+                padding: '8px 12px',
+                background: 'rgba(30, 30, 30, 0.9)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '8px',
+                color: '#fff',
+                fontSize: '13px',
+                cursor: 'pointer',
+              }}
+            >
+              <option value={1}>8th Grade</option>
+              <option value={2}>High School</option>
+              <option value={3}>College</option>
+              <option value={4}>Graduate</option>
+              <option value={5}>MD Level</option>
+            </select>
+            <button
+              onClick={() => setSelectedContent(null)}
+              style={{
+                padding: '8px 16px',
+                background: 'rgba(30, 30, 30, 0.9)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '8px',
+                color: '#fff',
+                fontSize: '13px',
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+          <div style={{
+            position: 'absolute',
+            top: '72px',
+            left: '16px',
+            right: '16px',
+            bottom: '16px',
+            overflow: 'auto',
+          }}>
+            <ContentViewer
+              document={selectedContent}
+              onClose={() => setSelectedContent(null)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Quick Action Buttons - visible when no region is selected */}
+      {!isMenuOpen && !selection.regionId && activePanel === 'none' && (
+        <div className="body-centric-quick-actions" style={{
+          position: 'fixed',
+          bottom: '72px',
+          left: '0',
+          right: '0',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          zIndex: 60,
           pointerEvents: 'none',
         }}>
-          <span>Tap any body region to explore</span>
+          {/* Action button row */}
+          <div style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '0 16px',
+            pointerEvents: 'auto',
+          }}>
+            <button
+              onClick={() => onNavigate('encyclopedia')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(168, 85, 247, 0.25)',
+                border: '1px solid rgba(168, 85, 247, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(216, 180, 254, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Encyclopedia"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              Encyclopedia
+            </button>
+
+            <button
+              onClick={() => onNavigate('chat')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(34, 197, 94, 0.25)',
+                border: '1px solid rgba(34, 197, 94, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(134, 239, 172, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Ask AI"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              Ask AI
+            </button>
+          </div>
+
+          {/* Second row */}
+          <div style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '0 16px',
+            pointerEvents: 'auto',
+          }}>
+            <button
+              onClick={() => onNavigate('symptom-explorer')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(249, 115, 22, 0.25)',
+                border: '1px solid rgba(249, 115, 22, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(253, 186, 116, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Symptoms"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              Symptoms
+            </button>
+
+            <button
+              onClick={() => onNavigate('medication-explorer')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(14, 165, 233, 0.25)',
+                border: '1px solid rgba(14, 165, 233, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(125, 211, 252, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="Medications"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.5 20.5L3.5 13.5C2.5 12.5 2.5 10.5 3.5 9.5L9.5 3.5C10.5 2.5 12.5 2.5 13.5 3.5L20.5 10.5C21.5 11.5 21.5 13.5 20.5 14.5L14.5 20.5C13.5 21.5 11.5 21.5 10.5 20.5Z"/>
+                <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/>
+              </svg>
+              Medications
+            </button>
+
+            <button
+              onClick={() => onNavigate('dashboard')}
+              className="body-centric-action-btn"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                background: 'rgba(236, 72, 153, 0.25)',
+                border: '1px solid rgba(236, 72, 153, 0.35)',
+                borderRadius: '20px',
+                backdropFilter: 'blur(8px)',
+                color: 'rgba(249, 168, 212, 0.95)',
+                fontSize: '12px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              aria-label="My Health"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+              My Health
+            </button>
+          </div>
+
+          {/* Hint text */}
+          <div style={{
+            padding: '4px 14px',
+            color: 'rgba(255, 255, 255, 0.35)',
+            fontSize: '11px',
+            pointerEvents: 'none',
+          }}>
+            <span>or tap any body region to explore</span>
+          </div>
         </div>
       )}
     </div>
@@ -439,6 +751,8 @@ interface ContextPanelProps {
   dashboardData: DashboardData | null;
   onClose: () => void;
   onNavigate: (view: View) => void;
+  onContentSelect: (content: ContentDocument) => void;
+  complexityLevel: ComplexityLevel;
 }
 
 function ContextPanel({
@@ -449,7 +763,14 @@ function ContextPanel({
   dashboardData,
   onClose,
   onNavigate,
+  onContentSelect,
+  complexityLevel,
 }: ContextPanelProps) {
+  const handleViewEncyclopediaEntry = (entryId: string) => {
+    sessionStorage.setItem('soma_encyclopedia_entry_id', entryId);
+    onNavigate('encyclopedia-entry');
+  };
+
   const renderContent = () => {
     switch (type) {
       case 'medications':
@@ -481,7 +802,9 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
-            onViewEntry={() => onNavigate('encyclopedia')}
+            onViewEntry={handleViewEncyclopediaEntry}
+            onContentSelect={onContentSelect}
+            complexityLevel={complexityLevel}
           />
         );
 
@@ -512,6 +835,9 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onNavigate={onNavigate}
+            onContentSelect={onContentSelect}
+            complexityLevel={complexityLevel}
           />
         );
 
@@ -521,6 +847,9 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onViewEncyclopediaEntry={handleViewEncyclopediaEntry}
+            onContentSelect={onContentSelect}
+            complexityLevel={complexityLevel}
           />
         );
 
@@ -530,6 +859,8 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onContentSelect={onContentSelect}
+            complexityLevel={complexityLevel}
           />
         );
 
@@ -585,6 +916,10 @@ interface RegionContentProps {
   regionId: string;
   regionName: string;
   regionMapping: RegionMapping | null;
+  onNavigate?: (view: View) => void;
+  onViewEncyclopediaEntry?: (entryId: string) => void;
+  onContentSelect?: (content: ContentDocument) => void;
+  complexityLevel?: ComplexityLevel;
 }
 
 function RegionMedicationsContent({
@@ -716,20 +1051,102 @@ function RegionSymptomsContent({
 }
 
 function RegionEncyclopediaContent({
-  regionId: _regionId,
+  regionId,
   regionName,
   regionMapping,
   onViewEntry,
+  onContentSelect,
+  complexityLevel = 3,
 }: RegionContentProps & { onViewEntry: (entryId: string) => void }) {
+  const [loading, setLoading] = useState(false);
   const categories = regionMapping?.encyclopediaCategories ?? [];
   const conditions = regionMapping?.commonConditions ?? [];
   const organs = regionMapping?.organs ?? [];
+
+  const handleRegionOverviewClick = async () => {
+    if (!onContentSelect) return;
+    setLoading(true);
+    try {
+      const content = await retrieveContentByStructure(regionId, complexityLevel);
+      if (content) {
+        onContentSelect(content);
+      }
+    } catch (error) {
+      console.error('[RegionEncyclopediaContent] Error loading content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOrganClick = async (organ: string) => {
+    if (!onContentSelect) return;
+    setLoading(true);
+    try {
+      const content = await retrieveContentDocument(organ, { level: complexityLevel });
+      if (content) {
+        onContentSelect(content);
+      } else {
+        // Fallback to entry ID navigation
+        onViewEntry(organ.toLowerCase().replace(/ /g, '-'));
+      }
+    } catch (error) {
+      console.error('[RegionEncyclopediaContent] Error loading organ content:', error);
+      onViewEntry(organ.toLowerCase().replace(/ /g, '-'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleConditionClick = async (condition: string) => {
+    if (!onContentSelect) return;
+    setLoading(true);
+    try {
+      const content = await retrieveContentDocument(condition, {
+        type: 'condition',
+        level: complexityLevel,
+      });
+      if (content) {
+        onContentSelect(content);
+      } else {
+        onViewEntry(condition.toLowerCase().replace(/ /g, '-'));
+      }
+    } catch (error) {
+      console.error('[RegionEncyclopediaContent] Error loading condition content:', error);
+      onViewEntry(condition.toLowerCase().replace(/ /g, '-'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="region-encyclopedia-content">
       <p className="content-intro">
         Learn about the {regionName.toLowerCase()} and related health topics.
       </p>
+
+      {/* Region Overview Button */}
+      <div className="encyclopedia-section">
+        <button
+          className="entry-button primary"
+          onClick={handleRegionOverviewClick}
+          disabled={loading}
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            background: 'linear-gradient(135deg, #4a9eff 0%, #7c3aed 100%)',
+            border: 'none',
+            borderRadius: '8px',
+            color: 'white',
+            fontSize: '14px',
+            fontWeight: 600,
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.7 : 1,
+            marginBottom: '16px',
+          }}
+        >
+          {loading ? 'Loading...' : `View ${regionName} Overview`}
+        </button>
+      </div>
 
       {organs.length > 0 && (
         <div className="encyclopedia-section">
@@ -739,7 +1156,8 @@ function RegionEncyclopediaContent({
               <button
                 key={organ}
                 className="entry-button"
-                onClick={() => onViewEntry(organ.toLowerCase().replace(/ /g, '-'))}
+                onClick={() => handleOrganClick(organ)}
+                disabled={loading}
               >
                 {organ}
               </button>
@@ -756,7 +1174,8 @@ function RegionEncyclopediaContent({
               <button
                 key={condition}
                 className="entry-button"
-                onClick={() => onViewEntry(condition.toLowerCase().replace(/ /g, '-'))}
+                onClick={() => handleConditionClick(condition)}
+                disabled={loading}
               >
                 {condition}
               </button>
@@ -818,8 +1237,45 @@ function RegionLayersContent({ regionId: _regionId, regionName, regionMapping }:
   );
 }
 
-function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionHistologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onNavigate,
+  onContentSelect,
+  complexityLevel = 3,
+}: RegionContentProps) {
+  const [loading, setLoading] = useState<string | null>(null);
   const histologyTypes = regionMapping?.histologyTypes ?? [];
+
+  const handleHistologyClick = async (type: string) => {
+    if (onContentSelect) {
+      setLoading(type);
+      try {
+        const content = await searchHistology(type, complexityLevel);
+        if (content) {
+          onContentSelect(content);
+        } else {
+          // Fallback to session storage and navigation
+          sessionStorage.setItem('soma_histology_type', type);
+          sessionStorage.setItem('soma_histology_region', regionName);
+          onNavigate?.('body-centric');
+        }
+      } catch (error) {
+        console.error('[RegionHistologyContent] Error loading histology:', error);
+        sessionStorage.setItem('soma_histology_type', type);
+        sessionStorage.setItem('soma_histology_region', regionName);
+        onNavigate?.('body-centric');
+      } finally {
+        setLoading(null);
+      }
+    } else {
+      // Fallback behavior
+      sessionStorage.setItem('soma_histology_type', type);
+      sessionStorage.setItem('soma_histology_region', regionName);
+      onNavigate?.('body-centric');
+    }
+  };
 
   return (
     <div className="region-histology-content">
@@ -830,7 +1286,12 @@ function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping
       {histologyTypes.length > 0 ? (
         <div className="histology-list">
           {histologyTypes.map(type => (
-            <button key={type} className="histology-card">
+            <button
+              key={type}
+              className="histology-card"
+              onClick={() => handleHistologyClick(type)}
+              disabled={loading === type}
+            >
               <div className="histology-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="8" />
@@ -838,7 +1299,9 @@ function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping
                   <circle cx="11" cy="11" r="3" />
                 </svg>
               </div>
-              <span className="histology-name">{type.replace(/-/g, ' ')}</span>
+              <span className="histology-name">
+                {loading === type ? 'Loading...' : type.replace(/-/g, ' ')}
+              </span>
             </button>
           ))}
         </div>
@@ -851,9 +1314,66 @@ function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping
   );
 }
 
-function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionPathologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onViewEncyclopediaEntry,
+  onContentSelect,
+  complexityLevel = 3,
+}: RegionContentProps) {
+  const [loading, setLoading] = useState<string | null>(null);
   const conditions = regionMapping?.commonConditions ?? [];
   const pathologyTopics = regionMapping?.pathologyTopics ?? [];
+
+  const handleConditionClick = async (condition: string) => {
+    if (onContentSelect) {
+      setLoading(condition);
+      try {
+        const content = await searchPathology(condition, complexityLevel);
+        if (content) {
+          onContentSelect(content);
+        } else {
+          // Fallback to entry ID navigation
+          const entryId = condition.toLowerCase().replace(/\s+/g, '-');
+          onViewEncyclopediaEntry?.(entryId);
+        }
+      } catch (error) {
+        console.error('[RegionPathologyContent] Error loading pathology:', error);
+        const entryId = condition.toLowerCase().replace(/\s+/g, '-');
+        onViewEncyclopediaEntry?.(entryId);
+      } finally {
+        setLoading(null);
+      }
+    } else {
+      const entryId = condition.toLowerCase().replace(/\s+/g, '-');
+      onViewEncyclopediaEntry?.(entryId);
+    }
+  };
+
+  const handleTopicClick = async (topic: string) => {
+    if (onContentSelect) {
+      setLoading(topic);
+      try {
+        const content = await searchPathology(topic, complexityLevel);
+        if (content) {
+          onContentSelect(content);
+        } else {
+          const entryId = topic.toLowerCase().replace(/\s+/g, '-');
+          onViewEncyclopediaEntry?.(entryId);
+        }
+      } catch (error) {
+        console.error('[RegionPathologyContent] Error loading topic:', error);
+        const entryId = topic.toLowerCase().replace(/\s+/g, '-');
+        onViewEncyclopediaEntry?.(entryId);
+      } finally {
+        setLoading(null);
+      }
+    } else {
+      const entryId = topic.toLowerCase().replace(/\s+/g, '-');
+      onViewEncyclopediaEntry?.(entryId);
+    }
+  };
 
   return (
     <div className="region-pathology-content">
@@ -866,8 +1386,15 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
           <span className="subsection-title">Pathology Topics</span>
           <div className="topic-list">
             {pathologyTopics.map(topic => (
-              <button key={topic} className="topic-card">
-                <span className="topic-name">{topic.replace(/-/g, ' ')}</span>
+              <button
+                key={topic}
+                className="topic-card"
+                onClick={() => handleTopicClick(topic)}
+                disabled={loading === topic}
+              >
+                <span className="topic-name">
+                  {loading === topic ? 'Loading...' : topic.replace(/-/g, ' ')}
+                </span>
               </button>
             ))}
           </div>
@@ -879,9 +1406,16 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
           <span className="subsection-title">Common Conditions</span>
           <div className="condition-list">
             {conditions.slice(0, 5).map(condition => (
-              <div key={condition} className="condition-card">
-                <span className="condition-name">{condition}</span>
-              </div>
+              <button
+                key={condition}
+                className="condition-card"
+                onClick={() => handleConditionClick(condition)}
+                disabled={loading === condition}
+              >
+                <span className="condition-name">
+                  {loading === condition ? 'Loading...' : condition}
+                </span>
+              </button>
             ))}
           </div>
         </div>
@@ -890,9 +1424,32 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
   );
 }
 
-function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionPhysiologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onContentSelect,
+  complexityLevel = 3,
+}: RegionContentProps) {
+  const [loading, setLoading] = useState<string | null>(null);
   const physiologyTopics = regionMapping?.physiologyTopics ?? [];
   const bodySystems = regionMapping?.bodySystems ?? [];
+
+  const handleTopicClick = async (topic: string) => {
+    if (!onContentSelect) return;
+
+    setLoading(topic);
+    try {
+      const content = await searchPhysiology(topic, complexityLevel);
+      if (content) {
+        onContentSelect(content);
+      }
+    } catch (error) {
+      console.error('[RegionPhysiologyContent] Error loading physiology:', error);
+    } finally {
+      setLoading(null);
+    }
+  };
 
   return (
     <div className="region-physiology-content">
@@ -905,8 +1462,15 @@ function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMappin
           <span className="subsection-title">Physiological Processes</span>
           <div className="topic-list">
             {physiologyTopics.map(topic => (
-              <button key={topic} className="topic-card">
-                <span className="topic-name">{topic.replace(/-/g, ' ')}</span>
+              <button
+                key={topic}
+                className="topic-card"
+                onClick={() => handleTopicClick(topic)}
+                disabled={loading === topic}
+              >
+                <span className="topic-name">
+                  {loading === topic ? 'Loading...' : topic.replace(/-/g, ' ')}
+                </span>
               </button>
             ))}
           </div>
@@ -932,9 +1496,11 @@ function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMappin
 // ============================================
 
 function BodyViewerLoading() {
-  // Log when this component renders - helps trace Suspense behavior
-  console.log('[BodyCentricHome] BodyViewerLoading fallback is rendering');
-  addDebugLogEntry('info', 'Suspense fallback: BodyViewerLoading is rendering');
+  // Log only once on mount to avoid infinite loop
+  useEffect(() => {
+    console.log('[BodyCentricHome] BodyViewerLoading fallback is rendering');
+    addDebugLogEntry('info', 'Suspense fallback: BodyViewerLoading is rendering');
+  }, []);
 
   return <ModelLoadingScreen />;
 }

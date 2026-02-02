@@ -90,11 +90,6 @@ export const EMPTY_ARRAY: readonly any[] = Object.freeze([]);
  */
 export const EMPTY_OBJECT: Readonly<Record<string, never>> = Object.freeze({});
 
-/**
- * Create a stable noop function
- */
-export const noop = () => {};
-
 // ============================================
 // Context Optimization Patterns
 // ============================================

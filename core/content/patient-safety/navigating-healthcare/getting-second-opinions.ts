@@ -4,6 +4,7 @@ export const gettingSecondOpinionsContent: EducationalContent = {
   id: 'getting-second-opinions',
   type: 'concept',
   name: 'Getting Second Opinions',
+  nameEs: 'Obtener una Segunda Opinión',
   alternateNames: ['Medical Second Opinion', 'Consultation Review', 'Independent Medical Review'],
   levels: {
     1: {

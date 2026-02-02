@@ -14,6 +14,7 @@ import { hypertensionContent } from './hypertension';
 import { lipidDisordersContent } from './lipid-disorders';
 import { congenitalHeartContent } from './congenital-heart';
 import { cardiovascularTestingContent } from './cardiovascular-testing';
+import { heartAnatomyContent } from './anatomy';
 
 export { cardiovascularOverviewContent } from './overview';
 export { heartConditionsContent } from './heart-conditions';
@@ -24,6 +25,7 @@ export { hypertensionContent } from './hypertension';
 export { lipidDisordersContent } from './lipid-disorders';
 export { congenitalHeartContent } from './congenital-heart';
 export { cardiovascularTestingContent } from './cardiovascular-testing';
+export { heartAnatomyContent } from './anatomy';
 
 // Re-export as default for convenience
 export default {
@@ -36,4 +38,5 @@ export default {
   lipidDisordersContent,
   congenitalHeartContent,
   cardiovascularTestingContent,
+  heartAnatomyContent,
 };

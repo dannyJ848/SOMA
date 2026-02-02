@@ -8,6 +8,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
 import { useActionTracker } from './hooks/useActionTracker';
+import { RelatedContent } from './components/RelatedContent';
 import type { EncyclopediaEntryAction } from '../core/intent-prediction/types';
 import type { ViewPreset } from './utils/anatomy3DEventBus';
 import { getEntry } from '../core/medical-simulation/encyclopedia/store';
@@ -30,6 +31,7 @@ interface EncyclopediaEntryProps {
   onBack: () => void;
   onNavigateToEntry: (entryId: string) => void;
   onNavigateToAnatomy?: () => void;
+  onAskAI?: (topicContext: string) => void;
 }
 
 // ============================================
@@ -294,6 +296,7 @@ export function EncyclopediaEntry({
   onBack,
   onNavigateToEntry,
   onNavigateToAnatomy,
+  onAskAI,
 }: EncyclopediaEntryProps) {
   // Initialize 3D navigation
   const { navigateToStructure, highlightStructures, setViewPreset, enableLayers } =
@@ -326,7 +329,7 @@ export function EncyclopediaEntry({
         entityName: entry.name,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [entryId]); // Track when entry changes
 
   // Track complexity level changes
@@ -338,7 +341,7 @@ export function EncyclopediaEntry({
         entityName: entry.name,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [complexityLevel]); // Only track when complexity changes
 
   // Track tab changes
@@ -350,7 +353,7 @@ export function EncyclopediaEntry({
         entityName: entry.name,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [activeTab]); // Only track when tab changes
 
   // Map AnatomyLink viewPreset to EventBus ViewPreset
@@ -411,6 +414,17 @@ export function EncyclopediaEntry({
     onNavigateToEntry(relatedEntry.entryId);
   }, [onNavigateToEntry, track]);
 
+  // Handle "Ask AI" about this entry
+  const handleAskAI = useCallback(() => {
+    if (!entry || !onAskAI) return;
+    track('view-content', {
+      entityId: entry.entryId,
+      entityName: entry.name,
+    });
+    const topicContext = `Tell me about ${entry.name} (${ENTRY_TYPE_CONFIG[entry.entryType].label}). ${entry.overview.patient}`;
+    onAskAI(topicContext);
+  }, [entry, onAskAI, track]);
+
   // If entry not found
   if (!entry) {
     return (
@@ -460,6 +474,12 @@ export function EncyclopediaEntry({
             <div className="entry-aliases">
               Also known as: {entry.aliases.join(', ')}
             </div>
+          )}
+          {onAskAI && (
+            <button className="ask-ai-btn" onClick={handleAskAI}>
+              <span className="btn-icon">💬</span>
+              <span>Ask AI about {entry.name}</span>
+            </button>
           )}
         </div>
       </div>
@@ -608,6 +628,16 @@ export function EncyclopediaEntry({
           </div>
         )}
       </div>
+
+      {/* Knowledge Graph Related Content */}
+      <RelatedContent
+        nodeId={`${entry.entryType}:${entry.entryId}`}
+        onItemPress={(node) => {
+          // Strip the type prefix to get the entry ID for navigation
+          const targetEntryId = node.id.includes(':') ? node.id.split(':').slice(1).join(':') : node.id;
+          onNavigateToEntry(targetEntryId);
+        }}
+      />
 
       {/* Footer */}
       <div className="entry-footer">

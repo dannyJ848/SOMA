@@ -10,6 +10,7 @@ export const chronicKidneyDisease: EducationalContent = {
   id: 'condition-ckd',
   type: 'condition',
   name: 'Chronic Kidney Disease',
+  nameEs: 'Enfermedad Renal Crónica',
   alternateNames: ['CKD', 'Chronic Renal Failure', 'Chronic Kidney Failure', 'Renal Insufficiency'],
   hpoId: 'HP:0012622',
 

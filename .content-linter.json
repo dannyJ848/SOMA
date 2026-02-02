@@ -1,0 +1,23 @@
+{
+  "contentDirs": ["core/content"],
+  "excludePatterns": [
+    "**/node_modules/**",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/types.ts",
+    "**/index.ts",
+    "**/*.d.ts"
+  ],
+  "rules": {
+    "syntax": true,
+    "content": true,
+    "formatting": true,
+    "medical": true,
+    "crossReferences": true
+  },
+  "thresholds": {
+    "maxFileLines": 600,
+    "minContentLength": 50,
+    "maxContentLength": 50000
+  }
+}

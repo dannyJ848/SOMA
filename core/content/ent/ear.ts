@@ -1,674 +1,435 @@
 import { EducationalContent } from '../types';
 
-export const earContent: EducationalContent = {
-  id: 'ent-ear',
-  type: 'topic',
-  name: 'Ear Disorders and Hearing',
-  alternateNames: ['Otology', 'Aural Disorders', 'Hearing Disorders'],
+/**
+ * Ear Disorders Educational Content
+ *
+ * Covers: Otitis Media, Otitis Externa, Tinnitus, Hearing Loss,
+ * Meniere's Disease, and Cholesteatoma.
+ *
+ * Each condition uses 5 complexity levels per the EducationalContent interface.
+ * nameEs provides Spanish translations. ICD-11 codes included where applicable.
+ */
 
-  levels: {
-    1: {
-      level: 1,
-      summary: 'Your ears help you hear sounds and keep your balance. Sometimes ears get sick or infected, which can make hearing difficult.',
-      explanation: `Your ears are amazing organs that do two important jobs: helping you hear sounds and keeping you balanced. When something goes wrong with your ears, it can affect how you hear or make you feel dizzy.
+// Helper to build a condition with shared metadata defaults
+function earCondition(partial: Omit<EducationalContent, 'createdAt' | 'updatedAt' | 'version' | 'status'>): EducationalContent {
+  return {
+    ...partial,
+    createdAt: '2026-01-30T00:00:00.000Z',
+    updatedAt: '2026-01-30T00:00:00.000Z',
+    version: 1,
+    status: 'published',
+  };
+}
 
-**Common Ear Problems:**
-
-1. **Ear Infections** - These happen when germs get inside your ear, especially behind the eardrum. They can cause pain, fever, and trouble hearing. Kids get ear infections more often than adults.
-
-2. **Swimmer's Ear** - This is an infection of the ear canal, the tunnel that leads to your eardrum. It often happens after swimming when water stays in the ear.
-
-3. **Hearing Loss** - Some people cannot hear as well as others. This can happen from birth, from loud noises, infections, or just getting older.
-
-**Signs of Ear Problems:**
-- Ear pain or pressure
-- Trouble hearing
-- Ringing in the ears
-- Feeling dizzy or off balance
-- Fluid coming out of the ear
-
-**Keeping Ears Healthy:**
-- Don't put anything smaller than your elbow in your ear (no cotton swabs!)
-- Wear ear protection around loud noises
-- Get ear infections treated quickly`,
-      keyTerms: [
-        { term: 'eardrum', definition: 'A thin piece of skin inside your ear that vibrates when sound hits it' },
-        { term: 'ear infection', definition: 'When germs get inside your ear and cause pain and swelling' },
-        { term: 'ear canal', definition: 'The tunnel from the outside of your ear to your eardrum' },
-        { term: 'hearing loss', definition: 'When you cannot hear sounds as well as other people' },
-        { term: 'swimmer\'s ear', definition: 'An infection in the ear canal that can happen after swimming' },
-      ],
-      analogies: [
-        'Your eardrum works like a drum head - when sound hits it, it vibrates and sends the sound deeper into your ear.',
-        'An ear infection is like having a cold in your ear - the germs cause fluid and pressure that hurts.',
-      ],
-      examples: [
-        'If you have trouble hearing the TV at a volume that others think is too loud, you might have hearing loss.',
-        'After swimming, if your ear feels itchy or hurts when you touch it, you might have swimmer\'s ear.',
-      ],
-      patientCounselingPoints: [
-        'Never put cotton swabs or other objects in your ear - they can push wax deeper and damage the eardrum.',
-        'If ear pain lasts more than a day or is very severe, see a doctor.',
-        'Protect your ears from loud noises by wearing earplugs or earmuffs at concerts or when using loud tools.',
-      ],
+export const earDisordersContent: Record<string, EducationalContent> = {
+  'otitis-media': earCondition({
+    id: 'ear-otitis-media',
+    type: 'condition',
+    name: 'Otitis Media',
+    alternateNames: ['Middle Ear Infection', 'nameEs:Otitis Media'],
+    hpoId: 'HP:0000388',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'A middle ear infection that causes ear pain and trouble hearing, very common in young children.',
+        explanation: `An ear infection happens when germs get behind your eardrum. Fluid builds up and pushes on the eardrum, causing pain and making sounds harder to hear.\n\n**Signs:** Ear pain, fever, fussiness in babies, trouble hearing, fluid draining from the ear.\n\n**What helps:** Most ear infections get better on their own. A doctor may prescribe medicine if it does not improve.`,
+        keyTerms: [
+          { term: 'eardrum', definition: 'A thin membrane inside your ear that vibrates when sound hits it' },
+          { term: 'middle ear', definition: 'The space behind your eardrum where infections happen' },
+        ],
+        analogies: ['An ear infection is like a balloon filling with water behind your eardrum -- the pressure causes pain.'],
+        patientCounselingPoints: ['See a doctor if ear pain lasts more than 2 days or fever is high.', 'Do not put anything in the ear canal.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Otitis media is inflammation and infection of the middle ear, most common in children due to shorter Eustachian tubes.',
+        explanation: `The middle ear is connected to the throat by the Eustachian tube. In children, this tube is shorter and more horizontal, making it easier for bacteria from the throat to reach the middle ear.\n\n**Types:**\n- **Acute otitis media (AOM):** Sudden infection with pain, fever, and a bulging eardrum\n- **Otitis media with effusion (OME):** Fluid without active infection\n- **Chronic otitis media:** Persistent infection or drainage >3 months\n\n**Common pathogens:** Streptococcus pneumoniae, Haemophilus influenzae, Moraxella catarrhalis\n\n**Treatment:** Observation for mild cases; amoxicillin first-line antibiotic; tympanostomy tubes for recurrent episodes.`,
+        keyTerms: [
+          { term: 'Eustachian tube', definition: 'Tube connecting the middle ear to the back of the throat that equalizes pressure', pronunciation: 'yoo-STAY-shun' },
+          { term: 'tympanostomy tubes', definition: 'Small tubes placed in the eardrum to ventilate the middle ear and prevent fluid buildup' },
+          { term: 'AOM', definition: 'Acute otitis media -- sudden onset middle ear infection' },
+        ],
+        patientCounselingPoints: ['Most ear infections resolve without antibiotics.', 'Follow up to confirm fluid has cleared, especially in young children.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Otitis media encompasses AOM, OME, and chronic suppurative forms, driven by Eustachian tube dysfunction and microbial colonization. ICD-11: AB30 (suppurative), AA83 (non-suppurative).',
+        explanation: `**Pathogenesis:** Eustachian tube obstruction (viral URI, adenoid hypertrophy, allergies) creates negative middle ear pressure, allowing nasopharyngeal flora to ascend. Biofilm formation contributes to recurrence.\n\n**Diagnosis:** Pneumatic otoscopy shows decreased TM mobility; tympanometry confirms effusion. AOM: bulging, erythematous TM. OME: retracted or neutral TM with fluid level.\n\n**Management:**\n- AOM: Watchful waiting (>2 yrs, unilateral, non-severe); amoxicillin 80-90 mg/kg/day; amoxicillin-clavulanate for treatment failure\n- OME: Observe 3 months; tympanostomy tubes if persistent bilateral effusion with hearing loss\n- Chronic: Ototopical antibiotics; possible tympanoplasty or mastoidectomy\n\n**Complications:** Mastoiditis, cholesteatoma, facial nerve paralysis, intracranial infection.`,
+        keyTerms: [
+          { term: 'pneumatic otoscopy', definition: 'Otoscopic exam with air insufflation to assess TM mobility' },
+          { term: 'tympanometry', definition: 'Objective test measuring middle ear compliance and pressure' },
+          { term: 'biofilm', definition: 'Bacterial community in extracellular matrix resistant to antibiotics' },
+        ],
+        clinicalNotes: 'AAO-HNS guidelines recommend against routine antibiotics for uncomplicated AOM in children >2 years. PCV13 has reduced S. pneumoniae AOM incidence.',
+      },
+      4: {
+        level: 4,
+        summary: 'AOM pathophysiology involves mucosal inflammation, biofilm formation, and immune dysregulation. Recurrent AOM reflects host susceptibility including Eustachian tube anatomy, immune maturation, and genetic predisposition.',
+        explanation: `**Molecular pathogenesis:** Viral URI upregulates nasopharyngeal bacterial adhesion via platelet-activating factor receptor. IL-1beta and TNF-alpha drive middle ear inflammation. Biofilms on middle ear mucosa and tympanostomy tubes resist planktonic-targeted antibiotics.\n\n**Otitis-prone phenotype:** First AOM <6 months, deficient IgG2 subclass, polymorphisms in TLR4 and mannose-binding lectin, atopy, craniofacial anomalies (cleft palate, Down syndrome).\n\n**Surgical considerations:**\n- Tympanostomy tubes: Short-term (Shepard) vs long-term (T-tube); adenoidectomy as adjunct reduces recurrence\n- Tympanoplasty types I-V for chronic perforation/ossicular chain pathology\n- Mastoidectomy: Canal wall-up vs canal wall-down for cholesteatoma/chronic disease\n\n**Antibiotic resistance:** Beta-lactamase producing H. influenzae and M. catarrhalis; penicillin-resistant S. pneumoniae via altered PBPs.`,
+        keyTerms: [
+          { term: 'platelet-activating factor receptor', definition: 'Receptor upregulated during viral URI that enhances bacterial adhesion to nasopharyngeal epithelium' },
+          { term: 'IgG2 subclass deficiency', definition: 'Immune deficiency impairing response to polysaccharide antigens, predisposing to recurrent AOM' },
+        ],
+        clinicalNotes: 'Biofilm-mediated AOM explains culture-negative middle ear effusions with PCR-positive bacterial DNA.',
+      },
+      5: {
+        level: 5,
+        summary: 'Evidence-based OM management integrates AAO-HNS guidelines, antimicrobial stewardship, surgical decision algorithms, and emerging vaccine and immunomodulatory strategies.',
+        explanation: `**AAO-HNS 2016 OME Guidelines:** Pneumatic otoscopy or tympanometry for diagnosis; 3-month observation; tubes for bilateral OME with hearing loss >=25 dB; no systemic steroids/decongestants/antihistamines.\n\n**Antimicrobial stewardship:** High-dose amoxicillin overcomes intermediate pneumococcal resistance. Watchful waiting with safety-net prescription reduces unnecessary antibiotic use by 60%.\n\n**Emerging therapies:** Protein-based pneumococcal vaccines targeting conserved surface proteins; transtympanic drug delivery systems; middle ear mucosal immunization strategies.\n\n**Outcomes:** Tympanostomy tubes reduce AOM episodes by 1.5/year; 15-30% develop otorrhea; 2-4% persistent perforation; tympanosclerosis common but clinically insignificant.`,
+        keyTerms: [
+          { term: 'safety-net prescription', definition: 'Delayed antibiotic prescription filled only if symptoms do not improve in 48-72 hours' },
+          { term: 'transtympanic delivery', definition: 'Drug delivery across the tympanic membrane to achieve therapeutic middle ear concentrations' },
+        ],
+        clinicalNotes: 'Red flags: mastoid tenderness, facial nerve palsy, high fever with toxic appearance, meningeal signs -- require urgent imaging and IV antibiotics.',
+      },
     },
+    media: [],
+    citations: [
+      { id: 'aao-ome-2016', type: 'article', title: 'Clinical Practice Guideline: Otitis Media with Effusion (2016)', source: 'Otolaryngology-Head and Neck Surgery' },
+    ],
+    crossReferences: [
+      { targetId: 'ear-cholesteatoma', targetType: 'condition', relationship: 'related', label: 'Cholesteatoma' },
+    ],
+    tags: { systems: ['auditory'], topics: ['otology', 'infection', 'pediatrics'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['pediatrics', 'family-medicine'] } },
+  }),
 
-    2: {
-      level: 2,
-      summary: 'Ear disorders include infections (otitis media and externa), hearing loss from various causes, and balance problems. These conditions are common in both children and adults.',
-      explanation: `The ear is divided into three sections: outer ear, middle ear, and inner ear. Problems can occur in any of these areas and affect hearing, balance, or both.
-
-## Outer and Middle Ear Disorders
-
-**Otitis Media (Middle Ear Infection):**
-- Very common in children due to shorter, more horizontal Eustachian tubes
-- Caused by bacteria or viruses that travel from the throat
-- Fluid builds up behind the eardrum, causing pressure and pain
-- Can cause temporary hearing loss if fluid blocks sound transmission
-
-**Otitis Externa (Swimmer's Ear):**
-- Infection of the ear canal between the outer ear and eardrum
-- Caused by bacteria or fungi growing in moist environment
-- More common in swimmers and people with eczema
-- The ear canal becomes swollen, itchy, and painful
-
-## Hearing Loss
-
-**Types of Hearing Loss:**
-1. **Conductive hearing loss** - Problem in outer or middle ear that blocks sound (earwax, fluid, eardrum perforation)
-2. **Sensorineural hearing loss** - Problem in inner ear or hearing nerve (aging, noise exposure, infections)
-3. **Mixed hearing loss** - Combination of both types
-
-**Common Causes:**
-- Earwax blockage
-- Ear infections
-- Perforated eardrum (hole in eardrum)
-- Loud noise exposure
-- Aging (presbycusis)
-- Certain medications
-
-**Tinnitus (Ringing in Ears):**
-- Perception of sound when no external sound is present
-- Often described as ringing, buzzing, or hissing
-- Can be caused by many conditions including noise exposure, ear infections, or medications
-
-## Balance Problems
-
-The inner ear contains the vestibular system, which helps maintain balance. Problems here can cause:
-- Dizziness
-- Vertigo (spinning sensation)
-- Unsteadiness when walking`,
-      keyTerms: [
-        { term: 'otitis media', definition: 'Infection of the middle ear, behind the eardrum, common in children', pronunciation: 'oh-TYE-tis MEE-dee-uh' },
-        { term: 'otitis externa', definition: 'Infection of the ear canal, also called swimmer\'s ear', pronunciation: 'oh-TYE-tis ex-TER-nuh' },
-        { term: 'conductive hearing loss', definition: 'Hearing loss caused by problems in the outer or middle ear that block sound transmission' },
-        { term: 'sensorineural hearing loss', definition: 'Permanent hearing loss from inner ear or hearing nerve damage' },
-        { term: 'tinnitus', definition: 'Ringing, buzzing, or other sounds in the ears when no external sound is present', pronunciation: 'tih-NYE-tus' },
-        { term: 'Eustachian tube', definition: 'Tube connecting middle ear to throat that equalizes pressure', pronunciation: 'yoo-STAY-shun' },
-        { term: 'eardrum perforation', definition: 'A hole or tear in the eardrum' },
-      ],
-      analogies: [
-        'Conductive hearing loss is like wearing earplugs - the sound is blocked from getting through.',
-        'Sensorineural hearing loss is like a broken microphone - the sound gets in but cannot be processed properly.',
-        'The Eustachian tube is like a pressure valve that opens and closes to keep air pressure equal on both sides of the eardrum.',
-      ],
-      patientCounselingPoints: [
-        'Ear infections often clear up on their own, but antibiotics may be needed for bacterial infections.',
-        'Hearing aids can help many people with permanent hearing loss communicate better.',
-        'Protect your hearing by limiting exposure to loud noises and wearing hearing protection.',
-        'See a doctor if you experience sudden hearing loss, as prompt treatment may help.',
-      ],
+  'otitis-externa': earCondition({
+    id: 'ear-otitis-externa',
+    type: 'condition',
+    name: 'Otitis Externa',
+    alternateNames: ['Swimmer\'s Ear', 'nameEs:Otitis Externa'],
+    hpoId: 'HP:0000389',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'An infection of the ear canal that causes pain, itching, and swelling, often from water getting trapped in the ear.',
+        explanation: `Swimmer's ear happens when water stays in your ear canal after swimming or bathing. The moisture lets germs grow, causing the ear canal to become red, swollen, and painful.\n\n**Signs:** Pain when you touch or pull on your ear, itching, swelling, discharge.\n\n**Prevention:** Dry ears after swimming; do not use cotton swabs.`,
+        keyTerms: [
+          { term: 'ear canal', definition: 'The tube from the outside of your ear to your eardrum' },
+        ],
+        analogies: ['Swimmer\'s ear is like getting a rash from wearing wet socks too long -- moisture lets germs grow.'],
+        patientCounselingPoints: ['Tilt your head to drain water after swimming.', 'Do not put cotton swabs in your ears.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Otitis externa is inflammation of the external auditory canal, commonly caused by Pseudomonas aeruginosa, presenting with otalgia and canal edema.',
+        explanation: `**Causes:** Bacterial (Pseudomonas, Staph aureus) or fungal (Aspergillus, Candida) infection of the ear canal.\n\n**Risk factors:** Swimming, hearing aid use, eczema, trauma from cotton swabs, humid climates.\n\n**Diagnosis:** Pain with tragal pressure or pinna manipulation; canal edema and erythema; otorrhea.\n\n**Treatment:** Topical antibiotic-steroid drops (ciprofloxacin-dexamethasone); wick placement if canal swollen shut; keep ear dry.`,
+        keyTerms: [
+          { term: 'tragal pressure', definition: 'Pressing on the small cartilage flap in front of the ear canal -- pain suggests otitis externa' },
+          { term: 'ototopical', definition: 'Medication applied directly into the ear canal as drops' },
+        ],
+        patientCounselingPoints: ['Complete the full course of ear drops.', 'Keep the ear dry during treatment.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Otitis externa ranges from acute diffuse infection to necrotizing (malignant) forms. ICD-11: AB30.1. Diagnosis is clinical; treatment is primarily topical.',
+        explanation: `**Classification:**\n- Acute diffuse: Most common; bacterial or fungal\n- Chronic: >3 months or >=4 episodes/year; suspect dermatitis or fungal etiology\n- Necrotizing (malignant): Skull base osteomyelitis; Pseudomonas in diabetics/immunocompromised; cranial nerve involvement (VII, IX-XII)\n\n**Otomycosis:** Aspergillus niger (black spores), Candida albicans; intense pruritus; clotrimazole/acetic acid drops.\n\n**AAO-HNS 2014 Guidelines:** Topical antibiotics +/- steroid first-line; systemic antibiotics only if extension beyond canal or host immunocompromise; aural toilet for debris.`,
+        keyTerms: [
+          { term: 'necrotizing otitis externa', definition: 'Life-threatening infection extending to temporal bone causing osteomyelitis, primarily in elderly diabetics' },
+          { term: 'otomycosis', definition: 'Fungal infection of the ear canal, often Aspergillus or Candida species' },
+        ],
+        clinicalNotes: 'Granulation tissue at the bony-cartilaginous junction is the hallmark of necrotizing OE. CT and gallium/technetium scans aid diagnosis and monitoring.',
+      },
+      4: {
+        level: 4,
+        summary: 'Necrotizing otitis externa involves Pseudomonas-mediated skull base osteomyelitis with cranial neuropathies. Pathogenesis reflects cerumen pH changes and epithelial barrier disruption.',
+        explanation: `**Pathogenesis:** Cerumen maintains acidic pH (6.1) inhibiting bacterial growth. Moisture alkalinizes the canal, maceration disrupts the epithelial barrier, and Pseudomonas produces exotoxin A, elastase, and phospholipase C causing tissue invasion.\n\n**Necrotizing OE workup:** ESR/CRP (monitoring markers), CT temporal bone (cortical erosion), Tc-99m bone scan (early detection), Ga-67 scan (treatment response), MRI (soft tissue and intracranial extension).\n\n**Cranial nerve involvement:** VII most common (poor prognosis indicator); IX-XII via jugular foramen; contralateral spread via clivus.\n\n**Treatment:** IV antipseudomonal antibiotics (ciprofloxacin, piperacillin-tazobactam) for 6-8 weeks; surgical debridement for sequestra; mortality 10-20% with cranial nerve involvement.`,
+        keyTerms: [
+          { term: 'exotoxin A', definition: 'Pseudomonas virulence factor that inhibits protein synthesis via ADP-ribosylation of EF-2' },
+          { term: 'bony-cartilaginous junction', definition: 'Fissures of Santorini at the junction where infection can spread to skull base' },
+        ],
+        clinicalNotes: 'Ga-67 scan normalizes with successful treatment; Tc-99m remains positive for months regardless of response.',
+      },
+      5: {
+        level: 5,
+        summary: 'Management of otitis externa follows AAO-HNS evidence-based guidelines emphasizing topical therapy, recognition of necrotizing variants, and antimicrobial stewardship.',
+        explanation: `**AAO-HNS 2014 Key Recommendations:**\n- Topical therapy preferred over systemic (superior canal concentrations, fewer side effects)\n- Fluoroquinolone drops for perforated TM or tubes (non-ototoxic)\n- Pain management integral; NSAIDs or acetaminophen; consider opioids for severe cases\n- Wick placement for edematous canal narrowing\n\n**Resistant organisms:** MRSA increasing in acute OE; consider culture if treatment failure. Fungal recurrence after antibacterial drops (steroids promote fungal overgrowth).\n\n**Prevention evidence:** Acetic acid drops post-swimming reduce incidence. Custom swim molds for recurrent swimmers' ear. Hearing aid hygiene counseling.`,
+        keyTerms: [
+          { term: 'fluoroquinolone ototopicals', definition: 'Non-ototoxic topical antibiotics safe for use with perforated TM (ciprofloxacin, ofloxacin)' },
+        ],
+        clinicalNotes: 'Aminoglycoside-containing drops (neomycin/polymyxin) are contraindicated with TM perforation due to ototoxicity risk. Always verify TM integrity before prescribing.',
+      },
     },
+    media: [],
+    citations: [
+      { id: 'aao-oe-2014', type: 'article', title: 'Clinical Practice Guideline: Acute Otitis Externa (2014)', source: 'Otolaryngology-Head and Neck Surgery' },
+    ],
+    crossReferences: [],
+    tags: { systems: ['auditory'], topics: ['otology', 'infection'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['family-medicine'] } },
+  }),
 
-    3: {
-      level: 3,
-      summary: 'Otolaryngology disorders of the ear encompass otitis media, otitis externa, the full spectrum of hearing loss (conductive, sensorineural, and mixed), tinnitus, and vestibular dysfunction. These conditions require systematic evaluation and targeted management strategies.',
-      explanation: `## Otitis Media
-
-**Acute Otitis Media (AOM):**
-- Bacterial or viral infection of the middle ear
-- Pathogenesis: Eustachian tube dysfunction leads to negative pressure, allowing nasopharyngeal flora to ascend
-- Common pathogens: Streptococcus pneumoniae, Haemophilus influenzae, Moraxella catarrhalis
-- Clinical presentation: Otalgia, fever, irritability, hearing loss, bulging or erythematous tympanic membrane
-
-**Otitis Media with Effusion (OME):**
-- Fluid in middle ear without signs of acute infection
-- Often follows AOM or upper respiratory infection
-- May cause conductive hearing loss affecting speech development in children
-- Spontaneous resolution within 3 months in most cases
-
-**Chronic Otitis Media:**
-- Persistent inflammation or recurrent episodes lasting more than 3 months
-- May lead to tympanic membrane perforation, cholesteatoma, or mastoiditis
-**Complications:**
-- Mastoiditis: Infection spreading to mastoid air cells
-- Cholesteatoma: Skin growth in middle ear causing bone erosion
-- Permanent hearing loss
-- Intracranial complications (rare but serious)
-
-## Otitis Externa
-
-**Acute Otitis Externa:**
-- Inflammation of external auditory canal
-- Pathogens: Pseudomonas aeruginosa (most common), Staphylococcus aureus
-- Predisposing factors: Trauma, moisture (aquatic exposure), eczema, hearing aid use
-- Clinical findings: Canal edema, erythema, tenderness with tragal pressure or auricular manipulation
-
-**Malignant (Necrotizing) Otitis Externa:**
-- Severe infection spreading to skull base (osteomyelitis)
-- Primarily affects elderly diabetics or immunocompromised
-- Caused by Pseudomonas aeruginosa
-- Requires aggressive treatment and possible surgical debridement
-
-## Hearing Loss Classification
-
-**By Pathophysiology:**
-
-1. **Conductive Hearing Loss:**
-   - Site: External ear canal, tympanic membrane, or ossicular chain
-   - Causes: Cerumen impaction, otitis media, tympanic membrane perforation, otosclerosis, ossicular chain discontinuity
-   - Characteristic: Bone conduction better than air conduction
-   - Treatment: Medical management, hearing aids, or surgery depending on etiology
-
-2. **Sensorineural Hearing Loss (SNHL):**
-   - Site: Cochlea, auditory nerve, or central pathways
-   - Causes: Presbycusis, noise exposure, ototoxicity, genetic factors, infections, Meniere disease
-   - Characteristic: Permanent loss affecting air and bone conduction equally
-   - Management: Hearing aids, cochlear implants for severe cases, communication strategies
-
-3. **Mixed Hearing Loss:**
-   - Combination of conductive and sensorineural components
-
-**By Timing:**
-- Congenital: Present at birth (genetic, intrauterine infections, perinatal factors)
-- Prelingual: Before speech development
-- Postlingual: After speech acquisition
-- Sudden: Rapid onset within 72 hours (medical emergency)
-
-**By Severity (pure tone average):**
-- Normal: ≤25 dB HL
-- Mild: 26-40 dB HL
-- Moderate: 41-55 dB HL
-- Moderately severe: 56-70 dB HL
-- Severe: 71-90 dB HL
-- Profound: ≥91 dB HL
-
-## Tinnitus
-
-**Classification:**
-- Subjective: Perceived only by patient (most common)
-- Objective: Sound audible to examiner (rare - vascular or muscular)
-
-**Etiologies:**
-- Sensorineural hearing loss (most common)
-- Otologic: Meniere disease, otosclerosis, cerumen impaction
-- Neurologic: Vestibular schwannoma, multiple sclerosis
-- Medications: Aspirin, NSAIDs, aminoglycosides, loop diuretics
-
-## Vestibular Disorders
-
-**Peripheral Vestibular Disorders:**
-- Benign paroxysmal positional vertigo (BPPV): Canalithiasis in semicircular canals
-- Meniere disease: Endolymphatic hydrops causing episodic vertigo, tinnitus, and hearing loss
-- Vestibular neuritis: Inflammation of vestibular nerve
-- Labrynthitis: Vestibular nerve plus cochlear involvement
-
-**Central Vestibular Disorders:**
-- Vertebrobasilar insufficiency
-- Migraine-associated vertigo
-- Multiple sclerosis
-- Cerebellar lesions`,
-      keyTerms: [
-        { term: 'acute otitis media', definition: 'Sudden onset middle ear infection with signs of inflammation and effusion' },
-        { term: 'otitis media with effusion', definition: 'Middle ear fluid without acute infection signs; often follows AOM' },
-        { term: 'cholesteatoma', definition: 'Abnormal skin growth in middle ear causing bone erosion and potential complications', pronunciation: 'koh-lee-stee-uh-TOH-muh' },
-        { term: 'otosclerosis', definition: 'Abnormal bone growth in middle ear causing fixation of stapes and conductive hearing loss' },
-        { term: 'presbycusis', definition: 'Age-related sensorineural hearing loss, typically affecting high frequencies first', pronunciation: 'prez-bih-KYOO-sis' },
-        { term: 'benign paroxysmal positional vertigo', definition: 'Brief episodes of vertigo triggered by position changes due to canaliths in semicircular canals', pronunciation: 'benign PAR-ox-iz-mul' },
-        { term: 'Meniere disease', definition: 'Disorder of inner ear causing episodic vertigo, tinnitus, aural fullness, and fluctuating hearing loss', pronunciation: 'may-NYAYRS' },
-      ],
-      clinicalNotes: `Sudden sensorineural hearing loss (SSNHL) is a medical emergency requiring prompt evaluation and potential steroid treatment within 2-4 weeks for best outcomes. Otitis media is the most common reason for pediatric antibiotic prescriptions and tympanostomy tube placement. Pneumococcal conjugate vaccine has significantly reduced AOM incidence by targeting S. pneumoniae.`,
-      patientCounselingPoints: [
-        'Most ear infections resolve without antibiotics, but follow-up is important to ensure hearing returns to normal.',
-        'Noise-induced hearing loss is permanent but preventable - always use hearing protection in loud environments.',
-        'Cochlear implants can provide meaningful hearing to those with severe-to-profound sensorineural hearing loss.',
-        'Balance retraining exercises (vestibular rehabilitation) can help many vestibular disorders.',
-      ],
+  'tinnitus': earCondition({
+    id: 'ear-tinnitus',
+    type: 'condition',
+    name: 'Tinnitus',
+    alternateNames: ['Ringing in the Ears', 'nameEs:Acufeno', 'nameEs:Tinnitus'],
+    hpoId: 'HP:0000360',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'Tinnitus is hearing sounds like ringing or buzzing when there is no actual sound around you.',
+        explanation: `Sometimes people hear ringing, buzzing, or hissing in their ears even when it is quiet. This is called tinnitus. It is not a disease itself but a sign that something else may be going on.\n\n**Common causes:** Loud noise exposure, earwax buildup, ear infections, aging.\n\n**What helps:** Avoiding loud noises, background sound machines, reducing stress.`,
+        keyTerms: [
+          { term: 'tinnitus', definition: 'Hearing sounds in your ears when no real sound is present', pronunciation: 'TIN-ih-tus' },
+        ],
+        patientCounselingPoints: ['Tinnitus is very common and usually not dangerous.', 'Protect your ears from loud noises to prevent it from getting worse.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Tinnitus is the perception of sound without an external source, affecting ~15% of adults. It is classified as subjective or objective.',
+        explanation: `**Types:**\n- **Subjective:** Only the patient hears it (vast majority)\n- **Objective:** Examiner can hear it (vascular or muscular causes)\n\n**Common causes:** Noise-induced hearing loss, presbycusis, earwax, medications (aspirin, NSAIDs), Meniere disease.\n\n**Evaluation:** Audiogram, otoscopic exam, assessment for asymmetric hearing loss.\n\n**Management:** Sound therapy, hearing aids (if hearing loss present), cognitive behavioral therapy, avoiding triggers.`,
+        keyTerms: [
+          { term: 'subjective tinnitus', definition: 'Tinnitus perceived only by the patient, most commonly associated with hearing loss' },
+          { term: 'objective tinnitus', definition: 'Tinnitus audible to the examiner, caused by vascular or muscular sources' },
+        ],
+        patientCounselingPoints: ['A hearing test helps determine the cause.', 'Background noise or white noise machines can help at night.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Tinnitus involves peripheral cochlear damage and maladaptive central auditory gain. ICD-11: AB51. Evaluation must exclude retrocochlear pathology.',
+        explanation: `**Pathophysiology:** Cochlear hair cell damage reduces auditory input; central auditory system increases gain (neural hyperactivity), generating phantom perception. Dorsal cochlear nucleus and auditory cortex reorganization contribute.\n\n**Red flags requiring imaging (MRI IAC):** Unilateral tinnitus, pulsatile tinnitus, asymmetric hearing loss -- to exclude vestibular schwannoma.\n\n**Pulsatile tinnitus workup:** CTA/MRA to evaluate for dural AV fistula, carotid stenosis, glomus tumor, benign intracranial hypertension.\n\n**Evidence-based treatment:** CBT has strongest evidence for reducing tinnitus distress. Sound therapy and hearing aids provide partial masking. No FDA-approved pharmacotherapy.`,
+        keyTerms: [
+          { term: 'central auditory gain', definition: 'Compensatory increase in neural activity in auditory pathways following reduced peripheral input' },
+          { term: 'pulsatile tinnitus', definition: 'Rhythmic tinnitus synchronous with heartbeat, suggesting vascular etiology' },
+        ],
+        clinicalNotes: 'Unilateral tinnitus with asymmetric SNHL warrants MRI to rule out vestibular schwannoma (acoustic neuroma).',
+      },
+      4: {
+        level: 4,
+        summary: 'Tinnitus neuroscience reveals maladaptive plasticity involving auditory cortex tonotopic reorganization, limbic-auditory coupling, and aberrant gamma oscillations.',
+        explanation: `**Neural mechanisms:**\n- Reduced cochlear output triggers homeostatic upregulation of spontaneous activity in dorsal cochlear nucleus\n- Tonotopic map reorganization: Edge frequencies of hearing loss become overrepresented\n- Thalamocortical dysrhythmia: Theta-gamma coupling in auditory cortex\n- Limbic involvement (amygdala, hippocampus) underlies emotional distress component\n\n**Neuroimaging:** fMRI shows increased auditory cortex activity; altered functional connectivity between auditory, attention, and emotional networks.\n\n**Neuromodulation approaches:** rTMS of auditory cortex (modest effect); tDCS; vagus nerve stimulation paired with tones (reset tonotopic map); bimodal stimulation (auditory + somatosensory).`,
+        keyTerms: [
+          { term: 'thalamocortical dysrhythmia', definition: 'Disruption of normal thalamic oscillatory patterns leading to abnormal cortical activity in tinnitus' },
+          { term: 'bimodal neuromodulation', definition: 'Simultaneous auditory and somatosensory stimulation to reverse maladaptive plasticity' },
+        ],
+        clinicalNotes: 'The neurophysiological model (Jastreboff) forms the basis of tinnitus retraining therapy (TRT), combining counseling with sound therapy.',
+      },
+      5: {
+        level: 5,
+        summary: 'Tinnitus management integrates evidence-based guidelines (AAO-HNS 2014), multidisciplinary care, and emerging neuromodulatory and pharmacological trials.',
+        explanation: `**AAO-HNS 2014 Tinnitus Guideline:**\n- Distinguish primary (idiopathic) from secondary tinnitus\n- Audiologic evaluation recommended\n- No routine imaging for bilateral non-pulsatile tinnitus\n- CBT recommended; sound therapy offered\n- Against: antidepressants, anticonvulsants, Ginkgo, melatonin, zinc as tinnitus-specific treatments\n\n**Clinical trials landscape:** NMDA receptor antagonists, potassium channel modulators (Kv7), OTO-313 (intratympanic gacyclidine). Vagus nerve stimulation paired with tones showed durable benefit in RESET trial.\n\n**Outcome measures:** Tinnitus Functional Index (TFI), Tinnitus Handicap Inventory (THI), minimum masking level (MML).`,
+        keyTerms: [
+          { term: 'Tinnitus Functional Index', definition: 'Validated 25-item questionnaire measuring tinnitus severity and treatment responsiveness' },
+        ],
+        clinicalNotes: 'Pulsatile tinnitus is always objective or has a vascular etiology until proven otherwise. CTA/MRA is essential workup.',
+      },
     },
+    media: [],
+    citations: [
+      { id: 'aao-tinnitus-2014', type: 'article', title: 'Clinical Practice Guideline: Tinnitus', source: 'Otolaryngology-Head and Neck Surgery' },
+    ],
+    crossReferences: [
+      { targetId: 'ear-hearing-loss', targetType: 'condition', relationship: 'related', label: 'Hearing Loss' },
+      { targetId: 'ear-meniere-disease', targetType: 'condition', relationship: 'related', label: 'Meniere Disease' },
+    ],
+    tags: { systems: ['auditory'], topics: ['otology', 'neuroscience'], clinicalRelevance: 'medium', examRelevance: { usmle: true, nbme: true, shelf: ['family-medicine', 'neurology'] } },
+  }),
 
-    4: {
-      level: 4,
-      summary: 'Otologic disorders encompass a complex spectrum of pathologies affecting sound transmission, mechanoelectrical transduction, and vestibular function. Understanding the pathophysiological mechanisms, from molecular pathways to biomechanical alterations, guides evidence-based diagnosis and management of these conditions.',
-      explanation: `## Otitis Media: Pathophysiology and Host Factors
-
-**Eustachian Tube Dysfunction:**
-- Anatomical factors: Shorter, more horizontal, and more cartilaginous in children
-- Functional obstruction: Adenoid hypertrophy, chronic rhinosinusitis, ciliary dyskinesia
-- Pressure dysregulation: Failure to ventilate middle ear leads to negative pressure and transudation of fluid
-
-**Biofilm Formation:**
-- Chronic and recurrent otitis media may involve biofilm-protected bacteria
-- Biofilms resist antibiotic penetration and host immune responses
-- Explains treatment failure and recurrence despite sterile middle ear cultures
-
-**Immunological Factors:**
-- Immature immune system in children (especially <2 years)
-- Reduced IgG2 subclass response to polysaccharide antigens
-- Daycare attendance increases exposure to pathogens
-
-**Otitis-Prone Child Characteristics:**
-- Early first AOM (<6 months)
-- Sibling history of recurrent AOM
-- Atopy and allergic rhinitis
-- Pacifier use
-- Tobacco smoke exposure
-- Lack of breastfeeding
-
-## Otitis Externa: Pathogenesis and Variants
-
-**Pathogenic Mechanisms:**
-- Moisture creates alkaline environment favoring bacterial growth
-- Trauma (cotton swab use) disrupts protective cerumen and epithelial barrier
-- Inflammation leads to edema, pain, and further moisture trapping
-
-**Chronic Otitis Externa:**
-- Persistent inflammation >4 weeks or ≥4 episodes/year
-- Underlying causes: Allergic contact dermatitis, psoriasis, eczema, fungal infection
-- Requires addressing predisposing factors and topical steroid therapy
-
-**Fungal Otitis Externa (Otomycosis):**
-- Aspergillus and Candida species
-- Characterized by fuzzy appearing debris and intense pruritus
-- Antifungal drops required; steroids may worsen
-
-## Sensorineural Hearing Loss Mechanisms
-
-**Metabolic Presbycusis:**
-- Stria vascularis degeneration
-- Reduced endocochlear potential
-- Affects all frequencies relatively equally
-
-**Sensory Presbycusis:**
-- Hair cell loss (basal turn high-frequency region first)
-- Most common pattern of age-related hearing loss
-- Steeply sloping high-frequency loss
-
-**Neural Presbycusis:**
-- Spiral ganglion neuron loss
-- Poor speech discrimination despite pure tone thresholds
-
-**Mechanical Presbycusis:**
-- Basilar membrane stiffening
-- Changes in cochlear mechanics
-
-**Noise-Induced Hearing Loss:**
-- Acoustic trauma: Immediate damage from very loud sound (>140 dB)
-- Temporary threshold shift: Reversible damage after moderate exposure
-- Permanent threshold shift: Irreversible hair cell damage
-- Base of cochlea most susceptible (4-6 kHz notch characteristic)
-
-**Ototoxicity Mechanisms:**
-- Aminoglycosides: Generate reactive oxygen species, damage mitochondria
-- Cisplatin: Causes DNA cross-linking in hair cells
-- Loop diuretics: Alter endolymph composition, cause temporary or permanent threshold shift
-- Aspirin: Reversible effects on outer hair cell motility
-
-## Tinnitus Pathophysiology
-
-**Peripheral Mechanisms:**
-- Damaged cochlear hair cells produce spontaneous activity
-- Reduced auditory input leads to increased central gain (homeostatic plasticity)
-- Discordant damage between inner and outer hair cells
-
-**Central Mechanisms:**
-- Increased spontaneous firing in auditory nerve
-- Hyperactivity in dorsal cochlear nucleus
-- Reorganization of tonotopic maps in auditory cortex
-- Involvement of non-auditory structures (limbic system) in chronic tinnitus distress
-
-**Neuroimaging Correlates:**
-- Increased activity in auditory cortex
-- Functional connectivity changes between auditory and non-auditory regions
-- Abnormal gamma-band oscillations
-
-## Vestibular Pathophysiology
-
-**BPPV Mechanism:**
-- Canalolithiasis: Free-floating otoconia in semicircular canal
-- Cupulolithiasis: Otoconia adherent to cupula
-- Posterior canal most common (85-95%)
-- Diagnosis confirmed by Hallpike-Dix maneuver
-
-**Meniere Disease:**
-- Endolymphatic hydrops: Excess endolymph causing distension
-- Possible etiologies: Endolymphatic sac obstruction, autoimmune, viral, genetic
-- Histopathology: Reissner's membrane bulging into scala vestibuli
-- Disease progression: Hearing fluctuations → permanent loss → involvement of other ear
-
-**Vestibular Neuritis:**
-- Viral reactivation (HSV-1) in vestibular ganglion
-- Selective damage to superior vestibular nerve (accounts for sparing of horizontal canal function)
-- Recovery via central compensation over weeks to months
-
-**Vestibular Compensation:**
-- Acute stage: Severe vertigo, nausea, nystagmus
-- Subacute stage: Symptomatic improvement with static deficits
-- Chronic stage: Dynamic recovery with vestibular rehabilitation
-
-## Surgical Considerations
-
-**Myringotomy with Tube Placement:**
-- Indications: Recurrent AOM, chronic OME with hearing loss, atelectasis
-- Tube types: Short-term (6-12 months) vs long-term (2+ years)
-- Complications: Otorrhea, tympanosclerosis, persistent perforation
-
-**Tympanoplasty:**
-- Closure of tympanic membrane perforation
-- Types I-V depending on ossicular involvement
-- Success rates: 80-90% for Type I
-
-**Ossiculoplasty:**
-- Reconstruction of ossicular chain
-- Materials: Autologous (cartilage, bone) vs prosthetic (PORP, TORP)
-- Outcomes depend on middle ear ventilation and mastoid status
-
-**Stapedectomy for Otosclerosis:**
-- Removal of fixed stapes footplate
-- Placement of prosthesis from incus to oval window
-- 90% closure of air-bone gap to within 10 dB
-
-**Cochlear Implantation:**
-- Indications: Severe-to-profound SNHL with minimal benefit from hearing aids
-- Bilateral implantation increasingly standard
-- Outcomes: Variable; speech perception in quiet ~80%, noise ~50%`,
-      keyTerms: [
-        { term: 'biofilm', definition: 'Aggregate of microorganisms encased in extracellular matrix, resistant to antibiotics and host defenses' },
-        { term: 'endolymphatic hydrops', definition: 'Distension of endolymphatic spaces due to excess fluid, underlying pathology of Meniere disease' },
-        { term: 'canalolithiasis', definition: 'Free-floating otoconia within semicircular canal causing BPPV' },
-        { term: 'vestibular compensation', definition: 'Central nervous system process of adapting to peripheral vestibular loss through neuroplasticity' },
-        { term: 'air-bone gap', definition: 'Difference between air conduction and bone conduction thresholds, indicates conductive hearing loss' },
-        { term: 'tonotopic reorganization', definition: 'Plastic changes in auditory cortex map following hearing loss or input deprivation' },
-        { term: 'homeostatic plasticity', definition: 'Central gain increase in response to reduced auditory input, contributing to tinnitus' },
-      ],
-      clinicalNotes: `The 4kHz notch in audiograms is characteristic of noise-induced hearing loss because this region corresponds to the basal turn of the cochlea, which is most susceptible to metabolic and vascular compromise. The American Academy of Otolaryngology recommends against routine use of antibiotics for AOM given high spontaneous resolution rates, but recommends treatment for children <6 months, severe illness, or bilateral AOM with otorrhea.`,
+  'hearing-loss': earCondition({
+    id: 'ear-hearing-loss',
+    type: 'condition',
+    name: 'Hearing Loss',
+    alternateNames: ['Deafness', 'Hypoacusis', 'nameEs:Perdida Auditiva', 'nameEs:Hipoacusia'],
+    hpoId: 'HP:0000365',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'Hearing loss means you cannot hear sounds as well as other people. It can happen at any age and has many causes.',
+        explanation: `Some people have trouble hearing from birth, while others lose hearing over time from loud noises, infections, or aging.\n\n**Types:** Sounds may be muffled (like wearing earplugs) or unclear (you hear sounds but cannot understand words).\n\n**Getting help:** Hearing aids make sounds louder. Cochlear implants can help people with severe hearing loss.`,
+        keyTerms: [
+          { term: 'hearing aid', definition: 'A small device worn in or behind the ear that makes sounds louder' },
+          { term: 'cochlear implant', definition: 'A device surgically placed in the ear that helps very deaf people hear' },
+        ],
+        patientCounselingPoints: ['If you often ask people to repeat themselves, get a hearing test.', 'Hearing loss from loud noise is preventable -- wear ear protection.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Hearing loss is classified as conductive (sound blockage), sensorineural (nerve damage), or mixed. Severity ranges from mild to profound.',
+        explanation: `**Conductive hearing loss:** Problem in outer or middle ear blocks sound. Causes: earwax, fluid, eardrum perforation, otosclerosis. Often treatable.\n\n**Sensorineural hearing loss (SNHL):** Inner ear or nerve damage. Causes: aging (presbycusis), noise exposure, genetics, infections. Usually permanent.\n\n**Mixed:** Both types together.\n\n**Severity (dB HL):** Mild 26-40, Moderate 41-55, Severe 71-90, Profound >90.\n\n**Sudden SNHL:** Hearing loss within 72 hours -- medical emergency requiring urgent steroid treatment.`,
+        keyTerms: [
+          { term: 'conductive hearing loss', definition: 'Hearing loss from blockage of sound in the outer or middle ear' },
+          { term: 'sensorineural hearing loss', definition: 'Hearing loss from damage to the inner ear or auditory nerve' },
+          { term: 'presbycusis', definition: 'Gradual hearing loss from aging, usually affecting high-pitched sounds first', pronunciation: 'prez-bih-KYOO-sis' },
+        ],
+        patientCounselingPoints: ['Sudden hearing loss in one ear needs same-day medical attention.', 'Over-the-counter hearing aids are now available for mild-moderate loss.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Hearing loss evaluation uses audiometry, tuning forks (Weber/Rinne), and imaging. ICD-11: AB50-AB59. Management depends on type, severity, and etiology.',
+        explanation: `**Diagnostic approach:**\n- Weber test: Lateralizes to affected ear (conductive) or unaffected ear (SNHL)\n- Rinne test: Bone > air conduction = conductive loss; air > bone with decreased thresholds = SNHL\n- Audiometry: Pure tone thresholds, speech discrimination, tympanometry\n- ABR: Auditory brainstem response for retrocochlear evaluation\n\n**Key etiologies:**\n- Otosclerosis: Stapes fixation; conductive loss; stapedectomy curative\n- Noise-induced: Characteristic 4kHz notch on audiogram\n- Presbycusis: High-frequency sloping loss, poor speech discrimination\n- Ototoxicity: Aminoglycosides, cisplatin, loop diuretics\n\n**SSNHL:** 30dB loss over 3 frequencies within 72 hours; oral or intratympanic steroids; MRI to exclude schwannoma.`,
+        keyTerms: [
+          { term: 'otosclerosis', definition: 'Abnormal bone remodeling fixing the stapes footplate, causing progressive conductive hearing loss' },
+          { term: 'speech discrimination score', definition: 'Percentage of words correctly identified at suprathreshold levels; poor scores suggest retrocochlear pathology' },
+        ],
+        clinicalNotes: 'The 4kHz audiometric notch is pathognomonic for noise-induced hearing loss due to vulnerability of the basal cochlear turn.',
+      },
+      4: {
+        level: 4,
+        summary: 'Hearing loss mechanisms span outer hair cell dysfunction, stria vascularis degeneration, synaptic ribbon loss (hidden hearing loss), and central auditory processing disorders.',
+        explanation: `**Cochlear mechanisms:**\n- Sensory presbycusis: Outer hair cell loss (basal turn first); steep high-frequency loss\n- Metabolic presbycusis: Stria vascularis atrophy; reduced endocochlear potential; flat loss\n- Neural presbycusis: Spiral ganglion loss; poor discrimination despite adequate thresholds\n- Hidden hearing loss (cochlear synaptopathy): Loss of IHC-SGN synaptic ribbons; normal audiogram but difficulty in noise\n\n**Genetic hearing loss:**\n- GJB2 (Connexin 26): Most common cause of autosomal recessive non-syndromic SNHL\n- Pendred syndrome (SLC26A4): SNHL + enlarged vestibular aqueduct + thyroid goiter\n- Waardenburg, Usher, Alport syndromes\n\n**Cochlear implant candidacy:** Severe-profound bilateral SNHL; sentence recognition <50% in best-aided condition; functional auditory nerve required.`,
+        keyTerms: [
+          { term: 'cochlear synaptopathy', definition: 'Loss of inner hair cell synaptic ribbons causing difficulty hearing in noise despite normal audiogram ("hidden hearing loss")' },
+          { term: 'GJB2 mutation', definition: 'Connexin 26 gene mutation, most common cause of genetic non-syndromic sensorineural hearing loss' },
+        ],
+        clinicalNotes: 'Enlarged vestibular aqueduct on CT is the most common inner ear malformation associated with SNHL in children.',
+      },
+      5: {
+        level: 5,
+        summary: 'Hearing loss management encompasses AAO-HNS SSNHL guidelines, cochlear implant advances, OTC hearing aid legislation, gene therapy trials, and otoprotective strategies.',
+        explanation: `**SSNHL Guidelines (AAO-HNS 2019):**\n- Oral prednisone 60mg x 10-14 days or intratympanic dexamethasone\n- Intratympanic salvage therapy for incomplete recovery\n- MRI recommended; no evidence for antivirals or HBO\n\n**Emerging therapies:**\n- Gene therapy: AAV-mediated OTOF gene delivery for otoferlin deficiency (SNHL); clinical trials ongoing\n- Hair cell regeneration: Notch inhibition and Atoh1 overexpression to transdifferentiate supporting cells\n- Otoprotection: NAC, D-methionine for cisplatin-induced ototoxicity\n\n**OTC Hearing Aids (FDA 2022):** Direct-to-consumer for mild-moderate loss; expanding access; audiologic follow-up still recommended.\n\n**Outcomes:** Bilateral CI in children: 70-80% mainstream education; adult CI: median sentence recognition 80% in quiet.`,
+        keyTerms: [
+          { term: 'intratympanic steroid', definition: 'Injection of dexamethasone through TM into middle ear for SSNHL, achieving high perilymph concentrations' },
+          { term: 'Atoh1', definition: 'Transcription factor critical for hair cell differentiation; target for regenerative therapy' },
+        ],
+        clinicalNotes: 'SSNHL treated within 2 weeks has best prognosis. Delay beyond 4 weeks dramatically reduces recovery rates.',
+      },
     },
+    media: [],
+    citations: [
+      { id: 'aao-ssnhl-2019', type: 'article', title: 'Clinical Practice Guideline: Sudden Hearing Loss (2019)', source: 'Otolaryngology-Head and Neck Surgery' },
+    ],
+    crossReferences: [
+      { targetId: 'ear-tinnitus', targetType: 'condition', relationship: 'related', label: 'Tinnitus' },
+    ],
+    tags: { systems: ['auditory'], topics: ['otology', 'audiology', 'genetics'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['family-medicine', 'pediatrics', 'neurology'] } },
+  }),
 
-    5: {
-      level: 5,
-      summary: 'Advanced otologic practice requires comprehensive understanding of evidence-based guidelines, emerging therapeutic technologies, surgical decision-making, and multidisciplinary management of complex auditory and vestibular disorders. Contemporary practice emphasizes precision medicine approaches and outcomes-based care.',
-      explanation: `## Clinical Practice Guidelines (AAO-HNS)
-
-**Otitis Media with Effusion (2016 Update):**
-- Diagnosis requires pneumatic otoscopy or tympanometry
-- Observation for 3 months recommended before intervention
-- Autoinsufflation devices may be recommended
-- Hearing testing recommended for ≥3 months effusion
-- Tympanostomy tubes recommended for: ≥4-6 months bilateral effusion with hearing loss, ≥3 months with structural changes, or at-risk children
-- Intranasal steroids, antibiotics, and decongestants NOT recommended
-
-**Acute Otitis Externa (2014):**
-- Diagnosis requires rapid onset of symptoms, signs of canal inflammation, and tenderness
-- Topical antibiotics with or without corticosteroids as first-line
-- Systemic antibiotics NOT recommended unless extension beyond ear canal or immunocompromised
-- Aural toilet (debridement) essential for severe cases
-- Nonototoxic drops recommended if tympanic membrane perforated
-
-**Sudden Sensorineural Hearing Loss (2019):**
-- Urgent evaluation recommended; treatment ideally within 2-4 weeks
-- Intratympanic or oral steroids recommended as initial therapy
-- Imaging recommended to identify retrocochlear pathology
-- No robust evidence for antivirals, hyperbaric oxygen, or vasodilators
-
-**Benign Paroxysmal Positional Vertigo (2017):**
-- Diagnosis confirmed by nystagmus with diagnostic maneuvers
-- Canalith repositioning maneuvers (Epley) recommended for posterior canal BPPV
-- Post-maneuver precautions not required
-- Vestibular rehabilitation recommended for persistent symptoms
-
-**Cerumen Impaction (2017):**
-- Diagnosis requires symptoms attributable to impaction or inability to visualize tympanic membrane
-- Cerumenolytic agents, irrigation, and manual removal are acceptable first-line
-- Ear drops NOT recommended alone for symptomatic impaction
-- Contraindications to irrigation: tympanic membrane perforation, ear tubes, immunocompromised
-
-## Emerging Therapies and Technology
-
-**Cochlear Implant Advances:**
-- Hybrid implants: Preserve residual hearing in low frequencies while electrically stimulating high frequencies
-- Fully implantable devices under development
-- Electrode array designs minimizing insertion trauma
-- Signal processing strategies improving music appreciation and tone perception
-- Bilateral and bimodal fitting (CI + hearing aid) optimizing outcomes
-
-**Hearing Aid Technology:**
-- Disposable and over-the-counter options expanding access
-- Artificial intelligence for environmental adaptation
-- rechargeability and direct streaming to devices
-- Bone conduction implants for conductive/mixed loss
-
-**Tinnitus Therapies:**
-- Cognitive behavioral therapy (CBT): Most effective for reducing tinnitus distress
-- Sound therapy: Masking, partial masking, and habituation approaches
-- Neuromodulation: Transcranial magnetic stimulation, transcutaneous electrical stimulation
-- Combination therapies showing promise in clinical trials
-
-**Vestibular Rehabilitation:**
-- Customized exercise protocols (adaptation, habituation, substitution)
-- Gaze stability exercises: Improves VOR gain and reduces oscillopsia
-- Balance training: Reduces fall risk in chronic vestibular loss
-- Virtual reality applications expanding treatment options
-
-## Surgical Decision-Making
-
-**Tympanostomy Tube Selection:**
-- Short-term tubes: Lower complication rate, higher need for replacement
-- Long-term tubes: Longer ventilation, higher risk of persistent perforation
-- Considerations: age, recurrence risk, planned future procedures, swimming activities
-
-**Chronic Ear Surgery:**
-- Canal wall-up vs canal-down mastoidectomy: Trade-off between recurrence rate and mastoid cavity issues
-- Ossiculoplasty timing vs staging with mastoidectomy
-- Use of cartilage for tympanic membrane reconstruction in atelectatic ears
-- Second-look procedures for cholesteatoma surveillance
-
-**Otosclerosis Surgery:**
-- Stapedectomy vs stapedotomy: Similar outcomes with slight preference for small fenestra technique
-- Laser-assisted techniques for precise footplate manipulation
-- Piston prosthesis selection considerations (size, material)
-- Revision surgery considerations and outcomes
-
-**Vestibular Schwannoma Management:**
-- Observation with serial imaging for small tumors
-- Stereotactic radiosurgery: Control rates >95% for small-medium tumors
-- Microsurgical resection: Translabyrinthine (hearing sacrifice), retrosigmoid, middle fossa approaches
-- Multidisciplinary decision-making incorporating tumor size, growth rate, hearing status, patient age and preferences
-
-## Diagnostic Advances
-
-**High-Resolution CT Temporal Bone:**
-- 0.5mm or less slice thickness
-- Multiplanar reconstructions for surgical planning
-- Assessment for cochlear implant candidacy
-- Detection of subtle temporal bone fractures
-
-**MRI Protocols:**
-- 3D FLAIR for endolymphatic hydrops
-- 3D CISS/FIESTA for cranial nerve and cochlear duct assessment
-- Diffusion-weighted imaging for cholesteatoma detection (non-echo-planar preferred)
-- Gadolinium enhancement patterns for various pathologies
-
-**Audiometric Assessment:**
-- High-frequency audiometry (up to 12-16 kHz) for early ototoxicity detection
-- Otoacoustic emissions: Objective assessment of outer hair cell function
-- Auditory brainstem response: Neural assessment, especially for infants
-
-**Vestibular Testing:**
-- Video head impulse test (vHIT): Assess individual semicircular canal function
-- Vestibular evoked myogenic potentials (VEMPs): Saccular (cVEMP) and utricular (oVEMP) assessment
-- Rotary chair testing: Comprehensive vestibular function assessment
-- Posturography: Quantify balance control contributions
-
-## Outcomes and Quality Measures
-
-**Hearing-Related Quality of Life:**
-- Hearing Handicap Inventory for Adults (HHIA) and Elderly (HHIE)
-- Speech, Spatial and Qualities of Hearing Scale (SSQ)
-- Importance of patient-reported outcomes in addition to pure tone thresholds
-
-**Otitis Media Outcomes:**
-- Tube otorrhea incidence: 15-30% (higher with ventilation tubes)
-- Recurrence rates after tube extrusion: 20-40%
-- Long-term tympanic membrane perforation: 2-4%
-- Tympanosclerosis: Common but usually clinically insignificant
-
-**Surgical Outcomes:**
-- Tympanoplasty success (Type I): 80-90%
-- Ossiculoplasty success: 50-80% depending on materials and middle ear status
-- Stapedectomy air-bone gap closure to ≤10 dB: ~90%
-- Cholesteatoma recurrence: Canal wall-down ~5%, canal wall-up 15-30%
-
-## Special Populations
-
-**Pediatric Considerations:**
-- Developmental critical periods for speech and language acquisition
-- Aggressive management of bilateral hearing loss essential
-- Universal newborn hearing screening mandates
-- AOM diagnostic challenges: Pediatric ear canal size and mobility
-- Adenoidectomy considerations for OME management
-
-**Geriatric Considerations:**
-- Presbycusis and communication difficulties
-- Vestibular decline contributing to falls
-- Comorbidities affecting treatment options
-- Polypharmacy and ototoxicity risk
-- Hearing aid adoption barriers
-
-**Immunocompromised Patients:**
-- Higher risk for malignant otitis externa
-- Atypical pathogens and aggressive presentations
-- Necrotizing otitis media: Rare but life-threatening
-- Importance of early aggressive intervention
-
-**Pregnancy:**
-- Physiologic Eustachian tube dysfunction contributing to otitis media
-- Medication safety considerations for treatment
-- Imaging modalities avoiding radiation`,
-      keyTerms: [
-        { term: 'pneumatic otoscopy', definition: 'Otoscopic examination with insufflation to assess tympanic membrane mobility, essential for otitis media diagnosis' },
-        { term: 'autoinsufflation', definition: 'Patient-performed Valsalva maneuver to open Eustachian tube and ventilate middle ear' },
-        { term: 'bimodal fitting', definition: 'Combination of cochlear implant in one ear and hearing aid in the other for optimal hearing' },
-        { term: 'canal wall-down mastoidectomy', definition: 'Removal of posterior ear canal wall to create common cavity with mastoid, lower recurrence but higher cavity care burden' },
-        { term: 'posturography', definition: 'Objective assessment of balance control using force plate to quantify contributions of visual, vestibular, and proprioceptive inputs' },
-        { term: 'otosclerosis', definition: 'Primary bone dysplasia of temporal bone causing otic capsule fixation, most commonly stapes footplate' },
-        { term: 'neurotologic', definition: 'Subspecialty focusing on neurological aspects of otology, including skull base surgery' },
-      ],
-      clinicalNotes: `Key Practice Guidelines Summary:
-
-AAO-HNS Clinical Practice Guidelines provide level A recommendations based on systematic evidence review. Key recommendations:
-1. OME: Observation for 3 months before intervention; avoid systemic steroids/decongestants
-2. OE: Topical antibiotics first-line; systemic antibiotics only for extension beyond ear canal
-3. SSNHL: Treat within 2-4 weeks with steroids; avoid unproven therapies
-4. BPPV: Canalith repositioning maneuvers are first-line; post-maneuver precautions unnecessary
-5. Cerumen: Cerumenolytics, irrigation, or manual removal equally effective; avoid drops alone for symptomatic impaction
-
-Red flags requiring urgent referral:
-- Sudden hearing loss (within 72 hours)
-- Asymmetric or progressive sensorineural loss
-- Associated neurological symptoms
-- Periauricular swelling or cellulitis
-- Persistent otorrhea despite appropriate therapy
-- Mastoid tenderness or posterior auricular protrusion`,
+  'meniere-disease': earCondition({
+    id: 'ear-meniere-disease',
+    type: 'condition',
+    name: 'Meniere Disease',
+    alternateNames: ['Endolymphatic Hydrops', 'Morbus Meniere', 'nameEs:Enfermedad de Meniere'],
+    hpoId: 'HP:0011390',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'Meniere disease causes episodes of spinning dizziness, hearing loss, ringing in the ear, and ear fullness.',
+        explanation: `Meniere disease affects the inner ear. People with this condition have attacks where the room seems to spin (vertigo), their hearing gets worse, they hear ringing, and the ear feels full or blocked. Attacks last minutes to hours.\n\n**What helps:** A low-salt diet, medication for dizziness, and avoiding caffeine and stress.`,
+        keyTerms: [
+          { term: 'vertigo', definition: 'A feeling that you or the room is spinning' },
+        ],
+        patientCounselingPoints: ['Attacks can be scary but are not life-threatening.', 'A low-salt diet may reduce how often attacks happen.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Meniere disease is an inner ear disorder causing episodic vertigo, fluctuating sensorineural hearing loss, tinnitus, and aural fullness.',
+        explanation: `**Classic triad + fullness:**\n1. Episodic vertigo (20 min to 12 hours)\n2. Low-frequency sensorineural hearing loss (fluctuating early, progressive later)\n3. Tinnitus (roaring quality)\n4. Aural fullness\n\n**Cause:** Excess fluid (endolymph) in the inner ear, though the exact reason is unknown.\n\n**Diagnosis:** Clinical history + audiogram showing low-frequency SNHL.\n\n**Treatment:** Low-sodium diet (<2g/day), diuretics, betahistine, vestibular rehabilitation. Intratympanic gentamicin or steroids for refractory cases.`,
+        keyTerms: [
+          { term: 'endolymph', definition: 'Fluid inside the inner ear that helps with hearing and balance' },
+          { term: 'aural fullness', definition: 'Sensation of pressure or blockage in the ear' },
+        ],
+        patientCounselingPoints: ['Most patients achieve adequate control with dietary changes and medication.', 'Do not drive during vertigo episodes.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Meniere disease reflects endolymphatic hydrops. ICD-11: AB31.0. Diagnosis per AAO-HNS criteria requires episodic vertigo, documented SNHL, and aural symptoms.',
+        explanation: `**Diagnostic criteria (AAO-HNS 2015):**\n- Definite: >=2 vertigo episodes (20 min - 12 hrs) + audiometrically documented low-to-mid frequency SNHL + fluctuating aural symptoms\n- Probable: Episodic vertigo + fluctuating aural symptoms without documented hearing loss\n\n**Pathology:** Distension of endolymphatic compartment (Reissner's membrane bulges into scala vestibuli); rupture theory explains acute attacks (potassium-rich endolymph bathes neural structures).\n\n**Staged management:**\n1. Lifestyle: Sodium restriction, caffeine/alcohol avoidance\n2. Medical: Diuretics (HCTZ/triamterene), betahistine, acute rescue (meclizine, ondansetron)\n3. Intratympanic: Dexamethasone (hearing-sparing) or gentamicin (vestibulotoxic, 80-90% vertigo control)\n4. Surgical: Endolymphatic sac decompression, vestibular neurectomy, labyrinthectomy (last resort)`,
+        keyTerms: [
+          { term: 'endolymphatic hydrops', definition: 'Distension of the endolymphatic space, the underlying pathology of Meniere disease' },
+          { term: 'intratympanic gentamicin', definition: 'Vestibulotoxic aminoglycoside injected through TM to ablate vestibular function in refractory Meniere disease' },
+        ],
+        clinicalNotes: 'Bilateral involvement occurs in 25-40% of patients over time. MRI with 3D-FLAIR can visualize endolymphatic hydrops.',
+      },
+      4: {
+        level: 4,
+        summary: 'Meniere disease pathophysiology involves endolymphatic sac dysfunction, autoimmune mechanisms, aquaporin dysregulation, and potential viral triggers, with variable natural history.',
+        explanation: `**Pathophysiological theories:**\n- Endolymphatic sac malabsorption: Reduced endolymph resorption\n- Autoimmune: Elevated anti-HSP70 antibodies; steroid-responsiveness supports immune component\n- Aquaporin dysregulation: AQP2 and AQP4 expression changes in inner ear\n- Viral: HSV latency in vestibular ganglion\n\n**Natural history:** Burns out over 5-10 years; vertigo frequency decreases but hearing loss progresses; bilateral 25-40%.\n\n**Advanced diagnostics:** Electrocochleography (SP/AP ratio >0.4 suggestive); gadolinium-enhanced 3T MRI 3D-FLAIR shows endolymphatic hydrops.\n\n**Gentamicin titration:** Low-dose monthly injections (vestibular ablation while monitoring hearing); targets type I hair cells preferentially.`,
+        keyTerms: [
+          { term: 'electrocochleography', definition: 'Recording of cochlear potentials (SP and AP) to detect endolymphatic hydrops' },
+          { term: 'summating potential', definition: 'DC potential reflecting cochlear hair cell receptor potential; elevated in hydrops' },
+        ],
+        clinicalNotes: 'SP/AP ratio >0.4 on ECoG suggests hydrops but has limited sensitivity (60-70%). MRI hydrops imaging is increasingly used.',
+      },
+      5: {
+        level: 5,
+        summary: 'Meniere disease management is evolving with hydrops imaging, biomarker research, and precision approaches to intratympanic therapy and surgical intervention.',
+        explanation: `**Current evidence:**\n- Cochrane review: No high-quality RCTs for most Meniere treatments\n- Betahistine: BEMED trial (2016) showed no benefit over placebo for vertigo frequency\n- Intratympanic dexamethasone: Moderate evidence for short-term vertigo control and hearing preservation\n- Intratympanic gentamicin: 80-90% vertigo control; significant hearing loss risk (20-30%)\n\n**Surgical outcomes:**\n- Endolymphatic sac decompression: 60-80% vertigo control; placebo effect debated\n- Vestibular neurectomy: >90% vertigo control; requires craniotomy\n- Labyrinthectomy: Definitive for unilateral disease with no serviceable hearing\n\n**Emerging:**\n- OTO-104 (sustained-release intratympanic dexamethasone)\n- Endolymphatic sac gene therapy targets\n- Vestibular implants for bilateral vestibulopathy`,
+        keyTerms: [
+          { term: 'vestibular neurectomy', definition: 'Selective transection of vestibular nerve via middle or posterior fossa approach, preserving hearing' },
+        ],
+        clinicalNotes: 'Definite bilateral Meniere disease is rare at presentation; bilateral symptoms may indicate autoimmune inner ear disease requiring systemic immunosuppression.',
+      },
     },
-  },
+    media: [],
+    citations: [
+      { id: 'aao-meniere-2020', type: 'article', title: 'Meniere Disease: Clinical Practice Guideline', source: 'Otolaryngology-Head and Neck Surgery' },
+    ],
+    crossReferences: [
+      { targetId: 'ear-hearing-loss', targetType: 'condition', relationship: 'related', label: 'Hearing Loss' },
+      { targetId: 'ear-tinnitus', targetType: 'condition', relationship: 'related', label: 'Tinnitus' },
+    ],
+    tags: { systems: ['auditory', 'vestibular'], topics: ['otology', 'vestibular'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['neurology', 'family-medicine'] } },
+  }),
 
-  media: [
-    {
-      id: 'ear-anatomy-overview',
-      type: 'diagram',
-      filename: 'ear-anatomy-overview.svg',
-      title: 'Ear Anatomy Overview',
-      description: 'Cross-sectional view of external, middle, and inner ear structures',
+  'cholesteatoma': earCondition({
+    id: 'ear-cholesteatoma',
+    type: 'condition',
+    name: 'Cholesteatoma',
+    alternateNames: ['Keratoma', 'nameEs:Colesteatoma'],
+    hpoId: 'HP:0000399',
+    levels: {
+      1: {
+        level: 1,
+        summary: 'A cholesteatoma is an abnormal skin growth behind the eardrum that can damage the ear bones and cause hearing loss.',
+        explanation: `A cholesteatoma is a pocket of skin that grows in the wrong place -- behind your eardrum in the middle ear. As it grows, it can eat away at the tiny ear bones and other structures.\n\n**Signs:** Foul-smelling ear discharge, hearing loss, dizziness, ear pain.\n\n**Treatment:** Surgery is needed to remove it and prevent damage.`,
+        keyTerms: [
+          { term: 'cholesteatoma', definition: 'An abnormal skin growth inside the middle ear that can damage nearby structures', pronunciation: 'koh-lee-stee-ah-TOH-mah' },
+        ],
+        patientCounselingPoints: ['Cholesteatomas do not go away on their own and need surgery.', 'Regular follow-up after surgery is important to check for regrowth.'],
+      },
+      2: {
+        level: 2,
+        summary: 'Cholesteatoma is a destructive, expanding collection of keratinized squamous epithelium in the middle ear or mastoid, requiring surgical management.',
+        explanation: `**Types:**\n- **Acquired (most common):** Forms from eardrum retraction pocket, usually in pars flaccida (attic region)\n- **Congenital:** White mass behind intact eardrum, no history of ear infection or surgery\n\n**How it forms:** Negative middle ear pressure from Eustachian tube dysfunction pulls the eardrum inward, creating a pocket that traps skin cells. The growing mass erodes bone.\n\n**Complications:** Ossicular erosion (hearing loss), facial nerve damage, labyrinthine fistula (vertigo), mastoiditis, intracranial infection.\n\n**Treatment:** Tympanomastoidectomy (canal wall-up or canal wall-down). Regular follow-up for recurrence detection.`,
+        keyTerms: [
+          { term: 'retraction pocket', definition: 'Inward collapse of the eardrum caused by negative middle ear pressure' },
+          { term: 'tympanomastoidectomy', definition: 'Surgery to remove cholesteatoma from the middle ear and mastoid bone' },
+        ],
+        patientCounselingPoints: ['Surgery aims to remove the growth and preserve or restore hearing.', 'Follow-up imaging or second-look surgery may be needed.'],
+      },
+      3: {
+        level: 3,
+        summary: 'Cholesteatoma is locally destructive keratinized epithelium in the middle ear cleft. ICD-11: AB31.2. Surgical excision is definitive; recurrence rates vary by technique.',
+        explanation: `**Pathogenesis theories:**\n- Retraction: Eustachian tube dysfunction -> TM retraction -> keratin accumulation\n- Migration: Epithelium migrates through marginal perforation\n- Metaplasia: Middle ear mucosa transforms to keratinizing epithelium\n- Implantation: Iatrogenic or traumatic epithelial seeding\n\n**Clinical features:** Painless otorrhea (fetid), conductive hearing loss, aural polyp. CT temporal bone shows soft tissue mass with bony erosion (scutum, tegmen, ossicles).\n\n**Surgical approaches:**\n- Canal wall-up (CWU): Preserves canal anatomy; higher recurrence (15-30%); may require second-look\n- Canal wall-down (CWD): Creates mastoid cavity; lower recurrence (~5%); requires lifelong cavity care\n- DWI-MRI: Non-EPI sequences detect residual/recurrent cholesteatoma (sensitivity >90%), reducing need for second-look surgery`,
+        keyTerms: [
+          { term: 'scutum erosion', definition: 'Loss of the lateral attic wall bony spur, earliest CT finding in pars flaccida cholesteatoma' },
+          { term: 'canal wall-up mastoidectomy', definition: 'Cholesteatoma removal preserving posterior canal wall; better cosmesis but higher recurrence' },
+        ],
+        clinicalNotes: 'Non-EPI DWI MRI has largely replaced routine second-look surgery for cholesteatoma surveillance.',
+      },
+      4: {
+        level: 4,
+        summary: 'Cholesteatoma bone erosion involves osteoclast activation by inflammatory cytokines (TNF-alpha, IL-1, RANKL) and matrix metalloproteinases from the perimatrix.',
+        explanation: `**Molecular pathogenesis:**\n- Perimatrix (connective tissue layer) produces IL-1beta, TNF-alpha, IL-6\n- RANKL/OPG ratio shifted toward bone resorption\n- MMP-2 and MMP-9 degrade extracellular matrix\n- Keratinocyte hyperproliferation (Ki-67 elevated) driven by EGF and KGF\n- Bacterial biofilms (Pseudomonas, Proteus) sustain chronic inflammation\n\n**Surgical decision-making:**\n- CWU preferred in: Children (avoid cavity), bilateral disease, only hearing ear, intact canal wall\n- CWD preferred in: Extensive disease, labyrinthine fistula, poor Eustachian tube function, revision surgery\n- Ossiculoplasty: Staged (6-12 months later) vs simultaneous; cartilage tympanoplasty for reinforcement\n\n**Labyrinthine fistula management:** Do not remove matrix from fistula; cover with fascia; risk of SNHL if matrix disturbed.`,
+        keyTerms: [
+          { term: 'perimatrix', definition: 'Subepithelial connective tissue layer of cholesteatoma responsible for inflammatory mediator production and bone erosion' },
+          { term: 'RANKL', definition: 'Receptor activator of nuclear factor kappa-B ligand; promotes osteoclast differentiation and bone resorption' },
+        ],
+        clinicalNotes: 'Tegmen erosion risks epidural abscess or CSF leak. Facial nerve dehiscence in the tympanic segment occurs in 50% of cholesteatoma cases.',
+      },
+      5: {
+        level: 5,
+        summary: 'Cholesteatoma management continues to evolve with non-EPI DWI surveillance, endoscopic ear surgery, and molecular-targeted approaches to reduce recurrence.',
+        explanation: `**Imaging advances:**\n- Non-EPI DWI MRI (HASTE, PROPELLER): Sensitivity >90%, specificity >95% for residual cholesteatoma >=3mm\n- Eliminates many second-look surgeries; recommended at 12 months post-CWU\n- Fusion imaging (CT + MRI) for surgical planning\n\n**Endoscopic ear surgery (EES):**\n- Transcanal approach avoids postauricular incision\n- Superior visualization of hidden areas (sinus tympani, facial recess)\n- Growing evidence shows comparable recurrence rates to microscopic surgery\n- Combined endoscopic-microscopic approaches for extensive disease\n\n**Outcomes data:**\n- CWU recidivism: Residual 10-20%, recurrent 5-15%\n- CWD recidivism: Residual 5-10%, recurrent <5%\n- Hearing reconstruction success: 50-70% achieving serviceable hearing\n\n**Research frontiers:** Anti-proliferative agents (5-FU, mitomycin C) applied to perimatrix; MMP inhibitors; targeted anti-inflammatory therapy to reduce bone erosion.`,
+        keyTerms: [
+          { term: 'non-EPI DWI', definition: 'Non-echo-planar diffusion-weighted MRI technique with reduced artifact, highly sensitive for cholesteatoma detection' },
+          { term: 'endoscopic ear surgery', definition: 'Minimally invasive transcanal approach using rigid endoscopes for cholesteatoma removal' },
+        ],
+        clinicalNotes: 'Congenital cholesteatoma staging (Potsic): Stage I (single quadrant) to Stage IV (mastoid extension). Early stages have excellent surgical outcomes.',
+      },
     },
-    {
-      id: 'otitis-media-comparison',
-      type: 'diagram',
-      filename: 'normal-vs-otitis-media-tympanic-membrane.svg',
-      title: 'Normal vs Otitis Media Tympanic Membrane',
-      description: 'Comparison of normal, bulging, and perforated tympanic membranes',
-    },
-    {
-      id: 'audiogram-key',
-      type: 'diagram',
-      filename: 'audiogram-interpretation-guide.svg',
-      title: 'Audiogram Interpretation Guide',
-      description: 'Guide to reading and interpreting audiograms with examples',
-    },
-  ],
-
-  citations: [
-    {
-      id: 'aao-hns-ome-guideline-2016',
-      type: 'article',
-      title: 'Clinical Practice Guideline: Otitis Media with Effusion Update (2016)',
-      source: 'Otolaryngology-Head and Neck Surgery',
-      authors: ['Lieberthal, A.S.', 'Carroll, A.E.', 'Chonmaitree, T.', 'et al.'],
-      url: 'https://www.entnet.org/content/otitis-media-effusion',
-    },
-    {
-      id: 'aao-hns-oe-guideline-2014',
-      type: 'article',
-      title: 'Clinical Practice Guideline: Acute Otitis Externa (2014)',
-      source: 'Otolaryngology-Head and Neck Surgery',
-      authors: ['Rosenfeld, R.M.', 'Schwartz, S.R.', 'Cannon, C.R.', 'et al.'],
-    },
-    {
-      id: 'aao-hns-bppv-guideline-2017',
-      type: 'article',
-      title: 'Clinical Practice Guideline: Benign Paroxysmal Positional Vertigo (2017 Update)',
-      source: 'Otolaryngology-Head and Neck Surgery',
-      authors: ['Bhattacharyya, N.', 'Gubbels, S.P.', 'Schwartz, S.R.', 'et al.'],
-    },
-    {
-      id: 'cummings-otology',
-      type: 'textbook',
-      title: 'Otology and Neurotology (7th Edition)',
-      source: 'Cummings Otolaryngology: Head and Neck Surgery',
-      chapter: 'Section III',
-    },
-    {
-      id: 'bailey-otolaryngology',
-      type: 'textbook',
-      title: 'Head & Neck Surgery - Otolaryngology (5th Edition)',
-      source: 'Lippincott Williams & Wilkins',
-      authors: ['Bailey, B.J.', 'Johnson, J.T.', 'Newlands, S.D.'],
-    },
-  ],
-
-  crossReferences: [
-    { targetId: 'ent-nose', targetType: 'topic', relationship: 'sibling', label: 'Nose and Sinus Disorders' },
-    { targetId: 'ent-throat', targetType: 'topic', relationship: 'sibling', label: 'Throat Disorders' },
-    { targetId: 'ent-voice', targetType: 'topic', relationship: 'sibling', label: 'Voice and Larynx' },
-    { targetId: 'ent-pediatric', targetType: 'topic', relationship: 'related', label: 'Pediatric ENT' },
-    { targetId: 'system-nervous', targetType: 'system', relationship: 'related', label: 'Nervous System' },
-  ],
-
-  tags: {
-    systems: ['auditory', 'vestibular'],
-    structures: ['FMA:52780', 'FMA:60909', 'FMA:60908'],
-    topics: ['otology', 'hearing', 'vestibular', 'infection', 'audiology'],
-    keywords: ['otitis media', 'otitis externa', 'hearing loss', 'tinnitus', 'vertigo', 'cochlear implant', 'tympanostomy tubes'],
-    clinicalRelevance: 'high',
-    examRelevance: {
-      usmle: true,
-      nbme: true,
-      shelf: ['surgery', 'pediatrics', 'family-medicine'],
-    },
-  },
-
-  createdAt: '2026-01-25T00:00:00.000Z',
-  updatedAt: '2026-01-25T00:00:00.000Z',
-  version: 1,
-  status: 'published',
+    media: [],
+    citations: [
+      { id: 'cummings-cholesteatoma', type: 'textbook', title: 'Cholesteatoma Surgery', source: 'Cummings Otolaryngology, 7th Edition', chapter: 'Chapter 142' },
+    ],
+    crossReferences: [
+      { targetId: 'ear-otitis-media', targetType: 'condition', relationship: 'related', label: 'Chronic Otitis Media' },
+    ],
+    tags: { systems: ['auditory'], topics: ['otology', 'surgery'], clinicalRelevance: 'high', examRelevance: { usmle: true, nbme: true, shelf: ['surgery'] } },
+  }),
 };
 
-export default earContent;
+// Maintain backward-compatible export used by index.ts
+export const earContent: EducationalContent = earDisordersContent['otitis-media'];
+
+export default earDisordersContent;

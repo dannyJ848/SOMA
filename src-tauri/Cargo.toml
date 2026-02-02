@@ -30,6 +30,7 @@ once_cell = "1.19"
 parking_lot = "0.12"
 dirs = "5.0"
 rand = "0.8"
+zeroize = "1.7"
 
 [target.'cfg(target_os = "ios")'.dependencies]
 # iOS-specific: ensure Metal is used

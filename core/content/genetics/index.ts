@@ -32,7 +32,7 @@ export { complexInheritanceContent } from './inheritance/complex-inheritance';
 // Chromosomal Disorders
 export { downSyndromeContent } from './disorders/chromosomal/down-syndrome';
 export { turnerSyndromeContent } from './disorders/chromosomal/turner-syndrome';
-export { klinefelterSyndromeContent } from './disorders/chromosomal/klinefelter-syndrome';
+export { klinefelter as klinefelterSyndromeContent } from '../conditions/genetic/klinefelter';
 export { chromosomalDisordersOverviewContent } from './disorders/chromosomal/overview';
 
 // Single Gene Disorders

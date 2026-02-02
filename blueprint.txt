@@ -1,0 +1,238 @@
+# SOMA Medical Education App - Blueprint
+
+## Project Overview
+
+SOMA is a comprehensive, offline-capable medical education application with:
+- 3D anatomy visualization
+- 246 encyclopedia entries across 11 body systems
+- Multi-level content (patient, intermediate, professional)
+- Medical image library (36 images, expandable)
+- Personalized health tracking
+- AI-powered learning assistance
+
+---
+
+## Architecture
+
+### Tech Stack
+- **Frontend**: React + TypeScript + Vite
+- **Backend**: Tauri (Rust) with SQLite
+- **3D**: Three.js / React Three Fiber
+- **Storage**: Encrypted SQLite (AES-256-GCM)
+- **Offline**: All content local, no API dependencies
+
+### Directory Structure
+
+```
+SOMA-Kimi Build/
+├── src/                          # React frontend
+│   ├── EncyclopediaEntry.tsx     # Encyclopedia with image gallery
+│   ├── AnatomyViewer.tsx         # 3D anatomy viewer
+│   └── ...
+├── core/                         # Business logic
+│   └── medical-simulation/
+│       └── encyclopedia/
+│           ├── entries/          # 246 encyclopedia entries
+│           ├── image-manifest.ts # Image catalog
+│           ├── image-resolver.ts # Image utilities
+│           ├── types.ts          # TypeScript definitions
+│           └── seed.ts           # Entry seeding
+├── public/
+│   └── assets/
+│       └── images/               # 36 medical images
+├── src-tauri/                    # Rust backend
+└── tests/                        # Test suites
+```
+
+---
+
+## Encyclopedia System
+
+### Content Model
+Each encyclopedia entry includes:
+- `entryId`: Unique identifier
+- `entryType`: condition, symptom, medication, anatomy, etc.
+- `name`: Display name
+- `category`: Medical specialty
+- `overview`: Multi-level content (patient/intermediate/professional)
+- `content`: Detailed sections with multi-level explanations
+- `images`: Associated medical images (NEW)
+- `anatomyLinks`: 3D structure references
+- `relatedEntries`: Cross-references
+- `references`: Citations (CC BY attribution)
+
+### Image System
+
+#### Categories
+1. **Anatomical Diagrams** (11 SVG) - Production ready
+2. **Histology** (9 JPG) - Placeholders with labels
+3. **Medical Imaging** (7 files) - Placeholders + ECG SVGs
+4. **Pathology** (5 JPG) - 1 real + 4 placeholders
+5. **Clinical Photos** (4 JPG) - Placeholders with labels
+
+#### Image Manifest
+Location: `core/medical-simulation/encyclopedia/image-manifest.ts`
+
+Each image includes:
+- `id`: Unique identifier
+- `title`: Display title
+- `path`: File path in public/assets/images
+- `category`: anatomical, histology, pathology, clinical, imaging
+- `systems`: Related body systems
+- `description`: Alt text
+- `attribution`: Source and license info
+- `level`: patient, intermediate, professional
+- `tags`: Search keywords
+- `relatedEntryIds`: Linked encyclopedia entries
+
+#### Image Resolver
+Location: `core/medical-simulation/encyclopedia/image-resolver.ts`
+
+Utilities:
+- `getEntryImages(entryId)`: Get all images for an entry
+- `getImageById(imageId)`: Lookup single image
+- `searchImages(query)`: Search by tag/keyword
+- `getImageStatistics()`: Report coverage
+
+#### UI Components
+Location: `src/EncyclopediaEntry.tsx`
+
+Features:
+- Images tab (appears when images exist)
+- Featured image display
+- Thumbnail grid
+- Lightbox modal
+- Color-coded type badges
+- Attribution display
+
+---
+
+## Content Sources
+
+### Text Content
+- **Source**: OpenStax Anatomy & Physiology
+- **License**: CC BY 4.0
+- **Status**: 246 entries transcribed, fully offline
+
+### Images
+- **SVG Diagrams**: Custom created, CC BY 4.0
+- **Histology**: UMich Histology (CC BY-NC) - placeholders
+- **Clinical**: CDC PHIL (Public Domain) - placeholders
+- **Imaging**: Radiopaedia (CC BY-NC-SA) - placeholders
+- **Pathology**: NCI Visuals Online (Public Domain) - mixed
+
+---
+
+## Development Guidelines
+
+### Adding New Images
+
+1. **Create/obtain image**:
+   - SVG: Create custom or source from CC BY
+   - JPG: Download from approved sources
+
+2. **Add to manifest**:
+   ```typescript
+   // image-manifest.ts
+   {
+     id: 'unique-id',
+     title: 'Image Title',
+     path: '/assets/images/category/filename.jpg',
+     category: 'histology',
+     systems: ['cardiovascular'],
+     description: 'Alt text',
+     attribution: { source: 'Source Name', license: 'CC BY' },
+     level: 'intermediate',
+     tags: ['tag1', 'tag2'],
+     relatedEntryIds: ['entry-id']
+   }
+   ```
+
+3. **Place file** in `public/assets/images/`
+
+4. **Test**: Verify image appears in encyclopedia entry
+
+### Adding New Encyclopedia Entries
+
+1. Create entry file in `core/medical-simulation/encyclopedia/entries/`
+2. Import and add to `seed.ts`
+3. Add menu mappings in `regionMenuContentResolver.ts`
+4. Add images to manifest if applicable
+
+---
+
+## Testing
+
+### Current Status
+- TypeScript: 0 errors
+- Unit Tests: 179/179 passing
+- Integration Tests: Passing
+
+### Test Commands
+```bash
+npm test -- --run        # Run all tests
+npx tsc --noEmit         # Type check
+```
+
+---
+
+## Deployment
+
+### Build Commands
+```bash
+npm run build            # Web build
+npm run tauri build      # Desktop app build
+```
+
+### Git Workflow
+- Branch: `ralph/advanced-medical-intelligence`
+- Commit: `6f9a6cf` - Encyclopedia images complete
+- Next: Push to GitHub when ready
+
+---
+
+## Roadmap
+
+### Completed ✅
+- [x] 246 encyclopedia entries
+- [x] 36 medical images (13 SVG + 23 JPG)
+- [x] Image gallery UI
+- [x] Menu content resolver (492 mappings)
+- [x] TypeScript type safety
+
+### In Progress 🔄
+- [ ] Replace JPG placeholders with real images (optional)
+- [ ] Add more SVG diagrams
+- [ ] Expand entry coverage
+
+### Future 📋
+- [ ] 3D anatomy improvements
+- [ ] AI content generation
+- [ ] Quiz system
+- [ ] User progress tracking
+- [ ] Mobile optimizations
+
+---
+
+## Resources
+
+### Documentation
+- `IMAGE-SOURCES.md` - How to download real images
+- `IMAGE-DOWNLOAD-SUMMARY.md` - Complete inventory
+- `progress.txt` - Development history
+- `handoff.txt` - Session handoff notes
+
+### External References
+- OpenStax Anatomy & Physiology: https://openstax.org/books/anatomy-and-physiology/pages/index
+- UMich Histology: https://histology.medicine.umich.edu/
+- CDC PHIL: https://phil.cdc.gov/
+- Radiopaedia: https://radiopaedia.org/
+- NCI Visuals: https://visualsonline.cancer.gov/
+
+---
+
+## License
+
+Content: CC BY 4.0 (OpenStax)
+Code: Proprietary
+Images: Mixed (see individual attribution)

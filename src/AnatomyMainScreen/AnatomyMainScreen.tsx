@@ -2008,8 +2008,29 @@ export function AnatomyMainScreen({
           and seamless 3D experience integration
         */}
         <LayerController
-          activeLayers={activeLayers}
-          onLayersChange={setActiveLayers}
+          activeLayers={activeLayers.map(l => {
+            // Reverse map 3D model layer IDs to UI layer IDs
+            const reverseMapping: Record<string, string> = {
+              integumentary: 'skin',
+              muscular: 'muscle',
+              skeletal: 'bone',
+              cardiovascular: 'vessels',
+              nervous: 'nerves',
+            };
+            return reverseMapping[l] || l;
+          })}
+          onLayersChange={(layers) => {
+            // Map UI layer IDs to 3D model layer IDs
+            const layerMapping: Record<string, string> = {
+              skin: 'integumentary',
+              muscle: 'muscular',
+              bone: 'skeletal',
+              vessels: 'cardiovascular',
+              nerves: 'nervous',
+            };
+            const mappedLayers = layers.map(l => layerMapping[l] || l);
+            setActiveLayers(mappedLayers);
+          }}
           defaultDockPosition="right"
           defaultOpen={true}
           panelId="layer-controller"

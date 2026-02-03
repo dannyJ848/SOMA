@@ -1,0 +1,791 @@
+{
+  "title": "Understanding Hospital Care",
+  "category": "Healthcare Navigation",
+  "description": "Navigate hospital visits confidently, from emergency room to discharge, understanding who cares for you and your rights as a patient.",
+  "content_type": "educational",
+  "sections": [
+    {
+      "title": "Understanding the Emergency Room",
+      "complexity_level": 1,
+      "content": {
+        "overview": "The emergency room (ER) provides care for serious and life-threatening conditions. Understanding how it works helps you know what to expect.",
+        "when_to_go_to_er": {
+          "emergency_symptoms": [
+            "Chest pain or pressure",
+            "Difficulty breathing",
+            "Signs of stroke (face drooping, arm weakness, speech difficulty)",
+            "Severe bleeding that will not stop",
+            "Severe allergic reactions",
+            "Loss of consciousness",
+            "Seizures",
+            "Serious burns",
+            "Broken bones with visible deformity",
+            "Severe abdominal pain",
+            "Poisoning or overdose",
+            "Suicidal thoughts or severe mental health crisis"
+          ],
+          "when_urgent_care_may_be_better": [
+            "Minor cuts and sprains",
+            "Mild to moderate fever",
+            "Ear infections",
+            "Minor burns",
+            "Urinary tract infections"
+          ]
+        },
+        "what_happens_in_er": [
+          {
+            "step": "Check-in/Registration",
+            "description": "Give your information, insurance, and briefly describe why you are there"
+          },
+          {
+            "step": "Triage",
+            "description": "A nurse assesses how urgent your condition is and assigns a priority level"
+          },
+          {
+            "step": "Waiting",
+            "description": "You may wait to be seen - sickest patients are seen first, not first come first served"
+          },
+          {
+            "step": "Treatment Area",
+            "description": "You are taken to a treatment room or bed when space is available"
+          },
+          {
+            "step": "Evaluation",
+            "description": "Doctor or nurse practitioner examines you and orders tests if needed"
+          },
+          {
+            "step": "Tests/Treatment",
+            "description": "Blood work, imaging, medications, or procedures as needed"
+          },
+          {
+            "step": "Disposition",
+            "description": "Decision is made to send you home, admit to hospital, or transfer"
+          }
+        ],
+        "triage_explained": {
+          "what_it_is": "A system to prioritize patients based on how sick they are",
+          "categories": [
+            "Immediate/Life-threatening - seen right away",
+            "Emergent - seen very quickly",
+            "Urgent - seen after more critical patients",
+            "Less urgent - may wait longer",
+            "Non-urgent - longest wait"
+          ],
+          "important_to_know": "Your wait time depends on your condition compared to others, not when you arrived"
+        },
+        "what_to_bring": [
+          "ID and insurance card",
+          "Medication list or medication bottles",
+          "List of allergies",
+          "List of your doctors",
+          "Phone charger",
+          "Comfort items for potential long wait"
+        ],
+        "tips": [
+          "Tell the nurse if your symptoms change or worsen while waiting",
+          "Ask questions about what is happening and why",
+          "You can have a family member or friend with you",
+          "Know that ER care is expensive - understand your insurance coverage"
+        ]
+      }
+    },
+    {
+      "title": "Hospital Admission Process",
+      "complexity_level": 2,
+      "content": {
+        "overview": "If you need to stay in the hospital, understanding the admission process helps you know what to expect.",
+        "types_of_admission": [
+          {
+            "type": "Emergency admission",
+            "description": "Admitted through the ER for urgent conditions",
+            "how_it_happens": "ER doctor determines you need to stay for treatment"
+          },
+          {
+            "type": "Scheduled admission",
+            "description": "Planned hospital stay, often for surgery",
+            "how_it_happens": "Your doctor arranges in advance"
+          },
+          {
+            "type": "Direct admission",
+            "description": "Your doctor sends you directly to the hospital",
+            "how_it_happens": "Doctor calls ahead to arrange your bed"
+          }
+        ],
+        "important_distinction": {
+          "inpatient_status": {
+            "definition": "Formally admitted to the hospital",
+            "insurance_coverage": "Covered under hospital inpatient benefits",
+            "medicare_note": "Medicare Part A covers inpatient stays"
+          },
+          "observation_status": {
+            "definition": "In a hospital bed but technically outpatient",
+            "insurance_coverage": "Covered under outpatient benefits - may cost more",
+            "medicare_note": "Covered under Part B with different cost-sharing",
+            "important": "You may not know which status you are in - always ask"
+          },
+          "your_right": "You have the right to know your status and can request a Medicare Outpatient Observation Notice (MOON) if applicable"
+        },
+        "admission_process_steps": [
+          {
+            "step": 1,
+            "title": "Registration",
+            "what_happens": "Provide personal info, insurance, emergency contacts, advance directives"
+          },
+          {
+            "step": 2,
+            "title": "Medical evaluation",
+            "what_happens": "Admission history and physical by doctor or nurse practitioner"
+          },
+          {
+            "step": 3,
+            "title": "Room assignment",
+            "what_happens": "Assigned to appropriate unit based on your condition"
+          },
+          {
+            "step": 4,
+            "title": "Nursing intake",
+            "what_happens": "Nurses assess you and create care plan"
+          },
+          {
+            "step": 5,
+            "title": "Medication reconciliation",
+            "what_happens": "Review all medications you take at home"
+          }
+        ],
+        "what_to_bring_for_hospital_stay": [
+          "Insurance card and ID",
+          "Complete medication list with doses",
+          "Advance directives if you have them",
+          "List of doctors and their contact information",
+          "Comfortable clothing and slippers with non-slip soles",
+          "Toiletries",
+          "Phone charger",
+          "Something to pass time (book, tablet)",
+          "CPAP machine if you use one",
+          "Glasses, hearing aids, dentures"
+        ],
+        "valuables_warning": "Leave jewelry and valuables at home - hospitals are not responsible for lost items"
+      }
+    },
+    {
+      "title": "Who Is Who in the Hospital",
+      "complexity_level": 2,
+      "content": {
+        "overview": "Many different people will care for you in the hospital. Understanding their roles helps you know who to ask for what.",
+        "medical_team": [
+          {
+            "role": "Attending Physician",
+            "description": "The doctor ultimately responsible for your care",
+            "recognizable_by": "Usually wears white coat; should introduce themselves as your doctor",
+            "ask_them_about": "Major decisions about your care and treatment plan"
+          },
+          {
+            "role": "Hospitalist",
+            "description": "A doctor who specializes in hospital care",
+            "recognizable_by": "May be your attending if your regular doctor does not work in the hospital",
+            "ask_them_about": "Daily updates on your condition and plan"
+          },
+          {
+            "role": "Resident Physician",
+            "description": "A doctor in training (has completed medical school)",
+            "recognizable_by": "Often seen in teaching hospitals; usually younger",
+            "ask_them_about": "Routine questions; they report to the attending"
+          },
+          {
+            "role": "Medical Student",
+            "description": "A student training to become a doctor",
+            "recognizable_by": "Usually in teaching hospitals; may ask to examine you",
+            "your_rights": "You can decline to have students involved in your care"
+          },
+          {
+            "role": "Specialists/Consultants",
+            "description": "Doctors with expertise in specific areas called in for your care",
+            "examples": "Cardiologist, surgeon, pulmonologist",
+            "ask_them_about": "Their specific area of expertise related to your condition"
+          }
+        ],
+        "nursing_team": [
+          {
+            "role": "Registered Nurse (RN)",
+            "description": "Your primary caregiver day-to-day",
+            "responsibilities": [
+              "Administers medications",
+              "Monitors vital signs",
+              "Coordinates your care",
+              "Communicates with doctors",
+              "Educates you about your condition"
+            ],
+            "ask_them_about": "Almost anything - they know your care plan best"
+          },
+          {
+            "role": "Nurse Practitioner/Physician Assistant",
+            "description": "Advanced practice providers who can diagnose, order tests, and prescribe",
+            "responsibilities": "Similar to physicians in many ways",
+            "ask_them_about": "Medical questions and treatment decisions"
+          },
+          {
+            "role": "Nursing Assistant/Patient Care Technician",
+            "description": "Helps with daily activities and basic care",
+            "responsibilities": [
+              "Helps with bathing and dressing",
+              "Takes vital signs",
+              "Assists with meals",
+              "Helps you move and walk"
+            ],
+            "ask_them_about": "Help with daily needs and comfort"
+          },
+          {
+            "role": "Charge Nurse",
+            "description": "Nurse supervising the unit",
+            "ask_them_about": "Concerns about your nursing care"
+          }
+        ],
+        "other_team_members": [
+          {
+            "role": "Pharmacist",
+            "description": "Medication expert",
+            "ask_them_about": "Questions about your medications, side effects, interactions"
+          },
+          {
+            "role": "Physical Therapist",
+            "description": "Helps you regain strength and mobility",
+            "ask_them_about": "Exercises, safe movement, recovery goals"
+          },
+          {
+            "role": "Occupational Therapist",
+            "description": "Helps you perform daily activities",
+            "ask_them_about": "Dressing, bathing, cooking, returning to normal life"
+          },
+          {
+            "role": "Respiratory Therapist",
+            "description": "Helps with breathing problems",
+            "ask_them_about": "Oxygen, breathing treatments, ventilators"
+          },
+          {
+            "role": "Social Worker",
+            "description": "Helps with non-medical needs",
+            "ask_them_about": "Insurance, discharge planning, community resources, emotional support"
+          },
+          {
+            "role": "Case Manager",
+            "description": "Coordinates your care and discharge",
+            "ask_them_about": "What happens next, where you will go after hospital"
+          },
+          {
+            "role": "Dietitian",
+            "description": "Nutrition expert",
+            "ask_them_about": "Diet, nutrition needs, food restrictions"
+          },
+          {
+            "role": "Chaplain",
+            "description": "Spiritual care provider",
+            "ask_them_about": "Spiritual needs, religious practices, emotional support"
+          },
+          {
+            "role": "Patient Advocate/Ombudsman",
+            "description": "Helps resolve concerns about your care",
+            "ask_them_about": "Problems with your care, questions about your rights"
+          }
+        ],
+        "tips_for_communication": [
+          "Ask everyone to introduce themselves and their role",
+          "Write down names and roles of key team members",
+          "Do not hesitate to ask for the nurse if you need help",
+          "Request to speak to the attending physician for important decisions",
+          "Ask for contact numbers for after discharge"
+        ]
+      }
+    },
+    {
+      "title": "Patient Rights in the Hospital",
+      "complexity_level": 3,
+      "content": {
+        "overview": "As a hospital patient, you have specific rights protected by law and hospital policy. Knowing your rights helps you participate actively in your care.",
+        "fundamental_rights": [
+          {
+            "right": "Right to respectful care",
+            "means": "Care that respects your dignity, values, and beliefs regardless of your background"
+          },
+          {
+            "right": "Right to information",
+            "means": "Clear explanations of your diagnosis, treatment options, and who is providing care"
+          },
+          {
+            "right": "Right to participate in decisions",
+            "means": "Be involved in all decisions about your care and treatment"
+          },
+          {
+            "right": "Right to refuse treatment",
+            "means": "Say no to any treatment or procedure (with some exceptions for emergencies or court orders)"
+          },
+          {
+            "right": "Right to informed consent",
+            "means": "Understand and agree to treatments before they happen"
+          },
+          {
+            "right": "Right to privacy",
+            "means": "Your medical information is confidential; discussions held privately"
+          },
+          {
+            "right": "Right to safety",
+            "means": "Receive care in a safe environment free from abuse and neglect"
+          },
+          {
+            "right": "Right to complain",
+            "means": "Voice concerns without fear of retaliation"
+          }
+        ],
+        "specific_rights": {
+          "visitors": [
+            "You can have visitors of your choosing",
+            "You can restrict visitors",
+            "You can designate who may visit",
+            "Same-sex partners and non-family have visitation rights"
+          ],
+          "communication": [
+            "Receive information in a language you understand",
+            "Have interpreter services provided",
+            "Request accommodations for disabilities"
+          ],
+          "advance_directives": [
+            "Right to create or change advance directives",
+            "Right to have them followed",
+            "Cannot be required to have one to receive care"
+          ],
+          "billing": [
+            "Receive itemized bill upon request",
+            "Know the charges before procedures when possible",
+            "Apply for financial assistance"
+          ]
+        },
+        "exercising_your_rights": {
+          "if_you_have_concerns": [
+            "Speak with your nurse or doctor first",
+            "Ask to speak with the charge nurse or supervisor",
+            "Contact the patient advocate or patient relations",
+            "File a formal complaint if needed"
+          ],
+          "if_rights_are_violated": [
+            "Document what happened",
+            "Report to hospital administration",
+            "Contact your state health department",
+            "File complaint with The Joint Commission",
+            "Contact your insurance company",
+            "Seek legal advice for serious violations"
+          ]
+        },
+        "hipaa_in_the_hospital": {
+          "your_information_protected": "Medical staff cannot share your information without permission",
+          "exceptions": "Some information may be shared with family unless you object",
+          "your_controls": [
+            "You can request to opt out of hospital directory",
+            "You can specify who can receive your information",
+            "You can restrict certain information"
+          ]
+        },
+        "patient_responsibilities": [
+          "Provide accurate health information",
+          "Ask questions when you do not understand",
+          "Follow the agreed-upon treatment plan",
+          "Treat staff respectfully",
+          "Meet financial obligations",
+          "Follow hospital rules and policies"
+        ]
+      }
+    },
+    {
+      "title": "Discharge Planning",
+      "complexity_level": 3,
+      "content": {
+        "overview": "Leaving the hospital safely requires planning. Good discharge planning helps you recover and prevents returning to the hospital.",
+        "discharge_planning_starts_early": {
+          "when_it_begins": "Often starts at admission",
+          "who_is_involved": [
+            "You and your family/caregivers",
+            "Your doctors and nurses",
+            "Case manager or discharge planner",
+            "Social worker",
+            "Therapists if applicable"
+          ],
+          "your_role": "Participate actively in planning - share concerns and preferences"
+        },
+        "where_you_might_go": [
+          {
+            "destination": "Home with self-care",
+            "when_appropriate": "You can manage independently with outpatient follow-up",
+            "what_you_need": "Discharge instructions, medications, follow-up appointments"
+          },
+          {
+            "destination": "Home with home health",
+            "when_appropriate": "You need some professional help but not 24-hour care",
+            "services": "Nursing visits, therapy, wound care at home"
+          },
+          {
+            "destination": "Skilled nursing facility (SNF)",
+            "when_appropriate": "You need 24-hour nursing care and rehabilitation",
+            "duration": "Usually temporary for recovery",
+            "medicare_coverage": "May be covered after 3-day hospital stay (inpatient status)"
+          },
+          {
+            "destination": "Rehabilitation facility",
+            "when_appropriate": "You need intensive daily therapy",
+            "focus": "Physical, occupational, or speech therapy",
+            "duration": "Usually 1-3 weeks"
+          },
+          {
+            "destination": "Long-term acute care hospital",
+            "when_appropriate": "Complex medical needs requiring extended hospital-level care",
+            "examples": "Ventilator weaning, complex wound care"
+          },
+          {
+            "destination": "Hospice",
+            "when_appropriate": "Focus on comfort for terminal illness",
+            "setting": "Can be at home, in hospice facility, or nursing home"
+          }
+        ],
+        "discharge_process": [
+          {
+            "step": "Doctor writes discharge order",
+            "your_action": "Ask about timing and any pending results"
+          },
+          {
+            "step": "Nurse provides discharge instructions",
+            "your_action": "Read carefully, ask questions about anything unclear"
+          },
+          {
+            "step": "Medication reconciliation",
+            "your_action": "Understand which medications to take, which to stop, new ones"
+          },
+          {
+            "step": "Follow-up appointments scheduled",
+            "your_action": "Confirm dates and times, note any transportation needs"
+          },
+          {
+            "step": "Prescriptions provided",
+            "your_action": "Fill before leaving if hospital pharmacy available, or same day"
+          },
+          {
+            "step": "Education completed",
+            "your_action": "Make sure you understand warning signs and when to seek help"
+          },
+          {
+            "step": "Transportation arranged",
+            "your_action": "Have a safe way to get home"
+          }
+        ],
+        "discharge_instructions": {
+          "should_include": [
+            "Diagnoses and conditions treated",
+            "Medications with instructions",
+            "Activity restrictions",
+            "Diet instructions",
+            "Wound care if applicable",
+            "Warning signs to watch for",
+            "When to call the doctor",
+            "Follow-up appointments",
+            "Contact numbers for questions"
+          ],
+          "what_to_do": [
+            "Review before leaving the hospital",
+            "Ask questions about anything unclear",
+            "Make sure a family member also understands",
+            "Keep in a safe place at home"
+          ]
+        },
+        "preventing_readmission": [
+          "Understand and follow discharge instructions",
+          "Take medications exactly as prescribed",
+          "Keep all follow-up appointments",
+          "Know warning signs that mean you should seek help",
+          "Ask about home health services if needed",
+          "Make sure you have help at home if needed",
+          "Fill prescriptions before you need them"
+        ],
+        "your_rights_at_discharge": {
+          "you_have_right_to": [
+            "Understand your discharge plan",
+            "Participate in decisions about where you go",
+            "Appeal discharge if you think it is too soon (Medicare patients)"
+          ],
+          "important_medicare_rule": "Medicare patients must receive Important Message from Medicare notice and can request Quality Improvement Organization (QIO) review if they believe discharge is premature"
+        }
+      }
+    },
+    {
+      "title": "Staying Safe in the Hospital",
+      "complexity_level": 4,
+      "content": {
+        "overview": "Hospitals can be dangerous places due to infections, medication errors, and other risks. Being an active participant helps keep you safe.",
+        "preventing_infections": {
+          "your_role": [
+            "Ask everyone to wash hands before touching you",
+            "Wash your own hands frequently",
+            "Ask if catheters and IVs are still necessary",
+            "Keep wounds clean and report any changes"
+          ],
+          "common_hospital_infections": [
+            "Catheter-associated urinary tract infections",
+            "Central line-associated bloodstream infections",
+            "Surgical site infections",
+            "Ventilator-associated pneumonia",
+            "C. difficile infections"
+          ],
+          "what_hospital_should_do": [
+            "Practice hand hygiene",
+            "Use sterile technique for procedures",
+            "Remove catheters when no longer needed",
+            "Use appropriate antibiotics"
+          ]
+        },
+        "medication_safety": {
+          "your_role": [
+            "Know all medications you take at home",
+            "Ask about every medication given to you in hospital",
+            "Verify medication name, dose, and timing",
+            "Report any allergies or previous reactions",
+            "Speak up if something seems wrong"
+          ],
+          "questions_to_ask": [
+            "What is this medication for?",
+            "Is this the medication my doctor ordered?",
+            "What are the possible side effects?",
+            "Does this replace any of my home medications?"
+          ],
+          "high_risk_medications": [
+            "Blood thinners (anticoagulants)",
+            "Insulin and diabetes medications",
+            "Opioid pain medications",
+            "Sedatives"
+          ]
+        },
+        "fall_prevention": {
+          "risk_factors": [
+            "New medications (especially sedatives)",
+            "Unfamiliar environment",
+            "Weakness from illness",
+            "IV lines and tubes",
+            "Getting up at night"
+          ],
+          "your_role": [
+            "Call for help before getting out of bed",
+            "Use call light",
+            "Wear non-slip footwear",
+            "Make sure path to bathroom is clear",
+            "Report dizziness or weakness"
+          ]
+        },
+        "speaking_up": {
+          "when_to_speak_up": [
+            "Something does not seem right",
+            "You have not heard from your doctor",
+            "Your pain is not controlled",
+            "You do not understand what is happening",
+            "Staff are not washing hands",
+            "You feel unsafe"
+          ],
+          "how_to_speak_up": [
+            "Be direct but respectful",
+            "Use I statements: I am concerned that...",
+            "Ask questions: Can you explain why...?",
+            "Ask to speak with supervisor if concerns not addressed"
+          ],
+          "rapid_response": {
+            "what_it_is": "A team that can be called for patients getting worse",
+            "when_to_call": "If you or family notice sudden decline that is not being addressed",
+            "how_to_call": "Ask staff or call switchboard; family can often activate"
+          }
+        },
+        "preventing_pressure_injuries": {
+          "what_they_are": "Skin breakdown from staying in one position",
+          "prevention": [
+            "Change positions frequently",
+            "Keep skin clean and dry",
+            "Report any skin pain or redness",
+            "Stay as active as safely possible"
+          ]
+        },
+        "preventing_blood_clots": {
+          "risk_in_hospital": "Increased due to immobility",
+          "prevention": [
+            "Wear compression devices if provided",
+            "Move legs and ankles while in bed",
+            "Get up and walk when allowed",
+            "Take blood thinners if prescribed"
+          ],
+          "warning_signs": [
+            "Leg pain or swelling",
+            "Shortness of breath",
+            "Chest pain"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Surgery and Procedures",
+      "complexity_level": 4,
+      "content": {
+        "overview": "Understanding what happens before, during, and after surgery helps you prepare and participate in safe care.",
+        "before_surgery": {
+          "preoperative_appointment": {
+            "purpose": "Evaluate your health and prepare for surgery",
+            "includes": [
+              "Medical history review",
+              "Physical examination",
+              "Blood tests and other testing",
+              "Medication review",
+              "Anesthesia evaluation"
+            ]
+          },
+          "preparing_at_home": [
+            "Follow instructions about eating and drinking before surgery",
+            "Take or stop medications as instructed",
+            "Arrange transportation and help at home",
+            "Prepare your home for recovery",
+            "Pack bag for hospital stay if staying overnight"
+          ],
+          "informed_consent": {
+            "you_should_understand": [
+              "What surgery will be performed",
+              "Why it is recommended",
+              "Risks and potential complications",
+              "Alternatives to surgery",
+              "Expected recovery",
+              "Who will perform the surgery"
+            ],
+            "your_rights": [
+              "Ask questions until you understand",
+              "Take time to decide",
+              "Refuse the procedure",
+              "Get second opinion"
+            ]
+          }
+        },
+        "day_of_surgery": {
+          "check_in_process": [
+            "Arrive at scheduled time",
+            "Complete registration",
+            "Change into hospital gown",
+            "Receive IV for fluids and medications",
+            "Meet with surgical team"
+          ],
+          "surgical_safety_checks": [
+            "Verification of identity (expect to confirm name and birthdate multiple times)",
+            "Marking of surgical site (you should see this happen)",
+            "Time-out before surgery (entire team verifies correct patient, procedure, site)"
+          ],
+          "anesthesia_options": [
+            {
+              "type": "General anesthesia",
+              "description": "Completely asleep during procedure"
+            },
+            {
+              "type": "Regional anesthesia",
+              "description": "Numb a large area (spinal, epidural)"
+            },
+            {
+              "type": "Local anesthesia",
+              "description": "Numb small area"
+            },
+            {
+              "type": "Sedation",
+              "description": "Relaxed and drowsy but not fully asleep"
+            }
+          ]
+        },
+        "after_surgery": {
+          "recovery_room": [
+            "Wake up with monitoring",
+            "Pain managed",
+            "Vital signs checked frequently",
+            "May have oxygen, drains, catheter"
+          ],
+          "managing_pain": [
+            "Report pain level honestly",
+            "Take pain medication as prescribed",
+            "Use non-medication methods too (ice, positioning, distraction)",
+            "Understand plan for weaning off strong pain medications"
+          ],
+          "preventing_complications": [
+            "Cough and deep breathe as instructed",
+            "Get up and move as soon as allowed",
+            "Watch for warning signs of complications"
+          ],
+          "warning_signs": [
+            "Fever",
+            "Increasing pain",
+            "Redness, swelling, or drainage from incision",
+            "Difficulty breathing",
+            "Chest pain",
+            "Leg pain or swelling"
+          ]
+        },
+        "questions_to_ask_surgeon": [
+          "How many times have you performed this surgery?",
+          "What are the most common complications?",
+          "What is the expected recovery time?",
+          "When can I return to normal activities?",
+          "What results can I expect?",
+          "What happens if something goes wrong?",
+          "Who covers for you if I have problems after surgery?"
+        ]
+      }
+    }
+  ],
+  "key_vocabulary": [
+    {
+      "term": "Triage",
+      "definition": "A system for prioritizing patients based on the severity of their condition"
+    },
+    {
+      "term": "Inpatient",
+      "definition": "A patient formally admitted to the hospital"
+    },
+    {
+      "term": "Observation status",
+      "definition": "In a hospital bed but classified as outpatient, affecting insurance coverage"
+    },
+    {
+      "term": "Attending physician",
+      "definition": "The doctor ultimately responsible for your care in the hospital"
+    },
+    {
+      "term": "Discharge planning",
+      "definition": "The process of preparing for you to leave the hospital safely"
+    },
+    {
+      "term": "Informed consent",
+      "definition": "Your agreement to treatment after understanding the risks, benefits, and alternatives"
+    },
+    {
+      "term": "Rapid response team",
+      "definition": "A team that can be called when a patient is getting worse and needs immediate attention"
+    }
+  ],
+  "action_items": [
+    {
+      "action": "Know when to go to the ER versus urgent care",
+      "why": "Get appropriate care and avoid unnecessary ER costs"
+    },
+    {
+      "action": "Ask about your admission status (inpatient vs observation)",
+      "why": "Affects your insurance coverage and costs"
+    },
+    {
+      "action": "Participate actively in discharge planning",
+      "why": "Ensures you have what you need to recover at home"
+    },
+    {
+      "action": "Ask everyone who enters your room to wash their hands",
+      "why": "Prevents hospital-acquired infections"
+    },
+    {
+      "action": "Know the warning signs to watch for after discharge",
+      "why": "Catch problems early and prevent readmission"
+    }
+  ],
+  "related_topics": [
+    "healthcare-system",
+    "patient-advocacy",
+    "understanding-medical-bills"
+  ]
+}

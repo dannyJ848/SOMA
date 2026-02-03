@@ -1,0 +1,882 @@
+/**
+ * SymptomExplorer Styles
+ *
+ * Styles for the symptom exploration interface.
+ */
+
+.symptom-explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #e8e8e8;
+  overflow: hidden;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.symptom-explorer-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+}
+
+.symptom-explorer-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.symptom-explorer-header .back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.symptom-explorer-header .back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.symptom-explorer-header .clear-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.symptom-explorer-header .clear-button:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   Search Section
+   ============================================ */
+
+.search-section {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Search Results */
+.search-results {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: #e8e8e8;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.search-result-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.search-result-item:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-match-type {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #aaa;
+}
+
+/* User Symptoms Section */
+.user-symptoms-section {
+  margin-bottom: 24px;
+}
+
+.user-symptoms-section h3 {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.user-symptoms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.user-symptom-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #c7d2fe;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-symptom-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.user-symptom-item .symptom-date {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* Browse Section */
+.browse-section h3 {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 16px;
+}
+
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.symptom-browse-card {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.symptom-browse-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-2px);
+}
+
+.symptom-card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.symptom-card-region {
+  font-size: 0.875rem;
+  color: #6366f1;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.symptom-card-sources {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ============================================
+   Symptom Detail
+   ============================================ */
+
+.symptom-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.symptom-detail-header {
+  margin-bottom: 20px;
+}
+
+.symptom-detail-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.symptom-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.meta-item {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.meta-item.category {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+}
+
+.meta-item.region {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.symptom-description {
+  color: #aaa;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Complexity Selector */
+.complexity-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.complexity-label {
+  font-size: 0.875rem;
+  color: #aaa;
+}
+
+.complexity-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.complexity-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.complexity-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.complexity-btn.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}
+
+.complexity-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-left: auto;
+}
+
+/* Explanation */
+.symptom-explanation {
+  padding: 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid #6366f1;
+}
+
+.symptom-explanation p {
+  margin: 0;
+  color: #e8e8e8;
+  line-height: 1.6;
+}
+
+/* ============================================
+   Red Flags
+   ============================================ */
+
+.red-flags-section {
+  margin-bottom: 24px;
+}
+
+.red-flags-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.red-flags-header:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.red-flags-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1rem;
+  color: #ef4444;
+}
+
+.toggle-icon {
+  font-size: 1.25rem;
+  color: #ef4444;
+}
+
+.red-flags-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 0 12px 12px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-top: none;
+}
+
+.red-flag-card {
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border-left: 4px solid #ef4444;
+}
+
+.red-flag-header {
+  margin-bottom: 8px;
+}
+
+.red-flag-urgency {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.red-flag-finding {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.red-flag-concern,
+.red-flag-action {
+  font-size: 0.875rem;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+/* ============================================
+   Anatomical Sources
+   ============================================ */
+
+.anatomical-sources-section {
+  margin-bottom: 24px;
+}
+
+.anatomical-sources-section h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.sources-hint {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.anatomical-source-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 4px solid #666;
+  transition: all 0.2s ease;
+}
+
+.anatomical-source-card:hover,
+.anatomical-source-card.highlighted {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.source-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.source-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.source-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.likelihood-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.source-system {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.source-mechanism {
+  font-size: 0.9rem;
+  color: #bbb;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.source-features {
+  margin-bottom: 10px;
+}
+
+.source-features strong {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.source-features ul {
+  margin: 4px 0 0 0;
+  padding-left: 20px;
+}
+
+.source-features li {
+  font-size: 0.875rem;
+  color: #ccc;
+  margin-bottom: 2px;
+}
+
+.source-factors {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.factor-label {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+}
+
+.factor-label.aggravating {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.factor-label.relieving {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.source-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.source-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.source-action-btn.highlight-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.5);
+  color: #a5b4fc;
+}
+
+.source-action-btn.navigate-btn:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #86efac;
+}
+
+/* ============================================
+   Referred Pain
+   ============================================ */
+
+.referred-pain-section {
+  margin-bottom: 24px;
+}
+
+.referred-pain-section h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.referred-pain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referred-pain-card {
+  padding: 14px;
+  background: rgba(255, 152, 0, 0.08);
+  border-radius: 12px;
+  border-left: 4px solid #ff9800;
+}
+
+.referred-source {
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.referred-to {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffc107;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.referred-arrow {
+  color: #ff9800;
+}
+
+.dermatome {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.referred-mechanism {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.referred-example {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ============================================
+   Differential
+   ============================================ */
+
+.differential-section {
+  margin-bottom: 24px;
+}
+
+.differential-section h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.differential-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.differential-item {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+/* ============================================
+   Related Symptoms
+   ============================================ */
+
+.related-symptoms-section {
+  margin-bottom: 24px;
+}
+
+.related-symptoms-section h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.related-symptoms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.related-symptom-btn {
+  padding: 8px 16px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 20px;
+  background: transparent;
+  color: #a5b4fc;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.related-symptom-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+}
+
+/* ============================================
+   AI Analysis Button & Follow-up Chat
+   ============================================ */
+
+.ai-analysis-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.ai-analysis-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.ai-analysis-btn:active {
+  transform: translateY(0);
+}
+
+.followup-chat-container {
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  min-height: 400px;
+  max-height: 600px;
+}
+
+/* ============================================
+   Responsive & Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 768px) {
+  .symptom-explorer {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .symptom-explorer-header {
+    padding: 12px 16px;
+    padding-top: calc(12px + env(safe-area-inset-top, 0px));
+  }
+
+  .symptom-explorer-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .symptom-explorer-header .back-button,
+  .symptom-explorer-header .clear-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .search-section {
+    padding: 16px;
+  }
+
+  .search-input {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 14px 14px 14px 44px;
+  }
+
+  .symptom-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .symptom-browse-card {
+    padding: 14px;
+    min-height: 44px;
+  }
+
+  .complexity-selector {
+    flex-wrap: wrap;
+    padding: 10px 14px;
+  }
+
+  .complexity-hint {
+    width: 100%;
+    margin-top: 8px;
+    margin-left: 0;
+  }
+
+  .complexity-btn {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .source-actions {
+    flex-direction: column;
+  }
+
+  .source-action-btn {
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  .red-flags-header {
+    min-height: 44px;
+  }
+
+  .user-symptom-item {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .related-symptom-btn {
+    min-height: 44px;
+    padding: 10px 18px;
+  }
+
+  .followup-chat-container {
+    min-height: 350px;
+    max-height: calc(100vh - 200px);
+  }
+
+  .ai-analysis-btn {
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .symptom-browse-card:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .anatomical-source-card:active {
+    transform: scale(0.99);
+  }
+
+  .source-action-btn:active,
+  .related-symptom-btn:active,
+  .user-symptom-item:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+}

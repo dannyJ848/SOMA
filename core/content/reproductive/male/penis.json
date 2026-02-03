@@ -1,0 +1,106 @@
+{
+  "id": "structure-penis",
+  "type": "structure",
+  "name": "Penis",
+  "alternateNames": ["Phallus", "Male copulatory organ"],
+  "fmaId": "FMA:9707",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The penis is the male organ used for urination and reproduction.",
+      "explanation": "The penis has two jobs: releasing urine from the body and delivering sperm during reproduction. It contains the urethra (the tube for urine and semen) surrounded by spongy tissue. When a man becomes sexually aroused, this spongy tissue fills with blood, making the penis hard (erect). This erection allows the penis to enter the vagina during intercourse so sperm can be deposited to potentially create a baby.",
+      "keyTerms": [
+        { "term": "urethra", "definition": "The tube that carries urine and semen through the penis" },
+        { "term": "erection", "definition": "When the penis becomes hard due to filling with blood" },
+        { "term": "spongy tissue", "definition": "Soft tissue that can expand when filled with blood" }
+      ],
+      "analogies": ["The spongy tissue in the penis works like a balloon - when it fills with blood, it expands and becomes firm."],
+      "examples": ["During an erection, the penis can triple in length and increase in diameter due to blood filling the spongy tissues."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The penis consists of three erectile bodies (two corpora cavernosa and one corpus spongiosum), a root attached to the pelvis, and a shaft ending in the glans covered by the foreskin.",
+      "explanation": "The penis has an internal root and an external shaft and glans. The root includes the bulb (expanded corpus spongiosum) and crura (extensions of corpora cavernosa) attached to the ischiopubic rami. The shaft contains paired dorsal corpora cavernosa separated by a septum, and the ventral corpus spongiosum surrounding the urethra. The glans is the expanded tip of the corpus spongiosum, highly sensitive due to nerve endings. The foreskin (prepuce) covers the glans in uncircumcised males. During erection, arterial blood fills the sinusoids of erectile tissue while venous outflow is restricted, increasing rigidity.",
+      "keyTerms": [
+        { "term": "corpora cavernosa", "definition": "Paired erectile bodies on the dorsal (upper) side of the penis", "pronunciation": "KOR-por-ah kav-er-NO-sah" },
+        { "term": "corpus spongiosum", "definition": "Single erectile body surrounding the urethra on the ventral side", "pronunciation": "KOR-pus spun-jee-OH-sum" },
+        { "term": "glans", "definition": "The expanded, sensitive head of the penis" },
+        { "term": "prepuce", "definition": "The foreskin, a retractable fold of skin covering the glans", "pronunciation": "PREE-pyoos" },
+        { "term": "crura", "definition": "The anchoring extensions of the corpora cavernosa attached to the pelvis", "pronunciation": "KROO-rah" }
+      ],
+      "analogies": ["Think of the three erectile bodies like three parallel water balloons - two big ones on top (corpora cavernosa) and one below with a tube through it (corpus spongiosum with urethra)."],
+      "examples": ["Circumcision is the surgical removal of the foreskin, which is done for cultural, religious, or medical reasons."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Penile erection involves neurovascular coordination where parasympathetic activation releases nitric oxide, causing smooth muscle relaxation and sinusoidal filling, while venous compression against the tunica albuginea maintains rigidity.",
+      "explanation": "The erectile bodies are surrounded by the tunica albuginea, a dense fibrous layer. The corpora cavernosa are supplied by paired deep (cavernosal) arteries that give off helicine arteries emptying into sinusoidal spaces. Erection mechanism: parasympathetic signals (from S2-S4 via cavernous nerves) release acetylcholine, which triggers nitric oxide (NO) release from endothelium and nerve terminals. NO activates guanylyl cyclase, increasing cGMP, which relaxes trabecular smooth muscle, allowing sinusoidal filling. The expanding sinusoids compress subtunical venules against the tunica albuginea (veno-occlusive mechanism), reducing venous outflow and maintaining erection. Detumescence occurs when sympathetic signals cause vasoconstriction and smooth muscle contraction.",
+      "keyTerms": [
+        { "term": "tunica albuginea", "definition": "Dense fibrous capsule surrounding erectile bodies" },
+        { "term": "helicine arteries", "definition": "Coiled branches of cavernosal artery that empty into sinusoidal spaces" },
+        { "term": "nitric oxide (NO)", "definition": "Signaling molecule that initiates smooth muscle relaxation for erection" },
+        { "term": "veno-occlusive mechanism", "definition": "Compression of veins against tunica albuginea that maintains erection" },
+        { "term": "cavernous nerves", "definition": "Parasympathetic nerves from prostatic plexus that mediate erection" },
+        { "term": "cGMP", "definition": "Cyclic GMP, second messenger causing smooth muscle relaxation in erectile tissue" }
+      ],
+      "examples": ["PDE5 inhibitors (Viagra, Cialis) work by blocking the breakdown of cGMP, prolonging the smooth muscle relaxation needed for erection."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Penile physiology integrates central and peripheral neural pathways, endothelial NO-cGMP signaling, and hemodynamic mechanisms, with erectile dysfunction reflecting vascular, neurological, hormonal, or psychological etiologies.",
+      "explanation": "Erection involves central (psychogenic from limbic system) and reflexogenic (from tactile stimulation via pudendal nerve to sacral cord) pathways, integrated in the medial preoptic area and paraventricular nucleus. Peripheral mechanism: cavernous nerves release NO (from nNOS in nerve terminals and eNOS in endothelium), activating soluble guanylyl cyclase, increasing cGMP, which through PKG causes smooth muscle relaxation via: K+ channel opening, decreased intracellular Ca2+, and myosin light chain dephosphorylation. PDE5 degrades cGMP, terminating the signal. Arterial insufficiency (atherosclerosis), venous leak, neuropathy (diabetic, post-surgical), hormonal deficiency, and psychogenic factors all contribute to erectile dysfunction. The corporal tissue requires adequate oxygenation for synthetic function; chronic hypoxia leads to fibrosis and TGF-β1-mediated collagen deposition.",
+      "keyTerms": [
+        { "term": "psychogenic erection", "definition": "Erection initiated by central arousal from visual, auditory, or imaginative stimuli" },
+        { "term": "reflexogenic erection", "definition": "Erection initiated by tactile genital stimulation via spinal reflex arc" },
+        { "term": "nNOS", "definition": "Neuronal nitric oxide synthase in nerve terminals" },
+        { "term": "eNOS", "definition": "Endothelial nitric oxide synthase in sinusoidal endothelium" },
+        { "term": "PDE5", "definition": "Phosphodiesterase type 5, enzyme that breaks down cGMP in erectile tissue" },
+        { "term": "venous leak", "definition": "Failure of veno-occlusive mechanism causing inability to maintain erection" }
+      ],
+      "clinicalNotes": "Erectile dysfunction often precedes cardiovascular events as both share endothelial dysfunction pathophysiology. ED in younger men warrants cardiovascular risk assessment. Nocturnal penile tumescence testing can differentiate organic from psychogenic ED."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary management of penile pathology spans vascular surgery for ED refractory to medical therapy, Peyronie's disease intervention, penile prosthesis implantation, and complex reconstruction for trauma, malignancy, and gender-affirming surgery.",
+      "explanation": "Clinical management spectrum: 1) ED: first-line PDE5 inhibitors (sildenafil, tadalafil, vardenafil, avanafil), second-line intracavernosal injection (alprostadil, trimix) or vacuum devices, third-line penile prosthesis (malleable or inflatable 3-piece); 2) Peyronie's disease: collagenase clostridium histolyticum, surgical plication or plaque excision with grafting for severe curvature; 3) Priapism: ischemic (low-flow) is urological emergency requiring corporal aspiration and phenylephrine injection, stuttering priapism management includes PDE5 inhibitors paradoxically; 4) Penile cancer: Gleason-type grading, surgical resection with margin assessment, sentinel lymph node biopsy for invasive disease; 5) Trauma: fracture (tunica albuginea rupture) requires surgical repair; 6) Gender-affirming surgery: phalloplasty techniques (radial forearm free flap, anterolateral thigh flap). Duplex ultrasound with intracavernosal injection evaluates arterial inflow and veno-occlusive function.",
+      "keyTerms": [
+        { "term": "penile prosthesis", "definition": "Surgically implanted device for erection in men unresponsive to other ED treatments" },
+        { "term": "Peyronie's disease", "definition": "Fibrous plaque in tunica albuginea causing penile curvature" },
+        { "term": "priapism", "definition": "Prolonged erection unrelated to sexual stimulation, urological emergency if ischemic" },
+        { "term": "collagenase clostridium histolyticum", "definition": "Injectable enzyme for Peyronie's disease that breaks down collagen in plaque" },
+        { "term": "penile duplex ultrasound", "definition": "Imaging study measuring arterial flow and venous function after intracavernosal injection" },
+        { "term": "phalloplasty", "definition": "Surgical construction of a penis, used in trauma reconstruction and gender-affirming surgery" }
+      ],
+      "clinicalNotes": "Priapism >4-6 hours risks corporal fibrosis and permanent ED. Penile fracture classically presents with 'popping' sound, immediate detumescence, and eggplant deformity - surgical exploration within 24 hours optimizes outcomes. Modern 3-piece inflatable prostheses have >90% satisfaction rates. Peyronie's disease affects 5-10% of men, with natural history of plaque stabilization over 12-18 months before intervention."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-urethra", "targetType": "structure", "relationship": "related", "label": "Urethra" },
+    { "targetId": "structure-scrotum", "targetType": "structure", "relationship": "related", "label": "Scrotum" },
+    { "targetId": "condition-erectile-dysfunction", "targetType": "condition", "relationship": "related", "label": "Erectile Dysfunction" }
+  ],
+  "tags": {
+    "systems": ["reproductive", "urinary"],
+    "structures": ["FMA:9707"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

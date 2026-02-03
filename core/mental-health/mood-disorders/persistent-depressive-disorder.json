@@ -1,0 +1,121 @@
+{
+  "id": "condition-persistent-depressive-disorder",
+  "type": "condition",
+  "category": "mood-disorder",
+  "name": "Persistent Depressive Disorder",
+  "alternateNames": ["Dysthymia", "Chronic Depression", "PDD"],
+  "icd10": "F34.1",
+  "dsm5": "300.4",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Persistent depressive disorder is a long-lasting form of depression where someone feels low or down most of the time for at least two years.",
+      "explanation": "While major depression often comes in episodes, persistent depressive disorder is like a constant low-grade sadness that becomes part of daily life. People with this condition often feel like they've always been this way and may not even realize they have a treatable condition. They might feel hopeless, have low energy, and struggle with low self-esteem. Even though the symptoms might be less intense than major depression, the long duration can significantly affect quality of life.",
+      "keyTerms": [
+        { "term": "chronic", "definition": "Lasting a long time, usually years" },
+        { "term": "low-grade", "definition": "Less intense but still affecting daily life" },
+        { "term": "persistent", "definition": "Continuing over a long period without stopping" }
+      ],
+      "analogies": ["If major depression is like a severe storm, persistent depressive disorder is like constantly cloudy weather - not as dramatic, but still affecting your life every day."],
+      "examples": ["Someone might say 'I've always been a pessimist' or 'I just have a gloomy personality' when they actually have a treatable condition."],
+      "importantNote": "Just because symptoms are less severe doesn't mean they're less important to treat. Long-term low mood deserves care too."
+    },
+    "2": {
+      "level": 2,
+      "summary": "PDD requires depressed mood for most of the day, more days than not, for at least 2 years (1 year in children/adolescents), plus at least two associated symptoms.",
+      "explanation": "Diagnostic criteria require depressed mood most days for 2+ years without a symptom-free period lasting more than 2 months. At least two of the following must be present: poor appetite or overeating, insomnia or hypersomnia, low energy/fatigue, low self-esteem, poor concentration or difficulty making decisions, and feelings of hopelessness. PDD may occur alone or with major depressive episodes (previously called 'double depression'). Early onset (before age 21) tends to have a more chronic course.",
+      "keyTerms": [
+        { "term": "dysthymia", "definition": "The older term for persistent depressive disorder, meaning 'bad mood state'", "pronunciation": "dis-THY-mee-ah" },
+        { "term": "double depression", "definition": "When major depressive episodes occur on top of persistent depressive disorder" },
+        { "term": "early onset", "definition": "Beginning before age 21, associated with more chronic course and personality pathology" }
+      ],
+      "diagnosticCriteria": "DEF HIS mnemonic: Depressed mood, Energy low, Food (appetite changes), Hopelessness, Insomnia/hypersomnia, Self-esteem low",
+      "prevalence": "Lifetime prevalence approximately 2-6%; affects women twice as often as men"
+    },
+    "3": {
+      "level": 3,
+      "summary": "PDD represents a chronic depressive condition with neurobiological similarities to MDD, requiring long-term treatment strategies combining medication and psychotherapy.",
+      "explanation": "PDD shares neurobiological features with MDD including monoamine dysregulation and HPA axis abnormalities, though often with subtler findings. DSM-5 combined previous dysthymia and chronic major depression into PDD. Specifiers include: with anxious distress, with atypical features, with pure dysthymic syndrome (never met MDD criteria), with persistent major depressive episode (continuously met MDD criteria for 2+ years), and with intermittent major depressive episodes (current or past MDD but not continuous). Treatment is challenging - antidepressants are effective but response rates are lower than MDD. CBASP (Cognitive Behavioral Analysis System of Psychotherapy) was specifically developed for chronic depression.",
+      "keyTerms": [
+        { "term": "CBASP", "definition": "Cognitive Behavioral Analysis System of Psychotherapy; integrates cognitive, behavioral, and interpersonal strategies specifically for chronic depression" },
+        { "term": "pure dysthymic syndrome", "definition": "PDD in which full criteria for major depressive episode have never been met" },
+        { "term": "characterological depression", "definition": "Outdated term suggesting depression is part of personality; now recognized as treatable disorder" }
+      ],
+      "clinicalNotes": "Consider personality disorders as comorbidities, especially Cluster C. Ensure adequate treatment duration - minimum 2 years of medication for maintenance. CBASP + medication superior to either alone in chronic depression (Keller et al. NEJM 2000)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Management of PDD requires addressing treatment resistance, comorbid personality pathology, and interpersonal dysfunction through integrated long-term care.",
+      "explanation": "PDD often shows partial or non-response to standard treatments. Optimization strategies include: adequate dose and duration trials, combination antidepressants (SSRI + bupropion, or SSRI + mirtazapine), augmentation (atypical antipsychotics, lithium, thyroid hormone), and MAOIs for refractory cases. Psychotherapy approaches: CBASP addresses interpersonal discrimination and situational analysis; schema therapy targets early maladaptive schemas common in early-onset cases; MBCT may prevent relapse. Comorbid conditions are common: anxiety disorders (50-80%), personality disorders (especially avoidant, dependent, borderline), and substance use. Early onset PDD shows significant overlap with depressive personality traits. Social and occupational functioning often significantly impaired despite 'mild' symptom severity.",
+      "keyTerms": [
+        { "term": "schema therapy", "definition": "Integrative approach addressing deeply held maladaptive beliefs developed in childhood" },
+        { "term": "interpersonal discrimination", "definition": "In CBASP, learning to distinguish between past harmful relationships and current relationships" },
+        { "term": "situational analysis", "definition": "CBASP technique examining how thoughts and behaviors affect interpersonal outcomes" }
+      ],
+      "clinicalNotes": "Chronicity predicts poorer outcomes. Address hopelessness about treatment directly - patients often don't believe they can get better. Engagement and therapeutic alliance particularly important given interpersonal difficulties."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert management of PDD involves reconceptualizing chronic depression, integrating novel treatments, and addressing the developmental and interpersonal context of early-onset cases.",
+      "explanation": "Contemporary understanding views PDD on a spectrum with MDD rather than as a distinct entity, with chronicity as a dimensional specifier. Neurobiological research shows reduced hippocampal volume, altered reward circuitry, and chronic inflammation similar to but often less pronounced than MDD. Novel approaches include: ketamine for treatment-resistant chronic depression, psilocybin-assisted therapy (showing promise for refractory cases), anti-inflammatory agents, and intensive short-term dynamic psychotherapy (ISTDP) for affect-phobic patients with early-onset chronic depression. Developmental considerations: early-onset PDD often develops in context of adverse childhood experiences, insecure attachment, and invalidating environments - informing trauma-focused and attachment-based treatments. Functional outcomes often poor despite treatment - disability, relationship difficulties, and reduced quality of life persist. Long-term management focuses on maintenance medication, ongoing psychotherapy, lifestyle optimization, and realistic goal-setting.",
+      "keyTerms": [
+        { "term": "affect phobia", "definition": "Unconscious avoidance of emotional experience; common in chronic depression" },
+        { "term": "ISTDP", "definition": "Intensive Short-Term Dynamic Psychotherapy; addresses defensive patterns preventing emotional processing" },
+        { "term": "dimensional approach", "definition": "Viewing disorders as extremes on a continuum rather than discrete categories" }
+      ],
+      "clinicalNotes": "Recovery is possible but often partial. Frame treatment goals around quality of life and functioning, not just symptom remission. Suicide risk exists despite 'mild' symptoms - hopelessness is key risk factor. Consider vocational rehabilitation and social skills training for functional impairment."
+    }
+  },
+
+  "riskFactors": [
+    "Family history of mood disorders",
+    "Childhood adversity or trauma",
+    "Chronic stress",
+    "Early onset of depressive symptoms",
+    "Comorbid anxiety disorders",
+    "Personality traits: neuroticism, low self-esteem",
+    "Female sex"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "crisisTextLine": "Text HOME to 741741"
+    },
+    "message": "Even chronic conditions can be treated. If you're struggling, please reach out for help."
+  },
+
+  "treatments": {
+    "firstLine": ["SSRIs", "SNRIs", "CBASP", "CBT", "IPT"],
+    "secondLine": ["Combination antidepressants", "Augmentation strategies", "Schema therapy"],
+    "forResistantCases": ["MAOIs", "ECT", "Ketamine", "Intensive psychotherapy"]
+  },
+
+  "citations": [
+    {
+      "id": "keller-2000",
+      "type": "study",
+      "title": "A Comparison of Nefazodone, the Cognitive Behavioral-Analysis System of Psychotherapy, and Their Combination for the Treatment of Chronic Depression",
+      "journal": "New England Journal of Medicine",
+      "year": 2000
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "related", "label": "Major Depressive Disorder" },
+    { "targetId": "treatment-cbasp", "targetType": "treatment", "relationship": "treatment", "label": "CBASP" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "mood-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

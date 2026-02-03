@@ -19,6 +19,56 @@ tauri-build = { version = "2.5.3", features = [] }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
-tauri = { version = "2.9.5", features = [] }
+tauri = { version = "2.9.5", features = ["protocol-asset"] }
 tauri-plugin-log = "2"
 tauri-plugin-shell = "2"
+
+# On-device LLM inference via llama.cpp
+llama-cpp-2 = { version = "0.1", features = ["metal"] }
+tokio = { version = "1", features = ["sync", "rt"] }
+once_cell = "1.19"
+parking_lot = "0.12"
+dirs = "5.0"
+rand = "0.8"
+zeroize = "1.7"
+
+[target.'cfg(target_os = "ios")'.dependencies]
+# iOS-specific: ensure Metal is used
+llama-cpp-2 = { version = "0.1", features = ["metal"] }
+
+[target.'cfg(target_os = "android")'.dependencies]
+# Android-specific: CPU only for now
+llama-cpp-2 = { version = "0.1", features = [] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+# Windows-specific: CPU with AVX2 support
+llama-cpp-2 = { version = "0.1", features = [] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# Linux-specific: CPU with AVX2 support
+llama-cpp-2 = { version = "0.1", features = [] }
+
+[features]
+default = []
+# Enable for iOS builds with Metal GPU acceleration
+metal = ["llama-cpp-2/metal"]
+# Enable for CUDA builds (Windows/Linux with NVIDIA GPU)
+cuda = []
+# Enable for CPU-only builds
+cpu-only = []
+
+[profile.dev]
+incremental = true
+opt-level = 0
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = 3
+strip = true
+
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+strip = false

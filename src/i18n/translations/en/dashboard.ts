@@ -1,0 +1,16 @@
+export const dashboard = {
+  'dashboard.title': 'Health Dashboard',
+  'dashboard.summary.conditions': 'Active Conditions',
+  'dashboard.summary.medications': 'Current Medications',
+  'dashboard.summary.labs': 'Lab Results',
+  'dashboard.vitals.title': 'Vitals Summary',
+  'dashboard.vitals.heartRate': 'Heart Rate',
+  'dashboard.vitals.hrv': 'HRV',
+  'dashboard.vitals.recovery': 'Recovery',
+  'dashboard.vitals.sleep': 'Sleep',
+  'dashboard.vitals.steps': 'Steps',
+  'dashboard.vitals.empty': 'No vital signs recorded yet',
+  'dashboard.recent.title': 'Recent Activity',
+  'dashboard.empty.title': 'Welcome to Biological Self',
+  'dashboard.empty.subtitle': 'Start by adding your health information',
+};

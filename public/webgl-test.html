@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WebGL Diagnostic Test</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+    h2 {
+      color: #8b9dc3;
+      margin: 20px 0 10px 0;
+      font-size: 1.1rem;
+    }
+    .status-card {
+      background: #2a2a4e;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #3a3a5e;
+    }
+    .status-row:last-child {
+      border-bottom: none;
+    }
+    .status-label {
+      color: #a0a0c0;
+    }
+    .status-value {
+      font-weight: 600;
+      text-align: right;
+      max-width: 60%;
+      word-break: break-word;
+    }
+    .success {
+      color: #4ade80;
+    }
+    .error {
+      color: #f87171;
+    }
+    .warning {
+      color: #fbbf24;
+    }
+    .info {
+      color: #60a5fa;
+    }
+    #canvas-container {
+      background: #0a0a1e;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0;
+      position: relative;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 300px;
+    }
+    .canvas-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    .error-box {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid #f87171;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .cap-item {
+      background: #1a1a3e;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .cap-label {
+      color: #8b9dc3;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .cap-value {
+      color: #fff;
+      font-weight: 500;
+    }
+    .test-btn {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .test-btn:active {
+      background: #4338ca;
+    }
+    .timestamp {
+      color: #6b7280;
+      font-size: 0.75rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>WebGL Diagnostic Test</h1>
+  <p style="color: #8b9dc3; margin-bottom: 20px;">Testing pure WebGL (no libraries)</p>
+
+  <div class="status-card">
+    <h2>Context Creation</h2>
+    <div class="status-row">
+      <span class="status-label">WebGL 1.0</span>
+      <span id="webgl1-status" class="status-value">Testing...</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">WebGL 2.0</span>
+      <span id="webgl2-status" class="status-value">Testing...</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Experimental WebGL</span>
+      <span id="experimental-status" class="status-value">Testing...</span>
+    </div>
+  </div>
+
+  <div id="error-container"></div>
+
+  <div id="canvas-container">
+    <canvas id="test-canvas"></canvas>
+    <span class="canvas-label" id="canvas-label">Initializing...</span>
+  </div>
+
+  <div class="status-card">
+    <h2>Render Test</h2>
+    <div class="status-row">
+      <span class="status-label">Draw Triangle</span>
+      <span id="render-status" class="status-value">Pending...</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Animation Frame</span>
+      <span id="animation-status" class="status-value">Pending...</span>
+    </div>
+  </div>
+
+  <div class="status-card">
+    <h2>WebGL Capabilities</h2>
+    <div id="capabilities" class="capabilities-grid">
+      <div class="cap-item">
+        <span class="cap-label">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-card">
+    <h2>Extensions</h2>
+    <div id="extensions" style="font-size: 0.85rem; color: #a0a0c0;">
+      Loading...
+    </div>
+  </div>
+
+  <button class="test-btn" onclick="runFullTest()">Re-run All Tests</button>
+
+  <p class="timestamp" id="timestamp"></p>
+
+  <script>
+    // Vertex shader - just passes through position
+    const vertexShaderSource = `
+      attribute vec4 a_position;
+      attribute vec4 a_color;
+      varying vec4 v_color;
+      void main() {
+        gl_Position = a_position;
+        v_color = a_color;
+      }
+    `;
+
+    // Fragment shader - outputs color
+    const fragmentShaderSource = `
+      precision mediump float;
+      varying vec4 v_color;
+      void main() {
+        gl_FragColor = v_color;
+      }
+    `;
+
+    let gl = null;
+    let animationId = null;
+    let errors = [];
+
+    function logError(msg) {
+      errors.push(msg);
+      console.error('[WebGL Test]', msg);
+      updateErrorDisplay();
+    }
+
+    function updateErrorDisplay() {
+      const container = document.getElementById('error-container');
+      if (errors.length > 0) {
+        container.innerHTML = `<div class="error-box">${errors.join('\n')}</div>`;
+      } else {
+        container.innerHTML = '';
+      }
+    }
+
+    function createShader(gl, type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        const info = gl.getShaderInfoLog(shader);
+        gl.deleteShader(shader);
+        throw new Error('Shader compile error: ' + info);
+      }
+      return shader;
+    }
+
+    function createProgram(gl, vertexShader, fragmentShader) {
+      const program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        const info = gl.getProgramInfoLog(program);
+        gl.deleteProgram(program);
+        throw new Error('Program link error: ' + info);
+      }
+      return program;
+    }
+
+    function testWebGLContext() {
+      const canvas = document.getElementById('test-canvas');
+      const webgl1Status = document.getElementById('webgl1-status');
+      const webgl2Status = document.getElementById('webgl2-status');
+      const experimentalStatus = document.getElementById('experimental-status');
+
+      // Test WebGL 2.0
+      let gl2 = null;
+      try {
+        gl2 = canvas.getContext('webgl2');
+        if (gl2) {
+          webgl2Status.textContent = 'Supported';
+          webgl2Status.className = 'status-value success';
+          gl = gl2;
+        } else {
+          webgl2Status.textContent = 'Not available';
+          webgl2Status.className = 'status-value warning';
+        }
+      } catch (e) {
+        webgl2Status.textContent = 'Error: ' + e.message;
+        webgl2Status.className = 'status-value error';
+        logError('WebGL2 error: ' + e.message);
+      }
+
+      // Test WebGL 1.0
+      let gl1 = null;
+      try {
+        gl1 = canvas.getContext('webgl');
+        if (gl1) {
+          webgl1Status.textContent = 'Supported';
+          webgl1Status.className = 'status-value success';
+          if (!gl) gl = gl1;
+        } else {
+          webgl1Status.textContent = 'Not available';
+          webgl1Status.className = 'status-value warning';
+        }
+      } catch (e) {
+        webgl1Status.textContent = 'Error: ' + e.message;
+        webgl1Status.className = 'status-value error';
+        logError('WebGL1 error: ' + e.message);
+      }
+
+      // Test experimental-webgl (fallback for older browsers)
+      try {
+        const expGl = canvas.getContext('experimental-webgl');
+        if (expGl) {
+          experimentalStatus.textContent = 'Supported';
+          experimentalStatus.className = 'status-value success';
+          if (!gl) gl = expGl;
+        } else {
+          experimentalStatus.textContent = 'Not available';
+          experimentalStatus.className = 'status-value info';
+        }
+      } catch (e) {
+        experimentalStatus.textContent = 'Error: ' + e.message;
+        experimentalStatus.className = 'status-value error';
+        logError('Experimental WebGL error: ' + e.message);
+      }
+
+      return gl;
+    }
+
+    function displayCapabilities(gl) {
+      const container = document.getElementById('capabilities');
+
+      if (!gl) {
+        container.innerHTML = '<div class="cap-item"><span class="cap-label error">No WebGL context available</span></div>';
+        return;
+      }
+
+      const capabilities = [
+        { label: 'Vendor', value: gl.getParameter(gl.VENDOR) },
+        { label: 'Renderer', value: gl.getParameter(gl.RENDERER) },
+        { label: 'Version', value: gl.getParameter(gl.VERSION) },
+        { label: 'GLSL Version', value: gl.getParameter(gl.SHADING_LANGUAGE_VERSION) },
+        { label: 'Max Texture Size', value: gl.getParameter(gl.MAX_TEXTURE_SIZE) + 'px' },
+        { label: 'Max Cube Map Size', value: gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE) + 'px' },
+        { label: 'Max Render Buffer', value: gl.getParameter(gl.MAX_RENDERBUFFER_SIZE) + 'px' },
+        { label: 'Max Vertex Attribs', value: gl.getParameter(gl.MAX_VERTEX_ATTRIBS) },
+        { label: 'Max Vertex Uniforms', value: gl.getParameter(gl.MAX_VERTEX_UNIFORM_VECTORS) },
+        { label: 'Max Fragment Uniforms', value: gl.getParameter(gl.MAX_FRAGMENT_UNIFORM_VECTORS) },
+        { label: 'Max Varying Vectors', value: gl.getParameter(gl.MAX_VARYING_VECTORS) },
+        { label: 'Viewport', value: gl.getParameter(gl.MAX_VIEWPORT_DIMS).join(' x ') },
+        { label: 'Aliased Line Width', value: gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE).join(' - ') },
+        { label: 'Aliased Point Size', value: gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE).join(' - ') },
+      ];
+
+      // Try to get debug info (unmasked vendor/renderer)
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        capabilities.unshift(
+          { label: 'Unmasked Vendor', value: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) },
+          { label: 'Unmasked Renderer', value: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) }
+        );
+      }
+
+      container.innerHTML = capabilities.map(cap => `
+        <div class="cap-item">
+          <span class="cap-label">${cap.label}</span>
+          <span class="cap-value">${cap.value || 'N/A'}</span>
+        </div>
+      `).join('');
+    }
+
+    function displayExtensions(gl) {
+      const container = document.getElementById('extensions');
+
+      if (!gl) {
+        container.innerHTML = '<span class="error">No WebGL context available</span>';
+        return;
+      }
+
+      const extensions = gl.getSupportedExtensions() || [];
+
+      if (extensions.length === 0) {
+        container.innerHTML = '<span class="warning">No extensions available</span>';
+        return;
+      }
+
+      // Important extensions to highlight
+      const importantExts = [
+        'OES_texture_float',
+        'OES_texture_half_float',
+        'OES_standard_derivatives',
+        'OES_vertex_array_object',
+        'WEBGL_depth_texture',
+        'WEBGL_draw_buffers',
+        'ANGLE_instanced_arrays',
+        'EXT_shader_texture_lod',
+        'EXT_frag_depth',
+      ];
+
+      const available = extensions.filter(e => importantExts.some(i => e.includes(i)));
+      const otherCount = extensions.length - available.length;
+
+      container.innerHTML = `
+        <div style="margin-bottom: 8px;">
+          <strong>Key Extensions (${available.length}/${importantExts.length}):</strong><br>
+          ${available.length > 0 ? available.map(e => `<span class="success">${e}</span>`).join(', ') : '<span class="warning">None</span>'}
+        </div>
+        <div>
+          <strong>Total Extensions:</strong> ${extensions.length}
+          ${otherCount > 0 ? `(${otherCount} other extensions available)` : ''}
+        </div>
+      `;
+    }
+
+    function testRender(gl) {
+      const renderStatus = document.getElementById('render-status');
+      const animationStatus = document.getElementById('animation-status');
+      const canvasLabel = document.getElementById('canvas-label');
+
+      if (!gl) {
+        renderStatus.textContent = 'Skipped (no context)';
+        renderStatus.className = 'status-value error';
+        animationStatus.textContent = 'Skipped';
+        animationStatus.className = 'status-value error';
+        canvasLabel.textContent = 'WebGL not available';
+        return;
+      }
+
+      try {
+        // Create shaders
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+        const program = createProgram(gl, vertexShader, fragmentShader);
+
+        // Triangle vertices (position + color)
+        // Position: x, y | Color: r, g, b, a
+        const vertices = new Float32Array([
+          // Top vertex (cyan)
+           0.0,  0.7,    0.0, 1.0, 1.0, 1.0,
+          // Bottom-left vertex (magenta)
+          -0.7, -0.5,    1.0, 0.0, 1.0, 1.0,
+          // Bottom-right vertex (yellow)
+           0.7, -0.5,    1.0, 1.0, 0.0, 1.0,
+        ]);
+
+        // Create buffer
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+        // Get attribute locations
+        const positionLoc = gl.getAttribLocation(program, 'a_position');
+        const colorLoc = gl.getAttribLocation(program, 'a_color');
+
+        // Set up attributes
+        const FSIZE = vertices.BYTES_PER_ELEMENT;
+        gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 6 * FSIZE, 0);
+        gl.enableVertexAttribArray(positionLoc);
+        gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 6 * FSIZE, 2 * FSIZE);
+        gl.enableVertexAttribArray(colorLoc);
+
+        // Set up viewport
+        const canvas = gl.canvas;
+        const dpr = window.devicePixelRatio || 1;
+        const displayWidth = canvas.clientWidth;
+        const displayHeight = canvas.clientHeight;
+        canvas.width = displayWidth * dpr;
+        canvas.height = displayHeight * dpr;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+
+        // Clear and draw
+        gl.clearColor(0.04, 0.04, 0.12, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(program);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+        // Check for errors
+        const glError = gl.getError();
+        if (glError !== gl.NO_ERROR) {
+          throw new Error('GL Error: ' + glError);
+        }
+
+        renderStatus.textContent = 'Success';
+        renderStatus.className = 'status-value success';
+        canvasLabel.textContent = 'WebGL ' + (gl instanceof WebGL2RenderingContext ? '2.0' : '1.0') + ' - Triangle rendered';
+
+        // Test animation frame
+        let frameCount = 0;
+        const startTime = performance.now();
+
+        function animate() {
+          frameCount++;
+          const elapsed = performance.now() - startTime;
+
+          if (elapsed < 1000) {
+            // Rotate the triangle slightly for visual feedback
+            const angle = elapsed * 0.002;
+            const cos = Math.cos(angle);
+            const sin = Math.sin(angle);
+
+            // Update vertices with rotation
+            const rotatedVertices = new Float32Array([
+               0.0 * cos - 0.7 * sin,  0.0 * sin + 0.7 * cos,    0.0, 1.0, 1.0, 1.0,
+              -0.7 * cos - (-0.5) * sin, -0.7 * sin + (-0.5) * cos,    1.0, 0.0, 1.0, 1.0,
+               0.7 * cos - (-0.5) * sin,  0.7 * sin + (-0.5) * cos,    1.0, 1.0, 0.0, 1.0,
+            ]);
+
+            gl.bufferData(gl.ARRAY_BUFFER, rotatedVertices, gl.STATIC_DRAW);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+            animationId = requestAnimationFrame(animate);
+          } else {
+            // Animation test complete
+            const fps = Math.round(frameCount / (elapsed / 1000));
+            animationStatus.textContent = `${fps} FPS (${frameCount} frames)`;
+            animationStatus.className = fps >= 30 ? 'status-value success' : 'status-value warning';
+          }
+        }
+
+        animationStatus.textContent = 'Testing...';
+        animate();
+
+      } catch (e) {
+        renderStatus.textContent = 'Failed: ' + e.message;
+        renderStatus.className = 'status-value error';
+        animationStatus.textContent = 'Skipped';
+        animationStatus.className = 'status-value error';
+        canvasLabel.textContent = 'Render error';
+        logError('Render error: ' + e.message);
+      }
+    }
+
+    function runFullTest() {
+      // Reset state
+      errors = [];
+      updateErrorDisplay();
+
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+
+      // Reset status displays
+      document.getElementById('webgl1-status').textContent = 'Testing...';
+      document.getElementById('webgl2-status').textContent = 'Testing...';
+      document.getElementById('experimental-status').textContent = 'Testing...';
+      document.getElementById('render-status').textContent = 'Pending...';
+      document.getElementById('animation-status').textContent = 'Pending...';
+
+      // Run tests
+      gl = testWebGLContext();
+      displayCapabilities(gl);
+      displayExtensions(gl);
+      testRender(gl);
+
+      // Update timestamp
+      document.getElementById('timestamp').textContent =
+        'Test run: ' + new Date().toLocaleString() +
+        ' | Device pixel ratio: ' + (window.devicePixelRatio || 1) +
+        ' | User Agent: ' + navigator.userAgent.substring(0, 50) + '...';
+    }
+
+    // Run tests on load
+    window.addEventListener('load', runFullTest);
+
+    // Also handle visibility changes (iOS may suspend WebGL)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        console.log('[WebGL Test] Page visible, checking WebGL state...');
+        // Re-test after a short delay
+        setTimeout(runFullTest, 100);
+      }
+    });
+  </script>
+</body>
+</html>

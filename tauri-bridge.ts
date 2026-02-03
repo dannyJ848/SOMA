@@ -95,6 +95,35 @@ function getEnvOrFail(name: string): string {
   return value;
 }
 
+/**
+ * Read the passphrase from stdin (single line).
+ * The Rust parent process writes the passphrase followed by a newline
+ * and then closes the pipe. This avoids exposing the passphrase via
+ * environment variables (visible in `ps eww` / `/proc/[pid]/environ`).
+ */
+function readPassphraseFromStdin(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', (chunk: string) => {
+      data += chunk;
+    });
+    process.stdin.on('end', () => {
+      const passphrase = data.split('\n')[0].trim();
+      if (!passphrase) {
+        reject(new Error('No passphrase received on stdin'));
+      } else {
+        resolve(passphrase);
+      }
+    });
+    process.stdin.on('error', (err: Error) => {
+      reject(err);
+    });
+    // If stdin is a TTY (manual run), this won't hang forever thanks to
+    // the Rust side closing the pipe after writing.
+  });
+}
+
 function getSummary(self: BiologicalSelf | null): HealthSummary {
   if (!self) {
     return {
@@ -452,7 +481,8 @@ function getDashboardData(self: BiologicalSelf | null): DashboardData {
 
 async function main() {
   const command = process.argv[2];
-  const passphrase = getEnvOrFail('BIOSELF_PASSPHRASE');
+  // FINDING-05 remediation: read passphrase from stdin pipe instead of env var
+  const passphrase = await readPassphraseFromStdin();
   const dbPath = getEnvOrFail('BIOSELF_DB_PATH');
 
   const store = new BiologicalSelfStore(dbPath, passphrase);

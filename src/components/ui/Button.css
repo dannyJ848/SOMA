@@ -1,0 +1,139 @@
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  white-space: nowrap;
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #3b82f6);
+  outline-offset: 2px;
+}
+
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.ui-button--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.ui-button--md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.ui-button--lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+/* Variants */
+.ui-button--primary {
+  background-color: var(--ui-primary, #3b82f6);
+  color: white;
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background-color: var(--ui-primary-hover, #2563eb);
+}
+
+.ui-button--secondary {
+  background-color: var(--ui-secondary, #e5e7eb);
+  color: var(--ui-secondary-text, #374151);
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background-color: var(--ui-secondary-hover, #d1d5db);
+}
+
+.ui-button--danger {
+  background-color: var(--ui-danger, #ef4444);
+  color: white;
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background-color: var(--ui-danger-hover, #dc2626);
+}
+
+.ui-button--ghost {
+  background-color: transparent;
+  color: var(--ui-ghost-text, #374151);
+}
+
+.ui-button--ghost:hover:not(:disabled) {
+  background-color: var(--ui-ghost-hover, rgba(0, 0, 0, 0.05));
+}
+
+/* Full width */
+.ui-button--full-width {
+  width: 100%;
+}
+
+/* Loading state */
+.ui-button--loading {
+  position: relative;
+}
+
+.ui-button__spinner {
+  display: inline-flex;
+}
+
+.ui-button__spinner-icon {
+  width: 1rem;
+  height: 1rem;
+  animation: ui-button-spin 1s linear infinite;
+}
+
+@keyframes ui-button-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-button__content {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .ui-button--secondary {
+    background-color: var(--ui-secondary-dark, #374151);
+    color: var(--ui-secondary-text-dark, #f3f4f6);
+  }
+
+  .ui-button--secondary:hover:not(:disabled) {
+    background-color: var(--ui-secondary-hover-dark, #4b5563);
+  }
+
+  .ui-button--ghost {
+    color: var(--ui-ghost-text-dark, #f3f4f6);
+  }
+
+  .ui-button--ghost:hover:not(:disabled) {
+    background-color: var(--ui-ghost-hover-dark, rgba(255, 255, 255, 0.1));
+  }
+}

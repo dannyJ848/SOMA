@@ -1,6 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  ENHANCED_ANATOMICAL_LAYERS,
+  CLINICAL_PRESETS,
+  type EnhancedLayerDefinition,
+  type ClinicalPreset,
+  type BodyRegion,
+  type ClinicalRelevance,
+  type ComplexityLevel,
+  type LayerFilterOptions,
+  filterLayers,
+  flattenLayers,
+  getPresetLayers,
+  getPresetOpacity,
+} from './layers/EnhancedLayerConfig';
 
-// Layer definitions with hierarchy
+// ============================================
+// Layer definitions with hierarchy (legacy export for compatibility)
+// ============================================
+
 export interface LayerDefinition {
   id: string;
   name: string;
@@ -8,84 +25,22 @@ export interface LayerDefinition {
   sublayers?: LayerDefinition[];
 }
 
-export const ANATOMICAL_LAYERS: LayerDefinition[] = [
-  {
-    id: 'integumentary',
-    name: 'Skin',
-    color: '#e8c4a8',
-    sublayers: [
-      { id: 'integumentary.epidermis', name: 'Epidermis', color: '#f0d4b8' },
-      { id: 'integumentary.dermis', name: 'Dermis', color: '#d8b498' },
-      { id: 'integumentary.hypodermis', name: 'Hypodermis', color: '#c8a488' },
-    ],
-  },
-  {
-    id: 'skeletal',
-    name: 'Skeleton',
-    color: '#f5f5dc',
-    sublayers: [
-      { id: 'skeletal.axial', name: 'Axial Skeleton', color: '#fffff0' },
-      { id: 'skeletal.appendicular', name: 'Appendicular Skeleton', color: '#fafad2' },
-      { id: 'skeletal.joints', name: 'Joints', color: '#d4d4aa' },
-    ],
-  },
-  {
-    id: 'muscular',
-    name: 'Muscles',
-    color: '#c84040',
-    sublayers: [
-      { id: 'muscular.superficial', name: 'Superficial Muscles', color: '#d85050' },
-      { id: 'muscular.deep', name: 'Deep Muscles', color: '#b83030' },
-      { id: 'muscular.tendons', name: 'Tendons', color: '#f0e0d0' },
-    ],
-  },
-  {
-    id: 'organs',
-    name: 'Organs',
-    color: '#b87850',
-    sublayers: [
-      { id: 'organs.digestive', name: 'Digestive', color: '#c88860' },
-      { id: 'organs.respiratory', name: 'Respiratory', color: '#f0a0a0' },
-      { id: 'organs.urinary', name: 'Urinary', color: '#d0a080' },
-      { id: 'organs.reproductive', name: 'Reproductive', color: '#e0b0a0' },
-      { id: 'organs.endocrine', name: 'Endocrine', color: '#c0a090' },
-    ],
-  },
-  {
-    id: 'cardiovascular',
-    name: 'Vessels',
-    color: '#c04040',
-    sublayers: [
-      { id: 'cardiovascular.heart', name: 'Heart', color: '#d04050' },
-      { id: 'cardiovascular.arteries', name: 'Arteries', color: '#e04040' },
-      { id: 'cardiovascular.veins', name: 'Veins', color: '#4040c0' },
-      { id: 'cardiovascular.capillaries', name: 'Capillaries', color: '#c080c0' },
-    ],
-  },
-  {
-    id: 'nervous',
-    name: 'Nerves',
-    color: '#f0d060',
-    sublayers: [
-      { id: 'nervous.brain', name: 'Brain', color: '#f0e080' },
-      { id: 'nervous.spinalcord', name: 'Spinal Cord', color: '#e0d050' },
-      { id: 'nervous.peripheral', name: 'Peripheral Nerves', color: '#f0e0a0' },
-      { id: 'nervous.autonomic', name: 'Autonomic', color: '#d0c040' },
-    ],
-  },
-  {
-    id: 'lymphatic',
-    name: 'Lymphatic',
-    color: '#80c080',
-    sublayers: [
-      { id: 'lymphatic.nodes', name: 'Lymph Nodes', color: '#90d090' },
-      { id: 'lymphatic.vessels', name: 'Lymph Vessels', color: '#70b070' },
-      { id: 'lymphatic.organs', name: 'Lymphoid Organs', color: '#60a060' },
-    ],
-  },
-];
+// Convert enhanced layers to legacy format for backward compatibility
+function convertToLegacyFormat(layers: EnhancedLayerDefinition[]): LayerDefinition[] {
+  return layers.map(layer => ({
+    id: layer.id,
+    name: layer.name,
+    color: layer.color,
+    sublayers: layer.sublayers ? convertToLegacyFormat(layer.sublayers) : undefined,
+  }));
+}
 
-// Preset layer configurations
+export const ANATOMICAL_LAYERS: LayerDefinition[] = convertToLegacyFormat(ENHANCED_ANATOMICAL_LAYERS);
+
+// ============================================
+// Preset layer configurations (legacy export)
+// ============================================
+
 export interface LayerPreset {
   id: string;
   name: string;
@@ -98,7 +53,7 @@ export const LAYER_PRESETS: LayerPreset[] = [
     id: 'all',
     name: 'All Systems',
     description: 'Show all anatomical layers',
-    activeLayers: ANATOMICAL_LAYERS.map(l => l.id),
+    activeLayers: ENHANCED_ANATOMICAL_LAYERS.map(l => l.id),
   },
   {
     id: 'skeletal-muscular',
@@ -132,45 +87,38 @@ export const LAYER_PRESETS: LayerPreset[] = [
   },
 ];
 
+// ============================================
 // Layer state management
+// ============================================
+
 export interface LayerState {
   id: string;
   visible: boolean;
   opacity: number;
-  expanded: boolean; // For sublayer accordion
+  expanded: boolean;
 }
 
 export type LayerStateMap = Map<string, LayerState>;
 
-// Local storage key for persisting layer state
 const LAYER_STATE_KEY = 'biological-self-layer-state';
 
-// Initialize layer state from definitions
+// Initialize layer state from enhanced definitions
 function initializeLayerState(): LayerStateMap {
   const map = new Map<string, LayerState>();
+  const allLayers = flattenLayers(ENHANCED_ANATOMICAL_LAYERS);
 
-  ANATOMICAL_LAYERS.forEach(layer => {
+  for (const layer of allLayers) {
     map.set(layer.id, {
       id: layer.id,
       visible: true,
-      opacity: 1,
+      opacity: layer.defaultOpacity ?? 1,
       expanded: false,
     });
-
-    layer.sublayers?.forEach(sublayer => {
-      map.set(sublayer.id, {
-        id: sublayer.id,
-        visible: true,
-        opacity: 1,
-        expanded: false,
-      });
-    });
-  });
+  }
 
   return map;
 }
 
-// Load layer state from localStorage
 function loadLayerState(): LayerStateMap {
   try {
     const stored = localStorage.getItem(LAYER_STATE_KEY);
@@ -188,7 +136,6 @@ function loadLayerState(): LayerStateMap {
   return initializeLayerState();
 }
 
-// Save layer state to localStorage
 function saveLayerState(state: LayerStateMap): void {
   try {
     const obj: Record<string, LayerState> = {};
@@ -201,10 +148,15 @@ function saveLayerState(state: LayerStateMap): void {
   }
 }
 
-// Custom hook for layer management
+// ============================================
+// Enhanced Layer Hook
+// ============================================
+
 export function useLayerState() {
   const [layerStates, setLayerStates] = useState<LayerStateMap>(() => loadLayerState());
   const [soloLayer, setSoloLayer] = useState<string | null>(null);
+  const [filterOptions, setFilterOptions] = useState<LayerFilterOptions>({});
+  const [activePreset, setActivePreset] = useState<string | null>(null);
 
   // Persist state changes
   useEffect(() => {
@@ -221,8 +173,8 @@ export function useLayerState() {
       }
       return newMap;
     });
-    // Clear solo mode when toggling
     if (soloLayer) setSoloLayer(null);
+    setActivePreset(null);
   }, [soloLayer]);
 
   // Set layer opacity
@@ -249,17 +201,17 @@ export function useLayerState() {
     });
   }, []);
 
-  // Solo mode - show only one layer
+  // Solo mode
   const toggleSolo = useCallback((layerId: string) => {
     setSoloLayer(prev => prev === layerId ? null : layerId);
+    setActivePreset(null);
   }, []);
 
-  // Apply preset
+  // Apply legacy preset
   const applyPreset = useCallback((preset: LayerPreset) => {
     setLayerStates(prev => {
       const newMap = new Map(prev);
       newMap.forEach((state, key) => {
-        // Check if this layer or its parent is in the preset
         const isActive = preset.activeLayers.some(activeId =>
           key === activeId || key.startsWith(activeId + '.')
         );
@@ -268,6 +220,29 @@ export function useLayerState() {
       return newMap;
     });
     setSoloLayer(null);
+    setActivePreset(null);
+  }, []);
+
+  // Apply clinical preset
+  const applyClinicalPreset = useCallback((preset: ClinicalPreset) => {
+    const presetLayers = getPresetLayers(preset);
+
+    setLayerStates(prev => {
+      const newMap = new Map(prev);
+      newMap.forEach((state, key) => {
+        const isActive = presetLayers.has(key) ||
+          Array.from(presetLayers).some(activeId => key.startsWith(activeId + '.'));
+        const presetOpacity = getPresetOpacity(preset, key);
+        newMap.set(key, {
+          ...state,
+          visible: isActive,
+          opacity: presetOpacity ?? state.opacity,
+        });
+      });
+      return newMap;
+    });
+    setSoloLayer(null);
+    setActivePreset(preset.id);
   }, []);
 
   // Show all layers
@@ -280,6 +255,7 @@ export function useLayerState() {
       return newMap;
     });
     setSoloLayer(null);
+    setActivePreset(null);
   }, []);
 
   // Hide all layers
@@ -292,9 +268,10 @@ export function useLayerState() {
       return newMap;
     });
     setSoloLayer(null);
+    setActivePreset(null);
   }, []);
 
-  // Get effective visibility (considering solo mode)
+  // Get effective visibility
   const isVisible = useCallback((layerId: string): boolean => {
     const state = layerStates.get(layerId);
     if (!state) return false;
@@ -305,74 +282,438 @@ export function useLayerState() {
 
     // Check parent visibility for sublayers
     const parts = layerId.split('.');
-    if (parts.length > 1) {
-      const parentState = layerStates.get(parts[0]);
-      if (!parentState?.visible) return false;
+    for (let i = 1; i < parts.length; i++) {
+      const parentId = parts.slice(0, i).join('.');
+      const parentState = layerStates.get(parentId);
+      if (parentState && !parentState.visible) return false;
     }
 
     return state.visible;
   }, [layerStates, soloLayer]);
 
-  // Get effective opacity (considering parent opacity for sublayers)
+  // Get effective opacity
   const getOpacity = useCallback((layerId: string): number => {
     const state = layerStates.get(layerId);
     if (!state) return 0;
 
+    let opacity = state.opacity;
+
+    // Multiply by parent opacities
     const parts = layerId.split('.');
-    if (parts.length > 1) {
-      const parentState = layerStates.get(parts[0]);
+    for (let i = 1; i < parts.length; i++) {
+      const parentId = parts.slice(0, i).join('.');
+      const parentState = layerStates.get(parentId);
       if (parentState) {
-        return state.opacity * parentState.opacity;
+        opacity *= parentState.opacity;
       }
     }
 
-    return state.opacity;
+    return opacity;
   }, [layerStates]);
+
+  // Update filter options
+  const updateFilters = useCallback((options: Partial<LayerFilterOptions>) => {
+    setFilterOptions(prev => ({ ...prev, ...options }));
+  }, []);
+
+  // Clear all filters
+  const clearFilters = useCallback(() => {
+    setFilterOptions({});
+  }, []);
 
   return {
     layerStates,
     soloLayer,
+    filterOptions,
+    activePreset,
     toggleLayer,
     setOpacity,
     toggleExpanded,
     toggleSolo,
     applyPreset,
+    applyClinicalPreset,
     showAll,
     hideAll,
     isVisible,
     getOpacity,
+    updateFilters,
+    clearFilters,
   };
 }
 
+// ============================================
+// Body Region Labels
+// ============================================
+
+const BODY_REGION_LABELS: Record<BodyRegion, string> = {
+  head: 'Head',
+  neck: 'Neck',
+  thorax: 'Thorax',
+  abdomen: 'Abdomen',
+  pelvis: 'Pelvis',
+  upper_limb: 'Upper Limb',
+  lower_limb: 'Lower Limb',
+};
+
+const CLINICAL_RELEVANCE_LABELS: Record<ClinicalRelevance, string> = {
+  essential: 'Essential',
+  common: 'Common',
+  specialized: 'Specialized',
+  research: 'Research',
+};
+
+const COMPLEXITY_LEVEL_LABELS: Record<ComplexityLevel, string> = {
+  basic: 'Basic',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+  expert: 'Expert',
+};
+
+// ============================================
+// Layer Filter Panel Component
+// ============================================
+
+interface LayerFilterPanelProps {
+  filterOptions: LayerFilterOptions;
+  onUpdateFilters: (options: Partial<LayerFilterOptions>) => void;
+  onClearFilters: () => void;
+}
+
+function LayerFilterPanel({ filterOptions, onUpdateFilters, onClearFilters }: LayerFilterPanelProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const hasActiveFilters = !!(
+    filterOptions.bodyRegions?.length ||
+    filterOptions.clinicalRelevance?.length ||
+    filterOptions.complexityLevel ||
+    filterOptions.searchTerm
+  );
+
+  return (
+    <div className="layer-filter-panel">
+      <div className="layer-filter-header">
+        <button
+          className={`layer-filter-toggle ${isExpanded ? 'expanded' : ''}`}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+          </svg>
+          Filters
+          {hasActiveFilters && <span className="filter-badge" />}
+        </button>
+        {hasActiveFilters && (
+          <button className="clear-filters-btn" onClick={onClearFilters}>
+            Clear
+          </button>
+        )}
+      </div>
+
+      {isExpanded && (
+        <div className="layer-filter-content">
+          {/* Search */}
+          <div className="filter-section">
+            <input
+              type="text"
+              className="layer-search-input"
+              placeholder="Search structures..."
+              value={filterOptions.searchTerm || ''}
+              onChange={(e) => onUpdateFilters({ searchTerm: e.target.value || undefined })}
+            />
+          </div>
+
+          {/* Body Region Filter */}
+          <div className="filter-section">
+            <label className="filter-label">Body Region</label>
+            <div className="filter-chips">
+              {(Object.keys(BODY_REGION_LABELS) as BodyRegion[]).map(region => (
+                <button
+                  key={region}
+                  className={`filter-chip ${filterOptions.bodyRegions?.includes(region) ? 'active' : ''}`}
+                  onClick={() => {
+                    const current = filterOptions.bodyRegions || [];
+                    const newRegions = current.includes(region)
+                      ? current.filter(r => r !== region)
+                      : [...current, region];
+                    onUpdateFilters({ bodyRegions: newRegions.length ? newRegions : undefined });
+                  }}
+                >
+                  {BODY_REGION_LABELS[region]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Clinical Relevance Filter */}
+          <div className="filter-section">
+            <label className="filter-label">Clinical Relevance</label>
+            <div className="filter-chips">
+              {(Object.keys(CLINICAL_RELEVANCE_LABELS) as ClinicalRelevance[]).map(relevance => (
+                <button
+                  key={relevance}
+                  className={`filter-chip ${filterOptions.clinicalRelevance?.includes(relevance) ? 'active' : ''}`}
+                  onClick={() => {
+                    const current = filterOptions.clinicalRelevance || [];
+                    const newRelevance = current.includes(relevance)
+                      ? current.filter(r => r !== relevance)
+                      : [...current, relevance];
+                    onUpdateFilters({ clinicalRelevance: newRelevance.length ? newRelevance : undefined });
+                  }}
+                >
+                  {CLINICAL_RELEVANCE_LABELS[relevance]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Complexity Level Filter */}
+          <div className="filter-section">
+            <label className="filter-label">Max Complexity</label>
+            <div className="filter-chips">
+              {(Object.keys(COMPLEXITY_LEVEL_LABELS) as ComplexityLevel[]).map(level => (
+                <button
+                  key={level}
+                  className={`filter-chip ${filterOptions.complexityLevel === level ? 'active' : ''}`}
+                  onClick={() => {
+                    onUpdateFilters({
+                      complexityLevel: filterOptions.complexityLevel === level ? undefined : level
+                    });
+                  }}
+                >
+                  {COMPLEXITY_LEVEL_LABELS[level]}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================
+// Clinical Presets Panel Component
+// ============================================
+
+interface ClinicalPresetsPanelProps {
+  activePreset: string | null;
+  onApplyPreset: (preset: ClinicalPreset) => void;
+}
+
+function ClinicalPresetsPanel({ activePreset, onApplyPreset }: ClinicalPresetsPanelProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="clinical-presets-panel">
+      <button
+        className={`clinical-presets-toggle ${isExpanded ? 'expanded' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        Clinical Presets
+        {activePreset && <span className="preset-badge" />}
+      </button>
+
+      {isExpanded && (
+        <div className="clinical-presets-grid">
+          {CLINICAL_PRESETS.map(preset => (
+            <button
+              key={preset.id}
+              className={`clinical-preset-btn ${activePreset === preset.id ? 'active' : ''}`}
+              onClick={() => onApplyPreset(preset)}
+              title={preset.description}
+            >
+              <span className="preset-name">{preset.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================
+// Layer Row Component (Recursive)
+// ============================================
+
+interface LayerRowProps {
+  layer: EnhancedLayerDefinition;
+  depth: number;
+  layerStates: LayerStateMap;
+  soloLayer: string | null;
+  isVisible: (layerId: string) => boolean;
+  getOpacity: (layerId: string) => number;
+  onToggleLayer: (layerId: string) => void;
+  onSetOpacity: (layerId: string, opacity: number) => void;
+  onToggleExpanded: (layerId: string) => void;
+  onToggleSolo: (layerId: string) => void;
+}
+
+function LayerRow({
+  layer,
+  depth,
+  layerStates,
+  soloLayer,
+  isVisible,
+  getOpacity,
+  onToggleLayer,
+  onSetOpacity,
+  onToggleExpanded,
+  onToggleSolo,
+}: LayerRowProps) {
+  const state = layerStates.get(layer.id);
+  const visible = isVisible(layer.id);
+  const opacity = state?.opacity ?? 1;
+  const effectiveOpacity = getOpacity(layer.id);
+  const isSolo = soloLayer === layer.id;
+  const hasSublayers = layer.sublayers && layer.sublayers.length > 0;
+  const isExpanded = state?.expanded || false;
+
+  // Show complexity indicator
+  const complexityIndicator = layer.complexityLevel && layer.complexityLevel !== 'basic' ? (
+    <span className={`complexity-indicator complexity-${layer.complexityLevel}`} title={`${COMPLEXITY_LEVEL_LABELS[layer.complexityLevel]} level`}>
+      {layer.complexityLevel === 'intermediate' ? 'I' : layer.complexityLevel === 'advanced' ? 'A' : 'E'}
+    </span>
+  ) : null;
+
+  return (
+    <div className={`layer-item depth-${Math.min(depth, 3)}`}>
+      <div className="layer-row" style={{ paddingLeft: `${depth * 12 + 8}px` }}>
+        <button
+          className="layer-visibility"
+          onClick={() => onToggleLayer(layer.id)}
+          title={visible ? 'Hide' : 'Show'}
+        >
+          {visible ? (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          ) : (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          )}
+        </button>
+
+        <span
+          className="layer-color"
+          style={{
+            backgroundColor: layer.color,
+            opacity: effectiveOpacity,
+          }}
+        />
+
+        <span className="layer-name" title={layer.latinName || layer.name}>
+          {layer.name}
+          {complexityIndicator}
+        </span>
+
+        <input
+          type="range"
+          className="layer-opacity"
+          min="0"
+          max="1"
+          step="0.05"
+          value={opacity}
+          onChange={(e) => onSetOpacity(layer.id, parseFloat(e.target.value))}
+          title={`Opacity: ${Math.round(opacity * 100)}%`}
+        />
+
+        <button
+          className={`layer-solo ${isSolo ? 'active' : ''}`}
+          onClick={() => onToggleSolo(layer.id)}
+          title="Solo"
+        >
+          S
+        </button>
+
+        {hasSublayers && (
+          <button
+            className={`layer-expand ${isExpanded ? 'expanded' : ''}`}
+            onClick={() => onToggleExpanded(layer.id)}
+          >
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+        )}
+      </div>
+
+      {hasSublayers && isExpanded && (
+        <div className="sublayer-list">
+          {layer.sublayers!.map(sublayer => (
+            <LayerRow
+              key={sublayer.id}
+              layer={sublayer}
+              depth={depth + 1}
+              layerStates={layerStates}
+              soloLayer={soloLayer}
+              isVisible={isVisible}
+              getOpacity={getOpacity}
+              onToggleLayer={onToggleLayer}
+              onSetOpacity={onSetOpacity}
+              onToggleExpanded={onToggleExpanded}
+              onToggleSolo={onToggleSolo}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================
 // Layer Panel Component
+// ============================================
+
 interface LayerPanelProps {
   layerStates: LayerStateMap;
   soloLayer: string | null;
+  filterOptions?: LayerFilterOptions;
+  activePreset?: string | null;
   onToggleLayer: (layerId: string) => void;
   onSetOpacity: (layerId: string, opacity: number) => void;
   onToggleExpanded: (layerId: string) => void;
   onToggleSolo: (layerId: string) => void;
   onApplyPreset: (preset: LayerPreset) => void;
+  onApplyClinicalPreset?: (preset: ClinicalPreset) => void;
   onShowAll: () => void;
   onHideAll: () => void;
   isVisible: (layerId: string) => boolean;
   getOpacity: (layerId: string) => number;
+  onUpdateFilters?: (options: Partial<LayerFilterOptions>) => void;
+  onClearFilters?: () => void;
 }
 
 export function LayerPanel({
   layerStates,
   soloLayer,
+  filterOptions = {},
+  activePreset = null,
   onToggleLayer,
   onSetOpacity,
   onToggleExpanded,
   onToggleSolo,
   onApplyPreset,
+  onApplyClinicalPreset,
   onShowAll,
   onHideAll,
   isVisible,
   getOpacity,
+  onUpdateFilters,
+  onClearFilters,
 }: LayerPanelProps) {
-  const [showPresets, setShowPresets] = useState(false);
+  const [showLegacyPresets, setShowLegacyPresets] = useState(false);
+
+  // Apply filters to layers
+  const filteredLayers = useMemo(() => {
+    return filterLayers(ENHANCED_ANATOMICAL_LAYERS, filterOptions);
+  }, [filterOptions]);
 
   return (
     <div className="layer-panel">
@@ -392,9 +733,9 @@ export function LayerPanel({
             </svg>
           </button>
           <button
-            onClick={() => setShowPresets(!showPresets)}
-            className={`layer-action-btn ${showPresets ? 'active' : ''}`}
-            title="Presets"
+            onClick={() => setShowLegacyPresets(!showLegacyPresets)}
+            className={`layer-action-btn ${showLegacyPresets ? 'active' : ''}`}
+            title="Quick Presets"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="7" height="7"/>
@@ -406,7 +747,8 @@ export function LayerPanel({
         </div>
       </div>
 
-      {showPresets && (
+      {/* Legacy quick presets */}
+      {showLegacyPresets && (
         <div className="layer-presets">
           {LAYER_PRESETS.map(preset => (
             <button
@@ -421,123 +763,53 @@ export function LayerPanel({
         </div>
       )}
 
+      {/* Clinical Presets */}
+      {onApplyClinicalPreset && (
+        <ClinicalPresetsPanel
+          activePreset={activePreset}
+          onApplyPreset={onApplyClinicalPreset}
+        />
+      )}
+
+      {/* Filters */}
+      {onUpdateFilters && onClearFilters && (
+        <LayerFilterPanel
+          filterOptions={filterOptions}
+          onUpdateFilters={onUpdateFilters}
+          onClearFilters={onClearFilters}
+        />
+      )}
+
+      {/* Layer List */}
       <div className="layer-list">
-        {ANATOMICAL_LAYERS.map(layer => {
-          const state = layerStates.get(layer.id);
-          const visible = isVisible(layer.id);
-          const opacity = getOpacity(layer.id);
-          const isSolo = soloLayer === layer.id;
-          const hasSublayers = layer.sublayers && layer.sublayers.length > 0;
-          const isExpanded = state?.expanded || false;
-
-          return (
-            <div key={layer.id} className="layer-item">
-              <div className="layer-row">
-                <button
-                  className="layer-visibility"
-                  onClick={() => onToggleLayer(layer.id)}
-                  title={visible ? 'Hide' : 'Show'}
-                >
-                  {visible ? (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                  ) : (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
-                    </svg>
-                  )}
-                </button>
-
-                <span
-                  className="layer-color"
-                  style={{ backgroundColor: layer.color }}
-                />
-
-                <span className="layer-name">{layer.name}</span>
-
-                <input
-                  type="range"
-                  className="layer-opacity"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={opacity}
-                  onChange={(e) => onSetOpacity(layer.id, parseFloat(e.target.value))}
-                  title={`Opacity: ${Math.round(opacity * 100)}%`}
-                />
-
-                <button
-                  className={`layer-solo ${isSolo ? 'active' : ''}`}
-                  onClick={() => onToggleSolo(layer.id)}
-                  title="Solo"
-                >
-                  S
-                </button>
-
-                {hasSublayers && (
-                  <button
-                    className={`layer-expand ${isExpanded ? 'expanded' : ''}`}
-                    onClick={() => onToggleExpanded(layer.id)}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M6 9l6 6 6-6"/>
-                    </svg>
-                  </button>
-                )}
-              </div>
-
-              {hasSublayers && isExpanded && (
-                <div className="sublayer-list">
-                  {layer.sublayers!.map(sublayer => {
-                    const subVisible = isVisible(sublayer.id);
-                    const subOpacity = getOpacity(sublayer.id);
-
-                    return (
-                      <div key={sublayer.id} className="sublayer-row">
-                        <button
-                          className="layer-visibility"
-                          onClick={() => onToggleLayer(sublayer.id)}
-                        >
-                          {subVisible ? (
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                              <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                          ) : (
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                          )}
-                        </button>
-
-                        <span
-                          className="layer-color small"
-                          style={{ backgroundColor: sublayer.color }}
-                        />
-
-                        <span className="layer-name">{sublayer.name}</span>
-
-                        <input
-                          type="range"
-                          className="layer-opacity small"
-                          min="0"
-                          max="1"
-                          step="0.1"
-                          value={subOpacity}
-                          onChange={(e) => onSetOpacity(sublayer.id, parseFloat(e.target.value))}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {filteredLayers.map(layer => (
+          <LayerRow
+            key={layer.id}
+            layer={layer}
+            depth={0}
+            layerStates={layerStates}
+            soloLayer={soloLayer}
+            isVisible={isVisible}
+            getOpacity={getOpacity}
+            onToggleLayer={onToggleLayer}
+            onSetOpacity={onSetOpacity}
+            onToggleExpanded={onToggleExpanded}
+            onToggleSolo={onToggleSolo}
+          />
+        ))}
       </div>
     </div>
   );
 }
+
+// Re-export types and config from EnhancedLayerConfig
+export {
+  ENHANCED_ANATOMICAL_LAYERS,
+  CLINICAL_PRESETS,
+  type EnhancedLayerDefinition,
+  type ClinicalPreset,
+  type BodyRegion,
+  type ClinicalRelevance,
+  type ComplexityLevel,
+  type LayerFilterOptions,
+};

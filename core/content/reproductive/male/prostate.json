@@ -1,0 +1,111 @@
+{
+  "id": "structure-prostate",
+  "type": "structure",
+  "name": "Prostate",
+  "alternateNames": ["Prostate gland"],
+  "fmaId": "FMA:9600",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The prostate is a small gland below the bladder that makes fluid to help sperm stay healthy.",
+      "explanation": "The prostate is about the size of a walnut and sits just below the bladder. It wraps around the tube that carries urine out of the body (urethra). The prostate makes a milky fluid that mixes with sperm to form semen. This fluid helps protect and nourish sperm. As men get older, the prostate often gets bigger, which can sometimes cause problems with urination.",
+      "keyTerms": [
+        { "term": "gland", "definition": "An organ that makes and releases special fluids" },
+        { "term": "urethra", "definition": "The tube that carries urine from the bladder out of the body" },
+        { "term": "prostate fluid", "definition": "The milky liquid made by the prostate that mixes with sperm" }
+      ],
+      "analogies": ["The prostate is like a small donut-shaped factory that adds protective fluid to sperm as they pass through."],
+      "examples": ["Because the prostate surrounds the urethra, when it gets bigger in older men, it can squeeze the urethra and make it harder to urinate."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The prostate is an accessory reproductive gland that secretes alkaline fluid containing PSA, citric acid, and zinc, contributing approximately 30% of semen volume.",
+      "explanation": "The prostate weighs about 20 grams in young adults and consists of glandular tissue (70%) and fibromuscular stroma (30%). It is divided into zones: peripheral zone (most cancer), central zone (around ejaculatory ducts), transition zone (BPH develops here), and anterior fibromuscular stroma. Prostatic fluid is slightly acidic (pH 6.5) but helps buffer vaginal acidity. Key secretions include prostate-specific antigen (PSA) which liquefies semen, citric acid (energy source), zinc (antimicrobial), and acid phosphatase. The prostate is surrounded by a capsule and innervated by the prostatic plexus. Digital rectal examination (DRE) can assess posterior prostate surface.",
+      "keyTerms": [
+        { "term": "PSA", "definition": "Prostate-specific antigen - enzyme that liquefies semen and is used as a blood test marker", "pronunciation": "P-S-A" },
+        { "term": "peripheral zone", "definition": "Outer portion of prostate where most cancers arise" },
+        { "term": "transition zone", "definition": "Inner prostate zone surrounding urethra where BPH develops" },
+        { "term": "BPH", "definition": "Benign prostatic hyperplasia - non-cancerous prostate enlargement", "pronunciation": "B-P-H" },
+        { "term": "digital rectal exam", "definition": "Physical examination of the prostate through the rectum" }
+      ],
+      "analogies": ["Think of the prostate zones like layers of an onion, with different diseases preferring different layers."],
+      "examples": ["PSA blood test helps screen for prostate cancer, but PSA can also be elevated in BPH and prostatitis."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The prostate is a tubuloalveolar exocrine gland with androgen-dependent growth and secretory function, organized into histologically distinct zones with differential propensity for BPH and carcinoma.",
+      "explanation": "The McNeal zonal anatomy divides the prostate into: peripheral zone (70% of glandular tissue, 70% of cancers), central zone (25% of tissue, 5% of cancers, resistant to disease), transition zone (5% of tissue, 25% of cancers, all BPH), and anterior fibromuscular stroma. Histologically, the gland contains tubuloalveolar glands with columnar secretory epithelium, basal cells, and neuroendocrine cells, embedded in fibromuscular stroma. The prostatic urethra traverses the gland with the verumontanum (colliculus seminalis) marking ejaculatory duct openings. Neurovascular bundles run posterolateral to the prostate. Arterial supply from inferior vesical and middle rectal arteries; venous drainage to prostatic plexus (Santorini's plexus) communicating with vertebral veins (metastatic pathway).",
+      "keyTerms": [
+        { "term": "tubuloalveolar", "definition": "Gland structure with both tubular and rounded sac-like components" },
+        { "term": "verumontanum", "definition": "Elevation on posterior prostatic urethra where ejaculatory ducts open", "pronunciation": "vair-oo-mon-TAY-num" },
+        { "term": "Santorini's plexus", "definition": "Prostatic venous plexus surrounding prostate, surgically significant" },
+        { "term": "neurovascular bundle", "definition": "Nerve and vessel bundle posterolateral to prostate, contains cavernous nerves for erection" },
+        { "term": "basal cells", "definition": "Prostatic epithelial cells lacking androgen receptor expression, lost in carcinoma" }
+      ],
+      "clinicalNotes": "Loss of basal cells (seen with p63, high-molecular-weight keratin stains) is a diagnostic criterion for prostatic adenocarcinoma. Nerve-sparing prostatectomy preserves neurovascular bundles to maintain erectile function."
+    },
+    "4": {
+      "level": 4,
+      "summary": "The prostate demonstrates androgen-regulated epithelial-stromal interactions driving normal development, BPH pathogenesis, and carcinogenesis, with the PSA-expressing luminal cells originating from basal cell differentiation.",
+      "explanation": "Prostatic development and maintenance require androgen signaling: testosterone enters prostate cells, is converted to dihydrotestosterone (DHT) by 5α-reductase type 2, and DHT binds androgen receptor (10x higher affinity than testosterone). AR signaling promotes epithelial differentiation and secretory function. The prostatic epithelium contains: luminal cells (AR+, PSA-secreting, differentiated), basal cells (AR-, p63+, stem/progenitor function), and neuroendocrine cells (chromogranin+, rare). BPH involves stromal-epithelial interactions in the transition zone with both glandular and stromal hyperplasia. Prostatic adenocarcinoma arises from luminal cells (AR+, basal cell loss) with progression through prostatic intraepithelial neoplasia (PIN). Gleason grading assesses architectural patterns (1-5), reported as Grade Groups 1-5. PSA is a serine protease (kallikrein family) that liquefies semen by cleaving semenogelins.",
+      "keyTerms": [
+        { "term": "5α-reductase", "definition": "Enzyme converting testosterone to dihydrotestosterone in prostate" },
+        { "term": "dihydrotestosterone (DHT)", "definition": "Potent androgen metabolite with high affinity for androgen receptor" },
+        { "term": "prostatic intraepithelial neoplasia (PIN)", "definition": "Pre-malignant lesion with cytological atypia but intact basal layer" },
+        { "term": "Gleason grade", "definition": "Histological grading system based on glandular architecture patterns" },
+        { "term": "Grade Group", "definition": "Modern prostate cancer grading system (1-5) based on Gleason patterns" }
+      ],
+      "clinicalNotes": "5α-reductase inhibitors (finasteride, dutasteride) shrink the prostate by reducing DHT, treating BPH and reducing prostate cancer incidence. Androgen deprivation therapy (ADT) for prostate cancer initially suppresses tumor but castration-resistant prostate cancer eventually emerges."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The prostate represents a clinically critical organ where androgen receptor signaling, tumor immunology, and genomic alterations converge in the context of contemporary precision oncology and minimally invasive treatment paradigms.",
+      "explanation": "Clinical management integration: 1) BPH: medical therapy (α-blockers, 5-ARIs, combination), minimally invasive procedures (UroLift, Rezum, aquablation), TURP, simple prostatectomy; 2) Prostate cancer screening: PSA with consideration of risk factors, MRI-targeted biopsy, genetic risk scores (PHI, 4Kscore); 3) Localized prostate cancer: active surveillance (Grade Group 1), radical prostatectomy (open, laparoscopic, robotic), radiation (EBRT, brachytherapy), focal therapy; 4) Advanced disease: ADT (LHRH agonists/antagonists, orchiectomy), novel antiandrogens (enzalutamide, apalutamide, darolutamide), CYP17 inhibitors (abiraterone), PARP inhibitors for BRCA mutations, immunotherapy (sipuleucel-T), radioligand therapy (PSMA-targeted). Genomic characterization: common mutations include TMPRSS2-ERG fusion (50%), PTEN loss, TP53 mutations, DNA repair gene alterations (BRCA1/2, ATM - 20% of mCRPC). PSA kinetics (PSA velocity, doubling time) guide treatment decisions.",
+      "keyTerms": [
+        { "term": "TMPRSS2-ERG fusion", "definition": "Androgen-regulated gene rearrangement present in ~50% of prostate cancers" },
+        { "term": "PARP inhibitors", "definition": "Targeted therapy effective in tumors with homologous recombination deficiency (BRCA mutations)" },
+        { "term": "PSMA", "definition": "Prostate-specific membrane antigen - target for imaging (PET) and radioligand therapy" },
+        { "term": "castration-resistant prostate cancer", "definition": "Prostate cancer progressing despite testosterone at castrate levels" },
+        { "term": "multiparametric MRI", "definition": "Advanced imaging combining T2, diffusion, and contrast sequences for prostate cancer detection" },
+        { "term": "PI-RADS", "definition": "Prostate Imaging Reporting and Data System - standardized MRI interpretation scoring" }
+      ],
+      "clinicalNotes": "PSMA PET-CT has revolutionized staging with superior sensitivity for nodal and metastatic disease compared to conventional imaging. Germline genetic testing (BRCA1/2, Lynch syndrome genes) recommended for metastatic and high-risk localized prostate cancer, with implications for PARP inhibitor eligibility and family screening. Active surveillance for Grade Group 1 avoids overtreatment while maintaining oncological safety."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "aua-bph-guidelines",
+      "type": "article",
+      "title": "AUA Guideline on Management of Benign Prostatic Hyperplasia",
+      "source": "American Urological Association"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-seminal-vesicles", "targetType": "structure", "relationship": "related", "label": "Seminal Vesicles" },
+    { "targetId": "structure-urethra", "targetType": "structure", "relationship": "related", "label": "Urethra" },
+    { "targetId": "condition-bph", "targetType": "condition", "relationship": "related", "label": "BPH" },
+    { "targetId": "condition-prostate-cancer", "targetType": "condition", "relationship": "related", "label": "Prostate Cancer" }
+  ],
+  "tags": {
+    "systems": ["reproductive", "urinary"],
+    "structures": ["FMA:9600"],
+    "topics": ["anatomy", "physiology", "pathology", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "nbme": true, "shelf": ["surgery", "medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

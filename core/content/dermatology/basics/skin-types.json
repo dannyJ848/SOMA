@@ -1,0 +1,203 @@
+{
+  "id": "derm-basics-skin-types",
+  "type": "patient-education",
+  "category": "dermatology",
+  "subcategory": "basics",
+  "name": "Skin Types",
+  "alternateNames": ["Fitzpatrick Skin Types", "Skin Type Classification"],
+  "description": "Understanding different skin types and their characteristics",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Everyone has a different skin type based on how oily or dry their skin is and how their skin reacts to the sun.",
+      "explanation": "There are different ways to describe skin types:\n\n**By How Oily or Dry Your Skin Is:**\n- **Normal skin** - Not too oily, not too dry. Lucky you!\n- **Dry skin** - Feels tight, may be flaky or rough\n- **Oily skin** - Looks shiny, especially on the forehead, nose, and chin\n- **Combination skin** - Oily in some areas (usually the T-zone), dry in others\n- **Sensitive skin** - Gets red, itchy, or irritated easily\n\n**By How Your Skin Reacts to the Sun:**\nDermatologists use a scale from 1 to 6:\n- Types 1-2: Very fair skin that burns easily and rarely tans\n- Types 3-4: Medium skin that sometimes burns and tans\n- Types 5-6: Dark skin that rarely burns and tans easily\n\nKnowing your skin type helps you:\n- Choose the right skincare products\n- Know how much sun protection you need\n- Understand what skin problems you might be more likely to get",
+      "keyTerms": [
+        {
+          "term": "T-zone",
+          "definition": "The forehead, nose, and chin area that often gets oily"
+        },
+        {
+          "term": "sensitive skin",
+          "definition": "Skin that gets irritated, red, or itchy easily"
+        },
+        {
+          "term": "combination skin",
+          "definition": "Skin that is oily in some spots and dry in others"
+        }
+      ],
+      "keyPoints": [
+        "Skin types are classified by oiliness and sun sensitivity",
+        "Knowing your skin type helps you choose the right products",
+        "Sun protection needs vary by skin type",
+        "Skin type can change with age and seasons"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Skin types are classified by sebum production (cosmetic skin types) and by sun reactivity (Fitzpatrick phototypes), both of which influence skincare and sun protection recommendations.",
+      "explanation": "**Cosmetic Skin Types**\n\n*Normal Skin:*\n- Balanced sebum production\n- Small pores, even texture\n- Few imperfections, good elasticity\n\n*Dry Skin:*\n- Reduced sebum production\n- May feel tight, especially after washing\n- Fine lines more visible, rough texture\n- May be flaky or itchy\n\n*Oily Skin:*\n- Excess sebum production\n- Enlarged pores, shiny appearance\n- More prone to acne and blackheads\n- Often thicker, with fewer wrinkles\n\n*Combination Skin:*\n- Oily T-zone (forehead, nose, chin)\n- Normal to dry cheeks\n- Most common skin type\n\n*Sensitive Skin:*\n- Reacts to products, weather, or stress\n- May have redness, burning, or itching\n- Often associated with conditions like rosacea or eczema\n\n**Fitzpatrick Skin Phototypes**\n\n| Type | Characteristics | Sun Response |\n|------|----------------|---------------|\n| I | Very fair, red/blonde hair, blue eyes | Always burns, never tans |\n| II | Fair, light hair, blue/green eyes | Burns easily, tans minimally |\n| III | Light brown skin, brown hair/eyes | Sometimes burns, tans gradually |\n| IV | Olive/moderate brown skin | Rarely burns, tans easily |\n| V | Dark brown skin | Very rarely burns, tans darkly |\n| VI | Deeply pigmented dark brown/black | Never burns, deeply pigmented |\n\n**Why Skin Type Matters**\n- Sunscreen needs: Types I-II need SPF 30+ always; all types need protection\n- Skin cancer risk: Higher in lighter phototypes, but all types at risk\n- Aging: Sun damage shows differently by type\n- Product selection: Ingredients affect different types differently",
+      "keyTerms": [
+        {
+          "term": "sebum",
+          "definition": "Natural oil produced by skin glands that moisturizes and protects",
+          "pronunciation": "SEE-bum"
+        },
+        {
+          "term": "Fitzpatrick phototype",
+          "definition": "A 6-point scale classifying skin by its response to sun exposure",
+          "pronunciation": "FITZ-pat-rik"
+        },
+        {
+          "term": "T-zone",
+          "definition": "The T-shaped area of forehead, nose, and chin that tends to be oilier"
+        },
+        {
+          "term": "photosensitivity",
+          "definition": "Increased sensitivity to ultraviolet light from the sun"
+        }
+      ],
+      "keyPoints": [
+        "Cosmetic skin types describe oil production and sensitivity",
+        "Fitzpatrick scale classifies sun reactivity on a 1-6 scale",
+        "All skin types need sun protection, but amounts vary",
+        "Skin type guides product and treatment selection"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Cutaneous typing systems classify skin by objective and functional parameters including sebum production, hydration, photoreactivity, and intrinsic sensitivity, informing dermatological care and phototherapy dosing.",
+      "explanation": "**Sebaceous Function Classification**\n\n*Pathophysiology of Skin Types:*\n- Sebum production regulated by androgens (testosterone, DHT)\n- Sebaceous gland density varies: face > chest > back > extremities\n- Peak sebum production in adolescence, declines with age\n- Hormonal fluctuations (menstrual cycle) affect sebum output\n\n*Objective Measurements:*\n- Sebumeter: Measures sebum excretion rate (μg/cm²)\n- Corneometer: Measures stratum corneum hydration\n- TEWL meter: Measures transepidermal water loss\n\n*Factors Affecting Sebum Production:*\n- Genetics (polygenic inheritance)\n- Hormones (androgens stimulate, estrogens reduce)\n- Diet (high glycemic index may increase)\n- Climate (increases in hot, humid conditions)\n- Medications (retinoids, antiandrogens reduce)\n\n**Fitzpatrick Phototyping**\n\nDeveloped in 1975 for determining UVA phototherapy doses for psoriasis.\n\n*Classification Basis:*\n- Self-reported response to first 30-60 min of summer sun after winter\n- Considers burning tendency and tanning ability\n- Originally developed for Caucasian populations\n\n*Limitations:*\n- Poor correlation with actual MED (minimal erythema dose) in darker types\n- Does not account for mixed heritage\n- Subjective self-reporting\n- Limited utility for non-European ancestries\n\n**Skin Sensitivity Classifications**\n\n*Baumann Skin Type Indicator:*\n- 4 parameters: Oily/Dry, Sensitive/Resistant, Pigmented/Non-pigmented, Wrinkled/Tight\n- 16 possible combinations\n- Guides product recommendations\n\n*Sensitive Skin Subtypes:*\n- Type I: Acne-type (follicular irritation)\n- Type II: Rosacea-type (vascular reactivity)\n- Type III: Stinging-type (neurogenic)\n- Type IV: Allergic-type (immunologic)\n\n**Ethnic Variations in Skin**\n\n*Structural Differences:*\n- Stratum corneum layers: Similar across ethnic groups\n- Lipid content: Variable, may affect barrier function\n- Collagen fiber density: May be higher in darker skin\n- Fibroblast function: Increased collagen synthesis in keloid-prone skin\n\n*Pigmentary Differences:*\n- Melanocyte number: Similar across races\n- Melanosome size, number, distribution: Variable\n- Darker skin: Larger melanosomes, more melanin, less degradation in keratinocytes",
+      "keyTerms": [
+        {
+          "term": "minimal erythema dose (MED)",
+          "definition": "The smallest UV dose that produces visible redness 24 hours after exposure",
+          "pronunciation": "MED"
+        },
+        {
+          "term": "sebumeter",
+          "definition": "Device that measures sebum production on skin surface",
+          "pronunciation": "see-BYOO-meh-ter"
+        },
+        {
+          "term": "corneometer",
+          "definition": "Device that measures hydration of the stratum corneum",
+          "pronunciation": "kor-nee-OM-eh-ter"
+        },
+        {
+          "term": "melanosome",
+          "definition": "Organelle containing melanin; size and distribution vary by skin type",
+          "pronunciation": "MEL-an-oh-sohm"
+        }
+      ],
+      "keyPoints": [
+        "Sebum production is hormonally regulated and measurable",
+        "Fitzpatrick scale was developed for phototherapy dosing",
+        "Multiple classification systems exist for different purposes",
+        "Ethnic skin differences involve melanosome characteristics, not melanocyte numbers"
+      ]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced skin typing integrates molecular markers, genetic polymorphisms, and functional assays to personalize dermatological care, predict treatment responses, and assess disease risk.",
+      "explanation": "**Molecular Basis of Skin Types**\n\n*Sebaceous Gland Regulation:*\n- Androgen receptor signaling: Testosterone → 5α-reductase → DHT → gene transcription\n- PPAR signaling: Lipid synthesis and sebocyte differentiation\n- IGF-1 and mTORC1: Link diet to sebum production\n- Sebum composition: Triglycerides, wax esters, squalene, free fatty acids\n\n*Genetic Influences:*\n- STS gene (steroid sulfatase): Associated with dry skin/ichthyosis\n- FLG mutations: Filaggrin deficiency → dry skin, atopic dermatitis risk\n- ABCC11 gene: Determines earwax type and apocrine gland function\n- Androgen receptor CAG repeat length: Influences hormonal sensitivity\n\n**Phototype Molecular Determinants**\n\n*MC1R Gene Variants:*\n- Red hair/fair skin variants: R151C, R160W, D294H\n- Partial function variants reduce eumelanin synthesis\n- Increased pheomelanin ratio → photosensitivity\n- Independent melanoma risk beyond phenotype\n\n*Additional Pigmentation Genes:*\n- TYR: Tyrosinase (rate-limiting enzyme)\n- OCA2/HERC2: Affects melanosome pH\n- SLC24A5, SLC45A2: Melanosome ion transport\n- IRF4: Affects melanin synthesis\n\n*Tanning Response Genetics:*\n- ASIP (agouti): Antagonizes MC1R signaling\n- Tanning involves increased melanin synthesis, melanosome transfer\n- UV-induced DNA damage → p53 → POMC → α-MSH → MC1R → melanin\n\n**Sensitive Skin Pathophysiology**\n\n*Neurogenic Sensitivity:*\n- TRPV1 upregulation: Lower threshold for irritant perception\n- Increased neuropeptide release\n- Substance P, CGRP drive neurogenic inflammation\n\n*Barrier-Related Sensitivity:*\n- Increased TEWL even without visible changes\n- Reduced intercellular lipids\n- Lower NMF levels\n\n*Vascular Reactivity:*\n- Exaggerated flush response\n- Elevated baseline blood flow\n- Altered vascular tone regulation\n\n**Personalized Dermatology Applications**\n\n*Phototherapy Dosing:*\n- MED testing more accurate than phototype alone\n- Gene-based dosing protocols emerging\n- Consider concurrent photosensitizing medications\n\n*Treatment Selection:*\n- FLG status may predict emollient needs\n- MC1R status for melanoma surveillance intensity\n- TPMT polymorphisms for azathioprine dosing\n- HLA-B*58:01 for allopurinol DRESS risk\n\n*Cosmeceutical Personalization:*\n- Skin microbiome profiling\n- Gene expression panels\n- Biomarker-guided product selection",
+      "keyTerms": [
+        {
+          "term": "MC1R",
+          "definition": "Melanocortin 1 receptor gene; variants determine red hair phenotype and melanoma risk",
+          "pronunciation": "M-C-1-R"
+        },
+        {
+          "term": "5α-reductase",
+          "definition": "Enzyme converting testosterone to more potent DHT, affecting sebum production",
+          "pronunciation": "5-alpha re-DUK-tase"
+        },
+        {
+          "term": "TPMT",
+          "definition": "Thiopurine methyltransferase; polymorphisms affect azathioprine metabolism",
+          "pronunciation": "T-P-M-T"
+        },
+        {
+          "term": "eumelanin",
+          "definition": "Brown-black melanin that provides photoprotection",
+          "pronunciation": "yoo-MEL-ah-nin"
+        },
+        {
+          "term": "pheomelanin",
+          "definition": "Red-yellow melanin that may generate reactive oxygen species with UV",
+          "pronunciation": "fee-oh-MEL-ah-nin"
+        }
+      ],
+      "clinicalCorrelations": [
+        "MC1R variants confer melanoma risk independent of skin color",
+        "FLG mutations are major risk factors for atopic dermatitis",
+        "Pharmacogenomics guides medication dosing and risk assessment",
+        "Personalized skincare based on genetic/molecular profiling is emerging"
+      ]
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary skin typing incorporates multi-omic profiling, exposome analysis, and computational modeling to achieve precision dermatology, understanding skin as a dynamic system influenced by genetic, environmental, and lifestyle factors.",
+      "explanation": "**Systems Biology of Skin Phenotype**\n\n*Multi-Omic Integration:*\n- Genomics: SNP arrays, whole genome sequencing for pigmentation, sensitivity genes\n- Transcriptomics: Tissue-specific gene expression profiles\n- Proteomics: Stratum corneum protein analysis (NMF, enzymes)\n- Lipidomics: Sebum and barrier lipid composition\n- Metabolomics: Small molecule profiling\n- Microbiomics: 16S rRNA and metagenomic sequencing\n\n*Skin Phenotype as Emergent Property:*\n- Gene-environment interactions\n- Epigenetic modifications (DNA methylation, histone marks)\n- Post-translational modifications\n- Microbiome-host crosstalk\n\n**Exposome and Skin Aging**\n\n*External Exposome Factors:*\n- UV radiation: DNA damage, MMP induction, immunosuppression\n- Pollution: PM2.5, PAHs, NOx → oxidative stress, barrier disruption\n- Tobacco: Accelerated aging, impaired wound healing\n- Climate: Temperature, humidity effects on barrier and sebum\n- Lifestyle: Diet, sleep, exercise\n\n*Internal Exposome:*\n- Hormonal milieu (menopause, andropause effects)\n- Systemic inflammation\n- Psychological stress (cortisol, neuropeptides)\n- Metabolic status (diabetes, obesity)\n\n*Exposome-Skin Interactions:*\n- Aryl hydrocarbon receptor (AhR) signaling by pollutants\n- Circadian rhythm disruption effects\n- Cumulative oxidative damage\n- Synergistic effects (UV + pollution)\n\n**Advanced Skin Classification Systems**\n\n*Beyond Fitzpatrick:*\n- Genetics-based photosensitivity scoring\n- Combined ancestry analysis\n- Objective spectrophotometry (Individual Typology Angle)\n- Colorimetry with L*a*b* values\n\n*Multidimensional Typing:*\n- Skin atlas projects (facial aging patterns by ethnicity)\n- Machine learning phenotype prediction\n- Wearable sensor integration (UV exposure, sweat analysis)\n- Longitudinal skin monitoring\n\n**Precision Dermatology Applications**\n\n*Predictive Models:*\n- Skin cancer risk scores combining phenotype, genetics, behavior\n- Aging trajectory prediction\n- Treatment response prediction (psoriasis biologics, acne therapy)\n- Adverse event risk assessment\n\n*Personalized Interventions:*\n- Genomics-informed sun protection recommendations\n- Microbiome-targeted probiotics/prebiotics\n- Individualized anti-aging protocols\n- Precision skincare formulation\n\n*Digital Health Integration:*\n- AI-powered skin analysis apps\n- Teledermatology with standardized imaging\n- Real-time environmental exposure monitoring\n- Personalized behavior change recommendations\n\n**Ethical Considerations**\n\n*Challenges:*\n- Genetic testing privacy\n- Commercial exploitation of genetic data\n- Healthcare access disparities\n- Bias in AI algorithms trained on limited datasets\n- Redefining 'normal' skin\n\n*Future Directions:*\n- Population-specific reference datasets\n- Regulatory frameworks for personalized cosmetics\n- Integration with electronic health records\n- Global skin health initiatives",
+      "keyTerms": [
+        {
+          "term": "exposome",
+          "definition": "The totality of environmental exposures affecting an individual throughout life",
+          "pronunciation": "ex-POH-zohm"
+        },
+        {
+          "term": "Individual Typology Angle",
+          "definition": "Objective spectrophotometric measure of constitutive skin color",
+          "pronunciation": "ty-POL-oh-jee"
+        },
+        {
+          "term": "PM2.5",
+          "definition": "Particulate matter <2.5 micrometers that penetrates skin and causes oxidative damage"
+        },
+        {
+          "term": "aryl hydrocarbon receptor",
+          "definition": "Transcription factor activated by environmental pollutants affecting skin barrier and immunity",
+          "pronunciation": "AIR-il HY-droh-kar-bon"
+        },
+        {
+          "term": "multi-omics",
+          "definition": "Integration of genomics, transcriptomics, proteomics, metabolomics for comprehensive phenotyping"
+        }
+      ],
+      "clinicalCorrelations": [
+        "Precision dermatology integrates genetic and environmental data",
+        "AI-powered diagnostics are transforming skin assessment",
+        "Exposome research reveals modifiable aging factors",
+        "Personalized skincare is moving from marketing to science"
+      ],
+      "references": [
+        "Krutmann J et al. The skin aging exposome. J Dermatol Sci. 2017",
+        "Crawford NG et al. Loci associated with skin pigmentation identified in African populations. Science. 2017",
+        "Bastien M et al. Precision medicine for the management of inflammatory skin diseases. J Invest Dermatol. 2021",
+        "Ezzedine K et al. Fitzpatrick skin phototype: the unifying standard for classifying skin color. J Am Acad Dermatol. 2022"
+      ]
+    }
+  },
+  "relatedContent": [
+    {
+      "id": "derm-basics-skin-anatomy",
+      "relationship": "related",
+      "label": "Skin Anatomy"
+    },
+    {
+      "id": "derm-skincare-sun-protection",
+      "relationship": "related",
+      "label": "Sun Protection"
+    }
+  ],
+  "tags": {
+    "systems": ["integumentary"],
+    "topics": ["physiology", "patient-education", "dermatology"],
+    "keywords": ["skin type", "Fitzpatrick", "phototype", "sebum", "sensitivity"],
+    "clinicalRelevance": "high"
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

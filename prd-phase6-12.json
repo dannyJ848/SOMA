@@ -1,0 +1,461 @@
+{
+  "project": "Biological Self - Advanced Medical Intelligence",
+  "branchName": "ralph/advanced-medical-intelligence",
+  "description": "Expand the application to encapsulate physician-level medical understanding with extensive AI integration covering physiology, anatomy, pathology, and diagnostics. Make complex medical knowledge intuitively accessible to users.",
+  "phases": [
+    {
+      "phase": 6,
+      "name": "Clinical Reasoning Engine",
+      "description": "Build the foundation for clinical thinking - differential diagnosis, red flags, and decision support",
+      "userStories": [
+        {
+          "id": "US-201",
+          "title": "Differential Diagnosis Data Model",
+          "description": "Create comprehensive data structures for symptoms, conditions, and their probabilistic relationships",
+          "acceptanceCriteria": [
+            "Define Symptom interface with characteristics (onset, duration, severity, modifiers)",
+            "Define Condition interface with diagnostic criteria, prevalence, red flags",
+            "Create SymptomConditionMapping with likelihood ratios",
+            "Include demographic modifiers (age, sex, risk factors)",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-202",
+          "title": "Differential Diagnosis Generator",
+          "description": "AI-powered system to generate ranked differential diagnoses from symptom input",
+          "acceptanceCriteria": [
+            "Input: array of symptoms with characteristics",
+            "Output: ranked list of possible conditions with probabilities",
+            "Use Bayesian reasoning with prior probabilities",
+            "Consider symptom combinations and patterns",
+            "LLM enhancement for nuanced clinical reasoning",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-203",
+          "title": "Red Flag Detection System",
+          "description": "Identify dangerous symptom patterns requiring immediate medical attention",
+          "acceptanceCriteria": [
+            "Define red flag patterns for major emergencies (MI, stroke, PE, sepsis, etc.)",
+            "Real-time symptom monitoring during input",
+            "Urgency scoring (immediate, urgent, soon, routine)",
+            "Clear actionable guidance for each red flag",
+            "Never replace emergency services - always advise seeking care",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-204",
+          "title": "Clinical Decision Tree Visualizer",
+          "description": "Interactive visualization of diagnostic reasoning pathways",
+          "acceptanceCriteria": [
+            "Tree/graph visualization of diagnostic process",
+            "Show branching based on symptom presence/absence",
+            "Highlight current position in reasoning",
+            "Explain why each branch is relevant",
+            "Mobile responsive with touch interactions",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-205",
+          "title": "Clinical Reasoning Chat Mode",
+          "description": "Enhance AI chat with structured clinical reasoning capabilities",
+          "acceptanceCriteria": [
+            "Chat can ask clarifying questions in clinical style",
+            "Systematic review of systems integration",
+            "Show reasoning process transparently",
+            "Cite medical knowledge sources",
+            "Appropriate disclaimers and limitations",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 7,
+      "name": "Diagnostic Intelligence System",
+      "description": "Lab interpretation, diagnostic algorithms, and test recommendations",
+      "userStories": [
+        {
+          "id": "US-301",
+          "title": "Lab Value Interpretation Engine",
+          "description": "Comprehensive lab test interpretation with clinical context",
+          "acceptanceCriteria": [
+            "Database of 200+ common lab tests with reference ranges",
+            "Age/sex-specific normal ranges",
+            "Pattern recognition (anemia panels, liver panels, etc.)",
+            "Clinical significance explanations",
+            "Trending visualization over time",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-302",
+          "title": "Diagnostic Algorithm Library",
+          "description": "Interactive evidence-based diagnostic algorithms",
+          "acceptanceCriteria": [
+            "Implement 20+ common diagnostic algorithms (chest pain, syncope, etc.)",
+            "Step-by-step guided walkthrough",
+            "Branch based on user input",
+            "Show evidence basis for each step",
+            "Save progress and results",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-303",
+          "title": "Test Recommendation Engine",
+          "description": "Suggest appropriate diagnostic tests based on clinical picture",
+          "acceptanceCriteria": [
+            "Input: symptoms + suspected conditions",
+            "Output: prioritized test recommendations",
+            "Explain what each test would reveal",
+            "Consider test characteristics (sensitivity, specificity)",
+            "Cost and invasiveness considerations",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-304",
+          "title": "Lab Results Dashboard",
+          "description": "Visual dashboard for tracking and understanding lab results",
+          "acceptanceCriteria": [
+            "Input lab values manually or from health records",
+            "Visual indicators (normal, high, low, critical)",
+            "Trend charts over time",
+            "Panel groupings with interpretations",
+            "AI-generated summary of overall picture",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 8,
+      "name": "Pathophysiology Visualization",
+      "description": "Deep dive into disease mechanisms at cellular and system levels",
+      "userStories": [
+        {
+          "id": "US-401",
+          "title": "Disease Mechanism Visualizer",
+          "description": "Animated visualizations of how diseases develop and progress",
+          "acceptanceCriteria": [
+            "Library of 50+ disease mechanism animations",
+            "Cellular level detail where appropriate",
+            "Step-by-step progression with explanations",
+            "Interactive controls (play, pause, step)",
+            "Link to related anatomy structures",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-402",
+          "title": "Body System Cascade Effects",
+          "description": "Show how dysfunction in one system affects others",
+          "acceptanceCriteria": [
+            "System interaction maps",
+            "Cascade visualization (e.g., heart failure effects)",
+            "Compensation mechanisms shown",
+            "Decompensation thresholds",
+            "Timeline of progression",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-403",
+          "title": "Drug Mechanism Animations",
+          "description": "Visualize how medications work at molecular level",
+          "acceptanceCriteria": [
+            "Receptor binding animations",
+            "Enzyme inhibition visualizations",
+            "Pharmacokinetics visualization (absorption, distribution)",
+            "Side effect mechanism explanations",
+            "Drug interaction visualizations",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-404",
+          "title": "Cellular Pathology Viewer",
+          "description": "Microscopic view of disease effects on cells and tissues",
+          "acceptanceCriteria": [
+            "Normal vs pathological tissue comparisons",
+            "Inflammation process visualization",
+            "Cell death mechanisms",
+            "Healing and repair processes",
+            "Cancer cell behavior",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 9,
+      "name": "Treatment Intelligence",
+      "description": "Evidence-based treatment recommendations and drug management",
+      "userStories": [
+        {
+          "id": "US-501",
+          "title": "Treatment Recommendation Engine",
+          "description": "AI-powered evidence-based treatment suggestions",
+          "acceptanceCriteria": [
+            "Input: confirmed or suspected diagnosis",
+            "Output: treatment options with evidence levels",
+            "First-line, second-line, alternative options",
+            "Consider contraindications and patient factors",
+            "Link to clinical guidelines",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-502",
+          "title": "Drug Interaction Checker",
+          "description": "Comprehensive drug-drug and drug-condition interaction checking",
+          "acceptanceCriteria": [
+            "Check interactions between multiple medications",
+            "Severity ratings (contraindicated, major, moderate, minor)",
+            "Mechanism of interaction explained",
+            "Alternative suggestions when interactions found",
+            "Drug-condition and drug-food interactions",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-503",
+          "title": "Dosage Calculator",
+          "description": "Calculate appropriate medication dosages",
+          "acceptanceCriteria": [
+            "Weight-based calculations",
+            "Renal/hepatic adjustment calculators",
+            "Pediatric dosing",
+            "Unit conversions",
+            "Maximum dose warnings",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-504",
+          "title": "Treatment Timeline Planner",
+          "description": "Visual timeline for treatment plans and medication schedules",
+          "acceptanceCriteria": [
+            "Create medication schedules",
+            "Show expected response timelines",
+            "Monitoring milestones",
+            "Follow-up appointment reminders",
+            "Progress tracking",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 10,
+      "name": "Patient Education Generator",
+      "description": "Tools for understanding and communicating health information",
+      "userStories": [
+        {
+          "id": "US-601",
+          "title": "Health Literacy Analyzer",
+          "description": "Assess and adapt content to user's health literacy level",
+          "acceptanceCriteria": [
+            "Detect user's comprehension level from interactions",
+            "Adapt medical terminology accordingly",
+            "Offer multiple explanation levels",
+            "Track learning progress",
+            "Suggest educational resources",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-602",
+          "title": "Condition Explanation Generator",
+          "description": "Generate personalized condition explanations",
+          "acceptanceCriteria": [
+            "Plain language disease explanations",
+            "Analogies and metaphors for complex concepts",
+            "Visual aids generation",
+            "FAQ sections",
+            "Shareable summaries for family",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-603",
+          "title": "Medication Guide Generator",
+          "description": "Create personalized medication information sheets",
+          "acceptanceCriteria": [
+            "Purpose and mechanism in plain language",
+            "How to take correctly",
+            "What to expect (timeline, side effects)",
+            "Warning signs to watch for",
+            "Printable format option",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-604",
+          "title": "Lifestyle Recommendation Engine",
+          "description": "Personalized lifestyle and prevention recommendations",
+          "acceptanceCriteria": [
+            "Based on conditions and risk factors",
+            "Diet recommendations with meal suggestions",
+            "Exercise guidance with safety considerations",
+            "Sleep and stress management",
+            "Habit tracking integration",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 11,
+      "name": "Clinical Case Simulator",
+      "description": "Interactive learning through clinical case studies",
+      "userStories": [
+        {
+          "id": "US-701",
+          "title": "Case Presentation System",
+          "description": "Present clinical cases in realistic format",
+          "acceptanceCriteria": [
+            "Library of 100+ clinical cases across specialties",
+            "Progressive information revelation",
+            "History, physical exam, labs, imaging stages",
+            "Difficulty levels",
+            "Real-world based scenarios",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-702",
+          "title": "Diagnosis Practice Mode",
+          "description": "Interactive diagnosis practice with feedback",
+          "acceptanceCriteria": [
+            "User generates differential diagnosis",
+            "System scores accuracy",
+            "Feedback on missed diagnoses",
+            "Explain key distinguishing features",
+            "Track performance over time",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-703",
+          "title": "Treatment Decision Simulator",
+          "description": "Practice treatment decisions with outcomes",
+          "acceptanceCriteria": [
+            "Present treatment options",
+            "Show simulated outcomes based on choices",
+            "Explain optimal treatment rationale",
+            "Consider resource constraints",
+            "Ethical decision scenarios",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-704",
+          "title": "Learning Assessment Dashboard",
+          "description": "Track learning progress and identify gaps",
+          "acceptanceCriteria": [
+            "Performance analytics by topic",
+            "Identify knowledge gaps",
+            "Spaced repetition for weak areas",
+            "Achievement system",
+            "Comparison with learning goals",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    },
+    {
+      "phase": 12,
+      "name": "Advanced AI Medical Reasoning",
+      "description": "Sophisticated AI capabilities for medical understanding",
+      "userStories": [
+        {
+          "id": "US-801",
+          "title": "Medical Reasoning Chain",
+          "description": "Transparent step-by-step medical reasoning",
+          "acceptanceCriteria": [
+            "Show complete reasoning chain for conclusions",
+            "Cite evidence at each step",
+            "Acknowledge uncertainty appropriately",
+            "Alternative hypotheses considered",
+            "User can question any step",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-802",
+          "title": "Personalized Health Insights",
+          "description": "AI-generated insights from user's health data",
+          "acceptanceCriteria": [
+            "Analyze patterns in logged data",
+            "Identify correlations user may not notice",
+            "Predictive alerts for concerning trends",
+            "Wellness optimization suggestions",
+            "Privacy-preserving analysis",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-803",
+          "title": "Medical Question Answering",
+          "description": "Answer complex medical questions with citations",
+          "acceptanceCriteria": [
+            "Handle nuanced medical questions",
+            "Provide balanced perspectives",
+            "Cite medical literature",
+            "Appropriate uncertainty expression",
+            "Know limitations and refer appropriately",
+            "Typecheck passes"
+          ],
+          "passes": false
+        },
+        {
+          "id": "US-804",
+          "title": "Health Risk Modeling",
+          "description": "Predictive modeling for health risks",
+          "acceptanceCriteria": [
+            "Calculate risk scores (cardiovascular, diabetes, etc.)",
+            "Explain contributing factors",
+            "Show modifiable vs non-modifiable risks",
+            "Intervention impact projections",
+            "Comparison to population averages",
+            "Typecheck passes"
+          ],
+          "passes": false
+        }
+      ]
+    }
+  ]
+}

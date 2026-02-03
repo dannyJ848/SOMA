@@ -1,0 +1,16 @@
+export const symptoms = {
+  'symptoms.title': 'Symptom Tracker',
+  'symptoms.add': 'Add Symptom',
+  'symptoms.description': 'Description',
+  'symptoms.severity': 'Severity',
+  'symptoms.location': 'Location',
+  'symptoms.onset': 'When did it start?',
+  'symptoms.duration': 'Duration',
+  'symptoms.triggers': 'Triggers',
+  'symptoms.relief': 'What helps?',
+  'symptoms.severity.mild': 'Mild',
+  'symptoms.severity.moderate': 'Moderate',
+  'symptoms.severity.severe': 'Severe',
+  'symptoms.history.title': 'Symptom History',
+  'symptoms.empty': 'No symptoms recorded',
+};

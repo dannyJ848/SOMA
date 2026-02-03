@@ -1,0 +1,1234 @@
+/**
+ * Retinal Detachment - Comprehensive Educational Content
+ *
+ * Covers rhegmatogenous, tractional, and exudative retinal detachment
+ * with symptoms, diagnosis, and treatment.
+ */
+
+import { EducationalContent} from "../../types";
+
+export const retinalDetachment: EducationalContent = {
+  id: "condition-retinal-detachment",
+  type: "condition",
+  name: "Retinal Detachment",
+  alternateNames: ["RD", "Detached Retina", "Rhegmatogenous RD", "RRD"],
+  hpoId: "HP:0000547",
+
+  levels: {
+    1: {
+      level: 1,
+      summary: "Retinal detachment is a serious eye condition where the retina (the light-sensing tissue at the back of the eye) pulls away from its normal position. It is a medical emergency that can cause permanent vision loss if not treated quickly.",
+      explanation: `Think of your eye like a camera, with the retina being the film that captures images. When the retina detaches, it's like the film peeling away from the back of the camera. Without the retina in its proper place, the eye can't capture clear images.
+
+**Why is retinal detachment dangerous?**
+
+The retina needs to be attached to the back of the eye to work properly. When it detaches:
+- It doesn't get the oxygen and nutrients it needs
+- The photoreceptor cells (that capture light) start to die
+- Vision is lost in the detached area
+- **This is a medical emergency** - the sooner it's treated, the better the chances of saving vision
+
+**Types of retinal detachment:**
+
+1. **Rhegmatogenous (most common):**
+   - A tear or hole in the retina
+   - Fluid seeps behind the retina
+   - Retina pulls away from the back of the eye
+   - Usually happens with aging
+
+2. **Tractional:**
+   - Scar tissue pulls on the retina
+   - Common in people with diabetes
+   - Scar tissue grows on the retina and pulls it loose
+
+3. **Exudative:**
+   - Fluid leaks behind the retina
+   - No tear or hole
+   - Caused by other eye diseases or inflammation
+
+**Warning Signs of Retinal Detachment:**
+
+**IMPORTANT:** You may have no pain at all, but watch for:
+- **Flashes of light** (like lightning streaks in your vision)
+- **New floaters** (spots, cobwebs, or specks floating in your vision)
+- **A curtain or shadow** moving across your field of vision
+- **Sudden blurring of vision**
+- **Sudden loss of peripheral (side) vision**
+
+**Who is at risk?**
+- Age over 50 (more common as we age)
+- Nearsightedness (myopia)
+- Previous retinal detachment in one eye
+- Family history of retinal detachment
+- Eye injury or trauma
+- Previous eye surgery (especially cataract surgery)
+- Diabetes (for tractional detachment)
+
+**How is retinal detachment diagnosed?**
+- Dilated eye exam (eye doctor uses drops to widen pupils)
+- Special examination of the retina
+- Ultrasound of the eye (if cataract or bleeding blocks view)
+
+**How is retinal detachment treated?**
+
+**Most retinal detachments need surgery:**
+
+1. **Pneumatic Retinopexy:**
+   - Gas bubble injected into the eye
+   - Pushes retina back into place
+   - Laser or freezing treatment seals the tear
+   - Patient must position head in specific way
+
+2. **Scleral Buckle:**
+   - Small band placed around the eye
+   - Gently pushes the eye wall toward the retina
+   - Helps retina reattach
+
+3. **Vitrectomy:**
+   - Removes vitreous gel from inside the eye
+   - Repairs the detachment
+   - Replaces gel with gas or oil bubble
+
+**Recovery:**
+- Vision may take months to fully recover
+- Some vision may not return
+- Success rate is high with prompt treatment
+- Follow-up care is critical
+
+**Remember:**
+- This is a medical emergency
+- Seek immediate care if you have symptoms
+- Quick treatment improves outcomes
+- Regular eye exams can catch problems early`,
+      keyTerms: [
+        { term: "retina", definition: "The light-sensitive layer at the back of the eye that sends visual signals to the brain" },
+        { term: "floaters", definition: "Small spots or specks that float through your field of vision; can be normal or a sign of retinal problem" },
+        { term: "flashes", definition: "Flashes of light in your vision, caused by the vitreous pulling on the retina" },
+      ],
+      analogies: [
+        "Retinal detachment is like wallpaper peeling off a wall - once it starts pulling away, it needs to be reattached.",
+        "A retinal tear is like a hole in a tent - rain (fluid) can leak through and cause the tent to sag.",
+      ],
+      examples: [
+        "An older person suddenly sees flashes of light and many new floaters, followed by a dark curtain moving across their vision from one side.",
+        "Someone with poorly controlled diabetes develops scar tissue in their eye that pulls on the retina, causing tractional detachment.",
+      ],
+      patientCounselingPoints: [
+        "Flashes, floaters, or a curtain moving across your vision are medical emergencies - call your eye doctor immediately.",
+        "Don\\\'t wait - the sooner retinal detachment is treated, the better the chances of saving vision.",
+        "If you have a retinal detachment in one eye, your risk of detachment in the other eye is increased.",
+        "Wear protective eyewear during sports or activities that could injure your eyes.",
+        "Inform your eye doctor immediately if you notice any sudden changes in your vision.",
+      ],
+    },
+    2: {
+      level: 2,
+      summary: "Retinal detachment is separation of the neurosensory retina from the retinal pigment epithelium. Rhegmatogenous RD (RRD), caused by retinal break with fluid accumulation, is the most common type and requires urgent surgical repair. Tractional and exudative RD have different mechanisms and management approaches.",
+      explanation: `## Anatomy and Pathophysiology
+
+**Normal Retinal Attachment:**
+- Retina attached to RPE (retinal pigment epithelium)
+- RPE provides nutrition and removes waste
+- Vitreous gel fills center of eye, loosely attached to retina
+
+**Mechanisms of Detachment:**
+
+1. **Rhegmatogenous (RRD):**
+   - Retinal break (tear or hole)
+   - Liquified vitreous passes through break
+   - Fluid accumulates between retina and RPE
+   - Gravity-dependent spread
+
+2. **Tractional (TRD):**
+   - Vitreoretinal adhesions pull on retina
+   - Fibrotic membranes contract
+   - No retinal break
+   - Associated with diabetes, trauma, inflammation
+
+3. **Exudative (Serous):**
+   - Fluid accumulation from other causes
+   - No retinal break
+   - RPE or choroidal vascular problem
+   - Inflammation, tumor, vascular leakage
+
+## Clinical Features
+
+**Symptoms of Rhegmatogenous RD:**
+
+**Prodromal (Posterior Vitreous Detachment):**
+- Flashes of light (photopsia)
+- New floaters
+- May last days to weeks before detachment
+
+**Retinal Detachment:**
+- Dark curtain or shadow moving across vision
+- Peripheral vision loss first
+- Central vision loss as macula detaches
+- Blurred vision
+- No pain (usually)
+
+**Timing is Critical:**
+- Macula-on: Macula still attached, urgent repair needed
+- Macula-off: Macula already detached, repair within days to weeks
+
+**Risk Factors:**
+
+**Myopia:**
+- Nearsightedness
+- Longer eye shape
+- Thinner peripheral retina
+- More lattice degeneration
+- Higher lifetime risk
+
+**Age:**
+- Peak incidence 50-70 years
+- Vitreous liquefaction with age
+- PVD more common
+
+**Previous RD in Fellow Eye:**
+- 10-15% risk in second eye
+- Lifelong monitoring needed
+
+**Cataract Surgery:**
+- Capsular rent, vitreous loss increases risk
+- YAG laser capsulotomy small risk
+- Risk persists for years after surgery
+
+**Trauma:**
+- Penetrating or blunt injury
+- Delayed presentation possible
+- Associated with other ocular injuries
+
+**Family History:**
+- Genetic predisposition
+- Lattice degeneration
+- High myopia in families
+
+**Other Risk Factors:**
+- Lattice degeneration (thinned retina)
+- Retinal tears (symptomatic or asymptomatic)
+- Stickler syndrome (connective tissue disorder)
+- Marfan syndrome
+- Pregnancy (rare, but reported)
+
+## Diagnosis
+
+**History:**
+- Symptom onset and progression
+- Flashes, floaters, curtain
+- Previous eye problems or surgery
+- Trauma history
+- Family history
+- Systemic diseases (diabetes)
+
+**Physical Examination:**
+- Visual acuity
+- Slit lamp examination
+- Dilated fundus examination (essential)
+- Scleral depression (indentation to see peripheral retina)
+- Intraocular pressure
+
+**Fundus Findings:**
+
+**Detached Retina:**
+- Elevated, corrugated appearance
+- Loss of retinal transparency
+- Reduced choroidal detail
+- Moves with eye movement
+
+**Retinal Break:**
+- Horseshoe tear
+- Operculated tear (round with free operculum)
+- Round atrophic hole
+- Giant retinal tear (>90 degrees)
+
+**Other Signs:**
+- Vitreous hemorrhage (pigment cells)
+- Pigment in vitreous ("tobacco dust")
+- Posterior vitreous detachment
+- Lattice degeneration
+- Choroidal detachment (rare)
+
+**Ancillary Tests:**
+
+**B-Scan Ultrasound:**
+- When view obscured (cataract, hemorrhage)
+- Shows retinal elevation
+- Can detect tears
+- Assesses vitreous status
+- Rules out tumor
+
+**Optical Coherence Tomography (OCT):**
+- Cross-sectional retinal imaging
+- Macular status
+- Small detachments
+- Macular hole, epiretinal membrane
+- Not for peripheral RD
+
+**Widefield Imaging:**
+- Optos imaging
+- Widefield fluorescein angiography
+- Documentation
+- Surgical planning
+
+## Treatment
+
+**Rhegmatogenous RD:**
+
+**Goal:** Reattach retina, seal all breaks
+
+**Surgical Options:**
+
+1. **Pneumatic Retinopexy:**
+   - Office-based procedure
+   - Gas bubble injection (SF6, C3F8)
+   - Cryotherapy or laser to seal break
+   - Specific head positioning required
+   - Success: 75-85% (selected cases)
+   - Advantages: Quick recovery, less invasive
+   - Disadvantages: Positioning demanding, not for all RDs
+
+2. **Scleral Buckle:**
+   - Operating room procedure
+   - Silicone band placed around eye
+   - Indents eye wall, supports break
+   - Cryotherapy to breaks
+   - Drain subretinal fluid (optional)
+   - Success: 85-90%
+   - Advantages: Durable, no intraocular surgery
+   - Disadvantages: More invasive, refractive change
+
+3. **Pars Plana Vitrectomy (PPV):**
+   - Operating room procedure
+   - Remove vitreous, flatten retina
+   - Laser around breaks
+   - Gas or silicone oil tamponade
+   - Success: 85-95%
+   - Advantages: Direct visualization, handles complex RDs
+   - Disadvantages: Cataract progression, more invasive
+
+**Selection Factors:**
+- Break location
+- Number of breaks
+- Macular status
+- Lens status
+- Patient factors
+- Surgeon preference
+
+**Combined Approaches:**
+- PPV + scleral buckle (complex RDs)
+- PPV + pneumatic (rare)
+
+**Non-Surgical (Rare):**
+- Observation for very selected cases
+- Exudative RD: treat underlying cause
+- Tractional RD: treat underlying disease
+
+**Postoperative Care:**
+- Positioning (gas bubble cases)
+- Activity restrictions
+- Drop medications (antibiotic, steroid, cycloplegic)
+- Follow-up examinations
+- Cataract may develop (PPV)
+- Silicone oil removal (if used)
+
+## Prognosis
+
+**Visual Outcomes:**
+- Macula-on: Good vision prognosis
+- Macula-off: Variable, often 20/50 to 20/400
+- Duration of macular detachment matters
+- Anatomic success: >90%
+- Functional success: 50-70%
+
+**Success Rates:**
+- Primary repair: 80-90%
+- Reoperation success: 95%+
+- Failure usually from PVR or missed breaks
+
+**Complications:**
+- Proliferative vitreoretinopathy (PVR)
+- Recurrent detachment
+- Infection (endophthalmitis)
+- Bleeding (vitreous hemorrhage)
+- Cataract (after PPV)
+- Glaucoma
+- Diplopia (buckle)
+- Epiretinal membrane
+- Macular pucker
+- New retinal breaks
+
+**Follow-up:**
+- Fellow eye monitoring
+- Regular examinations
+- Treat lattice degeneration?
+- Patient education on symptoms`,
+      keyTerms: [
+        { term: "rhegmatogenous", definition: "Type of retinal detachment caused by a retinal break (tear or hole)" },
+        { term: "PVD", definition: "Posterior vitreous detachment; separation of vitreous gel from retina; normal aging but can cause retinal tears" },
+        { term: "lattice degeneration", definition: "Thinning of peripheral retina with lattice-like appearance; risk factor for retinal tears" },
+        { term: "scleral buckle", definition: "Silicone band placed around the eye to support retina against eye wall" },
+        { term: "PPV", definition: "Pars plana vitrectomy; removal of vitreous gel to repair retinal detachment" },
+        { term: "PVR", definition: "Proliferative vitreoretinopathy; scar tissue formation causing recurrent detachment" },
+      ],
+      analogies: [
+        "A retinal tear is like a hole in a pair of jeans - once there\\\'s a hole, the fabric (retina) can pull away from the lining.",
+        "Pneumatic retinopexy is like using a pool float to push the retina back up against the wall of the eye."
+      ],
+      patientCounselingPoints: [
+        "Sudden flashes, floaters, or a curtain in your vision are emergencies - call your eye doctor immediately.",
+        "The longer a macula-off detachment waits for surgery, the worse the visual outcome.",
+        "Positioning after surgery is critical if a gas bubble was used.",
+        "Avoid high altitude, air travel, and scuba diving until the gas bubble is gone.",
+        "Have regular eye exams, especially if you have risk factors for retinal detachment."
+      ],
+    },
+    3: {
+      level: 3,
+      summary: "Retinal detachment involves separation of neurosensory retina from RPE, with rhegmatogenous (retinal break with fluid ingress), tractional (fibrovascular proliferation), and exudative (fluid accumulation without break) subtypes. Urgent surgical intervention with pneumatic retinopexy, scleral buckle, or vitrectomy is required for rhegmatogenous detachment to prevent permanent vision loss.",
+      explanation: `## Detailed Pathophysiology
+
+**Rhegmatogenous Retinal Detachment:**
+
+**Sequence of Events:**
+
+1. **Posterior Vitreous Detachment (PVD):**
+   - Vitreous liquefaction (synchysis)
+   - Vitreous detachment from retina (syneresis)
+   - Age-related, occurs in most people by age 70
+   - Usually asymptomatic
+   - May cause flashes and floaters
+
+2. **Retinal Break Formation:**
+   - Dynamic vitreoretinal traction during PVD
+   - Break at site of firm vitreoretinal adhesion
+   - Horseshoe tear: U-shaped with operculum
+   - Operculated tear: Round with free flap
+   - Atrophic hole: Thinned retina, full-thickness defect
+
+3. **Fluid ingress:**
+   - Liquified vitreous enters subretinal space
+   - Detachment spreads from break
+   - Gravity-dependent (fluid tracks inferiorly)
+   - Retina loses attachment, nutrition
+
+4. **Retinal Dysfunction:**
+   - Separation from RPE choroidal blood supply
+   - Photoreceptor hypoxia, ischemia
+   - Cell death begins in days
+   - Irreversible if prolonged
+
+**Vitreoretinal Adhesions:**
+- Strongest at vitreous base
+- Lattice degeneration: Thin retina, strong adhesion
+- Optic disc, vessels, macula
+- Sites of tear formation during PVD
+
+**Proliferative Vitreoretinopathy (PVR):**
+- Major cause of surgical failure
+- Cellular proliferation on retinal surfaces
+- Membrane formation, contraction
+- Retinal stiffness, foreshortening
+- Causes recurrent detachment
+
+**Tractional Retinal Detachment:**
+
+**Pathogenesis:**
+- Fibrovascular membranes form on retinal surface
+- Vascular endothelial growth factor (VEGF) driven
+- Neovascularization from ischemic retina
+- Membranes contract, pulling retina
+- No retinal break (initially)
+- Can break secondarily, become combined
+
+**Etiologies:**
+- **Diabetic retinopathy:** Most common cause
+- **Proliferative sickle cell retinopathy**
+- **Retinopathy of prematurity (ROP)**
+- **Trauma:** Penetrating injury
+- **Uveitis:** Inflammatory membranes
+- **Eales disease**
+
+**Exudative Retinal Detachment:**
+
+**Pathophysiology:**
+- Fluid accumulation without break
+- Increased vascular permeability
+- RPE pump dysfunction
+- Hydrostatic or osmotic imbalance
+
+**Causes:**
+- **Vascular:**
+  - Central serous chorioretinopathy
+  - Uveal effusion syndrome
+  - Hypertensive choroidopathy
+  - Coat disease
+- **Inflammatory:**
+  - Vogt-Koyanagi-Harada disease
+  - Posterior scleritis
+  - Uveitis
+- **Neoplastic:**
+  - Choroidal melanoma
+  - Metastatic tumors
+  - Choroidal hemangioma
+- **Iatrogenic:**
+  - Surgery complications
+  - Medication effects
+
+## Diagnostic Evaluation
+
+**Symptom Analysis:**
+
+**Flashes (Photopsia):**
+- Vitreous traction on retina
+- Mechanical stimulation of photoreceptors
+- Peripheral, brief, flashing lights
+- More prominent in dark adaptation
+
+**Floaters:**
+- Vitreous condensations
+- Hemorrhage (tobacco dust)
+- Pigment cells (RPE)
+- Weiss ring: PVD ring
+- New onset = urgent evaluation
+
+**Curtain/Shadow:**
+- Detached retina loses function
+- Peripheral vision loss first
+- Shadow moves toward center
+- Total vision loss if macula detaches
+
+**Examination Techniques:**
+
+**Dilated Fundus Examination:**
+- Indentation ophthalmoscopy (scleral depression)
+- Examines peripheral retina
+- Breaks often anterior, equatorial
+- Requires skill and experience
+- May be difficult with small pupil, media opacity
+
+**Slit Lamp Biomicroscopy:**
+- 78D, 90D lenses for panoramic view
+- Examination of anterior vitreous
+- Look for Schaffer sign (pigment)
+- Assess for PVD
+
+**B-Scan Ultrasound:**
+- Indicated when media opacity limits view
+- Cornea, lens opacity, vitreous hemorrhage
+- Shows retinal elevation, mobility
+- Localizes breaks (difficult)
+- Assesses vitreous status
+- Rules out choroidal mass
+
+**OCT:**
+- Cross-sectional retinal imaging
+- Macular status
+- Small detachments, schisis cavity
+- Epiretinal membrane, macular hole
+- Not for peripheral RD
+
+**Widefield Imaging:**
+- Optos: 200-degree view
+- Documentation
+- Preoperative planning
+- Patient education
+
+**Ultrasound Biomicroscopy (UBM):**
+- Anterior segment visualization
+- Trauma cases
+- Small peripheral RDs
+- Ciliary body detachment
+
+## Surgical Management
+
+**Pneumatic Retinopexy:**
+
+**Indications:**
+- Single break or close group
+- Break superior (top half)
+- No PVR
+- Clear media
+- Macula can be on or off
+
+**Technique:**
+- Cryotherapy or laser to break
+- Intravitreal gas injection (SF6, C3F8)
+- Patient positioning (face down, specific position)
+- Gas expands, pushes retina back
+- Break seals by chorioretinal adhesion
+
+**Advantages:**
+- Office procedure
+- Lower cost
+- Faster recovery
+- Less invasive
+
+**Disadvantages:**
+- Strict positioning required
+- Lower success rate (75-85%)
+- Not for all RDs
+- New breaks possible
+- Cataract progression
+
+**Gas Bubble Duration:**
+- SF6: ~2 weeks
+- C3F8: ~6-8 weeks
+
+**Scleral Buckle:**
+
+**Types:**
+- Segmental buckle (localized)
+- Encircling band (360-degree)
+- Combination
+
+**Technique:**
+- Identify breaks
+- Place silicone element
+- Suture to sclera
+- Indent eye wall
+- Cryotherapy to breaks
+- Drain subretinal fluid (optional)
+- Support retina while adhesion forms
+
+**Advantages:**
+- Durable long-term
+- No intraocular surgery
+- Handles inferior breaks well
+- Can be combined with PPV
+
+**Disadvantages:**
+- More invasive
+- Refractive change (myopia)
+- Diplopia possible
+- Extrusion, infection
+- Longer recovery
+
+**Pars Plana Vitrectomy (PPV):**
+
+**Technique:**
+- Three pars plana ports
+- Remove vitreous
+- Flatten retina (air-fluid exchange)
+- Laser endophotocoagulation around breaks
+- Tamponade agent (gas or oil)
+- Remove air, leave tamponade
+
+**Indications:**
+- Multiple breaks
+- Posterior breaks
+- Macular hole
+- PVR
+- Media opacity (vitreous hemorrhage)
+- Combined tractional-rhegmatogenous
+- Failed previous surgery
+
+**Tamponade Agents:**
+
+| Agent | Duration | Use |
+|-------|----------|-----|
+| Air | 5-7 days | Simple cases |
+| SF6 gas | 2 weeks | Small to medium RD |
+| C3F8 gas | 6-8 weeks | Large, complex RD |
+| Silicone oil | Indefinite | Complex, PVR, trauma |
+
+**Advantages of PPV:**
+- Direct visualization
+- Removes vitreous traction
+- Relieves media opacity
+- Handles complex RDs
+
+**Disadvantages:**
+- Cataract progression (nearly 100%)
+- Intraocular surgery risks
+- Silicone oil needs removal
+- More expensive
+
+**Combined Procedures:**
+- PPV + scleral buckle (complex RDs, PVR)
+- Higher success for difficult cases
+- More invasive
+
+## Prognostic Factors
+
+**Good Prognosis:**
+- Macula-on
+- Single break
+- Superior location
+- Short duration
+- Young age
+- No PVR
+
+**Poor Prognosis:**
+- Macula-off >7 days
+- Multiple breaks
+- Inferior location
+- Long duration
+- PVR present
+- Older age
+- Giant retinal tear
+- Trauma
+- Poor postoperative positioning`,
+      keyTerms: [
+        { term: "PVD", definition: "Posterior vitreous detachment; separation of vitreous from retina; normal aging but can cause retinal tears" },
+        { term: "Weiss ring", definition: "Circular floater representing attachment site of vitreous to optic nerve; seen with complete PVD" },
+        { term: "Schaffer sign", definition: "Pigment cells in anterior vitreous; indicates retinal break" },
+        { term: "cryotherapy", definition: "Freezing treatment to create chorioretinal adhesion around retinal break" },
+        { term: "laser retinopexy", definition: "Laser treatment to create chorioretinal adhesion around retinal break" },
+        { term: "tamponade", definition: "Agent (gas or oil) used to keep retina in place after surgery" },
+      ],
+      analogies: [
+        "PVR is like scar tissue forming under a bandage - it shrinks and pulls the retina away again.",
+        "A scleral buckle is like tightening a belt around the eye - it pushes the eye wall inward to support the retina.",
+      ],
+      clinicalNotes: "For pneumatic retinopexy, positioning is critical. The patient must position so that the bubble is against the break. This may mean face-down or side positioning for days. Non-compliance is a common cause of failure."
+    },
+    4: {
+      level: 4,
+      summary: "Retinal detachment management requires prompt recognition, accurate diagnosis, and appropriate surgical intervention. Rhegmatogenous detachment needs urgent repair; timing is critical when macula is still attached. Surgical approach selection depends on break characteristics, lens status, and surgeon expertise. Understanding of vitreoretinal relationships and PVR pathogenesis guides management and prognostication.",
+      explanation: `## Advanced Concepts in RD
+
+**Giant Retinal Tear:**
+- Tear extent >90 degrees (3 clock hours)
+- Posterior flap may fold over
+- High risk of PVR
+- High risk of macula involvement
+- Treatment: PPV with perfluorocarbon liquid
+- Avoid scleral buckle alone (won't reach)
+
+**Macula Hole RD:**
+- Full-thickness macular hole
+- Fluid detachment around macula
+- Associated with high myopia, PVD
+- Treatment: PPV with ILM peel
+- Gas tamponade
+- Face-down positioning
+
+**Retinal Dialysis:**
+- Disinsertion of retina at ora serrata
+- Trauma-related or idiopathic
+- Usually inferotemporal
+- Scleral buckle excellent for this
+- Can be treated with PPV
+
+**Traumatic RD:**
+- Delayed presentation common
+- May be hidden by other injuries
+- Associated with choroidal rupture, scleral rupture
+- Break often opposite injury site (contrecoup)
+- May have multiple breaks
+- PPV often needed
+
+**Suprachoroidal Hemorrhage:**
+- Intraoperative complication
+- Blood in suprachoroidal space
+- Can cause RD, expulsive hemorrhage
+- Risk factors: glaucoma, hypertension, anticoagulation
+- Urgent drainage needed
+
+**Choroidal Detachment:**
+- Fluid in suprachoroidal space
+- Can be associated with RD or surgery
+- Dark brown, dome-shaped
+- Distinguished from RD on ultrasound
+- Treat underlying cause
+
+## Surgical Decision-Making
+
+**Algorithm for Primary RRD:**
+
+**Single Break, Superior:**
+- Pneumatic retinopexy (if appropriate)
+- Scleral buckle
+- PPV (surgeon preference)
+
+**Multiple Breaks, Posterior:**
+- PPV preferred
+- Scleral buckle if breaks anterior
+
+**Inferior Breaks:**
+- Scleral buckle alone good
+- PPV with silicone oil if PVR
+
+**Lattice Degeneration Only:**
+- Prophylactic treatment controversial
+- Consider laser if high risk
+- Patient education important
+
+**Pseudophakic (after cataract surgery):**
+- PPV preferred
+- Higher risk of missed breaks
+- Posterior capsular openings
+- Scleral buckle alternative
+
+**Phakic (natural lens):**
+- Scleral buckle spares lens
+- PPV causes cataract progression
+- Consider patient age
+
+**Macula Status:**
+- Macula-on: Urgent (within 24-48 hours)
+- Macula-off: Semi-urgent (within 7 days)
+
+**PVR Grade:**
+- Grade A: vitreous cells, pigment
+- Grade B: wrinkling, stiffness
+- Grade C: membranes, star folds (advanced)
+- Grade C requires PPV, often with buckle
+
+## Complications Management
+
+**Recurrent Detachment:**
+- Identify cause (missed break, PVR, new break)
+- PPV usually needed
+- Silicone oil tamponade
+- Relaxed retina, anterior drainage
+- May need retinectomy
+
+**Persistent SRF (Subretinal Fluid):**
+- Common postoperative finding
+- May persist for months
+- Usually resolves
+- Consider choroidal pathology if persistent
+
+**Epiretinal Membrane:**
+- Postoperative complication
+- Puckering, distortion
+- May need PPV with membrane peel
+- OCT for diagnosis
+
+**Macular Pucker:**
+- Same as ERM
+- Wrinkled ILM surface
+- Vision decreased
+- Surgical peel if symptomatic
+
+**Cystoid Macular Edema:**
+- Postoperative inflammation
+- OCT diagnosis
+- NSAIDs, steroids
+- Usually resolves
+
+**New Retinal Breaks:**
+- After surgery
+- From vitreous traction
+- Laser treatment
+- May require reoperation
+
+**Endophthalmitis:**
+- Rare complication
+- Pain, vision loss, hypopyon
+- Vitreous tap and inject
+- PPV if severe
+- Culture directed antibiotics
+
+**Hypotony:**
+- Low IOP (<5 mmHg)
+- Wound leak
+- Choroidal detachment
+- Ciliary body dysfunction
+- Treat underlying cause
+
+**Diplopia:**
+- After scleral buckle
+- Extraocular muscle imbalance
+- Rectus muscle restriction
+- Prism or strabismus surgery
+
+**Silicone Oil Complications:**
+- Emulsification
+- Glaucoma
+- Band keratopathy
+- Oil in anterior chamber
+- Needs removal (usually 3-12 months)
+
+## Special Situations
+
+**Stickler Syndrome:**
+- Connective tissue disorder
+- High myopia, abnormal vitreous
+- Bilateral RDs common
+- Young age at onset
+- Treat fellow eye prophylactically?
+- Genetic counseling
+
+**Marfan Syndrome:**
+- Ectopia lentis
+- High myopia
+- Retinal detachment risk
+- Lens subluxation complicates PPV
+- Lensectomy may be needed
+
+**Diabetic Tractional RD:**
+- Fibrovascular membranes
+- Neovascularization
+- Progressive traction
+- May have combined (traction + rhegmatogenous)
+- PPV with membrane dissection
+- Anti-VEGF preoperative (controversial)
+- Laser to nonperfusion areas
+
+**Uveitic RD:**
+- Exudative component
+- Inflammatory membranes
+- Choroidal swelling
+- Treat uveitis first
+- Surgery for tractional/rhegmatogenous
+
+**Pediatric RD:**
+- Trauma common
+- High myopia
+- Retinopathy of prematurity
+- Persistent fetal vasculature
+- Different anatomy (vitreous base closer anteriorly)
+- High recurrence rate
+- Earlier aggressive treatment
+
+**Postoperative RD:**
+- After cataract surgery
+- Associated with vitreous loss
+- Posterior capsule rupture
+- YAG laser capsulotomy
+- May be delayed presentation
+- PPV preferred
+
+## Prognosis and Outcomes
+
+**Anatomic Success:**
+- Primary repair: 80-90%
+- Reoperation success: 95%+
+- Lower with PVR, giant tears
+
+**Visual Outcomes:**
+- Macula-on: 80-90% achieve 20/40 or better
+- Macula-off: 30-60% achieve 20/40 or better
+- Duration of macular detachment critical
+- 7 days: threshold for poor recovery
+- 30 days: very poor prognosis
+
+**Preoperative Factors:**
+- Macular status (most important)
+- Duration of detachment
+- Number/size of breaks
+- PVR grade
+- Lens status
+- Patient age
+
+**Postoperative Factors:**
+- Successful reattachment
+- Epiretinal membrane
+- Macular pucker
+- Cystoid macular edema
+- Cataract (after PPV)
+
+**Fellow Eye Risk:**
+- General population: 0.005% per year
+- After unilateral RD: 1-2% per year
+- Lattice degeneration: Higher risk
+- Prophylactic treatment controversial`,
+      keyTerms: [
+        { term: "giant retinal tear", definition: "Tear extending more than 90 degrees around retina; high risk of PVR and poor outcomes" },
+        { term: "retinal dialysis", definition: "Disinsertion of retina at ora serrata; common after trauma" },
+        { term: "suprachoroidal hemorrhage", definition: "Bleeding into potential space between choroid and sclera; surgical emergency" },
+        { term: "ERD", definition: "Exudative retinal detachment; fluid accumulation without retinal break" },
+      ],
+      clinicalNotes: `Key clinical pearls for retinal detachment:
+
+1. **Time is retina** - Macula-on detachments are emergencies. Repair within 24-48 hours for best outcomes. Macula-off still needs prompt repair but less urgent.
+
+2. **Flashes and floaters are red flags** - New onset flashes and floaters need urgent evaluation. PVD with symptoms has 15% retinal tear risk.
+
+3. **Always examine both eyes** - The fellow eye is at risk. Look for lattice degeneration, atrophic holes, retinal tears.
+
+4. **Indentation is essential** - Without scleral depression, you miss 20-30% of peripheral breaks. Learn this technique.
+
+5. **Ultrasound when you can"t see** - Don"t guess when media is opaque. B-scan ultrasound is invaluable for diagnosis and surgical planning.
+
+6. **Treat according to findings** - Don't use same approach for all RDs. Single break vs multiple, macula-on vs off, phakic vs pseudophakic all matter.
+
+7. **PVR is the enemy** - Proliferative vitreoretinopathy causes most failures. Early surgery before PVR develops improves outcomes.
+
+8. **Patient education saves vision** - Teach patients the warning signs. Flashes, floaters, or curtains need immediate evaluation.`,
+    },
+    5: {
+      level: 5,
+      summary: "Contemporary retinal detachment management integrates advanced imaging, microsurgical techniques, and individualized surgical approaches based on break characteristics and ocular findings. Understanding vitreoretinal pathology, PVR mechanisms, and prognostic factors enables optimal outcomes. Emerging technologies and techniques continue to improve success rates for this vision-threatening condition.",
+      explanation: `## Evidence-Based Surgical Approaches
+
+**Pivotal Trials:**
+
+**Scleral Buckle vs. Vitrectomy:**
+- Similar anatomic success for uncomplicated RRD
+- Scleral buckle: Better for phakic, younger patients
+- PPV: Preferred for pseudophakic, complex RDs
+- Combined procedures for complex cases
+
+**Pneumatic Retinopexy:**
+- PIVOT trial: Lower success than PPV or buckle
+- Appropriate for selected cases
+- Cost-effective when successful
+- Requires patient compliance
+
+**Gas vs. Oil Tamponade:**
+- Gas: Preferred for most cases
+- Oil: PVR, inferior breaks, trauma, air travel
+- Silicone oil removal needed
+- Heavy oils (Densiron) for inferior breaks
+
+**Surgical Decision Evidence:**
+
+| Factor | Favor Buckle | Favor PPV |
+|--------|--------------|-----------|
+| Phakic | Yes | No (causes cataract) |
+| Pseudophakic | Maybe | Yes |
+| Single superior break | Either | Either |
+| Multiple breaks | Maybe | Yes |
+| Posterior breaks | No | Yes |
+| Inferior breaks | Yes | Oil |
+| PVR | No | Yes |
+| Media opacity | No | Yes (clears media) |
+| Giant tear | No | Yes |
+
+## Advanced Surgical Techniques
+
+**Small-Gauge Vitrectomy:**
+- 23G, 25G, 27G systems
+- Sutureless or sutured
+- Faster recovery
+- Less inflammation
+- Comparable outcomes to 20G
+
+**Perfluorocarbon Liquids:**
+- "Heavy liquid" (heavier than water)
+- Flattens retina during surgery
+- Subretinal fluid displacement
+- Makes posterior breaks accessible
+- Removed at end of case
+
+**Chandelier Lighting:**
+- Bimanual surgery
+- Illuminated chandelier
+- Better visualization
+- Allows bimanual dissection
+
+**Wide-Angle Viewing Systems:**
+- Resight, contact lenses
+- Better peripheral view
+- Easier break localization
+- Improved surgical efficiency
+
+**Endoscopic Vitrectomy:**
+- Direct visualization
+- When anterior segment cloudy
+- Trauma cases
+- Difficult anterior breaks
+
+**Retinectomy:**
+- Intentional retinal cutting
+- For PVR, foreshortened retina
+- Relaxes retina
+- Last resort
+- Sacrifices peripheral vision
+
+## Complex Detachments
+
+**PVR Management:**
+- Grade C requires aggressive surgery
+- Membrane peeling (delamination)
+- Retinectomy for shortening
+- Long-acting tamponade (silicone oil)
+- May need repeat procedures
+- Adjunctive agents (5-FU, daunorubicin) studied
+
+**Giant Retinal Tear:**
+- >90 degrees extent
+- High PVR risk
+- Posterior flap may fold
+- Perfluorocarbon liquid essential
+- PPV with buckle
+- Laser posterior to break
+- Long-acting gas or oil
+
+**Coloboma RD:**
+- Associated with uveal coloboma
+- Breaks at coloboma margin
+- No retina in coloboma
+- Laser demarcation possible
+- Scleral buckle challenging
+- PPV with oil tamponade
+
+**Myopic Tractional Maculopathy:**
+- Staphyloma-associated
+- Foveoschisis + detachment
+- Macular hole may be present
+- PPV with ILM peel
+- Gas tamponade
+- Positioning important
+
+**Choroidal Detachment with RD:**
+- Suprachoroidal fluid compresses retina
+- Drain choroidals first
+- Small gauge vitrectomy
+- May need external drainage
+- Perfluorocarbon helpful
+
+## Emerging Technologies
+
+**Robotic Surgery:**
+- Preceyes system
+- Steady instrument manipulation
+- Not yet FDA approved
+- Future potential
+
+**Augmented Reality:**
+- Heads-up displays
+- Surgical navigation
+- 3D visualization
+- Already available
+
+**Artificial Intelligence:**
+- Ultrasound interpretation
+- Break detection
+- Prognosis prediction
+- Surgical planning assistance
+
+**New Agents:**
+- Ocriplasmin (Jetrea): for vitreomacular traction
+- Adjuncts for PVR prevention
+- Pharmacologic vitreolysis
+- Anti-PVR agents (research)
+
+## Controversies
+
+**Prophylactic Treatment for Lattice:**
+- Most don't treat asymptomatic lattice
+- Consider if:
+  - Strong family history
+  - Fellow eye RD
+  - High myopia
+  - High-risk occupation
+- Laser or cryotherapy
+
+**Bilateral Buckling:**
+- Some advocate prophylactic buckle in fellow eye
+- After unilateral RD with high-risk features
+- Not standard of care
+- Patient preference matters
+
+**Silicone Oil Removal:**
+- When: 3-12 months typical
+- Earlier if complications
+- Later if needed
+- Some leave oil indefinitely
+- Glaucoma risk with long-term
+
+**Anti-VEGF Before Diabetic Vitrectomy:**
+- Reduces bleeding, fibrovascular tissue
+- May make dissection harder
+- Timing: 3-7 days preoperative
+- Used by many, not proven
+
+**Primary Scleral Buckle vs. PPV:**
+- Trend toward more PPV
+- Scleral buckle still has role
+- Phakic patients benefit from buckle
+- Surgeon preference matters
+- Cost considerations
+
+**Macula Surgery:**
+- ILM peel for macular hole RD
+- Peeling technique varies
+- ICG staining (toxicity concerns)
+- Brilliant blue (safer)
+- Trypan blue alternative`,
+      keyTerms: [
+        { term: "perfluorocarbon liquid", definition: "Heavy liquid used intraoperatively to flatten retina and displace subretinal fluid" },
+        { term: "chandelier lighting", definition: "Bimanual illumination system allowing both hands free for instruments during vitrectomy" },
+        { term: "retinectomy", definition: "Surgical removal of retina for PVR or foreshortening; sacrificial procedure" },
+        { term: "staphyloma", definition: "Outpouching of sclera in high myopia; associated with macular pathology" },
+      ],
+      clinicalNotes: `Advanced clinical pearls:
+
+1. **Urgency matters** - Macula-on detachments are true emergencies. Prioritize these cases. Every hour counts for photoreceptor survival.
+
+2. **Find all breaks** - Missed breaks are the most common cause of failure. Meticulous examination with indentation. Look for multiple breaks.
+
+3. **Match surgery to pathology** - Don't use one approach for all RDs. Consider break characteristics, lens status, macular involvement, PVR.
+
+4. **PVR is the challenge** - Proliferative vitreoretinopathy causes most recurrent RDs. Early surgery before PVR develops. Aggressive membrane peeling when present.
+
+5. **Fellow eye surveillance** - After unilateral RD, fellow eye risk is 1-2% per year. Educate patient on warning signs. Consider prophylactic treatment selectively.
+
+6. **Trauma needs special attention** - Breaks may be opposite injury site. Look for multiple breaks. May have delayed presentation. Consider choroidal rupture.
+
+7. **Silicone oil is a tool, not default** - Use when needed (PVR, inferior breaks, trauma). Plan for removal. Discuss with patient.
+
+8. **Positioning is critical** - Gas or oil tamponade requires proper positioning. Non-compliance causes failure. Set expectations preoperatively.`,
+    },
+  },
+
+  media: [
+    {
+      id: "retinal-detachment-types",
+      type: "diagram",
+      filename: "retinal-detachment-types.svg",
+      title: "Types of Retinal Detachment",
+      description: "Comparison of rhegmatogenous, tractional, and exudative retinal detachment"
+    },
+    {
+      id: "retinal-breaks",
+      type: "diagram",
+      filename: "retinal-breaks.svg",
+      title: "Types of Retinal Breaks",
+      description: "Illustration of horseshoe tear, operculated tear, and atrophic hole",
+    },
+    {
+      id: "rd-surgical-options",
+      type: "diagram",
+      filename: "rd-surgical-options.svg",
+      title: "Surgical Treatment Options for RD",
+      description: "Comparison of pneumatic retinopexy, scleral buckle, and vitrectomy"
+    },
+  ],
+
+  citations: [
+    {
+      id: "aao-rd-2020",
+      type: "article",
+      title: "Retinal Detachment and Related Peripheral Vitreoretinal Disorders Preferred Practice Pattern",
+      authors: ["American Academy of Ophthalmology"],
+      source: "Ophthalmology",
+    },
+    {
+      id: "pivot-trial",
+      type: "article",
+      title: "Pneumatic Retinopexy versus Vitrectomy for the Treatment of Rhegmatogenous Retinal Detachment",
+      authors: ["PIVOT Study Group"],
+      source: "Ophthalmology",
+    },
+  ],
+
+  crossReferences: [
+    { targetId: "condition-diabetic-retinopathy", targetType: "condition", relationship: "related", label: "Diabetic Retinopathy" },
+    { targetId: "condition-macular-degeneration", targetType: "condition", relationship: "related", label: "Age-Related Macular Degeneration" },
+  ],
+
+  tags: {
+    systems: ["visual"],
+    topics: ["ophthalmology', 'retina', 'vitreoretinal surgery', 'emergency"],
+    keywords: ["retinal detachment', 'rhegmatogenous', 'scleral buckle', 'vitrectomy', 'retinal tear"],
+    clinicalRelevance: "critical",
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ["surgery", "emergency medicine"],
+    },
+  },
+
+  createdAt: "2025-01-26T00:00:00.000Z",
+  updatedAt: "2025-01-26T00:00:00.000Z",
+  version: 1,
+  status: "published",
+};
+
+export default retinalDetachment;

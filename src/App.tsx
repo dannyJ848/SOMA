@@ -1,12 +1,54 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy, useCallback, useRef } from 'react';
+import { ErrorBoundary } from './errors/ErrorBoundary';
 import { invoke } from './tauri-invoke';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
+import { useActionTracker } from './hooks/useActionTracker';
+import { useUserDemographics, DEFAULT_DEMOGRAPHICS } from './hooks/useUserDemographics';
+import { useTranslation, useI18n } from './i18n/useI18n';
+import { LanguageToggle } from './components/LanguageSwitcher';
+import { ViewTransition, getSlideDirection } from './components/ViewTransition';
+import './components/ViewTransition.css';
+import { UnifiedNavigation, KeyboardShortcutsHelp } from './components/navigation';
+import { ContentViewer, type ContentDocument } from './ContentViewer';
+import {
+  retrieveVitalContent,
+  searchConditions,
+  searchMedications,
+  searchLabTests
+} from './contentRetrieval';
+import { GlobalSearch } from './search/GlobalSearch';
+import { MobileBottomNav } from './components/MobileBottomNav';
+import type {
+  DashboardAction,
+  NavigationAction,
+  TimelineAction,
+  BodyMapAction,
+} from '../core/intent-prediction/types';
 
-// Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
+// Lazy load heavy components to prevent blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
+const SymptomExplorer = lazy(() => import('./SymptomExplorer').then(m => ({ default: m.SymptomExplorer })));
+const MedicationExplorer = lazy(() => import('./MedicationExplorer').then(m => ({ default: m.MedicationExplorer })));
+const ConditionSimulator = lazy(() => import('./ConditionSimulator'));
+const MedicalEncyclopedia = lazy(() => import('./MedicalEncyclopedia').then(m => ({ default: m.MedicalEncyclopedia })));
+const EncyclopediaEntry = lazy(() => import('./EncyclopediaEntry').then(m => ({ default: m.EncyclopediaEntry })));
+const SpecialtyBrowser = lazy(() => import('./components/SpecialtyBrowser').then(m => ({ default: m.SpecialtyBrowser })));
+const ProcedureBrowser = lazy(() => import('./components/ProcedureBrowser').then(m => ({ default: m.ProcedureBrowser })));
+const AnatomyMainScreen = lazy(() => import('./AnatomyMainScreen/AnatomyMainScreen').then(m => ({ default: m.AnatomyMainScreen })));
+const RegionalDetailView = lazy(() => import('./AnatomyMainScreen/RegionalDetailView').then(m => ({ default: m.RegionalDetailView })));
+
+// Body-centric components
+const OnboardingFlow = lazy(() => import('./onboarding/OnboardingFlow').then(m => ({ default: m.OnboardingFlow })));
+const BodyCentricHome = lazy(() => import('./BodyCentricHome').then(m => ({ default: m.BodyCentricHome })));
+
+// Settings
+const SettingsPage = lazy(() => import('./settings/SettingsPage'));
+
+// Vitals
+const VitalsTracker = lazy(() => import('./vitals/VitalsTracker'));
 
 interface HealthSummary {
   totalConditions: number;
@@ -88,19 +130,74 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
+
+// MobileBottomNav is now imported from ./components/MobileBottomNav
+
 
 function App() {
-  const [unlocked, setUnlocked] = useState(false);
+  const { t } = useTranslation('common');
+  const { t: tNav } = useTranslation('navigation');
+  const { t: tDash } = useTranslation('dashboard');
+  // DEV MODE: Skip passcode and onboarding for development
+  // Set to false to test the full onboarding flow as a new user
+  // When true: Bypasses passcode, provides mock dashboard data, and auto-saves default demographics
+  const DEV_SKIP_AUTH = true;
+
+  // Mock data for DEV mode to ensure the app renders properly without onboarding
+  // Provides realistic sample data so the dashboard looks functional during development
+  const DEV_MOCK_DASHBOARD: DashboardData = {
+    summary: {
+      totalConditions: 4,
+      totalMedications: 3,
+      totalLabResults: 5,
+      totalWhoopCycles: 42,
+      totalAppleHealthDays: 90,
+      lastUpdated: new Date().toISOString(),
+    },
+    activeConditions: [
+      { id: 'dev-cond-1', name: 'Seasonal Allergies', status: 'active', severity: 'mild', diagnosedDate: '2024-03-15' },
+      { id: 'dev-cond-2', name: 'Mild Asthma', status: 'managed', severity: 'moderate', diagnosedDate: '2021-06-01' },
+      { id: 'dev-cond-3', name: 'GERD', status: 'active', severity: 'mild', diagnosedDate: '2023-11-20' },
+      { id: 'dev-cond-4', name: 'Lower Back Pain', status: 'monitoring', severity: 'moderate', diagnosedDate: '2025-01-10' },
+    ],
+    currentMedications: [
+      { id: 'dev-med-1', name: 'Cetirizine', dosage: '10mg', frequency: 'Daily' },
+      { id: 'dev-med-2', name: 'Albuterol Inhaler', dosage: '90mcg', frequency: 'As needed' },
+      { id: 'dev-med-3', name: 'Omeprazole', dosage: '20mg', frequency: 'Daily' },
+    ],
+    recentLabs: [
+      { id: 'dev-lab-1', testName: 'HbA1c', value: 5.4, unit: '%', status: 'normal', collectedAt: '2025-12-15', trend: 'stable', previousValue: 5.5 },
+      { id: 'dev-lab-2', testName: 'TSH', value: 2.1, unit: 'mIU/L', status: 'normal', collectedAt: '2025-12-15', trend: 'down', previousValue: 2.8 },
+      { id: 'dev-lab-3', testName: 'Vitamin D', value: 32, unit: 'ng/mL', status: 'normal', collectedAt: '2025-12-15', trend: 'up', previousValue: 24 },
+      { id: 'dev-lab-4', testName: 'LDL Cholesterol', value: 118, unit: 'mg/dL', status: 'borderline', collectedAt: '2025-12-15', trend: 'up', previousValue: 105 },
+      { id: 'dev-lab-5', testName: 'Hemoglobin', value: 14.2, unit: 'g/dL', status: 'normal', collectedAt: '2025-12-15', trend: 'stable', previousValue: 14.0 },
+    ],
+    vitalsSummary: {
+      restingHeartRate: 62,
+      hrv: 48,
+      sleepHours: 7.3,
+      recoveryScore: 72,
+      steps: 8547,
+      lastUpdated: new Date().toISOString(),
+    },
+    recentSymptoms: [
+      { id: 'dev-sym-1', description: 'Mild nasal congestion', severity: 3, location: 'head_front', onsetDate: '2026-01-27' },
+      { id: 'dev-sym-2', description: 'Lower back stiffness', severity: 4, location: 'lower_back', onsetDate: '2026-01-25' },
+    ],
+  };
+
+  const [unlocked, setUnlocked] = useState(DEV_SKIP_AUTH);
   const [passphrase, setPassphrase] = useState('');
   const [confirmPassphrase, setConfirmPassphrase] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [hasDatabase, setHasDatabase] = useState(false);
+  const [loading, setLoading] = useState(!DEV_SKIP_AUTH);
+  const [hasDatabase, setHasDatabase] = useState(DEV_SKIP_AUTH);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  // In DEV mode, start with mock dashboard to prevent null errors
+  const [dashboard, setDashboard] = useState<DashboardData | null>(DEV_SKIP_AUTH ? DEV_MOCK_DASHBOARD : null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
-  const [currentView, setCurrentView] = useState<View>('dashboard');
+  const [currentView, setCurrentView] = useState<View>('body-centric');
   const [timeline, setTimeline] = useState<TimelineData | null>(null);
   const [timelineLoading, setTimelineLoading] = useState(false);
   const [activeFilters, setActiveFilters] = useState<TimelineEventType[]>(['lab', 'imaging', 'condition', 'medication', 'surgery', 'symptom']);
@@ -110,10 +207,90 @@ function App() {
   const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
   const [showSymptomForm, setShowSymptomForm] = useState(false);
   const [dataVersion, setDataVersion] = useState(0);
+  // Phase 4 state
+  const [selectedEncyclopediaEntryId, setSelectedEncyclopediaEntryId] = useState<string | null>(null);
+  const [initialMedicationId, setInitialMedicationId] = useState<string | undefined>(undefined);
+  const [initialConditionId, setInitialConditionId] = useState<string | undefined>(undefined);
+  // Regional detail view state
+  const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
+  // Chat context from body region "Ask AI" action
+  const [chatContext, setChatContext] = useState<string | null>(null);
+  // Structured anatomy chat context (carries region data, body systems, conditions, etc.)
+  const [anatomyChatContext, setAnatomyChatContext] = useState<import('./ai/types').AnatomyChatContext | null>(null);
+  // Navigation history for breadcrumb support
+  const [navigationHistory, setNavigationHistory] = useState<View[]>([]);
+  // Track previous view for transition direction
+  const previousViewRef = useRef<View | null>(null);
+  // View order for determining slide direction
+  const viewOrder: View[] = ['body-centric', 'chat', 'timeline', 'dashboard', 'body', 'anatomy', 'regional-detail', 'symptom-explorer', 'medication-explorer', 'condition-simulator', 'encyclopedia', 'encyclopedia-entry', 'specialty-browser', 'procedure-browser', 'settings'];
+  // Transition type based on navigation direction
+  const [transitionType, setTransitionType] = useState<'fade' | 'slide-left' | 'slide-right'>('fade');
+  // Global keyboard shortcuts state
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false);
+  // Content viewer state for displaying educational content
+  const [showContentViewer, setShowContentViewer] = useState(false);
+  const [contentDoc, setContentDoc] = useState<ContentDocument | null>(null);
+
+  // Action tracking hooks for intent prediction
+  const { track: trackDashboard } = useActionTracker<DashboardAction>('dashboard', 'App');
+  const { track: trackNavigation } = useActionTracker<NavigationAction>('navigation', 'App');
+  const { track: trackTimeline } = useActionTracker<TimelineAction>('timeline', 'App');
+  const { track: trackBodyMap } = useActionTracker<BodyMapAction>('body-map', 'App');
+
+  // Demographics hook for body-centric home
+  const { isOnboarded, isLoading: demographicsLoading, refreshDemographics, saveDemographics } = useUserDemographics();
+
+  // Navigate with history tracking and transition animation
+  const navigateWithHistory = useCallback((newView: View) => {
+    trackNavigation('view-change', { fromView: currentView, toView: newView });
+    previousViewRef.current = currentView;
+    setTransitionType(getSlideDirection(currentView, newView, viewOrder));
+    setNavigationHistory(prev => [...prev, currentView]);
+    setCurrentView(newView);
+  }, [currentView, trackNavigation, viewOrder]);
+
+  // Navigate back through history with reverse transition
+  const navigateBack = useCallback(() => {
+    if (navigationHistory.length > 0) {
+      const newHistory = [...navigationHistory];
+      const previousView = newHistory.pop()!;
+      trackNavigation('back', { fromView: currentView, toView: previousView });
+      previousViewRef.current = currentView;
+      setTransitionType('slide-right'); // Always slide right when going back
+      setNavigationHistory(newHistory);
+      setCurrentView(previousView);
+      return true;
+    }
+    return false;
+  }, [navigationHistory, currentView, trackNavigation]);
+
+  // Tracked navigation handler for header buttons with transition
+  const handleNavigate = useCallback((targetView: View) => {
+    trackNavigation('view-change', { fromView: currentView, toView: targetView });
+    previousViewRef.current = currentView;
+    setTransitionType(getSlideDirection(currentView, targetView, viewOrder));
+    setCurrentView(targetView);
+  }, [currentView, trackNavigation, viewOrder]);
 
   useEffect(() => {
     checkDatabase();
   }, []);
+
+  // DEV MODE: Initialize with default demographics if not onboarded
+  // This ensures the body model renders correctly in dev mode
+  // Use a ref to track if we've attempted to save, preventing repeated calls on error
+  const devDemographicsSavedRef = useRef(false);
+  useEffect(() => {
+    if (DEV_SKIP_AUTH && !isOnboarded && !demographicsLoading && !devDemographicsSavedRef.current) {
+      // Mark as attempted to prevent infinite retries on error
+      devDemographicsSavedRef.current = true;
+      // Save default demographics to localStorage so the body model works
+      saveDemographics(DEFAULT_DEMOGRAPHICS).catch(err => {
+        console.log('DEV MODE: Could not save default demographics:', err);
+      });
+    }
+  }, [DEV_SKIP_AUTH, isOnboarded, demographicsLoading, saveDemographics]);
 
   useEffect(() => {
     if (unlocked) {
@@ -127,7 +304,107 @@ function App() {
     }
   }, [unlocked, currentView, activeFilters, dateRange]);
 
+  // Global keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check if user is typing in an input field
+      const target = event.target as HTMLElement;
+      const isInputField =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        target.getAttribute('role') === 'textbox';
+
+      // Always handle Escape to close panels/modals (even in input fields)
+      if (event.key === 'Escape') {
+        // Close search if open
+        if (isSearchOpen) {
+          event.preventDefault();
+          setIsSearchOpen(false);
+          return;
+        }
+        // Close shortcuts help if open
+        if (isShortcutsHelpOpen) {
+          event.preventDefault();
+          setIsShortcutsHelpOpen(false);
+          return;
+        }
+        // Close selected event modal if open
+        if (selectedEvent) {
+          event.preventDefault();
+          setSelectedEvent(null);
+          return;
+        }
+        // Close symptom form if open
+        if (showSymptomForm) {
+          event.preventDefault();
+          setShowSymptomForm(false);
+          return;
+        }
+        return;
+      }
+
+      // Skip other shortcuts when typing in input fields
+      if (isInputField) {
+        return;
+      }
+
+      // Skip if Cmd/Ctrl/Alt modifiers are pressed (allow Shift for ?)
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
+
+      switch (event.key) {
+        // / - Open search (prevent browser find)
+        case '/':
+          event.preventDefault();
+          setIsSearchOpen(true);
+          break;
+
+        // ? (Shift + /) - Open keyboard shortcuts help
+        case '?':
+          event.preventDefault();
+          setIsShortcutsHelpOpen(prev => !prev);
+          break;
+
+        // H - Toggle UI visibility
+        case 'h':
+        case 'H':
+          // Only in anatomy views - handled by UnifiedNavigation
+          if (currentView === 'anatomy' || currentView === 'body-centric') {
+            // Let UnifiedNavigation handle this
+            return;
+          }
+          break;
+
+        // Space - Reset camera view (only in anatomy views)
+        // F - Focus on selection (only in anatomy views)
+        // 1-6 - Camera presets (only in anatomy views)
+        // These are handled by UnifiedNavigation component when active
+        case ' ':
+        case 'f':
+        case 'F':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+          // These are handled by the UnifiedNavigation component
+          // when in anatomy or body-centric views
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentView, isSearchOpen, isShortcutsHelpOpen, selectedEvent, showSymptomForm]);
+
   async function checkDatabase() {
+    // In DEV mode, skip the database check entirely - we already initialized
+    // hasDatabase=true and loading=false, so don't let a failed or negative
+    // check_database_exists call override those values
+    if (DEV_SKIP_AUTH) return;
     try {
       const exists = await invoke<boolean>('check_database_exists');
       setHasDatabase(exists);
@@ -139,6 +416,11 @@ function App() {
   }
 
   async function loadDashboard() {
+    // In DEV mode with mock data already loaded, skip the Tauri call
+    // to avoid a brief dashboardLoading=true flash that shows the skeleton
+    if (DEV_SKIP_AUTH && dashboard) {
+      return;
+    }
     setDashboardLoading(true);
     try {
       const data = await invoke<DashboardData>('get_dashboard');
@@ -167,13 +449,124 @@ function App() {
     }
   }
 
-  function toggleFilter(type: TimelineEventType) {
+  const toggleFilter = useCallback((type: TimelineEventType) => {
+    const isAdding = !activeFilters.includes(type);
+    trackTimeline('filter-type', {
+      filterType: type,
+      filterValue: isAdding ? 'enabled' : 'disabled',
+    });
     setActiveFilters(prev =>
       prev.includes(type)
         ? prev.filter(t => t !== type)
         : [...prev, type]
     );
-  }
+  }, [activeFilters, trackTimeline]);
+
+  // Handle date range change with tracking
+  const handleDateRangeChange = useCallback((field: 'start' | 'end', value: string) => {
+    trackTimeline('change-date-range', {
+      dateRangeStart: field === 'start' ? value : dateRange.start,
+      dateRangeEnd: field === 'end' ? value : dateRange.end,
+    });
+    setDateRange(prev => ({ ...prev, [field]: value }));
+  }, [dateRange, trackTimeline]);
+
+  // Handle clear date range with tracking
+  const handleClearDateRange = useCallback(() => {
+    trackTimeline('change-date-range', { dateRangeStart: undefined, dateRangeEnd: undefined });
+    setDateRange({});
+  }, [trackTimeline]);
+
+  // Handle timeline event selection with tracking
+  const handleSelectTimelineEvent = useCallback((event: TimelineEvent) => {
+    trackTimeline('select-event', { eventId: event.id, eventType: event.type });
+    setSelectedEvent(event);
+  }, [trackTimeline]);
+
+  // Handle body region selection with tracking
+  const handleBodyRegionSelect = useCallback((regionId: string) => {
+    trackBodyMap('select-region', { bodyRegion: regionId });
+    setSelectedBodyRegion(regionId);
+  }, [trackBodyMap]);
+
+  // Handle body diagram view toggle with tracking
+  const handleBodyViewToggle = useCallback((view: 'anterior' | 'posterior') => {
+    trackBodyMap('toggle-view', { metadata: { view } });
+    setBodyDiagramView(view);
+  }, [trackBodyMap]);
+
+  // Handle symptom form start with tracking
+  const handleStartSymptomLog = useCallback(() => {
+    trackBodyMap('start-symptom-log', { bodyRegion: selectedBodyRegion || undefined });
+    setShowSymptomForm(true);
+  }, [selectedBodyRegion, trackBodyMap]);
+
+  // Handle dashboard quick access button click with tracking
+  const handleQuickAccessClick = useCallback((targetView: View, cardType: string) => {
+    trackDashboard('click-quick-access', { metadata: { cardType, targetView } });
+    trackNavigation('view-change', { fromView: currentView, toView: targetView });
+    setCurrentView(targetView);
+  }, [currentView, trackDashboard, trackNavigation]);
+
+  // Handle search result selection
+  // Note: GlobalSearch sends SearchCategory values which use plural forms
+  // ('conditions', 'symptoms', 'medications', 'procedures') or singular
+  // ('anatomy', 'encyclopedia'). We handle both singular and plural variants.
+  const handleSearchResultSelect = useCallback((result: {
+    id: string;
+    category: string;
+    navigationPath?: string;
+    structureId?: string;
+    entryId?: string;
+  }) => {
+    setIsSearchOpen(false);
+
+    // Navigate based on the result category
+    switch (result.category) {
+      case 'anatomy':
+      case 'structure':
+        // Navigate to anatomy view; use structureId if provided, otherwise just open anatomy
+        trackNavigation('view-change', { fromView: currentView, toView: 'anatomy', metadata: { structureId: result.structureId || result.id } });
+        setCurrentView('anatomy');
+        break;
+      case 'condition':
+      case 'conditions':
+        setInitialConditionId(result.entryId || result.id);
+        trackNavigation('view-change', { fromView: currentView, toView: 'condition-simulator' });
+        setCurrentView('condition-simulator');
+        break;
+      case 'medication':
+      case 'medications':
+        setInitialMedicationId(result.entryId || result.id);
+        trackNavigation('view-change', { fromView: currentView, toView: 'medication-explorer' });
+        setCurrentView('medication-explorer');
+        break;
+      case 'symptom':
+      case 'symptoms':
+        trackNavigation('view-change', { fromView: currentView, toView: 'symptom-explorer' });
+        setCurrentView('symptom-explorer');
+        break;
+      case 'procedure':
+      case 'procedures':
+        trackNavigation('view-change', { fromView: currentView, toView: 'procedure-browser' });
+        setCurrentView('procedure-browser');
+        break;
+      case 'encyclopedia':
+        if (result.entryId) {
+          setSelectedEncyclopediaEntryId(result.entryId);
+          trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia-entry' });
+          setCurrentView('encyclopedia-entry');
+        } else {
+          trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia' });
+          setCurrentView('encyclopedia');
+        }
+        break;
+      default:
+        // Default to encyclopedia for unknown categories
+        trackNavigation('view-change', { fromView: currentView, toView: 'encyclopedia' });
+        setCurrentView('encyclopedia');
+    }
+  }, [currentView, trackNavigation]);
 
   function getEventTypeColor(type: TimelineEventType): string {
     const colors: Record<TimelineEventType, string> = {
@@ -189,12 +582,12 @@ function App() {
 
   function getEventTypeLabel(type: TimelineEventType): string {
     const labels: Record<TimelineEventType, string> = {
-      lab: 'Lab',
-      imaging: 'Imaging',
-      condition: 'Condition',
-      medication: 'Medication',
-      surgery: 'Surgery',
-      symptom: 'Symptom',
+      lab: t('medical.lab') || 'Lab',
+      imaging: t('medical.imaging') || 'Imaging',
+      condition: t('medical.condition') || 'Condition',
+      medication: t('medical.medication') || 'Medication',
+      surgery: t('medical.surgery') || 'Surgery',
+      symptom: t('medical.symptom') || 'Symptom',
     };
     return labels[type];
   }
@@ -210,7 +603,7 @@ function App() {
 
   async function handleUnlock() {
     if (!passphrase) {
-      setError('Please enter your passphrase');
+      setError(t('error.enterPassphrase') || 'Please enter your passphrase');
       return;
     }
 
@@ -223,25 +616,40 @@ function App() {
     } catch (err) {
       const errorMsg = String(err);
       if (errorMsg.includes('Incorrect passphrase') || errorMsg.includes('bad decrypt')) {
-        setError('Incorrect passphrase. Please try again.');
+        setError(t('error.incorrectPassphrase') || 'Incorrect passphrase. Please try again.');
       } else {
-        setError(`Failed to unlock: ${errorMsg}`);
+        setError(`${t('error.unlockFailed') || 'Failed to unlock'}: ${errorMsg}`);
       }
     } finally {
       setIsSubmitting(false);
     }
   }
 
+  async function handleLock() {
+    try {
+      await invoke<void>('lock_database');
+    } catch (err) {
+      console.error('Failed to lock database:', err);
+    }
+    // Always return to lock screen regardless of backend result
+    setUnlocked(false);
+    setPassphrase('');
+    setDashboard(null);
+    setTimeline(null);
+    setCurrentView('body-centric');
+    setError('');
+  }
+
   async function handleCreate() {
     setError('');
 
     if (passphrase.length < 8) {
-      setError('Passphrase must be at least 8 characters');
+      setError(t('error.passphraseTooShort') || 'Passphrase must be at least 8 characters');
       return;
     }
 
     if (passphrase !== confirmPassphrase) {
-      setError('Passphrases do not match');
+      setError(t('error.passphrasesDoNotMatch') || 'Passphrases do not match');
       return;
     }
 
@@ -261,18 +669,19 @@ function App() {
   function getPassphraseStrength(): { label: string; color: string; width: string } {
     const len = passphrase.length;
     if (len === 0) return { label: '', color: 'transparent', width: '0%' };
-    if (len < 8) return { label: 'Too short', color: 'var(--error)', width: '25%' };
-    if (len < 12) return { label: 'Weak', color: 'var(--warning)', width: '50%' };
-    if (len < 16) return { label: 'Good', color: 'var(--accent)', width: '75%' };
-    return { label: 'Strong', color: 'var(--success)', width: '100%' };
+    if (len < 8) return { label: t('password.tooShort') || 'Too short', color: 'var(--error)', width: '25%' };
+    if (len < 12) return { label: t('password.weak') || 'Weak', color: 'var(--warning)', width: '50%' };
+    if (len < 16) return { label: t('password.good') || 'Good', color: 'var(--accent)', width: '75%' };
+    return { label: t('password.strong') || 'Strong', color: 'var(--success)', width: '100%' };
   }
 
   function TrendIcon({ trend }: { trend?: 'up' | 'down' | 'stable' | null }) {
+    const { t } = useTranslation('labs');
     if (!trend) return null;
 
     if (trend === 'up') {
       return (
-        <span className="trend-icon trend-up" title="Increased">
+        <span className="trend-icon trend-up" title={t('labs.trend.up')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 15l-6-6-6 6"/>
           </svg>
@@ -281,7 +690,7 @@ function App() {
     }
     if (trend === 'down') {
       return (
-        <span className="trend-icon trend-down" title="Decreased">
+        <span className="trend-icon trend-down" title={t('labs.trend.down')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M6 9l6 6 6-6"/>
           </svg>
@@ -289,7 +698,7 @@ function App() {
       );
     }
     return (
-      <span className="trend-icon trend-stable" title="Stable">
+      <span className="trend-icon trend-stable" title={t('labs.trend.stable')}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M5 12h14"/>
         </svg>
@@ -306,10 +715,68 @@ function App() {
     );
   }
 
+  // Content retrieval handlers
+  const handleVitalClick = async (vitalType: 'heart-rate' | 'hrv' | 'recovery' | 'sleep' | 'steps') => {
+    const doc = await retrieveVitalContent(vitalType, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for vital: ${vitalType}`);
+      // Fallback to vitals view
+      setCurrentView('vitals');
+    }
+  };
+
+  const handleConditionClick = async (conditionName: string) => {
+    console.log(`[Content Retrieval] Searching for condition: ${conditionName}`);
+    const doc = await searchConditions(conditionName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for condition: ${conditionName}`);
+      // Fallback to condition simulator
+      setInitialConditionId(conditionName);
+      setCurrentView('condition-simulator');
+    }
+  };
+
+  const handleMedicationClick = async (medicationName: string) => {
+    console.log(`[Content Retrieval] Searching for medication: ${medicationName}`);
+    const doc = await searchMedications(medicationName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for medication: ${medicationName}`);
+      // Fallback to medication explorer
+      setInitialMedicationId(medicationName);
+      setCurrentView('medication-explorer');
+    }
+  };
+
+  const handleLabClick = async (labTestName: string) => {
+    console.log(`[Content Retrieval] Searching for lab: ${labTestName}`);
+    const doc = await searchLabTests(labTestName, 3);
+    if (doc) {
+      setContentDoc(doc);
+      setShowContentViewer(true);
+    } else {
+      console.warn(`[Content Retrieval] No content found for lab: ${labTestName}`);
+      // Fallback to timeline with lab filter
+      setActiveFilters(['lab']);
+      setCurrentView('timeline');
+    }
+  };
+
   if (loading) {
     return (
-      <div className="container">
-        <div className="loading">Loading...</div>
+      <div className="container" role="main" aria-busy="true" aria-label={t('app.loading') || 'Loading application'}>
+        <div className="loading" role="status" aria-live="polite">
+          <div className="loading-spinner" aria-hidden="true" />
+          <span>{t('action.loading')}</span>
+        </div>
       </div>
     );
   }
@@ -321,6 +788,9 @@ function App() {
     return (
       <div className="container">
         <div className="auth-card auth-card-wide">
+          <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+            <LanguageToggle />
+          </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="2"/>
@@ -328,11 +798,11 @@ function App() {
                     stroke="currentColor" strokeWidth="2" fill="none"/>
             </svg>
           </div>
-          <h1>Welcome to Biological Self</h1>
-          <p className="subtitle">Your private health companion</p>
+          <h1>{t('app.welcome')}</h1>
+          <p className="subtitle">{t('app.tagline')}</p>
 
           <div className="privacy-section">
-            <h2>Your Data Stays Here</h2>
+            <h2>{t('privacy.control')}</h2>
             <div className="privacy-features">
               <div className="privacy-feature">
                 <span className="privacy-icon">
@@ -342,8 +812,8 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>Encrypted Storage</strong>
-                  <span>AES-256 encryption protects all your health data</span>
+                  <strong>{t('privacy.encryptedStorage')}</strong>
+                  <span>{t('privacy.encryptedStorageDesc')}</span>
                 </div>
               </div>
               <div className="privacy-feature">
@@ -356,8 +826,8 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>100% Local</strong>
-                  <span>No servers, no cloud, no network calls</span>
+                  <strong>{t('privacy.local')}</strong>
+                  <span>{t('privacy.localDesc')}</span>
                 </div>
               </div>
               <div className="privacy-feature">
@@ -367,21 +837,21 @@ function App() {
                   </svg>
                 </span>
                 <div>
-                  <strong>You Control Your Data</strong>
-                  <span>Only you can access it with your passphrase</span>
+                  <strong>{t('privacy.control')}</strong>
+                  <span>{t('privacy.controlDesc')}</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="create-form">
-            <h2>Create Your Passphrase</h2>
-            <p className="form-hint">Choose a strong passphrase you'll remember. This cannot be recovered if lost.</p>
+            <h2>{t('password.create')}</h2>
+            <p className="form-hint">{t('password.hint')}</p>
 
             <div className="input-group">
               <input
                 type="password"
-                placeholder="Enter passphrase (min 8 characters)"
+                placeholder={`${t('password.enter')} (${t('password.minLength')})`}
                 value={passphrase}
                 onChange={(e) => setPassphrase(e.target.value)}
                 disabled={isSubmitting}
@@ -396,7 +866,7 @@ function App() {
 
             <input
               type="password"
-              placeholder="Confirm passphrase"
+              placeholder={t('password.confirm')}
               value={confirmPassphrase}
               onChange={(e) => setConfirmPassphrase(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
@@ -406,7 +876,7 @@ function App() {
             {error && <div className="error">{error}</div>}
 
             <button onClick={handleCreate} disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Secure Database'}
+              {isSubmitting ? t('action.loading') : t('action.create')}
             </button>
           </div>
         </div>
@@ -419,6 +889,9 @@ function App() {
     return (
       <div className="container">
         <div className="auth-card">
+          <div className="language-toggle-container" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+            <LanguageToggle />
+          </div>
           <div className="logo">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="2"/>
@@ -426,8 +899,8 @@ function App() {
                     stroke="currentColor" strokeWidth="2" fill="none"/>
             </svg>
           </div>
-          <h1>Biological Self</h1>
-          <p className="subtitle">Enter your passphrase to unlock your health data</p>
+          <h1>{t('app.name')}</h1>
+          <p className="subtitle">{t('password.enter')}</p>
 
           <div className="privacy-notice">
             <span className="lock-icon">
@@ -436,12 +909,12 @@ function App() {
                 <path d="M7 11V7a5 5 0 0110 0v4"/>
               </svg>
             </span>
-            <span>Your data is encrypted and stored only on this device</span>
+            <span>{t('password.encrypted')}</span>
           </div>
 
           <input
             type="password"
-            placeholder="Enter passphrase"
+            placeholder={t('password.enter')}
             value={passphrase}
             onChange={(e) => setPassphrase(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
@@ -453,29 +926,72 @@ function App() {
             <div className="error">
               {error}
               <button className="retry-link" onClick={() => { setError(''); setPassphrase(''); }}>
-                Clear and try again
+                {t('error.clearAndRetry')}
               </button>
             </div>
           )}
 
           <button onClick={handleUnlock} disabled={isSubmitting}>
-            {isSubmitting ? 'Unlocking...' : 'Unlock'}
+            {isSubmitting ? t('action.loading') : t('action.unlock')}
           </button>
         </div>
       </div>
     );
   }
 
-  // Dashboard or Timeline (unlocked)
-  if (dashboardLoading || !dashboard) {
+  // Onboarding flow for new users (show after unlock, before main content)
+  // DEV MODE: Skip onboarding when DEV_SKIP_AUTH is enabled
+  if (!DEV_SKIP_AUTH && !isOnboarded && !demographicsLoading) {
     return (
-      <div className="container">
-        <div className="loading">Loading your health data...</div>
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading onboarding...</div>
+        </div>
+      }>
+        <OnboardingFlow
+          onComplete={async () => {
+            // Refresh demographics state from localStorage after onboarding saves
+            await refreshDemographics();
+            // Refresh dashboard after onboarding completes
+            loadDashboard();
+          }}
+        />
+      </Suspense>
+    );
+  }
+
+  // Dashboard or Timeline (unlocked) - show skeleton loader
+  // Always show skeleton when dashboard is not loaded, regardless of DEV_SKIP_AUTH
+  // This prevents null access errors when destructuring dashboard properties
+  // In DEV mode, skip the demographicsLoading gate since we provide mock data and
+  // auto-save default demographics - waiting for that async op would block rendering
+  if (dashboardLoading || !dashboard || (!DEV_SKIP_AUTH && demographicsLoading)) {
+    return (
+      <div className="container" role="main" aria-busy="true">
+        <div className="dashboard-skeleton" role="status" aria-live="polite">
+          <span className="sr-only">Loading your health data...</span>
+          <div className="skeleton-section">
+            <div className="skeleton skeleton-section-title" />
+            <div className="skeleton-vitals-grid">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="skeleton skeleton-vital-item" />
+              ))}
+            </div>
+          </div>
+          <div className="skeleton-section">
+            <div className="skeleton skeleton-section-title" />
+            {[1, 2, 3].map(i => (
+              <div key={i} className="skeleton skeleton-list-item" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 
-  const { summary, activeConditions, currentMedications, recentLabs, vitalsSummary } = dashboard;
+  // Use DEV mock data as fallback if dashboard is null (shouldn't happen but safety first)
+  const dashboardData = dashboard ?? DEV_MOCK_DASHBOARD;
+  const { summary, activeConditions, currentMedications, recentLabs, vitalsSummary } = dashboardData;
 
   // Event detail modal
   const EventDetailModal = ({ event, onClose }: { event: TimelineEvent; onClose: () => void }) => (
@@ -513,19 +1029,21 @@ function App() {
     </div>
   );
 
-  // Timeline View
-  if (currentView === 'timeline') {
-    return (
-      <div className="container timeline-view">
-        <header className="app-header">
-          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
+  // Render the current view content based on currentView state
+  const renderViewContent = () => {
+    // Timeline View
+    if (currentView === 'timeline') {
+      return (
+        <div className="container timeline-view">
+          <header className="app-header">
+            <button className="back-button" onClick={() => setCurrentView('body-centric')}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            Back
+            {t('action.back')}
           </button>
-          <h1>Health Timeline</h1>
-          <div className="header-spacer" />
+          <h1>{tNav('nav.timeline')}</h1>
+          <LanguageToggle />
         </header>
 
         {/* Filter Controls */}
@@ -550,19 +1068,19 @@ function App() {
             <input
               type="date"
               value={dateRange.start || ''}
-              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
-              placeholder="Start date"
+              onChange={(e) => handleDateRangeChange('start', e.target.value)}
+              placeholder={t('action.startDate') || 'Start date'}
             />
-            <span className="date-separator">to</span>
+            <span className="date-separator">{t('action.to') || 'to'}</span>
             <input
               type="date"
               value={dateRange.end || ''}
-              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
-              placeholder="End date"
+              onChange={(e) => handleDateRangeChange('end', e.target.value)}
+              placeholder={t('action.endDate') || 'End date'}
             />
             {(dateRange.start || dateRange.end) && (
-              <button className="clear-dates" onClick={() => setDateRange({})}>
-                Clear
+              <button className="clear-dates" onClick={handleClearDateRange}>
+                {t('action.clear')}
               </button>
             )}
           </div>
@@ -571,7 +1089,7 @@ function App() {
         {/* Timeline */}
         <div className="timeline-container">
           {timelineLoading ? (
-            <div className="loading">Loading timeline...</div>
+            <div className="loading">{t('action.loading')}</div>
           ) : timeline && timeline.events.length > 0 ? (
             <>
               <div className="timeline-count">
@@ -582,7 +1100,7 @@ function App() {
                   <div
                     key={event.id}
                     className="timeline-item"
-                    onClick={() => setSelectedEvent(event)}
+                    onClick={() => handleSelectTimelineEvent(event)}
                   >
                     <div
                       className="timeline-marker"
@@ -620,6 +1138,24 @@ function App() {
         </div>
 
         {selectedEvent && <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
       </div>
     );
   }
@@ -627,26 +1163,583 @@ function App() {
   // Chat View
   if (currentView === 'chat') {
     return (
-      <ChatView
-        onBack={() => setCurrentView('dashboard')}
-        dashboardData={dashboard}
-      />
+      <>
+        <ChatView
+          onBack={() => {
+            setChatContext(null);
+            setAnatomyChatContext(null);
+            setCurrentView('body-centric');
+          }}
+          dashboardData={dashboard}
+          regionContext={chatContext}
+          anatomyChatContext={anatomyChatContext}
+        />
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
     );
   }
 
-  // 3D Anatomy View - lazy loaded with Suspense
+  // 3D Anatomy View - lazy loaded with Suspense, uses UnifiedNavigation for 3D canvas controls
   if (currentView === 'anatomy') {
     return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading 3D Anatomy Viewer...</div>
-        </div>
-      }>
-        <AnatomyViewer
-          onBack={() => setCurrentView('dashboard')}
-          dashboardData={dashboard}
+      <UnifiedNavigation
+        toolbarPosition="left"
+        showBreadcrumbs={true}
+        showCameraIndicator={true}
+        onCameraPresetChange={(preset) => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { cameraPreset: preset } });
+        }}
+        onResetView={() => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
+        }}
+      >
+        <ErrorBoundary
+          fallback={({ error, reset }) => (
+            <div style={{
+              padding: '40px',
+              background: '#1a1a2e',
+              color: 'white',
+              maxWidth: '600px',
+              margin: '0 auto',
+            }}>
+              <h2 style={{ color: '#ef4444' }}>3D Viewer Error</h2>
+              <pre style={{ 
+                background: '#0a0a0f', 
+                padding: '20px', 
+                borderRadius: '8px',
+                overflow: 'auto',
+                fontSize: '12px',
+              }}>{error.message}</pre>
+              <button 
+                onClick={reset}
+                style={{
+                  padding: '12px 24px',
+                  background: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginTop: '20px',
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
+        >
+          <Suspense fallback={
+            <div className="container">
+              <div className="loading">Loading 3D Anatomy Viewer...</div>
+            </div>
+          }>
+            <AnatomyMainScreen
+              onNavigateToDetail={(regionId: string) => {
+                setSelectedRegionId(regionId);
+                trackNavigation('view-change', { fromView: currentView, toView: 'regional-detail' });
+                navigateWithHistory('regional-detail');
+              }}
+              onNavigateToChat={(regionId: string, regionName: string, chatContext?: import('./ai/types').AnatomyChatContext) => {
+                setChatContext(`I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`);
+                setAnatomyChatContext(chatContext ?? null);
+                trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+                setCurrentView('chat');
+              }}
+            />
+          </Suspense>
+        </ErrorBoundary>
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
         />
-      </Suspense>
+      </UnifiedNavigation>
+    );
+  }
+
+  // Phase 4: Symptom Explorer
+  if (currentView === 'symptom-explorer') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Symptom Explorer...</div>
+          </div>
+        }>
+          <SymptomExplorer
+            onBack={() => setCurrentView('body-centric')}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Phase 4: Medication Explorer
+  if (currentView === 'medication-explorer') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Medication Explorer...</div>
+          </div>
+        }>
+          <MedicationExplorer
+            onBack={() => {
+              setInitialMedicationId(undefined);
+              // Try to navigate back through history, otherwise go to body-centric home
+              if (!navigateBack()) {
+                setCurrentView('body-centric');
+              }
+            }}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            initialMedicationId={initialMedicationId}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Phase 4: Condition Simulator
+  if (currentView === 'condition-simulator') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Condition Simulator...</div>
+          </div>
+        }>
+          <ConditionSimulator
+            onBack={() => {
+              setInitialConditionId(undefined);
+              setCurrentView('body-centric');
+            }}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onNavigateToMedication={(medId: string) => {
+              setInitialMedicationId(medId);
+              navigateWithHistory('medication-explorer');
+            }}
+            initialConditionId={initialConditionId}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Phase 4: Medical Encyclopedia
+  if (currentView === 'encyclopedia') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Medical Encyclopedia...</div>
+          </div>
+        }>
+          <MedicalEncyclopedia
+            onBack={() => setCurrentView('body-centric')}
+            dashboardData={dashboard}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onOpenEntry={(entryId) => {
+              setSelectedEncyclopediaEntryId(entryId);
+              setCurrentView('encyclopedia-entry');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Phase 4: Encyclopedia Entry
+  if (currentView === 'encyclopedia-entry' && selectedEncyclopediaEntryId) {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Encyclopedia Entry...</div>
+          </div>
+        }>
+          <EncyclopediaEntry
+            entryId={selectedEncyclopediaEntryId}
+            onBack={() => {
+              setSelectedEncyclopediaEntryId(null);
+              setCurrentView('encyclopedia');
+            }}
+            onNavigateToEntry={(entryId) => {
+              setSelectedEncyclopediaEntryId(entryId);
+              // Stay on encyclopedia-entry view
+            }}
+            onNavigateToAnatomy={() => setCurrentView('anatomy')}
+            onAskAI={(topicContext) => {
+              setChatContext(topicContext);
+              setAnatomyChatContext(null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Specialty Browser View
+  if (currentView === 'specialty-browser') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Specialty Browser...</div>
+          </div>
+        }>
+          <SpecialtyBrowser
+            onBack={() => setCurrentView('body-centric')}
+            onNavigateToCondition={(conditionId) => {
+              setInitialConditionId(conditionId);
+              navigateWithHistory('condition-simulator');
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Procedure Browser
+  if (currentView === 'procedure-browser') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Procedure Browser...</div>
+          </div>
+        }>
+          <ProcedureBrowser
+            onBack={() => setCurrentView('body-centric')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Vitals View
+  if (currentView === 'vitals') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Vitals...</div>
+          </div>
+        }>
+          <VitalsTracker
+            summaries={[]}
+            onClose={() => setCurrentView('body-centric')}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Regional Detail View - tabbed detail view for a selected anatomical region
+  if (currentView === 'regional-detail' && selectedRegionId) {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Regional Detail...</div>
+          </div>
+        }>
+          <RegionalDetailView
+            regionId={selectedRegionId}
+            patientData={undefined}
+            onClose={() => {
+              setSelectedRegionId(null);
+              if (!navigateBack()) {
+                setCurrentView('anatomy');
+              }
+            }}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Settings View
+  if (currentView === 'settings') {
+    return (
+      <>
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Settings...</div>
+          </div>
+        }>
+          <SettingsPage
+            onBack={() => setCurrentView('body-centric')}
+            onLock={handleLock}
+          />
+        </Suspense>
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Body-Centric Home (default view) - uses UnifiedNavigation for 3D canvas controls
+  if (currentView === 'body-centric') {
+    return (
+      <UnifiedNavigation
+        toolbarPosition="left"
+        showBreadcrumbs={true}
+        showCameraIndicator={true}
+        onCameraPresetChange={(preset) => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { cameraPreset: preset } });
+        }}
+        onResetView={() => {
+          trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
+        }}
+      >
+        <Suspense fallback={
+          <div className="container">
+            <div className="loading">Loading Body-Centric Home...</div>
+          </div>
+        }>
+          <BodyCentricHome
+            dashboardData={dashboard}
+            isLoading={dashboardLoading}
+            onNavigate={(view: View) => {
+              trackNavigation('view-change', { fromView: currentView, toView: view });
+              setCurrentView(view);
+            }}
+            onAskAI={(regionContext: string, structuredContext?: import('./ai/types').AnatomyChatContext) => {
+              setChatContext(regionContext);
+              setAnatomyChatContext(structuredContext ?? null);
+              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+              setCurrentView('chat');
+            }}
+          />
+        </Suspense>
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+        {/* Global Search Modal */}
+        {isSearchOpen && (
+          <GlobalSearch
+            onResultSelect={handleSearchResultSelect}
+            onOpenChange={setIsSearchOpen}
+            defaultOpen={true}
+          />
+        )}
+
+        {/* Keyboard Shortcuts Help Modal */}
+        <KeyboardShortcutsHelp
+          isOpen={isShortcutsHelpOpen}
+          onClose={() => setIsShortcutsHelpOpen(false)}
+        />
+      </UnifiedNavigation>
     );
   }
 
@@ -678,7 +1771,7 @@ function App() {
     return (
       <div className="container body-view">
         <header className="app-header">
-          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+          <button className="back-button" onClick={() => setCurrentView('body-centric')}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
@@ -694,13 +1787,13 @@ function App() {
             <div className="body-diagram-controls">
               <button
                 className={`view-toggle ${bodyDiagramView === 'anterior' ? 'active' : ''}`}
-                onClick={() => setBodyDiagramView('anterior')}
+                onClick={() => handleBodyViewToggle('anterior')}
               >
                 Front
               </button>
               <button
                 className={`view-toggle ${bodyDiagramView === 'posterior' ? 'active' : ''}`}
-                onClick={() => setBodyDiagramView('posterior')}
+                onClick={() => handleBodyViewToggle('posterior')}
               >
                 Back
               </button>
@@ -710,7 +1803,7 @@ function App() {
           <BodyDiagram
             view={bodyDiagramView}
             selectedRegion={selectedBodyRegion || undefined}
-            onRegionSelect={(regionId) => setSelectedBodyRegion(regionId)}
+            onRegionSelect={handleBodyRegionSelect}
             symptomLocations={symptomLocations}
           />
 
@@ -720,7 +1813,7 @@ function App() {
               <span className="selected-region-name">{getRegionName(selectedBodyRegion)}</span>
               <button
                 className="add-symptom-button"
-                onClick={() => setShowSymptomForm(true)}
+                onClick={handleStartSymptomLog}
               >
                 Add Symptom Here
               </button>
@@ -732,85 +1825,89 @@ function App() {
   }
 
   return (
-    <div className="container dashboard">
-      <header className="app-header">
+    <div className="container dashboard" role="main" aria-label={tDash('dashboard.title')}>
+      {/* Skip link for keyboard users */}
+      <a href="#main-content" className="skip-link">{t('a11y.skipToMain')}</a>
+
+      <header className="app-header" role="banner">
         <div className="header-spacer" />
         <div className="header-title">
-          <h1>Biological Self</h1>
-          <p className="subtitle">Your health, understood</p>
+          <h1>{t('app.name')}</h1>
+          <p className="subtitle">{t('app.tagline')}</p>
         </div>
-        <div className="header-actions">
-          <button className="header-action-button" onClick={() => setCurrentView('chat')}>
+        <nav className="header-actions" aria-label="Quick actions">
+          <button className="header-action-button" onClick={() => handleNavigate('chat')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            Chat
+            {tNav('nav.chat')}
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('anatomy')}>
+          <button className="header-action-button" onClick={() => handleNavigate('anatomy')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
               <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
               <circle cx="12" cy="16" r="2"/>
             </svg>
-            3D Anatomy
+            {tNav('nav.anatomy')}
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('body')}>
+          <button className="header-action-button" onClick={() => handleNavigate('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2a3 3 0 0 0-3 3c0 1.5 1.5 3 3 3s3-1.5 3-3a3 3 0 0 0-3-3z"/>
               <path d="M12 8v14"/>
               <path d="M8 12h8"/>
               <path d="M8 22l4-4 4 4"/>
             </svg>
-            Body
+            {tNav('nav.body')}
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('timeline')}>
+          <button className="header-action-button" onClick={() => handleNavigate('timeline')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 6v6l4 2"/>
             </svg>
-            Timeline
+            {tNav('nav.timeline')}
           </button>
-        </div>
+          <LanguageToggle />
+        </nav>
       </header>
 
-      <main>
+      <main id="main-content">
         {/* Vitals Summary Card */}
-        <section className="dashboard-section">
-          <h2 className="section-title">Vitals Summary</h2>
-          <div className="vitals-grid">
+        <section className="dashboard-section" aria-labelledby="vitals-heading">
+          <h2 id="vitals-heading" className="section-title">{tDash('dashboard.vitals.title')}</h2>
+          <div className="vitals-grid" role="list" aria-label="Vital signs">
             {vitalsSummary.restingHeartRate ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Resting HR</span>
+              <div className="vital-item" onClick={() => handleVitalClick('heart-rate')}>
+                <span className="vital-label">{tDash('dashboard.vitals.heartRate')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.restingHeartRate)}</span>
                 <span className="vital-unit">bpm</span>
               </div>
             ) : null}
             {vitalsSummary.hrv ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">HRV</span>
+              <div className="vital-item" onClick={() => handleVitalClick('hrv')}>
+                <span className="vital-label">{tDash('dashboard.vitals.hrv')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.hrv)}</span>
                 <span className="vital-unit">ms</span>
               </div>
             ) : null}
             {vitalsSummary.recoveryScore ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Recovery</span>
+              <div className="vital-item" onClick={() => handleVitalClick('recovery')}>
+                <span className="vital-label">{tDash('dashboard.vitals.recovery')}</span>
                 <span className="vital-value">{Math.round(vitalsSummary.recoveryScore)}</span>
                 <span className="vital-unit">%</span>
               </div>
             ) : null}
             {vitalsSummary.sleepHours ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Sleep</span>
+              <div className="vital-item" onClick={() => handleVitalClick('sleep')}>
+                <span className="vital-label">{tDash('dashboard.vitals.sleep')}</span>
                 <span className="vital-value">{vitalsSummary.sleepHours}</span>
                 <span className="vital-unit">hrs</span>
               </div>
             ) : null}
             {vitalsSummary.steps ? (
-              <div className="vital-item" onClick={() => console.log('Navigate to vitals')}>
-                <span className="vital-label">Steps</span>
+              <div className="vital-item" onClick={() => handleVitalClick('steps')}>
+                <span className="vital-label">{tDash('dashboard.vitals.steps')}</span>
                 <span className="vital-value">{vitalsSummary.steps.toLocaleString()}</span>
-                <span className="vital-unit">today</span>
+                <span className="vital-unit">{t('time.today')}</span>
               </div>
             ) : null}
             {!vitalsSummary.restingHeartRate && !vitalsSummary.hrv && !vitalsSummary.steps && (
@@ -820,7 +1917,7 @@ function App() {
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                   </svg>
                 }
-                message="No vital signs recorded yet"
+                message={tDash('dashboard.vitals.empty')}
               />
             )}
           </div>
@@ -828,6 +1925,73 @@ function App() {
 
         {/* AI Insights Panel */}
         <InsightsPanel dashboardData={dashboard} dataVersion={dataVersion} />
+
+        {/* Phase 4: Quick Access Buttons */}
+        <section className="dashboard-section quick-access-section">
+          <h2 className="section-title">Explore & Learn</h2>
+          <div className="quick-access-buttons">
+            <button
+              className="quick-access-btn symptom-btn"
+              onClick={() => handleQuickAccessClick('symptom-explorer', 'symptom')}
+            >
+              <span className="btn-icon">🔍</span>
+              <span className="btn-text">
+                <span className="btn-title">Explore Symptom</span>
+                <span className="btn-subtitle">Understand what symptoms mean</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn medication-btn"
+              onClick={() => handleQuickAccessClick('medication-explorer', 'medication')}
+            >
+              <span className="btn-icon">💊</span>
+              <span className="btn-text">
+                <span className="btn-title">Drug Effects</span>
+                <span className="btn-subtitle">See how medications work</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn condition-btn"
+              onClick={() => handleQuickAccessClick('condition-simulator', 'condition')}
+            >
+              <span className="btn-icon">🏥</span>
+              <span className="btn-text">
+                <span className="btn-title">Learn Condition</span>
+                <span className="btn-subtitle">Explore disease progression</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn encyclopedia-btn"
+              onClick={() => handleQuickAccessClick('encyclopedia', 'encyclopedia')}
+            >
+              <span className="btn-icon">📚</span>
+              <span className="btn-text">
+                <span className="btn-title">Encyclopedia</span>
+                <span className="btn-subtitle">Medical knowledge base</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn specialty-btn"
+              onClick={() => handleQuickAccessClick('specialty-browser', 'specialty')}
+            >
+              <span className="btn-icon">🩻</span>
+              <span className="btn-text">
+                <span className="btn-title">Specialties</span>
+                <span className="btn-subtitle">Browse by medical specialty</span>
+              </span>
+            </button>
+            <button
+              className="quick-access-btn procedure-btn"
+              onClick={() => handleQuickAccessClick('procedure-browser', 'procedure')}
+            >
+              <span className="btn-icon">🔬</span>
+              <span className="btn-text">
+                <span className="btn-title">Procedures</span>
+                <span className="btn-subtitle">Browse 127 medical procedures</span>
+              </span>
+            </button>
+          </div>
+        </section>
 
         {/* Two-column layout for conditions and meds */}
         <div className="two-column">
@@ -837,10 +2001,10 @@ function App() {
               Active Conditions
               <span className="count-badge">{activeConditions.length}</span>
             </h2>
-            <div className="card-list" onClick={() => console.log('Navigate to conditions')}>
+            <div className="card-list">
               {activeConditions.length > 0 ? (
                 activeConditions.slice(0, 5).map((condition) => (
-                  <div key={condition.id} className="list-item">
+                  <div key={condition.id} className="list-item" onClick={() => handleConditionClick(condition.name)}>
                     <span className="item-name">{condition.name}</span>
                     <span className={`status-badge status-${condition.status}`}>
                       {condition.status}
@@ -867,10 +2031,10 @@ function App() {
               Current Medications
               <span className="count-badge">{currentMedications.length}</span>
             </h2>
-            <div className="card-list" onClick={() => console.log('Navigate to medications')}>
+            <div className="card-list">
               {currentMedications.length > 0 ? (
                 currentMedications.slice(0, 5).map((med) => (
-                  <div key={med.id} className="list-item">
+                  <div key={med.id} className="list-item" onClick={() => handleMedicationClick(med.name)}>
                     <div className="item-details">
                       <span className="item-name">{med.name}</span>
                       {med.dosage && <span className="item-meta">{med.dosage}</span>}
@@ -900,10 +2064,10 @@ function App() {
             Recent Labs
             <span className="count-badge">{summary.totalLabResults}</span>
           </h2>
-          <div className="labs-grid" onClick={() => console.log('Navigate to labs')}>
+          <div className="labs-grid">
             {recentLabs.length > 0 ? (
               recentLabs.slice(0, 8).map((lab) => (
-                <div key={lab.id} className={`lab-card ${lab.status ? `lab-${lab.status}` : ''}`}>
+                <div key={lab.id} className={`lab-card ${lab.status ? `lab-${lab.status}` : ''}`} onClick={() => handleLabClick(lab.testName)}>
                   <div className="lab-header">
                     <span className="lab-name">{lab.testName}</span>
                     <TrendIcon trend={lab.trend} />
@@ -948,7 +2112,69 @@ function App() {
           )}
         </footer>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav currentView={currentView} onNavigate={handleNavigate} />
+
+      {/* Global Search Modal */}
+      {isSearchOpen && (
+        <GlobalSearch
+          onResultSelect={handleSearchResultSelect}
+          onOpenChange={setIsSearchOpen}
+          defaultOpen={true}
+        />
+      )}
+
+      {/* Keyboard Shortcuts Help Modal */}
+      <KeyboardShortcutsHelp
+        isOpen={isShortcutsHelpOpen}
+        onClose={() => setIsShortcutsHelpOpen(false)}
+      />
+
+      {/* Content Viewer Overlay */}
+      {showContentViewer && contentDoc && (
+        <div className="content-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '800px',
+            maxHeight: '90vh',
+            backgroundColor: '#1e1e1e',
+            borderRadius: '8px',
+            overflow: 'hidden'
+          }}>
+            <ContentViewer
+              contentDoc={contentDoc}
+              onClose={() => setShowContentViewer(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
+  );
+  }; // End of renderViewContent
+
+  // Wrap all view content with ViewTransition for smooth animations
+  return (
+    <ViewTransition
+      viewKey={currentView}
+      duration={250}
+      transitionType={transitionType}
+      className="app-view-container"
+    >
+      {renderViewContent()}
+    </ViewTransition>
   );
 }
 

@@ -1,0 +1,601 @@
+/**
+ * DiseaseTimelinePanel Component Styles
+ */
+
+.disease-timeline-panel {
+  background: var(--bg-secondary, #1e293b);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  color: var(--text-primary, #f8fafc);
+}
+
+.disease-timeline-panel:focus {
+  outline: 2px solid var(--accent-color, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.timeline-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.header-text h3 {
+  font-size: 1.125rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.condition-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.phase-counter {
+  background: var(--accent-color, #3b82f6);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.natural-history {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ============================================
+   Timeline Track (Desktop)
+   ============================================ */
+
+.timeline-track {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.phase-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.phase-marker-container:hover {
+  transform: scale(1.05);
+}
+
+.phase-marker-container.active {
+  transform: scale(1.1);
+}
+
+.marker-track {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.marker-dot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  z-index: 2;
+  flex-shrink: 0;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  background: var(--bg-primary, #0f172a);
+}
+
+.phase-marker-container.active .marker-dot {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.phase-marker-container.completed .marker-dot {
+  background: #3b82f6;
+}
+
+.marker-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.marker-line {
+  position: absolute;
+  left: 50%;
+  right: -50%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 3px;
+  transition: background-color 0.3s;
+}
+
+.marker-label {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.marker-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-primary, #f8fafc);
+  white-space: nowrap;
+}
+
+.phase-marker-container.active .marker-name {
+  color: #22c55e;
+}
+
+.marker-timeframe {
+  display: block;
+  font-size: 0.625rem;
+  color: var(--text-tertiary, #64748b);
+  margin-top: 0.125rem;
+}
+
+/* ============================================
+   Timeline Slider (Mobile)
+   ============================================ */
+
+.timeline-slider-container {
+  margin-bottom: 1.5rem;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  padding: 0 0.25rem;
+}
+
+.slider-label {
+  font-size: 0.625rem;
+  color: var(--text-tertiary, #64748b);
+  width: 1.5rem;
+  text-align: center;
+}
+
+.slider-label.active {
+  color: var(--accent-color, #3b82f6);
+  font-weight: 600;
+}
+
+.timeline-range-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-tertiary, #334155);
+  appearance: none;
+  cursor: pointer;
+}
+
+.timeline-range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--accent-color, #3b82f6);
+  cursor: grab;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-range-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+
+.timeline-range-slider::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--accent-color, #3b82f6);
+  cursor: grab;
+  border: 2px solid white;
+}
+
+.current-phase-label {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-color, #3b82f6);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   Phase Pills
+   ============================================ */
+
+.phase-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.phase-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-tertiary, #334155);
+  border: 1px solid var(--border-color, #475569);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.75rem;
+}
+
+.phase-pill:hover {
+  background: var(--bg-primary, #0f172a);
+}
+
+.phase-pill.active {
+  border-color: #22c55e;
+  background: #22c55e22;
+}
+
+.phase-pill.completed {
+  border-color: #3b82f6;
+}
+
+.pill-name {
+  color: var(--text-secondary, #94a3b8);
+}
+
+.phase-pill.active .pill-name {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+/* ============================================
+   Badges
+   ============================================ */
+
+.timeline-reversibility-badge {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.timeline-reversibility-badge.small {
+  padding: 0.0625rem 0.375rem;
+  font-size: 0.625rem;
+}
+
+.timeline-severity-badge {
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* ============================================
+   Phase Detail Card
+   ============================================ */
+
+.phase-detail-card {
+  background: var(--bg-primary, #0f172a);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color, #334155);
+  animation: cardFadeIn 0.3s ease;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.header-title-section h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.detail-timeframe {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  background: var(--bg-tertiary, #334155);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.phase-detail-description {
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Detail Sections */
+.detail-section {
+  margin-bottom: 1rem;
+}
+
+.detail-section h4 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary, #f8fafc);
+}
+
+.symptoms-list,
+.treatments-list,
+.goals-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.symptoms-list li,
+.treatments-list li,
+.goals-list li {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 0.25rem;
+}
+
+.goals-section {
+  background: #22c55e11;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border-left: 3px solid #22c55e;
+}
+
+.goals-section h4 {
+  color: #22c55e;
+}
+
+/* ============================================
+   Anatomical Changes Grid
+   ============================================ */
+
+.anatomical-changes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.anatomical-change-item {
+  background: var(--bg-tertiary, #334155);
+  border: 1px solid var(--border-color, #475569);
+  border-left-width: 3px;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  color: inherit;
+  font-family: inherit;
+}
+
+.anatomical-change-item:hover {
+  background: var(--bg-secondary, #1e293b);
+  transform: translateX(4px);
+}
+
+.change-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.change-color-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.change-structure {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-primary, #f8fafc);
+}
+
+.new-indicator {
+  background: #22c55e;
+  color: white;
+  padding: 0 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.change-item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.change-type-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #64748b);
+  text-transform: capitalize;
+}
+
+.change-description-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #94a3b8);
+  margin: 0 0 0.375rem 0;
+  line-height: 1.4;
+}
+
+.view-in-3d-hint {
+  font-size: 0.625rem;
+  color: var(--accent-color, #3b82f6);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.anatomical-change-item:hover .view-in-3d-hint {
+  opacity: 1;
+}
+
+/* ============================================
+   Prognosis Footer
+   ============================================ */
+
+.prognosis-footer {
+  background: var(--bg-primary, #0f172a);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color, #334155);
+}
+
+.prognosis-footer h4 {
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.prognosis-footer p {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   Navigation Buttons
+   ============================================ */
+
+.timeline-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary, #334155);
+  border: 1px solid var(--border-color, #475569);
+  border-radius: 0.5rem;
+  color: var(--text-primary, #f8fafc);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: var(--accent-color, #3b82f6);
+  border-color: var(--accent-color, #3b82f6);
+}
+
+.nav-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.nav-button.prev {
+  text-align: left;
+}
+
+.nav-button.next {
+  text-align: right;
+}
+
+/* ============================================
+   Responsive - Show/Hide
+   ============================================ */
+
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .disease-timeline-panel {
+    padding: 1rem;
+  }
+
+  .timeline-panel-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .phase-pills {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+    margin: 0 -1rem 1.5rem -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .phase-pill {
+    flex-shrink: 0;
+  }
+
+  .anatomical-changes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-navigation {
+    flex-direction: column;
+  }
+
+  .nav-button {
+    text-align: center;
+  }
+}

@@ -3,11 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Biological Self</title>
+    <!-- iOS-optimized viewport with safe area support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <!-- iOS web app meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SOMA" />
+    <!-- Prevent iOS callouts and text selection on UI elements -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>SOMA</title>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Early error capture for iOS debugging - catches errors before React loads -->
+    <script>
+      (function() {
+        // Early error log storage (before React's debug panel loads)
+        window.__earlyErrors = [];
+
+        // Capture errors before React loads
+        window.onerror = function(message, source, lineno, colno, error) {
+          var entry = {
+            timestamp: new Date().toISOString(),
+            type: 'error',
+            message: message,
+            source: source + ':' + lineno + ':' + colno,
+            stack: error ? error.stack : null
+          };
+          window.__earlyErrors.push(entry);
+          console.error('[EarlyCapture]', message, source, lineno, error);
+          return false;
+        };
+
+        // Capture unhandled promise rejections
+        window.onunhandledrejection = function(event) {
+          var reason = event.reason;
+          var message = 'Promise Rejection';
+          var stack = null;
+
+          if (reason instanceof Error) {
+            message = reason.message;
+            stack = reason.stack;
+          } else if (typeof reason === 'string') {
+            message = reason;
+          } else if (reason && typeof reason === 'object' && reason.message) {
+            message = reason.message;
+          }
+
+          var entry = {
+            timestamp: new Date().toISOString(),
+            type: 'error',
+            message: 'Unhandled Promise: ' + message,
+            stack: stack
+          };
+          window.__earlyErrors.push(entry);
+          console.error('[EarlyCapture] Promise rejection:', message, stack);
+        };
+
+        // Check WebGL support early
+        try {
+          var canvas = document.createElement('canvas');
+          var gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          var webglVersion = canvas.getContext('webgl2') ? 2 : (gl ? 1 : 0);
+
+          window.__webglSupport = {
+            version: webglVersion,
+            supported: !!gl,
+            timestamp: new Date().toISOString()
+          };
+
+          if (gl) {
+            var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            if (debugInfo) {
+              window.__webglSupport.renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+              window.__webglSupport.vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+            }
+            window.__webglSupport.maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+          }
+
+          console.log('[EarlyCapture] WebGL Support:', window.__webglSupport);
+        } catch (e) {
+          window.__webglSupport = { version: 0, supported: false, error: e.message };
+          console.error('[EarlyCapture] WebGL detection error:', e);
+        }
+
+        // Log platform info
+        console.log('[EarlyCapture] Platform:', {
+          userAgent: navigator.userAgent,
+          platform: navigator.platform,
+          devicePixelRatio: window.devicePixelRatio,
+          screenWidth: screen.width,
+          screenHeight: screen.height
+        });
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

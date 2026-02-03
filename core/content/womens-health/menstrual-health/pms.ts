@@ -1,0 +1,613 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const pms: WomensHealthContent = {
+  id: 'pms',
+  title: 'Premenstrual Syndrome (PMS)',
+  category: 'Menstrual Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'What is PMS?',
+      content: `Premenstrual Syndrome (PMS) is a group of symptoms that happen before your period. Most people who menstruate experience some form of PMS.
+
+**Common PMS Symptoms:**
+
+**Physical:**
+- Bloated feeling or weight gain
+- Breast tenderness
+- Headaches or migraines
+- Muscle or joint pain
+- Acne breakouts
+- Tiredness or fatigue
+
+**Emotional:**
+- Mood swings
+- Feeling irritable or angry
+- Feeling sad or anxious
+- Trouble concentrating
+- Food cravings
+- Sleep problems
+
+**When Does PMS Occur?**
+- Usually 1-2 weeks before your period
+- Symptoms go away once bleeding starts
+- Can happen every cycle or just sometimes
+
+**Tips to Manage PMS:**
+- Get regular exercise
+- Eat healthy foods, limit salt and sugar
+- Get enough sleep
+- Try stress-reduction techniques
+- Keep a symptom diary
+
+**When to See a Doctor:**
+- If symptoms are severe
+- If symptoms interfere with daily life
+- If nothing seems to help
+
+Remember: PMS is very common. You're not alone, and help is available if symptoms are bothersome.`,
+      keyPoints: [
+        'PMS causes physical and emotional symptoms before menstruation',
+        'Symptoms typically occur 1-2 weeks before the period',
+        'Lifestyle changes can help manage mild PMS',
+        'Severe symptoms warrant medical evaluation'
+      ],
+      vocabulary: [
+        { term: 'Bloating', definition: 'Swelling or feeling full in the belly area' },
+        { term: 'Mood Swings', definition: 'Rapid changes in emotional state' },
+        { term: 'Cravings', definition: 'Strong desires to eat certain foods' },
+        { term: 'Menstruate', definition: 'To have a period' }
+      ],
+      quiz: [
+        {
+          question: 'When do PMS symptoms typically occur?',
+          options: [
+            'During the period',
+            'After the period ends',
+            '1-2 weeks before the period',
+            'All month long'
+          ],
+          correctAnswer: 2,
+          explanation: 'PMS symptoms typically occur 1-2 weeks before menstruation begins and usually resolve once bleeding starts.',
+        },
+        {
+          question: 'Which of these is a common physical PMS symptom?',
+          options: [
+            'High fever',
+            'Breast tenderness',
+            'Hair loss',
+            'Vision changes'
+          ],
+          correctAnswer: 1,
+          explanation: 'Breast tenderness is a common physical symptom of PMS, along with bloating, headaches, and fatigue.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Understanding PMS Symptoms and Causes',
+      content: `Premenstrual Syndrome affects up to 75% of menstruating individuals. Understanding the pattern and range of symptoms helps differentiate PMS from normal cycle-related changes.
+
+**The Luteal Phase Connection:**
+
+PMS occurs during the luteal phase of the menstrual cycle:
+- **Days 1-14 (Follicular):** Typically symptom-free for most
+- **Days 15-28 (Luteal):** When PMS symptoms emerge
+- **Symptom window:** Usually 5-10 days before menstruation
+- **Resolution:** Within 1-3 days after period starts
+
+**Comprehensive Symptom List:**
+
+**Physical Symptoms (Affective):**
+| Symptom | Percentage |
+|---------|------------|
+| Bloating/weight gain | 80% |
+| Breast tenderness | 70% |
+| Headaches | 50% |
+| Fatigue | 70% |
+| Appetite changes | 60% |
+| Sleep disturbance | 45% |
+| Joint/muscle pain | 40% |
+
+**Emotional Symptoms:**
+| Symptom | Percentage |
+|---------|------------|
+| Irritability | 70% |
+| Mood swings | 65% |
+| Anxiety | 50% |
+| Sadness/depression | 45% |
+| Anger | 40% |
+| Difficulty concentrating | 35% |
+| Social withdrawal | 30% |
+
+**What Causes PMS?**
+
+**Hormonal Fluctuations:**
+- Rising progesterone after ovulation
+- Estrogen level changes
+- Sensitivity to normal hormonal changes
+
+**Neurotransmitter Changes:**
+- Serotonin fluctuations affect mood
+- GABA changes influence anxiety
+- Endorphin variations impact pain perception
+
+**Other Contributing Factors:**
+- Stress
+- Poor nutrition
+- Lack of exercise
+- Sleep deprivation
+- Certain nutritional deficiencies
+
+**Risk Factors:**
+- Age: Late 20s to 40s
+- Family history of PMS or depression
+- History of depression or anxiety
+- High stress levels
+
+**PMS vs. Normal Cycle Changes:**
+
+Not all cycle-related symptoms are PMS:
+- True PMS symptoms are consistently timed
+- Symptoms must cause some impairment
+- Should be documented for at least 2-3 cycles
+- Must have a symptom-free phase (follicular)
+
+**Tracking Your Symptoms:**
+Keep a daily log for 2-3 months noting:
+- Day of cycle
+- Physical symptoms
+- Emotional symptoms
+- Severity (mild, moderate, severe)
+- Impact on daily activities`,
+      keyPoints: [
+        'PMS affects up to 75% of menstruating individuals',
+        'Symptoms occur during the luteal phase, 5-10 days before menstruation',
+        'Both physical and emotional symptoms are common',
+        'Documenting symptoms helps confirm PMS diagnosis'
+      ],
+      vocabulary: [
+        { term: 'Luteal Phase', definition: 'Second half of menstrual cycle after ovulation' },
+        { term: 'Serotonin', definition: 'Brain chemical that regulates mood' },
+        { term: 'Follicular Phase', definition: 'First half of menstrual cycle before ovulation' },
+        { term: 'Neurotransmitter', definition: 'Chemical messenger in the brain' }
+      ],
+      quiz: [
+        {
+          question: 'What defines PMS versus normal cycle changes?',
+          options: [
+            'Any symptom before a period counts as PMS',
+            'Symptoms must be consistently timed and cause some impairment',
+            'Only emotional symptoms count as PMS',
+            'PMS requires at least 10 symptoms'
+          ],
+          correctAnswer: 1,
+          explanation: 'For PMS, symptoms must be consistently timed to the luteal phase and cause some degree of impairment in daily functioning, plus there should be a symptom-free follicular phase.',
+        },
+        {
+          question: 'Which neurotransmitter is most associated with PMS mood symptoms?',
+          options: [
+            'Dopamine',
+            'Serotonin',
+            'Norepinephrine',
+            'Acetylcholine'
+          ],
+          correctAnswer: 1,
+          explanation: 'Serotonin fluctuations during the luteal phase are strongly associated with mood symptoms in PMS, including irritability, sadness, and anxiety.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Diagnosis and Clinical Management of PMS',
+      content: `Premenstrual Syndrome diagnosis requires systematic evaluation and exclusion of other conditions. The International Society for Premenstrual Disorders (ISPMD) provides standardized diagnostic criteria.
+
+**Diagnostic Criteria for PMS:**
+
+**Required Criteria:**
+1. Symptoms present in luteal phase
+2. Symptoms resolve within 4 days of menses onset
+3. Symptom-free week in follicular phase
+4. Symptom recurrence in at least two of three cycles
+5. Impairment in daily activities
+
+**Diagnostic Tools:**
+
+**Prospective Daily Ratings:**
+- Daily Record of Severity of Problems (DRSP)
+- Visual Analog Scales (VAS)
+- Calendar of Premenstrual Experiences (COPE)
+- Minimum 2-3 months of prospective tracking
+
+**Laboratory Evaluation:**
+Not typically diagnostic but may rule out other conditions:
+- TSH (thyroid)
+- CBC (anemia)
+- Prolactin level
+- Vitamin D, B12
+
+**Differential Diagnosis:**
+
+| Condition | Differentiating Features |
+|-----------|------------------------|
+| PMDD | More severe, specific mood symptoms |
+| Thyroid disorders | No luteal phase pattern |
+| Depression | No cyclical pattern |
+| Perimenopause | Irregular cycles, age >40 |
+| Endometriosis | Pain continues during menses |
+
+**Treatment Approaches:**
+
+**Lifestyle Modifications (First-line):**
+
+**Exercise:**
+- Aerobic exercise, 30 minutes, 3x/week
+- Reduces symptoms by up to 50%
+- May take 2-3 months to see effect
+
+**Dietary Changes:**
+- Complex carbohydrates
+- Reduced salt (decreases bloating)
+- Limit caffeine and alcohol
+- Calcium, magnesium, vitamin B6 supplementation
+
+**Stress Management:**
+- Cognitive behavioral therapy (CBT)
+- Relaxation techniques
+- Sleep hygiene
+
+**Pharmacologic Interventions:**
+
+**Non-Prescription Options:**
+- NSAIDs for pain symptoms
+- Vitamin B6 (50-100 mg/day)
+- Calcium carbonate (1200 mg/day)
+- Magnesium (200-400 mg/day)
+- Evening primrose oil (EPO)
+
+**Prescription Medications:**
+
+**Combined Oral Contraceptives (COCs):**
+- Suppress ovulation
+- Stabilize hormonal fluctuations
+- Some formulations specifically for PMS
+
+**SSRIs (First-line for severe symptoms):**
+- Fluoxetine, sertraline, paroxetine, escitalopram
+- Can be taken continuously or only in luteal phase
+- 60-70% response rate
+- Improvement within 1-2 cycles
+
+**GnRH Agonists:**
+- For severe, refractory cases
+- Creates medical menopause
+- Add-back therapy required for long-term use
+
+**Alternative Therapies:**
+- Cognitive behavioral therapy (CBT)
+- Acupuncture
+- Light therapy
+- Chasteberry (Vitex agnus-castus)`,
+      keyPoints: [
+        'PMS diagnosis requires prospective symptom tracking for 2-3 cycles',
+        'Lifestyle modifications are first-line treatment',
+        'SSRIs are highly effective for severe PMS symptoms',
+        'Multiple treatment options can be combined for optimal relief'
+      ],
+      vocabulary: [
+        { term: 'DRSP', definition: 'Daily Record of Severity of Problems - standardized PMS tracking tool' },
+        { term: 'Prospective Tracking', definition: 'Recording symptoms as they happen, not from memory' },
+        { term: 'SSRI', definition: 'Selective Serotonin Reuptake Inhibitor - antidepressant medication' },
+        { term: 'Luteal Phase Dosing', definition: 'Taking medication only during the second half of cycle' }
+      ],
+      quiz: [
+        {
+          question: 'What is the minimum duration of symptom tracking required for PMS diagnosis?',
+          options: [
+            'One cycle',
+            'Two to three cycles',
+            'Six cycles',
+            'Twelve cycles'
+          ],
+          correctAnswer: 1,
+          explanation: 'Prospective symptom tracking for at least two to three menstrual cycles is required to establish the cyclical pattern of symptoms needed for PMS diagnosis.',
+        },
+        {
+          question: 'What is the response rate to SSRIs for PMS symptoms?',
+          options: [
+            '30-40%',
+            '60-70%',
+            '80-90%',
+            '95%+'
+          ],
+          correctAnswer: 1,
+          explanation: 'SSRIs have a 60-70% response rate for PMS symptoms, with improvement typically seen within 1-2 menstrual cycles. They can be taken continuously or only during the luteal phase.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Pathophysiology and Neuroendocrine Mechanisms',
+      content: `The pathophysiology of PMS involves complex interactions between ovarian hormones, neurotransmitters, and circadian rhythms. No single abnormality has been identified; rather, PMS represents abnormal responses to normal hormonal fluctuations.
+
+**Neuroendocrine Mechanisms:**
+
+**Serotonin System:**
+- Luteal phase decreases in serotonin synthesis
+- ↓Tryptophan availability (precursor for serotonin)
+- ↓Serotonin receptor binding potential
+- Association with 5-HTTLPR polymorphism
+- Explains SSRI efficacy
+
+**GABAergic System:**
+- Allopregnanolone (progesterone metabolite)
+- Potent positive modulator of GABA-A receptors
+- Luteal phase increases in allopregnanolone
+- Some women have paradoxical anxiogenic response
+- Explains GABAergic medication effects
+
+**Opioid System:**
+- Endorphin and enkephalin fluctuations
+- Luteal phase changes in opioid tone
+- Related to pain symptoms
+- May contribute to food cravings
+
+**Circadian and Melatonin:**
+- Abnormal melatonin secretion patterns
+- Delayed nocturnal melatonin rise
+- Correlation with mood symptoms
+- Sleep architecture changes
+
+**Hypothalamic-Pituitary-Adrenal (HPA) Axis:**
+- Enhanced cortisol response to stress in luteal phase
+- Blunted HPA axis feedback
+- Association with early life stress
+- May explain stress sensitivity
+
+**Genetic Factors:**
+
+**Serotonin Transporter (5-HTTLPR):**
+- Short allele associated with increased PMS/PMDD risk
+- Reduced serotonin reuptake efficiency
+- Increased sensitivity to hormonal changes
+
+**Estrogen Receptor Polymorphisms:**
+- ESR1 and ESR2 variants
+- Affect hormone sensitivity
+- May influence symptom profile
+
+**CYP450 Enzymes:**
+- Variations in estrogen metabolism
+- Individual differences in hormone clearance
+
+**Inflammatory Mechanisms:**
+- Pro-inflammatory cytokines increase in luteal phase
+- IL-1β, TNF-α, IL-6 fluctuations
+- Associated with physical symptoms
+- May explain NSAID efficacy
+
+**GABA-A Receptor Subunit Changes:**
+- α4β1δ subunit expression changes
+- Altered sensitivity to allopregnanolone
+- May cause paradoxical effects
+
+**Brain Imaging Findings:**
+
+**PET Studies:**
+- Altered glucose metabolism in luteal phase
+- Changes in prefrontal cortex activity
+- Amygdala hyperactivity to emotional stimuli
+
+**MRI Studies:**
+- Hippocampal volume changes
+- Altered functional connectivity
+- White matter microstructure differences
+
+**Peripheral Markers:**
+- Luteal phase rise in plasma allopregnanolone
+- Decreased platelet serotonin uptake
+- Altered β-endorphin levels
+- Variable progesterone/estrogen ratios
+
+**The "Sensitivity" Hypothesis:**
+Current evidence supports that women with PMS/PMDD have normal hormone levels but abnormal central nervous system sensitivity to normal hormonal fluctuations, particularly to allopregnanolone and progesterone metabolites.`,
+      keyPoints: [
+        'PMS involves abnormal CNS response to normal hormonal fluctuations',
+        'Serotonin system dysfunction is central to PMS pathophysiology',
+        'Allopregnanolone sensitivity explains both GABA and mood effects',
+        'Genetic variations in serotonin and estrogen receptors increase risk'
+      ],
+      vocabulary: [
+        { term: 'Allopregnanolone', definition: 'Potent progesterone metabolite that modulates GABA receptors' },
+        { term: '5-HTTLPR', definition: 'Serotonin transporter gene polymorphism linked to PMS/PMDD' },
+        { term: 'GABA-A', definition: 'Gamma-aminobutyric acid receptor type A - main inhibitory brain receptor' },
+        { term: 'Paradoxical Response', definition: 'Opposite reaction to what is typically expected' }
+      ],
+      quiz: [
+        {
+          question: 'What is the central theory behind PMS pathophysiology?',
+          options: [
+            'Women with PMS have abnormally high hormone levels',
+            'Women with PMS have abnormal CNS sensitivity to normal hormones',
+            'PMS is caused by estrogen deficiency alone',
+            'PMS results from thyroid dysfunction'
+          ],
+          correctAnswer: 1,
+          explanation: 'The leading hypothesis is that women with PMS/PMDD have normal hormone levels but abnormal central nervous system sensitivity to normal hormonal fluctuations, particularly to progesterone metabolites like allopregnanolone.',
+        },
+        {
+          question: 'How does allopregnanolone affect women with PMS?',
+          options: [
+            'It consistently reduces anxiety',
+            'Some women have paradoxical anxiogenic responses',
+            'It has no effect on mood',
+            'It only affects physical symptoms'
+          ],
+          correctAnswer: 1,
+          explanation: 'While allopregnanolone normally has anxiolytic effects, some women with PMS/PMDD experience paradoxical anxiogenic responses due to altered GABA-A receptor sensitivity, explaining why GABAergic medications help some but not all.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Management and Research Directions',
+      content: `Management of severe PMS and PMDD requires individualized, often multimodal approaches. Recent advances in understanding neurosteroid biology have opened new therapeutic avenues.
+
+**Pharmacogenetic Considerations:**
+
+**SSRI Selection Based on Genetics:**
+- CYP2C19 polymorphisms affect sertraline metabolism
+- CYP2D6 variants influence fluoxetine/paroxetine clearance
+- 5-HTTLPR status predicts SSRI response
+- Pharmacogenetic testing can guide therapy selection
+
+**Individualized Luteal Phase Dosing:**
+- Onset timing varies by individual
+- Some require continuous dosing
+- Monitor symptom diaries to optimize timing
+- Consider half-life of medication
+
+**Novel Pharmacologic Approaches:**
+
+**Neurosteroid Modulation:**
+- **Sepranolone (UC1010):** Allopregnanolone antagonist
+  - Phase III trials for PMDD
+  - Targets GABA-A receptor subunit changes
+  - Reduces negative mood symptoms
+
+- **Zuranolone (SAGE-217):**
+  - Neuroactive steroid GABA modulator
+  - 14-day course option
+  - Rapid onset of action
+
+**Glutamate System:**
+- **Riluzole:** Glutamate modulator
+- **Ketamine:** NMDA antagonist
+- Investigational for severe PMDD
+
+**Non-Hormonal Contraception with Benefits:**
+- **Desogestrel POP:** May reduce PMS symptoms
+- **Dienogest:** Selective progesterone receptor modulator activity
+- **Drospirenone:** Anti-mineralocorticoid effects
+
+**Combination Therapies:**
+
+**Sequential Treatment:**
+- COC + SSRI
+- SSRIs + CBT
+- COC + CBT + lifestyle
+- Individualized based on symptom profile
+
+**Augmentation Strategies:**
+- Adding buspirone to SSRI
+- Combining SSRIs with sleep hygiene
+- NSAIDs + hormonal methods for pain
+
+**Complementary and Integrative Medicine:**
+
+**Evidence-Based Supplements:**
+| Supplement | Dose | Evidence |
+|------------|------|----------|
+| Calcium | 1200 mg/day | A |
+| Vitamin B6 | 50-100 mg/day | A |
+| Magnesium | 200-400 mg/day | B |
+| Omega-3 | 1-2 g/day | B |
+| Chasteberry | 20-40 mg/day | C |
+| Saffron | 30 mg/day | B |
+
+**Mind-Body Interventions:**
+- Cognitive Behavioral Therapy (CBT)
+- Mindfulness-Based Stress Reduction (MBSR)
+- Acupuncture (5-6 sessions per cycle)
+- Bright light therapy (morning exposure)
+
+**Digital Health Solutions:**
+- Symptom tracking apps with AI prediction
+- CBT delivered via apps
+- Telemedicine for follow-up
+- Wearable device integration
+
+**Special Populations:**
+
+**Adolescents:**
+- First-line: Lifestyle + COCs
+- SSRIs if severe symptoms
+- Avoid GnRH agonists (bone health)
+- Parental involvement in treatment planning
+
+**Perimenopause:**
+- Overlap with vasomotor symptoms
+- Consider systemic HT if appropriate
+- Higher doses of SSRIs may be needed
+- Monitor for depression
+
+**Women with Depression:**
+- Distinguishing PMS from worsening depression
+- Continuous SSRI dosing preferred
+- May need combination therapy
+- Monitor for bipolar disorder
+
+**Treatment-Resistant PMS/PMDD:**
+- Confirm diagnosis with prospective ratings
+- Re-evaluate for comorbid conditions
+- Consider combination pharmacotherapy
+- Evaluate for premenstrual exacerbation of other disorders
+- Referral to specialist center
+
+**Future Directions:**
+- Personalized medicine based on genetic profile
+- Novel neurosteroid modulators
+- Digital therapeutics
+- Microbiome-gut-brain axis research
+- Biomarker development for treatment prediction`,
+      keyPoints: [
+        'Pharmacogenetics can guide SSRI selection for PMS treatment',
+        'Novel neurosteroid modulators show promise in clinical trials',
+        'Combination therapies often work better than single modalities',
+        'Digital health tools enable personalized treatment approaches'
+      ],
+      vocabulary: [
+        { term: 'Pharmacogenetics', definition: 'Study of how genes affect drug response' },
+        { term: 'Neurosteroid Modulation', definition: 'Targeting steroid-derived compounds that affect brain function' },
+        { term: 'CYP450', definition: 'Liver enzyme family that metabolizes medications' },
+        { term: 'Digital Therapeutics', definition: 'Evidence-based therapeutic interventions delivered via software' }
+      ],
+      quiz: [
+        {
+          question: 'What is the mechanism of action for sepranolone (UC1010)?',
+          options: [
+            'Increases serotonin levels',
+            'Blocks allopregnanolone at GABA-A receptors',
+            'Inhibits COX enzymes',
+            'Modulates glutamate activity'
+          ],
+          correctAnswer: 1,
+          explanation: 'Sepranolone is an allopregnanolone antagonist that targets the GABA-A receptor changes believed to underlie PMS/PMDD symptoms, offering a targeted approach for women with paradoxical responses to neurosteroids.',
+        },
+        {
+          question: 'Which supplement has the highest level of evidence for PMS treatment?',
+          options: [
+            'Chasteberry',
+            'Calcium',
+            'Evening primrose oil',
+            'Vitamin C'
+          ],
+          correctAnswer: 1,
+          explanation: 'Calcium supplementation (1200 mg/day) has Level A evidence for reducing PMS symptoms, making it one of the most evidence-based non-prescription treatments available.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-cycle',
+    'pmdd',
+    'menstrual-disorders',
+    'hormonal-health'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'International Society for Premenstrual Disorders (ISPMD) Guidelines',
+    'ACOG Practice Bulletin No. 128',
+    'Cochrane Database of Systematic Reviews on PMS treatments'
+  ]
+};

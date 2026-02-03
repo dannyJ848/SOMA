@@ -1,0 +1,16 @@
+export const symptoms = {
+  'symptoms.title': 'Registro de Síntomas',
+  'symptoms.add': 'Agregar Síntoma',
+  'symptoms.description': 'Descripción',
+  'symptoms.severity': 'Severidad',
+  'symptoms.location': 'Ubicación',
+  'symptoms.onset': '¿Cuándo comenzó?',
+  'symptoms.duration': 'Duración',
+  'symptoms.triggers': 'Desencadenantes',
+  'symptoms.relief': '¿Qué ayuda?',
+  'symptoms.severity.mild': 'Leve',
+  'symptoms.severity.moderate': 'Moderado',
+  'symptoms.severity.severe': 'Severo',
+  'symptoms.history.title': 'Historial de Síntomas',
+  'symptoms.empty': 'No hay síntomas registrados',
+};

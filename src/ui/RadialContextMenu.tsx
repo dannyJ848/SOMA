@@ -1,0 +1,439 @@
+/**
+ * Radial Context Menu
+ *
+ * Circular menu that appears when a body region is selected.
+ * Provides contextual actions for the selected region.
+ *
+ * Uses the glassmorphism CSS from components/navigation/RadialContextMenu.css.
+ */
+
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { getRegionDisplayName } from '../utils/regionToSystemMapper';
+import '../components/navigation/RadialContextMenu.css';
+
+// ============================================
+// Types
+// ============================================
+
+export type ContextMenuAction =
+  | 'medications'
+  | 'symptoms'
+  | 'encyclopedia'
+  | 'chat'
+  | 'layers'
+  | 'histology'
+  | 'pathology'
+  | 'physiology';
+
+export interface RadialMenuItem {
+  id: ContextMenuAction;
+  label: string;
+  icon: React.ReactNode;
+  description: string;
+  color: string;
+}
+
+export interface RadialContextMenuProps {
+  isOpen: boolean;
+  regionId: string | null;
+  position: { x: number; y: number };
+  onSelect: (action: ContextMenuAction) => void;
+  onClose: () => void;
+}
+
+// ============================================
+// Menu Items Configuration
+// ============================================
+
+const MENU_ITEMS: RadialMenuItem[] = [
+  {
+    id: 'medications',
+    label: 'Meds',
+    description: 'View medications affecting this region',
+    color: '#3b82f6',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M10.5 20.5L3.5 13.5C2.5 12.5 2.5 10.5 3.5 9.5L9.5 3.5C10.5 2.5 12.5 2.5 13.5 3.5L20.5 10.5C21.5 11.5 21.5 13.5 20.5 14.5L14.5 20.5C13.5 21.5 11.5 21.5 10.5 20.5Z" />
+        <line x1="8.5" y1="8.5" x2="15.5" y2="15.5" />
+      </svg>
+    ),
+  },
+  {
+    id: 'symptoms',
+    label: 'Symptoms',
+    description: 'View your symptom history for this region',
+    color: '#22c55e',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11L12 14L22 4" />
+        <path d="M21 12V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H16" />
+      </svg>
+    ),
+  },
+  {
+    id: 'encyclopedia',
+    label: 'Learn',
+    description: 'Encyclopedia entries for this region',
+    color: '#8b5cf6',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 19.5C4 18.1 5.1 17 6.5 17H20" />
+        <path d="M6.5 2H20V22H6.5C5.1 22 4 20.9 4 19.5V4.5C4 3.1 5.1 2 6.5 2Z" />
+        <line x1="9" y1="7" x2="16" y2="7" />
+        <line x1="9" y1="11" x2="14" y2="11" />
+      </svg>
+    ),
+  },
+  {
+    id: 'chat',
+    label: 'Ask AI',
+    description: 'Chat with AI about this region',
+    color: '#ec4899',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M21 15C21 15.5 20.8 16 20.4 16.4C20 16.8 19.5 17 19 17H7L3 21V5C3 4.5 3.2 4 3.6 3.6C4 3.2 4.5 3 5 3H19C19.5 3 20 3.2 20.4 3.6C20.8 4 21 4.5 21 5V15Z" />
+        <circle cx="8" cy="10" r="1" fill="currentColor" />
+        <circle cx="12" cy="10" r="1" fill="currentColor" />
+        <circle cx="16" cy="10" r="1" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    id: 'layers',
+    label: 'Deeper',
+    description: 'Explore anatomical layers',
+    color: '#06b6d4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+        <path d="M2 17L12 22L22 17" />
+        <path d="M2 12L12 17L22 12" />
+      </svg>
+    ),
+  },
+  {
+    id: 'histology',
+    label: 'Histology',
+    description: 'View microscopic tissue detail',
+    color: '#f59e0b',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21L16.65 16.65" />
+        <circle cx="11" cy="11" r="3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'pathology',
+    label: 'Pathology',
+    description: 'Disease mechanisms and conditions',
+    color: '#ef4444',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 9V13" />
+        <path d="M12 17H12.01" />
+        <path d="M10.3 3.2L1.8 18C1.5 18.5 1.4 19 1.5 19.5C1.6 20 1.9 20.4 2.3 20.7C2.7 20.9 3.1 21 3.5 21H20.5C20.9 21 21.3 20.9 21.7 20.7C22.1 20.4 22.4 20 22.5 19.5C22.6 19 22.5 18.5 22.2 18L13.7 3.2C13.4 2.8 13 2.4 12.5 2.2C12 2 11.5 2 11 2.2C10.5 2.4 10.1 2.8 9.8 3.2H10.3Z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'physiology',
+    label: 'Function',
+    description: 'How this region works',
+    color: '#14b8a6',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 12H18L15 21L9 3L6 12H2" />
+      </svg>
+    ),
+  },
+];
+
+// ============================================
+// Component
+// ============================================
+
+export function RadialContextMenu({
+  isOpen,
+  regionId,
+  position,
+  onSelect,
+  onClose,
+}: RadialContextMenuProps) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<ContextMenuAction | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const radius = 110; // Distance from center to items
+  const itemCount = MENU_ITEMS.length;
+  const angleStep = (2 * Math.PI) / itemCount;
+
+  // Handle animation state
+  useEffect(() => {
+    if (isOpen) {
+      setIsAnimating(true);
+      const timer = setTimeout(() => setIsAnimating(false), 400);
+      return () => clearTimeout(timer);
+    } else {
+      // Allow closing animation to play
+      setIsAnimating(true);
+      const timer = setTimeout(() => setIsAnimating(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  // Reset state when menu opens
+  useEffect(() => {
+    if (isOpen) {
+      setHoveredItem(null);
+      setFocusedIndex(-1);
+    }
+  }, [isOpen]);
+
+  // Handle click outside
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    // Use a slight delay to avoid closing immediately on the same tap that opened it
+    const timer = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+      switch (e.key) {
+        case 'Escape':
+          e.preventDefault();
+          onClose();
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          e.preventDefault();
+          setFocusedIndex(prev => (prev + 1) % itemCount);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          setFocusedIndex(prev => (prev - 1 + itemCount) % itemCount);
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < itemCount) {
+            handleSelect(MENU_ITEMS[focusedIndex].id);
+          }
+          break;
+        case 'Tab':
+          e.preventDefault();
+          if (e.shiftKey) {
+            setFocusedIndex(prev => (prev - 1 + itemCount) % itemCount);
+          } else {
+            setFocusedIndex(prev => (prev + 1) % itemCount);
+          }
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, focusedIndex, itemCount]);
+
+  // Focus the current item when focusedIndex changes
+  useEffect(() => {
+    if (isOpen && focusedIndex >= 0 && itemRefs.current[focusedIndex]) {
+      itemRefs.current[focusedIndex]?.focus();
+    }
+  }, [isOpen, focusedIndex]);
+
+  // Calculate adjusted position to keep menu on screen
+  const adjustedPosition = useMemo(() => {
+    if (typeof window === 'undefined') return position;
+
+    const padding = 20;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const menuRadius = radius + 60; // Item radius + item size buffer
+
+    let x = position.x;
+    let y = position.y;
+
+    // Adjust horizontal position
+    if (x - menuRadius < padding) {
+      x = menuRadius + padding;
+    } else if (x + menuRadius > viewportWidth - padding) {
+      x = viewportWidth - menuRadius - padding;
+    }
+
+    // Adjust vertical position
+    if (y - menuRadius < padding) {
+      y = menuRadius + padding;
+    } else if (y + menuRadius > viewportHeight - padding) {
+      y = viewportHeight - menuRadius - padding;
+    }
+
+    return { x, y };
+  }, [position, radius]);
+
+  const handleSelect = useCallback((action: ContextMenuAction) => {
+    onSelect(action);
+  }, [onSelect]);
+
+  if (!isOpen && !isAnimating) {
+    return null;
+  }
+
+  const regionName = regionId ? getRegionDisplayName(regionId) : '';
+
+  return (
+    <div
+      className={`radial-context-overlay ${isOpen ? 'open' : 'closing'}`}
+      aria-hidden={!isOpen}
+    >
+      <div
+        ref={menuRef}
+        className={`radial-context-menu ${isOpen ? 'open' : 'closing'}`}
+        style={{
+          '--menu-x': `${adjustedPosition.x}px`,
+          '--menu-y': `${adjustedPosition.y}px`,
+          '--menu-radius': `${radius}px`,
+        } as React.CSSProperties}
+        role="menu"
+        aria-label={regionName ? `Actions for ${regionName}` : 'Context menu'}
+      >
+        {/* Center Hub */}
+        <div className="radial-context-center">
+          <div className="radial-context-center-inner">
+            {regionName ? (
+              <>
+                <span className="radial-context-region-name">{regionName}</span>
+                <span className="radial-context-region-hint">Select action</span>
+              </>
+            ) : (
+              <span className="radial-context-region-hint">Select action</span>
+            )}
+          </div>
+          <button
+            className="radial-context-close"
+            onClick={onClose}
+            aria-label="Close menu"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Menu items arranged in a circle */}
+        {MENU_ITEMS.map((item, index) => {
+          const angle = angleStep * index - Math.PI / 2; // Start from top
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          const isHovered = hoveredItem === item.id;
+          const isFocused = focusedIndex === index;
+
+          return (
+            <button
+              key={item.id}
+              ref={(el) => { itemRefs.current[index] = el; }}
+              className={`radial-context-item ${isHovered || isFocused ? 'active' : ''}`}
+              style={{
+                '--item-x': `${x}px`,
+                '--item-y': `${y}px`,
+                '--item-color': item.color,
+                '--item-delay': `${index * 40}ms`,
+              } as React.CSSProperties}
+              onClick={() => handleSelect(item.id)}
+              onMouseEnter={() => {
+                setHoveredItem(item.id);
+                setFocusedIndex(index);
+              }}
+              onMouseLeave={() => setHoveredItem(null)}
+              onFocus={() => {
+                setHoveredItem(item.id);
+                setFocusedIndex(index);
+              }}
+              onBlur={() => setHoveredItem(null)}
+              role="menuitem"
+              aria-label={`${item.label}: ${item.description}`}
+              tabIndex={isFocused ? 0 : -1}
+              data-action={item.id}
+            >
+              <div className="radial-context-item-bg" />
+              <div className="radial-context-item-glow" />
+              <div className="radial-context-item-icon" aria-hidden="true">{item.icon}</div>
+              <span className="radial-context-item-label">{item.label}</span>
+            </button>
+          );
+        })}
+
+        {/* Tooltip for hovered/focused item */}
+        {(hoveredItem || focusedIndex >= 0) && (
+          <div className="radial-context-tooltip" role="tooltip">
+            <span className="radial-context-tooltip-title">
+              {hoveredItem
+                ? MENU_ITEMS.find(i => i.id === hoveredItem)?.label
+                : MENU_ITEMS[focusedIndex]?.label}
+            </span>
+            <span className="radial-context-tooltip-desc">
+              {hoveredItem
+                ? MENU_ITEMS.find(i => i.id === hoveredItem)?.description
+                : MENU_ITEMS[focusedIndex]?.description}
+            </span>
+          </div>
+        )}
+
+        {/* Connecting lines from center to items */}
+        <svg className="radial-context-lines" viewBox="-200 -200 400 400">
+          {MENU_ITEMS.map((item, index) => {
+            const angle = angleStep * index - Math.PI / 2;
+            const x = Math.cos(angle) * (radius - 20);
+            const y = Math.sin(angle) * (radius - 20);
+            const isActive = hoveredItem === item.id || focusedIndex === index;
+
+            return (
+              <line
+                key={item.id}
+                className={`radial-context-line ${isActive ? 'active' : ''}`}
+                x1="0"
+                y1="0"
+                x2={x}
+                y2={y}
+                style={{
+                  '--line-delay': `${index * 40}ms`,
+                  '--item-color': item.color,
+                } as React.CSSProperties}
+              />
+            );
+          })}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// Exports
+// ============================================
+
+export { MENU_ITEMS };
+export default RadialContextMenu;

@@ -1,0 +1,367 @@
+/**
+ * Audio Player Styles
+ *
+ * TTS playback controls with progress bar.
+ */
+
+/* ============================================
+   Audio Player Base
+   ============================================ */
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--surface-color, #f8fafc);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.audio-player--compact {
+  padding: 4px 8px;
+  gap: 8px;
+  background: transparent;
+  border: none;
+}
+
+/* ============================================
+   Label
+   ============================================ */
+
+.audio-player__label {
+  color: var(--text-secondary, #64748b);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ============================================
+   Controls
+   ============================================ */
+
+.audio-player__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.audio-player__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--primary-color, #4f46e5);
+  color: white;
+}
+
+.audio-player__button:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: var(--primary-dark, #4338ca);
+}
+
+.audio-player__button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.audio-player__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.audio-player__button--stop {
+  background: var(--danger-color, #ef4444);
+}
+
+.audio-player__button--stop:hover:not(:disabled) {
+  background: var(--danger-dark, #dc2626);
+}
+
+.audio-player__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.audio-player__icon--loading {
+  animation: audio-player-spin 1s linear infinite;
+}
+
+/* ============================================
+   Progress Bar
+   ============================================ */
+
+.audio-player__progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.audio-player__progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--progress-track, #e2e8f0);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.audio-player__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color, #4f46e5) 0%, var(--primary-light, #818cf8) 100%);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.audio-player__progress-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ============================================
+   Status
+   ============================================ */
+
+.audio-player__status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-color, #4f46e5);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.audio-player__speaker-icon {
+  width: 16px;
+  height: 16px;
+  animation: audio-player-pulse 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   Compact Mode Indicators
+   ============================================ */
+
+.audio-player__speaking-indicator,
+.audio-player__loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--primary-color, #4f46e5);
+  font-weight: 500;
+}
+
+.audio-player__speaking-indicator {
+  animation: audio-player-fade-in 0.2s ease;
+}
+
+/* ============================================
+   Speaking Indicator (Standalone)
+   ============================================ */
+
+.speaking-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(79, 70, 229, 0.05) 100%);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--primary-color, #4f46e5);
+  animation: audio-player-fade-in 0.2s ease;
+}
+
+.speaking-indicator__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speaking-indicator__speaker {
+  width: 16px;
+  height: 16px;
+  animation: audio-player-pulse 1.5s ease-in-out infinite;
+}
+
+.speaking-indicator__loader {
+  width: 16px;
+  height: 16px;
+}
+
+.speaking-indicator__text {
+  font-weight: 500;
+}
+
+.speaking-indicator__stop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color, #ef4444);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.speaking-indicator__stop:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.1);
+}
+
+.speaking-indicator__stop-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* ============================================
+   State Variants
+   ============================================ */
+
+.audio-player--playing {
+  border-color: var(--primary-color, #4f46e5);
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(79, 70, 229, 0.02) 100%);
+}
+
+.audio-player--loading {
+  opacity: 0.8;
+}
+
+.audio-player--error {
+  border-color: var(--danger-color, #ef4444);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes audio-player-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes audio-player-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes audio-player-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .audio-player {
+    background: var(--surface-dark, #1e293b);
+    border-color: var(--border-dark, #334155);
+  }
+
+  .audio-player__label {
+    color: var(--text-secondary-dark, #94a3b8);
+  }
+
+  .audio-player__progress-bar {
+    background: var(--progress-track-dark, #334155);
+  }
+
+  .audio-player__progress-text {
+    color: var(--text-secondary-dark, #94a3b8);
+  }
+
+  .speaking-indicator {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(79, 70, 229, 0.1) 100%);
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+
+  .speaking-indicator__stop {
+    background: rgba(239, 68, 68, 0.2);
+  }
+
+  .speaking-indicator__stop:hover {
+    background: rgba(239, 68, 68, 0.3);
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .audio-player__icon--loading,
+  .speaking-indicator__loader,
+  .audio-player__speaker-icon,
+  .speaking-indicator__speaker {
+    animation: none;
+  }
+
+  .audio-player__progress-fill {
+    transition: none;
+  }
+}
+
+/* ============================================
+   Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 480px) {
+  .audio-player {
+    padding: 10px 14px;
+  }
+
+  .audio-player__button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .audio-player__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .audio-player__progress-text {
+    min-width: 32px;
+  }
+
+  .speaking-indicator {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}

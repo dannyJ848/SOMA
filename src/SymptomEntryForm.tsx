@@ -4,6 +4,7 @@ import { getAllRegions } from './BodyDiagram';
 
 interface SymptomEntryFormProps {
   preselectedRegion?: string;
+  preselectedNlInput?: string;
   onSave: () => void;
   onCancel: () => void;
 }
@@ -176,10 +177,10 @@ Parse severity hints: "mild" = 3, "moderate" = 5, "severe" = 7, "sharp/intense" 
 
 Only include fields you can reasonably extract. If unsure about something, omit it.`;
 
-export function SymptomEntryForm({ preselectedRegion, onSave, onCancel }: SymptomEntryFormProps) {
+export function SymptomEntryForm({ preselectedRegion, preselectedNlInput, onSave, onCancel }: SymptomEntryFormProps) {
   // Form mode: 'nl' for natural language input, 'manual' for direct form
   const [mode, setMode] = useState<'nl' | 'manual'>(preselectedRegion ? 'manual' : 'nl');
-  const [nlInput, setNlInput] = useState('');
+  const [nlInput, setNlInput] = useState(preselectedNlInput || '');
   const [isParsing, setIsParsing] = useState(false);
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const [parseError, setParseError] = useState('');

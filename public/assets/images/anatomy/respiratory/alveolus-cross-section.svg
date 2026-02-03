@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 450" width="550" height="450">
+  <defs>
+    <radialGradient id="alveolarAir" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fef2f2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fecaca;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="capillaryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.8" />
+    </linearGradient>
+    <radialGradient id="rbcGrad" cx="30%" cy="30%" r="50%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="550" height="450" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="275" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Alveolar Structure &amp; Gas Exchange
+  </text>
+  
+  <!-- Alveolar Sac (cluster of alveoli) -->
+  <g transform="translate(50, 60)">
+    <!-- Alveolus 1 -->
+    <circle cx="100" cy="100" r="55" fill="url(#alveolarAir)" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="100" cy="100" r="45" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Alveolus 2 -->
+    <circle cx="170" cy="130" r="50" fill="url(#alveolarAir)" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="170" cy="130" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Alveolus 3 -->
+    <circle cx="130" cy="175" r="48" fill="url(#alveolarAir)" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="130" cy="175" r="38" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Type I Pneumocytes (lining) -->
+    <path d="M 55 90 Q 70 85 85 90" fill="none" stroke="#7f1d1d" stroke-width="1"/>
+    <text x="20" y="95" font-family="Arial" font-size="8" fill="#991b1b">Type I Cell</text>
+    
+    <!-- Type II Pneumocytes (surfactant producing) -->
+    <ellipse cx="85" cy="110" rx="8" ry="12" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+    <text x="50" y="125" font-family="Arial" font-size="8" fill="#b45309">Type II Cell</text>
+    
+    <!-- Surfactant layer -->
+    <path d="M 70 65 Q 100 60 130 65" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="3,2"/>
+    <text x="140" y="70" font-family="Arial" font-size="8" fill="#059669">Surfactant</text>
+    
+    <!-- Alveolar Macrophage -->
+    <circle cx="150" cy="100" r="10" fill="#a855f7" stroke="#7c3aed" stroke-width="1"/>
+    <circle cx="147" cy="97" r="3" fill="#ddd6fe"/>
+    <text x="165" y="95" font-family="Arial" font-size="8" fill="#7c3aed">Macrophage</text>
+    
+    <!-- Label -->
+    <text x="135" y="250" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#dc2626">
+      Alveolar Sac
+    </text>
+  </g>
+  
+  <!-- Detailed Cross-Section -->
+  <g transform="translate(280, 80)">
+    <!-- Alveolar wall -->
+    <path d="M 20 150 Q 60 100 120 110 Q 180 120 200 150" 
+          fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+    
+    <!-- Alveolar epithelium -->
+    <path d="M 20 150 Q 60 105 120 115 Q 175 125 195 150" 
+          fill="none" stroke="#b91c1c" stroke-width="1"/>
+    
+    <!-- Basement membrane -->
+    <path d="M 22 155 Q 62 110 122 120 Q 177 130 197 155" 
+          fill="none" stroke="#6b7280" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Capillary endothelium -->
+    <path d="M 25 160 Q 65 115 125 125 Q 180 135 200 160" 
+          fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+    
+    <!-- Capillary lumen -->
+    <path d="M 30 165 Q 70 130 130 135 Q 175 142 195 165 L 195 185 
+             Q 175 200 130 195 Q 70 190 30 185 Z" 
+          fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+    
+    <!-- Red Blood Cells -->
+    <ellipse cx="70" cy="175" rx="12" ry="8" fill="url(#rbcGrad)" stroke="#b91c1c" stroke-width="0.5"/>
+    <ellipse cx="100" cy="170" rx="12" ry="8" fill="url(#rbcGrad)" stroke="#b91c1c" stroke-width="0.5"/>
+    <ellipse cx="130" cy="178" rx="12" ry="8" fill="url(#rbcGrad)" stroke="#b91c1c" stroke-width="0.5"/>
+    <ellipse cx="160" cy="172" rx="12" ry="8" fill="url(#rbcGrad)" stroke="#b91c1c" stroke-width="0.5"/>
+    
+    <!-- Oxygen molecules (in alveolus) -->
+    <g fill="#10b981">
+      <circle cx="80" cy="130" r="4"/>
+      <circle cx="110" cy="125" r="4"/>
+      <circle cx="140" cy="132" r="4"/>
+      <text x="85" y="128" font-family="Arial" font-size="6" fill="white" font-weight="bold">O₂</text>
+    </g>
+    
+    <!-- CO2 molecules (in blood) -->
+    <g fill="#6b7280">
+      <circle cx="85" cy="182" r="3"/>
+      <circle cx="145" cy="185" r="3"/>
+      <text x="88" y="185" font-family="Arial" font-size="5" fill="white">CO₂</text>
+    </g>
+    
+    <!-- Arrows showing gas exchange -->
+    <path d="M 100 140 L 100 165" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrowO2)"/>
+    <path d="M 120 180 L 120 145" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="3,2"/>
+    
+    <!-- Labels -->
+    <text x="110" y="95" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#dc2626">
+      Alveolar Space
+    </text>
+    <text x="110" y="215" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#2563eb">
+      Capillary Blood
+    </text>
+    
+    <!-- Respiratory Membrane Label -->
+    <line x1="210" y1="130" x2="250" y2="110" stroke="#7c3aed" stroke-width="1"/>
+    <text x="255" y="115" font-family="Arial" font-size="8" fill="#7c3aed">Respiratory</text>
+    <text x="255" y="128" font-family="Arial" font-size="8" fill="#7c3aed">Membrane</text>
+    
+    <!-- Bar showing thickness -->
+    <line x1="50" y1="220" x2="170" y2="220" stroke="#4b5563" stroke-width="1"/>
+    <line x1="50" y1="217" x2="50" y2="223" stroke="#4b5563" stroke-width="1"/>
+    <line x1="170" y1="217" x2="170" y2="223" stroke="#4b5563" stroke-width="1"/>
+    <text x="110" y="235" text-anchor="middle" font-family="Arial" font-size="8" fill="#4b5563">
+      ~0.5 μm thick
+    </text>
+  </g>
+  
+  <!-- Gas Exchange Equation -->
+  <rect x="20" y="330" width="510" height="100" fill="#ecfdf5" stroke="#10b981" rx="8"/>
+  <text x="275" y="355" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#047857">
+    Gas Exchange Process
+  </text>
+  
+  <!-- O2 diffusion -->
+  <text x="40" y="380" font-family="Arial" font-size="10" fill="#059669">
+    • O₂ diffuses from alveoli (high P<sub>O₂</sub> = 104 mmHg) → blood (low P<sub>O₂</sub> = 40 mmHg)
+  </text>
+  
+  <!-- CO2 diffusion -->
+  <text x="40" y="400" font-family="Arial" font-size="10" fill="#6b7280">
+    • CO₂ diffuses from blood (high P<sub>CO₂</sub> = 45 mmHg) → alveoli (low P<sub>CO₂</sub> = 40 mmHg)
+  </text>
+  
+  <!-- Diffusion rate -->
+  <text x="40" y="420" font-family="Arial" font-size="10" fill="#374151">
+    • Rate depends on: partial pressure gradient, membrane thickness, surface area
+  </text>
+  
+  <!-- Attribution -->
+  <text x="275" y="445" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

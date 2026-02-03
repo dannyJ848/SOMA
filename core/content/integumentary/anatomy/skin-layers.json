@@ -1,0 +1,252 @@
+{
+  "id": "structure-skin-layers",
+  "type": "structure",
+  "name": "Skin Layers",
+  "alternateNames": ["Cutaneous layers", "Integument layers", "Skin strata"],
+  "fmaId": "FMA:7163",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Your skin has three main layers that work together to protect your body like a living suit of armor.",
+      "explanation": "Imagine your skin is like a three-layer cake. The top layer (epidermis) is what you can see and touch - it's tough and waterproof. The middle layer (dermis) is thicker and contains blood vessels, nerves, and hair roots. The bottom layer (hypodermis) is like a soft cushion made of fat that keeps you warm and protects your bones and muscles.\n\nEach layer has a special job. The top layer keeps germs out and prevents your body from drying up. The middle layer lets you feel things like hot, cold, and pain. The bottom layer stores energy and acts like a shock absorber when you bump into things.\n\nYour skin is constantly replacing itself. Dead cells fall off the top layer (you lose millions every day!) and new cells push up from below. It's like a slow-motion conveyor belt that takes about a month to cycle through.",
+      "keyTerms": [
+        {
+          "term": "epidermis",
+          "definition": "The thin outer layer of skin that you can see and touch",
+          "pronunciation": "ep-ih-DER-mis"
+        },
+        {
+          "term": "dermis",
+          "definition": "The thick middle layer of skin with blood vessels and nerves",
+          "pronunciation": "DER-mis"
+        },
+        {
+          "term": "hypodermis",
+          "definition": "The fatty bottom layer of skin that cushions and insulates your body",
+          "pronunciation": "hy-poh-DER-mis"
+        }
+      ],
+      "analogies": [
+        "Skin layers are like a three-layer cake: frosting (epidermis), cake (dermis), and the plate underneath (hypodermis)",
+        "The epidermis is like plastic wrap that keeps moisture in and germs out",
+        "The hypodermis is like the foam padding in a winter jacket"
+      ],
+      "examples": [
+        "When you get a paper cut, you usually only cut through the epidermis - that's why it doesn't bleed much",
+        "When you get a bruise, blood leaks into the dermis layer where you can see it through the epidermis"
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The skin consists of three distinct layers: the epidermis (stratified epithelium), dermis (connective tissue), and hypodermis (subcutaneous fat), each with specific structural and functional roles.",
+      "explanation": "The epidermis is the outermost layer, made of stratified squamous epithelium that is constantly renewing itself. It contains keratinocytes (cells that produce keratin protein), melanocytes (cells that produce pigment), and immune cells called Langerhans cells. The epidermis has no blood vessels and receives nutrients by diffusion from the dermis.\n\nThe dermis is the middle layer, composed of connective tissue containing collagen and elastic fibers. It is divided into two regions: the papillary dermis (upper, thinner, with finger-like projections into the epidermis) and the reticular dermis (lower, thicker, with dense collagen bundles). The dermis contains blood vessels, lymph vessels, nerves, hair follicles, and glands.\n\nThe hypodermis (also called subcutaneous tissue or superficial fascia) is not technically part of the skin but anchors it to underlying structures. It consists mainly of adipose (fat) tissue and loose connective tissue. It provides insulation, energy storage, and shock absorption.\n\nThe thickness of each layer varies by body region. For example, the epidermis is thickest on the palms and soles (about 1.5 mm) and thinnest on the eyelids (about 0.05 mm).",
+      "keyTerms": [
+        {
+          "term": "keratinocytes",
+          "definition": "The main cells of the epidermis that produce the protein keratin",
+          "pronunciation": "keh-RAT-in-oh-sites"
+        },
+        {
+          "term": "melanocytes",
+          "definition": "Cells in the epidermis that produce the pigment melanin",
+          "pronunciation": "MEL-an-oh-sites"
+        },
+        {
+          "term": "papillary dermis",
+          "definition": "The upper layer of the dermis with finger-like projections",
+          "pronunciation": "PAP-ih-lair-ee"
+        },
+        {
+          "term": "reticular dermis",
+          "definition": "The lower, thicker layer of the dermis with dense connective tissue",
+          "pronunciation": "reh-TIK-yoo-lar"
+        },
+        {
+          "term": "adipose tissue",
+          "definition": "Fat tissue that stores energy and provides insulation",
+          "pronunciation": "AD-ih-pohs"
+        }
+      ],
+      "analogies": [
+        "The papillary dermis fingerlike projections are like puzzle pieces that lock the epidermis in place",
+        "Collagen fibers in the dermis are like the steel cables in a suspension bridge - they provide strength",
+        "The hypodermis is like bubble wrap - it cushions and insulates"
+      ],
+      "examples": [
+        "Calluses form when the epidermis thickens in response to repeated friction",
+        "Stretch marks occur when the collagen fibers in the dermis are damaged from rapid stretching"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The integument comprises the epidermis (keratinized stratified squamous epithelium with five distinct strata), the dermis (papillary and reticular connective tissue layers), and the hypodermis (adipose-rich subcutaneous tissue), functioning collectively in protection, thermoregulation, sensation, and metabolic activities.",
+      "explanation": "**Epidermis**\nThe epidermis is an avascular, keratinized stratified squamous epithelium organized into five layers (from deep to superficial): stratum basale, stratum spinosum, stratum granulosum, stratum lucidum (thick skin only), and stratum corneum. The stratum basale contains stem cells that continuously divide, pushing daughter cells upward. As cells migrate superficially, they undergo keratinization - progressively accumulating keratin protein while losing organelles and eventually dying. This transit takes approximately 28-40 days.\n\nFour cell types populate the epidermis:\n- Keratinocytes (90-95%): Produce keratin and lipids for barrier function\n- Melanocytes (8%): Produce melanin pigment transferred to keratinocytes\n- Langerhans cells (2-4%): Dendritic antigen-presenting cells for immune surveillance\n- Merkel cells (<1%): Mechanoreceptors for fine touch discrimination\n\n**Dermis**\nThe dermis is a vascularized connective tissue layer 0.5-5mm thick, composed primarily of type I and III collagen, elastic fibers, and ground substance (glycosaminoglycans and proteoglycans).\n\nThe papillary dermis (20% of dermal thickness) contains loose areolar connective tissue, dermal papillae that interdigitate with epidermal ridges (rete ridges), Meissner corpuscles, and a capillary plexus. The reticular dermis (80%) contains dense irregular connective tissue, larger blood vessels, sebaceous glands, sweat glands, hair follicles, and pacinian corpuscles.\n\n**Hypodermis**\nThe hypodermis (subcutis) contains adipocytes organized into lobules separated by fibrous septa. It contains larger blood vessels and nerves, and anchors skin to deep fascia or periosteum. Thickness varies greatly by body region, sex, and nutritional status.",
+      "keyTerms": [
+        {
+          "term": "stratum basale",
+          "definition": "The deepest epidermal layer containing stem cells and melanocytes; site of cell division",
+          "pronunciation": "STRAT-um bah-SAL-ee",
+          "etymology": "Latin: stratum = layer, basalis = basal/base"
+        },
+        {
+          "term": "stratum corneum",
+          "definition": "The outermost epidermal layer of dead, keratinized cells (corneocytes)",
+          "pronunciation": "STRAT-um KOR-nee-um",
+          "etymology": "Latin: corneus = horn-like"
+        },
+        {
+          "term": "rete ridges",
+          "definition": "Downward projections of the epidermis that interlock with dermal papillae",
+          "pronunciation": "REE-tee"
+        },
+        {
+          "term": "Meissner corpuscles",
+          "definition": "Encapsulated mechanoreceptors in dermal papillae sensitive to light touch",
+          "pronunciation": "MICE-ner"
+        },
+        {
+          "term": "Pacinian corpuscles",
+          "definition": "Large encapsulated mechanoreceptors in deep dermis sensitive to pressure and vibration",
+          "pronunciation": "pah-SIN-ee-an"
+        }
+      ],
+      "analogies": [
+        "The epidermis is like a brick wall where keratinocytes are bricks and intercellular lipids are mortar",
+        "Dermal papillae and rete ridges interlock like velcro to prevent the epidermis from sliding off"
+      ],
+      "examples": [
+        "Fingerprints are formed by the pattern of dermal papillae and are determined genetically during fetal development",
+        "Thin skin (hairy skin) lacks stratum lucidum, while thick skin (glabrous skin on palms/soles) has all five epidermal layers"
+      ]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The skin's trilaminar organization reflects complex developmental origins, with epidermis derived from ectoderm and dermis/hypodermis from mesoderm, establishing a highly regulated microenvironment for barrier homeostasis, immune surveillance, and regenerative capacity.",
+      "explanation": "**Epidermal Biology**\nThe epidermis maintains homeostasis through precisely regulated keratinocyte proliferation in the stratum basale, with stem cells located in the bulge region of hair follicles and interfollicular epidermis. The keratinocyte differentiation program involves:\n1. Exit from cell cycle and onset of terminal differentiation\n2. Expression of keratins K1/K10 (replacing K5/K14)\n3. Assembly of cornified envelope proteins (involucrin, loricrin, filaggrin)\n4. Lipid extrusion from lamellar bodies\n5. Programmed cell death with nuclear degradation\n\nThe epidermal permeability barrier resides in the stratum corneum, structured as 'bricks and mortar' - corneocytes (bricks) surrounded by intercellular lipid lamellae (mortar) composed of ceramides, cholesterol, and free fatty acids in specific ratios.\n\n**Dermal Extracellular Matrix**\nThe dermis is a mechanically complex tissue with collagen I and III providing tensile strength, elastic fibers (elastin core with fibrillin microfibrils) providing recoil, and ground substance (hyaluronan, dermatan sulfate, chondroitin sulfate) providing hydration and turgor.\n\nFibroblasts are the primary synthetic cells, producing ECM components and responding to mechanical stress through mechanotransduction pathways. The dermal-epidermal junction (DEJ) is a specialized basement membrane containing type IV and VII collagen, laminins, and nidogens, anchoring the epidermis via hemidesmosomes.\n\n**Vascular Architecture**\nThe dermis contains two horizontal vascular plexuses: the superficial (subpapillary) plexus at the papillary-reticular junction and the deep plexus at the dermal-hypodermal junction. These are connected by ascending arterioles and descending venules. Arteriovenous anastomoses in the fingertips and other acral areas regulate thermoregulation.\n\n**Neural Supply**\nCutaneous innervation includes myelinated Aβ fibers (touch), Aδ fibers (pain, temperature), and unmyelinated C fibers (pain, temperature, itch). Specialized mechanoreceptors include slowly adapting type I (Merkel cells), slowly adapting type II (Ruffini endings), rapidly adapting type I (Meissner), and rapidly adapting type II (Pacinian).",
+      "keyTerms": [
+        {
+          "term": "lamellar bodies",
+          "definition": "Secretory organelles in keratinocytes that release lipids to form the permeability barrier",
+          "pronunciation": "lah-MEL-ar"
+        },
+        {
+          "term": "cornified envelope",
+          "definition": "A protein shell beneath the plasma membrane of corneocytes composed of cross-linked involucrin, loricrin, and filaggrin",
+          "pronunciation": "KOR-nih-fide"
+        },
+        {
+          "term": "dermal-epidermal junction",
+          "definition": "The basement membrane zone anchoring epidermis to dermis via hemidesmosomes and anchoring fibrils",
+          "pronunciation": "DER-mal ep-ih-DER-mal"
+        },
+        {
+          "term": "mechanotransduction",
+          "definition": "The process by which cells convert mechanical stimuli into biochemical signals"
+        },
+        {
+          "term": "hemidesmosomes",
+          "definition": "Attachment structures linking basal keratinocytes to the basement membrane"
+        }
+      ],
+      "clinicalNotes": "Defects in specific skin layer components lead to characteristic diseases: Epidermolysis bullosa (DEJ defects), ichthyoses (cornification defects), Ehlers-Danlos syndrome (collagen defects), cutis laxa (elastic fiber defects). Age-related dermal atrophy results from decreased collagen synthesis and increased MMP activity."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The integumentary system exemplifies tissue-level complexity where epidermal differentiation programs, dermal ECM dynamics, and vascular/neural networks integrate with immune surveillance and regenerative mechanisms, with clinical relevance spanning wound healing, aging, and neoplastic transformation.",
+      "explanation": "**Molecular Regulation of Epidermal Homeostasis**\nEpidermal stem cell maintenance and differentiation are regulated by Wnt, Notch, and Hedgehog signaling pathways. p63 (a p53 family member) is essential for stratification and stem cell maintenance. The transition from proliferation to differentiation involves calcium-dependent mechanisms and c-Myc downregulation.\n\nThe epidermal calcium gradient increases from basal to granular layers, regulating desmosome assembly and lamellar body secretion. Filaggrin aggregates keratin filaments and is degraded to natural moisturizing factor (NMF) in the stratum corneum, contributing to hydration and UV protection.\n\n**Dermal Remodeling and Mechanobiology**\nDermal fibroblasts exist in heterogeneous populations (papillary vs reticular) with distinct transcriptional profiles. Mechanical tension regulates fibroblast activation via YAP/TAZ and integrin signaling. The balance between collagen synthesis and degradation (MMPs/TIMPs) determines dermal integrity.\n\nLanger lines (lines of skin tension) reflect the predominant orientation of collagen bundles and are clinically important for surgical incision planning. Incisions parallel to Langer lines heal with minimal scarring.\n\n**Cutaneous Immune System**\nThe skin-associated lymphoid tissue (SALT) includes Langerhans cells (epidermis), dermal dendritic cells, resident memory T cells, innate lymphoid cells, and mast cells. Keratinocytes produce antimicrobial peptides (cathelicidins, defensins) and cytokines, functioning as active immune participants.\n\nThe commensal microbiome (Staphylococcus epidermidis, Cutibacterium acnes, Malassezia) contributes to barrier function and immune priming. Dysbiosis is implicated in atopic dermatitis, acne, and other inflammatory conditions.\n\n**Clinical Applications**\n- Skin biopsy interpretation requires understanding of layer-specific pathology\n- Cosmetic procedures target specific layers: botulinum toxin (muscle), fillers (dermis/hypodermis), chemical peels (epidermis)\n- Transdermal drug delivery must overcome the stratum corneum barrier\n- Skin aging involves both intrinsic (genetic, hormonal) and extrinsic (photoaging) mechanisms affecting all layers\n\n**Wound Healing Phases**\n1. Hemostasis: Platelet plug, fibrin clot\n2. Inflammation: Neutrophil then macrophage infiltration\n3. Proliferation: Re-epithelialization, granulation tissue, angiogenesis\n4. Remodeling: Collagen reorganization (scar maturation over 1-2 years)",
+      "keyTerms": [
+        {
+          "term": "natural moisturizing factor",
+          "definition": "Hygroscopic degradation products of filaggrin that maintain stratum corneum hydration, including amino acids, pyrrolidone carboxylic acid, and urocanic acid"
+        },
+        {
+          "term": "Langer lines",
+          "definition": "Lines of natural skin tension corresponding to collagen bundle orientation; surgical incisions parallel to these lines minimize scarring"
+        },
+        {
+          "term": "SALT",
+          "definition": "Skin-associated lymphoid tissue; the integrated immune network of the skin including dendritic cells, T cells, and other immune cells"
+        },
+        {
+          "term": "antimicrobial peptides",
+          "definition": "Small cationic peptides (cathelicidins, defensins) produced by keratinocytes that provide innate immune defense against microorganisms"
+        },
+        {
+          "term": "photoaging",
+          "definition": "Extrinsic skin aging caused by chronic UV exposure, characterized by solar elastosis, dyspigmentation, and increased skin cancer risk"
+        }
+      ],
+      "clinicalNotes": "Dermatopathology evaluation requires systematic assessment: epidermis (thickness, maturation, interface changes), dermis (inflammatory pattern, fibrosis, vascular changes), and subcutis (panniculitis patterns). Immunohistochemistry aids diagnosis: CK5/6 for squamous differentiation, S100/Melan-A for melanocytic lesions, CD markers for lymphoproliferative disorders. Molecular testing increasingly important for melanoma (BRAF, NRAS), merkel cell carcinoma (MCPyV), and lymphomas."
+    }
+  },
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch5",
+      "type": "textbook",
+      "title": "The Integumentary System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "5",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "bolognia-derm",
+      "type": "textbook",
+      "title": "Dermatology",
+      "authors": ["Jean L. Bolognia", "Julie V. Schaffer", "Lorenzo Cerroni"],
+      "source": "Elsevier",
+      "chapter": "1-2"
+    },
+    {
+      "id": "histology-ross",
+      "type": "textbook",
+      "title": "Histology: A Text and Atlas",
+      "authors": ["Wojciech Pawlina", "Michael H. Ross"],
+      "source": "Wolters Kluwer"
+    }
+  ],
+  "crossReferences": [
+    {
+      "targetId": "system-integumentary",
+      "targetType": "system",
+      "relationship": "parent",
+      "label": "Integumentary System"
+    },
+    {
+      "targetId": "structure-epidermis",
+      "targetType": "structure",
+      "relationship": "child",
+      "label": "Epidermis"
+    },
+    {
+      "targetId": "structure-dermis",
+      "targetType": "structure",
+      "relationship": "child",
+      "label": "Dermis"
+    },
+    {
+      "targetId": "structure-hypodermis",
+      "targetType": "structure",
+      "relationship": "child",
+      "label": "Hypodermis"
+    }
+  ],
+  "tags": {
+    "systems": ["integumentary"],
+    "structures": ["FMA:7163", "FMA:70596", "FMA:70580"],
+    "topics": ["anatomy", "histology"],
+    "keywords": ["skin", "epidermis", "dermis", "hypodermis", "subcutaneous", "keratinocytes", "collagen"],
+    "clinicalRelevance": "high",
+    "examRelevance": {
+      "usmle": true,
+      "nbme": true,
+      "shelf": ["medicine", "surgery"]
+    }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

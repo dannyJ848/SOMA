@@ -1,0 +1,1183 @@
+/**
+ * Age-Related Macular Degeneration - Comprehensive Educational Content
+ *
+ * Covers dry (atrophic) and wet (exudative) AMD, diagnosis with OCT,
+ * and anti-VEGF therapy.
+ */
+
+import { EducationalContent } from "../../types";
+
+export const macularDegeneration: EducationalContent = {
+  id: "condition-macular-degeneration",
+  type: "condition",
+  name: "Age-Related Macular Degeneration",
+  alternateNames: ["AMD", "ARMD", "Macular Degeneration", "Age-Related Macular Degeneration"],
+  hpoId: "HP:0001161",
+
+  levels: {
+    1: {
+      level: 1,
+      summary: "Age-related macular degeneration (AMD) is an eye condition that damages the macula, the part of the eye responsible for sharp central vision. It is a leading cause of vision loss in older adults.",
+      explanation: `Think of your eye like a camera. The macula is the part of the "film" (retina) at the back of your eye that captures the center of what you see. When you have AMD, this central area gets damaged.
+
+**What is the macula?**
+- The macula is a small area at the center of your retina
+- It gives you sharp, detailed central vision
+- It lets you see faces, read, drive, and recognize colors
+- AMD does NOT cause complete blindness - peripheral (side) vision is usually preserved
+
+**Types of AMD:**
+
+1. **Dry AMD (most common):**
+   - Drusen (tiny yellow deposits) build up under the macula
+   - Vision changes happen slowly over years
+   - No treatment currently, but vitamins may help slow it
+   - Can progress to wet AMD
+
+2. **Wet AMD (more serious):**
+   - Abnormal blood vessels grow under the macula
+   - These vessels leak blood and fluid
+   - Vision loss can happen suddenly (days to weeks)
+   - Requires urgent treatment with eye injections to prevent blindness
+
+**What causes AMD?**
+- Getting older (most important risk factor)
+- Smoking doubles your risk
+- Family history
+- Being Caucasian
+- High blood pressure, high cholesterol
+- Obesity
+
+**Warning Signs of AMD:**
+- Blurred central vision
+- Straight lines appear wavy
+- Dark or empty spots in center of vision
+- Colors seem less bright
+- Difficulty reading or recognizing faces
+
+**How is AMD diagnosed?**
+- Eye exam looking at the back of the eye
+- Special photographs of the retina
+- Amsler grid test (check for wavy lines)
+- OCT scan (like ultrasound for the eye)
+
+**How is AMD treated?**
+
+**Dry AMD:**
+- AREDS2 vitamin supplements may slow progression
+- Eating leafy greens, fish, and nuts
+- Not smoking
+- Wearing UV protection sunglasses
+- Monitoring vision at home with an Amsler grid
+
+**Wet AMD:**
+- Anti-VEGF injections into the eye (e.g., Avastin, Lucentis, Eylea)
+- Injections are given regularly (monthly or every few months)
+- Can't restore vision already lost, but can prevent further loss
+- Sometimes laser treatment is used
+
+**Remember:**
+- Early detection is critical
+- Wet AMD needs treatment quickly to save vision
+- Dry AMD has no cure but healthy habits help
+- Use an Amsler grid at home to monitor your vision`,
+      keyTerms: [
+        { term: "macula", definition: "The central part of the retina that provides sharp, detailed central vision" },
+        { term: "drusen", definition: "Tiny yellow deposits that accumulate under the retina in aging eyes and in macular degeneration" },
+        { term: "peripheral vision", definition: "Side vision; what you see out of the corners of your eyes" },
+      ],
+      analogies: [
+        "The macula is like the bullseye on a target - it's the center that gives you clear vision for reading and recognizing faces.",
+        "AMD is like wearing a pair of glasses with a smudge right in the center - you can still see around the edges but the center is blurry.",
+      ],
+      examples: [
+        "An older person notices that straight lines on a door frame appear wavy or distorted.",
+        "Someone with wet AMD might wake up one day and notice a dark spot in the center of their vision that wasn't there before.",
+      ],
+      patientCounselingPoints: [
+        "Stop smoking - it doubles your risk of AMD and makes it worse.",
+        "Eat dark leafy greens, fatty fish, and nuts - they contain nutrients important for eye health.",
+        "Use an Amsler grid weekly to check for changes in your vision.",
+        "If you notice sudden vision changes, see an eye doctor immediately - wet AMD needs urgent treatment.",
+        "Wear sunglasses that block UV and blue light to protect your macula.",
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Age-related macular degeneration (AMD) is a degenerative condition affecting the macula, causing progressive central vision loss. It is classified as dry (atrophic) or wet (exudative/neovascular), with wet AMD involving choroidal neovascularization and requiring anti-VEGF therapy to prevent severe vision loss.',
+      explanation: `## Anatomy and Function
+
+**The Macula:**
+- Located at the posterior pole of the eye
+- Approximately 5.5 mm in diameter
+- Contains highest concentration of photoreceptors (cones)
+- Fovea: central depression with thinnest retina, best visual acuity
+- Responsible for:
+  - Central, high-acuity vision (20/20 or better)
+  - Color vision
+  - Fine detail perception
+  - Reading and face recognition
+
+**Pathophysiology Overview:**
+- Aging changes in retinal pigment epithelium (RPE)
+- Bruch membrane thickening
+- Drusen accumulation
+- Photoreceptor dysfunction and death
+- In wet AMD: abnormal blood vessel growth (choroidal neovascularization)
+
+## Types and Stages of AMD
+
+**Dry AMD (Atrophic/Non-Exudative):**
+- Accounts for 80-90% of cases
+- Drusen accumulation under RPE
+- Geographic atrophy (GA) in advanced stages
+- Vision loss usually gradual
+- No FDA-approved treatment for GA (as of 2023)
+
+**Stages of Dry AMD:**
+1. **Early AMD:**
+   - Multiple small drusen or few medium-sized drusen
+   - Usually no symptoms
+   - No vision loss
+
+2. **Intermediate AMD:**
+   - Many medium-sized drusen or one or more large drusen
+   - May have mild vision changes
+   - May notice changes in quality of vision
+
+3. **Advanced Dry AMD (Geographic Atrophy):**
+   - Large areas of RPE and photoreceptor loss
+   - Well-demarcated areas of atrophy
+   - Significant central vision loss
+   - May progress to wet AMD
+
+**Wet AMD (Exudative/Neovascular):**
+- Accounts for 10-20% of AMD cases
+- 90% of AMD-related blindness
+- Choroidal neovascularization (CNV)
+- Fluid leakage, hemorrhage, fibrosis
+- Sudden or rapid vision loss
+- Treatable with anti-VEGF injections
+
+## Risk Factors
+
+**Non-modifiable:**
+- Age: prevalence increases from <2% at age 50-59 to >30% at age >75
+- Genetics: CFH, ARMS2/HTRA1 genes
+- Race: more common in Caucasians
+- Gender: slightly more common in females
+
+**Modifiable:**
+- Smoking: 2-4x increased risk, dose-dependent
+- Obesity: increases progression risk
+- Diet: low in antioxidants, leafy greens, fish
+- Cardiovascular disease: hypertension, hypercholesterolemia
+- Sun exposure: UV and blue light
+
+## Clinical Features
+
+**Symptoms:**
+- Gradual or sudden central vision blurring
+- Metamorphopsia (straight lines appear wavy)
+- Scotoma (central blind spot)
+- Difficulty reading or recognizing faces
+- Reduced color perception
+- Micropsia (objects appear smaller) or macropsia
+
+**Signs:**
+- Drusen on fundus exam (yellowish retinal lesions)
+- RPE changes (hyperpigmentation, hypopigmentation)
+- Geographic atrophy (well-defined areas of atrophy)
+- Subretinal fluid/hemorrhage (wet AMD)
+- Subretinal fibrosis/scar (disciform scar)
+
+## Diagnostic Testing
+
+**Amsler Grid:**
+- Grid of straight lines with central fixation dot
+- Patient covers one eye, stares at dot
+- Positive if lines appear wavy, distorted, or missing areas
+- Simple home monitoring tool
+
+**Fundoscopy:**
+- Direct or indirect ophthalmoscopy
+- Slit lamp biomicroscopy with lenses
+- Identify drusen, RPE changes, fluid, hemorrhage
+
+**Optical Coherence Tomography (OCT):**
+- Cross-sectional imaging of retina
+- Detects intraretinal and subretinal fluid
+- Measures retinal thickness
+- Identifies drusen, geographic atrophy
+- Essential for monitoring wet AMD treatment response
+
+**Fundus Autofluorescence (FAF):**
+- Visualizes lipofuscin accumulation
+- Maps geographic atrophy
+- RPE health assessment
+
+**Fluorescein Angiography (FA):**
+- IV fluorescein dye injection
+- Serial retinal photographs
+- Identifies leakage (wet AMD)
+- Characterizes CNV (classic vs occult)
+
+**Indocyanine Green Angiography (ICG):**
+- Better visualization of choroidal circulation
+- Identifies polypoidal choroidal vasculopathy (PCV)
+- Helpful when FA inconclusive
+
+**AREDS Classification System:**
+
+| Category | Drusen | Other Changes | Risk of Progression to Advanced AMD |
+|----------|--------|---------------|--------------------------------------|
+| 1 | None or few small | None | <5% |
+| 2 | Multiple small or at least 1 intermediate | None | ~10% |
+| 3 | Extensive intermediate, or at least 1 large | None in each eye | ~25% |
+| 4 | Advanced AMD in one eye | Vision loss due to AMD | ~50% in fellow eye |
+
+## Treatment
+
+**Dry AMD:**
+
+1. **AREDS2 Formulation:**
+   - Vitamin C (500 mg)
+   - Vitamin E (400 IU)
+   - Lutein (10 mg) / Zeaxanthin (2 mg)
+   - Zinc (80 mg) as zinc oxide
+   - Copper (2 mg) as cupric oxide
+   - Reduces progression to advanced AMD by 25%
+
+2. **Lifestyle Modifications:**
+   - Smoking cessation (critical)
+   - Mediterranean diet (fish, vegetables, olive oil)
+   - Cardiovascular risk factor control
+   - UV and blue light protection
+
+3. **Vision Rehabilitation:**
+   - Low vision aids
+   - Magnifying devices
+   - Assistive technology
+
+**Wet AMD:**
+
+1. **Anti-VEGF Therapy (First-line):**
+
+   **Medications:**
+   - Bevacizumab (Avastin): Off-label, compounded
+   - Ranibizumab (Lucentis): FDA-approved
+   - Aflibercept (Eylea): FDA-approved
+   - Brolucizumab (Beovu): FDA-approved
+   - Faricimab (Vabysmo): Anti-VEGF + Anti-Ang2
+
+   **Regimens:**
+   - Monthly injections
+   - Treat-and-extend (TAE): extend interval if stable
+   - PRN (as needed): monitor closely, treat when active
+   - Fixed interval: every 4-8 weeks
+
+   **Mechanism:**
+   - VEGF (vascular endothelial growth factor) promotes abnormal blood vessel growth
+   - Anti-VEGF drugs block VEGF
+   - Reduces leakage, shrinks CNV
+   - Maintains or improves vision
+
+2. **Photodynamic Therapy (PDT):**
+   - Verteporfin injection followed by cold laser
+   - Used less commonly now
+   - Sometimes combined with anti-VEGF
+   - Helpful for PCV
+
+3. **Thermal Laser:**
+   - Rarely used now
+   - Destroys CNV but damages retina
+   - Used only for lesions away from fovea
+
+**Emerging Treatments:**
+- Complement inhibitors for geographic atrophy
+- Gene therapy for sustained anti-VEGF delivery
+- Port delivery systems for long-term drug release
+- Neuroprotective agents
+
+## Prognosis
+
+**Dry AMD:**
+- Slow progression
+- Variable rate of vision loss
+- Risk of conversion to wet AMD: ~10% per year with intermediate/advanced
+- Geographic atrophy causes progressive central vision loss
+
+**Wet AMD:**
+- Untreated: rapid progression to legal blindness within 2 years
+- Treated: 30-40% gain vision, 50% stable, 10% continue to lose
+- Requires long-term, possibly indefinite treatment
+- CNV may become fibrotic and less responsive over time
+
+**Monitoring:**
+- Regular eye exams (every 6-12 months for dry AMD)
+- Amsler grid at home weekly
+- Prompt evaluation for any vision changes`,
+      keyTerms: [
+        { term: "drusen", definition: "Yellow-white extracellular deposits between Bruch membrane and RPE; hallmark of AMD" },
+        { term: "choroidal neovascularization", definition: "Growth of abnormal blood vessels from choroid into subretinal space; causes wet AMD" },
+        { term: "geographic atrophy", definition: "Well-defined areas of RPE and photoreceptor loss in advanced dry AMD" },
+        { term: "metamorphopsia", definition: "Visual distortion where straight lines appear wavy or curved" },
+        { term: "anti-VEGF", definition: "Medications that inhibit vascular endothelial growth factor; standard treatment for wet AMD" },
+      ],
+      analogies: [
+        "Anti-VEGF therapy is like weed killer for the abnormal blood vessels growing under the macula.",
+        "Geographic atrophy is like patches of bald earth where the grass (retina) has completely died away.",
+      ],
+      patientCounselingPoints: [
+        "Wet AMD requires regular eye injections - this may be monthly or less frequently depending on response.",
+        "Anti-VEGF injections can maintain vision but rarely restore vision already lost.",
+        'AREDS2 vitamins may help slow dry AMD but are not a cure.',
+        "If you notice wavy lines or dark spots in your vision, contact your eye doctor immediately.",
+      ],
+    },
+    3: {
+      level: 3,
+      summary: "Age-related macular degeneration involves degenerative changes in Bruch membrane, RPE dysfunction, and photoreceptor loss. Wet AMD is characterized by choroidal neovascularization (CNV) with leakage and hemorrhage, requiring anti-VEGF therapy. Diagnosis relies on multimodal imaging including OCT, FA, and FAF.",
+      explanation: `## Pathophysiology
+
+**Normal Macular Anatomy:**
+- Retina: 10 layers of neural tissue
+- Photoreceptors: rods (peripheral) and cones (macula)
+- Retinal Pigment Epithelium (RPE): monolayer beneath photoreceptors
+- Bruch membrane: elastic layer between RPE and choroid
+- Choroid: vascular layer providing oxygen and nutrients
+- Choriocapillaris: capillary network adjacent to Bruch membrane
+
+**Aging Changes in AMD:**
+
+1. **Bruch Membrane Changes:**
+   - Lipid and protein accumulation
+   - Thickening and decreased permeability
+   - Calcification and drusen formation
+   - Diffuse deposits (basal laminar, basal linear)
+
+2. **RPE Dysfunction:**
+   - Lipofuscin accumulation (A2E)
+   - Impaired phagocytosis of photoreceptor outer segments
+   - Reduced metabolic transport
+   - Cellular senescence and death
+
+3. **Choriocapillaris Atrophy:**
+   - Reduced blood flow
+   - Capillary dropout
+   - Ischemia contributing to degeneration
+
+**Drusen Pathogenesis:**
+- Accumulation of extracellular deposits
+- Complement activation and inflammation
+- Lipid and protein aggregation
+- Oxidative damage
+- Genetic susceptibility (CFH, C3, CFI variants)
+
+**Angiogenesis in Wet AMD:**
+
+1. **VEGF Upregulation:**
+   - Hypoxia from RPE/choroidal dysfunction
+   - Inflammation (complement, macrophages)
+   - Oxidative stress
+   - VEGF-A isoforms promote vascular permeability and endothelial proliferation
+
+2. **Choroidal Neovascularization (CNV):**
+   - Type 1: Sub-RPE (occult)
+   - Type 2: Subretinal (classic)
+   - Type 3: Retinal angiomatous proliferation (RAP)
+   - Polypoidal choroidal vasculopathy (PCV)
+
+**Complement System in AMD:**
+- Chronic inflammation at macula
+- CFH Y402H polymorphism increases risk
+- Uncontrolled complement activation
+- Drusen contain complement components
+- Rationale for complement inhibitor therapy
+
+## Imaging and Diagnosis
+
+**Optical Coherence Tomography:**
+
+**Findings in Dry AMD:**
+- Drusen appear as RPE elevations
+- Hyperreflective material between RPE and Bruch membrane
+- RPE thinning in geographic atrophy
+- Choroidal hypertransmission in atrophic areas
+
+**Findings in Wet AMD:**
+- Intraretinal fluid (cystoid macular edema)
+- Subretinal fluid (serous detachment)
+- Subretinal hyperreflective material (blood/fibrosis)
+- Pigment epithelial detachments (PED)
+- Disruption of ellipsoid zone
+
+**OCT Angiography (OCTA):**
+- Non-invasive visualization of vasculature
+- Detects CNV without dye injection
+- Flow voids in non-perfusion areas
+- Useful for monitoring treatment response
+
+**Fluorescein Angiography Patterns:**
+
+**CNV Types:**
+1. **Classic CNV:**
+   - Well-demarcated hyperfluorescence
+   - Early lacy network, late leakage
+   - Better response to treatment
+
+2. **Occult CNV:**
+   - Poorly defined leakage
+   - Late staining without clear boundaries
+   - Fibrovascular PED
+
+3. **Minimally Classic:**
+   - Both classic and occult components
+   - <50% classic component
+
+**FA Stages:**
+- Pre-arterial (choroidal filling)
+- Arterial (retinal arteries fill)
+- Early venous (arteriovenous transit)
+- Late venous (venous laminar flow)
+- Recirculation (leakage evident)
+
+**Indocyanine Green Angiography (ICGA):**
+- Better choroidal visualization
+- Polypoidal lesions in PCV (hot spots)
+- Branching vascular network
+- Plaques and staining
+
+**Fundus Autofluorescence (FAF):**
+- Hyperautofluorescence: lipofuscin accumulation (foci at risk)
+- Hypoautofluorescence: RPE atrophy (geographic atrophy)
+- Patterns: focal, banded, diffuse
+
+## Classification Systems
+
+**AREDS2 Simplified Severity Scale:**
+- Based on drusen size and presence of pigmentary changes
+- 5-step scale predicting progression risk
+- Useful for patient counseling
+
+**Beckman Initiative Classification:**
+
+1. **Normal:**
+   - No drusen or only small (<63 µm) drusen
+
+2. **Early AMD:**
+   - Medium drusen (63-124 µm)
+   - Any drusen size with pigment changes
+
+3. **Intermediate AMD:**
+   - Large drusen (≥125 µm)
+   - Any large drusen with pigment changes
+
+4. **Late AMD:**
+   - Geographic atrophy
+   - Neovascular AMD
+
+**CT Categories (based on drusen volume on OCT):**
+- Category C0: <0.03 mm³
+- Category C1: 0.03-0.09 mm³
+- Category C2: >0.09 mm³
+
+## Treatment Details
+
+**AREDS2 Formulation:**
+- Purpose: Reduce progression to advanced AMD
+- Indications: Intermediate or advanced AMD in one or both eyes
+- Components:
+  - Vitamin C 500 mg
+  - Vitamin E 400 IU
+  - Lutein 10 mg (replaced beta-carotene)
+  - Zeaxanthin 2 mg
+  - Zinc 80 mg
+  - Copper 2 mg
+- Contraindications: Smokers (beta-carotene increases lung cancer risk)
+- Evidence: 25% reduction in 5-year risk of progression
+
+**Anti-VEGF Agents:**
+
+| Agent | FDA Approval | Molecular Weight | Dosing | Half-life |
+|-------|--------------|------------------|--------|-----------|
+| Ranibizumab (Lucentis) | 2006 | 48 kDa (Fab) | 0.5 mg monthly | ~9 hours |
+| Aflibercept (Eylea) | 2011 | 115 kDa (Fc fusion) | 2 mg q8 weeks after 3 monthly | ~12 days |
+| Bevacizumab (Avastin) | Off-label | 149 kDa (full antibody) | 1.25 mg monthly | ~20 days |
+| Brolucizumab (Beovu) | 2019 | 26 kDa (single-chain) | 6 mg q8-12 weeks | Very short |
+| Faricimab (Vabysmo) | 2022 | Dual action | 6 mg q8-16 weeks | ~11 days |
+
+**Comparison Trials:**
+- CATT: Ranibizumab vs bevacizumab - similar efficacy
+- VIEW 1 & 2: Aflibercept q8wk noninferior to ranibizumab monthly
+- HAWK & HARRIER: Brolucizumab noninferior to aflibercept
+- TENAYA & LUCERNE: Faricimab q16wk noninferior to aflibercept q8wk
+
+**Treatment Regimens:**
+
+1. **Monthly:**
+   - Every 4 weeks
+   - Best visual outcomes
+   - Highest burden
+
+2. **Treat-and-Extend (TAE):**
+   - Treat until dry
+   - Extend interval by 2 weeks if stable
+   - Reduce interval if fluid recurs
+   - Reduces visit burden
+
+3. **PRN (Pro Re Nata):**
+   - Monthly monitoring
+   - Treat only with fluid/recurrence
+   - Requires frequent visits
+
+4. **Fixed Interval:**
+   - Every 6-8 weeks
+   - Simplifies schedule
+   - May undertreat some patients
+
+**Refractory Wet AMD:**
+- Incomplete response to anti-VEGF
+- Consider:
+  - Switch anti-VEGF agent
+  - Shorter interval
+  - Add PDT (especially PCV)
+  - Combination therapy
+
+**Complications of Anti-VEGF:**
+- Injection-related: endophthalmitis (0.05%), retinal detachment, vitreous hemorrhage
+- Systemic: theoretical thromboembolic risk (not clearly increased)
+- Ocular: intraocular inflammation, IOP spike, cataract progression
+
+## Geographic Atrophy
+
+**Pathophysiology:**
+- Progressive RPE and photoreceptor loss
+- Enlarging atrophic lesions
+- Foveal involvement causes central vision loss
+- No proven treatment (complement inhibitors in trials)
+
+**Patterns:**
+- Banded atrophy around drusen
+- Focal patches
+- Diffuse atrophy
+
+**Prognosis:**
+- Median growth rate: 0.5-1.0 mm²/year
+- Extrafoveal lesions: vision preserved until fovea involved
+- Foveal lesions: significant vision loss
+
+**Emerging Treatments:**
+- Pegcetacoplan (Syfovre): complement C3 inhibitor
+- Avacincaptad pegol (Izervay): complement C5 inhibitor
+- Monthly or every-other-month intravitreal injections
+- Slows GA progression but does not restore vision`,
+      keyTerms: [
+        { term: "Bruch membrane", definition: "Thin extracellular layer between RPE and choroid; site of drusen deposition in AMD" },
+        { term: "choroid", definition: "Vascular layer of the eye between sclera and retina; source of neovascularization in wet AMD" },
+        { term: "lipofuscin", definition: "Metabolic waste product accumulating in RPE; contributes to AMD pathogenesis" },
+        { term: "RPE", definition: "Retinal Pigment Epithelium; monolayer supporting photoreceptors; dysfunction central to AMD" },
+        { term: "complement system", definition: "Immune pathway; genetic variants increase AMD risk; therapeutic target" },
+      ],
+      analogies: [
+        "The RPE is like the retina's support team - it provides nutrients and removes waste. When it fails, the retina (photoreceptors) dies.",
+        "Anti-VEGF therapy is like applying a brake to the growth of abnormal blood vessels.",
+      ],
+      clinicalNotes: 'Smoking cessation is one of the most important interventions for AMD - smokers have 2-4x higher risk and faster progression. For patients with intermediate AMD, recommend AREDS2 vitamins (without beta-carotene if they smoke).',
+    },
+    4: {
+      level: 4,
+      summary: 'AMD pathogenesis involves complement-mediated inflammation, extracellular drusen accumulation, and RPE-photoreceptor complex dysfunction. Wet AMD develops through VEGF-driven choroidal neovascularization requiring lifelong anti-VEGF therapy. Emerging complement inhibitors target geographic atrophy, while novel delivery systems aim to reduce treatment burden.',
+      explanation: `## Advanced Pathophysiology
+
+**Genetic Architecture:**
+
+**Major Risk Loci:**
+- **CFH (Complement Factor H):** Y402H polymorphism (rs1061170)
+  - Odds ratio: 2.5-4.6 for AMD
+  - Alters complement regulation
+  - Most significant genetic risk factor
+
+- **ARMS2/HTRA1 locus on 10q26:**
+  - A69S variant in ARMS2
+  - Promoter variant affecting HTRA1 expression
+  - Odds ratio: ~3 for AMD
+
+- **C3, C2, CFB:**
+  - Complement pathway genes
+  - Gain-of-function increases inflammation
+
+- **TIMP3:**
+  - Extracellular matrix regulation
+  - Associated with Sorsby fundus dystrophy
+
+**Polygenic Risk Scores:**
+- Combine multiple variants for risk prediction
+- May guide screening frequency
+- Not yet standard of care
+
+**Drusen Biogenesis:**
+
+1. **Composition:**
+   - Lipids: cholesterol, phospholipids
+   - Proteins: complement, apolipoproteins, vitronectin
+   - Trace elements: zinc, calcium
+   - Amyloid beta
+
+2. **Formation:**
+   - RPE secretion impairment
+   - Bruch membrane dysfunction
+   - Impaired choroidal clearance
+   - Oxidative modification
+
+3. **Consequences:**
+   - Physical barrier to diffusion
+   - RPE detachment (drusenoid PED)
+   - Photoreceptor stress
+   - Trigger for complement activation
+
+**Complement Dysregulation:**
+
+**Alternative Pathway:**
+- CFH regulates C3 convertase
+- Loss of function → overactivity
+- Chronic inflammation at RPE-choroid interface
+- Membrane attack complex (MAC) deposition
+
+**Therapeutic Targeting:**
+- Anti-C5 (eculizumab, avacincaptad)
+- Anti-C3 (pegcetacoplan)
+- Anti-factor D (lampalizumab - failed phase 3)
+- Anti-factor B
+
+**RPE-Müller Cell Metabolism:**
+- Visual cycle dysfunction
+- Lipofuscin (A2E) accumulation
+- Oxidative stress
+- Mitochondrial dysfunction
+- Autophagy impairment
+
+## Advanced Imaging
+
+**OCT Biomarkers:**
+
+**Prognostic Indicators:**
+- Hyperreflective foci: inflammatory cells, RPE migration
+- Disruption of ellipsoid zone: photoreceptor damage
+- External limiting membrane disruption: severe damage
+- Subretinal hyperreflective material: neovascular tissue vs hemorrhage vs fibrosis
+- Choroidal caverns: vascular dropout
+
+**Quantitative OCT:**
+- Choroidal thickness: subfoveal choroidal thinning in AMD
+- Drusen volume: predicts progression
+- Geographic atrophy area: growth rate monitoring
+- Retinal layer thickness: photoreceptor layer thinning
+
+**OCT Angiography Advances:**
+- Type 1 CNV: well-defined network
+- Type 2 CNV: more distinct vascular tuft
+- Type 3 (RAP): retinal-choroidal anastomosis
+- Flow voids correlate with nonperfusion
+- Choriocapillaris density loss
+
+**Multimodal Imaging Integration:**
+- Combined OCT + FAF for comprehensive assessment
+- FA for leakage patterns
+- ICG for polypoidal lesions
+- Ultra-widefield imaging for peripheral lesions
+
+**Artificial Intelligence:**
+- Automated drusen detection and quantification
+- CNV detection on OCT
+- Progression prediction
+- Treatment response prediction
+
+## Treatment Optimization
+
+**Anti-VEGF Pharmacology:**
+
+**Molecular Characteristics:**
+- Bevacizumab: Full IgG1 antibody (149 kDa)
+- Ranibizumab: Fab fragment (48 kDa)
+- Aflibercept: Fc fusion protein (115 kDa)
+- Brolucizumab: Single-chain antibody fragment (26 kDa)
+
+**Pharmacokinetics:**
+- Vitreous half-life: 9 days (ranibizumab) to 20 days (bevacizumab)
+- Systemic exposure: Higher with bevacizumab
+- Intraocular concentration persists for weeks
+
+**Dosing Strategies:**
+
+**High-Dose Anti-VEGF:**
+- 2.0 mg ranibizumab (HARBOR trial)
+- 8 mg aflibercept (PHOTON, PULSAR trials)
+- 6 mg brolucizumab (HAWK, HARRIER)
+- Potential for extended dosing intervals
+
+**Treat-and-Extend Algorithm:**
+1. Loading phase: 3 monthly injections
+2. Assess response (OCT, VA)
+3. If dry: extend interval by 2 weeks
+4. If wet: return to last effective interval
+5. Maximum interval: 10-12 weeks (most patients)
+
+**Predictors of Treatment Response:**
+
+**Good Prognosis:**
+- Smaller lesions
+- Classic CNV
+- Good baseline vision
+- Minimal fibrosis
+- Prompt treatment
+- Younger age
+
+**Poor Prognosis:**
+- Large lesions
+- Occult CNV
+- Poor baseline vision
+- Subretinal fibrosis
+- RPE tear
+- Delayed treatment
+- Older age
+
+**Refractory CNV Management:**
+
+1. **Confirm True Refractory Status:**
+   - Persistent fluid on OCT
+   - Exclusion of atrophy masquerading as fluid
+   - Check for polypoidal lesions
+
+2. **Intensification:**
+   - Shorten interval (4-6 weeks)
+   - Switch agent (different binding profile)
+   - Higher dose
+
+3. **Adjunctive Therapies:**
+   - PDT for PCV
+   - Combination therapy
+   - Consider retinal angiomatous proliferation management
+
+## Geographic Atrophy Therapeutics
+
+**Pegcetacoplan (Syfovre):**
+- Complement C3 inhibitor
+- Monthly or every-other-month dosing
+- OAKS and DERBY trials: 17-22% reduction in GA growth
+- Safety: intraocular inflammation, wet AMD conversion
+- FDA approved 2023
+
+**Avacincaptad pegol (Izervay):**
+- Complement C5 inhibitor
+- Monthly dosing
+- GATHER2 trial: 14% reduction in GA growth
+- Better safety profile than pegcetacoplan
+- FDA approved 2023
+
+**Patient Selection:**
+- Bilateral GA vs unilateral
+- Foveal sparing vs foveal involvement
+- Extrafoveal lesions may benefit most
+- Risk-benefit discussion needed
+
+**Emerging GA Therapies:**
+- Complement factor D inhibitors
+- Gene therapy (ADVM-022 - anti-VEGF)
+- Neuroprotective agents
+- Visual cycle modulators (emixustat)
+- Cell therapy (RPE transplantation)
+
+## Novel Delivery Systems
+
+**Port Delivery System (Ranibizumab PDS):**
+- Refillable implant
+- Continuous ranibizumab release
+- ARCHWAY trial: equivalent to monthly injections
+- Refill every 6 months
+- Complications: vitreous hemorrhage, implant dislocation
+
+**Gene Therapy:**
+
+**RGX-314 (AAV8 vector):**
+- Delivers anti-VEGF Fab gene
+- Subretinal or suprachoroidal delivery
+- Potential for durable anti-VEGF production
+- Ongoing phase 3 trials
+
+**ADVM-022 (AAV.7m8 vector):**
+- Intravitreal delivery
+- Expresses aflibercept
+- Phase 1/2 ongoing
+
+**TKT021 (siRNA):**
+- Silences VEGF production
+- Intravitreal injection
+- Longer duration potential
+
+## Special Forms of AMD
+
+**Polypoidal Choroidal Vasculopathy (PCV):**
+- More common in Asians (30-50% of wet AMD)
+- Branching vascular network + polyps
+- ICG essential for diagnosis
+- PDT +/- anti-VEGF effective
+- Anti-VEGF monotherapy may be insufficient
+
+**Retinal Angiomatous Proliferation (RAP):**
+- Type 3 CNV
+- Retinal-choroidal anastomosis
+- Poor response to anti-VEGF alone
+- Combination therapy recommended
+- PDT can be helpful
+
+**Pachychoroid Spectrum:**
+- Thickened choroid
+- Pachydrusen
+- Central serous chorioretinopathy overlapping features
+- May require different treatment approach
+
+**Myopic CNV:**
+- In high myopia
+- Different from AMD but similar treatment
+- Anti-VEGF effective
+- Fewer injections needed typically`,
+      keyTerms: [
+        { term: "polygenic risk score", definition: "Quantitative assessment of genetic risk based on multiple variants; may guide AMD screening" },
+        { term: "PDS", definition: "Port Delivery System; refillable implant providing continuous ranibizumab delivery for wet AMD" },
+        { term: "PCV", definition: "Polypoidal Choroidal Vasculopathy; subtype of wet AMD with polypoidal lesions, more common in Asians" },
+        { term: "RAP", definition: "Retinal Angiomatous Proliferation; Type 3 CNV originating from retinal vasculature" },
+        { term: "hyperreflective foci", definition: "Small hyperreflective spots on OCT representing inflammatory cells or RPE migration; predictor of progression" },
+      ],
+      clinicalNotes: `Clinical pearls for AMD management:
+
+1. **Genetics matter** - Ask about family history. First-degree relatives have 3-4x increased risk. Consider earlier screening.
+
+2. **Smoking is critical** - Current smokers have 2-4x risk. Cessation is the most important modifiable risk factor.
+
+3. **AREDS2 for intermediate AMD** - Recommend AREDS2 vitamins for bilateral intermediate AMD or advanced AMD in one eye.
+
+4. **Amsler grid at home** - Teach patients to use weekly. Cover one eye, look at central dot. Report wavy lines immediately.
+
+5. **Treat-and-extend is standard** - Reduces burden while maintaining outcomes. Most patients can be extended to 8-12 week intervals.
+
+6. **Bilateral disease needs attention** - If one eye has wet AMD, the fellow eye is at high risk. Monitor closely.
+
+7. **GA therapies are available** - Pegcetacoplan and avacincaptad slow GA progression but don't restore vision. Discuss with appropriate patients.
+
+8. **PCV requires ICG** - In patients of Asian ancestry or poor anti-VEGF response, consider ICG to rule out PCV. PDT may be needed.`,
+    },
+    5: {
+      level: 5,
+      summary: "Contemporary AMD management integrates genetic risk assessment, advanced multimodal imaging, and precision anti-VEGF therapy. Emerging complement inhibitors for geographic atrophy and novel delivery systems aim to reduce treatment burden. Individualized approaches based on phenotype, response patterns, and patient factors optimize long-term outcomes.",
+      explanation: `## Evidence-Based Medicine and Clinical Trials
+
+**Landmark Trials:**
+
+**AREDS and AREDS2:**
+- AREDS (2001): Antioxidants + zinc reduced 5-year risk of advanced AMD by 25%
+- AREDS2 (2013): Lutein/zeaxanthin non-inferior to beta-carotene; safer for smokers
+- Population: bilateral intermediate AMD or advanced AMD in one eye
+
+**Anti-VEGF Pivotal Trials:**
+
+| Trial | Drug | Comparator | Result |
+|-------|------|------------|--------|
+| MARINA | Ranibizumab monthly | Sham | +15 letters ETDRS |
+| ANCHOR | Ranibizumab monthly | PDT | +11 letters |
+| PIER | Ranibizumab quarterly | Sham | Initial gain then loss |
+| PrONTO | Ranibizumab PRN | Monthly | Similar with fewer injections |
+| CATT | Ranibizumab vs Bevacizumab | Head-to-head | Similar efficacy |
+| VIEW 1/2 | Aflibercept q8wk | Ranibizumab monthly | Non-inferior |
+| HAWK/HARRIER | Brolucizumab q12wk | Aflibercept q8wk | Non-inferior |
+| TENAYA/LUCERNE | Faricimab q16wk | Aflibercept q8wk | Non-inferior |
+
+**Key Insights:**
+- Monthly dosing provides best outcomes
+- PRN and TAE can maintain vision with fewer injections
+- Bevacizumab cost-effective with similar efficacy
+- Longer-acting agents reduce burden
+
+**Geographic Atrophy Trials:**
+
+**Pegcetacoplan (OAKS, DERBY):**
+- Monthly: 17-22% reduction in GA growth
+- EOM: 12-16% reduction
+- Benefit increased over time
+- Subgroup: extrafoveal lesions benefited most
+
+**Avacincaptad (GATHER2):**
+- Monthly: 14% reduction in GA growth
+- Clean safety profile
+- Approved 2023
+
+**Complement Inhibitor Failures:**
+- Lampalizumab (anti-factor D): Phase 3 negative
+- APL-2 (pegcetacoplan) modest benefit
+- Eculizumab: negative
+
+**Interpretation:**
+- Complement inhibition slows but does not stop GA
+- Better for extrafoveal lesions
+- Early treatment may be more beneficial
+
+## Pharmacogenomics and Precision Medicine
+
+**Genotype-Guided Therapy:**
+
+**CFH and ARMS2:**
+- High-risk genotypes progress faster
+- May influence AREDS2 response
+- Not yet standard for treatment decisions
+
+**Pharmacogenomics of Anti-VEGF:**
+- VEGF gene polymorphisms may affect response
+- Not clinically actionable currently
+
+**Biomarker Development:**
+- Proteomic signatures for progression risk
+- Genetic risk scores for screening intervals
+- Imaging biomarkers for treatment response
+
+## Treatment Algorithm Optimization
+
+**Newly Diagnosed Wet AMD:**
+
+**Induction Phase:**
+- 3 monthly loading doses
+- Consider 4th dose if residual fluid
+- Assess response with OCT and VA
+
+**Maintenance Phase:**
+- TAE preferred for most patients
+- Extend by 2-week increments
+- Maximum interval typically 10-12 weeks
+- Re-treat if fluid recurs
+
+**Patient Factors Influencing Choice:**
+- Age and life expectancy
+- Comorbidities (anticoagulation, mobility)
+- Social support and transportation
+- Treatment preferences
+- Cost considerations
+
+**Refractory Disease Management:**
+
+**Definition:**
+- Persistent fluid on OCT after ≥6 anti-VEGF injections
+- Or vision loss despite treatment
+
+**Diagnostic Re-evaluation:**
+1. Confirm diagnosis (multimodal imaging)
+2. Rule out mimics (CSCR, PCV, RAP)
+3. Assess compliance
+4. Check for fibrosis/atrophy
+
+**Therapeutic Options:**
+1. Switch anti-VEGF agent
+2. Shorten interval
+3. Consider PDT for PCV
+4. Combination therapy
+5. High-dose regimens
+
+**Dry AMD Monitoring:**
+
+**Intermediate AMD:**
+- Eye exams every 6-12 months
+- AREDS2 vitamins
+- Home Amsler grid
+- OCT monitoring (annually)
+
+**Advanced Dry AMD (Geographic Atrophy):**
+- Monitor for foveal involvement
+- Consider complement inhibitors
+- Discuss low vision rehabilitation
+- Monitor fellow eye for wet AMD
+
+## Emerging Therapies and Future Directions
+
+**Gene Therapy:**
+
+**RGX-314:**
+- AAV8 vector delivers anti-VEGF Fab gene
+- Suprachoroidal delivery (Phase 3)
+- Subretinal delivery (Phase 2)
+- Potential for durable anti-VEGF production
+- Eliminates need for frequent injections
+
+**ADVM-022:**
+- AAV.7m8 vector
+- Intravitreal delivery
+- Expresses aflibercept
+- Phase 1/2 ongoing
+
+**4D-150:**
+- AAV vector expressing anti-VEGF and anti-Ang2
+- Intravitreal delivery
+- Early trials promising
+
+**Port Delivery Systems:**
+
+**Current Status:**
+- Ranibizumab PDS (Susvimo)
+- Refill every 6 months
+- Equivalent to monthly ranibizumab
+- Complications: hemorrhage, implant dislocation
+
+**Next Generation:**
+- Smaller profile
+- Longer duration
+- Different anti-VEGF agents
+
+**Neuroprotection Strategies:**
+- Visual cycle modulation (emixustat - failed phase 3)
+- Complement inhibition
+- Stem cell-derived RPE transplantation
+- Photoreceptor replacement
+
+**Artificial Intelligence Integration:**
+- Automated OCT analysis
+- Home OCT monitoring
+- Treatment decision support
+- Progression prediction
+
+## Controversies and Evolving Concepts
+
+**Anti-VEGF Monotherapy vs Combination:**
+- Standard is anti-VEGF alone
+- PDT role limited to PCV
+- Combination generally not superior
+
+**Treatment Duration:**
+- How long to treat?
+- Many patients need indefinite treatment
+- Discontinuation leads to recurrence
+- Shared decision-making essential
+
+**Cost-Effectiveness:**
+- Bevacizumab: most cost-effective
+- Ranibizumab, aflibercept: higher cost, modest benefit
+- Biosimilars entering market
+- Value-based pricing considerations
+
+**Monitoring Intensity:**
+- Monthly monitoring for TAE
+- Home monitoring technologies
+- Telemedicine approaches
+- Pandemic accelerated virtual visits
+
+**Treating Asymptomatic Wet AMD:**
+- Fellow eye with CNV but good vision
+- Evidence supports early treatment
+- Better outcomes than waiting for vision loss
+
+**Bilateral Disease Management:**
+- Stagger injections for convenience
+- Same-day bilateral injections (controversial)
+- Consider treatment burden
+
+**Geographic Atrophy Treatment:**
+- Who benefits most?
+- Extrafoveal lesions
+- Bilateral disease
+- Slowing vs stopping progression
+- Cost-benefit analysis`,
+      keyTerms: [
+        { term: "TAE", definition: "Treat-and-extend; dosing regimen where intervals are extended when disease is quiescent" },
+        { term: "PRN", definition: "Pro re nata; as-needed treatment based on disease activity detected on monitoring" },
+        { term: "ETDRS letters", definition: "Standardized visual acuity measurement; 15 letters = 3 lines on eye chart" },
+        { term: "CSCR", definition: "Central serous chorioretinopathy; condition mimicking wet AMD that responds differently to anti-VEGF" },
+      ],
+      clinicalNotes: `Advanced clinical pearls:
+
+1. **Treat-and-extend is the new standard** - Reduces visit burden while maintaining vision. Most patients stabilize at 8-12 week intervals. Start with 3 monthly doses, then extend by 2 weeks if dry.
+
+2. **Switch anti-VEGF for incomplete response** - If persistent fluid after 6+ injections, consider switching agents. Each has different binding characteristics (bevacizumab/all VEGF, ranibizumab/VEGF-A, aflibercept/VEGF-A + PlGF).
+
+3. **PCV requires special attention** - In Asian patients or those with poor anti-VEGF response, get ICG. PDT combined with anti-VEGF is more effective than anti-VEGF alone.
+
+4. **Fellow eyes need monitoring** - If one eye has wet AMD, the fellow eye is at high risk (10-15% per year). Educate patients on Amsler grid and prompt reporting.
+
+5. **AREDS2 for intermediate AMD** - Recommend for bilateral intermediate AMD or advanced AMD in one eye. Use lutein/zeaxanthin formulation (no beta-carotene) for smokers.
+
+6. **GA treatments are available** - Pegcetacoplan and avacincaptad slow GA progression but do not restore vision. Best for extrafoveal GA or patients with bilateral disease. Discuss risks/benefits.
+
+7. **Consider clinical trials** - Many AMD trials available. Gene therapy may reduce burden in future. Consider referral for eligible patients.
+
+8. **Don't forget psychosocial impact** - AMD causes depression and isolation. Refer to low vision services early. Support groups and rehabilitation can improve quality of life.`,
+    },
+  },
+
+  media: [
+    {
+      id: "amd-stages",
+      type: "diagram",
+      filename: "amd-stages.svg",
+      title: "AMD Stages and Progression",
+      description: "Progression from normal macula through dry to wet AMD",
+    },
+    {
+      id: "amsler-grid",
+      type: "diagram",
+      filename: "amsler-grid.svg",
+      title: "Amsler Grid",
+      description: "Amsler grid for home monitoring of macular degeneration",
+    },
+    {
+      id: "oct-findings-amd",
+      type: "diagram",
+      filename: "amd-oct-findings.svg",
+      title: "OCT Findings in AMD",
+      description: "Comparison of normal vs dry vs wet AMD on OCT",
+    },
+  ],
+
+  citations: [
+    {
+      id: "aao-amd-2019",
+      type: "article",
+      title: "Age-Related Macular Degeneration Preferred Practice Pattern",
+      authors: ["American Academy of Ophthalmology"],
+      source: "Ophthalmology",
+    },
+    {
+      id: "areds2-trial",
+      type: "article",
+      title: "AREDS2 Research Group. Lutein + Zeaxanthin and Omega-3 Fatty Acids for Age-Related Macular Degeneration",
+      authors: ["AREDS2 Research Group"],
+      source: "JAMA",
+    },
+    {
+      id: "catt-trial",
+      type: "article",
+      title: "Comparison of Age-Related Macular Degeneration Treatments Trials (CATT)",
+      authors: ["CATT Research Group"],
+      source: "Ophthalmology",
+    },
+  ],
+
+  crossReferences: [
+    { targetId: "condition-diabetic-retinopathy", targetType: "condition", relationship: "related", label: "Diabetic Retinopathy" },
+    { targetId: "condition-retinal-detachment", targetType: "condition", relationship: "related", label: "Retinal Detachment" },
+    { targetId: "condition-glaucoma", targetType: "condition", relationship: "related", label: "Glaucoma" },
+  ],
+
+  tags: {
+    systems: ["visual"],
+    topics: ["ophthalmology", "retina", "aging", "macula"],
+    keywords: ["macular degeneration", "AMD", "anti-VEGF", "drusen", "choroidal neovascularization"],
+    clinicalRelevance: "high",
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ["family medicine", "surgery"],
+    },
+  },
+
+  createdAt: '2025-01-26T00:00:00.000Z',
+  updatedAt: '2025-01-26T00:00:00.000Z',
+  version: 1,
+  status: "published",
+};
+
+export default macularDegeneration;

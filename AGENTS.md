@@ -2,6 +2,14 @@
 
 This file captures patterns, gotchas, and conventions discovered during development.
 
+## CURRENT STATUS (2026-01-28 23:00)
+- **TypeScript**: 🔄 22 errors (pre-existing, not i18n related)
+- **i18n**: ✅ CLEAN (0 errors) - Bilingual support complete
+- **Phase**: 6 - Layer-Condition Integration, AI Voice Navigation & i18n
+- **iOS**: ✅ Database permissions FIXED v2 - TestFlight build ready
+- **Content**: 2,719 educational files
+- **Next**: Upload build/TestFlight/SOMA.ipa to TestFlight
+
 ## Project Vision
 
 A local-first, privacy-preserving AI health repository with 3D anatomical interface for symptom tracking and physiological education. Counter-narrative to cloud-dependent healthcare AI.
@@ -166,6 +174,54 @@ When adding new data types:
 5. Add store method(s) (addX, addXBatch)
 6. Add date deserialization in `store.deserialize()`
 
+### 7. Template Literals in Content Files (CRITICAL)
+**Problem:** Escaped backticks (`\`\`\``) inside template literals cause TypeScript parsing errors
+**Root Cause:** The backslash-escaped backtick becomes a literal backtick, which prematurely closes the template literal
+**Solution:** Use `---` for markdown code blocks instead of `\`\`\``
+```typescript
+// WRONG - causes parsing errors
+explanation: `Here is a code block:
+\`\`\`
+code here
+\`\`\`
+`
+
+// CORRECT - use --- delimiter
+explanation: `Here is a code block:
+---
+code here
+---
+`
+```
+
+### 8. Unicode Characters in TypeScript
+**Problem:** Box-drawing characters (├, │, └) and symbols (×, →, ↑, α, β) can cause TypeScript parsing issues
+**Solution:** Replace with ASCII equivalents
+```typescript
+// Replace these patterns:
+'├─' → '+-'
+'│ ' → '| '
+'└─' → '+-'
+'×' → 'x'
+'→' → '->'
+'↑' → 'increased'
+'α' → 'alpha'
+'β' → 'beta'
+```
+
+### 9. Apostrophes in Single-Quoted Strings
+**Problem:** Apostrophes in single-quoted strings terminate the string prematurely
+**Solution:** Escape apostrophes with backslash
+```typescript
+// WRONG
+{ term: 'body's', definition: '...' }
+
+// CORRECT
+{ term: 'body\'s', definition: '...' }
+// OR use double quotes
+{ term: "body's", definition: "..." }
+```
+
 ## Performance Notes
 
 - Embedding generation: ~100-200ms per chunk with nomic-embed-text
@@ -187,12 +243,154 @@ When adding new data types:
 # Run any TypeScript file
 npx tsx <file>.ts
 
-# Check types
+# Check types (CRITICAL - run before committing)
 npx tsc --noEmit
+
+# Count TypeScript errors
+npx tsc --noEmit 2>&1 | grep -c "error TS"
+
+# Check TypeScript errors by file
+npx tsc --noEmit 2>&1 | grep "error TS" | cut -d'(' -f1 | sort | uniq -c
 
 # Run with passphrase
 BIOSELF_PASSPHRASE=test123 npx tsx <script>.ts
+
+# Fix common TypeScript issues in content files
+# (See Gotchas #7, #8, #9 above)
 ```
+```
+
+## Bilingual Support (i18n)
+
+The app now supports **English** and **Spanish** throughout.
+
+### Usage in Components
+
+```tsx
+import { useTranslation } from './i18n/useI18n';
+
+function MyComponent() {
+  const { t } = useTranslation('namespace');
+  return <h1>{t('key')}</h1>;
+}
+```
+
+### Language Switcher
+
+```tsx
+import { LanguageSwitcher, LanguageToggle } from './components/LanguageSwitcher';
+
+<LanguageSwitcher variant="dropdown" />  // Full dropdown
+<LanguageToggle />                        // Compact toggle
+```
+
+### Translation Files
+
+Located in `src/i18n/translations/{en,es}/`:
+- `common.ts` - Shared UI strings
+- `navigation.ts` - Nav items
+- `dashboard.ts` - Dashboard widgets
+- `symptoms.ts` - Symptom tracking
+- `anatomy.ts` - 3D viewer
+- `chat.ts` - AI chat
+- `medications.ts` - Medications
+- `labs.ts` - Lab results
+- `settings.ts` - Settings
+- `errors.ts` - Error messages
+- `onboarding.ts` - First-time setup
+- `voice.ts` - Voice commands
+- `complexity.ts` - Learning levels
+
+### AI Bilingual Support
+
+The medical educator AI supports Spanish:
+
+```typescript
+const response = await askEducator({
+  question: userQuestion,
+  context: {
+    domain: 'symptoms',
+    language: 'es',  // Spanish response
+  }
+});
+```
+
+See `src/i18n/README.md` for full documentation.
+
+## TestFlight Deployment
+
+### Configuration
+- **Bundle ID**: com.dannygomez.biological-self
+- **Team ID**: NDJZ6S9Q4L
+- **Current Version**: 0.1.0
+- **Build Number**: Auto-incremented per deployment
+- **Min iOS Version**: 14.0
+
+### Build Scripts
+```bash
+# Increment build number
+./scripts/increment-build.sh [new-version]
+
+# Build for TestFlight
+./scripts/build-testflight.sh
+
+# Build and upload
+export APP_STORE_CONNECT_API_KEY=your_key
+./scripts/build-testflight.sh --upload
+
+# Or use Fastlane
+fastlane ios beta    # Build and upload
+fastlane ios build   # Build only
+```
+
+### Prerequisites for Upload
+1. Create app record in App Store Connect
+2. Generate API key (Users and Access → Keys)
+3. Set environment variables for API access
+4. Run increment-build.sh to update build number
+5. Build and upload
+
+### Required App Store Connect Metadata
+- App name: Biological Self
+- Primary category: Medical
+- Bundle ID must match: com.dannygomez.biological-self
+- Required capabilities: HealthKit (for future integration)
+
+### CRITICAL: iOS File System Permissions
+
+iOS apps MUST use the Documents directory for data storage. The app sandbox prevents writing to other locations.
+
+**Error**: `Operation not permitted (os error 1)`
+
+**Initial Fix (Failed)**:
+```rust
+// dirs::document_dir() doesn't work reliably on iOS
+let documents_dir = dirs::document_dir().unwrap_or_default();
+```
+
+**Final Fix (Working)**:
+```rust
+// Use $HOME environment variable directly
+let home_dir = std::env::var("HOME")
+    .map(PathBuf::from)
+    .unwrap_or_else(|_| std::env::current_dir().unwrap_or_default());
+home_dir.join("Documents").join("biological-self-data")
+```
+
+**Database Path on iOS**:
+```
+/var/mobile/Containers/Data/Application/<UUID>/Documents/biological-self-data/biological-self.db
+```
+
+**Required Entitlements**:
+- com.apple.security.app-sandbox
+- com.apple.security.files.documents.read-write
+- com.apple.security.device.microphone (for voice)
+
+**Required Info.plist**:
+- NSMicrophoneUsageDescription (for voice commands)
+
+See `docs/TESTFLIGHT.md` for detailed deployment guide.
 
 ## Next Phase: Desktop App
 

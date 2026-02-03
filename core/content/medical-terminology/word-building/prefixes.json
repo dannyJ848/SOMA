@@ -1,0 +1,935 @@
+{
+  "id": "medical-prefixes",
+  "title": "Medical Prefixes: The Beginning of Words",
+  "description": "Prefixes are word parts added to the beginning of a root word to modify its meaning. Learning common medical prefixes helps you understand unfamiliar terms.",
+  "introduction": {
+    "level1": "A prefix is a small word part that goes at the start of a medical word. It changes the meaning of the word. For example, 'pre-' means 'before,' so 'prenatal' means 'before birth.'",
+    "level2": "Medical prefixes are attached to the beginning of root words to modify their meaning. Understanding common prefixes allows you to decode many medical terms you encounter.",
+    "level3": "Prefixes in medical terminology serve as modifiers that attach to the beginning of root words. They typically indicate location, time, quantity, or negation. Mastering common prefixes provides a foundation for understanding complex medical vocabulary."
+  },
+  "categories": [
+    {
+      "name": "Negation and Absence",
+      "description": "Prefixes that mean 'no,' 'not,' 'without,' or 'absence of'",
+      "prefixes": [
+        {
+          "prefix": "a-",
+          "alternates": ["an-"],
+          "meaning": "without, not, absence of",
+          "pronunciation": "ay or ah",
+          "definitions": {
+            "level1": "Means 'without' or 'not having something'",
+            "level2": "Indicates the absence or lack of something",
+            "level3": "Denotes absence, deficiency, or negation of the root term",
+            "level4": "Greek-derived prefix indicating privation or absence of the quality or condition described by the root",
+            "level5": "Privative prefix of Greek origin (alpha privative) indicating absence, lack, or negation; 'an-' variant used before vowels and 'h'"
+          },
+          "examples": [
+            {
+              "term": "asymptomatic",
+              "breakdown": "a- (without) + symptom + -atic (relating to)",
+              "meaning": "without symptoms"
+            },
+            {
+              "term": "anemia",
+              "breakdown": "an- (without) + -emia (blood condition)",
+              "meaning": "without enough red blood cells"
+            },
+            {
+              "term": "apnea",
+              "breakdown": "a- (without) + -pnea (breathing)",
+              "meaning": "without breathing; temporary stop in breathing"
+            }
+          ],
+          "clinicalContext": "Common in describing conditions where something normal is absent, such as 'atypical' (not typical), 'arrhythmia' (without regular rhythm), or 'afebrile' (without fever)."
+        },
+        {
+          "prefix": "anti-",
+          "alternates": ["ant-"],
+          "meaning": "against, opposing",
+          "pronunciation": "AN-tee or AN-tie",
+          "definitions": {
+            "level1": "Means 'against' - fights against something",
+            "level2": "Works against or opposes something",
+            "level3": "Indicates opposition to or counteraction of something",
+            "level4": "Denotes antagonism, opposition, or counteraction to the root term",
+            "level5": "Greek-derived prefix indicating opposition, counteraction, or prophylaxis against a condition or agent"
+          },
+          "examples": [
+            {
+              "term": "antibiotic",
+              "breakdown": "anti- (against) + bio (life) + -tic (pertaining to)",
+              "meaning": "medication that fights against bacteria"
+            },
+            {
+              "term": "anticoagulant",
+              "breakdown": "anti- (against) + coagul (clotting) + -ant (agent)",
+              "meaning": "medication that prevents blood clotting"
+            },
+            {
+              "term": "antipyretic",
+              "breakdown": "anti- (against) + pyret (fever) + -ic (pertaining to)",
+              "meaning": "medication that reduces fever"
+            }
+          ],
+          "clinicalContext": "Extensively used in pharmacology to describe medications that work against diseases, symptoms, or physiological processes."
+        }
+      ]
+    },
+    {
+      "name": "Location and Position",
+      "description": "Prefixes that describe where something is located",
+      "prefixes": [
+        {
+          "prefix": "epi-",
+          "meaning": "upon, above, over",
+          "pronunciation": "EP-ee",
+          "definitions": {
+            "level1": "Means 'on top of' or 'above'",
+            "level2": "Located on the surface or above something",
+            "level3": "Indicates a position upon, above, or superficial to another structure",
+            "level4": "Denotes a superficial or superior anatomical position relative to the root structure",
+            "level5": "Greek-derived prefix indicating a position upon, over, or superficial to the root anatomical structure"
+          },
+          "examples": [
+            {
+              "term": "epidermis",
+              "breakdown": "epi- (upon) + derm (skin) + -is (noun ending)",
+              "meaning": "the outer layer of skin"
+            },
+            {
+              "term": "epigastric",
+              "breakdown": "epi- (above) + gastr (stomach) + -ic (pertaining to)",
+              "meaning": "the area above the stomach"
+            }
+          ]
+        },
+        {
+          "prefix": "hypo-",
+          "meaning": "under, below, deficient",
+          "pronunciation": "HY-poh",
+          "definitions": {
+            "level1": "Means 'under' or 'too little'",
+            "level2": "Below normal or underneath something",
+            "level3": "Indicates a position below, beneath, or a deficiency of something",
+            "level4": "Denotes either an anatomical position inferior to a structure or a physiological state below normal parameters",
+            "level5": "Greek-derived prefix with dual meaning: anatomically indicates inferior position; physiologically indicates subnormal function or deficiency"
+          },
+          "examples": [
+            {
+              "term": "hypoglycemia",
+              "breakdown": "hypo- (low) + glyc (sugar) + -emia (blood condition)",
+              "meaning": "low blood sugar"
+            },
+            {
+              "term": "hypothyroidism",
+              "breakdown": "hypo- (under) + thyroid + -ism (condition)",
+              "meaning": "underactive thyroid gland"
+            },
+            {
+              "term": "hypodermic",
+              "breakdown": "hypo- (under) + derm (skin) + -ic (pertaining to)",
+              "meaning": "under the skin"
+            }
+          ]
+        },
+        {
+          "prefix": "hyper-",
+          "meaning": "above, excessive, beyond normal",
+          "pronunciation": "HY-per",
+          "definitions": {
+            "level1": "Means 'too much' or 'higher than normal'",
+            "level2": "More than normal or above what is expected",
+            "level3": "Indicates excess, above normal limits, or hyperfunction",
+            "level4": "Denotes a state above normal physiological parameters or excessive activity/quantity",
+            "level5": "Greek-derived prefix indicating supranormal function, quantity, or position; antonym of hypo-"
+          },
+          "examples": [
+            {
+              "term": "hypertension",
+              "breakdown": "hyper- (high) + tension (pressure)",
+              "meaning": "high blood pressure"
+            },
+            {
+              "term": "hyperglycemia",
+              "breakdown": "hyper- (high) + glyc (sugar) + -emia (blood condition)",
+              "meaning": "high blood sugar"
+            },
+            {
+              "term": "hyperthyroidism",
+              "breakdown": "hyper- (over) + thyroid + -ism (condition)",
+              "meaning": "overactive thyroid gland"
+            }
+          ]
+        },
+        {
+          "prefix": "sub-",
+          "meaning": "under, below, beneath",
+          "pronunciation": "sub",
+          "definitions": {
+            "level1": "Means 'under' or 'below'",
+            "level2": "Located underneath or less than something",
+            "level3": "Indicates a position beneath or inferior to another structure",
+            "level4": "Denotes anatomical position inferior or deep to a reference structure",
+            "level5": "Latin-derived prefix indicating inferior anatomical position or reduced degree of a quality"
+          },
+          "examples": [
+            {
+              "term": "subcutaneous",
+              "breakdown": "sub- (under) + cutane (skin) + -ous (pertaining to)",
+              "meaning": "under the skin"
+            },
+            {
+              "term": "sublingual",
+              "breakdown": "sub- (under) + lingu (tongue) + -al (pertaining to)",
+              "meaning": "under the tongue"
+            }
+          ]
+        },
+        {
+          "prefix": "supra-",
+          "alternates": ["super-"],
+          "meaning": "above, beyond",
+          "pronunciation": "SOO-prah",
+          "definitions": {
+            "level1": "Means 'above' or 'over'",
+            "level2": "Located above or superior to something",
+            "level3": "Indicates a position above or superior to another structure",
+            "level4": "Denotes anatomical position superior to a reference structure",
+            "level5": "Latin-derived prefix indicating superior anatomical position or excess degree"
+          },
+          "examples": [
+            {
+              "term": "supraclavicular",
+              "breakdown": "supra- (above) + clavicul (collarbone) + -ar (pertaining to)",
+              "meaning": "above the collarbone"
+            },
+            {
+              "term": "suprapubic",
+              "breakdown": "supra- (above) + pub (pubic bone) + -ic (pertaining to)",
+              "meaning": "above the pubic bone"
+            }
+          ]
+        },
+        {
+          "prefix": "infra-",
+          "meaning": "below, beneath",
+          "pronunciation": "IN-frah",
+          "definitions": {
+            "level1": "Means 'below' or 'underneath'",
+            "level2": "Located below or inferior to something",
+            "level3": "Indicates a position below or inferior to another structure",
+            "level4": "Denotes anatomical position inferior to a reference structure",
+            "level5": "Latin-derived prefix indicating inferior anatomical position"
+          },
+          "examples": [
+            {
+              "term": "infraorbital",
+              "breakdown": "infra- (below) + orbit (eye socket) + -al (pertaining to)",
+              "meaning": "below the eye socket"
+            }
+          ]
+        },
+        {
+          "prefix": "intra-",
+          "meaning": "within, inside",
+          "pronunciation": "IN-trah",
+          "definitions": {
+            "level1": "Means 'inside of' or 'within'",
+            "level2": "Located inside or occurring within something",
+            "level3": "Indicates position or occurrence within a structure or system",
+            "level4": "Denotes location or administration within an anatomical structure or organ",
+            "level5": "Latin-derived prefix indicating location within or administration into the interior of a structure"
+          },
+          "examples": [
+            {
+              "term": "intravenous",
+              "breakdown": "intra- (within) + ven (vein) + -ous (pertaining to)",
+              "meaning": "within or into a vein"
+            },
+            {
+              "term": "intramuscular",
+              "breakdown": "intra- (within) + muscul (muscle) + -ar (pertaining to)",
+              "meaning": "within a muscle"
+            }
+          ]
+        },
+        {
+          "prefix": "extra-",
+          "meaning": "outside, beyond",
+          "pronunciation": "EX-trah",
+          "definitions": {
+            "level1": "Means 'outside of' or 'beyond'",
+            "level2": "Located outside or external to something",
+            "level3": "Indicates position or occurrence outside a structure or system",
+            "level4": "Denotes location external to an anatomical structure or beyond normal limits",
+            "level5": "Latin-derived prefix indicating position outside or external to the root structure"
+          },
+          "examples": [
+            {
+              "term": "extracellular",
+              "breakdown": "extra- (outside) + cellul (cell) + -ar (pertaining to)",
+              "meaning": "outside the cells"
+            }
+          ]
+        },
+        {
+          "prefix": "peri-",
+          "meaning": "around, surrounding",
+          "pronunciation": "PAIR-ee",
+          "definitions": {
+            "level1": "Means 'around' or 'surrounding'",
+            "level2": "Located around or encircling something",
+            "level3": "Indicates position around or encircling a structure",
+            "level4": "Denotes circumferential location around an anatomical structure",
+            "level5": "Greek-derived prefix indicating circumferential or surrounding position relative to the root structure"
+          },
+          "examples": [
+            {
+              "term": "pericardium",
+              "breakdown": "peri- (around) + cardi (heart) + -um (structure)",
+              "meaning": "the membrane surrounding the heart"
+            },
+            {
+              "term": "perioperative",
+              "breakdown": "peri- (around) + operative (surgery)",
+              "meaning": "the time around surgery (before, during, after)"
+            }
+          ]
+        },
+        {
+          "prefix": "endo-",
+          "meaning": "within, inner",
+          "pronunciation": "EN-doh",
+          "definitions": {
+            "level1": "Means 'inside' or 'inner'",
+            "level2": "Located on the inside or inner surface",
+            "level3": "Indicates the inner portion or lining of a structure",
+            "level4": "Denotes the interior or inner aspect of an anatomical structure",
+            "level5": "Greek-derived prefix indicating the innermost aspect or internal location within a structure"
+          },
+          "examples": [
+            {
+              "term": "endocardium",
+              "breakdown": "endo- (inner) + cardi (heart) + -um (structure)",
+              "meaning": "the inner lining of the heart"
+            },
+            {
+              "term": "endoscopy",
+              "breakdown": "endo- (within) + scopy (viewing)",
+              "meaning": "looking inside the body with a camera"
+            }
+          ]
+        },
+        {
+          "prefix": "ecto-",
+          "alternates": ["exo-"],
+          "meaning": "outside, external",
+          "pronunciation": "EK-toh",
+          "definitions": {
+            "level1": "Means 'outside' or 'outer'",
+            "level2": "Located on the outside or outer surface",
+            "level3": "Indicates the outer portion or external aspect of a structure",
+            "level4": "Denotes the exterior or outer aspect of an anatomical structure",
+            "level5": "Greek-derived prefix indicating the outermost aspect or external location"
+          },
+          "examples": [
+            {
+              "term": "ectopic",
+              "breakdown": "ecto- (outside) + top (place) + -ic (pertaining to)",
+              "meaning": "in an abnormal location (outside the normal place)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Time and Sequence",
+      "description": "Prefixes that describe when something happens",
+      "prefixes": [
+        {
+          "prefix": "pre-",
+          "meaning": "before, in front of",
+          "pronunciation": "pree",
+          "definitions": {
+            "level1": "Means 'before' something happens",
+            "level2": "Occurring before an event or procedure",
+            "level3": "Indicates temporal or positional precedence",
+            "level4": "Denotes temporal precedence or anatomical anterior position",
+            "level5": "Latin-derived prefix indicating temporal precedence or anterior anatomical position"
+          },
+          "examples": [
+            {
+              "term": "preoperative",
+              "breakdown": "pre- (before) + operative (surgery)",
+              "meaning": "before surgery"
+            },
+            {
+              "term": "prenatal",
+              "breakdown": "pre- (before) + natal (birth)",
+              "meaning": "before birth"
+            }
+          ]
+        },
+        {
+          "prefix": "post-",
+          "meaning": "after, behind",
+          "pronunciation": "pohst",
+          "definitions": {
+            "level1": "Means 'after' something happens",
+            "level2": "Occurring after an event or procedure",
+            "level3": "Indicates temporal or positional succession",
+            "level4": "Denotes temporal succession or anatomical posterior position",
+            "level5": "Latin-derived prefix indicating temporal succession or posterior anatomical position"
+          },
+          "examples": [
+            {
+              "term": "postoperative",
+              "breakdown": "post- (after) + operative (surgery)",
+              "meaning": "after surgery"
+            },
+            {
+              "term": "postpartum",
+              "breakdown": "post- (after) + partum (childbirth)",
+              "meaning": "after giving birth"
+            }
+          ]
+        },
+        {
+          "prefix": "neo-",
+          "meaning": "new, recent",
+          "pronunciation": "NEE-oh",
+          "definitions": {
+            "level1": "Means 'new' or 'newly formed'",
+            "level2": "Refers to something new or recently developed",
+            "level3": "Indicates new formation or recent origin",
+            "level4": "Denotes new growth, formation, or recent origin of a structure or condition",
+            "level5": "Greek-derived prefix indicating new formation or neoplastic origin"
+          },
+          "examples": [
+            {
+              "term": "neonate",
+              "breakdown": "neo- (new) + nate (born)",
+              "meaning": "a newborn baby"
+            },
+            {
+              "term": "neoplasm",
+              "breakdown": "neo- (new) + plasm (formation)",
+              "meaning": "new growth (tumor)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Size and Quantity",
+      "description": "Prefixes that describe amount or size",
+      "prefixes": [
+        {
+          "prefix": "macro-",
+          "meaning": "large, big",
+          "pronunciation": "MAK-roh",
+          "definitions": {
+            "level1": "Means 'large' or 'big'",
+            "level2": "Larger than normal size",
+            "level3": "Indicates abnormally large size of a structure or cell",
+            "level4": "Denotes pathologically or abnormally large dimensions",
+            "level5": "Greek-derived prefix indicating macroscopic or abnormally large size"
+          },
+          "examples": [
+            {
+              "term": "macrocyte",
+              "breakdown": "macro- (large) + cyte (cell)",
+              "meaning": "an abnormally large red blood cell"
+            }
+          ]
+        },
+        {
+          "prefix": "micro-",
+          "meaning": "small, tiny",
+          "pronunciation": "MY-kroh",
+          "definitions": {
+            "level1": "Means 'very small' or 'tiny'",
+            "level2": "Smaller than normal or microscopic",
+            "level3": "Indicates abnormally small size or microscopic dimensions",
+            "level4": "Denotes pathologically small dimensions or microscopic scale",
+            "level5": "Greek-derived prefix indicating microscopic dimensions or abnormally small size"
+          },
+          "examples": [
+            {
+              "term": "microscope",
+              "breakdown": "micro- (small) + scope (to view)",
+              "meaning": "instrument to view tiny things"
+            },
+            {
+              "term": "microcyte",
+              "breakdown": "micro- (small) + cyte (cell)",
+              "meaning": "an abnormally small red blood cell"
+            }
+          ]
+        },
+        {
+          "prefix": "poly-",
+          "meaning": "many, much",
+          "pronunciation": "PAH-lee",
+          "definitions": {
+            "level1": "Means 'many' or 'a lot of'",
+            "level2": "Multiple or numerous",
+            "level3": "Indicates the presence of many or excessive quantity",
+            "level4": "Denotes multiplicity or pathological increase in number",
+            "level5": "Greek-derived prefix indicating plurality or abnormally increased number"
+          },
+          "examples": [
+            {
+              "term": "polyuria",
+              "breakdown": "poly- (many) + uria (urination)",
+              "meaning": "excessive urination"
+            },
+            {
+              "term": "polydipsia",
+              "breakdown": "poly- (many) + dipsia (thirst)",
+              "meaning": "excessive thirst"
+            }
+          ]
+        },
+        {
+          "prefix": "oligo-",
+          "meaning": "few, scanty",
+          "pronunciation": "AH-lih-goh",
+          "definitions": {
+            "level1": "Means 'few' or 'not enough'",
+            "level2": "Less than normal or insufficient",
+            "level3": "Indicates deficiency or abnormally decreased quantity",
+            "level4": "Denotes pathological decrease in number or amount",
+            "level5": "Greek-derived prefix indicating paucity or abnormally decreased number"
+          },
+          "examples": [
+            {
+              "term": "oliguria",
+              "breakdown": "oligo- (few) + uria (urination)",
+              "meaning": "decreased urination"
+            }
+          ]
+        },
+        {
+          "prefix": "uni-",
+          "alternates": ["mono-"],
+          "meaning": "one, single",
+          "pronunciation": "YOO-nee / MAH-noh",
+          "definitions": {
+            "level1": "Means 'one' or 'single'",
+            "level2": "Only one of something",
+            "level3": "Indicates a single instance or unilateral involvement",
+            "level4": "Denotes singular occurrence or unilateral pathology",
+            "level5": "Latin (uni-) or Greek (mono-) derived prefix indicating singular or unilateral nature"
+          },
+          "examples": [
+            {
+              "term": "unilateral",
+              "breakdown": "uni- (one) + later (side) + -al (pertaining to)",
+              "meaning": "on one side only"
+            },
+            {
+              "term": "monocyte",
+              "breakdown": "mono- (one) + cyte (cell)",
+              "meaning": "a type of white blood cell with one nucleus"
+            }
+          ]
+        },
+        {
+          "prefix": "bi-",
+          "meaning": "two, double",
+          "pronunciation": "by",
+          "definitions": {
+            "level1": "Means 'two' or 'both'",
+            "level2": "Two of something or on both sides",
+            "level3": "Indicates two instances or bilateral involvement",
+            "level4": "Denotes dual occurrence or bilateral pathology",
+            "level5": "Latin-derived prefix indicating bilateral or dual nature"
+          },
+          "examples": [
+            {
+              "term": "bilateral",
+              "breakdown": "bi- (two) + later (side) + -al (pertaining to)",
+              "meaning": "on both sides"
+            }
+          ]
+        },
+        {
+          "prefix": "quad-",
+          "alternates": ["quadri-"],
+          "meaning": "four",
+          "pronunciation": "kwahd",
+          "definitions": {
+            "level1": "Means 'four'",
+            "level2": "Involving four parts or areas",
+            "level3": "Indicates four structures or all four limbs",
+            "level4": "Denotes involvement of four anatomical regions, typically all extremities",
+            "level5": "Latin-derived prefix indicating four anatomical structures or regions"
+          },
+          "examples": [
+            {
+              "term": "quadriplegia",
+              "breakdown": "quadri- (four) + plegia (paralysis)",
+              "meaning": "paralysis of all four limbs"
+            }
+          ]
+        },
+        {
+          "prefix": "hemi-",
+          "meaning": "half",
+          "pronunciation": "HEM-ee",
+          "definitions": {
+            "level1": "Means 'half'",
+            "level2": "One half of something",
+            "level3": "Indicates one half or one side of a structure",
+            "level4": "Denotes involvement of half of a structure, typically one side",
+            "level5": "Greek-derived prefix indicating hemilateral or half involvement"
+          },
+          "examples": [
+            {
+              "term": "hemiplegia",
+              "breakdown": "hemi- (half) + plegia (paralysis)",
+              "meaning": "paralysis of one side of the body"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Direction and Movement",
+      "description": "Prefixes that describe direction or movement",
+      "prefixes": [
+        {
+          "prefix": "ab-",
+          "meaning": "away from",
+          "pronunciation": "ab",
+          "definitions": {
+            "level1": "Means 'away from' or 'moving away'",
+            "level2": "Moving away from a central point",
+            "level3": "Indicates movement away from the midline or center",
+            "level4": "Denotes movement or orientation away from the anatomical midline",
+            "level5": "Latin-derived prefix indicating movement or direction away from the central axis"
+          },
+          "examples": [
+            {
+              "term": "abduction",
+              "breakdown": "ab- (away) + duction (movement)",
+              "meaning": "movement away from the body's midline"
+            }
+          ]
+        },
+        {
+          "prefix": "ad-",
+          "meaning": "toward",
+          "pronunciation": "ad",
+          "definitions": {
+            "level1": "Means 'toward' or 'moving toward'",
+            "level2": "Moving toward a central point",
+            "level3": "Indicates movement toward the midline or center",
+            "level4": "Denotes movement or orientation toward the anatomical midline",
+            "level5": "Latin-derived prefix indicating movement or direction toward the central axis"
+          },
+          "examples": [
+            {
+              "term": "adduction",
+              "breakdown": "ad- (toward) + duction (movement)",
+              "meaning": "movement toward the body's midline"
+            }
+          ]
+        },
+        {
+          "prefix": "trans-",
+          "meaning": "across, through",
+          "pronunciation": "tranz",
+          "definitions": {
+            "level1": "Means 'across' or 'through'",
+            "level2": "Going through or crossing something",
+            "level3": "Indicates passage through or across a structure",
+            "level4": "Denotes traversing through an anatomical structure",
+            "level5": "Latin-derived prefix indicating passage through or across anatomical planes or structures"
+          },
+          "examples": [
+            {
+              "term": "transdermal",
+              "breakdown": "trans- (through) + derm (skin) + -al (pertaining to)",
+              "meaning": "through the skin"
+            }
+          ]
+        },
+        {
+          "prefix": "retro-",
+          "meaning": "behind, backward",
+          "pronunciation": "REH-troh",
+          "definitions": {
+            "level1": "Means 'behind' or 'in back of'",
+            "level2": "Located behind or moving backward",
+            "level3": "Indicates posterior position or backward direction",
+            "level4": "Denotes anatomical position posterior to or backward movement",
+            "level5": "Latin-derived prefix indicating posterior anatomical position or retrograde direction"
+          },
+          "examples": [
+            {
+              "term": "retroperitoneal",
+              "breakdown": "retro- (behind) + peritoneal (abdominal lining)",
+              "meaning": "behind the peritoneum (abdominal lining)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Color",
+      "description": "Prefixes that describe colors",
+      "prefixes": [
+        {
+          "prefix": "cyano-",
+          "meaning": "blue",
+          "pronunciation": "sy-AN-oh",
+          "definitions": {
+            "level1": "Means 'blue' color",
+            "level2": "Refers to a bluish color or discoloration",
+            "level3": "Indicates blue discoloration, typically from low oxygen",
+            "level4": "Denotes blue discoloration associated with deoxygenated hemoglobin",
+            "level5": "Greek-derived prefix indicating blue discoloration from reduced hemoglobin or other causes"
+          },
+          "examples": [
+            {
+              "term": "cyanosis",
+              "breakdown": "cyano- (blue) + -osis (condition)",
+              "meaning": "bluish discoloration of skin from lack of oxygen"
+            }
+          ]
+        },
+        {
+          "prefix": "erythro-",
+          "meaning": "red",
+          "pronunciation": "eh-RITH-roh",
+          "definitions": {
+            "level1": "Means 'red' color",
+            "level2": "Refers to a reddish color",
+            "level3": "Indicates red color or red blood cells",
+            "level4": "Denotes erythrocytes (red blood cells) or red discoloration",
+            "level5": "Greek-derived prefix indicating erythrocyte-related pathology or red coloration"
+          },
+          "examples": [
+            {
+              "term": "erythrocyte",
+              "breakdown": "erythro- (red) + cyte (cell)",
+              "meaning": "red blood cell"
+            }
+          ]
+        },
+        {
+          "prefix": "leuko-",
+          "alternates": ["leuc-"],
+          "meaning": "white",
+          "pronunciation": "LOO-koh",
+          "definitions": {
+            "level1": "Means 'white' color",
+            "level2": "Refers to a white color or white blood cells",
+            "level3": "Indicates white color or white blood cells",
+            "level4": "Denotes leukocytes (white blood cells) or white discoloration",
+            "level5": "Greek-derived prefix indicating leukocyte-related pathology or white coloration"
+          },
+          "examples": [
+            {
+              "term": "leukocyte",
+              "breakdown": "leuko- (white) + cyte (cell)",
+              "meaning": "white blood cell"
+            }
+          ]
+        },
+        {
+          "prefix": "melano-",
+          "meaning": "black, dark",
+          "pronunciation": "MEL-ah-noh",
+          "definitions": {
+            "level1": "Means 'black' or 'dark' color",
+            "level2": "Refers to a black or dark color",
+            "level3": "Indicates dark pigmentation or melanin",
+            "level4": "Denotes melanin-related structures or dark pigmentation",
+            "level5": "Greek-derived prefix indicating melanin or abnormal dark pigmentation"
+          },
+          "examples": [
+            {
+              "term": "melanoma",
+              "breakdown": "melano- (dark) + -oma (tumor)",
+              "meaning": "a cancer of pigmented skin cells"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Speed and Frequency",
+      "description": "Prefixes that describe rate or speed",
+      "prefixes": [
+        {
+          "prefix": "tachy-",
+          "meaning": "fast, rapid",
+          "pronunciation": "TAK-ee",
+          "definitions": {
+            "level1": "Means 'fast' or 'rapid'",
+            "level2": "Faster than normal",
+            "level3": "Indicates abnormally fast rate or rhythm",
+            "level4": "Denotes pathologically increased rate or frequency",
+            "level5": "Greek-derived prefix indicating abnormally rapid rate of a physiological process"
+          },
+          "examples": [
+            {
+              "term": "tachycardia",
+              "breakdown": "tachy- (fast) + cardia (heart)",
+              "meaning": "fast heart rate (over 100 beats per minute)"
+            },
+            {
+              "term": "tachypnea",
+              "breakdown": "tachy- (fast) + pnea (breathing)",
+              "meaning": "fast breathing rate"
+            }
+          ]
+        },
+        {
+          "prefix": "brady-",
+          "meaning": "slow",
+          "pronunciation": "BRAY-dee",
+          "definitions": {
+            "level1": "Means 'slow'",
+            "level2": "Slower than normal",
+            "level3": "Indicates abnormally slow rate or rhythm",
+            "level4": "Denotes pathologically decreased rate or frequency",
+            "level5": "Greek-derived prefix indicating abnormally slow rate of a physiological process"
+          },
+          "examples": [
+            {
+              "term": "bradycardia",
+              "breakdown": "brady- (slow) + cardia (heart)",
+              "meaning": "slow heart rate (under 60 beats per minute)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quality and Condition",
+      "description": "Prefixes that describe good, bad, or other conditions",
+      "prefixes": [
+        {
+          "prefix": "dys-",
+          "meaning": "bad, difficult, painful, abnormal",
+          "pronunciation": "dis",
+          "definitions": {
+            "level1": "Means 'bad' or 'difficult'",
+            "level2": "Abnormal or painful function",
+            "level3": "Indicates difficult, painful, or abnormal function",
+            "level4": "Denotes disordered or impaired function of a process",
+            "level5": "Greek-derived prefix indicating impaired, painful, or abnormal physiological function"
+          },
+          "examples": [
+            {
+              "term": "dyspnea",
+              "breakdown": "dys- (difficult) + pnea (breathing)",
+              "meaning": "difficulty breathing"
+            },
+            {
+              "term": "dysphagia",
+              "breakdown": "dys- (difficult) + phagia (swallowing)",
+              "meaning": "difficulty swallowing"
+            }
+          ]
+        },
+        {
+          "prefix": "eu-",
+          "meaning": "good, normal, well",
+          "pronunciation": "yoo",
+          "definitions": {
+            "level1": "Means 'good' or 'normal'",
+            "level2": "Normal or healthy function",
+            "level3": "Indicates normal or healthy function",
+            "level4": "Denotes normal physiological function or state",
+            "level5": "Greek-derived prefix indicating normal or healthy physiological function"
+          },
+          "examples": [
+            {
+              "term": "eupnea",
+              "breakdown": "eu- (normal) + pnea (breathing)",
+              "meaning": "normal breathing"
+            },
+            {
+              "term": "euthyroid",
+              "breakdown": "eu- (normal) + thyroid",
+              "meaning": "normal thyroid function"
+            }
+          ]
+        },
+        {
+          "prefix": "pseudo-",
+          "meaning": "false, fake",
+          "pronunciation": "SOO-doh",
+          "definitions": {
+            "level1": "Means 'not real' or 'fake'",
+            "level2": "Resembles but is not the real thing",
+            "level3": "Indicates a false or deceptive resemblance",
+            "level4": "Denotes a condition that mimics another but has different etiology",
+            "level5": "Greek-derived prefix indicating phenotypic mimicry without true pathological identity"
+          },
+          "examples": [
+            {
+              "term": "pseudocyst",
+              "breakdown": "pseudo- (false) + cyst",
+              "meaning": "a fluid collection that resembles a cyst but lacks a true cyst wall"
+            }
+          ]
+        },
+        {
+          "prefix": "mal-",
+          "meaning": "bad, poor, abnormal",
+          "pronunciation": "mal",
+          "definitions": {
+            "level1": "Means 'bad' or 'poor'",
+            "level2": "Abnormal or improper function",
+            "level3": "Indicates abnormal, inadequate, or poor function",
+            "level4": "Denotes pathological or defective function",
+            "level5": "Latin-derived prefix indicating inadequate or abnormal function or development"
+          },
+          "examples": [
+            {
+              "term": "malnutrition",
+              "breakdown": "mal- (poor) + nutrition",
+              "meaning": "poor or inadequate nutrition"
+            },
+            {
+              "term": "malabsorption",
+              "breakdown": "mal- (poor) + absorption",
+              "meaning": "inadequate absorption of nutrients"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "practiceExercises": [
+    {
+      "type": "breakdown",
+      "instruction": "Break down these terms into their prefix and root components:",
+      "terms": ["hypertension", "bradycardia", "subcutaneous", "prenatal", "tachypnea"]
+    },
+    {
+      "type": "matching",
+      "instruction": "Match the prefix to its meaning:",
+      "pairs": [
+        {"prefix": "hypo-", "meaning": "under, below, deficient"},
+        {"prefix": "hyper-", "meaning": "above, excessive"},
+        {"prefix": "tachy-", "meaning": "fast, rapid"},
+        {"prefix": "brady-", "meaning": "slow"},
+        {"prefix": "poly-", "meaning": "many"}
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Prefixes are added to the beginning of root words to modify meaning",
+    "Many prefixes come in opposite pairs (hypo-/hyper-, tachy-/brady-, pre-/post-)",
+    "Learning prefixes helps you decode unfamiliar medical terms",
+    "When in doubt about a term, ask your healthcare provider to explain"
+  ]
+}

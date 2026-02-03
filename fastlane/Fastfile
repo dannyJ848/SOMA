@@ -1,0 +1,144 @@
+# Fastlane configuration for Biological Self iOS app
+# This file defines the lanes for building and deploying to TestFlight
+
+default_platform(:ios)
+
+platform :ios do
+  # Define the app identifier and team ID
+  APP_IDENTIFIER = "com.dannygomez.biological-self"
+  TEAM_ID = "NDJZ6S9Q4L"
+  SCHEME = "biological-self_iOS"
+  
+  # Before all lanes, ensure we have the right setup
+  before_all do
+    ensure_git_status_clean
+  end
+
+  # Lane: test
+  # Run tests before building
+  lane :test do
+    scan(
+      workspace: "src-tauri/gen/apple/biological-self.xcworkspace",
+      scheme: SCHEME,
+      destination: "platform=iOS Simulator,name=iPhone 15 Pro"
+    )
+  end
+
+  # Lane: build
+  # Build the app for TestFlight
+  lane :build do
+    # Increment build number
+    increment_build_number(
+      xcodeproj: "src-tauri/gen/apple/biological-self.xcodeproj"
+    )
+    
+    # Build the app
+    build_app(
+      workspace: "src-tauri/gen/apple/biological-self.xcworkspace",
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      export_team_id: TEAM_ID,
+      output_directory: "build/TestFlight",
+      build_path: "build/TestFlight"
+    )
+  end
+
+  # Lane: beta
+  # Build and upload to TestFlight
+  lane :beta do
+    # Ensure we have the App Store Connect API key
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_filepath: ENV["APP_STORE_CONNECT_KEY_PATH"],
+      in_house: false
+    )
+    
+    # Increment build number
+    increment_build_number(
+      xcodeproj: "src-tauri/gen/apple/biological-self.xcodeproj"
+    )
+    
+    # Build the app
+    build_app(
+      workspace: "src-tauri/gen/apple/biological-self.xcworkspace",
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      export_team_id: TEAM_ID
+    )
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      api_key: api_key,
+      skip_waiting_for_build_processing: true,
+      notify_external_testers: false
+    )
+    
+    # Tag the release
+    add_git_tag(tag: "testflight-v#{get_version_number}-#{get_build_number}")
+    
+    # Push the tag
+    push_git_tags
+    
+    UI.success("🎉 Successfully uploaded to TestFlight!")
+  end
+
+  # Lane: release
+  # Build and submit for App Store review
+  lane :release do
+    # Ensure we have the App Store Connect API key
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_filepath: ENV["APP_STORE_CONNECT_KEY_PATH"],
+      in_house: false
+    )
+    
+    # Build the app
+    build_app(
+      workspace: "src-tauri/gen/apple/biological-self.xcworkspace",
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      export_team_id: TEAM_ID
+    )
+    
+    # Upload to App Store
+    upload_to_app_store(
+      api_key: api_key,
+      skip_metadata: false,
+      skip_screenshots: false,
+      submit_for_review: false,
+      automatic_release: false
+    )
+    
+    UI.success("🎉 Successfully uploaded to App Store Connect!")
+  end
+
+  # Lane: screenshots
+  # Generate screenshots for the App Store
+  lane :screenshots do
+    capture_ios_screenshots(
+      workspace: "src-tauri/gen/apple/biological-self.xcworkspace",
+      scheme: SCHEME,
+      devices: [
+        "iPhone 15 Pro",
+        "iPhone 15 Pro Max",
+        "iPad Pro (12.9-inch) (6th generation)"
+      ]
+    )
+  end
+
+  # After all lanes
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+    UI.success("✅ Lane '#{lane}' completed successfully!")
+  end
+
+  # Error handling
+  error do |lane, exception|
+    UI.error("❌ Lane '#{lane}' failed with exception: #{exception}")
+  end
+end

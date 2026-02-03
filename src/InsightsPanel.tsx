@@ -133,11 +133,16 @@ export function InsightsPanel({ dashboardData, dataVersion }: InsightsPanelProps
   }, []);
 
   // Generate insights when data changes
+  // Note: We intentionally omit generateInsights and lastGeneratedVersion from deps
+  // - generateInsights is a function that reads state, including it would cause loops
+  // - lastGeneratedVersion is checked inside the effect to prevent duplicate calls
+  // - dashboardData is compared by reference, which is fine since App.tsx manages its lifecycle
   useEffect(() => {
     if (aiAvailable && dashboardData && dataVersion !== lastGeneratedVersion) {
       generateInsights();
     }
-  }, [aiAvailable, dashboardData, dataVersion]);
+     
+  }, [aiAvailable, dataVersion]);
 
   async function generateInsights() {
     if (!dashboardData || isLoading) return;

@@ -1,0 +1,108 @@
+{
+  "id": "ent-vertigo-dizziness",
+  "type": "patient-education",
+  "name": "Vertigo and Dizziness",
+  "alternateNames": ["Vestibular Disorders", "Balance Problems", "Spinning Sensation"],
+  "category": "ear",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Dizziness is a general feeling of being unsteady or lightheaded, while vertigo is a specific type where you feel like you or your surroundings are spinning.",
+      "explanation": "Dizziness is one of the most common reasons people see a doctor. It can mean different things: feeling faint or lightheaded, feeling unsteady when you walk, or feeling like the room is spinning around you. The spinning sensation is called vertigo, and it usually means there is a problem with your inner ear or the balance centers in your brain. Your inner ear has special organs that sense movement and help you keep your balance. When something goes wrong with these organs - like an infection, tiny crystals moving out of place, or fluid buildup - you can feel intense spinning that may come with nausea and trouble walking. Lightheadedness without spinning is often related to blood pressure, dehydration, or other medical conditions. It is important to describe your symptoms clearly to your doctor because different types of dizziness have different causes and treatments.",
+      "keyTerms": [
+        {"term": "dizziness", "definition": "A general term for feeling unsteady, lightheaded, or off-balance"},
+        {"term": "vertigo", "definition": "A spinning sensation, feeling like you or the room is rotating"},
+        {"term": "inner ear", "definition": "The part of your ear responsible for balance as well as hearing"},
+        {"term": "balance", "definition": "Your body's ability to stay upright and steady"}
+      ],
+      "analogies": ["Your inner ear balance organs are like a gyroscope on a ship - they tell your brain which way is up and how you are moving. When they malfunction, it is like getting wrong information and feeling seasick on dry land."],
+      "examples": ["A common cause of vertigo is BPPV - when tiny crystals in your inner ear move to the wrong place, causing brief but intense spinning when you move your head certain ways, like rolling over in bed."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Vertigo results from peripheral (inner ear) or central (brain) vestibular dysfunction, while dizziness encompasses vertigo, presyncope, disequilibrium, and non-specific lightheadedness.",
+      "explanation": "The vestibular system includes the peripheral labyrinth (semicircular canals detecting rotation, utricle and saccule detecting linear acceleration) and central connections in the brainstem and cerebellum. Peripheral vertigo is more common and typically presents with severe spinning, horizontal-torsional nystagmus suppressed by visual fixation, and often hearing changes or tinnitus. Common causes include benign paroxysmal positional vertigo (BPPV - displaced otoconia in semicircular canals), vestibular neuritis (viral inflammation), labyrinthitis (with hearing loss), and Meniere's disease. Central vertigo is less common but more concerning, caused by stroke, multiple sclerosis, or tumors affecting brainstem/cerebellum; features include mild vertigo with severe imbalance, vertical or direction-changing nystagmus, neurological deficits. Presyncope is near-fainting from transient cerebral hypoperfusion (orthostatic hypotension, cardiac causes). Disequilibrium is imbalance without vertigo, often from peripheral neuropathy or musculoskeletal issues. Chronic subjective dizziness reflects anxiety-vestibular interaction.",
+      "keyTerms": [
+        {"term": "vestibular system", "definition": "The balance portion of the inner ear and its brain connections"},
+        {"term": "nystagmus", "definition": "Involuntary rhythmic eye movements, important diagnostic sign in vertigo", "pronunciation": "nis-TAG-mus"},
+        {"term": "BPPV", "definition": "Benign paroxysmal positional vertigo - crystals displaced in semicircular canals"},
+        {"term": "vestibular neuritis", "definition": "Inflammation of the vestibular nerve causing acute vertigo", "pronunciation": "nur-EYE-tis"},
+        {"term": "presyncope", "definition": "Near-fainting sensation from reduced blood flow to the brain"}
+      ],
+      "analogies": ["The difference between peripheral and central vertigo is like the difference between a broken speedometer (peripheral - the sensor is wrong) and a broken navigation computer (central - the processing is wrong)."],
+      "examples": ["BPPV causes brief (less than 1 minute) episodes of intense vertigo triggered by head position changes like looking up, bending over, or rolling over in bed."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Vestibular assessment includes clinical testing (HINTS, Dix-Hallpike, gait), electronystagmography, and imaging, with treatment ranging from repositioning maneuvers to vestibular rehabilitation.",
+      "explanation": "Acute vertigo evaluation uses the HINTS exam (Head Impulse, Nystagmus, Test of Skew) to distinguish peripheral from central causes - a normal head impulse test in acute vertigo suggests stroke rather than peripheral lesion. The Dix-Hallpike maneuver diagnoses posterior canal BPPV, showing transient upbeat-torsional nystagmus after ~2 second latency, fatigable with repeat testing. Supine roll test detects horizontal canal BPPV. Treatment for posterior canal BPPV is the Epley (canalith repositioning) maneuver with ~80% single-treatment success. Vestibular neuritis is treated with initial symptom management (antiemetics, vestibular suppressants limited to <3 days), steroids if within 72 hours, and early vestibular rehabilitation. Electronystagmography (ENG) or videonystagmography (VNG) assesses caloric responses and oculomotor function. Vestibular evoked myogenic potentials (VEMPs) test otolith function. MRI with IAC protocol is indicated for asymmetric vestibular testing or suspicion of central pathology. Vestibular rehabilitation therapy uses adaptation, substitution, and habituation exercises to promote central compensation.",
+      "keyTerms": [
+        {"term": "HINTS exam", "definition": "Bedside test battery distinguishing peripheral from central causes of acute vestibular syndrome"},
+        {"term": "Dix-Hallpike maneuver", "definition": "Diagnostic test for posterior canal BPPV, provoking characteristic nystagmus"},
+        {"term": "Epley maneuver", "definition": "Canalith repositioning treatment for posterior canal BPPV"},
+        {"term": "caloric testing", "definition": "Vestibular function test using warm and cold water or air irrigation in ear canal"},
+        {"term": "vestibular rehabilitation", "definition": "Exercise-based therapy promoting central compensation for vestibular dysfunction"}
+      ],
+      "clinicalNotes": "HINTS outperforms MRI for stroke detection in first 24-48 hours of acute vestibular syndrome. Epley contraindicated in severe cervical spine disease. Vestibular suppressants (meclizine, benzodiazepines) should be avoided long-term as they impair central compensation. Consider PPPD (persistent postural-perceptual dizziness) in chronic non-vertiginous dizziness."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Vestibular pathophysiology involves sensory mismatch, velocity storage dysregulation, and central compensation mechanisms, with emerging understanding of vestibular migraine and functional dizziness.",
+      "explanation": "Vestibular symptoms arise from mismatch between vestibular, visual, and proprioceptive inputs. The velocity storage mechanism in vestibular nuclei extends low-frequency vestibular signals beyond peripheral time constants; dysfunction explains prolonged symptoms in various vestibular disorders. Vestibular compensation following unilateral loss involves: static compensation (rebalancing resting activity between vestibular nuclei) occurring within days, and dynamic compensation (recalibrating VOR gain, developing substitution strategies) taking weeks to months. Bilateral vestibulopathy causes oscillopsia (visual blurring with head movement) and chronic imbalance. Vestibular migraine, the second most common cause of recurrent vertigo after BPPV, involves trigeminal-vestibular interactions and central sensitization; diagnosis is clinical without definitive biomarker. PPPD (persistent postural-perceptual dizziness) represents a functional vestibular disorder with chronic non-spinning dizziness exacerbated by upright posture, visual motion, and active/passive self-motion; treatment includes vestibular rehabilitation, CBT, and SSRIs. Superior canal dehiscence syndrome results from third-window effect causing sound/pressure-induced vertigo, autophony, and pulsatile tinnitus.",
+      "keyTerms": [
+        {"term": "velocity storage", "definition": "Central mechanism prolonging vestibular signal, dysfunction contributes to motion sensitivity"},
+        {"term": "vestibular compensation", "definition": "Central nervous system plasticity recovering balance function after peripheral loss"},
+        {"term": "vestibular migraine", "definition": "Migraine variant causing recurrent episodic vertigo, may occur with or without headache"},
+        {"term": "PPPD", "definition": "Persistent postural-perceptual dizziness, chronic functional vestibular disorder"},
+        {"term": "oscillopsia", "definition": "Visual blurring during head movement from VOR failure", "pronunciation": "os-il-OP-see-ah"}
+      ],
+      "clinicalNotes": "Vestibular migraine criteria: current or past migraine history, episodic vestibular symptoms, migraine features during at least 50% of episodes. PPPD diagnostic criteria in ICD-11. Bilateral vestibulopathy etiology: aminoglycosides, bilateral Meniere's, autoimmune. SSCD diagnosis: CT temporal bone, cVEMP, audiometry (air-bone gap at low frequencies)."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced vestibular medicine integrates precision diagnostics, novel therapeutic targets, vestibular implant development, and phenotype-specific treatment algorithms.",
+      "explanation": "Cutting-edge vestibular diagnostics include video head impulse testing (vHIT) quantifying VOR gain and catch-up saccades for individual semicircular canals, ocular and cervical VEMPs characterizing otolith function, and subjective visual vertical assessing central integration. Imaging advances include high-resolution MRI sequences detecting endolymphatic hydrops (3D-FLAIR with intratympanic gadolinium) for Meniere's disease confirmation. Vestibular implants (currently investigational) directly stimulate ampullary nerves to restore vestibular function in bilateral vestibulopathy; multichannel prostheses aim to restore three-dimensional motion sensing. Chemical vestibular ablation (intratympanic gentamicin) remains useful for intractable Meniere's vertigo; titration protocols balance vertigo control against hearing/vestibular preservation. SSCD surgical approaches include middle fossa craniotomy for plugging/resurfacing and transmastoid plugging for canal occlusion. Emerging migraine treatments (CGRP monoclonal antibodies) show promise for vestibular migraine. Virtual reality vestibular rehabilitation enables controlled sensory conflict exposure. Biomarkers under investigation include genetic susceptibility markers, inner ear imaging, and vestibular function testing patterns to guide personalized treatment algorithms.",
+      "keyTerms": [
+        {"term": "vestibular implant", "definition": "Prosthetic device electrically stimulating vestibular nerves to restore balance sensation"},
+        {"term": "vHIT", "definition": "Video head impulse test providing objective semicircular canal function assessment"},
+        {"term": "intratympanic gentamicin", "definition": "Chemical vestibular ablation for refractory Meniere's disease"},
+        {"term": "CGRP antagonists", "definition": "Migraine-targeted medications with potential efficacy in vestibular migraine"},
+        {"term": "endolymphatic hydrops imaging", "definition": "MRI technique visualizing inner ear fluid distension in Meniere's disease"}
+      ],
+      "clinicalNotes": "Johns Hopkins vestibular implant trials ongoing. Meniere's treatment ladder: diet/lifestyle → diuretics → intratympanic steroids → gentamicin → labyrinthectomy/vestibular nerve section. SSCD surgery decisions balance symptoms against surgical risks. VR rehabilitation shows equivalent efficacy to in-person therapy for selected patients."
+    }
+  },
+  "media": [
+    {
+      "id": "vestibular-anatomy-diagram",
+      "type": "diagram",
+      "filename": "vestibular_system_anatomy.svg",
+      "title": "Vestibular System Anatomy",
+      "description": "Diagram showing semicircular canals, otolith organs, and central vestibular pathways"
+    }
+  ],
+  "citations": [
+    {
+      "id": "barany-society-guidelines",
+      "type": "guideline",
+      "title": "Diagnostic Criteria for Vestibular Disorders",
+      "source": "Barany Society",
+      "url": "https://www.jvr-web.org/Barany.html"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "ent-ear-anatomy", "targetType": "anatomy", "relationship": "related", "label": "Ear Anatomy"},
+    {"targetId": "ent-menieres-disease", "targetType": "condition", "relationship": "related", "label": "Meniere's Disease"},
+    {"targetId": "ent-hearing-tests", "targetType": "procedure", "relationship": "related", "label": "Hearing Tests"}
+  ],
+  "tags": {
+    "systems": ["vestibular", "neurological"],
+    "topics": ["conditions", "diagnosis", "treatment"],
+    "clinicalRelevance": "high",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

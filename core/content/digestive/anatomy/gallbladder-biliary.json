@@ -1,0 +1,111 @@
+{
+  "id": "structure-gallbladder-biliary",
+  "type": "structure",
+  "name": "Gallbladder and Biliary Tree",
+  "alternateNames": ["Biliary system", "Vesica biliaris", "Vesica fellea"],
+  "fmaId": "FMA:7202",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The gallbladder is a small pouch that stores bile, a liquid that helps your body digest fats.",
+      "explanation": "Your gallbladder is shaped like a small pear and sits under your liver. The liver makes bile all the time, but you don't always need it. The gallbladder stores this bile until you eat fatty foods. When you eat something like pizza or ice cream, your gallbladder squeezes and sends bile through tubes called bile ducts into your intestine to help break down the fats. Without bile, fats would clump together and be hard to digest.",
+      "keyTerms": [
+        { "term": "bile", "definition": "A green-yellow liquid that helps break down fats" },
+        { "term": "gallbladder", "definition": "A small pouch that stores bile until it's needed" },
+        { "term": "fats", "definition": "A type of nutrient found in foods like butter, oil, and cheese" }
+      ],
+      "analogies": ["The gallbladder is like a water balloon that fills up with bile, then squeezes it out when you eat fatty food."],
+      "examples": ["When you eat French fries, your gallbladder squeezes to release bile that helps your body absorb the fat."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The biliary system consists of the gallbladder and bile ducts (intrahepatic, common hepatic, cystic, and common bile duct) that transport bile from the liver to the duodenum.",
+      "explanation": "Bile is produced continuously by hepatocytes and flows through intrahepatic bile ducts, which merge to form the left and right hepatic ducts. These join at the porta hepatis to form the common hepatic duct. The cystic duct connects the gallbladder to the common hepatic duct, forming the common bile duct (CBD). The CBD joins the pancreatic duct (duct of Wirsung) at the ampulla of Vater before emptying into the duodenum through the major duodenal papilla, controlled by the sphincter of Oddi. The gallbladder concentrates bile 5-20 fold by absorbing water and electrolytes.",
+      "keyTerms": [
+        { "term": "common bile duct", "definition": "Tube carrying bile from liver/gallbladder to duodenum; formed by hepatic and cystic ducts", "pronunciation": "CBD" },
+        { "term": "ampulla of Vater", "definition": "Junction where bile duct and pancreatic duct meet before entering duodenum", "pronunciation": "VAH-ter" },
+        { "term": "sphincter of Oddi", "definition": "Muscular valve controlling bile and pancreatic juice release into duodenum" }
+      ],
+      "analogies": ["The bile ducts are like a river system - small streams (intrahepatic ducts) join to form larger rivers (hepatic ducts, CBD) flowing to the sea (duodenum)."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Biliary physiology involves CCK-stimulated gallbladder contraction, sphincter of Oddi relaxation, bile acid-dependent and independent flow, and bile acid conjugation for micelle formation.",
+      "explanation": "Bile composition: water, bile acids/salts (conjugated cholic and chenodeoxycholic acids), phospholipids (lecithin), cholesterol, bilirubin, and electrolytes. Bile acids are synthesized from cholesterol, conjugated with glycine or taurine for water solubility, and secreted into bile canaliculi via the bile salt export pump (BSEP). In the intestine, bile salts form mixed micelles with fats, enabling absorption. After ileal reabsorption via ASBT, bile acids return to liver via portal vein (enterohepatic circulation, ~95% recycled, 4-12 cycles daily). CCK released from duodenal I-cells in response to fats and amino acids causes gallbladder contraction (via CCK-1 receptors) and sphincter of Oddi relaxation, releasing concentrated bile into the duodenum.",
+      "keyTerms": [
+        { "term": "bile acids", "definition": "Cholesterol-derived amphipathic molecules that emulsify dietary fats; primary (cholic, chenodeoxycholic) and secondary (deoxycholic, lithocholic)" },
+        { "term": "CCK", "definition": "Cholecystokinin; hormone triggering gallbladder contraction and sphincter of Oddi relaxation" },
+        { "term": "BSEP", "definition": "Bile salt export pump; ATP-dependent transporter on canalicular membrane exporting bile acids" }
+      ],
+      "clinicalNotes": "Gallstones form when bile becomes supersaturated with cholesterol or bilirubin. Cholesterol stones (80%) associated with obesity, rapid weight loss, pregnancy. Pigment stones (20%) with hemolysis, cirrhosis, ileal disease."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Biliary pathophysiology involves defects in canalicular transporters, altered bile composition leading to lithogenesis, sphincter of Oddi dysfunction, and cholestatic injury from bile acid retention.",
+      "explanation": "Canalicular transport: BSEP (bile salts), MDR3 (phospholipids), MRP2 (bilirubin glucuronides, organic anions), ABCG5/G8 (cholesterol). MDR3 deficiency causes low phospholipid in bile, cholesterol crystallization, and progressive familial intrahepatic cholestasis type 3 (PFIC3). Lithogenesis: critical micellar concentration exceeded when cholesterol/lecithin ratio elevated, nucleation factors present, and gallbladder stasis occurs. Primary sclerosing cholangitis involves progressive destruction of bile ducts, associated with IBD, risk for cholangiocarcinoma. Primary biliary cholangitis is autoimmune destruction of small intrahepatic ducts with anti-mitochondrial antibodies. Sphincter of Oddi dysfunction causes biliary-type pain; diagnosed by ERCP manometry (basal pressure >40mmHg).",
+      "keyTerms": [
+        { "term": "MDR3", "definition": "Multidrug resistance protein 3 (ABCB4); phospholipid flippase protecting bile ducts from bile acid toxicity" },
+        { "term": "primary sclerosing cholangitis", "definition": "Chronic cholestatic disease with bile duct strictures; IBD association; cholangiocarcinoma risk" },
+        { "term": "primary biliary cholangitis", "definition": "Autoimmune destruction of small bile ducts; anti-mitochondrial antibodies; treated with ursodeoxycholic acid" }
+      ],
+      "clinicalNotes": "ERCP risks: post-ERCP pancreatitis (prevented by rectal indomethacin, pancreatic duct stent), cholangitis, perforation, bleeding. MRCP preferred for diagnostic imaging when intervention unlikely."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical biliary evaluation integrates liver biochemistry, imaging (ultrasound, MRCP, EUS, ERCP), and intervention for cholelithiasis, cholangitis, strictures, and malignancy.",
+      "explanation": "Cholelithiasis: most asymptomatic; prophylactic cholecystectomy not recommended except with porcelain gallbladder. Biliary colic: RUQ pain, postprandial, <6h duration, normal labs. Acute cholecystitis: prolonged pain, fever, Murphy sign, leukocytosis, thickened gallbladder wall/pericholecystic fluid on US; HIDA scan >95% sensitive if US equivocal. Tokyo Guidelines (TG18) grade severity. Treatment: early laparoscopic cholecystectomy (within 72h); percutaneous cholecystostomy for poor surgical candidates. Choledocholithiasis: CBD stones, elevated ALP/bilirubin, dilated CBD. ERCP with sphincterotomy and stone extraction. Acute cholangitis: Charcot triad (fever, jaundice, RUQ pain); Reynolds pentad adds altered mental status and hypotension. Emergency biliary drainage (ERCP or PTC) is life-saving. Biliary strictures: differentiate benign (PSC, post-surgical) from malignant (cholangiocarcinoma, pancreatic cancer) with brush cytology, FISH, cholangioscopy with biopsy. Cholangiocarcinoma: intrahepatic, perihilar (Klatskin), distal; staging determines resectability; perihilar classified by Bismuth-Corlette.",
+      "keyTerms": [
+        { "term": "Tokyo Guidelines", "definition": "Evidence-based guidelines for diagnosis and severity grading of acute cholecystitis and cholangitis" },
+        { "term": "HIDA scan", "definition": "Hepatobiliary iminodiacetic acid scan; technetium-labeled tracer excreted into bile; non-filling of gallbladder indicates cystic duct obstruction" },
+        { "term": "Bismuth-Corlette", "definition": "Classification of perihilar cholangiocarcinoma by extent of biliary involvement" }
+      ],
+      "clinicalNotes": "Mirizzi syndrome: impacted stone in cystic duct/Hartmann's pouch causing CBD compression/obstruction. Suspect if CBD dilated with stones only in gallbladder/cystic duct. Post-cholecystectomy syndrome: persistent symptoms; evaluate for retained stones, SOD, functional dyspepsia."
+    }
+  },
+
+  "media": [
+    {
+      "id": "biliary-tree-3d",
+      "type": "3d-model",
+      "filename": "biliary_tree.glb",
+      "title": "3D Biliary Tree Model",
+      "description": "Interactive 3D model showing gallbladder, cystic duct, hepatic ducts, CBD, and ampulla"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-6b",
+      "type": "textbook",
+      "title": "Accessory Organs in Digestion",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.6",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "tokyo-guidelines-2018",
+      "type": "article",
+      "title": "Tokyo Guidelines 2018",
+      "source": "Journal of Hepato-Biliary-Pancreatic Sciences",
+      "url": "https://doi.org/10.1002/jhbp.487"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-liver", "targetType": "structure", "relationship": "sibling", "label": "Liver" },
+    { "targetId": "structure-pancreas", "targetType": "structure", "relationship": "sibling", "label": "Pancreas" },
+    { "targetId": "condition-gallstones", "targetType": "condition", "relationship": "related", "label": "Gallstones" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:7202"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery", "medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

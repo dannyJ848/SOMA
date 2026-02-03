@@ -1,0 +1,15 @@
+export const medications = {
+  'medications.title': 'Medications',
+  'medications.add': 'Add Medication',
+  'medications.name': 'Medication Name',
+  'medications.dosage': 'Dosage',
+  'medications.frequency': 'Frequency',
+  'medications.prescribedBy': 'Prescribed By',
+  'medications.startDate': 'Start Date',
+  'medications.endDate': 'End Date',
+  'medications.active': 'Active Medications',
+  'medications.past': 'Past Medications',
+  'medications.interactions.title': 'Drug Interactions',
+  'medications.interactions.check': 'Check Interactions',
+  'medications.empty': 'No medications recorded',
+};

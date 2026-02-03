@@ -1,0 +1,105 @@
+{
+  "id": "structure-large-intestine",
+  "type": "structure",
+  "name": "Large Intestine",
+  "alternateNames": ["Colon", "Large bowel", "Intestinum crassum"],
+  "fmaId": "FMA:7201",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The large intestine absorbs water from leftover food material and forms solid waste (poop) for removal from your body.",
+      "explanation": "After the small intestine takes out all the nutrients, the leftover watery material moves to the large intestine. Even though it's called 'large,' it's actually shorter than the small intestine - only about 5 feet long. But it's much wider! The main job of the large intestine is to absorb water from the waste material, turning it from liquid to solid. Trillions of helpful bacteria live here and help break down leftover food. It takes about 12-36 hours for waste to travel through the large intestine before you go to the bathroom.",
+      "keyTerms": [
+        { "term": "waste", "definition": "The leftover stuff your body doesn't need after digesting food" },
+        { "term": "bacteria", "definition": "Tiny living things that help break down food in your intestine" },
+        { "term": "absorb", "definition": "To soak up, like a sponge soaks up water" }
+      ],
+      "analogies": ["The large intestine is like a sponge that squeezes water out of waste, making it solid enough to leave your body."],
+      "examples": ["If you don't drink enough water, your large intestine absorbs too much water from waste, making it hard to go to the bathroom (constipation)."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The large intestine (~1.5 meters) consists of the cecum, colon (ascending, transverse, descending, sigmoid), rectum, and anal canal, absorbing water and electrolytes while housing the gut microbiome.",
+      "explanation": "The large intestine begins at the ileocecal valve where the ileum joins the cecum. The appendix projects from the cecum. The colon has four segments: ascending (right side), transverse (crosses abdomen), descending (left side), and sigmoid (S-shaped, leads to rectum). Distinguishing features include the taeniae coli (three longitudinal muscle bands), haustra (pouches between taeniae), and epiploic appendages (fat tags). The colon lacks villi but has deep crypts with abundant goblet cells. The rectum stores feces, and the anal canal has internal (involuntary) and external (voluntary) sphincters controlling defecation.",
+      "keyTerms": [
+        { "term": "cecum", "definition": "Pouch-like beginning of the large intestine, below the ileocecal valve", "pronunciation": "SEE-kum" },
+        { "term": "taeniae coli", "definition": "Three longitudinal muscle bands on the colon surface", "pronunciation": "TEE-nee-ee KOH-lie" },
+        { "term": "haustra", "definition": "Pouches in the colon wall between taeniae coli", "pronunciation": "HAW-struh" }
+      ],
+      "analogies": ["The taeniae coli are like drawstrings that gather the colon into pouches."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The large intestine performs water and electrolyte absorption, harbors a complex microbiome that ferments undigested material producing short-chain fatty acids, and executes the defecation reflex through coordinated neural control.",
+      "explanation": "Water absorption is passive, following active sodium absorption via epithelial sodium channels (ENaC) and Na+/K+-ATPase. Approximately 1.5L of ileal effluent is reduced to 100-200mL of feces daily. The gut microbiota (10^13-10^14 bacteria, primarily Bacteroidetes and Firmicutes) ferment dietary fiber and resistant starch, producing short-chain fatty acids (acetate, propionate, butyrate) that provide ~10% of daily calories. Butyrate is the primary energy source for colonocytes. The microbiome synthesizes vitamin K and some B vitamins. Colonic motility includes mixing contractions (haustral shuttling), mass movements (high-amplitude propagating contractions, 1-3/day), and the gastrocolic reflex. The defecation reflex involves rectal distension activating stretch receptors, parasympathetic signals causing internal sphincter relaxation, and voluntary control of the external sphincter.",
+      "keyTerms": [
+        { "term": "short-chain fatty acids", "definition": "Bacterial fermentation products (acetate, propionate, butyrate); butyrate fuels colonocytes" },
+        { "term": "microbiome", "definition": "Community of microorganisms residing in the gut; ~1000 species, 10^14 cells" },
+        { "term": "gastrocolic reflex", "definition": "Eating-induced increase in colonic motility; mediates urge to defecate after meals" }
+      ],
+      "clinicalNotes": "Antibiotic disruption of microbiome causes Clostridioides difficile infection. Fecal microbiota transplant (FMT) highly effective for recurrent C. diff."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Large intestinal function integrates epithelial transport, mucosal immunity, microbiome-host interactions, and neural control through the enteric nervous system and extrinsic autonomic pathways.",
+      "explanation": "Colonocyte sodium absorption occurs via ENaC (aldosterone-sensitive), Na+/H+ exchanger, and Cl-/HCO3- exchanger. Chloride secretion via CFTR is normally minimal but pathologically activated in secretory diarrheas (cholera toxin activates adenylyl cyclase, increasing cAMP, activating CFTR). The mucosal immune system includes the epithelial barrier, mucus layer, secretory IgA, innate lymphoid cells, and gut-associated lymphoid tissue (GALT). Toll-like receptors (TLRs) and NOD-like receptors recognize microbial patterns. The microbiome influences development of immune tolerance; dysbiosis is implicated in IBD, metabolic syndrome, and colorectal cancer. Enteric nervous system control: myenteric plexus coordinates motility; submucosal plexus regulates secretion. Extrinsic parasympathetic (vagus to mid-transverse, pelvic splanchnic to distal) stimulates motility and secretion; sympathetic inhibits.",
+      "keyTerms": [
+        { "term": "ENaC", "definition": "Epithelial sodium channel; apical colonocyte, aldosterone-regulated, mediates sodium absorption" },
+        { "term": "CFTR", "definition": "Cystic fibrosis transmembrane conductance regulator; chloride channel, when activated causes secretory diarrhea" },
+        { "term": "dysbiosis", "definition": "Imbalance in gut microbial community associated with disease states" }
+      ],
+      "clinicalNotes": "Aldosterone excess (primary aldosteronism, Conn syndrome) causes hypokalemia partly via increased colonic potassium secretion. Secretory diarrhea (high stool volume, persists with fasting) versus osmotic diarrhea (responds to fasting)."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical evaluation of colorectal disorders integrates colonoscopy, cross-sectional imaging, defecography, manometry, and pathologic assessment for inflammatory bowel disease, functional disorders, diverticular disease, and colorectal cancer.",
+      "explanation": "Colonoscopy: gold standard for colorectal cancer screening (begin age 45 average risk per USPSTF 2021), polyp detection and removal, IBD surveillance. CT colonography alternative for incomplete colonoscopy. Colorectal cancer staging: TNM with CT chest/abdomen/pelvis, MRI for rectal cancer (relationship to mesorectal fascia). Treatment: endoscopic resection for T1 without adverse features; surgery with complete mesocolic excision for colon cancer, total mesorectal excision for rectal cancer; neoadjuvant chemoradiation for locally advanced rectal cancer. Molecular testing: MSI/MMR status (Lynch syndrome, immunotherapy eligibility), KRAS/NRAS/BRAF for metastatic disease treatment selection. IBD evaluation: distinguish Crohn's (skip lesions, transmural, granulomas, may affect any GI segment) from UC (continuous from rectum, mucosal only, crypt abscesses). IBD treatment: 5-ASA for mild UC, biologics (anti-TNF, vedolizumab, ustekinumab, JAK inhibitors) for moderate-severe. Functional disorders: anorectal manometry and balloon expulsion for dyssynergic defecation; biofeedback therapy effective.",
+      "keyTerms": [
+        { "term": "MSI-high", "definition": "Microsatellite instability-high; defective mismatch repair, ~15% of CRC, better prognosis, immunotherapy responsive" },
+        { "term": "total mesorectal excision", "definition": "Surgical technique removing rectum with intact mesorectal fascia envelope; reduces local recurrence" },
+        { "term": "dyssynergic defecation", "definition": "Functional disorder of paradoxical pelvic floor contraction during attempted defecation; diagnosed by anorectal manometry" }
+      ],
+      "clinicalNotes": "Lynch syndrome screening: universal MMR immunohistochemistry or MSI testing on all CRC. Amsterdam II or Bethesda criteria identify high-risk families. Surveillance colonoscopy every 1-2 years starting age 20-25 or 2-5 years before youngest family diagnosis."
+    }
+  },
+
+  "media": [
+    {
+      "id": "large-intestine-3d",
+      "type": "3d-model",
+      "filename": "large_intestine.glb",
+      "title": "3D Large Intestine Model",
+      "description": "Interactive 3D model showing cecum, colon segments, rectum, and anal canal"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-5b",
+      "type": "textbook",
+      "title": "The Small and Large Intestines",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.5",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-small-intestine", "targetType": "structure", "relationship": "sibling", "label": "Small Intestine" },
+    { "targetId": "condition-colorectal-cancer", "targetType": "condition", "relationship": "related", "label": "Colorectal Cancer" },
+    { "targetId": "condition-ulcerative-colitis", "targetType": "condition", "relationship": "related", "label": "Ulcerative Colitis" },
+    { "targetId": "condition-diverticular-disease", "targetType": "condition", "relationship": "related", "label": "Diverticular Disease" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:7201"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

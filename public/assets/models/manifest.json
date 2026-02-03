@@ -1,0 +1,381 @@
+{
+  "source": "Z-Anatomy",
+  "sourceUrl": "https://www.z-anatomy.com",
+  "license": "CC BY-SA 4.0",
+  "blenderVersion": "5.0.1",
+  "exportDate": "2026-01-20T23:56:22.189028",
+  "models": [
+    {
+      "name": "1: Skeletal system",
+      "file": "assets/models/skeletal/1_Skeletal_system.glb",
+      "system": "skeletal",
+      "meshCount": 1244,
+      "sizeMB": 1.59
+    },
+    {
+      "name": "Abdomen",
+      "file": "assets/models/organs/Abdomen.glb",
+      "system": "organs",
+      "meshCount": 81,
+      "sizeMB": 8.56
+    },
+    {
+      "name": "Anterior teeth",
+      "file": "assets/models/organs/Anterior_teeth.glb",
+      "system": "organs",
+      "meshCount": 12,
+      "sizeMB": 8.47
+    },
+    {
+      "name": "Appendicular skeleton",
+      "file": "assets/models/skeletal/Appendicular_skeleton.glb",
+      "system": "skeletal",
+      "meshCount": 129,
+      "sizeMB": 8.77
+    },
+    {
+      "name": "Auditory ossicles",
+      "file": "assets/models/organs/Auditory_ossicles.glb",
+      "system": "organs",
+      "meshCount": 38,
+      "sizeMB": 8.48
+    },
+    {
+      "name": "Axial skeleton",
+      "file": "assets/models/skeletal/Axial_skeleton.glb",
+      "system": "skeletal",
+      "meshCount": 216,
+      "sizeMB": 9.67
+    },
+    {
+      "name": "Back",
+      "file": "assets/models/organs/Back.glb",
+      "system": "organs",
+      "meshCount": 178,
+      "sizeMB": 8.75
+    },
+    {
+      "name": "Bones of cranium",
+      "file": "assets/models/skeletal/Bones_of_cranium.glb",
+      "system": "skeletal",
+      "meshCount": 126,
+      "sizeMB": 8.51
+    },
+    {
+      "name": "Bones of free lower limb",
+      "file": "assets/models/skeletal/Bones_of_free_lower_limb.glb",
+      "system": "skeletal",
+      "meshCount": 149,
+      "sizeMB": 8.57
+    },
+    {
+      "name": "Bones of lower limb",
+      "file": "assets/models/skeletal/Bones_of_lower_limb.glb",
+      "system": "skeletal",
+      "meshCount": 155,
+      "sizeMB": 8.58
+    },
+    {
+      "name": "Bones of pectoral girdle",
+      "file": "assets/models/skeletal/Bones_of_pectoral_girdle.glb",
+      "system": "skeletal",
+      "meshCount": 25,
+      "sizeMB": 8.51
+    },
+    {
+      "name": "Bones of thorax",
+      "file": "assets/models/skeletal/Bones_of_thorax.glb",
+      "system": "skeletal",
+      "meshCount": 54,
+      "sizeMB": 8.73
+    },
+    {
+      "name": "Bones of upper limb",
+      "file": "assets/models/skeletal/Bones_of_upper_limb.glb",
+      "system": "skeletal",
+      "meshCount": 38,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Bones of vertebral column",
+      "file": "assets/models/skeletal/Bones_of_vertebral_column.glb",
+      "system": "skeletal",
+      "meshCount": 70,
+      "sizeMB": 8.69
+    },
+    {
+      "name": "Bonus collection",
+      "file": "assets/models/organs/Bonus_collection.glb",
+      "system": "organs",
+      "meshCount": 3373,
+      "sizeMB": 10.04
+    },
+    {
+      "name": "Bony pelvis",
+      "file": "assets/models/skeletal/Bony_pelvis.glb",
+      "system": "skeletal",
+      "meshCount": 4,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Cartilages",
+      "file": "assets/models/organs/Cartilages.glb",
+      "system": "organs",
+      "meshCount": 31,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Cervical vertebrae",
+      "file": "assets/models/skeletal/Cervical_vertebrae.glb",
+      "system": "skeletal",
+      "meshCount": 25,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Costal cartilages",
+      "file": "assets/models/organs/Costal_cartilages.glb",
+      "system": "organs",
+      "meshCount": 20,
+      "sizeMB": 8.51
+    },
+    {
+      "name": "Cranium",
+      "file": "assets/models/organs/Cranium.glb",
+      "system": "organs",
+      "meshCount": 158,
+      "sizeMB": 8.89
+    },
+    {
+      "name": "Digestive system",
+      "file": "assets/models/digestive/Digestive_system.glb",
+      "system": "digestive",
+      "meshCount": 78,
+      "sizeMB": 8.59
+    },
+    {
+      "name": "Extracranial bones of head",
+      "file": "assets/models/skeletal/Extracranial_bones_of_head.glb",
+      "system": "skeletal",
+      "meshCount": 34,
+      "sizeMB": 8.59
+    },
+    {
+      "name": "False ribs",
+      "file": "assets/models/skeletal/False_ribs.glb",
+      "system": "skeletal",
+      "meshCount": 10,
+      "sizeMB": 8.56
+    },
+    {
+      "name": "Floating ribs",
+      "file": "assets/models/skeletal/Floating_ribs.glb",
+      "system": "skeletal",
+      "meshCount": 4,
+      "sizeMB": 8.49
+    },
+    {
+      "name": "Head",
+      "file": "assets/models/organs/Head.glb",
+      "system": "organs",
+      "meshCount": 877,
+      "sizeMB": 9.02
+    },
+    {
+      "name": "Inferior teeth",
+      "file": "assets/models/organs/Inferior_teeth.glb",
+      "system": "organs",
+      "meshCount": 14,
+      "sizeMB": 8.52
+    },
+    {
+      "name": "Left lower limb",
+      "file": "assets/models/organs/Left_lower_limb.glb",
+      "system": "organs",
+      "meshCount": 311,
+      "sizeMB": 8.62
+    },
+    {
+      "name": "Left upper limb",
+      "file": "assets/models/organs/Left_upper_limb.glb",
+      "system": "organs",
+      "meshCount": 219,
+      "sizeMB": 8.65
+    },
+    {
+      "name": "Lumbar vertebrae",
+      "file": "assets/models/skeletal/Lumbar_vertebrae.glb",
+      "system": "skeletal",
+      "meshCount": 10,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Main divisions",
+      "file": "assets/models/organs/Main_divisions.glb",
+      "system": "organs",
+      "meshCount": 2698,
+      "sizeMB": 10.04
+    },
+    {
+      "name": "Mandible",
+      "file": "assets/models/skeletal/Mandible.glb",
+      "system": "skeletal",
+      "meshCount": 30,
+      "sizeMB": 8.59
+    },
+    {
+      "name": "Maxilla",
+      "file": "assets/models/skeletal/Maxilla.glb",
+      "system": "skeletal",
+      "meshCount": 18,
+      "sizeMB": 8.55
+    },
+    {
+      "name": "Neck",
+      "file": "assets/models/organs/Neck.glb",
+      "system": "organs",
+      "meshCount": 189,
+      "sizeMB": 8.57
+    },
+    {
+      "name": "Pelvis",
+      "file": "assets/models/skeletal/Pelvis.glb",
+      "system": "skeletal",
+      "meshCount": 15,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Posterior teeth",
+      "file": "assets/models/organs/Posterior_teeth.glb",
+      "system": "organs",
+      "meshCount": 36,
+      "sizeMB": 8.54
+    },
+    {
+      "name": "Regions of human body",
+      "file": "assets/models/organs/Regions_of_human_body.glb",
+      "system": "organs",
+      "meshCount": 2726,
+      "sizeMB": 10.05
+    },
+    {
+      "name": "Ribs",
+      "file": "assets/models/skeletal/Ribs.glb",
+      "system": "skeletal",
+      "meshCount": 46,
+      "sizeMB": 8.74
+    },
+    {
+      "name": "Right foot",
+      "file": "assets/models/organs/Right_foot.glb",
+      "system": "organs",
+      "meshCount": 187,
+      "sizeMB": 8.59
+    },
+    {
+      "name": "Right hand",
+      "file": "assets/models/organs/Right_hand.glb",
+      "system": "organs",
+      "meshCount": 96,
+      "sizeMB": 8.57
+    },
+    {
+      "name": "Right lower limb",
+      "file": "assets/models/organs/Right_lower_limb.glb",
+      "system": "organs",
+      "meshCount": 341,
+      "sizeMB": 8.63
+    },
+    {
+      "name": "Right maxilla",
+      "file": "assets/models/skeletal/Right_maxilla.glb",
+      "system": "skeletal",
+      "meshCount": 16,
+      "sizeMB": 8.56
+    },
+    {
+      "name": "Right upper limb",
+      "file": "assets/models/organs/Right_upper_limb.glb",
+      "system": "organs",
+      "meshCount": 249,
+      "sizeMB": 8.66
+    },
+    {
+      "name": "Skeletal system",
+      "file": "assets/models/skeletal/Skeletal_system.glb",
+      "system": "skeletal",
+      "meshCount": 804,
+      "sizeMB": 10.05
+    },
+    {
+      "name": "Sternum",
+      "file": "assets/models/organs/Sternum.glb",
+      "system": "organs",
+      "meshCount": 8,
+      "sizeMB": 8.51
+    },
+    {
+      "name": "Superior teeth",
+      "file": "assets/models/organs/Superior_teeth.glb",
+      "system": "organs",
+      "meshCount": 14,
+      "sizeMB": 8.53
+    },
+    {
+      "name": "Teeth",
+      "file": "assets/models/organs/Teeth.glb",
+      "system": "organs",
+      "meshCount": 48,
+      "sizeMB": 8.58
+    },
+    {
+      "name": "Thoracic skeleton",
+      "file": "assets/models/skeletal/Thoracic_skeleton.glb",
+      "system": "skeletal",
+      "meshCount": 100,
+      "sizeMB": 8.94
+    },
+    {
+      "name": "Thoracic vertebrae",
+      "file": "assets/models/skeletal/Thoracic_vertebrae.glb",
+      "system": "skeletal",
+      "meshCount": 17,
+      "sizeMB": 8.6
+    },
+    {
+      "name": "Thorax",
+      "file": "assets/models/organs/Thorax.glb",
+      "system": "organs",
+      "meshCount": 135,
+      "sizeMB": 8.81
+    },
+    {
+      "name": "Trunk",
+      "file": "assets/models/organs/Trunk.glb",
+      "system": "organs",
+      "meshCount": 710,
+      "sizeMB": 9.26
+    },
+    {
+      "name": "Vertebral column",
+      "file": "assets/models/skeletal/Vertebral_column.glb",
+      "system": "skeletal",
+      "meshCount": 130,
+      "sizeMB": 8.8
+    },
+    {
+      "name": "Visceral systems",
+      "file": "assets/models/organs/Visceral_systems.glb",
+      "system": "organs",
+      "meshCount": 177,
+      "sizeMB": 8.6
+    }
+  ],
+  "errors": [
+    {
+      "name": "complete_anatomy",
+      "error": "Converting py args to operator properties:: keyword \"export_apply_modifiers\" unrecognized"
+    }
+  ],
+  "totalModels": 52,
+  "totalSizeMB": 448.37
+}

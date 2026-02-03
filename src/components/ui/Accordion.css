@@ -1,0 +1,122 @@
+.ui-accordion {
+  border: 1px solid var(--ui-accordion-border, #e5e7eb);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Item */
+.ui-accordion__item {
+  border-bottom: 1px solid var(--ui-accordion-border, #e5e7eb);
+}
+
+.ui-accordion__item:last-child {
+  border-bottom: none;
+}
+
+.ui-accordion__item--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Trigger */
+.ui-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ui-accordion-text, #111827);
+  background-color: var(--ui-accordion-bg, #ffffff);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ui-accordion__trigger:hover {
+  background-color: var(--ui-accordion-hover, #f9fafb);
+}
+
+.ui-accordion__trigger:focus-visible {
+  outline: 2px solid var(--ui-focus-ring, #3b82f6);
+  outline-offset: -2px;
+}
+
+.ui-accordion__trigger-content {
+  flex: 1;
+}
+
+.ui-accordion__icon {
+  flex-shrink: 0;
+  color: var(--ui-accordion-icon, #6b7280);
+  transition: transform 0.2s ease-out;
+}
+
+.ui-accordion__icon--expanded {
+  transform: rotate(180deg);
+}
+
+/* Content */
+.ui-accordion__content {
+  overflow: hidden;
+  background-color: var(--ui-accordion-content-bg, #f9fafb);
+}
+
+.ui-accordion__content[hidden] {
+  display: none;
+}
+
+.ui-accordion__content--expanded {
+  animation: ui-accordion-expand 0.2s ease-out;
+}
+
+@keyframes ui-accordion-expand {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ui-accordion__content-inner {
+  padding: 1rem;
+  color: var(--ui-accordion-content-text, #374151);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .ui-accordion {
+    border-color: var(--ui-accordion-border-dark, #374151);
+  }
+
+  .ui-accordion__item {
+    border-bottom-color: var(--ui-accordion-border-dark, #374151);
+  }
+
+  .ui-accordion__trigger {
+    color: var(--ui-accordion-text-dark, #f9fafb);
+    background-color: var(--ui-accordion-bg-dark, #1f2937);
+  }
+
+  .ui-accordion__trigger:hover {
+    background-color: var(--ui-accordion-hover-dark, #374151);
+  }
+
+  .ui-accordion__icon {
+    color: var(--ui-accordion-icon-dark, #9ca3af);
+  }
+
+  .ui-accordion__content {
+    background-color: var(--ui-accordion-content-bg-dark, #111827);
+  }
+
+  .ui-accordion__content-inner {
+    color: var(--ui-accordion-content-text-dark, #d1d5db);
+  }
+}

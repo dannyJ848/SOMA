@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3D Performance Test</title>
+  <style>
+    body { margin: 0; background: #1a1a2e; font-family: monospace; color: white; }
+    #canvas-container { width: 100vw; height: 80vh; }
+    #metrics { padding: 10px; background: #2a2a4e; }
+    .metric { display: inline-block; margin-right: 20px; }
+    .good { color: #4f4; }
+    .warning { color: #ff4; }
+    .poor { color: #f44; }
+  </style>
+</head>
+<body>
+  <div id="metrics">
+    <span class="metric">FPS: <span id="fps">--</span></span>
+    <span class="metric">Frame Time: <span id="frame-time">--</span>ms</span>
+    <span class="metric">Draw Calls: <span id="draw-calls">--</span></span>
+    <span class="metric">Triangles: <span id="triangles">--</span></span>
+    <span class="metric">Status: <span id="status">Initializing...</span></span>
+  </div>
+  <div id="canvas-container"></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // Performance-optimized settings matching AnatomyViewer
+    const container = document.getElementById('canvas-container');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // Renderer with performance settings
+    const renderer = new THREE.WebGLRenderer({
+      antialias: false,
+      alpha: false,
+      powerPreference: 'high-performance',
+      precision: 'lowp'
+    });
+    renderer.setPixelRatio(1);  // Force 1x like in our optimization
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+
+    // Scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a2e);
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.set(0, 1, 4);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.minDistance = 2.0;
+    controls.maxDistance = 15;
+    controls.target.set(0, 0.5, 0);
+
+    // Lighting (matching AnatomicalLighting)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    keyLight.position.set(5, 8, 5);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xf0f0ff, 0.4);
+    fillLight.position.set(-5, 5, 5);
+    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0xffe0d0, 0.3);
+    rimLight.position.set(0, 3, -5);
+    scene.add(rimLight);
+
+    // Create test meshes (matching EnhancedAnatomyModel structure count and complexity)
+    const SEGMENTS_LOW = 8;
+    const SEGMENTS_MED = 12;
+    const meshes = [];
+
+    // Use MeshLambertMaterial like the optimized code
+    const material = new THREE.MeshLambertMaterial({
+      color: 0xe8d4c4,
+      emissive: 0x000000,
+      emissiveIntensity: 0
+    });
+
+    // Create ~30 meshes to simulate anatomy structures
+    const structures = [
+      { type: 'sphere', pos: [0, 1.35, 0], args: [0.25, SEGMENTS_MED, SEGMENTS_MED] },
+      { type: 'cylinder', pos: [0, 1.0, 0], args: [0.1, 0.12, 0.2, SEGMENTS_LOW] },
+      { type: 'capsule', pos: [0, 0.55, 0], radius: 0.3, length: 0.5 },
+      { type: 'capsule', pos: [0, -0.1, 0], radius: 0.28, length: 0.4 },
+      { type: 'cylinder', pos: [-0.5, 0.4, 0], args: [0.08, 0.08, 0.8, SEGMENTS_LOW], rot: [0, 0, Math.PI/6] },
+      { type: 'cylinder', pos: [0.5, 0.4, 0], args: [0.08, 0.08, 0.8, SEGMENTS_LOW], rot: [0, 0, -Math.PI/6] },
+      { type: 'cylinder', pos: [-0.18, -0.85, 0], args: [0.1, 0.1, 1.0, SEGMENTS_LOW] },
+      { type: 'cylinder', pos: [0.18, -0.85, 0], args: [0.1, 0.1, 1.0, SEGMENTS_LOW] },
+      // Add more internal structures
+      { type: 'sphere', pos: [0, 0.6, 0.1], args: [0.15, SEGMENTS_MED, SEGMENTS_MED], color: 0xcc4444 },
+      { type: 'capsule', pos: [-0.2, 0.55, 0], radius: 0.12, length: 0.35, color: 0xddaaaa },
+      { type: 'capsule', pos: [0.2, 0.55, 0], radius: 0.12, length: 0.35, color: 0xddaaaa },
+    ];
+
+    // Add more structures to reach ~30
+    for (let i = 0; i < 20; i++) {
+      structures.push({
+        type: 'sphere',
+        pos: [(Math.random() - 0.5) * 0.6, Math.random() * 1.5 - 0.5, (Math.random() - 0.5) * 0.4],
+        args: [0.05 + Math.random() * 0.05, SEGMENTS_LOW, SEGMENTS_LOW],
+        color: 0xcccccc
+      });
+    }
+
+    structures.forEach(s => {
+      let geometry;
+      if (s.type === 'sphere') {
+        geometry = new THREE.SphereGeometry(...s.args);
+      } else if (s.type === 'cylinder') {
+        geometry = new THREE.CylinderGeometry(...s.args);
+      } else if (s.type === 'capsule') {
+        geometry = new THREE.CapsuleGeometry(s.radius, s.length, SEGMENTS_LOW, SEGMENTS_LOW);
+      }
+
+      const mat = s.color ? new THREE.MeshLambertMaterial({ color: s.color }) : material.clone();
+      const mesh = new THREE.Mesh(geometry, mat);
+      mesh.position.set(...s.pos);
+      if (s.rot) mesh.rotation.set(...s.rot);
+      scene.add(mesh);
+      meshes.push(mesh);
+    });
+
+    // Ground plane
+    const groundGeom = new THREE.PlaneGeometry(6, 6);
+    const groundMat = new THREE.MeshBasicMaterial({ color: 0x1a1a2e });
+    const ground = new THREE.Mesh(groundGeom, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -1.4;
+    scene.add(ground);
+
+    // FPS measurement
+    let frameCount = 0;
+    let lastTime = performance.now();
+    let fps = 0;
+    let frameTime = 0;
+
+    const fpsEl = document.getElementById('fps');
+    const frameTimeEl = document.getElementById('frame-time');
+    const drawCallsEl = document.getElementById('draw-calls');
+    const trianglesEl = document.getElementById('triangles');
+    const statusEl = document.getElementById('status');
+
+    function updateMetrics() {
+      const now = performance.now();
+      frameCount++;
+
+      if (now - lastTime >= 1000) {
+        fps = frameCount;
+        frameTime = 1000 / fps;
+        frameCount = 0;
+        lastTime = now;
+
+        fpsEl.textContent = fps;
+        fpsEl.className = fps >= 55 ? 'good' : (fps >= 30 ? 'warning' : 'poor');
+
+        frameTimeEl.textContent = frameTime.toFixed(1);
+
+        const info = renderer.info;
+        drawCallsEl.textContent = info.render.calls;
+        trianglesEl.textContent = info.render.triangles;
+
+        if (fps >= 55) {
+          statusEl.textContent = 'Excellent';
+          statusEl.className = 'good';
+        } else if (fps >= 30) {
+          statusEl.textContent = 'Good';
+          statusEl.className = 'warning';
+        } else {
+          statusEl.textContent = 'Needs Work';
+          statusEl.className = 'poor';
+        }
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+      updateMetrics();
+    }
+
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+
+    console.log('3D Performance Test loaded');
+    console.log('Meshes:', meshes.length);
+    console.log('Settings: antialias=false, dpr=1, precision=lowp');
+  </script>
+</body>
+</html>

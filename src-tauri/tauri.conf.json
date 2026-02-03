@@ -1,30 +1,82 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Biological Self",
-  "version": "0.1.0",
-  "identifier": "com.dannygomez.biological-self",
+  "productName": "SOMA",
+  "version": "1.0.0",
+  "identifier": "com.dannygomez.soma",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
     "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build"
+    "beforeBuildCommand": "npm run build:prod"
   },
   "app": {
     "windows": [
       {
-        "title": "Biological Self",
-        "width": 1024,
-        "height": 768,
-        "minWidth": 800,
-        "minHeight": 600,
+        "title": "SOMA",
+        "label": "main",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 1024,
+        "minHeight": 768,
         "resizable": true,
         "fullscreen": false,
-        "center": true
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "visible": true,
+        "focus": true,
+        "alwaysOnTop": false,
+        "contentProtected": true,
+        "skipTaskbar": false,
+        "dragDropEnabled": true,
+        "shadow": true,
+        "theme": null,
+        "titleBarStyle": "Visible",
+        "hiddenTitle": false,
+        "acceptFirstMouse": false,
+        "tabbingIdentifier": null,
+        "additionalBrowserArgs": null,
+        "userAgent": null,
+        "zoomHotkeysEnabled": false,
+        "incognito": false,
+        "proxyUrl": null,
+        "browserExtensionsEnabled": false,
+        "useHttpsScheme": false,
+        "devtools": true
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
-    }
+      "csp": {
+        "default-src": "'self' tauri://localhost https://tauri.localhost asset: https://asset.localhost",
+        "img-src": "'self' data: blob: asset: https://asset.localhost http://asset.localhost tauri://localhost https://tauri.localhost",
+        "style-src": "'self' 'unsafe-inline'",
+        "script-src": "'self' 'wasm-unsafe-eval'",
+        "connect-src": "'self' blob: data: http://localhost:1420 https://localhost:1420 ws://localhost:1420 wss://localhost:1420 http://localhost:11434 ipc: tauri: asset: https://www.gstatic.com https://tauri.localhost http://tauri.localhost tauri://localhost https://asset.localhost http://asset.localhost",
+        "font-src": "'self' data:",
+        "media-src": "'self' blob: data: tauri://localhost https://tauri.localhost asset: https://asset.localhost",
+        "worker-src": "'self' blob: https://www.gstatic.com",
+        "object-src": "'none'",
+        "frame-src": "'none'",
+        "base-uri": "'self'",
+        "form-action": "'self'"
+      },
+      "freezePrototype": true,
+      "dangerousDisableAssetCspModification": false,
+      "assetProtocol": {
+        "enable": true,
+        "scope": {
+          "allow": ["$APPDATA/**", "$RESOURCE/**", "$DOCUMENT/**"],
+          "deny": []
+        }
+      },
+      "pattern": { "use": "brownfield" },
+      "capabilities": ["main-window-capability"]
+    },
+    "withGlobalTauri": false,
+    "trayIcon": null
   },
   "bundle": {
     "active": true,
@@ -36,11 +88,95 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
+    "resources": {},
+    "externalBin": [],
+    "copyright": "Copyright 2024-2025 Danny Gomez",
     "category": "Medical",
     "shortDescription": "Local-first health education app",
-    "longDescription": "Understand your body like a physician understands their patients. 100% private, local-first health data management.",
+    "longDescription": "Understand your body like a physician understands their patients. 100% private, local-first health data management with AI-powered insights. All processing happens on your device - your health data never leaves your computer.",
+    "licenseFile": "../LICENSE",
+    "publisher": "Danny Gomez",
+    "homepage": "https://github.com/dannygomez/biological-self",
+    "createUpdaterArtifacts": true,
     "macOS": {
-      "minimumSystemVersion": "10.15"
+      "minimumSystemVersion": "10.15",
+      "entitlements": null,
+      "exceptionDomain": null,
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null,
+      "hardenedRuntime": true,
+      "dmg": {
+        "appPosition": { "x": 180, "y": 170 },
+        "applicationFolderPosition": { "x": 480, "y": 170 },
+        "windowSize": { "width": 660, "height": 400 }
+      }
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "http://timestamp.digicert.com",
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper",
+        "silent": true
+      },
+      "allowDowngrades": false,
+      "nsis": {
+        "displayLanguageSelector": true,
+        "installerIcon": "icons/icon.ico",
+        "headerImage": null,
+        "sidebarImage": null,
+        "installMode": "currentUser",
+        "languages": ["English", "Spanish", "French", "German", "Portuguese", "Japanese", "Korean", "Chinese"]
+      },
+      "wix": null
+    },
+    "linux": {
+      "appimage": {
+        "bundleMediaFramework": true,
+        "files": {}
+      },
+      "deb": {
+        "depends": [
+          "libwebkit2gtk-4.1-0",
+          "libappindicator3-1",
+          "librsvg2-2",
+          "patchelf"
+        ],
+        "files": {},
+        "desktopTemplate": null,
+        "section": "science",
+        "priority": "optional"
+      },
+      "rpm": {
+        "depends": [],
+        "files": {},
+        "desktopTemplate": null,
+        "epoch": 0,
+        "release": "1"
+      }
+    },
+    "iOS": {
+      "developmentTeam": "NDJZ6S9Q4L"
+    },
+    "android": {
+      "minSdkVersion": 24
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    },
+    "updater": {
+      "active": true,
+      "dialog": true,
+      "pubkey": "",
+      "endpoints": [
+        "https://github.com/dannygomez/biological-self/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
     }
   }
 }

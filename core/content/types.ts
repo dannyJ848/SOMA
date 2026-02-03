@@ -41,6 +41,7 @@ export interface LevelContent {
   analogies?: string[];      // Level-appropriate analogies
   examples?: string[];       // Real-world examples
   clinicalNotes?: string;    // Clinical relevance (primarily levels 4-5)
+  patientCounselingPoints?: string[];  // Patient education points (primarily levels 1-2)
 }
 
 /**
@@ -81,7 +82,7 @@ export interface MediaAsset {
  */
 export interface CrossReference {
   targetId: string;          // ID of the related content
-  targetType: 'structure' | 'system' | 'pathway' | 'condition' | 'topic';
+  targetType: ContentType;
   relationship: 'parent' | 'child' | 'sibling' | 'related' | 'see-also';
   label?: string;            // Display text for the link
 }
@@ -105,10 +106,16 @@ export interface ContentTags {
 /**
  * Complete educational content item with all 5 levels
  */
+/**
+ * Type for content items - includes all valid content types
+ */
+export type ContentType = 'structure' | 'system' | 'pathway' | 'process' | 'condition' | 'concept' | 'topic';
+
 export interface EducationalContent {
   id: string;                // Unique identifier
-  type: 'structure' | 'system' | 'pathway' | 'process' | 'condition' | 'concept';
+  type: ContentType;
   name: string;              // Primary name
+  nameEs?: string;           // Spanish name
   alternateNames?: string[]; // Synonyms, abbreviations
   fmaId?: string;            // Foundational Model of Anatomy ID
   hpoId?: string;            // Human Phenotype Ontology ID (for conditions/symptoms)
@@ -141,7 +148,7 @@ export interface EducationalContent {
  */
 export interface PartialEducationalContent {
   id: string;
-  type: EducationalContent['type'];
+  type: ContentType;
   name: string;
   alternateNames?: string[];
   fmaId?: string;
@@ -168,7 +175,7 @@ export interface PartialEducationalContent {
 export interface ContentGenerationRequest {
   targetId: string;
   name: string;
-  type: EducationalContent['type'];
+  type: ContentType;
   targetLevel: ComplexityLevel;
   existingLevels?: Partial<Record<ComplexityLevel, LevelContent>>;
   context?: {
@@ -198,7 +205,7 @@ export interface ContentValidation {
  */
 export interface ContentSearchQuery {
   text?: string;
-  type?: EducationalContent['type'] | EducationalContent['type'][];
+  type?: ContentType | ContentType[];
   systems?: string[];
   structures?: string[];
   tags?: string[];
@@ -216,4 +223,42 @@ export interface ContentSearchResult {
   score: number;             // Relevance score
   matchedFields: string[];   // Which fields matched
   snippet?: string;          // Text snippet with match
+}
+
+/**
+ * Legacy content format with different level structure
+ * Used for content that hasn't been migrated to the new LevelContent format
+ */
+export interface LegacyLevelContent {
+  title?: string;
+  description?: string;
+  content?: string | any;
+  keyTakeaways?: string[];
+  keyPoints?: string[];
+  nextLevel?: string | null;
+  flashcards?: any;
+  level?: number;
+  summary?: string;
+  explanation?: string;
+  keyTerms?: any[];
+  vocabulary?: any[];
+  examples?: string[];
+  clinicalNotes?: string;
+  patientCounselingPoints?: string[] | string | null;
+  [key: string]: any;
+}
+
+export interface LegacyEducationalContent {
+  id?: string;
+  title?: string;
+  name?: string;
+  type?: ContentType;
+  category?: string;
+  subcategory?: string;
+  description?: string;
+  levels: Record<string, LegacyLevelContent>;
+  citations?: any[];
+  crossReferences?: any[];
+  tags?: any;
+  [key: string]: any;
 }

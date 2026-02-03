@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 450" width="650" height="450">
+  <defs>
+    <linearGradient id="compactGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fde68a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#fcd34d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="spongyGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="650" height="450" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="325" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Bone Structure - Long Bone
+  </text>
+  
+  <!-- Long Bone Diagram (Left side) -->
+  <g transform="translate(30, 70)">
+    <!-- Epiphysis (top) -->
+    <ellipse cx="80" cy="40" rx="50" ry="35" fill="url(#spongyGrad)" stroke="#d97706" stroke-width="2"/>
+    
+    <!-- Articular cartilage -->
+    <ellipse cx="80" cy="25" rx="45" ry="10" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="140" y="30" font-family="Arial" font-size="9" fill="#dc2626">Articular Cartilage</text>
+    
+    <!-- Diaphysis (shaft) -->
+    <rect x="30" y="75" width="100" height="180" fill="url(#compactGrad)" stroke="#d97706" stroke-width="2"/>
+    
+    <!-- Medullary cavity -->
+    <rect x="55" y="75" width="50" height="180" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="70" y="170" text-anchor="middle" font-family="Arial" font-size="8" fill="#b45309">Medullary</text>
+    <text x="70" y="182" text-anchor="middle" font-family="Arial" font-size="8" fill="#b45309">Cavity</text>
+    
+    <!-- Epiphysis (bottom) -->
+    <ellipse cx="80" cy="290" rx="50" ry="35" fill="url(#spongyGrad)" stroke="#d97706" stroke-width="2"/>
+    
+    <!-- Labels for long bone parts -->
+    <text x="140" y="100" font-family="Arial" font-size="10" font-weight="bold" fill="#d97706">Diaphysis</text>
+    <text x="140" y="115" font-family="Arial" font-size="8" fill="#b45309">(shaft - compact bone)</text>
+    
+    <text x="140" y="280" font-family="Arial" font-size="10" font-weight="bold" fill="#d97706">Epiphysis</text>
+    <text x="140" y="295" font-family="Arial" font-size="8" fill="#b45309">(ends - spongy bone)</text>
+    
+    <!-- Periosteum -->
+    <line x1="28" y1="80" x2="20" y2="80" stroke="#059669" stroke-width="2"/>
+    <text x="5" y="85" font-family="Arial" font-size="8" fill="#059669">Periosteum</text>
+    
+    <!-- Endosteum -->
+    <line x1="52" y1="130" x2="45" y2="135" stroke="#10b981" stroke-width="1.5"/>
+    <text x="10" y="140" font-family="Arial" font-size="8" fill="#059669">Endosteum</text>
+  </g>
+  
+  <!-- Compact Bone Detail (Top Right) -->
+  <g transform="translate(320, 70)">
+    <rect x="0" y="0" width="280" height="150" fill="#fef3c7" stroke="#fbbf24" stroke-width="1" rx="5"/>
+    <text x="140" y="20" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#b45309">
+      Compact Bone - Osteon (Haversian System)
+    </text>
+    
+    <!-- Osteon structure -->
+    <g transform="translate(80, 85)">
+      <!-- Concentric lamellae -->
+      <circle cx="0" cy="0" r="55" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="45" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="35" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="25" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      
+      <!-- Central canal -->
+      <circle cx="0" cy="0" r="8" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+      <text x="0" y="3" text-anchor="middle" font-family="Arial" font-size="6" fill="#b45309">HC</text>
+      
+      <!-- Osteocytes in lacunae (small dots) -->
+      <g fill="#d97706">
+        <circle cx="20" cy="0" r="3"/>
+        <circle cx="-20" cy="0" r="3"/>
+        <circle cx="0" cy="20" r="3"/>
+        <circle cx="0" cy="-20" r="3"/>
+        <circle cx="30" cy="30" r="3"/>
+        <circle cx="-30" cy="-30" r="3"/>
+        <circle cx="40" cy="-10" r="3"/>
+        <circle cx="-40" cy="10" r="3"/>
+      </g>
+      
+      <!-- Canaliculi (tiny lines) -->
+      <g stroke="#fbbf24" stroke-width="0.5">
+        <line x1="20" y1="0" x2="25" y2="0"/>
+        <line x1="0" y1="20" x2="0" y2="25"/>
+        <line x1="30" y1="30" x2="35" y2="35"/>
+      </g>
+    </g>
+    
+    <!-- Labels -->
+    <text x="150" y="75" font-family="Arial" font-size="9" fill="#d97706">Lamellae</text>
+    <text x="150" y="90" font-family="Arial" font-size="9" fill="#d97706">(concentric rings)</text>
+    <text x="180" y="115" font-family="Arial" font-size="8" fill="#b45309">Haversian Canal</text>
+    <text x="180" y="130" font-family="Arial" font-size="8" fill="#b45309">(blood vessels, nerves)</text>
+  </g>
+  
+  <!-- Spongy Bone Detail (Bottom Right) -->
+  <g transform="translate(320, 240)">
+    <rect x="0" y="0" width="280" height="190" fill="#fef9c3" stroke="#fbbf24" stroke-width="1" rx="5"/>
+    <text x="140" y="20" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#b45309">
+      Spongy (Cancellous) Bone
+    </text>
+    
+    <!-- Trabeculae network -->
+    <g transform="translate(70, 110)" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <path d="M -40 -30 L -20 -10 L 10 -25 L 40 -15"/>
+      <path d="M -35 10 L -10 0 L 20 15 L 50 5"/>
+      <path d="M -45 30 L -15 35 L 25 40 L 55 25"/>
+      <path d="M -20 -10 L -10 0 L -15 35"/>
+      <path d="M 10 -25 L 20 15 L 25 40"/>
+      <path d="M 40 -15 L 50 5 L 55 25"/>
+      <path d="M -20 -10 L -35 10"/>
+      <path d="M 10 -25 L -10 0"/>
+    </g>
+    
+    <!-- Osteocytes -->
+    <g fill="#d97706">
+      <circle cx="50" cy="80" r="4"/>
+      <circle cx="80" cy="75" r="4"/>
+      <circle cx="110" cy="85" r="4"/>
+      <circle cx="70" cy="100" r="4"/>
+      <circle cx="100" cy="110" r="4"/>
+      <circle cx="130" cy="95" r="4"/>
+      <circle cx="55" cy="130" r="4"/>
+      <circle cx="90" cy="140" r="4"/>
+      <circle cx="120" cy="135" r="4"/>
+    </g>
+    
+    <!-- Labels -->
+    <text x="160" y="70" font-family="Arial" font-size="9" fill="#d97706">Trabeculae</text>
+    <text x="160" y="85" font-family="Arial" font-size="9" fill="#d97706">(bone struts)</text>
+    <text x="160" y="115" font-family="Arial" font-size="8" fill="#b45309">Red bone marrow</text>
+    <text x="160" y="130" font-family="Arial" font-size="8" fill="#b45309">in spaces</text>
+  </g>
+  
+  <!-- Summary Box -->
+  <rect x="30" y="380" width="260" height="60" fill="#fef3c7" stroke="#fbbf24" rx="8"/>
+  <text x="160" y="405" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#b45309">
+    Bone Tissue Types
+  </text>
+  <text x="160" y="425" text-anchor="middle" font-family="Arial" font-size="9" fill="#d97706">
+    Compact: Dense, strong; forms diaphysis | Spongy: Lightweight; forms epiphyses
+  </text>
+  
+  <!-- Attribution -->
+  <text x="325" y="445" text-anchor="middle" font-family="Arial" font-size="8" fill="#9ca3af">
+    Source: OpenStax Anatomy &amp; Physiology (CC BY 4.0)
+  </text>
+</svg>

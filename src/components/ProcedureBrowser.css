@@ -1,0 +1,526 @@
+/**
+ * ProcedureBrowser Styles
+ *
+ * Dark theme styles for the medical procedures browser.
+ * Follows the same patterns as SymptomExplorer and SpecialtyBrowser.
+ */
+
+.procedure-browser {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #e8e8e8;
+  overflow: hidden;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.pb-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.pb-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pb-header .back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pb-header .back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pb-count {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+/* ============================================
+   Search & Filters Bar
+   ============================================ */
+
+.pb-controls {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.pb-search-row {
+  position: relative;
+}
+
+.pb-search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8e8e8;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.pb-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.pb-search-input:focus {
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+.pb-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.pb-filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pb-filter-chip {
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pb-filter-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+}
+
+.pb-filter-chip.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93c5fd;
+}
+
+/* ============================================
+   Scrollable List
+   ============================================ */
+
+.pb-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 20px 100px 20px;
+}
+
+.pb-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pb-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pb-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+/* ============================================
+   Group Headers
+   ============================================ */
+
+.pb-group {
+  margin-bottom: 8px;
+}
+
+.pb-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0 6px 0;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, #1a1a2e 0%, rgba(26, 26, 46, 0.95) 80%, transparent 100%);
+  z-index: 5;
+}
+
+.pb-group-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pb-group-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pb-group-count {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-left: auto;
+}
+
+/* ============================================
+   Procedure Card (List Item)
+   ============================================ */
+
+.pb-card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pb-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.pb-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pb-card-names {
+  flex: 1;
+  min-width: 0;
+}
+
+.pb-card-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  display: block;
+  line-height: 1.3;
+}
+
+.pb-card-name-es {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.pb-card-desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 6px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pb-card-badges {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ============================================
+   Badges
+   ============================================ */
+
+.pb-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pb-badge-category {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.pb-badge-complexity {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.pb-complexity-minimal {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.pb-complexity-low {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.pb-complexity-moderate {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+}
+
+.pb-complexity-high {
+  background: rgba(249, 115, 22, 0.2);
+  color: #fdba74;
+}
+
+.pb-complexity-very-high {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+/* ============================================
+   Detail Panel (expanded / modal)
+   ============================================ */
+
+.pb-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: pb-fade-in 0.2s ease;
+}
+
+@keyframes pb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pb-detail-panel {
+  width: 100%;
+  max-width: 700px;
+  max-height: 85vh;
+  background: #1e2a3a;
+  border-radius: 16px 16px 0 0;
+  overflow-y: auto;
+  animation: pb-slide-up 0.25s ease;
+}
+
+@keyframes pb-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.pb-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 20px 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  background: #1e2a3a;
+  z-index: 1;
+}
+
+.pb-detail-title {
+  flex: 1;
+}
+
+.pb-detail-title h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.pb-detail-title .pb-card-name-es {
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.pb-detail-close {
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8e8e8;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.pb-detail-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pb-detail-body {
+  padding: 16px 20px 32px 20px;
+}
+
+.pb-detail-section {
+  margin-bottom: 20px;
+}
+
+.pb-detail-section h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px 0;
+}
+
+.pb-detail-section p {
+  font-size: 0.92rem;
+  color: #e8e8e8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pb-detail-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pb-detail-tag {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.pb-detail-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.pb-meta-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.pb-meta-label {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.pb-meta-value {
+  display: block;
+  font-size: 0.88rem;
+  color: #e8e8e8;
+}
+
+/* ============================================
+   Empty state
+   ============================================ */
+
+.pb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.pb-empty-icon {
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 16px;
+}
+
+.pb-empty p {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ============================================
+   Complexity-level adaptive
+   ============================================ */
+
+.pb-level-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.pb-level-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (min-width: 768px) {
+  .pb-detail-panel {
+    border-radius: 16px;
+    margin-bottom: 5vh;
+    max-height: 80vh;
+  }
+
+  .pb-detail-overlay {
+    align-items: center;
+  }
+}

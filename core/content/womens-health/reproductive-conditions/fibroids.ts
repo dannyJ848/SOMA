@@ -1,0 +1,706 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const fibroids: WomensHealthContent = {
+  id: 'fibroids',
+  title: 'Uterine Fibroids (Leiomyomas)',
+  category: 'Reproductive Conditions',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Fibroids',
+      content: `Uterine fibroids are non-cancerous growths that develop in or on the uterus. They are very common - many women have them without knowing.
+
+**What are Fibroids?**
+
+Fibroids are tumors made of smooth muscle cells and fibrous connective tissue. They grow in the uterus and range in size from tiny seedlings to large masses that can distort and enlarge the uterus.
+
+**Key Facts:**
+
+- Fibroids are almost always benign (non-cancerous)
+- They rarely develop into cancer
+- Many women don't have symptoms
+- They can appear at any age but are most common in women 30-40 years old
+- Fibroids tend to shrink after menopause
+
+**Types of Fibroids by Location:**
+
+1. **Intramural** - Grow within the muscular wall of the uterus
+2. **Subserosal** - Grow on the outer surface of the uterus
+3. **Submucosal** - Grow into the uterine cavity
+
+**Why Fibroids Matter:**
+
+While many fibroids don't cause problems, they can sometimes cause:
+- Heavy or prolonged menstrual bleeding
+- Pelvic pain or pressure
+- Frequent urination (if pressing on bladder)
+- Difficulty getting pregnant
+- Complications during pregnancy
+
+Understanding fibroids helps you recognize when they might need treatment and when they can be safely monitored.
+`,
+      keyPoints: [
+        'Fibroids are benign (non-cancerous) tumors of the uterus',
+        'They are very common, affecting up to 70% of women by age 50',
+        'Many women with fibroids have no symptoms',
+        'Fibroids are classified by their location in the uterus',
+        'Fibroids tend to shrink after menopause'
+      ],
+      vocabulary: [
+        { term: 'Benign', definition: 'Not cancerous; does not invade nearby tissue or spread to other parts of the body' },
+        { term: 'Uterus', definition: 'The hollow, pear-shaped organ in a woman\'s pelvis where a baby grows' },
+        { term: 'Tumor', definition: 'An abnormal mass of tissue that forms when cells grow and divide more than they should' }
+      ],
+      quiz: [
+        {
+          question: 'Are uterine fibroids cancerous?',
+          options: [
+            'Yes, they are always cancerous',
+            'No, they are almost always benign (non-cancerous)',
+            'They become cancerous after menopause',
+            'Only large fibroids are cancerous'
+          ],
+          correctAnswer: 1,
+          explanation: 'Uterine fibroids are almost always benign (non-cancerous). They rarely develop into cancer.',
+        },
+        {
+          question: 'What typically happens to fibroids after menopause?',
+          options: [
+            'They grow larger',
+            'They shrink',
+            'They become cancerous',
+            'Nothing changes'
+          ],
+          correctAnswer: 1,
+          explanation: 'Fibroids tend to shrink after menopause due to decreased hormone levels.',
+        },
+        {
+          question: 'Where do submucosal fibroids grow?',
+          options: [
+            'On the outer surface of the uterus',
+            'Within the muscular wall of the uterus',
+            'Into the uterine cavity',
+            'Outside the abdomen'
+          ],
+          correctAnswer: 2,
+          explanation: 'Submucosal fibroids grow into the uterine cavity and can cause heavy bleeding.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Symptoms and Diagnosis',
+      content: `Fibroids can cause a variety of symptoms depending on their size, number, and location. Understanding these symptoms helps in recognizing when to seek medical attention.
+
+**Common Symptoms of Fibroids:**
+
+**Bleeding Issues:**
+- Heavy menstrual bleeding (menorrhagia)
+- Prolonged menstrual periods (lasting more than a week)
+- Bleeding between periods
+- Passing blood clots during menstruation
+
+**Pelvic Symptoms:**
+- Pelvic pain or pressure
+- Feeling of fullness in the lower abdomen
+- Enlarged abdomen or uterus
+- Pain during sexual intercourse (dyspareunia)
+
+**Urinary and Bowel Symptoms:**
+- Frequent urination (from pressure on bladder)
+- Difficulty emptying the bladder completely
+- Constipation (from pressure on rectum)
+- Back pain or leg pains (from pressure on nerves)
+
+**Reproductive Issues:**
+- Difficulty conceiving (infertility)
+- Multiple miscarriages
+- Complications during pregnancy
+- Problems during labor and delivery
+
+**When to See a Doctor:**
+
+You should seek medical attention for:
+- Persistent pelvic pain that doesn't go away
+- Very heavy or prolonged bleeding (soaking through pads/tampons every hour)
+- Bleeding between periods or after menopause
+- Difficulty urinating or emptying bladder
+- Unexplained lower abdominal swelling
+
+**How Fibroids are Diagnosed:**
+
+1. **Pelvic Exam** - Doctor can feel enlarged or irregular uterus
+2. **Ultrasound** - Uses sound waves to create images of the uterus
+3. **Lab Tests** - CBC to check for anemia from heavy bleeding
+
+**The Impact on Quality of Life:**
+
+Fibroids can significantly affect daily life:
+- Missing work or social activities during heavy periods
+- Fatigue from anemia due to blood loss
+- Anxiety about bleeding through clothing
+- Discomfort during physical activities
+- Stress about fertility
+
+If fibroids are affecting your quality of life, there are many treatment options available.
+`,
+      keyPoints: [
+        'Heavy menstrual bleeding is the most common symptom of fibroids',
+        'Fibroids can cause pelvic pressure, pain, and urinary symptoms',
+        'The severity of symptoms depends on fibroid size, number, and location',
+        'Diagnosis typically involves pelvic exam and ultrasound',
+        'Fibroids can cause infertility and pregnancy complications'
+      ],
+      vocabulary: [
+        { term: 'Menorrhagia', definition: 'Abnormally heavy or prolonged menstrual bleeding' },
+        { term: 'Dyspareunia', definition: 'Pain during sexual intercourse' },
+        { term: 'Anemia', definition: 'A condition in which you lack enough healthy red blood cells to carry adequate oxygen to your body\'s tissues' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most common symptom of uterine fibroids?',
+          options: [
+            'Pelvic pain',
+            'Heavy menstrual bleeding',
+            'Difficulty urinating',
+            'Back pain'
+          ],
+          correctAnswer: 1,
+          explanation: 'Heavy menstrual bleeding (menorrhagia) is the most common symptom of uterine fibroids.',
+        },
+        {
+          question: 'Why might fibroids cause frequent urination?',
+          options: [
+            'They increase urine production',
+            'They press on the bladder',
+            'They cause urinary tract infections',
+            'They affect kidney function'
+          ],
+          correctAnswer: 1,
+          explanation: 'Large fibroids can press on the bladder, reducing its capacity and causing frequent urination.',
+        },
+        {
+          question: 'Which diagnostic test is commonly used to confirm fibroids?',
+          options: [
+            'Blood test',
+            'Pelvic ultrasound',
+            'MRI scan',
+            'CT scan'
+          ],
+          correctAnswer: 1,
+          explanation: 'Pelvic ultrasound is the most commonly used imaging test to diagnose fibroids.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Causes and Risk Factors',
+      content: `Understanding why fibroids develop helps identify risk factors and potential prevention strategies.
+
+**What Causes Fibroids?**
+
+The exact cause of fibroids is not completely understood, but research has identified several key factors:
+
+**Hormonal Factors:**
+- **Estrogen and Progesterone** - These hormones stimulate the growth of uterine lining during each menstrual cycle, and they also appear to promote fibroid growth
+- Fibroids contain more estrogen and progesterone receptors than normal uterine muscle cells
+- Fibroids tend to grow when hormone levels are high (during reproductive years)
+- They shrink when hormone levels decrease (after menopause)
+
+**Genetic Factors:**
+- Fibroids appear to run in families
+- Having a close relative with fibroids increases your risk
+- Specific gene mutations have been identified in fibroid cells
+- Identical twins are more likely to both have fibroids than fraternal twins
+
+**Growth Factors:**
+- Insulin-like growth factor may affect fibroid growth
+- Other growth substances that help the body maintain tissues may promote fibroid development
+
+**Extracellular Matrix:**
+- Fibroids have increased amounts of extracellular matrix (the material that makes cells stick together)
+- This matrix stores growth factors and causes fibroid cells to respond differently to hormones
+
+**Risk Factors for Developing Fibroids:**
+
+**Risk Factors You Cannot Change:**
+
+| Factor | Explanation |
+|--------|-------------|
+| Age | Most common in women 30-40 years old |
+| Race | African American women are 2-3 times more likely to develop fibroids |
+| Family History | Having a mother or sister with fibroids increases risk |
+| Genetic Predisposition | Certain genetic mutations increase susceptibility |
+| Early Menarche | Starting periods at a young age increases exposure to hormones |
+
+**Risk Factors You Can Potentially Modify:**
+
+| Factor | Explanation |
+|--------|-------------|
+| Diet High in Red Meat | May increase fibroid risk |
+| Alcohol Consumption | Particularly beer appears to increase risk |
+| Vitamin D Deficiency | Low vitamin D levels are associated with fibroids |
+| Obesity | Higher body weight increases estrogen production |
+| Stress | Chronic stress may affect hormone balance |
+
+**Protective Factors:**
+
+- **Pregnancy** - Having children seems protective
+- **Oral Contraceptives** - Lower dose birth control pills may reduce risk
+- **Vegetarian Diet** - Plant-based diets associated with lower risk
+- **Exercise** - Regular physical activity may reduce risk
+- **Vitamin D** - Adequate levels appear protective
+
+**Racial Disparities:**
+
+African American women are disproportionately affected by fibroids:
+- Develop fibroids at younger ages
+- Have larger and more numerous fibroids
+- Experience more severe symptoms
+- Are more likely to need surgical treatment
+- May have different genetic factors contributing to development
+
+**Hormonal Influence:**
+
+The relationship between hormones and fibroids explains:
+- Why fibroids grow during reproductive years
+- Why they rarely appear before puberty
+- Why they typically shrink after menopause
+- Why they can grow rapidly during pregnancy (when hormones are high)
+`,
+      keyPoints: [
+        'Fibroids are influenced by estrogen and progesterone hormone levels',
+        'Genetic factors and family history play a significant role in fibroid development',
+        'African American women are 2-3 times more likely to develop fibroids',
+        'Obesity, diet, and vitamin D deficiency are modifiable risk factors',
+        'Fibroids grow during reproductive years and typically shrink after menopause'
+      ],
+      vocabulary: [
+        { term: 'Hormone Receptors', definition: 'Proteins on cells that bind to specific hormones and trigger cellular responses' },
+        { term: 'Extracellular Matrix', definition: 'The network of proteins and molecules that provide structural and biochemical support to cells' },
+        { term: 'Menarche', definition: 'The first occurrence of menstruation' }
+      ],
+      quiz: [
+        {
+          question: 'Which group of women has the highest risk of developing fibroids?',
+          options: [
+            'Asian women',
+            'White women',
+            'African American women',
+            'Hispanic women'
+          ],
+          correctAnswer: 2,
+          explanation: 'African American women are 2-3 times more likely to develop fibroids than women of other racial groups.',
+        },
+        {
+          question: 'Why do fibroids typically shrink after menopause?',
+          options: [
+            'Decreased physical activity',
+            'Changes in diet',
+            'Decreased estrogen and progesterone levels',
+            'Immune system changes'
+          ],
+          correctAnswer: 2,
+          explanation: 'Fibroids shrink after menopause because estrogen and progesterone levels, which promote fibroid growth, decrease significantly.',
+        },
+        {
+          question: 'Which vitamin has been associated with reduced fibroid risk?',
+          options: [
+            'Vitamin A',
+            'Vitamin B12',
+            'Vitamin C',
+            'Vitamin D'
+          ],
+          correctAnswer: 3,
+          explanation: 'Vitamin D deficiency is associated with increased fibroid risk, and adequate levels appear protective.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Treatment Options',
+      content: `Treatment for fibroids ranges from watchful waiting to surgical removal, depending on symptoms, fibroid characteristics, and patient goals.
+
+**Treatment Decision Factors:**
+
+When deciding on treatment, doctors consider:
+- Severity and type of symptoms
+- Size, number, and location of fibroids
+- Age and how close to menopause
+- Future fertility desires
+- Overall health and medical history
+- Patient preferences and quality of life concerns
+
+**Watchful Waiting (Expectant Management)**
+
+**Indications:**
+- Small, asymptomatic fibroids
+- Approaching menopause
+- Mild symptoms that don't interfere with daily life
+- Pregnancy or trying to conceive (fibroids often monitored)
+
+**What it involves:**
+- Regular pelvic exams
+- Periodic ultrasounds to monitor growth
+- Tracking symptoms
+- Addressing symptoms as they arise
+
+**Medical Management:**
+
+**GnRH Agonists (e.g., Leuprolide):**
+- Induce temporary menopause by reducing estrogen
+- Shrink fibroids by 30-50%
+- Used preoperatively to reduce size before surgery
+- Limited to 6 months due to side effects (bone loss)
+- Add-back therapy can extend duration
+
+**Hormonal Birth Control:**
+- Oral contraceptives, IUDs, patches
+- Can help control bleeding but don't shrink fibroids
+- Progesterone-releasing IUD (Mirena) especially helpful for bleeding
+
+**Other Medications:**
+- Tranexamic acid - reduces heavy bleeding
+- NSAIDs (ibuprofen, naproxen) - reduce pain and bleeding
+- Selective progesterone receptor modulators (SPRMs)
+
+**Minimally Invasive Procedures:**
+
+**Uterine Artery Embolization (UAE):**
+- Small particles injected into uterine arteries
+- Cuts off blood supply to fibroids, causing them to shrink
+- 70-90% symptom improvement
+- Not recommended for women desiring future pregnancy
+
+**MRI-guided Focused Ultrasound (FUS):**
+- High-energy ultrasound waves destroy fibroid tissue
+- Non-invasive, no incision
+- Limited availability
+
+**Radiofrequency Ablation:**
+- Heat energy destroys fibroid tissue
+- Can be done laparoscopically or transcervically
+
+**Surgical Options:**
+
+**Myomectomy:**
+- Surgical removal of fibroids
+- Uterus is preserved
+- Best option for women desiring future pregnancy
+- Approaches:
+  - Hysteroscopic (through vagina/cervix) for submucosal fibroids
+  - Laparoscopic (small incisions)
+  - Abdominal (large incision) for very large or multiple fibroids
+- Recurrence rate: 15-30% over time
+
+**Hysterectomy:**
+- Surgical removal of the uterus
+- Only definitive cure for fibroids
+- Eliminates possibility of future pregnancy
+- Approaches: vaginal, laparoscopic, abdominal, robotic
+- Ovaries may be preserved if desired
+
+**Comparison of Treatment Options:**
+
+| Treatment | Fibroid Removal | Fertility Preserved | Recovery Time | Recurrence Risk |
+|-----------|----------------|---------------------|---------------|-----------------|
+| Watchful Waiting | No | Yes | None | N/A |
+| Medications | No | Yes | None | High after stopping |
+| UAE | No (shrink) | Possibly reduced | 1-2 weeks | Low |
+| FUS | No (shrink) | Possibly | 1-2 days | Low |
+| Myomectomy | Yes | Yes | 2-6 weeks | 15-30% |
+| Hysterectomy | Uterus removed | No | 4-8 weeks | None |
+
+**Choosing the Right Treatment:**
+
+**For women wanting fertility:**
+- Myomectomy is usually preferred
+- Some medical management may help with symptoms while trying to conceive
+
+**For women done having children:**
+- More options available (UAE, hysterectomy)
+- Decision based on symptom severity, recovery considerations, and personal preference
+
+**For women near menopause:**
+- Medical management to bridge to menopause
+- Symptoms often improve naturally after menopause
+
+**Newer and Emerging Treatments:**
+
+- Elagolix (oral GnRH antagonist) - newer option with fewer side effects
+- Relugolix combination therapy
+- Ablation technologies continue to evolve
+`,
+      keyPoints: [
+        'Treatment choice depends on symptoms, fibroid characteristics, and fertility goals',
+        'Watchful waiting is appropriate for asymptomatic or mildly symptomatic fibroids',
+        'GnRH agonists can shrink fibroids but are limited by side effects',
+        'Myomectomy removes fibroids while preserving fertility',
+        'Hysterectomy is the only definitive cure but eliminates fertility'
+      ],
+      vocabulary: [
+        { term: 'GnRH Agonists', definition: 'Medications that initially stimulate then suppress gonadotropin-releasing hormone receptors, reducing estrogen production' },
+        { term: 'Uterine Artery Embolization', definition: 'A procedure that cuts off blood supply to fibroids by blocking the uterine arteries with small particles' },
+        { term: 'Myomectomy', definition: 'Surgical removal of fibroids while preserving the uterus' }
+      ],
+      quiz: [
+        {
+          question: 'Which surgical option preserves the ability to become pregnant?',
+          options: [
+            'Hysterectomy',
+            'Myomectomy',
+            'Uterine artery embolization',
+            'None of the above'
+          ],
+          correctAnswer: 1,
+          explanation: 'Myomectomy removes fibroids while preserving the uterus, maintaining the ability to become pregnant.',
+        },
+        {
+          question: 'What is the most significant limitation of GnRH agonists?',
+          options: [
+            'They don\'t shrink fibroids',
+            'They cannot be used long-term due to bone loss side effects',
+            'They cause weight gain',
+            'They increase bleeding'
+          ],
+          correctAnswer: 1,
+          explanation: 'GnRH agonists can only be used for up to 6 months due to side effects including bone loss (osteoporosis risk).',
+        },
+        {
+          question: 'Which treatment is the only definitive cure for fibroids?',
+          options: [
+            'Myomectomy',
+            'Uterine artery embolization',
+            'Hysterectomy',
+            'GnRH agonists'
+          ],
+          correctAnswer: 2,
+          explanation: 'Hysterectomy (removal of the uterus) is the only definitive cure for fibroids, as it removes the organ where fibroids grow.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Pathophysiology and Considerations',
+      content: `This advanced section explores the molecular mechanisms of fibroid development and special clinical considerations.
+
+**Molecular Pathogenesis:**
+
+**Genetic Alterations:**
+
+*MED12 Mutations:*
+- Found in ~70% of fibroids
+- X-linked gene encoding mediator complex subunit
+- Somatic mutations (not inherited)
+- More common in smaller fibroids
+
+*HMGA2 Rearrangements:*
+- Found in ~10-15% of fibroids
+- Chromosomal rearrangements affecting high mobility group AT-hook 2
+- Associated with larger fibroids
+
+*Other Genetic Changes:*
+- Chromosomal deletions (7q, 3q, 1p)
+- Chromosomal additions (12q, 6p)
+- Mutations in COL4A5/COL4A6
+
+**Epigenetic Modifications:**
+
+*DNA Methylation:*
+- Global hypomethylation in fibroid tissue
+- Promoter hypermethylation of tumor suppressor genes
+- Altered expression of key regulatory genes
+
+*Histone Modifications:*
+- Aberrant histone acetylation/deacetylation
+- Histone deacetylase overexpression
+- Target for potential therapies
+
+*Non-coding RNAs:*
+- MicroRNA dysregulation (miR-21, miR-34a, miR-200 family)
+- Altered lncRNA expression
+- Potential diagnostic and therapeutic targets
+
+**Growth Factor Signaling Pathways:**
+
+*Transforming Growth Factor-beta (TGF-β):*
+- Overexpressed in fibroids
+- Promotes extracellular matrix production
+- Stimulates fibroid cell proliferation
+- Key mediator of fibrotic process
+
+*Insulin-like Growth Factors (IGF):*
+- IGF-1 overexpression in fibroid cells
+- Interacts with estrogen signaling
+- May explain obesity-fibroid link
+
+*Platelet-Derived Growth Factor (PDGF):*
+- Mitogenic effects on smooth muscle cells
+- Promotes angiogenesis
+
+**Hormonal Signaling Mechanisms:**
+
+*Estrogen Signaling:*
+- Increased aromatase expression in fibroids
+- Local estrogen production (in situ synthesis)
+- Altered estrogen receptor alpha/beta ratio
+- Estrogen promotes progesterone receptor expression
+
+*Progesterone Signaling:*
+- Complex role - both inhibitory and stimulatory effects reported
+- PR isoform imbalance
+- Progesterone stimulates Bcl-2 expression (anti-apoptotic)
+- May be more important than estrogen for growth
+
+**The Stem Cell Hypothesis:**
+
+- Fibroids may originate from abnormal myometrial stem cells
+- Side population (SP) cells identified in myometrium
+- These stem cells have tumor-initiating capacity
+- MED12 mutations occur early in stem cells
+- Explains clonal nature of individual fibroids
+- May explain variable behavior of different fibroids in same uterus
+
+**Extracellular Matrix (ECM) Abnormalities:**
+
+*Composition Changes:*
+- Increased collagen type I and III
+- Altered fibronectin distribution
+- Increased proteoglycans (versican, decorin, biglycan)
+
+*Degradation Imbalance:*
+- Altered MMP (matrix metalloproteinase) activity
+- Decreased MMP degradation
+- Increased TIMP (tissue inhibitors) expression
+- Result: excessive ECM accumulation
+
+**Special Clinical Considerations:**
+
+**Fibroids in Pregnancy:**
+
+*Complications:*
+- Miscarriage (2-3x increased risk)
+- Placental abruption
+- Placenta previa
+- Fetal growth restriction
+- Preterm labor and delivery
+- Malpresentation (breech)
+- Postpartum hemorrhage
+- Cesarean delivery
+
+*Red degeneration:*
+- Occurs in 2-10% of pregnancies
+- More common in 2nd trimester
+- Caused by outgrowing blood supply
+- Presents with acute pain, fever, nausea
+- Usually managed conservatively
+
+*Management considerations:*
+- Most fibroids don't require intervention during pregnancy
+- Myomectomy during pregnancy only in severe cases
+- Delivery route based on obstetric indications
+
+**Fibroids and Infertility:**
+
+*Proposed mechanisms:*
+- Distorted uterine cavity (submucosal fibroids)
+- Impaired implantation
+- Altered uterine blood flow
+- Increased uterine contractility
+- Inflammation
+
+*Evidence:*
+- Submucosal fibroids clearly reduce fertility
+- Subserosal fibroids minimal impact
+- Intramural fibroids - controversial, may have impact
+- Myomectomy improves pregnancy rates for submucosal and large intramural fibroids
+
+**Malignant Transformation:**
+
+*Leiomyosarcoma:*
+- Rare (<0.1% of fibroids)
+- Not arising from benign fibroids (de novo)
+- Cannot reliably predict which fibroids are malignant
+- Rapid growth not a reliable indicator
+- Age >50 is risk factor
+- No reliable preoperative diagnosis
+- Histologic diagnosis required (mitotic count, cellular atypia, necrosis)
+
+**Novel Therapeutic Approaches:**
+
+*Targeted Therapies:*
+- Selective progesterone receptor modulators (SPRMs)
+- Aromatase inhibitors
+- GnRH antagonists (relugolix, elagolix)
+- Vitamin D analogs
+
+*Epigenetic Therapies:*
+- HDAC inhibitors
+- DNA methyltransferase inhibitors
+- miRNA-based therapies
+
+*Anti-fibrotic Therapies:*
+- TGF-β inhibitors
+- Pirfenidone
+- Collagen synthesis inhibitors
+`,
+      keyPoints: [
+        'MED12 mutations are found in approximately 70% of fibroids',
+        'The stem cell hypothesis suggests fibroids originate from abnormal myometrial stem cells',
+        'TGF-β signaling plays a key role in fibroid growth and fibrosis',
+        'Submucosal fibroids have the greatest impact on fertility',
+        'Leiomyosarcoma is a rare malignancy that does not arise from benign fibroids'
+      ],
+      vocabulary: [
+        { term: 'MED12', definition: 'Mediator complex subunit 12, a gene commonly mutated in fibroids' },
+        { term: 'Side Population Cells', definition: 'A population of stem cells identified by their ability to efflux certain dyes, proposed as the origin of fibroids' },
+        { term: 'Red Degeneration', definition: 'Hemorrhagic necrosis of fibroid tissue occurring most commonly during pregnancy due to outgrowing blood supply' },
+        { term: 'SPRM', definition: 'Selective progesterone receptor modulators - medications that selectively target progesterone receptors' }
+      ],
+      quiz: [
+        {
+          question: 'What percentage of fibroids contain MED12 mutations?',
+          options: [
+            '10%',
+            '30%',
+            '70%',
+            '95%'
+          ],
+          correctAnswer: 2,
+          explanation: 'MED12 mutations are found in approximately 70% of fibroids, making it the most common genetic alteration in these tumors.',
+        },
+        {
+          question: 'Which type of fibroid has the greatest negative impact on fertility?',
+          options: [
+            'Subserosal fibroids',
+            'Intramural fibroids',
+            'Submucosal fibroids',
+            'All types have equal impact'
+          ],
+          correctAnswer: 2,
+          explanation: 'Submucosal fibroids, which distort the uterine cavity, have the clearest negative impact on fertility. Myomectomy improves pregnancy rates for these fibroids.',
+        },
+        {
+          question: 'What is the relationship between benign fibroids and leiomyosarcoma?',
+          options: [
+            'Large fibroids commonly transform into leiomyosarcoma',
+            'Leiomyosarcoma arises de novo, not from benign fibroids',
+            'Submucosal fibroids are most likely to become malignant',
+            'All fibroids have equal potential for malignant transformation'
+          ],
+          correctAnswer: 1,
+          explanation: 'Leiomyosarcoma arises de novo (as new tumors) and does not develop from benign fibroids. Malignant transformation of benign fibroids is extremely rare, if it occurs at all.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: ['menstrual-disorders', 'menorrhagia', 'fertility-overview', 'hormonal-health', 'womens-health-screening'],
+  lastUpdated: '2025-01-25',
+  references: [
+    { title: 'American College of Obstetricians and Gynecologists', url: 'https://www.acog.org/womens-healthcare/faqs/uterine-fibroids' },
+    { title: 'Uterine Fibroids - ACOG Practice Bulletin', url: 'https://www.acog.org/clinical/clinical-guidance/practice-bulletins/articles/2020/12/uterine-fibroids' },
+    { title: 'Fibroids: Clinical Features and Management', url: 'https://www.mayoclinic.org/diseases-conditions/uterine-fibroids' },
+    { title: 'MED12 Mutations in Uterine Leiomyomas', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3096687/' },
+    { title: 'Uterine Fibroid Epidemiology', url: 'https://www.nichd.nih.gov/health/topics/uterine' }
+  ]
+};

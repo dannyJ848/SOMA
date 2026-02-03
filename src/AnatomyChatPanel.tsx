@@ -13,15 +13,29 @@ import {
   type DashboardData,
 } from './utils/anatomyContextBuilder';
 
+interface Citation {
+  index: number;
+  source: string;
+  section?: string;
+  url?: string;
+}
+
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+  citations?: Citation[];
 }
 
-interface AIChatResponse {
+interface AIChatRAGResponse {
   content: string;
   model: string;
   done: boolean;
+  citations: Citation[];
+  ragContext?: {
+    chunksUsed: number;
+    totalTokens: number;
+    processingTimeMs: number;
+  };
 }
 
 interface AnatomyChatPanelProps {
@@ -75,15 +89,25 @@ export function AnatomyChatPanel({
       }));
       chatMessages.push({ role: 'user', content: text });
 
-      const response = await invoke<AIChatResponse>('ai_chat', {
+      // Use RAG-enhanced chat for better educational content
+      const response = await invoke<AIChatRAGResponse>('ai_chat_rag', {
         request: {
           messages: chatMessages,
           systemPrompt,
           temperature: 0.7,
+          ragOptions: {
+            structureName: structureName,
+            complexityLevel: 3,
+            maxTokens: 3000,
+          },
         },
       });
 
-      setMessages(prev => [...prev, { role: 'assistant', content: response.content }]);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: response.content,
+        citations: response.citations,
+      }]);
     } catch (err) {
       console.error('Anatomy chat error:', err);
       setMessages(prev => [
@@ -168,6 +192,35 @@ export function AnatomyChatPanel({
         {messages.map((message, index) => (
           <div key={index} className={`chat-panel-message ${message.role}`}>
             <div className="message-content">{message.content}</div>
+            {message.citations && message.citations.length > 0 && (
+              <div className="message-citations">
+                <div className="citations-header">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                  Sources
+                </div>
+                <div className="citations-list">
+                  {message.citations.map((citation) => (
+                    <a
+                      key={citation.index}
+                      href={citation.url || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="citation-link"
+                      onClick={(e) => !citation.url && e.preventDefault()}
+                    >
+                      <span className="citation-index">[{citation.index}]</span>
+                      <span className="citation-source">{citation.source}</span>
+                      {citation.section && (
+                        <span className="citation-section">{citation.section}</span>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ))}
 
@@ -377,6 +430,65 @@ export function AnatomyChatPanel({
           background: #252538;
           color: #e0e0e0;
           border-bottom-left-radius: 4px;
+        }
+
+        .message-citations {
+          max-width: 85%;
+          margin-top: 8px;
+          padding: 10px 12px;
+          background: #1e1e30;
+          border: 1px solid #333;
+          border-radius: 8px;
+          font-size: 12px;
+        }
+
+        .citations-header {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #888;
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+
+        .citations-list {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .citation-link {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          padding: 6px 8px;
+          background: #252538;
+          border-radius: 4px;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.15s;
+        }
+
+        .citation-link:hover {
+          background: #2a2a4a;
+        }
+
+        .citation-index {
+          color: #4a9eff;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+
+        .citation-source {
+          color: #ccc;
+          font-weight: 500;
+        }
+
+        .citation-section {
+          color: #888;
+          font-size: 11px;
+          width: 100%;
+          margin-top: 2px;
         }
 
         .chat-panel-message.loading .message-content {

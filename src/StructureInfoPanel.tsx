@@ -50,6 +50,8 @@ interface StructureInfoPanelProps {
   onSelectStructure?: (id: string) => void;
   onViewInIsolation?: () => void;
   onViewHistology?: (histologyId: string) => void;
+  onViewPathology?: (structureId: string, structureName: string) => void;
+  onViewEducation?: () => void;
   onAskAI?: (query: string) => void;
 }
 
@@ -70,6 +72,8 @@ export function StructureInfoPanel({
   onSelectStructure,
   onViewInIsolation,
   onViewHistology,
+  onViewPathology,
+  onViewEducation,
   onAskAI,
 }: StructureInfoPanelProps) {
   const [info, setInfo] = useState<StructureInfo | null>(null);
@@ -190,6 +194,20 @@ export function StructureInfoPanel({
           )}
           {info?.histologyId && onViewHistology && (
             <button onClick={() => onViewHistology(info.histologyId!)}>View Histology</button>
+          )}
+          {onViewPathology && (
+            <button
+              onClick={() => onViewPathology(structureId, structureName)}
+              className="pathology-btn"
+              style={{ backgroundColor: '#5c3d2e', color: '#ffccbc' }}
+            >
+              View Pathology
+            </button>
+          )}
+          {onViewEducation && (
+            <button onClick={onViewEducation} className="education-btn">
+              Education
+            </button>
           )}
         </div>
 
@@ -422,6 +440,16 @@ export function StructureInfoPanel({
 
         .quick-actions button:hover {
           background: #444;
+        }
+
+        .quick-actions .education-btn {
+          background: linear-gradient(135deg, #4a9eff 0%, #7c3aed 100%);
+          color: white;
+          font-weight: 500;
+        }
+
+        .quick-actions .education-btn:hover {
+          background: linear-gradient(135deg, #5aa8ff 0%, #8b4afd 100%);
         }
 
         .info-section {

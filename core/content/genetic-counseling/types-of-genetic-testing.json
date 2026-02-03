@@ -1,0 +1,462 @@
+{
+  "id": "gc-002",
+  "title": "Types of Genetic Testing",
+  "category": "genetic-counseling",
+  "subcategory": "testing",
+  "description": "Understanding different types of genetic tests and when they are used",
+  "keywords": ["genetic testing", "carrier screening", "prenatal testing", "diagnostic testing", "predictive testing", "pharmacogenomics"],
+  "lastUpdated": "2026-01-24",
+  "version": "1.0.0",
+  "content": {
+    "overview": {
+      "level1": {
+        "title": "Types of Genetic Tests",
+        "content": "There are several types of genetic tests, each designed for different purposes. Some tests look for conditions you might pass to your children, some check if your baby has certain conditions, and others help predict your risk for diseases or guide medication choices."
+      },
+      "level2": {
+        "title": "Understanding Different Genetic Testing Categories",
+        "content": "Genetic testing encompasses multiple categories including carrier screening (identifying individuals who carry gene changes for recessive conditions), prenatal testing (evaluating fetal health), diagnostic testing (confirming suspected conditions), predictive testing (assessing future disease risk), and pharmacogenomic testing (guiding medication selection and dosing). Each type serves distinct clinical purposes and has specific considerations for timing, interpretation, and follow-up."
+      },
+      "level3": {
+        "title": "Clinical Applications of Genetic Testing Modalities",
+        "content": "The clinical application of genetic testing requires understanding test characteristics including sensitivity, specificity, positive and negative predictive values, and analytical versus clinical validity. Test selection depends on clinical indication, family history, and patient preferences. Pre-test probability, informed consent, and result interpretation frameworks differ by testing category. Laboratory methodologies range from targeted variant analysis to comprehensive genome sequencing."
+      },
+      "level4": {
+        "title": "Advanced Genetic Testing Strategies and Interpretation",
+        "content": "Contemporary genetic testing employs diverse methodologies including single-gene testing, multi-gene panels, chromosomal microarray, exome sequencing, and genome sequencing. Test selection algorithms consider diagnostic yield, cost-effectiveness, incidental finding policies, and turnaround time. Variant interpretation follows ACMG/AMP guidelines with ongoing reassessment as evidence accumulates. Clinical integration requires understanding of penetrance, expressivity, and genotype-phenotype correlations."
+      },
+      "level5": {
+        "title": "Precision Diagnostics: Integrating Multi-Omic Testing Approaches",
+        "content": "Precision diagnostic strategies integrate germline and somatic testing, transcriptomic and epigenetic analyses, and emerging technologies including long-read sequencing and optical genome mapping. Interpretation incorporates population databases, functional studies, and computational predictors within probabilistic frameworks. Challenges include variant of uncertain significance resolution, reanalysis protocols, and the expanding scope of secondary findings. Implementation requires robust bioinformatics infrastructure and multidisciplinary expertise."
+      }
+    },
+    "sections": {
+      "carrierScreening": {
+        "title": "Carrier Screening",
+        "level1": {
+          "content": "Carrier screening tells you if you carry a gene change that could cause a condition in your children. Carriers are usually healthy themselves. If both parents are carriers of the same recessive condition, each pregnancy has a 25% chance of the child being affected.",
+          "keyPoints": [
+            "Carriers are usually healthy",
+            "Tests for conditions that require two gene copies to cause disease",
+            "Both parents need to be carriers for child to be at risk",
+            "Can be done before or during pregnancy",
+            "Helps with family planning decisions"
+          ],
+          "commonConditionsScreened": [
+            "Cystic fibrosis",
+            "Sickle cell disease",
+            "Tay-Sachs disease",
+            "Spinal muscular atrophy",
+            "Fragile X syndrome"
+          ]
+        },
+        "level2": {
+          "content": "Carrier screening identifies individuals who carry one copy of a pathogenic variant for autosomal recessive or X-linked conditions. Carriers typically do not have the condition but can pass the variant to their children. When both partners carry variants in the same gene, each pregnancy has a 25% risk of an affected child. Screening can be ethnicity-based (targeting populations with higher carrier frequencies) or expanded (pan-ethnic screening for many conditions). Professional guidelines recommend offering carrier screening to all pregnant individuals or those planning pregnancy.",
+          "screeningApproaches": [
+            "Ethnicity-based screening: targets conditions more common in specific populations",
+            "Expanded carrier screening: tests for 100+ conditions regardless of ethnicity",
+            "Sequential screening: tests one partner first, then the other if positive",
+            "Concurrent screening: tests both partners simultaneously"
+          ],
+          "timing": [
+            "Ideally before pregnancy (preconception)",
+            "Can be done during pregnancy (prenatal)",
+            "Recommended to complete before diagnostic testing decisions needed"
+          ]
+        },
+        "level3": {
+          "content": "Carrier screening programs employ targeted genotyping or sequencing-based approaches with varying detection rates by variant and population. Detection rates depend on the variants included and population-specific allele frequencies. Residual risk calculations account for limitations in variant detection. ACMG, ACOG, and SMFM guidelines recommend offering carrier screening universally, with informed consent addressing detection rates, residual risk, and implications of positive results. Reproductive options for carrier couples include natural conception with prenatal diagnosis, preimplantation genetic testing, donor gametes, or adoption.",
+          "technicalConsiderations": [
+            "Detection rates vary by gene, variant, and methodology",
+            "Residual risk calculations essential for counseling",
+            "Some variants not detectable by standard methods",
+            "Expanded panels increase chance of VUS findings",
+            "Copy number variants may require additional testing"
+          ],
+          "reproductiveOptions": [
+            "Natural conception with prenatal diagnosis (CVS or amniocentesis)",
+            "Preimplantation genetic testing (PGT-M)",
+            "Use of donor sperm or donor eggs",
+            "Adoption",
+            "Choosing not to have biological children"
+          ]
+        },
+        "level4": {
+          "content": "Expanded carrier screening panels typically include conditions meeting criteria for severity, carrier frequency, and test performance. ACMG recommends tiered disclosure based on condition severity and penetrance. Considerations include founder mutations requiring population-specific panels, pseudogenes complicating analysis (e.g., SMN1), and X-linked conditions requiring different counseling for male versus female carriers. Quality metrics include clinical sensitivity, analytic sensitivity, and residual risk by population. Implementation challenges include variant interpretation consistency and recontact for panel updates.",
+          "qualityMetrics": [
+            "Clinical sensitivity by population",
+            "Analytic sensitivity and specificity",
+            "Residual carrier risk calculations",
+            "VUS rates and management protocols",
+            "Partner testing completion rates"
+          ],
+          "specialConsiderations": [
+            "Consanguinity increases recessive disease risk",
+            "Gamete donors require comprehensive screening",
+            "Pseudogene regions require specialized analysis",
+            "Some conditions show reduced penetrance",
+            "Incidental carrier findings for adult-onset conditions"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary carrier screening integrates population genetics, health economics, and implementation science. Cost-effectiveness analyses support expanded screening despite increased VUS findings. Emerging approaches include polygenic carrier risk modification and population-specific panel optimization. Challenges include variant curation inconsistency across laboratories, founder variant representation in reference populations, and equitable access across socioeconomic groups. Research addresses ideal panel composition, disclosure thresholds, and long-term outcomes of screening programs.",
+          "emergingConsiderations": [
+            "Polygenic modifiers of carrier phenotypes",
+            "Deep intronic and regulatory variant detection",
+            "RNA-based confirmation of splicing variants",
+            "Population-specific panel optimization",
+            "Health economic modeling for panel expansion",
+            "Equity in screening access and uptake"
+          ]
+        }
+      },
+      "prenatalTesting": {
+        "title": "Prenatal Testing",
+        "level1": {
+          "content": "Prenatal testing checks on your baby's health during pregnancy. Screening tests tell you the chance your baby has certain conditions but are not definitive. Diagnostic tests like amniocentesis or CVS can give you a more certain answer but carry a small risk of miscarriage.",
+          "screeningVsDiagnostic": {
+            "screening": [
+              "Tells you the chance or risk",
+              "Does not give a definite answer",
+              "No risk to pregnancy",
+              "Examples: blood tests, ultrasound, cell-free DNA"
+            ],
+            "diagnostic": [
+              "Gives a more definite answer",
+              "Small risk of miscarriage (less than 1%)",
+              "Examples: amniocentesis, CVS",
+              "Recommended after positive screening"
+            ]
+          }
+        },
+        "level2": {
+          "content": "Prenatal screening includes first-trimester combined screening (nuchal translucency ultrasound with maternal serum markers), second-trimester quad screen, and cell-free DNA (cfDNA) screening. These provide risk assessment for common aneuploidies (Down syndrome, trisomy 18, trisomy 13) and, in some cases, sex chromosome differences and microdeletions. Diagnostic testing includes chorionic villus sampling (CVS, 10-13 weeks) and amniocentesis (typically 15+ weeks), which obtain fetal cells for chromosome analysis or genetic testing. Ultrasound evaluation identifies structural anomalies that may warrant further genetic evaluation.",
+          "screeningOptions": [
+            "First-trimester combined screening (11-14 weeks): NT + PAPP-A + hCG",
+            "Quad screen (15-22 weeks): AFP, hCG, estriol, inhibin A",
+            "Cell-free DNA/NIPT (after 10 weeks): screens for aneuploidies",
+            "Detailed anatomy ultrasound (18-22 weeks): structural evaluation"
+          ],
+          "diagnosticOptions": [
+            "Chorionic villus sampling (CVS): 10-13 weeks, placental cells",
+            "Amniocentesis: 15+ weeks, amniotic fluid cells",
+            "Can perform karyotype, microarray, or specific gene testing"
+          ]
+        },
+        "level3": {
+          "content": "Cell-free DNA screening analyzes placental DNA fragments in maternal blood, with detection rates >99% for trisomy 21 and lower for other aneuploidies and sex chromosome variations. Positive predictive value varies by maternal age and condition screened. False positives occur due to confined placental mosaicism, maternal copy number variants, or vanishing twins. ACOG recommends cfDNA as a screening option for all pregnancies, with diagnostic testing to confirm positive results. Chromosomal microarray is recommended for diagnostic testing when structural anomalies are identified, detecting pathogenic copy number variants in 6% of cases with normal karyotype.",
+          "cfDNAConsiderations": [
+            "Detection rates: T21 >99%, T18 ~97%, T13 ~92%",
+            "PPV depends on maternal age and baseline risk",
+            "False positives: CPM, maternal CNVs, vanishing twins",
+            "Low fetal fraction may require redraw or alternative testing",
+            "Sex chromosome screening has lower PPV",
+            "Microdeletion screening has limited validation"
+          ],
+          "diagnosticTestingIndications": [
+            "Positive screening result confirmation",
+            "Structural anomalies on ultrasound",
+            "Previous child with chromosomal abnormality",
+            "Known parental chromosome rearrangement",
+            "Patient preference for definitive information"
+          ]
+        },
+        "level4": {
+          "content": "Advanced prenatal diagnosis integrates imaging, biochemistry, and genomics. Exome sequencing for fetal anomalies detects causal variants in 30-40% of cases with normal microarray, particularly for skeletal dysplasias, multiple anomalies, and hydrops. Turnaround time challenges and variant interpretation complexity require multidisciplinary case review. Emerging applications include genome sequencing and prenatal therapy eligibility assessment. Ethical considerations include termination decisions, variants of uncertain significance, and incidental findings disclosure.",
+          "advancedDiagnostics": [
+            "Fetal exome sequencing for unexplained anomalies",
+            "Rapid aneuploidy detection (FISH, QF-PCR)",
+            "Targeted testing for family variants",
+            "SNP array for uniparental disomy detection",
+            "Methylation testing for imprinting disorders"
+          ],
+          "exomeSequencingConsiderations": [
+            "Diagnostic yield 30-40% with normal CMA",
+            "Higher yield for skeletal, cardiac, and multi-system anomalies",
+            "VUS rate 2-5%, requiring careful counseling",
+            "Secondary findings policies vary by laboratory",
+            "Parental samples improve interpretation"
+          ]
+        },
+        "level5": {
+          "content": "The future of prenatal diagnostics includes non-invasive prenatal diagnosis from cell-free fetal DNA for single-gene disorders, whole genome sequencing of cell-free DNA, and circulating fetal cell isolation. Research addresses optimal testing algorithms, health economic implications, and psychological outcomes. Ethical frameworks navigate the expanding scope of prenatal information, equity in access, and implications for disability rights. International perspectives vary significantly in approaches to prenatal screening and termination policies.",
+          "emergingTechnologies": [
+            "Non-invasive prenatal diagnosis for monogenic disorders",
+            "Whole genome sequencing from cfDNA",
+            "Circulating fetal cell isolation and analysis",
+            "Fetal cell-free RNA for tissue-specific assessment",
+            "AI-enhanced ultrasound interpretation"
+          ],
+          "ethicalConsiderations": [
+            "Expansion of testable conditions and implications",
+            "Equity in access to advanced testing",
+            "Disability rights and prenatal testing",
+            "Variant interpretation in prenatal context",
+            "International variation in screening approaches"
+          ]
+        }
+      },
+      "diagnosticTesting": {
+        "title": "Diagnostic Testing",
+        "level1": {
+          "content": "Diagnostic testing is done when someone has signs or symptoms of a genetic condition. The test looks for the specific genetic cause of the condition. Getting a diagnosis can help with treatment planning, understanding what to expect, and identifying other family members who might be at risk.",
+          "reasons": [
+            "You have symptoms suggesting a genetic condition",
+            "A family member has been diagnosed with a genetic condition",
+            "Your doctor suspects a specific condition",
+            "To confirm a clinical diagnosis"
+          ],
+          "benefits": [
+            "Explains the cause of symptoms",
+            "Guides treatment and management",
+            "Helps predict what to expect",
+            "Identifies at-risk family members",
+            "May qualify you for specific treatments or research studies"
+          ]
+        },
+        "level2": {
+          "content": "Diagnostic genetic testing is performed when an individual has signs or symptoms suggestive of a genetic condition. Test selection depends on the suspected diagnosis and may include single-gene testing, multi-gene panels, chromosomal microarray, or exome/genome sequencing. A positive result confirms the diagnosis and enables targeted management, family testing, and accurate recurrence risk counseling. Negative results may indicate an alternative diagnosis, a variant not detected by the test, or a non-genetic cause. Variant interpretation determines clinical actionability.",
+          "testSelection": [
+            "Single-gene testing: when clinical features strongly suggest one condition",
+            "Gene panels: when multiple genes can cause similar features",
+            "Chromosomal microarray: for developmental delay, autism, multiple anomalies",
+            "Exome sequencing: when other testing non-diagnostic",
+            "Genome sequencing: emerging for complex cases"
+          ],
+          "resultTypes": [
+            "Positive: pathogenic/likely pathogenic variant identified",
+            "Negative: no variant identified (does not rule out genetic cause)",
+            "VUS: uncertain significance, may be reclassified"
+          ]
+        },
+        "level3": {
+          "content": "Diagnostic testing strategies employ phenotype-driven approaches, with test selection guided by clinical features, inheritance pattern, and prior probability. Gene panels offer cost-effective analysis of conditions with genetic heterogeneity. Exome sequencing provides ~30-40% diagnostic yield for undiagnosed rare diseases. Trio analysis (proband plus parents) improves interpretation through identification of de novo variants and phase determination. Reanalysis of negative exomes yields additional diagnoses as gene-disease associations expand.",
+          "diagnosticAlgorithms": [
+            "Chromosome analysis for suspected aneuploidy",
+            "CMA for developmental delay, ASD, multiple congenital anomalies",
+            "Targeted testing for clinically recognizable syndromes",
+            "Gene panels for genetically heterogeneous conditions",
+            "Exome/genome when prior testing non-diagnostic"
+          ],
+          "exomeConsiderations": [
+            "~30-40% diagnostic yield for rare disease",
+            "Trio testing improves interpretation",
+            "Reanalysis yields additional diagnoses over time",
+            "Limitations: GC-rich regions, repeat expansions, deep intronic variants",
+            "Secondary findings policies per ACMG SF v3.0"
+          ]
+        },
+        "level4": {
+          "content": "Advanced diagnostic workflows integrate phenotyping tools (HPO terms), variant prioritization algorithms, and multidisciplinary case review. Genome sequencing addresses exome limitations including structural variants, repeat expansions, and non-coding variants. Functional studies including RNA sequencing and cell-based assays support variant classification. Undiagnosed disease programs employ iterative reanalysis, data sharing, and international collaboration. Challenges include variant interpretation in novel genes, VUS management, and achieving diagnostic equity across populations.",
+          "advancedApproaches": [
+            "Standardized phenotyping with HPO terms",
+            "Genome sequencing for comprehensive analysis",
+            "RNA sequencing for splice variant validation",
+            "Functional assays for variant classification",
+            "Long-read sequencing for structural variants",
+            "Methylation analysis for imprinting disorders"
+          ],
+          "diagnosticChallenges": [
+            "Underrepresentation of diverse populations in databases",
+            "VUS interpretation and reclassification",
+            "Novel gene-disease association validation",
+            "Penetrance and expressivity variability",
+            "Multilocus pathogenic variation (blended phenotypes)"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary diagnostic genomics integrates multi-omic data including genome, transcriptome, methylome, and metabolome. Computational approaches employ AI/ML for variant prioritization and phenotype matching. International data sharing through initiatives like Matchmaker Exchange accelerates novel gene discovery. Challenges include the diagnostic odyssey duration, health inequities, and the need for sustained reanalysis infrastructure. Research addresses the role of non-coding variation, polygenic modifiers, and somatic mosaicism in rare disease pathogenesis.",
+          "integrativeApproaches": [
+            "Multi-omic integration (genome + transcriptome + methylome)",
+            "AI/ML for variant prioritization and phenotype matching",
+            "International data sharing (Matchmaker Exchange, ClinVar)",
+            "Automated reanalysis pipelines",
+            "Somatic mosaicism detection",
+            "Non-coding variant interpretation frameworks"
+          ]
+        }
+      },
+      "predictiveTesting": {
+        "title": "Predictive and Presymptomatic Testing",
+        "level1": {
+          "content": "Predictive testing tells you if you inherited a gene change that increases your risk for a condition before you have any symptoms. This information can help with screening and prevention. However, not everyone wants to know their future risk. The decision to have predictive testing is personal.",
+          "considerations": [
+            "Can help with screening and prevention planning",
+            "May affect insurance or employment (though some protections exist)",
+            "Not everyone wants to know their future risk",
+            "Should be done with genetic counseling",
+            "Results can affect other family members"
+          ],
+          "examples": [
+            "BRCA testing for breast and ovarian cancer risk",
+            "Lynch syndrome testing for colon cancer risk",
+            "Huntington's disease testing",
+            "Hereditary heart condition testing"
+          ]
+        },
+        "level2": {
+          "content": "Predictive testing identifies pathogenic variants in asymptomatic individuals with a family history of genetic conditions. Presymptomatic testing specifically refers to conditions with high penetrance where the individual is likely to develop the condition. Pre-test counseling addresses the medical, psychological, and social implications including the impact on family members, insurance considerations, and psychological readiness. Professional guidelines recommend multi-session counseling protocols for conditions without medical intervention (e.g., Huntington's disease). Positive results enable risk-reducing strategies and enhanced surveillance.",
+          "preTestCounseling": [
+            "Review of condition and inheritance",
+            "Assessment of psychological readiness",
+            "Discussion of possible results and implications",
+            "Insurance and employment considerations",
+            "Impact on family members",
+            "Support resources identification"
+          ],
+          "managementImplications": [
+            "Enhanced surveillance protocols",
+            "Risk-reducing interventions (medications, surgery)",
+            "Reproductive planning options",
+            "Family testing cascade",
+            "Psychological support and coping"
+          ]
+        },
+        "level3": {
+          "content": "Predictive testing protocols vary by condition. HDSA guidelines for Huntington's disease recommend pre-test psychological assessment, multi-session counseling, and long-term follow-up regardless of result. NCCN guidelines for hereditary cancer syndromes provide age-based recommendations for testing and management. Reduced penetrance conditions (e.g., BRCA1/2) require counseling about risk ranges rather than certainties. Psychological outcomes research informs best practices for disclosure and follow-up. Cascade testing of at-risk relatives is a critical public health opportunity.",
+          "conditionSpecificProtocols": [
+            "Huntington's disease: HDSA predictive testing protocol",
+            "Hereditary cancer: NCCN testing and management guidelines",
+            "Cardiac conditions: specialty-specific guidelines",
+            "Neurodegenerative: disease-specific testing protocols"
+          ],
+          "psychologicalConsiderations": [
+            "Pre-test psychological assessment",
+            "Post-test follow-up regardless of result",
+            "Survivor guilt in negative results",
+            "Depression and anxiety screening",
+            "Impact on relationships and life decisions"
+          ]
+        },
+        "level4": {
+          "content": "Advanced predictive testing considerations include multi-gene panel testing with mixed penetrance results, polygenic risk scores for common diseases, and incidental predictive findings from clinical sequencing. Challenges include interpreting variants of uncertain significance in predictive context, communicating risk ranges for reduced penetrance conditions, and managing results for conditions without effective interventions. Shared decision-making frameworks help patients navigate the personal value of predictive information against potential harms.",
+          "advancedConsiderations": [
+            "Multi-gene panels with variable penetrance results",
+            "Polygenic risk score interpretation",
+            "Incidental predictive findings management",
+            "VUS in predictive testing context",
+            "Penetrance modification by family history and PRS",
+            "Pediatric predictive testing ethics"
+          ],
+          "sharedDecisionMaking": [
+            "Exploration of patient values and preferences",
+            "Discussion of risk communication preferences",
+            "Assessment of coping styles and resources",
+            "Consideration of family context and dynamics",
+            "Respect for right not to know"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary predictive genetics integrates germline variants, polygenic risk scores, and biomarkers for personalized risk estimation. Research explores gene-environment interactions, epigenetic modifications, and modifier genes that influence penetrance. Population genomic screening initiatives raise questions about optimal testing strategies for unselected populations. Ethical frameworks address the expanding scope of predictive information, the right not to know, and the balance between individual autonomy and family implications.",
+          "emergingParadigms": [
+            "Integrated risk models (monogenic + PRS + environmental)",
+            "Biomarker integration for dynamic risk assessment",
+            "Gene-environment interaction quantification",
+            "Modifier gene identification and application",
+            "Population genomic screening implementation",
+            "Direct-to-consumer predictive testing integration"
+          ]
+        }
+      },
+      "pharmacogenomicTesting": {
+        "title": "Pharmacogenomic Testing",
+        "level1": {
+          "content": "Pharmacogenomic testing looks at how your genes affect your response to medications. Your genetic makeup can influence whether a medication works well for you, what dose you need, or whether you might have side effects. This information helps your doctor choose the right medications and doses for you.",
+          "benefits": [
+            "Helps find medications that work best for you",
+            "Helps determine the right dose",
+            "Helps avoid medications that might cause side effects",
+            "Can save time in finding the right treatment"
+          ],
+          "examples": [
+            "Blood thinners like warfarin",
+            "Pain medications",
+            "Antidepressants",
+            "Some cancer treatments",
+            "Heart medications"
+          ]
+        },
+        "level2": {
+          "content": "Pharmacogenomic testing analyzes genes that affect drug metabolism, transport, and targets to guide medication selection and dosing. Key genes include CYP2D6 and CYP2C19 (drug metabolism enzymes) and drug-target genes like VKORC1 (warfarin) and SLCO1B1 (statins). Results classify individuals as normal, intermediate, poor, rapid, or ultrarapid metabolizers. Clinical implementation through electronic health record alerts and clinical decision support improves prescribing. The Clinical Pharmacogenetics Implementation Consortium (CPIC) provides evidence-based guidelines for drug-gene pairs.",
+          "keyGenes": [
+            "CYP2D6: antidepressants, opioids, tamoxifen",
+            "CYP2C19: clopidogrel, proton pump inhibitors, antidepressants",
+            "CYP2C9: warfarin, NSAIDs",
+            "VKORC1: warfarin sensitivity",
+            "SLCO1B1: statin myopathy risk",
+            "TPMT/NUDT15: thiopurine toxicity",
+            "HLA-B: drug hypersensitivity"
+          ],
+          "metabolizerPhenotypes": [
+            "Normal metabolizer: standard drug response expected",
+            "Intermediate metabolizer: may need dose adjustment",
+            "Poor metabolizer: drug accumulation risk, may need alternative",
+            "Rapid/Ultrarapid metabolizer: may need higher doses or alternatives"
+          ]
+        },
+        "level3": {
+          "content": "Pharmacogenomic implementation requires infrastructure for testing, result documentation, clinical decision support, and provider education. CPIC guidelines provide prescribing recommendations for over 100 drug-gene pairs across therapeutic areas. Preemptive testing panels provide results before prescribing decisions. Challenges include result availability at point of care, provider adoption, and payer coverage. Gene-drug interactions may be modified by concurrent medications (drug-drug-gene interactions) and other patient factors.",
+          "implementationComponents": [
+            "Laboratory testing and result reporting",
+            "EHR integration and clinical decision support",
+            "Pharmacogenomic interpretation resources",
+            "Provider and patient education",
+            "Result portability across health systems"
+          ],
+          "clinicalGuidelines": [
+            "CPIC: peer-reviewed, evidence-based guidelines",
+            "DPWG (Dutch): European prescribing recommendations",
+            "FDA: drug labeling with pharmacogenomic information",
+            "ASHP: clinical pharmacy implementation resources"
+          ]
+        },
+        "level4": {
+          "content": "Advanced pharmacogenomic practice addresses complex gene interactions, structural variants affecting enzyme activity, and population-specific alleles. Star allele nomenclature (e.g., CYP2D6*4) describes functional variant combinations, with copy number variation common for some genes. Phenoconversion from drug-drug interactions may override germline predictions. Clinical pharmacogenomicists integrate genetic, clinical, and medication data for comprehensive recommendations. Research explores polygenic influences on drug response and machine learning for prediction optimization.",
+          "advancedConsiderations": [
+            "Star allele nomenclature and haplotype phasing",
+            "Copy number variation detection (CYP2D6)",
+            "Phenoconversion from drug-drug interactions",
+            "Population-specific allele frequencies",
+            "Activity scores for quantitative phenotype prediction",
+            "Composite drug metabolism predictions"
+          ],
+          "clinicalPharmacogenomics": [
+            "Medication therapy management integration",
+            "Complex patient case consultation",
+            "Drug-drug-gene interaction assessment",
+            "Therapeutic drug monitoring integration",
+            "Provider education and support"
+          ]
+        },
+        "level5": {
+          "content": "Precision pharmacotherapy integrates germline pharmacogenomics with tumor genomics in oncology, considers epigenetic drug response modifiers, and employs multi-omic prediction models. Health system implementation research addresses adoption barriers, outcome metrics, and cost-effectiveness. Emerging applications include pharmacogenomics in mental health, pain management, and transplant immunosuppression. Future directions include pharmacoepigenomics, polygenic drug response scores, and artificial intelligence for treatment selection.",
+          "emergingApplications": [
+            "Tumor-germline integration in oncology dosing",
+            "Psychiatric pharmacogenomics implementation",
+            "Pain management and opioid pharmacogenomics",
+            "Transplant immunosuppression optimization",
+            "Pharmacoepigenomic drug response modifiers",
+            "AI/ML for multi-gene response prediction"
+          ],
+          "implementationScience": [
+            "Health system adoption strategies",
+            "Outcome measurement and value demonstration",
+            "Provider and patient behavior change",
+            "Health equity in pharmacogenomic access",
+            "Result portability and interoperability"
+          ]
+        }
+      }
+    }
+  },
+  "testingMethodsGlossary": {
+    "singleGeneTest": "Tests one specific gene for variants associated with a particular condition",
+    "genePanel": "Tests multiple genes simultaneously for conditions with genetic heterogeneity",
+    "chromosomalMicroarray": "Detects deletions and duplications across the genome (copy number variants)",
+    "exomeSequencing": "Sequences all protein-coding genes (~20,000 genes, ~1-2% of genome)",
+    "genomeSequencing": "Sequences the entire genome including non-coding regions",
+    "karyotype": "Visual analysis of chromosomes for number and large structural changes",
+    "FISH": "Fluorescent probes detect specific chromosome regions; rapid results for targeted abnormalities",
+    "methylationAnalysis": "Evaluates DNA methylation patterns for imprinting disorders and some cancer syndromes"
+  }
+}

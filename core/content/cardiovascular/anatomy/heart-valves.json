@@ -1,0 +1,428 @@
+{
+  "topic": "Heart Valves",
+  "category": "anatomy",
+  "system": "cardiovascular",
+  "contents": [
+    {
+      "id": "structure-tricuspid-valve",
+      "type": "structure",
+      "name": "Tricuspid Valve",
+      "alternateNames": ["Right atrioventricular valve", "TV"],
+      "fmaId": "FMA:7234",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The tricuspid valve is a door with three flaps between the upper and lower chambers on the right side of your heart.",
+          "explanation": "Imagine a door that only opens one way - that's what the tricuspid valve does! It has three flaps (that's why it's called TRI-cuspid) that open to let blood flow from the top chamber (right atrium) to the bottom chamber (right ventricle). When the bottom chamber squeezes to pump blood, the valve flaps close tightly so blood can't go backward. It's like a one-way gate!",
+          "keyTerms": [
+            {"term": "valve", "definition": "A part that opens and closes to control the flow of liquid"},
+            {"term": "flap", "definition": "A part that can swing or move to open and close"},
+            {"term": "cusps", "definition": "Another word for the flaps of a heart valve"}
+          ],
+          "analogies": ["The tricuspid valve works like a swinging door in a restaurant kitchen that only opens one way."],
+          "examples": ["You might hear the tricuspid valve closing when a doctor listens to your heart with a stethoscope."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The tricuspid valve is the largest heart valve, consisting of three leaflets (anterior, posterior, septal) that prevent backflow from the right ventricle to the right atrium.",
+          "explanation": "The tricuspid valve has three cusps or leaflets: the anterior (front, largest), posterior (back), and septal (attached to the septum). Each leaflet is anchored by chordae tendineae (tendinous cords) to papillary muscles in the right ventricle. During diastole (relaxation), the valve opens to allow blood to flow from RA to RV. During systole (contraction), increased RV pressure pushes the leaflets closed, and the papillary muscles contract to prevent leaflet prolapse. The annulus (ring) supporting the valve is fibrous tissue that can dilate in disease.",
+          "keyTerms": [
+            {"term": "leaflet", "definition": "A flap or cusp of a heart valve", "pronunciation": "LEEF-let"},
+            {"term": "chordae tendineae", "definition": "Tendinous cords connecting valve leaflets to papillary muscles", "pronunciation": "KOR-dee ten-DIN-ee-ee"},
+            {"term": "papillary muscles", "definition": "Muscular pillars in ventricles that anchor chordae tendineae"},
+            {"term": "annulus", "definition": "Ring of fibrous tissue supporting a valve", "pronunciation": "AN-yoo-lus"},
+            {"term": "regurgitation", "definition": "Backward leakage of blood through an incompetent valve"}
+          ],
+          "analogies": ["The papillary muscles and chordae are like guy wires holding up a tent, preventing it from blowing inside out."],
+          "examples": ["In severe tricuspid regurgitation, you can sometimes see the neck veins pulsate with each heartbeat."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The tricuspid valve apparatus includes the annulus, three leaflets, chordae tendineae, and three papillary muscles, functioning as an integrated unit whose dysfunction causes tricuspid regurgitation or stenosis.",
+          "explanation": "The tricuspid annulus is a saddle-shaped fibrous structure approximately 11-12 cm in circumference. The anterior leaflet is largest, the septal leaflet is smallest and least mobile. The commissures are named anteroseptal, anteroposterior, and posteroseptal. Three papillary muscles support the valve: anterior (largest, from moderator band), posterior (may be bifid), and septal (multiple small heads). The septal leaflet attaches directly to the septum, a feature distinguishing it from the mitral valve. Normal tricuspid annulus diameter is <21 mm/m2 indexed to BSA; dilation >40mm suggests significant regurgitation risk. The valve area is 7-9 cm2.",
+          "keyTerms": [
+            {"term": "commissure", "definition": "Junction between adjacent valve leaflets", "pronunciation": "KOM-ih-shur"},
+            {"term": "annular dilation", "definition": "Enlargement of the valve ring, common cause of functional TR"},
+            {"term": "tricuspid annular plane", "definition": "Plane of the tricuspid ring, used for TAPSE measurement"},
+            {"term": "tethering", "definition": "Restriction of leaflet motion due to displacement of papillary muscles in RV dilation"}
+          ],
+          "clinicalNotes": "Functional TR from annular dilation and RV remodeling is far more common than primary TR. Annuloplasty addresses functional TR by reducing annular size."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Tricuspid valve pathophysiology includes primary (organic) and secondary (functional) disease, with annular dilation, leaflet tethering, and RV remodeling as key mechanisms.",
+          "explanation": "Primary TR causes include rheumatic disease, endocarditis (especially in IV drug users - staph common), carcinoid heart disease (leaflet thickening/retraction from serotonin metabolites), Ebstein anomaly (apical displacement of septal leaflet), and myxomatous degeneration. Secondary/functional TR (more common, 75% of cases) results from left-sided heart disease causing pulmonary hypertension, RV dilation, annular dilation, and leaflet tethering. Atrial fibrillation causes annular dilation even without left heart disease (isolated atrial functional TR). TR severity grading uses vena contracta (severe if >7mm), EROA (severe if ≥40mm2), and regurgitant volume (severe if ≥45mL). Tricuspid stenosis is rare; rheumatic etiology most common, valve area <1.0 cm2 indicates severe stenosis.",
+          "keyTerms": [
+            {"term": "functional tricuspid regurgitation", "definition": "TR from annular dilation and leaflet tethering secondary to RV/RA remodeling"},
+            {"term": "vena contracta", "definition": "Narrowest portion of regurgitant jet, measured for severity grading"},
+            {"term": "EROA", "definition": "Effective Regurgitant Orifice Area - quantitative measure of regurgitation severity"},
+            {"term": "carcinoid heart disease", "definition": "Valve thickening and retraction from serotonin metabolites in metastatic carcinoid"},
+            {"term": "Ebstein anomaly", "definition": "Congenital apical displacement of tricuspid valve with atrialized RV portion"}
+          ],
+          "clinicalNotes": "Carcinoid heart disease characteristically causes TR and PS (right-sided valves exposed to serotonin from hepatic metastases); left-sided valves protected by lung metabolism of serotonin."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Tricuspid valve intervention encompasses surgical repair/replacement and emerging transcatheter therapies, with timing guided by symptoms, RV function, and response to left-sided disease treatment.",
+          "explanation": "Surgical TV repair (ring annuloplasty) is preferred over replacement when feasible, often performed concomitantly with left-sided valve surgery. Indications for isolated TV surgery: severe TR with symptoms refractory to medical therapy, progressive RV dilation/dysfunction. Bioprosthetic valves preferred over mechanical due to high thrombosis risk with mechanical valves in tricuspid position. Transcatheter tricuspid interventions (TTVI): edge-to-edge repair (TriClip, PASCAL), annuloplasty systems (Cardioband), valve replacement (EVOQUE). TRILUMINATE trial showed TriClip reduces TR severity. Challenges: large annulus, thin RV wall, proximity to conduction system (risk of AV block), complex RV/RA anatomy. Lead-induced TR occurs with pacemaker/ICD leads impinging on leaflets - lead extraction with TV repair may be needed.",
+          "keyTerms": [
+            {"term": "annuloplasty", "definition": "Surgical placement of ring to reduce dilated valve annulus"},
+            {"term": "transcatheter edge-to-edge repair", "definition": "Catheter-based leaflet approximation creating double orifice (TriClip, PASCAL)"},
+            {"term": "TriClip", "definition": "Transcatheter device for tricuspid leaflet approximation, similar to MitraClip"},
+            {"term": "lead-induced TR", "definition": "Tricuspid regurgitation caused by pacemaker/ICD leads interfering with valve closure"}
+          ],
+          "clinicalNotes": "Treat left-sided heart disease first - TR often improves. If TR persists >6 months after left-sided intervention with progressive RV dilation, consider TV intervention. Consider TV surgery at time of left-sided surgery if TR moderate or annulus dilated (>40mm)."
+        }
+      },
+      "media": [
+        {
+          "id": "tv-3d-model",
+          "type": "3d-model",
+          "filename": "tricuspid-valve-anatomy.glb",
+          "title": "Tricuspid Valve 3D Model",
+          "description": "Interactive model showing three leaflets, chordae, and papillary muscles"
+        }
+      ],
+      "citations": [
+        {
+          "id": "otto-valvular",
+          "type": "textbook",
+          "title": "Valvular Heart Disease: A Companion to Braunwald's Heart Disease",
+          "authors": ["Catherine M. Otto"],
+          "source": "Elsevier"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-right-atrium", "targetType": "structure", "relationship": "related"},
+        {"targetId": "structure-right-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-tricuspid-regurgitation", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "cardiac anatomy", "heart valves"],
+        "keywords": ["tricuspid valve", "heart valve", "regurgitation", "stenosis"],
+        "clinicalRelevance": "high",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-mitral-valve",
+      "type": "structure",
+      "name": "Mitral Valve",
+      "alternateNames": ["Bicuspid valve", "Left atrioventricular valve", "MV"],
+      "fmaId": "FMA:7235",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The mitral valve is a door with two flaps between the upper and lower chambers on the left side of your heart.",
+          "explanation": "The mitral valve got its name because it looks like a bishop's hat called a 'miter.' It has two flaps that open and close to let blood flow from the left atrium (top chamber) to the left ventricle (bottom chamber). This is the strongest part of your heart, so the mitral valve has to work extra hard to make sure blood flows the right direction!",
+          "keyTerms": [
+            {"term": "bicuspid", "definition": "Having two cusps or flaps"},
+            {"term": "miter", "definition": "A tall pointed hat worn by bishops that the valve is named after"},
+            {"term": "valve", "definition": "A part that opens and closes to control flow"}
+          ],
+          "analogies": ["The mitral valve is like double doors that swing open to let people through, then close to prevent anyone from going backward."],
+          "examples": ["Doctors can hear the mitral valve closing as part of the first heart sound when they listen with a stethoscope."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The mitral valve consists of two leaflets (anterior and posterior) that control blood flow from the left atrium to the left ventricle, preventing backflow during ventricular contraction.",
+          "explanation": "The mitral valve has two leaflets: the anterior (larger, attached to the aortic root) and posterior (smaller, wraps around the annulus). Both leaflets are connected by chordae tendineae to two papillary muscles in the left ventricle: the anterolateral and posteromedial. The papillary muscles contract during systole to prevent the leaflets from prolapsing into the left atrium. The valve opens during diastole when left ventricular pressure drops below left atrial pressure. The annulus is a fibrous ring that forms a 'saddle shape' in 3D. The mitral valve area is normally 4-6 cm2.",
+          "keyTerms": [
+            {"term": "anterior leaflet", "definition": "Larger mitral valve leaflet in contact with the aortic root"},
+            {"term": "posterior leaflet", "definition": "Smaller mitral valve leaflet with three scallops (P1, P2, P3)"},
+            {"term": "prolapse", "definition": "When valve leaflets bulge backward into the atrium during systole"},
+            {"term": "mitral valve area", "definition": "The effective opening of the mitral valve; normal 4-6 cm2"}
+          ],
+          "analogies": ["The two leaflets work like saloon doors, swinging open together then closing tightly."],
+          "examples": ["Mitral valve prolapse is a common condition where the leaflets bulge too far into the left atrium."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The mitral valve apparatus comprises the annulus, two leaflets with distinct scallops, chordae tendineae, and two papillary muscles, functioning as an integrated saddle-shaped structure.",
+          "explanation": "The mitral annulus is a D-shaped structure, flat posteriorly and curved anteriorly where it is continuous with the aortic root (aorto-mitral continuity). The anterior leaflet occupies one-third of the annular circumference but covers a larger area. The posterior leaflet has three scallops: P1 (lateral), P2 (middle, largest), and P3 (medial), with corresponding A1, A2, A3 regions on the anterior leaflet. The commissures are anterolateral and posteromedial. Primary chordae attach to leaflet free edges (prevent prolapse), secondary chordae attach to leaflet body (support), tertiary chordae attach to posterior leaflet base. The anterolateral papillary muscle has dual blood supply (LAD and LCX); posteromedial has single supply (RCA or LCX), making it more vulnerable to ischemic rupture.",
+          "keyTerms": [
+            {"term": "Carpentier classification", "definition": "System for describing mitral valve dysfunction: Type I (normal motion), II (excessive motion/prolapse), IIIa (restricted in systole and diastole), IIIb (restricted in systole only)"},
+            {"term": "P2 scallop", "definition": "Middle scallop of posterior leaflet, most commonly involved in prolapse"},
+            {"term": "aorto-mitral continuity", "definition": "Fibrous connection between anterior mitral leaflet and aortic root"},
+            {"term": "commissure", "definition": "Junction between anterior and posterior leaflets"}
+          ],
+          "clinicalNotes": "Posteromedial papillary muscle rupture is more common post-MI due to single blood supply (usually from RCA/PDA)."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Mitral valve pathophysiology encompasses primary (degenerative, rheumatic) and secondary (functional) disease, with mechanics determined by leaflet motion patterns, annular dynamics, and ventricular geometry.",
+          "explanation": "Primary MR: Degenerative (myxomatous) disease causes leaflet prolapse (Carpentier Type II) - Barlow disease shows diffuse billowing, fibroelastic deficiency shows localized prolapse with thin leaflets. Rheumatic disease causes commissural fusion, leaflet thickening, chordal shortening (Type IIIa restriction). Endocarditis causes perforation or vegetations. Secondary/functional MR (Type I or IIIb): Normal leaflets fail to coapt due to annular dilation, LV dilation with papillary muscle displacement and leaflet tethering. Severity grading: EROA ≥40mm2 (≥30mm2 for secondary), regurgitant volume ≥60mL (≥45mL secondary), vena contracta ≥7mm, regurgitant fraction ≥50% indicate severe MR. Mitral stenosis: Rheumatic etiology causes commissural fusion, leaflet thickening, subvalvular apparatus fusion. MVA <1.5 cm2 is moderate, <1.0 cm2 is severe. Pressure half-time method: MVA = 220/PHT.",
+          "keyTerms": [
+            {"term": "Barlow disease", "definition": "Diffuse myxomatous degeneration with billowing of both leaflets and annular dilation"},
+            {"term": "fibroelastic deficiency", "definition": "Localized prolapse from chordal rupture with thin, non-redundant leaflets"},
+            {"term": "functional mitral regurgitation", "definition": "MR with structurally normal leaflets due to LV/annular remodeling"},
+            {"term": "pressure half-time", "definition": "Time for transmitral gradient to decrease by half; used to calculate MVA (220/PHT)"},
+            {"term": "tethering", "definition": "Restriction of leaflet motion from displaced papillary muscles pulling on chordae"}
+          ],
+          "clinicalNotes": "In functional MR, LV reverse remodeling with GDMT may reduce MR severity. Mitral annular calcification (MAC) complicates intervention due to calcium distribution."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Mitral valve intervention strategies include surgical repair/replacement and transcatheter approaches (TEER, TMVR), with selection based on pathophysiology, anatomy, surgical risk, and operator expertise.",
+          "explanation": "Surgical MV repair is preferred over replacement for degenerative MR - superior survival, preserved LV function, avoids anticoagulation. Techniques: leaflet resection, neochordae (Gore-Tex), annuloplasty ring. Repair rates >95% for isolated P2 prolapse at experienced centers. For rheumatic MS, percutaneous balloon mitral valvuloplasty (PBMV) is first-line if favorable anatomy (Wilkins score ≤8). TEER (MitraClip, PASCAL) for primary MR in surgical high-risk patients (EVEREST II) and secondary MR with HFrEF (COAPT trial: MR with EROA ≥30mm2 + LVEDV <97mL/m2 = proportionate MR; MITRA-FR enrolled more dilated ventricles). Anatomic requirements for TEER: adequate leaflet length, central jet, no severe calcification, MVA >4cm2. TMVR with prosthetic valves (TENDYNE, EVOQUE) for patients not suitable for TEER. Mitral annular calcification requires specialized techniques (decalcification, transcatheter MAC valve-in-MAC, surgical MAC excision with reconstruction).",
+          "keyTerms": [
+            {"term": "TEER", "definition": "Transcatheter Edge-to-Edge Repair - MitraClip or PASCAL devices creating double-orifice valve"},
+            {"term": "COAPT criteria", "definition": "EROA ≥30mm2, regurgitant volume ≥45mL, LVEDD <7cm, LVEDV index <96mL/m2, optimized GDMT"},
+            {"term": "Wilkins score", "definition": "Echo score (0-16) assessing suitability for balloon valvuloplasty based on mobility, thickening, calcification, subvalvular involvement"},
+            {"term": "neochordae", "definition": "Artificial chordae (Gore-Tex) to replace ruptured or elongated native chordae"},
+            {"term": "proportionate vs disproportionate MR", "definition": "Concept comparing MR severity to LV dilation; COAPT favored disproportionately severe MR"}
+          ],
+          "clinicalNotes": "Consider early surgery for severe primary MR even if asymptomatic with LV dilation (LVESD ≥40mm) or dysfunction (EF≤60%), new AF, or PASP >50mmHg. COAPT inclusion: GDMT optimized, EF 20-50%, LVESD <70mm."
+        }
+      },
+      "media": [
+        {
+          "id": "mv-3d-model",
+          "type": "3d-model",
+          "filename": "mitral-valve-anatomy.glb",
+          "title": "Mitral Valve 3D Model",
+          "description": "Interactive model showing leaflet scallops, chordae, and papillary muscles"
+        }
+      ],
+      "citations": [
+        {
+          "id": "otto-valvular",
+          "type": "textbook",
+          "title": "Valvular Heart Disease",
+          "authors": ["Catherine M. Otto"],
+          "source": "Elsevier"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-atrium", "targetType": "structure", "relationship": "related"},
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-mitral-regurgitation", "targetType": "condition", "relationship": "related"},
+        {"targetId": "condition-mitral-stenosis", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "heart valves"],
+        "keywords": ["mitral valve", "bicuspid valve", "MitraClip", "mitral regurgitation", "mitral stenosis"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-aortic-valve",
+      "type": "structure",
+      "name": "Aortic Valve",
+      "alternateNames": ["AV", "Aortic semilunar valve"],
+      "fmaId": "FMA:7236",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The aortic valve is a three-flap door between your heart's main pumping chamber and the biggest blood vessel in your body.",
+          "explanation": "When the left ventricle (the strongest part of your heart) squeezes, the aortic valve opens to let blood rush into the aorta - the big highway that carries blood to your whole body. The valve has three flaps shaped like half-moons that press together tightly to prevent blood from leaking back into the heart. Every time your heart beats, this valve opens and closes!",
+          "keyTerms": [
+            {"term": "aorta", "definition": "The biggest blood vessel in your body that carries blood from your heart"},
+            {"term": "semilunar", "definition": "Shaped like a half-moon"},
+            {"term": "cusp", "definition": "One of the flaps of the valve"}
+          ],
+          "analogies": ["The aortic valve is like an exit door from a stadium - it opens to let fans out, then closes so no one can come back in."],
+          "examples": ["You can sometimes hear problems with the aortic valve as a whooshing sound called a murmur."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The aortic valve has three semilunar cusps that open during ventricular systole to allow blood ejection into the aorta and close during diastole to prevent regurgitation.",
+          "explanation": "The aortic valve sits at the junction of the left ventricle and ascending aorta. It has three pocket-shaped cusps named for the coronary arteries: right coronary cusp (gives rise to RCA), left coronary cusp (gives rise to left main), and non-coronary cusp (no artery). Above each cusp is a dilation called the sinus of Valsalva. The cusps have no chordae or papillary muscles - they open and close based on pressure differences. During systole, LV pressure exceeds aortic pressure, pushing cusps open. During diastole, aortic pressure exceeds LV pressure, filling the sinuses and pushing cusps closed. The closing of the aortic valve produces the second heart sound (S2).",
+          "keyTerms": [
+            {"term": "semilunar cusp", "definition": "Half-moon shaped flap of the aortic or pulmonary valve"},
+            {"term": "sinus of Valsalva", "definition": "Dilated portion of aorta above each cusp of the aortic valve", "pronunciation": "val-SAL-vah"},
+            {"term": "coronary ostia", "definition": "Openings of the coronary arteries in the aortic root"},
+            {"term": "S2", "definition": "Second heart sound, produced by closure of the aortic and pulmonary valves"}
+          ],
+          "analogies": ["The sinuses of Valsalva act like little pools that help the valve cusps fill and close properly."],
+          "examples": ["The coronary arteries fill during diastole when the aortic valve is closed and blood fills the sinuses."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The aortic valve complex includes the annulus, three cusps with commissures, the sinuses of Valsalva, and the sinotubular junction, with the left and right coronary ostia arising from respective sinuses.",
+          "explanation": "The aortic root is the functional unit from the LV outflow tract to sinotubular junction. The annulus is a crown-shaped virtual ring at the nadir of the cusps, not a discrete fibrous structure. The cusps attach along a semilunar hinge line to the aortic wall. Commissures are where adjacent cusps meet at the sinotubular junction. The right coronary ostium arises from the right coronary sinus (anterior), left coronary ostium from the left coronary sinus (left posterior). Non-coronary sinus is posterior and abuts the interatrial septum. Normal annulus diameter is 23-26mm (indexed 13-14mm/m2). The sinotubular junction marks the transition from sinuses to tubular ascending aorta. Normal valve area 3-4 cm2. Bicuspid aortic valve (BAV) is present in 1-2% of population.",
+          "keyTerms": [
+            {"term": "aortic root", "definition": "Functional unit from LVOT to STJ including annulus, cusps, sinuses, and coronary ostia"},
+            {"term": "sinotubular junction", "definition": "Circumferential ridge marking transition from sinuses to tubular ascending aorta", "pronunciation": "sy-no-TUBE-yoo-lar"},
+            {"term": "commissure", "definition": "Junction where two adjacent cusps meet at the sinotubular junction"},
+            {"term": "bicuspid aortic valve", "definition": "Congenital variant with two cusps instead of three, often with raphe (fusion line)"}
+          ],
+          "clinicalNotes": "BAV is associated with aortopathy - ascending aortic dilation requiring surveillance and intervention if diameter >5.5cm (or >5cm with risk factors)."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Aortic valve pathophysiology includes calcific degeneration, bicuspid valve disease, rheumatic disease, and endocarditis, with hemodynamic consequences of stenosis (pressure overload) or regurgitation (volume overload).",
+          "explanation": "Aortic stenosis (AS): Calcific/degenerative AS (age-related in trileaflet, earlier in BAV) involves lipid deposition, inflammation, and calcification similar to atherosclerosis. Rheumatic AS causes commissural fusion with associated MV disease. Severity grading: severe AS = valve area <1.0 cm2 (or <0.6 cm2/m2), mean gradient >40 mmHg, peak velocity >4 m/s. Low-flow, low-gradient AS (EF <50% with AVA <1.0 cm2 but gradient <40 mmHg) requires dobutamine stress echo to differentiate true-severe from pseudo-severe AS. Paradoxical low-flow, low-gradient (normal EF but small stroke volume index <35 mL/m2) common in elderly, hypertensive patients. Aortic regurgitation (AR): Causes include BAV, endocarditis, root dilation, rheumatic disease. Acute AR causes pulmonary edema; chronic AR allows LV adaptation with eccentric hypertrophy. Severe AR: vena contracta >6mm, holodiastolic flow reversal in descending aorta.",
+          "keyTerms": [
+            {"term": "calcific aortic stenosis", "definition": "Degenerative AS from calcification, the most common cause in developed countries"},
+            {"term": "low-flow low-gradient AS", "definition": "AVA <1.0 cm2 with mean gradient <40 mmHg; requires further workup to confirm severity"},
+            {"term": "dobutamine stress echo", "definition": "Test to differentiate true-severe from pseudo-severe AS by assessing contractile reserve"},
+            {"term": "holodiastolic flow reversal", "definition": "Doppler finding of reversed flow throughout diastole, indicating severe AR"}
+          ],
+          "clinicalNotes": "Classic AS symptoms: syncope, angina, heart failure (SAD mnemonic). Once symptomatic, prognosis is poor without intervention. Severe AS with any symptoms is Class I indication for AVR."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Aortic valve intervention includes surgical AVR (mechanical, bioprosthetic) and TAVR, with selection based on age, surgical risk, anatomy, and durability considerations.",
+          "explanation": "SAVR remains gold standard for low-surgical-risk patients. Mechanical valves offer durability but require lifelong anticoagulation (target INR 2.5-3.5 for aortic). Bioprosthetic valves avoid anticoagulation but have limited durability (15-20 years). TAVR has expanded from high-risk (PARTNER 1) to intermediate (PARTNER 2) to low-risk patients (PARTNER 3, Evolut Low Risk trials). Current recommendations: TAVR preferred age >80 or life expectancy <10 years; SAVR preferred age <50 (mechanical) or 50-65 (consider both); shared decision-making 65-80 years. TAVR requires adequate vascular access, annulus size within device range, coronary height assessment. Complications: paravalvular leak (TAVR > SAVR), conduction disturbance/pacemaker (higher with self-expanding), coronary obstruction (low coronary height, small SOV), stroke. Valve-in-valve TAVR treats failed bioprosthetic valves. AR treatment: SAVR remains standard; TAVR for AR is emerging (JenaValve, J-Valve in trials).",
+          "keyTerms": [
+            {"term": "TAVR", "definition": "Transcatheter Aortic Valve Replacement - catheter-delivered prosthetic valve"},
+            {"term": "PARTNER trials", "definition": "Landmark trials establishing TAVR efficacy across surgical risk groups"},
+            {"term": "valve-in-valve", "definition": "Transcatheter valve placed inside failing bioprosthetic surgical valve"},
+            {"term": "coronary obstruction", "definition": "Life-threatening TAVR complication from leaflet covering coronary ostium"}
+          ],
+          "clinicalNotes": "Heart Team approach for valve selection. Consider structural durability - 50-year-old may need redo operation with bioprosthetic valve. TAVR durability data at 5-8 years comparable to SAVR; longer-term data evolving."
+        }
+      },
+      "media": [
+        {
+          "id": "av-3d-model",
+          "type": "3d-model",
+          "filename": "aortic-valve-anatomy.glb",
+          "title": "Aortic Valve 3D Model",
+          "description": "Interactive model showing three cusps, sinuses of Valsalva, and coronary ostia"
+        }
+      ],
+      "citations": [
+        {
+          "id": "otto-valvular",
+          "type": "textbook",
+          "title": "Valvular Heart Disease",
+          "authors": ["Catherine M. Otto"],
+          "source": "Elsevier"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "structure-ascending-aorta", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-aortic-stenosis", "targetType": "condition", "relationship": "related"},
+        {"targetId": "condition-aortic-regurgitation", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "heart valves"],
+        "keywords": ["aortic valve", "TAVR", "aortic stenosis", "aortic regurgitation"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-pulmonary-valve",
+      "type": "structure",
+      "name": "Pulmonary Valve",
+      "alternateNames": ["PV", "Pulmonic valve", "Pulmonary semilunar valve"],
+      "fmaId": "FMA:7237",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The pulmonary valve is a three-flap door between the right ventricle and the blood vessel leading to your lungs.",
+          "explanation": "The pulmonary valve sits at the exit of the right ventricle. When the right ventricle squeezes, this valve opens and lets blood flow to your lungs through the pulmonary artery. Like the aortic valve, it has three half-moon shaped flaps. After the blood flows through, the valve closes so blood cannot leak back into the heart.",
+          "keyTerms": [
+            {"term": "pulmonary artery", "definition": "The blood vessel that carries blood from the heart to the lungs"},
+            {"term": "lungs", "definition": "The organs where blood picks up oxygen"},
+            {"term": "valve", "definition": "A one-way door that controls blood flow"}
+          ],
+          "analogies": ["The pulmonary valve is like a turnstile that only lets people go one direction - toward the lungs."],
+          "examples": ["If this valve doesn't work right, you might feel short of breath because not enough blood gets to your lungs."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The pulmonary valve is a semilunar valve with three cusps located at the junction of the right ventricle and pulmonary artery, operating at lower pressures than the aortic valve.",
+          "explanation": "The pulmonary valve has three cusps: anterior, right, and left (named by position, not coronary arteries as there are none). Like the aortic valve, it has no chordae tendineae and opens/closes passively based on pressure gradients. It operates at much lower pressures (25/10 mmHg in the pulmonary artery vs 120/80 in aorta). The valve sits within the infundibulum (outflow tract) of the right ventricle. The pulmonary trunk then divides into right and left pulmonary arteries. Closure of the pulmonary valve contributes to the second heart sound (P2 component).",
+          "keyTerms": [
+            {"term": "infundibulum", "definition": "Smooth-walled outflow tract of the right ventricle leading to the pulmonary valve"},
+            {"term": "pulmonary trunk", "definition": "Main pulmonary artery that divides into right and left pulmonary arteries"},
+            {"term": "P2", "definition": "Pulmonary component of the second heart sound"},
+            {"term": "semilunar cusps", "definition": "Half-moon shaped valve leaflets without chordae tendineae"}
+          ],
+          "analogies": ["The pulmonary valve is the gentler twin of the aortic valve, handling blood at much lower pressures."],
+          "examples": ["In pulmonary hypertension, P2 becomes louder because the valve is closing against higher pressure."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The pulmonary valve is the most anterior cardiac valve, consisting of three cusps with associated sinuses, positioned in the right ventricular outflow tract at the infundibulum-pulmonary trunk junction.",
+          "explanation": "The pulmonary valve is the most anteriorly positioned cardiac valve and the only one not in fibrous continuity with other valves. The three cusps (anterior, right, left) are slightly thinner than aortic cusps due to lower pressure loading. Small sinuses exist above each cusp but are less prominent than aortic sinuses of Valsalva. The annulus is at the level of the infundibulum, approximately 25-29mm in diameter. Unlike the aortic valve, there are no coronary artery ostia. The relationship to surrounding structures includes proximity to the aortic root (anterior and to the right) and the left atrium (posterior). Normal valve area is approximately 2.0 cm2/m2.",
+          "keyTerms": [
+            {"term": "pulmonary annulus", "definition": "Fibrous ring supporting the pulmonary valve at the RV-PA junction"},
+            {"term": "pulmonary sinuses", "definition": "Dilations above each cusp, less prominent than aortic sinuses"},
+            {"term": "RVOT", "definition": "Right Ventricular Outflow Tract - muscular region leading to pulmonary valve"}
+          ],
+          "clinicalNotes": "The anterior position makes the pulmonary valve more accessible for catheter-based interventions. Important landmark in congenital heart surgery."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Pulmonary valve pathology includes congenital stenosis, regurgitation (often post-TOF repair), and carcinoid involvement, with hemodynamic assessment requiring consideration of RV function and pulmonary pressures.",
+          "explanation": "Pulmonary stenosis (PS): Congenital (most common) with dome-shaped valve, valvular dysplasia, or supravalvular stenosis. Severe PS: peak gradient >64 mmHg (though symptoms may occur at lower gradients). Rheumatic PS is rare. Carcinoid causes PS and TR due to serotonin-induced fibrosis. Pulmonary regurgitation (PR): Most commonly from prior interventions (balloon valvuloplasty, surgical valvotomy, TOF repair). Chronic PR is well-tolerated for years but eventually causes RV dilation and dysfunction. Severe PR shows short pressure half-time (<100ms), diastolic flow reversal in branch PAs. RV dilation (indexed RVEDV >150 mL/m2 or RVESV >80 mL/m2 on CMR) indicates timing for pulmonary valve replacement. Endocarditis is rare due to low pressures but occurs in IV drug users.",
+          "keyTerms": [
+            {"term": "dome-shaped stenosis", "definition": "Congenital fusion of valve cusps creating a dome with central orifice"},
+            {"term": "Tetralogy of Fallot", "definition": "Congenital defect with VSD, overriding aorta, PS, and RV hypertrophy; repair often causes PR"},
+            {"term": "carcinoid heart disease", "definition": "Right-sided valve fibrosis from serotonin metabolites in metastatic carcinoid"},
+            {"term": "pressure half-time", "definition": "Time for gradient to decrease by half; short time indicates severe regurgitation"}
+          ],
+          "clinicalNotes": "Indications for PS intervention: symptoms with any gradient, or asymptomatic with peak gradient >64 mmHg. Balloon valvuloplasty is first-line for valvular PS."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Pulmonary valve interventions include balloon valvuloplasty for stenosis and surgical or transcatheter valve replacement for regurgitation, with timing guided by RV volumes and function on CMR.",
+          "explanation": "Balloon pulmonary valvuloplasty (BPV) is first-line for typical valvular PS with dome morphology - curative with low restenosis. Dysplastic valves (Noonan syndrome) have poorer results. Surgical valvotomy reserved for complex anatomy. For PR: Timing of pulmonary valve replacement (PVR) is guided by CMR-derived RV volumes - consider PVR before RVEDV >160 mL/m2 or RVESV >80 mL/m2 to maximize RV recovery. Transcatheter PVR options: Melody valve (bovine jugular vein valve in stent) for conduits/bioprosthetic valves, Edwards SAPIEN for larger native RVOTs. Native RVOT TPVR (without prior conduit) expanding with devices like Harmony, Alterra Adaptive Prestent. Bioprosthetic surgical valves used in pulmonary position have longer durability than in aortic position due to lower pressures. Considerations: RVOT size variability, proximity to coronary arteries (coronary compression testing required).",
+          "keyTerms": [
+            {"term": "Melody valve", "definition": "Transcatheter valve (bovine jugular vein in stent) for pulmonary position, primarily in conduits"},
+            {"term": "TPVR", "definition": "Transcatheter Pulmonary Valve Replacement"},
+            {"term": "CMR", "definition": "Cardiac Magnetic Resonance - gold standard for RV volume quantification"},
+            {"term": "Harmony valve", "definition": "Self-expanding transcatheter valve designed for native RVOT"}
+          ],
+          "clinicalNotes": "Coronary compression is a serious TPVR complication - preprocedural testing with balloon inflation and coronary angiography essential. Freedom from reintervention at 10 years post-surgical PVR approximately 70-80%."
+        }
+      },
+      "media": [
+        {
+          "id": "pv-3d-model",
+          "type": "3d-model",
+          "filename": "pulmonary-valve-anatomy.glb",
+          "title": "Pulmonary Valve 3D Model",
+          "description": "Interactive model showing three cusps and relationship to RVOT"
+        }
+      ],
+      "citations": [
+        {
+          "id": "otto-valvular",
+          "type": "textbook",
+          "title": "Valvular Heart Disease",
+          "authors": ["Catherine M. Otto"],
+          "source": "Elsevier"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-right-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "structure-pulmonary-artery", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-pulmonary-stenosis", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "heart valves", "congenital heart disease"],
+        "keywords": ["pulmonary valve", "pulmonic valve", "tetralogy of Fallot", "TPVR"],
+        "clinicalRelevance": "high",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery", "pediatrics"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    }
+  ]
+}

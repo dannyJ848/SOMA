@@ -1,7 +1,7 @@
 {
   "project": "Biological Self",
-  "branchName": "ralph/phase-3-physiology-learning",
-  "description": "Phase 3: Comprehensive Physiology Learning System - Full 3D anatomy with multi-layer visualization, RAG-powered education at 5 complexity levels, histology, cadaver cross-sections, and precise AI cueing",
+  "branchName": "ralph/phase-4-medical-simulation",
+  "description": "Phase 4: Advanced Medical Simulation Platform - Symptom-to-anatomy integration, medication-to-physiology visualization, condition simulation with disease progression, and cross-referenced medical encyclopedia",
   "userStories": [
     {
       "id": "US-009",
@@ -194,7 +194,7 @@
         "Three.js scene renders in dedicated Anatomy view",
         "WebGL2 renderer with antialiasing",
         "Three-point lighting for anatomical clarity (ambient + 2 directional)",
-        "Perspective camera with 45° FOV",
+        "Perspective camera with 45\u00b0 FOV",
         "Canvas resizes responsively with window",
         "Performance monitoring (FPS counter in dev mode)",
         "Target: 60fps on M1 Mac",
@@ -819,7 +819,7 @@
         "Map to metabolic/physiological pathways",
         "Cover: CBC, CMP, LFTs, lipids, thyroid, coagulation, cardiac markers",
         "Include lesser-known specialty labs",
-        "Bidirectional queries (lab→organ, organ→labs)",
+        "Bidirectional queries (lab\u2192organ, organ\u2192labs)",
         "Extensible schema for new tests",
         "Typecheck passes"
       ],
@@ -832,7 +832,7 @@
       "title": "Biomarker pathway visualization",
       "description": "When viewing a lab result, show the metabolic pathway with anatomical highlighting.",
       "acceptanceCriteria": [
-        "Click lab result → show pathway diagram",
+        "Click lab result \u2192 show pathway diagram",
         "Pathway steps with enzymes and locations",
         "3D model highlights involved organs",
         "Normal vs abnormal pathway states",
@@ -852,7 +852,7 @@
       "acceptanceCriteria": [
         "Intestinal lipid absorption visualization",
         "Liver lipid metabolism (synthesis, packaging)",
-        "Lipoprotein lifecycle (VLDL→LDL, HDL reverse transport)",
+        "Lipoprotein lifecycle (VLDL\u2192LDL, HDL reverse transport)",
         "Receptor-mediated uptake",
         "Atherosclerosis plaque formation animation",
         "Statin mechanism of action",
@@ -925,7 +925,7 @@
       "title": "Symptom-to-anatomy mapping",
       "description": "Map symptoms to possible anatomical sources with differential considerations.",
       "acceptanceCriteria": [
-        "Symptom → list of possible anatomical sources",
+        "Symptom \u2192 list of possible anatomical sources",
         "Weighted by likelihood/commonality",
         "Consider referred pain patterns",
         "Link to user's logged symptoms",
@@ -945,7 +945,7 @@
       "acceptanceCriteria": [
         "Input symptom or select from user's logs",
         "List differential diagnoses ranked",
-        "Click diagnosis → highlight affected anatomy",
+        "Click diagnosis \u2192 highlight affected anatomy",
         "Show pathophysiology for each differential",
         "Red flags / alarm symptoms highlighted",
         "When to seek care guidance",
@@ -963,11 +963,11 @@
       "acceptanceCriteria": [
         "Heart referred pain (arm, jaw)",
         "Gallbladder referred pain (shoulder)",
-        "Appendix referred pain (periumbilical→RLQ)",
-        "Kidney referred pain (flank→groin)",
+        "Appendix referred pain (periumbilical\u2192RLQ)",
+        "Kidney referred pain (flank\u2192groin)",
         "Dermatomal overlay on body model",
         "Explain viscerosomatic convergence mechanism",
-        "Interactive: click organ → show referral zone",
+        "Interactive: click organ \u2192 show referral zone",
         "5-level explanations",
         "Typecheck passes"
       ],
@@ -1016,7 +1016,7 @@
       "title": "Region-based chief complaints",
       "description": "For each body region, show common symptoms and their anatomical basis.",
       "acceptanceCriteria": [
-        "Select 3D region → see common chief complaints",
+        "Select 3D region \u2192 see common chief complaints",
         "Each complaint links to underlying anatomy",
         "User's past symptoms in this region shown",
         "Educational content for region-specific issues",
@@ -1152,6 +1152,643 @@
       "priority": 64,
       "passes": true,
       "notes": "Central orchestration for all AI-initiated education."
+    },
+    {
+      "id": "US-073",
+      "title": "3D Anatomy Event Bus",
+      "description": "Create event bus utility for cross-component communication with the 3D AnatomyViewer. Enable programmatic navigation, highlighting, and layer control from external components.",
+      "acceptanceCriteria": [
+        "Event bus created in src/utils/anatomy3DEventBus.ts",
+        "Events: NAVIGATE_TO_STRUCTURE, NAVIGATE_TO_REGION, SET_VIEW_PRESET, ENABLE_LAYERS, DISABLE_LAYERS",
+        "Events: HIGHLIGHT_STRUCTURES, CLEAR_HIGHLIGHTS, SET_CAMERA_POSITION, RESET_VIEW",
+        "Events: SELECT_STRUCTURE, DESELECT_STRUCTURE",
+        "Typed payloads for each event type",
+        "Subscribe/unsubscribe pattern with cleanup",
+        "Convenience functions for common operations",
+        "Typecheck passes"
+      ],
+      "priority": 65,
+      "passes": true,
+      "notes": "Foundation for all Phase 4 features. Already implemented."
+    },
+    {
+      "id": "US-074",
+      "title": "3D Navigation Hook",
+      "description": "Create React hook providing clean API for programmatic 3D viewer control. Support compound actions for symptom sources, medication targets, and condition anatomy.",
+      "acceptanceCriteria": [
+        "useAnatomy3DNavigation hook in src/hooks/",
+        "Functions: navigateToStructure, navigateToRegion, setViewPreset",
+        "Functions: enableLayers, highlightStructures, clearHighlights, resetView",
+        "Compound action: focusOnSymptomSources with likelihood-based coloring",
+        "Compound action: focusOnMedicationTargets with therapeutic/adverse coloring",
+        "Compound action: showConditionAffectedAreas with primary/secondary highlighting",
+        "Color mappings for likelihood, effect type, and involvement levels",
+        "Layer presets for body systems",
+        "Typecheck passes"
+      ],
+      "priority": 66,
+      "passes": true,
+      "notes": "Builds on event bus. Already implemented."
+    },
+    {
+      "id": "US-075",
+      "title": "AnatomyViewer Imperative API",
+      "description": "Extend AnatomyViewer with forwardRef and useImperativeHandle to expose navigation methods. Subscribe to event bus for external control.",
+      "acceptanceCriteria": [
+        "AnatomyViewer wrapped with forwardRef",
+        "Imperative API: navigateToStructure, setViewPreset, enableLayers, highlightStructures",
+        "Subscribe to event bus in useEffect",
+        "Handle all event types from anatomy3DEventBus",
+        "External highlight state separate from internal selection",
+        "Support highlight colors and pulse animation",
+        "Cleanup event subscriptions on unmount",
+        "Typecheck passes"
+      ],
+      "priority": 67,
+      "passes": true,
+      "notes": "Connects event bus to 3D viewer. Already implemented."
+    },
+    {
+      "id": "US-076",
+      "title": "Highlight Rendering with Pulse Animation",
+      "description": "Add support for external structure highlighting with custom colors and optional pulse animation effect.",
+      "acceptanceCriteria": [
+        "External highlights rendered with specified colors",
+        "Pulse animation option using emissive intensity oscillation",
+        "Multiple simultaneous highlights supported",
+        "Highlights distinguish from hover/selection states",
+        "Clear highlights by structure ID or all",
+        "Duration-based auto-clear option",
+        "Intensity levels: strong, moderate, mild",
+        "Typecheck passes"
+      ],
+      "priority": 68,
+      "passes": true,
+      "notes": "Visual feedback for symptom/medication/condition highlights. Already implemented."
+    },
+    {
+      "id": "US-077",
+      "title": "SymptomExplorer Main Component",
+      "description": "Create main SymptomExplorer component orchestrating symptom input, anatomical source display, 3D navigation, and educational content.",
+      "acceptanceCriteria": [
+        "SymptomExplorer.tsx with search/browse interface",
+        "Symptom search with autocomplete from existing mappings",
+        "Display anatomical sources with likelihood badges (common/less-common/rare/do-not-miss)",
+        "Red flag warnings prominently displayed",
+        "Click anatomical source to navigate 3D viewer",
+        "Complexity level selector for educational content",
+        "Referred pain patterns section",
+        "Integration with useAnatomy3DNavigation hook",
+        "Typecheck passes"
+      ],
+      "priority": 69,
+      "passes": true,
+      "notes": "Main symptom exploration UI. Already implemented."
+    },
+    {
+      "id": "US-078",
+      "title": "Expand Symptom-Anatomy Mappings",
+      "description": "Add 10+ new comprehensive symptom mappings with anatomical sources, red flags, and educational content at all 5 complexity levels.",
+      "acceptanceCriteria": [
+        "Fatigue mapping with thyroid, anemia, sleep disorder sources",
+        "Dizziness mapping with vestibular, cardiac, neurologic sources",
+        "Palpitations mapping with arrhythmia, anxiety, metabolic sources",
+        "Swelling/edema mapping with cardiac, renal, hepatic, venous sources",
+        "Nausea/vomiting mapping with GI, CNS, metabolic sources",
+        "Cough mapping with respiratory, cardiac, reflux sources",
+        "Numbness/tingling mapping with nerve compression, neuropathy sources",
+        "Urinary symptoms mapping with UTI, prostate, bladder sources",
+        "Vision changes mapping with ocular, neurologic, vascular sources",
+        "Each mapping has red flags, referred pain, mechanism explanations",
+        "5-level educational content for each",
+        "Typecheck passes"
+      ],
+      "priority": 70,
+      "passes": true,
+      "notes": "Expand from 6 to 16+ symptoms. Located in core/exploration/symptom-anatomy/."
+    },
+    {
+      "id": "US-079",
+      "title": "SymptomFollowUpChat Component",
+      "description": "Create AI-powered follow-up question component for symptom differential narrowing through conversational interaction.",
+      "acceptanceCriteria": [
+        "SymptomFollowUpChat.tsx component",
+        "AI generates clinically relevant follow-up questions",
+        "Questions adapt based on user responses",
+        "Conversation history displayed",
+        "Differential narrows as questions answered",
+        "Integrates with existing ai_chat_rag command",
+        "Educational explanations for why each question matters",
+        "Typecheck passes"
+      ],
+      "priority": 71,
+      "passes": true,
+      "notes": "Conversational differential narrowing."
+    },
+    {
+      "id": "US-080",
+      "title": "Medication Physiology Data Model",
+      "description": "Create comprehensive data model for medication mechanisms, body system effects, therapeutic targets, and adverse effects with 3D anatomy mapping.",
+      "acceptanceCriteria": [
+        "MedicationPhysiology interface with mechanism, targets, effects",
+        "BodySystemEffect with therapeutic/adverse/neutral classification",
+        "TherapeuticTarget with structure IDs and mechanism",
+        "AdverseEffect with severity, frequency, affected structures",
+        "MultiLevelExplanation for 5 complexity levels",
+        "DrugInteraction types for combination analysis",
+        "Highlight color mappings for visualization",
+        "Typecheck passes"
+      ],
+      "priority": 72,
+      "passes": true,
+      "notes": "Foundation for medication explorer. Create in core/medical-simulation/medications/."
+    },
+    {
+      "id": "US-081",
+      "title": "Medication Database (15+ drugs)",
+      "description": "Populate medication database with comprehensive data for common drug classes including mechanism, effects, and anatomy mapping.",
+      "acceptanceCriteria": [
+        "Cardiovascular: Lisinopril, Metoprolol, Amlodipine, Atorvastatin, Aspirin",
+        "Diabetes: Metformin, Glipizide, Semaglutide",
+        "Pain/Inflammation: Ibuprofen, Acetaminophen, Naproxen",
+        "Respiratory: Albuterol, Fluticasone",
+        "GI: Omeprazole, Famotidine",
+        "Each drug has complete mechanism explanation",
+        "Each drug has body system effects mapped to 3D structures",
+        "Each drug has therapeutic targets and adverse effects",
+        "5-level educational content for each",
+        "Typecheck passes"
+      ],
+      "priority": 73,
+      "passes": true,
+      "notes": "Start with user's medications + common drugs."
+    },
+    {
+      "id": "US-082",
+      "title": "MedicationExplorer Main Component",
+      "description": "Create main MedicationExplorer component showing drug mechanism, body system effects, and 3D anatomy visualization.",
+      "acceptanceCriteria": [
+        "MedicationExplorer.tsx component",
+        "Drug search/selection from database",
+        "Mechanism of action panel with complexity toggle",
+        "Body systems affected list with effect type badges",
+        "Click system to navigate 3D viewer",
+        "Therapeutic targets highlighted green",
+        "Adverse effect regions highlighted red",
+        "Pharmacokinetics summary (absorption, distribution, metabolism, excretion)",
+        "Integration with useAnatomy3DNavigation hook",
+        "Typecheck passes"
+      ],
+      "priority": 74,
+      "passes": true,
+      "notes": "Main medication exploration UI."
+    },
+    {
+      "id": "US-083",
+      "title": "DrugInteractionChecker Component",
+      "description": "Create component analyzing user's medication list for interactions with severity warnings and overlapping system highlighting.",
+      "acceptanceCriteria": [
+        "DrugInteractionChecker.tsx component",
+        "Loads user's current medications from dashboard data",
+        "Analyzes pairwise interactions",
+        "Severity levels: major, moderate, minor",
+        "Shows overlapping body systems affected",
+        "3D viewer highlights overlapping regions",
+        "Educational explanation of interaction mechanism",
+        "Recommendations and monitoring parameters",
+        "Typecheck passes"
+      ],
+      "priority": 75,
+      "passes": true,
+      "notes": "Safety feature for polypharmacy awareness."
+    },
+    {
+      "id": "US-084",
+      "title": "Condition Simulation Data Model",
+      "description": "Create data model for disease simulation including progression timeline, anatomical changes per phase, and treatment options.",
+      "acceptanceCriteria": [
+        "ConditionSimulation interface with pathophysiology, progression, treatments",
+        "DiseaseProgression with timeline steps and phases",
+        "ProgressionStep with anatomical changes and reversibility",
+        "ConditionAnatomyMapping with primary/secondary structures",
+        "TreatmentOption with efficacy and evidence level",
+        "Complication type with affected structures",
+        "MultiLevelExplanation for all content",
+        "Typecheck passes"
+      ],
+      "priority": 76,
+      "passes": true,
+      "notes": "Foundation for condition simulator. Create in core/medical-simulation/conditions/."
+    },
+    {
+      "id": "US-085",
+      "title": "Condition Database (15+ conditions)",
+      "description": "Populate condition database with comprehensive simulation data for major disease categories.",
+      "acceptanceCriteria": [
+        "Cardiovascular: Hypertension, Heart Failure, Atrial Fibrillation, CAD",
+        "Metabolic: Type 2 Diabetes, Hyperlipidemia, Metabolic Syndrome",
+        "Respiratory: Asthma, COPD",
+        "Musculoskeletal: Osteoarthritis, Osteoporosis, Rheumatoid Arthritis",
+        "Neurologic: Migraine, Peripheral Neuropathy",
+        "Each condition has complete pathophysiology",
+        "Each condition has progression timeline with phases",
+        "Each condition has anatomy mapping for 3D visualization",
+        "Each condition has treatment options with mechanisms",
+        "5-level educational content for each",
+        "Typecheck passes"
+      ],
+      "priority": 77,
+      "passes": true,
+      "notes": "Include user's conditions + related diseases. 15 conditions implemented including Stroke."
+    },
+    {
+      "id": "US-086",
+      "title": "ConditionSimulator Main Component",
+      "description": "Create main ConditionSimulator component with disease browser, timeline scrubber, and phase-specific 3D visualization.",
+      "acceptanceCriteria": [
+        "ConditionSimulator.tsx component",
+        "Condition search/browse by category",
+        "Interactive timeline scrubber showing disease phases",
+        "Phase descriptions with symptoms and anatomical changes",
+        "Scrubbing timeline updates 3D viewer highlighting",
+        "Reversibility indicators per phase",
+        "Pathophysiology explanation at selected complexity",
+        "Integration with useAnatomy3DNavigation hook",
+        "Typecheck passes"
+      ],
+      "priority": 78,
+      "passes": true,
+      "notes": "Main condition simulation UI."
+    },
+    {
+      "id": "US-087",
+      "title": "DiseaseTimelinePanel Component",
+      "description": "Create interactive timeline panel for disease progression with phase markers, descriptions, and 3D synchronization.",
+      "acceptanceCriteria": [
+        "DiseaseTimelinePanel.tsx component",
+        "Horizontal timeline with phase markers",
+        "Drag/click to select phase",
+        "Phase card shows: name, timeframe, symptoms, reversibility",
+        "Anatomical changes list for selected phase",
+        "Smooth transitions between phases",
+        "Callback to update 3D viewer on phase change",
+        "Typecheck passes"
+      ],
+      "priority": 79,
+      "passes": true,
+      "notes": "Core timeline interaction for disease progression."
+    },
+    {
+      "id": "US-088",
+      "title": "TreatmentOptionsPanel Component",
+      "description": "Create panel showing treatment modalities for conditions with links to medication explorer and evidence levels.",
+      "acceptanceCriteria": [
+        "TreatmentOptionsPanel.tsx component",
+        "List treatment options for selected condition",
+        "Treatment types: medication, procedure, lifestyle, monitoring",
+        "Efficacy and evidence level badges",
+        "Click medication treatment to open MedicationExplorer",
+        "Mechanism of action summary",
+        "Side effects and contraindications",
+        "Typecheck passes"
+      ],
+      "priority": 80,
+      "passes": true,
+      "notes": "Links conditions to treatment education."
+    },
+    {
+      "id": "US-089",
+      "title": "Medical Encyclopedia Data Model",
+      "description": "Create data model for cross-referenced medical encyclopedia with multi-level content, anatomy links, and semantic search support.",
+      "acceptanceCriteria": [
+        "EncyclopediaEntry interface with entryType, content, references",
+        "Entry types: condition, symptom, medication, anatomy, procedure, physiology",
+        "MultiLevelContent with patient/intermediate/professional levels",
+        "RelatedEntry with relationship type",
+        "AnatomyLink with structure ID and navigation params",
+        "Reference with citation format",
+        "Search metadata for semantic indexing",
+        "Typecheck passes"
+      ],
+      "priority": 81,
+      "passes": true,
+      "notes": "Foundation for encyclopedia. Create in core/medical-simulation/encyclopedia/."
+    },
+    {
+      "id": "US-090",
+      "title": "Encyclopedia RAG Collection",
+      "description": "Create dedicated vector collection for encyclopedia entries with semantic search and complexity filtering.",
+      "acceptanceCriteria": [
+        "New 'encyclopedia' collection in LanceDB",
+        "Embeddings generated for all encyclopedia entries",
+        "Metadata: entryType, category, complexity, related entries",
+        "Search function with entry type filtering",
+        "Complexity level filtering in retrieval",
+        "Cross-reference indexing for related entries",
+        "Batch ingestion for initial population",
+        "Typecheck passes"
+      ],
+      "priority": 82,
+      "passes": true,
+      "notes": "Extends core/rag/retrieval.ts with encyclopedia support."
+    },
+    {
+      "id": "US-091",
+      "title": "MedicalEncyclopedia Main Component",
+      "description": "Create main encyclopedia component with semantic search, category browsing, and cross-referenced entry viewing.",
+      "acceptanceCriteria": [
+        "MedicalEncyclopedia.tsx component",
+        "Search bar with debounced semantic search",
+        "Category filters: Conditions, Symptoms, Medications, Anatomy, Procedures",
+        "Search results with quick preview cards",
+        "Recent searches history",
+        "Browse by category with alphabetical listing",
+        "Click entry to open detailed view",
+        "Typecheck passes"
+      ],
+      "priority": 83,
+      "passes": true,
+      "notes": "Main encyclopedia UI."
+    },
+    {
+      "id": "US-092",
+      "title": "EncyclopediaEntry Component",
+      "description": "Create detailed entry viewer with complexity toggle, related entries sidebar, and 3D anatomy navigation.",
+      "acceptanceCriteria": [
+        "EncyclopediaEntry.tsx component",
+        "Complexity level toggle (Patient \u2192 Expert)",
+        "Content adapts to selected complexity",
+        "Related entries sidebar with relationship labels",
+        "Anatomy links with 3D navigation buttons",
+        "Citations and evidence level display",
+        "Click anatomy link navigates 3D viewer",
+        "Back to search/browse navigation",
+        "Typecheck passes"
+      ],
+      "priority": 84,
+      "passes": true,
+      "notes": "Detailed encyclopedia entry view."
+    },
+    {
+      "id": "US-093",
+      "title": "Dashboard Phase 4 Integration",
+      "description": "Add quick-access buttons to dashboard for Phase 4 features: Explore Symptom, Drug Effects, Learn Condition, Encyclopedia.",
+      "acceptanceCriteria": [
+        "Quick-access button row on dashboard",
+        "'Explore Symptom' button opens SymptomExplorer",
+        "'Drug Effects' button opens MedicationExplorer with user's meds",
+        "'Learn Condition' button opens ConditionSimulator with user's conditions",
+        "'Encyclopedia' button opens MedicalEncyclopedia",
+        "Context passed to each feature (dashboardData)",
+        "Navigation state management for returning to dashboard",
+        "Typecheck passes"
+      ],
+      "priority": 85,
+      "passes": true,
+      "notes": "Integration point for all Phase 4 features."
+    },
+    {
+      "id": "US-094",
+      "title": "Cross-Feature Navigation",
+      "description": "Enable seamless navigation between Phase 4 features: medication \u2192 condition it treats, symptom \u2192 related conditions, etc.",
+      "acceptanceCriteria": [
+        "Medication shows 'treats these conditions' links",
+        "Condition shows 'treated by these medications' links",
+        "Symptom shows 'associated with these conditions' links",
+        "Encyclopedia entries link to relevant features",
+        "Breadcrumb navigation for feature chains",
+        "Back navigation preserves state",
+        "Deep linking support for sharing specific views",
+        "Typecheck passes"
+      ],
+      "priority": 86,
+      "passes": true,
+      "notes": "Connects all Phase 4 features into cohesive experience."
+    },
+    {
+      "id": "US-095",
+      "title": "iOS Mobile Testing and Polish",
+      "description": "Test and optimize all Phase 4 features for iOS mobile experience via Tauri.",
+      "acceptanceCriteria": [
+        "All Phase 4 features work on iOS simulator",
+        "Touch interactions work correctly (tap, swipe, pinch)",
+        "3D viewer performs at 60fps on iOS",
+        "Responsive layouts for mobile screen sizes",
+        "Bottom sheet patterns for panels on mobile",
+        "Keyboard handling for search inputs",
+        "Performance profiling and optimization",
+        "Typecheck passes"
+      ],
+      "priority": 87,
+      "passes": true,
+      "notes": "Final polish for iOS deployment."
+    },
+    {
+      "id": "US-096",
+      "title": "Action Event Type System",
+      "description": "Create comprehensive TypeScript types for tracking user actions across all features in the adaptive intent prediction system.",
+      "acceptanceCriteria": [
+        "Define FeatureArea union covering all app areas",
+        "Define action types per feature (SymptomExplorerAction, MedicationExplorerAction, etc.)",
+        "Define ActionEvent interface with payload, timestamps, session linking",
+        "Define UserJourney interface for action sequences",
+        "Define InferredIntent and prediction-related types",
+        "Define event bus types for cross-component communication",
+        "Typecheck passes"
+      ],
+      "priority": 88,
+      "passes": true,
+      "notes": "Foundation for Phase 5 intent prediction. Types in core/intent-prediction/"
+    },
+    {
+      "id": "US-097",
+      "title": "Intent Event Bus",
+      "description": "Create cross-component event bus for the intent prediction system following existing anatomy3DEventBus pattern.",
+      "acceptanceCriteria": [
+        "IntentEventBus class in src/utils/intentEventBus.ts",
+        "Event types: ACTION_TRACKED, PREDICTION_READY, SHORTCUTS_UPDATED, etc.",
+        "Pub/sub with typed payloads",
+        "Event history tracking",
+        "Convenience functions for common operations",
+        "Cleanup and unsubscribe support",
+        "Typecheck passes"
+      ],
+      "priority": 89,
+      "passes": true,
+      "notes": "Follow anatomy3DEventBus.ts pattern"
+    },
+    {
+      "id": "US-098",
+      "title": "Action Tracker Hook",
+      "description": "Create useActionTracker React hook for components to track user actions.",
+      "acceptanceCriteria": [
+        "useActionTracker hook in src/hooks/",
+        "Hook accepts feature area and returns tracking functions",
+        "trackAction(type, payload) for instant actions",
+        "trackTimedAction(type) returns stop function for duration tracking",
+        "Auto-links actions with previousActionId",
+        "Session management",
+        "Typecheck passes"
+      ],
+      "priority": 90,
+      "passes": true,
+      "notes": "Main interface for components to track actions"
+    },
+    {
+      "id": "US-099",
+      "title": "Journey Store",
+      "description": "Create persistent storage for user journeys using SQLite via Tauri.",
+      "acceptanceCriteria": [
+        "SQLite table for action events",
+        "Session-based grouping",
+        "addAction(), getRecentActions(), getJourney() methods",
+        "Auto-cleanup of old sessions (30 days)",
+        "Tauri commands for CRUD",
+        "Typecheck passes"
+      ],
+      "priority": 91,
+      "passes": true,
+      "notes": "Persist journeys in core/intent-prediction/journey-store.ts"
+    },
+    {
+      "id": "US-100",
+      "title": "Prediction Engine",
+      "description": "Create the core prediction engine using DeepSeek via Ollama.",
+      "acceptanceCriteria": [
+        "Debounced prediction triggering (1.5s after last action)",
+        "Minimum 2 actions before predicting",
+        "Build prediction prompt with action sequence + health context",
+        "Parse LLM JSON response to InferredIntent",
+        "Rule-based fallback when LLM unavailable",
+        "Emit PREDICTION_READY events",
+        "Typecheck passes"
+      ],
+      "priority": 92,
+      "passes": true,
+      "notes": "Uses DeepSeek via Ollama (already default model)"
+    },
+    {
+      "id": "US-101",
+      "title": "Prediction Prompts",
+      "description": "Create optimized prompts for intent prediction.",
+      "acceptanceCriteria": [
+        "Domain knowledge rules (symptom→anatomy, medication→condition patterns)",
+        "Health profile personalization",
+        "JSON output format specification",
+        "Template functions for action sequence formatting",
+        "Typecheck passes"
+      ],
+      "priority": 93,
+      "passes": true,
+      "notes": "Prompts in core/intent-prediction/prompts.ts"
+    },
+    {
+      "id": "US-102",
+      "title": "Adaptive UI Context",
+      "description": "Create React context for managing adaptive UI state.",
+      "acceptanceCriteria": [
+        "AdaptiveUIContext provides: shortcuts, quickActions, visiblePanels, lastPrediction",
+        "Methods: showPanel, hidePanel, executeShortcut, executeQuickAction",
+        "Subscribes to PREDICTION_READY events",
+        "Pre-loading manager for predicted content",
+        "Typecheck passes"
+      ],
+      "priority": 94,
+      "passes": true,
+      "notes": "Context in src/contexts/AdaptiveUIContext.tsx"
+    },
+    {
+      "id": "US-103",
+      "title": "Shortcuts Bar Component",
+      "description": "Create UI component for displaying suggested shortcuts.",
+      "acceptanceCriteria": [
+        "ShortcutsBar.tsx with horizontal scrollable bar",
+        "Icons by type (symptom, medication, condition, anatomy, lab, chat)",
+        "Click executes navigation",
+        "Smooth fade in/out on prediction updates",
+        "Mobile responsive (44px touch targets)",
+        "Typecheck passes"
+      ],
+      "priority": 95,
+      "passes": true,
+      "notes": "Component in src/components/adaptive/"
+    },
+    {
+      "id": "US-104",
+      "title": "Integrate Action Tracking (Phase 4 Components)",
+      "description": "Add action tracking to all Phase 4 components.",
+      "acceptanceCriteria": [
+        "SymptomExplorer: track search, select, view-source, followup actions",
+        "MedicationExplorer: track search, select, view-effects, check-interaction",
+        "ConditionSimulator: track select, scrub-timeline, view-phase, view-treatment",
+        "MedicalEncyclopedia: track search, browse, view-entry",
+        "EncyclopediaEntry: track tab-change, view-anatomy, view-related",
+        "Typecheck passes"
+      ],
+      "priority": 96,
+      "passes": true,
+      "notes": "Use useActionTracker hook in each component"
+    },
+    {
+      "id": "US-105",
+      "title": "Integrate Action Tracking (Core Components)",
+      "description": "Add action tracking to dashboard, timeline, body map, and chat.",
+      "acceptanceCriteria": [
+        "Dashboard: track card clicks, quick-access button clicks",
+        "Timeline: track filter changes, event selection",
+        "BodyMap: track region selection, symptom logging",
+        "ChatView: track message sends, suggestion clicks, citation views",
+        "AnatomyViewer: bridge existing events to intent bus",
+        "Typecheck passes"
+      ],
+      "priority": 97,
+      "passes": true,
+      "notes": "Integrate with existing core components"
+    },
+    {
+      "id": "US-106",
+      "title": "Chat Journey Context Integration",
+      "description": "Pass user journey context to AI chat.",
+      "acceptanceCriteria": [
+        "JourneySummarizer to format exploration history",
+        "ChatView includes journey in system prompt",
+        "AI can reference user's exploration journey",
+        "Contextual suggestions based on journey",
+        "Typecheck passes"
+      ],
+      "priority": 98,
+      "passes": true,
+      "notes": "Enhances AI chat with journey awareness"
+    },
+    {
+      "id": "US-107",
+      "title": "Tauri Prediction Bridge",
+      "description": "Add Tauri command for intent prediction.",
+      "acceptanceCriteria": [
+        "predict_intent command in lib.rs",
+        "Calls ai-predict-bridge.ts",
+        "Request/response serialization",
+        "Error handling and timeouts",
+        "Typecheck passes"
+      ],
+      "priority": 99,
+      "passes": true,
+      "notes": "Bridge for calling prediction engine from frontend"
+    },
+    {
+      "id": "US-108",
+      "title": "Mobile Polish for Adaptive UI",
+      "description": "Ensure adaptive UI works well on mobile/iOS.",
+      "acceptanceCriteria": [
+        "Shortcuts bar is touch-friendly (44px targets)",
+        "Quick actions panel as bottom sheet on mobile",
+        "Predictions don't block UI",
+        "Battery-conscious debouncing",
+        "Typecheck passes"
+      ],
+      "priority": 100,
+      "passes": true,
+      "notes": "Final polish for mobile adaptive UI"
     }
   ]
 }

@@ -1,0 +1,15 @@
+export const settings = {
+  'settings.title': 'Settings',
+  'settings.general': 'General',
+  'settings.privacy': 'Privacy & Security',
+  'settings.notifications': 'Notifications',
+  'settings.accessibility': 'Accessibility',
+  'settings.language': 'Language',
+  'settings.data': 'Data Management',
+  'settings.about': 'About',
+  'settings.version': 'Version',
+  'settings.privacyPolicy': 'Privacy Policy',
+  'settings.terms': 'Terms of Service',
+  'settings.exportData': 'Export Health Data',
+  'settings.deleteData': 'Delete All Data',
+};

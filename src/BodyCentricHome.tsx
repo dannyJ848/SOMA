@@ -332,6 +332,8 @@ export function BodyCentricHome({
 
   return (
     <div ref={containerRef} className="body-centric-home">
+      {/* DEBUG: Check if 3D viewer is loading */}
+
       {/* Minimal viewer status indicator with toggle - small, bottom-right, unobtrusive */}
       <button
         onClick={() => setUseSimplifiedViewer(!useSimplifiedViewer)}

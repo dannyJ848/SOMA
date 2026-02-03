@@ -1,4 +1,5 @@
 import { useState, useEffect, Suspense, lazy, useCallback, useRef } from 'react';
+import { ErrorBoundary } from './errors/ErrorBoundary';
 import { invoke } from './tauri-invoke';
 import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
@@ -1209,25 +1210,60 @@ function App() {
           trackNavigation('view-change', { fromView: currentView, toView: currentView, metadata: { action: 'reset-view' } });
         }}
       >
-        <Suspense fallback={
-          <div className="container">
-            <div className="loading">Loading 3D Anatomy Viewer...</div>
-          </div>
-        }>
-          <AnatomyMainScreen
-            onNavigateToDetail={(regionId: string) => {
-              setSelectedRegionId(regionId);
-              trackNavigation('view-change', { fromView: currentView, toView: 'regional-detail' });
-              navigateWithHistory('regional-detail');
-            }}
-            onNavigateToChat={(regionId: string, regionName: string, chatContext?: import('./ai/types').AnatomyChatContext) => {
-              setChatContext(`I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`);
-              setAnatomyChatContext(chatContext ?? null);
-              trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
-              setCurrentView('chat');
-            }}
-          />
-        </Suspense>
+        <ErrorBoundary
+          fallback={({ error, reset }) => (
+            <div style={{
+              padding: '40px',
+              background: '#1a1a2e',
+              color: 'white',
+              maxWidth: '600px',
+              margin: '0 auto',
+            }}>
+              <h2 style={{ color: '#ef4444' }}>3D Viewer Error</h2>
+              <pre style={{ 
+                background: '#0a0a0f', 
+                padding: '20px', 
+                borderRadius: '8px',
+                overflow: 'auto',
+                fontSize: '12px',
+              }}>{error.message}</pre>
+              <button 
+                onClick={reset}
+                style={{
+                  padding: '12px 24px',
+                  background: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginTop: '20px',
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
+        >
+          <Suspense fallback={
+            <div className="container">
+              <div className="loading">Loading 3D Anatomy Viewer...</div>
+            </div>
+          }>
+            <AnatomyMainScreen
+              onNavigateToDetail={(regionId: string) => {
+                setSelectedRegionId(regionId);
+                trackNavigation('view-change', { fromView: currentView, toView: 'regional-detail' });
+                navigateWithHistory('regional-detail');
+              }}
+              onNavigateToChat={(regionId: string, regionName: string, chatContext?: import('./ai/types').AnatomyChatContext) => {
+                setChatContext(`I selected the ${regionName} region. Tell me about conditions, anatomy, or physiology of this area.`);
+                setAnatomyChatContext(chatContext ?? null);
+                trackNavigation('view-change', { fromView: currentView, toView: 'chat' });
+                setCurrentView('chat');
+              }}
+            />
+          </Suspense>
+        </ErrorBoundary>
 
         {/* Global Search Modal */}
         {isSearchOpen && (

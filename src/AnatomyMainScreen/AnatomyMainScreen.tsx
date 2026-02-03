@@ -1650,6 +1650,7 @@ export function AnatomyMainScreen({
       />
 
       <div className="anatomy-main-screen">
+
         {/* Spatial Breadcrumbs - shows anatomical hierarchy */}
         <SpatialBreadcrumbs
           path={anatomicalPath}
@@ -1674,6 +1675,7 @@ export function AnatomyMainScreen({
             overflow: 'hidden',
           }}
         >
+
           {/* ThreeJS Error Boundary - catches WebGL and rendering errors */}
           <ThreeJSErrorBoundary
             onError={(error) => {
@@ -1704,7 +1706,7 @@ export function AnatomyMainScreen({
               justifyContent: 'center',
               background: '#0a0a0f',
               color: 'white',
-              minHeight: '300px', // CRITICAL: iOS needs explicit min-height
+              minHeight: '300px',
             }}>
               <div style={{ textAlign: 'center' }}>
                 <div className="loading-spinner" style={{
@@ -1812,10 +1814,8 @@ export function AnatomyMainScreen({
                 }
               }}
             >
-              {/* Lighting */}
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[10, 10, 5]} intensity={0.8} />
-              <directionalLight position={[-5, 5, -5]} intensity={0.3} />
+              {/* Background color - dark blue-gray for professional look */}
+              <color attach="background" args={['#1a1a2e']} />
 
               {/* 3D Body Model - wired to display patient-specific data */}
               <PersonalizedBodyModel
@@ -2003,13 +2003,10 @@ export function AnatomyMainScreen({
         />
 
         {/*
-          Smart Layer Controller Panel - dockable, collapsible, draggable
-          Integrates with SmartPanelManager for glass morphism styling
-          and seamless 3D experience integration
+          Smart Layer Controller Panel - TEMPORARILY DISABLED FOR DEBUGGING
         */}
-        <LayerController
+        {/* <LayerController
           activeLayers={activeLayers.map(l => {
-            // Reverse map 3D model layer IDs to UI layer IDs
             const reverseMapping: Record<string, string> = {
               integumentary: 'skin',
               muscular: 'muscle',
@@ -2020,7 +2017,6 @@ export function AnatomyMainScreen({
             return reverseMapping[l] || l;
           })}
           onLayersChange={(layers) => {
-            // Map UI layer IDs to 3D model layer IDs
             const layerMapping: Record<string, string> = {
               skin: 'integumentary',
               muscle: 'muscular',
@@ -2034,7 +2030,7 @@ export function AnatomyMainScreen({
           defaultDockPosition="right"
           defaultOpen={true}
           panelId="layer-controller"
-        />
+        /> */}
 
         {/* SmartPanelManager renders all registered panels with glass morphism */}
         <SmartPanelManager className="anatomy-panel-manager" />

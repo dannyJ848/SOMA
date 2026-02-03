@@ -475,35 +475,7 @@ export function BodyCentricHome({
             padding: '0 16px',
             pointerEvents: 'auto',
           }}>
-            <button
-              onClick={() => onNavigate('anatomy')}
-              className="body-centric-action-btn"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '8px 14px',
-                background: 'rgba(59, 130, 246, 0.25)',
-                border: '1px solid rgba(59, 130, 246, 0.35)',
-                borderRadius: '20px',
-                backdropFilter: 'blur(8px)',
-                color: 'rgba(147, 197, 253, 0.95)',
-                fontSize: '12px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              aria-label="Explore Anatomy"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
-                <circle cx="12" cy="16" r="2"/>
-              </svg>
-              Explore Anatomy
-            </button>
-
-            <button
+<button
               onClick={() => onNavigate('encyclopedia')}
               className="body-centric-action-btn"
               style={{

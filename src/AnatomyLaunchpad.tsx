@@ -469,34 +469,38 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
         </p>
       </div>
 
-      {/* 3D Anatomy Viewer Placeholder */}
+      {/* Body Region Selector */}
       <div 
-        className="anatomy-viewer-container"
+        className="region-selector-container"
         style={{
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: '40px 20px',
         }}
       >
         <div style={{
           textAlign: 'center',
-          color: '#666',
+          maxWidth: '800px',
         }}>
-          <div style={{ fontSize: '4rem', marginBottom: '20px' }}>🧍</div>
-          <p>3D Anatomy Model Integration Point</p>
-          <p style={{ fontSize: '0.85rem' }}>Click on body regions to access medical information</p>
+          <h2 style={{ 
+            color: '#fff', 
+            marginBottom: '30px',
+            fontSize: '1.5rem',
+            fontWeight: 500
+          }}>
+            Select a Body Region
+          </h2>
           
           <div style={{ 
-            marginTop: '30px',
             display: 'flex',
-            gap: '20px',
+            gap: '16px',
             justifyContent: 'center',
             flexWrap: 'wrap'
           }}>
-            {/* Quick region buttons for testing */}
-            {['heart', 'lungs', 'brain', 'liver', 'kidneys'].map(regionId => {
+            {['heart', 'lungs', 'brain', 'liver', 'kidneys', 'stomach', 'skin'].map(regionId => {
               const region = ANATOMICAL_REGIONS.find(r => r.id === regionId);
               if (!region) return null;
               
@@ -507,31 +511,50 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
                   key={regionId}
                   onClick={(e) => handleRegionClick(regionId, e as any)}
                   style={{
-                    padding: '12px 20px',
+                    padding: '16px 24px',
                     background: visualState?.affected 
                       ? 'rgba(244, 67, 54, 0.2)' 
                       : 'rgba(255, 255, 255, 0.05)',
                     border: `2px solid ${visualState?.affected ? '#f44336' : 'rgba(255, 255, 255, 0.1)'}`,
-                    borderRadius: '8px',
+                    borderRadius: '12px',
                     color: '#fff',
                     cursor: 'pointer',
-                    fontSize: '0.9rem',
+                    fontSize: '1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    transition: 'all 0.2s ease',
+                    minWidth: '140px',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = visualState?.affected 
+                      ? 'rgba(244, 67, 54, 0.2)' 
+                      : 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  {region.system === 'cardiovascular' ? '🫀' :
-                   region.system === 'respiratory' ? '🫁' :
-                   region.system === 'nervous' ? '🧠' :
-                   region.system === 'digestive' ? '🍽️' :
-                   region.system === 'urinary' ? '🚽' : '🏥'} {region.name}
+                  <span style={{ fontSize: '1.5rem' }}>
+                    {region.system === 'cardiovascular' ? '🫀' :
+                     region.system === 'respiratory' ? '🫁' :
+                     region.system === 'nervous' ? '🧠' :
+                     region.system === 'digestive' ? '🍽️' :
+                     region.system === 'urinary' ? '🚽' :
+                     region.system === 'integumentary' ? '🛡️' : '🏥'}
+                  </span>
+                  <span>{region.name}</span>
                   {visualState?.affected && (
                     <span style={{ 
-                      marginLeft: '8px',
+                      marginLeft: '4px',
                       fontSize: '0.7rem',
-                      padding: '2px 6px',
+                      padding: '2px 8px',
                       background: '#f44336',
-                      borderRadius: '10px'
-                    }}
-                    >
+                      borderRadius: '10px',
+                      fontWeight: 'bold'
+                    }}>
                       {visualState.severity}
                     </span>
                   )}
@@ -539,6 +562,14 @@ export const AnatomyLaunchpad: React.FC<AnatomyLaunchpadProps> = ({
               );
             })}
           </div>
+          
+          <p style={{ 
+            color: '#888', 
+            marginTop: '30px',
+            fontSize: '0.9rem'
+          }}>
+            Click any region to access medical information, conditions, and treatments
+          </p>
         </div>
       </div>
 

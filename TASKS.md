@@ -10,49 +10,50 @@
 
 ### Tasks
 
-#### 1. PDF Parser Infrastructure
-- [ ] Create `core/import/pdf-parser.ts`
-  - [ ] Use pdf-parse for text extraction
-  - [ ] Handle multi-page documents
-  - [ ] Extract document structure (sections, headers)
-  - [ ] Error handling for corrupted PDFs
+#### 1. PDF Parser Infrastructure ✅
+- [x] Create `core/import/pdf-medical-record.ts`
+  - [x] Use pdf-parse for text extraction
+  - [x] Handle multi-page documents
+  - [x] Extract document structure (sections, headers)
+  - [x] Error handling for corrupted PDFs
 
-#### 2. LLM Extraction Pipeline
-- [ ] Create `core/import/llm-extractor.ts`
-  - [ ] Prompt template for medical record parsing
-  - [ ] JSON schema for structured output
-  - [ ] Confidence scoring per extracted field
-  - [ ] Batch processing for large documents
+#### 2. LLM Extraction Pipeline ✅
+- [x] Create extraction prompts for medical record parsing
+- [x] JSON schema for structured output
+- [x] Confidence scoring per extracted field
+- [x] Document type detection (lab, imaging, discharge, etc.)
 
-#### 3. Data Mapping
-- [ ] Create `core/import/mappers/` directory
-  - [ ] Lab result mapper
-  - [ ] Medication mapper  
-  - [ ] Condition/diagnosis mapper
-  - [ ] Vital signs mapper
-  - [ ] Imaging report mapper
+#### 3. Data Mapping ✅
+- [x] Lab result mapper
+- [x] Medication mapper  
+- [x] Condition/diagnosis mapper
+- [x] Imaging report mapper
+- [x] Vital signs mapper
 
-#### 4. Duplicate Detection
-- [ ] Create `core/import/duplicate-detector.ts`
-  - [ ] Fuzzy matching for labs (date + test name + value)
-  - [ ] Medication overlap detection
-  - [ ] User confirmation for ambiguous matches
-  - [ ] Confidence thresholds
+#### 4. Duplicate Detection ✅
+- [x] Create `core/import/duplicate-detector.ts`
+- [x] Fuzzy matching for labs (date + test name + value)
+- [x] Medication overlap detection
+- [x] Condition duplicate detection
 
-#### 5. Tauri Integration
-- [ ] Add IPC commands to `tauri-bridge.ts`
-  - [ ] `parse-pdf` command
-  - [ ] `import-extracted-data` command
-  - [ ] Progress callbacks
+#### 5. Tauri Integration (TypeScript) ✅
+- [x] `parse-medical-record-pdf` command
+- [x] `check-import-duplicates` command
+- [x] `import-medical-record` command
 
-#### 6. React UI
+#### 6. Tauri Integration (Rust) 🔄
+- [ ] Add Rust IPC commands to `src-tauri/src/lib.rs`
+- [ ] Progress callbacks for large imports
+
+#### 7. React UI 🔄
 - [ ] Create `src/ImportView.tsx`
-  - [ ] File drop zone
-  - [ ] Processing progress indicator
-  - [ ] Review extracted data before import
-  - [ ] Error display and retry
+- [ ] File drop zone
+- [ ] Processing progress indicator
+- [ ] Review extracted data before import
+- [ ] Duplicate review UI
+- [ ] Error display and retry
 
-#### 7. Testing
+#### 8. Testing
 - [ ] Test with sample PDFs
   - [ ] Lab report PDF
   - [ ] Discharge summary
@@ -62,10 +63,10 @@
 
 ## Progress Log
 
-### 2026-02-04 - Setup
-- Created ROADMAP.md with full project vision
-- Created TASKS.md for sprint tracking
-- Ready to begin P4.1.1 implementation
+### 2026-02-04 - P4.1.1 In Progress
+- **Completed:** Core extraction infrastructure, duplicate detection, TypeScript IPC bridge
+- **In Progress:** React UI component
+- **Next:** Rust IPC commands, then testing
 
 ### Next Actions (Autonomous)
 1. Begin Task 1: PDF Parser Infrastructure

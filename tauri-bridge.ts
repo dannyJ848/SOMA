@@ -8,6 +8,14 @@
 
 import { BiologicalSelfStore } from './core/biological-self/store.js';
 import type { BiologicalSelf, LabResult, Condition, Medication, Symptom, AssociatedFactor } from './core/biological-self/types.js';
+import {
+  MedicalRecordExtractor,
+  convertExtractedLabs,
+  convertExtractedMedications,
+  convertExtractedConditions,
+  detectAllDuplicates,
+} from './core/import/index.js';
+import type { MedicalRecordExtraction } from './core/import/index.js';
 
 interface HealthSummary {
   totalConditions: number;
@@ -550,6 +558,203 @@ async function main() {
             resolvedDate: newSymptom.resolvedDate?.toISOString(),
             createdAt: newSymptom.createdAt.toISOString(),
             updatedAt: newSymptom.updatedAt.toISOString(),
+          },
+        }));
+        break;
+      }
+
+      // P4.1.1: Medical Record PDF Import
+      case 'parse-medical-record-pdf': {
+        const filePath = process.argv[3];
+        if (!filePath) {
+          console.error('Missing file path');
+          process.exit(1);
+        }
+
+        const extractor = new MedicalRecordExtractor();
+        const extraction = await extractor.extractFromPDF(filePath);
+
+        console.log(JSON.stringify({
+          ...extraction,
+          // Convert dates to ISO strings for JSON serialization
+          labs: extraction.labs.map(lab => ({
+            ...lab,
+            collectedAt: lab.collectedAt,
+          })),
+          medications: extraction.medications.map(med => ({
+            ...med,
+            prescribedAt: med.prescribedAt,
+          })),
+          conditions: extraction.conditions.map(cond => ({
+            ...cond,
+            onsetDate: cond.onsetDate,
+            resolvedDate: cond.resolvedDate,
+          })),
+          imaging: extraction.imaging.map(img => ({
+            ...img,
+            date: img.date,
+          })),
+          vitals: extraction.vitals.map(vital => ({
+            ...vital,
+            measuredAt: vital.measuredAt,
+          })),
+        }));
+        break;
+      }
+
+      case 'check-import-duplicates': {
+        const extractionJson = process.argv[3];
+        if (!extractionJson) {
+          console.error('Missing extraction data');
+          process.exit(1);
+        }
+
+        const extraction = JSON.parse(extractionJson) as MedicalRecordExtraction;
+        const self = store.get();
+
+        if (!self) {
+          console.error('No database found');
+          process.exit(1);
+        }
+
+        // Convert extracted data to BiologicalSelf format
+        const defaultDate = extraction.dateOfService ? new Date(extraction.dateOfService) : new Date();
+        const labs = convertExtractedLabs(extraction.labs, defaultDate);
+        const medications = convertExtractedMedications(extraction.medications, defaultDate);
+        const conditions = convertExtractedConditions(extraction.conditions, defaultDate);
+
+        // Check for duplicates
+        const duplicates = detectAllDuplicates(
+          { labs, medications, conditions },
+          {
+            labs: self.labResults,
+            medications: self.medications,
+            conditions: self.conditions,
+          }
+        );
+
+        console.log(JSON.stringify({
+          labs: {
+            newItems: duplicates.labs.newItems.length,
+            duplicates: duplicates.labs.duplicates.length,
+            ambiguous: duplicates.labs.ambiguous.length,
+          },
+          medications: {
+            newItems: duplicates.medications.newItems.length,
+            duplicates: duplicates.medications.duplicates.length,
+            ambiguous: duplicates.medications.ambiguous.length,
+          },
+          conditions: {
+            newItems: duplicates.conditions.newItems.length,
+            duplicates: duplicates.conditions.duplicates.length,
+            ambiguous: duplicates.conditions.ambiguous.length,
+          },
+          details: duplicates,
+        }));
+        break;
+      }
+
+      case 'import-medical-record': {
+        const extractionJson = process.argv[3];
+        const importOptionsJson = process.argv[4] || '{}';
+
+        if (!extractionJson) {
+          console.error('Missing extraction data');
+          process.exit(1);
+        }
+
+        const extraction = JSON.parse(extractionJson) as MedicalRecordExtraction;
+        const importOptions = JSON.parse(importOptionsJson) as {
+          skipDuplicates?: boolean;
+          skipAmbiguous?: boolean;
+        };
+
+        let self = store.get();
+        if (!self) {
+          console.error('No database found');
+          process.exit(1);
+        }
+
+        const defaultDate = extraction.dateOfService ? new Date(extraction.dateOfService) : new Date();
+        const imported = {
+          labs: 0,
+          medications: 0,
+          conditions: 0,
+          imaging: 0,
+          skipped: {
+            labs: 0,
+            medications: 0,
+            conditions: 0,
+          },
+        };
+
+        // Convert and import labs
+        const labsToImport = convertExtractedLabs(extraction.labs, defaultDate);
+        if (importOptions.skipDuplicates) {
+          const dupCheck = detectAllDuplicates(
+            { labs: labsToImport, medications: [], conditions: [] },
+            { labs: self.labResults, medications: [], conditions: [] }
+          );
+          for (const lab of dupCheck.labs.newItems) {
+            store.addLabResult(self, lab);
+            imported.labs++;
+          }
+          imported.skipped.labs = dupCheck.labs.duplicates.length + dupCheck.labs.ambiguous.length;
+        } else {
+          for (const lab of labsToImport) {
+            store.addLabResult(self, lab);
+            imported.labs++;
+          }
+        }
+
+        // Convert and import medications
+        const medsToImport = convertExtractedMedications(extraction.medications, defaultDate);
+        if (importOptions.skipDuplicates) {
+          const dupCheck = detectAllDuplicates(
+            { labs: [], medications: medsToImport, conditions: [] },
+            { labs: [], medications: self.medications, conditions: [] }
+          );
+          for (const med of dupCheck.medications.newItems) {
+            store.addMedication(self, med);
+            imported.medications++;
+          }
+          imported.skipped.medications = dupCheck.medications.duplicates.length + dupCheck.medications.ambiguous.length;
+        } else {
+          for (const med of medsToImport) {
+            store.addMedication(self, med);
+            imported.medications++;
+          }
+        }
+
+        // Convert and import conditions
+        const condsToImport = convertExtractedConditions(extraction.conditions, defaultDate);
+        if (importOptions.skipDuplicates) {
+          const dupCheck = detectAllDuplicates(
+            { labs: [], medications: [], conditions: condsToImport },
+            { labs: [], medications: [], conditions: self.conditions }
+          );
+          for (const cond of dupCheck.conditions.newItems) {
+            store.addCondition(self, cond);
+            imported.conditions++;
+          }
+          imported.skipped.conditions = dupCheck.conditions.duplicates.length + dupCheck.conditions.ambiguous.length;
+        } else {
+          for (const cond of condsToImport) {
+            store.addCondition(self, cond);
+            imported.conditions++;
+          }
+        }
+
+        // Refresh to get latest state
+        self = store.get();
+
+        console.log(JSON.stringify({
+          success: true,
+          imported,
+          summary: {
+            totalConditions: self.conditions.length,
+            totalMedications: self.medications.length,
+            totalLabResults: self.labResults.length,
           },
         }));
         break;

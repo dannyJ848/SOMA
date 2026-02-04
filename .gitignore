@@ -1,46 +1,222 @@
+```
 # Dependencies
 node_modules/
-target/
-dist/
 
-# Build outputs
-*.app
-*.dmg
-*.exe
-*.msi
-
-# Local AI models (too large for git)
-models/*.gguf
-models/*.bin
-
-# User data (never commit)
-data/
-*.sqlite
-*.db
-
-# Environment
+# Environment variables
 .env
 .env.local
-.env.*.local
+.env.*
 
-# IDE
-.vscode/
-.idea/
+# Logs
+*.log
+
+# Temporary files
+*.tmp
 *.swp
 *.swo
 
-# OS
+# Build artifacts
+dist/
+build/
+target/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/modules/
+*.sublime-workspace
+.pytest_cache/
+.mypy_cache/
+
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+dist/
+build/
+.nyc_output
+coverage/
+.nyc_output/
+istanbul.yml
+.jscs.js
+.jscs.json
+.eslintcache
+.nodemonignore
+.tern-project
+.flowconfig
+.node-version
+.nvmrc
+grunt-cache/
+.Grunfile.coffee
+.Grunfile.js
+.npm
+.npmignore
+.travis.yml
+circle.yml
+.editorconfig
+.jshintrc
+.eslintrc
+.eslintignore
+.babelrc
+.bower.json
+.istanbul.yml
+.codeclimate.yml
+.codacy-coverage.json
+.codacy.yaml
+.codecov.yml
+.coveralls.yml
+.remarkrc
+.stylelintrc
+.stylelintignore
+.tsconfig
+.tslint.json
+.vscode/
+.idea/
+
+# Compiled and binary files
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.obj
+*.out
+*.class
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Logs
-logs/
-*.log
+# Backup files
+*~
+*.bak
+*.swp
+*.swo
 
-# Test coverage
+# Archives
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+
+# Testing
 coverage/
+htmlcov/
+.coverage
 
-# Temporary
+# IDE
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Gradle
+.gradle/
+build/
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.prof
+vendor/
+bin/
+*.out
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# C/C++
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.dylib
+*.plist
+*.dSYM/
+*.dSYM.zip
+
+# Ruby
+*.gem
+*.rbc
+.ruby-version
+.bundle/
+vendor/bundle/
+.rbenv-vars
+spec/reports/
+test/tmp/
+test/version_tmp/
 tmp/
-temp/
-.transformers-cache/
+
+# PHP
+*.phar
+.php_cs.cache
+.phpunit.result.cache
+vendor/
+composer.lock
+
+# Rust
+target/
+Cargo.lock
+
+# Julia
+julia-*/
+
+# Zig
+zig-out/
+```

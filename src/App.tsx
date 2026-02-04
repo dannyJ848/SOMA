@@ -4,6 +4,7 @@ import { BodyDiagram, getRegionName } from './BodyDiagram';
 import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
+import { ImportView } from './ImportView';
 
 // Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
@@ -88,7 +89,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'import';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -731,6 +732,25 @@ function App() {
     );
   }
 
+  // Import View
+  if (currentView === 'import') {
+    return (
+      <div className="container import-container">
+        <header className="app-header">
+          <button className="back-button" onClick={() => setCurrentView('dashboard')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+          </button>
+          <h1>Import Medical Records</h1>
+          <div className="header-spacer" />
+        </header>
+        <ImportView />
+      </div>
+    );
+  }
+
   return (
     <div className="container dashboard">
       <header className="app-header">
@@ -740,6 +760,14 @@ function App() {
           <p className="subtitle">Your health, understood</p>
         </div>
         <div className="header-actions">
+          <button className="header-action-button" onClick={() => setCurrentView('import')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            Import
+          </button>
           <button className="header-action-button" onClick={() => setCurrentView('chat')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>

@@ -7,6 +7,13 @@
 
 import type { EducationalModule, MedicalSpecialty, ModuleType } from './types.js';
 
+// Import existing modules
+import { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
+import { hypertensionModule } from './modules/cardiology/hypertension.js';
+import { cbcModule } from './modules/labs/cbc.js';
+import { headacheModule } from './modules/neurology/headache.js';
+import { gerdModule } from './modules/gastroenterology/gerd.js';
+
 // Module storage - will be populated as modules are created
 const modules: Map<string, EducationalModule> = new Map();
 

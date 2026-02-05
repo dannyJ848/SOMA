@@ -1,2 +1,8 @@
+/**
+ * Lab Trend Analysis Module
+ * 
+ * Lab trend analysis subarchitecture.
+ */
+
 export * from './types';
-export { trendAnalysisStore, type TrendAnalysisState } from './store';
+export * from './store';

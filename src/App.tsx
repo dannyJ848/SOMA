@@ -7,8 +7,9 @@ import { InsightsPanel } from './InsightsPanel';
 import { ImportView } from './ImportView';
 import { EducationView } from './EducationView';
 
-// Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
+// Lazy load components to prevent Three.js from blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
+const AnatomyLaunchpad = lazy(() => import('./AnatomyLaunchpad').then(m => ({ default: m.AnatomyLaunchpad })));
 
 interface HealthSummary {
   totalConditions: number;
@@ -90,7 +91,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'import' | 'education';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'anatomy-launchpad' | 'import' | 'education';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -636,8 +637,23 @@ function App() {
     );
   }
 
-  // 3D Anatomy View - lazy loaded with Suspense
-  if (currentView === 'anatomy') {
+  // 3D Anatomy View - Launchpad (lazy loaded)
+  if (currentView === 'anatomy-launchpad') {
+    return (
+      <Suspense fallback={
+        <div className="container">
+          <div className="loading">Loading Anatomy Explorer...</div>
+        </div>
+      }>
+        <AnatomyLaunchpad
+          onBack={() => setCurrentView('dashboard')}
+          dashboardData={dashboard}
+        />
+      </Suspense>
+    );
+  }
+
+  // 3D Anatomy View - Original (lazy loaded)
     return (
       <Suspense fallback={
         <div className="container">
@@ -791,13 +807,13 @@ function App() {
             </svg>
             Chat
           </button>
-          <button className="header-action-button" onClick={() => setCurrentView('anatomy')}>
+          <button className="header-action-button" onClick={() => setCurrentView('anatomy-launchpad')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
               <path d="M12 6v12M8 10c0-2 1.8-4 4-4s4 2 4 4"/>
               <circle cx="12" cy="16" r="2"/>
             </svg>
-            3D Anatomy
+            Anatomy
           </button>
           <button className="header-action-button" onClick={() => setCurrentView('body')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

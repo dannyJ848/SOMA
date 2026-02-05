@@ -23,6 +23,14 @@ export async function initializeEducationModules(): Promise<void> {
   const { hypertensionModule } = await import('./modules/cardiology/hypertension.js');
   registerModule(hypertensionModule);
   
+  // Specialty modules - Neurology
+  const { headacheModule } = await import('./modules/neurology/headache.js');
+  registerModule(headacheModule);
+  
+  // Specialty modules - Gastroenterology
+  const { gerdModule } = await import('./modules/gastroenterology/gerd.js');
+  registerModule(gerdModule);
+  
   // Lab interpretation modules
   const { cbcModule } = await import('./modules/labs/cbc.js');
   registerModule(cbcModule);
@@ -34,3 +42,5 @@ export async function initializeEducationModules(): Promise<void> {
 export { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
 export { hypertensionModule } from './modules/cardiology/hypertension.js';
 export { cbcModule } from './modules/labs/cbc.js';
+export { headacheModule } from './modules/neurology/headache.js';
+export { gerdModule } from './modules/gastroenterology/gerd.js';

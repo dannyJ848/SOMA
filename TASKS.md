@@ -72,8 +72,14 @@ Transform medical education from physician training into accessible, modular pat
 
 ## Phase 4 Roadmap (Beta Readiness)
 
-### P4.1 Data Import/Export System ✅ / 🔄
+### P4.1 Data Import/Export System 🔄 ACTIVE
 - [x] **P4.1.1** PDF Medical Record Import ✅
+  - [x] OCR text extraction types
+  - [x] LLM-based data extraction store
+  - [x] Rule-based extraction for conditions, meds, labs
+  - [x] Duplicate detection with Levenshtein similarity
+  - [ ] Tesseract.js OCR integration
+  - [ ] Import review UI
 - [ ] **P4.1.2** FHIR Integration 
 - [ ] **P4.1.3** Apple Health Deep Integration
 - [ ] **P4.1.4** Data Export & Portability

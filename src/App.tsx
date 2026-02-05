@@ -5,6 +5,7 @@ import { SymptomEntryForm } from './SymptomEntryForm';
 import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 import { ImportView } from './ImportView';
+import { EducationView } from './EducationView';
 
 // Lazy load the AnatomyViewer to prevent Three.js from blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
@@ -89,7 +90,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'import';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'import' | 'education';
 
 function App() {
   const [unlocked, setUnlocked] = useState(false);
@@ -751,6 +752,16 @@ function App() {
     );
   }
 
+  // Education View
+  if (currentView === 'education') {
+    return (
+      <EducationView
+        onBack={() => setCurrentView('dashboard')}
+        userData={dashboard}
+      />
+    );
+  }
+
   return (
     <div className="container dashboard">
       <header className="app-header">
@@ -760,6 +771,12 @@ function App() {
           <p className="subtitle">Your health, understood</p>
         </div>
         <div className="header-actions">
+          <button className="header-action-button" onClick={() => setCurrentView('education')}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            Learn
+          </button>
           <button className="header-action-button" onClick={() => setCurrentView('import')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>

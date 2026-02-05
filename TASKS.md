@@ -78,8 +78,8 @@ Transform medical education from physician training into accessible, modular pat
   - [x] LLM-based data extraction store
   - [x] Rule-based extraction for conditions, meds, labs
   - [x] Duplicate detection with Levenshtein similarity
+  - [x] Import review UI with drag-and-drop
   - [ ] Tesseract.js OCR integration
-  - [ ] Import review UI
 - [ ] **P4.1.2** FHIR Integration 
 - [ ] **P4.1.3** Apple Health Deep Integration
 - [ ] **P4.1.4** Data Export & Portability

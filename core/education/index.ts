@@ -66,6 +66,10 @@ export async function initializeEducationModules(): Promise<void> {
   const { asthmaModule } = await import('./modules/pulmonology/asthma-comprehensive.js');
   registerModule(asthmaModule);
   
+  // Specialty modules - Infectious Disease
+  const { covid19Module } = await import('./modules/infectious-disease/covid19-comprehensive.js');
+  registerModule(covid19Module);
+  
   console.log('[Education] Modules initialized');
 }
 
@@ -84,3 +88,4 @@ export { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
 export { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
 export { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
 export { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';
+export { covid19Module } from './modules/infectious-disease/covid19-comprehensive.js';

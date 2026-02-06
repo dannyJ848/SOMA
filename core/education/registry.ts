@@ -22,6 +22,7 @@ import { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
 import { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
 import { hypothyroidismModule } from './modules/endocrinology/hypothyroidism-comprehensive.js';
 import { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';
+import { covid19Module } from './modules/infectious-disease/covid19-comprehensive.js';
 
 // Module storage - will be populated as modules are created
 const modules: Map<string, EducationalModule> = new Map();

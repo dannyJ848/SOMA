@@ -19,6 +19,9 @@ export async function initializeEducationModules(): Promise<void> {
   const { type2DiabetesModule } = await import('./modules/endocrinology/type2-diabetes.js');
   registerModule(type2DiabetesModule);
   
+  const { hypothyroidismModule } = await import('./modules/endocrinology/hypothyroidism-comprehensive.js');
+  registerModule(hypothyroidismModule);
+  
   // Specialty modules - Cardiology
   const { hypertensionModule } = await import('./modules/cardiology/hypertension.js');
   registerModule(hypertensionModule);
@@ -59,11 +62,16 @@ export async function initializeEducationModules(): Promise<void> {
   const { acneComprehensiveModule } = await import('./modules/dermatology/acne-comprehensive.js');
   registerModule(acneComprehensiveModule);
   
+  // Specialty modules - Pulmonology
+  const { asthmaModule } = await import('./modules/pulmonology/asthma-comprehensive.js');
+  registerModule(asthmaModule);
+  
   console.log('[Education] Modules initialized');
 }
 
 // Re-export modules for direct access
 export { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
+export { hypothyroidismModule } from './modules/endocrinology/hypothyroidism-comprehensive.js';
 export { hypertensionModule } from './modules/cardiology/hypertension.js';
 export { cbcModule } from './modules/labs/cbc.js';
 export { lipidsModule } from './modules/labs/lipids.js';
@@ -75,3 +83,4 @@ export { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.j
 export { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
 export { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
 export { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
+export { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';

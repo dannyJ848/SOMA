@@ -20,6 +20,8 @@ import { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.j
 import { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
 import { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
 import { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
+import { hypothyroidismModule } from './modules/endocrinology/hypothyroidism-comprehensive.js';
+import { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';
 
 // Module storage - will be populated as modules are created
 const modules: Map<string, EducationalModule> = new Map();

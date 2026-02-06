@@ -78,6 +78,23 @@ export async function initializeEducationModules(): Promise<void> {
   const { bphModule } = await import('./modules/urology/bph-comprehensive.js');
   registerModule(bphModule);
   
+  // NEW MODULES - Comprehensive Educational Content
+  // Specialty modules - Cardiology (New)
+  const { atrialFibrillationModule } = await import('./modules/cardiology/atrial-fibrillation.js');
+  registerModule(atrialFibrillationModule);
+  
+  // Specialty modules - Endocrinology (New)
+  const { type1DiabetesModule } = await import('./modules/endocrinology/type1-diabetes.js');
+  registerModule(type1DiabetesModule);
+  
+  // Specialty modules - Neurology (New)
+  const { migraineModule } = await import('./modules/neurology/migraine-comprehensive.js');
+  registerModule(migraineModule);
+  
+  // Specialty modules - Oncology (New)
+  const { colorectalCancerScreeningModule } = await import('./modules/oncology/colorectal-cancer-screening.js');
+  registerModule(colorectalCancerScreeningModule);
+  
   console.log('[Education] Modules initialized');
 }
 
@@ -99,3 +116,9 @@ export { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';
 export { covid19Module } from './modules/infectious-disease/covid19-comprehensive.js';
 export { allergicRhinitisModule } from './modules/allergy-immunology/allergic-rhinitis-comprehensive.js';
 export { bphModule } from './modules/urology/bph-comprehensive.js';
+
+// NEW MODULES - Comprehensive Educational Content
+export { atrialFibrillationModule } from './modules/cardiology/atrial-fibrillation.js';
+export { type1DiabetesModule } from './modules/endocrinology/type1-diabetes.js';
+export { migraineModule } from './modules/neurology/migraine-comprehensive.js';
+export { colorectalCancerScreeningModule } from './modules/oncology/colorectal-cancer-screening.js';

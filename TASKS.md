@@ -80,9 +80,9 @@ Transform medical education from physician training into accessible, modular pat
   - [x] Duplicate detection with Levenshtein similarity
   - [x] Import review UI with drag-and-drop
   - [x] Tesseract.js OCR integration for scanned/image PDFs
-- [ ] **P4.1.2** FHIR Integration 
-- [ ] **P4.1.3** Apple Health Deep Integration
-- [ ] **P4.1.4** Data Export & Portability
+- [x] **P4.1.2** FHIR Integration ✅
+- [x] **P4.1.3** Apple Health Deep Integration ✅
+- [ ] **P4.1.4** Data Export & Portability (NEXT)
 
 ### P4.2 Knowledge Base Expansion 🔄 PRIORITY
 - [x] **P4.2.1** ✅ Educational module infrastructure complete

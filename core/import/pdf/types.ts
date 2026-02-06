@@ -13,6 +13,10 @@ export interface PDFImportJob {
   extractedText?: string;
   extractedData?: ExtractedMedicalData;
   errors?: string[];
+  /** OCR confidence score (0-100), only set if OCR was used */
+  ocrConfidence?: number;
+  /** Whether OCR was required for this PDF */
+  usedOCR?: boolean;
   createdAt: string;
   completedAt?: string;
 }

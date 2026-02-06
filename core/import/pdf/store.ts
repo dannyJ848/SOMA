@@ -12,6 +12,7 @@ import type {
   DuplicateItem,
   PDFImportState,
 } from './types';
+import { OCRService, type OCRResult } from '../ocr-service';
 
 class PDFImportStore {
   private state: PDFImportState = {
@@ -28,6 +29,14 @@ class PDFImportStore {
   };
 
   private listeners: Set<() => void> = new Set();
+  private ocrService: OCRService | null = null;
+
+  private getOCRService(): OCRService {
+    if (!this.ocrService) {
+      this.ocrService = new OCRService(this.state.config.ocrLanguage);
+    }
+    return this.ocrService;
+  }
 
   // Job Management
   createJob(fileName: string, fileSize: number, pages: number): PDFImportJob {
@@ -82,53 +91,93 @@ class PDFImportStore {
     this.notify();
   }
 
-  // OCR Phase
+  // OCR Phase - Uses Tesseract.js for image-based PDFs
   async performOCR(jobId: string, pdfBuffer: ArrayBuffer): Promise<string> {
-    this.updateJobStatus(jobId, 'processing', 10);
+    this.updateJobStatus(jobId, 'processing', 10, { errors: [] });
 
-    // In a real implementation, this would use Tesseract.js or similar
-    // For now, we'll simulate the OCR process
-    await this.simulateDelay(1000);
+    const ocrService = this.getOCRService();
 
-    const extractedText = this.mockOCR(pdfBuffer);
-    this.updateJobStatus(jobId, 'processing', 30, { extractedText });
+    try {
+      const result = await ocrService.extractFromPDF(pdfBuffer, {
+        language: this.state.config.ocrLanguage,
+        onProgress: (page, total, status) => {
+          const progress = 10 + Math.round((page / total) * 20); // 10-30% range for OCR phase
+          this.updateJobStatus(jobId, 'processing', progress, { pages: total });
+        },
+        renderQuality: 2,
+        confidenceThreshold: 60,
+        maxPages: 100, // Prevent runaway processing on huge files
+      });
 
-    return extractedText;
+      // Update job with extracted text and OCR metadata
+      this.updateJobStatus(jobId, 'processing', 30, {
+        extractedText: result.text,
+        usedOCR: result.usedOCR,
+        ocrConfidence: result.averageConfidence
+      });
+
+      // Report any OCR errors as warnings (don't fail the whole import)
+      if (result.errors.length > 0) {
+        console.warn(`OCR warnings for job ${jobId}:`, result.errors);
+        const job = this.state.jobs.get(jobId);
+        if (job && !job.errors) {
+          job.errors = [];
+        }
+        if (job && job.errors) {
+          job.errors.push(...result.errors.map(e => `Warning: ${e}`));
+        }
+      }
+
+      return result.text;
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'OCR processing failed';
+      this.updateJobStatus(jobId, 'error', 0, { errors: [errorMsg] });
+      throw error;
+    }
   }
 
-  private mockOCR(buffer: ArrayBuffer): string {
-    // Mock OCR output - in production, use Tesseract.js
-    return `
-PATIENT MEDICAL RECORD
-John Doe, DOB: 1980-05-15
-MRN: 12345678
+  /**
+   * Check if a PDF likely needs OCR before processing
+   * Useful for showing appropriate UI messaging
+   */
+  async detectNeedsOCR(pdfBuffer: ArrayBuffer): Promise<boolean> {
+    const ocrService = this.getOCRService();
+    return ocrService.needsOCR(pdfBuffer, 3); // Sample first 3 pages
+  }
 
-ACTIVE CONDITIONS:
-1. Type 2 Diabetes Mellitus (E11.9) - Onset: 2019-03
-2. Essential Hypertension (I10) - Onset: 2018-07
+  /**
+   * Get OCR result with detailed metadata
+   * Useful for debugging and quality assessment
+   */
+  async performOCRWithMetadata(jobId: string, pdfBuffer: ArrayBuffer): Promise<OCRResult> {
+    this.updateJobStatus(jobId, 'processing', 10);
 
-CURRENT MEDICATIONS:
-- Metformin 500mg twice daily
-- Lisinopril 10mg daily
-- Atorvastatin 20mg daily
+    const ocrService = this.getOCRService();
 
-RECENT LABS (2024-01-15):
-- Hemoglobin A1C: 7.2% (goal <7%)
-- LDL Cholesterol: 95 mg/dL
-- Creatinine: 1.1 mg/dL
-- eGFR: >60 mL/min/1.73m²
+    try {
+      const result = await ocrService.extractFromPDF(pdfBuffer, {
+        language: this.state.config.ocrLanguage,
+        onProgress: (page, total, status) => {
+          const progress = 10 + Math.round((page / total) * 20);
+          this.updateJobStatus(jobId, 'processing', progress, { pages: total });
+        },
+        renderQuality: 2,
+        confidenceThreshold: 60,
+        maxPages: 100,
+      });
 
-VITALS:
-BP: 138/82, HR: 72, Temp: 98.6°F
+      this.updateJobStatus(jobId, 'processing', 30, {
+        extractedText: result.text,
+        usedOCR: result.usedOCR,
+        ocrConfidence: result.averageConfidence
+      });
 
-ALLERGIES:
-- Penicillin (rash)
-- Sulfa drugs (hives)
-
-NOTES:
-Patient reports good medication compliance.
-Continue current regimen. Follow up in 3 months.
-    `.trim();
+      return result;
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'OCR processing failed';
+      this.updateJobStatus(jobId, 'error', 0, { errors: [errorMsg] });
+      throw error;
+    }
   }
 
   // LLM Extraction Phase
@@ -378,19 +427,19 @@ Continue current regimen. Follow up in 3 months.
         id: `cond-${Math.random().toString(36).substr(2, 9)}`,
         type: 'condition' as const,
         data: c,
-        action: c.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify',
+        action: (c.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify') as 'accept' | 'modify',
       })),
       ...extractedData.medications.map(m => ({
         id: `med-${Math.random().toString(36).substr(2, 9)}`,
         type: 'medication' as const,
         data: m,
-        action: m.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify',
+        action: (m.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify') as 'accept' | 'modify',
       })),
       ...extractedData.labResults.map(l => ({
         id: `lab-${Math.random().toString(36).substr(2, 9)}`,
         type: 'lab' as const,
         data: l,
-        action: l.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify',
+        action: (l.confidence >= this.state.config.confidenceThreshold ? 'accept' : 'modify') as 'accept' | 'modify',
       })),
     ];
 

@@ -17,6 +17,9 @@ import { labThyroidInterpretationModule } from './modules/lab-thyroid-interpreta
 import { headacheModule } from './modules/neurology/headache.js';
 import { gerdModule } from './modules/gastroenterology/gerd.js';
 import { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.js';
+import { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
+import { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
+import { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
 
 // Module storage - will be populated as modules are created
 const modules: Map<string, EducationalModule> = new Map();

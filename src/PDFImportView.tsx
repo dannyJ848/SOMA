@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { pdfImportStore, type PDFImportJob, type ExtractedMedicalData, type ReviewItem } from '../../../core/import/pdf';
+import { pdfImportStore, type PDFImportJob, type ExtractedMedicalData, type ReviewItem, type OCRResult } from '../../../core/import/pdf';
 
 interface PDFImportViewProps {
   onBack: () => void;
@@ -11,6 +11,8 @@ export function PDFImportView({ onBack, onComplete }: PDFImportViewProps) {
   const [activeJob, setActiveJob] = useState<PDFImportJob | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const [ocrProgress, setOcrProgress] = useState<{ current: number; total: number; status: string } | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     const unsubscribe = pdfImportStore.subscribe(() => {
@@ -24,6 +26,8 @@ export function PDFImportView({ onBack, onComplete }: PDFImportViewProps) {
   const handleDrop = useCallback(async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
+    setIsProcessing(true);
+    setOcrProgress(null);
     
     const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf');
     
@@ -33,15 +37,28 @@ export function PDFImportView({ onBack, onComplete }: PDFImportViewProps) {
       
       // Start extraction
       try {
-        const text = await pdfImportStore.performOCR(job.id, arrayBuffer);
-        const data = await pdfImportStore.extractMedicalData(job.id, text);
+        // Check if OCR is needed
+        const needsOCR = await pdfImportStore.detectNeedsOCR(arrayBuffer);
+        if (needsOCR) {
+          setOcrProgress({ current: 0, total: 1, status: 'Preparing OCR...' });
+        }
+
+        // Perform OCR with progress tracking
+        const text = await pdfImportStore.performOCRWithMetadata(job.id, arrayBuffer);
+        setOcrProgress(null);
+        
+        // Extract medical data
+        const data = await pdfImportStore.extractMedicalData(job.id, text.text);
         pdfImportStore.updateJobStatus(job.id, 'review', 100, { extractedData: data });
       } catch (err) {
         pdfImportStore.updateJobStatus(job.id, 'error', 0, { 
           errors: [String(err)] 
         });
+        setOcrProgress(null);
       }
     }
+    
+    setIsProcessing(false);
   }, []);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -99,6 +116,20 @@ export function PDFImportView({ onBack, onComplete }: PDFImportViewProps) {
         <p className="hint">Supported: PDF medical records, lab reports, discharge summaries</p>
       </div>
 
+      {/* OCR Progress Indicator */}
+      {isProcessing && ocrProgress && (
+        <div className="ocr-progress">
+          <div className="ocr-status">
+            <span className="ocr-icon">🔍</span>
+            <span>{ocrProgress.status}</span>
+          </div>
+          <div className="progress-bar ocr-bar">
+            <div className="progress-fill" style={{ width: `${(ocrProgress.current / Math.max(ocrProgress.total, 1)) * 100}%` }} />
+          </div>
+          <span className="ocr-page-count">Page {ocrProgress.current} of {ocrProgress.total}</span>
+        </div>
+      )}
+
       {/* Jobs List */}
       {jobs.length > 0 && (
         <div className="jobs-list">
@@ -111,8 +142,17 @@ export function PDFImportView({ onBack, onComplete }: PDFImportViewProps) {
               </div>
               
               {job.status === 'processing' || job.status === 'extracting' ? (
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: `${job.progress}%` }} />
+                <div className="progress-section">
+                  <div className="progress-bar">
+                    <div className="progress-fill" style={{ width: `${job.progress}%` }} />
+                  </div>
+                  <span className="progress-label">
+                    {job.status === 'processing' && job.progress < 30 
+                      ? '🔍 Extracting text from PDF...' 
+                      : job.status === 'extracting' 
+                        ? '🤖 Analyzing with AI...' 
+                        : 'Processing...'}
+                  </span>
                 </div>
               ) : job.status === 'review' && job.extractedData ? (
                 <ExtractedDataReview 

@@ -72,14 +72,14 @@ Transform medical education from physician training into accessible, modular pat
 
 ## Phase 4 Roadmap (Beta Readiness)
 
-### P4.1 Data Import/Export System 🔄 ACTIVE
+### P4.1 Data Import/Export System ✅ COMPLETE
 - [x] **P4.1.1** PDF Medical Record Import ✅
   - [x] OCR text extraction types
   - [x] LLM-based data extraction store
   - [x] Rule-based extraction for conditions, meds, labs
   - [x] Duplicate detection with Levenshtein similarity
   - [x] Import review UI with drag-and-drop
-  - [ ] Tesseract.js OCR integration
+  - [x] Tesseract.js OCR integration for scanned/image PDFs
 - [ ] **P4.1.2** FHIR Integration 
 - [ ] **P4.1.3** Apple Health Deep Integration
 - [ ] **P4.1.4** Data Export & Portability
@@ -120,6 +120,29 @@ Transform medical education from physician training into accessible, modular pat
 ---
 
 ## Progress Log
+
+### 2026-02-05 - P4.1.1 Complete: Tesseract.js OCR Integration
+- **✅ Tesseract.js OCR fully integrated:**
+  - New OCR service (`core/import/ocr-service.ts`) with Tesseract.js
+  - Renders PDF pages to canvas for image-based OCR
+  - Smart text detection - uses native text when available, OCR only when needed
+  - Multi-page PDF support with progress tracking
+  - OCR confidence reporting and warning system
+  - Large file handling (max 100 pages)
+- **✅ Updated PDF Import Store:**
+  - Real OCR implementation replacing mock
+  - `detectNeedsOCR()` for pre-checking PDF type
+  - `performOCRWithMetadata()` for detailed results
+  - OCR metadata in job (confidence, usedOCR flag)
+- **✅ Updated PDFImportView UI:**
+  - OCR progress indicator with page count
+  - Status messages for different processing phases
+  - Better error handling and display
+- **✅ Dependencies:**
+  - `tesseract.js` - OCR engine
+  - `pdfjs-dist` - PDF rendering to images
+- **Lines of code:** 320+ lines in ocr-service.ts, 80+ lines updated in store.ts
+- **Status:** PDF Medical Record Import (P4.1.1) is now production-ready
 
 ### 2026-02-04 - MAJOR MILESTONE: Education System Complete
 - **✅ Complete educational system delivered:**

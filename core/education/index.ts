@@ -47,6 +47,18 @@ export async function initializeEducationModules(): Promise<void> {
   const { labThyroidInterpretationModule } = await import('./modules/lab-thyroid-interpretation.js');
   registerModule(labThyroidInterpretationModule);
   
+  // Specialty modules - Nephrology
+  const { ckdComprehensiveModule } = await import('./modules/nephrology/ckd-comprehensive.js');
+  registerModule(ckdComprehensiveModule);
+  
+  // Specialty modules - Hematology
+  const { anemiaModule } = await import('./modules/hematology/anemia-comprehensive.js');
+  registerModule(anemiaModule);
+  
+  // Specialty modules - Dermatology
+  const { acneComprehensiveModule } = await import('./modules/dermatology/acne-comprehensive.js');
+  registerModule(acneComprehensiveModule);
+  
   console.log('[Education] Modules initialized');
 }
 
@@ -60,3 +72,6 @@ export { labThyroidInterpretationModule } from './modules/lab-thyroid-interpreta
 export { headacheModule } from './modules/neurology/headache.js';
 export { gerdModule } from './modules/gastroenterology/gerd.js';
 export { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.js';
+export { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
+export { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
+export { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';

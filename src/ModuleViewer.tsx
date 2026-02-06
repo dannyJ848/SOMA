@@ -6,8 +6,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import type { EducationalModule, ComplexityLevel, QuizResult } from '../../../core/education/types.js';
-import { COMPLEXITY_LEVELS } from '../../../core/education/types.js';
+import type { EducationalModule, ComplexityLevel, QuizResult } from '../../core/education/types';
+import { COMPLEXITY_LEVELS } from '../../core/education/types';
 
 interface ModuleViewerProps {
   module: EducationalModule;
@@ -207,7 +207,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
                   <p className="result-answer">
                     Your answer: {question.options?.[result.userAnswer as number] || result.userAnswer}
                   </p>
-                  <!result.correct && question.options && (
+                  {!result.correct && question.options && (
                     <p className="result-correct">
                       Correct: {question.options[question.correctAnswer as number]}
                     </p>

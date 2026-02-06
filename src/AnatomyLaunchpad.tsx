@@ -5,7 +5,7 @@ import { SelectionManager } from './SelectionManager';
 import { StructureInfoPanel } from './StructureInfoPanel';
 import { AnatomyChatPanel } from './AnatomyChatPanel';
 import { type DashboardData } from './App';
-import { ComplexityLevel } from './ComplexityLevel';
+import { type ComplexityLevel } from './ComplexityLevel';
 import { ContentViewer } from './ContentViewer';
 
 // Lazy load the actual 3D viewer to prevent blocking

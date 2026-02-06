@@ -654,6 +654,7 @@ function App() {
   }
 
   // 3D Anatomy View - Original (lazy loaded)
+  if (currentView === 'anatomy') {
     return (
       <Suspense fallback={
         <div className="container">

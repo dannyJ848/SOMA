@@ -47,19 +47,19 @@ export const type2DiabetesModule: EducationalModule = {
   content: {
     // Level 1: Foundation (8th grade)
     1: {
-      summary: `Your body needs sugar (glucose) for energy. Normally, a key called "insulin" opens doors on your cells to let sugar in. In Type 2 diabetes, those doors get sticky and don't open as well. Also, your body doesn't make enough keys. So sugar builds up in your blood instead of getting into cells where it's needed.`,
+      summary: `Your body needs sugar (glucose) for energy. Normally, a key called "insulin" opens doors on your cells to let sugar in. In Type 2 diabetes, those doors get sticky and do not open as well. Also, your body does not make enough keys. So sugar builds up in your blood instead of getting into cells where it is needed.`,
       
       analogy: `Think of insulin like a key to your house, and your cells are the rooms inside. Type 2 diabetes is like two problems happening at once:
 
-1. The locks get rusty (insulin resistance) - even with the key, it's hard to open the door
-2. The key factory starts making fewer keys (beta cell decline) - you don't have enough keys for all the doors
+1. The locks get rusty (insulin resistance) - even with the key, it is hard to open the door
+2. The key factory starts making fewer keys (beta cell decline) - you do not have enough keys for all the doors
 
-Either way, you can't get inside easily, and things pile up outside (sugar in your blood).`,
+Either way, you cannot get inside easily, and things pile up outside (sugar in your blood).`,
       
       keyPoints: [
         'Your cells need sugar for energy, like a car needs gas',
         'Insulin is like a key that opens cell doors to let sugar in',
-        'In Type 2 diabetes, cells resist insulin - the key doesn't work as well',
+        'In Type 2 diabetes, cells resist insulin - the key does not work as well',
         'The pancreas also makes less insulin over time',
         'Sugar stays in blood instead of entering cells - this causes problems',
       ],
@@ -127,7 +127,7 @@ Either way, you can't get inside easily, and things pile up outside (sugar in yo
         },
         {
           name: 'Ectopic Lipid Storage',
-          description: 'Fat stored in organs where it doesn't belong (liver, pancreas, muscle) interferes with insulin signaling and beta-cell function.',
+          description: 'Fat stored in organs where it does not belong (liver, pancreas, muscle) interferes with insulin signaling and beta-cell function.',
         },
       ],
       

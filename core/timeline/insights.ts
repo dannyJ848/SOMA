@@ -449,8 +449,8 @@ function analyzeSeasonalPatterns(events: TimelineEvent[]): TimelineInsight[] {
   }
   
   // Find symptoms that occur disproportionately in certain months
-  for (const [month, symptoms] of symptomsByMonth) {
-    for (const [symptomName, count] of symptoms) {
+  for (const [month, symptoms] of Array.from(symptomsByMonth)) {
+    for (const [symptomName, count] of Array.from(symptoms)) {
       if (count >= 2) {
         const monthName = new Date(2000, month, 1).toLocaleString('default', { month: 'long' });
         insights.push({

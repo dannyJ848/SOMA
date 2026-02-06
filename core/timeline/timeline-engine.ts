@@ -66,7 +66,7 @@ export function conditionToTimelineEvents(condition: UserCondition): TimelineEve
         icdCode: condition.icdCode,
         severity: condition.severity,
         status: condition.status,
-        relatedSymptoms: condition.relatedSymptoms,
+        relatedSymptoms: condition.relatedSystems,
       } as MedicalEventData,
       severity: condition.severity === 'severe' ? 'high' : condition.severity === 'moderate' ? 'moderate' : 'low',
       status: condition.status === 'active' ? 'active' : condition.status === 'chronic' ? 'ongoing' : 'resolved',
@@ -474,7 +474,7 @@ export function clusterEvents(
       }
       
       const severityClusters: EventCluster[] = [];
-      for (const [severity, groupEvents] of severityGroups) {
+      for (const [severity, groupEvents] of Array.from(severityGroups)) {
         if (groupEvents.length > 1 && severity !== 'info') {
           severityClusters.push(createCluster(groupEvents));
         }

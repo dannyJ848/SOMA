@@ -1,0 +1,587 @@
+/**
+ * i18n-styles.css - Styles for Internationalization Components
+ * 
+ * Styles for language selector, translation progress indicators,
+ * and contribute translations CTA.
+ */
+
+/* ==========================================================================
+   LANGUAGE SELECTOR - DROPDOWN VARIANT
+   ========================================================================== */
+
+.language-selector-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.language-selector-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-secondary, #f5f5f5);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #333);
+  transition: all 0.2s ease;
+}
+
+.language-selector-toggle:hover {
+  background: var(--bg-hover, #e8e8e8);
+  border-color: var(--border-hover, #bbb);
+}
+
+.language-selector-toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.language-selector-toggle .flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.language-selector-toggle .current-language {
+  flex: 1;
+}
+
+.language-selector-toggle .chevron {
+  transition: transform 0.2s ease;
+}
+
+.language-selector-toggle .chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.language-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  padding: 4px;
+  background: var(--bg-primary, white);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.language-option {
+  margin: 0;
+  padding: 0;
+}
+
+.language-option.selected {
+  background: var(--bg-selected, #e3f2fd);
+  border-radius: 4px;
+}
+
+.language-option-btn {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.language-option-btn:hover {
+  background: var(--bg-hover, #f0f0f0);
+}
+
+.language-option-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-option-content .flag {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.language-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.language-info .native-name {
+  font-weight: 500;
+  color: var(--text-primary, #333);
+}
+
+.language-info .english-name {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+/* Loading Overlay */
+.language-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+
+/* ==========================================================================
+   LANGUAGE SELECTOR - BUTTONS VARIANT
+   ========================================================================== */
+
+.language-selector-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg-secondary, #f5f5f5);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.language-btn:hover:not(:disabled) {
+  background: var(--bg-hover, #e8e8e8);
+  border-color: var(--border-hover, #bbb);
+}
+
+.language-btn.active {
+  background: var(--bg-selected, #1976d2);
+  border-color: var(--bg-selected, #1976d2);
+  color: white;
+}
+
+.language-btn:disabled:not(.active) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.language-btn .flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.language-btn .native-name {
+  font-weight: 500;
+}
+
+.language-btn .completion-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.language-btn.active .completion-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.language-selector-buttons .loading-indicator {
+  align-self: center;
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+
+/* ==========================================================================
+   LANGUAGE SELECTOR - MINIMAL VARIANT
+   ========================================================================== */
+
+.language-selector-minimal {
+  padding: 6px 24px 6px 10px;
+  font-size: 14px;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 6px;
+  background: var(--bg-primary, white);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.language-selector-minimal:focus {
+  outline: none;
+  border-color: var(--focus-color, #1976d2);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+/* ==========================================================================
+   TRANSLATION PROGRESS INDICATOR
+   ========================================================================== */
+
+.translation-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-bar-container {
+  width: 60px;
+  height: 6px;
+  background: var(--progress-bg, #e0e0e0);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  min-width: 28px;
+}
+
+/* Progress Status Colors */
+.translation-progress.complete .progress-bar-fill {
+  background: var(--success-color, #4caf50);
+}
+
+.translation-progress.complete .progress-label {
+  color: var(--success-color, #4caf50);
+}
+
+.translation-progress.good .progress-bar-fill {
+  background: var(--info-color, #2196f3);
+}
+
+.translation-progress.partial .progress-bar-fill {
+  background: var(--warning-color, #ff9800);
+}
+
+.translation-progress.minimal .progress-bar-fill {
+  background: var(--error-color, #f44336);
+}
+
+/* Size Variants */
+.translation-progress.small .progress-bar-container {
+  width: 40px;
+  height: 4px;
+}
+
+.translation-progress.small .progress-label {
+  font-size: 11px;
+  min-width: 24px;
+}
+
+.translation-progress.large .progress-bar-container {
+  width: 100px;
+  height: 8px;
+}
+
+.translation-progress.large .progress-label {
+  font-size: 14px;
+  min-width: 36px;
+}
+
+/* ==========================================================================
+   CONTRIBUTE TRANSLATIONS CTA
+   ========================================================================== */
+
+.contribute-translations-cta {
+  background: linear-gradient(135deg, var(--gradient-start, #667eea) 0%, var(--gradient-end, #764ba2) 100%);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+}
+
+.cta-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cta-icon {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cta-text {
+  flex: 1;
+}
+
+.cta-text h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cta-text p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: white;
+  color: var(--gradient-start, #667eea);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cta-button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.other-languages {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   LANGUAGE SETTINGS PANEL
+   ========================================================================== */
+
+.language-settings-panel {
+  max-width: 600px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.settings-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #333);
+}
+
+.settings-hint {
+  margin: 12px 0 0 0;
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+
+.translation-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.translation-status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg-secondary, #f5f5f5);
+  border-radius: 8px;
+}
+
+.translation-status-item .language-name {
+  font-size: 14px;
+  color: var(--text-primary, #333);
+}
+
+/* ==========================================================================
+   RTL SUPPORT
+   ========================================================================== */
+
+[dir="rtl"] .language-selector-toggle .chevron {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .language-option-btn {
+  text-align: right;
+}
+
+[dir="rtl"] .cta-content {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .translation-status-item {
+  flex-direction: row-reverse;
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .language-selector-toggle {
+    background: var(--bg-secondary-dark, #2a2a2a);
+    border-color: var(--border-color-dark, #444);
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .language-selector-toggle:hover {
+    background: var(--bg-hover-dark, #333);
+    border-color: var(--border-hover-dark, #555);
+  }
+
+  .language-dropdown-menu {
+    background: var(--bg-primary-dark, #1a1a1a);
+    border-color: var(--border-color-dark, #444);
+  }
+
+  .language-option.selected {
+    background: var(--bg-selected-dark, #0d47a1);
+  }
+
+  .language-option-btn:hover {
+    background: var(--bg-hover-dark, #2a2a2a);
+  }
+
+  .language-info .native-name {
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .language-info .english-name {
+    color: var(--text-secondary-dark, #999);
+  }
+
+  .language-btn {
+    background: var(--bg-secondary-dark, #2a2a2a);
+    border-color: var(--border-color-dark, #444);
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .language-btn:hover:not(:disabled) {
+    background: var(--bg-hover-dark, #333);
+    border-color: var(--border-hover-dark, #555);
+  }
+
+  .language-selector-minimal {
+    background-color: var(--bg-primary-dark, #1a1a1a);
+    border-color: var(--border-color-dark, #444);
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .translation-status-item {
+    background: var(--bg-secondary-dark, #2a2a2a);
+  }
+
+  .translation-status-item .language-name {
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .settings-section h3 {
+    color: var(--text-primary-dark, #e0e0e0);
+  }
+
+  .settings-hint {
+    color: var(--text-secondary-dark, #999);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .language-selector-toggle {
+    padding: 6px 10px;
+  }
+
+  .language-selector-toggle .current-language {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .language-btn {
+    padding: 6px 10px;
+  }
+
+  .cta-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .language-selector-toggle,
+  .language-btn,
+  .cta-button,
+  .progress-bar-fill,
+  .chevron {
+    transition: none !important;
+  }
+
+  .cta-button:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .language-selector-toggle,
+  .language-btn,
+  .language-option-btn {
+    border-width: 2px;
+  }
+
+  .progress-bar-container {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Focus visible styles */
+.language-selector-toggle:focus-visible,
+.language-btn:focus-visible,
+.language-option-btn:focus-visible,
+.language-selector-minimal:focus-visible,
+.cta-button:focus-visible {
+  outline: 2px solid var(--focus-color, #1976d2);
+  outline-offset: 2px;
+}

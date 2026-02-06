@@ -49,3 +49,6 @@ export type {
   MedicationDuplicateOptions,
   BatchDuplicateResult,
 } from './duplicate-detector.js';
+
+// P4.1.2: FHIR Integration
+export * from './fhir/index.js';

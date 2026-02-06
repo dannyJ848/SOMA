@@ -31,9 +31,21 @@ export async function initializeEducationModules(): Promise<void> {
   const { gerdModule } = await import('./modules/gastroenterology/gerd.js');
   registerModule(gerdModule);
   
+  const { ibsModule } = await import('./modules/gastroenterology/gastro-ibs-comprehensive.js');
+  registerModule(ibsModule);
+  
   // Lab interpretation modules
   const { cbcModule } = await import('./modules/labs/cbc.js');
   registerModule(cbcModule);
+  
+  const { lipidsModule } = await import('./modules/labs/lipids.js');
+  registerModule(lipidsModule);
+  
+  const { thyroidModule } = await import('./modules/labs/thyroid.js');
+  registerModule(thyroidModule);
+  
+  const { labThyroidInterpretationModule } = await import('./modules/lab-thyroid-interpretation.js');
+  registerModule(labThyroidInterpretationModule);
   
   console.log('[Education] Modules initialized');
 }
@@ -42,5 +54,9 @@ export async function initializeEducationModules(): Promise<void> {
 export { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
 export { hypertensionModule } from './modules/cardiology/hypertension.js';
 export { cbcModule } from './modules/labs/cbc.js';
+export { lipidsModule } from './modules/labs/lipids.js';
+export { thyroidModule } from './modules/labs/thyroid.js';
+export { labThyroidInterpretationModule } from './modules/lab-thyroid-interpretation.js';
 export { headacheModule } from './modules/neurology/headache.js';
 export { gerdModule } from './modules/gastroenterology/gerd.js';
+export { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.js';

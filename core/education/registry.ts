@@ -11,8 +11,12 @@ import type { EducationalModule, MedicalSpecialty, ModuleType } from './types.js
 import { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
 import { hypertensionModule } from './modules/cardiology/hypertension.js';
 import { cbcModule } from './modules/labs/cbc.js';
+import { lipidsModule } from './modules/labs/lipids.js';
+import { thyroidModule } from './modules/labs/thyroid.js';
+import { labThyroidInterpretationModule } from './modules/lab-thyroid-interpretation.js';
 import { headacheModule } from './modules/neurology/headache.js';
 import { gerdModule } from './modules/gastroenterology/gerd.js';
+import { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.js';
 
 // Module storage - will be populated as modules are created
 const modules: Map<string, EducationalModule> = new Map();

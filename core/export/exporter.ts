@@ -239,31 +239,34 @@ async function collectHealthData(
     notes: [],
   };
   
+  // Convert DateRangeFilter to fetcher format
+  const fetcherDateRange = dateRange ? { start: dateRange.startDate, end: dateRange.endDate } : undefined;
+  
   const categoryMap: Record<ExportDataCategory, () => Promise<void>> = {
     all: async () => {},
     profile: async () => {
       data.profile = await fetcher.getProfile();
     },
     labs: async () => {
-      data.labs = await fetcher.getLabs(dateRange);
+      data.labs = await fetcher.getLabs(fetcherDateRange);
     },
     medications: async () => {
-      data.medications = await fetcher.getMedications(dateRange);
+      data.medications = await fetcher.getMedications(fetcherDateRange);
     },
     conditions: async () => {
       data.conditions = await fetcher.getConditions();
     },
     procedures: async () => {
-      data.procedures = await fetcher.getProcedures(dateRange);
+      data.procedures = await fetcher.getProcedures(fetcherDateRange);
     },
     timeline: async () => {
-      data.timeline = await fetcher.getTimeline(dateRange);
+      data.timeline = await fetcher.getTimeline(fetcherDateRange);
     },
     imaging: async () => {
-      data.imaging = await fetcher.getImaging(dateRange);
+      data.imaging = await fetcher.getImaging(fetcherDateRange);
     },
     vitals: async () => {
-      data.vitals = await fetcher.getVitals(dateRange);
+      data.vitals = await fetcher.getVitals(fetcherDateRange);
     },
     allergies: async () => {
       data.allergies = await fetcher.getAllergies();
@@ -273,7 +276,7 @@ async function collectHealthData(
     },
     appointments: async () => {},
     notes: async () => {
-      data.notes = await fetcher.getNotes(dateRange);
+      data.notes = await fetcher.getNotes(fetcherDateRange);
     },
   };
   
@@ -492,7 +495,7 @@ async function exportToFHIR(
 // FHIR Converters
 // ============================================================================
 
-function convertToFHIRPatient(profile: NonNullable<CompleteHealthRecord['profile']>): Record<string, unknown> {
+function convertToFHIRPatient(profile: NonNullable<CompleteHealthRecord['profile']>): { resourceType: 'Patient'; id: string; [key: string]: unknown } {
   return {
     resourceType: 'Patient',
     id: profile.id,
@@ -510,7 +513,7 @@ function convertToFHIRPatient(profile: NonNullable<CompleteHealthRecord['profile
   };
 }
 
-function convertToFHIRCondition(condition: Condition, patientId: string): Record<string, unknown> {
+function convertToFHIRCondition(condition: Condition, patientId: string): { resourceType: 'Condition'; id: string; [key: string]: unknown } {
   const statusMap: Record<string, string> = {
     active: 'active',
     resolved: 'resolved',
@@ -543,7 +546,7 @@ function convertToFHIRCondition(condition: Condition, patientId: string): Record
   };
 }
 
-function convertToFHIRMedicationRequest(med: Medication, patientId: string): Record<string, unknown> {
+function convertToFHIRMedicationRequest(med: Medication, patientId: string): { resourceType: 'MedicationRequest'; id: string; [key: string]: unknown } {
   const statusMap: Record<string, string> = {
     active: 'active',
     discontinued: 'stopped',
@@ -570,7 +573,7 @@ function convertToFHIRMedicationRequest(med: Medication, patientId: string): Rec
   };
 }
 
-function convertToFHIRObservation(lab: LabResult, patientId: string): Record<string, unknown> {
+function convertToFHIRObservation(lab: LabResult, patientId: string): { resourceType: 'Observation'; id: string; [key: string]: unknown } {
   const statusMap: Record<string, string> = {
     normal: 'final',
     low: 'final',
@@ -613,7 +616,7 @@ function convertToFHIRObservation(lab: LabResult, patientId: string): Record<str
   };
 }
 
-function convertToFHIRAllergy(allergy: Allergy, patientId: string): Record<string, unknown> {
+function convertToFHIRAllergy(allergy: Allergy, patientId: string): { resourceType: 'AllergyIntolerance'; id: string; [key: string]: unknown } {
   const severityMap: Record<string, string> = {
     mild: 'mild',
     moderate: 'moderate',
@@ -651,7 +654,7 @@ function convertToFHIRAllergy(allergy: Allergy, patientId: string): Record<strin
   };
 }
 
-function convertToFHIRImmunization(imm: Immunization, patientId: string): Record<string, unknown> {
+function convertToFHIRImmunization(imm: Immunization, patientId: string): { resourceType: 'Immunization'; id: string; [key: string]: unknown } {
   return {
     resourceType: 'Immunization',
     id: imm.id,
@@ -679,18 +682,19 @@ function convertToFHIRImmunization(imm: Immunization, patientId: string): Record
 // ============================================================================
 // CSV Helpers
 // ============================================================================
+// CSV Helpers
+// ============================================================================
 
 function formatCSVSection(title: string, headers: string[], rows: (string | number)[][]): string {
-  const csvRows = rows.map(row =
-003e 
-    row.map(cell => {
+  const csvRows = rows.map(row => {
+    return row.map(cell => {
       const str = String(cell ?? '');
       if (str.includes(',') || str.includes('\n') || str.includes('"')) {
         return `"${str.replace(/"/g, '""')}"`;
       }
       return str;
-    }).join(',')
-  );
+    }).join(',');
+  });
   
   return `# ${title}\n${headers.join(',')}\n${csvRows.join('\n')}`;
 }
@@ -788,7 +792,7 @@ export async function createPartialExport(
   const options: ExportOptions = {
     format: 'json',
     categories,
-    dateRange,
+    dateRange: dateRange ? { startDate: dateRange.start, endDate: dateRange.end } : undefined,
     language: 'es',
   };
   

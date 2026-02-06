@@ -8,7 +8,15 @@
  * @module core/export
  */
 
-// Types
+// Import types for local use
+import type {
+  ExportFormat,
+  ExportDataCategory,
+  ExportOptions,
+  ExportResult,
+} from './types';
+
+// Re-export Types
 export type {
   ExportFormat,
   ExportDataCategory,
@@ -42,7 +50,6 @@ export type {
   FHIRResourceType,
   FHIRBundle,
   FHIRBundleEntry,
-  PasswordStrength,
 } from './types';
 
 // Export Engine
@@ -71,6 +78,7 @@ export {
   ExportEncryptionError,
   DEFAULT_ITERATIONS,
   VERSION as ENCRYPTION_VERSION,
+  type PasswordStrength,
 } from './encryption';
 
 // ============================================================================

@@ -35,7 +35,7 @@ async function deriveKey(
   iterations: number
 ): Promise<CryptoKey> {
   const passwordBuffer = encoder.encode(password);
-  
+
   // Import password as key material
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
@@ -44,12 +44,12 @@ async function deriveKey(
     false,
     ['deriveBits', 'deriveKey']
   );
-  
+
   // Derive AES-GCM key
   return crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt,
+      salt: salt.buffer as ArrayBuffer,
       iterations,
       hash: 'SHA-256',
     },
@@ -100,8 +100,8 @@ export async function encryptData(
   // Convert to base64 for storage/transmission
   const encryptedExport: EncryptedExport = {
     encrypted: true,
-    salt: arrayBufferToBase64(salt),
-    iv: arrayBufferToBase64(iv),
+    salt: arrayBufferToBase64(salt.buffer),
+    iv: arrayBufferToBase64(iv.buffer),
     ciphertext: arrayBufferToBase64(ciphertext),
     iterations,
     version: VERSION,
@@ -123,19 +123,21 @@ export async function decryptData(
   password: string
 ): Promise<string> {
   // Decode base64 values
-  const salt = base64ToArrayBuffer(encryptedExport.salt);
-  const iv = base64ToArrayBuffer(encryptedExport.iv);
+  const saltBuffer = base64ToArrayBuffer(encryptedExport.salt);
+  const ivBuffer = base64ToArrayBuffer(encryptedExport.iv);
   const ciphertext = base64ToArrayBuffer(encryptedExport.ciphertext);
-  
+
   // Derive key with same parameters
-  const key = await deriveKey(password, new Uint8Array(salt), encryptedExport.iterations);
-  
+  const saltArray = new Uint8Array(saltBuffer);
+  const key = await deriveKey(password, saltArray, encryptedExport.iterations);
+
   // Decrypt
   try {
+    const ivArray = new Uint8Array(ivBuffer);
     const plaintext = await crypto.subtle.decrypt(
       {
         name: ALGORITHM,
-        iv: new Uint8Array(iv),
+        iv: ivArray,
       },
       key,
       ciphertext

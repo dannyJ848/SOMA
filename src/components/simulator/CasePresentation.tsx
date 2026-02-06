@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import type { PatientPresentation, LabResult, ImagingResult } from '../../../core/education/simulator/types';
+import type { PatientPresentation, LabResult, ImagingResult } from '../../../../core/education/simulator/types';
 
 interface CasePresentationProps {
   presentation: PatientPresentation;
@@ -24,7 +24,7 @@ export const CasePresentation: React.FC<CasePresentationProps> = ({
     <div className="case-presentation">
       {/* Patient Header */}
       <div className="patient-header">
-        <h2>{presentation.name}</h2㸀
+        <h2>{presentation.name}</h2>
         <div className="patient-demographics">
           <span className="demo-tag">{presentation.age} years old</span>
           <span className="demo-tag">{presentation.sex}</span>

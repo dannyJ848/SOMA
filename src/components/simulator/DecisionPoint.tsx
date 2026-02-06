@@ -32,7 +32,7 @@ export const DecisionPoint: React.FC<DecisionPointProps> = ({
   const [startTime] = useState<number>(Date.now());
 
   const handleOptionSelect = useCallback((option: DecisionOption) => {
-    if (feedback) return; // Prevent changing after selection
+    if (feedback) return;
     
     setSelectedOptionId(option.id);
     
@@ -60,7 +60,6 @@ export const DecisionPoint: React.FC<DecisionPointProps> = ({
         : baseClass;
     }
     
-    // After feedback
     if (option.scoring.isOptimal) {
       return `${baseClass} optimal`;
     }

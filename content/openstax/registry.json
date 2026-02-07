@@ -1,0 +1,186 @@
+{
+  "source": "OpenStax Anatomy & Physiology 2e",
+  "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e",
+  "extractedAt": "2026-02-07T20:24:00Z",
+  "license": "CC BY 4.0",
+  "attribution": "OpenStax, Rice University. Anatomy and Physiology 2e. Available at: https://openstax.org/books/anatomy-and-physiology-2e",
+  "bookDetails": {
+    "title": "Anatomy and Physiology 2e",
+    "authors": ["J. Gordon Betts", "Peter Desaix", "Eddie Johnson"],
+    "publisher": "OpenStax",
+    "publicationDate": "2022",
+    "totalChapters": 28
+  },
+  "extractionSummary": {
+    "priorityChaptersTargeted": 10,
+    "successfullyExtracted": 1,
+    "partialExtraction": 9,
+    "totalFigures": 11,
+    "totalTables": 0,
+    "imagesDownloaded": 11
+  },
+  "priorityChapters": [
+    {
+      "num": 1,
+      "title": "Introduction to Human Anatomy",
+      "id": "1-introduction",
+      "bodyRegion": "general",
+      "complexityLevel": 1,
+      "status": "complete",
+      "path": "chapters/chapter-01.json",
+      "figures": 1,
+      "tables": 0,
+      "learningObjectives": [
+        "Distinguish between anatomy and physiology, and identify several branches of each",
+        "Describe the structure of the body, from simplest to most complex, in terms of the six levels of organization",
+        "Identify the functional characteristics of human life",
+        "Identify the four requirements for human survival",
+        "Define homeostasis and explain its importance to normal human functioning",
+        "Use appropriate anatomical terminology to identify key body structures, body regions, and directions in the body",
+        "Compare and contrast at least four medical imaging techniques in terms of their function and use in medicine"
+      ],
+      "images": [
+        "images/chapter-1/fig-1-1.jpg"
+      ]
+    },
+    {
+      "num": 4,
+      "title": "The Tissue Level of Organization",
+      "id": "4-the-tissue-level-of-organization",
+      "bodyRegion": "tissue",
+      "complexityLevel": 1,
+      "status": "partial",
+      "path": "chapters/chapter-04.json",
+      "figures": 1,
+      "tables": 0,
+      "notes": "URL pattern requires JavaScript rendering - needs browser automation"
+    },
+    {
+      "num": 7,
+      "title": "Axial Skeleton",
+      "id": "7-axial-skeleton",
+      "bodyRegion": "skeletal/axial",
+      "complexityLevel": 2,
+      "status": "partial",
+      "path": "chapters/chapter-07.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 8,
+      "title": "Appendicular Skeleton",
+      "id": "8-appendicular-skeleton",
+      "bodyRegion": "skeletal/appendicular",
+      "complexityLevel": 2,
+      "status": "partial",
+      "path": "chapters/chapter-08.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 11,
+      "title": "Muscular System",
+      "id": "11-muscular-system",
+      "bodyRegion": "muscular",
+      "complexityLevel": 3,
+      "status": "partial",
+      "path": "chapters/chapter-11.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 19,
+      "title": "Cardiovascular System - Heart",
+      "id": "19-cardiovascular-system",
+      "bodyRegion": "cardiovascular/heart",
+      "complexityLevel": 4,
+      "status": "partial",
+      "path": "chapters/chapter-19.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 22,
+      "title": "Respiratory System",
+      "id": "22-respiratory-system",
+      "bodyRegion": "respiratory",
+      "complexityLevel": 5,
+      "status": "partial",
+      "path": "chapters/chapter-22.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 23,
+      "title": "Digestive System",
+      "id": "23-digestive-system",
+      "bodyRegion": "digestive",
+      "complexityLevel": 5,
+      "status": "partial",
+      "path": "chapters/chapter-23.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 25,
+      "title": "Urinary System",
+      "id": "25-urinary-system",
+      "bodyRegion": "urinary",
+      "complexityLevel": 6,
+      "status": "partial",
+      "path": "chapters/chapter-25.json",
+      "figures": 1,
+      "tables": 0
+    },
+    {
+      "num": 26,
+      "title": "Fluid, Electrolyte, and Acid-Base Balance",
+      "id": "26-fluid-electrolyte-and-acid-base-balance",
+      "bodyRegion": "fluid-balance",
+      "complexityLevel": 6,
+      "status": "partial",
+      "path": "chapters/chapter-26.json",
+      "figures": 1,
+      "tables": 0
+    }
+  ],
+  "bodyRegions": [
+    "general",
+    "tissue", 
+    "skeletal/axial",
+    "skeletal/appendicular",
+    "muscular",
+    "cardiovascular/heart",
+    "respiratory",
+    "digestive",
+    "urinary",
+    "fluid-balance"
+  ],
+  "imageInventory": [
+    "images/chapter-1/fig-1-0.jpg",
+    "images/chapter-1/fig-1-1.jpg",
+    "images/chapter-4/fig-4-0.jpg",
+    "images/chapter-7/fig-7-0.jpg",
+    "images/chapter-8/fig-8-0.jpg",
+    "images/chapter-11/fig-11-0.jpg",
+    "images/chapter-19/fig-19-0.jpg",
+    "images/chapter-22/fig-22-0.jpg",
+    "images/chapter-23/fig-23-0.jpg",
+    "images/chapter-25/fig-25-0.jpg",
+    "images/chapter-26/fig-26-0.jpg"
+  ],
+  "nextSteps": [
+    "Access remaining chapters via OpenStax web reader with JavaScript enabled",
+    "Extract detailed content from chapters 4, 7, 8, 11, 19, 22, 23, 25, 26",
+    "Download all 500+ figures with proper attribution",
+    "Extract tables and clinical connection boxes",
+    "Build anatomical term glossary with Latin names",
+    "Map physiological processes to body regions"
+  ],
+  "technicalNotes": {
+    "extractionMethod": "Playwright headless browser with JavaScript rendering",
+    "challenges": "OpenStax uses dynamic JavaScript routing that requires full browser automation for content access",
+    "chapter1Success": "web_fetch API successfully extracted Chapter 1 content",
+    "remainingChapters": "Require browser-based extraction with proper URL resolution from OpenStax's dynamic TOC"
+  }
+}

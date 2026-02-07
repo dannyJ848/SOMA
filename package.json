@@ -14,7 +14,10 @@
   "scripts": {
     "build": "tsc",
     "extract": "node --experimental-vm-modules dist/extract.js",
-    "validate": "node --experimental-vm-modules dist/validate.js"
+    "validate": "node --experimental-vm-modules dist/validate.js",
+    "extract:openstax": "npx ts-node extractors/openstax_playwright.ts",
+    "extract:pathology": "npx ts-node extractors/pathology_outlines_playwright.ts",
+    "extract:all": "npm run extract:openstax && npm run extract:pathology"
   },
   "keywords": [
     "medical",
@@ -25,9 +28,10 @@
     "openstax"
   ],
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
   },
   "engines": {

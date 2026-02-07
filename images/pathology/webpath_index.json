@@ -1,0 +1,18 @@
+{
+  "source": "WebPath (University of Utah)",
+  "url": "https://webpath.med.utah.edu",
+  "license": "Educational Use - Attribution Required",
+  "total_images": 1,
+  "downloaded": 1,
+  "skipped": 0,
+  "images": [
+    {
+      "url": "https://webpath.med.utah.edu/jpeg2/HIV012.jpg",
+      "caption": "",
+      "alt": "",
+      "page_name": "AIDS Pathology",
+      "page_url": "https://webpath.med.utah.edu/TUTORIAL/AIDS/AIDS.html",
+      "section": "TUTORIAL"
+    }
+  ]
+}

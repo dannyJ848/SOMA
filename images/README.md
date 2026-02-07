@@ -1,25 +1,30 @@
-# Image Storage
+# Medical Image Extraction Scripts
 
-Downloaded images from open source educational materials.
-
-## Attribution
-
-All images retain their original license and attribution requirements. See `../src/attribution/sources.json` for source information.
+This directory contains Python scripts for extracting open-source medical images from various educational sources.
 
 ## Directory Structure
+- `extractors/` - Individual extractor scripts for each source
+- `utils/` - Shared utilities for downloading, metadata handling
+- `data/` - Metadata JSON files
 
-Images are organized by source:
-
+## Usage
+Each extractor can be run independently:
+```bash
+python extractors/michigan_histology.py
+python extractors/uwa_blue_histology.py
 ```
-images/
-├── openstax-anatomy-physiology/
-├── openstax-histology/
-├── uwa-blue-histology/
-└── ...
-```
 
-## Naming Convention
+## Rate Limiting
+All scripts respect a 1-second delay between requests.
 
-Images follow the format: `{descriptive-name}-{hash}.{ext}`
-
-Example: `epithelial-tissues-overview-a3f7b2c1.jpg`
+## Sources
+1. University of Michigan Histology (CC BY-NC)
+2. UWA Blue Histology (Educational)
+3. University of Florida Histology (CC BY-NC-SA)
+4. Pathology Outlines (CC BY)
+5. WebPath (Educational)
+6. LibreTexts Pathology (CC BY-NC-SA)
+7. OpenStax Anatomy (CC BY)
+8. Open Anatomy Project (CC BY/PD)
+9. Wikimedia Commons (CC BY-SA/PD)
+10. Gray's Anatomy (Public Domain)

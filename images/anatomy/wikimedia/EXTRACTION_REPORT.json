@@ -1,0 +1,44 @@
+{
+  "extraction_date": "2026-02-07T14:16:00CST",
+  "duration_minutes": 20,
+  "source": "Wikimedia Commons",
+  "total_images_downloaded": 124,
+  "target": 500,
+  "achievement_rate": "24.8%",
+  "by_category": {
+    "general": 21,
+    "grays": 55,
+    "muscles": 11,
+    "nervous": 9,
+    "digestive": 8,
+    "lymphatic": 8,
+    "urinary": 6,
+    "reproductive": 4,
+    "endocrine": 2,
+    "cardiovascular": 0,
+    "illustrations": 0,
+    "integumentary": 0,
+    "respiratory": 0,
+    "skeleton": 0
+  },
+  "challenges": [
+    "High failure rate on image downloads (75% of discovered URLs failed)",
+    "Wikimedia API rate limiting and intermittent 403 errors",
+    "Category structure inconsistencies - some categories returned 0 results",
+    "URL format variations causing download failures"
+  ],
+  "key_insights": {
+    "best_performing_category": "Gray's Anatomy plates (55 images)",
+    "success_rate": "~25% of discovered images successfully downloaded",
+    "api_calls": "Approximately 50 API calls made",
+    "images_discovered": "Approximately 470 unique images found via API",
+    "storage_used": "25MB"
+  },
+  "recommendations": [
+    "Use Wikimedia Commons dump files for bulk extraction instead of API",
+    "Implement more robust retry logic with exponential backoff",
+    "Use multiple User-Agent rotation to avoid blocks",
+    "Consider using Commons API with OAuth for higher rate limits",
+    "Download from Internet Archive mirrors for better reliability"
+  ]
+}

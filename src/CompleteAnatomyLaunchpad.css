@@ -823,6 +823,172 @@
   font-size: 1rem;
 }
 
+/* Education Tab */
+.education-tab {
+  padding: 0.5rem 0;
+}
+
+.education-intro {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.recommended-modules {
+  margin-bottom: 1.25rem;
+}
+
+.recommended-modules h5,
+.related-topics h5 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  margin: 0 0 0.75rem;
+}
+
+.module-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.module-chip {
+  padding: 0.5rem 1rem;
+  background: rgba(74, 158, 255, 0.15);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 20px;
+  color: #4a9eff;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+}
+
+.module-chip:hover {
+  background: rgba(74, 158, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.education-actions {
+  margin-bottom: 1.5rem;
+}
+
+.related-topics {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topic-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.topic-icon {
+  font-size: 0.875rem;
+}
+
+/* User Labs */
+.user-labs {
+  background: rgba(255,255,255,0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.user-labs h4 {
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem;
+  color: #4a9eff;
+}
+
+.labs-mini-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.labs-mini-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.labs-mini-list li:last-child {
+  border-bottom: none;
+}
+
+.lab-name-mini {
+  color: rgba(255,255,255,0.8);
+}
+
+.lab-value-mini {
+  font-weight: 600;
+  color: #fff;
+}
+
+.lab-abnormal-high .lab-value-mini,
+.lab-abnormal-low .lab-value-mini {
+  color: #fbbf24;
+}
+
+.lab-critical .lab-value-mini {
+  color: #ef4444;
+}
+
+/* User Conditions in Conditions Tab */
+.user-section-title {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.user-conditions-list .condition-item {
+  padding: 0.75rem 0;
+}
+
+.condition-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.condition-status-dot.status-active {
+  background: #ef4444;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
+}
+
+.condition-status-dot.status-managed {
+  background: #fbbf24;
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.5);
+}
+
+.condition-status-dot.status-resolved {
+  background: #22c55e;
+}
+
+.condition-meta {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Instructions */
 .anatomy-instructions {
   position: absolute;

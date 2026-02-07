@@ -6,6 +6,8 @@ import { type DashboardData } from './App';
 
 interface CompleteAnatomyLaunchpadProps {
   onBack: () => void;
+  onLearn?: (regionId: string, moduleId?: string) => void;
+  onViewLabs?: (regionId: string) => void;
   dashboardData: DashboardData | null;
 }
 
@@ -25,6 +27,8 @@ export interface BodyRegion {
   commonConditions: string[];
   keyStructures: string[];
   layer: 'skin' | 'fat' | 'muscle' | 'bone' | 'organ';
+  relatedModules: string[];
+  educationalContentId?: string;
 }
 
 // Enhanced body regions with better anatomical accuracy
@@ -42,11 +46,12 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Migraine', 'Tension headache', 'Sinusitis', 'Vertigo', 'Tinnitus'],
     keyStructures: ['Brain', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Skull'],
     layer: 'bone',
+    relatedModules: ['neurology', 'ophthalmology', 'ent'],
   },
   {
     id: 'neck',
     name: 'Neck',
-    latinName: 'Cervix',
+    latinName: 'Collum',
     position: [0, 1.28, 0],
     scale: [0.12, 0.18, 0.12],
     geometry: 'capsule',
@@ -55,6 +60,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Cervical strain', 'Thyroid disorders', 'Lymphadenopathy'],
     keyStructures: ['Cervical spine', 'Trachea', 'Thyroid', 'Carotid arteries', 'Jugular veins'],
     layer: 'muscle',
+    relatedModules: ['endocrinology', 'orthopedics'],
   },
 
   // TORSO
@@ -70,6 +76,35 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hypertension', 'Asthma', 'COPD', 'Pneumonia', 'Angina', 'GERD'],
     keyStructures: ['Heart', 'Lungs', 'Ribs', 'Sternum', 'Thoracic spine'],
     layer: 'organ',
+    relatedModules: ['cardiology', 'pulmonology'],
+  },
+  {
+    id: 'thoracicSpine',
+    name: 'Thoracic Spine',
+    latinName: 'Columna thoracica',
+    position: [0, 0.85, -0.15],
+    scale: [0.25, 0.45, 0.12],
+    geometry: 'capsule',
+    systems: ['skeletal', 'muscular', 'nervous'],
+    description: '12 vertebrae (T1-T12) forming the mid-back',
+    commonConditions: ['Thoracic outlet syndrome', 'Scoliosis', 'Kyphosis', 'Disc herniation'],
+    keyStructures: ['Vertebrae T1-T12', 'Spinal cord', 'Intercostal nerves'],
+    layer: 'bone',
+    relatedModules: ['orthopedics', 'neurology'],
+  },
+  {
+    id: 'lumbarSpine',
+    name: 'Lumbar Spine',
+    latinName: 'Columna lumbalis',
+    position: [0, 0.25, -0.12],
+    scale: [0.28, 0.35, 0.12],
+    geometry: 'capsule',
+    systems: ['skeletal', 'muscular', 'nervous'],
+    description: '5 vertebrae (L1-L5), most common source of back pain',
+    commonConditions: ['Low back pain', 'Lumbar disc herniation', 'Spinal stenosis', 'Sciatica'],
+    keyStructures: ['Vertebrae L1-L5', 'Cauda equina', 'Sciatic nerve', 'Psoas muscle'],
+    layer: 'bone',
+    relatedModules: ['orthopedics', 'neurology'],
   },
   {
     id: 'abdomen',
@@ -83,6 +118,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Diabetes', 'GERD', 'IBS', 'Kidney disease', 'Liver disease', 'Gallstones'],
     keyStructures: ['Stomach', 'Liver', 'Kidneys', 'Pancreas', 'Intestines', 'Gallbladder'],
     layer: 'organ',
+    relatedModules: ['gastroenterology', 'endocrinology', 'nephrology'],
   },
   {
     id: 'pelvis',
@@ -96,13 +132,14 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['UTI', 'Prostatitis', 'Endometriosis', 'Hemorrhoids'],
     keyStructures: ['Bladder', 'Reproductive organs', 'Rectum', 'Hip bones', 'Sacrum'],
     layer: 'bone',
+    relatedModules: ['obgyn', 'urology'],
   },
 
   // SHOULDER JOINTS
   {
     id: 'leftShoulder',
     name: 'Left Shoulder',
-    latinName: 'Articulatio humeri sinistra',
+    latinName: 'Articulatio glenohumeralis sinistra',
     position: [-0.42, 1.05, 0],
     scale: [0.14, 0.14, 0.14],
     geometry: 'joint',
@@ -115,7 +152,7 @@ export const BODY_REGIONS: BodyRegion[] = [
   {
     id: 'rightShoulder',
     name: 'Right Shoulder',
-    latinName: 'Articulatio humeri dextra',
+    latinName: 'Articulatio glenohumeralis dextra',
     position: [0.42, 1.05, 0],
     scale: [0.14, 0.14, 0.14],
     geometry: 'joint',
@@ -136,7 +173,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     geometry: 'capsule',
     systems: ['muscular', 'skeletal', 'nervous', 'cardiovascular'],
     description: 'Upper extremity from shoulder to elbow',
-    commonConditions: ['Tennis elbow', 'Carpal tunnel', 'Tendonitis', 'DVT'],
+    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
   },
@@ -149,7 +186,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     geometry: 'capsule',
     systems: ['muscular', 'skeletal', 'nervous', 'cardiovascular'],
     description: 'Upper extremity from shoulder to elbow',
-    commonConditions: ['Tennis elbow', 'Carpal tunnel', 'Tendonitis'],
+    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
   },
@@ -437,7 +474,45 @@ export const BODY_REGIONS: BodyRegion[] = [
   },
 ];
 
-// System colors for highlighting - Complete Anatomy style
+// System to specialty mapping for educational modules
+const SYSTEM_TO_SPECIALTY: Partial<Record<BodySystem, string>> = {
+  cardiovascular: 'cardiology',
+  respiratory: 'pulmonology',
+  digestive: 'gastroenterology',
+  endocrine: 'endocrinology',
+  nervous: 'neurology',
+  muscular: 'orthopedics',
+  skeletal: 'orthopedics',
+  urinary: 'nephrology',
+  reproductive: 'obgyn',
+};
+
+// Region to educational module mapping
+const REGION_MODULES: Record<string, string[]> = {
+  head: ['neurology', 'ophthalmology', 'ent'],
+  neck: ['endocrinology', 'orthopedics'],
+  chest: ['cardiology', 'pulmonology'],
+  abdomen: ['gastroenterology', 'endocrinology', 'nephrology'],
+  pelvis: ['obgyn', 'urology'],
+  leftShoulder: ['orthopedics', 'sports-medicine'],
+  rightShoulder: ['orthopedics', 'sports-medicine'],
+  leftArm: ['orthopedics'],
+  rightArm: ['orthopedics'],
+  leftForearm: ['orthopedics'],
+  rightForearm: ['orthopedics'],
+  leftHand: ['orthopedics', 'rheumatology'],
+  rightHand: ['orthopedics', 'rheumatology'],
+  leftHip: ['orthopedics'],
+  rightHip: ['orthopedics'],
+  leftThigh: ['orthopedics', 'sports-medicine'],
+  rightThigh: ['orthopedics', 'sports-medicine'],
+  leftKnee: ['orthopedics', 'sports-medicine'],
+  rightKnee: ['orthopedics', 'sports-medicine'],
+  leftLeg: ['orthopedics'],
+  rightLeg: ['orthopedics'],
+  leftFoot: ['orthopedics', 'sports-medicine'],
+  rightFoot: ['orthopedics', 'sports-medicine'],
+};
 export const SYSTEM_COLORS: Record<BodySystem, string> = {
   integumentary: '#f4d7c4',  // Skin tone
   skeletal: '#e8e4dc',       // Bone white
@@ -1113,11 +1188,13 @@ function SystemToggle({ system, color, isActive, onToggle }: SystemToggleProps) 
 interface RegionInfoPanelProps {
   region: BodyRegion;
   onClose: () => void;
+  onLearn?: (regionId: string, moduleId?: string) => void;
+  onViewLabs?: (regionId: string) => void;
   dashboardData: DashboardData | null;
 }
 
-function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProps) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'conditions' | 'structures'>('overview');
+function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }: RegionInfoPanelProps) {
+  const [activeTab, setActiveTab] = useState<'overview' | 'conditions' | 'structures' | 'education'>('overview');
 
   const userConditions = useMemo(() => {
     if (!dashboardData?.activeConditions) return [];
@@ -1126,6 +1203,40 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
       regionKeywords.some(kw => c.name.toLowerCase().includes(kw.toLowerCase()))
     );
   }, [dashboardData, region]);
+
+  const relevantLabs = useMemo(() => {
+    if (!dashboardData?.recentLabs) return [];
+    // Map body systems to common lab tests
+    const systemLabMap: Record<string, string[]> = {
+      cardiovascular: ['lipid', 'cholesterol', 'troponin', 'bnp'],
+      endocrine: ['glucose', 'hba1c', 'tsh', 't3', 't4', 'insulin'],
+      digestive: ['liver', 'ast', 'alt', 'bilirubin', 'amylase'],
+      urinary: ['creatinine', 'bun', 'uric acid', 'egfr'],
+      respiratory: ['oxygen', 'spo2'],
+    };
+    
+    const relevantTests = region.systems.flatMap(sys => systemLabMap[sys] || []);
+    return dashboardData.recentLabs.filter(lab =>
+      relevantTests.some(test => lab.name.toLowerCase().includes(test.toLowerCase()))
+    ).slice(0, 5);
+  }, [dashboardData, region]);
+
+  const recommendedModules = useMemo(() => {
+    return REGION_MODULES[region.id] || [];
+  }, [region.id]);
+
+  const handleLearn = () => {
+    const specialty = SYSTEM_TO_SPECIALTY[region.systems[0]];
+    if (onLearn) {
+      onLearn(region.id, specialty);
+    }
+  };
+
+  const handleViewLabs = () => {
+    if (onViewLabs) {
+      onViewLabs(region.id);
+    }
+  };
 
   return (
     <div className="region-panel">
@@ -1155,6 +1266,12 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
           onClick={() => setActiveTab('structures')}
         >
           Structures
+        </button>
+        <button
+          className={activeTab === 'education' ? 'active' : ''}
+          onClick={() => setActiveTab('education')}
+        >
+          Learn
         </button>
       </div>
 
@@ -1191,9 +1308,27 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
               </div>
             )}
 
+            {relevantLabs.length > 0 && (
+              <div className="user-labs">
+                <h4>Relevant Labs</h4>
+                <ul className="labs-mini-list">
+                  {relevantLabs.map(lab => (
+                    <li key={lab.id} className={`lab-${lab.status}`}>
+                      <span className="lab-name-mini">{lab.name}</span>
+                      <span className="lab-value-mini">{lab.value} {lab.unit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="quick-actions">
-              <button className="action-btn primary">Learn About This Region</button>
-              <button className="action-btn">View Related Labs</button>
+              <button className="action-btn primary" onClick={handleLearn}>
+                📚 Learn About This Region
+              </button>
+              <button className="action-btn" onClick={handleViewLabs}>
+                🔬 View Related Labs
+              </button>
             </div>
           </div>
         )}
@@ -1210,6 +1345,21 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
                 </li>
               ))}
             </ul>
+            
+            {userConditions.length > 0 && (
+              <>
+                <h4 className="user-section-title">Your Conditions</h4>
+                <ul className="conditions-list user-conditions-list">
+                  {userConditions.map(c => (
+                    <li key={c.id} className={`condition-item condition-${c.status}`}>
+                      <span className="condition-status-dot status-${c.status}" />
+                      <span className="condition-name">{c.name}</span>
+                      <span className="condition-meta">{c.status}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         )}
 
@@ -1224,6 +1374,50 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {activeTab === 'education' && (
+          <div className="education-tab">
+            <h4>Educational Modules</h4>
+            <p className="education-intro">
+              Learn about the {region.name.toLowerCase()} and related medical topics.
+            </p>
+            
+            {recommendedModules.length > 0 && (
+              <div className="recommended-modules">
+                <h5>Recommended Specialties</h5>
+                <div className="module-chips">
+                  {recommendedModules.map(module => (
+                    <button 
+                      key={module} 
+                      className="module-chip"
+                      onClick={() => onLearn?.(region.id, module)}
+                    >
+                      {module.charAt(0).toUpperCase() + module.slice(1).replace('-', ' ')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="education-actions">
+              <button className="action-btn primary" onClick={handleLearn}>
+                📚 Start Learning Module
+              </button>
+            </div>
+            
+            <div className="related-topics">
+              <h5>Related Topics</h5>
+              <ul className="topics-list">
+                {region.commonConditions.slice(0, 3).map((condition, i) => (
+                  <li key={i} className="topic-item">
+                    <span className="topic-icon">📖</span>
+                    {condition}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>
@@ -1359,7 +1553,7 @@ function LayerPanel({ layerDepth, onLayerChange }: LayerPanelProps) {
 // MAIN COMPONENT
 // ============================================================================
 
-export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnatomyLaunchpadProps) {
+export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboardData }: CompleteAnatomyLaunchpadProps) {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<BodyRegion | null>(null);
   const [showUI, setShowUI] = useState(true);
@@ -1551,6 +1745,8 @@ export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnat
         <RegionInfoPanel
           region={selectedRegion}
           onClose={() => setSelectedRegion(null)}
+          onLearn={onLearn}
+          onViewLabs={onViewLabs}
           dashboardData={dashboardData}
         />
       )}

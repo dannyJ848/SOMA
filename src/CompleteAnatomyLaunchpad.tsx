@@ -576,23 +576,47 @@ function BodyPartMesh({
   onClick 
 }: BodyPartMeshProps) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
+  const [targetOpacity, setTargetOpacity] = useState(1);
 
-  // Determine visibility based on layer depth
+  // Determine visibility based on layer depth with smooth transition
   useEffect(() => {
     const layerOrder = ['skin', 'fat', 'muscle', 'bone', 'organ'];
     const currentLayerIndex = layerOrder.indexOf(region.layer);
     const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
-    setIsVisible(currentLayerIndex <= maxVisibleLayer);
+    
+    // Calculate opacity with fade transition
+    const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
+    const isVisible = currentLayerIndex <= maxVisibleLayer;
+    
+    if (!isVisible) {
+      setTargetOpacity(0);
+    } else if (currentLayerIndex === maxVisibleLayer && layerProgress < 1) {
+      // Fading out the current layer
+      setTargetOpacity(0.3 + layerProgress * 0.6);
+    } else {
+      setTargetOpacity(1);
+    }
   }, [layerDepth, region.layer]);
+
+  // Smooth opacity animation
+  useFrame(() => {
+    if (materialRef.current) {
+      const currentOpacity = materialRef.current.opacity;
+      const newOpacity = currentOpacity + (targetOpacity - currentOpacity) * 0.1;
+      if (Math.abs(newOpacity - currentOpacity) > 0.001) {
+        materialRef.current.opacity = newOpacity;
+        materialRef.current.transparent = newOpacity < 0.95;
+      }
+    }
+  });
 
   // Determine primary system for coloring
   const primarySystem = region.systems[0];
   const baseColor = SYSTEM_COLORS[primarySystem];
 
-  // Calculate opacity based on system visibility
+  // Calculate system visibility
   const systemVisible = region.systems.some(sys => visibleSystems[sys]);
-  const opacity = systemVisible && isVisible ? 0.9 : isVisible ? 0.2 : 0;
 
   // Highlight effects
   let emissiveColor = '#000000';
@@ -606,7 +630,7 @@ function BodyPartMesh({
     emissiveIntensity = 0.3;
   }
 
-  // Render appropriate geometry
+  if (targetOpacity <= 0.01) return null;
   const renderGeometry = () => {
     switch (region.geometry) {
       case 'head':
@@ -637,7 +661,7 @@ function BodyPartMesh({
     );
   }, [region.geometry]);
 
-  if (opacity <= 0) return null;
+  if (targetOpacity <= 0.01) return null;
 
   return (
     <group
@@ -663,13 +687,14 @@ function BodyPartMesh({
         >
           <capsuleGeometry args={[0.5, 1, 8, 16]} />
           <meshStandardMaterial
+            ref={materialRef}
             color={baseColor}
             roughness={0.5}
             metalness={0.1}
             emissive={emissiveColor}
             emissiveIntensity={emissiveIntensity}
-            transparent={opacity < 0.9}
-            opacity={opacity}
+            transparent={true}
+            opacity={targetOpacity}
           />
         </mesh>
       )}
@@ -683,13 +708,14 @@ function BodyPartMesh({
         >
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial
+            ref={materialRef}
             color={baseColor}
             roughness={0.5}
             metalness={0.1}
             emissive={emissiveColor}
             emissiveIntensity={emissiveIntensity}
-            transparent={opacity < 0.9}
-            opacity={opacity}
+            transparent={true}
+            opacity={targetOpacity}
           />
         </mesh>
       )}
@@ -703,13 +729,14 @@ function BodyPartMesh({
         >
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial
+            ref={materialRef}
             color={baseColor}
             roughness={0.5}
             metalness={0.1}
             emissive={emissiveColor}
             emissiveIntensity={emissiveIntensity}
-            transparent={opacity < 0.9}
-            opacity={opacity}
+            transparent={true}
+            opacity={targetOpacity}
           />
         </mesh>
       )}
@@ -1102,12 +1129,27 @@ interface LayerPanelProps {
 }
 
 function LayerPanel({ layerDepth, onLayerChange }: LayerPanelProps) {
-  const layers = ['Skin', 'Fat', 'Muscle', 'Bone', 'Organs'];
-  const currentLayer = Math.floor((layerDepth / 100) * layers.length);
+  const layers = [
+    { name: 'Skin', color: '#f4d7c4', desc: 'Epidermis & Dermis' },
+    { name: 'Fat', color: '#fff8dc', desc: 'Subcutaneous tissue' },
+    { name: 'Muscle', color: '#c44d4d', desc: 'Skeletal muscles' },
+    { name: 'Bone', color: '#e8e4dc', desc: 'Skeletal system' },
+    { name: 'Organs', color: '#ff9999', desc: 'Internal organs' }
+  ];
+  
+  const currentLayerIndex = Math.floor((layerDepth / 100) * layers.length);
+  const currentLayer = layers[Math.min(currentLayerIndex, layers.length - 1)];
 
   return (
     <div className="layer-panel">
-      <h4>Layer Dissection</h4>
+      <div className="layer-header">
+        <h4>Layer Dissection</h4>
+        <div className="current-layer" style={{ borderLeftColor: currentLayer.color }}>
+          <span className="current-layer-name">{currentLayer.name}</span>
+          <span className="current-layer-desc">{currentLayer.desc}</span>
+        </div>
+      </div>
+      
       <div className="layer-slider-container">
         <input
           type="range"
@@ -1116,15 +1158,21 @@ function LayerPanel({ layerDepth, onLayerChange }: LayerPanelProps) {
           value={layerDepth}
           onChange={(e) => onLayerChange(Number(e.target.value))}
           className="layer-slider"
+          style={{
+            background: `linear-gradient(to right, ${currentLayer.color} ${layerDepth}%, rgba(255,255,255,0.2) ${layerDepth}%)`
+          }}
         />
-        <div className="layer-labels">
+        
+        <div className="layer-legend">
           {layers.map((layer, i) => (
-            <span 
-              key={layer} 
-              className={`layer-label ${i === currentLayer ? 'active' : ''}`}
+            <div 
+              key={layer.name} 
+              className={`layer-item ${i === currentLayerIndex ? 'active' : ''}`}
+              onClick={() => onLayerChange(((i + 0.5) / layers.length) * 100)}
             >
-              {layer}
-            </span>
+              <span className="layer-color" style={{ backgroundColor: layer.color }} />
+              <span className="layer-name">{layer.name}</span>
+            </div>
           ))}
         </div>
       </div>

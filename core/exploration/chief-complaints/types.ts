@@ -13,6 +13,8 @@ export type BodyRegion =
   | 'face'
   | 'neck'
   | 'chest'
+  | 'thoracic-spine'
+  | 'lumbar-spine'
   | 'abdomen-upper'
   | 'abdomen-lower'
   | 'back-upper'
@@ -21,8 +23,14 @@ export type BodyRegion =
   | 'shoulder-right'
   | 'arm-left'
   | 'arm-right'
+  | 'elbow-left'
+  | 'elbow-right'
+  | 'forearm-left'
+  | 'forearm-right'
   | 'hand-left'
   | 'hand-right'
+  | 'wrist-left'
+  | 'wrist-right'
   | 'hip-left'
   | 'hip-right'
   | 'thigh-left'
@@ -62,6 +70,7 @@ export interface RegionChiefComplaints {
   regionId: BodyRegion;
   regionName: string;
   regionDescription: string;
+  latinName?: string;
   boundingBox: {
     min: { x: number; y: number; z: number };
     max: { x: number; y: number; z: number };
@@ -70,6 +79,7 @@ export interface RegionChiefComplaints {
   regionalAnatomy: RegionalAnatomy;
   differentialAnatomy: DifferentialAnatomy[];
   redFlags: RegionRedFlag[];
+  relatedModules?: string[];
   explanations: {
     level1: string;
     level2: string;

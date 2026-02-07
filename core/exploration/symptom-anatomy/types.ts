@@ -28,6 +28,8 @@ export type BodyRegion =
   | 'face'
   | 'neck'
   | 'chest'
+  | 'thoracic-spine'
+  | 'lumbar-spine'
   | 'abdomen'
   | 'back'
   | 'upper-extremity'

@@ -506,7 +506,7 @@ export const HealthMetricsDashboard: React.FC<Props> = ({
                 
                 <div className="spo2-alertas">
                   <div className="spo2-alerta">
-                    <span className="alerta-label">Eventos < 95%:</span>
+                    <span className="alerta-label">Eventos {'<'} 95%:</span>
                     <span className="alerta-valor">
                       {datosFiltrados.reduce((sum, e) => sum + e.eventosBajo95, 0)}
                     </span>
@@ -541,7 +541,7 @@ export const HealthMetricsDashboard: React.FC<Props> = ({
                 className={`vista-tab ${vista === tab.key ? 'activo' : ''}`}
                 onClick={() => setVista(tab.key as Vista)}
               >
-                <span className="tab-icono">{tab.icono}</span>
+                <span className="tab-icono">{tab.icon}</span>
                 <span className="tab-label">{tab.label}</span>
               </button>
             ))}

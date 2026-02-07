@@ -62,13 +62,19 @@ const posteriorRegions: BodyRegion[] = [
   // Neck
   { id: 'body.neck.posterior', name: 'Back of Neck', path: 'M90,50 L110,50 L108,80 L92,80 Z' },
 
-  // Back
-  { id: 'body.back.upper-left', name: 'Upper Left Back', path: 'M65,80 L100,80 L100,130 L65,125 Z' },
-  { id: 'body.back.upper-right', name: 'Upper Right Back', path: 'M100,80 L135,80 L135,125 L100,130 Z' },
-  { id: 'body.back.mid-left', name: 'Mid Left Back', path: 'M65,125 L100,130 L100,170 L65,170 Z' },
-  { id: 'body.back.mid-right', name: 'Mid Right Back', path: 'M100,130 L135,125 L135,170 L100,170 Z' },
-  { id: 'body.back.lower-left', name: 'Lower Left Back', path: 'M65,170 L100,170 L100,200 L70,195 Z' },
-  { id: 'body.back.lower-right', name: 'Lower Right Back', path: 'M100,170 L135,170 L130,195 L100,200 Z' },
+  // Thoracic Spine (Mid Back)
+  { id: 'body.thoracic-spine', name: 'Thoracic Spine', path: 'M85,80 L115,80 L115,140 L100,145 L85,140 Z' },
+
+  // Lumbar Spine (Lower Back)
+  { id: 'body.lumbar-spine', name: 'Lumbar Spine', path: 'M85,140 L115,140 L110,195 L90,195 Z' },
+
+  // Back (legacy regions - kept for compatibility)
+  { id: 'body.back.upper-left', name: 'Upper Left Back', path: 'M65,80 L85,80 L85,110 L65,105 Z' },
+  { id: 'body.back.upper-right', name: 'Upper Right Back', path: 'M115,80 L135,80 L135,105 L115,110 Z' },
+  { id: 'body.back.mid-left', name: 'Mid Left Back', path: 'M65,105 L85,110 L85,140 L65,140 Z' },
+  { id: 'body.back.mid-right', name: 'Mid Right Back', path: 'M115,110 L135,105 L135,140 L115,140 Z' },
+  { id: 'body.back.lower-left', name: 'Lower Left Back', path: 'M65,140 L90,140 L90,195 L70,195 Z' },
+  { id: 'body.back.lower-right', name: 'Lower Right Back', path: 'M90,140 L115,140 L110,195 L90,195 Z' },
 
   // Buttocks
   { id: 'body.buttock.left', name: 'Left Buttock', path: 'M70,195 L100,200 L100,230 L65,225 Z' },

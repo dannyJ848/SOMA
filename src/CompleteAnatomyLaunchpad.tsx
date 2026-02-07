@@ -1910,6 +1910,19 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
         </button>
       </div>
 
+      {/* Quiz Panel */}
+      <QuizPanel
+        isActive={quizActive}
+        currentQuestion={quizQuestions[currentQuestionIndex] || null}
+        questionNumber={currentQuestionIndex + 1}
+        totalQuestions={quizQuestions.length}
+        score={quizScore}
+        state={quizState}
+        onStart={startQuiz}
+        onClose={closeQuiz}
+        onSkip={skipQuestion}
+      />
+
       {/* Hover Tooltip */}
       {hoveredRegionData && !selectedRegion && (
         <div className="hover-tooltip">

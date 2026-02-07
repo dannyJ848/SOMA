@@ -560,6 +560,7 @@ interface BodyPartMeshProps {
   isSelected: boolean;
   visibleSystems: SystemVisibility;
   layerDepth: number;
+  clippingPlanes: THREE.Plane[];
   onPointerOver: () => void;
   onPointerOut: () => void;
   onClick: () => void;
@@ -571,6 +572,7 @@ function BodyPartMesh({
   isSelected, 
   visibleSystems, 
   layerDepth,
+  clippingPlanes,
   onPointerOver, 
   onPointerOut, 
   onClick 
@@ -695,6 +697,8 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            clippingPlanes={clippingPlanes}
+            clipShadows={true}
           />
         </mesh>
       )}
@@ -716,6 +720,8 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            clippingPlanes={clippingPlanes}
+            clipShadows={true}
           />
         </mesh>
       )}
@@ -737,6 +743,8 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            clippingPlanes={clippingPlanes}
+            clipShadows={true}
           />
         </mesh>
       )}
@@ -755,6 +763,8 @@ interface AnatomyModelProps {
   layerDepth: number;
   showPins: boolean;
   showGrid: boolean;
+  crossSectionMode: 'none' | 'sagittal' | 'coronal' | 'transverse';
+  cutPosition: number;
   onHover: (regionId: string | null) => void;
   onSelect: (regionId: string) => void;
 }
@@ -766,11 +776,46 @@ function AnatomyModel({
   layerDepth,
   showPins,
   showGrid,
+  crossSectionMode,
+  cutPosition,
   onHover, 
   onSelect 
 }: AnatomyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useThree();
+  const { scene, gl } = useThree();
+
+  // Setup clipping planes
+  const clippingPlanes = useMemo(() => {
+    if (crossSectionMode === 'none') return [];
+    
+    let normal: THREE.Vector3;
+    let constant: number;
+    
+    switch (crossSectionMode) {
+      case 'sagittal': // Left/Right cut
+        normal = new THREE.Vector3(1, 0, 0);
+        constant = -cutPosition * 0.5;
+        break;
+      case 'coronal': // Front/Back cut
+        normal = new THREE.Vector3(0, 0, 1);
+        constant = -cutPosition * 0.5;
+        break;
+      case 'transverse': // Top/Bottom cut
+        normal = new THREE.Vector3(0, 1, 0);
+        constant = -cutPosition * 1.5;
+        break;
+      default:
+        return [];
+    }
+    
+    return [new THREE.Plane(normal, constant)];
+  }, [crossSectionMode, cutPosition]);
+
+  // Apply clipping planes to renderer
+  useEffect(() => {
+    gl.localClippingEnabled = crossSectionMode !== 'none';
+    gl.clippingPlanes = clippingPlanes;
+  }, [gl, clippingPlanes, crossSectionMode]);
 
   // Gentle idle rotation
   useFrame((state) => {
@@ -842,6 +887,11 @@ function AnatomyModel({
         />
       )}
 
+      {/* Cut plane visualization */}
+      {crossSectionMode !== 'none' && (
+        <CutPlaneVisualizer mode={crossSectionMode} position={cutPosition} />
+      )}
+
       {/* Body parts */}
       {BODY_REGIONS.map((region) => (
         <BodyPartMesh
@@ -851,6 +901,7 @@ function AnatomyModel({
           isSelected={selectedRegion === region.id}
           visibleSystems={visibleSystems}
           layerDepth={layerDepth}
+          clippingPlanes={clippingPlanes}
           onPointerOver={() => onHover(region.id)}
           onPointerOut={() => onHover(null)}
           onClick={() => onSelect(region.id)}
@@ -866,6 +917,67 @@ function AnatomyModel({
         far={4}
         resolution={1024}
       />
+    </group>
+  );
+}
+
+// ============================================================================
+// CUT PLANE VISUALIZER
+// ============================================================================
+
+interface CutPlaneVisualizerProps {
+  mode: 'sagittal' | 'coronal' | 'transverse';
+  position: number;
+}
+
+function CutPlaneVisualizer({ mode, position }: CutPlaneVisualizerProps) {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  // Pulse animation for the cut plane
+  useFrame((state) => {
+    if (meshRef.current) {
+      const material = meshRef.current.material as THREE.MeshBasicMaterial;
+      material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
+    }
+  });
+
+  let planePosition: [number, number, number];
+  let rotation: [number, number, number];
+
+  switch (mode) {
+    case 'sagittal':
+      planePosition = [position * 0.5, 0, 0];
+      rotation = [0, Math.PI / 2, 0];
+      break;
+    case 'coronal':
+      planePosition = [0, 0, position * 0.5];
+      rotation = [0, 0, 0];
+      break;
+    case 'transverse':
+      planePosition = [0, position * 1.5, 0];
+      rotation = [Math.PI / 2, 0, 0];
+      break;
+  }
+
+  return (
+    <group position={planePosition} rotation={rotation}>
+      {/* Semi-transparent cut plane */}
+      <mesh ref={meshRef}>
+        <planeGeometry args={[3, 4]} />
+        <meshBasicMaterial 
+          color="#4a9eff" 
+          transparent 
+          opacity={0.3} 
+          side={THREE.DoubleSide}
+          depthTest={false}
+        />
+      </mesh>
+      
+      {/* Cut line */}
+      <lineSegments>
+        <edgesGeometry args={[new THREE.PlaneGeometry(3, 4)]} />
+        <lineBasicMaterial color="#4a9eff" linewidth={2} />
+      </lineSegments>
     </group>
   );
 }
@@ -1120,6 +1232,69 @@ function RegionInfoPanel({ region, onClose, dashboardData }: RegionInfoPanelProp
 }
 
 // ============================================================================
+// CROSS-SECTION PANEL COMPONENT
+// ============================================================================
+
+interface CrossSectionPanelProps {
+  mode: 'none' | 'sagittal' | 'coronal' | 'transverse';
+  position: number;
+  onModeChange: (mode: 'none' | 'sagittal' | 'coronal' | 'transverse') => void;
+  onPositionChange: (pos: number) => void;
+}
+
+function CrossSectionPanel({ mode, position, onModeChange, onPositionChange }: CrossSectionPanelProps) {
+  const modes = [
+    { id: 'none', label: 'Off', icon: '○' },
+    { id: 'sagittal', label: 'Left/Right', icon: '↔' },
+    { id: 'coronal', label: 'Front/Back', icon: '↗' },
+    { id: 'transverse', label: 'Top/Bottom', icon: '↕' },
+  ] as const;
+
+  return (
+    <div className="cross-section-panel">
+      <div className="cross-section-header">
+        <h4>Cross Section</h4>
+        <div className="mode-buttons">
+          {modes.map((m) => (
+            <button
+              key={m.id}
+              className={`mode-btn ${mode === m.id ? 'active' : ''}`}
+              onClick={() => onModeChange(m.id)}
+              title={m.label}
+            >
+              <span className="mode-icon">{m.icon}</span>
+              <span className="mode-label">{m.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {mode !== 'none' && (
+        <div className="cut-slider-container">
+          <label>
+            Cut Position: {position > 0 ? '+' : ''}{position.toFixed(1)}
+          </label>
+          <input
+            type="range"
+            min="-1"
+            max="1"
+            step="0.05"
+            value={position}
+            onChange={(e) => onPositionChange(Number(e.target.value))}
+            className="cut-slider"
+          />
+          <div className="cut-labels">
+            <span>{mode === 'sagittal' ? 'Left' : mode === 'coronal' ? 'Back' : 'Top'}</span>
+            <span>Center</span>
+            <span>{mode === 'sagittal' ? 'Right' : mode === 'coronal' ? 'Front' : 'Bottom'}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================================
 // LAYER PANEL COMPONENT
 // ============================================================================
 
@@ -1191,6 +1366,10 @@ export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnat
   const [showPins, setShowPins] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
   const [layerDepth, setLayerDepth] = useState(100);
+  
+  // Cross-section state
+  const [crossSectionMode, setCrossSectionMode] = useState<'none' | 'sagittal' | 'coronal' | 'transverse'>('none');
+  const [cutPosition, setCutPosition] = useState(0); // -1 to 1
 
   const [visibleSystems, setVisibleSystems] = useState<SystemVisibility>({
     integumentary: true,
@@ -1282,6 +1461,16 @@ export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnat
         <LayerPanel layerDepth={layerDepth} onLayerChange={setLayerDepth} />
       </div>
 
+      {/* Cross Section Panel */}
+      <div className={`cross-section-container ${!showUI ? 'hidden' : ''}`}>
+        <CrossSectionPanel 
+          mode={crossSectionMode} 
+          position={cutPosition}
+          onModeChange={setCrossSectionMode}
+          onPositionChange={setCutPosition}
+        />
+      </div>
+
       {/* View Controls */}
       <div className={`view-controls ${!showUI ? 'hidden' : ''}`}>
         <button 
@@ -1332,6 +1521,8 @@ export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnat
             layerDepth={layerDepth}
             showPins={showPins}
             showGrid={showGrid}
+            crossSectionMode={crossSectionMode}
+            cutPosition={cutPosition}
             onHover={setHoveredRegion}
             onSelect={handleRegionSelect}
           />

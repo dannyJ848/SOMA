@@ -641,5 +641,3 @@ async function getSessionById(sessionId: string): Promise<GuidedSession | null> 
 // ============================================================================
 // Export
 // ============================================================================
-
-export { SESSION_TEMPLATES, TEACHING_TIPS };

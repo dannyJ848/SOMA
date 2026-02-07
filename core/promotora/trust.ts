@@ -553,11 +553,3 @@ export function getTrustScoreExplanation(
 // ============================================================================
 // Export
 // ============================================================================
-
-export {
-  PRIVACY_GUARANTEES,
-  DATA_POLICIES,
-  COMMUNITY_TESTIMONIALS,
-  TRUST_BADGES,
-  CONSENT_TEMPLATES,
-};

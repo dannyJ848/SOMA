@@ -119,6 +119,19 @@ Transform medical education from physician training into accessible, modular pat
 
 ---
 
+### 2026-02-07 - AUDIT #4: Cross-Section Mode Review
+- **Status:** ⚠️ ISSUES IDENTIFIED - See `audit-cross-section-report.md`
+- **Critical Bug:** Head and Joint geometries do NOT apply clipping planes
+  - Affected: Head (1), All joints (12) = ~40% of body regions
+  - Impact: Cross-section mode appears broken for these regions
+- **Missing:** Cylinder geometry handler (neck region doesn't render)
+- **Working:** UI controls, sliders, visualizer, mode selection
+- **Performance:** Acceptable but could optimize re-renders
+- **Fix Estimate:** 4-6 hours
+- **Recommendation:** Fix before Beta release
+
+---
+
 ### 2026-02-07 - CRITICAL FIXES: Anatomical Corrections & Education Wiring
 - **✅ Priority 1 Fixes Complete:**
   - Fixed Latin name for neck: "Cervix" → "Collum" (Cervix refers to uterine cervix, not neck)

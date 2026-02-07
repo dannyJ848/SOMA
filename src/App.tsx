@@ -6,10 +6,12 @@ import { ChatView } from './ChatView';
 import { InsightsPanel } from './InsightsPanel';
 import { ImportView } from './ImportView';
 import { EducationView } from './EducationView';
+import './CompleteAnatomyLaunchpad.css';
 
 // Lazy load components to prevent Three.js from blocking app startup
 const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
 const AnatomyLaunchpad = lazy(() => import('./AnatomyLaunchpad').then(m => ({ default: m.AnatomyLaunchpad })));
+const CompleteAnatomyLaunchpad = lazy(() => import('./CompleteAnatomyLaunchpad').then(m => ({ default: m.CompleteAnatomyLaunchpad })));
 
 interface HealthSummary {
   totalConditions: number;
@@ -637,7 +639,7 @@ function App() {
     );
   }
 
-  // 3D Anatomy View - Launchpad (lazy loaded)
+  // 3D Anatomy View - Complete Anatomy Style Launchpad
   if (currentView === 'anatomy-launchpad') {
     return (
       <Suspense fallback={
@@ -645,7 +647,7 @@ function App() {
           <div className="loading">Loading Anatomy Explorer...</div>
         </div>
       }>
-        <AnatomyLaunchpad
+        <CompleteAnatomyLaunchpad
           onBack={() => setCurrentView('dashboard')}
           dashboardData={dashboard}
         />

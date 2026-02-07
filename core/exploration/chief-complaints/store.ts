@@ -1807,7 +1807,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
         ],
         characteristicFeatures: ['Location', 'Swelling', 'Stiffness', 'Numbness'],
         commonCauses: ['Trigger finger', 'Arthritis', 'De Quervain\'s', 'Fracture'],
-        differentialDiagnoses: ['Osteoarthritis', 'Rheumatoid arthritis', 'Carpal tunnel syndrome', 'Trigger finger'],
+        differentialDiagnoses: ['Osteoarthritis', 'Rheumatoid arthritis', 'Trigger finger'],
         relatedComplaints: ['wrist-pain', 'finger-stiffness'],
       },
     ],

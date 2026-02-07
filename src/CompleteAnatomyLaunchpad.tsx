@@ -667,27 +667,48 @@ function TorsoGeometry({ scale }: { scale: [number, number, number] }) {
 }
 
 // Anatomically accurate head shape
-function HeadGeometry({ scale }: { scale: [number, number, number] }) {
+function HeadGeometry({ scale, clippingPlanes }: { scale: [number, number, number]; clippingPlanes?: THREE.Plane[] }) {
   return (
     <group scale={scale}>
       {/* Main skull */}
       <mesh>
         <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial
+          color={SYSTEM_COLORS.nervous}
+          roughness={0.5}
+          metalness={0.1}
+          clippingPlanes={clippingPlanes}
+          clipShadows={true}
+        />
       </mesh>
       {/* Jaw/chin */}
       <mesh position={[0, -0.3, 0.1]}>
         <sphereGeometry args={[0.35, 24, 24]} />
+        <meshStandardMaterial
+          color={SYSTEM_COLORS.skeletal}
+          roughness={0.5}
+          metalness={0.1}
+          clippingPlanes={clippingPlanes}
+          clipShadows={true}
+        />
       </mesh>
       {/* Neck connection */}
       <mesh position={[0, -0.5, 0]}>
         <cylinderGeometry args={[0.2, 0.25, 0.3, 16]} />
+        <meshStandardMaterial
+          color={SYSTEM_COLORS.muscular}
+          roughness={0.5}
+          metalness={0.1}
+          clippingPlanes={clippingPlanes}
+          clipShadows={true}
+        />
       </mesh>
     </group>
   );
 }
 
 // Joint articulation with visible joint structure
-function JointGeometry({ scale, isSelected, isHovered }: { scale: [number, number, number]; isSelected: boolean; isHovered: boolean }) {
+function JointGeometry({ scale, isSelected, isHovered, clippingPlanes }: { scale: [number, number, number]; isSelected: boolean; isHovered: boolean; clippingPlanes?: THREE.Plane[] }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
@@ -705,6 +726,15 @@ function JointGeometry({ scale, isSelected, isHovered }: { scale: [number, numbe
       {/* Main joint sphere */}
       <mesh>
         <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial
+          color={SYSTEM_COLORS.skeletal}
+          roughness={0.5}
+          metalness={0.1}
+          emissive={isSelected ? '#22ff44' : isHovered ? '#4488ff' : '#000000'}
+          emissiveIntensity={isSelected ? 0.4 : isHovered ? 0.3 : 0}
+          clippingPlanes={clippingPlanes}
+          clipShadows={true}
+        />
       </mesh>
       {/* Joint highlight ring */}
       {(isSelected || isHovered) && (
@@ -821,37 +851,6 @@ function BodyPartMesh({
   }
 
   if (targetOpacity <= 0.01) return null;
-  const renderGeometry = () => {
-    switch (region.geometry) {
-      case 'head':
-        return <HeadGeometry scale={[1, 1, 1]} />;
-      case 'torso':
-        return <torsoShape scale={region.scale} />;
-      case 'joint':
-        return <JointGeometry scale={[1, 1, 1]} isSelected={isSelected} isHovered={isHovered} />;
-      case 'sphere':
-        return <sphereGeometry args={[0.5, 32, 32]} />;
-      case 'box':
-        return <boxGeometry args={[1, 1, 1]} />;
-      case 'cylinder':
-        return <cylinderGeometry args={[0.5, 0.5, 1, 16]} />;
-      case 'capsule':
-      default:
-        return <capsuleGeometry args={[0.5, 1, 8, 16]} />;
-    }
-  };
-
-  // For torso, use a custom rounded shape
-  const torsoShape = useMemo(() => {
-    if (region.geometry !== 'torso') return null;
-    return (
-      <mesh>
-        <capsuleGeometry args={[0.5, 1.2, 8, 16]} />
-      </mesh>
-    );
-  }, [region.geometry]);
-
-  if (targetOpacity <= 0.01) return null;
 
   return (
     <group
@@ -859,13 +858,14 @@ function BodyPartMesh({
       rotation={region.rotation || [0, 0, 0]}
     >
       {region.geometry === 'head' && (
-        <HeadGeometry scale={region.scale} />
+        <HeadGeometry scale={region.scale} clippingPlanes={clippingPlanes} />
       )}
       {region.geometry === 'joint' && (
         <JointGeometry 
           scale={region.scale} 
           isSelected={isSelected} 
           isHovered={isHovered} 
+          clippingPlanes={clippingPlanes}
         />
       )}
       {(region.geometry === 'capsule' || region.geometry === 'torso') && (
@@ -936,6 +936,29 @@ function BodyPartMesh({
           />
         </mesh>
       )}
+      {region.geometry === 'cylinder' && (
+        <mesh
+          ref={meshRef}
+          scale={region.scale}
+          onPointerOver={onPointerOver}
+          onPointerOut={onPointerOut}
+          onClick={onClick}
+        >
+          <cylinderGeometry args={[0.5, 0.5, 1, 16]} />
+          <meshStandardMaterial
+            ref={materialRef}
+            color={baseColor}
+            roughness={0.5}
+            metalness={0.1}
+            emissive={emissiveColor}
+            emissiveIntensity={emissiveIntensity}
+            transparent={true}
+            opacity={targetOpacity}
+            clippingPlanes={clippingPlanes}
+            clipShadows={true}
+          />
+        </mesh>
+      )}
     </group>
   );
 }
@@ -955,6 +978,7 @@ interface AnatomyModelProps {
   cutPosition: number;
   onHover: (regionId: string | null) => void;
   onSelect: (regionId: string) => void;
+  meshesRef?: React.MutableRefObject<THREE.Mesh[]>;
 }
 
 function AnatomyModel({ 
@@ -967,10 +991,12 @@ function AnatomyModel({
   crossSectionMode,
   cutPosition,
   onHover, 
-  onSelect 
+  onSelect,
+  meshesRef 
 }: AnatomyModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { scene, gl } = useThree();
+  const localMeshesRef = useRef<THREE.Mesh[]>([]);
 
   // Setup clipping planes
   const clippingPlanes = useMemo(() => {
@@ -1004,6 +1030,22 @@ function AnatomyModel({
     gl.localClippingEnabled = crossSectionMode !== 'none';
     gl.clippingPlanes = clippingPlanes;
   }, [gl, clippingPlanes, crossSectionMode]);
+
+  // Collect meshes for occlusion detection
+  useEffect(() => {
+    if (groupRef.current) {
+      const meshes: THREE.Mesh[] = [];
+      groupRef.current.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          meshes.push(child);
+        }
+      });
+      localMeshesRef.current = meshes;
+      if (meshesRef) {
+        meshesRef.current = meshes;
+      }
+    }
+  }, [meshesRef]);
 
   // Gentle idle rotation
   useFrame((state) => {
@@ -1182,6 +1224,7 @@ interface PinLabelProps {
   showAll: boolean;
   primarySystem: BodySystem;
   layerDepth: number;
+  meshesRef: React.MutableRefObject<THREE.Mesh[]>;
   onClick: () => void;
 }
 
@@ -1242,23 +1285,18 @@ function isLayerVisible(regionLayers: BodyRegion['layers'], layerDepth: number):
   return false;
 }
 
-function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, layerDepth, onClick }: PinLabelProps) {
+function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, layerDepth, meshesRef, onClick }: PinLabelProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const { camera } = useThree();
+  const { camera, raycaster } = useThree();
+  const [occlusionOpacity, setOcclusionOpacity] = useState(1);
+  const opacityRef = useRef(1);
+  const pinWorldPosition = useRef(new THREE.Vector3());
 
-  // Make labels always face camera (billboard effect)
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.lookAt(camera.position);
-    }
-  });
-
-  // Layer-aware visibility check - must be before early return for consistent hook order
+  // Layer-aware visibility check
   const layerVisible = isLayerVisible(region.layers, layerDepth);
   
   // Determine if pin should be shown
   const shouldShow = isVisible && layerVisible && (showAll || isHovered || isSelected);
-  const opacity = isSelected ? 1 : isHovered ? 0.9 : showAll ? 0.7 : 0;
   
   // Calculate pin position with geometry-aware offset
   const pinOffset = calculatePinOffset(region);
@@ -1267,8 +1305,41 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
     region.position[1],
     region.position[2] + 0.1
   ];
+
+  // Make labels always face camera (billboard effect) and check occlusion
+  useFrame(() => {
+    if (!groupRef.current || !camera) return;
+    
+    // Billboard effect - label always faces camera
+    groupRef.current.lookAt(camera.position);
+    
+    // Get pin world position for raycasting
+    groupRef.current.getWorldPosition(pinWorldPosition.current);
+    
+    // Raycast for occlusion detection
+    if (meshesRef.current.length > 0) {
+      const direction = pinWorldPosition.current.clone().sub(camera.position).normalize();
+      const distanceToPin = pinWorldPosition.current.distanceTo(camera.position);
+      
+      raycaster.set(camera.position, direction);
+      
+      // Check for intersections, excluding the pin itself
+      const intersects = raycaster.intersectObjects(meshesRef.current, false);
+      
+      // If something blocks the pin (intersection is closer than the pin)
+      const isOccluded = intersects.length > 0 && intersects[0].distance < distanceToPin - 0.05;
+      
+      // Smooth transition for occlusion
+      const targetOpacity = isOccluded ? 0 : 1;
+      opacityRef.current += (targetOpacity - opacityRef.current) * 0.15;
+      setOcclusionOpacity(opacityRef.current);
+    }
+  });
   
-  if (!shouldShow || opacity <= 0) return null;
+  const baseOpacity = isSelected ? 1 : isHovered ? 0.9 : showAll ? 0.7 : 0;
+  const finalOpacity = baseOpacity * occlusionOpacity;
+  
+  if (!shouldShow || finalOpacity <= 0.01) return null;
 
   const systemColor = SYSTEM_COLORS[primarySystem];
 
@@ -1280,13 +1351,13 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
       {/* Pin line connecting to body */}
       <mesh position={[-pinOffset/2, 0, 0]}>
         <cylinderGeometry args={[0.005, 0.005, pinOffset, 8]} rotation={[0, 0, Math.PI/2]} />
-        <meshBasicMaterial color={systemColor} transparent opacity={opacity} />
+        <meshBasicMaterial color={systemColor} transparent opacity={finalOpacity} />
       </mesh>
       
       {/* Pin head */}
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[0.04, 16, 16]} />
-        <meshBasicMaterial color={systemColor} transparent opacity={opacity} />
+        <meshBasicMaterial color={systemColor} transparent opacity={finalOpacity} />
       </mesh>
 
       {/* HTML Label */}
@@ -1298,6 +1369,7 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
           userSelect: 'none',
           pointerEvents: 'none', // FIX: Prevent label from blocking mouse events on 3D model
           transition: 'opacity 0.2s ease',
+          opacity: finalOpacity,
         }}
       >
         <div
@@ -1305,7 +1377,6 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
           style={{
             background: isSelected ? 'rgba(34, 255, 68, 0.9)' : 'rgba(0,0,0,0.85)',
             borderLeft: `3px solid ${systemColor}`,
-            opacity: opacity,
             pointerEvents: 'auto', // Re-enable clicks on the label itself
           }}
           onClick={(e) => {
@@ -1840,6 +1911,9 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
   const [showGrid, setShowGrid] = useState(true);
   const [layerDepth, setLayerDepth] = useState(100);
   
+  // Ref for body meshes (used for occlusion detection)
+  const bodyMeshesRef = useRef<THREE.Mesh[]>([]);
+  
   // Cross-section state
   const [crossSectionMode, setCrossSectionMode] = useState<'none' | 'sagittal' | 'coronal' | 'transverse'>('none');
   const [cutPosition, setCutPosition] = useState(0); // -1 to 1
@@ -2109,6 +2183,7 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
             cutPosition={cutPosition}
             onHover={setHoveredRegion}
             onSelect={handleRegionSelect}
+            meshesRef={bodyMeshesRef}
           />
           {/* Pin Labels */}
           {BODY_REGIONS.map(region => {
@@ -2124,6 +2199,7 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
                 showAll={showPins}
                 primarySystem={primarySystem}
                 layerDepth={layerDepth}
+                meshesRef={bodyMeshesRef}
                 onClick={() => handleRegionSelect(region.id)}
               />
             );

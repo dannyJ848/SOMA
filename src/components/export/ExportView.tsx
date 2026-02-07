@@ -872,7 +872,8 @@ export const ExportView: React.FC<ExportViewProps> = ({
           font-size: 14px;
           line-height: 1.5;
         }
-      `}></style>
+      `}
+      </style>
     </div>
   );
 };
@@ -957,7 +958,8 @@ const ExportProgress: React.FC<{
           font-size: 16px;
           color: #2d3748;
         }
-      `}></style>
+      `}
+      </style>
     </div>
   );
 };

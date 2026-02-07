@@ -873,7 +873,8 @@ export const ImportRestore: React.FC<ImportRestoreProps> = ({
           font-weight: 600;
           color: #2d3748;
         }
-      `}></style>
+      `}
+      </style>
     </div>
   );
 };

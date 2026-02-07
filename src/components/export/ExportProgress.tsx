@@ -348,7 +348,8 @@ export const ExportProgress: React.FC<ExportProgressProps> = ({
         .cancel-button:hover {
           background: #e2e8f0;
         }
-      `}></style>
+      `}
+      </style>
     </div>
   );
 };

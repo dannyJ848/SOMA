@@ -541,7 +541,8 @@ export const ExportPreview: React.FC<ExportPreviewProps> = ({
         .btn-secondary:hover {
           background: #e2e8f0;
         }
-      `}></style>
+      `}
+      </style>
     </div>
   );
 };

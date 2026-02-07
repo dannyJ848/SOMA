@@ -1,0 +1,36 @@
+{
+  "title": "Uh oh, we can't find the page you requested.",
+  "content": [
+    {
+      "heading": "Content",
+      "paragraphs": [
+        "This website utilizes technologies such as cookies to enable essential site functionality, as well as for analytics, personalization, and targeted advertising purposes. Privacy Notice",
+        "We use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.",
+        "The cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more",
+        "For more information on how Google's third-party cookies operate and handle your data, see: Google Privacy Policy",
+        "Necessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.",
+        "OpenStax Accounts cookie for authentication",
+        "Required to provide OpenStax services",
+        "Cookie Consent from Salesforce",
+        "Cookie Consent from Salesforce",
+        "Customer support",
+        "Cookies that are required for authentication and necessary OpenStax functions.",
+        "Product analytics",
+        "Zapier cookies that are used for Customer Support services.",
+        "Privacy-focused platform cookie",
+        "Functional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting feedback, and other third-party features.",
+        "Salesforce session cookie. We use Salesforce to drive our support services to users.",
+        "Optional AI-based customer support cookie",
+        "Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc.",
+        "Marketing automation tracking cookie",
+        "User surveys",
+        "Marketing cookie",
+        "Marketing cookie",
+        "Performance cookies are used to understand and analyze the key performance indexes of the website which helps in delivering a better user experience for the visitors.",
+        "Advertisement cookies are used to provide visitors with customized advertisements based on the pages you visited previously and to analyze the effectiveness of the ad campaigns.",
+        "Other uncategorized cookies are those that are being analyzed and have not been classified into a category as yet."
+      ]
+    }
+  ],
+  "images": []
+}

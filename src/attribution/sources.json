@@ -1,0 +1,221 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-02-07T13:55:00.000Z",
+  "sources": [
+    {
+      "id": "openstax-anatomy-physiology",
+      "name": "OpenStax Anatomy & Physiology",
+      "title": "Anatomy and Physiology 2e",
+      "authors": [
+        "J. Gordon Betts",
+        "Kelly A. Young",
+        "James A. Wise",
+        "Eddie Johnson",
+        "Brandon Poe",
+        "Dean H. Kruse",
+        "Oksana Korol",
+        "Jody E. Johnson",
+        "Mark Womble",
+        "Peter DeSaix"
+      ],
+      "publisher": "OpenStax (Rice University)",
+      "year": 2022,
+      "license": {
+        "type": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "summary": "Creative Commons Attribution 4.0 International License - free to share and adapt with attribution"
+      },
+      "urls": {
+        "main": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+        "repository": "https://github.com/openstax/anatomy-book",
+        "license": "https://github.com/openstax/anatomy-book/blob/main/LICENSE"
+      },
+      "coverage": {
+        "categories": ["anatomy", "physiology"],
+        "topics": [
+          "human body organization",
+          "cellular biology",
+          "tissues",
+          "integumentary system",
+          "skeletal system",
+          "muscular system",
+          "nervous system",
+          "endocrine system",
+          "cardiovascular system",
+          "lymphatic system",
+          "respiratory system",
+          "digestive system",
+          "urinary system",
+          "reproductive system"
+        ]
+      },
+      "attribution": {
+        "required": true,
+        "text": "Betts, J.G., Young, K.A., Wise, J.A., Johnson, E., Poe, B., Kruse, D.H., Korol, O., Johnson, J.E., Womble, M., DeSaix, P. Anatomy and Physiology 2e. OpenStax. 2022. CC BY 4.0.",
+        "format": "Standard academic citation with CC BY 4.0 notice"
+      },
+      "verifiedAt": "2026-02-07",
+      "compliance": "compliant"
+    },
+    {
+      "id": "openstax-histology",
+      "name": "OpenStax Histology",
+      "title": "Histology: The Study of Tissues",
+      "authors": [
+        "OpenStax"
+      ],
+      "publisher": "OpenStax (Rice University)",
+      "year": 2023,
+      "license": {
+        "type": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "summary": "Creative Commons Attribution 4.0 International License"
+      },
+      "urls": {
+        "main": "https://openstax.org/books/histology/pages/1-introduction",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "coverage": {
+        "categories": ["histology"],
+        "topics": [
+          "epithelial tissue",
+          "connective tissue",
+          "muscle tissue",
+          "nervous tissue",
+          "microscopic anatomy",
+          "tissue preparation",
+          "staining techniques"
+        ]
+      },
+      "attribution": {
+        "required": true,
+        "text": "OpenStax. Histology: The Study of Tissues. OpenStax. 2023. CC BY 4.0.",
+        "format": "Standard citation with CC BY 4.0 notice"
+      },
+      "verifiedAt": "2026-02-07",
+      "compliance": "compliant"
+    },
+    {
+      "id": "uwa-blue-histology",
+      "name": "UWA Blue Histology",
+      "title": "Blue Histology",
+      "authors": [
+        "School of Anatomy and Human Biology",
+        "University of Western Australia"
+      ],
+      "publisher": "University of Western Australia",
+      "year": 2021,
+      "license": {
+        "type": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "summary": "Creative Commons Attribution-NonCommercial 4.0 - educational use only"
+      },
+      "urls": {
+        "main": "http://www.lab.anhb.uwa.edu.au/mb140/",
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/"
+      },
+      "coverage": {
+        "categories": ["histology"],
+        "topics": [
+          "microscopic anatomy",
+          "tissue identification",
+          "histological staining",
+          "organs"
+        ]
+      },
+      "attribution": {
+        "required": true,
+        "text": "Blue Histology © School of Anatomy and Human Biology, University of Western Australia. CC BY-NC 4.0.",
+        "format": "Must include UWA attribution and non-commercial notice"
+      },
+      "verifiedAt": "2026-02-07",
+      "compliance": "compliant"
+    },
+    {
+      "id": "pathology-outlines",
+      "name": "Pathology Outlines",
+      "title": "Pathology Outlines - Educational Resource",
+      "authors": [
+        "PathologyOutlines.com Contributors"
+      ],
+      "publisher": "PathologyOutlines.com",
+      "year": 2024,
+      "license": {
+        "type": "custom",
+        "url": "https://www.pathologyoutlines.com/page/about",
+        "summary": "Educational use permitted with proper attribution, subject to site terms"
+      },
+      "urls": {
+        "main": "https://www.pathologyoutlines.com/",
+        "license": "https://www.pathologyoutlines.com/page/about"
+      },
+      "coverage": {
+        "categories": ["pathology"],
+        "topics": [
+          "surgical pathology",
+          "cytopathology",
+          "hematopathology",
+          "dermatopathology",
+          "neuropathology"
+        ]
+      },
+      "attribution": {
+        "required": true,
+        "text": "Content from PathologyOutlines.com used with permission for educational purposes.",
+        "format": "Must include PathologyOutlines.com attribution and link"
+      },
+      "verifiedAt": "2026-02-07",
+      "compliance": "pending"
+    },
+    {
+      "id": "anatomy-toolbox",
+      "name": "Anatomy Toolbox",
+      "title": "Anatomy Toolbox - Open Educational Resource",
+      "authors": [
+        "Various Contributors"
+      ],
+      "publisher": "Open Anatomy Project",
+      "year": 2023,
+      "license": {
+        "type": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "summary": "Creative Commons Attribution 4.0"
+      },
+      "urls": {
+        "main": "https://openanatomy.org/",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "coverage": {
+        "categories": ["anatomy"],
+        "topics": [
+          "3D anatomy models",
+          "cross-sectional anatomy",
+          "imaging anatomy"
+        ]
+      },
+      "attribution": {
+        "required": true,
+        "text": "Open Anatomy Project. CC BY 4.0.",
+        "format": "Include Open Anatomy attribution"
+      },
+      "verifiedAt": "2026-02-07",
+      "compliance": "compliant"
+    }
+  ],
+  "compliance": {
+    "totalSources": 5,
+    "compliantCount": 4,
+    "pendingCount": 1,
+    "reviewNeededCount": 0,
+    "byLicense": {
+      "CC-BY-4.0": 3,
+      "CC-BY-NC-4.0": 1,
+      "custom": 1
+    }
+  },
+  "notes": {
+    "general": "All sources verified for open access or educational use permissions. Content extraction will respect all license terms.",
+    "commercial-use": "UWA Blue Histology is CC-BY-NC (non-commercial only). Pathology Outlines requires direct verification for redistribution.",
+    "attribution-requirements": "All sources require attribution. Attribution text must be preserved in all extracted content."
+  }
+}

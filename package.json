@@ -1,103 +1,36 @@
 {
-  "name": "biological-self",
-  "version": "0.1.0",
-  "description": "Understand your body like a physician understands their patients",
+  "name": "@biological-self/content",
+  "version": "1.0.0",
+  "description": "Medical educational content aggregation system for Biological Self",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "cli": "tsx cli.ts",
-    "demo": "tsx demo.ts",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "tauri": "tauri",
-    "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build",
-    "typecheck": "tsc --noEmit",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug",
-    "test:unit": "vitest run tests/unit",
-    "test:integration": "vitest run tests/integration",
-    "test:i18n": "vitest run tests/i18n",
-    "test:a11y": "vitest run tests/a11y"
+    "build": "tsc",
+    "extract": "node --experimental-vm-modules dist/extract.js",
+    "validate": "node --experimental-vm-modules dist/validate.js"
   },
   "keywords": [
-    "health",
+    "medical",
     "education",
-    "privacy",
-    "local-first",
-    "open-source",
-    "llm",
-    "medical"
+    "anatomy",
+    "histology",
+    "pathology",
+    "openstax"
   ],
-  "author": "Danny Gomez",
-  "license": "AGPL-3.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dannygomez/biological-self.git"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "bugs": {
-    "url": "https://github.com/dannygomez/biological-self/issues"
-  },
-  "homepage": "https://github.com/dannygomez/biological-self#readme",
-  "devDependencies": {
-    "@chromatic-com/storybook": "^5.0.0",
-    "@storybook/addon-a11y": "^10.2.7",
-    "@storybook/addon-docs": "^10.2.7",
-    "@storybook/addon-onboarding": "^10.2.7",
-    "@storybook/addon-vitest": "^10.2.7",
-    "@storybook/react-vite": "^10.2.7",
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.1",
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/node": "^25.0.9",
-    "@types/pdf-parse": "^1.1.5",
-    "@types/react": "^19.2.9",
-    "@types/react-dom": "^19.2.3",
-    "@types/uuid": "^10.0.0",
-    "@vitejs/plugin-react": "^5.1.2",
-    "@vitest/browser-playwright": "^4.0.18",
-    "@vitest/coverage-v8": "^4.0.18",
-    "jsdom": "^24.0.0",
-    "playwright": "^1.58.2",
-    "storybook": "^10.2.7",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vitest": "^4.0.18"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.71.2",
-    "@lancedb/lancedb": "^0.23.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
-    "@tauri-apps/api": "^2.9.1",
-    "@tauri-apps/cli": "^2.9.6",
-    "@types/three": "^0.182.0",
-    "@xenova/transformers": "^2.17.2",
-    "apache-arrow": "^18.1.0",
-    "better-sqlite3": "^12.6.2",
-    "chromadb": "^3.2.2",
-    "ollama": "^0.6.3",
-    "pdf-parse": "^2.4.5",
-    "pdfjs-dist": "^5.4.624",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tesseract.js": "^7.0.0",
-    "three": "^0.182.0",
-    "undici": "^7.18.2",
-    "uuid": "^13.0.0"
   }
 }

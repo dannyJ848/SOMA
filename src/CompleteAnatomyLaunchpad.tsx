@@ -14,6 +14,16 @@ interface CompleteAnatomyLaunchpadProps {
 // Body region definitions with anatomical accuracy
 export type BodySystem = 'integumentary' | 'skeletal' | 'muscular' | 'nervous' | 'cardiovascular' | 'respiratory' | 'digestive' | 'urinary' | 'endocrine' | 'reproductive' | 'lymphatic';
 
+// Layer type for dissection mode - maps to anatomical depth
+export type LayerType = 'skin' | 'fat' | 'muscle' | 'bone' | 'organ';
+
+// Layer assignment interface for body regions
+export interface LayerAssignment {
+  primary: LayerType;
+  // All layers that this region participates in (for proper dissection)
+  layers: LayerType[];
+}
+
 export interface BodyRegion {
   id: string;
   name: string;
@@ -26,7 +36,8 @@ export interface BodyRegion {
   description: string;
   commonConditions: string[];
   keyStructures: string[];
-  layer: 'skin' | 'fat' | 'muscle' | 'bone' | 'organ';
+  layer: LayerType;
+  layers: LayerType[]; // All layers this region belongs to
   relatedModules: string[];
   educationalContentId?: string;
 }
@@ -46,6 +57,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Migraine', 'Tension headache', 'Sinusitis', 'Vertigo', 'Tinnitus'],
     keyStructures: ['Brain', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Skull'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone', 'organ'],
     relatedModules: ['neurology', 'ophthalmology', 'ent'],
   },
   {
@@ -60,6 +72,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Cervical strain', 'Thyroid disorders', 'Lymphadenopathy'],
     keyStructures: ['Cervical spine', 'Trachea', 'Thyroid', 'Carotid arteries', 'Jugular veins'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['endocrinology', 'orthopedics'],
   },
 
@@ -76,6 +89,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hypertension', 'Asthma', 'COPD', 'Pneumonia', 'Angina', 'GERD'],
     keyStructures: ['Heart', 'Lungs', 'Ribs', 'Sternum', 'Thoracic spine'],
     layer: 'organ',
+    layers: ['skin', 'fat', 'muscle', 'bone', 'organ'],
     relatedModules: ['cardiology', 'pulmonology'],
   },
   {
@@ -90,6 +104,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Thoracic outlet syndrome', 'Scoliosis', 'Kyphosis', 'Disc herniation'],
     keyStructures: ['Vertebrae T1-T12', 'Spinal cord', 'Intercostal nerves'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'neurology'],
   },
   {
@@ -104,6 +119,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Low back pain', 'Lumbar disc herniation', 'Spinal stenosis', 'Sciatica'],
     keyStructures: ['Vertebrae L1-L5', 'Cauda equina', 'Sciatic nerve', 'Psoas muscle'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'neurology'],
   },
   {
@@ -118,6 +134,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Diabetes', 'GERD', 'IBS', 'Kidney disease', 'Liver disease', 'Gallstones'],
     keyStructures: ['Stomach', 'Liver', 'Kidneys', 'Pancreas', 'Intestines', 'Gallbladder'],
     layer: 'organ',
+    layers: ['skin', 'fat', 'muscle', 'bone', 'organ'],
     relatedModules: ['gastroenterology', 'endocrinology', 'nephrology'],
   },
   {
@@ -132,6 +149,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['UTI', 'Prostatitis', 'Endometriosis', 'Hemorrhoids'],
     keyStructures: ['Bladder', 'Reproductive organs', 'Rectum', 'Hip bones', 'Sacrum'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone', 'organ'],
     relatedModules: ['obgyn', 'urology'],
   },
 

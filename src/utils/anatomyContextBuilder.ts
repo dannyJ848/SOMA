@@ -23,6 +23,7 @@ interface StructureEducationalContent {
 
 // Educational content for body regions (expandable with more data)
 const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
+  // HEAD & NECK
   head: {
     name: 'Head',
     latinName: 'Caput',
@@ -41,6 +42,8 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Neck strain', 'Cervical disc herniation', 'Whiplash', 'Thyroid disorders'],
     relatedStructures: ['Cervical vertebrae', 'Thyroid gland', 'Trachea', 'Esophagus', 'Carotid arteries'],
   },
+
+  // TORSO
   chest: {
     name: 'Chest (Thorax)',
     latinName: 'Thorax',
@@ -86,115 +89,8 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Hip arthritis', 'Pelvic fracture', 'UTI', 'Prostatitis', 'Endometriosis'],
     relatedStructures: ['Hip bones', 'Sacrum', 'Coccyx', 'Bladder', 'Reproductive organs'],
   },
-  leftArm: {
-    name: 'Left Arm',
-    latinName: 'Brachium sinister',
-    system: 'Musculoskeletal',
-    location: 'Left upper extremity, from shoulder to elbow',
-    function: 'Allows reaching, grasping, and manipulation of objects. Contains major nerves and blood vessels.',
-    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
-    relatedStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
-  },
-  rightArm: {
-    name: 'Right Arm',
-    latinName: 'Brachium dexter',
-    system: 'Musculoskeletal',
-    location: 'Right upper extremity, from shoulder to elbow',
-    function: 'Allows reaching, grasping, and manipulation of objects. Contains major nerves and blood vessels.',
-    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
-    relatedStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
-  },
-  leftForearm: {
-    name: 'Left Forearm',
-    latinName: 'Antebrachium sinistrum',
-    system: 'Musculoskeletal',
-    location: 'Left forearm, from elbow to wrist',
-    function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
-    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
-    relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
-  },
-  rightForearm: {
-    name: 'Right Forearm',
-    latinName: 'Antebrachium dextrum',
-    system: 'Musculoskeletal',
-    location: 'Right forearm, from elbow to wrist',
-    function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
-    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
-    relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
-  },
-  leftHand: {
-    name: 'Left Hand',
-    latinName: 'Manus sinistra',
-    system: 'Musculoskeletal',
-    location: 'Left hand, from wrist to fingertips',
-    function: 'Complex structure with 27 bones for fine manipulation and grip.',
-    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
-    relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
-  },
-  rightHand: {
-    name: 'Right Hand',
-    latinName: 'Manus dextra',
-    system: 'Musculoskeletal',
-    location: 'Right hand, from wrist to fingertips',
-    function: 'Complex structure with 27 bones for fine manipulation and grip.',
-    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
-    relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
-  },
-  leftThigh: {
-    name: 'Left Thigh',
-    latinName: 'Femur sinistrum',
-    system: 'Musculoskeletal',
-    location: 'Left upper leg, from hip to knee',
-    function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
-    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
-    relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
-  },
-  rightThigh: {
-    name: 'Right Thigh',
-    latinName: 'Femur dextrum',
-    system: 'Musculoskeletal',
-    location: 'Right upper leg, from hip to knee',
-    function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
-    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
-    relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
-  },
-  leftLeg: {
-    name: 'Left Lower Leg',
-    latinName: 'Crus sinister',
-    system: 'Musculoskeletal',
-    location: 'Left lower leg, from knee to ankle',
-    function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
-    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
-    relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
-  },
-  rightLeg: {
-    name: 'Right Lower Leg',
-    latinName: 'Crus dexter',
-    system: 'Musculoskeletal',
-    location: 'Right lower leg, from knee to ankle',
-    function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
-    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
-    relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
-  },
-  leftFoot: {
-    name: 'Left Foot',
-    latinName: 'Pes sinister',
-    system: 'Musculoskeletal',
-    location: 'Left foot, from ankle to toes',
-    function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
-    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
-    relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
-  },
-  rightFoot: {
-    name: 'Right Foot',
-    latinName: 'Pes dexter',
-    system: 'Musculoskeletal',
-    location: 'Right foot, from ankle to toes',
-    function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
-    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
-    relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
-  },
-  // Shoulders
+
+  // UPPER EXTREMITIES - SHOULDER
   leftShoulder: {
     name: 'Left Shoulder',
     latinName: 'Articulatio glenohumeralis sinistra',
@@ -213,7 +109,8 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
   },
-  // Arms
+
+  // UPPER EXTREMITIES - ARM
   leftArm: {
     name: 'Left Arm',
     latinName: 'Brachium sinistrum',
@@ -232,7 +129,8 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     relatedStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
   },
-  // Elbows
+
+  // UPPER EXTREMITIES - ELBOW
   leftElbow: {
     name: 'Left Elbow',
     latinName: 'Articulatio cubiti sinistra',
@@ -251,7 +149,28 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
   },
-  // Wrists
+
+  // UPPER EXTREMITIES - FOREARM
+  leftForearm: {
+    name: 'Left Forearm',
+    latinName: 'Antebrachium sinistrum',
+    system: 'Musculoskeletal',
+    location: 'Left forearm, from elbow to wrist',
+    function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
+    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
+    relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
+  },
+  rightForearm: {
+    name: 'Right Forearm',
+    latinName: 'Antebrachium dextrum',
+    system: 'Musculoskeletal',
+    location: 'Right forearm, from elbow to wrist',
+    function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
+    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
+    relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
+  },
+
+  // UPPER EXTREMITIES - WRIST
   leftWrist: {
     name: 'Left Wrist',
     latinName: 'Articulatio radiocarpalis sinistra',
@@ -270,7 +189,28 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Sprain', 'Arthritis', 'Fracture'],
     relatedStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
   },
-  // Hips
+
+  // UPPER EXTREMITIES - HAND
+  leftHand: {
+    name: 'Left Hand',
+    latinName: 'Manus sinistra',
+    system: 'Musculoskeletal',
+    location: 'Left hand, from wrist to fingertips',
+    function: 'Complex structure with 27 bones for fine manipulation and grip.',
+    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
+    relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
+  },
+  rightHand: {
+    name: 'Right Hand',
+    latinName: 'Manus dextra',
+    system: 'Musculoskeletal',
+    location: 'Right hand, from wrist to fingertips',
+    function: 'Complex structure with 27 bones for fine manipulation and grip.',
+    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
+    relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
+  },
+
+  // LOWER EXTREMITIES - HIP
   leftHip: {
     name: 'Left Hip',
     latinName: 'Articulatio coxae sinistra',
@@ -289,13 +229,14 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     relatedStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
   },
-  // Thighs
+
+  // LOWER EXTREMITIES - THIGH
   leftThigh: {
     name: 'Left Thigh',
     latinName: 'Femur sinistrum',
     system: 'Musculoskeletal',
     location: 'Left upper leg, from hip to knee',
-    function: 'Contains the femur and major muscle groups for locomotion.',
+    function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
   },
@@ -304,11 +245,12 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     latinName: 'Femur dextrum',
     system: 'Musculoskeletal',
     location: 'Right upper leg, from hip to knee',
-    function: 'Contains the femur and major muscle groups for locomotion.',
+    function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
   },
-  // Knees
+
+  // LOWER EXTREMITIES - KNEE
   leftKnee: {
     name: 'Left Knee',
     latinName: 'Articulatio genus sinistra',
@@ -327,7 +269,28 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     relatedStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
   },
-  // Ankles
+
+  // LOWER EXTREMITIES - LEG
+  leftLeg: {
+    name: 'Left Lower Leg',
+    latinName: 'Crus sinistrum',
+    system: 'Musculoskeletal',
+    location: 'Left lower leg, from knee to ankle',
+    function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
+    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
+    relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
+  },
+  rightLeg: {
+    name: 'Right Lower Leg',
+    latinName: 'Crus dextrum',
+    system: 'Musculoskeletal',
+    location: 'Right lower leg, from knee to ankle',
+    function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
+    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
+    relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
+  },
+
+  // LOWER EXTREMITIES - ANKLE
   leftAnkle: {
     name: 'Left Ankle',
     latinName: 'Articulatio talocruralis sinistra',
@@ -345,6 +308,26 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows dorsiflexion and plantarflexion of the foot; critical for walking and balance.',
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     relatedStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
+  },
+
+  // LOWER EXTREMITIES - FOOT
+  leftFoot: {
+    name: 'Left Foot',
+    latinName: 'Pes sinister',
+    system: 'Musculoskeletal',
+    location: 'Left foot, from ankle to toes',
+    function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
+    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
+    relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
+  },
+  rightFoot: {
+    name: 'Right Foot',
+    latinName: 'Pes dexter',
+    system: 'Musculoskeletal',
+    location: 'Right foot, from ankle to toes',
+    function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
+    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
+    relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
   },
 };
 

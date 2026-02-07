@@ -136,7 +136,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
         onMouseMove={handleMouseMove}
       >
         <div className="thyroid-scale__header"
-3.      >
+        >
           <h3 className="thyroid-scale__title">Thyroid Function</h3>
           <div className="thyroid-scale__value">
             <span
@@ -172,7 +172,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
         >
           <div className="thyroid-scale__thermometer">
             {/* Thermometer Tube */}
-            <div className="thyroid-scale__tube"㸉
+            <div className="thyroid-scale__tube">
               <div
                 className="thyroid-scale__fill"
                 style={{
@@ -220,14 +220,14 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
             </div>
 
             {/* Markers */}
-            <div className="thyroid-scale__markers"㸉
+            <div className="thyroid-scale__markers">
               <div className="thyroid-scale__marker">
                 <div className="thyroid-scale__marker-line" />
                 <span className="thyroid-scale__marker-label">Hyper (High)</span>
-                <span className="thyroid-scale__marker-value">< 0.4</span>
+                <span className="thyroid-scale__marker-value">{'<'} 0.4</span>
               </div>
               
-              <div className="thyroid-scale__marker"㸉
+              <div className="thyroid-scale__marker">
                 <div className="thyroid-scale__marker-line" />
                 <span className="thyroid-scale__marker-label">Normal</span>
                 <span className="thyroid-scale__marker-value">0.4-4.0</span>
@@ -236,26 +236,26 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
               <div className="thyroid-scale__marker">
                 <div className="thyroid-scale__marker-line" />
                 <span className="thyroid-scale__marker-label">Hypo (Low)</span>
-                <span className="thyroid-scale__marker-value">> 4.0</span>
+                <span className="thyroid-scale__marker-value">{'>'} 4.0</span>
               </div>
             </div>
           </div>
 
           {/* Zone Labels */}
-          <div className="thyroid-scale__zones"㸉
-            <div className="thyroid-scale__zone thyroid-scale__zone--hyper"㸉
+          <div className="thyroid-scale__zones">
+            <div className="thyroid-scale__zone thyroid-scale__zone--hyper">
               <strong>Hyperthyroid</strong>
               <br />
               Too fast
             </div>
             
-            <div className="thyroid-scale__zone thyroid-scale__zone--normal"㸉
+            <div className="thyroid-scale__zone thyroid-scale__zone--normal">
               <strong>Normal</strong>
               <br />
               Just right
             </div>
             
-            <div className="thyroid-scale__zone thyroid-scale__zone--hypo"㸉
+            <div className="thyroid-scale__zone thyroid-scale__zone--hypo">
               <strong>Hypothyroid</strong>
               <br />
               Too slow
@@ -277,7 +277,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
             viewBox="0 0 80 60"
           >
             {/* Thyroid gland shape (butterfly-like) */}
-            <g className={glandAnimationClass}㸉
+            <g className={glandAnimationClass}>
               {/* Left lobe */}
               <ellipse
                 cx="25"
@@ -327,7 +327,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
 
         {/* Status Info */}
         <div className="thyroid-scale__info"
-3.      >
+        >
           <strong style={{ color: statusDescription.color }}>
             {statusDescription.title}
           </strong>
@@ -345,7 +345,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
             padding: '1rem',
             background: 'var(--bg-secondary, #141414)',
             borderRadius: '8px',
-          }}㸉
+          }}>
             {t3 !== undefined && (
               <div
                 onMouseEnter={(e) => showTooltip(
@@ -355,7 +355,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
                 )}
                 onMouseLeave={hideTooltip}
               >
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #888888)' }}㸉
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #888888)' }}>
                   T3 (Triiodothyronine)
                 </div>
                 <div style={{
@@ -364,7 +364,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
                   color: t3 >= (referenceRanges.t3?.low || 80) && t3 <= (referenceRanges.t3?.high || 200)
                     ? 'var(--success, #22c55e)'
                     : 'var(--warning, #f59e0b)'
-                }}㸉
+                }}>
                   {formatHormone(t3, 0)}
                   <span style={{ fontSize: '0.75rem', marginLeft: '0.25rem' }}>ng/dL</span>
                 </div>

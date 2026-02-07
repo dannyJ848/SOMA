@@ -258,7 +258,7 @@ export const LipidPanelChart: React.FC<LipidPanelChartProps> = ({
                   animation: animated ? 'pulse-hdl 2s ease-in-out infinite' : 'none',
                 }}
               />
-              <!-- Shield shine effect -->
+              {/* Shield shine effect */}
               <path
                 d="M 95 100 L 92 115 L 98 125"
                 fill="none"

@@ -1061,6 +1061,1372 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
     },
   }],
 
+  ['neck', {
+    regionId: 'neck',
+    regionName: 'Neck',
+    latinName: 'Collum',
+    regionDescription: 'The neck connects the head to the torso and contains the cervical spine, trachea, and major vessels',
+    boundingBox: {
+      min: { x: -0.1, y: 1.3, z: -0.1 },
+      max: { x: 0.1, y: 1.6, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'neck-pain',
+        symptom: 'Neck Pain',
+        aliases: ['cervical pain', 'neck ache', 'stiff neck'],
+        frequency: 'very-common',
+        description: 'Pain or discomfort in the neck region',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-cervical-spine',
+            structureName: 'Cervical Spine',
+            system: 'musculoskeletal',
+            mechanism: 'Disc degeneration, muscle strain, or facet joint dysfunction',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-cervical-muscles',
+            structureName: 'Cervical Muscles',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle tension, strain, or trigger points',
+            highlightColor: '#27AE60',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Range of motion limitation', 'Radiation to arms', 'Associated headache'],
+        commonCauses: ['Muscle strain', 'Poor posture', 'Cervical spondylosis', 'Whiplash'],
+        differentialDiagnoses: ['Cervical disc herniation', 'Spinal stenosis', 'Radiculopathy', 'Myofascial pain'],
+        relatedComplaints: ['neck-stiffness', 'arm-pain', 'headache'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Cervical vertebrae C1-C7', 'Intervertebral discs', 'Ligaments', 'Muscles'],
+          structureIds: ['musculoskeletal-cervical-spine', 'musculoskeletal-cervical-discs', 'musculoskeletal-cervical-muscles'],
+          primaryFunctions: ['Support head', 'Enable head movement', 'Protect spinal cord'],
+        },
+        {
+          system: 'nervous',
+          structures: ['Spinal cord', 'Cervical nerve roots', 'Brachial plexus'],
+          structureIds: ['nervous-spinal-cord', 'nervous-cervical-roots', 'nervous-brachial-plexus'],
+          primaryFunctions: ['Transmit signals', 'Upper limb innervation'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-cervical-spine',
+          structureName: 'Cervical Vertebrae',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Common source of neck pain and radiculopathy',
+          commonPathologies: ['Disc herniation', 'Spondylosis', 'Fracture'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Cervical plexus', 'Cervical dorsal rami'],
+        motorNerves: ['C1-C8 spinal nerves'],
+        dermatomalLevels: ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Vertebral arteries', 'Carotid arteries'],
+        venousDrainage: ['Jugular veins', 'Vertebral veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Neck pain with fever and stiff neck',
+        concern: 'Meningitis',
+        associatedFindings: ['Photophobia', 'Altered mental status', 'Rash'],
+        action: 'Emergency evaluation',
+        urgency: 'emergency',
+      },
+      {
+        symptom: 'Neck pain after trauma with neuro deficits',
+        concern: 'Cervical spine fracture',
+        associatedFindings: ['Weakness', 'Numbness', 'Incontinence'],
+        action: 'Immobilize and emergency imaging',
+        urgency: 'emergency',
+      },
+    ],
+    relatedModules: ['orthopedics', 'neurology'],
+    explanations: {
+      level1: 'Your neck connects your head to your body. It has bones, muscles, and nerves that can get sore from poor posture or overuse.',
+      level2: 'The neck contains 7 cervical vertebrae that support the head and allow movement. Muscles and ligaments provide stability. Pain often comes from muscle strain or disc problems.',
+      level3: 'The cervical spine consists of seven vertebrae with discs between them. The spinal cord runs through the vertebral canal, and nerve roots exit through foramina. Common pain sources include discs, facet joints, and muscles.',
+      level4: 'Cervical biomechanics involve complex coupled motions. Disc herniations at C5-C6 and C6-C7 are most common. Radiculopathy follows dermatomal patterns. The vertebral arteries traverse the transverse foramina.',
+      level5: 'Cervical pain involves nociceptors in discs, facet joints, and muscles. Disc herniation causes radiculopathy via mechanical compression and chemical irritation. Central sensitization plays a role in chronic neck pain.',
+    },
+  }],
+
+  ['shoulder-left', {
+    regionId: 'shoulder-left',
+    regionName: 'Left Shoulder',
+    latinName: 'Articulatio glenohumeralis sinistra',
+    regionDescription: 'The shoulder is a ball-and-socket joint connecting the arm to the torso',
+    boundingBox: {
+      min: { x: -0.45, y: 0.95, z: -0.1 },
+      max: { x: -0.25, y: 1.15, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'shoulder-pain',
+        symptom: 'Shoulder Pain',
+        aliases: ['shoulder ache', 'painful shoulder', 'stiff shoulder'],
+        frequency: 'very-common',
+        description: 'Pain in or around the shoulder joint',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-rotator-cuff',
+            structureName: 'Rotator Cuff',
+            system: 'musculoskeletal',
+            mechanism: 'Tendon inflammation or tear',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-glenohumeral-joint',
+            structureName: 'Glenohumeral Joint',
+            system: 'musculoskeletal',
+            mechanism: 'Joint inflammation or degeneration',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-subacromial-bursa',
+            structureName: 'Subacromial Bursa',
+            system: 'musculoskeletal',
+            mechanism: 'Bursal inflammation',
+            highlightColor: '#F39C12',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Range of motion limitation', 'Night pain', 'Weakness'],
+        commonCauses: ['Rotator cuff tendinopathy', 'Impingement', 'Bursitis', 'Arthritis'],
+        differentialDiagnoses: ['Rotator cuff tear', 'Frozen shoulder', 'AC joint pathology', 'Referred pain'],
+        relatedComplaints: ['shoulder-stiffness', 'arm-weakness'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Humerus', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
+          structureIds: ['musculoskeletal-humerus', 'musculoskeletal-scapula', 'musculoskeletal-rotator-cuff'],
+          primaryFunctions: ['Wide range of motion', 'Arm positioning'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-rotator-cuff',
+          structureName: 'Rotator Cuff',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Primary stabilizer of the shoulder; common tear site',
+          commonPathologies: ['Supraspinatus tear', 'Tendinopathy', 'Calcific tendinitis'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Axillary nerve', 'Suprascapular nerve'],
+        motorNerves: ['Axillary nerve', 'Suprascapular nerve'],
+        dermatomalLevels: ['C4', 'C5', 'C6'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Axillary artery branches'],
+        venousDrainage: ['Axillary vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Shoulder pain with chest pain and shortness of breath',
+        concern: 'Cardiac referred pain',
+        associatedFindings: ['Diaphoresis', 'Nausea', 'Jaw/arm pain'],
+        action: 'Emergency cardiac evaluation',
+        urgency: 'emergency',
+      },
+    ],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your shoulder is a ball-and-socket joint that lets you move your arm in many directions. It can get painful from overuse or injury.',
+      level2: 'The shoulder is the most mobile joint in the body. It relies on muscles (rotator cuff) for stability. Pain often comes from tendon inflammation or tears.',
+      level3: 'The glenohumeral joint has a shallow socket that allows great mobility but requires dynamic stabilization by the rotator cuff. Impingement occurs when tendons are compressed under the acromion.',
+      level4: 'Rotator cuff tendons (supraspinatus most commonly) pass through the subacromial space. Degenerative changes and mechanical impingement lead to tendinopathy. Full-thickness tears cause weakness and may require surgical repair.',
+      level5: 'Shoulder pain involves subacromial bursa inflammation and rotator cuff tendinopathy. Cellular changes in tendinopathy include collagen disorganization and neovascularization. Biomechanical factors and overuse contribute to pathology.',
+    },
+  }],
+
+  ['shoulder-right', {
+    regionId: 'shoulder-right',
+    regionName: 'Right Shoulder',
+    latinName: 'Articulatio glenohumeralis dextra',
+    regionDescription: 'The shoulder is a ball-and-socket joint connecting the arm to the torso',
+    boundingBox: {
+      min: { x: 0.25, y: 0.95, z: -0.1 },
+      max: { x: 0.45, y: 1.15, z: 0.1 },
+    },
+    chiefComplaints: [], // Uses same as left shoulder
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Axillary nerve', 'Suprascapular nerve'],
+        motorNerves: ['Axillary nerve', 'Suprascapular nerve'],
+        dermatomalLevels: ['C4', 'C5', 'C6'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Axillary artery branches'],
+        venousDrainage: ['Axillary vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your shoulder is a ball-and-socket joint that lets you move your arm.',
+      level2: 'The shoulder is the most mobile joint in the body, relying on muscles for stability.',
+      level3: 'The glenohumeral joint has a shallow socket requiring dynamic stabilization.',
+      level4: 'Rotator cuff tendons pass through the subacromial space.',
+      level5: 'Shoulder pain involves bursa inflammation and rotator cuff tendinopathy.',
+    },
+  }],
+
+  ['arm-left', {
+    regionId: 'arm-left',
+    regionName: 'Left Arm',
+    latinName: 'Brachium sinistrum',
+    regionDescription: 'The arm (brachium) extends from shoulder to elbow, containing the humerus and major muscles',
+    boundingBox: {
+      min: { x: -0.52, y: 0.4, z: -0.1 },
+      max: { x: -0.38, y: 0.9, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'arm-pain',
+        symptom: 'Arm Pain',
+        aliases: ['upper arm pain', 'bicep pain', 'tricep pain'],
+        frequency: 'common',
+        description: 'Pain in the upper arm between shoulder and elbow',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-biceps',
+            structureName: 'Biceps Brachii',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain or tendonitis',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-triceps',
+            structureName: 'Triceps Brachii',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain or tendonitis',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-humerus',
+            structureName: 'Humerus',
+            system: 'musculoskeletal',
+            mechanism: 'Fracture or bone pathology',
+            highlightColor: '#27AE60',
+          },
+        ],
+        characteristicFeatures: ['Location (anterior/posterior)', 'Movement-related pain', 'Swelling', 'Weakness'],
+        commonCauses: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain', 'Muscle contusion'],
+        differentialDiagnoses: ['Biceps tendon rupture', 'Humeral fracture', 'Radial neuropathy', 'Referred neck pain'],
+        relatedComplaints: ['shoulder-pain', 'elbow-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Humerus', 'Biceps brachii', 'Triceps brachii', 'Brachialis'],
+          structureIds: ['musculoskeletal-humerus', 'musculoskeletal-biceps', 'musculoskeletal-triceps'],
+          primaryFunctions: ['Elbow flexion and extension', 'Forearm supination'],
+        },
+        {
+          system: 'cardiovascular',
+          structures: ['Brachial artery', 'Basilic vein', 'Cephalic vein'],
+          structureIds: ['cardiovascular-brachial-artery', 'cardiovascular-arm-veins'],
+          primaryFunctions: ['Blood supply to arm', 'Venous drainage'],
+        },
+        {
+          system: 'nervous',
+          structures: ['Median nerve', 'Ulnar nerve', 'Radial nerve', 'Musculocutaneous nerve'],
+          structureIds: ['nervous-median', 'nervous-ulnar', 'nervous-radial'],
+          primaryFunctions: ['Motor control', 'Sensation'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-humerus',
+          structureName: 'Humerus',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Common fracture site, especially in elderly',
+          commonPathologies: ['Proximal humerus fracture', 'Humeral shaft fracture', 'Pathologic fracture'],
+        },
+        {
+          structureId: 'musculoskeletal-biceps',
+          structureName: 'Biceps Brachii',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Common site of tendonitis and rupture',
+          commonPathologies: ['Biceps tendonitis', 'Distal biceps rupture', 'Popeye deformity'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Musculocutaneous nerve', 'Radial nerve (posterior arm)'],
+        motorNerves: ['Musculocutaneous nerve', 'Radial nerve (triceps)'],
+        dermatomalLevels: ['C5', 'C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Brachial artery', 'Profunda brachii artery'],
+        venousDrainage: ['Basilic vein', 'Cephalic vein', 'Brachial veins'],
+        lymphaticDrainage: ['Axillary lymph nodes'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Severe arm pain with pulselessness or pallor',
+        concern: 'Vascular compromise',
+        associatedFindings: ['Cold extremity', 'Absent pulse', 'Delayed capillary refill'],
+        action: 'Emergency vascular evaluation',
+        urgency: 'emergency',
+      },
+      {
+        symptom: 'Arm pain after trauma with deformity',
+        concern: 'Fracture with displacement',
+        associatedFindings: ['Obvious deformity', 'Inability to move', 'Numbness'],
+        action: 'Imaging and orthopedic consultation',
+        urgency: 'urgent',
+      },
+    ],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your arm has one big bone (humerus) and muscles that bend and straighten your elbow. Pain usually comes from muscle strain or injury.',
+      level2: 'The arm contains the humerus bone with biceps (front) and triceps (back) muscles. The brachial artery and major nerves run through this region.',
+      level3: 'The brachium contains the humerus with flexor (biceps, brachialis) and extensor (triceps) compartments. The musculocutaneous and radial nerves innervate these muscles.',
+      level4: 'The humerus has distinct anatomical regions: proximal (surgical/anatomic necks), shaft, and distal (condyles). The radial nerve spirals around the posterior humerus, making it vulnerable in shaft fractures.',
+      level5: 'Arm pain mechanisms include muscle strain (sarcomere disruption), tendon inflammation (collagen breakdown), and nerve compression. The brachial plexus origins explain referred pain patterns from the neck.',
+    },
+  }],
+
+  ['arm-right', {
+    regionId: 'arm-right',
+    regionName: 'Right Arm',
+    latinName: 'Brachium dextrum',
+    regionDescription: 'The arm (brachium) extends from shoulder to elbow, containing the humerus and major muscles',
+    boundingBox: {
+      min: { x: 0.38, y: 0.4, z: -0.1 },
+      max: { x: 0.52, y: 0.9, z: 0.1 },
+    },
+    chiefComplaints: [], // Uses same as left arm
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Musculocutaneous nerve', 'Radial nerve'],
+        motorNerves: ['Musculocutaneous nerve', 'Radial nerve'],
+        dermatomalLevels: ['C5', 'C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Brachial artery'],
+        venousDrainage: ['Basilic vein', 'Cephalic vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your arm has one big bone and muscles that move your elbow.',
+      level2: 'The arm contains the humerus with biceps and triceps muscles.',
+      level3: 'The brachium has flexor and extensor muscle compartments.',
+      level4: 'The humerus has distinct anatomical regions and nerve courses.',
+      level5: 'Arm pain involves muscle, tendon, and nerve structures.',
+    },
+  }],
+
+  ['elbow-left', {
+    regionId: 'elbow-left',
+    regionName: 'Left Elbow',
+    latinName: 'Articulatio cubiti sinistra',
+    regionDescription: 'The elbow is a hinge joint connecting the upper arm to the forearm',
+    boundingBox: {
+      min: { x: -0.55, y: 0.25, z: -0.08 },
+      max: { x: -0.4, y: 0.4, z: 0.08 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'elbow-pain',
+        symptom: 'Elbow Pain',
+        aliases: ['elbow ache', 'sore elbow'],
+        frequency: 'common',
+        description: 'Pain in or around the elbow joint',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-lateral-epicondyle',
+            structureName: 'Lateral Epicondyle',
+            system: 'musculoskeletal',
+            mechanism: 'Extensor tendon origin inflammation',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-medial-epicondyle',
+            structureName: 'Medial Epicondyle',
+            system: 'musculoskeletal',
+            mechanism: 'Flexor tendon origin inflammation',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-olecranon-bursa',
+            structureName: 'Olecranon Bursa',
+            system: 'musculoskeletal',
+            mechanism: 'Bursal inflammation',
+            highlightColor: '#F39C12',
+          },
+        ],
+        characteristicFeatures: ['Location (medial/lateral/posterior)', 'Grip-related pain', 'Swelling'],
+        commonCauses: ['Lateral epicondylitis', 'Medial epicondylitis', 'Bursitis', 'Arthritis'],
+        differentialDiagnoses: ['Tennis elbow', 'Golfer\'s elbow', 'Olecranon bursitis', 'Radial tunnel syndrome'],
+        relatedComplaints: ['forearm-pain', 'wrist-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Humerus', 'Radius', 'Ulna', 'Joint capsule', 'Ligaments'],
+          structureIds: ['musculoskeletal-elbow-joint', 'musculoskeletal-elbow-ligaments'],
+          primaryFunctions: ['Flexion and extension', 'Forearm rotation'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-lateral-epicondyle',
+          structureName: 'Lateral Epicondyle',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Origin of wrist extensors; common site of overuse injury',
+          commonPathologies: ['Lateral epicondylitis (tennis elbow)', 'Extensor tendon tear'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Radial nerve', 'Ulnar nerve', 'Median nerve'],
+        motorNerves: ['Radial nerve', 'Musculocutaneous nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery', 'Brachial artery'],
+        venousDrainage: ['Cephalic vein', 'Basilic vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your elbow is a hinge that lets you bend and straighten your arm. It can get sore from repetitive activities like sports or computer work.',
+      level2: 'The elbow joint connects the upper arm to the forearm. It allows bending, straightening, and rotation. Common problems include tendon inflammation from overuse.',
+      level3: 'The elbow is a synovial hinge joint with humeroulnar, humeroradial, and proximal radioulnar articulations. The ulnar nerve passes behind the medial epicondyle.',
+      level4: 'Epicondylitis involves microtears at tendon origins. Lateral epicondylitis affects extensor carpi radialis brevis. Ulnar nerve compression at the cubital tunnel causes medial elbow symptoms.',
+      level5: 'Elbow pain involves extensor or flexor tendon microtrauma with failed healing response. Eccentric loading and repetitive strain contribute to pathology. Ultrasound and MRI guide treatment.',
+    },
+  }],
+
+  ['elbow-right', {
+    regionId: 'elbow-right',
+    regionName: 'Right Elbow',
+    latinName: 'Articulatio cubiti dextra',
+    regionDescription: 'The elbow is a hinge joint connecting the upper arm to the forearm',
+    boundingBox: {
+      min: { x: 0.4, y: 0.25, z: -0.08 },
+      max: { x: 0.55, y: 0.4, z: 0.08 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Radial nerve', 'Ulnar nerve'],
+        motorNerves: ['Radial nerve', 'Musculocutaneous nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery'],
+        venousDrainage: ['Cephalic vein', 'Basilic vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your elbow is a hinge that lets you bend and straighten your arm.',
+      level2: 'The elbow joint connects the upper arm to the forearm.',
+      level3: 'The elbow is a synovial hinge joint with multiple articulations.',
+      level4: 'Epicondylitis involves microtears at tendon origins.',
+      level5: 'Elbow pain involves tendon microtrauma with failed healing.',
+    },
+  }],
+
+  ['forearm-left', {
+    regionId: 'forearm-left',
+    regionName: 'Left Forearm',
+    latinName: 'Antebrachium sinistrum',
+    regionDescription: 'The forearm extends from elbow to wrist, containing radius and ulna',
+    boundingBox: {
+      min: { x: -0.55, y: -0.15, z: -0.08 },
+      max: { x: -0.4, y: 0.25, z: 0.08 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'forearm-pain',
+        symptom: 'Forearm Pain',
+        aliases: ['forearm ache', 'wrist pain'],
+        frequency: 'common',
+        description: 'Pain in the forearm between elbow and wrist',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-radius',
+            structureName: 'Radius',
+            system: 'musculoskeletal',
+            mechanism: 'Fracture or stress injury',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-ulna',
+            structureName: 'Ulna',
+            system: 'musculoskeletal',
+            mechanism: 'Fracture or stress injury',
+            highlightColor: '#27AE60',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Swelling', 'Deformity'],
+        commonCauses: ['Wrist fracture', 'Compartment syndrome', 'Radial nerve palsy'],
+        differentialDiagnoses: ['Radius fracture', 'Ulna fracture', 'Nerve compression'],
+        relatedComplaints: ['elbow-pain', 'wrist-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Radius', 'Ulna', 'Forearm muscles'],
+          structureIds: ['musculoskeletal-radius', 'musculoskeletal-ulna'],
+          primaryFunctions: ['Wrist and finger movement', 'Forearm rotation'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Radial nerve', 'Median nerve', 'Ulnar nerve'],
+        motorNerves: ['Radial nerve', 'Median nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery'],
+        venousDrainage: ['Radial vein', 'Ulnar vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your forearm has two bones and muscles that move your wrist and fingers.',
+      level2: 'The forearm contains the radius and ulna with flexor and extensor muscles.',
+      level3: 'The forearm allows wrist movement and rotation (pronation/supination).',
+      level4: 'The interosseous membrane connects radius and ulna.',
+      level5: 'Forearm pathology involves bones, muscles, and nerves.',
+    },
+  }],
+
+  ['forearm-right', {
+    regionId: 'forearm-right',
+    regionName: 'Right Forearm',
+    latinName: 'Antebrachium dextrum',
+    regionDescription: 'The forearm extends from elbow to wrist, containing radius and ulna',
+    boundingBox: {
+      min: { x: 0.4, y: -0.15, z: -0.08 },
+      max: { x: 0.55, y: 0.25, z: 0.08 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Radial nerve', 'Median nerve', 'Ulnar nerve'],
+        motorNerves: ['Radial nerve', 'Median nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery'],
+        venousDrainage: ['Radial vein', 'Ulnar vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your forearm has two bones and muscles that move your wrist.',
+      level2: 'The forearm contains the radius and ulna.',
+      level3: 'The forearm allows wrist movement and rotation.',
+      level4: 'The interosseous membrane connects the bones.',
+      level5: 'Forearm pathology involves bones and nerves.',
+    },
+  }],
+
+  ['wrist-left', {
+    regionId: 'wrist-left',
+    regionName: 'Left Wrist',
+    latinName: 'Articulatio radiocarpalis sinistra',
+    regionDescription: 'The wrist is a complex joint connecting the forearm to the hand',
+    boundingBox: {
+      min: { x: -0.58, y: -0.3, z: -0.06 },
+      max: { x: -0.42, y: -0.15, z: 0.06 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'wrist-pain',
+        symptom: 'Wrist Pain',
+        aliases: ['wrist ache', 'sore wrist'],
+        frequency: 'common',
+        description: 'Pain in the wrist joint',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-carpal-bones',
+            structureName: 'Carpal Bones',
+            system: 'musculoskeletal',
+            mechanism: 'Fracture or ligament injury',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-wrist-ligaments',
+            structureName: 'Wrist Ligaments',
+            system: 'musculoskeletal',
+            mechanism: 'Sprain or tear',
+            highlightColor: '#E74C3C',
+          },
+        ],
+        characteristicFeatures: ['Swelling', 'Range of motion limitation', 'Deformity'],
+        commonCauses: ['Sprain', 'Fracture', 'Arthritis', 'Tendonitis'],
+        differentialDiagnoses: ['Carpal tunnel syndrome', 'Fracture', 'Sprain', 'Arthritis'],
+        relatedComplaints: ['hand-pain', 'forearm-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Radius', 'Ulna', 'Carpal bones', 'Ligaments'],
+          structureIds: ['musculoskeletal-wrist-joint', 'musculoskeletal-carpal-bones'],
+          primaryFunctions: ['Wrist movement', 'Stability'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Median nerve', 'Ulnar nerve', 'Radial nerve'],
+        motorNerves: ['Median nerve', 'Ulnar nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery'],
+        venousDrainage: ['Radial vein', 'Ulnar vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    explanations: {
+      level1: 'Your wrist connects your forearm to your hand. It can get sprained or develop arthritis.',
+      level2: 'The wrist contains multiple small bones (carpals) and ligaments. It allows movement in multiple directions.',
+      level3: 'The wrist has proximal and distal carpal rows with complex ligamentous support.',
+      level4: 'Carpal anatomy includes scaphoid, lunate, triquetrum, pisiform, trapezium, trapezoid, capitate, and hamate.',
+      level5: 'Wrist biomechanics involve radiocarpal and midcarpal joints with complex kinematics.',
+    },
+  }],
+
+  ['wrist-right', {
+    regionId: 'wrist-right',
+    regionName: 'Right Wrist',
+    latinName: 'Articulatio radiocarpalis dextra',
+    regionDescription: 'The wrist is a complex joint connecting the forearm to the hand',
+    boundingBox: {
+      min: { x: 0.42, y: -0.3, z: -0.06 },
+      max: { x: 0.58, y: -0.15, z: 0.06 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Median nerve', 'Ulnar nerve', 'Radial nerve'],
+        motorNerves: ['Median nerve', 'Ulnar nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Radial artery', 'Ulnar artery'],
+        venousDrainage: ['Radial vein', 'Ulnar vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    explanations: {
+      level1: 'Your wrist connects your forearm to your hand.',
+      level2: 'The wrist contains multiple small bones and ligaments.',
+      level3: 'The wrist has proximal and distal carpal rows.',
+      level4: 'Carpal anatomy includes eight small bones.',
+      level5: 'Wrist biomechanics involve complex joint kinematics.',
+    },
+  }],
+
+  ['hand-left', {
+    regionId: 'hand-left',
+    regionName: 'Left Hand',
+    latinName: 'Manus sinistra',
+    regionDescription: 'The hand contains 27 bones for fine manipulation and grip',
+    boundingBox: {
+      min: { x: -0.6, y: -0.45, z: -0.05 },
+      max: { x: -0.4, y: -0.3, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'hand-pain',
+        symptom: 'Hand Pain',
+        aliases: ['hand ache', 'finger pain'],
+        frequency: 'common',
+        description: 'Pain in the hand or fingers',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-carpal-bones',
+            structureName: 'Carpal Bones',
+            system: 'musculoskeletal',
+            mechanism: 'Fracture or dislocation',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-finger-joints',
+            structureName: 'Finger Joints',
+            system: 'musculoskeletal',
+            mechanism: 'Arthritis or injury',
+            highlightColor: '#E74C3C',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Swelling', 'Stiffness', 'Numbness'],
+        commonCauses: ['Trigger finger', 'Arthritis', 'De Quervain\'s', 'Fracture'],
+        differentialDiagnoses: ['Osteoarthritis', 'Rheumatoid arthritis', 'Carpal tunnel syndrome', 'Trigger finger'],
+        relatedComplaints: ['wrist-pain', 'finger-stiffness'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Muscles'],
+          structureIds: ['musculoskeletal-hand-bones', 'musculoskeletal-hand-muscles'],
+          primaryFunctions: ['Fine manipulation', 'Grip', 'Sensation'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Median nerve', 'Ulnar nerve', 'Radial nerve'],
+        motorNerves: ['Median nerve', 'Ulnar nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8', 'T1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Superficial palmar arch', 'Deep palmar arch'],
+        venousDrainage: ['Palmar venous plexus'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    explanations: {
+      level1: 'Your hand has many small bones that let you grip and feel things.',
+      level2: 'The hand contains 27 bones including carpals, metacarpals, and phalanges.',
+      level3: 'Hand function involves intrinsic and extrinsic muscles with complex innervation.',
+      level4: 'The hand has arches (longitudinal and transverse) for grip function.',
+      level5: 'Hand biomechanics involve complex tendon systems and joint mechanics.',
+    },
+  }],
+
+  ['hand-right', {
+    regionId: 'hand-right',
+    regionName: 'Right Hand',
+    latinName: 'Manus dextra',
+    regionDescription: 'The hand contains 27 bones for fine manipulation and grip',
+    boundingBox: {
+      min: { x: 0.4, y: -0.45, z: -0.05 },
+      max: { x: 0.6, y: -0.3, z: 0.1 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Median nerve', 'Ulnar nerve', 'Radial nerve'],
+        motorNerves: ['Median nerve', 'Ulnar nerve'],
+        dermatomalLevels: ['C6', 'C7', 'C8', 'T1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Superficial palmar arch', 'Deep palmar arch'],
+        venousDrainage: ['Palmar venous plexus'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    explanations: {
+      level1: 'Your hand has many small bones for gripping.',
+      level2: 'The hand contains 27 bones.',
+      level3: 'Hand function involves complex muscles.',
+      level4: 'The hand has arches for grip function.',
+      level5: 'Hand biomechanics involve complex systems.',
+    },
+  }],
+
+  ['hip-left', {
+    regionId: 'hip-left',
+    regionName: 'Left Hip',
+    latinName: 'Articulatio coxae sinistra',
+    regionDescription: 'The hip is a ball-and-socket joint connecting the leg to the pelvis',
+    boundingBox: {
+      min: { x: -0.28, y: -0.45, z: -0.1 },
+      max: { x: -0.12, y: -0.25, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'hip-pain',
+        symptom: 'Hip Pain',
+        aliases: ['hip ache', 'groin pain'],
+        frequency: 'common',
+        description: 'Pain in or around the hip joint',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-femoral-head',
+            structureName: 'Femoral Head',
+            system: 'musculoskeletal',
+            mechanism: 'Degeneration or avascular necrosis',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-acetabulum',
+            structureName: 'Acetabulum',
+            system: 'musculoskeletal',
+            mechanism: 'Degeneration or labral tear',
+            highlightColor: '#3498DB',
+          },
+        ],
+        characteristicFeatures: ['Groin pain', 'Limited range of motion', 'Weight-bearing pain'],
+        commonCauses: ['Osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
+        differentialDiagnoses: ['OA', 'Trochanteric bursitis', 'Femoroacetabular impingement', 'Fracture'],
+        relatedComplaints: ['thigh-pain', 'knee-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Femoral head', 'Acetabulum', 'Ligaments', 'Muscles'],
+          structureIds: ['musculoskeletal-hip-joint'],
+          primaryFunctions: ['Weight bearing', 'Locomotion'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Femoral nerve', 'Obturator nerve', 'Sciatic nerve'],
+        motorNerves: ['Femoral nerve', 'Obturator nerve'],
+        dermatomalLevels: ['L2', 'L3', 'L4', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Medial femoral circumflex', 'Lateral femoral circumflex'],
+        venousDrainage: ['Femoral vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Hip pain after fall in elderly',
+        concern: 'Hip fracture',
+        associatedFindings: ['Inability to bear weight', 'Leg shortening', 'External rotation'],
+        action: 'Emergency imaging and orthopedic consultation',
+        urgency: 'emergency',
+      },
+    ],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your hip is a ball-and-socket joint that supports your body weight when standing and walking.',
+      level2: 'The hip joint connects the leg to the pelvis. It is very stable but can develop arthritis with age.',
+      level3: 'The hip is a ball-and-socket synovial joint with the femoral head articulating with the acetabulum.',
+      level4: 'Hip pathology includes osteoarthritis, labral tears, and femoroacetabular impingement.',
+      level5: 'Hip biomechanics involve complex loading patterns and joint reaction forces.',
+    },
+  }],
+
+  ['hip-right', {
+    regionId: 'hip-right',
+    regionName: 'Right Hip',
+    latinName: 'Articulatio coxae dextra',
+    regionDescription: 'The hip is a ball-and-socket joint connecting the leg to the pelvis',
+    boundingBox: {
+      min: { x: 0.12, y: -0.45, z: -0.1 },
+      max: { x: 0.28, y: -0.25, z: 0.1 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Femoral nerve', 'Obturator nerve'],
+        motorNerves: ['Femoral nerve', 'Obturator nerve'],
+        dermatomalLevels: ['L2', 'L3', 'L4', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Medial femoral circumflex'],
+        venousDrainage: ['Femoral vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your hip supports your body weight when walking.',
+      level2: 'The hip joint connects the leg to the pelvis.',
+      level3: 'The hip is a ball-and-socket synovial joint.',
+      level4: 'Hip pathology includes osteoarthritis and labral tears.',
+      level5: 'Hip biomechanics involve complex loading patterns.',
+    },
+  }],
+
+  ['thigh-left', {
+    regionId: 'thigh-left',
+    regionName: 'Left Thigh',
+    latinName: 'Femur sinistrum',
+    regionDescription: 'The thigh contains the femur and major muscle groups for locomotion',
+    boundingBox: {
+      min: { x: -0.25, y: -1.0, z: -0.1 },
+      max: { x: -0.12, y: -0.45, z: 0.1 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'thigh-pain',
+        symptom: 'Thigh Pain',
+        aliases: ['thigh ache', 'quad pain', 'hamstring pain'],
+        frequency: 'common',
+        description: 'Pain in the upper leg',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-quadriceps',
+            structureName: 'Quadriceps',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain or contusion',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-hamstrings',
+            structureName: 'Hamstrings',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain or tear',
+            highlightColor: '#3498DB',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Swelling', 'Bruising', 'Weakness'],
+        commonCauses: ['Quadriceps strain', 'Hamstring tear', 'Contusion', 'Compartment syndrome'],
+        differentialDiagnoses: ['Muscle strain', 'Tear', 'Referred back pain', 'DVT'],
+        relatedComplaints: ['hip-pain', 'knee-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Femur', 'Quadriceps', 'Hamstrings', 'Adductors'],
+          structureIds: ['musculoskeletal-femur', 'musculoskeletal-thigh-muscles'],
+          primaryFunctions: ['Locomotion', 'Stability'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Femoral nerve', 'Sciatic nerve'],
+        motorNerves: ['Femoral nerve', 'Sciatic nerve'],
+        dermatomalLevels: ['L2', 'L3', 'L4', 'S1', 'S2'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Femoral artery', 'Profunda femoris'],
+        venousDrainage: ['Femoral vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Thigh swelling with calf pain and warmth',
+        concern: 'Deep vein thrombosis (DVT)',
+        associatedFindings: ['Swollen calf', 'Tenderness', 'Risk factors for clotting'],
+        action: 'Urgent ultrasound and anticoagulation evaluation',
+        urgency: 'urgent',
+      },
+    ],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your thigh has your biggest bone (femur) and strong muscles for walking and running.',
+      level2: 'The thigh contains the femur with quadriceps (front) and hamstrings (back) muscle groups.',
+      level3: 'The femur is the longest and strongest bone. The thigh muscles power locomotion.',
+      level4: 'Thigh pathology includes muscle strains, contusions, and femoral fractures.',
+      level5: 'Thigh muscle injuries involve sarcomere disruption and hematoma formation.',
+    },
+  }],
+
+  ['thigh-right', {
+    regionId: 'thigh-right',
+    regionName: 'Right Thigh',
+    latinName: 'Femur dextrum',
+    regionDescription: 'The thigh contains the femur and major muscle groups for locomotion',
+    boundingBox: {
+      min: { x: 0.12, y: -1.0, z: -0.1 },
+      max: { x: 0.25, y: -0.45, z: 0.1 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Femoral nerve', 'Sciatic nerve'],
+        motorNerves: ['Femoral nerve', 'Sciatic nerve'],
+        dermatomalLevels: ['L2', 'L3', 'L4', 'S1', 'S2'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Femoral artery'],
+        venousDrainage: ['Femoral vein'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your thigh has strong muscles for walking.',
+      level2: 'The thigh contains the femur with quadriceps and hamstrings.',
+      level3: 'The femur is the longest bone.',
+      level4: 'Thigh pathology includes muscle strains.',
+      level5: 'Thigh muscle injuries involve tissue disruption.',
+    },
+  }],
+
+  ['leg-left', {
+    regionId: 'leg-left',
+    regionName: 'Left Lower Leg',
+    latinName: 'Crus sinistrum',
+    regionDescription: 'The lower leg contains the tibia and fibula with calf muscles',
+    boundingBox: {
+      min: { x: -0.22, y: -1.5, z: -0.08 },
+      max: { x: -0.1, y: -1.0, z: 0.08 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'leg-pain',
+        symptom: 'Lower Leg Pain',
+        aliases: ['calf pain', 'shin pain'],
+        frequency: 'common',
+        description: 'Pain in the lower leg between knee and ankle',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-tibia',
+            structureName: 'Tibia',
+            system: 'musculoskeletal',
+            mechanism: 'Stress fracture or periostitis',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-gastrocnemius',
+            structureName: 'Gastrocnemius',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain or tear',
+            highlightColor: '#E74C3C',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Swelling', 'Warmth'],
+        commonCauses: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
+        differentialDiagnoses: ['Stress fracture', 'Compartment syndrome', 'DVT', 'Achilles pathology'],
+        relatedComplaints: ['knee-pain', 'ankle-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus'],
+          structureIds: ['musculoskeletal-tibia', 'musculoskeletal-calf-muscles'],
+          primaryFunctions: ['Locomotion', 'Ankle movement'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Common peroneal nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1', 'S2'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Anterior tibial artery', 'Posterior tibial artery'],
+        venousDrainage: ['Tibial veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Severe calf pain with swelling and warmth',
+        concern: 'Deep vein thrombosis (DVT)',
+        associatedFindings: ['Swelling', 'Tenderness', 'Risk factors'],
+        action: 'Urgent ultrasound',
+        urgency: 'urgent',
+      },
+    ],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your lower leg has two bones and calf muscles that help you walk and run.',
+      level2: 'The lower leg contains the tibia and fibula with calf muscles.',
+      level3: 'The tibia bears most of the weight; the fibula provides muscle attachment.',
+      level4: 'Lower leg pathology includes stress fractures and compartment syndrome.',
+      level5: 'Lower leg injuries involve bone, muscle, and vascular structures.',
+    },
+  }],
+
+  ['leg-right', {
+    regionId: 'leg-right',
+    regionName: 'Right Lower Leg',
+    latinName: 'Crus dextrum',
+    regionDescription: 'The lower leg contains the tibia and fibula with calf muscles',
+    boundingBox: {
+      min: { x: 0.1, y: -1.5, z: -0.08 },
+      max: { x: 0.22, y: -1.0, z: 0.08 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Common peroneal nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1', 'S2'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Anterior tibial artery', 'Posterior tibial artery'],
+        venousDrainage: ['Tibial veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics'],
+    explanations: {
+      level1: 'Your lower leg has calf muscles for walking.',
+      level2: 'The lower leg contains the tibia and fibula.',
+      level3: 'The tibia bears most of the weight.',
+      level4: 'Lower leg pathology includes fractures.',
+      level5: 'Lower leg injuries involve multiple structures.',
+    },
+  }],
+
+  ['ankle-left', {
+    regionId: 'ankle-left',
+    regionName: 'Left Ankle',
+    latinName: 'Articulatio talocruralis sinistra',
+    regionDescription: 'The ankle connects the lower leg to the foot',
+    boundingBox: {
+      min: { x: -0.25, y: -1.75, z: -0.06 },
+      max: { x: -0.1, y: -1.5, z: 0.06 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'ankle-pain',
+        symptom: 'Ankle Pain',
+        aliases: ['ankle ache', 'twisted ankle'],
+        frequency: 'very-common',
+        description: 'Pain in or around the ankle joint',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-lateral-ligaments',
+            structureName: 'Lateral Ligaments',
+            system: 'musculoskeletal',
+            mechanism: 'Ligament sprain or tear',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-achilles-tendon',
+            structureName: 'Achilles Tendon',
+            system: 'musculoskeletal',
+            mechanism: 'Tendonitis or rupture',
+            highlightColor: '#3498DB',
+          },
+        ],
+        characteristicFeatures: ['Swelling', 'Bruising', 'Instability', 'Limited motion'],
+        commonCauses: ['Sprain', 'Achilles tendonitis', 'Fracture', 'Arthritis'],
+        differentialDiagnoses: ['Ligament sprain', 'Fracture', 'Achilles rupture'],
+        relatedComplaints: ['foot-pain', 'leg-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Tibia', 'Fibula', 'Talus', 'Ligaments'],
+          structureIds: ['musculoskeletal-ankle-joint'],
+          primaryFunctions: ['Stability', 'Movement'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Superficial peroneal nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Anterior tibial artery', 'Posterior tibial artery'],
+        venousDrainage: ['Tibial veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your ankle connects your leg to your foot. It can get sprained easily.',
+      level2: 'The ankle joint allows up and down movement. It is stabilized by ligaments.',
+      level3: 'The ankle is a hinge joint with medial and lateral ligament complexes.',
+      level4: 'Ankle sprains most commonly affect the lateral ligaments.',
+      level5: 'Ankle biomechanics involve complex joint mechanics during gait.',
+    },
+  }],
+
+  ['ankle-right', {
+    regionId: 'ankle-right',
+    regionName: 'Right Ankle',
+    latinName: 'Articulatio talocruralis dextra',
+    regionDescription: 'The ankle connects the lower leg to the foot',
+    boundingBox: {
+      min: { x: 0.1, y: -1.75, z: -0.06 },
+      max: { x: 0.25, y: -1.5, z: 0.06 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Superficial peroneal nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Anterior tibial artery', 'Posterior tibial artery'],
+        venousDrainage: ['Tibial veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your ankle connects your leg to your foot.',
+      level2: 'The ankle joint allows up and down movement.',
+      level3: 'The ankle is a hinge joint with ligament complexes.',
+      level4: 'Ankle sprains affect the lateral ligaments.',
+      level5: 'Ankle biomechanics involve complex mechanics.',
+    },
+  }],
+
+  ['foot-left', {
+    regionId: 'foot-left',
+    regionName: 'Left Foot',
+    latinName: 'Pes sinister',
+    regionDescription: 'The foot contains 26 bones for weight-bearing and locomotion',
+    boundingBox: {
+      min: { x: -0.3, y: -2.0, z: -0.05 },
+      max: { x: -0.08, y: -1.75, z: 0.15 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'foot-pain',
+        symptom: 'Foot Pain',
+        aliases: ['foot ache', 'heel pain'],
+        frequency: 'very-common',
+        description: 'Pain in the foot or heel',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-plantar-fascia',
+            structureName: 'Plantar Fascia',
+            system: 'musculoskeletal',
+            mechanism: 'Fascial inflammation',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-calcaneus',
+            structureName: 'Calcaneus',
+            system: 'musculoskeletal',
+            mechanism: 'Heel spur or fracture',
+            highlightColor: '#3498DB',
+          },
+        ],
+        characteristicFeatures: ['Heel pain', 'Morning pain', 'Swelling'],
+        commonCauses: ['Plantar fasciitis', 'Heel spur', 'Sprain', 'Bunion'],
+        differentialDiagnoses: ['Plantar fasciitis', 'Calcaneal fracture', 'Achilles pathology'],
+        relatedComplaints: ['ankle-pain', 'toe-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
+          structureIds: ['musculoskeletal-foot-bones'],
+          primaryFunctions: ['Weight bearing', 'Locomotion', 'Balance'],
+        },
+      ],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Superficial peroneal nerve', 'Sural nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Dorsalis pedis artery', 'Posterior tibial artery'],
+        venousDrainage: ['Dorsal venous arch'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your foot has many bones that support your weight when standing and walking.',
+      level2: 'The foot contains 26 bones with arches for shock absorption.',
+      level3: 'The foot has longitudinal and transverse arches.',
+      level4: 'Foot pathology includes plantar fasciitis and metatarsalgia.',
+      level5: 'Foot biomechanics involve complex arch mechanics during gait.',
+    },
+  }],
+
+  ['foot-right', {
+    regionId: 'foot-right',
+    regionName: 'Right Foot',
+    latinName: 'Pes dexter',
+    regionDescription: 'The foot contains 26 bones for weight-bearing and locomotion',
+    boundingBox: {
+      min: { x: 0.08, y: -2.0, z: -0.05 },
+      max: { x: 0.3, y: -1.75, z: 0.15 },
+    },
+    chiefComplaints: [],
+    regionalAnatomy: {
+      systems: [],
+      keyStructures: [],
+      neuralInnervation: {
+        sensoryNerves: ['Tibial nerve', 'Superficial peroneal nerve'],
+        motorNerves: ['Tibial nerve'],
+        dermatomalLevels: ['L4', 'L5', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Dorsalis pedis artery'],
+        venousDrainage: ['Dorsal venous arch'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    explanations: {
+      level1: 'Your foot supports your weight when walking.',
+      level2: 'The foot contains 26 bones with arches.',
+      level3: 'The foot has arches for shock absorption.',
+      level4: 'Foot pathology includes plantar fasciitis.',
+      level5: 'Foot biomechanics involve complex mechanics.',
+    },
+  }],
+
   ['knee-left', {
     regionId: 'knee-left',
     regionName: 'Left Knee',
@@ -1271,6 +2637,105 @@ rightKnee.regionalAnatomy = leftKnee.regionalAnatomy;
 rightKnee.differentialAnatomy = leftKnee.differentialAnatomy;
 rightKnee.redFlags = leftKnee.redFlags;
 rightKnee.explanations = leftKnee.explanations;
+
+// Copy shoulder-left data to shoulder-right
+const leftShoulder = regionChiefComplaints.get('shoulder-left')!;
+const rightShoulder = regionChiefComplaints.get('shoulder-right')!;
+rightShoulder.chiefComplaints = leftShoulder.chiefComplaints;
+rightShoulder.regionalAnatomy = leftShoulder.regionalAnatomy;
+rightShoulder.differentialAnatomy = leftShoulder.differentialAnatomy;
+rightShoulder.redFlags = leftShoulder.redFlags;
+rightShoulder.explanations = leftShoulder.explanations;
+
+// Copy arm-left data to arm-right (CORRECTED: no DVT, carpal tunnel, tennis elbow in arm conditions)
+const leftArm = regionChiefComplaints.get('arm-left')!;
+const rightArm = regionChiefComplaints.get('arm-right')!;
+rightArm.chiefComplaints = leftArm.chiefComplaints;
+rightArm.regionalAnatomy = leftArm.regionalAnatomy;
+rightArm.differentialAnatomy = leftArm.differentialAnatomy;
+rightArm.redFlags = leftArm.redFlags;
+rightArm.explanations = leftArm.explanations;
+
+// Copy elbow-left data to elbow-right
+const leftElbow = regionChiefComplaints.get('elbow-left')!;
+const rightElbow = regionChiefComplaints.get('elbow-right')!;
+rightElbow.chiefComplaints = leftElbow.chiefComplaints;
+rightElbow.regionalAnatomy = leftElbow.regionalAnatomy;
+rightElbow.differentialAnatomy = leftElbow.differentialAnatomy;
+rightElbow.redFlags = leftElbow.redFlags;
+rightElbow.explanations = leftElbow.explanations;
+
+// Copy forearm-left data to forearm-right
+const leftForearm = regionChiefComplaints.get('forearm-left')!;
+const rightForearm = regionChiefComplaints.get('forearm-right')!;
+rightForearm.chiefComplaints = leftForearm.chiefComplaints;
+rightForearm.regionalAnatomy = leftForearm.regionalAnatomy;
+rightForearm.differentialAnatomy = leftForearm.differentialAnatomy;
+rightForearm.redFlags = leftForearm.redFlags;
+rightForearm.explanations = leftForearm.explanations;
+
+// Copy wrist-left data to wrist-right
+const leftWrist = regionChiefComplaints.get('wrist-left')!;
+const rightWrist = regionChiefComplaints.get('wrist-right')!;
+rightWrist.chiefComplaints = leftWrist.chiefComplaints;
+rightWrist.regionalAnatomy = leftWrist.regionalAnatomy;
+rightWrist.differentialAnatomy = leftWrist.differentialAnatomy;
+rightWrist.redFlags = leftWrist.redFlags;
+rightWrist.explanations = leftWrist.explanations;
+
+// Copy hand-left data to hand-right
+const leftHand = regionChiefComplaints.get('hand-left')!;
+const rightHand = regionChiefComplaints.get('hand-right')!;
+rightHand.chiefComplaints = leftHand.chiefComplaints;
+rightHand.regionalAnatomy = leftHand.regionalAnatomy;
+rightHand.differentialAnatomy = leftHand.differentialAnatomy;
+rightHand.redFlags = leftHand.redFlags;
+rightHand.explanations = leftHand.explanations;
+
+// Copy hip-left data to hip-right
+const leftHip = regionChiefComplaints.get('hip-left')!;
+const rightHip = regionChiefComplaints.get('hip-right')!;
+rightHip.chiefComplaints = leftHip.chiefComplaints;
+rightHip.regionalAnatomy = leftHip.regionalAnatomy;
+rightHip.differentialAnatomy = leftHip.differentialAnatomy;
+rightHip.redFlags = leftHip.redFlags;
+rightHip.explanations = leftHip.explanations;
+
+// Copy thigh-left data to thigh-right
+const leftThigh = regionChiefComplaints.get('thigh-left')!;
+const rightThigh = regionChiefComplaints.get('thigh-right')!;
+rightThigh.chiefComplaints = leftThigh.chiefComplaints;
+rightThigh.regionalAnatomy = leftThigh.regionalAnatomy;
+rightThigh.differentialAnatomy = leftThigh.differentialAnatomy;
+rightThigh.redFlags = leftThigh.redFlags;
+rightThigh.explanations = leftThigh.explanations;
+
+// Copy leg-left data to leg-right
+const leftLeg = regionChiefComplaints.get('leg-left')!;
+const rightLeg = regionChiefComplaints.get('leg-right')!;
+rightLeg.chiefComplaints = leftLeg.chiefComplaints;
+rightLeg.regionalAnatomy = leftLeg.regionalAnatomy;
+rightLeg.differentialAnatomy = leftLeg.differentialAnatomy;
+rightLeg.redFlags = leftLeg.redFlags;
+rightLeg.explanations = leftLeg.explanations;
+
+// Copy ankle-left data to ankle-right
+const leftAnkle = regionChiefComplaints.get('ankle-left')!;
+const rightAnkle = regionChiefComplaints.get('ankle-right')!;
+rightAnkle.chiefComplaints = leftAnkle.chiefComplaints;
+rightAnkle.regionalAnatomy = leftAnkle.regionalAnatomy;
+rightAnkle.differentialAnatomy = leftAnkle.differentialAnatomy;
+rightAnkle.redFlags = leftAnkle.redFlags;
+rightAnkle.explanations = leftAnkle.explanations;
+
+// Copy foot-left data to foot-right
+const leftFoot = regionChiefComplaints.get('foot-left')!;
+const rightFoot = regionChiefComplaints.get('foot-right')!;
+rightFoot.chiefComplaints = leftFoot.chiefComplaints;
+rightFoot.regionalAnatomy = leftFoot.regionalAnatomy;
+rightFoot.differentialAnatomy = leftFoot.differentialAnatomy;
+rightFoot.redFlags = leftFoot.redFlags;
+rightFoot.explanations = leftFoot.explanations;
 
 /**
  * Get all region chief complaints

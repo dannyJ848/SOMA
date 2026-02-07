@@ -1702,6 +1702,7 @@ function LayerPanel({ layerDepth, onLayerChange }: LayerPanelProps) {
 // ============================================================================
 
 export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboardData }: CompleteAnatomyLaunchpadProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<BodyRegion | null>(null);
   const [showUI, setShowUI] = useState(true);
@@ -1815,6 +1816,14 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
     return BODY_REGIONS.find(r => r.id === hoveredRegion);
   }, [hoveredRegion]);
 
+  // Loading state - simulate model loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -1841,6 +1850,17 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
 
   return (
     <div className="complete-anatomy-launchpad">
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">Loading Anatomy Model...</div>
+          <div className="loading-progress">
+            <div className="loading-bar" />
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className={`anatomy-header ${!showUI ? 'hidden' : ''}`}>
         <button className="back-btn" onClick={onBack}>

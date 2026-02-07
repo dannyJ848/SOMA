@@ -208,10 +208,10 @@ Your Lisinopril also protects your kidneys, which is especially important with d
 - Multiple muscle groups for movement
 
 **Common Conditions:**
-- Carpal tunnel syndrome
-- Tennis elbow (lateral epicondylitis)
+- Biceps tendonitis
+- Triceps strain
+- Humerus fracture
 - Rotator cuff injuries
-- Fractures
 
 The arm receives blood supply from the brachial artery. Good cardiovascular health (like maintaining your blood pressure) ensures adequate circulation to the extremities.`;
   }

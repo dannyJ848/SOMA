@@ -137,7 +137,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     system: 'Musculoskeletal',
     location: 'Left hinge joint connecting upper arm to forearm',
     function: 'Allows flexion and extension of the forearm; critical for reaching and lifting movements.',
-    commonConditions: ['Golfer\'s elbow', 'Bursitis', 'Arthritis'],
+    commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
   },
   rightElbow: {
@@ -146,7 +146,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     system: 'Musculoskeletal',
     location: 'Right hinge joint connecting upper arm to forearm',
     function: 'Allows flexion and extension of the forearm; critical for reaching and lifting movements.',
-    commonConditions: ['Golfer\'s elbow', 'Bursitis', 'Arthritis'],
+    commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
   },
 

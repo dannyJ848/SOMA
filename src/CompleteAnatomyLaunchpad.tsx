@@ -1122,6 +1122,56 @@ interface PinLabelProps {
   onClick: () => void;
 }
 
+// Calculate accurate pin offset based on geometry type and scale
+function calculatePinOffset(region: BodyRegion): number {
+  const [sx, sy, sz] = region.scale;
+  
+  switch (region.geometry) {
+    case 'head':
+      // Head is roughly spherical, use average radius
+      return Math.max(sx, sy, sz) * 0.6 + 0.1;
+    case 'torso':
+      // Torso is wider than tall, offset from side
+      return sx * 0.6 + 0.15;
+    case 'joint':
+      // Joints are compact, smaller offset
+      return Math.max(sx, sy, sz) * 0.5 + 0.08;
+    case 'sphere':
+      return Math.max(sx, sy, sz) * 0.55 + 0.1;
+    case 'box':
+      // For boxes, offset from the widest dimension
+      return Math.max(sx, sy, sz) * 0.55 + 0.1;
+    case 'cylinder':
+      return Math.max(sx, sz) * 0.55 + 0.1;
+    case 'capsule':
+    default:
+      // Capsule: offset from the radius (x/z) plus half height
+      return Math.max(sx, sz) * 0.55 + 0.12;
+  }
+}
+
+// Check if a region should be visible based on current layer depth
+function isLayerVisible(regionLayer: BodyRegion['layer'], layerDepth: number): boolean {
+  const layerOrder: BodyRegion['layer'][] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
+  const currentLayerIndex = layerOrder.indexOf(regionLayer);
+  const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
+  
+  // Calculate fade progress for the boundary layer
+  const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
+  
+  // If completely beyond visible layers, hide
+  if (currentLayerIndex > maxVisibleLayer) {
+    return false;
+  }
+  
+  // If at the boundary layer, apply fade threshold
+  if (currentLayerIndex === maxVisibleLayer && layerProgress < 0.3) {
+    return false;
+  }
+  
+  return true;
+}
+
 function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, layerDepth, onClick }: PinLabelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
@@ -1133,31 +1183,29 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
     }
   });
 
+  // Layer-aware visibility check - must be before early return for consistent hook order
+  const layerVisible = isLayerVisible(region.layer, layerDepth);
+  
   // Determine if pin should be shown
-  const shouldShow = isVisible && (showAll || isHovered || isSelected);
+  const shouldShow = isVisible && layerVisible && (showAll || isHovered || isSelected);
   const opacity = isSelected ? 1 : isHovered ? 0.9 : showAll ? 0.7 : 0;
+  
+  // Calculate pin position with geometry-aware offset
+  const pinOffset = calculatePinOffset(region);
+  const pinPosition: [number, number, number] = [
+    region.position[0] + pinOffset,
+    region.position[1],
+    region.position[2] + 0.1
+  ];
   
   if (!shouldShow || opacity <= 0) return null;
 
-  // Layer-aware visibility check
-  const layerOrder = ['skin', 'fat', 'muscle', 'bone', 'organ'];
-  const currentLayerIndex = layerOrder.indexOf(region.layer);
-  const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
-  
-  // Hide pins for regions that are not currently visible based on layer depth
-  if (currentLayerIndex > maxVisibleLayer) return null;
-
   const systemColor = SYSTEM_COLORS[primarySystem];
-  const pinOffset = Math.max(...region.scale) * 0.5 + 0.15;
 
   return (
     <group 
       ref={groupRef}
-      position={[
-        region.position[0] + pinOffset,
-        region.position[1],
-        region.position[2] + 0.1
-      ]}
+      position={pinPosition}
     >
       {/* Pin line connecting to body */}
       <mesh position={[-pinOffset/2, 0, 0]}>
@@ -1178,6 +1226,7 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
         distanceFactor={8}
         style={{
           userSelect: 'none',
+          pointerEvents: 'none', // FIX: Prevent label from blocking mouse events on 3D model
           transition: 'opacity 0.2s ease',
         }}
       >
@@ -1187,6 +1236,7 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
             background: isSelected ? 'rgba(34, 255, 68, 0.9)' : 'rgba(0,0,0,0.85)',
             borderLeft: `3px solid ${systemColor}`,
             opacity: opacity,
+            pointerEvents: 'auto', // Re-enable clicks on the label itself
           }}
           onClick={(e) => {
             e.stopPropagation();

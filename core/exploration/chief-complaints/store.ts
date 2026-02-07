@@ -644,6 +644,243 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
     },
   }],
 
+  ['thoracic-spine', {
+    regionId: 'thoracic-spine',
+    regionName: 'Thoracic Spine',
+    regionDescription: 'The thoracic spine (T1-T12) forms the mid-back and provides attachment for ribs',
+    boundingBox: {
+      min: { x: -0.2, y: 0.9, z: -0.1 },
+      max: { x: 0.2, y: 1.3, z: 0.2 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'thoracic-back-pain',
+        symptom: 'Mid-Back Pain',
+        aliases: ['thoracic pain', 'upper back pain', 'between shoulder blades'],
+        frequency: 'common',
+        description: 'Pain in the thoracic spine region',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-thoracic-vertebrae',
+            structureName: 'Thoracic Vertebrae',
+            system: 'musculoskeletal',
+            mechanism: 'Mechanical stress, postural strain',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-rhomboids',
+            structureName: 'Rhomboid Muscles',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle strain from posture or overuse',
+            highlightColor: '#27AE60',
+          },
+          {
+            structureId: 'musculoskeletal-thoracic-facets',
+            structureName: 'Thoracic Facet Joints',
+            system: 'musculoskeletal',
+            mechanism: 'Facet joint dysfunction',
+            highlightColor: '#F39C12',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Postural relationship', 'Radiation pattern'],
+        commonCauses: ['Poor posture', 'Muscle strain', 'Facet dysfunction', 'Scoliosis'],
+        differentialDiagnoses: ['Thoracic disc herniation', 'Compression fracture', 'Scoliosis', 'Costochondritis'],
+        relatedComplaints: ['neck-pain', 'chest-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Thoracic vertebrae T1-T12', 'Ribs', 'Intercostal muscles'],
+          structureIds: ['musculoskeletal-thoracic-spine', 'musculoskeletal-ribs', 'musculoskeletal-intercostals'],
+          primaryFunctions: ['Protect thoracic organs', 'Support posture', 'Enable breathing mechanics'],
+        },
+        {
+          system: 'nervous',
+          structures: ['Spinal cord', 'Thoracic nerve roots'],
+          structureIds: ['nervous-spinal-cord', 'nervous-thoracic-roots'],
+          primaryFunctions: ['Upper body sensation', 'Intercostal muscle innervation'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-thoracic-spine',
+          structureName: 'Thoracic Vertebrae',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Stabilizes rib cage; limited mobility compared to cervical/lumbar',
+          commonPathologies: ['Postural pain', 'Scheuermann disease', 'Compression fractures'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Thoracic dorsal rami', 'Intercostal nerves'],
+        motorNerves: ['T1-T12 spinal nerves'],
+        dermatomalLevels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Intercostal arteries', 'Supreme intercostal artery'],
+        venousDrainage: ['Intercostal veins', 'Azygos system'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Back pain with fever, weight loss',
+        concern: 'Spinal infection or malignancy',
+        associatedFindings: ['Night pain', 'History of cancer'],
+        action: 'Urgent imaging',
+        urgency: 'urgent',
+      },
+    ],
+    relatedModules: ['orthopedics', 'neurology'],
+    explanations: {
+      level1: 'Your thoracic spine is your mid-back. It connects your neck to your lower back and attaches to your ribs.',
+      level2: 'The thoracic spine consists of 12 vertebrae (T1-T12). It is less mobile than the neck and lower back because it attaches to the rib cage.',
+      level3: 'The thoracic spine provides stability and protection for the heart and lungs. The ribs attach to the thoracic vertebrae via costovertebral joints.',
+      level4: 'Thoracic pain often originates from postural strain or facet joints. Disc herniations are less common than in the lumbar spine.',
+      level5: 'Thoracic vertebral anatomy includes heart-shaped vertebral bodies and downward-sloping spinous processes. The sympathetic trunk runs along the costovertebral junctions.',
+    },
+  }],
+
+  ['lumbar-spine', {
+    regionId: 'lumbar-spine',
+    regionName: 'Lumbar Spine',
+    regionDescription: 'The lumbar spine (L1-L5) bears body weight and enables trunk movement',
+    boundingBox: {
+      min: { x: -0.2, y: 0.5, z: 0.0 },
+      max: { x: 0.2, y: 0.9, z: 0.2 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'lumbar-back-pain',
+        symptom: 'Low Back Pain',
+        aliases: ['lumbar pain', 'LBP', 'lumbago'],
+        frequency: 'very-common',
+        description: 'Pain in the lumbar region',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-lumbar-muscles',
+            structureName: 'Lumbar Muscles',
+            system: 'musculoskeletal',
+            mechanism: 'Strain, spasm, trigger points',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-lumbar-disc',
+            structureName: 'Intervertebral Discs',
+            system: 'musculoskeletal',
+            mechanism: 'Herniation, degeneration',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-facet-joints',
+            structureName: 'Facet Joints',
+            system: 'musculoskeletal',
+            mechanism: 'Arthropathy, inflammation',
+            highlightColor: '#F39C12',
+          },
+        ],
+        characteristicFeatures: ['Location', 'Radiation', 'Aggravating factors', 'Associated symptoms'],
+        commonCauses: ['Muscle strain', 'Disc degeneration', 'Facet arthropathy', 'Spinal stenosis'],
+        differentialDiagnoses: ['Disc herniation', 'Stenosis', 'Spondylolisthesis', 'Kidney disease', 'Malignancy'],
+        relatedComplaints: ['sciatica', 'leg-weakness'],
+      },
+      {
+        complaintId: 'sciatica',
+        symptom: 'Sciatica',
+        aliases: ['leg pain from back', 'radiating leg pain', 'radiculopathy'],
+        frequency: 'common',
+        description: 'Pain radiating down the leg from the back',
+        anatomicalBasis: [
+          {
+            structureId: 'nervous-sciatic-nerve',
+            structureName: 'Sciatic Nerve',
+            system: 'nervous',
+            mechanism: 'Nerve root compression or irritation',
+            highlightColor: '#E74C3C',
+          },
+          {
+            structureId: 'musculoskeletal-lumbar-disc',
+            structureName: 'Lumbar Disc',
+            system: 'musculoskeletal',
+            mechanism: 'Disc herniation compressing nerve root',
+            highlightColor: '#F39C12',
+          },
+        ],
+        characteristicFeatures: ['Dermatomal distribution', 'Associated weakness/numbness', 'Provocative maneuvers'],
+        commonCauses: ['Disc herniation', 'Spinal stenosis', 'Piriformis syndrome'],
+        differentialDiagnoses: ['L4-S1 radiculopathy', 'Vascular claudication', 'Hip pathology'],
+        relatedComplaints: ['low-back-pain', 'leg-numbness'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'musculoskeletal',
+          structures: ['Lumbar vertebrae', 'Intervertebral discs', 'Paraspinal muscles', 'Facet joints'],
+          structureIds: ['musculoskeletal-lumbar-spine', 'musculoskeletal-lumbar-disc', 'musculoskeletal-paraspinal', 'musculoskeletal-facet'],
+          primaryFunctions: ['Support', 'Mobility', 'Protection of spinal cord'],
+        },
+        {
+          system: 'nervous',
+          structures: ['Lumbar nerve roots', 'Cauda equina', 'Sciatic nerve'],
+          structureIds: ['nervous-lumbar-roots', 'nervous-cauda-equina', 'nervous-sciatic'],
+          primaryFunctions: ['Lower extremity sensation', 'Lower extremity motor', 'Bladder/bowel function'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'musculoskeletal-lumbar-disc',
+          structureName: 'Lumbar Intervertebral Disc',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Common cause of back and leg pain through herniation',
+          commonPathologies: ['Herniation', 'Degeneration', 'Annular tear'],
+        },
+        {
+          structureId: 'nervous-cauda-equina',
+          structureName: 'Cauda Equina',
+          system: 'nervous',
+          clinicalRelevance: 'Compression causes emergency - bladder/bowel dysfunction',
+          commonPathologies: ['Cauda equina syndrome (surgical emergency)'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Lumbar dorsal rami', 'Lumbar nerve roots'],
+        motorNerves: ['L2-S2 nerve roots'],
+        dermatomalLevels: ['L1', 'L2', 'L3', 'L4', 'L5', 'S1'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Lumbar arteries', 'Iliolumbar artery'],
+        venousDrainage: ['Lumbar veins', 'Internal vertebral venous plexus'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Saddle anesthesia, bladder/bowel dysfunction',
+        concern: 'Cauda equina syndrome',
+        associatedFindings: ['Bilateral leg symptoms', 'Progressive weakness', 'Urinary retention'],
+        action: 'Emergency MRI and surgical consultation',
+        urgency: 'emergency',
+      },
+      {
+        symptom: 'Back pain with fever, weight loss',
+        concern: 'Spinal infection or malignancy',
+        associatedFindings: ['Night pain', 'History of cancer', 'Immunosuppression'],
+        action: 'Urgent imaging (MRI)',
+        urgency: 'urgent',
+      },
+    ],
+    relatedModules: ['orthopedics', 'neurology'],
+    explanations: {
+      level1: 'Your lumbar spine is your lower back. It supports your body weight and allows you to bend and twist.',
+      level2: 'The lumbar spine consists of 5 vertebrae (L1-L5) and bears most of your body weight. It is the most common source of back pain.',
+      level3: 'The lumbar spine provides support and flexibility. The discs between vertebrae can herniate and press on nerves, causing leg pain (sciatica).',
+      level4: 'The cauda equina (nerve roots below L1-L2) exits through neural foramina. Disc herniation at L4-L5 and L5-S1 are most common.',
+      level5: 'Lumbar pain transmission involves the sinuvertebral nerve and dorsal rami. Discogenic pain, facet pain, and radicular pain have distinct mechanisms.',
+    },
+  }],
+
   ['back-lower', {
     regionId: 'back-lower',
     regionName: 'Lower Back',

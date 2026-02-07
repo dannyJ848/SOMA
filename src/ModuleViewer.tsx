@@ -5,9 +5,11 @@
  * Integrates with user's biological self for personalized examples.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import type { EducationalModule, ComplexityLevel, QuizResult } from '../../core/education/types';
 import { COMPLEXITY_LEVELS } from '../../core/education/types';
+import { ImageGallery, CompactImageGallery } from './components/ImageGallery.js';
+import { filterImages, getImagesByCondition, ImageMetadata } from './content/imageRegistry.js';
 
 interface ModuleViewerProps {
   module: EducationalModule;
@@ -23,12 +25,45 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
   userData,
 }) => {
   const [complexity, setComplexity] = useState<ComplexityLevel>(3);
-  const [activeTab, setActiveTab] = useState<'content' | 'quiz' | 'resources'>('content');
+  const [activeTab, setActiveTab] = useState<'content' | 'images' | 'quiz' | 'resources'>('content');
   const [quizResults, setQuizResults] = useState<QuizResult[]>([]);
   const [showQuizResults, setShowQuizResults] = useState(false);
 
   const complexityInfo = COMPLEXITY_LEVELS[complexity];
   const content = module.content[complexity];
+
+  // Get related images based on module specialty and content
+  const relatedImages = useMemo(() => {
+    const specialty = module.specialty;
+    const systemMap: Record<string, string> = {
+      cardiology: 'cardiovascular',
+      pulmonology: 'respiratory',
+      gastroenterology: 'digestive',
+      nephrology: 'urinary',
+      endocrinology: 'endocrine',
+      neurology: 'nervous',
+      orthopedics: 'musculoskeletal',
+      dermatology: 'integumentary',
+      hematology: 'hematologic',
+    };
+
+    let images: ImageMetadata[] = [];
+
+    // Filter by body system if specialty maps to a system
+    if (specialty && systemMap[specialty]) {
+      images = filterImages({ bodySystem: systemMap[specialty] as any });
+    }
+
+    // Also try to find images by conditions mentioned in the module
+    if (module.learningObjectives) {
+      const objectives = module.learningObjectives.join(' ').toLowerCase();
+      const conditionImages = getImagesByCondition(objectives);
+      images = [...images, ...conditionImages];
+    }
+
+    // Remove duplicates and limit
+    return [...new Map(images.map(img => [img.id, img])).values()].slice(0, 20);
+  }, [module]);
 
   const handleComplexityChange = (level: ComplexityLevel) => {
     setComplexity(level);
@@ -180,6 +215,37 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
     }
     return null;
   };
+
+  const renderImages = () => (
+    <div className="module-images">
+      <div className="images-intro">
+        <h3>🖼️ Visual References</h3>
+        <p>
+          Explore pathology, anatomy, and histology images related to {module.title.toLowerCase()}.
+          These educational images help illustrate key concepts and conditions.
+        </p>
+      </div>
+
+      {relatedImages.length > 0 ? (
+        <ImageGallery
+          images={relatedImages}
+          title=""
+          showFilters={true}
+          columns={3}
+          showRelated={true}
+          emptyMessage="No images found for this module."
+        />
+      ) : (
+        <div className="no-images-notice">
+          <p>📚 Visual references are not yet available for this module.</p>
+          <p className="subtle">
+            Check back later as we continue to expand our image library from sources
+            like WebPath, Gray's Anatomy, and Wikimedia Commons.
+          </p>
+        </div>
+      )}
+    </div>
+  );
 
   const renderQuiz = () => {
     if (!module.quiz) return <p>No quiz available for this module.</p>;
@@ -350,6 +416,12 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
           📖 Learn
         </button>
         <button
+          className={activeTab === 'images' ? 'active' : ''}
+          onClick={() => setActiveTab('images')}
+        >
+          🖼️ Images ({relatedImages.length})
+        </button>
+        <button
           className={activeTab === 'quiz' ? 'active' : ''}
           onClick={() => setActiveTab('quiz')}
         >
@@ -365,6 +437,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
 
       <div className="module-content-area">
         {activeTab === 'content' && renderContent()}
+        {activeTab === 'images' && renderImages()}
         {activeTab === 'quiz' && renderQuiz()}
         {activeTab === 'resources' && renderResources()}
       </div>

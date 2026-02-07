@@ -3,6 +3,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Grid, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { type DashboardData } from './App';
+import { CompactImageGallery } from './components/ImageGallery.js';
+import { getImagesByBodyRegion, getImagesByBodySystem, ImageMetadata } from './content/imageRegistry.js';
 
 interface CompleteAnatomyLaunchpadProps {
   onBack: () => void;
@@ -1542,7 +1544,8 @@ interface RegionInfoPanelProps {
 }
 
 function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }: RegionInfoPanelProps) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'conditions' | 'structures' | 'education'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'conditions' | 'structures' | 'visual' | 'education'>('overview');
+  const [selectedImage, setSelectedImage] = useState<ImageMetadata | null>(null);
 
   const userConditions = useMemo(() => {
     if (!dashboardData?.activeConditions) return [];
@@ -1572,6 +1575,43 @@ function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }
   const recommendedModules = useMemo(() => {
     return REGION_MODULES[region.id] || [];
   }, [region.id]);
+
+  // Get images for this body region and systems
+  const regionImages = useMemo(() => {
+    // Map region ID to body region keys
+    const regionKeyMap: Record<string, string> = {
+      head: 'head', neck: 'neck', chest: 'chest', abdomen: 'abdomen',
+      thoracicSpine: 'back', lumbarSpine: 'back', pelvis: 'pelvis',
+      leftShoulder: 'shoulder', rightShoulder: 'shoulder',
+      leftArm: 'arm', rightArm: 'arm',
+      leftElbow: 'elbow', rightElbow: 'elbow',
+      leftForearm: 'forearm', rightForearm: 'forearm',
+      leftWrist: 'wrist', rightWrist: 'wrist',
+      leftHand: 'hand', rightHand: 'hand',
+      leftHip: 'hip', rightHip: 'hip',
+      leftThigh: 'thigh', rightThigh: 'thigh',
+      leftKnee: 'knee', rightKnee: 'knee',
+      leftLeg: 'leg', rightLeg: 'leg',
+      leftAnkle: 'ankle', rightAnkle: 'ankle',
+      leftFoot: 'foot', rightFoot: 'foot',
+    };
+
+    const images: ImageMetadata[] = [];
+
+    // Get images by region
+    const regionKey = regionKeyMap[region.id];
+    if (regionKey) {
+      images.push(...getImagesByBodyRegion(regionKey as any));
+    }
+
+    // Get images by systems
+    region.systems.forEach(system => {
+      images.push(...getImagesByBodySystem(system as any));
+    });
+
+    // Remove duplicates
+    return [...new Map(images.map(img => [img.id, img])).values()];
+  }, [region]);
 
   const handleLearn = () => {
     // Use region's relatedModules if available, fallback to system-based mapping

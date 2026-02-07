@@ -217,6 +217,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Cephalic pain-sensitive structures include the meninges (especially dura), large cerebral vessels, venous sinuses, and pericranial muscles. The trigeminal-cervical complex at the trigeminal nucleus caudalis receives convergent input from V1 and C1-C3, explaining the distribution of headache referral. Primary headache disorders involve altered pain processing without structural lesion.',
       level5: 'The trigeminovascular system mediates most headache types. Meningeal nociceptors (C-fibers and Aδ-fibers) express TRPV1, CGRP receptors, and other nociceptive channels. Central sensitization in the trigeminal nucleus caudalis and thalamus underlies headache progression and allodynia. Descending modulation from PAG and RVM is dysfunctional in chronic headache. Neuroimaging studies show altered connectivity in pain matrix regions (insula, ACC, S1) in migraine patients.',
     },
+    relatedModules: ['neurology', 'ophthalmology', 'ent'],
   }],
 
   ['chest', {
@@ -473,6 +474,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Thoracic pain transmission involves: cardiac (T1-T5 sympathetic afferents causing referred arm/jaw pain), pleural (phrenic C3-C5 and intercostal T1-T12), esophageal (vagal and sympathetic), and chest wall (intercostal somatic nerves). The wide dermatomal overlap creates diagnostic challenges. Clinical decision rules (HEART score) aid risk stratification for ACS.',
       level5: 'Cardiac nociception involves unmyelinated C-fibers responding to adenosine, bradykinin, and protons released during ischemia. Visceral afferents travel via cardiac sympathetic nerves to dorsal horn neurons at T1-T5, where convergence with somatic afferents underlies referral patterns. Pleural pain involves parietal pleura innervation by intercostal and phrenic nerves. Esophageal pain uses both vagal (poorly localizing) and spinal (better localization) pathways. High-sensitivity troponin assays enable rapid ACS rule-out protocols.',
     },
+    relatedModules: ['cardiology', 'pulmonology'],
   }],
 
   ['abdomen-upper', {
@@ -642,6 +644,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Upper abdominal visceral afferents travel via the greater splanchnic nerve to T5-T9 spinal segments. Referred pain from the gallbladder occurs at the right scapula (phrenic nerve if diaphragm irritated). Pancreatic pain radiates to the back due to retroperitoneal location. Murphy\'s sign tests for focal peritoneal inflammation over the gallbladder.',
       level5: 'Upper GI pain involves two pathways: vagal afferents (poorly localizing, mediated by 5-HT3, substance P) and spinal afferents via splanchnic nerves (better localization, dermatomal pattern). Pancreatic pain involves dense celiac plexus innervation with both sympathetic and parasympathetic components. Visceral sensitization in functional dyspepsia involves altered chemosensitivity and mechanosensitivity. Gastric accommodation testing reveals impaired relaxation in some patients with postprandial symptoms.',
     },
+    relatedModules: ['gastroenterology', 'hepatology'],
   }],
 
   ['thoracic-spine', {
@@ -1059,6 +1062,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Lumbar pain transmission involves the sinuvertebral nerve (disc, posterior longitudinal ligament), medial branch of dorsal ramus (facet joints), and lateral branches (paraspinal muscles). Disc herniation most commonly affects L4-L5 and L5-S1, causing L5 or S1 radiculopathy respectively. Red flags for cauda equina syndrome include saddle anesthesia, urinary retention, and bilateral weakness.',
       level5: 'Discogenic pain involves sensitized nociceptors in the annulus fibrosus responding to mechanical and chemical stimuli (PGE2, IL-1β from nucleus pulposus). Facet joint pain involves capsular mechanoreceptors and nociceptors. Radicular pain results from mechanical compression and chemical irritation of the DRG by inflammatory mediators. Central sensitization explains the transition from acute to chronic low back pain. Neuroimaging findings must correlate with clinical presentation, as asymptomatic disc herniations are common.',
     },
+    relatedModules: ['orthopedics', 'neurology'],
   }],
 
   ['neck', {
@@ -2593,6 +2597,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Knee pain evaluation involves assessing mechanism of injury, mechanical symptoms (locking, catching, giving way), swelling characteristics (effusion location, timing), and specific physical exam maneuvers (Lachman, McMurray, valgus/varus stress). OA typically shows medial compartment joint space narrowing on weight-bearing X-ray. MRI is gold standard for soft tissue evaluation.',
       level5: 'Knee joint nociception involves free nerve endings in the joint capsule, synovium, periosteum, and meniscal periphery. Articular cartilage is aneural. Osteoarthritis pain involves subchondral bone microfractures, synovitis, and central sensitization. Meniscal tears in the vascular peripheral zone may heal; tears in the avascular central zone typically do not. ACL mechanoreceptors contribute to proprioception; ACL-deficient knees show altered neuromuscular control. Inflammatory arthritides show pannus invasion with cytokine-mediated cartilage destruction.',
     },
+    relatedModules: ['orthopedics', 'sports-medicine'],
   }],
 
   ['knee-right', {
@@ -2626,6 +2631,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
       level4: 'Knee pain evaluation involves assessing mechanism, mechanical symptoms, and swelling.',
       level5: 'Knee joint nociception involves free nerve endings in the capsule and synovium.',
     },
+    relatedModules: ['orthopedics', 'sports-medicine'],
   }],
 ]);
 
@@ -2637,6 +2643,7 @@ rightKnee.regionalAnatomy = leftKnee.regionalAnatomy;
 rightKnee.differentialAnatomy = leftKnee.differentialAnatomy;
 rightKnee.redFlags = leftKnee.redFlags;
 rightKnee.explanations = leftKnee.explanations;
+rightKnee.relatedModules = leftKnee.relatedModules;
 
 // Copy shoulder-left data to shoulder-right
 const leftShoulder = regionChiefComplaints.get('shoulder-left')!;

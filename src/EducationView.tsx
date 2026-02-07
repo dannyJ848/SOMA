@@ -7,11 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { ModuleViewer } from './ModuleViewer.js';
 import type { EducationalModule, MedicalSpecialty } from '../core/education/types.js';
-
-// Import modules directly (in production, these would come from backend)
-import { type2DiabetesModule } from '../core/education/modules/endocrinology/type2-diabetes.js';
-import { hypertensionModule } from '../core/education/modules/cardiology/hypertension.js';
-import { cbcModule } from '../core/education/modules/labs/cbc.js';
+import { initializeEducationModules, getAllModules } from '../core/education/index.js';
 
 const SPECIALTY_NAMES: Record<MedicalSpecialty, string> = {
   cardiology: 'Cardiology',
@@ -70,13 +66,18 @@ export const EducationView: React.FC<EducationViewProps> = ({
     (initialSpecialty as MedicalSpecialty) || 'all'
   );
   const [selectedType, setSelectedType] = useState<string | 'all'>('all');
+  const [allModules, setAllModules] = useState<EducationalModule[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // For now, use hardcoded modules. In production, fetch from registry
-  const allModules: EducationalModule[] = [
-    type2DiabetesModule,
-    hypertensionModule,
-    cbcModule,
-  ];
+  // Initialize education modules on mount
+  useEffect(() => {
+    const initModules = async () => {
+      await initializeEducationModules();
+      setAllModules(getAllModules());
+      setIsLoading(false);
+    };
+    initModules();
+  }, []);
 
   const filteredModules = allModules.filter((module) => {
     const matchesSearch = 
@@ -197,7 +198,13 @@ export const EducationView: React.FC<EducationViewProps> = ({
         ))}
       </div>
 
-      {filteredModules.length === 0 && (
+      {isLoading && (
+        <div className="loading-modules">
+          <p>📚 Loading educational modules...</p>
+        </div>
+      )}
+
+      {!isLoading && filteredModules.length === 0 && (
         <div className="no-results">
           <p>No modules match your search.</p>
           <button onClick={() => {

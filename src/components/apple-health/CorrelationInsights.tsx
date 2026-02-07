@@ -14,12 +14,74 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import type {
-  Correlacion,
-  HallazgoPatron,
-  PrediccionTemporal,
-  AnalisisContextual,
-} from '../../../core/import/apple-health/correlations.js';
+
+// ============================================================================
+// Tipos Inline (ya que el archivo original no existe)
+// ============================================================================
+
+export interface Correlacion {
+  variableA: string;
+  variableB: string;
+  coeficiente: number;
+  direccion: 'positiva' | 'negativa' | 'neutral';
+  fortaleza: 'fuerte' | 'moderada' | 'debil';
+  significanciaP: number;
+  significativa: boolean;
+  nMuestras: number;
+  confianza: string;
+  descripcion: string;
+  interpretacion: string;
+  tipo?: string;
+  periodo: {
+    inicio: Date;
+    fin: Date;
+  };
+}
+
+export interface HallazgoPatron {
+  id: string;
+  tipo: 'sintoma-metrica' | 'metrica-metrica' | 'comportamiento-resultado' | 'temporal' | 'anomalia';
+  titulo: string;
+  descripcion: string;
+  hallazgoClave: string;
+  nivelConfianza: 'alta' | 'media' | 'baja';
+  fechaDescubrimiento: Date;
+  metricasRelacionadas: string[];
+  interpretacion: string;
+  recomendaciones: string[];
+  evidencia: {
+    correlacion: number;
+    significanciaP: number;
+    nMuestras: number;
+  };
+}
+
+export interface PrediccionTemporal {
+  variable: string;
+  eventoPredicho: string;
+  horizonte: number;
+  precision: number;
+  basadoEn: string[];
+  ejemplo: {
+    fecha: Date;
+    valorObservado: string;
+    eventoOcurrio: boolean;
+  };
+}
+
+export interface MetricaDiferente {
+  metrica: string;
+  promedioContexto: number;
+  promedioGlobal: number;
+  diferenciaPorcentaje: number;
+  significativo: boolean;
+}
+
+export interface AnalisisContextual {
+  contexto: string;
+  interpretacion: string;
+  metricasDiferentes: MetricaDiferente[];
+}
 
 // ============================================================================
 // Tipos de Props

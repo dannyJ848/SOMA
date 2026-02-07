@@ -25,11 +25,11 @@ type FiltroTipo = 'todos' | 'sintoma-metrica' | 'metrica-metrica' | 'comportamie
 type FiltroConfianza = 'todas' | 'alta' | 'media' | 'baja';
 
 const TIPO_LABELS: Record<HallazgoPatron['tipo'], { label: string; icono: string; color: string }> = {
-  'sintoma-metrica': { label: 'Síntoma-Métrica', icono: '🤒', color: '#e74c3c' },
-  'metrica-metrica': { label: 'Métrica-Métrica', icono: '📊', color: '#3498db' },
+  'sintoma-metrica': { label: 'Sintoma-Metrica', icono: '🤒', color: '#e74c3c' },
+  'metrica-metrica': { label: 'Metrica-Metrica', icono: '📊', color: '#3498db' },
   'comportamiento-resultado': { label: 'Comportamiento-Resultado', icono: '🎯', color: '#2ecc71' },
   'temporal': { label: 'Temporal', icono: '⏰', color: '#9b59b6' },
-  'anomalia': { label: 'Anomalía', icono: '⚠️', color: '#f39c12' },
+  'anomalia': { label: 'Anomalia', icono: '⚠️', color: '#f39c12' },
 };
 
 const CONFIANZA_LABELS: Record<HallazgoPatron['nivelConfianza'], { label: string; color: string }> = {

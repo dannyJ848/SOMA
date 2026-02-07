@@ -80,7 +80,7 @@ export const TimelineInsights: React.FC<TimelineInsightsProps> = ({
   }, {} as Record<InsightType, number>);
 
   // Count by confidence
-  const confidenceCounts = insights.reduce((acc, insight) =㸎 {
+  const confidenceCounts = insights.reduce((acc, insight) => {
     acc[insight.confidence] = (acc[insight.confidence] || 0) + 1;
     return acc;
   }, {} as Record<InsightConfidence, number>);

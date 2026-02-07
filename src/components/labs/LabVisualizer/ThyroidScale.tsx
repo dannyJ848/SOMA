@@ -380,7 +380,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
                 )}
                 onMouseLeave={hideTooltip}
               >
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #888888)' }}㸉
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #888888)' }}>
                   T4 (Thyroxine)
                 </div>
                 <div style={{
@@ -389,7 +389,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
                   color: t4 >= (referenceRanges.t4?.low || 5) && t4 <= (referenceRanges.t4?.high || 12)
                     ? 'var(--success, #22c55e)'
                     : 'var(--warning, #f59e0b)'
-                }}㸉
+                }}>
                   {formatHormone(t4, 1)}
                   <span style={{ fontSize: '0.75rem', marginLeft: '0.25rem' }}>μg/dL</span>
                 </div>
@@ -428,7 +428,7 @@ export const ThyroidScale: React.FC<ThyroidScaleProps> = ({
             top: tooltip.y,
           }}
         >
-          <div className="lab-tooltip__content"㸉{tooltip.content}</div>
+          <div className="lab-tooltip__content">{tooltip.content}</div>
         </div>
       )}
     </>

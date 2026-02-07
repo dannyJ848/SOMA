@@ -19,6 +19,7 @@ interface StructureEducationalContent {
   function: string;
   commonConditions: string[];
   relatedStructures: string[];
+  relatedModules?: string[];
 }
 
 // Educational content for body regions (expandable with more data)
@@ -32,6 +33,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Houses the brain which controls all body functions. Contains eyes, ears, nose, and mouth for sensory input.',
     commonConditions: ['Headaches', 'Migraines', 'Concussion', 'Sinusitis', 'TMJ disorders'],
     relatedStructures: ['Brain', 'Skull', 'Eyes', 'Ears', 'Nose', 'Mouth'],
+    relatedModules: ['neurology', 'ophthalmology', 'ent'],
   },
   neck: {
     name: 'Neck',
@@ -41,6 +43,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Supports and moves the head, contains vital blood vessels (carotid arteries, jugular veins), airway (trachea), and esophagus.',
     commonConditions: ['Neck strain', 'Cervical disc herniation', 'Whiplash', 'Thyroid disorders'],
     relatedStructures: ['Cervical vertebrae', 'Thyroid gland', 'Trachea', 'Esophagus', 'Carotid arteries'],
+    relatedModules: ['endocrinology', 'orthopedics'],
   },
 
   // TORSO
@@ -52,6 +55,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Protects heart and lungs. The heart pumps blood throughout the body. Lungs exchange oxygen and carbon dioxide.',
     commonConditions: ['Heart disease', 'Angina', 'Pneumonia', 'Asthma', 'GERD', 'Costochondritis'],
     relatedStructures: ['Heart', 'Lungs', 'Ribs', 'Sternum', 'Diaphragm', 'Aorta'],
+    relatedModules: ['cardiology', 'pulmonology'],
   },
   thoracicSpine: {
     name: 'Thoracic Spine',
@@ -61,6 +65,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Provides structural support, protects spinal cord, and serves as attachment for ribs.',
     commonConditions: ['Thoracic outlet syndrome', 'Scoliosis', 'Kyphosis', 'Disc herniation'],
     relatedStructures: ['Vertebrae T1-T12', 'Spinal cord', 'Intercostal nerves', 'Ribs'],
+    relatedModules: ['orthopedics', 'neurology'],
   },
   lumbarSpine: {
     name: 'Lumbar Spine',
@@ -70,6 +75,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Bears body weight, allows flexion/extension/rotation of trunk. Most common source of back pain.',
     commonConditions: ['Low back pain', 'Lumbar disc herniation', 'Spinal stenosis', 'Sciatica'],
     relatedStructures: ['Vertebrae L1-L5', 'Cauda equina', 'Sciatic nerve', 'Psoas muscle'],
+    relatedModules: ['orthopedics', 'neurology'],
   },
   abdomen: {
     name: 'Abdomen',
@@ -79,6 +85,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains organs for digestion (stomach, intestines, liver, pancreas), filtration (kidneys), and immune function (spleen).',
     commonConditions: ['Gastritis', 'IBS', 'Appendicitis', 'Kidney stones', 'Liver disease', 'Hernias'],
     relatedStructures: ['Stomach', 'Liver', 'Kidneys', 'Intestines', 'Pancreas', 'Spleen'],
+    relatedModules: ['gastroenterology', 'endocrinology', 'nephrology'],
   },
   pelvis: {
     name: 'Pelvis',
@@ -88,6 +95,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Supports abdominal organs, enables bipedal locomotion, contains reproductive and urinary organs.',
     commonConditions: ['Hip arthritis', 'Pelvic fracture', 'UTI', 'Prostatitis', 'Endometriosis'],
     relatedStructures: ['Hip bones', 'Sacrum', 'Coccyx', 'Bladder', 'Reproductive organs'],
+    relatedModules: ['obgyn', 'urology', 'orthopedics'],
   },
 
   // UPPER EXTREMITIES - SHOULDER
@@ -99,6 +107,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Provides wide range of motion for arm movement; connects upper extremity to axial skeleton.',
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightShoulder: {
     name: 'Right Shoulder',
@@ -108,6 +117,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Provides wide range of motion for arm movement; connects upper extremity to axial skeleton.',
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // UPPER EXTREMITIES - ARM
@@ -119,6 +129,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows reaching, grasping, and manipulation of objects. Contains major nerves and blood vessels.',
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     relatedStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
+    relatedModules: ['orthopedics'],
   },
   rightArm: {
     name: 'Right Arm',
@@ -128,6 +139,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows reaching, grasping, and manipulation of objects. Contains major nerves and blood vessels.',
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     relatedStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
+    relatedModules: ['orthopedics'],
   },
 
   // UPPER EXTREMITIES - ELBOW
@@ -139,6 +151,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows flexion and extension of the forearm; critical for reaching and lifting movements.',
     commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightElbow: {
     name: 'Right Elbow',
@@ -148,6 +161,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows flexion and extension of the forearm; critical for reaching and lifting movements.',
     commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     relatedStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // UPPER EXTREMITIES - FOREARM
@@ -159,6 +173,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
     commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
     relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
+    relatedModules: ['orthopedics'],
   },
   rightForearm: {
     name: 'Right Forearm',
@@ -168,6 +183,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains radius and ulna for wrist movement and rotation. Houses forearm flexor and extensor muscles.',
     commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
     relatedStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
+    relatedModules: ['orthopedics'],
   },
 
   // UPPER EXTREMITIES - WRIST
@@ -179,6 +195,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows flexion, extension, and radial/ulnar deviation of the hand.',
     commonConditions: ['Sprain', 'Arthritis', 'Fracture'],
     relatedStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
   rightWrist: {
     name: 'Right Wrist',
@@ -188,6 +205,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows flexion, extension, and radial/ulnar deviation of the hand.',
     commonConditions: ['Sprain', 'Arthritis', 'Fracture'],
     relatedStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
 
   // UPPER EXTREMITIES - HAND
@@ -199,6 +217,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Complex structure with 27 bones for fine manipulation and grip.',
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
   rightHand: {
     name: 'Right Hand',
@@ -208,6 +227,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Complex structure with 27 bones for fine manipulation and grip.',
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     relatedStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
 
   // LOWER EXTREMITIES - HIP
@@ -219,6 +239,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Supports body weight and enables leg movement in multiple planes.',
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     relatedStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
+    relatedModules: ['orthopedics'],
   },
   rightHip: {
     name: 'Right Hip',
@@ -228,6 +249,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Supports body weight and enables leg movement in multiple planes.',
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     relatedStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
+    relatedModules: ['orthopedics'],
   },
 
   // LOWER EXTREMITIES - THIGH
@@ -239,6 +261,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightThigh: {
     name: 'Right Thigh',
@@ -248,6 +271,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains the femur and major muscle groups (quadriceps, hamstrings) for locomotion.',
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     relatedStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // LOWER EXTREMITIES - KNEE
@@ -259,6 +283,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Bears body weight and allows flexion/extension of the lower leg.',
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     relatedStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightKnee: {
     name: 'Right Knee',
@@ -268,6 +293,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Bears body weight and allows flexion/extension of the lower leg.',
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     relatedStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // LOWER EXTREMITIES - LEG
@@ -279,6 +305,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
+    relatedModules: ['orthopedics'],
   },
   rightLeg: {
     name: 'Right Lower Leg',
@@ -288,6 +315,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Contains tibia and fibula with calf muscles for locomotion and stability.',
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     relatedStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
+    relatedModules: ['orthopedics'],
   },
 
   // LOWER EXTREMITIES - ANKLE
@@ -299,6 +327,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows dorsiflexion and plantarflexion of the foot; critical for walking and balance.',
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     relatedStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightAnkle: {
     name: 'Right Ankle',
@@ -308,6 +337,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Allows dorsiflexion and plantarflexion of the foot; critical for walking and balance.',
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     relatedStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // LOWER EXTREMITIES - FOOT
@@ -319,6 +349,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   rightFoot: {
     name: 'Right Foot',
@@ -328,6 +359,7 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     function: 'Complex structure with 26 bones for weight-bearing and locomotion.',
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     relatedStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 };
 

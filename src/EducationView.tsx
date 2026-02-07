@@ -56,15 +56,19 @@ const MODULE_TYPE_NAMES: Record<string, string> = {
 interface EducationViewProps {
   onBack?: () => void;
   userData?: unknown;
+  initialSpecialty?: string;
 }
 
 export const EducationView: React.FC<EducationViewProps> = ({
   onBack,
   userData,
+  initialSpecialty,
 }) => {
   const [selectedModule, setSelectedModule] = useState<EducationalModule | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSpecialty, setSelectedSpecialty] = useState<MedicalSpecialty | 'all'>('all');
+  const [selectedSpecialty, setSelectedSpecialty] = useState<MedicalSpecialty | 'all'>(
+    (initialSpecialty as MedicalSpecialty) || 'all'
+  );
   const [selectedType, setSelectedType] = useState<string | 'all'>('all');
 
   // For now, use hardcoded modules. In production, fetch from registry

@@ -115,6 +115,7 @@ function App() {
   const [selectedBodyRegion, setSelectedBodyRegion] = useState<string | null>(null);
   const [showSymptomForm, setShowSymptomForm] = useState(false);
   const [dataVersion, setDataVersion] = useState(0);
+  const [educationSpecialty, setEducationSpecialty] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     checkDatabase();
@@ -651,6 +652,7 @@ function App() {
           onBack={() => setCurrentView('dashboard')}
           onLearn={(regionId, moduleId) => {
             // Navigate to education view with region context
+            setEducationSpecialty(moduleId);
             setCurrentView('education');
           }}
           onViewLabs={(regionId) => {
@@ -784,8 +786,12 @@ function App() {
   if (currentView === 'education') {
     return (
       <EducationView
-        onBack={() => setCurrentView('dashboard')}
+        onBack={() => {
+          setEducationSpecialty(undefined);
+          setCurrentView('dashboard');
+        }}
         userData={dashboard}
+        initialSpecialty={educationSpecialty}
       />
     );
   }

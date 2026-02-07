@@ -1,200 +1,197 @@
 # Cross-Section Mode Audit Report
-**Audit #4 - Phase 4 Review**
-**Date:** Saturday, February 7th, 2026 - 4:38 PM (America/Chicago)
+
+**Audit #4** - Saturday, February 7th, 2026 - 5:09 PM (America/Chicago)
 **Auditor:** Anatomy Audit Agent 5
-**File:** `src/CompleteAnatomyLaunchpad.tsx`
+**Component:** CompleteAnatomyLaunchpad.tsx Cross-Section Mode (Phase 4)
 
 ---
 
 ## Executive Summary
 
-**Status:** ⚠️ PARTIAL FUNCTIONALITY - ISSUES IDENTIFIED
+⚠️ **STATUS: PARTIALLY FUNCTIONAL - CRITICAL BUGS IDENTIFIED**
 
-The Cross-Section Mode implementation has a working foundation but contains **critical bugs** that prevent proper clipping of certain anatomy regions. The UI controls work correctly, but the 3D clipping plane application is inconsistent across different geometry types.
+Cross-section mode is implemented but has **critical bugs** affecting ~40% of body regions. The UI controls work correctly, but the clipping planes fail to apply to Head and Joint geometries, causing those regions to remain fully visible during cross-section cuts.
 
 ---
 
-## Issues Found
+## Detailed Findings
 
-### 🔴 CRITICAL: Missing Clipping Planes on Head and Joint Geometries
+### 1. Clip Plane Functionality: ⚠️ PARTIAL
 
-**Location:** `BodyPartMesh` component (lines ~500-600)
+**Working:**
+- ✅ Clipping planes are created correctly based on mode (sagittal/coronal/transverse)
+- ✅ Plane normal vectors are correctly configured:
+  - Sagittal: (1, 0, 0) - Left/Right cut
+  - Coronal: (0, 0, 1) - Front/Back cut  
+  - Transverse: (0, 1, 0) - Top/Bottom cut
+- ✅ Renderer localClippingEnabled is properly toggled
+- ✅ Capsule, Box, and Sphere geometries apply clipping planes correctly
 
-**Problem:** The `HeadGeometry` and `JointGeometry` components do NOT receive the `clippingPlanes` prop and their internal meshes do not apply clipping plane materials.
+**Broken:**
+- ❌ **Head geometry** (1 region) - Does NOT apply clipping planes
+- ❌ **Joint geometry** (12 regions) - Does NOT apply clipping planes
+- ❌ **Cylinder geometry** - No handler exists (neck region affected)
 
-**Code Evidence:**
+**Affected Body Regions (~40% of total):**
+| Geometry | Count | Regions | Clipping Works? |
+|----------|-------|---------|-----------------|
+| head | 1 | Head | ❌ NO |
+| joint | 12 | All shoulders, elbows, wrists, hips, knees, ankles | ❌ NO |
+| cylinder | 1 | Neck | ❌ NO (no handler) |
+| capsule | 14 | Arms, legs, spine, neck | ✅ Yes |
+| box | 2 | Hands, feet | ✅ Yes |
+| sphere | 0 | - | N/A |
+| torso | 2 | Chest, abdomen | ✅ Yes |
+
+**Root Cause:**
+In `BodyPartMesh` component (lines ~370-430), the `HeadGeometry` and `JointGeometry` sub-components are rendered WITHOUT passing the `clippingPlanes` prop:
+
 ```tsx
-// Head geometry - NO clipping planes applied
+// MISSING clippingPlanes!
 {region.geometry === 'head' && (
-  <HeadGeometry scale={region.scale} />  // ❌ No clippingPlanes prop passed
+  <HeadGeometry scale={region.scale} />
 )}
-
-// Joint geometry - NO clipping planes applied  
 {region.geometry === 'joint' && (
   <JointGeometry 
     scale={region.scale} 
     isSelected={isSelected} 
-    isHovered={isHovered}
-    // ❌ No clippingPlanes prop!
+    isHovered={isHovered} 
   />
 )}
 ```
 
-**Impact:** When cross-section mode is enabled:
-- The **head** region always renders fully, ignoring clip planes
-- All **joints** (shoulders, elbows, wrists, hips, knees, ankles) ignore clip planes
-- This creates a visually broken cross-section view where some body parts appear to "float" in space
-
-**Affected Regions:**
-- `head` - Head
-- `leftShoulder`, `rightShoulder` - Shoulders
-- `leftElbow`, `rightElbow` - Elbows
-- `leftWrist`, `rightWrist` - Wrists
-- `leftHip`, `rightHip` - Hips
-- `leftKnee`, `rightKnee` - Knees
-- `leftAnkle`, `rightAnkle` - Ankles
-
----
-
-### 🟡 MEDIUM: Missing Cylinder Geometry Handler
-
-**Location:** `BodyPartMesh` component
-
-**Problem:** The `cylinder` geometry type is defined in `BodyRegion` but has NO rendering case in `BodyPartMesh`.
-
-**Code Evidence:**
+Compare to working geometries which DO apply clipping:
 ```tsx
-// From BODY_REGIONS:
-{
-  id: 'neck',
-  name: 'Neck',
-  geometry: 'cylinder',  // Defined as cylinder
-  // ...
-}
-
-// In BodyPartMesh render logic:
-{region.geometry === 'capsule' || region.geometry === 'torso') && (...)}
-{region.geometry === 'box' && (...)}
-{region.geometry === 'sphere' && (...)}
-// ❌ NO CASE FOR 'cylinder'!
+{(region.geometry === 'capsule' || region.geometry === 'torso') && (
+  <mesh>
+    <capsuleGeometry args={[0.5, 1, 8, 16]} />
+    <meshStandardMaterial
+      clippingPlanes={clippingPlanes}  // ✅ Present!
+      clipShadows={true}
+    />
+  </mesh>
+)}
 ```
 
-**Impact:** The **neck** region does not render at all in the 3D view.
+---
+
+### 2. Interior Anatomy Visibility: ❌ NOT FUNCTIONAL
+
+**Issue:** Interior anatomy is NOT visible when cut because:
+1. All body parts use `MeshStandardMaterial` with `side={THREE.FrontSide}` (default)
+2. No back-face rendering means cut surfaces appear hollow/black
+3. No "cap" geometry is generated at cut planes
+4. No interior structure representation exists
+
+**Recommendation:** For true medical visualization, need to either:
+- Use `DoubleSide` material (simple but less accurate)
+- Generate cap geometry at clip planes (complex but accurate)
+- Add separate interior structure models (most accurate)
 
 ---
 
-### 🟡 MEDIUM: Inconsistent Clipping Plane Application
+### 3. Cut Plane Sliders: ✅ FUNCTIONAL
 
-**Location:** `AnatomyModel` component (lines ~650-700)
+**Working correctly:**
+- ✅ Slider range: -1 to 1 with 0.05 step
+- ✅ Real-time position updates
+- ✅ Label updates showing current position value
+- ✅ Mode buttons (Off, Left/Right, Front/Back, Top/Bottom)
+- ✅ State management through `cutPosition` and `crossSectionMode`
 
-**Problem:** Clipping planes are applied at the renderer level (`gl.clippingPlanes`) AND passed to individual mesh materials. This dual approach can cause:
-1. Performance overhead (redundant calculations)
-2. Potential conflicts between global and per-material clipping
-3. Shadow clipping issues (clipShadows is enabled)
+**Code Location:** `CrossSectionPanel` component (lines 1723-1780)
 
-**Code Evidence:**
+---
+
+### 4. Three.js Clip Plane Configuration: ⚠️ PARTIAL
+
+**Renderer Configuration (AnatomyModel component):**
 ```tsx
-// Global renderer clipping
 useEffect(() => {
   gl.localClippingEnabled = crossSectionMode !== 'none';
-  gl.clippingPlanes = clippingPlanes;  // Global
+  gl.clippingPlanes = clippingPlanes;
 }, [gl, clippingPlanes, crossSectionMode]);
-
-// Per-material clipping
-<meshStandardMaterial
-  clippingPlanes={clippingPlanes}  // Per-material
-  clipShadows={true}
-/>
 ```
 
-**Recommendation:** Use either global OR per-material clipping, not both. Per-material is more flexible.
+**Issues:**
+- ⚠️ `gl.clippingPlanes` is set directly on the renderer, which applies globally
+- ⚠️ All meshes share the same clipping planes array reference
+- ✅ Uses `localClippingEnabled` for performance
+- ✅ `clipShadows={true}` is set on materials
+
+**Plane Configuration:**
+- ✅ Correct normals for each mode
+- ⚠️ Constant calculation uses arbitrary multipliers (0.5, 1.5) that may need tuning
 
 ---
 
-### 🟢 WORKING: Clip Plane Position Slider
+### 5. Performance: ✅ ACCEPTABLE
 
-**Status:** ✅ FUNCTIONAL
+**Good practices found:**
+- ✅ Clipping planes created with `useMemo` to prevent unnecessary recreation
+- ✅ `localClippingEnabled` prevents global clipping calculations when off
+- ✅ Only one clipping plane active at a time (not all three)
+- ✅ Smooth opacity transitions use `useFrame` with lerp
 
-The cut position slider (range -1 to 1) correctly updates the clipping plane constant in real-time.
-
-**Code Evidence:**
-```tsx
-<input
-  type="range"
-  min="-1"
-  max="1"
-  step="0.05"
-  value={position}
-  onChange={(e) => onPositionChange(Number(e.target.value))}
-/>
-```
+**Potential improvements:**
+- ⚠️ Material updates may cause re-renders when clipping planes change
+- ⚠️ No culling for off-screen clipped geometry
 
 ---
 
-### 🟢 WORKING: Cut Plane Visualizer
+### 6. UI/UX: ❌ MISSING STYLES
 
-**Status:** ✅ FUNCTIONAL
+**Critical Issue:** The cross-section panel CSS classes are NOT defined in `styles.css`:
 
-The `CutPlaneVisualizer` component correctly displays a semi-transparent blue plane indicating where the cut occurs, with proper animation.
+Missing classes:
+- `.cross-section-panel`
+- `.cross-section-header`
+- `.cross-section-container`
+- `.mode-buttons`
+- `.mode-btn`
+- `.cut-slider-container`
+- `.cut-slider`
+- `.cut-labels`
 
----
-
-### 🟢 WORKING: Cross-Section Mode Selection
-
-**Status:** ✅ FUNCTIONAL
-
-All four modes work correctly in the UI:
-- `none` - Disables clipping
-- `sagittal` - Left/Right division (x-axis)
-- `coronal` - Front/Back division (z-axis)  
-- `transverse` - Top/Bottom division (y-axis)
-
----
-
-## Performance Analysis
-
-**Current Implementation:**
-- Clipping planes are recalculated on every `cutPosition` change
-- `useMemo` is used correctly to prevent unnecessary recalculations
-- Animation loop (useFrame) runs continuously for opacity transitions
-
-**Potential Issues:**
-1. No throttling on slider input - rapid slider movements cause many re-renders
-2. All 32 body regions re-render when clipping planes change (could optimize with React.memo)
-
-**Performance Rating:** ⚠️ ACCEPTABLE but could be optimized
+**Impact:** UI controls will be unstyled or use browser defaults, appearing broken.
 
 ---
 
 ## Recommendations
 
-### Priority 1: Fix Critical Clipping Issues
+### Priority 1: Fix Clipping for All Geometries (4-6 hours)
 
-1. **Update `HeadGeometry` to accept and apply clippingPlanes:**
+1. **Update HeadGeometry to accept and apply clippingPlanes:**
 ```tsx
 interface HeadGeometryProps {
   scale: [number, number, number];
-  clippingPlanes: THREE.Plane[];  // Add this
+  clippingPlanes?: THREE.Plane[];
 }
 
-// Apply to all internal meshes
-<mesh>
-  <sphereGeometry args={[0.5, 32, 32]} />
-  <meshStandardMaterial clippingPlanes={clippingPlanes} />
-</mesh>
+function HeadGeometry({ scale, clippingPlanes }: HeadGeometryProps) {
+  return (
+    <group scale={scale}>
+      <mesh>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial clippingPlanes={clippingPlanes} clipShadows={true} />
+      </mesh>
+      {/* Apply to all child meshes */}
+    </group>
+  );
+}
 ```
 
-2. **Update `JointGeometry` similarly:**
+2. **Update JointGeometry similarly:**
 ```tsx
 interface JointGeometryProps {
   scale: [number, number, number];
   isSelected: boolean;
   isHovered: boolean;
-  clippingPlanes: THREE.Plane[];  // Add this
+  clippingPlanes?: THREE.Plane[];
 }
 ```
 
-3. **Add missing cylinder case in `BodyPartMesh`:**
+3. **Add Cylinder geometry handler in BodyPartMesh:**
 ```tsx
 {region.geometry === 'cylinder' && (
   <mesh ...>
@@ -204,63 +201,42 @@ interface JointGeometryProps {
 )}
 ```
 
-### Priority 2: Performance Optimization
+### Priority 2: Add Missing CSS Styles (1 hour)
 
-1. Wrap `BodyPartMesh` with `React.memo` to prevent unnecessary re-renders
-2. Add throttling to the slider input (e.g., 16ms / 60fps)
-3. Consider using `useCallback` for event handlers
+Add to `styles.css`:
+```css
+.cross-section-container {
+  position: absolute;
+  top: 320px;
+  left: 16px;
+  width: 260px;
+  z-index: 50;
+}
 
-### Priority 3: Code Cleanup
+.cross-section-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
 
-1. Remove redundant global clipping (`gl.clippingPlanes`) if per-material clipping works
-2. Or vice versa - consolidate to one approach
-3. Add TypeScript strict typing for clipping plane props
+/* ... additional styles for buttons and slider */
+```
 
----
+### Priority 3: Interior Visibility (Optional - 8+ hours)
 
-## Test Cases to Verify
-
-After fixes, verify these scenarios:
-
-1. **Sagittal cut at center (0.0):**
-   - All body parts should show only left or right half
-   - Head should be cut in half (currently broken)
-   - All joints should respect the cut plane (currently broken)
-
-2. **Transverse cut at various positions:**
-   - Bottom of feet should disappear when cut is above them
-   - Head should disappear when cut is below it
-
-3. **Coronal cut (front/back):**
-   - Front of chest should disappear when cut is in front
-   - Spine should be visible from behind
-
-4. **Layer depth + Cross-section combo:**
-   - Should work together without visual artifacts
-
----
-
-## Files Requiring Changes
-
-1. `src/CompleteAnatomyLaunchpad.tsx` - Main fixes needed
-
-## Estimated Fix Time
-
-- Priority 1 fixes: ~2-3 hours
-- Priority 2 optimizations: ~1-2 hours
-- Testing and verification: ~1 hour
-
-**Total: ~4-6 hours of work**
+For true medical-grade cross-sections:
+- Use `DoubleSide` materials as a quick fix
+- Or implement stencil-based capping for accurate cut surfaces
+- Or create separate interior structure models
 
 ---
 
 ## Conclusion
 
-The Cross-Section Mode **foundation is solid** but has **critical gaps** in clipping plane application. The UI controls and visualizer work correctly, but approximately **25% of body regions** (head + 12 joints) do not respect clipping planes, making the feature appear broken to users.
+Cross-section mode has the **right architecture** but **incomplete implementation**. The clipping plane system is correctly set up at the renderer level, but individual geometry components were not updated to participate in clipping.
 
-**Recommendation:** Fix Priority 1 issues before Beta release.
+**Before Beta Release:** Must fix Priority 1 issues (missing clipping plane application for Head, Joint, and Cylinder geometries).
 
----
-
-*Report generated by Anatomy Audit Agent 5*
-*Audit #4 - Cross-Section Mode Review*
+**Estimated Fix Time:** 4-6 hours
+**Severity:** High (affects 40% of body regions)

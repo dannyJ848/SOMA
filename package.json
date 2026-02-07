@@ -12,7 +12,10 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "vite build",
+    "build:tsc": "tsc",
+    "preview": "vite preview",
+    "serve": "vite preview --port 1420",
     "extract": "node --experimental-vm-modules dist/extract.js",
     "validate": "node --experimental-vm-modules dist/validate.js",
     "extract:openstax": "npx ts-node extractors/openstax_playwright.ts",
@@ -31,6 +34,9 @@
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^20.0.0",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.182.0",
     "@vitejs/plugin-react": "^5.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.0.0",
@@ -38,5 +44,13 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@tauri-apps/api": "^2.10.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "three": "^0.182.0"
   }
 }

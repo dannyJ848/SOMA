@@ -645,7 +645,7 @@ export function AnatomyLaunchpad({ onBack, onLearn, dashboardData }: AnatomyLaun
           
           {/* Layer Controls */}
           <div className="layer-controls">
-            <LayerPanel state={layerState} />
+            <LayerPanel {...layerState} />
           </div>
 
           {/* Quick Help */}

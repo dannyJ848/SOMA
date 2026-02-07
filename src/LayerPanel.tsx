@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-// Layer definitions with hierarchy
+// Layer definitions with hierarchy - mapped to dissection layers
 export interface LayerDefinition {
   id: string;
   name: string;
@@ -10,23 +10,21 @@ export interface LayerDefinition {
 
 export const ANATOMICAL_LAYERS: LayerDefinition[] = [
   {
-    id: 'integumentary',
+    id: 'skin',
     name: 'Skin',
-    color: '#e8c4a8',
+    color: '#f4d7c4',
     sublayers: [
-      { id: 'integumentary.epidermis', name: 'Epidermis', color: '#f0d4b8' },
-      { id: 'integumentary.dermis', name: 'Dermis', color: '#d8b498' },
-      { id: 'integumentary.hypodermis', name: 'Hypodermis', color: '#c8a488' },
+      { id: 'skin.epidermis', name: 'Epidermis', color: '#f8e4d4' },
+      { id: 'skin.dermis', name: 'Dermis', color: '#e8c4b4' },
     ],
   },
   {
-    id: 'skeletal',
-    name: 'Skeleton',
-    color: '#f5f5dc',
+    id: 'fat',
+    name: 'Fat',
+    color: '#fff8dc',
     sublayers: [
-      { id: 'skeletal.axial', name: 'Axial Skeleton', color: '#fffff0' },
-      { id: 'skeletal.appendicular', name: 'Appendicular Skeleton', color: '#fafad2' },
-      { id: 'skeletal.joints', name: 'Joints', color: '#d4d4aa' },
+      { id: 'fat.subcutaneous', name: 'Subcutaneous', color: '#fffacd' },
+      { id: 'fat.visceral', name: 'Visceral', color: '#f5f5dc' },
     ],
   },
   {
@@ -40,15 +38,25 @@ export const ANATOMICAL_LAYERS: LayerDefinition[] = [
     ],
   },
   {
+    id: 'skeletal',
+    name: 'Skeleton',
+    color: '#e8e4dc',
+    sublayers: [
+      { id: 'skeletal.axial', name: 'Axial Skeleton', color: '#f5f5dc' },
+      { id: 'skeletal.appendicular', name: 'Appendicular Skeleton', color: '#fafad2' },
+      { id: 'skeletal.joints', name: 'Joints', color: '#d4d4aa' },
+    ],
+  },
+  {
     id: 'organs',
     name: 'Organs',
-    color: '#b87850',
+    color: '#ff9999',
     sublayers: [
-      { id: 'organs.digestive', name: 'Digestive', color: '#c88860' },
-      { id: 'organs.respiratory', name: 'Respiratory', color: '#f0a0a0' },
-      { id: 'organs.urinary', name: 'Urinary', color: '#d0a080' },
-      { id: 'organs.reproductive', name: 'Reproductive', color: '#e0b0a0' },
-      { id: 'organs.endocrine', name: 'Endocrine', color: '#c0a090' },
+      { id: 'organs.digestive', name: 'Digestive', color: '#ffaaaa' },
+      { id: 'organs.respiratory', name: 'Respiratory', color: '#ffbbbb' },
+      { id: 'organs.urinary', name: 'Urinary', color: '#ffcccc' },
+      { id: 'organs.reproductive', name: 'Reproductive', color: '#ffdddd' },
+      { id: 'organs.endocrine', name: 'Endocrine', color: '#ffeeee' },
     ],
   },
   {
@@ -101,7 +109,13 @@ export const LAYER_PRESETS: LayerPreset[] = [
     activeLayers: ANATOMICAL_LAYERS.map(l => l.id),
   },
   {
-    id: 'skeletal-muscular',
+    id: 'superficial',
+    name: 'Superficial',
+    description: 'Skin and fat layers',
+    activeLayers: ['skin', 'fat'],
+  },
+  {
+    id: 'musculoskeletal',
     name: 'Musculoskeletal',
     description: 'Bones and muscles',
     activeLayers: ['skeletal', 'muscular'],
@@ -316,17 +330,17 @@ export function useLayerState() {
   // Get effective opacity (considering parent opacity for sublayers)
   const getOpacity = useCallback((layerId: string): number => {
     const state = layerStates.get(layerId);
-    if (!state) return 0;
+    if (!state) return 1; // Default to fully visible if state not found
 
     const parts = layerId.split('.');
     if (parts.length > 1) {
       const parentState = layerStates.get(parts[0]);
-      if (parentState) {
-        return state.opacity * parentState.opacity;
+      if (parentState && typeof parentState.opacity === 'number') {
+        return (state.opacity ?? 1) * (parentState.opacity ?? 1);
       }
     }
 
-    return state.opacity;
+    return state.opacity ?? 1;
   }, [layerStates]);
 
   return {
@@ -341,6 +355,14 @@ export function useLayerState() {
     hideAll,
     isVisible,
     getOpacity,
+    // Aliases for LayerPanel component props
+    onToggleLayer: toggleLayer,
+    onSetOpacity: setOpacity,
+    onToggleExpanded: toggleExpanded,
+    onToggleSolo: toggleSolo,
+    onApplyPreset: applyPreset,
+    onShowAll: showAll,
+    onHideAll: hideAll,
   };
 }
 

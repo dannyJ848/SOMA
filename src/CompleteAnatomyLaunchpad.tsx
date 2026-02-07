@@ -166,6 +166,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -180,6 +181,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
@@ -196,6 +198,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
   {
@@ -210,6 +213,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
 
@@ -226,6 +230,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -240,6 +245,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
@@ -257,6 +263,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Wrist fracture', 'Compartment syndrome', 'Radial nerve palsy'],
     keyStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
   {
@@ -272,6 +279,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Wrist fracture', 'Compartment syndrome', 'Radial nerve palsy'],
     keyStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
 
@@ -288,6 +296,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Arthritis', 'Fracture'],
     keyStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'rheumatology'],
   },
   {
@@ -302,6 +311,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Arthritis', 'Fracture'],
     keyStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'rheumatology'],
   },
 
@@ -318,6 +328,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     keyStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'rheumatology'],
   },
   {
@@ -332,6 +343,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     keyStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'rheumatology'],
   },
 
@@ -348,6 +360,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     keyStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
   {
@@ -362,6 +375,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     keyStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
 
@@ -378,6 +392,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -392,6 +407,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
@@ -408,6 +424,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     keyStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -422,6 +439,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     keyStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
@@ -438,6 +456,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     keyStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
   {
@@ -452,6 +471,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     keyStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics'],
   },
 
@@ -468,6 +488,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     keyStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -482,6 +503,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     keyStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
     layer: 'bone',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
@@ -498,6 +520,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     keyStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
@@ -512,6 +535,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     keyStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
     layer: 'muscle',
+    layers: ['skin', 'fat', 'muscle', 'bone'],
     relatedModules: ['orthopedics', 'sports-medicine'],
   },
 ];
@@ -726,23 +750,44 @@ function BodyPartMesh({
 
   // Determine visibility based on layer depth with smooth transition
   useEffect(() => {
-    const layerOrder = ['skin', 'fat', 'muscle', 'bone', 'organ'];
-    const currentLayerIndex = layerOrder.indexOf(region.layer);
+    const layerOrder: LayerType[] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
+    
+    // Calculate max visible layer based on slider position
     const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
-    
-    // Calculate opacity with fade transition
     const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
-    const isVisible = currentLayerIndex <= maxVisibleLayer;
     
-    if (!isVisible) {
+    // Find the primary layer index
+    const primaryLayerIndex = layerOrder.indexOf(region.layer);
+    
+    // Check if region has any visible layers
+    const hasVisibleLayer = region.layers.some(layer => {
+      const layerIndex = layerOrder.indexOf(layer);
+      if (layerIndex < maxVisibleLayer) return true;
+      if (layerIndex === maxVisibleLayer && layerProgress >= 0.3) return true;
+      return false;
+    });
+    
+    if (!hasVisibleLayer) {
       setTargetOpacity(0);
-    } else if (currentLayerIndex === maxVisibleLayer && layerProgress < 1) {
+    } else if (primaryLayerIndex === maxVisibleLayer && layerProgress < 1) {
       // Fading out the current layer
       setTargetOpacity(0.3 + layerProgress * 0.6);
+    } else if (primaryLayerIndex > maxVisibleLayer) {
+      // Primary layer is beyond visibility - use secondary visible layer opacity
+      const visibleLayers = region.layers.filter(layer => {
+        const layerIndex = layerOrder.indexOf(layer);
+        return layerIndex <= maxVisibleLayer;
+      });
+      if (visibleLayers.length > 0) {
+        // Show with reduced opacity when showing through dissection
+        setTargetOpacity(0.5 + layerProgress * 0.3);
+      } else {
+        setTargetOpacity(0);
+      }
     } else {
       setTargetOpacity(1);
     }
-  }, [layerDepth, region.layer]);
+  }, [layerDepth, region.layer, region.layers]);
 
   // Smooth opacity animation
   useFrame(() => {
@@ -1169,25 +1214,32 @@ function calculatePinOffset(region: BodyRegion): number {
 }
 
 // Check if a region should be visible based on current layer depth
-function isLayerVisible(regionLayer: BodyRegion['layer'], layerDepth: number): boolean {
-  const layerOrder: BodyRegion['layer'][] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
-  const currentLayerIndex = layerOrder.indexOf(regionLayer);
+function isLayerVisible(regionLayers: BodyRegion['layers'], layerDepth: number): boolean {
+  const layerOrder: LayerType[] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
   const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
   
   // Calculate fade progress for the boundary layer
   const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
   
-  // If completely beyond visible layers, hide
-  if (currentLayerIndex > maxVisibleLayer) {
-    return false;
+  // Check if ANY of the region's layers are visible
+  for (const regionLayer of regionLayers) {
+    const currentLayerIndex = layerOrder.indexOf(regionLayer);
+    
+    // If completely beyond visible layers, skip
+    if (currentLayerIndex > maxVisibleLayer) {
+      continue;
+    }
+    
+    // If at the boundary layer, apply fade threshold
+    if (currentLayerIndex === maxVisibleLayer && layerProgress < 0.3) {
+      continue;
+    }
+    
+    // At least one layer is visible
+    return true;
   }
   
-  // If at the boundary layer, apply fade threshold
-  if (currentLayerIndex === maxVisibleLayer && layerProgress < 0.3) {
-    return false;
-  }
-  
-  return true;
+  return false;
 }
 
 function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, layerDepth, onClick }: PinLabelProps) {
@@ -1202,7 +1254,7 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
   });
 
   // Layer-aware visibility check - must be before early return for consistent hook order
-  const layerVisible = isLayerVisible(region.layer, layerDepth);
+  const layerVisible = isLayerVisible(region.layers, layerDepth);
   
   // Determine if pin should be shown
   const shouldShow = isVisible && layerVisible && (showAll || isHovered || isSelected);

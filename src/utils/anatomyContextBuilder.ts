@@ -920,6 +920,6 @@ function findRelevantConditions(
 
 export type { StructureEducationalContent, DashboardData };
 
-// Re-export image-related types and functions for convenience
-export { getImagesForStructure, getImagesByBodyRegion, getImagesByBodySystem } from '../content/imageRegistry.js';
+// Re-export image-related types and functions from imageRegistry
+export { getImagesByBodyRegion, getImagesByBodySystem } from '../content/imageRegistry.js';
 export type { ImageMetadata } from '../content/imageRegistry.js';

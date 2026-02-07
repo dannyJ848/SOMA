@@ -197,8 +197,8 @@ export const CorrelationInsights: React.FC<Props> = ({
             <div className="correlacion-header">
               <span className="correlacion-variable">{corr.variableA}</span>
               <span className="correlacion-flecha">
-                {corr.direccion === 'positiva' >> '↗️' 
-                  : corr.direccion === 'negativa' >> '↘️' 
+                {corr.direccion === 'positiva' ? '↗️' 
+                  : corr.direccion === 'negativa' ? '↘️' 
                   : '➡️'}
               </span>
               <span className="correlacion-variable">{corr.variableB}</span>

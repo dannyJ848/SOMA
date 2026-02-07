@@ -450,7 +450,7 @@ export function getTrustBadges(language: Language = 'es'): TrustBadge[] {
 export const CONSENT_TEMPLATES: Record<
   string,
   { title: LocalizedText; content: LocalizedText }
-003e = {
+> = {
   'promotora-access': {
     title: {
       es: 'Consentimiento para Compartir con Promotora',

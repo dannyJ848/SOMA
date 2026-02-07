@@ -357,7 +357,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     geometry: 'capsule',
     systems: ['muscular', 'skeletal', 'cardiovascular'],
     description: 'Upper leg containing the femur and major muscle groups',
-    commonConditions: ['Quadriceps strain', 'DVT', 'Compartment syndrome'],
+    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
     relatedModules: ['orthopedics', 'sports-medicine'],
@@ -371,7 +371,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     geometry: 'capsule',
     systems: ['muscular', 'skeletal', 'cardiovascular'],
     description: 'Upper leg containing the femur and major muscle groups',
-    commonConditions: ['Quadriceps strain', 'DVT', 'Compartment syndrome'],
+    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
     relatedModules: ['orthopedics', 'sports-medicine'],
@@ -540,6 +540,8 @@ const REGION_MODULES: Record<string, string[]> = {
   head: ['neurology', 'ophthalmology', 'ent'],
   neck: ['endocrinology', 'orthopedics'],
   chest: ['cardiology', 'pulmonology'],
+  thoracicSpine: ['orthopedics', 'neurology'],
+  lumbarSpine: ['orthopedics', 'neurology'],
   abdomen: ['gastroenterology', 'endocrinology', 'nephrology'],
   pelvis: ['obgyn', 'urology'],
   leftShoulder: ['orthopedics', 'sports-medicine'],
@@ -1116,10 +1118,11 @@ interface PinLabelProps {
   isSelected: boolean;
   showAll: boolean;
   primarySystem: BodySystem;
+  layerDepth: number;
   onClick: () => void;
 }
 
-function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, onClick }: PinLabelProps) {
+function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, layerDepth, onClick }: PinLabelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
 
@@ -1136,8 +1139,16 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
   
   if (!shouldShow || opacity <= 0) return null;
 
+  // Layer-aware visibility check
+  const layerOrder = ['skin', 'fat', 'muscle', 'bone', 'organ'];
+  const currentLayerIndex = layerOrder.indexOf(region.layer);
+  const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
+  
+  // Hide pins for regions that are not currently visible based on layer depth
+  if (currentLayerIndex > maxVisibleLayer) return null;
+
   const systemColor = SYSTEM_COLORS[primarySystem];
-  const pinOffset = region.scale[0] * 0.5 + 0.15;
+  const pinOffset = Math.max(...region.scale) * 0.5 + 0.15;
 
   return (
     <group 
@@ -1166,7 +1177,6 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
         center={false}
         distanceFactor={8}
         style={{
-          pointerEvents: 'none',
           userSelect: 'none',
           transition: 'opacity 0.2s ease',
         }}
@@ -1993,6 +2003,7 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
                 isSelected={selectedRegion?.id === region.id}
                 showAll={showPins}
                 primarySystem={primarySystem}
+                layerDepth={layerDepth}
                 onClick={() => handleRegionSelect(region.id)}
               />
             );

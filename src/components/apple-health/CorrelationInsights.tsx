@@ -492,7 +492,7 @@ export const CorrelationInsights: React.FC<PropsCorrelaciones> = ({
         <div style={styles.footerIcon}>🧠</div>
         <div style={styles.footerText}>
           <strong>¿Cómo funciona?</strong> Los hallazgos se generan mediante análisis estadístico 
-          de correlaciones (coeficiente de Pearson) con pruebas de significancia (p-value < 0.05). 
+          de correlaciones (coeficiente de Pearson) con pruebas de significancia (p-value {'<'} 0.05). 
           Requieren al menos 5 puntos de datos para ser considerados.
         </div>
       </div>
@@ -910,7 +910,7 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '24px',
     backgroundColor: '#f0fdf4',
     borderRadius: '12px',
-    border: '1px solid '#86efac',
+    border: '1px solid #86efac',
   },
   contextHeader: {
     display: 'flex',

@@ -409,8 +409,7 @@ export async function searchResources(
           r.description.es.toLowerCase().includes(lowerQuery) ||
           r.description.en.toLowerCase().includes(lowerQuery) ||
           r.services.some(
-            (s) =
-003e
+            (s) =>
               s.es.toLowerCase().includes(lowerQuery) ||
               s.en.toLowerCase().includes(lowerQuery)
           )

@@ -13,6 +13,7 @@ import { AnatomyViewer } from './AnatomyViewer';
 
 interface AnatomyLaunchpadProps {
   onBack: () => void;
+  onLearn?: (regionId: string, moduleId?: string) => void;
   dashboardData: DashboardData | null;
 }
 
@@ -27,6 +28,7 @@ interface BodyRegion {
   relevantLabs: string[];
   relatedModules: string[];
   description: string;
+  latinName?: string;
 }
 
 interface QuickStat {
@@ -40,6 +42,7 @@ const BODY_REGIONS: BodyRegion[] = [
   {
     id: 'head',
     name: 'Head & Brain',
+    latinName: 'Caput',
     systems: ['Nervous', 'Sensory', 'Integumentary'],
     commonConditions: ['Migraine', 'Tension headache', 'Sinusitis', 'Vertigo'],
     relevantLabs: ['CBC', 'Inflammatory markers', 'Hormone panel'],
@@ -47,8 +50,19 @@ const BODY_REGIONS: BodyRegion[] = [
     description: 'Central nervous system control center and sensory processing',
   },
   {
+    id: 'neck',
+    name: 'Neck',
+    latinName: 'Collum',
+    systems: ['Musculoskeletal', 'Nervous', 'Lymphatic'],
+    commonConditions: ['Neck strain', 'Cervical disc herniation', 'Whiplash', 'Thyroid disorders'],
+    relevantLabs: ['TSH', 'Inflammatory markers', 'CBC'],
+    relatedModules: ['endocrinology'],
+    description: 'Connects head to torso; contains cervical spine and major vessels',
+  },
+  {
     id: 'chest',
     name: 'Chest & Thorax',
+    latinName: 'Thorax',
     systems: ['Cardiovascular', 'Respiratory', 'Skeletal'],
     commonConditions: ['Hypertension', 'Asthma', 'GERD', 'Angina'],
     relevantLabs: ['Lipid panel', 'BNP', 'Troponin', 'CBC'],
@@ -56,8 +70,29 @@ const BODY_REGIONS: BodyRegion[] = [
     description: 'Heart, lungs, and major blood vessels',
   },
   {
+    id: 'thoracicSpine',
+    name: 'Thoracic Spine',
+    latinName: 'Columna thoracica',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Thoracic outlet syndrome', 'Scoliosis', 'Kyphosis', 'Disc herniation'],
+    relevantLabs: ['Inflammatory markers', 'Vitamin D', 'Calcium'],
+    relatedModules: ['orthopedics'],
+    description: '12 vertebrae (T1-T12) forming the mid-back',
+  },
+  {
+    id: 'lumbarSpine',
+    name: 'Lumbar Spine',
+    latinName: 'Columna lumbalis',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Low back pain', 'Lumbar disc herniation', 'Spinal stenosis', 'Sciatica'],
+    relevantLabs: ['Inflammatory markers', 'ESR', 'CRP'],
+    relatedModules: ['orthopedics'],
+    description: '5 vertebrae (L1-L5), most common source of back pain',
+  },
+  {
     id: 'abdomen',
     name: 'Abdomen',
+    latinName: 'Abdomen',
     systems: ['Digestive', 'Urinary', 'Endocrine', 'Reproductive'],
     commonConditions: ['GERD', 'IBS', 'Diabetes', 'Kidney disease'],
     relevantLabs: ['Comprehensive Metabolic Panel', 'HbA1c', 'Lipid panel', 'CBC'],
@@ -65,40 +100,134 @@ const BODY_REGIONS: BodyRegion[] = [
     description: 'Digestive organs, kidneys, and endocrine glands',
   },
   {
+    id: 'pelvis',
+    name: 'Pelvis',
+    latinName: 'Pelvis',
+    systems: ['Skeletal', 'Reproductive', 'Urinary', 'Digestive'],
+    commonConditions: ['UTI', 'Prostatitis', 'Endometriosis', 'Hip arthritis'],
+    relevantLabs: ['Urinalysis', 'CBC', 'CRP'],
+    relatedModules: ['obgyn', 'urology'],
+    description: 'Bony basin containing reproductive organs, bladder, and rectum',
+  },
+  {
     id: 'leftArm',
     name: 'Left Arm',
+    latinName: 'Brachium sinistrum',
     systems: ['Muscular', 'Skeletal', 'Cardiovascular', 'Nervous'],
-    commonConditions: ['Carpal tunnel', 'Tendonitis', 'Lymphedema'],
+    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     relevantLabs: ['Nerve conduction studies', 'Inflammatory markers'],
-    relatedModules: [],
-    description: 'Upper extremity with cardiac referral patterns',
+    relatedModules: ['orthopedics'],
+    description: 'Upper extremity from shoulder to elbow',
   },
   {
     id: 'rightArm',
     name: 'Right Arm',
+    latinName: 'Brachium dextrum',
     systems: ['Muscular', 'Skeletal', 'Cardiovascular', 'Nervous'],
-    commonConditions: ['Carpal tunnel', 'Tendonitis', 'Peripheral neuropathy'],
+    commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     relevantLabs: ['Nerve conduction studies', 'Glucose'],
-    relatedModules: [],
-    description: 'Upper extremity motor and sensory function',
+    relatedModules: ['orthopedics'],
+    description: 'Upper extremity from shoulder to elbow',
+  },
+  {
+    id: 'leftForearm',
+    name: 'Left Forearm',
+    latinName: 'Antebrachium sinistrum',
+    systems: ['Muscular', 'Skeletal', 'Nervous'],
+    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
+    relevantLabs: ['Nerve conduction studies'],
+    relatedModules: ['orthopedics'],
+    description: 'From elbow to wrist containing radius and ulna',
+  },
+  {
+    id: 'rightForearm',
+    name: 'Right Forearm',
+    latinName: 'Antebrachium dextrum',
+    systems: ['Muscular', 'Skeletal', 'Nervous'],
+    commonConditions: ['Radial nerve palsy', 'Wrist fracture', 'Compartment syndrome'],
+    relevantLabs: ['Nerve conduction studies'],
+    relatedModules: ['orthopedics'],
+    description: 'From elbow to wrist containing radius and ulna',
+  },
+  {
+    id: 'leftHand',
+    name: 'Left Hand',
+    latinName: 'Manus sinistra',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
+    relevantLabs: ['Nerve conduction studies', 'Inflammatory markers'],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    description: 'Complex structure with 27 bones for manipulation',
+  },
+  {
+    id: 'rightHand',
+    name: 'Right Hand',
+    latinName: 'Manus dextra',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
+    relevantLabs: ['Nerve conduction studies', 'Glucose'],
+    relatedModules: ['orthopedics', 'rheumatology'],
+    description: 'Complex structure with 27 bones for manipulation',
+  },
+  {
+    id: 'leftThigh',
+    name: 'Left Thigh',
+    latinName: 'Femur sinistrum',
+    systems: ['Muscular', 'Skeletal', 'Cardiovascular'],
+    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
+    relevantLabs: ['Creatine kinase', 'Inflammatory markers'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    description: 'Upper leg containing the femur and major muscle groups',
+  },
+  {
+    id: 'rightThigh',
+    name: 'Right Thigh',
+    latinName: 'Femur dextrum',
+    systems: ['Muscular', 'Skeletal', 'Cardiovascular'],
+    commonConditions: ['Quadriceps strain', 'Hamstring tear', 'Compartment syndrome'],
+    relevantLabs: ['Creatine kinase', 'Inflammatory markers'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    description: 'Upper leg containing the femur and major muscle groups',
   },
   {
     id: 'leftLeg',
-    name: 'Left Leg',
-    systems: ['Muscular', 'Skeletal', 'Cardiovascular', 'Lymphatic'],
-    commonConditions: ['DVT', 'Varicose veins', 'Peripheral artery disease'],
-    relevantLabs: ['D-dimer', 'Lipid panel'],
-    relatedModules: [],
-    description: 'Lower extremity circulation and mobility',
+    name: 'Left Lower Leg',
+    latinName: 'Crus sinistrum',
+    systems: ['Muscular', 'Skeletal', 'Nervous'],
+    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
+    relevantLabs: ['Calcium', 'Vitamin D', 'Inflammatory markers'],
+    relatedModules: ['orthopedics'],
+    description: 'From knee to ankle containing tibia and fibula',
   },
   {
     id: 'rightLeg',
-    name: 'Right Leg',
-    systems: ['Muscular', 'Skeletal', 'Cardiovascular', 'Lymphatic'],
-    commonConditions: ['DVT', 'Varicose veins', 'Peripheral artery disease'],
-    relevantLabs: ['D-dimer', 'Lipid panel'],
-    relatedModules: [],
-    description: 'Lower extremity circulation and mobility',
+    name: 'Right Lower Leg',
+    latinName: 'Crus dextrum',
+    systems: ['Muscular', 'Skeletal', 'Nervous'],
+    commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
+    relevantLabs: ['Calcium', 'Vitamin D', 'Inflammatory markers'],
+    relatedModules: ['orthopedics'],
+    description: 'From knee to ankle containing tibia and fibula',
+  },
+  {
+    id: 'leftFoot',
+    name: 'Left Foot',
+    latinName: 'Pes sinister',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
+    relevantLabs: ['Uric acid', 'Inflammatory markers'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    description: 'Complex structure with 26 bones for weight-bearing and locomotion',
+  },
+  {
+    id: 'rightFoot',
+    name: 'Right Foot',
+    latinName: 'Pes dexter',
+    systems: ['Skeletal', 'Muscular', 'Nervous'],
+    commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
+    relevantLabs: ['Uric acid', 'Inflammatory markers'],
+    relatedModules: ['orthopedics', 'sports-medicine'],
+    description: 'Complex structure with 26 bones for weight-bearing and locomotion',
   },
 ];
 
@@ -110,9 +239,25 @@ function getRelevantUserLabs(dashboardData: DashboardData | null, region: BodyRe
   
   // Map common lab patterns to regions
   const labMap: Record<string, string[]> = {
+    'head': ['Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'BNP', 'Troponin'],
+    'neck': ['TSH', 'Free T4', 'T3', 'Thyroid'],
     'chest': ['Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'BNP', 'Troponin'],
+    'thoracicSpine': ['Vitamin D', 'Calcium', 'Alkaline Phosphatase'],
+    'lumbarSpine': ['ESR', 'CRP', 'Vitamin D', 'Calcium'],
     'abdomen': ['Glucose', 'Hemoglobin A1C', 'Creatinine', 'BUN', 'ALT', 'AST'],
-    'head': ['CBC', 'CRP', 'ESR'],
+    'pelvis': ['Urinalysis', 'CBC', 'CRP'],
+    'leftArm': ['Glucose', 'Nerve conduction'],
+    'rightArm': ['Glucose', 'Nerve conduction'],
+    'leftForearm': ['Nerve conduction', 'EMG'],
+    'rightForearm': ['Nerve conduction', 'EMG'],
+    'leftHand': ['Nerve conduction', 'Glucose'],
+    'rightHand': ['Nerve conduction', 'Glucose'],
+    'leftThigh': ['Creatine kinase', 'LDH', 'CRP'],
+    'rightThigh': ['Creatine kinase', 'LDH', 'CRP'],
+    'leftLeg': ['Vitamin D', 'Calcium', 'Alkaline Phosphatase'],
+    'rightLeg': ['Vitamin D', 'Calcium', 'Alkaline Phosphatase'],
+    'leftFoot': ['Uric acid', 'CRP', 'ESR'],
+    'rightFoot': ['Uric acid', 'CRP', 'ESR'],
   };
   
   const relevantTests = labMap[region.id] || [];
@@ -137,12 +282,24 @@ function getRegionConditions(dashboardData: DashboardData | null, region: BodyRe
   
   const conditionMap: Record<string, string[]> = {
     'head': ['migraine', 'headache', 'vertigo', 'sinus'],
+    'neck': ['neck', 'cervical', 'thyroid'],
     'chest': ['hypertension', 'heart', 'asthma', 'gerd', 'reflux'],
+    'thoracicSpine': ['thoracic', 'scoliosis', 'kyphosis'],
+    'lumbarSpine': ['back pain', 'lumbar', 'sciatica', 'stenosis'],
     'abdomen': ['diabetes', 'gerd', 'reflux', 'kidney', 'liver', 'ibs'],
-    'leftArm': ['carpal', 'neuropathy'],
-    'rightArm': ['carpal', 'neuropathy'],
-    'leftLeg': ['dvt', 'pad', 'varicose'],
-    'rightLeg': ['dvt', 'pad', 'varicose'],
+    'pelvis': ['pelvic', 'hip', 'prostatitis', 'endometriosis'],
+    'leftArm': ['arm', 'biceps', 'triceps'],
+    'rightArm': ['arm', 'biceps', 'triceps'],
+    'leftForearm': ['forearm', 'wrist', 'radius', 'ulna'],
+    'rightForearm': ['forearm', 'wrist', 'radius', 'ulna'],
+    'leftHand': ['carpal', 'hand', 'finger'],
+    'rightHand': ['carpal', 'hand', 'finger'],
+    'leftThigh': ['thigh', 'quadriceps', 'hamstring'],
+    'rightThigh': ['thigh', 'quadriceps', 'hamstring'],
+    'leftLeg': ['shin', 'calf', 'achilles'],
+    'rightLeg': ['shin', 'calf', 'achilles'],
+    'leftFoot': ['foot', 'plantar', 'bunion'],
+    'rightFoot': ['foot', 'plantar', 'bunion'],
   };
   
   const keywords = conditionMap[region.id] || [];
@@ -153,7 +310,7 @@ function getRegionConditions(dashboardData: DashboardData | null, region: BodyRe
     .slice(0, 3);
 }
 
-export function AnatomyLaunchpad({ onBack, dashboardData }: AnatomyLaunchpadProps) {
+export function AnatomyLaunchpad({ onBack, onLearn, dashboardData }: AnatomyLaunchpadProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('explore');
   const [selectedRegion, setSelectedRegion] = useState<BodyRegion | null>(null);
   const [activePanel, setActivePanel] = useState<PanelView>('overview');
@@ -361,7 +518,17 @@ export function AnatomyLaunchpad({ onBack, dashboardData }: AnatomyLaunchpadProp
 
                     {/* Quick Actions */}
                     <div className="quick-actions">
-                      <button className="action-button primary" onClick={() => setActivePanel('education')}>
+                      <button 
+                        className="action-button primary" 
+                        onClick={() => {
+                          setActivePanel('education');
+                          // Wire up the Learn button to call onLearn if provided
+                          if (onLearn && selectedRegion) {
+                            const moduleId = selectedRegion.relatedModules?.[0];
+                            onLearn(selectedRegion.id, moduleId);
+                          }
+                        }}
+                      >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253"/>
                         </svg>
@@ -425,7 +592,16 @@ export function AnatomyLaunchpad({ onBack, dashboardData }: AnatomyLaunchpadProp
                           <div key={module.id} className="module-card">
                             <span className="module-type">{module.type}</span>
                             <h4>{module.title}</h4>
-                            <button className="start-learning">Start Learning →</button>
+                            <button 
+                              className="start-learning"
+                              onClick={() => {
+                                if (onLearn && selectedRegion) {
+                                  onLearn(selectedRegion.id, module.id);
+                                }
+                              }}
+                            >
+                              Start Learning →
+                            </button>
                           </div>
                         ))}
                       </div>

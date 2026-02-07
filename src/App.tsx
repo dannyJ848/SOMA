@@ -649,6 +649,15 @@ function App() {
       }>
         <CompleteAnatomyLaunchpad
           onBack={() => setCurrentView('dashboard')}
+          onLearn={(regionId, moduleId) => {
+            // Navigate to education view with region context
+            setCurrentView('education');
+          }}
+          onViewLabs={(regionId) => {
+            // Navigate to timeline view filtered by labs for this region
+            setActiveFilters(['lab']);
+            setCurrentView('timeline');
+          }}
           dashboardData={dashboard}
         />
       </Suspense>

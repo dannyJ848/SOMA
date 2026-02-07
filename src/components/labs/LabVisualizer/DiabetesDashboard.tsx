@@ -396,7 +396,7 @@ export const DiabetesDashboard: React.FC<DiabetesDashboardProps> = ({
               className="diabetes-dashboard__hba1c-goal"
               style={{ left: '33%' }}
             >
-              Goal: <7%
+              Goal: &lt;7%
             </div>
           </div>
 
@@ -407,7 +407,7 @@ export const DiabetesDashboard: React.FC<DiabetesDashboardProps> = ({
             fontSize: '0.75rem',
             color: 'var(--text-secondary, #888888)'
           }}>
-            <span>Normal < 5.7%</span>
+            <span>Normal &lt; 5.7%</span>
             <span>Prediabetes 5.7-6.4%</span>
             <span>Diabetes ≥ 6.5%</span>
           </div>
@@ -426,8 +426,7 @@ export const DiabetesDashboard: React.FC<DiabetesDashboardProps> = ({
             onMouseLeave={hideTooltip}
           >
             {tirSvg}
-            <div className="diabetes-dashboard__tir-center"
-3.          >
+            <div className="diabetes-dashboard__tir-center">
               <div className="diabetes-dashboard__tir-percent"
                 style={{
                   color: timeInRange.inRange >= 70 ? 'var(--success, #22c55e)' :
@@ -474,7 +473,7 @@ export const DiabetesDashboard: React.FC<DiabetesDashboardProps> = ({
                   className="diabetes-dashboard__tir-stat-dot"
                   style={{ backgroundColor: '#ef4444' }}
                 />
-                <span>Below Range (<70)</span>
+                <span>Below Range (&lt;70)</span>
               </div>
               <span className="diabetes-dashboard__tir-stat-value"
                 style={{ color: timeInRange.belowRange > 4 ? 'var(--error, #ef4444)' : 'inherit' }}
@@ -496,7 +495,7 @@ export const DiabetesDashboard: React.FC<DiabetesDashboardProps> = ({
                   className="diabetes-dashboard__tir-stat-dot"
                   style={{ backgroundColor: '#f59e0b' }}
                 />
-                <span>Above Range (>180)</span>
+                <span>Above Range (&gt;180)</span>
               </div>
               <span className="diabetes-dashboard__tir-stat-value"
                 style={{ color: timeInRange.aboveRange > 25 ? 'var(--warning, #f59e0b)' : 'inherit' }}

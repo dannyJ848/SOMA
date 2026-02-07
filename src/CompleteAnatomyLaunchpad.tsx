@@ -850,44 +850,82 @@ function AnatomyModel({
 interface PinLabelProps {
   region: BodyRegion;
   isVisible: boolean;
+  isHovered: boolean;
+  isSelected: boolean;
+  showAll: boolean;
+  primarySystem: BodySystem;
   onClick: () => void;
 }
 
-function PinLabel({ region, isVisible, onClick }: PinLabelProps) {
-  if (!isVisible) return null;
+function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySystem, onClick }: PinLabelProps) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { camera } = useThree();
+
+  // Make labels always face camera (billboard effect)
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.lookAt(camera.position);
+    }
+  });
+
+  // Determine if pin should be shown
+  const shouldShow = isVisible && (showAll || isHovered || isSelected);
+  const opacity = isSelected ? 1 : isHovered ? 0.9 : showAll ? 0.7 : 0;
+  
+  if (!shouldShow || opacity <= 0) return null;
+
+  const systemColor = SYSTEM_COLORS[primarySystem];
+  const pinOffset = region.scale[0] * 0.5 + 0.15;
 
   return (
-    <Html
+    <group 
+      ref={groupRef}
       position={[
-        region.position[0] + region.scale[0] * 0.6,
+        region.position[0] + pinOffset,
         region.position[1],
-        region.position[2]
+        region.position[2] + 0.1
       ]}
-      center
-      distanceFactor={10}
-      style={{
-        pointerEvents: 'none',
-        userSelect: 'none',
-      }}
     >
-      <div
+      {/* Pin line connecting to body */}
+      <mesh position={[-pinOffset/2, 0, 0]}>
+        <cylinderGeometry args={[0.005, 0.005, pinOffset, 8]} rotation={[0, 0, Math.PI/2]} />
+        <meshBasicMaterial color={systemColor} transparent opacity={opacity} />
+      </mesh>
+      
+      {/* Pin head */}
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[0.04, 16, 16]} />
+        <meshBasicMaterial color={systemColor} transparent opacity={opacity} />
+      </mesh>
+
+      {/* HTML Label */}
+      <Html
+        position={[0.08, 0, 0]}
+        center={false}
+        distanceFactor={8}
         style={{
-          background: 'rgba(0,0,0,0.8)',
-          color: '#fff',
-          padding: '4px 10px',
-          borderRadius: '4px',
-          fontSize: '12px',
-          fontWeight: 500,
-          whiteSpace: 'nowrap',
-          border: '1px solid rgba(255,255,255,0.3)',
-          pointerEvents: 'auto',
-          cursor: 'pointer',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          transition: 'opacity 0.2s ease',
         }}
-        onClick={onClick}
       >
-        {region.name}
-      </div>
-    </Html>
+        <div
+          className={`pin-label ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''}`}
+          style={{
+            background: isSelected ? 'rgba(34, 255, 68, 0.9)' : 'rgba(0,0,0,0.85)',
+            borderLeft: `3px solid ${systemColor}`,
+            opacity: opacity,
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+        >
+          <span className="pin-name">{region.name}</span>
+          <span className="pin-latin">{region.latinName}</span>
+        </div>
+      </Html>
+    </group>
   );
 }
 
@@ -1250,14 +1288,22 @@ export function CompleteAnatomyLaunchpad({ onBack, dashboardData }: CompleteAnat
             onSelect={handleRegionSelect}
           />
           {/* Pin Labels */}
-          {showPins && BODY_REGIONS.map(region => (
-            <PinLabel
-              key={`pin-${region.id}`}
-              region={region}
-              isVisible={region.systems.some(sys => visibleSystems[sys])}
-              onClick={() => handleRegionSelect(region.id)}
-            />
-          ))}
+          {BODY_REGIONS.map(region => {
+            const isVisible = region.systems.some(sys => visibleSystems[sys]);
+            const primarySystem = region.systems[0];
+            return (
+              <PinLabel
+                key={`pin-${region.id}`}
+                region={region}
+                isVisible={isVisible}
+                isHovered={hoveredRegion === region.id}
+                isSelected={selectedRegion?.id === region.id}
+                showAll={showPins}
+                primarySystem={primarySystem}
+                onClick={() => handleRegionSelect(region.id)}
+              />
+            );
+          })}
         </Canvas>
       </div>
 

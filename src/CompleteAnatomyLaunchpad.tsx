@@ -148,6 +148,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightShoulder',
@@ -161,6 +162,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Rotator cuff tear', 'Frozen shoulder', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus head', 'Scapula', 'Clavicle', 'Rotator cuff muscles'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // ARMS
@@ -176,6 +178,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
   {
     id: 'rightArm',
@@ -189,6 +192,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Biceps tendonitis', 'Humerus fracture', 'Triceps strain'],
     keyStructures: ['Humerus', 'Biceps', 'Triceps', 'Brachial artery', 'Median nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
 
   // ELBOW JOINTS
@@ -204,6 +208,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightElbow',
@@ -217,6 +222,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Tennis elbow', 'Golfer\'s elbow', 'Bursitis', 'Arthritis'],
     keyStructures: ['Humerus', 'Radius', 'Ulna', 'Biceps tendon'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // FOREARMS
@@ -233,6 +239,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Wrist fracture', 'Compartment syndrome', 'Radial nerve palsy'],
     keyStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
   {
     id: 'rightForearm',
@@ -247,6 +254,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Wrist fracture', 'Compartment syndrome', 'Radial nerve palsy'],
     keyStructures: ['Radius', 'Ulna', 'Forearm flexors', 'Radial nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
 
   // WRIST JOINTS
@@ -262,6 +270,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel', 'Sprain', 'Arthritis', 'Fracture'],
     keyStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
   {
     id: 'rightWrist',
@@ -275,6 +284,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel', 'Sprain', 'Arthritis', 'Fracture'],
     keyStructures: ['Radius', 'Ulna', 'Carpal bones', 'Transverse ligament'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
 
   // HANDS
@@ -290,6 +300,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     keyStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
   {
     id: 'rightHand',
@@ -303,6 +314,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Carpal tunnel syndrome', 'Trigger finger', 'Arthritis', 'De Quervain\'s'],
     keyStructures: ['Carpal bones', 'Metacarpals', 'Phalanges', 'Thenar muscles'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'rheumatology'],
   },
 
   // HIP JOINTS
@@ -318,6 +330,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     keyStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
     layer: 'bone',
+    relatedModules: ['orthopedics'],
   },
   {
     id: 'rightHip',
@@ -331,6 +344,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Hip osteoarthritis', 'Bursitis', 'Labral tear', 'Hip fracture'],
     keyStructures: ['Femoral head', 'Acetabulum', 'Hip muscles', 'Sciatic nerve'],
     layer: 'bone',
+    relatedModules: ['orthopedics'],
   },
 
   // THIGHS
@@ -346,6 +360,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Quadriceps strain', 'DVT', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightThigh',
@@ -359,6 +374,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Quadriceps strain', 'DVT', 'Compartment syndrome'],
     keyStructures: ['Femur', 'Quadriceps', 'Hamstrings', 'Femoral artery'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // KNEE JOINTS
@@ -374,6 +390,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     keyStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightKnee',
@@ -387,6 +404,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['ACL tear', 'Meniscus tear', 'Osteoarthritis', 'Bursitis'],
     keyStructures: ['Femoral condyles', 'Tibial plateau', 'Patella', 'Menisci', 'Ligaments'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // LOWER LEGS
@@ -402,6 +420,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     keyStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
   {
     id: 'rightLeg',
@@ -415,6 +434,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Shin splints', 'Stress fracture', 'Achilles tendonitis'],
     keyStructures: ['Tibia', 'Fibula', 'Gastrocnemius', 'Soleus', 'Tibial nerve'],
     layer: 'muscle',
+    relatedModules: ['orthopedics'],
   },
 
   // ANKLE JOINTS
@@ -430,6 +450,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     keyStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightAnkle',
@@ -443,6 +464,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Sprain', 'Achilles tendonitis', 'Arthritis', 'Fracture'],
     keyStructures: ['Tibia', 'Fibula', 'Talus', 'Calcaneus'],
     layer: 'bone',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 
   // FEET
@@ -458,6 +480,7 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     keyStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
   {
     id: 'rightFoot',
@@ -471,10 +494,35 @@ export const BODY_REGIONS: BodyRegion[] = [
     commonConditions: ['Plantar fasciitis', 'Ankle sprain', 'Achilles rupture', 'Bunions'],
     keyStructures: ['Tarsals', 'Metatarsals', 'Phalanges', 'Plantar fascia'],
     layer: 'muscle',
+    relatedModules: ['orthopedics', 'sports-medicine'],
   },
 ];
 
-// System to specialty mapping for educational modules
+// Quiz question type
+interface QuizQuestion {
+  id: string;
+  question: string;
+  targetRegionId: string;
+  hint?: string;
+}
+
+// Quiz state type
+type QuizState = 'idle' | 'asking' | 'correct' | 'incorrect' | 'complete';
+
+// Generate quiz questions from body regions
+const generateQuizQuestions = (): QuizQuestion[] => {
+  const questions: QuizQuestion[] = [
+    { id: 'q1', question: 'Click the heart', targetRegionId: 'chest', hint: 'Located in the center of the chest' },
+    { id: 'q2', question: 'Click the brain', targetRegionId: 'head', hint: 'Protected by the skull' },
+    { id: 'q3', question: 'Click the knee', targetRegionId: 'leftKnee', hint: 'A hinge joint in the leg' },
+    { id: 'q4', question: 'Click the shoulder', targetRegionId: 'rightShoulder', hint: 'Ball-and-socket joint' },
+    { id: 'q5', question: 'Click the stomach', targetRegionId: 'abdomen', hint: 'In the upper abdomen' },
+    { id: 'q6', question: 'Click the hand', targetRegionId: 'leftHand', hint: 'Has 27 bones' },
+    { id: 'q7', question: 'Click the hip', targetRegionId: 'rightHip', hint: 'Ball-and-socket joint connecting leg to pelvis' },
+    { id: 'q8', question: 'Click the neck', targetRegionId: 'neck', hint: 'Connects head to torso' },
+  ];
+  return questions.sort(() => Math.random() - 0.5); // Shuffle
+};
 const SYSTEM_TO_SPECIALTY: Partial<Record<BodySystem, string>> = {
   cardiovascular: 'cardiology',
   respiratory: 'pulmonology',
@@ -1144,6 +1192,105 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
 }
 
 // ============================================================================
+// QUIZ PANEL COMPONENT
+// ============================================================================
+
+interface QuizPanelProps {
+  isActive: boolean;
+  currentQuestion: QuizQuestion | null;
+  questionNumber: number;
+  totalQuestions: number;
+  score: number;
+  state: QuizState;
+  onStart: () => void;
+  onClose: () => void;
+  onSkip: () => void;
+}
+
+function QuizPanel({ 
+  isActive, 
+  currentQuestion, 
+  questionNumber, 
+  totalQuestions, 
+  score, 
+  state,
+  onStart, 
+  onClose, 
+  onSkip 
+}: QuizPanelProps) {
+  if (!isActive) return null;
+
+  return (
+    <div className="quiz-panel">
+      <div className="quiz-header">
+        <h4>🎯 Anatomy Quiz</h4>
+        <button className="quiz-close" onClick={onClose}>×</button>
+      </div>
+
+      {state === 'idle' && (
+        <div className="quiz-intro">
+          <p>Test your anatomy knowledge!</p>
+          <p className="quiz-description">
+            Identify body regions as they are called out.
+            {totalQuestions} questions, immediate feedback.
+          </p>
+          <button className="quiz-start-btn" onClick={onStart}>
+            Start Quiz
+          </button>
+        </div>
+      )}
+
+      {(state === 'asking' || state === 'correct' || state === 'incorrect') && currentQuestion && (
+        <div className="quiz-question">
+          <div className="quiz-progress">
+            <span>Question {questionNumber} of {totalQuestions}</span>
+            <span className="quiz-score">Score: {score}/{questionNumber - (state === 'asking' ? 1 : 0)}</span>
+          </div>
+
+          <div className={`quiz-prompt ${state}`}>
+            <h3>{currentQuestion.question}</h3>
+            {state === 'asking' && currentQuestion.hint && (
+              <p className="quiz-hint">💡 {currentQuestion.hint}</p>
+            )}
+            {state === 'correct' && (
+              <div className="quiz-feedback correct">
+                <span className="feedback-icon">✅</span>
+                <span>Correct!</span>
+              </div>
+            )}
+            {state === 'incorrect' && (
+              <div className="quiz-feedback incorrect">
+                <span className="feedback-icon">❌</span>
+                <span>Try again!</span>
+              </div>
+            )}
+          </div>
+
+          <button className="quiz-skip" onClick={onSkip}>
+            Skip →
+          </button>
+        </div>
+      )}
+
+      {state === 'complete' && (
+        <div className="quiz-complete">
+          <h3>🎉 Quiz Complete!</h3>
+          <div className="final-score">
+            <span className="score-number">{score}</span>
+            <span className="score-total">/{totalQuestions}</span>
+          </div>          <div className="score-percentage">
+            {Math.round((score / totalQuestions) * 100)}% Correct
+          </div>
+          <button className="quiz-restart" onClick={onStart}>
+            Try Again
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================================
 // SYSTEM TOGGLE COMPONENT
 // ============================================================================
 
@@ -1226,7 +1373,8 @@ function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }
   }, [region.id]);
 
   const handleLearn = () => {
-    const specialty = SYSTEM_TO_SPECIALTY[region.systems[0]];
+    // Use region's relatedModules if available, fallback to system-based mapping
+    const specialty = region.relatedModules?.[0] || SYSTEM_TO_SPECIALTY[region.systems[0]];
     if (onLearn) {
       onLearn(region.id, specialty);
     }
@@ -1565,6 +1713,14 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
   const [crossSectionMode, setCrossSectionMode] = useState<'none' | 'sagittal' | 'coronal' | 'transverse'>('none');
   const [cutPosition, setCutPosition] = useState(0); // -1 to 1
 
+  // Quiz state
+  const [quizActive, setQuizActive] = useState(false);
+  const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [quizScore, setQuizScore] = useState(0);
+  const [quizState, setQuizState] = useState<QuizState>('idle');
+  const [feedbackTimer, setFeedbackTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+
   const [visibleSystems, setVisibleSystems] = useState<SystemVisibility>({
     integumentary: true,
     skeletal: true,
@@ -1584,11 +1740,75 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
   }, []);
 
   const handleRegionSelect = useCallback((regionId: string) => {
+    // Handle quiz mode
+    if (quizActive && quizState === 'asking' && quizQuestions[currentQuestionIndex]) {
+      const currentQuestion = quizQuestions[currentQuestionIndex];
+      
+      if (regionId === currentQuestion.targetRegionId || 
+          // Allow matching symmetric body parts (left/right)
+          (currentQuestion.targetRegionId.startsWith('left') && regionId === currentQuestion.targetRegionId.replace('left', 'right')) ||
+          (currentQuestion.targetRegionId.startsWith('right') && regionId === currentQuestion.targetRegionId.replace('right', 'left'))) {
+        // Correct answer
+        setQuizState('correct');
+        setQuizScore(prev => prev + 1);
+        
+        // Clear any existing timer
+        if (feedbackTimer) clearTimeout(feedbackTimer);
+        
+        // Move to next question after delay
+        const timer = setTimeout(() => {
+          if (currentQuestionIndex < quizQuestions.length - 1) {
+            setCurrentQuestionIndex(prev => prev + 1);
+            setQuizState('asking');
+          } else {
+            setQuizState('complete');
+          }
+        }, 1500);
+        setFeedbackTimer(timer);
+        return;
+      } else {
+        // Incorrect answer
+        setQuizState('incorrect');
+        if (feedbackTimer) clearTimeout(feedbackTimer);
+        const timer = setTimeout(() => {
+          setQuizState('asking');
+        }, 1000);
+        setFeedbackTimer(timer);
+        return;
+      }
+    }
+
+    // Normal mode
     const region = BODY_REGIONS.find(r => r.id === regionId);
     if (region) {
       setSelectedRegion(region);
     }
+  }, [quizActive, quizState, quizQuestions, currentQuestionIndex, feedbackTimer]);
+
+  const startQuiz = useCallback(() => {
+    const questions = generateQuizQuestions();
+    setQuizQuestions(questions);
+    setCurrentQuestionIndex(0);
+    setQuizScore(0);
+    setQuizState('asking');
+    setQuizActive(true);
+    setSelectedRegion(null); // Close any open panel
   }, []);
+
+  const closeQuiz = useCallback(() => {
+    setQuizActive(false);
+    setQuizState('idle');
+    if (feedbackTimer) clearTimeout(feedbackTimer);
+  }, [feedbackTimer]);
+
+  const skipQuestion = useCallback(() => {
+    if (currentQuestionIndex < quizQuestions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setQuizState('asking');
+    } else {
+      setQuizState('complete');
+    }
+  }, [currentQuestionIndex, quizQuestions.length]);
 
   const hoveredRegionData = useMemo(() => {
     if (!hoveredRegion) return null;
@@ -1680,6 +1900,13 @@ export function CompleteAnatomyLaunchpad({ onBack, onLearn, onViewLabs, dashboar
           title="Toggle Grid"
         >
           ⊞ Grid
+        </button>
+        <button 
+          className={`view-btn ${quizActive ? 'active' : ''}`}
+          onClick={() => quizActive ? closeQuiz() : startQuiz()}
+          title="Quiz Mode"
+        >
+          🎯 Quiz
         </button>
       </div>
 

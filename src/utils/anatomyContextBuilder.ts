@@ -2,7 +2,10 @@
  * Anatomy Context Builder Utility
  *
  * Functions to build AI prompts with anatomical structure + health context.
+ * Enhanced with image references for visual learning.
  */
+
+import { getImagesByBodyRegion, getImagesByBodySystem, ImageMetadata } from '../content/imageRegistry.js';
 
 interface DashboardData {
   activeConditions: Array<{ name: string; status: string }>;
@@ -20,6 +23,7 @@ interface StructureEducationalContent {
   commonConditions: string[];
   relatedStructures: string[];
   relatedModules?: string[];
+  imageReferences?: ImageMetadata[];
 }
 
 // Educational content for body regions (expandable with more data)
@@ -667,14 +671,98 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
 };
 
 /**
- * Get educational content for a structure by ID
+ * Get educational content for a structure by ID with image references
  */
 export function buildStructureContext(structureId: string): StructureEducationalContent | null {
-  return STRUCTURE_DATA[structureId] || null;
+  const data = STRUCTURE_DATA[structureId];
+  if (!data) return null;
+
+  // Get related images for this structure
+  const images = getImagesForStructure(structureId);
+
+  return {
+    ...data,
+    imageReferences: images,
+  };
+}
+
+/**
+ * Get relevant images for a body structure
+ */
+export function getImagesForStructure(structureId: string): ImageMetadata[] {
+  const structure = STRUCTURE_DATA[structureId];
+  if (!structure) return [];
+
+  const images: ImageMetadata[] = [];
+
+  // Map structure IDs to body regions
+  const regionMap: Record<string, string> = {
+    head: 'head', neck: 'neck', chest: 'chest', abdomen: 'abdomen',
+    pelvis: 'pelvis', thoracicSpine: 'back', lumbarSpine: 'back',
+    leftShoulder: 'shoulder', rightShoulder: 'shoulder',
+    leftArm: 'arm', rightArm: 'arm', leftElbow: 'elbow', rightElbow: 'elbow',
+    leftForearm: 'forearm', rightForearm: 'forearm',
+    leftWrist: 'wrist', rightWrist: 'wrist', leftHand: 'hand', rightHand: 'hand',
+    leftHip: 'hip', rightHip: 'hip', leftThigh: 'thigh', rightThigh: 'thigh',
+    leftKnee: 'knee', rightKnee: 'knee', leftLeg: 'leg', rightLeg: 'leg',
+    leftAnkle: 'ankle', rightAnkle: 'ankle', leftFoot: 'foot', rightFoot: 'foot',
+    'thoracic-spine': 'back', 'lumbar-spine': 'back',
+    'shoulder-left': 'shoulder', 'shoulder-right': 'shoulder',
+    'arm-left': 'arm', 'arm-right': 'arm',
+    'elbow-left': 'elbow', 'elbow-right': 'elbow',
+    'forearm-left': 'forearm', 'forearm-right': 'forearm',
+    'wrist-left': 'wrist', 'wrist-right': 'wrist',
+    'hand-left': 'hand', 'hand-right': 'hand',
+    'hip-left': 'hip', 'hip-right': 'hip',
+    'thigh-left': 'thigh', 'thigh-right': 'thigh',
+    'knee-left': 'knee', 'knee-right': 'knee',
+    'leg-left': 'leg', 'leg-right': 'leg',
+    'ankle-left': 'ankle', 'ankle-right': 'ankle',
+    'foot-left': 'foot', 'foot-right': 'foot',
+    'abdomen-upper': 'abdomen', 'abdomen-lower': 'abdomen',
+    'back-upper': 'back', 'back-lower': 'back',
+  };
+
+  // Get images by region
+  const regionKey = regionMap[structureId];
+  if (regionKey) {
+    images.push(...getImagesByBodyRegion(regionKey as any));
+  }
+
+  // Get images by system
+  const systemMap: Record<string, string> = {
+    'Central Nervous System': 'nervous',
+    'Musculoskeletal': 'musculoskeletal',
+    'Cardiovascular / Respiratory': 'cardiovascular',
+    'Cardiovascular / Respiratory / Musculoskeletal': 'cardiovascular',
+    'Digestive / Urinary': 'digestive',
+    'Digestive / Urinary / Reproductive': 'digestive',
+    'Digestive / Hepatobiliary': 'digestive',
+    'Digestive / Urinary / Reproductive': 'urinary',
+    'Skeletal / Reproductive / Urinary': 'reproductive',
+    'Skeletal / Muscular / Nervous': 'nervous',
+    'Skeletal / Nervous': 'nervous',
+    'Musculoskeletal / Cardiovascular': 'cardiovascular',
+  };
+
+  const systemKey = systemMap[structure.system];
+  if (systemKey) {
+    images.push(...getImagesByBodySystem(systemKey as any));
+  }
+
+  // Also try to find images by common conditions
+  structure.commonConditions.forEach(condition => {
+    // This would need a condition-based lookup function in imageRegistry
+    // For now, we'll rely on region and system matching
+  });
+
+  // Remove duplicates and limit
+  return [...new Map(images.map(img => [img.id, img])).values()].slice(0, 10);
 }
 
 /**
  * Build a system prompt that combines structure education with health context
+ * Includes available image references for visual learning
  */
 export function buildAnatomySystemPrompt(
   structureId: string,
@@ -682,6 +770,7 @@ export function buildAnatomySystemPrompt(
   dashboardData: DashboardData | null
 ): string {
   const structureInfo = STRUCTURE_DATA[structureId];
+  const imageReferences = getImagesForStructure(structureId);
 
   let structureContent = '';
   if (structureInfo) {
@@ -696,6 +785,19 @@ Related Structures: ${structureInfo.relatedStructures.join(', ')}
 `.trim();
   } else {
     structureContent = `Name: ${structureName}\nNo detailed educational content available for this structure.`;
+  }
+
+  // Add image references section
+  let imageContext = '';
+  if (imageReferences.length > 0) {
+    imageContext = `
+=== AVAILABLE VISUAL REFERENCES ===
+${imageReferences.slice(0, 5).map(img => 
+  `- ${img.title} (${img.category}): ${img.path}`
+).join('\n')}
+
+You can reference these images when explaining anatomy or pathology concepts.
+`;
   }
 
   let healthContext = '';
@@ -734,10 +836,13 @@ IMPORTANT: You provide educational information only, not medical advice. Always 
 === STRUCTURE INFORMATION ===
 ${structureContent}
 
+${imageContext}
+
 ${healthContext ? `=== USER HEALTH CONTEXT ===\n${healthContext}` : ''}
 
 Guidelines:
 - Explain anatomy concepts clearly at an accessible level
+- When visual references are available, you can describe what the user would see in those images
 - When the user has relevant health conditions, explain how they might relate to this structure
 - Be educational and informative
 - Never diagnose or prescribe treatments
@@ -814,3 +919,7 @@ function findRelevantConditions(
 }
 
 export type { StructureEducationalContent, DashboardData };
+
+// Re-export image-related types and functions for convenience
+export { getImagesForStructure, getImagesByBodyRegion, getImagesByBodySystem } from '../content/imageRegistry.js';
+export type { ImageMetadata } from '../content/imageRegistry.js';

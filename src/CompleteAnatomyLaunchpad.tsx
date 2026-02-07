@@ -1657,6 +1657,12 @@ function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }
           Structures
         </button>
         <button
+          className={activeTab === 'visual' ? 'active' : ''}
+          onClick={() => setActiveTab('visual')}
+        >
+          🖼️ Visual ({regionImages.length})
+        </button>
+        <button
           className={activeTab === 'education' ? 'active' : ''}
           onClick={() => setActiveTab('education')}
         >
@@ -1683,6 +1689,16 @@ function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }
                 ))}
               </div>
             </div>
+
+            {/* Show preview of related images in overview */}
+            {regionImages.length > 0 && (
+              <CompactImageGallery
+                images={regionImages}
+                title="Visual References"
+                maxImages={4}
+                onImageClick={(img) => setSelectedImage(img)}
+              />
+            )}
 
             {userConditions.length > 0 && (
               <div className="user-conditions">
@@ -1763,6 +1779,58 @@ function RegionInfoPanel({ region, onClose, onLearn, onViewLabs, dashboardData }
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {activeTab === 'visual' && (
+          <div className="visual-tab">
+            {regionImages.length > 0 ? (
+              <>
+                <h4>🖼️ Visual References</h4>
+                <p className="visual-intro">
+                  Browse pathology, anatomy, and histology images related to the {region.name.toLowerCase()}.
+                  Click any image to view full details and attribution.
+                </p>
+                <CompactImageGallery
+                  images={regionImages}
+                  title=""
+                  maxImages={12}
+                  onImageClick={(img) => setSelectedImage(img)}
+                />
+                
+                {/* Categories breakdown */}
+                <div className="image-categories">
+                  <h5>By Category</h5>
+                  <div className="category-breakdown">
+                    {[
+                      { key: 'pathology', label: 'Pathology', color: '#c41e3a' },
+                      { key: 'anatomy', label: 'Anatomy', color: '#4a90d9' },
+                      { key: 'histology', label: 'Histology', color: '#20b2aa' },
+                    ].map(cat => {
+                      const count = regionImages.filter(img => img.category === cat.key).length;
+                      if (count === 0) return null;
+                      return (
+                        <span 
+                          key={cat.key} 
+                          className="category-badge"
+                          style={{ backgroundColor: cat.color }}
+                        >
+                          {cat.label}: {count}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="no-images">
+                <p>📚 No visual references available for this region yet.</p>
+                <p className="subtle">
+                  Our image library is continuously growing. Check back later for pathology 
+                  and anatomy images from WebPath, Gray's Anatomy, and Wikimedia Commons.
+                </p>
+              </div>
+            )}
           </div>
         )}
 

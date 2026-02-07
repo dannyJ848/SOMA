@@ -8,27 +8,27 @@
 
 ## Phase 4: Beta Readiness & Polish
 
-### P4.1: Data Import/Export System
-- [ ] **P4.1.1** PDF Medical Record Import (FHIR + OCR)
+### P4.1: Data Import/Export System ✅ COMPLETE
+- [x] **P4.1.1** PDF Medical Record Import (FHIR + OCR)
   - Parse PDF medical records using pdf-parse
   - Extract structured data using LLM (JSON mode)
   - Map to BiologicalSelf types
   - Handle duplicate detection
   - Progress tracking for large imports
 
-- [ ] **P4.1.2** FHIR Integration
+- [x] **P4.1.2** FHIR Integration
   - Import from major EHR systems (Epic, Cerner)
   - FHIR R4 resource mapping
   - SMART on FHIR authentication flow
   - Local-only storage of imported data
 
-- [ ] **P4.1.3** Apple Health Deep Integration
+- [x] **P4.1.3** Apple Health Deep Integration
   - Beyond summaries: import raw time-series data
   - Heart rate variability analysis
   - Sleep stage correlation with symptoms
   - Workout intensity trends
 
-- [ ] **P4.1.4** Data Export & Portability
+- [x] **P4.1.4** Data Export & Portability
   - JSON export (machine-readable)
   - PDF health summary report
   - Encrypted backup/restore
@@ -230,17 +230,18 @@
 
 ---
 
-## Active Sprint: P4.1 Data Import/Export
+## Active Sprint: P4.2 Knowledge Base Expansion
 
 ### Current Focus
-Implementing comprehensive data import capabilities to make Biological Self truly useful for users with existing health records.
+Building out comprehensive medical educational content across specialties and lab interpretations.
 
 ### In Progress
-- [ ] **P4.1.1** PDF Medical Record Import
+- [ ] **P4.2.2** More medical specialty content
+- [ ] **P4.2.4** Lab interpretation guides
 
 ### Next Up
-- [ ] **P4.1.2** FHIR Integration
-- [ ] **P4.1.3** Apple Health Deep Integration
+- [ ] **P4.2.3** Drug mechanism database
+- [ ] **P4.3.1** Educational prompts for AI chat
 
 ### Blocked
 - None currently
@@ -274,6 +275,11 @@ Implementing comprehensive data import capabilities to make Biological Self trul
 ---
 
 ## Autonomous Work Log
+
+### 2026-02-07
+- **Status:** Phase 4.1 complete - Data Import/Export System delivered
+- **Updated:** ROADMAP.md to reflect P4.1 completion and P4.2 as active sprint
+- **Next:** Continue P4.2 Knowledge Base Expansion - lab modules (thyroid, metabolic panel)
 
 ### 2026-02-04
 - **Status:** Initial autonomous development setup

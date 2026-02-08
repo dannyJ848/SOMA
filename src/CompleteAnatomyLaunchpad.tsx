@@ -785,7 +785,10 @@ function BodyPartMesh({
     const layerOrder: LayerType[] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
     
     // Calculate max visible layer based on slider position
-    const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
+    const maxVisibleLayer = Math.min(
+      Math.floor((layerDepth / 100) * layerOrder.length),
+      layerOrder.length - 1
+    );
     const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
     
     // Find the primary layer index
@@ -1261,7 +1264,10 @@ function calculatePinOffset(region: BodyRegion): number {
 // Check if a region should be visible based on current layer depth
 function isLayerVisible(regionLayers: BodyRegion['layers'], layerDepth: number): boolean {
   const layerOrder: LayerType[] = ['skin', 'fat', 'muscle', 'bone', 'organ'];
-  const maxVisibleLayer = Math.floor((layerDepth / 100) * layerOrder.length);
+  const maxVisibleLayer = Math.min(
+    Math.floor((layerDepth / 100) * layerOrder.length),
+    layerOrder.length - 1
+  );
   
   // Calculate fade progress for the boundary layer
   const layerProgress = (layerDepth / 100) * layerOrder.length - maxVisibleLayer;
@@ -1302,8 +1308,10 @@ function PinLabel({ region, isVisible, isHovered, isSelected, showAll, primarySy
   
   // Calculate pin position with geometry-aware offset
   const pinOffset = calculatePinOffset(region);
+  const isLeftSide = region.position[0] < 0;
+  const xOffset = isLeftSide ? -pinOffset : pinOffset;
   const pinPosition: [number, number, number] = [
-    region.position[0] + pinOffset,
+    region.position[0] + xOffset,
     region.position[1],
     region.position[2] + 0.1
   ];

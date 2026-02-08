@@ -679,6 +679,7 @@ function HeadGeometry({ scale, clippingPlanes }: { scale: [number, number, numbe
           color={SYSTEM_COLORS.nervous}
           roughness={0.5}
           metalness={0.1}
+          side={THREE.DoubleSide}
           clippingPlanes={clippingPlanes}
           clipShadows={true}
         />
@@ -690,6 +691,7 @@ function HeadGeometry({ scale, clippingPlanes }: { scale: [number, number, numbe
           color={SYSTEM_COLORS.skeletal}
           roughness={0.5}
           metalness={0.1}
+          side={THREE.DoubleSide}
           clippingPlanes={clippingPlanes}
           clipShadows={true}
         />
@@ -701,6 +703,7 @@ function HeadGeometry({ scale, clippingPlanes }: { scale: [number, number, numbe
           color={SYSTEM_COLORS.muscular}
           roughness={0.5}
           metalness={0.1}
+          side={THREE.DoubleSide}
           clippingPlanes={clippingPlanes}
           clipShadows={true}
         />
@@ -734,6 +737,7 @@ function JointGeometry({ scale, isSelected, isHovered, clippingPlanes }: { scale
           metalness={0.1}
           emissive={isSelected ? '#22ff44' : isHovered ? '#4488ff' : '#000000'}
           emissiveIntensity={isSelected ? 0.4 : isHovered ? 0.3 : 0}
+          side={THREE.DoubleSide}
           clippingPlanes={clippingPlanes}
           clipShadows={true}
         />
@@ -890,6 +894,7 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            side={THREE.DoubleSide}
             clippingPlanes={clippingPlanes}
             clipShadows={true}
           />
@@ -913,6 +918,7 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            side={THREE.DoubleSide}
             clippingPlanes={clippingPlanes}
             clipShadows={true}
           />
@@ -936,6 +942,7 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            side={THREE.DoubleSide}
             clippingPlanes={clippingPlanes}
             clipShadows={true}
           />
@@ -959,6 +966,7 @@ function BodyPartMesh({
             emissiveIntensity={emissiveIntensity}
             transparent={true}
             opacity={targetOpacity}
+            side={THREE.DoubleSide}
             clippingPlanes={clippingPlanes}
             clipShadows={true}
           />

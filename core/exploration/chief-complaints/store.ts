@@ -1507,7 +1507,7 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
           structureName: 'Lateral Epicondyle',
           system: 'musculoskeletal',
           clinicalRelevance: 'Origin of wrist extensors; common site of overuse injury',
-          commonPathologies: ['Lateral epicondylitis (tennis elbow)', 'Extensor tendon tear'],
+          commonPathologies: ['Lateral epicondylitis', 'Extensor tendon tear'],
         },
       ],
       neuralInnervation: {

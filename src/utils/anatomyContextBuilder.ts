@@ -49,6 +49,16 @@ const STRUCTURE_DATA: Record<string, StructureEducationalContent> = {
     relatedStructures: ['Cervical vertebrae', 'Thyroid gland', 'Trachea', 'Esophagus', 'Carotid arteries'],
     relatedModules: ['endocrinology', 'orthopedics'],
   },
+  face: {
+    name: 'Face',
+    latinName: 'Facies',
+    system: 'Nervous / Musculoskeletal / Sensory',
+    location: 'Anterior aspect of the head, containing sensory organs and facial structures',
+    function: 'Contains eyes for vision, nose for smell and breathing, mouth for eating and speaking, and facial muscles for expression.',
+    commonConditions: ['Sinusitis', 'TMJ disorders', 'Facial nerve palsy', 'Acne', 'Rosacea'],
+    relatedStructures: ['Eyes', 'Nose', 'Mouth', 'Sinuses', 'Facial muscles', 'Parotid gland'],
+    relatedModules: ['ent', 'ophthalmology', 'neurology', 'dermatology'],
+  },
 
   // TORSO
   chest: {
@@ -697,7 +707,7 @@ export function getImagesForStructure(structureId: string): ImageMetadata[] {
 
   // Map structure IDs to body regions
   const regionMap: Record<string, string> = {
-    head: 'head', neck: 'neck', chest: 'chest', abdomen: 'abdomen',
+    head: 'head', face: 'head', neck: 'neck', chest: 'chest', abdomen: 'abdomen',
     pelvis: 'pelvis', thoracicSpine: 'back', lumbarSpine: 'back',
     leftShoulder: 'shoulder', rightShoulder: 'shoulder',
     leftArm: 'arm', rightArm: 'arm', leftElbow: 'elbow', rightElbow: 'elbow',

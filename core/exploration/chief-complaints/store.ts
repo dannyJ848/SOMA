@@ -220,6 +220,139 @@ export const regionChiefComplaints: Map<BodyRegion, RegionChiefComplaints> = new
     relatedModules: ['neurology', 'ophthalmology', 'ent'],
   }],
 
+  ['face', {
+    regionId: 'face',
+    regionName: 'Face',
+    latinName: 'Facies',
+    regionDescription: 'The face contains the sensory organs (eyes, nose, mouth) and facial structures',
+    boundingBox: {
+      min: { x: -0.12, y: 1.45, z: 0.05 },
+      max: { x: 0.12, y: 1.75, z: 0.15 },
+    },
+    chiefComplaints: [
+      {
+        complaintId: 'face-sinus-pain',
+        symptom: 'Sinus Pain/Pressure',
+        aliases: ['sinus headache', 'facial pressure', 'sinus congestion'],
+        frequency: 'common',
+        description: 'Pain or pressure in the facial sinus areas',
+        anatomicalBasis: [
+          {
+            structureId: 'nervous-sinuses',
+            structureName: 'Paranasal Sinuses',
+            system: 'nervous',
+            mechanism: 'Inflammation and pressure in sinus cavities',
+            highlightColor: '#3498DB',
+          },
+          {
+            structureId: 'musculoskeletal-facial-bones',
+            structureName: 'Facial Bones',
+            system: 'musculoskeletal',
+            mechanism: 'Pressure on bony structures',
+            highlightColor: '#E74C3C',
+          },
+        ],
+        characteristicFeatures: ['Location (forehead, cheeks, between eyes)', 'Worse when bending forward', 'Nasal discharge', 'Seasonal pattern'],
+        commonCauses: ['Viral sinusitis', 'Allergic rhinitis', 'Bacterial sinusitis', 'Migraine (often misdiagnosed as sinus)'],
+        differentialDiagnoses: ['Acute sinusitis', 'Chronic sinusitis', 'Migraine', 'Dental infection'],
+        relatedComplaints: ['nasal-congestion', 'head-headache'],
+      },
+      {
+        complaintId: 'face-jaw-pain',
+        symptom: 'Jaw Pain',
+        aliases: ['TMJ pain', 'jaw clicking', 'facial pain'],
+        frequency: 'common',
+        description: 'Pain in the jaw joint or surrounding muscles',
+        anatomicalBasis: [
+          {
+            structureId: 'musculoskeletal-tmj',
+            structureName: 'Temporomandibular Joint (TMJ)',
+            system: 'musculoskeletal',
+            mechanism: 'Joint inflammation or disc displacement',
+            highlightColor: '#F39C12',
+          },
+          {
+            structureId: 'musculoskeletal-masseter',
+            structureName: 'Masseter Muscle',
+            system: 'musculoskeletal',
+            mechanism: 'Muscle tension or bruxism',
+            highlightColor: '#27AE60',
+          },
+        ],
+        characteristicFeatures: ['Pain with chewing', 'Clicking or popping', 'Limited mouth opening', 'Morning symptoms (if grinding)'],
+        commonCauses: ['TMJ disorder', 'Bruxism (teeth grinding)', 'Muscle tension', 'Arthritis'],
+        differentialDiagnoses: ['TMJ dysfunction', 'Myofascial pain', 'Dental pathology', 'Trigeminal neuralgia'],
+        relatedComplaints: ['head-headache', 'ear-pain'],
+      },
+    ],
+    regionalAnatomy: {
+      systems: [
+        {
+          system: 'nervous',
+          structures: ['Trigeminal nerve', 'Facial nerve', 'Eyes', 'Nose', 'Mouth'],
+          structureIds: ['nervous-trigeminal', 'nervous-facial', 'nervous-eye', 'nervous-nose'],
+          primaryFunctions: ['Sensation', 'Facial expression', 'Vision', 'Smell', 'Taste'],
+        },
+        {
+          system: 'musculoskeletal',
+          structures: ['Maxilla', 'Mandible', 'Zygomatic bones', 'TMJ', 'Facial muscles'],
+          structureIds: ['musculoskeletal-maxilla', 'musculoskeletal-mandible', 'musculoskeletal-tmj'],
+          primaryFunctions: ['Facial structure', 'Chewing', 'Expression'],
+        },
+      ],
+      keyStructures: [
+        {
+          structureId: 'nervous-trigeminal',
+          structureName: 'Trigeminal Nerve (CN V)',
+          system: 'nervous',
+          clinicalRelevance: 'Primary sensory nerve of the face; involved in facial pain syndromes',
+          commonPathologies: ['Trigeminal neuralgia', 'Atypical facial pain'],
+        },
+        {
+          structureId: 'musculoskeletal-tmj',
+          structureName: 'Temporomandibular Joint',
+          system: 'musculoskeletal',
+          clinicalRelevance: 'Common source of jaw pain and headache',
+          commonPathologies: ['TMJ disorder', 'Disc displacement', 'Arthritis'],
+        },
+      ],
+      neuralInnervation: {
+        sensoryNerves: ['Trigeminal nerve (V1, V2, V3)', 'Facial nerve (CN VII)'],
+        motorNerves: ['Facial nerve (CN VII)', 'Trigeminal motor branch'],
+        dermatomalLevels: ['V1', 'V2', 'V3'],
+      },
+      vascularSupply: {
+        arterialSupply: ['Facial artery', 'Superficial temporal artery', 'Ophthalmic artery'],
+        venousDrainage: ['Facial vein', 'Cavernous sinus via ophthalmic veins'],
+      },
+    },
+    differentialAnatomy: [],
+    redFlags: [
+      {
+        symptom: 'Sudden severe facial pain with rash',
+        concern: 'Herpes zoster ophthalmicus (shingles)',
+        associatedFindings: ['Vesicular rash in V1 distribution', 'Eye involvement'],
+        action: 'Urgent ophthalmology evaluation',
+        urgency: 'urgent',
+      },
+      {
+        symptom: 'Facial droop with other neurological symptoms',
+        concern: 'Stroke or Bell palsy',
+        associatedFindings: ['Asymmetric facial movement', 'Associated neurological signs'],
+        action: 'Emergency stroke evaluation',
+        urgency: 'emergency',
+      },
+    ],
+    relatedModules: ['ent', 'ophthalmology', 'neurology', 'dermatology'],
+    explanations: {
+      level1: 'Your face contains your eyes, nose, and mouth. It also has the muscles that let you show emotions. Pain in the face often comes from sinuses or the jaw joint.',
+      level2: 'The face houses the sensory organs (eyes, nose, mouth) and is innervated by the trigeminal nerve for sensation and facial nerve for movement. Common pain sources include sinuses, TMJ, and muscles.',
+      level3: 'The face contains the V1 (ophthalmic), V2 (maxillary), and V3 (mandibular) distributions of the trigeminal nerve. The paranasal sinuses (frontal, maxillary, ethmoid, sphenoid) can become inflamed causing sinusitis. The TMJ allows jaw movement and can cause referred pain.',
+      level4: 'Facial sensation is mediated by the trigeminal nerve with its three divisions. The sinuses are air-filled cavities that drain into the nasal cavity; obstruction leads to inflammation. The TMJ is a synovial joint with a fibrocartilaginous disc that can displace. Facial pain can be primary (trigeminal neuralgia) or secondary to dental, sinus, or vascular causes.',
+      level5: 'The trigeminal nerve has extensive central connections in the brainstem and thalamus. Trigeminal neuralgia involves vascular compression of the root entry zone causing demyelination and ephaptic transmission. Central sensitization in the trigeminal nucleus caudalis contributes to chronic facial pain. TMJ disorders involve biomechanical dysfunction, inflammation, and central pain processing changes.',
+    },
+  }],
+
   ['chest', {
     regionId: 'chest',
     regionName: 'Chest',

@@ -13,10 +13,7 @@ export * from "./endocrinology";
 
 // --- ENT (explicit re-exports to avoid allergicRhinitis collision) ---
 export {
-<<<<<<< HEAD
-=======
   earAnatomy,
->>>>>>> origin/ralph/advanced-medical-intelligence
   hearingPhysiology,
   hearingLoss,
   otitisMedia,
@@ -90,21 +87,15 @@ export * from "./pulmonology";
 // --- Rheumatology (explicit re-exports to avoid osteoarthritisContent collision) ---
 export {
   RHEUMATOLOGY_ENTRIES,
-<<<<<<< HEAD
-=======
   rheumatoidArthritisContent,
   osteoarthritisContent as rheumatologyOsteoarthritisContent,
   systemicLupusContent,
->>>>>>> origin/ralph/advanced-medical-intelligence
   goutContent,
   pseudogoutContent,
   ankylosingSpondylitisContent,
   spondyloarthropathiesContent,
-<<<<<<< HEAD
-=======
   fibromyalgiaContent,
   vasculitisContent,
->>>>>>> origin/ralph/advanced-medical-intelligence
   sclerodermaContent,
   connectiveTissueDiseasesContent,
   autoimmuneSerogyContent,

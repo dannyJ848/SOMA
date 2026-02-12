@@ -11,10 +11,7 @@
  */
 
 export { allergicRhinitis } from './allergic-rhinitis';
-<<<<<<< HEAD
-=======
 export { anaphylaxis } from './anaphylaxis';
->>>>>>> origin/ralph/advanced-medical-intelligence
 export { asthmaAllergy } from './asthma-allergy';
 export { atopicDermatitis } from './atopic-dermatitis';
 export { drugAllergies } from './drug-allergies';

@@ -63,10 +63,7 @@ export { thromboticThrombocytopenicPurpura } from './platelet-disorders/thrombot
 
 // Coagulation disorders
 export { disseminatedIntravascularCoagulation } from './coagulation/disseminated-intravascular-coagulation';
-<<<<<<< HEAD
-=======
 export { pulmonaryEmbolism as hematologyPulmonaryEmbolism } from './coagulation/pulmonary-embolism';
->>>>>>> origin/ralph/advanced-medical-intelligence
 
 // Transfusion medicine
 export { bloodTransfusionMedicine } from './transfusion/blood-transfusion-medicine';

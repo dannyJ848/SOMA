@@ -7,7 +7,4 @@
  */
 
 export { disseminatedIntravascularCoagulation } from './disseminated-intravascular-coagulation';
-<<<<<<< HEAD
-=======
 export { pulmonaryEmbolism } from './pulmonary-embolism';
->>>>>>> origin/ralph/advanced-medical-intelligence

@@ -1211,7 +1211,7 @@ function App() {
         }}
       >
         <ErrorBoundary
-          fallback={({ error, reset }) => (
+          fallback={(error, reset) => (
             <div style={{
               padding: '40px',
               background: '#1a1a2e',
@@ -1710,8 +1710,12 @@ function App() {
           <BodyCentricHome
             dashboardData={dashboard}
             isLoading={dashboardLoading}
-            onNavigate={(view: View) => {
+            onNavigate={(view: View, params?: { entryId?: string }) => {
               trackNavigation('view-change', { fromView: currentView, toView: view });
+              // Handle encyclopedia-entry navigation with entryId
+              if (view === 'encyclopedia-entry' && params?.entryId) {
+                setSelectedEncyclopediaEntryId(params.entryId);
+              }
               setCurrentView(view);
             }}
             onAskAI={(regionContext: string, structuredContext?: import('./ai/types').AnatomyChatContext) => {

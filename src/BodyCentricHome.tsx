@@ -124,7 +124,7 @@ type ActivePanel =
   | 'physiology';
 
 // View type matching App.tsx
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'body-centric' | 'settings';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'symptom-explorer' | 'medication-explorer' | 'condition-simulator' | 'encyclopedia' | 'encyclopedia-entry' | 'specialty-browser' | 'procedure-browser' | 'body-centric' | 'settings' | 'vitals' | 'regional-detail';
 
 /** Structured anatomy context for the AI chat (mirrors ai/types.ts AnatomyChatContext) */
 interface AnatomyChatContext {
@@ -142,7 +142,7 @@ interface AnatomyChatContext {
 interface BodyCentricHomeProps {
   dashboardData: DashboardData | null;
   isLoading: boolean;
-  onNavigate: (view: View) => void;
+  onNavigate: (view: View, params?: { entryId?: string }) => void;
   /** Called when "Ask AI" is triggered from a body region's radial menu, with region context string */
   onAskAI?: (regionContext: string, anatomyChatContext?: AnatomyChatContext) => void;
 }
@@ -646,7 +646,7 @@ interface ContextPanelProps {
   regionMapping: RegionMapping | null;
   dashboardData: DashboardData | null;
   onClose: () => void;
-  onNavigate: (view: View) => void;
+  onNavigate: (view: View, params?: { entryId?: string }) => void;
 }
 
 function ContextPanel({
@@ -689,7 +689,7 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
-            onViewEntry={() => onNavigate('encyclopedia')}
+            onViewEntry={(entryId) => onNavigate('encyclopedia-entry', { entryId })}
           />
         );
 
@@ -720,6 +720,7 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onNavigate={onNavigate}
           />
         );
 
@@ -729,6 +730,7 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onNavigate={onNavigate}
           />
         );
 
@@ -738,6 +740,7 @@ function ContextPanel({
             regionId={regionId}
             regionName={regionName}
             regionMapping={regionMapping}
+            onNavigate={onNavigate}
           />
         );
 
@@ -1026,8 +1029,18 @@ function RegionLayersContent({ regionId: _regionId, regionName, regionMapping }:
   );
 }
 
-function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionHistologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onNavigate,
+}: RegionContentProps & { onNavigate: (view: View, params?: { entryId?: string }) => void }) {
   const histologyTypes = regionMapping?.histologyTypes ?? [];
+
+  const handleHistologyClick = (type: string) => {
+    // Navigate to encyclopedia entry with the histology topic
+    onNavigate('encyclopedia-entry', { entryId: type.toLowerCase().replace(/ /g, '-') });
+  };
 
   return (
     <div className="region-histology-content">
@@ -1038,7 +1051,11 @@ function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping
       {histologyTypes.length > 0 ? (
         <div className="histology-list">
           {histologyTypes.map(type => (
-            <button key={type} className="histology-card">
+            <button
+              key={type}
+              className="histology-card"
+              onClick={() => handleHistologyClick(type)}
+            >
               <div className="histology-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="8" />
@@ -1059,9 +1076,24 @@ function RegionHistologyContent({ regionId: _regionId, regionName, regionMapping
   );
 }
 
-function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionPathologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onNavigate,
+}: RegionContentProps & { onNavigate: (view: View, params?: { entryId?: string }) => void }) {
   const conditions = regionMapping?.commonConditions ?? [];
   const pathologyTopics = regionMapping?.pathologyTopics ?? [];
+
+  const handleTopicClick = (topic: string) => {
+    // Navigate to encyclopedia entry with the pathology topic
+    onNavigate('encyclopedia-entry', { entryId: topic.toLowerCase().replace(/ /g, '-') });
+  };
+
+  const handleConditionClick = (condition: string) => {
+    // Navigate to encyclopedia entry with the condition
+    onNavigate('encyclopedia-entry', { entryId: condition.toLowerCase().replace(/ /g, '-') });
+  };
 
   return (
     <div className="region-pathology-content">
@@ -1074,7 +1106,11 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
           <span className="subsection-title">Pathology Topics</span>
           <div className="topic-list">
             {pathologyTopics.map(topic => (
-              <button key={topic} className="topic-card">
+              <button
+                key={topic}
+                className="topic-card"
+                onClick={() => handleTopicClick(topic)}
+              >
                 <span className="topic-name">{topic.replace(/-/g, ' ')}</span>
               </button>
             ))}
@@ -1087,9 +1123,13 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
           <span className="subsection-title">Common Conditions</span>
           <div className="condition-list">
             {conditions.slice(0, 5).map(condition => (
-              <div key={condition} className="condition-card">
+              <button
+                key={condition}
+                className="condition-card"
+                onClick={() => handleConditionClick(condition)}
+              >
                 <span className="condition-name">{condition}</span>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -1098,9 +1138,24 @@ function RegionPathologyContent({ regionId: _regionId, regionName, regionMapping
   );
 }
 
-function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMapping }: RegionContentProps) {
+function RegionPhysiologyContent({
+  regionId: _regionId,
+  regionName,
+  regionMapping,
+  onNavigate,
+}: RegionContentProps & { onNavigate: (view: View, params?: { entryId?: string }) => void }) {
   const physiologyTopics = regionMapping?.physiologyTopics ?? [];
   const bodySystems = regionMapping?.bodySystems ?? [];
+
+  const handleTopicClick = (topic: string) => {
+    // Navigate to encyclopedia entry with the physiology topic
+    onNavigate('encyclopedia-entry', { entryId: topic.toLowerCase().replace(/ /g, '-') });
+  };
+
+  const handleSystemClick = (system: string) => {
+    // Navigate to encyclopedia entry filtered by body system
+    onNavigate('encyclopedia-entry', { entryId: system.toLowerCase().replace(/ /g, '-') });
+  };
 
   return (
     <div className="region-physiology-content">
@@ -1113,7 +1168,11 @@ function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMappin
           <span className="subsection-title">Physiological Processes</span>
           <div className="topic-list">
             {physiologyTopics.map(topic => (
-              <button key={topic} className="topic-card">
+              <button
+                key={topic}
+                className="topic-card"
+                onClick={() => handleTopicClick(topic)}
+              >
                 <span className="topic-name">{topic.replace(/-/g, ' ')}</span>
               </button>
             ))}
@@ -1126,7 +1185,13 @@ function RegionPhysiologyContent({ regionId: _regionId, regionName, regionMappin
           <span className="subsection-title">Body Systems</span>
           <div className="system-tags">
             {bodySystems.map(system => (
-              <span key={system} className="system-tag">{system}</span>
+              <button
+                key={system}
+                className="system-tag"
+                onClick={() => handleSystemClick(system)}
+              >
+                {system}
+              </button>
             ))}
           </div>
         </div>

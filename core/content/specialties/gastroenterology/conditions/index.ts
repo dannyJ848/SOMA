@@ -6,7 +6,4 @@ export * from './gi-cancers';
 export * from './inflammatory-bowel-disease';
 export * from './irritable-bowel-syndrome';
 export * from './liver-diseases';
-<<<<<<< HEAD
-=======
 export * from './pancreatitis';
->>>>>>> origin/ralph/advanced-medical-intelligence

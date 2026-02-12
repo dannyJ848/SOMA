@@ -11,10 +11,7 @@
  * - Vertigo
  */
 
-<<<<<<< HEAD
-=======
 export { earAnatomy } from './ear-anatomy';
->>>>>>> origin/ralph/advanced-medical-intelligence
 export { hearingLoss } from './hearing-loss';
 export { hearingPhysiology } from './hearing-physiology';
 export { otitisExterna } from './otitis-externa';

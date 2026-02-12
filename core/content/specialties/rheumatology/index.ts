@@ -27,6 +27,11 @@ export { ankylosingSpondylitisContent } from './ankylosing-spondylitis';
 export { spondyloarthropathiesContent } from './spondyloarthropathies';
 export { sclerodermaContent } from './scleroderma';
 export { connectiveTissueDiseasesContent } from './connective-tissue-diseases';
+export { rheumatoidArthritisContent } from './rheumatoid-arthritis';
+export { osteoarthritisContent } from './osteoarthritis';
+export { systemicLupusContent } from './systemic-lupus';
+export { fibromyalgiaContent } from './fibromyalgia';
+export { vasculitisContent } from './vasculitis';
 
 // Diagnostic content exports
 export { autoimmuneSerogyContent } from './autoimmune-serology';

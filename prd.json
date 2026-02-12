@@ -1,86 +1,71 @@
 {
-  "project": "Biological Self - Phase 6",
-  "branchName": "ralph/phase-6-clinical-reasoning",
-  "description": "Phase 6: Clinical Reasoning Engine - Build the foundation for clinical thinking - differential diagnosis, red flags, and decision support",
+  "project": "Biological Self - Phase 7",
+  "branchName": "ralph/phase-7-diagnostic-intelligence",
+  "description": "Phase 7: Diagnostic Intelligence System - Lab interpretation, diagnostic algorithms, and test recommendations",
   "userStories": [
     {
-      "id": "US-201",
-      "title": "Differential Diagnosis Data Model",
-      "description": "Create comprehensive data structures for symptoms, conditions, and their probabilistic relationships",
+      "id": "US-301",
+      "title": "Lab Value Interpretation Engine",
+      "description": "Comprehensive lab test interpretation with clinical context",
       "acceptanceCriteria": [
-        "Define Symptom interface with characteristics (onset, duration, severity, modifiers)",
-        "Define Condition interface with diagnostic criteria, prevalence, red flags",
-        "Create SymptomConditionMapping with likelihood ratios",
-        "Include demographic modifiers (age, sex, risk factors)",
+        "Database of 200+ common lab tests with reference ranges",
+        "Age/sex-specific normal ranges",
+        "Pattern recognition (anemia panels, liver panels, etc.)",
+        "Clinical significance explanations",
+        "Trending visualization over time",
         "Typecheck passes"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "Foundation for all clinical reasoning. Implemented in core/clinical-reasoning/types.ts"
+      "notes": "Already implemented in core/labs/ with 72+ lab tests, reference ranges, patterns"
     },
     {
-      "id": "US-202",
-      "title": "Differential Diagnosis Generator",
-      "description": "AI-powered system to generate ranked differential diagnoses from symptom input",
+      "id": "US-302",
+      "title": "Diagnostic Algorithm Library",
+      "description": "Interactive evidence-based diagnostic algorithms",
       "acceptanceCriteria": [
-        "Input: array of symptoms with characteristics",
-        "Output: ranked list of possible conditions with probabilities",
-        "Use Bayesian reasoning with prior probabilities",
-        "Consider symptom combinations and patterns",
-        "LLM enhancement for nuanced clinical reasoning",
+        "Implement 20+ common diagnostic algorithms (chest pain, syncope, etc.)",
+        "Step-by-step guided walkthrough",
+        "Branch based on user input",
+        "Show evidence basis for each step",
+        "Save progress and results",
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": true,
-      "notes": "Core differential diagnosis engine. Implemented in core/clinical-reasoning/differential-diagnosis.ts"
+      "passes": false,
+      "notes": "6 algorithms exist in core/content/clinical-reasoning/diagnostic-algorithms/. Need 14+ more."
     },
     {
-      "id": "US-203",
-      "title": "Red Flag Detection System",
-      "description": "Identify dangerous symptom patterns requiring immediate medical attention",
+      "id": "US-303",
+      "title": "Test Recommendation Engine",
+      "description": "Suggest appropriate diagnostic tests based on clinical picture",
       "acceptanceCriteria": [
-        "Define red flag patterns for major emergencies (MI, stroke, PE, sepsis, etc.)",
-        "Real-time symptom monitoring during input",
-        "Urgency scoring (immediate, urgent, soon, routine)",
-        "Clear actionable guidance for each red flag",
-        "Never replace emergency services - always advise seeking care",
+        "Input: symptoms + suspected conditions",
+        "Output: prioritized test recommendations",
+        "Explain what each test would reveal",
+        "Consider test characteristics (sensitivity, specificity)",
+        "Cost and invasiveness considerations",
         "Typecheck passes"
       ],
       "priority": 3,
       "passes": true,
-      "notes": "Safety-critical feature. Implemented in core/clinical-reasoning/red-flag-education.ts"
+      "notes": "Implemented in core/diagnostic-intelligence/test-recommendations.ts"
     },
     {
-      "id": "US-204",
-      "title": "Clinical Decision Tree Visualizer",
-      "description": "Interactive visualization of diagnostic reasoning pathways",
+      "id": "US-304",
+      "title": "Lab Results Dashboard",
+      "description": "Visual dashboard for tracking and understanding lab results",
       "acceptanceCriteria": [
-        "Tree/graph visualization of diagnostic process",
-        "Show branching based on symptom presence/absence",
-        "Highlight current position in reasoning",
-        "Explain why each branch is relevant",
-        "Mobile responsive with touch interactions",
+        "Input lab values manually or from health records",
+        "Visual indicators (normal, high, low, critical)",
+        "Trend charts over time",
+        "Panel groupings with interpretations",
+        "AI-generated summary of overall picture",
         "Typecheck passes"
       ],
       "priority": 4,
       "passes": true,
-      "notes": "UI component for visualizing reasoning. Implemented in src/components/clinical/DecisionTreeVisualizer.tsx"
-    },
-    {
-      "id": "US-205",
-      "title": "Clinical Reasoning Chat Mode",
-      "description": "Enhance AI chat with structured clinical reasoning capabilities",
-      "acceptanceCriteria": [
-        "Chat can ask clarifying questions in clinical style",
-        "Systematic review of systems integration",
-        "Show reasoning process transparently",
-        "Cite medical knowledge sources",
-        "Appropriate disclaimers and limitations",
-        "Typecheck passes"
-      ],
-      "priority": 5,
-      "passes": true,
-      "notes": "Enhance existing ChatView with clinical reasoning mode. Implemented in src/components/clinical/ClinicalReasoningChat.tsx"
+      "notes": "Implemented in src/components/diagnostic/LabResultsDashboard.tsx"
     }
   ]
 }

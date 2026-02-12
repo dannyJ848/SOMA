@@ -533,10 +533,11 @@ export const HistologyPanel: React.FC<HistologyPanelProps> = memo(function Histo
   }, []);
 
   const handleView3D = useCallback(() => {
-    // Placeholder for 3D view - would integrate with 3D viewer
-    console.log('View in 3D clicked - feature coming soon');
-    // Could trigger a modal or switch to 3D viewer mode
-  }, []);
+    // Navigate to the anatomy tab with this region's 3D view
+    // Since this is a histology panel, we inform the user that 3D histology
+    // visualization is available through the main 3D anatomy viewer
+    onAskAI(`Show me the 3D anatomy model for ${regionName} so I can explore its microscopic structures in 3D context`);
+  }, [onAskAI, regionName]);
 
   const handleAskAbout = useCallback(
     (topic: string) => {

@@ -503,9 +503,10 @@ interface ModelCardProps {
   model: ModelReference;
   complexityLevel: ComplexityLevel;
   index: number;
+  onLoadModel: (model: ModelReference) => void;
 }
 
-function ModelCard({ model, complexityLevel, index }: ModelCardProps) {
+function ModelCard({ model, complexityLevel, index, onLoadModel }: ModelCardProps) {
   // Get viewing instructions based on complexity level
   const getViewingInstructions = (): string => {
     if (complexityLevel <= 2) {
@@ -530,7 +531,12 @@ function ModelCard({ model, complexityLevel, index }: ModelCardProps) {
           <span className="model-instructions">{getViewingInstructions()}</span>
         )}
       </div>
-      <button className="view-model-btn">Load Model</button>
+      <button
+        className="view-model-btn"
+        onClick={() => onLoadModel(model)}
+      >
+        Load Model
+      </button>
     </div>
   );
 }
@@ -813,6 +819,20 @@ export function AnatomyTab({
     console.log('Opening 3D preview for:', structure.name);
   }, []);
 
+  const handleLoadModel = useCallback((model: ModelReference) => {
+    // Load the model by setting preview with the model reference
+    // Create a synthetic structure from the model for the preview
+    const syntheticStructure: AnatomicalStructure = {
+      id: `model-${model.name.toLowerCase().replace(/\s+/g, '-')}`,
+      name: model.name,
+      type: 'other',
+      description: `${model.detailLevel} detail 3D anatomical model`,
+      modelPath: model.path,
+    };
+    setPreviewModel(syntheticStructure);
+    console.log('Loading 3D model:', model.name, model.path);
+  }, []);
+
   // Filter structures based on visible layers
   const visibleStructures = structures.filter(structure => {
     // Show structures that belong to visible layers
@@ -916,6 +936,7 @@ export function AnatomyTab({
                 model={model}
                 complexityLevel={complexityLevel}
                 index={index}
+                onLoadModel={handleLoadModel}
               />
             ))}
           </div>

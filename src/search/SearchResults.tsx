@@ -33,6 +33,12 @@ interface SearchResultsProps {
   /** Callback when a related item chip is clicked */
   onRelatedItemClick?: (item: RelatedItem) => void;
 
+  /** Callback when "view more" is clicked for a category */
+  onViewMore?: (category: SearchCategory) => void;
+
+  /** Callback when a related search term is clicked */
+  onRelatedSearchClick?: (term: string) => void;
+
   /** Currently selected result index for keyboard navigation */
   selectedIndex?: number;
 
@@ -77,6 +83,8 @@ export function SearchResults({
   results,
   onResultClick,
   onRelatedItemClick,
+  onViewMore,
+  onRelatedSearchClick,
   selectedIndex = -1,
   query,
   isLoading = false,
@@ -195,7 +203,10 @@ export function SearchResults({
                   />
                 ))}
                 {totalInCategory > maxPerCategory && (
-                  <button className="view-more-btn">
+                  <button
+                    className="view-more-btn"
+                    onClick={() => onViewMore?.(category)}
+                  >
                     View {totalInCategory - maxPerCategory} more {config.label.toLowerCase()}
                   </button>
                 )}
@@ -227,7 +238,11 @@ export function SearchResults({
           <span className="related-label">Related searches:</span>
           <div className="related-list">
             {results.relatedSearches.slice(0, 5).map((term, i) => (
-              <button key={i} className="related-item">
+              <button
+                key={i}
+                className="related-item"
+                onClick={() => onRelatedSearchClick?.(term)}
+              >
                 {term}
               </button>
             ))}

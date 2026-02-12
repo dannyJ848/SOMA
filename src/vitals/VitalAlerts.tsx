@@ -30,6 +30,8 @@ interface VitalAlertsProps {
   alerts: VitalAlert[];
   onAcknowledge: (alertId: string) => void;
   onConfigureThreshold?: (vitalType: VitalType) => void;
+  /** Callback when thresholds are saved */
+  onSaveThresholds?: (thresholds: AlertThreshold[]) => void;
 }
 
 interface AlertThreshold {
@@ -84,6 +86,7 @@ export function VitalAlerts({
   alerts,
   onAcknowledge,
   onConfigureThreshold,
+  onSaveThresholds,
 }: VitalAlertsProps) {
   const [filter, setFilter] = useState<'all' | AlertSeverity>('all');
   const [showAcknowledged, setShowAcknowledged] = useState(false);
@@ -150,6 +153,16 @@ export function VitalAlerts({
     },
     []
   );
+
+  // Handle save thresholds
+  const handleSaveThresholds = useCallback(() => {
+    // Save to localStorage for persistence
+    localStorage.setItem('biological-self-vital-thresholds', JSON.stringify(thresholds));
+    // Call the optional callback
+    onSaveThresholds?.(thresholds);
+    // Show feedback (in a real app, this would show a toast notification)
+    console.log('Vital sign thresholds saved successfully');
+  }, [thresholds, onSaveThresholds]);
 
   // Get severity icon
   const getSeverityIcon = (severity: AlertSeverity) => {
@@ -323,7 +336,12 @@ export function VitalAlerts({
             ))}
           </div>
           <div className="config-actions">
-            <button className="save-btn">Save Thresholds</button>
+            <button
+              className="save-btn"
+              onClick={handleSaveThresholds}
+            >
+              Save Thresholds
+            </button>
             <button
               className="reset-btn"
               onClick={() => setThresholds(DEFAULT_THRESHOLDS)}

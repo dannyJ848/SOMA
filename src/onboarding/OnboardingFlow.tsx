@@ -59,6 +59,8 @@ interface HealthProfile {
 
 interface OnboardingFlowProps {
   onComplete: () => void;
+  /** Optional callback when a quick action is selected during completion */
+  onQuickAction?: (action: 'body' | 'symptom' | 'chat') => void;
 }
 
 // ============================================
@@ -978,9 +980,10 @@ function SampleDataStep({ loadSampleData, onToggle, onNext, onBack }: SampleData
 interface CompleteStepProps {
   onComplete: () => void;
   healthProfile: HealthProfile;
+  onQuickAction?: (action: 'body' | 'symptom' | 'chat') => void;
 }
 
-function CompleteStep({ onComplete, healthProfile }: CompleteStepProps) {
+function CompleteStep({ onComplete, healthProfile, onQuickAction }: CompleteStepProps) {
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
@@ -989,10 +992,18 @@ function CompleteStep({ onComplete, healthProfile }: CompleteStepProps) {
   }, []);
 
   const quickActions = [
-    { label: 'Explore Body', icon: '🧬', action: 'body' },
-    { label: 'Log Symptom', icon: '📋', action: 'symptom' },
-    { label: 'Ask AI', icon: '💬', action: 'chat' },
+    { label: 'Explore Body', icon: '🧬', action: 'body' as const },
+    { label: 'Log Symptom', icon: '📋', action: 'symptom' as const },
+    { label: 'Ask AI', icon: '💬', action: 'chat' as const },
   ];
+
+  const handleQuickAction = (action: 'body' | 'symptom' | 'chat') => {
+    // Store the quick action intent so the main app can handle it after onboarding completes
+    localStorage.setItem('biological-self-pending-quick-action', action);
+    onComplete();
+    // Also call the optional callback if provided
+    onQuickAction?.(action);
+  };
 
   return (
     <div className="onboarding-step complete-step">
@@ -1040,7 +1051,11 @@ function CompleteStep({ onComplete, healthProfile }: CompleteStepProps) {
 
       <div className="quick-actions-grid">
         {quickActions.map((action) => (
-          <button key={action.action} className="quick-action-btn">
+          <button
+            key={action.action}
+            className="quick-action-btn"
+            onClick={() => handleQuickAction(action.action)}
+          >
             <span className="quick-action-icon">{action.icon}</span>
             <span className="quick-action-label">{action.label}</span>
           </button>
@@ -1106,7 +1121,7 @@ const STEP_ORDER: OnboardingStep[] = [
   'complete',
 ];
 
-export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
+export function OnboardingFlow({ onComplete, onQuickAction }: OnboardingFlowProps) {
   const [step, setStep] = useState<OnboardingStep>('welcome');
   const [localDemographics, setLocalDemographics] = useState<UserDemographics>(DEFAULT_DEMOGRAPHICS);
   const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
@@ -1241,6 +1256,7 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
           <CompleteStep
             onComplete={handleComplete}
             healthProfile={healthProfile}
+            onQuickAction={onQuickAction}
           />
         )}
       </div>

@@ -6,7 +6,7 @@
  * Now includes 5-level complexity support for progressive disclosure.
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import type { HistologyImage, Magnification, StainType } from '../../../core/histology/types';
 import {
   useComplexityLevel,
@@ -423,6 +423,11 @@ export function HistologyTab({ images, regionName }: HistologyTabProps) {
     setSelectedImage(image);
   }, []);
 
+  // Helper to check if an image is selected (avoids TypeScript narrowing issues)
+  const isImageSelected = useCallback((image: HistologyImage): boolean => {
+    return selectedImage !== null && selectedImage.id === image.id;
+  }, [selectedImage]);
+
   const handleCloseViewer = useCallback(() => {
     setSelectedImage(null);
   }, []);
@@ -430,17 +435,22 @@ export function HistologyTab({ images, regionName }: HistologyTabProps) {
   // Filter images - explicit type to work around TypeScript inference
   const allImages: HistologyImage[] = images.images ?? [];
 
-  // Filter images based on complexity level (if images have complexityLevel property)
-  const filteredImages: HistologyImage[] = allImages.filter((img: HistologyImage): boolean => {
-    // Filter by complexity level if the image has that property
-    const imageComplexity = (img as HistologyImage & { complexityLevel?: number }).complexityLevel;
-    if (imageComplexity !== undefined && imageComplexity > complexityLevel) {
-      return false;
+  // Filter images based on complexity level - use explicit loop to avoid TypeScript narrowing issues
+  const filteredImages = useMemo((): HistologyImage[] => {
+    const result: HistologyImage[] = [];
+    for (const img of allImages) {
+      // Filter by tissue category
+      if (filterCategory && img.tissueCategory !== filterCategory) continue;
+      // Filter by stain type
+      if (filterStain && img.stain !== filterStain) continue;
+      // Filter by complexity level
+      const imgLevel = img.complexityLevel as number | undefined;
+      const currentLevel = complexityLevel as number;
+      if (imgLevel !== undefined && imgLevel > currentLevel) continue;
+      result.push(img);
     }
-    if (filterCategory && img.tissueCategory !== filterCategory) return false;
-    if (filterStain && img.stain !== filterStain) return false;
-    return true;
-  });
+    return result;
+  }, [allImages, complexityLevel, filterCategory, filterStain]);
 
   // Get unique categories and stains for filters
   const categories = [...new Set(allImages.map(img => img.tissueCategory))];
@@ -622,7 +632,7 @@ export function HistologyTab({ images, regionName }: HistologyTabProps) {
                     <ImageCard
                       key={typedImage.id || idx}
                       image={typedImage}
-                      isSelected={Boolean(selectedImage && selectedImage.id === typedImage.id)}
+                      isSelected={isImageSelected(typedImage)}
                       onSelect={handleImageSelect}
                       complexityLevel={complexityLevel}
                     />

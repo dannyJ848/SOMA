@@ -162,6 +162,79 @@
   font-weight: 500;
 }
 
+/* Favorites Section */
+.favorites-section {
+  margin-top: 0.5rem;
+}
+
+.favorites-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+.favorites-chip:hover {
+  background: var(--bg-hover);
+}
+
+.favorites-chip.active {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: #f59e0b !important;
+  color: #f59e0b !important;
+}
+
+.favorites-icon {
+  font-size: 1rem;
+}
+
+.favorites-count {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Preview Actions */
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Favorite Button */
+.favorite-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.favorite-btn:hover {
+  background: var(--bg-hover);
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.favorite-btn.active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.favorite-btn.active:hover {
+  background: rgba(245, 158, 11, 0.25);
+}
+
 /* Encyclopedia Content */
 .encyclopedia-content {
   flex: 1;

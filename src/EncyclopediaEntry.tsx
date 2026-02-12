@@ -8,6 +8,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
 import { useActionTracker } from './hooks/useActionTracker';
+import { useFavorites } from './hooks/useFavorites';
 import { RelatedContent } from './components/RelatedContent';
 import type { EncyclopediaEntryAction } from '../core/intent-prediction/types';
 import type { ViewPreset } from './utils/anatomy3DEventBus';
@@ -407,6 +408,9 @@ export function EncyclopediaEntry({
   // Action tracking for intent prediction
   const { track } = useActionTracker<EncyclopediaEntryAction>('encyclopedia-entry', 'EncyclopediaEntry');
 
+  // Favorites hook
+  const { isFavorite, toggleFavorite } = useFavorites();
+
   // State
   const [complexityLevel, setComplexityLevel] = useState<ComplexityLevel>(2);
   const [activeTab, setActiveTab] = useState<'content' | 'images' | 'anatomy' | 'related' | 'references'>('content');
@@ -553,6 +557,17 @@ export function EncyclopediaEntry({
   }
 
   const typeConfig = ENTRY_TYPE_CONFIG[entry.entryType];
+  const entryIsFavorite = isFavorite(entry.entryId);
+
+  // Handle toggle favorite
+  const handleToggleFavorite = useCallback(() => {
+    toggleFavorite({
+      id: entry.entryId,
+      title: entry.name,
+      type: entry.entryType === 'lab-test' ? 'lab' : entry.entryType === 'anatomy' ? 'anatomy' : entry.entryType === 'condition' ? 'condition' : entry.entryType === 'medication' ? 'medication' : 'article',
+      path: `/encyclopedia/${entry.entryId}`,
+    });
+  }, [entry, toggleFavorite]);
 
   return (
     <div className="encyclopedia-entry">
@@ -586,12 +601,22 @@ export function EncyclopediaEntry({
               Also known as: {entry.aliases.join(', ')}
             </div>
           )}
-          {onAskAI && (
-            <button className="ask-ai-btn" onClick={handleAskAI}>
-              <span className="btn-icon">💬</span>
-              <span>Ask AI about {entry.name}</span>
+          <div className="entry-actions">
+            <button
+              className={`favorite-btn-large ${entryIsFavorite ? 'active' : ''}`}
+              onClick={handleToggleFavorite}
+              title={entryIsFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <span className="favorite-icon">{entryIsFavorite ? '★' : '☆'}</span>
+              <span className="favorite-label">{entryIsFavorite ? 'Favorited' : 'Add to Favorites'}</span>
             </button>
-          )}
+            {onAskAI && (
+              <button className="ask-ai-btn" onClick={handleAskAI}>
+                <span className="btn-icon">💬</span>
+                <span>Ask AI about {entry.name}</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

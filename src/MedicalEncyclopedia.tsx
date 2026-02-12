@@ -8,6 +8,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useAnatomy3DNavigation } from './hooks/useAnatomy3DNavigation';
 import { useActionTracker } from './hooks/useActionTracker';
+import { useFavorites } from './hooks/useFavorites';
 import type { EncyclopediaAction } from '../core/intent-prediction/types';
 import {
   searchEntries,
@@ -180,14 +181,27 @@ function SearchResultCard({ result, onClick }: SearchResultCardProps) {
 interface EntryPreviewCardProps {
   entry: EncyclopediaEntrySummary;
   onClick: () => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: (e: React.MouseEvent) => void;
 }
 
-function EntryPreviewCard({ entry, onClick }: EntryPreviewCardProps) {
+function EntryPreviewCard({ entry, onClick, isFavorite, onToggleFavorite }: EntryPreviewCardProps) {
   return (
     <div className="entry-preview-card" onClick={onClick}>
       <div className="preview-header">
         <h4 className="preview-name">{entry.name}</h4>
-        <EntryTypeBadge entryType={entry.entryType} />
+        <div className="preview-actions">
+          <EntryTypeBadge entryType={entry.entryType} />
+          {onToggleFavorite && (
+            <button
+              className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+              onClick={onToggleFavorite}
+              title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              {isFavorite ? '★' : '☆'}
+            </button>
+          )}
+        </div>
       </div>
       <CategoryBadge category={entry.category} />
       <p className="preview-summary">{entry.summary}</p>
@@ -244,9 +258,11 @@ function RecentSearches({ searches, onSelect, onClear }: RecentSearchesProps) {
 interface AlphabeticalIndexProps {
   entries: EncyclopediaEntrySummary[];
   onSelectEntry: (entryId: string) => void;
+  isFavorite?: (id: string) => boolean;
+  onToggleFavorite?: (entry: EncyclopediaEntrySummary) => (e: React.MouseEvent) => void;
 }
 
-function AlphabeticalIndex({ entries, onSelectEntry }: AlphabeticalIndexProps) {
+function AlphabeticalIndex({ entries, onSelectEntry, isFavorite, onToggleFavorite }: AlphabeticalIndexProps) {
   // Group entries by first letter
   const grouped = useMemo(() => {
     const groups: Record<string, EncyclopediaEntrySummary[]> = {};
@@ -289,6 +305,8 @@ function AlphabeticalIndex({ entries, onSelectEntry }: AlphabeticalIndexProps) {
                 key={entry.entryId}
                 entry={entry}
                 onClick={() => onSelectEntry(entry.entryId)}
+                isFavorite={isFavorite?.(entry.entryId)}
+                onToggleFavorite={onToggleFavorite?.(entry)}
               />
             ))}
           </div>
@@ -325,6 +343,9 @@ export function MedicalEncyclopedia({
   // Action tracking for intent prediction
   const { track } = useActionTracker<EncyclopediaAction>('encyclopedia', 'MedicalEncyclopedia');
 
+  // Favorites hook
+  const { favorites, isFavorite, toggleFavorite } = useFavorites();
+
   // Ref to prevent initial tracking
   const hasSearched = useRef(false);
 
@@ -333,6 +354,7 @@ export function MedicalEncyclopedia({
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [selectedEntryTypes, setSelectedEntryTypes] = useState<EntryType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<MedicalCategory | null>(null);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('encyclopedia-recent-searches');
@@ -392,6 +414,11 @@ export function MedicalEncyclopedia({
 
     let entries: EncyclopediaEntrySummary[] = getEntrySummaries();
 
+    // Filter by favorites only
+    if (showFavoritesOnly) {
+      entries = entries.filter(e => isFavorite(e.entryId));
+    }
+
     // Filter by entry type if selected
     if (selectedEntryTypes.length > 0) {
       entries = entries.filter(e => selectedEntryTypes.includes(e.entryType));
@@ -403,7 +430,16 @@ export function MedicalEncyclopedia({
     }
 
     return entries;
-  }, [activeView, selectedEntryTypes, selectedCategory]);
+  }, [activeView, selectedEntryTypes, selectedCategory, showFavoritesOnly, isFavorite]);
+
+  // Get favorite entries for display
+  const favoriteEntries = useMemo(() => {
+    const allSummaries = getEntrySummaries();
+    return favorites
+      .map(fav => allSummaries.find(e => e.entryId === fav.id))
+      .filter((e): e is EncyclopediaEntrySummary => e !== undefined)
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [favorites]);
 
   // Toggle entry type filter
   const toggleEntryType = useCallback((entryType: EntryType) => {
@@ -423,6 +459,19 @@ export function MedicalEncyclopedia({
       onOpenEntry(entryId);
     }
   }, [onOpenEntry, track]);
+
+  // Handle toggle favorite for an entry
+  const handleToggleFavorite = useCallback((entry: EncyclopediaEntrySummary) => {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation();
+      toggleFavorite({
+        id: entry.entryId,
+        title: entry.name,
+        type: entry.entryType === 'lab-test' ? 'lab' : entry.entryType === 'anatomy' ? 'anatomy' : entry.entryType === 'condition' ? 'condition' : entry.entryType === 'medication' ? 'medication' : 'article',
+        path: `/encyclopedia/${entry.entryId}`,
+      });
+    };
+  }, [toggleFavorite]);
 
   // Track browse view toggle
   useEffect(() => {
@@ -550,6 +599,22 @@ export function MedicalEncyclopedia({
         </div>
       </div>
 
+      {/* Favorites Filter */}
+      <div className="filter-section favorites-section">
+        <div className="filter-label">Quick Access:</div>
+        <div className="filter-chips">
+          <button
+            className={`filter-chip favorites-chip ${showFavoritesOnly ? 'active' : ''}`}
+            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+            title={showFavoritesOnly ? 'Show all entries' : 'Show only favorites'}
+          >
+            <span className="favorites-icon">{showFavoritesOnly ? '★' : '☆'}</span>
+            {showFavoritesOnly ? 'Showing Favorites' : 'Favorites'}
+            {favorites.length > 0 && <span className="favorites-count">({favorites.length})</span>}
+          </button>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="encyclopedia-content">
         {activeView === 'search' ? (
@@ -609,6 +674,8 @@ export function MedicalEncyclopedia({
           <AlphabeticalIndex
             entries={allEntries}
             onSelectEntry={handleSelectEntry}
+            isFavorite={isFavorite}
+            onToggleFavorite={handleToggleFavorite}
           />
         )}
       </div>

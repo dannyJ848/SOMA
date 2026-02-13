@@ -1,0 +1,391 @@
+{
+  "topic": "Coronary Arteries",
+  "category": "anatomy",
+  "system": "cardiovascular",
+  "contents": [
+    {
+      "id": "structure-left-main-coronary-artery",
+      "type": "structure",
+      "name": "Left Main Coronary Artery",
+      "alternateNames": ["LMCA", "Left main", "LM"],
+      "fmaId": "FMA:50039",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The left main coronary artery is the first branch that brings blood to the left side of your heart.",
+          "explanation": "Your heart needs its own blood supply to keep pumping. The left main coronary artery is like the main highway that feeds the left side of your heart - the side that works hardest. It starts from the aorta (the big blood vessel leaving your heart) and quickly splits into two branches that spread out to feed different parts of the heart muscle.",
+          "keyTerms": [
+            {"term": "coronary artery", "definition": "Blood vessels that bring oxygen and nutrients to the heart muscle itself"},
+            {"term": "heart muscle", "definition": "The special muscle that makes up your heart and never gets tired"},
+            {"term": "branch", "definition": "When a blood vessel splits into smaller paths"}
+          ],
+          "analogies": ["The left main is like a major highway that splits into two roads to reach different neighborhoods of the heart."],
+          "examples": ["If this artery gets blocked, it's very serious because it feeds most of the heart's blood supply."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The left main coronary artery originates from the left coronary sinus and bifurcates into the left anterior descending and left circumflex arteries, supplying most of the left ventricle.",
+          "explanation": "The left main coronary artery (LMCA) arises from the left coronary sinus of Valsalva, just above the aortic valve. It is typically 10-20mm in length and 3-6mm in diameter. After a short course, it divides (bifurcates) into the left anterior descending (LAD) artery and the left circumflex (LCx) artery. In about 30% of people, there is a third branch called the ramus intermedius. The left main supplies approximately 75% of the left ventricle through its branches, making it the most critical coronary segment.",
+          "keyTerms": [
+            {"term": "sinus of Valsalva", "definition": "Dilated portion of the aortic root above each valve cusp where coronary arteries originate"},
+            {"term": "bifurcation", "definition": "The point where a vessel divides into two branches"},
+            {"term": "LAD", "definition": "Left Anterior Descending artery - supplies the front of the heart"},
+            {"term": "LCx", "definition": "Left Circumflex artery - wraps around to supply the side of the heart"},
+            {"term": "ramus intermedius", "definition": "An extra branch between the LAD and LCx, present in about 30% of people"}
+          ],
+          "analogies": ["The left main is like a tree trunk that quickly divides into two main branches (LAD and LCx)."],
+          "examples": ["A blockage at the left main is called a 'widowmaker' because it can affect blood flow to most of the heart."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The left main coronary artery courses behind the pulmonary trunk, with variable length and diameter, before bifurcating or trifurcating into the LAD, LCx, and potentially ramus intermedius.",
+          "explanation": "The LMCA ostium is located in the left coronary sinus approximately 1-2mm above the sinotubular junction. The artery travels leftward behind the pulmonary trunk and anterior to the left atrial appendage. Length varies from 2mm to 40mm (mean 10-15mm). The bifurcation angle typically ranges from 60-90 degrees. When a ramus intermedius exists, creating trifurcation, it courses between the LAD and LCx territories, supplying the anterolateral wall. Distal left main disease involving the bifurcation is more common than ostial disease. The left main may share an ostium with the LCx or LAD as an anatomic variant. Anomalous left main from the right sinus (with interarterial course) is a rare but dangerous variant.",
+          "keyTerms": [
+            {"term": "ostium", "definition": "The opening/origin of a coronary artery from the aortic sinus"},
+            {"term": "trifurcation", "definition": "Division into three branches when ramus intermedius is present"},
+            {"term": "distal left main", "definition": "The portion near the bifurcation, commonly affected by disease"},
+            {"term": "interarterial course", "definition": "Anomalous artery passing between aorta and pulmonary artery - associated with sudden death"}
+          ],
+          "clinicalNotes": "Left main anomaly with interarterial course requires surgical correction due to risk of sudden cardiac death from compression during exercise."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Left main coronary artery disease portends high mortality risk, with revascularization strategy (CABG vs PCI) determined by SYNTAX score, diabetes status, and operator/institutional expertise.",
+          "explanation": "Significant left main disease (≥50% stenosis) confers elevated mortality risk due to large territory at risk. Assessment includes FFR (ischemia significant if ≤0.80), IVUS (MLA <6mm2 or 4.5mm2 depending on patient size), and angiographic appearance. SYNTAX trial established CABG superiority for complex (high SYNTAX score ≥33) left main and three-vessel disease. EXCEL and NOBLE trials compared PCI vs CABG for lower complexity left main - EXCEL showed noninferiority at 3 years with subsequent controversy over 5-year mortality. Current guidelines recommend CABG for left main with high complexity or diabetes with multivessel disease. PCI is reasonable for low-to-intermediate complexity (SYNTAX ≤32) when surgical risk is elevated. Distal bifurcation left main PCI techniques include provisional stenting (preferred), T-stenting, culotte, DK-crush, and two-stent approaches.",
+          "keyTerms": [
+            {"term": "SYNTAX score", "definition": "Angiographic complexity score guiding revascularization strategy; higher scores favor CABG"},
+            {"term": "FFR", "definition": "Fractional Flow Reserve - physiologic assessment of lesion significance; ≤0.80 indicates ischemia"},
+            {"term": "IVUS MLA", "definition": "Intravascular Ultrasound Minimum Lumen Area - anatomic assessment of stenosis severity"},
+            {"term": "provisional stenting", "definition": "Single stent to main vessel with provisional side branch stenting only if needed"}
+          ],
+          "clinicalNotes": "Heart Team discussion recommended for left main disease. Consider CABG for diabetics with multivessel disease (FREEDOM trial). FFR/IVUS important for intermediate lesions (40-70%)."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Contemporary left main PCI requires optimal intravascular imaging, physiology when appropriate, and meticulous technique for bifurcation lesions, with long-term outcomes approaching CABG in appropriately selected patients.",
+          "explanation": "IVUS-guided left main PCI improves outcomes (MAIN-COMPARE, ULTIMATE trials) - minimum stent area targets: ostial LM >8mm2, body >7mm2, ostial LAD >6mm2, ostial LCx >5mm2. OCT provides higher resolution but requires contrast. Instantaneous wave-free ratio (iFR) and FFR can assess intermediate lesions; caution in using FFR in left main due to impact of downstream disease. Bifurcation strategy: Modified provisional approach for most; two-stent when significant ostial LCx disease (>50%, long lesion, ischemia). DK-crush shows better outcomes than provisional for true bifurcations (DKCRUSH-V). Final kissing balloon inflation and POT (proximal optimization technique) are critical. Drug-eluting stents mandatory. Long-term outcomes: 5-year TVR approximately 10-15%, mortality comparable to CABG in low-complexity disease. Protected left main (patent LIMA-LAD graft) lower risk for PCI. Current-generation DES and imaging have improved outcomes compared to early trials.",
+          "keyTerms": [
+            {"term": "POT", "definition": "Proximal Optimization Technique - balloon dilation of proximal stent to correct elliptical deformation at bifurcation"},
+            {"term": "DK-crush", "definition": "Double-kissing crush technique - two-stent bifurcation technique with demonstrated superiority in true bifurcations"},
+            {"term": "IVUS MSA targets", "definition": "Minimum stent area goals for optimal left main PCI outcomes"},
+            {"term": "protected left main", "definition": "Left main with patent bypass graft (usually LIMA-LAD), lower risk intervention"}
+          ],
+          "clinicalNotes": "Consider CABG for left main + multivessel disease if SYNTAX >32 or diabetes. When PCI chosen, IVUS/OCT mandatory, achieve optimal expansion. Watch for jailed LCx with guidewire protection."
+        }
+      },
+      "media": [
+        {
+          "id": "lmca-3d-model",
+          "type": "3d-model",
+          "filename": "left-main-coronary.glb",
+          "title": "Left Main Coronary Artery 3D Model"
+        }
+      ],
+      "citations": [
+        {"id": "gray-anatomy", "type": "textbook", "title": "Gray's Anatomy", "source": "Elsevier"}
+      ],
+      "crossReferences": [
+        {"targetId": "structure-lad", "targetType": "structure", "relationship": "child"},
+        {"targetId": "structure-lcx", "targetType": "structure", "relationship": "child"},
+        {"targetId": "condition-cad", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "coronary arteries"],
+        "keywords": ["left main", "LMCA", "coronary artery", "bifurcation"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-left-anterior-descending",
+      "type": "structure",
+      "name": "Left Anterior Descending Artery",
+      "alternateNames": ["LAD", "Anterior interventricular artery"],
+      "fmaId": "FMA:50040",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The LAD is a major blood vessel that runs down the front of your heart, bringing blood to the main pumping chamber.",
+          "explanation": "After the left main artery splits, one branch goes down the front of your heart in a groove between the two ventricles - this is the LAD. It's super important because it feeds the left ventricle, which is the strongest part of your heart. The LAD also sends small branches into the heart muscle to make sure every part gets enough blood.",
+          "keyTerms": [
+            {"term": "LAD", "definition": "Left Anterior Descending - a major artery on the front of the heart"},
+            {"term": "ventricle", "definition": "The lower pumping chambers of your heart"},
+            {"term": "branch", "definition": "Smaller blood vessels that come off a bigger one"}
+          ],
+          "analogies": ["The LAD is like a main water pipe running down a building, with smaller pipes branching off to each floor."],
+          "examples": ["When people talk about a 'heart attack,' blockage of the LAD is often involved because it supplies so much of the heart."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The LAD travels in the anterior interventricular groove, giving off diagonal and septal perforator branches to supply the anterior left ventricle and anterior two-thirds of the interventricular septum.",
+          "explanation": "The LAD courses along the anterior interventricular sulcus (groove) from the left main bifurcation toward the cardiac apex. It gives off two types of branches: diagonal branches that supply the anterolateral LV free wall, and septal perforator branches that dive into the interventricular septum. The first septal perforator is often large and supplies the bundle of His (important for heart rhythm). The LAD typically wraps around the apex to supply the apical inferior wall in 80% of people. It is divided into proximal (before first septal), mid (between first septal and second diagonal), and distal (beyond second diagonal) segments.",
+          "keyTerms": [
+            {"term": "diagonal branches", "definition": "LAD branches supplying the anterolateral LV wall, numbered D1, D2, etc."},
+            {"term": "septal perforators", "definition": "LAD branches penetrating into the interventricular septum"},
+            {"term": "anterior interventricular sulcus", "definition": "Groove on the front of the heart where the LAD runs"},
+            {"term": "apex", "definition": "The bottom tip of the heart"}
+          ],
+          "analogies": ["The LAD runs down the front of the heart like a zipper, with septal branches diving inward and diagonals going outward."],
+          "examples": ["Blockage of the proximal LAD can cause a large heart attack affecting the anterior wall and septum."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The LAD is divided into proximal, mid, and distal segments based on septal and diagonal branch origins, with the first septal supplying the His bundle and the wrap-around portion variably supplying the apex.",
+          "explanation": "Proximal LAD extends from the left main to the first major septal perforator. Mid LAD extends from the first septal to approximately the second diagonal. Distal LAD continues to the apex. The first septal perforator is typically 1-2mm diameter, courses perpendicular into the septum, and supplies the bundle of His and proximal bundle branches - this is the target for alcohol septal ablation in HOCM. The number of diagonal branches varies (0-3), with D1 being most consistent. The LAD may be covered by a muscular bridge (myocardial bridging) in 25-30% of angiograms, most commonly in the mid segment - systolic compression is visible but rarely causes ischemia. Type III LAD (short LAD not reaching apex) occurs in 15% with RCA supplying the apex via long PDA.",
+          "keyTerms": [
+            {"term": "first septal perforator", "definition": "Large septal branch supplying bundle of His; target for alcohol septal ablation in HOCM"},
+            {"term": "myocardial bridging", "definition": "LAD tunneling through myocardium causing systolic compression; mid-LAD most common location"},
+            {"term": "wrap-around LAD", "definition": "LAD extending past apex to supply inferior apical territory"},
+            {"term": "Type III LAD", "definition": "Short LAD not reaching apex, with wraparound PDA from RCA compensating"}
+          ],
+          "clinicalNotes": "Alcohol septal ablation targets the first septal perforator. When bridging causes ischemia (rare), unroofing surgery may be considered."
+        },
+        "4": {
+          "level": 4,
+          "summary": "LAD lesion location determines infarct size and prognosis, with proximal LAD occlusion causing extensive anterior STEMI including septal and apical involvement, while chronic total occlusions may be supplied by collaterals.",
+          "explanation": "Proximal LAD occlusion before the first septal and first diagonal causes large anterior STEMI with high mortality - affects anterior wall, septum, and apex. The anterior wall comprises 40-45% of LV mass, explaining the significant impact on LV function and heart failure risk. ECG shows ST elevation in V1-V6, I, aVL with reciprocal changes in inferior leads. Mid-LAD occlusion produces smaller infarct sparing the septum (septal perforators arise proximally). Chronic LAD CTO may develop extensive collaterals from RCA (via septal-to-septal or epicardial-to-epicardial connections) - Rentrop grading classifies collateral filling. Revascularization of LAD CTO improves angina and potentially LV function if viable myocardium present. Stenting mid-LAD bridging is controversial due to high restenosis rates.",
+          "keyTerms": [
+            {"term": "anterior STEMI", "definition": "ST-elevation myocardial infarction from LAD occlusion; high morbidity/mortality"},
+            {"term": "Rentrop grade", "definition": "Classification of coronary collateral filling: 0-none, 1-filling branches, 2-partial epicardial, 3-complete filling"},
+            {"term": "CTO", "definition": "Chronic Total Occlusion - complete coronary blockage present for at least 3 months"},
+            {"term": "viability", "definition": "Myocardium that is dysfunctional but alive (hibernating/stunned) and can recover with revascularization"}
+          ],
+          "clinicalNotes": "De Winter pattern (upsloping ST depression V1-V6 with tall T waves) indicates proximal LAD occlusion without typical STEMI criteria - still requires emergent catheterization."
+        },
+        "5": {
+          "level": 5,
+          "summary": "LAD revascularization includes PCI with DES and CABG with LIMA graft, with LIMA-LAD providing superior long-term patency and survival benefit, particularly in multivessel disease and diabetes.",
+          "explanation": "LIMA-to-LAD graft is the cornerstone of surgical revascularization with >90% 10-year patency (vs 50-60% for saphenous vein grafts). LIMA patency benefit derives from arterial endothelium, NO production, and size match. All CABG should include LIMA-LAD unless contraindicated. PCI for LAD lesions uses DES with excellent outcomes for focal disease. Fractional flow reserve guides revascularization (FFR ≤0.80 indicates ischemia warranting treatment - FAME trials). Proximal LAD disease with normal EF and low surgical risk favors CABG. Complex LAD CTO PCI success rates 85-90% at experienced centers using antegrade/retrograde techniques, hybrid approach, and specialized equipment (Crossboss, Stingray). Intracoronary imaging (IVUS/OCT) optimizes PCI outcomes. ISCHEMIA trial showed no mortality benefit for revascularization in stable CAD with moderate-severe ischemia - impacts treatment philosophy but doesn't apply to left main or severe proximal LAD disease.",
+          "keyTerms": [
+            {"term": "LIMA-LAD", "definition": "Left Internal Mammary Artery grafted to LAD - gold standard surgical revascularization with superior patency"},
+            {"term": "FFR-guided revascularization", "definition": "Using physiology (FFR ≤0.80) to determine which lesions benefit from intervention"},
+            {"term": "CTO PCI", "definition": "Percutaneous intervention for chronic total occlusions using advanced techniques"},
+            {"term": "ISCHEMIA trial", "definition": "2019 trial showing no survival benefit for routine revascularization in stable CAD with moderate-severe ischemia"}
+          ],
+          "clinicalNotes": "When LAD CTO is attempted, consider retrograde approach if antegrade fails. Success rates higher with experienced operator (>75 CTOs/year). LIMA-LAD remains gold standard for significant proximal LAD disease."
+        }
+      },
+      "media": [
+        {
+          "id": "lad-3d-model",
+          "type": "3d-model",
+          "filename": "lad-anatomy.glb",
+          "title": "LAD Anatomy 3D Model"
+        }
+      ],
+      "citations": [
+        {"id": "gray-anatomy", "type": "textbook", "title": "Gray's Anatomy", "source": "Elsevier"}
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-main", "targetType": "structure", "relationship": "parent"},
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-anterior-stemi", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "coronary arteries"],
+        "keywords": ["LAD", "left anterior descending", "coronary artery", "LIMA", "anterior STEMI"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-left-circumflex",
+      "type": "structure",
+      "name": "Left Circumflex Artery",
+      "alternateNames": ["LCx", "Circumflex", "LCX"],
+      "fmaId": "FMA:50041",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The left circumflex artery wraps around the left side of your heart to bring blood to the back and side of the main pumping chamber.",
+          "explanation": "After the left main artery splits, one branch (the LAD) goes down the front, and the other branch (the circumflex) curves around the left side of your heart like a hug. It supplies the side and back walls of the left ventricle. The word 'circumflex' means 'bending around.'",
+          "keyTerms": [
+            {"term": "circumflex", "definition": "Bending or curving around something"},
+            {"term": "lateral", "definition": "On the side"},
+            {"term": "posterior", "definition": "At the back"}
+          ],
+          "analogies": ["The circumflex artery hugs around the heart like an arm wrapping around a friend's shoulder."],
+          "examples": ["If this artery gets blocked, you might have pain in your back or feel it differently than a front-wall heart attack."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The left circumflex courses in the left atrioventricular groove, giving off obtuse marginal branches that supply the lateral and posterolateral left ventricle.",
+          "explanation": "After branching from the left main, the LCx travels in the left atrioventricular (AV) groove between the left atrium and left ventricle. It gives off obtuse marginal (OM) branches that descend over the lateral LV wall. The number and size of OMs varies. In about 10-15% of people (left dominant circulation), the LCx is larger and gives rise to the posterior descending artery (PDA) and posterolateral branches, supplying the inferior wall. In the more common right-dominant circulation (85%), the LCx is smaller and supplies only the lateral wall.",
+          "keyTerms": [
+            {"term": "obtuse marginal branches", "definition": "LCx branches supplying the lateral LV wall, numbered OM1, OM2, etc."},
+            {"term": "atrioventricular groove", "definition": "Groove between the atrium and ventricle where the LCx runs"},
+            {"term": "left dominance", "definition": "When the LCx gives rise to the PDA (occurs in 10-15% of people)"},
+            {"term": "PDA", "definition": "Posterior Descending Artery - supplies the inferior interventricular septum"}
+          ],
+          "analogies": ["The LCx runs in the groove between atrium and ventricle like a train on a curved track."],
+          "examples": ["In left-dominant circulation, a LCx occlusion can cause a large inferolateral heart attack."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The LCx anatomy varies by dominance pattern: codominant supplies lateral wall via OMs only, left-dominant provides PDA and posterolateral branches, affecting infarct territory in occlusion.",
+          "explanation": "The LCx originates at the left main bifurcation at approximately 45-60 degree angle from the LAD. In right-dominant circulation (85%), the LCx terminates as OMs supplying the lateral wall. In left-dominant circulation (10%), the LCx continues as PDA in the posterior interventricular groove and gives off posterolateral branches, supplying the inferior wall and inferior septum. Codominant (5%) means both RCA and LCx contribute to inferior supply. The LCx passes close to the mitral annulus - this relationship is important in mitral valve surgery (risk of circumflex injury). The SA node artery arises from the LCx in 40% of cases. OM branches typically arise at right angles to the main vessel.",
+          "keyTerms": [
+            {"term": "codominant", "definition": "Both RCA and LCx contribute to posterior/inferior supply"},
+            {"term": "posterolateral branches", "definition": "Branches from dominant vessel supplying the posterior LV wall"},
+            {"term": "SA node artery", "definition": "Branch supplying the sinoatrial node; from RCA in 60%, LCx in 40%"}
+          ],
+          "clinicalNotes": "Circumflex injury can occur during mitral valve surgery due to proximity to posterior mitral annulus. Intraoperative recognition and repair essential."
+        },
+        "4": {
+          "level": 4,
+          "summary": "LCx occlusion causes lateral STEMI with variable ECG manifestations; the posterior circulation may be electrocardiographically silent, requiring posterior leads or high clinical suspicion.",
+          "explanation": "Acute LCx occlusion causes lateral STEMI with ST elevation in leads I, aVL, V5-V6, and if posterior involvement, ST depression V1-V3 (posterior injury seen anteriorly as reciprocal changes) or ST elevation in posterior leads (V7-V9). LCx occlusion may be 'ECG silent' - normal or nondiagnostic ECG in 20-30% of cases despite acute occlusion, because lateral leads have limited voltage representation. This contributes to missed diagnoses and delayed treatment. In left-dominant patients, LCx occlusion causes inferolateral STEMI with significant territory at risk. Chronic LCx occlusion may develop collaterals from LAD (via septal-to-septal connections) or RCA (via posterior epicardial connections). Isolated OM disease is often well-tolerated given limited territory.",
+          "keyTerms": [
+            {"term": "lateral STEMI", "definition": "ST-elevation MI from LCx/OM occlusion affecting lateral LV wall"},
+            {"term": "posterior leads", "definition": "V7, V8, V9 placed on the back to detect posterior injury; ≥0.5mm ST elevation significant"},
+            {"term": "ECG-silent occlusion", "definition": "Acute coronary occlusion without diagnostic ST-elevation on standard ECG"}
+          ],
+          "clinicalNotes": "When clinical suspicion high but ECG nondiagnostic, obtain posterior leads (V7-V9) and consider emergent angiography. ST depression V1-V3 may represent posterior STEMI."
+        },
+        "5": {
+          "level": 5,
+          "summary": "LCx intervention requires understanding of ostial angulation, tortuous course, and relationship to mitral apparatus, with specific considerations for bifurcation disease at left main-LCx and dominant LCx chronic occlusions.",
+          "explanation": "LCx ostial disease is commonly involved in left main bifurcation lesions - the angle (>70 degrees from LAD) affects stent geometry and side branch access. Provisional stenting strategy often jails the LCx, requiring rewiring if flow compromised. When LCx is severely diseased at ostium, two-stent techniques (DK-crush, TAP) may be needed. LCx PCI is technically challenging due to tortuosity, takeoff angle, and smaller caliber than LAD. Guide catheter selection (EBU, XB) important for support. LCx CTO is less commonly attempted than LAD/RCA CTO due to anatomy. Proximal LCx disease with good targets may favor CABG with SVG to OM (or RIMA in bilateral IMA strategy). In dominant LCx, the territory at risk is substantial, warranting aggressive revascularization. Consider SVG or RIMA to large OM when performing CABG.",
+          "keyTerms": [
+            {"term": "left main bifurcation disease", "definition": "Disease involving distal LM extending into LAD and/or LCx ostia"},
+            {"term": "TAP technique", "definition": "T-and-Protrusion - modified T-stent approach for bifurcation lesions"},
+            {"term": "EBU/XB guides", "definition": "Extra backup guide catheter shapes for left coronary support"}
+          ],
+          "clinicalNotes": "When stenting left main-LAD, always protect LCx with wire. Final kissing balloon and POT optimize results. Consider IVUS to confirm adequate LCx ostial area after left main stenting."
+        }
+      },
+      "media": [
+        {
+          "id": "lcx-3d-model",
+          "type": "3d-model",
+          "filename": "lcx-anatomy.glb",
+          "title": "Left Circumflex Anatomy"
+        }
+      ],
+      "citations": [
+        {"id": "gray-anatomy", "type": "textbook", "title": "Gray's Anatomy", "source": "Elsevier"}
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-main", "targetType": "structure", "relationship": "parent"},
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "coronary arteries"],
+        "keywords": ["left circumflex", "LCx", "obtuse marginal", "coronary dominance"],
+        "clinicalRelevance": "high",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-right-coronary-artery",
+      "type": "structure",
+      "name": "Right Coronary Artery",
+      "alternateNames": ["RCA"],
+      "fmaId": "FMA:50037",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The right coronary artery brings blood to the right side of your heart and usually the bottom of your heart too.",
+          "explanation": "The right coronary artery starts from the aorta on the right side and curves around the right side of your heart. In most people, it also goes around to the bottom of the heart to supply that area. It feeds the right ventricle (which pumps blood to your lungs) and important parts of the heart's electrical system.",
+          "keyTerms": [
+            {"term": "right ventricle", "definition": "The chamber that pumps blood to your lungs"},
+            {"term": "electrical system", "definition": "The part of your heart that controls your heartbeat rhythm"},
+            {"term": "coronary", "definition": "Related to the blood vessels that feed the heart itself"}
+          ],
+          "analogies": ["The RCA runs around the right side of your heart like a runner on an oval track."],
+          "examples": ["If the RCA gets blocked, it can slow down your heart because it often feeds the pacemaker area."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The RCA courses in the right AV groove, supplying the right ventricle, and in 85% of people (right dominance) gives rise to the posterior descending artery supplying the inferior LV.",
+          "explanation": "The RCA originates from the right coronary sinus and travels in the right atrioventricular groove. It gives off acute marginal branches to the right ventricular free wall. In right-dominant circulation (85% of people), the RCA continues around to the crux of the heart (where the AV groove and interventricular grooves meet) and becomes the posterior descending artery (PDA). The PDA runs in the posterior interventricular groove, giving off posterior septal perforators. The RCA also typically gives rise to the SA node artery (in 60%) and AV node artery (in 90%). This explains why RCA occlusion can cause bradycardia.",
+          "keyTerms": [
+            {"term": "acute marginal branches", "definition": "RCA branches supplying the right ventricular free wall"},
+            {"term": "posterior descending artery", "definition": "Branch running in the posterior interventricular groove; from RCA in right-dominant circulation"},
+            {"term": "crux", "definition": "The cross where AV groove and posterior interventricular groove meet"},
+            {"term": "AV node artery", "definition": "Branch supplying the AV node; typically from RCA"}
+          ],
+          "analogies": ["The RCA is like a road that curves around a building and then goes down the back."],
+          "examples": ["Inferior STEMIs from RCA occlusion often cause bradycardia and hypotension due to SA/AV node involvement."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The RCA is divided into proximal, mid, and distal segments, with branches to the conus, SA node, acute margin, AV node, PDA, and posterolateral LV, with variable anatomy based on dominance.",
+          "explanation": "Proximal RCA extends from the ostium to the first acute marginal branch. Mid RCA continues to the acute margin of the heart. Distal RCA extends from the acute margin to the crux. The conus branch (to RV outflow tract) arises from the proximal RCA or has a separate ostium in 50% (can provide collaterals to LAD in total occlusion). SA node artery arises proximally in 60% of cases. Acute marginal branches (1-3) supply the RV free wall. At the crux, the RCA gives off the AV node artery (entering the AV nodal region) and becomes the PDA. Posterolateral branches arise distal to PDA, supplying the posterior LV wall. In left dominance (10-15%), the RCA is smaller, terminating at the acute margin without PDA.",
+          "keyTerms": [
+            {"term": "conus branch", "definition": "First RCA branch to the RV outflow tract; may have separate ostium"},
+            {"term": "acute margin", "definition": "Sharp right border of the heart where RV free wall meets diaphragmatic surface"},
+            {"term": "crux cordis", "definition": "Junction of AV groove and posterior interventricular groove where PDA arises in right dominance"}
+          ],
+          "clinicalNotes": "Separate conus ostium can be mistaken for anomalous LAD origin on angiography. Conus collaterals can fill LAD territory when LAD is occluded."
+        },
+        "4": {
+          "level": 4,
+          "summary": "RCA occlusion causes inferior STEMI with characteristic ECG, bradyarrhythmias, RV infarction, and hypotension; proximal RCA involvement portends worse outcomes due to RV infarction.",
+          "explanation": "Acute RCA occlusion causes inferior STEMI with ST elevation in II, III, aVF and reciprocal depression in I, aVL. ST elevation III > II suggests RCA rather than LCx as culprit. Proximal RCA occlusion (before acute marginal branches) causes RV infarction - ST elevation in right-sided leads (V4R) with hypotension, clear lungs, elevated JVP (Kussmaul sign). Treatment: volume resuscitation, avoid nitrates/diuretics, maintain AV synchrony. Bradyarrhythmias (sinus bradycardia, AV block) occur due to SA/AV node artery involvement - usually transient, may require temporary pacing. Inferior STEMI has better prognosis than anterior STEMI due to smaller territory but RV involvement worsens outcomes. Vagal reflexes (Bezold-Jarisch reflex) cause bradycardia and hypotension independent of node ischemia.",
+          "keyTerms": [
+            {"term": "RV infarction", "definition": "Right ventricular involvement in inferior STEMI; indicated by ST elevation V4R, hypotension with clear lungs"},
+            {"term": "Bezold-Jarisch reflex", "definition": "Vagally-mediated bradycardia and hypotension in inferior MI, especially with reperfusion"},
+            {"term": "Kussmaul sign", "definition": "Paradoxical rise in JVP with inspiration, indicating RV infarction or pericardial disease"},
+            {"term": "complete heart block", "definition": "AV dissociation from AV node ischemia; often transient in inferior MI, narrow QRS escape"}
+          ],
+          "clinicalNotes": "Always get right-sided leads (V4R) in inferior STEMI to assess for RV involvement. RV infarction is preload-dependent - give fluids, not diuretics."
+        },
+        "5": {
+          "level": 5,
+          "summary": "RCA revascularization strategy considers proximal vs distal disease, RV infarction, and CTO anatomy, with PCI favored for most lesions and CABG providing SVG to PDA in multivessel disease.",
+          "explanation": "RCA PCI is generally successful due to straight course, but ostial disease requires attention to guide catheter position (avoid dissection). Shepherd's crook anatomy (proximal 180-degree bend) increases complexity. RV branch protection may be needed for bifurcation lesions. RCA CTO is the most common CTO attempted (40% of all CTOs) with success rates >85% at experienced centers. Antegrade approach with parallel wire or Crossboss/Stingray; retrograde via septal collaterals or epicardial connections if antegrade fails. In CABG, SVG to PDA/posterolateral branches is standard for RCA territory disease. RIMA to RCA is less common due to size mismatch and positioning. RV infarction with cardiogenic shock may require mechanical support (Impella RP) - poor outcomes with conservative management.",
+          "keyTerms": [
+            {"term": "shepherd's crook", "definition": "Proximal RCA configuration with 180-degree bend at ostium, increasing intervention complexity"},
+            {"term": "RCA CTO", "definition": "Chronic total occlusion of RCA - most commonly attempted CTO due to relative success and benefit"},
+            {"term": "Impella RP", "definition": "Percutaneous right ventricular assist device for RV failure"},
+            {"term": "retrograde approach", "definition": "CTO technique entering via collaterals from contralateral vessel"}
+          ],
+          "clinicalNotes": "Ostial RCA disease consider DES with adequate flare into aorta. For RCA CTO, septal collaterals from LAD commonly used for retrograde approach. Dominant RCA territory warrants revascularization for significant disease."
+        }
+      },
+      "media": [
+        {
+          "id": "rca-3d-model",
+          "type": "3d-model",
+          "filename": "rca-anatomy.glb",
+          "title": "Right Coronary Artery 3D Model"
+        }
+      ],
+      "citations": [
+        {"id": "gray-anatomy", "type": "textbook", "title": "Gray's Anatomy", "source": "Elsevier"}
+      ],
+      "crossReferences": [
+        {"targetId": "structure-right-ventricle", "targetType": "structure", "relationship": "related"},
+        {"targetId": "structure-av-node", "targetType": "structure", "relationship": "related"},
+        {"targetId": "condition-inferior-stemi", "targetType": "condition", "relationship": "related"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "topics": ["anatomy", "coronary arteries"],
+        "keywords": ["right coronary artery", "RCA", "PDA", "inferior STEMI", "RV infarction"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    }
+  ]
+}

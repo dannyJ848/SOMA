@@ -1,0 +1,112 @@
+{
+  "id": "structure-pancreas",
+  "type": "structure",
+  "name": "Pancreas",
+  "alternateNames": [],
+  "fmaId": "FMA:7198",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The pancreas is an organ that makes digestive juices to break down food and hormones to control your blood sugar.",
+      "explanation": "The pancreas is shaped like a flat fish and sits behind your stomach. It has two important jobs. First, it makes digestive juices (enzymes) that flow into your small intestine to help break down food - especially proteins, fats, and carbohydrates. Second, it makes hormones like insulin that control how much sugar is in your blood. Without insulin from your pancreas, the sugar from food couldn't get into your cells to give you energy.",
+      "keyTerms": [
+        { "term": "enzymes", "definition": "Special proteins that speed up the breakdown of food" },
+        { "term": "insulin", "definition": "A hormone that helps sugar get from your blood into your cells" },
+        { "term": "hormones", "definition": "Chemical messengers that travel in your blood to tell body parts what to do" }
+      ],
+      "analogies": ["The pancreas is like a factory with two departments - one makes digestive juices (like dish soap for breaking down food), and one makes hormones (like a thermostat for blood sugar)."],
+      "examples": ["After eating candy, your pancreas releases insulin to help move the sugar from your blood into your cells."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The pancreas is a retroperitoneal organ with exocrine function (digestive enzymes) and endocrine function (insulin, glucagon from Islets of Langerhans).",
+      "explanation": "The pancreas has a head (nestled in the C-curve of the duodenum), neck, body, and tail (extending to the spleen). The exocrine portion (~98%) consists of acinar cells producing digestive enzymes (amylase, lipase, proteases) that drain through the main pancreatic duct (duct of Wirsung) into the duodenum at the ampulla of Vater. The endocrine portion (~2%) consists of Islets of Langerhans containing beta cells (insulin), alpha cells (glucagon), delta cells (somatostatin), and PP cells (pancreatic polypeptide). The accessory duct (duct of Santorini) may drain separately through the minor papilla.",
+      "keyTerms": [
+        { "term": "acinar cells", "definition": "Exocrine cells that produce digestive enzymes", "pronunciation": "AS-in-ar" },
+        { "term": "Islets of Langerhans", "definition": "Clusters of endocrine cells within the pancreas producing hormones", "pronunciation": "LANG-er-hanz" },
+        { "term": "retroperitoneal", "definition": "Located behind the peritoneum, against the posterior abdominal wall" }
+      ],
+      "analogies": ["The islets are like small islands scattered in an ocean of enzyme-producing tissue."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Pancreatic exocrine secretion involves acinar production of zymogens and ductular secretion of bicarbonate-rich fluid, regulated by CCK and secretin respectively, while endocrine function maintains glucose homeostasis.",
+      "explanation": "Acinar cells secrete proenzymes (trypsinogen, chymotrypsinogen, procarboxypeptidase, proelastase) stored in zymogen granules. Enterokinase in duodenal mucosa activates trypsinogen to trypsin, which activates other zymogens. Lipase and amylase are secreted in active form. Centroacinar and duct cells secrete bicarbonate (up to 150 mEq/L) via CFTR and Cl-/HCO3- exchanger, neutralizing gastric acid. CCK stimulates acinar secretion via CCK-A receptors (Gq-PLC pathway). Secretin stimulates ductular bicarbonate secretion via cAMP. Endocrine function: beta cells secrete insulin in response to elevated glucose (GLUT2 uptake, glucokinase phosphorylation, ATP production, KATP channel closure, calcium influx); alpha cells secrete glucagon during hypoglycemia; somatostatin from delta cells inhibits both.",
+      "keyTerms": [
+        { "term": "enterokinase", "definition": "Duodenal brush border enzyme that activates trypsinogen to trypsin, initiating protease cascade" },
+        { "term": "zymogen", "definition": "Inactive precursor form of an enzyme; prevents autodigestion" },
+        { "term": "CFTR", "definition": "Cystic fibrosis transmembrane conductance regulator; chloride channel in duct cells enabling bicarbonate secretion" }
+      ],
+      "clinicalNotes": "CFTR mutations in cystic fibrosis cause thick secretions, duct obstruction, and pancreatic insufficiency. Hereditary pancreatitis results from PRSS1 mutations causing premature trypsinogen activation."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pancreatic pathophysiology involves premature zymogen activation causing autodigestion (pancreatitis), ductal obstruction and fibrosis, and beta cell dysfunction in diabetes.",
+      "explanation": "Acute pancreatitis: premature intrapancreatic trypsinogen activation overwhelms SPINK1 inhibitor, activating the protease cascade, causing autodigestion, necrosis, and inflammatory response. Causes: gallstones (40%), alcohol (40%), hypertriglyceridemia, medications, ERCP, trauma, infections. Severity stratified by Atlanta Classification (mild, moderately severe, severe) based on organ failure and local complications. Chronic pancreatitis: recurrent inflammation leads to fibrosis, atrophy, calcifications, ductal changes; exocrine insufficiency (steatorrhea when >90% function lost) and endocrine insufficiency (diabetes). SPINK1, PRSS1, CFTR, CTRC mutations predispose to chronic/hereditary pancreatitis. Type 1 diabetes: autoimmune beta cell destruction (HLA association, islet autoantibodies). Type 2 diabetes: insulin resistance and relative insulin deficiency; incretin dysfunction (GLP-1, GIP).",
+      "keyTerms": [
+        { "term": "SPINK1", "definition": "Serine protease inhibitor Kazal type 1 (PSTI); inhibits premature trypsin activation; mutations predispose to pancreatitis" },
+        { "term": "Atlanta Classification", "definition": "Standardized classification of acute pancreatitis severity based on organ failure and complications" },
+        { "term": "steatorrhea", "definition": "Fatty stools due to fat malabsorption; occurs when >90% of pancreatic function lost" }
+      ],
+      "clinicalNotes": "Ranson criteria and BISAP score predict severity in acute pancreatitis. CT severity index (Balthazar) assesses necrosis. Fluid resuscitation within 24h and enteral nutrition are cornerstones of management."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical pancreatic evaluation integrates imaging (CT, MRI/MRCP, EUS), functional testing, and intervention for pancreatitis, pancreatic cysts, and malignancy, with risk stratification guiding management.",
+      "explanation": "Acute pancreatitis: diagnosis requires 2 of 3 - characteristic pain, lipase >3x ULN, imaging findings. CT at 72-96h for severe cases to assess necrosis. Management: aggressive IV fluids (LR preferred), analgesia, NPO if needed, enteral nutrition when tolerated. Infected necrosis: antibiotics, drainage (step-up approach: percutaneous, endoscopic, surgery). Chronic pancreatitis: EUS and MRCP assess ductal changes; fecal elastase <200 indicates exocrine insufficiency; treat with pancreatic enzyme replacement (PERT) with meals. Pain management: analgesics, antioxidants, ERCP for dominant strictures, EUS-guided celiac plexus block, surgery (Frey, Puestow, Whipple) for refractory cases. Pancreatic cysts: mucinous neoplasms (IPMN, MCN) have malignant potential; EUS with fluid analysis (CEA >192 suggests mucinous, cytology for atypia). ACG guidelines for surveillance. Pancreatic adenocarcinoma: >90% of pancreatic malignancy; CA 19-9 for monitoring; staging CT, EUS for T/N staging and biopsy; borderline resectable and locally advanced require neoadjuvant therapy (FOLFIRINOX or gemcitabine-nabpaclitaxel); Whipple (head), distal pancreatectomy (body/tail); adjuvant modified FOLFIRINOX for resected disease.",
+      "keyTerms": [
+        { "term": "IPMN", "definition": "Intraductal papillary mucinous neoplasm; cystic pancreatic lesion with malignant potential; main duct type higher risk" },
+        { "term": "Whipple procedure", "definition": "Pancreaticoduodenectomy; resection of pancreatic head, duodenum, distal bile duct, gallbladder, +/- distal stomach" },
+        { "term": "step-up approach", "definition": "Sequential escalation from percutaneous drainage to endoscopic necrosectomy to surgery for infected pancreatic necrosis" }
+      ],
+      "clinicalNotes": "Pancreatic cancer screening: consider EUS/MRI annually starting age 50 or 10 years before youngest affected relative in high-risk individuals (BRCA2, PALB2, ATM, CDKN2A, Lynch, Peutz-Jeghers, hereditary pancreatitis, familial pancreatic cancer). Neuroendocrine tumors: functional (insulinoma, gastrinoma) or non-functional; MEN1 association; staging/treatment differs from adenocarcinoma."
+    }
+  },
+
+  "media": [
+    {
+      "id": "pancreas-3d",
+      "type": "3d-model",
+      "filename": "pancreas.glb",
+      "title": "3D Pancreas Model",
+      "description": "Interactive 3D model showing head, neck, body, tail, and ductal system"
+    },
+    {
+      "id": "islet-histology",
+      "type": "histology",
+      "filename": "pancreatic_islet.jpg",
+      "title": "Islet of Langerhans Histology",
+      "description": "Alpha, beta, and delta cells within acinar tissue"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-6c",
+      "type": "textbook",
+      "title": "Accessory Organs in Digestion",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.6",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "system-endocrine", "targetType": "system", "relationship": "related", "label": "Endocrine System" },
+    { "targetId": "structure-duodenum", "targetType": "structure", "relationship": "sibling", "label": "Duodenum" },
+    { "targetId": "condition-pancreatitis", "targetType": "condition", "relationship": "related", "label": "Pancreatitis" },
+    { "targetId": "condition-diabetes", "targetType": "condition", "relationship": "related", "label": "Diabetes Mellitus" }
+  ],
+  "tags": {
+    "systems": ["digestive", "endocrine"],
+    "structures": ["FMA:7198"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

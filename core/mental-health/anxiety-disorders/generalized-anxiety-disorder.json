@@ -1,0 +1,145 @@
+{
+  "id": "condition-generalized-anxiety-disorder",
+  "type": "condition",
+  "category": "anxiety-disorder",
+  "name": "Generalized Anxiety Disorder",
+  "alternateNames": ["GAD", "Chronic Anxiety", "Free-Floating Anxiety"],
+  "icd10": "F41.1",
+  "dsm5": "300.02",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Generalized anxiety disorder (GAD) is when you worry excessively about many different things in daily life, even when there's no clear reason to worry.",
+      "explanation": "Everyone worries sometimes - about health, money, family, or work. But people with GAD worry almost all the time about many different things, and the worry feels hard to control. This constant worry is exhausting and can cause physical symptoms like muscle tension, trouble sleeping, and difficulty concentrating. The good news is that GAD is very treatable with therapy and sometimes medication.",
+      "keyTerms": [
+        { "term": "anxiety", "definition": "A feeling of worry, nervousness, or unease about something uncertain" },
+        { "term": "excessive worry", "definition": "Worrying more than the situation calls for, about many different things" },
+        { "term": "chronic", "definition": "Lasting a long time or happening often" }
+      ],
+      "analogies": ["GAD is like having a worry engine in your brain that's always running, even when there's nothing specific to worry about - it just finds something new to focus on."],
+      "examples": ["Someone with GAD might lie awake worrying about their health, then their job, then whether they locked the door, then about things that might happen years from now - all in one night."],
+      "importantNote": "GAD is not just being a 'worrier' or having a nervous personality. It's a real condition that causes genuine distress and can be treated."
+    },
+    "2": {
+      "level": 2,
+      "summary": "GAD is characterized by excessive, difficult-to-control worry about multiple domains occurring more days than not for at least 6 months, accompanied by physical symptoms.",
+      "explanation": "DSM-5 criteria require: excessive anxiety and worry about multiple events or activities, occurring more days than not for at least 6 months; difficulty controlling worry; worry associated with at least 3 of 6 symptoms (restlessness, fatigue, concentration difficulty, irritability, muscle tension, sleep disturbance); symptoms cause significant distress or impairment; not attributable to substances or medical conditions. GAD differs from normal worry in its pervasiveness, persistence, associated distress, and physical symptoms. Common worry domains include health, finances, work/school, family, and minor matters. GAD is highly comorbid with other disorders, especially depression.",
+      "keyTerms": [
+        { "term": "free-floating anxiety", "definition": "Anxiety that isn't attached to any specific object or situation; shifts between concerns" },
+        { "term": "somatic symptoms", "definition": "Physical symptoms like muscle tension, headaches, GI distress associated with anxiety" },
+        { "term": "comorbidity", "definition": "Presence of two or more disorders at the same time" },
+        { "term": "worry domains", "definition": "Categories of concerns that people with GAD typically worry about" }
+      ],
+      "diagnosticCriteria": "Mnemonic for associated symptoms: WATCHER - Worry, Apprehension, Tension (muscle), Concentration difficulty, Hyperarousal, Exhaustion, Restlessness",
+      "prevalence": "Lifetime prevalence approximately 5-6%; F:M ratio 2:1; median age of onset 30 years; often chronic course"
+    },
+    "3": {
+      "level": 3,
+      "summary": "GAD involves dysfunction in worry-related neural circuits, intolerance of uncertainty as a core feature, and responds to both pharmacotherapy and CBT.",
+      "explanation": "Neurobiological findings: hyperactivity in amygdala and prefrontal cortex; reduced connectivity in emotion regulation circuits; altered GABA, serotonin, and norepinephrine function. The intolerance of uncertainty (IU) model suggests those with GAD have difficulty tolerating ambiguity and engage in worry as a maladaptive coping strategy. Worry paradoxically may serve to avoid emotional processing and physiological arousal. Treatment: First-line medications include SSRIs (escitalopram, paroxetine, sertraline) and SNRIs (venlafaxine, duloxetine). Buspirone is effective but takes 2-4 weeks. Benzodiazepines provide rapid relief but have dependence risk - reserve for short-term/adjunctive use. CBT is first-line psychotherapy: cognitive restructuring, relaxation training, behavioral experiments, and addressing IU. Applied relaxation is also effective.",
+      "keyTerms": [
+        { "term": "intolerance of uncertainty", "definition": "Difficulty accepting that negative events might occur; drives excessive worry as attempt to achieve certainty" },
+        { "term": "worry as avoidance", "definition": "Theory that abstract worry prevents emotional processing and physiological activation" },
+        { "term": "buspirone", "definition": "5-HT1A partial agonist anxiolytic; non-sedating, no dependence; delayed onset" },
+        { "term": "applied relaxation", "definition": "Evidence-based technique teaching rapid relaxation in anxiety-provoking situations" }
+      ],
+      "clinicalNotes": "GAD and MDD often coexist (60% lifetime comorbidity); treat both. SSRIs/SNRIs address both. Avoid long-term benzodiazepine use. Pregabalin (approved in Europe, not US for GAD) is an option. CBT produces durable gains - should be offered to all."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management addresses treatment resistance, metacognitive factors, and integrates third-wave therapies for refractory cases.",
+      "explanation": "Treatment-resistant GAD: optimize medication (adequate dose/duration), switch classes (SNRI if SSRI fails), augmentation (pregabalin, buspirone, hydroxyzine, or low-dose antipsychotic). Psychotherapy advances: Metacognitive therapy (MCT) targets positive beliefs about worry ('worry helps me prepare') and negative beliefs ('worry is uncontrollable'); reduces meta-worry. Acceptance and Commitment Therapy (ACT) focuses on acceptance of anxiety rather than elimination; promotes valued action despite discomfort. Worry exposure: deliberately exposing to worst-case scenario imagery to achieve habituation. Comorbidity management: substance use (often self-medication), somatic symptom disorders, personality disorders (especially Cluster C). Medical differential: hyperthyroidism, cardiac arrhythmias, caffeine excess, pheochromocytoma. GAD increases risk for physical health problems (cardiovascular disease, GI disorders) - integrated care important.",
+      "keyTerms": [
+        { "term": "metacognitive therapy", "definition": "Treatment targeting beliefs about thinking and worry itself, rather than worry content" },
+        { "term": "acceptance and commitment therapy", "definition": "Third-wave CBT emphasizing acceptance of internal experiences and commitment to values-based action" },
+        { "term": "worry exposure", "definition": "Confronting worst-case scenarios through imagery to reduce avoidance and promote habituation" },
+        { "term": "meta-worry", "definition": "Worry about worrying; 'I can't stop worrying' or 'worry will harm me'" }
+      ],
+      "clinicalNotes": "Many patients with GAD also meet criteria for social anxiety, panic, or depression - comprehensive assessment needed. Cognitive rigidity and reassurance-seeking maintain disorder. Functional impairment often significant despite 'just worry' - validate distress. Consider personality factors in treatment planning."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert-level management integrates transdiagnostic approaches, precision medicine, and addresses the developmental trajectory and maintenance mechanisms of chronic worry.",
+      "explanation": "Transdiagnostic perspective: GAD shares mechanisms with other anxiety/depressive disorders (negative affect, emotion dysregulation, behavioral inhibition). Unified Protocol addresses transdiagnostic factors. Precision medicine approaches: biomarkers (HPA axis function, inflammatory markers), neuroimaging (amygdala reactivity, PFC connectivity), genetic factors (NPSR1, COMT). Developmental trajectory: temperamental behavioral inhibition in childhood predisposes; early adversity impacts stress reactivity; metacognitive beliefs develop through learning. Maintenance mechanisms: experiential avoidance, intolerance of uncertainty, negative problem orientation, cognitive avoidance through worry. Novel treatments: psychedelics (psilocybin) under investigation; cannabidiol (mixed evidence); digital therapeutics; neurofeedback targeting amygdala regulation. Healthcare utilization: GAD patients are high utilizers of medical care; often present with somatic complaints; training non-psychiatric providers important. Long-term outcomes: chronic relapsing course common; sustained remission with combined treatment; quality of life often impaired even in treated patients.",
+      "keyTerms": [
+        { "term": "Unified Protocol", "definition": "Transdiagnostic CBT addressing core emotional disorder processes across anxiety and depression" },
+        { "term": "behavioral inhibition", "definition": "Temperamental tendency to respond with fear/withdrawal to novel stimuli; risk factor for anxiety" },
+        { "term": "negative problem orientation", "definition": "Tendency to view problems as threats, doubt ability to solve them; contributes to worry" },
+        { "term": "experiential avoidance", "definition": "Unwillingness to remain in contact with distressing internal experiences; maintains anxiety" }
+      ],
+      "clinicalNotes": "Relapse prevention: maintenance medication for at least 1 year; booster CBT sessions; lifestyle factors (sleep, exercise, caffeine reduction). GAD often lifelong but manageable with ongoing care. Meaning-focused approaches may help: connecting to values rather than eliminating all anxiety."
+    }
+  },
+
+  "riskFactors": [
+    "Family history of anxiety disorders",
+    "Temperament: behavioral inhibition, neuroticism",
+    "Childhood adversity",
+    "Female sex",
+    "Stressful life events",
+    "Chronic medical illness",
+    "Comorbid depression or other anxiety disorders"
+  ],
+
+  "selfCareStrategies": [
+    "Practice relaxation techniques (deep breathing, progressive muscle relaxation)",
+    "Limit caffeine and alcohol",
+    "Exercise regularly",
+    "Maintain good sleep habits",
+    "Challenge 'what if' thinking",
+    "Schedule worry time rather than worrying all day",
+    "Practice mindfulness",
+    "Stay connected socially"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "samhsaHelpline": "1-800-662-4357",
+      "adaaResources": "www.adaa.org"
+    },
+    "message": "If anxiety is overwhelming you, help is available. You don't have to manage this alone."
+  },
+
+  "treatments": {
+    "firstLine": ["SSRIs", "SNRIs", "CBT"],
+    "secondLine": ["Buspirone", "Pregabalin", "Hydroxyzine"],
+    "psychotherapy": ["CBT", "Applied Relaxation", "Metacognitive Therapy", "ACT"],
+    "adjunctive": ["Benzodiazepines (short-term)", "Relaxation training", "Mindfulness-based interventions"]
+  },
+
+  "citations": [
+    {
+      "id": "apa-dsm5-tr",
+      "type": "manual",
+      "title": "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision",
+      "authors": ["American Psychiatric Association"],
+      "year": 2022
+    },
+    {
+      "id": "bandelow-2017",
+      "type": "guideline",
+      "title": "World Federation of Societies of Biological Psychiatry Guidelines for the Pharmacological Treatment of Anxiety Disorders",
+      "year": 2017
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-panic-disorder", "targetType": "condition", "relationship": "related", "label": "Panic Disorder" },
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "comorbidity", "label": "Major Depressive Disorder" },
+    { "targetId": "treatment-cbt", "targetType": "treatment", "relationship": "treatment", "label": "CBT" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "anxiety-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

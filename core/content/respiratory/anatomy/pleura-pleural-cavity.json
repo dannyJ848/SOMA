@@ -1,0 +1,118 @@
+{
+  "id": "structure-pleura-pleural-cavity",
+  "type": "structure",
+  "name": "Pleura and Pleural Cavity",
+  "alternateNames": ["Pleural membranes", "Pleural space"],
+  "fmaId": "FMA:9583",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The pleura is a double-layered wrapper around each lung with a thin space between the layers that helps your lungs move smoothly when you breathe.",
+      "explanation": "Each of your lungs is wrapped in two thin, slippery layers called the pleura. One layer sticks to your lung (like plastic wrap on a sandwich), and the other layer lines the inside of your chest wall. Between these layers is a tiny space with a small amount of slippery fluid. This setup is like a water balloon inside another balloon - the inner balloon can slide easily inside the outer one. This allows your lungs to expand and shrink smoothly every time you breathe, without rubbing painfully against your ribs.",
+      "keyTerms": [
+        {"term": "pleura", "definition": "The thin double layer of tissue that wraps around each lung"},
+        {"term": "pleural cavity", "definition": "The tiny space between the two layers of pleura"},
+        {"term": "pleural fluid", "definition": "Slippery liquid in the pleural cavity that helps the lungs slide smoothly"}
+      ],
+      "analogies": ["The pleura works like two wet pieces of glass placed together - they slide smoothly over each other but are hard to pull apart. This is how your lungs can expand easily but stay close to your chest wall."],
+      "examples": ["When someone has pleurisy, the pleural layers rub together and cause sharp pain with every breath."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The pleura consists of visceral pleura covering the lung surface and parietal pleura lining the thoracic cavity, with the pleural cavity containing serous fluid for frictionless movement.",
+      "explanation": "The visceral pleura is tightly adherent to the lung surface and extends into the fissures. The parietal pleura lines the inner thoracic wall and has regional divisions: costal (ribs), diaphragmatic (diaphragm), mediastinal (mediastinum), and cervical (apex). These two layers are continuous at the hilum where bronchi and vessels enter the lung. The pleural cavity is a potential space containing 10-20mL of serous fluid produced by the parietal pleura and absorbed mainly via lymphatics in the parietal pleura. Negative intrapleural pressure (-5 cmH2O at rest) keeps the lungs expanded. The costodiaphragmatic recess is the lowest part of the pleural cavity where fluid first accumulates.",
+      "keyTerms": [
+        {"term": "visceral pleura", "definition": "Inner layer adherent to the lung surface", "pronunciation": "VISS-er-al PLOOR-ah"},
+        {"term": "parietal pleura", "definition": "Outer layer lining the chest wall and diaphragm", "pronunciation": "pah-RY-eh-tal PLOOR-ah"},
+        {"term": "intrapleural pressure", "definition": "Negative pressure in pleural space that keeps lungs expanded"},
+        {"term": "costodiaphragmatic recess", "definition": "Lowest part of pleural cavity between ribs and diaphragm where fluid collects"},
+        {"term": "hilum", "definition": "Area where bronchi, vessels, and nerves enter the lung"}
+      ],
+      "analogies": ["The pleural layers are like a fist (lung) pushed into a balloon (pleura) - the balloon has two layers around the fist but is really one continuous layer folded on itself."],
+      "examples": ["Pleural effusion is excess fluid in the pleural cavity, often visible on chest X-ray as blunting of the costophrenic angle."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Pleural anatomy and physiology involve Starling forces governing fluid dynamics, lymphatic drainage pathways, and anatomic relationships critical for interventional procedures.",
+      "explanation": "Pleural fluid dynamics follow Starling's equation: hydrostatic pressure gradient favors filtration from parietal pleura (systemic capillaries, 30 cmH2O) while oncotic pressure opposes it. The visceral pleura (pulmonary circulation, 11 cmH2O) has lower net filtration. Absorption occurs primarily through parietal pleural lymphatic stomata draining to intercostal and internal mammary nodes. Normal turnover is 0.1-0.2 mL/kg/hour. The pleural cupola extends 2-3cm above the clavicle, protected by Sibson's fascia (suprapleural membrane). The costodiaphragmatic recess extends to the 12th rib posteriorly but lung only reaches the 10th rib. Surface landmarks: visceral pleura follows lung margins; parietal pleura extends to 8th rib (MCL), 10th (MAL), 12th (posterior). The pulmonary ligament is the inferior extension of the hilum connecting visceral to mediastinal parietal pleura.",
+      "keyTerms": [
+        {"term": "Starling forces", "definition": "Hydrostatic and oncotic pressure gradients determining pleural fluid movement"},
+        {"term": "pleural stomata", "definition": "Lymphatic openings in parietal pleura that drain pleural fluid"},
+        {"term": "Sibson's fascia", "definition": "Suprapleural membrane protecting the pleural cupola at the thoracic inlet"},
+        {"term": "pulmonary ligament", "definition": "Double fold of pleura extending from hilum inferiorly, containing inferior pulmonary vein"},
+        {"term": "costodiaphragmatic recess", "definition": "Potential space between costal and diaphragmatic pleura that fills with fluid in effusion"}
+      ],
+      "clinicalNotes": "Thoracentesis: above rib to avoid neurovascular bundle, typically at 8th-9th intercostal space in posterior axillary line. Intercostal nerve block targets posterior angle of rib."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pleural pathophysiology encompasses effusion mechanisms, malignant involvement, and pneumothorax dynamics with implications for diagnostic and therapeutic interventions.",
+      "explanation": "Pleural effusions are classified as transudative (protein <3g/dL, LDH <200, Light's criteria) or exudative. Transudates result from hydrostatic/oncotic imbalance (CHF, cirrhosis, nephrotic syndrome). Exudates arise from increased permeability (infection, malignancy, inflammation) or impaired lymphatic drainage. Malignant effusions indicate advanced disease (median survival 3-12 months) and are managed with therapeutic thoracentesis, indwelling pleural catheter (IPC), or pleurodesis (chemical: talc, or surgical). Pneumothorax occurs when air enters the pleural space: primary spontaneous (rupture of apical blebs in tall, thin young males), secondary (underlying lung disease), traumatic, or iatrogenic. Tension pneumothorax is life-threatening due to mediastinal shift and cardiovascular collapse. Pleural pressure during inspiration becomes less negative with effusion/pneumothorax, impairing lung expansion.",
+      "keyTerms": [
+        {"term": "Light's criteria", "definition": "Criteria distinguishing exudative from transudative effusion using protein and LDH ratios"},
+        {"term": "indwelling pleural catheter", "definition": "Tunneled catheter for ambulatory drainage of recurrent malignant effusion"},
+        {"term": "pleurodesis", "definition": "Procedure causing pleural symphysis to prevent recurrent effusion or pneumothorax"},
+        {"term": "tension pneumothorax", "definition": "Air accumulation with one-way valve effect causing mediastinal shift and hemodynamic compromise"},
+        {"term": "primary spontaneous pneumothorax", "definition": "Pneumothorax without underlying lung disease, typically from apical bleb rupture"}
+      ],
+      "clinicalNotes": "Chest tube size: large bore (28-36Fr) for hemothorax, smaller (14-24Fr) for pneumothorax/effusion. Pigtail catheters (14Fr) adequate for most non-traumatic cases. BTS guidelines: observe small PSP if no dyspnea."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced pleural management integrates precision diagnostics, ambulatory interventions, and personalized approaches to malignant pleural disease with emerging biomarker-guided strategies.",
+      "explanation": "Pleural fluid analysis extends beyond Light's criteria: NT-proBNP (cardiac effusion), adenosine deaminase (tuberculosis), pH/glucose (parapneumonic staging), cytology/cell block (malignancy), flow cytometry (lymphoma). Thoracoscopy (medical or VATS) enables direct visualization and biopsy with 90%+ sensitivity for malignancy. Mesothelioma diagnosis requires immunohistochemistry panel (calretinin, WT1, cytokeratin 5/6 positive; CEA, TTF-1 negative); BAP1 loss suggests better prognosis. IPC with talc pleurodesis through the catheter (talc slurry or poudrage) achieves 70-80% success. Novel approaches include intrapleural fibrinolytic therapy (tPA/DNase) for loculated empyema, photodynamic therapy for mesothelioma, and SMART (symptom-guided IPC drainage) protocols. Ambulatory pneumothorax management with Heimlich valve allows outpatient treatment. Surgical options for recurrent pneumothorax include VATS bullectomy with mechanical/chemical pleurodesis or pleurectomy.",
+      "keyTerms": [
+        {"term": "medical thoracoscopy", "definition": "Minimally invasive procedure using local anesthesia for pleural biopsy and talc poudrage"},
+        {"term": "mesothelioma", "definition": "Malignancy of pleura primarily caused by asbestos exposure; poor prognosis"},
+        {"term": "tPA/DNase", "definition": "Intrapleural fibrinolytic therapy (tissue plasminogen activator and deoxyribonuclease) for empyema"},
+        {"term": "SMART protocol", "definition": "Symptom-guided drainage protocol for indwelling pleural catheters"},
+        {"term": "pleurectomy", "definition": "Surgical stripping of parietal pleura for recurrent pneumothorax or mesothelioma"}
+      ],
+      "clinicalNotes": "TIME1 trial: ambulatory thoracentesis effective. IPC vs pleurodesis (TIME2): equivalent dyspnea relief. MIST2 trial: tPA/DNase improves pleural infection outcomes. Consider Tremelimumab + durvalumab for unresectable mesothelioma (CheckMate 743)."
+    }
+  },
+  "media": [
+    {
+      "id": "pleura-3d-model",
+      "type": "3d-model",
+      "filename": "pleura_pleural_cavity.glb",
+      "title": "3D Pleura and Pleural Cavity",
+      "description": "Interactive model showing visceral and parietal pleura with recesses and surface landmarks"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "bts-pleural-guidelines",
+      "type": "article",
+      "title": "BTS Pleural Disease Guideline 2023",
+      "authors": ["British Thoracic Society"],
+      "source": "Thorax"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-lungs", "targetType": "structure", "relationship": "related", "label": "Lungs"},
+    {"targetId": "condition-pleural-effusion", "targetType": "condition", "relationship": "related", "label": "Pleural Effusion"},
+    {"targetId": "condition-pneumothorax", "targetType": "condition", "relationship": "related", "label": "Pneumothorax"}
+  ],
+  "tags": {
+    "systems": ["respiratory"],
+    "structures": ["FMA:9583", "FMA:9584", "FMA:9585"],
+    "topics": ["anatomy", "physiology", "procedures"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

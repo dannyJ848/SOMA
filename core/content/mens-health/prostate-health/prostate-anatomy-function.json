@@ -1,0 +1,125 @@
+{
+  "id": "mens-health-prostate-anatomy",
+  "type": "patient-education",
+  "category": "mens-health",
+  "subcategory": "prostate-health",
+  "name": "Prostate Anatomy and Function",
+  "description": "Understanding the prostate gland - what it is, where it is, and what it does",
+  "audienceNote": "Many men are uncertain about the prostate's location and function - this content addresses common questions openly",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The prostate is a small gland that helps make the fluid that carries sperm.",
+      "explanation": "The prostate is about the size of a walnut and sits just below your bladder. It wraps around the tube (urethra) that carries urine from your bladder out through your penis. The prostate makes a special fluid that mixes with sperm to create semen. This fluid helps protect and feed the sperm so they can survive and reach an egg. All men have a prostate, and it typically stays the same size until around age 40-50, when it often starts to grow larger.",
+      "keyTerms": [
+        { "term": "prostate", "definition": "A small gland in men that helps make semen" },
+        { "term": "bladder", "definition": "The organ that stores urine before you urinate" },
+        { "term": "urethra", "definition": "The tube that carries urine (and semen) out of the body" },
+        { "term": "semen", "definition": "The fluid that contains sperm when a man ejaculates" }
+      ],
+      "analogies": ["Think of the prostate as a small donut wrapped around a straw - the straw is the urethra, and the donut adds important fluids to the mix."],
+      "commonQuestions": [
+        {
+          "question": "Where exactly is my prostate?",
+          "answer": "It's deep inside your pelvis, below your bladder and in front of your rectum. That's why doctors can feel it during a rectal exam."
+        }
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The prostate is an accessory reproductive gland that produces prostatic fluid, a key component of semen that aids sperm survival and motility.",
+      "explanation": "The prostate is located in the male pelvis, positioned inferior to the bladder, anterior to the rectum, and surrounding the prostatic urethra. In a young adult male, it weighs approximately 20 grams and measures about 4cm wide, 3cm tall, and 2cm deep. The prostate produces approximately 30% of seminal fluid volume. Prostatic fluid is slightly acidic (pH ~6.5) but helps neutralize vaginal acidity to protect sperm. Key components include: prostate-specific antigen (PSA) which liquefies semen after ejaculation, citric acid which provides energy for sperm, and zinc which has antimicrobial properties. The gland is divided into zones: the peripheral zone (where most cancers arise), the central zone (around the ejaculatory ducts), and the transition zone (where benign enlargement occurs).",
+      "keyTerms": [
+        { "term": "PSA (prostate-specific antigen)", "definition": "A protein made by prostate cells that liquefies semen; measured in blood tests to screen for prostate problems" },
+        { "term": "peripheral zone", "definition": "The outer portion of the prostate, closest to the rectum, where 70% of prostate cancers develop" },
+        { "term": "transition zone", "definition": "The inner portion of the prostate surrounding the urethra, where benign enlargement (BPH) occurs" },
+        { "term": "ejaculatory ducts", "definition": "Tubes that carry sperm from the vas deferens through the prostate to the urethra" }
+      ],
+      "anatomicalLandmarks": [
+        "Sits below the bladder neck",
+        "Wraps around the prostatic urethra",
+        "Anterior to (in front of) the rectum - allows examination via digital rectal exam",
+        "Just above the pelvic floor muscles"
+      ],
+      "clinicalRelevance": "Understanding prostate anatomy explains why prostate enlargement causes urinary symptoms (compression of urethra) and why the prostate can be examined through the rectum."
+    },
+    "3": {
+      "level": 3,
+      "summary": "The prostate is a tubuloalveolar exocrine gland with zonal anatomy that determines disease predilection, androgen-dependent function, and complex secretory products essential for fertility.",
+      "explanation": "The prostate's McNeal zonal anatomy has important clinical implications: the peripheral zone (70% of glandular tissue) is the site of 70% of carcinomas and is easily palpable on digital rectal exam (DRE). The central zone (25% of tissue) surrounds the ejaculatory ducts and is relatively resistant to disease. The transition zone (5% of tissue) is the exclusive site of benign prostatic hyperplasia (BPH) and accounts for 25% of cancers. The anterior fibromuscular stroma contains no glandular tissue. Histologically, the prostate contains tubuloalveolar glands with secretory columnar epithelium (expressing PSA, PAP), basal cells (p63+, lost in carcinoma), and rare neuroendocrine cells. The gland is surrounded by a true capsule (important for cancer staging) and a fascial sheath. Prostatic secretions include PSA (kallikrein family serine protease), prostatic acid phosphatase (PAP), zinc (highest concentration of any organ), citric acid, polyamines (spermine, spermidine), and prostaglandins.",
+      "keyTerms": [
+        { "term": "tubuloalveolar gland", "definition": "Gland structure with both tubular ducts and rounded secretory sacs (alveoli)" },
+        { "term": "basal cells", "definition": "Prostatic epithelial cells that don't express androgen receptors; their absence is diagnostic of adenocarcinoma" },
+        { "term": "true capsule", "definition": "Fibromuscular layer surrounding the prostate proper; cancer that breaches this is staged as T3a" },
+        { "term": "verumontanum", "definition": "Elevation on posterior prostatic urethra where ejaculatory ducts and prostatic utricle open" }
+      ],
+      "clinicalNotes": "The posterior peripheral zone location of most cancers explains why DRE can detect abnormalities. BPH occurs exclusively in the transition zone, explaining why medical therapy targeting smooth muscle and 5-alpha reductase is effective."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Prostate biology centers on androgen-dependent epithelial-stromal interactions governing development, homeostasis, and disease pathogenesis through testosterone/DHT-AR signaling pathways.",
+      "explanation": "Prostatic development and maintenance depend on androgen signaling through the hypothalamic-pituitary-gonadal axis. Circulating testosterone enters prostate cells and is converted to dihydrotestosterone (DHT) by 5-alpha reductase type 2 (SRD5A2). DHT binds the androgen receptor (AR) with 10-fold higher affinity than testosterone. The liganded AR translocates to the nucleus, binding androgen response elements (AREs) to regulate gene transcription. Key AR-regulated genes include PSA (KLK3), TMPRSS2, and NKX3.1. Epithelial-stromal interactions are critical: AR signaling in stromal cells produces paracrine factors (FGFs, IGF-1) that support epithelial survival and secretory function. The prostate epithelium contains a hierarchy: basal cells (CD44+, p63+, AR-low) include stem cells; transit-amplifying cells differentiate into luminal cells (AR+, PSA+, differentiated secretory cells) and rare neuroendocrine cells (chromogranin A+, synaptophysin+). This understanding underlies BPH/cancer therapeutics targeting the androgen axis.",
+      "keyTerms": [
+        { "term": "5-alpha reductase", "definition": "Enzyme converting testosterone to the more potent DHT; type 2 predominates in prostate; inhibited by finasteride (type 2) and dutasteride (types 1&2)" },
+        { "term": "androgen receptor (AR)", "definition": "Nuclear hormone receptor that mediates testosterone/DHT effects; target of antiandrogen therapies" },
+        { "term": "paracrine signaling", "definition": "Communication between stromal and epithelial cells via secreted growth factors" },
+        { "term": "NKX3.1", "definition": "Androgen-regulated homeobox transcription factor essential for prostate development and differentiation; tumor suppressor lost in prostate cancer" }
+      ],
+      "clinicalNotes": "5-alpha reductase inhibitors (finasteride, dutasteride) reduce DHT levels by 70-90%, shrinking prostate volume and reducing PSA by ~50% (must double measured PSA in treated patients). Understanding AR signaling underpins androgen deprivation therapy for prostate cancer."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary prostate biology integrates molecular pathogenesis, precision medicine approaches, and advanced therapeutics targeting AR splice variants, tumor microenvironment, and genomic alterations.",
+      "explanation": "Advanced prostate pathobiology relevant to clinical practice: 1) Molecular alterations in prostate cancer include TMPRSS2-ERG fusion (50% of cases - androgen-regulated fusion creating ERG overexpression), PTEN loss (40% - PI3K/AKT pathway activation), TP53 mutations (progression marker), RB1 loss (neuroendocrine differentiation), DNA repair gene alterations (BRCA1/2, ATM, PALB2 - 20-25% of mCRPC, PARP inhibitor eligible), and AR amplification/mutations (castration resistance). 2) Castration-resistant prostate cancer (CRPC) mechanisms: intratumoral androgen synthesis, AR amplification, AR mutations (broadening ligand specificity), AR splice variants (AR-V7 constitutively active, lacks ligand-binding domain - predicts resistance to AR-targeted therapies), and glucocorticoid receptor takeover. 3) Novel targets: PSMA (prostate-specific membrane antigen) for imaging (PSMA PET-CT) and radioligand therapy (Lu-177 PSMA); neuroendocrine markers for treatment-emergent neuroendocrine prostate cancer. 4) Germline genetics: BRCA2 carriers have 8-fold increased prostate cancer risk with more aggressive disease; cascade testing indicated for metastatic cases and strong family history.",
+      "keyTerms": [
+        { "term": "TMPRSS2-ERG fusion", "definition": "Androgen-driven chromosomal rearrangement creating oncogenic ERG overexpression; most common genomic alteration in prostate cancer" },
+        { "term": "AR-V7", "definition": "Androgen receptor splice variant 7; constitutively active, predicts resistance to enzalutamide/abiraterone" },
+        { "term": "PSMA", "definition": "Prostate-specific membrane antigen; glutamate carboxypeptidase overexpressed in prostate cancer cells; target for imaging and therapy" },
+        { "term": "homologous recombination deficiency", "definition": "Defective DNA repair (BRCA1/2, ATM mutations) creating PARP inhibitor sensitivity" }
+      ],
+      "clinicalNotes": "Germline genetic testing (BRCA1/2, Lynch syndrome genes) recommended for metastatic and high-risk localized prostate cancer. PSMA PET-CT has revolutionized staging. PARP inhibitors (olaparib, rucaparib) approved for HRD-positive mCRPC. AR-V7 testing in circulating tumor cells can guide treatment selection in mCRPC."
+    }
+  },
+
+  "keyPoints": [
+    "The prostate is a walnut-sized gland that produces fluid essential for fertility",
+    "It wraps around the urethra, which explains why prostate problems cause urinary symptoms",
+    "Different zones of the prostate are affected by different diseases (transition zone = BPH, peripheral zone = most cancers)",
+    "The prostate depends on testosterone/DHT for normal function, which is why hormone therapy works for prostate conditions"
+  ],
+
+  "citations": [
+    {
+      "id": "aua-anatomy",
+      "type": "guideline",
+      "title": "AUA Core Curriculum: Male Reproductive System Anatomy",
+      "source": "American Urological Association"
+    },
+    {
+      "id": "openstax-anatomy",
+      "type": "textbook",
+      "title": "Anatomy and Physiology 2e - The Reproductive System",
+      "source": "OpenStax",
+      "license": "CC BY 4.0"
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "structure-prostate", "targetType": "structure", "relationship": "detailed-anatomy", "label": "Prostate (Anatomy)" },
+    { "targetId": "mens-health-bph", "targetType": "patient-education", "relationship": "related-condition", "label": "Enlarged Prostate (BPH)" },
+    { "targetId": "mens-health-prostate-cancer-screening", "targetType": "patient-education", "relationship": "related", "label": "Prostate Cancer Screening" }
+  ],
+
+  "tags": {
+    "systems": ["reproductive", "urinary"],
+    "topics": ["mens-health", "prostate", "anatomy", "patient-education"],
+    "audiences": ["patients", "general-public"],
+    "clinicalRelevance": "high"
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

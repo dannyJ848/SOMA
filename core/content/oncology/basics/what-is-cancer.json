@@ -1,0 +1,137 @@
+{
+  "id": "oncology-what-is-cancer",
+  "type": "education",
+  "name": "What is Cancer",
+  "alternateNames": ["Cancer Overview", "Understanding Cancer", "Cancer Fundamentals"],
+  "category": "oncology-basics",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Cancer is when some cells in your body start growing out of control and can spread to other parts of your body.",
+      "explanation": "Your body is made up of trillions of tiny building blocks called cells. Normally, cells grow, do their job, and then die when they get old or damaged - like workers in a factory who retire when their time comes. New cells take their place.\n\nBut sometimes, something goes wrong. A cell starts ignoring the normal rules. Instead of dying when it should, it keeps dividing and making copies of itself. These out-of-control cells can pile up and form a lump called a tumor.\n\nNot all tumors are cancer. Some tumors are benign, which means they stay in one place and don't spread. Cancer tumors are different - they can invade nearby tissues and even travel through your blood to start growing in other parts of your body.\n\nThe good news is that doctors have many ways to treat cancer, and many people with cancer get better. Finding cancer early usually makes it easier to treat.",
+      "keyTerms": [
+        { "term": "cell", "definition": "The tiny building blocks that make up your body - like bricks in a building" },
+        { "term": "tumor", "definition": "A lump that forms when cells grow out of control" },
+        { "term": "benign", "definition": "Not cancer; a growth that stays in one place and doesn't spread", "pronunciation": "beh-NINE" },
+        { "term": "malignant", "definition": "Cancerous; can grow into nearby tissues and spread to other body parts", "pronunciation": "mah-LIG-nant" }
+      ],
+      "analogies": [
+        "Normal cells are like good workers who follow the rules and retire on time. Cancer cells are like workers who won't stop working and won't leave, eventually crowding out the good workers.",
+        "Cancer is like a garden plant that grows out of control and starts taking over other parts of the yard."
+      ],
+      "examples": [
+        "When you get a cut, your skin cells multiply to heal the wound, then stop when the job is done. Cancer cells don't know when to stop.",
+        "A mole on your skin is usually benign - it stays the same size. But if it starts growing and changing, it might be turning into skin cancer."
+      ],
+      "encouragement": "Many people successfully beat cancer with treatment. Finding it early and working with your doctors gives you the best chance."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Cancer develops when cells acquire mutations that disrupt normal growth controls, allowing uncontrolled proliferation, invasion of surrounding tissues, and potential spread (metastasis) to distant sites.",
+      "explanation": "Every cell in your body contains DNA, which acts like an instruction manual for how the cell should behave. These instructions control when cells divide, when they repair themselves, and when they die.\n\nCancer begins when DNA instructions get damaged or changed - these changes are called mutations. Some mutations are inherited from parents, but most happen during a person's lifetime from various causes:\n- Normal cell division errors\n- Exposure to harmful substances (tobacco, UV radiation, certain chemicals)\n- Some viruses and infections\n- Chronic inflammation\n\nNormally, cells have repair systems to fix DNA damage. They also have safety mechanisms that cause damaged cells to self-destruct (apoptosis) before they can cause problems. Cancer develops when these safeguards fail.\n\nCancer cells gain several dangerous abilities:\n1. They keep dividing without stopping signals\n2. They ignore signals that would normally cause cell death\n3. They can invade surrounding tissues\n4. They can spread through blood or lymph to distant organs (metastasis)\n5. They can trigger growth of new blood vessels to feed themselves (angiogenesis)\n\nDifferent types of cancer are named for where they start: breast cancer starts in breast tissue, lung cancer in lung tissue, and so on.",
+      "keyTerms": [
+        { "term": "mutation", "definition": "A change in the DNA instructions inside a cell", "pronunciation": "myoo-TAY-shun" },
+        { "term": "metastasis", "definition": "When cancer cells spread from where they started to other parts of the body", "pronunciation": "meh-TAS-tah-sis" },
+        { "term": "apoptosis", "definition": "Programmed cell death - the normal process where damaged cells destroy themselves", "pronunciation": "ay-pop-TOH-sis" },
+        { "term": "angiogenesis", "definition": "The growth of new blood vessels, which tumors need to get nutrients and oxygen", "pronunciation": "an-jee-oh-JEN-eh-sis" }
+      ],
+      "analogies": [
+        "DNA is like a recipe book for your cells. Mutations are like typos in the recipe that can change how the dish turns out.",
+        "Metastasis is like dandelion seeds blowing in the wind - cancer cells break off and can take root in new locations."
+      ],
+      "examples": [
+        "Smoking causes mutations in lung cells, which is why it's the leading cause of lung cancer.",
+        "BRCA gene mutations increase breast and ovarian cancer risk because they affect the cell's ability to repair DNA damage."
+      ],
+      "encouragement": "Understanding how cancer works helps researchers develop better treatments. New therapies are targeting the specific mutations that drive cancer growth."
+    },
+    "3": {
+      "level": 3,
+      "summary": "Cancer is a genetic disease characterized by acquired hallmark capabilities including sustained proliferative signaling, evasion of growth suppressors, resistance to apoptosis, replicative immortality, angiogenesis induction, and activation of invasion/metastasis programs.",
+      "explanation": "**The Hallmarks of Cancer**\nHanahan and Weinberg defined key capabilities cancer cells must acquire:\n\n1. **Sustaining proliferative signaling**: Normal cells require growth signals to divide. Cancer cells generate their own growth signals (autocrine signaling), amplify growth receptors, or have constitutively active signaling pathways (e.g., RAS mutations).\n\n2. **Evading growth suppressors**: Tumor suppressor genes (p53, RB) normally halt cell division when problems arise. Loss of these 'brakes' allows unchecked proliferation.\n\n3. **Resisting cell death**: Cancer cells disable apoptotic pathways by overexpressing anti-apoptotic proteins (BCL-2) or losing pro-apoptotic signals (p53).\n\n4. **Enabling replicative immortality**: Normal cells can only divide a limited number of times (Hayflick limit) due to telomere shortening. Cancer cells reactivate telomerase to maintain telomeres indefinitely.\n\n5. **Inducing angiogenesis**: Tumors need blood supply beyond 1-2mm diameter. Cancer cells secrete VEGF and other pro-angiogenic factors to stimulate new vessel formation.\n\n6. **Activating invasion and metastasis**: Cancer cells lose cell-cell adhesion (E-cadherin downregulation), degrade extracellular matrix (MMPs), and acquire motility through epithelial-mesenchymal transition (EMT).\n\n**Emerging Hallmarks**\n- Deregulating cellular metabolism (Warburg effect - aerobic glycolysis)\n- Avoiding immune destruction\n- Tumor-promoting inflammation\n- Genome instability and mutation\n\n**Tumor Microenvironment**\nCancer doesn't develop in isolation. The tumor microenvironment includes cancer-associated fibroblasts, immune cells, endothelial cells, and extracellular matrix - all contributing to tumor growth and metastasis.",
+      "keyTerms": [
+        { "term": "oncogene", "definition": "A mutated gene that promotes cell growth; like a stuck accelerator pedal" },
+        { "term": "tumor suppressor", "definition": "A gene that normally inhibits cell growth; like brakes on a car" },
+        { "term": "telomerase", "definition": "Enzyme that maintains chromosome ends (telomeres), enabling unlimited cell division", "pronunciation": "teh-LOM-er-ace" },
+        { "term": "epithelial-mesenchymal transition", "definition": "Process where epithelial cells acquire migratory, invasive mesenchymal properties (EMT)", "pronunciation": "ep-ih-THEEL-ee-al mez-EN-kih-mal" },
+        { "term": "Warburg effect", "definition": "Cancer cells preferentially use glycolysis even in presence of oxygen (aerobic glycolysis)" }
+      ],
+      "clinicalNotes": "Understanding cancer hallmarks guides targeted therapy development. For example, HER2 amplification (proliferative signaling) is targeted by trastuzumab; BCL-2 overexpression by venetoclax; VEGF-driven angiogenesis by bevacizumab."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Carcinogenesis is a multistep process involving sequential genetic and epigenetic alterations in proto-oncogenes, tumor suppressors, and DNA repair genes, modulated by clonal evolution, tumor heterogeneity, and microenvironmental interactions.",
+      "explanation": "**Genetic Basis of Cancer**\n\nCancer requires accumulation of 4-7 driver mutations affecting key pathways:\n\n**Oncogenes** (gain-of-function mutations):\n- Growth factor receptors: EGFR, HER2, MET\n- Signal transducers: RAS (KRAS, NRAS, HRAS), BRAF, PI3K\n- Transcription factors: MYC, JUN, FOS\n- Anti-apoptotic: BCL-2\n- Telomerase: TERT promoter mutations\n\n**Tumor Suppressors** (loss-of-function mutations):\n- Cell cycle regulators: RB1, CDKN2A (p16INK4a)\n- Apoptosis: TP53, BAX\n- DNA repair: BRCA1/2, MLH1, MSH2\n- Growth suppression: APC, PTEN, NF1\n\n**Two-Hit Hypothesis**\nKnudson's model: tumor suppressors require biallelic inactivation. Inherited mutations in one allele (germline) require only one somatic 'hit.' Sporadic cancers need two somatic mutations.\n\n**Epigenetic Alterations**\n- Global hypomethylation: genomic instability\n- Promoter hypermethylation: silencing tumor suppressors (CDKN2A, MLH1)\n- Histone modifications: altered gene expression\n\n**Clonal Evolution**\nTumors evolve through Darwinian selection:\n1. Initiating mutation creates founder clone\n2. Additional mutations create subclones\n3. Selection pressures (hypoxia, therapy) favor resistant subclones\n4. Tumor heterogeneity develops\n\n**Cancer Stem Cells**\nA subset of cancer cells with stem-like properties (self-renewal, differentiation capacity) may drive tumor growth and treatment resistance. Targeting CSCs is an active research area.\n\n**Metastatic Cascade**\n1. Local invasion (EMT, MMP secretion)\n2. Intravasation into blood/lymph vessels\n3. Survival in circulation\n4. Extravasation at distant site\n5. Colonization (rate-limiting step)\n\nOrgan tropism reflects 'seed and soil' hypothesis - metastatic cells require compatible microenvironments.",
+      "keyTerms": [
+        { "term": "driver mutation", "definition": "A mutation that directly contributes to cancer development by conferring growth advantage" },
+        { "term": "passenger mutation", "definition": "A mutation present in cancer cells but not contributing to cancer development" },
+        { "term": "clonal evolution", "definition": "The process by which cancer cells accumulate mutations and undergo selection, similar to species evolution" },
+        { "term": "tumor heterogeneity", "definition": "Genetic and phenotypic diversity within a single tumor; impacts treatment response" },
+        { "term": "cancer stem cells", "definition": "Subpopulation of cancer cells with stem-like properties potentially responsible for tumor initiation and recurrence" }
+      ],
+      "clinicalNotes": "Molecular profiling identifies targetable alterations: EGFR mutations/ALK fusions in lung cancer guide TKI selection. Mismatch repair deficiency (MSI-H) predicts immunotherapy response. Liquid biopsies (ctDNA) can detect mutations and track clonal evolution during treatment."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary oncology integrates molecular diagnostics, precision medicine, and systems biology approaches to understand cancer as a complex adaptive system with implications for prevention, early detection, and therapeutic targeting of cancer vulnerabilities.",
+      "explanation": "**Genomic Landscape of Cancer**\n\nLarge-scale sequencing projects (TCGA, ICGC, PCAWG) have characterized:\n- Mutational signatures: patterns reflecting etiology (UV, smoking, APOBEC, BRCA deficiency)\n- Significantly mutated genes across cancer types\n- Copy number alterations and structural variants\n- Driver vs. passenger distinction using algorithms (MutSig, dNdScv)\n\n**Synthetic Lethality**\nExploiting genetic interactions for therapy: PARP inhibitors in BRCA-deficient cancers exemplify targeting a 'second hit' that is lethal only in the context of an existing tumor mutation.\n\n**Immunology and Cancer**\n- Immune surveillance vs. immunoediting (elimination, equilibrium, escape)\n- Tumor antigens: neoantigens from mutations, overexpressed self-antigens, viral antigens\n- Immune checkpoint molecules: PD-1/PD-L1, CTLA-4 as therapeutic targets\n- Tumor mutational burden (TMB) as biomarker for immunotherapy response\n- Tumor immune microenvironment: 'hot' vs. 'cold' tumors\n\n**Cancer Metabolism**\nBeyond Warburg:\n- Glutamine addiction\n- One-carbon metabolism\n- Lipid metabolism reprogramming\n- Metabolic vulnerabilities as therapeutic targets (IDH inhibitors, glutaminase inhibitors)\n\n**Precision Medicine Framework**\n1. Comprehensive genomic profiling (NGS panels, WES, WGS)\n2. Functional proteomics and phosphoproteomics\n3. Single-cell technologies revealing heterogeneity\n4. Circulating biomarkers (ctDNA, CTCs)\n5. Molecular tumor boards for treatment selection\n\n**Cancer Prevention**\n- Modifiable risk factors: tobacco, obesity, alcohol, infections\n- Chemoprevention: aspirin for colorectal, tamoxifen for breast cancer risk\n- Vaccination: HPV, HBV for virus-associated cancers\n- Screening: evidence-based programs for breast, colorectal, lung, cervical cancers\n\n**Emerging Concepts**\n- Ferroptosis: iron-dependent cell death as therapeutic target\n- Senescence: benefits and dangers of therapy-induced senescence\n- Microbiome: gut bacteria influence on cancer development and treatment response\n- Artificial intelligence: deep learning for diagnosis, prognosis, drug discovery",
+      "keyTerms": [
+        { "term": "mutational signature", "definition": "Characteristic pattern of mutations reflecting the underlying mutational process (e.g., UV, smoking, APOBEC)" },
+        { "term": "synthetic lethality", "definition": "When two genetic alterations together cause cell death, but neither alone is lethal; basis for PARP inhibitor therapy" },
+        { "term": "tumor mutational burden", "definition": "Number of mutations per megabase of DNA; predictor of immunotherapy response" },
+        { "term": "neoantigen", "definition": "Tumor-specific antigen arising from somatic mutations; recognized by T cells and targeted by immunotherapy" },
+        { "term": "liquid biopsy", "definition": "Detection and analysis of circulating tumor DNA or cells from blood; enables non-invasive monitoring" }
+      ],
+      "clinicalNotes": "Molecular tumor boards integrate genomic data, clinical context, and treatment guidelines. Basket trials test therapies across tumor types with common alterations. Adaptive platform trials (I-SPY, LUNG-MAP) accelerate drug development. Cell-free DNA can detect minimal residual disease and predict recurrence before clinical evidence."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "hanahan-hallmarks",
+      "type": "journal",
+      "title": "Hallmarks of Cancer: The Next Generation",
+      "authors": ["Douglas Hanahan", "Robert A. Weinberg"],
+      "source": "Cell",
+      "year": 2011,
+      "volume": "144(5)",
+      "pages": "646-674",
+      "doi": "10.1016/j.cell.2011.02.013"
+    },
+    {
+      "id": "acs-what-is-cancer",
+      "type": "web",
+      "title": "What Is Cancer?",
+      "source": "American Cancer Society",
+      "url": "https://www.cancer.org/cancer/understanding-cancer/what-is-cancer.html",
+      "accessDate": "2026-01-24"
+    },
+    {
+      "id": "nci-cancer-overview",
+      "type": "web",
+      "title": "What Is Cancer?",
+      "source": "National Cancer Institute",
+      "url": "https://www.cancer.gov/about-cancer/understanding/what-is-cancer",
+      "accessDate": "2026-01-24"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "oncology-cancer-development", "targetType": "education", "relationship": "related", "label": "How Cancer Develops" },
+    { "targetId": "oncology-staging", "targetType": "education", "relationship": "related", "label": "Cancer Staging" },
+    { "targetId": "oncology-treatment-overview", "targetType": "education", "relationship": "related", "label": "Treatment Overview" }
+  ],
+  "tags": {
+    "systems": ["oncology"],
+    "topics": ["fundamentals", "patient-education"],
+    "keywords": ["cancer", "tumor", "mutation", "metastasis", "oncology"],
+    "clinicalRelevance": "critical",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

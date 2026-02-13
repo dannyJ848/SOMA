@@ -1,0 +1,808 @@
+import { WomensHealthContent } from '../types';
+
+export const dysmenorrhea: WomensHealthContent = {
+  id: 'dysmenorrhea',
+  title: 'Dysmenorrhea (Painful Periods)',
+  category: 'Menstrual Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Period Pain',
+      content: `Dysmenorrhea (dis-men-o-REE-uh) is the medical term for painful periods. It's very common - most women have some pain during their period.
+
+**Two Types of Dysmenorrhea:**
+
+**Primary Dysmenorrhea:**
+- Normal period cramps
+- Not caused by any disease
+- Usually starts during teenage years
+- Often improves with age
+
+**Secondary Dysmenorrhea:**
+- Caused by a reproductive condition
+- Starts later in life
+- May get worse over time
+- Caused by conditions like endometriosis or fibroids
+
+**What Does It Feel Like?**
+
+Common symptoms include:
+- Cramping or aching in the lower belly
+- Pain that may radiate to lower back or thighs
+- Dull, throbbing, or sharp pain
+- May start 1-2 days before period
+- Usually lasts 2-3 days
+
+**Other symptoms that can accompany period pain:**
+- Nausea or vomiting
+- Diarrhea or constipation
+- Headache
+- Feeling tired or weak
+- Dizziness
+
+**Simple Ways to Find Relief:**
+
+**Heat Therapy:**
+- Use a heating pad on your lower belly
+- Take a warm bath
+- Heat helps relax muscles
+
+**Over-the-Counter Medicine:**
+- Ibuprofen (Advil, Motrin)
+- Naproxen (Aleve)
+- Take as directed, start before pain gets bad
+
+**Lifestyle Tips:**
+- Gentle exercise or walking
+- Rest when you need it
+- Drink plenty of water
+- Avoid caffeine, alcohol, and salty foods
+
+**When to Call a Doctor:**
+- Pain so bad you miss school or work often
+- Medicine doesn't help
+- Pain lasts longer than 2-3 days
+- You have a fever
+- Pain happens when you're not on your period
+
+**Remember:** Period pain is very common. You don't have to suffer in silence. Help is available.
+      `,
+      keyPoints: [
+        'Dysmenorrhea means painful menstrual cramping',
+        'Primary type is normal cramping, secondary is caused by a condition',
+        'Heat and over-the-counter pain relievers can help',
+        'Severe pain that affects daily life should be evaluated',
+      ],
+      vocabulary: [
+        { term: 'Dysmenorrhea', definition: 'Medical term for painful periods' },
+        { term: 'Cramps', definition: 'Painful contractions of the uterus' },
+        { term: 'Radiate', definition: 'To spread from one area to another' },
+        { term: 'Primary vs Secondary', definition: 'Primary is normal pain, secondary is from a condition' }
+      ],
+      quiz: [
+        {
+          question: 'What is the difference between primary and secondary dysmenorrhea?',
+          options: [
+            'Primary is more severe',
+            'Primary is normal cramping, secondary is caused by a condition',
+            'Primary only happens at night',
+            'Secondary is more common',
+          ],
+          correctAnswer: 1,
+          explanation: 'Primary dysmenorrhea refers to normal menstrual cramping without an underlying disease, while secondary dysmenorrhea is caused by reproductive conditions like endometriosis or fibroids.',
+        },
+        {
+          question: 'Which over-the-counter medications are most effective for period cramps?',
+          options: [
+            'Acetaminophen (Tylenol)',
+            'Ibuprofen or naproxen (NSAIDs)',
+            'Antihistamines',
+            'Cough medicine',
+          ],
+          correctAnswer: 1,
+          explanation: 'NSAIDs like ibuprofen and naproxen are most effective for menstrual cramps because they reduce prostaglandins, the chemicals that cause uterine contractions.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Causes and Treatment of Painful Periods',
+      content: `Dysmenorrhea affects approximately 50-90% of menstruating individuals, with 10-15% experiencing severe pain that disrupts daily activities.
+
+**Understanding the Pain Mechanism:**
+
+**Primary Dysmenorrhea Pathophysiology:**
+- Prostaglandins cause uterine contractions
+- Higher prostaglandin F2α (PGF2α) levels = more pain
+- Uterine contractions reduce blood flow to uterus
+- Reduced blood flow causes ischemia (lack of oxygen) = pain
+- Pain typically begins after ovulation is established (6-12 months after menarche)
+
+**Secondary Dysmenorrhea Causes:**
+
+| Condition | Description | Typical Pain Pattern |
+|-----------|-------------|---------------------|
+| Endometriosis | Endometrial tissue outside uterus | Progressive, starts before period |
+| Adenomyosis | Endometrium in uterine muscle | Deep, heavy bleeding |
+| Fibroids | Benign uterine tumors | Pressure, heavy bleeding |
+| Pelvic inflammatory disease | Infection of reproductive organs | New onset, often with discharge |
+| Ovarian cysts | Fluid-filled sacs on ovaries | Sudden, sharp if ruptures |
+| Endometrial polyps | Growths in uterine lining | Intermittent, heavy bleeding |
+
+**Risk Factors:**
+- Age <30
+- Early menarche (before age 12)
+- Heavy menstrual flow
+- Family history of dysmenorrhea
+- Smoking
+- Never been pregnant
+- High stress levels
+
+**Diagnostic Approach:**
+
+**History:**
+- Age at onset (distinguishes primary vs. secondary)
+- Timing of pain (with bleeding vs. throughout month)
+- Character of pain (cramping vs. constant)
+- Progression over time
+- Response to NSAIDs
+- Associated symptoms
+
+**Physical Examination:**
+- Abdominal examination
+- Pelvic examination (in sexually active patients)
+- Check for uterine enlargement, tenderness
+- Assess for masses or nodularity
+
+**Imaging:**
+- **Pelvic ultrasound:** First-line for suspected secondary causes
+- **MRI:** For complex cases, especially endometriosis
+
+**Laboratory Tests:**
+- Not typically diagnostic for primary dysmenorrhea
+- May include STI testing if pelvic infection suspected
+- CBC for anemia if heavy bleeding
+
+**Treatment:**
+
+**Primary Dysmenorrhea Treatment:**
+
+**1. NSAIDs (First-Line)**
+- Most effective treatment
+- Must be taken at regular intervals
+- Start 1-2 days before expected period if possible
+- Options: Ibuprofen, naproxen, mefenamic acid
+- Efficacy: 70-80% experience relief
+
+**2. Hormonal Contraceptives**
+- Combined oral contraceptives
+- Patch, ring
+- Reduce prostaglandin production
+- Suppress ovulation
+- May take 2-3 cycles for full effect
+
+**3. Lifestyle Modifications:**
+- Regular aerobic exercise
+- Heat therapy application
+- Stress management techniques
+- Adequate sleep
+- Dietary modifications
+
+**4. Complementary Therapies:**
+- Acupuncture
+- Transcutaneous electrical nerve stimulation (TENS)
+- Yoga and stretching
+- Massage therapy
+
+**Secondary Dysmenorrhea Treatment:**
+- Targeted to underlying cause
+- Endometriosis: Hormonal suppression, surgery
+- Adenomyosis: Hormonal treatments, possible surgery
+- Fibroids: Myomectomy or hysterectomy
+- Infection: Appropriate antibiotics
+
+**Red Flag Symptoms:**
+- Fever with pelvic pain
+- Pain not relieved by NSAIDs
+- Progressive worsening over time
+- Pain at times other than menstruation
+- Pain with intercourse
+- New onset after years of pain-free periods
+      `,
+      keyPoints: [
+        'Prostaglandins cause uterine contractions that lead to menstrual pain',
+        'Primary dysmenorrhea is common and improves with NSAIDs',
+        'Secondary dysmenorrhea requires treatment of underlying cause',
+        'Onset timing helps distinguish between primary and secondary types',
+      ],
+      vocabulary: [
+        { term: 'Prostaglandins', definition: 'Chemicals that cause uterine contractions and pain' },
+        { term: 'Ischemia', definition: 'Lack of blood supply causing tissue oxygen deprivation' },
+        { term: 'NSAIDs', definition: 'Non-steroidal anti-inflammatory drugs' },
+        { term: 'Adenomyosis', definition: 'Condition where endometrium grows into uterine muscle' }
+      ],
+      quiz: [
+        {
+          question: 'What chemical primarily causes menstrual cramps?',
+          options: [
+            'Estrogen',
+            'Prostaglandins',
+            'Testosterone',
+            'Insulin',
+          ],
+          correctAnswer: 1,
+          explanation: 'Prostaglandins, particularly PGF2α, are the primary chemicals responsible for menstrual cramps. They cause the uterus to contract, reducing blood flow and causing pain.',
+        },
+        {
+          question: 'What is a key difference between primary and secondary dysmenorrhea?',
+          options: [
+          'The time of onset (primary starts in teens, secondary starts later)',
+          'Primary affects younger women only',
+          'Secondary only happens at night',
+          'Primary is caused by infection',
+          ],
+          correctAnswer: 0,
+          explanation: 'A key distinguishing feature is that primary dysmenorrhea typically begins during adolescence soon after menarche, while secondary dysmenorrhea starts later in life and may be caused by underlying conditions.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Clinical Management and Pathophysiology',
+      content: `Effective management of dysmenorrhea requires understanding the underlying pain mechanisms and implementing evidence-based treatment strategies.
+
+**Primary Dysmenorrhea: Pathophysiology in Detail**
+
+**Prostaglandin Synthesis:**
+- Produced by endometrial cells during menstruation
+- Synthesis increases after progesterone withdrawal
+- PGF2α most potent in causing contractions
+- Levels peak during first 48 hours of menses
+
+**Uterine Activity:**
+- Resting pressure: 10-15 mmHg
+- Dysmenorrhea: Contractions 400+ mmHg
+- Contractions last longer than normal
+- Poor coordination between muscle fibers
+- Result: Uterine ischemia and pain
+
+**Pain Pathway:**
+- Uterine nerve fibers transmit pain signals
+- T11-L2 dermatomes (referred pain to lower back)
+- Prostaglandins sensitize nerve endings
+- Inflammatory mediators amplify pain response
+
+**Clinical Assessment Tools:**
+
+**Pain Scales:**
+- Visual Analog Scale (VAS): 0-10 scale
+- Verbal Descriptor Scale: Mild, moderate, severe
+- Menstrual Distress Questionnaire
+- McGill Pain Index
+
+**Functional Assessment:**
+- School/work days missed
+- Activity limitations
+- Sleep disruption
+- Quality of life impact
+
+**Treatment Algorithms:**
+
+**Primary Dysmenorrhea:**
+
+
+NSAIDs (first-line)
+   ↓
+If inadequate or contraindicated
+   ↓
+Add hormonal contraception
+   ↓
+If still inadequate
+   ↓
+Consider secondary causes
+
+
+**NSAID Dosing Strategies:**
+
+| Medication | Loading Dose | Maintenance | Interval |
+|------------|--------------|-------------|----------|
+| Ibuprofen | 400-600 mg | 200-400 mg | q4-6h |
+| Naproxen | 500 mg | 250-500 mg | q8-12h |
+| Mefenamic acid | 500 mg | 250 mg | q6h |
+| Diclofenac | 50 mg | 25-50 mg | q8h |
+
+**Key NSAID Principles:**
+- Pre-treat before pain escalates
+- Maintain therapeutic levels throughout period
+- Take with food to reduce GI side effects
+- Consider topical formulations for systemic risk reduction
+
+**Hormonal Management:**
+
+**Combined Hormonal Contraceptives:**
+- Suppress endometrial prostaglandin production
+- Reduce menstrual flow by 40-50%
+- Decrease uterine contractility
+- Continuous/extended cycling for severe cases
+- Effect: 70-80% improvement
+
+**Levonorgestrel IUD:**
+- Particularly effective for dysmenorrhea
+- Reduces prostaglandin synthesis
+- Thins endometrium
+- 80-90% report improvement
+- Additional benefit: contraception
+
+**Other Hormonal Options:**
+- Progestin-only pills
+- Contraceptive implant
+- Depo-medroxyprogesterone
+- Vaginal ring
+
+**Secondary Dysmenorrhea Evaluation:**
+
+**Targeted Testing Based on Suspicion:**
+- **Endometriosis:** Laparoscopy (gold standard), CA-125 (limited utility)
+- **Adenomyosis:** MRI (more sensitive than ultrasound)
+- **Fibroids:** Pelvic ultrasound
+- **Infection:** STI testing, cervical cultures
+- **Adenomyosis:** MRI with specific protocols
+
+**Laparoscopy Indications:**
+- Failed medical therapy
+- Suspected endometriosis
+- Adnexal mass on imaging
+- Chronic pelvic pain beyond menses
+
+**Special Considerations:**
+
+**Adolescents:**
+- Higher prevalence of primary dysmenorrhea
+- Rule out obstructive anomalies if never sexually active
+- Consider Müllerian anomalies if primary dysmenorrhea refractory
+
+**Women Trying to Conceive:**
+- Avoid hormonal suppression
+- NSAIDs may be used (limit duration)
+- Treat underlying condition if secondary
+
+**Endometriosis-Specific Treatment:**
+- Combined hormonal contraceptives
+- Progestin therapies
+- GnRH agonists/antagonists
+- Aromatase inhibitors
+- Surgical excision
+
+`,
+      keyPoints: [
+        'Prostaglandin-mediated uterine hypercontractility causes primary dysmenorrhea',
+        'NSAIDs are most effective when started before severe pain begins',
+        'Hormonal contraceptives reduce prostaglandin production',
+        'Secondary causes require specific diagnostic and treatment approaches',
+      ],
+      vocabulary: [
+        { term: 'PGF2α', definition: 'Prostaglandin F2 alpha - primary mediator of menstrual cramps' },
+        { term: 'Visceral Pain', definition: 'Pain from internal organs, often poorly localized' },
+        { term: 'Laparoscopy', definition: 'Minimally invasive surgery to view pelvic organs' },
+        { term: 'CA-125', definition: 'Tumor marker that may be elevated in endometriosis' }
+      ],
+      quiz: [
+        {
+          question: 'What is the recommended approach to NSAID therapy for dysmenorrhea?',
+          options: [
+            'Take only when pain becomes severe',
+            'Start before pain escalates and maintain regular dosing',
+            'Take only at bedtime',
+            'Take for one day only',
+          ],
+          correctAnswer: 1,
+          explanation: 'NSAIDs are most effective when started before severe pain begins (loading dose) and continued at regular intervals throughout the period to maintain therapeutic levels and prevent prostaglandin synthesis.',
+        },
+        {
+          question: 'What is the gold standard for diagnosing endometriosis?',
+          options: [
+            'Ultrasound',
+            'MRI',
+            'Laparoscopy with visualization and biopsy',
+            'Blood test',
+          ],
+          correctAnswer: 2,
+          explanation: 'Laparoscopy with direct visualization and biopsy remains the gold standard for diagnosing endometriosis, as imaging studies may miss early or subtle disease.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Advanced Management and Refractory Cases',
+      content: `Refractory dysmenorrhea and complex secondary causes require specialized management approaches targeting specific pain pathways and underlying pathology.
+
+**Refractory Primary Dysmenorrhea:**
+
+**Definition:**
+- Inadequate response to NSAIDs + hormonal therapy
+- Persistent pain after 3 months of appropriate therapy
+- Requires re-evaluation for secondary causes
+
+**Advanced NSAID Strategies:**
+
+**Combination NSAID Therapy:**
+- Rotating different NSAIDs
+- Adding topical diclofenac
+- Continuous vs. intermittent dosing based on response
+
+**Adjunctive Pain Management:**
+- Acetaminophen with NSAIDs
+- Skeletal muscle relaxants (cyclobenzaprine)
+- Neuromodulators (gabapentin, pregabalin)
+
+**Targeted Therapies:**
+
+**Prostaglandin Synthesis Inhibitors:**
+- COX-2 selective inhibitors
+- Consider if traditional NSAIDs cause GI side effects
+- Limited data specifically for dysmenorrhea
+
+**Hormonal Therapy Optimization:**
+
+**Extended/Continuous Regimens:**
+- Eliminate withdrawal bleeding
+- Continuous active pills
+- Breakthrough bleeding management
+
+**High-Dose Estrogen:**
+- Temporarily suppress severe symptoms
+- Limit to 3-6 months due to thrombosis risk
+
+**Parenteral Progestins:**
+- Depot medroxyprogesterone
+- Often induces amenorrhea
+- Consider bone health with long-term use
+
+**GnRH Agonists/Antagonists:**
+- Create medical menopause
+- Add-back therapy necessary
+- Limited to 6-month course
+- Bridge therapy or pre-surgical
+
+**Secondary Dysmenorrhea: Condition-Specific Management**
+
+**Endometriosis:**
+
+**Medical Management:**
+- Combined hormonal contraceptives (continuous)
+- Progestin monotherapy
+- GnRH analogs with add-back
+- Aromatase inhibitors (adjunctive)
+
+**Surgical Management:**
+- Excision vs. ablation
+- Multidisciplinary approach
+- Preoperative hormonal suppression
+- Postoperative hormonal suppression
+
+**Pain Mapping:**
+- Lesion location vs. pain location
+- Nerve sparing considerations
+- Involvement of urinary or gastrointestinal tracts
+
+**Adenomyosis:**
+
+**Medical Options:**
+- LNG-IUD (first-line)
+- Combined hormonal contraceptives
+- GnRH analogs
+- Ulipristal acetate (limited availability)
+
+**Surgical Options:**
+- Adenomyomectomy (fertility preservation)
+- Uterine artery embolization
+- High-intensity focused ultrasound (HIFU)
+- Hysterectomy (definitive)
+
+**Fibroid-Related Dysmenorrhea:**
+
+**Medical:**
+- LNG-IUD (submucosal fibroids)
+- GnRH analogs (pre-surgical)
+- Selective progesterone receptor modulators
+
+**Procedural:**
+- Myomectomy (various approaches)
+- Uterine artery embolization
+- MRI-guided focused ultrasound
+- Radiofrequency ablation
+
+**Chronic Pelvic Pain Overlap:**
+
+**Central Sensitization:**
+- Visceral hyperalgesia
+- Lowered pain thresholds
+- Requires multimodal approach
+
+**Multidisciplinary Management:**
+- Pain psychology
+- Physical therapy (pelvic floor)
+- Complementary and alternative medicine
+- Pain rehabilitation programs
+
+**Neurological Modulation:**
+- Sacral neuromodulation
+- Pudendal nerve blocks
+- Trigger point injections
+
+**Special Populations:**
+
+**Adolescents with Refractory Symptoms:**
+- Consider obstructive Müllerian anomalies
+- Endometriosis can occur in teens
+- Early diagnosis preserves fertility
+- Multidisciplinary care crucial
+
+**Perimenopausal Women:**
+- Overlap with adenomyosis
+- Fibroid degeneration
+- Consider endometrial sampling
+- Transition to menopause may eventually resolve
+
+**Women with Bleeding Disorders:**
+- Avoid NSAIDs (worsen bleeding)
+- Use hormonal approaches
+- Coordinate with hematology
+- Tranexamic acid for associated bleeding
+
+**Procedural Interventions:**
+
+**Uterine Nerve Ablation (LUNA):**
+- Division of uterosacral ligament nerves
+- Limited evidence of benefit
+- No longer routinely recommended
+
+**Presacral Neurectomy:**
+- More extensive nerve ablation
+- Reserved for severe central pain
+- Specialized procedure
+- Risk of constipation
+
+**Pain Rehabilitation:**
+- Graded activity
+- Desensitization techniques
+- Cognitive-behavioral strategies
+- Sleep optimization
+
+`,
+      keyPoints: [
+        'Refractory dysmenorrhea requires systematic re-evaluation',
+        'Endometriosis management may require combined medical and surgical approaches',
+        'Central sensitization can develop with chronic pain',
+        'Multidisciplinary care yields best outcomes for complex cases',
+      ],
+      vocabulary: [
+        { term: 'LUNA', definition: 'Laparoscopic Uterosacral Nerve Ablation - surgical procedure for pain' },
+        { term: 'Visceral Hyperalgesia', definition: 'Increased sensitivity to pain from internal organs' },
+        { term: 'Add-back Therapy', definition: 'Low-dose hormones given with GnRH agonists' },
+        { term: 'HIFU', definition: 'High-Intensity Focused Ultrasound - non-invasive treatment' }
+      ],
+      quiz: [
+        {
+          question: 'What is the first-line hormonal treatment for adenomyosis-related dysmenorrhea?',
+          options: [
+            'Combined oral contraceptives',
+            'Levonorgestrel intrauterine system',
+            'GnRH agonists',
+            'Progestin-only pills',
+          ],
+          correctAnswer: 1,
+          explanation: 'The levonorgestrel intrauterine system (LNG-IUD) is first-line treatment for adenomyosis, providing local progestin effect that thins the endometrium and reduces prostaglandin production.',
+        },
+        {
+          question: 'Why is laparoscopic uterosacral nerve ablation (LUNA) no longer routinely recommended?',
+          options: [
+            'Too expensive',
+            'Limited evidence of benefit for dysmenorrhea',
+            'Causes infertility',
+            'Requires open surgery',
+          ],
+          correctAnswer: 1,
+          explanation: 'LUNA has shown limited evidence of benefit for dysmenorrhea in clinical trials and is no longer routinely recommended, as it does not consistently provide pain relief.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Molecular Mechanisms and Future Directions',
+      content: `Current research into dysmenorrhea pathophysiology reveals complex interactions between inflammatory pathways, nociceptive signaling, and central nervous system processing that inform emerging therapeutic approaches.
+
+**Molecular Pathophysiology:**
+
+**Prostaglandin Biosynthesis:**
+- **COX-1 and COX-2:** Arachidonic acid conversion to prostaglandin H2
+- **PGF synthase:** Converts PGH2 to PGF2α
+- **PTGS2 gene upregulation:** Induced by inflammatory cytokines
+- **Progesterone withdrawal:** Triggers prostaglandin synthesis
+
+**Inflammatory Mediators:**
+
+**Cytokines:**
+- **IL-1β:** Stimulates prostaglandin production
+- **IL-6:** Elevated in dysmenorrhea
+- **IL-8:** Chemotactic for leukocytes
+- **TNF-α:** Enhances pain sensitivity
+
+**Chemokines:**
+- CXCL1, CXCL2: Attract neutrophils
+- CCL2: Monocyte recruitment
+- Amplify inflammatory cascade
+
+**Oxidative Stress:**
+- Reactive oxygen species (ROS) production
+- Reduced antioxidant capacity
+- Mitochondrial dysfunction
+- Contributes to pain sensitization
+
+**Nociceptive Pathways:**
+
+**Peripheral Sensitization:**
+- NGF (Nerve Growth Factor) upregulation
+- TRPV1 channel activation
+- Acid-sensing ion channels (ASICs)
+- Bradykinin and histamine release
+
+**Central Sensitization:**
+- NMDA receptor activation
+- Glial cell activation in spinal cord
+- Disinhibition of dorsal horn neurons
+- Expanded receptive fields
+
+**Modulatory Neurotransmitters:**
+- **Substance P:** Pain transmission
+- **Calcitonin gene-related peptide (CGRP):** Vasodilation, pain
+- **Endorphins:** Endogenous pain inhibition (deficient in chronic pain)
+- **Serotonin:** Modulatory effects
+
+**Genetic Factors:**
+
+**Candidate Genes:**
+- **PTGS2 (COX-2):** Polymorphisms affecting prostaglandin synthesis
+- **ESR1/ESR2:** Estrogen receptor variants
+- **SCN9A:** Sodium channel (Nav1.7) mutations
+- **COMT:** Catechol-O-methyltransferase variants
+- **OPRM1:** Opioid receptor polymorphisms
+
+**Epigenetic Modifications:**
+- DNA methylation changes in pain-related genes
+- Histone modifications affecting gene expression
+- MicroRNA regulation of inflammatory pathways
+- Potential for therapeutic targeting
+
+**Emerging Therapeutic Targets:**
+
+**COX-2 Specific Inhibition:**
+- More targeted prostaglandin reduction
+- Fewer GI side effects
+- Cardiovascular risk considerations
+
+**NGF Inhibitors:**
+- Tanezumab (monoclonal antibody)
+- Prevents peripheral sensitization
+- Currently in clinical trials for chronic pain
+
+**CGRP Antagonists:**
+- Proven effective for migraine
+- Potential application to dysmenorrhea
+- Multiple agents in development
+
+**TRPV1 Antagonists:**
+- Block capsaicin receptor
+- Prevent thermal and inflammatory hyperalgesia
+- Challenge: body temperature regulation
+
+**Anti-Cytokine Therapies:**
+- IL-6 inhibitors (tocilizumab)
+- TNF inhibitors (etanercept)
+- Potential for severe refractory cases
+
+**Novel Drug Delivery Systems:**
+- Vaginal rings with combined agents
+- Iontophoretic delivery
+- Nanoparticle formulations
+- Sustained-release local therapies
+
+**Precision Medicine Approaches:**
+
+**Pharmacogenetics:**
+- CYP450 polymorphisms affecting NSAID metabolism
+- Individual variation in drug response
+- Gene-guided therapy selection
+- Adverse effect prediction
+
+**Biomarker Development:**
+- Inflammatory profiles for endometriosis
+- Genetic risk stratification
+- Treatment response predictors
+- Non-invasive diagnostic methods
+
+**Neuromodulation:**
+- Transcranial direct current stimulation (tDCS)
+- Transcutaneous spinal cord stimulation
+- Vagus nerve stimulation
+- Non-invasive techniques under investigation
+
+**Lifestyle and Integrative Approaches:**
+
+**Dietary Modifications:**
+- Omega-3 fatty acids (anti-inflammatory)
+- Magnesium supplementation
+- Vitamin B1 (thiamine)
+- Low-FODMAP diet (for IBS overlap)
+
+**Exercise Physiology:**
+- Endogenous opioid release
+- Improved pelvic blood flow
+- Stress reduction
+- Core strengthening benefits
+
+**Mind-Body Interventions:**
+- Mindfulness-Based Stress Reduction (MBSR)
+- Cognitive Behavioral Therapy (CBT)
+- Yoga (specific for pelvic pain)
+- Acupuncture mechanisms
+
+**Future Research Directions:**
+- Endocannabinoid system modulation
+- Microbiome-gut-uterine axis
+- Stem cell therapies for endometriosis
+- Gene therapy potential
+- Personalized pain medicine protocols
+
+`,
+      keyPoints: [
+        'Multiple inflammatory mediators beyond prostaglandins contribute to dysmenorrhea',
+        'Central sensitization can perpetuate pain after peripheral trigger resolves',
+        'Genetic and epigenetic factors influence individual pain experience',
+        'Targeted therapies against specific pain pathways are in development',
+      ],
+      vocabulary: [
+        { term: 'NGF', definition: 'Nerve Growth Factor - involved in pain sensitization' },
+        { term: 'TRPV1', definition: 'Transient receptor potential vanilloid 1 - pain and heat receptor' },
+        { term: 'CGRP', definition: 'Calcitonin Gene-Related Peptide - pain and inflammation mediator' },
+        { term: 'Pharmacogenetics', definition: 'Study of genetic influence on drug response' }
+      ],
+      quiz: [
+        {
+          question: 'What is the role of nerve growth factor (NGF) in dysmenorrhea?',
+          options: [
+          'Reduces inflammation',
+          'Causes peripheral sensitization and contributes to pain',
+          'Only affects mood',
+          'Is only present in endometriosis',
+          ],
+          correctAnswer: 1,
+          explanation: 'NGF is upregulated during menstruation and causes peripheral sensitization by increasing the sensitivity of nociceptors, contributing to the pain experience in dysmenorrhea.',
+        },
+        {
+          question: 'What characterizes central sensitization in chronic dysmenorrhea?',
+          options: [
+          'Increased prostaglandin production',
+          'Enhanced pain signaling in the central nervous system',
+          'Hormonal deficiency',
+          'Muscle weakness only',
+          ],
+          correctAnswer: 1,
+          explanation: 'Central sensitization involves enhanced pain signaling in the spinal cord and brain, including NMDA receptor activation, glial cell activation, and expanded receptive fields, which can maintain pain even after peripheral triggers resolve.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'endometriosis',
+    'fibroids',
+    'adenomyosis',
+    'pms',
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'ACOG Practice Bulletin No. 228',
+    'Cochrane Database Systematic Reviews on Dysmenorrhea',
+    'PAIN journal reviews on menstrual pain mechanisms',
+  ]
+};

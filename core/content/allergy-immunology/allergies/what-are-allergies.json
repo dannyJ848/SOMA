@@ -1,0 +1,236 @@
+{
+  "id": "allergy-basics-what-are-allergies",
+  "type": "patient-education",
+  "category": "allergy-immunology",
+  "subcategory": "allergies",
+  "name": "What Are Allergies",
+  "alternateNames": ["Allergic Reactions", "Hypersensitivity", "Allergy Basics"],
+  "description": "Understanding what allergies are and how your immune system responds to allergens",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "An allergy happens when your body's defense system overreacts to something harmless, like pollen, food, or pet fur.",
+      "explanation": "Your body has a defense system called the immune system. Its job is to fight off germs that could make you sick. But sometimes, this system makes a mistake. It thinks something harmless - like dust, peanuts, or cat fur - is dangerous.\n\nWhen this happens, your body goes into 'fight mode' even though there's no real threat. This causes allergy symptoms like:\n- Sneezing and runny nose\n- Itchy, watery eyes\n- Skin rashes or hives\n- Stomach problems\n- In serious cases, trouble breathing\n\nThe things that trigger allergies are called allergens. Common allergens include:\n- Pollen from trees, grass, and weeds\n- Dust mites (tiny bugs you can't see)\n- Pet dander (tiny flakes of skin from animals)\n- Certain foods like peanuts, milk, or eggs\n- Insect stings\n- Some medicines\n\nAllergies are very common - about 1 in 4 people have them. You can develop allergies at any age, though many start in childhood. The good news is that allergies can be managed, and there are many ways to feel better.",
+      "keyTerms": [
+        {
+          "term": "allergy",
+          "definition": "When your body overreacts to something harmless",
+          "pronunciation": "AL-er-jee"
+        },
+        {
+          "term": "allergen",
+          "definition": "Something that causes an allergy, like pollen or peanuts",
+          "pronunciation": "AL-er-jen"
+        },
+        {
+          "term": "immune system",
+          "definition": "Your body's defense system that fights germs",
+          "pronunciation": "ih-MYOON SIS-tem"
+        }
+      ],
+      "keyPoints": [
+        "Allergies happen when your body overreacts to harmless things",
+        "Common allergens include pollen, dust, pets, and certain foods",
+        "About 1 in 4 people have allergies",
+        "Allergies can be managed with the right treatment"
+      ],
+      "commonMisconceptions": [
+        {
+          "myth": "You're born with allergies and can't develop new ones as an adult",
+          "fact": "You can develop new allergies at any age, and some childhood allergies may go away."
+        },
+        {
+          "myth": "Allergies are just a minor annoyance",
+          "fact": "While many allergies cause mild symptoms, some can be severe and even life-threatening."
+        }
+      ]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Allergies occur when the immune system mistakenly identifies a harmless substance as a threat, triggering the release of chemicals like histamine that cause symptoms throughout the body.",
+      "explanation": "**How Allergies Develop**\nAllergies involve two stages:\n\n1. **Sensitization** (First Exposure)\n   - Your immune system encounters an allergen for the first time\n   - It wrongly identifies this substance as harmful\n   - Your body produces antibodies called Immunoglobulin E (IgE) specific to that allergen\n   - These IgE antibodies attach to mast cells (immune cells in your tissues)\n   - You don't have symptoms yet - your body is just 'learning' the allergen\n\n2. **Allergic Reaction** (Later Exposures)\n   - When you encounter the allergen again, it binds to the IgE antibodies\n   - This triggers mast cells to release chemicals, especially histamine\n   - These chemicals cause allergy symptoms\n\n**Why Symptoms Vary**\nSymptoms depend on where the allergen enters your body:\n- **Inhaled allergens** (pollen, dust): Affect nose, eyes, lungs - cause sneezing, runny nose, watery eyes, coughing\n- **Ingested allergens** (food): Affect mouth, stomach, intestines - cause itching, swelling, nausea, diarrhea\n- **Skin contact** (poison ivy, latex): Cause rashes, hives, itching\n- **Injected allergens** (insect stings, medications): Can cause widespread reactions\n\n**Who Gets Allergies**\nRisk factors include:\n- Family history of allergies (genetics play a major role)\n- Having other allergic conditions (asthma, eczema)\n- Childhood exposure patterns\n- Environmental factors",
+      "keyTerms": [
+        {
+          "term": "IgE (Immunoglobulin E)",
+          "definition": "An antibody your body makes that triggers allergic reactions",
+          "pronunciation": "im-MYOO-no-GLOB-yoo-lin E"
+        },
+        {
+          "term": "histamine",
+          "definition": "A chemical released during allergic reactions that causes symptoms like itching and swelling",
+          "pronunciation": "HIS-tah-meen"
+        },
+        {
+          "term": "mast cells",
+          "definition": "Immune cells in your tissues that store and release histamine",
+          "pronunciation": "mast sellz"
+        },
+        {
+          "term": "sensitization",
+          "definition": "The process where your immune system first learns to react to an allergen",
+          "pronunciation": "SEN-sih-tih-ZAY-shun"
+        }
+      ],
+      "keyPoints": [
+        "Allergies develop in two stages: sensitization and subsequent reactions",
+        "IgE antibodies and mast cells are key players in allergic reactions",
+        "Histamine is the main chemical causing allergy symptoms",
+        "Symptoms depend on how and where you encounter the allergen"
+      ]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Type I hypersensitivity reactions involve IgE-mediated activation of mast cells and basophils, releasing preformed and newly synthesized mediators that cause immediate and late-phase responses in allergic disease.",
+      "explanation": "**Immunological Basis of Allergic Disease**\n\nAllergic reactions are classified as Type I (immediate) hypersensitivity reactions in the Gell and Coombs classification.\n\n**Sensitization Phase**\n1. Allergen uptake by antigen-presenting cells (APCs), particularly dendritic cells\n2. Allergen processing and presentation to naive CD4+ T cells\n3. Differentiation into TH2 cells (driven by IL-4, absence of IL-12)\n4. TH2 cells produce IL-4 and IL-13, promoting B cell class switching to IgE\n5. Plasma cells secrete allergen-specific IgE\n6. IgE binds to high-affinity FcεRI receptors on mast cells and basophils\n\n**Effector Phase - Immediate Response (Minutes)**\nRe-exposure to allergen causes:\n1. Cross-linking of surface-bound IgE by multivalent allergen\n2. Aggregation of FcεRI receptors\n3. Mast cell degranulation releasing:\n   - **Preformed mediators**: Histamine, tryptase, heparin, TNF-α\n   - **Newly synthesized lipid mediators**: Prostaglandin D2, leukotrienes (LTC4, LTD4, LTE4)\n\n**Late-Phase Response (4-24 hours)**\n- Cytokine production (IL-4, IL-5, IL-13) by mast cells and TH2 cells\n- Eosinophil recruitment and activation\n- Tissue inflammation and remodeling\n\n**Clinical Manifestations by Organ System**\n- **Upper airway**: Allergic rhinitis, conjunctivitis\n- **Lower airway**: Allergic asthma (bronchospasm, mucus hypersecretion)\n- **Skin**: Urticaria, angioedema, atopic dermatitis\n- **Gastrointestinal**: Food allergy symptoms\n- **Systemic**: Anaphylaxis",
+      "keyTerms": [
+        {
+          "term": "Type I hypersensitivity",
+          "definition": "IgE-mediated immediate allergic reaction",
+          "pronunciation": "hy-per-SEN-sih-TIV-ih-tee"
+        },
+        {
+          "term": "FcεRI",
+          "definition": "High-affinity IgE receptor on mast cells and basophils",
+          "pronunciation": "F-C-epsilon-R-one"
+        },
+        {
+          "term": "degranulation",
+          "definition": "Release of preformed mediators from mast cell granules",
+          "pronunciation": "dee-GRAN-yoo-LAY-shun"
+        },
+        {
+          "term": "leukotrienes",
+          "definition": "Lipid mediators causing bronchoconstriction and inflammation",
+          "pronunciation": "loo-koh-TRY-eenz"
+        },
+        {
+          "term": "TH2 cells",
+          "definition": "T helper cells that drive allergic inflammation via IL-4, IL-5, IL-13",
+          "pronunciation": "T-H-two sellz"
+        }
+      ],
+      "keyPoints": [
+        "Type I hypersensitivity is IgE-mediated with immediate and late-phase responses",
+        "Mast cell degranulation releases histamine and other preformed mediators",
+        "TH2 cytokines (IL-4, IL-5, IL-13) orchestrate allergic inflammation",
+        "Late-phase response involves eosinophil recruitment"
+      ]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Allergic sensitization involves complex epithelial-immune crosstalk, with barrier dysfunction and innate alarmins driving TH2 polarization, while genetic and environmental factors modulate disease expression through epigenetic mechanisms.",
+      "explanation": "**Epithelial Barrier and Allergic Sensitization**\n\nEpithelial cells are not passive barriers but active participants in allergic sensitization:\n\n**Alarmin Release**\n- Epithelial damage or allergen proteases trigger release of:\n  - TSLP (thymic stromal lymphopoietin)\n  - IL-25\n  - IL-33\n- These innate cytokines ('alarmins') promote TH2 responses\n- TSLP activates dendritic cells to prime TH2 differentiation\n- IL-33 activates ILC2 (innate lymphoid cells type 2)\n\n**ILC2 in Allergic Inflammation**\n- Tissue-resident cells responding to IL-33, IL-25\n- Produce IL-5, IL-13, amphiregulin\n- IL-5 drives eosinophilia\n- IL-13 promotes mucus production, smooth muscle contraction\n- Bridge innate and adaptive immunity in allergic disease\n\n**Genetic Susceptibility**\nKey gene associations:\n- **FLG (filaggrin)**: Barrier dysfunction, atopic dermatitis, food allergy risk\n- **IL-4/IL-13 gene cluster (5q31)**: TH2 cytokine production\n- **HLA class II alleles**: Specific allergen sensitization patterns\n- **TSLP**: Asthma, atopic dermatitis susceptibility\n- **IL-33/ST2**: Asthma severity\n\n**Hygiene Hypothesis and Microbiome**\nReduced early microbial exposure may contribute to allergy:\n- Decreased TH1/regulatory T cell development\n- Altered gut microbiome composition\n- Reduced microbial metabolites (short-chain fatty acids)\n- Studies show farm exposure, diverse gut microbiome protective\n\n**Epigenetic Regulation**\n- DNA methylation of TH2 gene loci\n- Histone modifications in cytokine gene promoters\n- Environmental factors (pollution, diet) affect methylation patterns\n- Transgenerational epigenetic inheritance documented\n\n**Allergen Characteristics Promoting Sensitization**\n- Protease activity (house dust mite Der p 1, cockroach)\n- Lipid-binding proteins (milk, peanut)\n- Structural homology to human proteins (cross-reactivity)\n- Low-dose, repeated mucosal exposure",
+      "keyTerms": [
+        {
+          "term": "TSLP",
+          "definition": "Thymic stromal lymphopoietin - epithelial alarmin driving TH2 responses",
+          "pronunciation": "T-S-L-P"
+        },
+        {
+          "term": "ILC2",
+          "definition": "Innate lymphoid cells type 2 that produce TH2 cytokines without antigen specificity",
+          "pronunciation": "I-L-C-two"
+        },
+        {
+          "term": "alarmins",
+          "definition": "Epithelial-derived cytokines (TSLP, IL-25, IL-33) that initiate allergic responses"
+        },
+        {
+          "term": "filaggrin",
+          "definition": "Epidermal protein; mutations cause barrier dysfunction and allergy risk",
+          "pronunciation": "fil-AG-rin"
+        },
+        {
+          "term": "hygiene hypothesis",
+          "definition": "Theory that reduced microbial exposure increases allergy susceptibility"
+        }
+      ],
+      "clinicalCorrelations": [
+        "Filaggrin mutations increase risk of atopic dermatitis and food allergy via transcutaneous sensitization",
+        "Anti-TSLP (tezepelumab) approved for severe asthma",
+        "Anti-IL-4Rα (dupilumab) blocks IL-4 and IL-13 signaling in multiple allergic diseases",
+        "Early diverse food introduction may prevent food allergy development"
+      ]
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary understanding of allergic disease encompasses multi-omics characterization of endotypes, precision medicine approaches targeting specific pathways, and emerging concepts of trained immunity, tissue remodeling, and disease modification strategies.",
+      "explanation": "**Allergic Disease Endotypes**\n\nBeyond phenotype classification, molecular endotyping guides therapy:\n\n**Type 2 (TH2-High) Inflammation**\n- Biomarkers: Blood/sputum eosinophils, FeNO, serum IgE, periostin\n- Cytokine signature: IL-4, IL-5, IL-13\n- Therapeutic targets:\n  - Anti-IgE (omalizumab): Binds free IgE, downregulates FcεRI\n  - Anti-IL-5/IL-5Rα (mepolizumab, benralizumab): Reduce eosinophils\n  - Anti-IL-4Rα (dupilumab): Blocks IL-4 and IL-13 signaling\n  - Anti-TSLP (tezepelumab): Blocks upstream alarmin\n\n**Non-Type 2 Inflammation**\n- TH17-driven: Neutrophilic, steroid-resistant\n- TH1/IFN-γ: Some occupational asthma\n- Pauci-granulocytic: Airway remodeling predominant\n\n**Trained Immunity in Allergy**\n- Epigenetic reprogramming of innate immune cells\n- House dust mite exposure can induce trained immunity in monocytes\n- May contribute to chronic inflammation independent of IgE\n- Implications for prevention strategies\n\n**Tissue Remodeling**\nChronic allergic inflammation leads to structural changes:\n- Subepithelial fibrosis (collagen deposition)\n- Smooth muscle hypertrophy/hyperplasia\n- Goblet cell metaplasia (mucus hypersecretion)\n- Angiogenesis and neuroplasticity\n\nMediators of remodeling:\n- TGF-β from mast cells, eosinophils\n- Periostin (downstream of IL-13)\n- MMPs and TIMPs balance\n\n**Disease Modification and Prevention**\n\n**Allergen Immunotherapy Mechanisms**\n- Induction of regulatory T cells (IL-10, TGF-β producing)\n- Shift from IgE to IgG4 (blocking antibodies)\n- Decreased mast cell and basophil reactivity\n- Epigenetic changes in TH2 gene loci\n- Potential for disease modification if started early\n\n**Primary Prevention Strategies**\n- LEAP study: Early peanut introduction prevents peanut allergy\n- EAT study: Diverse allergen introduction from 3 months\n- Microbiome modulation (probiotics, prebiotics) - mixed evidence\n- Vitamin D optimization during pregnancy/infancy\n\n**Single-Cell and Spatial Transcriptomics Insights**\n- Identification of pathogenic TH2A cells (HPGDS+, CRTH2+)\n- Heterogeneity of ILC2 populations\n- Tissue-resident memory cells in allergic sites\n- Mast cell heterogeneity and tissue-specific phenotypes\n\n**Future Directions**\n- Epitope-specific immunotherapy\n- Nanoparticle-based tolerance induction\n- Gene therapy approaches\n- Microbiome engineering\n- Prevention of atopic march through early intervention",
+      "keyTerms": [
+        {
+          "term": "endotype",
+          "definition": "Molecular mechanism-based disease subtype guiding precision therapy"
+        },
+        {
+          "term": "FeNO",
+          "definition": "Fractional exhaled nitric oxide - biomarker of type 2 airway inflammation",
+          "pronunciation": "F-E-N-O"
+        },
+        {
+          "term": "trained immunity",
+          "definition": "Epigenetic reprogramming of innate immune cells leading to enhanced or altered responses"
+        },
+        {
+          "term": "IgG4 blocking antibodies",
+          "definition": "Non-inflammatory antibodies induced by immunotherapy that compete with IgE for allergen binding"
+        },
+        {
+          "term": "atopic march",
+          "definition": "Natural progression from atopic dermatitis to food allergy, allergic rhinitis, and asthma"
+        }
+      ],
+      "clinicalCorrelations": [
+        "Biomarker-guided biologic selection improves outcomes in severe asthma",
+        "Early allergen introduction (LEAP protocol) can prevent peanut allergy in high-risk infants",
+        "Allergen immunotherapy may modify natural history if initiated early in disease",
+        "Single-cell technologies revealing therapeutic targets in treatment-resistant disease"
+      ],
+      "references": [
+        "Galli SJ, Tsai M. IgE and mast cells in allergic disease. Nat Med. 2012",
+        "Hammad H, Lambrecht BN. Barrier epithelial cells and the control of type 2 immunity. Immunity. 2015",
+        "Du Toit G, et al. Randomized trial of peanut consumption in infants at risk for peanut allergy. NEJM. 2015"
+      ]
+    }
+  },
+  "emergencyInfo": {
+    "title": "When to Seek Emergency Care",
+    "warning": "Call 911 or go to the emergency room immediately if you experience signs of a severe allergic reaction (anaphylaxis)",
+    "symptoms": [
+      "Difficulty breathing or shortness of breath",
+      "Swelling of the throat or tongue",
+      "Dizziness or fainting",
+      "Rapid or weak pulse",
+      "Severe hives or rash spreading rapidly",
+      "Nausea, vomiting, or diarrhea with other symptoms"
+    ],
+    "immediateAction": "If you have an epinephrine auto-injector (EpiPen), use it immediately and call 911"
+  },
+  "relatedContent": [
+    {
+      "id": "allergy-common-allergens",
+      "relationship": "related",
+      "label": "Common Allergens"
+    },
+    {
+      "id": "allergy-allergic-reactions",
+      "relationship": "related",
+      "label": "Allergic Reactions"
+    },
+    {
+      "id": "allergy-anaphylaxis",
+      "relationship": "emergency",
+      "label": "Anaphylaxis"
+    }
+  ],
+  "tags": {
+    "systems": ["immune"],
+    "topics": ["allergies", "hypersensitivity", "immunology", "patient-education"],
+    "keywords": ["allergy", "allergen", "IgE", "histamine", "mast cells", "immune reaction"],
+    "clinicalRelevance": "high"
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

@@ -1,0 +1,155 @@
+{
+  "id": "condition-social-anxiety-disorder",
+  "type": "condition",
+  "category": "anxiety-disorder",
+  "name": "Social Anxiety Disorder",
+  "alternateNames": ["Social Phobia", "SAD", "Social Anxiety"],
+  "icd10": "F40.10",
+  "dsm5": "300.23",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Social anxiety disorder is an intense fear of social situations where you might be judged, embarrassed, or humiliated by others.",
+      "explanation": "Most people feel nervous before giving a speech or meeting new people. But for people with social anxiety disorder, this fear is so intense that it can prevent them from doing everyday things like eating in public, talking to coworkers, or attending social events. They worry excessively about being judged, saying something embarrassing, or others noticing they're anxious (like blushing or sweating). The anxiety can be so severe that people start avoiding social situations altogether, which can impact friendships, work, and quality of life.",
+      "keyTerms": [
+        { "term": "social anxiety", "definition": "Intense fear of social situations where you might be judged or embarrassed" },
+        { "term": "self-consciousness", "definition": "Being overly aware of yourself and how others might see you" },
+        { "term": "avoidance", "definition": "Staying away from situations that cause fear" }
+      ],
+      "analogies": ["Social anxiety is like having a harsh critic in your head constantly telling you everyone is watching and judging your every move - even though most people aren't paying that much attention."],
+      "examples": ["Someone with social anxiety might spend hours worrying before a meeting, avoid eating in front of others for fear of looking awkward, or turn down promotions that would require more social interaction."],
+      "importantNote": "Social anxiety is not the same as being shy or introverted. It's an intense fear that causes real distress and affects daily life. It's one of the most treatable anxiety disorders."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Social anxiety disorder involves marked fear of social situations where one might be scrutinized, leading to avoidance or endurance with intense anxiety, persisting 6+ months.",
+      "explanation": "DSM-5 criteria: marked fear or anxiety about social situations in which the individual may be scrutinized (social interactions, being observed, performing); fear of acting in a way that will be negatively evaluated (embarrassing, leading to rejection, offending); social situations almost always provoke fear/anxiety; situations are avoided or endured with intense fear; fear is out of proportion to actual threat; persists 6+ months; causes significant distress or impairment. Specifier: 'performance only' if fear limited to speaking or performing in public. Common feared situations include public speaking, meeting new people, eating/drinking in public, writing in front of others, using public restrooms.",
+      "keyTerms": [
+        { "term": "scrutiny", "definition": "Close, critical observation by others; core fear in social anxiety" },
+        { "term": "negative evaluation", "definition": "Being judged negatively or seen as stupid, boring, or awkward" },
+        { "term": "performance only specifier", "definition": "Social anxiety limited to performance situations like public speaking" },
+        { "term": "safety behaviors", "definition": "Actions taken to prevent feared outcomes (e.g., rehearsing what to say, avoiding eye contact)" }
+      ],
+      "diagnosticCriteria": "Fear of scrutiny + avoidance/distress + disproportionate + 6+ months + significant impairment",
+      "prevalence": "Lifetime prevalence 7-13%; among most common psychiatric disorders; typical onset early-mid adolescence; F:M slightly higher female"
+    },
+    "3": {
+      "level": 3,
+      "summary": "Social anxiety disorder involves cognitive biases, heightened self-focused attention, and altered neural processing of social threat; treated with CBT and SSRIs.",
+      "explanation": "Cognitive models (Clark & Wells): heightened self-focused attention prevents disconfirming external feedback; negative self-imagery (seeing oneself from observer perspective as awkward/strange); post-event rumination reinforces negative beliefs. Neurobiological: amygdala hyperreactivity to social cues (especially faces showing disapproval); reduced prefrontal regulation; altered dopaminergic reward processing. Treatment: CBT (Cognitive Behavioral Group Therapy, individual CBT with cognitive restructuring, attention training, exposure, video feedback) is first-line with lasting effects. SSRIs (paroxetine, sertraline, fluvoxamine FDA-approved) and SNRIs (venlafaxine) are first-line medications. Beta-blockers (propranolol) for performance-only anxiety. MAOIs (phenelzine) effective but reserved for refractory cases. Benzodiazepines may reduce exposure learning.",
+      "keyTerms": [
+        { "term": "self-focused attention", "definition": "Excessive attention to internal sensations and self-image during social situations" },
+        { "term": "post-event processing", "definition": "Ruminating after social events about perceived failures or embarrassments" },
+        { "term": "negative self-imagery", "definition": "Seeing oneself from observer perspective during social situations, usually negatively distorted" },
+        { "term": "cognitive restructuring", "definition": "Identifying and challenging negative automatic thoughts and beliefs" }
+      ],
+      "clinicalNotes": "Early onset predicts worse outcomes if untreated; chronic course. Alcohol often used as 'liquid courage' - screen for AUD. Distinguish from avoidant personality disorder (overlapping but APD more pervasive). Video feedback can be powerful intervention - patients see they don't appear as anxious as they feel."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management addresses treatment resistance, comorbidities, and integrates specialized interventions for performance anxiety and generalized social anxiety.",
+      "explanation": "Treatment-resistant social anxiety: maximize SSRI dose; switch to SNRI or phenelzine (MAOI); augment with buspirone, gabapentin/pregabalin, or low-dose antipsychotic. Performance anxiety: beta-blockers (propranolol 10-40mg) reduce physical symptoms; most effective for occasional specific situations; CBT still preferred for broader fear. Generalized subtype: more impairing than performance-only; requires comprehensive treatment. Group CBT: evidence-based, provides built-in exposure; consider individual CBT if group anxiety too high initially. Attention bias modification: computerized training to reduce attention to threat cues - modest effects. Comorbidity: depression (often secondary to social isolation), other anxiety disorders, substance use, body dysmorphic disorder, selective mutism (childhood). Avoidant personality disorder overlap: ~50-90% of social anxiety patients meet APD criteria; treat as more severe form of same spectrum.",
+      "keyTerms": [
+        { "term": "phenelzine", "definition": "MAOI with strong efficacy for social anxiety but requires dietary restrictions" },
+        { "term": "attention bias modification", "definition": "Computerized training to shift attention away from threatening social cues" },
+        { "term": "selective mutism", "definition": "Childhood condition with consistent failure to speak in certain social situations despite speaking elsewhere" },
+        { "term": "avoidant personality disorder", "definition": "Pervasive pattern of social inhibition, inadequacy feelings, and hypersensitivity; overlaps with social anxiety" }
+      ],
+      "clinicalNotes": "Social anxiety typically precedes depression - treating early may prevent secondary conditions. Exposure is essential - medication without behavioral change often insufficient. Graduated exposure with dropping safety behaviors is key. Address perfectionism and intolerance of negative evaluation. Career impacts can be significant - vocational support may help."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert management integrates cognitive-neurobiological models, D-cycloserine augmentation, intensive treatments, and addresses developmental trajectory and public health impact.",
+      "explanation": "Integrated models: raphe-amygdala-prefrontal circuits show altered serotonergic modulation of threat processing; social reward circuitry (striatal dopamine) underactive; anterior cingulate cortex hyperactive (error monitoring). D-cycloserine augmentation: NMDA partial agonist may enhance exposure therapy extinction learning; effects modest and timing-dependent (give before successful exposures). Intensive treatments: massed exposure over days (social mishap exposure - deliberately doing 'embarrassing' things); one-session treatment for specific fears. Developmental trajectory: behavioral inhibition in infancy predicts social anxiety; adolescent onset common during increased social evaluation sensitivity; early intervention may prevent chronic course. Genetics: heritability ~30-40%; polygenic; gene-environment interactions with adversity/bullying. Public health impact: one of most common disorders with high disability, undertreatment, and economic burden. Digital interventions: internet-delivered CBT effective; VR exposure promising; may increase access. Cultural considerations: taijin kyofusho (Japanese culture - fear of offending others) related construct.",
+      "keyTerms": [
+        { "term": "social mishap exposure", "definition": "Intentionally engaging in mildly embarrassing behaviors to test feared consequences and build tolerance" },
+        { "term": "behavioral inhibition", "definition": "Temperamental trait of withdrawal from novel stimuli; risk factor for social anxiety" },
+        { "term": "taijin kyofusho", "definition": "Japanese culture-bound syndrome involving fear of offending or embarrassing others; related to social anxiety" },
+        { "term": "error monitoring", "definition": "Cognitive process of detecting errors/discrepancies; heightened in social anxiety (anterior cingulate)" }
+      ],
+      "clinicalNotes": "Social anxiety is undertreated - normalize seeking help. Self-focus and avoidance are key therapeutic targets. Foster approach behaviors and acceptance of imperfection. Long-term outcomes improved with CBT vs. medication alone. Consider social skills training if actual skills deficits exist (not just perceived deficits)."
+    }
+  },
+
+  "riskFactors": [
+    "Behavioral inhibition in childhood",
+    "Family history of social anxiety",
+    "Overprotective or critical parenting",
+    "Bullying or peer rejection",
+    "Negative social experiences",
+    "Physical features perceived as noticeable",
+    "Stressful life events requiring new social roles"
+  ],
+
+  "commonFears": [
+    "Speaking in front of groups",
+    "Meeting new people",
+    "Being the center of attention",
+    "Eating or drinking in front of others",
+    "Writing in front of others",
+    "Using public restrooms",
+    "Making phone calls",
+    "Being assertive or expressing opinions"
+  ],
+
+  "selfCareStrategies": [
+    "Challenge negative thoughts about social situations",
+    "Gradually face feared situations rather than avoiding them",
+    "Focus outward on the conversation, not inward on yourself",
+    "Drop safety behaviors (like rehearsing or avoiding eye contact)",
+    "Accept that some anxiety is normal - aim to function despite it",
+    "Limit alcohol as a coping strategy",
+    "Practice self-compassion"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "adaaResources": "www.adaa.org"
+    },
+    "message": "Social anxiety can feel isolating, but you're not alone. Help is available, and treatment really works."
+  },
+
+  "treatments": {
+    "firstLine": ["CBT", "SSRIs (paroxetine, sertraline)", "SNRIs (venlafaxine)"],
+    "forPerformanceAnxiety": ["Beta-blockers (propranolol)", "CBT"],
+    "forResistantCases": ["MAOIs (phenelzine)", "Gabapentin/pregabalin", "Augmentation strategies"],
+    "psychotherapy": ["Individual CBT", "Group CBT", "Exposure and response prevention"]
+  },
+
+  "citations": [
+    {
+      "id": "clark-wells-1995",
+      "type": "study",
+      "title": "A cognitive model of social phobia",
+      "source": "Social Phobia: Diagnosis, Assessment, and Treatment",
+      "year": 1995
+    },
+    {
+      "id": "mayo-wilson-2014",
+      "type": "meta-analysis",
+      "title": "Psychological and pharmacological interventions for social anxiety disorder in adults",
+      "journal": "Cochrane Database of Systematic Reviews",
+      "year": 2014
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-avoidant-personality-disorder", "targetType": "condition", "relationship": "related", "label": "Avoidant Personality Disorder" },
+    { "targetId": "condition-generalized-anxiety-disorder", "targetType": "condition", "relationship": "differential", "label": "Generalized Anxiety Disorder" },
+    { "targetId": "treatment-cbt", "targetType": "treatment", "relationship": "treatment", "label": "CBT" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "anxiety-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

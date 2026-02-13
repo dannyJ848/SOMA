@@ -1,0 +1,108 @@
+{
+  "id": "structure-uterus",
+  "type": "structure",
+  "name": "Uterus",
+  "alternateNames": ["Womb", "Uterine corpus"],
+  "fmaId": "FMA:17558",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The uterus is a hollow, pear-shaped organ where a baby grows during pregnancy.",
+      "explanation": "The uterus, also called the womb, is located in the lower belly between the bladder and the rectum. It's about the size of a pear when not pregnant but can stretch to many times its size during pregnancy. The inside lining of the uterus builds up each month to prepare for a possible pregnancy. If pregnancy doesn't happen, this lining sheds during menstruation (a period). During pregnancy, the uterus provides protection and nutrition for the growing baby and contracts during labor to push the baby out.",
+      "keyTerms": [
+        { "term": "womb", "definition": "Another word for the uterus" },
+        { "term": "menstruation", "definition": "The monthly shedding of the uterine lining, also called a period" },
+        { "term": "pregnancy", "definition": "The time when a baby is growing inside the uterus" }
+      ],
+      "analogies": ["The uterus is like a stretchy balloon that can expand to fit a growing baby and then return to its normal size after birth."],
+      "examples": ["During pregnancy, the uterus grows from the size of a pear to the size of a watermelon!"]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The uterus is a muscular organ with three layers (perimetrium, myometrium, endometrium) that supports embryo implantation, fetal development, and generates the contractions of labor.",
+      "explanation": "The uterus has three main parts: the fundus (top dome), corpus/body (main section), and cervix (lower narrow neck opening into vagina). The uterine wall has three layers: perimetrium (outer serous coat, continuous with broad ligament), myometrium (thick smooth muscle layer), and endometrium (inner mucosal lining). The endometrium has two zones: the functional layer that sheds during menstruation and regenerates each cycle, and the basal layer that remains and regenerates the functional layer. Uterus position is typically anteverted (tilted forward) and anteflexed (bent forward). Support is provided by cardinal and uterosacral ligaments. Blood supply is from uterine arteries (branches of internal iliac).",
+      "keyTerms": [
+        { "term": "fundus", "definition": "The upper rounded portion of the uterus above the fallopian tube insertions" },
+        { "term": "myometrium", "definition": "The thick muscular middle layer of the uterine wall", "pronunciation": "my-oh-MEE-tree-um" },
+        { "term": "endometrium", "definition": "The inner lining of the uterus that changes with the menstrual cycle", "pronunciation": "en-doh-MEE-tree-um" },
+        { "term": "perimetrium", "definition": "The outer serous covering of the uterus", "pronunciation": "pair-ih-MEE-tree-um" },
+        { "term": "anteverted", "definition": "Forward tilting of the uterus relative to the vagina" },
+        { "term": "uterine artery", "definition": "Main blood supply to the uterus, from internal iliac artery" }
+      ],
+      "analogies": ["Think of the uterus like a layered garment: an outer raincoat (perimetrium), thick insulation (myometrium), and soft inner lining (endometrium) that changes regularly."],
+      "examples": ["During pregnancy, the myometrium expands dramatically to accommodate the growing fetus, then contracts powerfully during labor."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The uterus demonstrates hormonally-responsive endometrial cycling (proliferative/secretory phases), myometrial quiescence during pregnancy maintained by progesterone, and coordinated contractility during parturition.",
+      "explanation": "Endometrial cycle: Proliferative phase (days 5-14, estrogen-driven) - regeneration from basal layer, gland elongation, stromal proliferation; Secretory phase (days 15-28, progesterone-dominant) - glandular coiling and secretion, decidualization of stroma, spiral artery development. Without pregnancy, progesterone withdrawal causes vasoconstriction, ischemia, and menstruation. The myometrium contains smooth muscle arranged in three layers with different orientations. During pregnancy, progesterone maintains quiescence via multiple mechanisms. Parturition involves transition from quiescence: increased oxytocin receptors, prostaglandin synthesis, gap junction formation between myocytes. The uterine cervix is primarily collagenous (vs. myometrial muscle), requiring ripening (collagen breakdown) before dilation. Uterine innervation is primarily sympathetic (hypogastric plexus) and parasympathetic (pelvic splanchnic nerves).",
+      "keyTerms": [
+        { "term": "proliferative phase", "definition": "Estrogen-driven endometrial growth after menstruation until ovulation" },
+        { "term": "secretory phase", "definition": "Progesterone-driven endometrial preparation for implantation after ovulation" },
+        { "term": "decidualization", "definition": "Transformation of endometrial stroma to support implantation and early pregnancy" },
+        { "term": "spiral arteries", "definition": "Coiled endometrial arteries that supply the functional layer and undergo remodeling in pregnancy" },
+        { "term": "myometrial quiescence", "definition": "Progesterone-maintained relaxation of uterine muscle during pregnancy" },
+        { "term": "cervical ripening", "definition": "Softening and effacement of cervix via collagen degradation before labor" }
+      ],
+      "examples": ["Endometrial biopsy in the secretory phase should show subnuclear vacuoles and stromal decidualization if progesterone is adequate."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Uterine physiology integrates endometrial receptivity (implantation window), trophoblast-decidual interaction, and myometrial transformation for pregnancy, with pathology including fibroids, adenomyosis, and endometrial carcinoma.",
+      "explanation": "Implantation biology: The implantation window (days 20-24) is characterized by pinopodes, integrins (αvβ3), and cytokine expression (LIF, IL-11). Trophoblast invasion involves uNK cells regulating spiral artery remodeling. Myometrial changes in pregnancy: progesterone maintains quiescence via progesterone receptor-mediated gene expression, decreased gap junctions, low oxytocin receptors. Parturition involves functional progesterone withdrawal (receptor isoform shifts), NFκB activation, prostaglandin synthesis, and oxytocin sensitivity. Common pathology: Leiomyomas (fibroids) - benign smooth muscle tumors, estrogen/progesterone responsive; Adenomyosis - endometrial glands within myometrium; Endometrial hyperplasia - unopposed estrogen effect; Endometrial carcinoma - Type I (endometrioid, estrogen-related) vs Type II (serous, p53 mutations). Imaging: transvaginal ultrasound, saline infusion sonohysterography, MRI.",
+      "keyTerms": [
+        { "term": "implantation window", "definition": "Days 20-24 of cycle when endometrium is receptive to embryo implantation" },
+        { "term": "pinopodes", "definition": "Endometrial surface projections appearing during implantation window" },
+        { "term": "functional progesterone withdrawal", "definition": "Change in progesterone receptor activity triggering parturition despite stable progesterone levels" },
+        { "term": "leiomyoma", "definition": "Benign uterine smooth muscle tumor (fibroid)", "pronunciation": "ly-oh-my-OH-mah" },
+        { "term": "adenomyosis", "definition": "Endometrial glands and stroma within myometrium", "pronunciation": "ad-en-oh-my-OH-sis" },
+        { "term": "endometrial carcinoma", "definition": "Cancer of uterine lining, most common gynecologic malignancy" }
+      ],
+      "clinicalNotes": "Endometrial thickness >4mm in postmenopausal woman requires evaluation (biopsy). Fibroids are present in majority of women by age 50, but most asymptomatic. Adenomyosis classically presents with dysmenorrhea and menorrhagia in parous women. Lynch syndrome screening recommended for endometrial cancer, especially age <50."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary uterine medicine spans fertility-preserving fibroid management, IVF uterine preparation, surgical and medical menorrhagia treatment, and personalized endometrial cancer therapy based on molecular classification.",
+      "explanation": "Clinical integration: 1) Fibroids: management options include GnRH agonists/antagonists (Oriahnn), uterine artery embolization, focused ultrasound ablation, myomectomy (hysteroscopic for submucosal, laparoscopic with morcellation concerns, open), hysterectomy; 2) Abnormal uterine bleeding: PALM-COEIN classification; medical (hormonal, tranexamic acid) and surgical (ablation, hysterectomy) options; 3) Endometrial receptivity: ERA (Endometrial Receptivity Analysis) for personalized embryo transfer timing; 4) Endometrial cancer: TCGA molecular classification (POLE ultramutated, MSI-high, copy-number low, copy-number high) now incorporated into FIGO staging; fertility-sparing progestin therapy for grade 1, stage IA; minimally invasive surgery standard; sentinel lymph node mapping; adjuvant therapy based on stage and molecular subtype; 5) Cesarean scar defect (niche): increasingly recognized cause of abnormal bleeding and subfertility; 6) Uterine factor infertility: uterine transplantation now established with live births worldwide.",
+      "keyTerms": [
+        { "term": "PALM-COEIN", "definition": "Classification of abnormal uterine bleeding causes: Polyp, Adenomyosis, Leiomyoma, Malignancy; Coagulopathy, Ovulatory, Endometrial, Iatrogenic, Not classified" },
+        { "term": "ERA test", "definition": "Endometrial Receptivity Analysis - transcriptomic test to determine personalized implantation window" },
+        { "term": "TCGA molecular classification", "definition": "Four molecular subtypes of endometrial cancer with different prognoses" },
+        { "term": "POLE ultramutated", "definition": "Endometrial cancer subtype with best prognosis due to POLE exonuclease mutations" },
+        { "term": "uterine transplantation", "definition": "Surgical transfer of uterus from donor to recipient for fertility" },
+        { "term": "cesarean scar niche", "definition": "Myometrial defect at previous cesarean site causing bleeding or fertility issues" }
+      ],
+      "clinicalNotes": "Endometrial cancer molecular classification is now integrated into FIGO 2023 staging. POLE-mutated tumors have excellent prognosis even with high-grade histology. p53-abnormal (copy-number high) tumors have worst prognosis, benefit from adjuvant therapy. Sentinel lymph node mapping has largely replaced systematic lymphadenectomy in endometrial cancer staging. Uterine transplantation requires multidisciplinary team with extensive ethics framework."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-cervix", "targetType": "structure", "relationship": "child", "label": "Cervix" },
+    { "targetId": "structure-fallopian-tubes", "targetType": "structure", "relationship": "related", "label": "Fallopian Tubes" },
+    { "targetId": "process-menstrual-cycle", "targetType": "process", "relationship": "related", "label": "Menstrual Cycle" },
+    { "targetId": "process-implantation", "targetType": "process", "relationship": "related", "label": "Implantation" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:17558"],
+    "topics": ["anatomy", "physiology", "pathology", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "nbme": true, "shelf": ["ob-gyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

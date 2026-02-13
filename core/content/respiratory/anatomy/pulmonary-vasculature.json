@@ -1,0 +1,119 @@
+{
+  "id": "structure-pulmonary-vasculature",
+  "type": "structure",
+  "name": "Pulmonary Vasculature",
+  "alternateNames": ["Pulmonary circulation", "Pulmonary blood vessels", "Lesser circulation"],
+  "fmaId": "FMA:45659",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The pulmonary blood vessels carry blood between your heart and lungs so that blood can pick up oxygen and release carbon dioxide.",
+      "explanation": "Blood travels in a loop from your heart to your lungs and back. The pulmonary arteries carry blood that has used up its oxygen from the right side of your heart to your lungs. Inside the lungs, tiny blood vessels wrap around air sacs called alveoli. Here, the blood drops off carbon dioxide (waste gas) and picks up fresh oxygen. The oxygen-rich blood then travels through pulmonary veins back to the left side of your heart, which pumps it out to your whole body. This is unique because arteries usually carry oxygen-rich blood, but pulmonary arteries carry oxygen-poor blood.",
+      "keyTerms": [
+        {"term": "pulmonary arteries", "definition": "Blood vessels that carry oxygen-poor blood from the heart to the lungs"},
+        {"term": "pulmonary veins", "definition": "Blood vessels that carry oxygen-rich blood from the lungs back to the heart"},
+        {"term": "capillaries", "definition": "Tiny blood vessels where oxygen and carbon dioxide are exchanged"},
+        {"term": "alveoli", "definition": "Air sacs in the lungs where gas exchange happens"}
+      ],
+      "analogies": ["Think of pulmonary circulation like a factory supply chain: trucks (pulmonary arteries) bring raw materials (carbon dioxide) to be processed, and other trucks (pulmonary veins) take the finished product (oxygen) away."],
+      "examples": ["When you exercise, more blood flows through your pulmonary vessels to pick up extra oxygen your muscles need."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The pulmonary circulation is a low-pressure system where the pulmonary trunk from the right ventricle divides into left and right pulmonary arteries, and four pulmonary veins return oxygenated blood to the left atrium.",
+      "explanation": "The pulmonary trunk arises from the right ventricle and divides into left and right pulmonary arteries at the level of T5-6. The right pulmonary artery is longer and passes behind the aorta and SVC to reach the right lung. The left pulmonary artery is shorter and passes anterior to the descending aorta. In the lungs, pulmonary arteries follow bronchial divisions, branching with each airway generation. Capillaries form a dense network around alveoli - this pulmonary capillary bed has the largest surface area of any vascular bed (~70 square meters). Pulmonary veins (typically four - two from each lung) carry oxygenated blood to the left atrium and do NOT follow the bronchi. The pulmonary circulation is a low-pressure, low-resistance system (mean PAP 15 mmHg vs 100 mmHg systemic) to prevent fluid leakage into alveoli.",
+      "keyTerms": [
+        {"term": "pulmonary trunk", "definition": "The main artery arising from the right ventricle that divides into left and right pulmonary arteries"},
+        {"term": "pulmonary capillary bed", "definition": "Dense network of tiny vessels around alveoli where gas exchange occurs"},
+        {"term": "mean pulmonary arterial pressure", "definition": "Average pressure in the pulmonary arteries, normally about 15 mmHg"},
+        {"term": "pulmonary veins", "definition": "Vessels returning oxygenated blood from lungs to the left atrium"},
+        {"term": "right ventricle", "definition": "Heart chamber that pumps blood into the pulmonary circulation"}
+      ],
+      "analogies": ["The pulmonary circulation is like a low-pressure shower compared to a high-pressure fire hose (systemic circulation) - gentler flow prevents damage to delicate lung tissue."],
+      "examples": ["Pulmonary hypertension is when pressure in the pulmonary arteries becomes abnormally high, straining the right heart."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Pulmonary vascular anatomy features a thin-walled, highly compliant system with unique regulatory mechanisms including hypoxic pulmonary vasoconstriction and a parallel bronchial circulation.",
+      "explanation": "Pulmonary arteries have thinner walls and less smooth muscle than systemic arteries of similar caliber, reflecting the low-pressure environment. Pulmonary arterioles have minimal muscularization (2-5% of vessel wall vs 15-20% systemic). Pulmonary veins are valveless and thin-walled, merging into superior and inferior pulmonary veins from each lung before entering the left atrium. The ligamentum arteriosum (remnant of ductus arteriosus) connects the left pulmonary artery to the aortic arch. Hypoxic pulmonary vasoconstriction (HPV) is unique to pulmonary circulation: alveolar hypoxia causes local vasoconstriction to redirect blood to better-ventilated areas. Pulmonary vascular resistance (PVR) decreases with increased cardiac output due to recruitment and distension of vessels. The pulmonary circulation receives entire cardiac output but has only 1/10th the resistance of systemic circulation.",
+      "keyTerms": [
+        {"term": "hypoxic pulmonary vasoconstriction", "definition": "Reflex vasoconstriction in response to alveolar hypoxia, optimizing V/Q matching"},
+        {"term": "pulmonary vascular resistance", "definition": "Resistance to blood flow through pulmonary circulation, PVR = (mPAP-PAWP)/CO"},
+        {"term": "ligamentum arteriosum", "definition": "Remnant of fetal ductus arteriosus connecting left PA to aorta; landmark for recurrent laryngeal nerve"},
+        {"term": "recruitment", "definition": "Opening of previously closed capillaries to accommodate increased blood flow"},
+        {"term": "distension", "definition": "Widening of pulmonary vessels under increased pressure to reduce resistance"}
+      ],
+      "clinicalNotes": "Ligamentum arteriosum is where left recurrent laryngeal nerve hooks around; important in mediastinal surgery. HPV is inhibited by volatile anesthetics, nitroprusside - can worsen V/Q mismatch."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pulmonary vascular physiology integrates zone-dependent perfusion, active and passive resistance mechanisms, and endothelial regulation with pathophysiological implications for pulmonary hypertension.",
+      "explanation": "Pulmonary blood flow distribution follows West's zones, determined by relationships between alveolar (PA), arterial (Pa), and venous (Pv) pressures. Zone 1 (PA>Pa>Pv): no flow, occurs with positive pressure ventilation; Zone 2 (Pa>PA>Pv): intermittent flow; Zone 3 (Pa>Pv>PA): continuous flow, dominant under normal conditions; Zone 4: reduced flow from interstitial edema compressing extra-alveolar vessels. Endothelial cells regulate vascular tone through vasodilators (nitric oxide, prostacyclin) and vasoconstrictors (endothelin-1, thromboxane). Pulmonary hypertension (mean PAP >20 mmHg at rest) is classified by WHO groups: Group 1 (PAH), Group 2 (left heart), Group 3 (lung disease/hypoxia), Group 4 (CTEPH), Group 5 (multifactorial). PAH pathophysiology involves endothelial dysfunction, smooth muscle proliferation, and vascular remodeling with plexiform lesions.",
+      "keyTerms": [
+        {"term": "West's zones", "definition": "Model describing regional pulmonary blood flow based on alveolar, arterial, and venous pressure relationships"},
+        {"term": "pulmonary hypertension", "definition": "Mean PAP >20 mmHg at rest; WHO classification divides into 5 groups by etiology"},
+        {"term": "endothelin-1", "definition": "Potent pulmonary vasoconstrictor produced by endothelium; target of PAH therapy"},
+        {"term": "nitric oxide", "definition": "Endothelium-derived vasodilator; inhaled NO used for acute pulmonary vasodilation"},
+        {"term": "plexiform lesions", "definition": "Complex vascular lesions in severe PAH from endothelial proliferation"}
+      ],
+      "clinicalNotes": "Right heart catheterization gold standard for PH diagnosis: mPAP, PAWP (wedge), PVR. PAWP >15 distinguishes pre- vs post-capillary PH. Vasodilator testing (inhaled NO) identifies responders for CCB therapy in PAH."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced pulmonary vascular management encompasses precision phenotyping, targeted molecular therapies, and interventional approaches with evolving understanding of genetic mechanisms and novel treatment strategies.",
+      "explanation": "Contemporary PAH assessment includes invasive hemodynamics, imaging (CT, MRI for RV function), biomarkers (NT-proBNP, BNP), exercise testing (6MWD, CPET), and multiparametric risk stratification (REVEAL 2.0, ESC/ERS risk score). Genetic testing identifies BMPR2 mutations (70% familial PAH) and other predisposing variants (ALK1, SMAD9, CAV1). Triple therapy with ERA (ambrisentan, macitentan), PDE5i (sildenafil, tadalafil), and prostacyclin pathway agent (selexipag, parenteral prostanoids) is standard for high-risk PAH. Sotatercept, an activin signaling inhibitor, represents a novel class targeting vascular remodeling. CTEPH is potentially curable with pulmonary endarterectomy (PEA); balloon pulmonary angioplasty (BPA) for inoperable cases. Lung transplantation remains an option for end-stage disease. Emerging therapies include inhaled prostacyclin analogs, gene therapy approaches, and AI-guided imaging for early detection.",
+      "keyTerms": [
+        {"term": "BMPR2", "definition": "Bone morphogenetic protein receptor type 2 gene; most common mutation in heritable PAH"},
+        {"term": "sotatercept", "definition": "Activin receptor fusion protein (activin trap) that rebalances growth factor signaling in PAH"},
+        {"term": "pulmonary endarterectomy", "definition": "Surgical removal of organized thrombus from pulmonary arteries in CTEPH"},
+        {"term": "balloon pulmonary angioplasty", "definition": "Interventional procedure dilating pulmonary arteries in inoperable CTEPH"},
+        {"term": "REVEAL 2.0", "definition": "Risk calculator for PAH survival prediction using multiple clinical variables"}
+      ],
+      "clinicalNotes": "PAH treatment escalation: initial dual therapy (ERA + PDE5i), add prostacyclin pathway agent if intermediate/high risk. Consider referral for transplant evaluation early. CTEPH screening: V/Q scan preferred over CTPA for diagnosis. BPA shows outcomes approaching PEA in experienced centers."
+    }
+  },
+  "media": [
+    {
+      "id": "pulmonary-vasculature-3d-model",
+      "type": "3d-model",
+      "filename": "pulmonary_vasculature.glb",
+      "title": "3D Pulmonary Vasculature",
+      "description": "Interactive model showing pulmonary arteries, veins, and capillary network with blood flow animation"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "esc-pah-guidelines",
+      "type": "article",
+      "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension",
+      "source": "European Heart Journal",
+      "url": "https://doi.org/10.1093/eurheartj/ehac237"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "system-cardiovascular", "targetType": "system", "relationship": "related", "label": "Cardiovascular System"},
+    {"targetId": "process-gas-exchange", "targetType": "process", "relationship": "related", "label": "Gas Exchange"},
+    {"targetId": "condition-pulmonary-hypertension", "targetType": "condition", "relationship": "related", "label": "Pulmonary Hypertension"}
+  ],
+  "tags": {
+    "systems": ["respiratory", "cardiovascular"],
+    "structures": ["FMA:45659", "FMA:66326", "FMA:49914"],
+    "topics": ["anatomy", "physiology", "cardiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

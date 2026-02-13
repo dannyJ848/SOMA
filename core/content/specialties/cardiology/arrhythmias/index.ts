@@ -1,0 +1,12 @@
+/**
+ * Arrhythmias Module Index (Specialty Cardiology)
+ *
+ * Cardiac rhythm disorders:
+ * - Atrial fibrillation
+ * - Heart blocks
+ * - Ventricular tachycardia
+ */
+
+export { atrialFibrillation } from './atrial-fibrillation';
+export { heartBlocks } from './heart-blocks';
+export { ventricularTachycardia } from './ventricular-tachycardia';

@@ -1,0 +1,118 @@
+{
+  "id": "structure-bronchial-circulation",
+  "type": "structure",
+  "name": "Bronchial Circulation",
+  "alternateNames": ["Systemic lung circulation", "Airway blood supply"],
+  "fmaId": "FMA:66848",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The bronchial circulation is a separate set of blood vessels that feeds oxygen to the walls of your airways - the tubes that carry air in your lungs.",
+      "explanation": "Your lungs have two different blood supplies with different jobs. The pulmonary circulation (the one you usually hear about) carries blood to pick up oxygen from the air sacs. But the walls of your airways - the trachea, bronchi, and bronchioles - need their own oxygen supply, just like any other body tissue. That's the bronchial circulation. These small arteries branch off from the main artery leaving your heart (the aorta) and bring fresh, oxygen-rich blood directly to nourish the airway tissues.",
+      "keyTerms": [
+        {"term": "bronchial arteries", "definition": "Blood vessels that bring oxygen-rich blood to the airways"},
+        {"term": "aorta", "definition": "The main artery from the heart that supplies blood to the body"},
+        {"term": "airways", "definition": "The tubes (trachea and bronchi) that carry air into the lungs"},
+        {"term": "pulmonary circulation", "definition": "The blood flow that picks up oxygen from the air sacs (different from bronchial)"}
+      ],
+      "analogies": ["It's like a building with two water systems - one for the sprinklers (emergency/main purpose) and one for drinking fountains and sinks (to keep the building itself running)."],
+      "examples": ["If a bronchial artery gets blocked, the airway tissue it supplies can become damaged, just like a heart attack damages heart muscle."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Bronchial arteries arise from the thoracic aorta to supply the bronchi, pulmonary vessels, and supporting structures with oxygenated systemic blood, while bronchial veins drain primarily into the pulmonary venous system.",
+      "explanation": "The bronchial arteries typically arise from the descending thoracic aorta at the T5-6 level. The most common pattern is one artery to the right lung and two to the left, but variations are common. These arteries supply the walls of the bronchi down to the terminal bronchioles, the pulmonary arterial walls (vasa vasorum), visceral pleura, hilar lymph nodes, vagus nerve, and esophagus. Bronchial arteries anastomose with pulmonary arteries in the walls of small bronchi and bronchioles. Most bronchial venous blood drains into the pulmonary veins rather than systemic veins, contributing to the normal physiological shunt (1-2% of cardiac output). True bronchial veins drain the extrapulmonary airways into the azygos and hemiazygos systems.",
+      "keyTerms": [
+        {"term": "bronchial arteries", "definition": "Systemic arteries from the thoracic aorta supplying the bronchial tree"},
+        {"term": "vasa vasorum", "definition": "Small vessels supplying the walls of larger blood vessels"},
+        {"term": "bronchopulmonary anastomoses", "definition": "Connections between bronchial and pulmonary arterial systems"},
+        {"term": "physiological shunt", "definition": "Normal mixing of deoxygenated bronchial venous blood into pulmonary veins"},
+        {"term": "azygos vein", "definition": "Systemic vein draining bronchial veins from the right side"}
+      ],
+      "analogies": ["Bronchial circulation is like the maintenance plumbing in a water treatment plant - it keeps the pipes (airways) themselves healthy while the main system (pulmonary circulation) does the actual water treatment (gas exchange)."],
+      "examples": ["In bronchiectasis, bronchial arteries enlarge to supply damaged tissue, and can cause massive hemoptysis if they erode."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Bronchial arterial anatomy features variable origins and branching patterns with clinical significance for hemoptysis management and bronchial artery embolization procedures.",
+      "explanation": "Bronchial artery origins are classified as orthotopic (arising from aorta at T5-T6 level, 70%) or ectopic (arising elsewhere - subclavian, internal mammary, intercostal, inferior phrenic). The classic pattern (Cauldwell): right intercostobronchial trunk (RICBT, most common right-sided variant), and two left bronchial arteries. Bronchial arteries >2mm diameter are abnormal and suggest chronic inflammation. They supply: bronchi to the respiratory bronchiole level, intrapulmonary arteries and veins (vasa vasorum), visceral pleura (outer portion), interlobular septa, and hilar/mediastinal lymph nodes. Bronchopulmonary anastomoses at the precapillary level are normally minimal but enlarge in chronic lung disease (bronchiectasis, CF, chronic infection) and congenital heart disease, potentially causing significant left-to-right shunt. In hemoptysis, 90% arises from bronchial circulation due to higher systemic pressure.",
+      "keyTerms": [
+        {"term": "intercostobronchial trunk", "definition": "Common trunk giving rise to right bronchial and posterior intercostal arteries"},
+        {"term": "orthotopic origin", "definition": "Normal bronchial artery origin from descending aorta at T5-T6 level"},
+        {"term": "ectopic origin", "definition": "Bronchial artery arising from sites other than typical aortic location"},
+        {"term": "bronchial artery embolization", "definition": "Interventional procedure to occlude bleeding bronchial arteries in hemoptysis"},
+        {"term": "Cauldwell classification", "definition": "Description of common bronchial artery anatomic variants"}
+      ],
+      "clinicalNotes": "Before BAE, must identify spinal arteries (anterior spinal artery of Adamkiewicz from T9-L2) to avoid spinal cord ischemia. Non-bronchial systemic collaterals (intercostal, internal mammary, phrenic) may also supply hemorrhage site."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Bronchial circulation physiology involves systemic pressure contribution to airway nutrition, collateral development in disease states, and the pathophysiology of massive hemoptysis and its interventional management.",
+      "explanation": "Bronchial blood flow represents 1-2% of cardiac output at rest but can increase 10-fold in inflammatory conditions. The bronchial circulation serves nutritive functions for airway walls, contributing to airway warming and humidification of inspired air. In chronic lung diseases, bronchopulmonary collaterals develop in response to pulmonary arterial obstruction or chronic inflammation; these tortuous, fragile vessels are prone to rupture. Hemoptysis pathophysiology: bronchial arteries operate at systemic pressure (120/80 mmHg) vs pulmonary (25/10 mmHg); erosion into bronchial vessels causes high-pressure bleeding. Massive hemoptysis (>600mL/24h or hemodynamic instability) has high mortality. CT angiography identifies bleeding source and guides bronchial artery embolization (BAE) with particles, coils, or plugs. Recurrence after BAE occurs in 10-30% due to collaterals or recanalization.",
+      "keyTerms": [
+        {"term": "massive hemoptysis", "definition": ">600mL/24h or >100mL/h; life-threatening, requires emergent management"},
+        {"term": "bronchial artery hypertrophy", "definition": "Enlargement of bronchial arteries in chronic inflammation (>2mm = abnormal)"},
+        {"term": "non-bronchial systemic collaterals", "definition": "Vessels from intercostal, internal mammary, or phrenic arteries supplying lung in disease"},
+        {"term": "CT angiography", "definition": "Imaging to identify bleeding source and map bronchial arterial anatomy before embolization"},
+        {"term": "artery of Adamkiewicz", "definition": "Major radiculomedullary artery (T9-L2), must be identified to prevent spinal cord injury during BAE"}
+      ],
+      "clinicalNotes": "Hemoptysis management: position bleeding side down, early bronchoscopy for localization, CT angiography, BAE if massive. Bleeding side down prevents asphyxiation of non-bleeding lung. Consider rigid bronchoscopy for massive hemoptysis."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced bronchial circulation management integrates multimodal imaging, interventional radiology techniques, and multidisciplinary approaches to massive hemoptysis with emerging endovascular technologies.",
+      "explanation": "Contemporary hemoptysis management follows an algorithmic approach: stabilization, bronchoscopy (flexible or rigid), CT angiography, and bronchial artery embolization as first-line intervention. Pre-procedural CTA (dual-phase arterial protocol) maps bronchial and non-bronchial systemic feeders, identifies Adamkiewicz artery, and localizes parenchymal abnormality. BAE technique: selective catheterization (5Fr Cobra/Simmons), superselective microcatheter positioning, embolization with PVA particles (300-500 microns), gelfoam, or microcoils. Complications: chest pain (most common), dysphagia, bronchial necrosis, spinal cord ischemia (<5% if Adamkiewicz identified). Recurrence rates: 15-30% at 1 year, higher in aspergilloma and bronchiectasis. Surgical resection remains definitive for focal disease with adequate pulmonary reserve. Novel approaches include glue embolization (NBCA), Onyx, and combination techniques. For pulmonary artery source bleeding (5-10% of cases), covered stents or plug occlusion may be required.",
+      "keyTerms": [
+        {"term": "superselective embolization", "definition": "Microcatheter-guided embolization distal to bronchial-esophageal-spinal anastomoses"},
+        {"term": "PVA particles", "definition": "Polyvinyl alcohol particles used for bronchial artery embolization"},
+        {"term": "NBCA", "definition": "N-butyl cyanoacrylate liquid embolic agent for vascular occlusion"},
+        {"term": "cryptogenic hemoptysis", "definition": "Hemoptysis without identifiable source on bronchoscopy and imaging (~10-25% of cases)"},
+        {"term": "Rasmussen aneurysm", "definition": "Pulmonary artery aneurysm from TB cavity erosion - pulmonary, not bronchial source"}
+      ],
+      "clinicalNotes": "Persistent hemoptysis after BAE: consider incomplete embolization, collaterals, pulmonary artery source, or rebleeding. Aspergilloma BAE has highest recurrence - consider surgical resection. For pulmonary artery pseudoaneurysm (Rasmussen), endovascular coil/covered stent or surgery required."
+    }
+  },
+  "media": [
+    {
+      "id": "bronchial-circulation-3d-model",
+      "type": "3d-model",
+      "filename": "bronchial_circulation.glb",
+      "title": "3D Bronchial Circulation",
+      "description": "Interactive model showing bronchial arteries, veins, and anastomoses with pulmonary circulation"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "yoon-hemoptysis",
+      "type": "article",
+      "title": "Bronchial and Nonbronchial Systemic Artery Embolization for Life-threatening Hemoptysis",
+      "authors": ["Yoon W"],
+      "source": "Radiographics"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-pulmonary-vasculature", "targetType": "structure", "relationship": "related", "label": "Pulmonary Vasculature"},
+    {"targetId": "structure-bronchial-tree", "targetType": "structure", "relationship": "related", "label": "Bronchial Tree"}
+  ],
+  "tags": {
+    "systems": ["respiratory", "cardiovascular"],
+    "structures": ["FMA:66848", "FMA:66849"],
+    "topics": ["anatomy", "interventional radiology", "emergency"],
+    "clinicalRelevance": "high",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

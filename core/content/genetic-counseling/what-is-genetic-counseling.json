@@ -1,0 +1,396 @@
+{
+  "id": "gc-001",
+  "title": "What is Genetic Counseling?",
+  "category": "genetic-counseling",
+  "subcategory": "introduction",
+  "description": "Understanding the role of genetic counselors and what to expect from genetic counseling services",
+  "keywords": ["genetic counseling", "genetic counselor", "family history", "genetic testing", "hereditary conditions"],
+  "lastUpdated": "2026-01-24",
+  "version": "1.0.0",
+  "content": {
+    "overview": {
+      "level1": {
+        "title": "Genetic Counseling: Your Guide to Understanding Your Genes",
+        "content": "Genetic counseling is a service that helps you understand how genes affect your health and your family's health. A genetic counselor is a specially trained healthcare professional who can explain genetic tests and help you make informed decisions about testing."
+      },
+      "level2": {
+        "title": "Understanding Genetic Counseling Services",
+        "content": "Genetic counseling is a healthcare service that combines genetic education with emotional support. Genetic counselors are graduate-level trained professionals who help individuals and families understand genetic conditions, interpret test results, and navigate complex healthcare decisions related to hereditary health risks."
+      },
+      "level3": {
+        "title": "The Science and Practice of Genetic Counseling",
+        "content": "Genetic counseling integrates clinical genetics, psychosocial assessment, and patient education to help individuals understand their genetic risk factors. Board-certified genetic counselors (CGCs) complete master's-level training and certification through the American Board of Genetic Counseling (ABGC), enabling them to interpret complex genetic information and guide patients through risk assessment, testing options, and informed decision-making."
+      },
+      "level4": {
+        "title": "Advanced Concepts in Genetic Counseling Practice",
+        "content": "Modern genetic counseling encompasses comprehensive risk assessment using validated models (e.g., BRCAPRO, Tyrer-Cuzick, PREMM5), interpretation of multi-gene panel results, coordination of cascade testing in families, and facilitation of shared decision-making. Counselors integrate principles of non-directiveness with evidence-based recommendations while addressing the psychological, ethical, and social implications of genetic information."
+      },
+      "level5": {
+        "title": "Precision Medicine and the Evolution of Genetic Counseling",
+        "content": "Contemporary genetic counseling operates at the intersection of precision medicine, behavioral genomics, and health policy. The field addresses challenges including variant reclassification, polygenic risk score interpretation, incidental and secondary findings management, and the integration of pharmacogenomics into clinical care. Advanced practice involves understanding penetrance variability, phenotypic heterogeneity, and the limitations of current risk models while navigating the evolving landscape of genetic discrimination protections and direct-to-consumer testing."
+      }
+    },
+    "sections": {
+      "roleOfGeneticCounselor": {
+        "title": "The Role of a Genetic Counselor",
+        "level1": {
+          "content": "A genetic counselor helps you understand genetic conditions and testing. They explain things in simple terms, answer your questions, and support you through the process. They do not tell you what to do but help you make decisions that are right for you and your family.",
+          "keyPoints": [
+            "Explains genetic conditions in simple terms",
+            "Helps you understand test options",
+            "Supports you emotionally",
+            "Answers your questions",
+            "Helps you make your own decisions"
+          ]
+        },
+        "level2": {
+          "content": "Genetic counselors are healthcare professionals who specialize in medical genetics and counseling. Their role includes taking detailed family health histories, assessing genetic risks, explaining inheritance patterns, coordinating genetic testing, interpreting results, and providing emotional support. They work in hospitals, clinics, laboratories, and through telehealth services.",
+          "keyPoints": [
+            "Collect and analyze family health history",
+            "Assess risk for genetic conditions",
+            "Explain how conditions are inherited",
+            "Coordinate and order genetic tests",
+            "Interpret and explain test results",
+            "Provide emotional support and resources",
+            "Connect families with support groups and specialists"
+          ]
+        },
+        "level3": {
+          "content": "Genetic counselors function as integral members of the healthcare team, bridging clinical genetics expertise with patient-centered care. Their scope includes pre-test counseling with informed consent, pedigree construction and analysis, Mendelian and complex inheritance risk calculations, test selection and coordination, variant interpretation review, post-test counseling, and psychosocial assessment. They facilitate communication between patients, families, and healthcare providers while ensuring adherence to professional ethics and practice guidelines.",
+          "keyPoints": [
+            "Construct and analyze multi-generational pedigrees",
+            "Calculate empiric and Mendelian risk estimates",
+            "Facilitate informed consent for genetic testing",
+            "Review and explain variant classifications",
+            "Coordinate care with multidisciplinary teams",
+            "Conduct psychosocial assessments",
+            "Advocate for patients in healthcare systems",
+            "Maintain confidentiality and manage family dynamics"
+          ]
+        },
+        "level4": {
+          "content": "The genetic counselor's role encompasses comprehensive genetic risk assessment using evidence-based models, variant curation review in accordance with ACMG/AMP guidelines, and integration of genetic findings into medical management. They address the psychological impact of genetic information, facilitate family communication strategies, and navigate ethical dilemmas including incidental findings, testing of minors, and reproductive decision-making. Advanced roles include research, laboratory variant curation, and specialty practice in oncology, prenatal, pediatric, or cardiovascular genetics.",
+          "keyPoints": [
+            "Apply validated risk assessment models (BRCAPRO, MMRpro, etc.)",
+            "Interpret variants using ACMG/AMP classification criteria",
+            "Develop personalized medical management recommendations",
+            "Address anticipatory guidance and surveillance protocols",
+            "Navigate ethical complexities in genetic testing",
+            "Facilitate cascade testing and family communication",
+            "Integrate findings with clinical specialists",
+            "Contribute to research and quality improvement initiatives"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary genetic counselors operate within a precision medicine framework, integrating germline and somatic testing results, polygenic risk scores, and pharmacogenomic data into personalized care plans. They navigate the challenges of variant reclassification, recontacting obligations, and the limitations of current evidence. Specialty practice requires expertise in phenotype-genotype correlations, modifier genes, and expressivity variability. The profession addresses health equity, genetic discrimination, and the responsible integration of direct-to-consumer and at-home testing into clinical care.",
+          "keyPoints": [
+            "Integrate multi-omic data into clinical recommendations",
+            "Manage variant reclassification and patient recontact protocols",
+            "Address penetrance, expressivity, and genetic modifiers",
+            "Navigate direct-to-consumer testing integration",
+            "Advocate for health equity in genetic services",
+            "Contribute to professional policy and guideline development",
+            "Balance technological advances with ethical practice",
+            "Address social and systemic barriers to genetic services"
+          ]
+        }
+      },
+      "whenToConsider": {
+        "title": "When to Consider Genetic Counseling",
+        "level1": {
+          "content": "You might want to see a genetic counselor if you have concerns about conditions that run in your family, are planning a pregnancy, are pregnant and want to learn about testing options, or if you or a family member has been diagnosed with a genetic condition.",
+          "keyPoints": [
+            "Family history of genetic conditions",
+            "Planning a pregnancy",
+            "Currently pregnant",
+            "Personal diagnosis of a genetic condition",
+            "Family member diagnosed with a genetic condition",
+            "Concerns about passing conditions to children"
+          ],
+          "referralReasons": [
+            "Cancer in multiple family members",
+            "Birth defects or developmental delays",
+            "Conditions that seem to run in families",
+            "Questions about carrier screening"
+          ]
+        },
+        "level2": {
+          "content": "Genetic counseling referrals are appropriate in multiple clinical scenarios. Prenatal indications include advanced maternal age, abnormal screening results, family history of genetic conditions, or exposure to teratogens. Cancer genetics referrals include multiple affected family members, early-onset cancers, or rare cancer types. Pediatric referrals may involve developmental delays, dysmorphic features, or suspected metabolic conditions. Adult referrals include personal or family history of hereditary conditions, preconception planning, or pharmacogenomic considerations.",
+          "keyPoints": [
+            "Prenatal: advanced maternal age, abnormal screens, family history",
+            "Cancer: multiple affected relatives, early onset, bilateral tumors",
+            "Pediatric: developmental delays, dysmorphic features, failure to thrive",
+            "Cardiovascular: family history of sudden cardiac death, cardiomyopathy",
+            "Neurologic: movement disorders, early-onset dementia family history",
+            "Preconception: carrier screening, known family variants",
+            "Pharmacogenomics: adverse drug reactions, medication optimization"
+          ]
+        },
+        "level3": {
+          "content": "Evidence-based referral guidelines have been established by professional organizations including ACMG, ACOG, NCCN, and specialty societies. Cancer genetics referral criteria include NCCN guidelines for hereditary cancer syndromes based on personal and family history. Prenatal referral criteria include ACOG recommendations for aneuploidy screening, carrier screening, and diagnostic testing. Cardiovascular genetics referrals are indicated for suspected channelopathies, cardiomyopathies, or familial hypercholesterolemia. Appropriate referral ensures timely access to risk assessment, testing, and management.",
+          "referralCriteria": {
+            "cancerGenetics": [
+              "Breast cancer diagnosed ≤50 years",
+              "Triple-negative breast cancer ≤60 years",
+              "Ovarian/fallopian tube/primary peritoneal cancer any age",
+              "Male breast cancer",
+              "Pancreatic cancer with family history",
+              "≥3 relatives with breast, ovarian, pancreatic, or prostate cancer",
+              "Colorectal or endometrial cancer <50 years or with family history",
+              "≥10 cumulative colorectal adenomas"
+            ],
+            "prenatalGenetics": [
+              "Advanced maternal age (≥35 at delivery)",
+              "Positive cell-free DNA screen",
+              "Abnormal serum screening",
+              "Ultrasound anomalies",
+              "Previous child with chromosomal abnormality",
+              "Known parental chromosome rearrangement",
+              "Consanguinity",
+              "Teratogen exposure concerns"
+            ],
+            "pediatricGenetics": [
+              "Multiple congenital anomalies",
+              "Global developmental delay",
+              "Autism spectrum disorder",
+              "Dysmorphic features",
+              "Short stature or growth abnormalities",
+              "Suspected metabolic disorder",
+              "Family history of genetic condition"
+            ]
+          }
+        },
+        "level4": {
+          "content": "Systematic referral pathways integrate clinical decision support tools, electronic health record alerts, and pedigree-based risk calculators to identify patients meeting guideline-based criteria. Quality metrics for genetic counseling services include time from referral to appointment, pre-test counseling completion rates, variant detection rates, and patient satisfaction. Barriers to appropriate referral include provider awareness gaps, geographic access limitations, and insurance coverage variability. Telegenetics and hybrid care models expand access while maintaining counseling quality.",
+          "keyPoints": [
+            "Implement EHR-based clinical decision support for referral",
+            "Utilize validated risk calculators (Tyrer-Cuzick, PREMM5, etc.)",
+            "Address referral barriers through telegenetics",
+            "Monitor quality metrics for genetic services",
+            "Ensure timely access to genetic counseling",
+            "Coordinate with primary care for appropriate referrals",
+            "Develop institutional referral pathways and protocols"
+          ]
+        },
+        "level5": {
+          "content": "Population-based approaches to genetic counseling are emerging, including universal carrier screening programs, population genomic screening initiatives (e.g., All of Us), and cascade testing programs for high-penetrance conditions. Implementation science frameworks guide the development of sustainable genetic service delivery models. Health economic analyses inform coverage decisions and resource allocation. Challenges include the expanding scope of actionable genetic findings, workforce capacity limitations, and the need for equitable access across diverse populations.",
+          "keyPoints": [
+            "Develop population-based genetic screening programs",
+            "Apply implementation science to genetic service delivery",
+            "Address workforce capacity and training needs",
+            "Ensure health equity in genetic services access",
+            "Integrate genetic counseling into primary care models",
+            "Navigate expanding scope of actionable genetic findings",
+            "Contribute to health policy and coverage decisions"
+          ]
+        }
+      },
+      "whatToExpect": {
+        "title": "What to Expect During Genetic Counseling",
+        "level1": {
+          "content": "During your appointment, the genetic counselor will ask about your health and your family's health. They will explain any conditions you are concerned about and discuss whether genetic testing might be helpful. The appointment usually lasts 30-60 minutes. You can bring a family member for support.",
+          "sessionComponents": [
+            "Discussion of your concerns and goals",
+            "Review of your health history",
+            "Collection of family health information",
+            "Education about genetic conditions",
+            "Discussion of testing options",
+            "Time for your questions",
+            "Development of a plan together"
+          ],
+          "preparationTips": [
+            "Gather information about family health history",
+            "Write down your questions",
+            "Bring any previous test results",
+            "Consider bringing a support person"
+          ]
+        },
+        "level2": {
+          "content": "A typical genetic counseling session includes intake and rapport building, detailed family history collection with pedigree construction, risk assessment, education about relevant genetic conditions, discussion of testing options with informed consent, and development of a follow-up plan. Pre-test counseling addresses the benefits, limitations, and implications of testing. Post-test counseling includes result disclosure, interpretation, and management recommendations. Sessions may be conducted in-person or via telehealth.",
+          "sessionComponents": [
+            "Intake and establishment of goals",
+            "Three-generation pedigree construction",
+            "Risk assessment and calculation",
+            "Genetic condition education with visual aids",
+            "Testing options discussion and informed consent",
+            "Psychosocial assessment and support",
+            "Management recommendations and referrals",
+            "Documentation and care coordination"
+          ],
+          "preparationTips": [
+            "Complete family history questionnaire",
+            "Gather medical records and prior test results",
+            "Research insurance coverage for genetic testing",
+            "Prepare list of questions and concerns",
+            "Consider family members' testing and results",
+            "Plan for emotional support during and after session"
+          ]
+        },
+        "level3": {
+          "content": "Genetic counseling employs evidence-based counseling frameworks including motivational interviewing, shared decision-making, and recipient-centered counseling. Sessions integrate psychoeducation, risk communication using multiple formats (frequencies, percentages, visual aids), and assessment of patient understanding through teach-back methods. Documentation includes detailed pedigree analysis, risk calculations, informed consent elements, and recommendations. Quality indicators include patient knowledge gain, decision quality, and psychosocial outcomes.",
+          "sessionComponents": [
+            "Rapport building and agenda setting",
+            "Comprehensive pedigree with medical documentation verification",
+            "Quantitative and qualitative risk assessment",
+            "Evidence-based risk communication strategies",
+            "Informed consent with documentation of understanding",
+            "Psychosocial assessment and intervention",
+            "Shared decision-making for testing and management",
+            "Care coordination and follow-up planning"
+          ],
+          "documentationElements": [
+            "Verified family history and pedigree",
+            "Risk calculations and models used",
+            "Testing discussed and patient decisions",
+            "Informed consent elements addressed",
+            "Psychosocial assessment findings",
+            "Recommendations and referrals",
+            "Follow-up plan and timeline"
+          ]
+        },
+        "level4": {
+          "content": "Advanced genetic counseling sessions address complex scenarios including multi-gene panel result interpretation, variant of uncertain significance management, discordant family testing results, and integration of genetic findings with clinical phenotype. Counselors employ motivational interviewing techniques to address ambivalence and facilitate behavior change for recommended surveillance. Documentation supports billing, quality monitoring, and continuity of care. Outcomes research informs practice improvement and demonstrates value of genetic counseling services.",
+          "sessionComponents": [
+            "Complex risk assessment using multiple models",
+            "Multi-gene panel pre-test counseling",
+            "VUS management and counseling strategies",
+            "Family variant testing coordination",
+            "Behavior change counseling for surveillance adherence",
+            "Ethical dilemma navigation and resolution",
+            "Integration with specialty care teams",
+            "Research enrollment discussion when appropriate"
+          ],
+          "qualityMetrics": [
+            "Patient knowledge assessment pre/post",
+            "Decision quality measures",
+            "Genetic testing uptake and completion",
+            "Surveillance adherence rates",
+            "Patient satisfaction scores",
+            "Variant detection rates",
+            "Time to result disclosure",
+            "Care coordination effectiveness"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary genetic counseling practice integrates advances in genomic medicine including whole exome/genome sequencing interpretation, somatic-germline integration in oncology, polygenic risk score counseling, and pharmacogenomic implementation. Sessions may address research participation, biobanking consent, and return of incidental/secondary findings. The field advances through outcomes research demonstrating the clinical utility and cost-effectiveness of genetic counseling, informing health policy and reimbursement. Competency-based training ensures practice keeps pace with rapidly evolving technology.",
+          "advancedConsiderations": [
+            "Exome/genome sequencing result interpretation",
+            "Secondary findings disclosure per ACMG recommendations",
+            "Polygenic risk score integration and communication",
+            "Tumor-germline concordance in cancer care",
+            "Research consent and biobanking considerations",
+            "Recontact obligations for variant reclassification",
+            "Cultural competency and health literacy adaptation",
+            "Contribution to health services research and policy"
+          ]
+        }
+      },
+      "familyHistoryImportance": {
+        "title": "The Importance of Family History",
+        "level1": {
+          "content": "Your family health history is like a puzzle that helps show your risk for certain conditions. Knowing what conditions have affected your relatives helps your healthcare team understand what you might need to watch for. Try to learn about the health of your parents, siblings, grandparents, aunts, uncles, and cousins.",
+          "keyInformation": [
+            "Health conditions in relatives",
+            "Age when conditions were diagnosed",
+            "Cause of death for deceased relatives",
+            "Ethnic background",
+            "Any known genetic test results in family"
+          ],
+          "tips": [
+            "Ask relatives about their health",
+            "Look at family records and documents",
+            "Create a family tree with health information",
+            "Update your family history regularly"
+          ]
+        },
+        "level2": {
+          "content": "A comprehensive family history includes a three-generation pedigree documenting health conditions, ages at diagnosis, and causes of death. This information enables risk stratification for hereditary conditions and guides testing recommendations. Key elements include cancer diagnoses with types, ages, and laterality; cardiovascular events; birth defects; developmental delays; and pregnancy losses. Documentation of ethnicity informs carrier screening recommendations based on population-specific risks.",
+          "pedigreeElements": [
+            "Three generations minimum (parents, siblings, children, grandparents, aunts/uncles, cousins)",
+            "All cancer diagnoses with type, age, and bilateral/multiple primary status",
+            "Cardiovascular disease including age at onset",
+            "Neurological conditions and age at onset",
+            "Birth defects and congenital anomalies",
+            "Pregnancy losses and stillbirths",
+            "Developmental delays and intellectual disability",
+            "Known genetic test results in family",
+            "Ethnicity and ancestry information",
+            "Consanguinity"
+          ]
+        },
+        "level3": {
+          "content": "Systematic family history collection using validated tools (e.g., Surgeon General's My Family Health Portrait) improves completeness and clinical utility. Pedigree analysis identifies inheritance patterns (autosomal dominant, recessive, X-linked, mitochondrial) and red flags for hereditary syndromes. Risk calculation tools integrate family history data to generate quantitative risk estimates. Medical record verification of key diagnoses improves accuracy, as self-reported family history has known limitations in specificity.",
+          "redFlagsForHereditary": [
+            "Multiple affected relatives with same/related cancers",
+            "Early age at diagnosis (before typical age)",
+            "Bilateral or multifocal disease",
+            "Multiple primary cancers in same individual",
+            "Rare tumor types (e.g., male breast cancer, ovarian cancer)",
+            "Clustering of related conditions",
+            "Autosomal dominant inheritance pattern",
+            "Consanguinity with recessive conditions"
+          ],
+          "limitations": [
+            "Self-report accuracy varies by condition",
+            "Small family size limits information",
+            "Incomplete penetrance masks inheritance",
+            "Adoption or estrangement limits access",
+            "De novo mutations have no family history"
+          ]
+        },
+        "level4": {
+          "content": "Advanced pedigree analysis incorporates phenotypic details that inform testing strategies, including tumor histology, biomarkers, and treatment response. Integration with electronic health records enables systematic family history collection and clinical decision support alerts. Challenges include incomplete penetrance, variable expressivity, and phenocopies that complicate pattern recognition. Understanding founder mutations and population genetics informs ancestry-specific risk assessment and variant interpretation.",
+          "advancedElements": [
+            "Tumor histology and biomarker status (ER, HER2, MSI, etc.)",
+            "Treatment response and outcomes",
+            "Age-specific penetrance considerations",
+            "Phenocopy recognition and documentation",
+            "Founder mutation awareness by ancestry",
+            "De novo mutation rate considerations",
+            "Germline mosaicism implications",
+            "EHR integration for systematic collection"
+          ]
+        },
+        "level5": {
+          "content": "Precision family history integrates phenotypic data with genomic findings, including segregation analysis for variant interpretation, penetrance estimation from family data, and identification of genetic modifiers. Population-based initiatives aim to enhance family history collection at scale while addressing privacy and data sharing considerations. Emerging tools incorporate machine learning for pattern recognition and risk prediction, while research advances understanding of gene-environment interactions that modify hereditary risk.",
+          "advancedConsiderations": [
+            "Segregation analysis for variant classification",
+            "Family-based penetrance estimation",
+            "Modifier gene and polygenic background effects",
+            "Gene-environment interaction documentation",
+            "Machine learning for pattern recognition",
+            "Population database integration",
+            "Privacy-preserving family data sharing",
+            "Longitudinal family history updating protocols"
+          ]
+        }
+      }
+    }
+  },
+  "resources": {
+    "professionalOrganizations": [
+      {
+        "name": "National Society of Genetic Counselors (NSGC)",
+        "url": "https://www.nsgc.org",
+        "description": "Professional organization for genetic counselors with find-a-counselor tool"
+      },
+      {
+        "name": "American College of Medical Genetics and Genomics (ACMG)",
+        "url": "https://www.acmg.net",
+        "description": "Professional organization for medical geneticists and genetic counselors"
+      }
+    ],
+    "patientResources": [
+      {
+        "name": "Genetic Alliance",
+        "url": "https://www.geneticalliance.org",
+        "description": "Patient advocacy organization with educational resources"
+      },
+      {
+        "name": "My Family Health Portrait",
+        "url": "https://phgkb.cdc.gov/FHH/html/index.html",
+        "description": "Surgeon General's tool for collecting family health history"
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "id": "structure-testes",
+  "type": "structure",
+  "name": "Testes",
+  "alternateNames": ["Testicles", "Male gonads", "Orchis"],
+  "fmaId": "FMA:7210",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The testes are two egg-shaped organs that make sperm and male hormones.",
+      "explanation": "The testes are located in a pouch of skin called the scrotum, which hangs outside the body. They have two important jobs: making sperm (the cells needed to make a baby) and making testosterone (the hormone that gives boys deeper voices and helps them grow facial hair during puberty). The testes need to be slightly cooler than body temperature to make healthy sperm, which is why they hang outside the body.",
+      "keyTerms": [
+        { "term": "sperm", "definition": "Tiny cells made by males that can join with a female's egg to make a baby" },
+        { "term": "testosterone", "definition": "A hormone that helps develop male characteristics like a deeper voice and facial hair" },
+        { "term": "scrotum", "definition": "The pouch of skin that holds the testes outside the body" }
+      ],
+      "analogies": ["Think of the testes like a factory that makes two products: sperm (tiny swimming cells) and testosterone (a chemical messenger that helps boys become men)."],
+      "examples": ["When boys go through puberty, their testes start making more testosterone, which causes their voice to deepen and muscles to grow stronger."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The testes are paired male reproductive organs responsible for spermatogenesis and testosterone production, located within the scrotum.",
+      "explanation": "Each testis is an oval organ about 4-5 cm long, surrounded by a tough fibrous capsule called the tunica albuginea. Inside, the testis is divided into 200-300 lobules, each containing 1-4 highly coiled seminiferous tubules where sperm are produced. Between the tubules are Leydig cells (interstitial cells) that produce testosterone. The testes descend from the abdomen into the scrotum before birth, and their external location maintains a temperature 2-3 degrees Celsius lower than body temperature, which is essential for proper sperm development.",
+      "keyTerms": [
+        { "term": "seminiferous tubules", "definition": "Coiled tubes within the testes where sperm cells are produced", "pronunciation": "sem-in-IF-er-us" },
+        { "term": "Leydig cells", "definition": "Cells between seminiferous tubules that produce testosterone", "pronunciation": "LY-dig" },
+        { "term": "tunica albuginea", "definition": "The thick white fibrous capsule surrounding each testis", "pronunciation": "TOO-nih-kah al-byoo-JIN-ee-ah" },
+        { "term": "spermatogenesis", "definition": "The process of sperm cell formation and maturation", "pronunciation": "sper-mat-oh-JEN-eh-sis" }
+      ],
+      "analogies": ["The testis is like a factory with many production lines (seminiferous tubules) making sperm, while separate workers (Leydig cells) in the spaces between make hormones."],
+      "examples": ["Undescended testes (cryptorchidism) can lead to infertility because the higher body temperature damages sperm production."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The testes are paired endocrine and exocrine glands that produce spermatozoa within seminiferous tubules and synthesize testosterone in Leydig cells under hypothalamic-pituitary-gonadal axis regulation.",
+      "explanation": "Each testis weighs approximately 10-15 grams and is enclosed by the tunica vaginalis (derived from peritoneum), tunica albuginea (dense connective tissue), and tunica vasculosa (vascular layer). The parenchyma contains seminiferous tubules lined with Sertoli cells and developing germ cells at various stages of spermatogenesis. Sertoli cells provide structural support, form the blood-testis barrier, secrete androgen-binding protein, and respond to FSH. Leydig cells in the interstitium respond to LH by producing testosterone. The seminiferous tubules converge into the rete testis, which connects to efferent ductules leading to the epididymis. Blood supply is via the testicular artery (from abdominal aorta), and venous drainage is through the pampiniform plexus, which helps cool arterial blood entering the testis.",
+      "keyTerms": [
+        { "term": "Sertoli cells", "definition": "Supporting cells in seminiferous tubules that nurture developing sperm and form the blood-testis barrier", "pronunciation": "ser-TOH-lee" },
+        { "term": "blood-testis barrier", "definition": "Tight junctions between Sertoli cells that protect developing sperm from immune attack" },
+        { "term": "rete testis", "definition": "Network of channels in the mediastinum testis that collect sperm from seminiferous tubules", "pronunciation": "REE-tee TES-tis" },
+        { "term": "pampiniform plexus", "definition": "Network of veins surrounding the testicular artery that functions as a countercurrent heat exchanger", "pronunciation": "pam-PIN-ih-form" },
+        { "term": "androgen-binding protein", "definition": "Protein secreted by Sertoli cells that maintains high testosterone concentration in seminiferous tubules" }
+      ],
+      "examples": ["Varicocele (dilated pampiniform plexus) can impair the countercurrent heat exchange mechanism and lead to subfertility."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The testes integrate complex neuroendocrine signaling with cellular differentiation programs to coordinate spermatogenesis and steroidogenesis, with Sertoli cells forming an immunologically privileged niche essential for germ cell development.",
+      "explanation": "Spermatogenesis occurs in seminiferous tubules over approximately 74 days, progressing from spermatogonia through primary and secondary spermatocytes to spermatids and finally spermatozoa. The blood-testis barrier, formed by tight junctions (occludin, claudins, ZO-1) between adjacent Sertoli cells, divides the seminiferous epithelium into basal and adluminal compartments, protecting post-meiotic germ cells from autoimmune recognition. Sertoli cells express FSH receptors and produce inhibin B (negative feedback on FSH), anti-Mullerian hormone (AMH), and various growth factors (GDNF, SCF). Leydig cells express LH receptors and utilize cholesterol (primarily from LDL) for testosterone synthesis via the steroidogenic pathway involving StAR protein, P450scc, and 17β-hydroxysteroid dehydrogenase. Intratesticular testosterone concentration is 50-100 times higher than serum levels, maintained by androgen-binding protein. The testis also produces estradiol via aromatase in Sertoli and Leydig cells.",
+      "keyTerms": [
+        { "term": "StAR protein", "definition": "Steroidogenic acute regulatory protein that transports cholesterol into mitochondria for steroid synthesis" },
+        { "term": "inhibin B", "definition": "Glycoprotein hormone produced by Sertoli cells that selectively inhibits FSH secretion" },
+        { "term": "GDNF", "definition": "Glial cell-derived neurotrophic factor that maintains spermatogonial stem cell self-renewal" },
+        { "term": "immunologically privileged site", "definition": "Location where foreign antigens are tolerated without provoking an immune response" },
+        { "term": "Sertoli cell only syndrome", "definition": "Absence of germ cells with only Sertoli cells present in seminiferous tubules, causing azoospermia" }
+      ],
+      "clinicalNotes": "FSH and inhibin B levels help distinguish between primary (testicular) and secondary (hypothalamic-pituitary) causes of male infertility. Low inhibin B with elevated FSH suggests Sertoli cell dysfunction or germ cell loss."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The testis represents a sophisticated microenvironment where somatic-germ cell interactions, immunomodulatory mechanisms, and hormonal signaling converge to maintain lifelong spermatogenesis, with clinical implications spanning fertility medicine, oncology, and endocrinology.",
+      "explanation": "The testicular microenvironment maintains stem cell niches (spermatogonial stem cells at the basement membrane) while orchestrating the spermatogenic wave along seminiferous tubules. Sertoli cell number, established during fetal and prepubertal development, determines adult sperm production capacity. Molecular regulation involves transcription factors (SOX9, SF1, WT1 in Sertoli cells; DAZL, VASA in germ cells), epigenetic reprogramming during meiosis, and stage-specific gene expression. The testis is an immune-privileged site through multiple mechanisms: blood-testis barrier, local immunosuppressive factors (TGF-β, IDO), Fas ligand expression, and regulatory T cells. This privilege has implications for testicular tumors (often immunologically 'cold') and for graft tolerance. Clinical assessment includes hormone panels (testosterone, LH, FSH, inhibin B, AMH), semen analysis (WHO criteria), testicular ultrasound, and genetic testing (karyotype, Y chromosome microdeletions, CFTR mutations). Fertility preservation options include sperm cryopreservation, testicular sperm extraction (TESE/micro-TESE), and experimental testicular tissue banking in prepubertal boys facing gonadotoxic treatment.",
+      "keyTerms": [
+        { "term": "Y chromosome microdeletions", "definition": "Deletions in AZFa, AZFb, or AZFc regions affecting genes essential for spermatogenesis; found in 10-15% of men with azoospermia" },
+        { "term": "micro-TESE", "definition": "Microsurgical testicular sperm extraction using operating microscope to identify seminiferous tubules with active spermatogenesis" },
+        { "term": "spermatogenic wave", "definition": "Spatial and temporal organization of spermatogenesis along seminiferous tubules ensuring continuous sperm production" },
+        { "term": "WHO semen analysis criteria", "definition": "Standardized parameters including volume (≥1.5mL), concentration (≥15M/mL), motility (≥40%), and morphology (≥4% normal)" },
+        { "term": "AZF regions", "definition": "Azoospermia factor regions on Y chromosome long arm containing genes critical for spermatogenesis" }
+      ],
+      "clinicalNotes": "In men with non-obstructive azoospermia, Y chromosome microdeletion analysis guides prognosis: AZFa/b deletions have virtually no chance of sperm retrieval, while AZFc deletions have 50-60% sperm retrieval rates with micro-TESE. Testicular tumors, predominantly germ cell tumors, are staged with serum markers (AFP, β-hCG, LDH), imaging, and histopathology, with excellent cure rates even in advanced disease."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "grays-anatomy-41",
+      "type": "textbook",
+      "title": "Gray's Anatomy",
+      "authors": ["Susan Standring"],
+      "source": "Gray's Anatomy: The Anatomical Basis of Clinical Practice, 42nd Edition",
+      "chapter": "Male Reproductive System"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-reproductive-male", "targetType": "system", "relationship": "parent", "label": "Male Reproductive System" },
+    { "targetId": "structure-epididymis", "targetType": "structure", "relationship": "related", "label": "Epididymis" },
+    { "targetId": "process-spermatogenesis", "targetType": "process", "relationship": "related", "label": "Spermatogenesis" },
+    { "targetId": "pathway-hpg-axis", "targetType": "pathway", "relationship": "related", "label": "HPG Axis" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:7210"],
+    "topics": ["anatomy", "physiology", "endocrinology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "nbme": true, "shelf": ["surgery", "medicine", "ob-gyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

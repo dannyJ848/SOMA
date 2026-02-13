@@ -1,0 +1,328 @@
+/**
+ * Medication Safety Review Styles
+ */
+
+.safety-review {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.review-header {
+  margin-bottom: 24px;
+}
+
+.review-header h2 {
+  margin: 0 0 8px 0;
+  color: #1f2937;
+}
+
+.review-description {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Scan Prompt */
+.scan-prompt {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+
+.current-summary {
+  margin-bottom: 24px;
+}
+
+.current-summary h3 {
+  margin: 0 0 16px 0;
+  color: #374151;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.btn-scan {
+  padding: 16px 48px;
+  font-size: 18px;
+}
+
+/* Results Summary */
+.scan-results-summary {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.results-header h3 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.results-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.critical-warning {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-number.total {
+  color: #6b7280;
+}
+
+.stat-number.contraindicated {
+  color: #7f1d1d;
+}
+
+.stat-number.major {
+  color: #dc2626;
+}
+
+.stat-number.moderate {
+  color: #f59e0b;
+}
+
+.stat-number.minor {
+  color: #3b82f6;
+}
+
+.stat-card .stat-label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.by-type-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #6b7280;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.type-stat {
+  background-color: #f3f4f6;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* Filters */
+.filters-section {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Alerts Container */
+.alerts-container {
+  min-height: 200px;
+}
+
+.no-alerts {
+  text-align: center;
+  padding: 48px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+}
+
+.no-alerts-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.no-alerts h3 {
+  margin: 0 0 8px 0;
+  color: #1f2937;
+}
+
+.no-alerts p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Print View */
+.print-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.print-view-header h2 {
+  margin: 0;
+}
+
+.print-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.print-content {
+  background-color: #f9fafb;
+  padding: 32px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+/* Button Styles */
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .summary-stats {
+    gap: 24px;
+  }
+  
+  .filters-section {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .results-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .safety-review > *:not(.print-content) {
+    display: none;
+  }
+  
+  .print-content {
+    background-color: white;
+    padding: 0;
+  }
+}

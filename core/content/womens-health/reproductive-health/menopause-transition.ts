@@ -1,0 +1,320 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const menopauseTransition: LegacyWomensHealthContent = {
+  id: 'concept-menopause-transition',
+  type: 'concept',
+  name: 'Menopause Transition',
+  alternateNames: ['Perimenopause', 'Climacteric', 'Change of life'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Menopause is when your periods stop permanently, usually around age 51. The years leading up to it, called perimenopause, bring changes to your body as hormone levels shift.',
+      explanation: `**What is Menopause?**
+Menopause means your periods have stopped for good. You've officially reached menopause when you haven't had a period for 12 months in a row.
+
+**Perimenopause (The Transition):**
+This is the time before menopause when your body starts changing. It can last 4-8 years.
+
+**Common Symptoms:**
+- **Hot flashes:** Sudden feelings of heat, often with sweating
+- **Night sweats:** Hot flashes that happen during sleep
+- **Irregular periods:** May become heavier, lighter, more or less frequent
+- **Sleep problems:** Trouble falling or staying asleep
+- **Mood changes:** Irritability, anxiety, or feeling down
+- **Vaginal dryness:** Can make sex uncomfortable
+
+**What Helps:**
+- Dress in layers for hot flashes
+- Keep your bedroom cool
+- Regular exercise
+- Talk to your doctor about treatment options if symptoms are bothersome
+
+**Important to Know:**
+- Menopause is natural, not a disease
+- You can still get pregnant during perimenopause until 12 months after your last period
+- Many symptoms improve after menopause`,
+      keyTerms: [
+        { term: 'menopause', definition: 'When your periods stop permanently, confirmed after 12 months without a period' },
+        { term: 'perimenopause', definition: 'The transition years before menopause when periods become irregular' },
+        { term: 'hot flash', definition: 'A sudden feeling of warmth spreading through your body, often with sweating' },
+      ],
+      analogies: ['Think of perimenopause like a dimmer switch slowly turning down the lights, rather than a sudden off switch.'],
+      examples: ['Waking up at night drenched in sweat', 'Going from regular monthly periods to skipping several months', 'Feeling hot suddenly even in a cool room'],
+    },
+    2: {
+      level: 2,
+      summary: 'The menopause transition involves declining ovarian function leading to irregular cycles, vasomotor symptoms, and urogenital changes, with final menstrual period occurring at average age 51.',
+      explanation: `**Stages (STRAW+10 Staging):**
+
+*Late Reproductive:*
+- Subtle changes in cycle length
+- Decreased fertility
+
+*Early Perimenopause:*
+- Cycle length varies by ≥7 days
+- Symptoms may begin
+
+*Late Perimenopause:*
+- Skipped periods (≥60 days between cycles)
+- Vasomotor symptoms peak
+
+*Postmenopause:*
+- 12 months after final menstrual period
+- Early postmenopause: First 6 years
+- Late postmenopause: Beyond 6 years
+
+**Hormonal Changes:**
+- Declining inhibin B and AMH
+- Rising FSH (often first measurable change)
+- Fluctuating estrogen (can be high or low)
+- Eventually, consistently low estrogen
+
+**Common Symptoms:**
+
+*Vasomotor (75% of women):*
+- Hot flashes: Sudden heat, flushing, sweating
+- Night sweats
+- Duration: Average 7 years, may persist >10 years
+
+*Urogenital:*
+- Vaginal dryness, irritation
+- Dyspareunia (painful intercourse)
+- Urinary frequency, urgency
+
+*Other:*
+- Sleep disturbance
+- Mood changes
+- Cognitive changes ("brain fog")
+- Joint aches
+
+**Health Considerations:**
+- Cardiovascular risk increases
+- Bone loss accelerates
+- Weight distribution shifts`,
+      keyTerms: [
+        { term: 'vasomotor symptoms', definition: 'Hot flashes and night sweats caused by changes in blood vessel regulation' },
+        { term: 'STRAW+10', definition: 'Staging system for reproductive aging from reproductive years through postmenopause' },
+        { term: 'urogenital atrophy', definition: 'Thinning and dryness of vaginal and urinary tissues due to low estrogen' },
+        { term: 'FSH', definition: 'Follicle-stimulating hormone; rises as ovarian function declines' },
+      ],
+      analogies: ['Estrogen levels in perimenopause are like a rollercoaster - unpredictable ups and downs before the ride ends.'],
+    },
+    3: {
+      level: 3,
+      summary: 'Menopause management includes hormone therapy for vasomotor symptoms and genitourinary syndrome, non-hormonal alternatives, and preventive care for cardiovascular and bone health.',
+      explanation: `**Hormone Therapy (HT):**
+
+*Indications:*
+- Bothersome vasomotor symptoms
+- Genitourinary syndrome of menopause (GSM)
+- Premature ovarian insufficiency (<40 years)
+
+*Types:*
+- Estrogen-only: For women without uterus
+- Combined (estrogen + progestogen): Required with uterus to protect endometrium
+- Routes: Oral, transdermal, vaginal
+
+*Timing Hypothesis:*
+- Most beneficial if started <60 years old or within 10 years of menopause
+- Favorable benefit-risk in this window
+- Not recommended for initiation >10 years post-menopause for VMS
+
+*Risks:*
+- VTE (higher with oral vs. transdermal)
+- Breast cancer (small increase with combined HT, appears after ~5 years)
+- Stroke (rare increase)
+
+**Non-Hormonal Options for VMS:**
+- SSRIs/SNRIs: Paroxetine, venlafaxine, escitalopram
+- Gabapentin
+- Clonidine
+- Cognitive behavioral therapy
+- Fezolinetant (neurokinin 3 receptor antagonist)
+
+**Genitourinary Syndrome of Menopause:**
+- First-line: Vaginal moisturizers, lubricants
+- Vaginal estrogen: Low systemic absorption, safe for most
+- DHEA vaginal insert (prasterone)
+- Ospemifene (oral SERM)
+
+**Preventive Care:**
+- Bone density screening (DEXA) at 65, or earlier with risk factors
+- Cardiovascular risk assessment
+- Colorectal cancer screening
+- Mammography per guidelines`,
+      keyTerms: [
+        { term: 'hormone therapy', definition: 'Estrogen with or without progestogen to treat menopause symptoms' },
+        { term: 'GSM', definition: 'Genitourinary syndrome of menopause - vaginal and urinary symptoms from estrogen deficiency' },
+        { term: 'transdermal estrogen', definition: 'Estrogen delivered through skin patch, lower VTE risk than oral' },
+        { term: 'timing hypothesis', definition: 'Concept that HT is most beneficial when started close to menopause' },
+      ],
+      clinicalNotes: 'Use lowest effective dose for shortest duration needed for VMS. Transdermal estrogen preferred for women with VTE risk factors, obesity, hypertriglyceridemia. Vaginal estrogen is safe for most breast cancer survivors for GSM.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced menopause management requires individualized hormone therapy decisions considering cardiovascular risk, breast cancer history, bone health, and quality of life, with regular reassessment and familiarity with emerging therapies.',
+      explanation: `**Individualized Hormone Therapy:**
+
+*Cardiovascular Considerations:*
+- Favorable lipid effects with oral estrogen (increases HDL)
+- Transdermal estrogen neutral on lipids
+- No primary prevention indication for CV disease
+- Caution with existing CVD
+
+*Progestogen Selection:*
+- Micronized progesterone: May have less breast cancer risk
+- Synthetic progestins: Various metabolic profiles
+- Levonorgestrel IUD: Option for endometrial protection
+
+*Duration of Use:*
+- Reassess annually
+- No arbitrary limit if benefits outweigh risks
+- Extended use may be appropriate for premature menopause
+
+**Special Populations:**
+
+*Premature Ovarian Insufficiency (<40):*
+- HT recommended until average menopause age
+- Higher doses often needed
+- Long-term bone and cardiovascular protection
+
+*History of Breast Cancer:*
+- Vaginal estrogen generally acceptable for GSM
+- Systemic HT controversial; consider non-hormonal options
+- BRCA carriers: Discuss with oncology
+
+*History of VTE:*
+- Transdermal estrogen may be considered with hematology consultation
+- Consider non-hormonal alternatives
+
+*Metabolic Syndrome/Obesity:*
+- Transdermal preferred (avoids first-pass hepatic metabolism)
+- Weight management counseling
+
+**Long-term Health:**
+
+*Bone Health:*
+- Estrogen loss: 2-3% bone loss annually for first 5 years
+- HT prevents bone loss
+- Transition to bisphosphonate if HT discontinued
+- DEXA monitoring
+
+*Cognition:*
+- HT does not prevent dementia
+- May worsen cognition if started >65 years
+- Early HT does not appear harmful to cognition
+
+**Emerging Therapies:**
+- Tissue-selective estrogen complex (TSEC)
+- Neurokinin 3 receptor antagonists
+- Estetrol (natural estrogen)
+- Selective progesterone receptor modulators`,
+      keyTerms: [
+        { term: 'micronized progesterone', definition: 'Natural progesterone in small particle form, may have better safety profile than synthetic progestins' },
+        { term: 'premature ovarian insufficiency', definition: 'Loss of ovarian function before age 40' },
+        { term: 'TSEC', definition: 'Tissue-selective estrogen complex; combines estrogen with bazedoxifene (SERM)' },
+        { term: 'neurokinin 3 receptor', definition: 'CNS receptor involved in thermoregulation; target for non-hormonal VMS treatment' },
+      ],
+      clinicalNotes: 'Micronized progesterone 200 mg for 12-14 days/month or continuously is standard. For POI, use higher estrogen doses (equivalent to COC). Bioidentical hormones from compounding pharmacies are not recommended - lack standardization and safety data.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert menopause care involves nuanced interpretation of evidence, management of complex cases including cancer survivors and women with multiple comorbidities, understanding of regulatory differences, and providing evidence-based counseling in a landscape of misinformation.',
+      explanation: `**Evidence Interpretation:**
+
+*WHI Study Context:*
+- Mean age 63 at enrollment (past timing window)
+- Conjugated equine estrogen + medroxyprogesterone acetate
+- Does not represent all HT formulations or timing
+- Overemphasis on risks led to undertreated symptoms
+
+*Current Evidence Synthesis:*
+- Early initiation: Net benefit for most symptomatic women
+- Extended use decisions: Individualized risk-benefit
+- Breast cancer risk: Small absolute increase, varies by formulation
+- CVD: Neutral in timing window, potential harm in older women
+
+**Complex Cases:**
+
+*Breast Cancer Survivors:*
+- GSM: Vaginal estrogen acceptable for most, especially ER-negative
+- VMS: Non-hormonal options first-line
+- Aromatase inhibitor-related symptoms: Challenging, multidisciplinary approach
+- HABITS trial (halted early) vs. Stockholm study (neutral)
+
+*Thrombophilia:*
+- Transdermal estrogen does not increase VTE risk in same way as oral
+- Factor V Leiden, prothrombin mutation: Consider with hematology
+- Careful patient selection, not absolute contraindication
+
+*Cardiovascular Disease:*
+- Existing CVD: Generally avoid HT
+- Risk factors only: Individualize, consider transdermal
+
+**Compounded Bioidentical Hormones:**
+- FDA-approved bioidentical options exist (patches, micronized progesterone)
+- Compounded products lack standardization, purity testing
+- Salivary hormone testing not validated
+- Counsel patients on evidence-based alternatives
+
+**Global Perspectives:**
+- Regulatory approval differs by country
+- Duration recommendations vary
+- Cultural factors affect treatment acceptance
+
+**Quality of Life Framework:**
+- Symptom severity assessment tools (MRS, MENQOL)
+- Shared decision-making
+- Balance of benefits, risks, and patient values
+- Regular reassessment with continued symptom control
+
+**Emerging Research:**
+- Role of microbiome in menopause symptoms
+- Genetic predictors of symptom severity
+- Long-term outcomes with different HT formulations
+- Non-hormonal targets for bone protection`,
+      keyTerms: [
+        { term: 'WHI', definition: 'Women\'s Health Initiative - large RCT that changed understanding of HT risks and benefits' },
+        { term: 'timing hypothesis', definition: 'Theory that HT benefits are greatest when initiated close to menopause onset' },
+        { term: 'MRS', definition: 'Menopause Rating Scale - validated tool for assessing symptom severity' },
+        { term: 'bioidentical', definition: 'Hormones chemically identical to endogenous human hormones; FDA-approved options available' },
+      ],
+      clinicalNotes: 'Help patients navigate misinformation about "natural" vs. "synthetic" hormones. FDA-approved bioidentical hormones (estradiol patches, micronized progesterone) provide standardized, tested options. Duration of HT should be individualized; 5-year arbitrary limit is not evidence-based. Document shared decision-making thoroughly.',
+    },
+  },
+  media: [],
+  citations: [
+    {
+      id: 'nams-position-2022',
+      type: 'article',
+      title: 'The 2022 Hormone Therapy Position Statement',
+      source: 'North American Menopause Society',
+      url: 'https://www.menopause.org/publications/professional-publications',
+      license: 'Copyright NAMS',
+    },
+    {
+      id: 'straw-staging',
+      type: 'article',
+      title: 'STRAW+10: Reproductive Aging Staging System',
+      source: 'Climacteric',
+      license: 'Copyright Informa',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'concept-menstrual-cycle-explained', targetType: 'concept', relationship: 'related', label: 'Menstrual Cycle' },
+    { targetId: 'concept-osteoporosis-prevention', targetType: 'concept', relationship: 'related', label: 'Osteoporosis Prevention' },
+    { targetId: 'concept-perimenopause-mood-changes', targetType: 'concept', relationship: 'related', label: 'Perimenopause Mood Changes' },
+  ],
+  tags: {
+    systems: ['reproductive', 'endocrine'],
+    topics: ['gynecology', 'patient-education', 'womens-health', 'menopause'],
+    keywords: ['menopause', 'perimenopause', 'hot flashes', 'hormone therapy', 'HRT', 'vasomotor symptoms'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn', 'medicine'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

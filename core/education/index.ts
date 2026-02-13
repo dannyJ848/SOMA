@@ -1,0 +1,124 @@
+/**
+ * Education Module Index
+ * 
+ * Exports all educational types and registers all modules.
+ */
+
+// Types
+export * from './types.js';
+
+// Registry
+export * from './registry.js';
+
+// Module registration will happen here
+import { registerModule } from './registry.js';
+
+// Import and register all modules
+export async function initializeEducationModules(): Promise<void> {
+  // Specialty modules - Endocrinology
+  const { type2DiabetesModule } = await import('./modules/endocrinology/type2-diabetes.js');
+  registerModule(type2DiabetesModule);
+  
+  const { hypothyroidismModule } = await import('./modules/endocrinology/hypothyroidism-comprehensive.js');
+  registerModule(hypothyroidismModule);
+  
+  // Specialty modules - Cardiology
+  const { hypertensionModule } = await import('./modules/cardiology/hypertension.js');
+  registerModule(hypertensionModule);
+  
+  // Specialty modules - Neurology
+  const { headacheModule } = await import('./modules/neurology/headache.js');
+  registerModule(headacheModule);
+  
+  // Specialty modules - Gastroenterology
+  const { gerdModule } = await import('./modules/gastroenterology/gerd.js');
+  registerModule(gerdModule);
+  
+  const { ibsModule } = await import('./modules/gastroenterology/gastro-ibs-comprehensive.js');
+  registerModule(ibsModule);
+  
+  // Lab interpretation modules
+  const { cbcModule } = await import('./modules/labs/cbc.js');
+  registerModule(cbcModule);
+  
+  const { lipidsModule } = await import('./modules/labs/lipids.js');
+  registerModule(lipidsModule);
+  
+  const { thyroidModule } = await import('./modules/labs/thyroid.js');
+  registerModule(thyroidModule);
+  
+  const { labThyroidInterpretationModule } = await import('./modules/lab-thyroid-interpretation.js');
+  registerModule(labThyroidInterpretationModule);
+  
+  // Specialty modules - Nephrology
+  const { ckdComprehensiveModule } = await import('./modules/nephrology/ckd-comprehensive.js');
+  registerModule(ckdComprehensiveModule);
+  
+  // Specialty modules - Hematology
+  const { anemiaModule } = await import('./modules/hematology/anemia-comprehensive.js');
+  registerModule(anemiaModule);
+  
+  // Specialty modules - Dermatology
+  const { acneComprehensiveModule } = await import('./modules/dermatology/acne-comprehensive.js');
+  registerModule(acneComprehensiveModule);
+  
+  // Specialty modules - Pulmonology
+  const { asthmaModule } = await import('./modules/pulmonology/asthma-comprehensive.js');
+  registerModule(asthmaModule);
+  
+  // Specialty modules - Infectious Disease
+  const { covid19Module } = await import('./modules/infectious-disease/covid19-comprehensive.js');
+  registerModule(covid19Module);
+  
+  // Specialty modules - Allergy & Immunology
+  const { allergicRhinitisModule } = await import('./modules/allergy-immunology/allergic-rhinitis-comprehensive.js');
+  registerModule(allergicRhinitisModule);
+  
+  // Specialty modules - Urology
+  const { bphModule } = await import('./modules/urology/bph-comprehensive.js');
+  registerModule(bphModule);
+  
+  // NEW MODULES - Comprehensive Educational Content
+  // Specialty modules - Cardiology (New)
+  const { atrialFibrillationModule } = await import('./modules/cardiology/atrial-fibrillation.js');
+  registerModule(atrialFibrillationModule);
+  
+  // Specialty modules - Endocrinology (New)
+  const { type1DiabetesModule } = await import('./modules/endocrinology/type1-diabetes.js');
+  registerModule(type1DiabetesModule);
+  
+  // Specialty modules - Neurology (New)
+  const { migraineModule } = await import('./modules/neurology/migraine-comprehensive.js');
+  registerModule(migraineModule);
+  
+  // Specialty modules - Oncology (New)
+  const { colorectalCancerScreeningModule } = await import('./modules/oncology/colorectal-cancer-screening.js');
+  registerModule(colorectalCancerScreeningModule);
+  
+  console.log('[Education] Modules initialized');
+}
+
+// Re-export modules for direct access
+export { type2DiabetesModule } from './modules/endocrinology/type2-diabetes.js';
+export { hypothyroidismModule } from './modules/endocrinology/hypothyroidism-comprehensive.js';
+export { hypertensionModule } from './modules/cardiology/hypertension.js';
+export { cbcModule } from './modules/labs/cbc.js';
+export { lipidsModule } from './modules/labs/lipids.js';
+export { thyroidModule } from './modules/labs/thyroid.js';
+export { labThyroidInterpretationModule } from './modules/lab-thyroid-interpretation.js';
+export { headacheModule } from './modules/neurology/headache.js';
+export { gerdModule } from './modules/gastroenterology/gerd.js';
+export { ibsModule } from './modules/gastroenterology/gastro-ibs-comprehensive.js';
+export { anemiaModule } from './modules/hematology/anemia-comprehensive.js';
+export { ckdComprehensiveModule } from './modules/nephrology/ckd-comprehensive.js';
+export { acneComprehensiveModule } from './modules/dermatology/acne-comprehensive.js';
+export { asthmaModule } from './modules/pulmonology/asthma-comprehensive.js';
+export { covid19Module } from './modules/infectious-disease/covid19-comprehensive.js';
+export { allergicRhinitisModule } from './modules/allergy-immunology/allergic-rhinitis-comprehensive.js';
+export { bphModule } from './modules/urology/bph-comprehensive.js';
+
+// NEW MODULES - Comprehensive Educational Content
+export { atrialFibrillationModule } from './modules/cardiology/atrial-fibrillation.js';
+export { type1DiabetesModule } from './modules/endocrinology/type1-diabetes.js';
+export { migraineModule } from './modules/neurology/migraine-comprehensive.js';
+export { colorectalCancerScreeningModule } from './modules/oncology/colorectal-cancer-screening.js';

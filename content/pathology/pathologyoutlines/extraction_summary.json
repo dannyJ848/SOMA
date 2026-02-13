@@ -1,0 +1,52 @@
+[
+  {
+    "category": "adenomahp",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "adrenalgross",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "breastbenign",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "cellulargeneral",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "cnstumor",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "earnonneoplastic",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "endocrinegeneral",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "esophagusnonneoplastic",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "eyegeneral",
+    "success": true,
+    "images": 6
+  },
+  {
+    "category": "gallbladdergeneral",
+    "success": true,
+    "images": 6
+  }
+]

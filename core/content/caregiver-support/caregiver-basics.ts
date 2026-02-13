@@ -1,0 +1,745 @@
+/**
+ * Caregiver Basics - Educational Content
+ *
+ * Comprehensive overview of caregiving roles, responsibilities, and foundational
+ * knowledge for family caregivers. This content provides essential guidance on
+ * understanding what caregiving entails and how to approach this important role.
+ */
+
+import { EducationalContent } from '../types';
+
+export const caregiverBasics: EducationalContent = {
+  id: 'caregiver-basics',
+  type: 'concept',
+  name: 'Caregiver Basics',
+  alternateNames: ['Caregiving Fundamentals', 'Understanding Caregiving', 'Caregiver Foundation'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Caregiving means helping someone who needs extra support with everyday things like eating, getting around, or taking medicine.',
+      explanation: `**What Is a Caregiver?**
+
+A caregiver is someone who helps another person who is sick, hurt, disabled, or getting older. The person you help might be a parent, spouse, child, or friend.
+
+**What Caregivers Do**
+
+Caregivers help with many different things:
+
+* **Personal care**: Helping someone bathe, dress, or use the bathroom
+* **Meals**: Making sure they eat healthy food and drink enough water
+* **Medicine**: Helping them remember to take their medicine
+* **Getting around**: Helping them walk, get in and out of bed, or go to appointments
+* **Company**: Being there so they don't feel lonely
+* **Safety**: Making sure their home is safe and they don't fall
+
+**Who Can Be a Caregiver**
+
+Anyone can become a caregiver. You don't need special training to start. Most caregivers are regular people who want to help someone they love. You learn as you go.
+
+**It's Okay to Ask for Help**
+
+Being a caregiver is a big job. You cannot do everything alone. It's important to:
+- Ask family and friends for help
+- Learn from doctors and nurses
+- Take breaks to rest
+- Remember that taking care of yourself helps you take better care of someone else
+
+**You're Doing Important Work**
+
+Caregiving is hard work, but it's also very important. The help you give makes a big difference in someone's life.`,
+      keyTerms: [
+        { term: 'caregiver', definition: 'A person who helps take care of someone who is sick, hurt, or needs extra help' },
+        { term: 'personal care', definition: 'Help with everyday activities like bathing, dressing, and grooming' },
+        { term: 'appointment', definition: 'A scheduled meeting with a doctor or other healthcare provider' },
+      ],
+      analogies: [
+        'Being a caregiver is like being a coach - you help, encourage, and support someone, but you also need to take care of yourself to keep going.',
+        'Caregiving is like being on a team - you, your loved one, and healthcare providers all working together.',
+      ],
+      examples: [
+        'Sarah helps her grandmother remember to take her heart medicine every morning and evening.',
+        'Carlos drives his father to doctor appointments and helps write down what the doctor says.',
+        'Amanda prepares meals for her sister who is recovering from surgery.',
+      ],
+      patientCounselingPoints: [
+        'Make a list of all the ways you help so you can see everything you do',
+        'Start with the most important tasks and ask for help with others',
+        'It helps to have a routine - doing things at the same time each day',
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Caregiving involves assisting someone with physical, emotional, and daily living needs due to illness, disability, or aging. It requires learning new skills and balancing multiple responsibilities.',
+      explanation: `## Understanding the Caregiver Role
+
+**Defining Caregiving**
+
+Caregiving is providing physical, emotional, and practical support to someone who cannot fully care for themselves. This might be due to:
+- Chronic illness (diabetes, heart disease, arthritis)
+- Sudden injury or accident
+- Progressive conditions (dementia, Parkinson's)
+- Recovery from surgery
+- Age-related decline
+
+**The Scope of Caregiver Responsibilities**
+
+**Physical Care**
+- Assistance with activities of daily living (ADLs): bathing, dressing, toileting
+- Mobility support: walking, transfers, using assistive devices
+- Medication reminders and administration
+- Wound care and other medical tasks
+- Meal preparation and feeding assistance
+
+**Daily Management**
+- Household chores and maintenance
+- Shopping and errands
+- Transportation to appointments
+- Scheduling and coordinating care
+- Managing finances and insurance
+
+**Emotional Support**
+- Companionship and social interaction
+- Emotional validation and listening
+- Encouragement and motivation
+- Advocating for their needs
+
+**Care Coordinator Role**
+Caregivers often become the main point of contact between:
+- The care recipient and their doctors
+- Different healthcare providers
+- Family members
+- Community resources
+
+**Types of Caregiving**
+
+**By Duration**
+- Temporary: Recovery from surgery or acute illness (weeks to months)
+- Progressive: Conditions that worsen over time (years)
+- Intermittent: Help needed during flare-ups of chronic conditions
+
+**By Living Situation**
+- Living together: Caregiver and care recipient share a home
+- Living separately: Regular visits and ongoing coordination
+- Long-distance: Managing care from another location
+
+**By Intensity**
+- Occasional help: A few hours per week
+- Part-time care: Daily assistance but not constant
+- Full-time care: Continuous supervision and support
+
+**The Reality of Caregiving**
+
+**What to Expect**
+- Learning curve: New skills and medical knowledge
+- Time demands: Often more hours than anticipated
+- Emotional complexity: Love, frustration, grief, and pride
+- Financial impact: Possible income loss and increased expenses
+- Relationship changes: Your relationship with your loved one will evolve
+
+**What Most Caregivers Report**
+- 60% report helping with medical tasks
+- Most provide care for 4+ years
+- Many also work full-time jobs
+- Most have other family responsibilities
+
+**Getting Started as a Caregiver**
+
+1. **Assess the situation**: What does your loved one actually need?
+2. **Learn the basics**: Understand their condition and treatment plan
+3. **Build your team**: Identify who can help (family, friends, professionals)
+4. **Get organized**: Create systems for medications, appointments, information
+5. **Plan for yourself**: Schedule breaks and maintain your own health`,
+      keyTerms: [
+        { term: 'activities of daily living (ADLs)', definition: 'Basic self-care tasks including bathing, dressing, eating, toileting, and moving around' },
+        { term: 'care coordination', definition: 'Organizing and managing someone\'s medical care and services across different providers' },
+        { term: 'care recipient', definition: 'The person receiving care and support from a caregiver' },
+        { term: 'assistive devices', definition: 'Tools that help people with disabilities, such as walkers, canes, or grab bars' },
+        { term: 'progressive condition', definition: 'A disease or condition that gets worse over time, like Alzheimer\'s or Parkinson\'s' },
+      ],
+      analogies: [
+        'Caregiving is like being a project manager - you organize, schedule, and coordinate many different tasks and people.',
+      ],
+      examples: [
+        'A mother helping her adult child with diabetes manage blood sugar monitoring and insulin',
+        'A spouse assisting their partner with multiple sclerosis in getting dressed each morning',
+        'An adult child visiting their aging parent weekly to manage medications and groceries',
+      ],
+      patientCounselingPoints: [
+        'Start by learning the most important tasks first - you don\'t have to know everything at once',
+        'Keep a notebook with important phone numbers, medication lists, and questions for doctors',
+        'Ask the healthcare team to show you exactly how to do any medical tasks',
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Caregiving encompasses a wide range of activities supporting individuals with health limitations, requiring acquisition of medical knowledge, care skills, and the ability to navigate complex healthcare systems while managing personal impact.',
+      explanation: `## The Comprehensive Caregiving Role
+
+**Epidemiology and Demographics**
+
+- **53 million Americans** provide unpaid care to adults or children
+- **Average duration**: 4.5 years of caregiving
+- **Hours provided**: Average 24 hours per week; many provide 40+ hours
+- **Economic value**: $470 billion annually in uncompensated care
+- **Gender distribution**: 61% female, 39% male (male caregivers increasing)
+- **Employment**: 60% of caregivers work full- or part-time
+- **Sandwich generation**: 25% care for both children and aging parents
+
+**Domains of Caregiver Responsibility**
+
+**1. Direct Care Activities**
+- Activities of Daily Living (ADLs): bathing, dressing, toileting, transferring, continence care, feeding
+- Instrumental Activities of Daily Living (IADLs): meal preparation, housekeeping, laundry, shopping, transportation, medication management, communication, financial management
+- Health monitoring: vital signs, symptom tracking, symptom reporting
+- Skilled care: wound care, injections, catheter care, tube feeding, oxygen therapy
+
+**2. Care Coordination**
+- Medical appointment scheduling and attendance
+- Communication with multiple providers
+- Medication reconciliation and management
+- Insurance and benefit navigation
+- Transition support (hospital to home, rehab to home)
+- Equipment and supply acquisition
+
+**3. Emotional and Social Support**
+- Companionship and reducing isolation
+- Emotional validation and processing
+- Behavioral management (especially in dementia)
+- Maintaining social connections
+- Preserving dignity and autonomy
+
+**4. Household and Financial Management**
+- Bill paying and financial oversight
+- Home maintenance and modifications
+- Legal planning and document organization
+- Insurance claims and appeals
+- Benefits applications and management
+
+**Caregiving by Condition Type**
+
+**Cognitive Impairment (Dementia, Alzheimer's)**
+- High supervision requirements
+- Behavioral symptom management
+- Communication adaptation
+- Safety monitoring (wandering, falls)
+- Gradual loss of independence
+
+**Physical Disability (Stroke, Spinal Cord Injury)**
+- Mobility assistance and transfers
+- Rehabilitation support
+- Accessibility modifications
+- Personal care assistance
+- Equipment management
+
+**Chronic Illness (Heart Failure, COPD, Diabetes)**
+- Symptom monitoring and management
+- Lifestyle modification support
+- Medication adherence
+- Diet and exercise support
+- Crisis recognition and response
+
+**Terminal Illness (Cancer, End-Organ Failure)**
+- Pain and symptom management
+- Emotional support for patient and family
+- End-of-life care planning
+- Coordination with hospice/palliative care
+- Bereavement support
+
+**The Caregiver Learning Curve**
+
+**Phases of Skill Acquisition**
+1. **Crisis mode**: Learning essential tasks immediately
+2. **Basic competence**: Managing routine care
+3. **Advanced skills**: Handling complex situations
+4. **Expertise**: Anticipating needs, navigating systems
+
+**Knowledge Areas Required**
+- Disease-specific information
+- Medication purposes and side effects
+- Nutrition and dietary requirements
+- Community resources and benefits
+- Legal and financial considerations
+- Emergency procedures
+- Communication with healthcare providers
+
+**Healthcare System Navigation**
+
+**Understanding the Continuum**
+- Primary care vs. specialty care
+- Emergency vs. urgent care
+- Inpatient vs. outpatient services
+- Home health, rehabilitation, skilled nursing
+- Palliative and hospice care
+
+**Communication with Providers**
+- Preparing for appointments
+- Asking effective questions
+- Understanding discharge instructions
+- Managing follow-up care
+- Accessing medical records
+
+**Insurance and Benefits**
+- Medicare, Medicaid, private insurance
+- Coverage for equipment and supplies
+- Home health benefits
+- Respite care coverage
+- Long-term care insurance`,
+      keyTerms: [
+        { term: 'Instrumental Activities of Daily Living (IADLs)', definition: 'Complex activities necessary for independent living: managing finances, medications, transportation, meal preparation, housekeeping, and communication' },
+        { term: 'medication reconciliation', definition: 'Creating and maintaining a complete, accurate list of all medications to prevent errors and interactions' },
+        { term: 'palliative care', definition: 'Specialized medical care focused on providing relief from symptoms and stress of serious illness, not dependent on prognosis' },
+        { term: 'transitions of care', definition: 'Moving patients between care settings (hospital to home, rehab to home) which are high-risk periods for adverse events' },
+        { term: 'sandwich generation', definition: 'Adults simultaneously caring for aging parents and supporting their own children' },
+      ],
+      clinicalNotes: 'Healthcare providers should assess caregiver capabilities and limitations when discharging patients or prescribing home treatments. Many caregivers perform medical tasks traditionally done by nurses. Provide hands-on training and written instructions. Screen for caregiver burden at each patient visit.',
+      patientCounselingPoints: [
+        'Keep a current medication list with doses and times, including over-the-counter medicines',
+        'Ask doctors: "What changes should I watch for that would mean we need to call you?"',
+        'Request caregiver training before hospital discharge - don\'t be afraid to ask for demonstrations',
+      ],
+    },
+    4: {
+      level: 4,
+      summary: 'Caregiving involves complex role transition requiring acquisition of diverse skills, with documented impacts on caregiver health and well-being. Evidence-based interventions can support caregiver adaptation and improve outcomes for both caregiver and care recipient.',
+      explanation: `## Theoretical Foundations of Caregiving
+
+**Stress Process Model (Pearlin et al.)**
+
+This model explains how caregiving affects health outcomes:
+
+**Primary Stressors**
+- Care recipient cognitive impairment (most significant predictor)
+- Functional limitations and dependency
+- Problem behaviors
+- Caregiving duration and intensity
+
+**Secondary Stressors**
+- **Role strain**: Conflicts between caregiving and other roles
+- **Role captivity**: Feeling trapped in unwanted role
+- **Economic strain**: Lost wages, increased expenses
+- **Family conflict**: Disagreements about care decisions
+- **Work-caregiving conflict**: Employment impacts
+
+**Mediators/Moderators**
+- Social support availability
+- Coping strategies (problem-focused vs. emotion-focused)
+- Appraisal of caregiving meaning
+- Personality factors (optimism, neuroticism)
+
+**Outcomes**
+- Depression and anxiety disorders
+- Physical health decline
+- Immune dysfunction
+- Healthcare utilization
+- Mortality risk
+
+**Role Theory Applied to Caregiving**
+
+**Role Acquisition**
+- Learning role expectations and behaviors
+- Developing caregiver identity
+- Skill development and competence
+
+**Role Conflict**
+- Competing demands from multiple roles
+- Interrole conflict (worker, parent, caregiver)
+- Intrarole conflict (different expectations)
+
+**Role Strain**
+- Difficulty meeting role demands
+- Physical and emotional exhaustion
+- Feeling overwhelmed or inadequate
+
+**Adaptation vs. Maladaptation**
+- Finding meaning vs. feeling burdened
+- Personal growth vs. role engulfment
+- Resilience vs. deterioration
+
+## Caregiver Health Impact
+
+**Physical Health Consequences**
+
+*Meta-analyses demonstrate:*
+- Higher rates of chronic conditions (hypertension, diabetes)
+- Increased inflammatory markers (IL-6, CRP, D-dimer)
+- Impaired immune function (slower wound healing)
+- Sleep disturbance and deprivation
+- Neglected self-care and preventive health
+
+**Mental Health Impact**
+- **Deppression**: 2-3x higher prevalence than general population
+- **Anxiety disorders**: Elevated rates, especially anticipatory anxiety
+- **Sleep disorders**: Insomnia, fragmented sleep
+- **PTSD**: After medical crises or traumatic care experiences
+- **Substance use**: Increased alcohol and medication use
+
+**Physiological Mechanisms**
+- HPA axis dysregulation (chronic stress response)
+- Autonomic nervous system imbalance
+- Accelerated cellular aging (telomere shortening)
+- Reduced heart rate variability
+- Elevated cardiovascular risk
+
+## Assessment of Caregiver Needs
+
+**Standardized Assessment Tools**
+
+*Caregiver Strain Index (CSI)*
+- 13 items, 5-point scale
+- Scores >7 indicate significant strain
+- Covers: physical, emotional, social, financial domains
+
+*Zarit Burden Interview (ZBI)*
+- 22 items measuring subjective burden
+- Short form (ZBI-12) available
+- Two domains: personal strain, role strain
+
+*Caregiver Reaction Assessment (CRA)*
+- 5 domains: self-esteem, lack of family support, finances, schedule, health
+- Captures both positive and negative aspects
+
+*Preparedness for Caregiving Scale*
+- 8 items assessing perceived readiness
+- Predicts caregiver outcomes
+
+**Comprehensive Caregiver Assessment Domains**
+1. Care recipient: condition, prognosis, care needs
+2. Caregiver: health, skills, limitations, availability
+3. Resources: family support, financial, community
+4. Environment: home safety, accessibility
+5. Knowledge gaps: education needs
+6. Stress levels: current symptoms and coping
+
+## Evidence-Based Caregiver Interventions
+
+**Psychoeducational Programs**
+
+*Components:*
+- Disease-specific education
+- Skill training (hands-on practice)
+- Problem-solving strategies
+- Stress management techniques
+- Resource navigation
+
+*Evidence:* Meta-analyses show:
+- Moderate effect sizes for burden reduction (d=0.40-0.50)
+- Improved caregiver knowledge and skills
+- Better care recipient outcomes
+- Delayed institutionalization
+
+**Skills Training Programs**
+
+*Manualized programs:*
+- Mastery of Dementia Care
+- Savvy Caregiver Program
+- Reducing Disability in Alzheimer's Disease
+
+*Key skill areas:*
+- Communication techniques
+- Behavior management
+- Assistance with ADLs
+- Home safety modifications
+- Activity engagement
+
+**Support Interventions**
+
+*Support Groups:*
+- Peer support and validation
+- Practical advice and strategies
+- Resource sharing
+- Reduced isolation
+
+*Individual Counseling:*
+- Cognitive-behavioral techniques
+- Stress management
+- Grief processing
+- Meaning-focused coping
+
+**Multicomponent Interventions**
+
+*REACH (Resources for Enhancing Alzheimer's Caregiver Health)*
+- Risk assessment and tailored intervention
+- Education, skills training, support
+- Demonstrated efficacy in RCTs
+- Improved depression and burden outcomes
+
+*TCARE (Tailored Caregiver Assessment and Referral)*
+- Systematic assessment
+- Matched to community resources
+- Reduced nursing home placement`,
+      keyTerms: [
+        { term: 'Stress Process Model', definition: 'Comprehensive theoretical framework explaining how caregiving stressors, moderators, and mediators interact to produce caregiver outcomes' },
+        { term: 'role captivity', definition: 'Feeling trapped in an unwanted caregiving role, associated with poorer mental health outcomes' },
+        { term: 'role engulfment', definition: 'Loss of independent identity as caregiver role becomes all-consuming' },
+        { term: 'HPA axis', definition: 'Hypothalamic-pituitary-adrenal axis, the body\'s stress response system that becomes dysregulated under chronic caregiving stress' },
+        { term: 'interrole conflict', definition: 'Strain from competing demands of multiple simultaneous roles (employee, parent, caregiver)' },
+      ],
+      clinicalNotes: `Clinical practice recommendations:
+1. Screen all family caregivers for burden using CSI or ZBI-12
+2. Assess caregiver health at patient visits
+3. Provide hands-on training for all medical tasks
+4. Refer high-burden caregivers to support services
+5. Monitor for depression and anxiety
+6. Address caregiver physical health concerns`,
+    },
+    5: {
+      level: 5,
+      summary: 'Caregiving research integrates biopsychosocial models to understand caregiver outcomes, with evidence supporting multicomponent interventions. Implementation science addresses translation of effective programs into practice while addressing health equity and policy implications.',
+      explanation: `## Advanced Research Perspectives on Caregiving
+
+**Longitudinal Studies and Trajectories**
+
+*Schulz et al. longitudinal research:*
+- **Mortality risk**: Strained caregivers had 63% higher mortality (JAMA 1999)
+- **Trajectory patterns**: Four distinct adaptation patterns identified:
+  - Consistently low burden (30%)
+  - Increasing burden (25%)
+  - Decreasing burden (20%)
+  - Consistently high burden (25%)
+- **Predictors of trajectory**: Care recipient behavior, caregiver resources, relationship quality
+
+*Biological embedding of caregiver stress:*
+- Epigenetic changes (DNA methylation patterns)
+- Telomere attrition (accelerated cellular aging)
+- Inflammatory proteomic signatures
+- Altered gene expression in stress pathways
+
+**Neurobiological Research**
+
+*Caregiver brain changes:*
+- Structural MRI: Reduced hippocampal volume
+- Functional MRI: Altered emotion regulation circuits
+- Cognitive effects: Executive function deficits
+- Dementia risk: Some studies show increased risk
+
+*Physiological dysregulation:*
+- Allostatic load: Multi-system physiological wear
+- Cortisol dysregulation: Flattened diurnal rhythm
+- Autonomic imbalance: Reduced HRV, elevated sympathetic tone
+- Immune senescence: Premature immune aging
+
+## Implementation Science in Caregiver Support
+
+**Translating Research to Practice**
+
+*Barriers to implementation:*
+- Lack of systematic caregiver identification
+- Fragmented service delivery
+- Reimbursement limitations
+- Workforce capacity constraints
+- Cultural and linguistic accessibility
+
+*Effective implementation strategies:*
+- Integration into healthcare workflows (EHR prompts)
+- Standardized screening protocols
+- Referral pathways with feedback loops
+- Community partnerships
+- Digital delivery platforms
+
+**Evidence-Based Program Implementation**
+
+*REACH OUT:*
+- Community-based implementation
+- Adapted for diverse populations
+- Training for community providers
+- Maintenance of fidelity while allowing adaptation
+
+*STAR-Caregivers:*
+- Staff training in residential settings
+- Systems approach to caregiver support
+- Demonstrated effectiveness in RCTs
+
+*BRI Care Consultation:*
+- Telephone-based care consultation
+- Tailored to individual needs
+- Evidence of improved outcomes
+
+## Health Equity Considerations
+
+**Disparities in Caregiving**
+
+*Socioeconomic factors:*
+- Lower-income caregivers: More burden, fewer resources
+- Racial/ethnic minorities: Higher intensity caregiving
+- Rural caregivers: Limited service access
+- LGBTQ+ caregivers: Family definition challenges
+
+*Cultural considerations:*
+- Filial piety expectations (Asian cultures)
+- Family-centered care traditions (Latino, Black families)
+- Stigma around formal help-seeking
+- Language and health literacy barriers
+
+**Culturally Adapted Interventions**
+
+*Adaptation principles:*
+- Cultural values integration
+- Language and literacy appropriate
+- Family structure considerations
+- Religious/spiritual inclusion
+- Community trust building
+
+*Evidence for adapted programs:*
+- Similar effectiveness when properly adapted
+- Improved engagement and retention
+- Better relevance and acceptability
+
+## Policy and Systems-Level Approaches
+
+**Federal Policy Landscape**
+
+*RAISE Family Caregivers Act (2018):*
+- National strategy on family caregiving
+- Focus: Assessment, services, workplace, research
+- Implementation ongoing across agencies
+
+*Family and Medical Leave Act (FMLA):*
+- 12 weeks unpaid leave for family care
+- Limited to employees at companies with 50+ employees
+- Coverage gaps for many caregivers
+
+*Americans with Disabilities Act (ADA):*
+- Protects caregivers from association discrimination
+- Reasonable accommodation for employee caregivers
+
+**State-Level Innovations**
+- Paid family leave programs (California, New York, others)
+- Caregiver tax credits
+- Medicaid caregiver assessment requirements
+- Lifespan respite programs
+- Workplace flexibility laws
+
+**Healthcare System Integration**
+
+*Value-based care implications:*
+- Caregivers affect readmission, quality metrics
+- Addressing caregiver needs reduces costs
+- Bundled payments include caregiver support
+- ACOs incorporating caregiver services
+
+*Documentation and billing:*
+- CPT codes for care plan oversight
+- Time-based documentation requirements
+- Chronic care management inclusion
+- Transitional care management
+
+## Emerging Research Directions
+
+**Technology and Innovation**
+- Remote monitoring reducing caregiver burden
+- AI-powered care coordination
+- Telehealth caregiver interventions
+- Virtual reality for caregiver training
+- Wearable technology for safety monitoring
+
+**Precision Caregiver Support**
+- Phenotyping for targeted interventions
+- Biomarkers for risk stratification
+- Genetic factors in caregiver resilience
+- Machine learning for predicting crisis
+
+**Global Perspectives**
+- International models of caregiver support
+- Cross-cultural caregiver experiences
+- Policy comparisons and outcomes
+- Migration and transnational caregiving
+
+**Economic Research**
+- Cost-effectiveness of caregiver interventions
+- ROI for workplace caregiver programs
+- Macroeconomic impact of informal care
+- Payment models for caregiver services
+
+## Clinical Practice Guidelines
+
+*Comprehensive caregiver care protocol:*
+
+1. **Universal screening** for caregiver status at intake
+2. **Standardized assessment** using validated tools
+3. **Needs-based stratification** for intervention intensity
+4. **Systematic follow-up** and reassessment
+5. **Documentation** in EHR with caregiver registry
+6. **Referral pathways** to community resources
+7. **Outcome monitoring** (burden, health, QOL)
+8. **Crisis intervention** protocols for high-risk situations`,
+      keyTerms: [
+        { term: 'allostatic load', definition: 'Cumulative physiological wear and tear from chronic stress exposure across multiple body systems' },
+        { term: 'implementation science', definition: 'Study of methods promoting systematic uptake of research findings into routine practice' },
+        { term: 'filial piety', definition: 'Cultural value emphasizing respect and care for parents and elders, common in Asian cultures' },
+        { term: 'association discrimination', definition: 'Workplace discrimination based on relationship with someone with a disability, protected under ADA' },
+        { term: 'phenotyping caregivers', definition: 'Classifying caregivers into subtypes based on characteristics, needs, and potential intervention responsiveness' },
+      ],
+      clinicalNotes: `Systems-level recommendations:
+1. Implement EHR-based caregiver identification and screening
+2. Develop integrated referral networks with community organizations
+3. Train all clinical staff in basic caregiver support
+4. Establish quality metrics for caregiver outcomes
+5. Address health equity in service delivery
+6. Advocate for policy supporting caregiver health`,
+    },
+  },
+
+  media: [
+    {
+      id: 'caregiver-responsibilities-diagram',
+      type: 'diagram',
+      filename: 'caregiver-responsibilities-overview.svg',
+      title: 'Caregiver Responsibilities Overview',
+      description: 'Visual breakdown of the domains of caregiver responsibility',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'aarp-caregiving-2023',
+      type: 'website',
+      title: 'Caregiving in the U.S. 2023 Report',
+      authors: ['AARP', 'National Alliance for Caregiving'],
+      source: 'AARP Public Policy Institute',
+      url: 'https://www.aarp.org/caregiving',
+    },
+    {
+      id: 'schulz-mortality-jama',
+      type: 'article',
+      title: 'Caregiving as a Risk Factor for Mortality: The Caregiver Health Effects Study',
+      authors: ['Schulz, R.', 'Beach, S.R.'],
+      source: 'JAMA',
+    },
+    {
+      id: 'pearlin-stress-process',
+      type: 'article',
+      title: 'The Stress Process Model: A Framework for Understanding Caregiver Outcomes',
+      authors: ['Pearlin, L.I.', 'Mullan, J.T.', 'Semple, S.J.', 'Skaff, M.M.'],
+      source: 'Psychology and Aging',
+    },
+    {
+      id: 'family-caregiver-alliance',
+      type: 'website',
+      title: 'Caregiver Statistics and Demographics',
+      source: 'Family Caregiver Alliance',
+      url: 'https://www.caregiver.org',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'caregiver-self-care', targetType: 'concept', relationship: 'related', label: 'Caregiver Self-Care' },
+    { targetId: 'caregiver-preventing-burnout', targetType: 'concept', relationship: 'related', label: 'Preventing Burnout' },
+    { targetId: 'caregiver-communication', targetType: 'concept', relationship: 'related', label: 'Patient Communication' },
+    { targetId: 'caregiver-safety', targetType: 'concept', relationship: 'related', label: 'Safety Considerations' },
+  ],
+
+  tags: {
+    systems: ['caregiver-support'],
+    topics: ['caregiving', 'caregiver roles', 'caregiver responsibilities', 'caregiver health'],
+    keywords: ['family caregiver', 'informal caregiver', 'caregiver burden', 'caregiver support'],
+    clinicalRelevance: 'high',
+  },
+
+  createdAt: '2026-01-25T00:00:00.000Z',
+  updatedAt: '2026-01-25T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};
+
+export default caregiverBasics;

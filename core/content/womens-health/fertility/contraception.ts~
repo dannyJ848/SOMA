@@ -1,0 +1,682 @@
+import { WomensHealthContent } from '../types';
+
+export const contraception: WomensHealthContent = {
+  id: 'contraception',
+  title: 'Contraception Overview',
+  category: 'Fertility',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Contraception',
+      content: `Contraception means preventing pregnancy. There are many methods available, so you can choose what works best for you.
+
+**What is Contraception?**
+- Birth control to prevent pregnancy
+| Different methods work differently
+| Some need a doctor's prescription
+| Others are available without prescription
+
+**Types of Contraception:**
+
+**1. Barrier Methods**
+- Condoms (male and female)
+| Diaphragm
+| Cervical cap
+| Contraceptive sponge
+| Prevent sperm from reaching egg
+
+**2. Hormonal Methods**
+- Birth control pills
+| Patch
+| Ring
+| Shot (injection)
+| Implant
+| IUD (hormonal)
+| Prevent ovulation or thicken cervical mucus
+
+**3. Long-Acting Reversible Contraception (LARC)**
+- IUDs (hormonal and copper)
+| Implant
+| Most effective methods
+| Last for years
+
+**4. Permanent Methods**
+| Tubal ligation (female)
+| Vasectomy (male)
+| For people sure they don't want more children
+
+**5. Fertility Awareness**
+| Tracking your cycle
+| Avoiding sex during fertile time
+| Requires careful tracking
+
+**6. Emergency Contraception**
+| Morning-after pill
+| Can prevent pregnancy after unprotected sex
+| Use as soon as possible (within 5 days)
+
+**Effectiveness:**
+| Most effective: IUDs, implant, sterilization (>99%)
+| Very effective: pills, patch, ring (91-99%)
+| Less effective: condoms, fertility awareness (72-88%)
+
+**Remember:** No method is 100% perfect. Using condoms also protects against sexually transmitted infections.`,
+      keyPoints: [
+        'Contraception prevents pregnancy in different ways',
+        'LARC methods (IUD, implant) are most effective',
+        'Emergency contraception is available after unprotected sex',
+        'Condoms protect against both pregnancy and STIs'
+      ],
+      vocabulary: [
+        { term: 'Contraception', definition: 'Methods to prevent pregnancy' },
+        { term: 'IUD', definition: 'Intrauterine Device - small device placed in uterus' },
+        { term: 'Sterilization', definition: 'Permanent birth control' },
+        { term: 'LARC', definition: 'Long-Acting Reversible Contraception' }
+      ],
+      quiz: [
+        {
+          question: 'What are the most effective methods of contraception?',
+          options: [
+            'Birth control pills and condoms',
+            'IUDs, implants, and sterilization',
+            'Fertility awareness',
+            'Withdrawal method'
+          ],
+          correctAnswer: 1,
+          explanation: 'Long-acting reversible contraception (IUDs, implants) and sterilization are the most effective methods, with effectiveness rates over 99%.'
+        },
+        {
+          question: 'What is the time limit for emergency contraception?',
+          options: [
+            '12 hours',
+            '24 hours',
+            '5 days (120 hours)',
+            '30 days'
+          ],
+          correctAnswer: 2,
+          explanation: 'Emergency contraception is most effective when taken as soon as possible, but can still be effective for up to 5 days (120 hours) after unprotected sex.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Contraception Options and Effectiveness',
+      content: `Choosing a contraceptive method involves understanding effectiveness, proper use, and personal preferences.
+
+**Contraceptive Effectiveness:**
+
+**Perfect Use vs. Typical Use:**
+
+| Method | Perfect Use | Typical Use |
+|--------|-------------|-------------|
+| Abstinence | 100% | Variable |
+| Sterilization | 99.5% | 99.5% |
+| LARC (IUD, implant) | 99.8% | 99.8% |
+| Injectable | 94-99% | 94% |
+| Pill, patch, ring | 91-99% | 91% |
+| Male condom | 98% | 82% |
+| Female condom | 95% | 79% |
+| Diaphragm | 94% | 88% |
+| Sponge | 88-91% | 76-88% |
+| Fertility awareness | 95-99% | 76-88% |
+| Withdrawal | 96% | 78% |
+| Spermicide | 82% | 72% |
+
+**Hormonal Contraceptives:**
+
+**Combined Hormonal Contraceptives (contain estrogen and progestin):**
+
+| Type | Usage | Duration |
+|------|-------|----------|
+| Pill | Daily | 21 active + 7 placebo or 24 active + 4 placebo |
+| Patch | Weekly | 3 weeks on, 1 week off |
+| Ring | Monthly | 3 weeks in, 1 week out |
+| Injection | Every 3 months | 4 injections per year |
+
+**Progestin-Only Methods:**
+
+| Type | Usage | Duration |
+|------|-------|----------|
+| Minipill | Daily | Continuous use |
+| Implant | Subdermal | 3 years |
+| IUD (hormonal) | Intrauterine | 3-8 years |
+| Injection | Every 3 months | 4 injections per year |
+
+**Barrier Methods:**
+
+**Male Condom:**
+| Latex or polyurethane
+| Worn on penis during intercourse
+| Single use only
+| Protects against STIs
+
+**Female Condom:**
+| Worn inside vagina
+| Can be inserted up to 8 hours before sex
+| Single use only
+| Protects against STIs
+
+**Diaphragm:**
+| Dome-shaped device with rim
+| Covers cervix
+| Used with spermicide
+| Fitted by healthcare provider
+| Reusable (lasts 1-2 years)
+
+**Sponge:**
+| Contains spermicide
+| Covers cervix
+| Available without prescription
+| Single use
+| Effective for 24 hours
+
+**Fertility Awareness:**
+| Tracking basal body temperature
+| Cervical mucus monitoring
+| Calendar method
+| Can be used to achieve or avoid pregnancy
+| Requires abstinence or barriers during fertile time
+
+**Withdrawal:**
+| Pulling out before ejaculation
+| Requires self-control
+| Not very reliable
+| Pre-ejaculation may contain sperm
+
+**Emergency Contraception:**
+| Levonorgestrel (Plan B) - 1 pill or 2 pills
+| Ulipristal acetate (Ella) - prescription
+| Copper IUD (most effective, also provides ongoing contraception)
+| Can be used up to 5 days after unprotected sex
+| Most effective when used as soon as possible
+`,
+      keyPoints: [
+        'Typical use effectiveness is lower than perfect use due to human error',
+        'LARC methods have highest typical use effectiveness',
+        'Male condoms are the only method that prevent STIs',
+        'Emergency contraception is available up to 5 days after unprotected sex'
+      ],
+      vocabulary: [
+        { term: 'Perfect Use', definition: 'Using a method correctly every time' },
+        { term: 'Typical Use', definition: 'How most people use methods in real life' },
+        { term: 'LARC', definition: 'Long-Acting Reversible Contraception' },
+        { term: 'Pre-ejaculate', definition: 'Fluid released before ejaculation, may contain sperm' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most effective reversible contraceptive method?',
+          options: [
+            'Birth control pills',
+            'Male condoms',
+            'IUDs and implants (LARC)',
+            'Diaphragm'
+          ],
+          correctAnswer: 2,
+          explanation: 'LARC methods (IUDs and implants) are the most effective reversible contraceptives with >99% effectiveness with typical use.'
+        },
+        {
+          question: 'What is the difference between perfect use and typical use effectiveness?',
+          options: [
+            'Perfect use is how methods work in clinical studies, typical use is how they work in real life',
+            'Perfect use is for hormonal methods only',
+            'Typical use is always more effective',
+            'There is no difference'
+          ],
+          correctAnswer: 0,
+          explanation: 'Perfect use reflects how a method performs when used correctly and consistently, while typical use reflects how it works in real life with occasional mistakes and inconsistencies.'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Hormonal Contraception Mechanisms',
+      content: `Understanding how hormonal contraception works helps women choose the most appropriate method for their needs.
+
+**Mechanisms of Action:**
+
+**Primary Mechanisms:**
+1. Inhibit ovulation (primary for combined methods)
+2. Thicken cervical mucus (progestin-only)
+3. Thin endometrium (makes implantation less likely)
+4. Slow tubal motility (affects egg/sperm transport)
+
+**Combined Hormonal Contraceptives (CHC):**
+
+**Estrogen Component (Ethinyl estradiol):**
+| Suppresses FSH and LH
+| Prevents follicular development
+| Inhibits ovulation
+| Stabilizes endometrium
+| Controls cycle (withdrawal bleeds)
+
+**Progestin Component:**
+| Thickens cervical mucus
+| Slows tubal motility
+| Makes endometrium less receptive
+| Backup ovulation suppression
+
+**Progestin-Only Methods:**
+
+**Progestin-Only Pill (POP):**
+| Thickens cervical mucus (primary)
+| Inhibits ovulation in 40-50% of cycles
+| Slows tubal motility
+| Must be taken at the same time daily
+| No estrogen-related risks
+
+**Levonorgestrel IUD:**
+| Thickens cervical mucus
+| Slows sperm motility
+| Suppresses ovulation in some cycles
+| Thins endometrium
+| Local effect on uterus
+
+**Etonogestrel Implant:**
+| Thickens cervical mucus
+| Inhibits ovulation (most cycles)
+| Slows tubal motility
+| Continuous progestin effect
+
+**Medroxyprogesterone Acetate Injection:**
+| Suppresses ovulation
+| Thickens cervical mucus
+| Thins endometrium
+| Persistent effect
+
+**Contraindications to Estrogen-Containing Methods:**
+
+**Absolute Contraindications (WHO Category 4):**
+| History of thromboembolism or current thrombosis
+| History of stroke or ischemic heart disease
+| Migraine with aura
+| Breast cancer (current)
+| Pregnancy
+| Age >35 with smoking
+| Prolonged immobility
+| Uncontrolled hypertension
+| Diabetes with complications
+
+**Relative Contraindications (WHO Category 3/4):**
+| Migraine without aura (category 3)
+| Well-controlled hypertension (category 3)
+| Obesity (BMI ≥30) (category 3)
+| Breastfeeding >6 weeks postpartum (category 3)
+
+**Benefits Beyond Contraception:**
+
+**Combined Hormonal Contraceptives:**
+| Regular, predictable cycles
+| Reduce menstrual bleeding
+| Improve dysmenorrhea
+| Improve acne
+| Reduce ovarian and endometrial cancer risk
+| Improve PMS symptoms
+| Reduce endometriosis pain
+
+**Levonorgestrel IUD:**
+| Lighter periods (or none)
+| Reduce dysmenorrhea
+| Reduce endometriosis pain
+| Treat heavy menstrual bleeding
+| Reduce endometrial hyperplasia risk
+
+**Side Effects:**
+
+**Common (usually resolve):**
+| Breakthrough bleeding
+| Breast tenderness
+| Nausea (especially with CHC)
+| Headache
+| Mood changes
+
+**Serious (rare):**
+| Blood clots (estrogen-containing)
+| Stroke (estrogen-containing)
+| Heart attack (estrogen-containing)
+| Liver problems
+| High blood pressure
+| Breast cancer (small increased risk)
+`,
+      keyPoints: [
+        'CHCs work primarily by suppressing ovulation',
+        'Progestin-only methods primarily thicken cervical mucus',
+        'Estrogen-containing methods have absolute contraindications',
+        'Progestin-only methods can be used in breastfeeding women'
+      ],
+      vocabulary: [
+        { term: 'CHC', definition: 'Combined Hormonal Contraceptives - contain estrogen and progestin' },
+        { term: 'Thromboembolism', definition: 'Blood clot in veins or arteries' },
+        { term: 'Breakthrough Bleeding', definition: 'Spotting or bleeding between periods' },
+        { term: 'Dysmenorrhea', definition: 'Painful menstrual cramps' }
+      ],
+      quiz: [
+        {
+          question: 'What is the primary mechanism of action for progestin-only methods?',
+          options: [
+            'They thin the uterine lining',
+            'They thicken cervical mucus (primary) and may inhibit ovulation',
+            'They suppress FSH and LH',
+            'They kill sperm'
+          ],
+          correctAnswer: 1,
+          explanation: 'Progestin-only methods primarily work by thickening cervical mucus, which prevents sperm from entering the uterus. They may also inhibit ovulation in some cycles and thin the endometrium.'
+        },
+        {
+          question: 'What is a contraindication to estrogen-containing contraceptives?',
+          options: [
+            'Light menstrual bleeding',
+            'History of blood clots or stroke',
+            'Acne treatment',
+            'PMS symptoms'
+          ],
+          correctAnswer: 1,
+          explanation: 'A history of blood clots (thromboembolism) or stroke is an absolute contraindication to estrogen-containing contraceptives because estrogen increases the risk of these conditions.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Special Populations and Counseling',
+      content: `Contraceptive counseling must consider individual medical conditions, reproductive goals, and preferences.
+
+**Postpartum Contraception:**
+
+**Breastfeeding Women:**
+
+**Safe Options:**
+| Progestin-only pill
+| Levonorgestrel IUD (can be placed immediately postpartum)
+| Etonogestrel implant
+| DMPA injection
+| Copper IUD (can be placed immediately postpartum)
+| Condoms
+
+**Not Recommended Until 6 Weeks Postpartum:**
+| Combined hormonal contraceptives
+| Because estrogen can affect milk supply
+
+**Non-Breastfeeding Women:**
+| All methods safe immediately postpartum
+| IUDs can be placed immediately postpartum
+| Higher expulsion rates if placed immediately
+
+**Adolescents:**
+| LARC methods first-line:
+  - High efficacy
+  - Long-acting
+  - No user action required
+  - Reversible
+| Confidentiality essential
+| STI screening important
+| Condoms recommended along with LARC for STI protection
+
+**Perimenopause (Ages 40-50+):**
+| Fertility declines but still present until menopause
+| Contraception needed for 1 year after last period
+| LARC excellent option
+| Progestin-only pills
+| Low-dose CHC if no contraindications
+| Copper IUD (non-hormonal option)
+
+**Medical Conditions:**
+
+**Diabetes:**
+| LARC methods safe
+| Progestin-only methods safe
+| CHC can be used if no vascular complications
+| Monitor blood pressure and lipids
+
+**Obesity (BMI ≥30):**
+| LARC methods safest and most effective
+| Progestin-only pill safe (but higher failure rate)
+| CHC possible but higher thrombosis risk
+| DMPA associated with weight gain
+
+**Depression:**
+| Hormonal methods not contraindicated
+| Monitor mood changes
+| Some antidepressants interact with CHCs
+
+**Epilepsy:**
+| Many anti-epileptics induce liver enzymes
+| Enzyme-inducing AEDs reduce CHC effectiveness
+| Higher dose CHC needed with enzyme inducers
+| LARC not affected by drug interactions
+| Progestin-only methods also affected
+
+**Rheumatologic Diseases:**
+| SLE with positive antiphospholipid antibodies: avoid estrogen
+| RA, SLE without APL: CHC may be used
+| LARC safe and effective
+| Progestin-only safe
+
+**Contraception After Abortion:**
+
+**Immediate Post-Abortion IUD Placement:**
+| Safe for both surgical and medical abortion
+| Highly effective
+| Reduces repeat abortion risk
+| Expulsion rate slightly higher but still low
+
+**Immediate Start:**
+| Any method can be started immediately
+| Quick start protocols for CHC
+| No need to wait for next period
+
+**Counseling Elements:**
+
+**Key Messages:**
+| LARC first-line for most women
+| Dual protection (condoms + hormonal) for STI prevention
+| Emergency contraception as backup
+| Shared decision-making
+| Respect patient preferences
+| Full information on risks and benefits
+
+**Myths and Facts:**
+
+| Myth | Fact |
+|------|------|
+| Birth control causes infertility | False - fertility returns quickly after stopping |
+| Birth control causes weight gain | Minimal effect; DMPA may cause weight gain |
+| You need a "break" from the pill | Not necessary for most modern pills |
+| Birth control causes abortion | False - prevents ovulation and fertilization |
+| Withdrawal is effective | Only 78% effective with typical use |
+| You can't get pregnant while breastfeeding | False; ovulation can return before first period
+`,
+      keyPoints: [
+        'LARC methods are first-line for most populations',
+        'Progestin-only methods are safe during breastfeeding',
+        'CHC contraindicated in breastfeeding women until 6 weeks postpartum',
+        'Drug interactions affect hormonal contraception'
+      ],
+      vocabulary: [
+        { term: 'LARC', definition: 'Long-Acting Reversible Contraception - IUDs and implants' },
+        { term: 'Dual Protection', definition: 'Using condoms plus another method for STI and pregnancy prevention' },
+        { term: 'Quick Start', definition: 'Starting contraception immediately without waiting for menses' },
+        { term: 'AED', definition: 'Anti-Epileptic Drug' }
+      ],
+      quiz: [
+        {
+          question: 'What contraceptive methods are safe for breastfeeding women immediately postpartum?',
+          options: [
+            'All hormonal methods immediately',
+            'Progestin-only pills, IUDs, implant, injection',
+            'Only barrier methods',
+            'No hormonal methods until baby weaned'
+          ],
+          correctAnswer: 1,
+          explanation: 'Progestin-only methods (pills, IUDs, implant, injection) are safe for breastfeeding mothers immediately postpartum. Combined hormonal methods should be avoided until at least 6 weeks postpartum as they may affect milk supply.'
+        },
+        {
+          question: 'Which contraceptive method is affected by enzyme-inducing medications?',
+          options: [
+            'Copper IUD',
+            'Combined hormonal contraceptives and progestin-only pill',
+            'Implant',
+            'Tubal ligation'
+          ],
+          correctAnswer: 1,
+          explanation: 'Enzyme-inducing medications (including some anti-epileptics) reduce the effectiveness of combined hormonal contraceptives and progestin-only pills by increasing their metabolism. LARC methods are not affected.'
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Contraceptive Technology and Future Directions',
+      content: `Advances in contraceptive technology continue to expand options and improve user experience.
+
+**Recent Innovations:**
+
+**New Progestins:**
+| Drospirenone (spironolactone analogue)
+| Nomegestrol acetate
+| Nestorone (noresthindrone acetate)
+| Selective progesterone receptor modulators (SPRMs)
+
+**New Delivery Systems:**
+
+**Vaginal Rings:**
+| Annovera (13 cycles, 1 year use)
+| Amethia (continuous use)
+| Phexxi (progesterone vaginal gel)
+| Praneem (progesterone vaginal ring)
+
+**Patches:**
+| Twirla (generic for Ortho Evra)
+| Smaller, more discreet
+| Extended cycle options
+
+**Intrauterine Systems:**
+
+**Hormonal IUDs:**
+| Liletta (52 mg levonorgestrel)
+| Kyleena (19.5 mg levonorgestrel)
+| Skyla (13.5 mg levonorgestrel)
+| Different sizes for uterine size
+
+**Copper IUDs:**
+| Various sizes and shapes
+| ParaGard T380A (standard)
+| Flexi-T 300 (smaller)
+| GyneFix (frameless, lower expulsion)
+
+**Male Contraception:**
+
+**Reversible Inhibition of Sperm Under Guidance (RISUG):**
+| Injectable compound
+| Inhibits sperm motility
+| Long-lasting (up to 10 years)
+| Reversible with another injection
+| Available in India
+| In development in US
+
+**Vasalgel:**
+| Reversible male contraceptive
+| Blocks vas deferens
+| In clinical trials
+
+**Hormonal Male Methods:**
+| Testosterone + progestin gels
+| Implantable hormonal methods
+| Still in development
+
+**Emergency Contraception Advances:**
+| Ulipristal acetate (Ella)
+| Prescription only
+| More effective than levonorgestrel
+| Works up to 5 days
+| Progesterone receptor modulator
+
+| Copper IUD for EC:
+| Most effective EC
+| 99.9% effective
+| Provides ongoing contraception
+| Insertion up to 5 days after unprotected sex
+
+**Pre-exposure Prophylaxis (PrEP) Integration:**
+| HIV prevention
+| Combined with contraception
+| Drug interactions:
+  - PrEP with hormonal contraception: safe
+  | - Interaction between tenofovir and some hormonal methods (minimal clinical significance)
+  | - Dual protection important
+
+**Non-Hormonal Male Contraceptive:**
+| Gendarussa (oral contraceptive for men)
+| Targets sperm motility
+| In clinical trials
+| Taken daily before intercourse
+
+**Remote Contraception Access:**
+| Telemedicine consultations
+| Home delivery of medications
+| Apps for prescription refills
+| Self-administered injections
+| At-home testing (blood pressure, labs)
+| Mail-order contraceptives
+
+**Digital Health Tools:**
+| Cycle tracking apps (fertility awareness)
+| Reminder apps for pill taking
+| EC resources
+| Telehealth for counseling
+
+**Future Directions:**
+| 6-month and 1-year combined injectables
+| Biodegradable vaginal rings
+| New male contraceptive methods
+| Non-hormonal male pills
+| Gene editing-based approaches (theoretical)
+| Microbicides that prevent both pregnancy and STIs
+| Multipurpose prevention technologies (MPTs)
+`,
+      keyPoints: [
+        'SPRMs and new progestins offer improved side effect profiles',
+        'Male contraceptive options remain limited but in development',
+        'Digital health tools improve contraceptive access and adherence',
+        'MPTs aim to prevent both pregnancy and STIs'
+      ],
+      vocabulary: [
+        { term: 'SPRM', definition: 'Selective Progesterone Receptor Modulator' },
+        { term: 'RISUG', definition: 'Reversible Inhibition of Sperm Under Guidance - male contraceptive' },
+        { term: 'Vasalgel', definition: 'Reversible injectable male contraceptive' },
+        { term: 'MPTs', definition: 'Multipurpose Prevention Technologies' }
+      ],
+      quiz: [
+        {
+          question: 'What is Ulipristal acetate (Ella)?',
+          options: [
+            'A type of IUD',
+            'A progesterone receptor modulator emergency contraceptive',
+            'A daily contraceptive pill',
+            'A male contraceptive pill'
+          ],
+          correctAnswer: 1,
+          explanation: 'Ulipristal acetate (Ella) is a progesterone receptor modulator emergency contraceptive that is more effective than levonorgestrel and can be used up to 5 days after unprotected sex.'
+        },
+        {
+          question: 'What is the most effective emergency contraceptive?',
+          options: [
+            'Levonorgestrel (Plan B)',
+            'Copper IUD',
+            'Birth control pills',
+            'Fertility awareness'
+          ],
+          correctAnswer: 1,
+          explanation: 'The copper IUD is the most effective emergency contraceptive when inserted within 5 days after unprotected sex, with a 99.9% effectiveness rate.'
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'fertility-overview',
+    'contraceptive-methods'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'CDC Contraception Guidelines',
+    'US MEC (Medical Eligibility Criteria)',
+    'ASRM Contraception Guidelines'
+  ]
+}

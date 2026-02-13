@@ -1,0 +1,1288 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const mastalgia: WomensHealthContent = {
+  id: 'mastalgia',
+  title: 'Breast Pain (Mastalgia)',
+  category: 'Breast Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Breast Pain',
+      content: `Breast pain, also called mastalgia, is very common and affects most women at some point in their lives. The good news is that breast pain is rarely a sign of breast cancer.
+
+**What is Breast Pain?**
+
+Breast pain can range from mild tenderness to severe pain. It can affect one or both breasts and may occur in a specific area or throughout the breast.
+
+**Key Facts:**
+- Very common - affects 70-80% of women at some time
+- Usually benign (not cancer)
+- Often related to hormonal changes
+- Usually resolves on its own
+- Can often be managed with self-care
+
+**Types of Breast Pain:**
+
+**1. Cyclical Breast Pain**
+- Related to menstrual cycle
+- Usually affects both breasts
+- Happens at the same time each month
+- Often worse before period
+- Improves after period starts
+
+**2. Non-Cyclical Breast Pain**
+- Not related to menstrual cycle
+- Often in one breast or specific area
+- Can be constant or come and go
+- More common after menopause
+
+**Common Causes:**
+
+**Hormonal Changes:**
+- Menstrual cycle
+- Pregnancy
+- Menopause
+- Hormone medications
+
+**Other Causes:**
+- Large breasts causing strain
+- Injury or trauma
+- Infection (mastitis)
+- Muscle strain
+- Fibrocystic changes
+
+**When to See a Doctor:**
+
+You should see your doctor if:
+- Pain is severe or disabling
+- Pain persists for more than 2 weeks
+- Pain is in one specific area
+- Pain is getting worse over time
+- You notice a lump
+- You have nipple discharge
+- You have skin changes (redness, dimpling)
+- Pain is accompanied by fever
+
+**What to Expect at Your Appointment:**
+
+Your doctor will:
+- Ask about your symptoms
+- Perform a breast examination
+- Ask about your menstrual cycle
+- Possibly order imaging (mammogram/ultrasound)
+- May recommend blood tests
+
+**Self-Care for Breast Pain:**
+
+**Pain Relief:**
+- Over-the-counter pain relievers (ibuprofen, naproxen)
+- Warm or cold compresses
+- Supportive bra
+- Wear sports bra for exercise
+
+**Lifestyle Changes:**
+- Reduce caffeine intake
+- Reduce salt intake
+- Eat a balanced diet
+- Regular exercise
+- Stress management
+
+**Good News About Breast Pain:**
+
+- Breast pain is rarely cancer
+- Most breast pain goes away on its own
+- Self-care measures often help
+- Treatment is available if needed
+- Imaging can provide reassurance
+
+**When Breast Pain Might Be Concerning:**
+
+Breast pain alone is rarely the first sign of breast cancer, but it's important to have any persistent pain evaluated. Pain is more concerning if:
+- It's in one specific spot that doesn't go away
+- It's getting worse over time
+- It's accompanied by a lump
+- There are skin or nipple changes
+
+**Remember:**
+
+- Most breast pain is normal
+- Don't panic if you have breast pain
+- Do get evaluated if pain is persistent
+- Keep track of your symptoms
+- Discuss concerns with your doctor`,
+      keyPoints: [
+        'Breast pain (mastalgia) is very common, affecting 70-80% of women',
+        'Breast pain is rarely a sign of breast cancer',
+        'Cyclical breast pain is related to the menstrual cycle',
+        'Self-care measures like supportive bras and pain relievers often help',
+        'Persistent pain that gets worse over time should be evaluated'
+      ],
+      vocabulary: [
+        { term: 'Mastalgia', definition: 'The medical term for breast pain' },
+        { term: 'Cyclical Breast Pain', definition: 'Breast pain that varies with the menstrual cycle' },
+        { term: 'Benign', definition: 'Not cancerous or harmful' },
+        { term: 'Fibrocystic Changes', definition: 'Common benign breast changes causing lumpiness and discomfort' }
+      ],
+      quiz: [
+        {
+          question: 'What percentage of women experience breast pain at some point in their lives?',
+          options: [
+            '10-20%',
+            '30-40%',
+            '70-80%',
+            'Almost 100%'
+          ],
+          correctAnswer: 2,
+          explanation: 'Breast pain affects 70-80% of women at some point in their lives, making it a very common complaint.'
+        },
+        {
+          question: 'What is the most likely cause of breast pain that occurs before each menstrual period and improves after the period starts?',
+          options: [
+            'Breast cancer',
+            'Cyclical hormonal changes',
+            'Infection',
+            'Muscle strain'
+          ],
+          correctAnswer: 1,
+          explanation: 'Breast pain that follows a pattern related to the menstrual cycle - worse before the period and improving after it starts - is typically caused by cyclical hormonal changes.'
+        },
+        {
+          question: 'Which of the following breast pain symptoms warrants medical evaluation?',
+          options: [
+            'Mild breast tenderness before period',
+            'Severe pain that persists for more than 2 weeks',
+            'Brief discomfort during exercise',
+            'Occasional mild discomfort'
+          ],
+          correctAnswer: 1,
+          explanation: 'Persistent severe pain that lasts more than 2 weeks, especially if it\'s getting worse or in one specific area, warrants medical evaluation.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Types and Causes of Breast Pain',
+      content: `Understanding the different types and causes of breast pain helps guide appropriate management and provides reassurance.
+
+**Classification of Breast Pain:**
+
+**Cyclical Mastalgia:**
+
+*Characteristics:*
+- Related to menstrual cycle
+- Usually bilateral (both breasts)
+- Often diffuse (widespread)
+- Worse in luteal phase (before period)
+- Resolves with menstruation
+- Most common type (60-70% of cases)
+
+*Typical Pattern:*
+- Begins after ovulation (mid-cycle)
+- Increases in intensity before period
+- Peaks just before menstruation
+- Improves dramatically with menses
+- May vary cycle to cycle
+
+*Pain Description:*
+- Heaviness, fullness, or soreness
+- Dull, aching discomfort
+- Often radiates to axilla (armpit)
+- May be accompanied by swelling
+
+*Demographics:*
+- Most common ages 30-40
+- Less common after menopause (unless on HRT)
+- Can affect adolescents
+
+**Non-Cyclical Mastalgia:**
+
+*Characteristics:*
+- Not related to menstrual cycle
+- Often unilateral (one breast)
+- Often focal (one area)
+- More common after menopause
+- May be constant or intermittent
+
+*Pain Description:*
+- Burning, sharp, or stabbing
+- Often localized to one spot
+- May feel like it's "inside" the breast
+- Usually doesn't vary with cycle
+
+*Demographics:*
+- More common in women 40-50
+- Can occur in any age group
+- More common after menopause
+
+**Extramammary Pain:**
+
+Pain that seems to be in the breast but actually originates from outside the breast:
+
+*Common Causes:*
+- **Costochondritis** (Tietze syndrome)
+  - Inflammation of cartilage connecting ribs to breastbone
+  - Very common cause of breast pain
+  - Pain reproduced by pressing on chest wall
+
+- **Muscle strain**
+  - Pectoralis muscle
+  - From exercise or overuse
+  - More common with large breasts
+
+- **Nerve-related pain**
+  - Intercostal neuralgia
+  - Cervical radiculopathy
+  - Shingles (herpes zoster)
+
+**Causes of Breast Pain:**
+
+**Hormonal Causes:**
+
+*Reproductive Hormones:*
+- Estrogen fluctuations
+- Progesterone effects
+- Prolactin elevations
+- Hormonal medications
+
+*Menstrual Cycle:*
+- Normal hormonal variation
+- Breast tissue sensitivity to hormones
+- Fluid retention before menses
+- Most common cause of cyclical pain
+
+*Pregnancy:*
+- First trimester breast tenderness very common
+- Due to hormonal changes preparing for lactation
+- Usually bilateral and diffuse
+
+*Menopause Transition:*
+- Irregular cycles, irregular symptoms
+- Perimenopausal hormone fluctuations
+- May be unpredictable
+
+**Medication-Related:**
+
+*Hormonal Contraceptives:*
+- Birth control pills
+- Patch, ring, implant, IUD
+- May cause or improve breast pain
+- Usually cyclical pattern
+
+*Hormone Replacement Therapy:*
+- Estrogen and progesterone
+- Common cause of breast pain
+- Dose-dependent
+
+*Other Medications:*
+- Antidepressants (SSRIs, SNRIs)
+- Some antibiotics (spironolactone)
+- Cardiovascular medications
+
+**Anatomical Causes:**
+
+*Large Breasts (Macromastia):*
+- Weight causes strain
+- Shoulder grooving from bra straps
+- Back, neck, and shoulder pain
+- Skin irritation (intertrigo)
+
+*Breast Biopsy Scars:*
+- Nerve injury
+- Scar tissue (fat necrosis)
+- Can cause persistent localized pain
+
+**Inflammatory Causes:**
+
+*Mastitis:*
+- Infection of breast tissue
+- Usually during breastfeeding
+- Redness, warmth, fever
+- Usually unilateral
+
+*Abscess:*
+- Collection of pus
+- Often follows mastitis
+- Requires drainage
+
+**Breast Conditions:**
+
+*Fibrocystic Changes:*
+- Most common benign breast condition
+- Lumpiness + tenderness
+- Worsens before period
+- Very common cause of pain
+
+*Cysts:*
+- Fluid-filled sacs
+- Can cause sudden onset pain
+- Especially if rapidly enlarging
+- Can be aspirated for relief
+
+*Galactocele:*
+- Milk-filled cyst
+- During or after lactation
+- Can be painful
+
+**Dietary and Lifestyle Factors:**
+
+*Potential Triggers:*
+- Caffeine
+- High fat diet
+- Excessive salt
+- Alcohol
+- Chocolate
+- Some evidence for methylxanthines
+
+*Stress:*
+- May worsen perception of pain
+- May affect hormonal balance
+- Muscle tension
+
+**Pain Characteristics by Cause:**
+
+| Pain Type | Pattern | Location | Associated Features |
+|-----------|---------|----------|-------------------|
+| Cyclical hormonal | Follows cycle | Both breasts | Swelling, lumpiness |
+| Costochondritis | Constant | One side | Reproducible by pressure |
+| Muscle strain | Activity-related | Chest wall | Worse with movement |
+| Mastitis | Acute | Usually one | Fever, redness |
+| Cysts | Sudden onset | One area | Palpable mass |
+| Neuralgia | Intermittent | Often one area | Burning, shooting |
+
+**When Pain is More Concerning:**
+
+While breast pain is rarely cancer, red flag features include:
+- Pain that's always in exactly the same spot
+- Pain that's getting progressively worse
+- Pain that doesn't go away after period
+- Associated palpable mass
+- Skin changes or nipple changes
+- Unilateral pain without apparent cause`,
+      keyPoints: [
+        'Cyclical mastalgia is the most common type, affecting 60-70% of women with breast pain',
+        'Costochondritis (chest wall inflammation) is a common cause of breast pain that mimics true breast pain',
+        'Hormonal medications including contraceptives and HRT can cause breast pain',
+        'Fibrocystic changes are a very common benign cause of breast pain and lumpiness',
+        'Pain that is always in the same spot and getting worse is more concerning'
+      ],
+      vocabulary: [
+        { term: 'Costochondritis', definition: 'Inflammation of the cartilage that connects the ribs to the breastbone' },
+        { term: 'Macromastia', definition: 'Abnormally large breasts that can cause pain and physical discomfort' },
+        { term: 'Intercostal Neuralgia', definition: 'Pain along the path of the nerves between the ribs' },
+        { term: 'Luteal Phase', definition: 'The second half of the menstrual cycle, after ovulation has occurred' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most common type of breast pain?',
+          options: [
+            'Non-cyclical mastalgia',
+            'Cyclical mastalgia',
+            'Costochondritis',
+            'Mastitis'
+          ],
+          correctAnswer: 1,
+          explanation: 'Cyclical mastalgia is the most common type of breast pain, accounting for 60-70% of cases. It follows the menstrual cycle pattern.'
+        },
+        {
+          question: 'What distinguishes costochondritis from true breast pain?',
+          options: [
+            'Costochondritis is always bilateral',
+            'Costochondritis pain is reproduced by pressing on the chest wall',
+            'Costochondritis only occurs during menstruation',
+            'Costochondritis causes fever'
+          ],
+          correctAnswer: 1,
+          explanation: 'Costochondritis is distinguished from true breast pain because the discomfort is reproduced by pressing on the chest wall where the ribs connect to the breastbone.'
+        },
+        {
+          question: 'Which medication class is most commonly associated with breast pain as a side effect?',
+          options: [
+            'Antibiotics',
+            'Hormonal medications',
+            'Pain relievers',
+            'Allergy medications'
+          ],
+          correctAnswer: 1,
+          explanation: 'Hormonal medications, including oral contraceptives, hormone replacement therapy, and fertility medications, are commonly associated with breast pain as a side effect.'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Evaluation and Diagnosis',
+      content: `A systematic approach to evaluating breast pain ensures appropriate management while providing reassurance and identifying any concerning features.
+
+**Clinical Assessment:**
+
+**History Taking:**
+
+*Key Questions:*
+
+| Question | Why It Matters |
+|----------|----------------|
+| Location of pain? | Helps distinguish focal vs diffuse |
+| One or both breasts? | Unilateral more concerning |
+| Relationship to menstrual cycle? | Distinguishes cyclical vs non-cyclical |
+| Duration of pain? | Persistent pain needs evaluation |
+| Character of pain? | Differentiates breast from chest wall pain |
+| Any trauma? | May explain injury-related pain |
+| Current medications? | Many medications cause breast pain |
+| Family history of breast cancer? | Affects risk assessment |
+| Any palpable lumps? | Requires full evaluation |
+| Any nipple discharge? | Needs investigation |
+| Skin or nipple changes? | Concerning feature |
+
+**Physical Examination:**
+
+*Breast Examination:*
+1. Visual inspection
+   - Symmetry
+   - Skin changes
+   - Nipple appearance
+
+2. Palpation
+   - Systematic approach
+   - Note any masses
+   - Assess tenderness
+   - Check axillary nodes
+
+3. Chest wall examination
+   - Press on costochondral junctions
+   - Assess pectoral muscles
+   - Check for trigger points
+   - Reproduce pain if possible
+
+*Reproducible Chest Wall Pain:*
+- Pain reproduced by chest wall pressure
+- Suggests costochondritis or muscle strain
+- Not from breast tissue
+- Reassuring finding
+
+**Diagnostic Testing:**
+
+**When to Order Imaging:**
+
+| Indication | Recommended Test |
+|------------|------------------|
+| Palpable mass | Diagnostic mammogram + ultrasound |
+| Age 30+ with focal pain | Diagnostic mammogram ± ultrasound |
+| Age <30 with focal pain | Ultrasound (mammogram less useful) |
+| Persistent unilateral pain | Imaging to rule out pathology |
+| High-risk patient | Lower threshold for imaging |
+| Normal exam, cyclical pain | Imaging often not needed |
+
+**Mammography:**
+
+*Indications:*
+- Age 30+ with concerning features
+- Any age with palpable mass
+- High-risk patients
+- Persistent non-cyclical pain
+
+*Findings:*
+- Most often normal in breast pain
+- May detect occult masses
+- May show cysts
+- May show architectural distortion
+
+**Ultrasound:**
+
+*Indications:*
+- Women under 30 (preferred initial test)
+- Palpable abnormality
+- Dense breast tissue
+- Characterizing mammographic findings
+- Guided aspiration of cysts
+
+*Advantages:*
+- No radiation
+- Distinguishes cysts from solid masses
+- Good in young, dense breasts
+- Real-time guidance
+
+**Laboratory Tests:**
+
+*Not routinely indicated for breast pain alone*
+
+May be considered if:
+- Pregnancy suspected (hCG)
+- Galactorrhea present (prolactin)
+- Thyroid dysfunction suspected (TSH)
+- Infection suspected (CBC)
+- Hormonal imbalance suspected
+
+**Specialized Tests:**
+
+*Ductography (Galactography):*
+- For bloody or persistent single-duct discharge
+- Not for pain alone
+
+*MRI:*
+- Not first-line for pain evaluation
+- May be used for high-risk patients
+- Problem-solving tool
+
+**Diagnostic Categories:**
+
+**1. Normal Examination + Cyclical Pain:**
+- Diagnosis: Cyclical mastalgia
+- Usually no imaging needed in low-risk women
+- Reassurance and conservative management
+- Return precautions
+
+**2. Normal Examination + Non-Cyclical Pain:**
+- Consider imaging based on:
+  - Age
+  - Risk factors
+  - Duration
+  - Focal vs diffuse
+
+**3. Chest Wall Pain:**
+- Diagnosis: Costochondritis/muscle strain
+- Pain reproduced by chest wall pressure
+- No breast imaging needed
+- Treat chest wall condition
+
+**4. Palpable Mass:**
+- Full diagnostic imaging
+- Ultrasound ± mammogram
+- Biopsy if indicated
+- Appropriate management of findings
+
+**5. Abnormal Imaging:**
+- Follow BI-RADS recommendations
+- Biopsy if suspicious
+- Treat underlying condition
+
+**Differential Diagnosis Considerations:**
+
+**Breast-Related:**
+- Fibrocystic changes
+- Cysts
+- Infection (mastitis/abscess)
+- Fat necrosis
+- Duct ectasia
+- Pregnancy-related
+- Galactocele
+
+**Chest Wall-Related:**
+- Costochondritis (most common)
+- Muscle strain
+- Rib fracture
+- Intercostal neuralgia
+- Cervical radiculopathy
+
+**Other:**
+- Shingles (herpes zoster)
+- Referred pain from elsewhere
+- Cardiac pain (very rare presentation)
+*Note: Cardiac pain in women can be atypical*
+
+**Red Flag Symptoms Requiring Urgent Evaluation:**
+
+- Palpable mass
+- Spontaneous bloody nipple discharge
+- Skin changes (dimpling, thickening, ulceration)
+- Nipple retraction or distortion
+- Persistent unilateral pain in one spot
+- Pain with abnormal imaging finding
+- Associated lymphadenopathy
+
+**Risk Assessment:**
+
+**Features Worrying for Cancer:**
+- Persistent unilateral focal pain
+- Progressive symptoms
+- Pain with palpable abnormality
+- Non-responsive to conservative measures
+- Associated skin/nipple changes
+- Abnormal imaging
+
+**Reassuring Features:**
+- Bilateral diffuse pain
+- Cyclical pattern
+- Normal examination
+- Reproducible chest wall pain
+- Responsive to conservative treatment
+- Duration < 3 months
+
+**Documentation:**
+
+**Should Include:**
+- Pain characteristics (location, duration, severity)
+- Relationship to menstrual cycle
+- Examination findings
+- Imaging results and BI-RADS
+- Assessment and plan
+- Follow-up arrangements
+- Return precautions
+
+**Patient Communication:**
+
+**Explain:**
+- Most breast pain is not cancer
+- The type of pain they have
+- Why tests are or aren't being ordered
+- What to watch for
+- When to return
+- Treatment options`,
+      keyPoints: [
+        'A detailed history and physical examination are essential for evaluating breast pain',
+        'Imaging is indicated for palpable masses, persistent unilateral pain, or women over 30 with focal pain',
+        'Costochondritis is diagnosed when pain is reproduced by pressing on the chest wall',
+        'Normal imaging with breast pain is reassuring and common',
+        'Red flag symptoms include palpable mass, bloody discharge, and skin changes'
+      ],
+      vocabulary: [
+        { term: 'BI-RADS', definition: 'Breast Imaging Reporting and Data System - a standardized system for classifying breast imaging findings' },
+        { term: 'Ductography', definition: 'An imaging test that involves injecting contrast into a breast duct to evaluate nipple discharge' },
+        { term: 'Galactorrhea', definition: 'Inappropriate milk production not related to pregnancy or breastfeeding' },
+        { term: 'Cervical Radiculopathy', definition: 'Nerve pain caused by compression of a nerve root in the neck' }
+      ],
+      quiz: [
+        {
+          question: 'What is the first-line imaging modality for breast pain in a woman under age 30?',
+          options: [
+            'Mammogram',
+            'Ultrasound',
+            'MRI',
+            'CT scan'
+          ],
+          correctAnswer: 1,
+          explanation: 'Ultrasound is the preferred initial imaging modality for women under 30 because it can distinguish cysts from solid masses without radiation. Mammography is less useful in younger, dense breasts.'
+        },
+        {
+          question: 'How is costochondritis diagnosed?',
+          options: [
+            'By mammography',
+            'By ultrasound',
+            'By physical examination showing pain reproduced by chest wall pressure',
+            'By blood tests'
+          ],
+          correctAnswer: 2,
+          explanation: 'Costochondritis is diagnosed clinically when the pain is reproduced by pressing on the costochondral junction where the ribs connect to the breastbone.'
+        },
+        {
+          question: 'Which feature of breast pain is most concerning for underlying malignancy?',
+          options: [
+            'Bilateral diffuse pain that varies with menstrual cycle',
+            'Persistent unilateral focal pain in one spot',
+            'Pain that improves after menstruation',
+            'Pain reproduced by pressing on the ribs'
+          ],
+          correctAnswer: 1,
+          explanation: 'Persistent unilateral focal pain in one spot is more concerning for underlying malignancy than bilateral cyclical pain, which is typically hormonal and benign.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Treatment and Management',
+      content: `Most breast pain can be managed effectively with conservative measures and targeted therapies based on the underlying cause.
+
+**Treatment Approach by Type:**
+
+**Cyclical Mastalgia Management:**
+
+*First-Line Conservative Measures:*
+
+**Supportive Garments:**
+- Well-fitting bra
+- Sports bra for exercise
+- Nighttime bra if helpful
+- Professional fitting recommended
+
+**Dietary Modifications:**
+- Reduce caffeine
+- Reduce salt intake (especially before period)
+- Low-fat diet
+- Evening primrose oil (evidence mixed)
+- Consider vitamin E (limited evidence)
+
+**Lifestyle Changes:**
+- Regular exercise
+- Stress reduction
+- Adequate sleep
+- Smoking cessation
+
+**Pain Relief:**
+- NSAIDs (ibuprofen, naproxen)
+- Topical NSAIDs (diclofenac gel)
+- Acetaminophen
+- Applied during symptomatic phase
+
+**Second-Line Medical Therapy:**
+
+*When conservative measures insufficient:*
+
+**Tamoxifen:**
+- Effective for severe cyclical pain
+- 10 mg daily or 20 mg cyclically
+- Side effects limit use
+- Hot flashes, vaginal discharge
+- Off-label use for pain
+
+**Danazol:**
+- Synthetic androgen
+- Very effective
+- Significant side effects
+- Weight gain, acne, hirsutism
+- Rarely used now
+
+**Bromocriptine:**
+- Dopamine agonist
+- Reduces prolactin
+- Side effects: nausea, dizziness
+- Limited use
+
+**Non-Cyclical Mastalgia Management:**
+
+*Identify and Treat Underlying Cause:*
+
+**Chest Wall Pain (Costochondritis):**
+- NSAIDs (mainstay)
+- Heat or ice
+- Physical therapy
+- Local injection (rare)
+- Usually self-limited
+
+**Muscle Strain:**
+- Rest and activity modification
+- NSAIDs
+- Stretching exercises
+- Physical therapy
+- Supportive bras
+
+**Cyst-Related Pain:**
+- Aspiration for relief
+- Often provides immediate relief
+- Confirm benign nature
+- May recur
+
+**Other Specific Causes:**
+- Infection: antibiotics
+- Fat necrosis: reassurance, excision if symptomatic
+- Duct ectasia: symptomatic treatment
+
+**Pharmacologic Treatments:**
+
+**Topical Treatments:**
+
+*Diclofenac Gel:*
+- Applied directly to breast
+- Minimal systemic absorption
+- Fewer side effects than oral NSAIDs
+- Effective for focal pain
+
+*NSAID Creams/Gels:*
+- Can be very effective
+- Direct application to painful area
+- Minimal systemic effects
+
+**Oral Medications:**
+
+*NSAIDs:*
+- First-line for most pain
+- Ibuprofen 400-600 mg TID
+- Naproxen 220 mg BID
+- Take during symptomatic phase
+- Watch for GI side effects
+
+*Hormonal Manipulations:*
+
+**Oral Contraceptives:**
+- May help or worsen pain
+- Lower estrogen formulations better
+- Continuous cycle (skip placebo) sometimes helps
+- Trial of different formulations
+
+**Evening Primrose Oil:**
+- Contains gamma-linolenic acid (GLA)
+- 3000 mg daily divided doses
+- May take 2-3 months to see effect
+- Evidence mixed but low risk
+
+**Vitamin E:**
+- 400 IU daily
+- Evidence limited
+- Minimal risk
+- Often tried
+
+**Flaxseed:**
+- Lignans may modulate estrogen
+- Ground flaxseed 25-30 g daily
+- Evidence limited
+
+**Interventional Treatments:**
+
+**Cyst Aspiration:**
+- Ultrasound-guided
+- Immediate relief for painful cysts
+- Confirms benign nature
+- May recur
+
+**Nerve Block:**
+- For severe localized pain
+- Intercostal nerve block
+- Temporary relief
+- Rarely needed
+
+**Surgical Options:**
+- Excision of painful lump
+- Microdochectomy for duct ectasia
+- Reduction mammoplasty for macromastia
+- Last resort options
+
+**Follow-up and Monitoring:**
+
+**Treatment Response:**
+
+*Good Response:*
+- Document improvement
+- Continue current treatment
+- Gradual taper if appropriate
+- Return precautions
+
+*Poor Response:*
+- Re-evaluate diagnosis
+- Consider alternative causes
+- Escalate treatment
+- Consider specialist referral
+
+**When to Refer:**
+
+*Breast Specialist:*
+- Atypical features
+- Poor response to treatment
+- Abnormal imaging
+- Patient anxiety
+
+*Pain Specialist:*
+- Chronic pain syndrome
+- Severe non-responsive pain
+* Multidisciplinary approach
+
+**Patient Education:**
+
+**Key Messages:**
+- Breast pain rarely indicates cancer
+- Most pain resolves with time
+- Multiple treatment options available
+- Trial and error may be needed
+- Report any new symptoms
+- Maintain recommended screening
+
+**Self-Care Instructions:**
+
+1. Wear supportive, well-fitting bras
+2. Apply heat or cold for comfort
+3. Use OTC pain relievers as needed
+4. Reduce caffeine and salt
+5. Maintain regular exercise
+6. Track symptoms in relation to cycle
+7. Practice stress management
+
+**Return Precautions:**
+
+Seek prompt evaluation for:
+- New lump
+- Worsening pain
+- Skin changes
+- Nipple discharge (especially bloody)
+- Persistent focal pain
+- Any concerning changes
+
+**Treatment Outcomes:**
+
+| Severity | Expected Outcome |
+|----------|-----------------|
+| Mild cyclical pain | Self-care usually sufficient |
+| Moderate cyclical pain | May require evening primrose oil or NSAIDs |
+| Severe cyclical pain | May require hormonal manipulation |
+| Non-cyclical pain | Treat underlying cause; variable response |
+| Chest wall pain | Usually responds to NSAIDs and physical therapy |
+
+**Special Populations:**
+
+**Pregnant Women:**
+- Reassurance (usually normal)
+- Supportive bra
+- Acetaminophen preferred over NSAIDs
+- Avoid hormonal treatments
+
+**Adolescents:**
+- Usually cyclical
+- Reassurance primary treatment
+- Monitor for symptom progression
+- NSAIDs if needed
+
+**Postmenopausal Women:**
+- Non-cyclical pain more common
+- Lower threshold for imaging
+- Review medications
+- Consider HRT adjustment
+
+**Women with Breast Implants:**
+- Usually not implant-related
+- Evaluate thoroughly
+- Consider capsular contracture`,
+      keyPoints: [
+        'Most breast pain can be managed with conservative measures like supportive bras and NSAIDs',
+        'Evening primrose oil and vitamin E are commonly used though evidence is mixed',
+        'Cyst aspiration provides immediate relief for painful cysts',
+        'Chest wall pain typically responds well to NSAIDs and physical therapy',
+        'Hormonal treatments like tamoxifen are reserved for severe cases'
+      ],
+      vocabulary: [
+        { term: 'Danazol', definition: 'A synthetic androgen medication that can relieve breast pain but has significant side effects' },
+        { term: 'Gamma-linolenic Acid (GLA)', definition: 'An omega-6 fatty acid found in evening primrose oil and borage oil' },
+        { term: 'Microdochectomy', definition: 'Surgical removal of a single breast duct' },
+        { term: 'Reduction Mammoplasty', definition: 'Surgical reduction of breast size to relieve symptoms of macromastia' }
+      ],
+      quiz: [
+        {
+          question: 'What is the first-line treatment for most cases of breast pain?',
+          options: [
+            'Surgery',
+            'Hormonal therapy',
+            'Supportive bras and NSAIDs',
+            'Antibiotics'
+          ],
+          correctAnswer: 2,
+          explanation: 'First-line treatment for most breast pain includes conservative measures like supportive, well-fitting bras and NSAIDs. These simple measures are effective for many women.'
+        },
+        {
+          question: 'What is the most appropriate immediate treatment for a painful breast cyst?',
+          options: [
+            'Immediate surgery',
+            'Aspiration to drain the cyst',
+            'Antibiotics',
+            'Hormone therapy'
+          ],
+          correctAnswer: 1,
+          explanation: 'Aspiration of a painful breast cyst provides immediate relief and confirms the benign nature of the lesion. The fluid can be analyzed if needed.'
+        },
+        {
+          question: 'Which dietary modification has the best evidence for helping with breast pain?',
+          options: [
+            'Reducing caffeine intake',
+            'Increasing dairy intake',
+            'Eating more spicy foods',
+            'Increasing sugar intake'
+          ],
+          correctAnswer: 0,
+          explanation: 'Reducing caffeine intake is one of the most commonly recommended and helpful dietary modifications for breast pain, though evidence varies among individuals.'
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Pathophysiology and Special Considerations',
+      content: `This advanced section explores the molecular mechanisms of breast pain, special populations, and complex clinical scenarios.
+
+**Pathophysiology of Breast Pain:**
+
+**Hormonal Mechanisms:**
+
+*Estrogen Effects:*
+- Stimulates breast ductal proliferation
+- Increases water retention
+- Causes breast engorgement
+- Peaks in luteal phase
+- Sensitizes nerve endings
+
+*Progesterone Effects:*
+- Stimulates lobular growth
+- Increases vascular permeability
+- Causes edema
+- Peaks before menstruation
+- May have anti-inflammatory effects
+
+*Prolactin:*
+- Stimulates milk production
+- May cause breast pain
+- Elevated in some breast pain syndromes
+- Affects dopaminergic pathways
+
+**Molecular Mediators:**
+
+*Inflammatory Cytokines:*
+- Prostaglandins (especially PGE2)
+- Leukotrienes
+- Cytokine modulation
+- Pain sensitization
+
+*Growth Factors:*
+- VEGF (vascular endothelial growth factor)
+- IGF (insulin-like growth factor)
+- Affects breast tissue sensitivity
+
+*Nerve Growth Factor:*
+- Increased in painful breast conditions
+- Promotes nerve proliferation
+- Sensitizes nociceptors
+
+**Pain Pathways:**
+
+*Peripheral Mechanisms:*
+- Nociceptor activation
+- Inflammatory mediator release
+- Edema compressing nerves
+- Hormone-induced sensitivity
+
+*Central Mechanisms:*
+- Altered pain processing
+- Central sensitization in chronic pain
+- Psychological factors amplifying perception
+
+**Cyclical vs Non-Cyclical Pathophysiology:**
+
+| Feature | Cyclical | Non-Cyclical |
+|---------|----------|--------------|
+| Primary driver | Hormonal | Often neuropathic/inflammatory |
+| Distribution | Bilateral/diffuse | Unilateral/focal |
+| Response to hormones | Consistent pattern | Unrelated to cycle |
+| Treatment response | Hormonal manipulation | Treat specific cause |
+
+**Special Populations:**
+
+**Pregnant and Lactating Women:**
+
+*Pathophysiology:*
+- Dramatic hormonal changes
+- Breast tissue proliferation
+- Milk production
+- Engorgement potential
+
+*Common Causes:*
+- Normal pregnancy changes
+- Mastitis (infection)
+- Engorgement
+- Nipple fissures
+- Ineffective latch
+
+*Management Considerations:*
+- Many medications contraindicated
+- Acetaminophen preferred
+- Supportive measures
+- Lactation consultation
+- Antibiotics if infection
+
+**Adolescents:**
+
+*Developmental Considerations:*
+- Breast development (thelarche)
+- Hormonal fluctuations
+- Hypersensitivity to hormones
+- Emotional impact
+
+*Causes:*
+- Normal development
+- Fibrocystic changes
+- Hormonal imbalances
+- Infection (rare)
+
+*Approach:*
+- Reassurance primary
+- Minimal intervention
+- Education on normal changes
+- Monitor for progression
+
+**Postmenopausal Women:**
+
+*Special Considerations:*
+- Non-cyclical pain predominates
+- Lower threshold for imaging
+- Medication review essential
+- Hormone therapy effects
+
+*Causes:*
+- Hormone replacement therapy
+- Atrophic changes
+- Chest wall pain more common
+- Malignancy risk increases with age
+
+**Women with Implants:**
+
+*Special Considerations:*
+- Differentiate implant from breast pain
+- Capsular contracture
+- Implant rupture
+- Pain may be from capsule
+- Normal nerves may be affected
+
+*Evaluation:*
+- May require implant-specific imaging
+- MRI for rupture evaluation
+- Consider implant age
+- Surgical consultation if needed
+
+**Chronic Pain Syndromes:**
+
+**Central Sensitization:**
+- Amplified pain response
+- Allodynia (pain from non-painful stimuli)
+- Hyperalgesia (increased pain sensitivity)
+- May have other chronic pain conditions
+- Requires pain management approach
+
+**Neuropathic Pain:**
+- Intercostal neuralgia
+- Nerve injury from surgery
+- Scar neuroma formation
+- Requires different medications (gabapentin, etc.)
+
+**Treatment-Resistant Pain:**
+
+*Approach:*
+- Re-evaluate diagnosis
+- Consider multidisciplinary pain management
+- Psychological support
+- Alternative therapies
+- Nerve blocks (rare)
+
+**Psychological Impact:**
+
+**Anxiety and Breast Pain:**
+- Cancer fear is common
+- Anxiety amplifies pain perception
+- Vicious cycle of pain and anxiety
+- Fear of exam findings
+- Impact on quality of life
+
+**Management:**
+- Clear communication
+- Reassurance about benign nature
+- Education about statistics
+- Psychological support when needed
+- Mindfulness and stress reduction
+
+**Economic and Social Impact:**
+
+*Work and Daily Activities:*
+- May affect work performance
+- Exercise limitation
+- Sleep disturbance
+- Impact on relationships
+- Healthcare costs
+
+**Controversies and Debates:**
+
+**Caffeine and Breast Pain:**
+- Mixed evidence
+- Some studies show benefit
+- Others show no effect
+- Likely individual variation
+- Reasonable to try reduction
+
+**Evening Primrose Oil:**
+- GLA proposed mechanism
+- Studies inconsistent
+- May work for some women
+- Minimal side effects
+- Reasonable trial
+
+**Hormonal Manipulations:**
+- Effective but side effects
+- Risk-benefit discussion needed
+- Reserved for severe cases
+- Not first-line treatment
+
+**Diet and Breast Pain:**
+
+*Potential Triggers:*
+- Caffeine (most consistent)
+- High fat diet (possible)
+- Excessive salt (possible)
+- Alcohol (possible)
+
+*Beneficial Foods:*
+- Flaxseed (lignans)
+- Soy (isoflavones)
+- Fruits and vegetables
+- Omega-3 fatty acids
+
+**Emerging Therapies:**
+
+*Topical Treatments:*
+- New NSAID formulations
+- Lidocaine patches
+- Compounded creams
+
+*Alternative Therapies:*
+- Acupuncture
+- Biofeedback
+- Chasteberry (Vitex agnus-castus)
+- St. John's wort
+
+**Research Directions:**
+
+*Molecular Classification:*
+- Identifying subtypes of breast pain
+- Personalized treatment approaches
+- Better understanding of pathophysiology
+
+*New Therapeutic Targets:*
+- Prostaglandin inhibitors
+- Cytokine modulators
+- Nerve growth factor inhibitors
+- Hormone receptor modulators`,
+      keyPoints: [
+        'Estrogen and progesterone fluctuations cause cyclical breast pain through ductal proliferation, lobular growth, and edema',
+        'Prostaglandins and inflammatory cytokines are key mediators of breast pain',
+        'Central sensitization can amplify pain perception in chronic breast pain',
+        'Pregnant, adolescent, postmenopausal, and women with implants require special considerations',
+        'Psychological factors including cancer anxiety significantly impact breast pain perception'
+      ],
+      vocabulary: [
+        { term: 'Allodynia', definition: 'Pain caused by a stimulus that does not normally provoke pain' },
+        { term: 'Hyperalgesia', definition: 'An increased sensitivity to pain, which may be caused by damage to nociceptors or peripheral nerves' },
+        { term: 'VEGF', definition: 'Vascular Endothelial Growth Factor - a signaling protein that stimulates blood vessel formation' },
+        { term: 'Nociceptor', definition: 'A sensory receptor that detects harmful stimuli and sends signals to the spinal cord and brain' }
+      ],
+      quiz: [
+        {
+          question: 'What is the primary mechanism by which estrogen causes breast pain?',
+          options: [
+            'Direct stimulation of pain receptors',
+            'Stimulation of ductal proliferation, water retention, and engorgement',
+            'Inflammation of breast tissue',
+            'Direct damage to nerve endings'
+          ],
+          correctAnswer: 1,
+          explanation: 'Estrogen causes breast pain primarily through stimulating ductal proliferation, increasing water retention, and causing breast engorgement. Progesterone contributes by stimulating lobular growth and causing edema.'
+        },
+        {
+          question: 'What is central sensitization in the context of chronic breast pain?',
+          options: [
+            'Increased sensitivity of breast tissue to hormones',
+            'Amplified pain processing in the central nervous system',
+            'Increased nerve endings in the breast',
+            'Hypersensitivity to medications'
+          ],
+          correctAnswer: 1,
+          explanation: 'Central sensitization refers to amplified pain processing in the central nervous system, resulting in heightened pain perception (allodynia and hyperalgesia) and chronic pain that persists beyond tissue healing.'
+        },
+        {
+          question: 'Which approach is recommended for women with chronic breast pain and significant cancer anxiety?',
+          options: [
+            'Dismiss the anxiety as unfounded',
+            'Provide clear reassurance, education about statistics, and psychological support',
+            'Immediate surgical biopsy for reassurance',
+          ],
+          correctAnswer: 1,
+          explanation: 'For women with chronic breast pain and significant cancer anxiety, the appropriate approach includes clear communication about the benign nature of most breast pain, education about statistics, and psychological support to address the anxiety amplifying pain perception.'
+        }
+      ]
+    }
+  ],
+  relatedTopics: ['breast-anatomy', 'breast-exam', 'fibrocystic-changes', 'womens-health'],
+  lastUpdated: '2025-01-25',
+  references: [
+    { title: 'ACOG Practice Bulletin on Breast Pain', url: 'https://www.acog.org/clinical/clinical-guidance/practice-bulletins' },
+    { title: 'Evaluation and Management of Breast Pain', url: 'https://www.aafp.org/pubs/afp/issues/2000/0801/p667.html' },
+    { title: 'Breast Pain - Diagnosis and Treatment', url: 'https://www.mayoclinic.org/diseases-conditions/breast-pain' },
+    { title: 'Management of Mastalgia - RCOG Guidelines', url: 'https://www.rcog.org.uk/guidelines' },
+    { title: 'Cyclical Mastalgia - BMJ Best Practice', url: 'https://bestpractice.bmj.com/topics' }
+  ]
+};

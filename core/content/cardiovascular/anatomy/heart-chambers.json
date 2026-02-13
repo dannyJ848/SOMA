@@ -1,0 +1,465 @@
+{
+  "topic": "Heart Chambers",
+  "category": "anatomy",
+  "system": "cardiovascular",
+  "contents": [
+    {
+      "id": "structure-right-atrium",
+      "type": "structure",
+      "name": "Right Atrium",
+      "alternateNames": ["RA", "Atrium dextrum"],
+      "fmaId": "FMA:7096",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The right atrium is the upper-right chamber of your heart that receives used blood from your body.",
+          "explanation": "Think of your heart like a house with four rooms. The right atrium is like the front door where tired blood comes back home after traveling through your body. This blood has given away its oxygen to your muscles and organs, so it needs to go to the lungs to get more oxygen. The right atrium collects this blood and passes it to the room below it (right ventricle).",
+          "keyTerms": [
+            {"term": "chamber", "definition": "A room or closed space inside something"},
+            {"term": "blood", "definition": "The red liquid that flows through your body carrying oxygen and nutrients"},
+            {"term": "oxygen", "definition": "An invisible gas in the air that your body needs to make energy"}
+          ],
+          "analogies": ["The right atrium is like a waiting room where tired blood rests before going to get refreshed in the lungs."],
+          "examples": ["When you run, your muscles use up oxygen from blood, and that used blood returns to the right atrium."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The right atrium is one of four heart chambers that receives deoxygenated blood from the body via the superior and inferior vena cava.",
+          "explanation": "The right atrium is a thin-walled chamber located in the upper right portion of the heart. It receives deoxygenated blood (blood low in oxygen) from two major veins: the superior vena cava brings blood from the upper body (head, arms, chest), and the inferior vena cava brings blood from the lower body (abdomen, legs). The right atrium also receives blood from the coronary sinus, which drains the heart muscle itself. When the atrium contracts, blood flows through the tricuspid valve into the right ventricle.",
+          "keyTerms": [
+            {"term": "deoxygenated blood", "definition": "Blood that has low oxygen content after delivering oxygen to body tissues", "pronunciation": "dee-OX-ee-jen-ay-ted"},
+            {"term": "superior vena cava", "definition": "Large vein that carries blood from the upper body to the right atrium", "pronunciation": "soo-PEER-ee-or VEE-nah KAY-vah"},
+            {"term": "inferior vena cava", "definition": "Large vein that carries blood from the lower body to the right atrium", "pronunciation": "in-FEER-ee-or VEE-nah KAY-vah"},
+            {"term": "tricuspid valve", "definition": "Heart valve with three leaflets between the right atrium and right ventricle", "pronunciation": "try-KUS-pid"}
+          ],
+          "analogies": ["The right atrium is like a collection basin that gathers all the used blood from the body's plumbing system."],
+          "examples": ["The coronary sinus opening can be seen as a small hole in the right atrium during heart surgery."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The right atrium is a low-pressure receiving chamber characterized by thin walls, pectinate muscles, the crista terminalis, and the fossa ovalis remnant.",
+          "explanation": "The right atrium has several important anatomical features. The smooth posterior portion (sinus venarum) receives the venae cavae and coronary sinus. The anterior portion contains pectinate muscles - muscular ridges that increase surface area. These two regions are separated by the crista terminalis, a muscular ridge. The interatrial septum (wall between atria) contains the fossa ovalis, a depression marking where the foramen ovale existed in fetal circulation. The sinoatrial (SA) node, the heart's natural pacemaker, is located in the right atrium near the superior vena cava opening. The right atrium operates at low pressures (0-8 mmHg) due to its role as a collecting chamber.",
+          "keyTerms": [
+            {"term": "pectinate muscles", "definition": "Muscular ridges in the anterior wall of the right atrium resembling the teeth of a comb", "pronunciation": "PEK-tin-ayt"},
+            {"term": "crista terminalis", "definition": "Vertical muscular ridge separating the smooth and trabeculated portions of the right atrium", "pronunciation": "KRIS-tah ter-min-AL-is"},
+            {"term": "fossa ovalis", "definition": "Oval depression in the interatrial septum, remnant of the fetal foramen ovale", "pronunciation": "FOS-ah oh-VAL-is"},
+            {"term": "sinoatrial node", "definition": "The heart's primary pacemaker, located in the right atrium", "pronunciation": "sy-noh-AY-tree-al"},
+            {"term": "sinus venarum", "definition": "Smooth-walled posterior portion of the right atrium derived from the embryonic sinus venosus", "pronunciation": "SY-nus ven-AR-um"}
+          ],
+          "examples": ["During right heart catheterization, the catheter passes through the right atrium where pressures are measured."]
+        },
+        "4": {
+          "level": 4,
+          "summary": "The right atrium serves as a volume reservoir with compliance properties critical for cardiac filling, while housing the SA node whose automaticity establishes heart rate.",
+          "explanation": "The right atrium functions as a primer pump and reservoir, contributing approximately 15-25% of right ventricular filling during atrial systole (the 'atrial kick'). This contribution becomes more significant with increased heart rate or ventricular stiffness. The atrial wall demonstrates high compliance, allowing accommodation of varying venous return without significant pressure changes. The SA node, located at the junction of the superior vena cava and right atrium, contains specialized pacemaker cells with unstable resting membrane potentials due to funny channels (If) and T-type calcium channels. Normal SA node firing rate is 60-100 bpm but is modulated by autonomic innervation - sympathetic stimulation increases rate, parasympathetic (vagal) stimulation decreases it. Atrial natriuretic peptide (ANP) is released from atrial myocytes in response to wall stretch, promoting natriuresis.",
+          "keyTerms": [
+            {"term": "atrial kick", "definition": "The contribution of atrial contraction to ventricular filling, normally 15-25% of stroke volume"},
+            {"term": "compliance", "definition": "The ability of a chamber to stretch and accommodate volume without significant pressure increase", "etymology": "From Latin 'complere' - to fill up"},
+            {"term": "funny channels", "definition": "Hyperpolarization-activated cyclic nucleotide-gated channels (HCN) responsible for pacemaker automaticity"},
+            {"term": "atrial natriuretic peptide", "definition": "Hormone released by atrial myocytes in response to stretch, promoting sodium and water excretion", "pronunciation": "nay-tree-yoo-RET-ik"},
+            {"term": "automaticity", "definition": "The intrinsic ability of cardiac cells to spontaneously depolarize and generate action potentials"}
+          ],
+          "clinicalNotes": "Loss of atrial kick in atrial fibrillation can reduce cardiac output by 15-25%, particularly problematic in patients with diastolic dysfunction or hypertrophic cardiomyopathy."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Right atrial pathophysiology encompasses arrhythmia substrates, congenital anomalies, and hemodynamic considerations essential for interventional and surgical planning.",
+          "explanation": "The right atrium is the site of multiple clinically significant arrhythmias. Typical atrial flutter involves a macro-reentrant circuit around the tricuspid annulus with the cavotricuspid isthmus (CTI) as the critical isthmus - CTI ablation is curative. Sinus node dysfunction manifests as bradycardia or tachycardia-bradycardia syndrome. Right atrial pressure waveforms (CVP monitoring) show 'a' wave (atrial contraction), 'c' wave (tricuspid bulging), 'x' descent (atrial relaxation), 'v' wave (passive atrial filling), and 'y' descent (tricuspid opening). Elevated mean RA pressure indicates right heart failure or pericardial constriction. Congenital defects include atrial septal defects (ostium secundum at fossa ovalis, ostium primum, sinus venosus types) and Ebstein anomaly with atrialized right ventricle. Patent foramen ovale (PFO) in 25% of adults can permit paradoxical embolism. The Koch triangle (coronary sinus ostium, tricuspid annulus, tendon of Todaro) contains the AV node - understanding this anatomy is crucial for ablation procedures.",
+          "keyTerms": [
+            {"term": "cavotricuspid isthmus", "definition": "Region between IVC and tricuspid annulus, critical for typical atrial flutter circuit", "pronunciation": "kay-voh-try-KUS-pid"},
+            {"term": "Koch triangle", "definition": "Anatomical landmark containing the AV node, bounded by coronary sinus, tricuspid annulus, and tendon of Todaro"},
+            {"term": "atrial septal defect", "definition": "Congenital defect allowing shunting between atria; classified as ostium secundum, primum, or sinus venosus types"},
+            {"term": "Ebstein anomaly", "definition": "Congenital displacement of tricuspid valve into RV with atrialization of the inlet portion"},
+            {"term": "CVP waveform", "definition": "Central venous pressure tracing reflecting right atrial hemodynamics with characteristic a, c, x, v, and y components"}
+          ],
+          "clinicalNotes": "Cannon 'a' waves occur with AV dissociation (atrium contracts against closed tricuspid). Giant 'v' waves indicate tricuspid regurgitation. Loss of 'a' wave occurs in atrial fibrillation."
+        }
+      },
+      "media": [
+        {
+          "id": "ra-3d-model",
+          "type": "3d-model",
+          "filename": "right-atrium-anatomy.glb",
+          "title": "Right Atrium 3D Model",
+          "description": "Interactive 3D model showing right atrial anatomy including crista terminalis, fossa ovalis, and pectinate muscles"
+        }
+      ],
+      "citations": [
+        {
+          "id": "grays-anatomy-heart",
+          "type": "textbook",
+          "title": "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
+          "authors": ["Susan Standring"],
+          "source": "Elsevier",
+          "chapter": "56",
+          "license": "Publisher"
+        },
+        {
+          "id": "openstax-anatomy-ch19",
+          "type": "textbook",
+          "title": "Anatomy and Physiology 2e - The Cardiovascular System: The Heart",
+          "source": "OpenStax",
+          "chapter": "19",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+          "license": "CC BY 4.0"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-atrium", "targetType": "structure", "relationship": "sibling", "label": "Left Atrium"},
+        {"targetId": "structure-right-ventricle", "targetType": "structure", "relationship": "related", "label": "Right Ventricle"},
+        {"targetId": "structure-tricuspid-valve", "targetType": "structure", "relationship": "related", "label": "Tricuspid Valve"},
+        {"targetId": "structure-sa-node", "targetType": "structure", "relationship": "child", "label": "Sinoatrial Node"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "structures": ["FMA:7096"],
+        "topics": ["anatomy", "cardiac anatomy", "heart chambers"],
+        "keywords": ["right atrium", "atrium", "heart chamber", "vena cava", "coronary sinus"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-left-atrium",
+      "type": "structure",
+      "name": "Left Atrium",
+      "alternateNames": ["LA", "Atrium sinistrum"],
+      "fmaId": "FMA:7097",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The left atrium is the upper-left chamber of your heart that receives fresh, oxygen-rich blood from your lungs.",
+          "explanation": "After blood picks up oxygen in your lungs, it needs to travel back to your heart so it can be pumped to the rest of your body. The left atrium is like a receiving station for this freshly oxygenated blood. It collects blood from four tubes called pulmonary veins (two from each lung) and then pushes it down into the left ventricle, which is the strongest pumping chamber.",
+          "keyTerms": [
+            {"term": "lungs", "definition": "Two spongy organs in your chest that take oxygen from the air you breathe"},
+            {"term": "oxygen-rich blood", "definition": "Blood that has lots of oxygen to deliver to your body's cells"},
+            {"term": "pulmonary veins", "definition": "Blood vessels that carry oxygenated blood from your lungs to your heart"}
+          ],
+          "analogies": ["The left atrium is like an airport arrival gate where refreshed blood lands after its trip through the lungs."],
+          "examples": ["Every time you take a breath, your lungs add oxygen to blood that then flows to your left atrium."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The left atrium receives oxygenated blood from four pulmonary veins and delivers it to the left ventricle through the mitral valve.",
+          "explanation": "The left atrium is positioned in the posterior (back) part of the heart. It has thicker walls than the right atrium because it handles blood at higher pressure. Four pulmonary veins (two from each lung) drain directly into it. The left atrium connects to the left ventricle through the mitral valve (also called bicuspid valve because it has two leaflets). A small ear-shaped pouch called the left atrial appendage extends from the main chamber. The left atrium is the most posterior structure of the heart and lies directly in front of the esophagus.",
+          "keyTerms": [
+            {"term": "pulmonary veins", "definition": "Four veins (two from each lung) that carry oxygenated blood to the left atrium", "pronunciation": "PUL-moh-ner-ee"},
+            {"term": "mitral valve", "definition": "Heart valve with two leaflets between the left atrium and left ventricle", "pronunciation": "MY-tral"},
+            {"term": "left atrial appendage", "definition": "Small pouch extending from the left atrium, also called the auricle", "pronunciation": "aw-RIK-ul"},
+            {"term": "bicuspid", "definition": "Having two cusps or leaflets", "pronunciation": "by-KUS-pid"}
+          ],
+          "analogies": ["The pulmonary veins are like four highways bringing oxygenated blood into the left atrium interchange."],
+          "examples": ["A transesophageal echocardiogram can visualize the left atrium well because the esophagus is right behind it."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The left atrium is a smooth-walled posterior chamber with pulmonary vein ostia, the left atrial appendage, and the mitral valve annulus, operating at higher pressures than the right atrium.",
+          "explanation": "The left atrium has predominantly smooth walls (derived from absorbed pulmonary veins embryologically) with pectinate muscles limited to the left atrial appendage. The four pulmonary vein ostia are located posteriorly - two superior and two inferior on each side. Normal left atrial pressure ranges from 4-12 mmHg, slightly higher than right atrial pressure due to the higher-pressure systemic circuit. The mitral annulus is a saddle-shaped fibrous ring that provides attachment for the mitral valve leaflets. The left atrial appendage (LAA) is a finger-like projection with complex trabeculations and variable morphology (chicken wing, cactus, windsock, or cauliflower shapes). The interatrial septum forms the medial wall, and the foramen ovale remnant (valve of the fossa ovalis) is visible from the left atrial side.",
+          "keyTerms": [
+            {"term": "pulmonary vein ostia", "definition": "Openings where the four pulmonary veins enter the left atrium", "pronunciation": "OS-tee-ah"},
+            {"term": "mitral annulus", "definition": "Fibrous ring at the junction of the left atrium and left ventricle supporting the mitral valve", "pronunciation": "AN-yoo-lus"},
+            {"term": "left atrial appendage", "definition": "Trabeculated pouch arising from the main left atrial body, variable in shape and size"},
+            {"term": "saddle-shaped", "definition": "Describing the 3D configuration of the mitral annulus with high points anteriorly and posteriorly"}
+          ],
+          "examples": ["CT pulmonary vein mapping before atrial fibrillation ablation delineates the pulmonary vein ostia anatomy."]
+        },
+        "4": {
+          "level": 4,
+          "summary": "The left atrium functions as a conduit, reservoir, and booster pump, with its appendage serving as a decompression chamber during volume overload but also as the primary site of thrombus formation in atrial fibrillation.",
+          "explanation": "Left atrial function encompasses three phases: reservoir (collecting pulmonary venous return during ventricular systole), conduit (passive flow during early diastole), and booster pump (atrial contraction in late diastole). LA compliance and reservoir function are assessed by LA strain on speckle-tracking echocardiography. LA enlargement (indexed volume >34 mL/m2) is a marker of chronically elevated LV filling pressures and predicts adverse outcomes. The LAA has different embryological origin (primary atrium) and thus different electrophysiological properties - it's the source of most triggers in paroxysmal AF. In non-valvular AF, >90% of left atrial thrombi form in the LAA due to blood stasis from loss of organized contraction. BNP and pro-BNP release from atrial myocytes correlates with atrial stretch and filling pressures.",
+          "keyTerms": [
+            {"term": "LA reservoir function", "definition": "Collection of pulmonary venous return during ventricular systole, assessed by LA strain"},
+            {"term": "LA strain", "definition": "Speckle-tracking echocardiographic measure of left atrial deformation and function"},
+            {"term": "indexed LA volume", "definition": "Left atrial volume normalized to body surface area; normal <34 mL/m2"},
+            {"term": "LAA thrombus", "definition": "Blood clot in the left atrial appendage, common source of cardioembolic stroke in AF"}
+          ],
+          "clinicalNotes": "LA dilation is a component of diastolic dysfunction grading. CHA2DS2-VASc score guides anticoagulation decisions in AF. TEE is gold standard for LAA thrombus detection before cardioversion."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Left atrial pathophysiology is central to atrial fibrillation management, structural heart intervention, and assessment of diastolic function, with the LAA as a target for stroke prevention.",
+          "explanation": "Pulmonary vein isolation (PVI) is the cornerstone of AF ablation, targeting triggers and rotors at PV ostia. Understanding PV anatomy variants (common ostia, accessory veins) is crucial for procedural planning. LA posterior wall and LAA isolation are performed in persistent AF. LAA occlusion (WATCHMAN, Amulet devices) offers stroke prevention alternative to anticoagulation - inclusion criteria typically mirror PROTECT-AF and PREVAIL trials (CHA2DS2-VASc ≥2, contraindication to long-term anticoagulation). LA pressure estimation via E/e' ratio guides diastolic function assessment: E/e' >14 suggests elevated LA pressure. Pulmonary vein stenosis (>50% reduction in diameter) is a complication of PV isolation occurring in 1-3% of cases. LA myxoma is the most common primary cardiac tumor, typically attached to fossa ovalis region. Mitral stenosis causes LA dilation, elevated pressure, and predisposes to AF and LAA thrombus. Cor triatriatum sinister is a congenital membrane dividing the LA.",
+          "keyTerms": [
+            {"term": "pulmonary vein isolation", "definition": "Catheter ablation creating electrical isolation of PVs from LA, cornerstone of AF ablation"},
+            {"term": "E/e' ratio", "definition": "Echocardiographic parameter (mitral E velocity / tissue Doppler e') estimating LV filling pressure"},
+            {"term": "LAA occlusion", "definition": "Device-based closure of LAA for stroke prevention in AF patients unable to tolerate anticoagulation"},
+            {"term": "cor triatriatum", "definition": "Congenital anomaly with membrane dividing atrium; sinister (left) more common than dexter (right)", "pronunciation": "kor try-AY-tree-AH-tum"}
+          ],
+          "clinicalNotes": "Post-PVI, 3-month blanking period before assessing success. Complete LAA occlusion requires no leak >5mm and no device-related thrombus on TEE at 45 days. Anticoagulation often continued for 45 days post-occlusion."
+        }
+      },
+      "media": [
+        {
+          "id": "la-3d-model",
+          "type": "3d-model",
+          "filename": "left-atrium-anatomy.glb",
+          "title": "Left Atrium 3D Model",
+          "description": "Interactive 3D model showing left atrial anatomy including pulmonary vein ostia and LAA"
+        }
+      ],
+      "citations": [
+        {
+          "id": "grays-anatomy-heart",
+          "type": "textbook",
+          "title": "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
+          "authors": ["Susan Standring"],
+          "source": "Elsevier",
+          "chapter": "56"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-right-atrium", "targetType": "structure", "relationship": "sibling", "label": "Right Atrium"},
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "related", "label": "Left Ventricle"},
+        {"targetId": "structure-mitral-valve", "targetType": "structure", "relationship": "related", "label": "Mitral Valve"},
+        {"targetId": "condition-atrial-fibrillation", "targetType": "condition", "relationship": "related", "label": "Atrial Fibrillation"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "structures": ["FMA:7097"],
+        "topics": ["anatomy", "cardiac anatomy", "heart chambers"],
+        "keywords": ["left atrium", "atrium", "pulmonary veins", "mitral valve", "LAA"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-right-ventricle",
+      "type": "structure",
+      "name": "Right Ventricle",
+      "alternateNames": ["RV", "Ventriculus dexter"],
+      "fmaId": "FMA:7098",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The right ventricle is the lower-right chamber of your heart that pumps blood to your lungs to get oxygen.",
+          "explanation": "The right ventricle is like a pump that pushes blood to a special place - your lungs! After blood comes back from your body without much oxygen, it flows into the right ventricle. Then, when the right ventricle squeezes, it pushes the blood through a tube to your lungs. In your lungs, the blood picks up fresh oxygen from the air you breathe. The right ventricle doesn't have to push as hard as the left side because the lungs are close by.",
+          "keyTerms": [
+            {"term": "ventricle", "definition": "A lower chamber of the heart that pumps blood out"},
+            {"term": "lungs", "definition": "The organs in your chest where blood picks up oxygen"},
+            {"term": "pump", "definition": "Something that pushes liquid from one place to another"}
+          ],
+          "analogies": ["The right ventricle is like a gentle pump that sends blood on a short trip to the nearby lungs."],
+          "examples": ["When you exhale, you're breathing out the carbon dioxide that your blood dropped off in the lungs."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The right ventricle is a triangular-shaped pumping chamber that receives blood from the right atrium and ejects it through the pulmonary valve into the pulmonary artery.",
+          "explanation": "The right ventricle lies in front of and to the right of the left ventricle. It has thinner walls than the left ventricle (about 3-5mm vs 10-15mm) because it only needs to pump blood to the lungs, which requires less pressure. The chamber has three parts: the inlet (where blood enters from the tricuspid valve), the trabeculated apical portion (with many muscle ridges), and the outflow tract (a smooth funnel leading to the pulmonary valve). A muscular band called the moderator band crosses the RV cavity and carries part of the electrical conduction system. The tricuspid valve has three leaflets attached to papillary muscles by chordae tendineae.",
+          "keyTerms": [
+            {"term": "pulmonary artery", "definition": "Large blood vessel that carries deoxygenated blood from the right ventricle to the lungs", "pronunciation": "PUL-moh-ner-ee"},
+            {"term": "pulmonary valve", "definition": "Heart valve with three semilunar cusps between the right ventricle and pulmonary artery"},
+            {"term": "moderator band", "definition": "Muscular band crossing the right ventricular cavity containing conduction tissue"},
+            {"term": "chordae tendineae", "definition": "String-like tendons connecting papillary muscles to valve leaflets", "pronunciation": "KOR-dee ten-DIN-ee-ee"}
+          ],
+          "analogies": ["The RV is shaped like a crescent wrapped around the left ventricle, like a glove around a ball."],
+          "examples": ["The moderator band is used as a landmark during cardiac surgery to identify the right ventricle."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The right ventricle has a complex crescentic geometry with inlet, trabeculated apical, and outlet components, designed for volume work at low pulmonary vascular resistance.",
+          "explanation": "RV architecture differs fundamentally from the LV. The RV wraps around the interventricular septum in a crescent shape. RV contraction occurs in a bellows-like motion (inward free wall movement) plus longitudinal shortening (tricuspid annular plane systolic excursion, TAPSE). The septum is shared with the LV and contributes to RV function (ventricular interdependence). Three papillary muscles support the tricuspid valve: anterior (largest), posterior, and septal (smallest). The trabeculae carneae are more coarse than in the LV. The crista supraventricularis separates the inlet and outlet portions. The infundibulum (conus arteriosus) is the smooth-walled outflow tract leading to the pulmonary valve. Normal RV free wall thickness is 3-5mm; thickness >5mm suggests RV hypertrophy.",
+          "keyTerms": [
+            {"term": "ventricular interdependence", "definition": "Mechanical interaction between ventricles via shared septum and pericardial constraint"},
+            {"term": "TAPSE", "definition": "Tricuspid Annular Plane Systolic Excursion - echocardiographic measure of RV longitudinal function; normal >17mm"},
+            {"term": "crista supraventricularis", "definition": "Muscular ridge separating the tricuspid valve from the pulmonary outflow tract"},
+            {"term": "infundibulum", "definition": "Smooth-walled outflow portion of the right ventricle, also called conus arteriosus", "pronunciation": "in-fun-DIB-yoo-lum"},
+            {"term": "trabeculae carneae", "definition": "Muscular ridges on the inner ventricular surface", "pronunciation": "trah-BEK-yoo-lee KAR-nee-ee"}
+          ],
+          "clinicalNotes": "RV dilation causes the septum to flatten or bow leftward (D-sign on echo), indicating pressure or volume overload."
+        },
+        "4": {
+          "level": 4,
+          "summary": "RV physiology is characterized by high compliance, preload dependence, sensitivity to afterload, and complex contraction mechanics involving longitudinal shortening and free wall inward motion.",
+          "explanation": "The RV is a thin-walled, highly compliant chamber optimized for handling varying venous return at low filling pressures. RV stroke work is approximately one-sixth of LV stroke work due to low pulmonary vascular resistance (normal PVR 1-2 Wood units). The RV is exquisitely sensitive to afterload increases - acute pulmonary embolism can cause acute RV failure because the thin wall cannot generate sustained high pressures. RV coronary perfusion differs from LV: the RV is perfused in both systole and diastole due to lower intramural pressures. The right coronary artery supplies most of the RV free wall. RV function assessment includes TAPSE (>17mm), fractional area change (>35%), RV S' (tissue Doppler >9.5 cm/s), and 3D RV ejection fraction (>45%). The septum normally curves toward the RV; septal flattening indicates elevated RV pressure (D-shaped LV in short axis).",
+          "keyTerms": [
+            {"term": "RV fractional area change", "definition": "Echocardiographic measure of RV systolic function: (end-diastolic area - end-systolic area)/end-diastolic area; normal >35%"},
+            {"term": "pulmonary vascular resistance", "definition": "Resistance to blood flow through the pulmonary circulation; measured in Wood units or dynes-sec/cm5"},
+            {"term": "RV S'", "definition": "Tissue Doppler systolic velocity of tricuspid annulus; normal >9.5 cm/s"},
+            {"term": "afterload sensitivity", "definition": "The marked dependence of RV stroke volume on pulmonary vascular resistance"}
+          ],
+          "clinicalNotes": "Acute PE can cause RV dilation and failure. RV infarction (from RCA occlusion) presents with hypotension, clear lungs, and elevated JVP - avoid nitrates and diuretics, give volume."
+        },
+        "5": {
+          "level": 5,
+          "summary": "RV pathophysiology encompasses pulmonary hypertension, arrhythmogenic cardiomyopathy, congenital defects, and is increasingly recognized as a prognostic determinant across cardiovascular diseases.",
+          "explanation": "Pulmonary hypertension (mean PAP ≥20 mmHg at rest per 2022 guidelines) causes RV pressure overload, hypertrophy, dilation, and eventual failure. WHO Group 1-5 classification guides therapy. RV failure in PAH is the primary determinant of survival - RV adaptation (concentric hypertrophy maintaining coupling) vs maladaptation (dilation, uncoupling, tricuspid regurgitation). Arrhythmogenic right ventricular cardiomyopathy (ARVC) involves fibrofatty replacement of RV myocardium, causing ventricular arrhythmias - diagnosis via 2010 Task Force Criteria (imaging, ECG, arrhythmia, histology, genetics). Tetralogy of Fallot repair leaves residual pulmonary regurgitation causing RV volume overload - pulmonary valve replacement timing is guided by RV volumes (RVESV >80ml/m2, RVEDV >150ml/m2). RV dysfunction predicts mortality in LV heart failure (HFrEF and HFpEF), post-MI, and post-LVAD implantation.",
+          "keyTerms": [
+            {"term": "pulmonary arterial hypertension", "definition": "WHO Group 1 PH with precapillary PH (mPAP≥20, PAWP≤15, PVR>2 WU)"},
+            {"term": "RV-PA coupling", "definition": "Relationship between RV contractility and pulmonary artery load; uncoupling indicates maladaptive remodeling"},
+            {"term": "ARVC", "definition": "Arrhythmogenic Right Ventricular Cardiomyopathy - genetic cardiomyopathy with fibrofatty RV replacement"},
+            {"term": "Tetralogy of Fallot", "definition": "Congenital defect with VSD, overriding aorta, pulmonary stenosis, and RV hypertrophy"}
+          ],
+          "clinicalNotes": "In ARVC, ICD for secondary prevention or primary prevention with high-risk features. PAH therapy includes PDE5i, ERA, prostacyclin pathway agents. RV failure post-LVAD may require RVAD support."
+        }
+      },
+      "media": [
+        {
+          "id": "rv-3d-model",
+          "type": "3d-model",
+          "filename": "right-ventricle-anatomy.glb",
+          "title": "Right Ventricle 3D Model",
+          "description": "Interactive 3D model showing RV anatomy including moderator band, papillary muscles, and outflow tract"
+        }
+      ],
+      "citations": [
+        {
+          "id": "grays-anatomy-heart",
+          "type": "textbook",
+          "title": "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
+          "source": "Elsevier",
+          "chapter": "56"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-left-ventricle", "targetType": "structure", "relationship": "sibling", "label": "Left Ventricle"},
+        {"targetId": "structure-right-atrium", "targetType": "structure", "relationship": "related", "label": "Right Atrium"},
+        {"targetId": "structure-pulmonary-valve", "targetType": "structure", "relationship": "related", "label": "Pulmonary Valve"},
+        {"targetId": "condition-pulmonary-hypertension", "targetType": "condition", "relationship": "related", "label": "Pulmonary Hypertension"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "structures": ["FMA:7098"],
+        "topics": ["anatomy", "cardiac anatomy", "heart chambers"],
+        "keywords": ["right ventricle", "ventricle", "pulmonary artery", "tricuspid valve", "TAPSE"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "structure-left-ventricle",
+      "type": "structure",
+      "name": "Left Ventricle",
+      "alternateNames": ["LV", "Ventriculus sinister"],
+      "fmaId": "FMA:7101",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "The left ventricle is the lower-left chamber of your heart - the strongest pumping chamber that sends oxygen-rich blood to your entire body.",
+          "explanation": "The left ventricle is the superhero of your heart! It's the strongest chamber because it has a very important job - pumping blood all the way from your heart to your toes and everywhere in between. Its walls are very thick and muscular, about three times thicker than the right ventricle. Every time your heart beats, the left ventricle squeezes with enough force to push blood through thousands of miles of blood vessels.",
+          "keyTerms": [
+            {"term": "ventricle", "definition": "A lower chamber of the heart that pumps blood out"},
+            {"term": "muscle", "definition": "A tissue in your body that can squeeze and relax to create movement"},
+            {"term": "blood vessels", "definition": "The tubes that carry blood throughout your body"}
+          ],
+          "analogies": ["The left ventricle is like the engine of your body's transportation system, pumping blood like fuel to every part."],
+          "examples": ["Your left ventricle pumps about 2,000 gallons of blood every day!"]
+        },
+        "2": {
+          "level": 2,
+          "summary": "The left ventricle is a thick-walled, cone-shaped chamber that receives oxygenated blood from the left atrium and pumps it through the aortic valve into the aorta for systemic circulation.",
+          "explanation": "The left ventricle forms the apex (bottom tip) of the heart and most of the left border seen on chest X-ray. Its walls are 10-15mm thick (3 times thicker than RV) because it must generate high pressures (120 mmHg systolic) to push blood through the entire body. The chamber has two parts: the inflow tract receiving blood through the mitral valve, and the outflow tract leading to the aortic valve. Two large papillary muscles (anterolateral and posteromedial) anchor the mitral valve chordae. The left ventricle has finer trabeculae carneae than the RV and does not have a moderator band. The interventricular septum separates it from the right ventricle.",
+          "keyTerms": [
+            {"term": "aorta", "definition": "The largest artery in the body, carrying oxygenated blood from the left ventricle to the body", "pronunciation": "ay-OR-tah"},
+            {"term": "aortic valve", "definition": "Heart valve with three semilunar cusps between the left ventricle and aorta"},
+            {"term": "papillary muscles", "definition": "Muscular projections in the ventricles that anchor valve chordae", "pronunciation": "PAP-ih-lair-ee"},
+            {"term": "apex", "definition": "The bottom tip of the heart, formed mainly by the left ventricle"}
+          ],
+          "analogies": ["The LV is like a powerful water pump that maintains pressure throughout a city's entire plumbing system."],
+          "examples": ["An enlarged left ventricle causes the cardiac silhouette to extend further left on chest X-ray."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "The left ventricle is an ellipsoid chamber with helically-arranged myocardial fibers enabling efficient torsional contraction, divided into basal, mid, and apical segments across three coronary territories.",
+          "explanation": "LV myocardial architecture features helically-arranged fiber bundles - subendocardial fibers run in a right-handed helix, mid-wall fibers are circumferential, and subepicardial fibers form a left-handed helix. This arrangement enables the wringing/twisting motion (torsion) that optimizes ejection. The 17-segment model divides the LV into basal (6 segments), mid (6 segments), apical (4 segments), and apex (1 segment) for standardized wall motion analysis. Coronary perfusion territories: LAD supplies anterior, anteroseptal, and apical segments; LCX supplies anterolateral, inferolateral segments; RCA supplies inferior, inferoseptal segments. The LV free wall is 10-12mm; septum is 7-11mm. Relative wall thickness (RWT) = (2 x posterior wall thickness)/LV internal diameter; RWT >0.42 indicates concentric geometry.",
+          "keyTerms": [
+            {"term": "LV torsion", "definition": "Wringing motion during systole caused by opposing rotation of base and apex"},
+            {"term": "17-segment model", "definition": "Standardized division of LV for wall motion analysis, correlating with coronary territories"},
+            {"term": "ejection fraction", "definition": "Percentage of blood ejected from ventricle each beat: (EDV-ESV)/EDV; normal 55-70%", "pronunciation": "ee-JEK-shun"},
+            {"term": "relative wall thickness", "definition": "Ratio assessing LV geometry: (2 x PW)/LVIDD; >0.42 = concentric, ≤0.42 = eccentric"}
+          ],
+          "clinicalNotes": "Regional wall motion abnormalities localize coronary disease: anterior hypokinesis suggests LAD territory, inferior suggests RCA."
+        },
+        "4": {
+          "level": 4,
+          "summary": "LV function integrates systolic contraction (determined by contractility, preload, afterload) and diastolic relaxation (active and passive components), with geometry influencing wall stress via Laplace's law.",
+          "explanation": "LV systolic function depends on: 1) Preload (end-diastolic volume, governed by Frank-Starling mechanism - increased sarcomere stretch enhances contraction); 2) Afterload (wall stress during ejection, influenced by aortic pressure, LV radius, and wall thickness per Laplace: wall stress = pressure x radius/2 x wall thickness); 3) Contractility (intrinsic myocardial force independent of loading, enhanced by catecholamines, decreased in cardiomyopathy). LV diastole has four phases: isovolumic relaxation (active, ATP-dependent, tau-dependent), early rapid filling (E wave, due to LV-LA pressure gradient), diastasis (minimal flow), and atrial contraction (A wave). Diastolic function assessment uses mitral inflow E/A ratio, E/e' ratio (estimating filling pressures), and LA volume index. LV strain (global longitudinal strain, GLS) is more sensitive than EF for detecting subclinical dysfunction; normal GLS is more negative than -18%.",
+          "keyTerms": [
+            {"term": "Laplace's law", "definition": "Wall stress = (pressure x radius)/(2 x wall thickness); explains why dilated hearts have increased wall stress"},
+            {"term": "contractility", "definition": "Intrinsic myocardial force generation independent of preload and afterload"},
+            {"term": "tau", "definition": "Time constant of isovolumic relaxation, reflecting active diastolic function", "pronunciation": "taw"},
+            {"term": "global longitudinal strain", "definition": "Speckle-tracking measure of myocardial deformation; normal < -18% (more negative is better)"},
+            {"term": "E/A ratio", "definition": "Ratio of early (E) to late (A) mitral inflow velocities; varies with diastolic function grade"}
+          ],
+          "clinicalNotes": "Concentric LV hypertrophy normalizes wall stress per Laplace (increased wall thickness for increased pressure). Eccentric hypertrophy (dilation) increases wall stress, leading to further dilation - a maladaptive spiral."
+        },
+        "5": {
+          "level": 5,
+          "summary": "LV pathophysiology encompasses systolic dysfunction (HFrEF), diastolic dysfunction (HFpEF), cardiomyopathies, and adverse remodeling, with therapeutic targets from neurohormonal blockade to mechanical support.",
+          "explanation": "HFrEF (EF <40%) results from myocyte loss or dysfunction with adverse remodeling - guideline-directed medical therapy (GDMT) includes ACE-I/ARB/ARNI, beta-blocker, MRA, SGLT2i (pillars reducing mortality). CRT for LBBB with EF≤35%; ICD for primary prevention if EF≤35% despite GDMT. HFpEF (EF≥50%) involves diastolic dysfunction, often with comorbidity-driven pathophysiology (hypertension, obesity, diabetes, atrial fibrillation). EMPEROR-Preserved and DELIVER trials established SGLT2i benefit in HFpEF. LV remodeling post-MI involves infarct expansion acutely and chamber dilation chronically - early ACE-I/ARB limits remodeling. Cardiomyopathies: DCM shows eccentric remodeling and global dysfunction; HCM shows asymmetric septal hypertrophy with LVOT obstruction in HOCM (treat with myectomy, alcohol septal ablation, or mavacamten); restrictive CMP shows stiff ventricle with biatrial enlargement. LVAD (HeartMate 3) for end-stage HFrEF as bridge-to-transplant or destination therapy.",
+          "keyTerms": [
+            {"term": "GDMT", "definition": "Guideline-Directed Medical Therapy - optimal neurohormonal blockade for HFrEF including ARNI/ACE-I, BB, MRA, SGLT2i"},
+            {"term": "cardiac resynchronization therapy", "definition": "Biventricular pacing for HFrEF with wide QRS (LBBB, QRS≥150ms) to improve mechanical synchrony"},
+            {"term": "adverse remodeling", "definition": "Progressive ventricular dilation and dysfunction after injury, mediated by neurohormonal activation"},
+            {"term": "LVOT obstruction", "definition": "Left ventricular outflow tract obstruction in HCM caused by SAM of mitral valve and septal hypertrophy"},
+            {"term": "mavacamten", "definition": "Cardiac myosin inhibitor FDA-approved for symptomatic obstructive HCM"}
+          ],
+          "clinicalNotes": "ACC/AHA HF staging: Stage A (at risk), B (structural disease, no symptoms), C (symptomatic), D (advanced). Optimization of GDMT before device therapy. INTERMACS profiles guide LVAD timing."
+        }
+      },
+      "media": [
+        {
+          "id": "lv-3d-model",
+          "type": "3d-model",
+          "filename": "left-ventricle-anatomy.glb",
+          "title": "Left Ventricle 3D Model",
+          "description": "Interactive 3D model showing LV anatomy including papillary muscles, trabeculae, and outflow tract"
+        },
+        {
+          "id": "lv-17-segment",
+          "type": "diagram",
+          "filename": "lv-17-segment-model.png",
+          "title": "LV 17-Segment Model",
+          "description": "Diagram showing the 17 segments of the left ventricle with coronary artery territories"
+        }
+      ],
+      "citations": [
+        {
+          "id": "grays-anatomy-heart",
+          "type": "textbook",
+          "title": "Gray's Anatomy: The Anatomical Basis of Clinical Practice",
+          "source": "Elsevier",
+          "chapter": "56"
+        },
+        {
+          "id": "ase-chamber-quantification",
+          "type": "article",
+          "title": "Recommendations for Cardiac Chamber Quantification by Echocardiography",
+          "authors": ["Lang RM", "Badano LP", "et al"],
+          "source": "J Am Soc Echocardiogr",
+          "url": "https://www.asecho.org/guideline/recommendations-for-cardiac-chamber-quantification-by-echocardiography/"
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "structure-right-ventricle", "targetType": "structure", "relationship": "sibling", "label": "Right Ventricle"},
+        {"targetId": "structure-left-atrium", "targetType": "structure", "relationship": "related", "label": "Left Atrium"},
+        {"targetId": "structure-aortic-valve", "targetType": "structure", "relationship": "related", "label": "Aortic Valve"},
+        {"targetId": "condition-heart-failure", "targetType": "condition", "relationship": "related", "label": "Heart Failure"},
+        {"targetId": "process-cardiac-cycle", "targetType": "process", "relationship": "related", "label": "Cardiac Cycle"}
+      ],
+      "tags": {
+        "systems": ["cardiovascular"],
+        "structures": ["FMA:7101"],
+        "topics": ["anatomy", "cardiac anatomy", "heart chambers", "physiology"],
+        "keywords": ["left ventricle", "ventricle", "ejection fraction", "aorta", "heart failure"],
+        "clinicalRelevance": "critical",
+        "examRelevance": {"usmle": true, "nbme": true, "shelf": ["medicine", "surgery"]}
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    }
+  ]
+}

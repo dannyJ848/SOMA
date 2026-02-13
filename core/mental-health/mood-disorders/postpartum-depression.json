@@ -1,0 +1,156 @@
+{
+  "id": "condition-postpartum-depression",
+  "type": "condition",
+  "category": "mood-disorder",
+  "name": "Postpartum Depression",
+  "alternateNames": ["Peripartum Depression", "Perinatal Depression", "PPD", "Postnatal Depression"],
+  "icd10": "F53.0",
+  "dsm5": "MDD with peripartum onset specifier",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Postpartum depression is a serious medical condition that causes feelings of extreme sadness, anxiety, and exhaustion after having a baby, making it hard to care for yourself or your child.",
+      "explanation": "Having a new baby is supposed to be a happy time, but many new mothers experience postpartum depression (PPD). This is different from the 'baby blues' that many women experience in the first week or two after giving birth. PPD is more intense and lasts longer - weeks or even months. Mothers with PPD might feel sad, hopeless, or empty; have trouble bonding with their baby; feel like they're not a good mother; or have scary thoughts about themselves or their baby. PPD is very treatable, and getting help is important for both mother and baby.",
+      "keyTerms": [
+        { "term": "baby blues", "definition": "Mild mood changes in the first 1-2 weeks after birth that go away on their own" },
+        { "term": "postpartum", "definition": "The period after giving birth" },
+        { "term": "bonding", "definition": "Forming an emotional connection with your baby" }
+      ],
+      "analogies": ["Just as your body needs time to heal after giving birth, your brain chemistry also needs to readjust - sometimes it needs extra help to find its balance."],
+      "examples": ["A new mother might find herself crying uncontrollably, feeling unable to enjoy anything, or feeling anxious about leaving the baby's side even for a moment - these could be signs of PPD."],
+      "importantNote": "Postpartum depression is NOT your fault and does NOT mean you're a bad mother. It's a medical condition that deserves treatment. Seeking help is the best thing you can do for yourself and your baby."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Peripartum depression in DSM-5 refers to major depressive episodes occurring during pregnancy or in the 4 weeks following delivery, though clinically symptoms may onset up to a year postpartum.",
+      "explanation": "DSM-5 uses 'peripartum onset' specifier for MDD or bipolar episodes with onset during pregnancy or within 4 weeks of delivery. Clinical practice recognizes onset up to 1 year postpartum. Distinguishing features from baby blues: duration >2 weeks, severity of symptoms, functional impairment. Symptoms include persistent sadness, anxiety, irritability, feelings of guilt or worthlessness, loss of interest, fatigue, sleep/appetite changes (beyond normal newborn demands), difficulty concentrating, and potential scary thoughts about harming self or baby. Risk peaks at 6-8 weeks postpartum. Screen all postpartum women using Edinburgh Postnatal Depression Scale (EPDS) or PHQ-9.",
+      "keyTerms": [
+        { "term": "peripartum onset", "definition": "DSM-5 specifier for mood episodes during pregnancy or within 4 weeks of delivery" },
+        { "term": "Edinburgh Postnatal Depression Scale", "definition": "10-item validated screening tool for peripartum depression; score ≥10 warrants further evaluation" },
+        { "term": "postpartum psychosis", "definition": "Rare psychiatric emergency with delusions, hallucinations, confusion; requires immediate treatment" },
+        { "term": "intrusive thoughts", "definition": "Unwanted, distressing thoughts that may include harm to baby; common in PPD and anxiety, differs from psychosis" }
+      ],
+      "diagnosticCriteria": "Same as MDD criteria with peripartum onset specifier; EPDS ≥10 or PHQ-9 ≥10 suggests need for clinical evaluation",
+      "prevalence": "10-20% of postpartum women; 50% of cases begin during pregnancy; paternal postpartum depression affects 8-10%"
+    },
+    "3": {
+      "level": 3,
+      "summary": "Peripartum depression involves complex hormonal, psychological, and social factors, requiring careful treatment selection balancing efficacy with breastfeeding considerations.",
+      "explanation": "Pathophysiology: rapid postpartum decline in estrogen and progesterone (neurosteroid effects on GABA-A receptors), altered HPA axis function, inflammatory changes, and disrupted sleep. Psychological factors: major life transition, identity changes, perfectionistic expectations. Risk factors: history of depression/anxiety (strongest predictor), previous PPD, bipolar disorder, stressful life events, poor social support, relationship problems, unplanned pregnancy, birth complications, infant health problems. Treatment considerations: psychotherapy (IPT and CBT effective); antidepressants (SSRIs: sertraline preferred for breastfeeding due to low infant exposure; avoid paroxetine in pregnancy if possible - Category D). Brexanolone (Zulresso) is IV infusion of allopregnanolone analog, FDA-approved 2019 for PPD with rapid onset. Zuranolone (Zurzuvae) is oral neurosteroid, FDA-approved 2023.",
+      "keyTerms": [
+        { "term": "allopregnanolone", "definition": "Neurosteroid that modulates GABA-A receptors; drops rapidly postpartum; basis for brexanolone mechanism" },
+        { "term": "brexanolone", "definition": "IV allopregnanolone analog FDA-approved for PPD; administered over 60 hours; rapid onset of action" },
+        { "term": "zuranolone", "definition": "Oral neurosteroid GABA-A modulator; first oral medication specifically FDA-approved for PPD" },
+        { "term": "lactation safety", "definition": "Consideration of medication transfer to breast milk and infant exposure" }
+      ],
+      "clinicalNotes": "Screen at first prenatal visit, third trimester, and postpartum visits. Sertraline has most safety data in breastfeeding. Continue antidepressants if effective pre-pregnancy to prevent relapse. Distinguish intrusive thoughts (ego-dystonic, distressing) from psychosis (delusions, acted upon). Postpartum psychosis is psychiatric emergency - risk of infanticide; often associated with bipolar."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management addresses treatment resistance, special populations, prevention strategies, and integration with obstetric care systems.",
+      "explanation": "Treatment-resistant PPD: optimize antidepressant dose/duration, consider augmentation, brexanolone for moderate-severe cases, ECT (safe in postpartum, may be preferred if breastfeeding). Prevention: prophylactic antidepressants postpartum in high-risk women reduces recurrence by 50%. Bipolar perinatal management: high relapse risk postpartum (up to 50%); maintain mood stabilizer if possible (lithium relatively safe in breastfeeding with monitoring, avoid valproate and carbamazepine in pregnancy); quetiapine may be option. Postpartum psychosis: 0.1-0.2% incidence; onset typically within 2 weeks; confusion, delusions, disorganized behavior, insomnia; risk factors include bipolar disorder (25-50% risk), previous postpartum psychosis (30-50% recurrence), primiparity, sleep deprivation. Management: hospitalization (ideally mother-baby unit), antipsychotics, mood stabilizers, sometimes ECT; good prognosis with treatment. Paternal PPD: screen and treat partners; affects child development.",
+      "keyTerms": [
+        { "term": "mother-baby unit", "definition": "Specialized psychiatric unit allowing mother and infant to stay together during treatment" },
+        { "term": "postpartum thyroiditis", "definition": "Autoimmune thyroid condition postpartum that can mimic or cause depression; check TSH" },
+        { "term": "prophylactic treatment", "definition": "Starting antidepressant immediately postpartum in high-risk women to prevent PPD" },
+        { "term": "paternal PPD", "definition": "Postpartum depression in fathers; often under-recognized; peaks 3-6 months postpartum" }
+      ],
+      "clinicalNotes": "Multidisciplinary care: OB, psychiatry, pediatrics, lactation. Address barriers: childcare for appointments, stigma, cultural factors. Maternal-infant bonding is therapeutic target - encourage even when depressed. Screen for intimate partner violence, which increases during pregnancy/postpartum. LactMed database for medication safety in breastfeeding."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert management integrates neurosteroid biology, precision prevention, systems-level screening implementation, and addresses long-term outcomes for mother and child.",
+      "explanation": "Neurosteroid research: allopregnanolone is positive allosteric modulator of GABA-A receptors; synthetic analogs (brexanolone, zuranolone) bypass need for progesterone metabolism. GABA-A receptor subunit composition changes during pregnancy may explain vulnerability. Precision prevention: biomarker research includes placental CRH, cytokines, epigenetic markers, and hormone sensitivity; polygenic risk scores under development. Long-term outcomes: untreated PPD associated with developmental delays in children, insecure attachment, behavioral problems, partner depression, and increased risk of chronic maternal depression. Systems implementation: universal screening legislation in many US states; integrated care models (collaborative care, perinatal psychiatry access lines); stepped care approaches. Disparities: Black and Hispanic women underdiagnosed; barriers include stigma, access, cultural factors, provider bias. Novel research: psychedelic-assisted therapy for severe PPD (psilocybin trials); transcranial magnetic stimulation; digital therapeutics; home-based interventions.",
+      "keyTerms": [
+        { "term": "Perinatal Psychiatry Access Programs", "definition": "Phone consultation services providing perinatal mental health expertise to primary care and OB providers" },
+        { "term": "placental CRH", "definition": "Corticotropin-releasing hormone from placenta; elevated levels may predict PPD" },
+        { "term": "epigenetic markers", "definition": "DNA methylation patterns that may predict peripartum depression risk" },
+        { "term": "stepped care", "definition": "Treatment model starting with lower-intensity interventions, escalating based on response" }
+      ],
+      "clinicalNotes": "Advocate for universal screening and treatment access. Address reproductive considerations before conception in women with mood disorders. Recovery is typical with treatment - communicate hope. Brexanolone limitation: cost (~$34,000), requires 60-hour infusion with REMS. Zuranolone offers accessible rapid-acting option. Long-term antidepressant continuation decreases recurrence in subsequent pregnancies."
+    }
+  },
+
+  "riskFactors": [
+    "History of depression or anxiety (strongest predictor)",
+    "Previous postpartum depression",
+    "Bipolar disorder",
+    "Depression or anxiety during pregnancy",
+    "Stressful life events during pregnancy or postpartum",
+    "Lack of social support",
+    "Relationship problems",
+    "Unplanned or unwanted pregnancy",
+    "Pregnancy or birth complications",
+    "Preterm birth or infant health problems",
+    "History of trauma or abuse",
+    "Financial stress"
+  ],
+
+  "warningSignsToSeekHelp": [
+    "Feeling sad, hopeless, or overwhelmed for more than 2 weeks",
+    "Difficulty bonding with your baby",
+    "Withdrawing from family and friends",
+    "Loss of interest in things you usually enjoy",
+    "Changes in eating or sleeping not related to baby care",
+    "Severe anxiety or panic attacks",
+    "Scary thoughts about yourself or your baby",
+    "Thoughts of harming yourself or your baby",
+    "Difficulty caring for yourself or your baby"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "postpartumHelpline": "1-800-944-4773 (Postpartum Support International)",
+      "crisisTextLine": "Text HOME to 741741"
+    },
+    "online": {
+      "postpartumSupportInternational": "www.postpartum.net",
+      "mothertobaby": "www.mothertobaby.org (medication safety in pregnancy/breastfeeding)"
+    },
+    "message": "If you're struggling after having a baby, please reach out. You deserve support, and help is available. This is treatable, and you can feel better."
+  },
+
+  "treatments": {
+    "firstLine": ["Psychotherapy (IPT, CBT)", "SSRIs (sertraline preferred if breastfeeding)"],
+    "rapidActing": ["Brexanolone (IV, for moderate-severe)", "Zuranolone (oral)"],
+    "forSevereCases": ["ECT (safe postpartum)"],
+    "adjunctive": ["Social support interventions", "Peer support", "Partner involvement"]
+  },
+
+  "citations": [
+    {
+      "id": "meltzer-brody-2018",
+      "type": "study",
+      "title": "Brexanolone injection in post-partum depression: two multicentre, double-blind, randomised, placebo-controlled, phase 3 trials",
+      "journal": "Lancet",
+      "year": 2018
+    },
+    {
+      "id": "acog-2018",
+      "type": "guideline",
+      "title": "ACOG Committee Opinion No. 757: Screening for Perinatal Depression",
+      "source": "Obstetrics & Gynecology",
+      "year": 2018
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "parent", "label": "Major Depressive Disorder" },
+    { "targetId": "condition-bipolar-disorder", "targetType": "condition", "relationship": "differential", "label": "Bipolar Disorder" },
+    { "targetId": "condition-postpartum-psychosis", "targetType": "condition", "relationship": "related", "label": "Postpartum Psychosis" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health", "reproductive"],
+    "topics": ["psychiatry", "obstetrics", "mood-disorders", "perinatal"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

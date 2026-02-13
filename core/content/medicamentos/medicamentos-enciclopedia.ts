@@ -1,0 +1,8450 @@
+/**
+ * Enciclopedia de Medicamentos / Medication Encyclopedia
+ *
+ * Guia completa de medicamentos para educacion del paciente.
+ * Comprehensive medication guide for patient education.
+ * SPANISH FIRST / ESPANOL PRIMERO - English secondary.
+ *
+ * 80+ medicamentos mas comunes recetados y de venta libre.
+ * 80+ most commonly prescribed and OTC medications.
+ */
+
+// ============================================================
+// INTERFACE
+// ============================================================
+
+export interface MedicamentoEntry {
+  id: string;
+  nombreGenericoEs: string;
+  nombreGenericoEn: string;
+  nombresComercialesEs: string[];
+  nombresComercialesEn: string[];
+  claseEs: string;
+  claseEn: string;
+  paraQueEsEs: string;
+  paraQueEsEn: string;
+  comoFuncionaEs: string;
+  comoFuncionaEn: string;
+  formasPresentacion: string[];
+  dosisUsualEs: string;
+  dosisUsualEn: string;
+  efectosSecundariosEs: string[];
+  efectosSecundariosEn: string[];
+  efectosGravesEs: string[];
+  efectosGravesEn: string[];
+  interaccionesEs: string[];
+  interaccionesEn: string[];
+  precaucionesEs: string[];
+  precaucionesEn: string[];
+  contraindicacionesEs: string[];
+  contraindicacionesEn: string[];
+  embarazoLactanciaEs: string;
+  embarazoLactanciaEn: string;
+  consejosUsoEs: string[];
+  consejosUsoEn: string[];
+  almacenamientoEs: string;
+  almacenamientoEn: string;
+  categorias: string[];
+  necesitaReceta: boolean;
+  controlado: boolean;
+}
+
+// ============================================================
+// DATA - Using JSON.parse for efficient loading
+// ============================================================
+
+const medicamentosData: MedicamentoEntry[] = JSON.parse(`[
+  {
+    "id": "paracetamol",
+    "nombreGenericoEs": "Paracetamol (Acetaminofen)",
+    "nombreGenericoEn": "Acetaminophen (Paracetamol)",
+    "nombresComercialesEs": [
+      "Tylenol",
+      "Tempra",
+      "Panadol"
+    ],
+    "nombresComercialesEn": [
+      "Tylenol",
+      "Panadol",
+      "Excedrin"
+    ],
+    "claseEs": "Analgesico y antipiretico",
+    "claseEn": "Analgesic and antipyretic",
+    "paraQueEsEs": "Se usa para aliviar el dolor leve a moderado (dolor de cabeza, dolor muscular, dolor de muelas) y para bajar la fiebre. Es una de las medicinas mas seguras cuando se usa correctamente.",
+    "paraQueEsEn": "Used to relieve mild to moderate pain (headache, muscle pain, toothache) and to reduce fever. It is one of the safest medicines when used correctly.",
+    "comoFuncionaEs": "Actua en el cerebro para reducir la sensacion de dolor y baja la fiebre actuando sobre el centro de control de temperatura del cuerpo. A diferencia del ibuprofeno, no reduce la inflamacion.",
+    "comoFuncionaEn": "Works in the brain to reduce pain sensation and lowers fever by acting on the body's temperature control center. Unlike ibuprofen, it does not reduce inflammation.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Liquido/Jarabe",
+      "Supositorio",
+      "Solucion intravenosa"
+    ],
+    "dosisUsualEs": "Adultos: 500-1000 mg cada 4-6 horas. Maximo 4000 mg (4 gramos) al dia. Ninos: segun peso, consulte al pediatra.",
+    "dosisUsualEn": "Adults: 500-1000 mg every 4-6 hours. Maximum 4000 mg (4 grams) per day. Children: based on weight, consult pediatrician.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Rash cutaneo (raro)",
+      "Dolor de estomago leve"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Skin rash (rare)",
+      "Mild stomach pain"
+    ],
+    "efectosGravesEs": [
+      "Dano hepatico severo (con sobredosis)",
+      "Reaccion alergica grave (anafilaxia)",
+      "Problemas de piel graves (sindrome de Stevens-Johnson, muy raro)"
+    ],
+    "efectosGravesEn": [
+      "Severe liver damage (with overdose)",
+      "Severe allergic reaction (anaphylaxis)",
+      "Serious skin problems (Stevens-Johnson syndrome, very rare)"
+    ],
+    "interaccionesEs": [
+      "Warfarina (puede aumentar el efecto anticoagulante)",
+      "Alcohol (aumenta riesgo de dano al higado)",
+      "Otros productos que contengan acetaminofen (riesgo de sobredosis)"
+    ],
+    "interaccionesEn": [
+      "Warfarin (may increase anticoagulant effect)",
+      "Alcohol (increases risk of liver damage)",
+      "Other products containing acetaminophen (overdose risk)"
+    ],
+    "precaucionesEs": [
+      "No exceder la dosis maxima diaria",
+      "Revisar todos sus medicamentos para evitar doble dosis de acetaminofen",
+      "Limitar el consumo de alcohol",
+      "Precaucion en personas con enfermedad hepatica"
+    ],
+    "precaucionesEn": [
+      "Do not exceed maximum daily dose",
+      "Check all your medications to avoid double-dosing acetaminophen",
+      "Limit alcohol consumption",
+      "Use caution in people with liver disease"
+    ],
+    "contraindicacionesEs": [
+      "Alergia al paracetamol",
+      "Enfermedad hepatica severa",
+      "Falla hepatica"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to acetaminophen",
+      "Severe liver disease",
+      "Liver failure"
+    ],
+    "embarazoLactanciaEs": "Generalmente considerado seguro durante el embarazo y la lactancia cuando se usa en dosis recomendadas. Es el analgesico de primera eleccion en el embarazo.",
+    "embarazoLactanciaEn": "Generally considered safe during pregnancy and breastfeeding when used at recommended doses. It is the first-choice pain reliever in pregnancy.",
+    "consejosUsoEs": [
+      "Tome con o sin alimentos",
+      "No tome mas de 4 gramos al dia",
+      "Revise las etiquetas de otros medicamentos - muchos contienen acetaminofen oculto",
+      "No mezcle con alcohol"
+    ],
+    "consejosUsoEn": [
+      "Take with or without food",
+      "Do not take more than 4 grams per day",
+      "Check labels of other medicines - many contain hidden acetaminophen",
+      "Do not mix with alcohol"
+    ],
+    "almacenamientoEs": "Almacenar a temperatura ambiente, lejos de la humedad y el calor. Mantener fuera del alcance de los ninos.",
+    "almacenamientoEn": "Store at room temperature, away from moisture and heat. Keep out of reach of children.",
+    "categorias": [
+      "analgesico",
+      "antipiretico",
+      "OTC",
+      "dolor",
+      "fiebre"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "ibuprofeno",
+    "nombreGenericoEs": "Ibuprofeno",
+    "nombreGenericoEn": "Ibuprofen",
+    "nombresComercialesEs": [
+      "Advil",
+      "Motrin",
+      "Brufen"
+    ],
+    "nombresComercialesEn": [
+      "Advil",
+      "Motrin",
+      "Nurofen"
+    ],
+    "claseEs": "Antiinflamatorio no esteroideo (AINE)",
+    "claseEn": "Nonsteroidal anti-inflammatory drug (NSAID)",
+    "paraQueEsEs": "Alivia el dolor, reduce la inflamacion y baja la fiebre. Util para dolores de cabeza, dolores musculares, artritis, calambres menstruales y dolor dental.",
+    "paraQueEsEn": "Relieves pain, reduces inflammation, and lowers fever. Useful for headaches, muscle pain, arthritis, menstrual cramps, and dental pain.",
+    "comoFuncionaEs": "Bloquea unas sustancias llamadas prostaglandinas que causan dolor, inflamacion y fiebre. Lo hace inhibiendo las enzimas COX-1 y COX-2.",
+    "comoFuncionaEn": "Blocks substances called prostaglandins that cause pain, inflammation, and fever. It does this by inhibiting COX-1 and COX-2 enzymes.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Suspension liquida",
+      "Crema/Gel topico"
+    ],
+    "dosisUsualEs": "Adultos: 200-400 mg cada 4-6 horas. Maximo 1200 mg/dia (sin receta) o 3200 mg/dia (con receta). Ninos: segun peso.",
+    "dosisUsualEn": "Adults: 200-400 mg every 4-6 hours. Maximum 1200 mg/day (OTC) or 3200 mg/day (prescription). Children: based on weight.",
+    "efectosSecundariosEs": [
+      "Dolor de estomago",
+      "Nauseas",
+      "Mareo",
+      "Dolor de cabeza",
+      "Retencion de liquidos leve"
+    ],
+    "efectosSecundariosEn": [
+      "Stomach pain",
+      "Nausea",
+      "Dizziness",
+      "Headache",
+      "Mild fluid retention"
+    ],
+    "efectosGravesEs": [
+      "Sangrado estomacal o intestinal",
+      "Problemas renales",
+      "Ataque cardiaco o derrame cerebral (uso prolongado)",
+      "Reaccion alergica grave"
+    ],
+    "efectosGravesEn": [
+      "Stomach or intestinal bleeding",
+      "Kidney problems",
+      "Heart attack or stroke (prolonged use)",
+      "Severe allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Aspirina (reduce efecto protector del corazon)",
+      "Anticoagulantes como warfarina (aumenta sangrado)",
+      "Litio (aumenta niveles de litio)",
+      "Metotrexato (aumenta toxicidad)",
+      "Medicamentos para la presion arterial"
+    ],
+    "interaccionesEn": [
+      "Aspirin (reduces heart-protective effect)",
+      "Anticoagulants like warfarin (increases bleeding)",
+      "Lithium (increases lithium levels)",
+      "Methotrexate (increases toxicity)",
+      "Blood pressure medications"
+    ],
+    "precaucionesEs": [
+      "Tome con alimentos para proteger el estomago",
+      "No use por mas de 10 dias sin consultar al medico",
+      "Precaucion en mayores de 65 anos",
+      "Tome la dosis mas baja efectiva por el menor tiempo posible"
+    ],
+    "precaucionesEn": [
+      "Take with food to protect the stomach",
+      "Do not use for more than 10 days without consulting a doctor",
+      "Use caution in adults over 65",
+      "Take the lowest effective dose for the shortest time possible"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a AINEs o aspirina",
+      "Ulcera estomacal activa",
+      "Sangrado gastrointestinal",
+      "Enfermedad renal severa",
+      "Tercer trimestre del embarazo",
+      "Cirugia de bypass coronario reciente"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to NSAIDs or aspirin",
+      "Active stomach ulcer",
+      "Gastrointestinal bleeding",
+      "Severe kidney disease",
+      "Third trimester of pregnancy",
+      "Recent coronary bypass surgery"
+    ],
+    "embarazoLactanciaEs": "Evitar en el tercer trimestre del embarazo. Usar con precaucion en el primer y segundo trimestre. Se excreta en leche materna en cantidades minimas.",
+    "embarazoLactanciaEn": "Avoid in the third trimester of pregnancy. Use with caution in first and second trimesters. Excreted in breast milk in minimal amounts.",
+    "consejosUsoEs": [
+      "Siempre tome con alimentos o leche",
+      "No se acueste por 10 minutos despues de tomarlo",
+      "No combine con otros AINEs",
+      "Beba suficiente agua"
+    ],
+    "consejosUsoEn": [
+      "Always take with food or milk",
+      "Do not lie down for 10 minutes after taking it",
+      "Do not combine with other NSAIDs",
+      "Drink plenty of water"
+    ],
+    "almacenamientoEs": "Almacenar a temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Store at room temperature, protect from light and moisture.",
+    "categorias": [
+      "analgesico",
+      "antiinflamatorio",
+      "AINE",
+      "OTC",
+      "dolor",
+      "fiebre"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "naproxeno",
+    "nombreGenericoEs": "Naproxeno",
+    "nombreGenericoEn": "Naproxen",
+    "nombresComercialesEs": [
+      "Aleve",
+      "Flanax",
+      "Naprosyn"
+    ],
+    "nombresComercialesEn": [
+      "Aleve",
+      "Naprosyn",
+      "Anaprox"
+    ],
+    "claseEs": "Antiinflamatorio no esteroideo (AINE)",
+    "claseEn": "Nonsteroidal anti-inflammatory drug (NSAID)",
+    "paraQueEsEs": "Alivia dolor e inflamacion de artritis, dolor muscular, calambres menstruales, dolor de cabeza y gota. Su efecto dura mas que el ibuprofeno.",
+    "paraQueEsEn": "Relieves pain and inflammation from arthritis, muscle pain, menstrual cramps, headache, and gout. Its effect lasts longer than ibuprofen.",
+    "comoFuncionaEs": "Inhibe las enzimas COX-1 y COX-2, reduciendo la produccion de prostaglandinas que causan dolor, inflamacion y fiebre.",
+    "comoFuncionaEn": "Inhibits COX-1 and COX-2 enzymes, reducing production of prostaglandins that cause pain, inflammation, and fever.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Suspension liquida",
+      "Tableta de liberacion prolongada"
+    ],
+    "dosisUsualEs": "Adultos: 220-550 mg cada 8-12 horas. Maximo 1375 mg el primer dia, luego 1100 mg/dia.",
+    "dosisUsualEn": "Adults: 220-550 mg every 8-12 hours. Maximum 1375 mg first day, then 1100 mg/day.",
+    "efectosSecundariosEs": [
+      "Dolor de estomago",
+      "Acidez",
+      "Nauseas",
+      "Mareo",
+      "Somnolencia"
+    ],
+    "efectosSecundariosEn": [
+      "Stomach pain",
+      "Heartburn",
+      "Nausea",
+      "Dizziness",
+      "Drowsiness"
+    ],
+    "efectosGravesEs": [
+      "Sangrado gastrointestinal",
+      "Dano renal",
+      "Eventos cardiovasculares",
+      "Reacciones cutaneas graves"
+    ],
+    "efectosGravesEn": [
+      "Gastrointestinal bleeding",
+      "Kidney damage",
+      "Cardiovascular events",
+      "Severe skin reactions"
+    ],
+    "interaccionesEs": [
+      "Anticoagulantes",
+      "Litio",
+      "Metotrexato",
+      "Diureticos",
+      "Otros AINEs"
+    ],
+    "interaccionesEn": [
+      "Anticoagulants",
+      "Lithium",
+      "Methotrexate",
+      "Diuretics",
+      "Other NSAIDs"
+    ],
+    "precaucionesEs": [
+      "Tomar con alimentos",
+      "No usar por periodos prolongados sin supervision medica",
+      "Precaucion en ancianos y personas con problemas gastrointestinales"
+    ],
+    "precaucionesEn": [
+      "Take with food",
+      "Do not use for prolonged periods without medical supervision",
+      "Caution in elderly and people with GI problems"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a AINEs",
+      "Ulcera activa",
+      "Enfermedad renal severa",
+      "Tercer trimestre del embarazo"
+    ],
+    "contraindicacionesEn": [
+      "NSAID allergy",
+      "Active ulcer",
+      "Severe kidney disease",
+      "Third trimester of pregnancy"
+    ],
+    "embarazoLactanciaEs": "Evitar en el tercer trimestre. Usar con precaucion durante la lactancia.",
+    "embarazoLactanciaEn": "Avoid in the third trimester. Use with caution during breastfeeding.",
+    "consejosUsoEs": [
+      "Tomar con alimentos o un vaso lleno de agua",
+      "Una ventaja es que se toma solo 2 veces al dia",
+      "No combinar con otros AINEs"
+    ],
+    "consejosUsoEn": [
+      "Take with food or a full glass of water",
+      "An advantage is it only needs to be taken twice daily",
+      "Do not combine with other NSAIDs"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "analgesico",
+      "antiinflamatorio",
+      "AINE",
+      "OTC",
+      "dolor"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "aspirina",
+    "nombreGenericoEs": "Aspirina (Acido acetilsalicilico)",
+    "nombreGenericoEn": "Aspirin (Acetylsalicylic acid)",
+    "nombresComercialesEs": [
+      "Bayer",
+      "Ecotrin",
+      "Aspirina"
+    ],
+    "nombresComercialesEn": [
+      "Bayer",
+      "Ecotrin",
+      "Bufferin"
+    ],
+    "claseEs": "AINE / Antiagregante plaquetario",
+    "claseEn": "NSAID / Antiplatelet agent",
+    "paraQueEsEs": "A dosis bajas previene ataques cardiacos y derrames cerebrales. A dosis mas altas alivia dolor, fiebre e inflamacion.",
+    "paraQueEsEn": "At low doses prevents heart attacks and strokes. At higher doses relieves pain, fever, and inflammation.",
+    "comoFuncionaEs": "Bloquea permanentemente la enzima COX en las plaquetas, evitando que se formen coagulos. Tambien reduce el dolor y la fiebre.",
+    "comoFuncionaEn": "Permanently blocks the COX enzyme in platelets, preventing clot formation. Also reduces pain and fever.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta con capa enterica",
+      "Tableta masticable",
+      "Supositorio"
+    ],
+    "dosisUsualEs": "Prevencion cardiaca: 81-325 mg al dia. Dolor/fiebre: 325-650 mg cada 4-6 horas. Maximo 4000 mg/dia.",
+    "dosisUsualEn": "Cardiac prevention: 81-325 mg daily. Pain/fever: 325-650 mg every 4-6 hours. Maximum 4000 mg/day.",
+    "efectosSecundariosEs": [
+      "Dolor de estomago",
+      "Acidez",
+      "Nauseas",
+      "Moretones faciles"
+    ],
+    "efectosSecundariosEn": [
+      "Stomach pain",
+      "Heartburn",
+      "Nausea",
+      "Easy bruising"
+    ],
+    "efectosGravesEs": [
+      "Sangrado gastrointestinal",
+      "Sangrado cerebral",
+      "Reaccion alergica severa",
+      "Zumbido de oidos (tinnitus)",
+      "Sindrome de Reye en ninos"
+    ],
+    "efectosGravesEn": [
+      "Gastrointestinal bleeding",
+      "Brain bleeding",
+      "Severe allergic reaction",
+      "Ringing in ears (tinnitus)",
+      "Reye syndrome in children"
+    ],
+    "interaccionesEs": [
+      "Anticoagulantes (aumenta sangrado)",
+      "Ibuprofeno (puede reducir efecto cardioprotector)",
+      "Metotrexato",
+      "Alcohol"
+    ],
+    "interaccionesEn": [
+      "Anticoagulants (increases bleeding)",
+      "Ibuprofen (may reduce cardioprotective effect)",
+      "Methotrexate",
+      "Alcohol"
+    ],
+    "precaucionesEs": [
+      "No dar a ninos o adolescentes con fiebre (Sindrome de Reye)",
+      "Suspender antes de cirugias",
+      "Precaucion en personas con asma"
+    ],
+    "precaucionesEn": [
+      "Do not give to children or teenagers with fever (Reye Syndrome)",
+      "Stop before surgeries",
+      "Caution in people with asthma"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a AINEs",
+      "Ulcera activa",
+      "Hemofilia",
+      "Ninos menores de 12 anos con enfermedad viral"
+    ],
+    "contraindicacionesEn": [
+      "NSAID allergy",
+      "Active ulcer",
+      "Hemophilia",
+      "Children under 12 with viral illness"
+    ],
+    "embarazoLactanciaEs": "Evitar dosis altas, especialmente en el tercer trimestre. Dosis baja puede usarse bajo supervision medica.",
+    "embarazoLactanciaEn": "Avoid high doses, especially in the third trimester. Low dose may be used under medical supervision.",
+    "consejosUsoEs": [
+      "La dosis baja para el corazon (81 mg) se toma todos los dias",
+      "Tome con alimentos para proteger el estomago",
+      "No deje de tomarla sin consultar a su medico si es para el corazon"
+    ],
+    "consejosUsoEn": [
+      "Low dose for heart (81 mg) is taken every day",
+      "Take with food to protect the stomach",
+      "Do not stop taking it without consulting your doctor if it is for your heart"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, lugar seco. Desechar si huele a vinagre (descomposicion).",
+    "almacenamientoEn": "Room temperature, dry place. Discard if it smells like vinegar (decomposition).",
+    "categorias": [
+      "analgesico",
+      "antiinflamatorio",
+      "antiagregante",
+      "OTC",
+      "cardiovascular"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "tramadol",
+    "nombreGenericoEs": "Tramadol",
+    "nombreGenericoEn": "Tramadol",
+    "nombresComercialesEs": [
+      "Ultram",
+      "Tramal",
+      "Calmador"
+    ],
+    "nombresComercialesEn": [
+      "Ultram",
+      "ConZip"
+    ],
+    "claseEs": "Analgesico opioide debil",
+    "claseEn": "Weak opioid analgesic",
+    "paraQueEsEs": "Alivia el dolor moderado a moderadamente severo cuando otros analgesicos como el paracetamol o ibuprofeno no son suficientes.",
+    "paraQueEsEn": "Relieves moderate to moderately severe pain when other pain relievers like acetaminophen or ibuprofen are not enough.",
+    "comoFuncionaEs": "Actua de dos formas: se une a los receptores de dolor opioide en el cerebro y tambien aumenta la serotonina y norepinefrina, que son quimicos que reducen el dolor.",
+    "comoFuncionaEn": "Works in two ways: binds to opioid pain receptors in the brain and also increases serotonin and norepinephrine, chemicals that reduce pain.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Capsula"
+    ],
+    "dosisUsualEs": "Adultos: 50-100 mg cada 4-6 horas. Maximo 400 mg/dia. Liberacion prolongada: 100-300 mg una vez al dia.",
+    "dosisUsualEn": "Adults: 50-100 mg every 4-6 hours. Maximum 400 mg/day. Extended-release: 100-300 mg once daily.",
+    "efectosSecundariosEs": [
+      "Mareo",
+      "Nauseas",
+      "Estrenimiento",
+      "Somnolencia",
+      "Dolor de cabeza",
+      "Boca seca"
+    ],
+    "efectosSecundariosEn": [
+      "Dizziness",
+      "Nausea",
+      "Constipation",
+      "Drowsiness",
+      "Headache",
+      "Dry mouth"
+    ],
+    "efectosGravesEs": [
+      "Convulsiones",
+      "Sindrome serotoninergico",
+      "Depresion respiratoria",
+      "Dependencia y adiccion",
+      "Reaccion alergica severa"
+    ],
+    "efectosGravesEn": [
+      "Seizures",
+      "Serotonin syndrome",
+      "Respiratory depression",
+      "Dependence and addiction",
+      "Severe allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Antidepresivos ISRS/IRSN (sindrome serotoninergico)",
+      "Otros opioides",
+      "Benzodiazepinas",
+      "Alcohol",
+      "Carbamazepina (reduce efecto)"
+    ],
+    "interaccionesEn": [
+      "SSRI/SNRI antidepressants (serotonin syndrome)",
+      "Other opioids",
+      "Benzodiazepines",
+      "Alcohol",
+      "Carbamazepine (reduces effect)"
+    ],
+    "precaucionesEs": [
+      "No mezclar con alcohol ni sedantes",
+      "Puede causar dependencia con uso prolongado",
+      "No conducir hasta saber como le afecta",
+      "No dejar de tomar abruptamente"
+    ],
+    "precaucionesEn": [
+      "Do not mix with alcohol or sedatives",
+      "Can cause dependence with prolonged use",
+      "Do not drive until you know how it affects you",
+      "Do not stop taking abruptly"
+    ],
+    "contraindicacionesEs": [
+      "Menores de 12 anos",
+      "Epilepsia no controlada",
+      "Uso con inhibidores de la MAO",
+      "Intoxicacion aguda con alcohol o sedantes"
+    ],
+    "contraindicacionesEn": [
+      "Children under 12",
+      "Uncontrolled epilepsy",
+      "Use with MAO inhibitors",
+      "Acute intoxication with alcohol or sedatives"
+    ],
+    "embarazoLactanciaEs": "Evitar durante el embarazo, especialmente uso prolongado. Puede causar sindrome de abstinencia neonatal. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Avoid during pregnancy, especially prolonged use. Can cause neonatal withdrawal syndrome. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "No triture las tabletas de liberacion prolongada",
+      "Levantese lentamente para evitar mareos",
+      "Use un laxante si el estrenimiento es un problema",
+      "Guarde bajo llave"
+    ],
+    "consejosUsoEn": [
+      "Do not crush extended-release tablets",
+      "Get up slowly to avoid dizziness",
+      "Use a laxative if constipation is a problem",
+      "Store under lock and key"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Guardar en lugar seguro fuera del alcance de otros.",
+    "almacenamientoEn": "Room temperature. Store in a secure place out of reach of others.",
+    "categorias": [
+      "analgesico",
+      "opioide",
+      "dolor",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "morfina",
+    "nombreGenericoEs": "Morfina",
+    "nombreGenericoEn": "Morphine",
+    "nombresComercialesEs": [
+      "MS Contin",
+      "Kadian",
+      "Oramorph"
+    ],
+    "nombresComercialesEn": [
+      "MS Contin",
+      "Kadian",
+      "Roxanol"
+    ],
+    "claseEs": "Analgesico opioide fuerte",
+    "claseEn": "Strong opioid analgesic",
+    "paraQueEsEs": "Se usa para dolor severo que no se controla con otros analgesicos, como dolor post-quirurgico, dolor de cancer y dolor cronico severo.",
+    "paraQueEsEn": "Used for severe pain not controlled by other painkillers, such as post-surgical pain, cancer pain, and severe chronic pain.",
+    "comoFuncionaEs": "Se une a receptores opioides mu en el cerebro y la medula espinal, bloqueando las senales de dolor y produciendo alivio intenso del dolor.",
+    "comoFuncionaEn": "Binds to mu opioid receptors in the brain and spinal cord, blocking pain signals and producing intense pain relief.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Solucion oral",
+      "Inyeccion",
+      "Supositorio"
+    ],
+    "dosisUsualEs": "Muy variable segun la situacion. El medico ajustara la dosis individualmente. Liberacion inmediata: 15-30 mg cada 4 horas segun necesidad.",
+    "dosisUsualEn": "Highly variable depending on the situation. The doctor will adjust the dose individually. Immediate release: 15-30 mg every 4 hours as needed.",
+    "efectosSecundariosEs": [
+      "Estrenimiento severo",
+      "Nauseas y vomitos",
+      "Somnolencia",
+      "Mareo",
+      "Sudoracion",
+      "Picazon"
+    ],
+    "efectosSecundariosEn": [
+      "Severe constipation",
+      "Nausea and vomiting",
+      "Drowsiness",
+      "Dizziness",
+      "Sweating",
+      "Itching"
+    ],
+    "efectosGravesEs": [
+      "Depresion respiratoria (respiracion lenta/debil)",
+      "Adiccion",
+      "Sobredosis (puede ser mortal)",
+      "Presion arterial baja severa"
+    ],
+    "efectosGravesEn": [
+      "Respiratory depression (slow/weak breathing)",
+      "Addiction",
+      "Overdose (can be fatal)",
+      "Severe low blood pressure"
+    ],
+    "interaccionesEs": [
+      "Benzodiazepinas (riesgo de muerte)",
+      "Alcohol (riesgo de muerte)",
+      "Otros opioides",
+      "Sedantes",
+      "Inhibidores de la MAO"
+    ],
+    "interaccionesEn": [
+      "Benzodiazepines (risk of death)",
+      "Alcohol (risk of death)",
+      "Other opioids",
+      "Sedatives",
+      "MAO inhibitors"
+    ],
+    "precaucionesEs": [
+      "Tiene alto riesgo de adiccion",
+      "Nunca comparta este medicamento",
+      "No mezcle con alcohol",
+      "Tenga naloxona disponible",
+      "No conduzca"
+    ],
+    "precaucionesEn": [
+      "Has high risk of addiction",
+      "Never share this medication",
+      "Do not mix with alcohol",
+      "Have naloxone available",
+      "Do not drive"
+    ],
+    "contraindicacionesEs": [
+      "Depresion respiratoria severa",
+      "Asma aguda",
+      "Obstruccion intestinal",
+      "Uso con inhibidores de la MAO"
+    ],
+    "contraindicacionesEn": [
+      "Severe respiratory depression",
+      "Acute asthma",
+      "Intestinal obstruction",
+      "Use with MAO inhibitors"
+    ],
+    "embarazoLactanciaEs": "Uso prolongado durante el embarazo causa sindrome de abstinencia neonatal. Se excreta en leche materna - usar con extrema precaucion.",
+    "embarazoLactanciaEn": "Prolonged use during pregnancy causes neonatal withdrawal syndrome. Excreted in breast milk - use with extreme caution.",
+    "consejosUsoEs": [
+      "Tome exactamente como lo receto su medico",
+      "Use un laxante desde el primer dia",
+      "Nunca comparta ni venda este medicamento",
+      "Guarde bajo llave",
+      "Pregunte sobre naloxona de rescate"
+    ],
+    "consejosUsoEn": [
+      "Take exactly as prescribed by your doctor",
+      "Use a laxative from the first day",
+      "Never share or sell this medication",
+      "Store under lock and key",
+      "Ask about rescue naloxone"
+    ],
+    "almacenamientoEs": "Lugar seguro bajo llave. Temperatura ambiente. Deseche los sobrantes en su farmacia.",
+    "almacenamientoEn": "Secure location under lock and key. Room temperature. Dispose of leftovers at your pharmacy.",
+    "categorias": [
+      "analgesico",
+      "opioide",
+      "dolor",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "oxicodona",
+    "nombreGenericoEs": "Oxicodona",
+    "nombreGenericoEn": "Oxycodone",
+    "nombresComercialesEs": [
+      "OxyContin",
+      "Percocet (con acetaminofen)",
+      "Roxicodone"
+    ],
+    "nombresComercialesEn": [
+      "OxyContin",
+      "Percocet (with acetaminophen)",
+      "Roxicodone"
+    ],
+    "claseEs": "Analgesico opioide fuerte",
+    "claseEn": "Strong opioid analgesic",
+    "paraQueEsEs": "Trata dolor severo que requiere un opioide. Se usa cuando otros analgesicos no son suficientes.",
+    "paraQueEsEn": "Treats severe pain requiring an opioid. Used when other pain relievers are not enough.",
+    "comoFuncionaEs": "Se une a receptores opioides en el cerebro y la medula espinal para bloquear las senales de dolor.",
+    "comoFuncionaEn": "Binds to opioid receptors in the brain and spinal cord to block pain signals.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Solucion oral",
+      "Capsula"
+    ],
+    "dosisUsualEs": "Liberacion inmediata: 5-15 mg cada 4-6 horas. El medico ajustara segun necesidad. No exceder la dosis prescrita.",
+    "dosisUsualEn": "Immediate release: 5-15 mg every 4-6 hours. Doctor will adjust as needed. Do not exceed prescribed dose.",
+    "efectosSecundariosEs": [
+      "Estrenimiento",
+      "Nauseas",
+      "Somnolencia",
+      "Mareo",
+      "Vomitos",
+      "Boca seca"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation",
+      "Nausea",
+      "Drowsiness",
+      "Dizziness",
+      "Vomiting",
+      "Dry mouth"
+    ],
+    "efectosGravesEs": [
+      "Depresion respiratoria",
+      "Adiccion severa",
+      "Sobredosis mortal",
+      "Sindrome de abstinencia"
+    ],
+    "efectosGravesEn": [
+      "Respiratory depression",
+      "Severe addiction",
+      "Fatal overdose",
+      "Withdrawal syndrome"
+    ],
+    "interaccionesEs": [
+      "Benzodiazepinas",
+      "Alcohol",
+      "Otros depresores del SNC",
+      "Inhibidores de CYP3A4",
+      "Inhibidores de la MAO"
+    ],
+    "interaccionesEn": [
+      "Benzodiazepines",
+      "Alcohol",
+      "Other CNS depressants",
+      "CYP3A4 inhibitors",
+      "MAO inhibitors"
+    ],
+    "precaucionesEs": [
+      "Altisimo riesgo de adiccion",
+      "Nunca triture tabletas de liberacion prolongada",
+      "Tenga naloxona disponible",
+      "No conduzca ni opere maquinaria"
+    ],
+    "precaucionesEn": [
+      "Very high risk of addiction",
+      "Never crush extended-release tablets",
+      "Have naloxone available",
+      "Do not drive or operate machinery"
+    ],
+    "contraindicacionesEs": [
+      "Depresion respiratoria significativa",
+      "Asma no monitoreada",
+      "Obstruccion gastrointestinal"
+    ],
+    "contraindicacionesEn": [
+      "Significant respiratory depression",
+      "Unmonitored asthma",
+      "Gastrointestinal obstruction"
+    ],
+    "embarazoLactanciaEs": "Uso prolongado causa sindrome de abstinencia neonatal. Evitar durante la lactancia.",
+    "embarazoLactanciaEn": "Prolonged use causes neonatal withdrawal syndrome. Avoid during breastfeeding.",
+    "consejosUsoEs": [
+      "NUNCA triture ni mastique las tabletas de liberacion prolongada",
+      "Guarde bajo llave",
+      "Tome exactamente como se lo recetaron",
+      "Use laxantes para el estrenimiento"
+    ],
+    "consejosUsoEn": [
+      "NEVER crush or chew extended-release tablets",
+      "Store under lock and key",
+      "Take exactly as prescribed",
+      "Use laxatives for constipation"
+    ],
+    "almacenamientoEs": "Guardar bajo llave en lugar seguro. Temperatura ambiente.",
+    "almacenamientoEn": "Store under lock and key in a secure place. Room temperature.",
+    "categorias": [
+      "analgesico",
+      "opioide",
+      "dolor",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "amoxicilina",
+    "nombreGenericoEs": "Amoxicilina",
+    "nombreGenericoEn": "Amoxicillin",
+    "nombresComercialesEs": [
+      "Amoxil",
+      "Trimox",
+      "Augmentin (con acido clavulanico)"
+    ],
+    "nombresComercialesEn": [
+      "Amoxil",
+      "Trimox",
+      "Augmentin (with clavulanic acid)"
+    ],
+    "claseEs": "Antibiotico - Penicilina",
+    "claseEn": "Antibiotic - Penicillin",
+    "paraQueEsEs": "Trata infecciones bacterianas como infecciones del oido, garganta (amigdalitis), senos nasales, pulmones (neumonia), piel, y vias urinarias. Tambien se usa para la bacteria H. pylori del estomago.",
+    "paraQueEsEn": "Treats bacterial infections such as ear, throat (tonsillitis), sinus, lung (pneumonia), skin, and urinary tract infections. Also used for H. pylori stomach bacteria.",
+    "comoFuncionaEs": "Mata las bacterias al impedir que formen su pared celular. Sin esta pared, las bacterias no pueden sobrevivir.",
+    "comoFuncionaEn": "Kills bacteria by preventing them from forming their cell wall. Without this wall, bacteria cannot survive.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta masticable",
+      "Suspension oral (liquido)",
+      "Tableta"
+    ],
+    "dosisUsualEs": "Adultos: 250-500 mg cada 8 horas, o 500-875 mg cada 12 horas. Ninos: 25-45 mg/kg/dia dividido en dosis.",
+    "dosisUsualEn": "Adults: 250-500 mg every 8 hours, or 500-875 mg every 12 hours. Children: 25-45 mg/kg/day divided into doses.",
+    "efectosSecundariosEs": [
+      "Diarrea",
+      "Nauseas",
+      "Vomitos",
+      "Salpullido",
+      "Dolor de estomago"
+    ],
+    "efectosSecundariosEn": [
+      "Diarrhea",
+      "Nausea",
+      "Vomiting",
+      "Rash",
+      "Stomach pain"
+    ],
+    "efectosGravesEs": [
+      "Reaccion alergica severa (anafilaxia)",
+      "Diarrea severa por C. difficile",
+      "Reacciones cutaneas graves"
+    ],
+    "efectosGravesEn": [
+      "Severe allergic reaction (anaphylaxis)",
+      "Severe C. difficile diarrhea",
+      "Serious skin reactions"
+    ],
+    "interaccionesEs": [
+      "Anticoagulantes (puede aumentar sangrado)",
+      "Metotrexato (aumenta toxicidad)",
+      "Anticonceptivos orales (puede reducir eficacia)"
+    ],
+    "interaccionesEn": [
+      "Anticoagulants (may increase bleeding)",
+      "Methotrexate (increases toxicity)",
+      "Oral contraceptives (may reduce efficacy)"
+    ],
+    "precaucionesEs": [
+      "Termine todo el tratamiento aunque se sienta mejor",
+      "Informe si es alergico a penicilina",
+      "Las personas alergicas a penicilina pueden ser alergicas a cefalosporinas"
+    ],
+    "precaucionesEn": [
+      "Complete the entire course even if you feel better",
+      "Inform if you are allergic to penicillin",
+      "People allergic to penicillin may be allergic to cephalosporins"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a penicilina",
+      "Historial de reaccion alergica severa a betalactamicos"
+    ],
+    "contraindicacionesEn": [
+      "Penicillin allergy",
+      "History of severe allergic reaction to beta-lactams"
+    ],
+    "embarazoLactanciaEs": "Generalmente seguro en el embarazo (categoria B). Se excreta en leche materna en pequenas cantidades - generalmente seguro.",
+    "embarazoLactanciaEn": "Generally safe in pregnancy (category B). Excreted in breast milk in small amounts - generally safe.",
+    "consejosUsoEs": [
+      "Termine todo el antibiotico como se lo recetaron",
+      "Puede tomar con o sin alimentos",
+      "Refrigere la suspension liquida",
+      "Use metodo anticonceptivo adicional si toma anticonceptivos orales"
+    ],
+    "consejosUsoEn": [
+      "Finish all the antibiotic as prescribed",
+      "Can take with or without food",
+      "Refrigerate the liquid suspension",
+      "Use additional contraceptive method if taking oral contraceptives"
+    ],
+    "almacenamientoEs": "Capsulas: temperatura ambiente. Suspension: refrigerar y desechar despues de 14 dias.",
+    "almacenamientoEn": "Capsules: room temperature. Suspension: refrigerate and discard after 14 days.",
+    "categorias": [
+      "antibiotico",
+      "penicilina",
+      "infeccion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "azitromicina",
+    "nombreGenericoEs": "Azitromicina",
+    "nombreGenericoEn": "Azithromycin",
+    "nombresComercialesEs": [
+      "Zithromax",
+      "Z-Pack",
+      "Azitrocin"
+    ],
+    "nombresComercialesEn": [
+      "Zithromax",
+      "Z-Pack",
+      "Zmax"
+    ],
+    "claseEs": "Antibiotico - Macrolido",
+    "claseEn": "Antibiotic - Macrolide",
+    "paraQueEsEs": "Trata infecciones de las vias respiratorias (bronquitis, neumonia, sinusitis), infecciones de oido, infecciones de la piel y enfermedades de transmision sexual como clamidia.",
+    "paraQueEsEn": "Treats respiratory infections (bronchitis, pneumonia, sinusitis), ear infections, skin infections, and sexually transmitted infections like chlamydia.",
+    "comoFuncionaEs": "Impide que las bacterias fabriquen proteinas que necesitan para crecer y multiplicarse. Esto detiene la infeccion.",
+    "comoFuncionaEn": "Prevents bacteria from making proteins they need to grow and multiply. This stops the infection.",
+    "formasPresentacion": [
+      "Tableta",
+      "Suspension oral",
+      "Polvo para solucion",
+      "Inyeccion intravenosa"
+    ],
+    "dosisUsualEs": "Z-Pack tipico: 500 mg el primer dia, luego 250 mg por 4 dias mas. Clamidia: 1 gramo en dosis unica.",
+    "dosisUsualEn": "Typical Z-Pack: 500 mg first day, then 250 mg for 4 more days. Chlamydia: 1 gram single dose.",
+    "efectosSecundariosEs": [
+      "Diarrea",
+      "Nauseas",
+      "Dolor abdominal",
+      "Vomitos",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Diarrhea",
+      "Nausea",
+      "Abdominal pain",
+      "Vomiting",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Arritmias cardiacas (prolongacion QT)",
+      "Dano hepatico",
+      "Colitis por C. difficile",
+      "Reaccion alergica severa"
+    ],
+    "efectosGravesEn": [
+      "Heart arrhythmias (QT prolongation)",
+      "Liver damage",
+      "C. difficile colitis",
+      "Severe allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Warfarina (aumenta sangrado)",
+      "Digoxina (aumenta niveles)",
+      "Medicamentos que prolongan QT",
+      "Antiacidos con aluminio/magnesio"
+    ],
+    "interaccionesEn": [
+      "Warfarin (increases bleeding)",
+      "Digoxin (increases levels)",
+      "Medications that prolong QT",
+      "Aluminum/magnesium antacids"
+    ],
+    "precaucionesEs": [
+      "Termine todo el tratamiento",
+      "Precaucion en personas con problemas cardiacos",
+      "Tome 1 hora antes o 2 horas despues de antiacidos"
+    ],
+    "precaucionesEn": [
+      "Complete the entire course",
+      "Caution in people with heart problems",
+      "Take 1 hour before or 2 hours after antacids"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a macrolidos",
+      "Historial de ictericia/dano hepatico con azitromicina previa"
+    ],
+    "contraindicacionesEn": [
+      "Macrolide allergy",
+      "History of jaundice/liver damage with previous azithromycin"
+    ],
+    "embarazoLactanciaEs": "Generalmente considerado seguro en el embarazo cuando es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Generally considered safe in pregnancy when needed. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Puede tomar con o sin alimentos",
+      "Tome la suspension con el estomago vacio",
+      "Termine todo el tratamiento",
+      "Es uno de los antibioticos mas comodos (tratamiento corto)"
+    ],
+    "consejosUsoEn": [
+      "Can take with or without food",
+      "Take suspension on an empty stomach",
+      "Finish all the treatment",
+      "One of the most convenient antibiotics (short course)"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Suspension: no necesita refrigeracion, desechar despues de 10 dias.",
+    "almacenamientoEn": "Room temperature. Suspension: does not need refrigeration, discard after 10 days.",
+    "categorias": [
+      "antibiotico",
+      "macrolido",
+      "infeccion",
+      "respiratorio"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "ciprofloxacino",
+    "nombreGenericoEs": "Ciprofloxacino",
+    "nombreGenericoEn": "Ciprofloxacin",
+    "nombresComercialesEs": [
+      "Cipro",
+      "Ciproxina"
+    ],
+    "nombresComercialesEn": [
+      "Cipro",
+      "Cipro XR"
+    ],
+    "claseEs": "Antibiotico - Fluoroquinolona",
+    "claseEn": "Antibiotic - Fluoroquinolone",
+    "paraQueEsEs": "Trata infecciones urinarias, infecciones abdominales, infecciones de huesos y articulaciones, ciertas diarreas bacterianas y algunas infecciones respiratorias.",
+    "paraQueEsEn": "Treats urinary infections, abdominal infections, bone and joint infections, certain bacterial diarrheas, and some respiratory infections.",
+    "comoFuncionaEs": "Mata las bacterias al bloquear las enzimas (ADN girasa y topoisomerasa IV) que necesitan para copiar y reparar su ADN.",
+    "comoFuncionaEn": "Kills bacteria by blocking enzymes (DNA gyrase and topoisomerase IV) they need to copy and repair their DNA.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Suspension oral",
+      "Gotas oticas",
+      "Gotas oftalmicas",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "250-750 mg cada 12 horas dependiendo del tipo de infeccion. ITU simple: 250 mg cada 12 horas por 3 dias.",
+    "dosisUsualEn": "250-750 mg every 12 hours depending on infection type. Simple UTI: 250 mg every 12 hours for 3 days.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Diarrea",
+      "Mareo",
+      "Dolor de cabeza",
+      "Sensibilidad al sol"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Diarrhea",
+      "Dizziness",
+      "Headache",
+      "Sun sensitivity"
+    ],
+    "efectosGravesEs": [
+      "Ruptura de tendones (especialmente el tendon de Aquiles)",
+      "Dano a nervios (neuropatia periferica)",
+      "Problemas del sistema nervioso central",
+      "Dano hepatico",
+      "Prolongacion del QT"
+    ],
+    "efectosGravesEn": [
+      "Tendon rupture (especially Achilles tendon)",
+      "Nerve damage (peripheral neuropathy)",
+      "Central nervous system problems",
+      "Liver damage",
+      "QT prolongation"
+    ],
+    "interaccionesEs": [
+      "Antiacidos, hierro, calcio, zinc (reducen absorcion)",
+      "Teofilina (aumenta niveles)",
+      "Warfarina (aumenta sangrado)",
+      "Cafeina (aumenta efecto de cafeina)"
+    ],
+    "interaccionesEn": [
+      "Antacids, iron, calcium, zinc (reduce absorption)",
+      "Theophylline (increases levels)",
+      "Warfarin (increases bleeding)",
+      "Caffeine (increases caffeine effect)"
+    ],
+    "precaucionesEs": [
+      "Evite el sol excesivo y use protector solar",
+      "Reporte dolor de tendones inmediatamente",
+      "Tome 2 horas antes o 6 horas despues de antiacidos/minerales",
+      "Beba abundante agua"
+    ],
+    "precaucionesEn": [
+      "Avoid excessive sun and use sunscreen",
+      "Report tendon pain immediately",
+      "Take 2 hours before or 6 hours after antacids/minerals",
+      "Drink plenty of water"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a fluoroquinolonas",
+      "Uso con tizanidina",
+      "Historial de tendinitis por fluoroquinolonas"
+    ],
+    "contraindicacionesEn": [
+      "Fluoroquinolone allergy",
+      "Use with tizanidine",
+      "History of fluoroquinolone tendinitis"
+    ],
+    "embarazoLactanciaEs": "Generalmente se evita en el embarazo y la lactancia por riesgo de dano al cartilago en el feto/nino.",
+    "embarazoLactanciaEn": "Generally avoided in pregnancy and breastfeeding due to risk of cartilage damage in the fetus/child.",
+    "consejosUsoEs": [
+      "No tome con leche ni productos lacteos solos (pero puede con alimentos que contengan lacteos)",
+      "Use protector solar",
+      "Deje de tomarlo y busque ayuda si siente dolor en tendones"
+    ],
+    "consejosUsoEn": [
+      "Do not take with milk or dairy products alone (but can take with food containing dairy)",
+      "Use sunscreen",
+      "Stop and seek help if you feel tendon pain"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Proteger de la luz.",
+    "almacenamientoEn": "Room temperature. Protect from light.",
+    "categorias": [
+      "antibiotico",
+      "fluoroquinolona",
+      "infeccion",
+      "urinario"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "metronidazol",
+    "nombreGenericoEs": "Metronidazol",
+    "nombreGenericoEn": "Metronidazole",
+    "nombresComercialesEs": [
+      "Flagyl",
+      "MetroGel"
+    ],
+    "nombresComercialesEn": [
+      "Flagyl",
+      "MetroGel",
+      "Metrocream"
+    ],
+    "claseEs": "Antibiotico / Antiparasitario",
+    "claseEn": "Antibiotic / Antiparasitic",
+    "paraQueEsEs": "Trata infecciones causadas por bacterias anaerobias y parasitos, incluyendo infecciones abdominales, vaginosis bacteriana, C. difficile, Giardia y H. pylori.",
+    "paraQueEsEn": "Treats infections caused by anaerobic bacteria and parasites, including abdominal infections, bacterial vaginosis, C. difficile, Giardia, and H. pylori.",
+    "comoFuncionaEs": "Penetra en las bacterias y parasitos donde dana su ADN, causando su muerte. Es especialmente efectivo contra organismos que viven sin oxigeno.",
+    "comoFuncionaEn": "Penetrates bacteria and parasites where it damages their DNA, causing their death. Especially effective against organisms that live without oxygen.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Crema/Gel vaginal",
+      "Gel topico",
+      "Inyeccion intravenosa"
+    ],
+    "dosisUsualEs": "250-500 mg cada 8 horas o 500-750 mg cada 12 horas, dependiendo de la infeccion. Duracion: 5-14 dias tipicamente.",
+    "dosisUsualEn": "250-500 mg every 8 hours or 500-750 mg every 12 hours, depending on infection. Duration: typically 5-14 days.",
+    "efectosSecundariosEs": [
+      "Sabor metalico en la boca",
+      "Nauseas",
+      "Dolor de cabeza",
+      "Perdida de apetito",
+      "Orina oscura"
+    ],
+    "efectosSecundariosEn": [
+      "Metallic taste in mouth",
+      "Nausea",
+      "Headache",
+      "Loss of appetite",
+      "Dark urine"
+    ],
+    "efectosGravesEs": [
+      "Neuropatia periferica (entumecimiento en manos/pies)",
+      "Convulsiones",
+      "Reaccion tipo disulfiram con alcohol"
+    ],
+    "efectosGravesEn": [
+      "Peripheral neuropathy (numbness in hands/feet)",
+      "Seizures",
+      "Disulfiram-like reaction with alcohol"
+    ],
+    "interaccionesEs": [
+      "ALCOHOL - PROHIBIDO (causa nauseas, vomitos, taquicardia severos)",
+      "Warfarina (aumenta sangrado)",
+      "Litio (aumenta toxicidad)",
+      "Disulfiram"
+    ],
+    "interaccionesEn": [
+      "ALCOHOL - PROHIBITED (causes severe nausea, vomiting, rapid heartbeat)",
+      "Warfarin (increases bleeding)",
+      "Lithium (increases toxicity)",
+      "Disulfiram"
+    ],
+    "precaucionesEs": [
+      "NO BEBA ALCOHOL durante el tratamiento y hasta 3 dias despues de terminarlo",
+      "Reporte entumecimiento u hormigueo en manos o pies",
+      "Termine todo el tratamiento"
+    ],
+    "precaucionesEn": [
+      "DO NOT DRINK ALCOHOL during treatment and for 3 days after finishing",
+      "Report numbness or tingling in hands or feet",
+      "Complete the entire course"
+    ],
+    "contraindicacionesEs": [
+      "Alergia al metronidazol",
+      "Primer trimestre del embarazo (para tricomoniasis)",
+      "Uso con disulfiram en ultimas 2 semanas"
+    ],
+    "contraindicacionesEn": [
+      "Metronidazole allergy",
+      "First trimester of pregnancy (for trichomoniasis)",
+      "Use with disulfiram in last 2 weeks"
+    ],
+    "embarazoLactanciaEs": "Evitar en el primer trimestre si es posible. Se excreta en leche materna - suspender lactancia durante tratamiento y 24 horas despues.",
+    "embarazoLactanciaEn": "Avoid in first trimester if possible. Excreted in breast milk - discontinue breastfeeding during treatment and 24 hours after.",
+    "consejosUsoEs": [
+      "CERO ALCOHOL - esto es muy importante",
+      "El sabor metalico es normal y desaparece al terminar",
+      "La orina oscura es normal",
+      "Tome con alimentos para reducir nauseas"
+    ],
+    "consejosUsoEn": [
+      "ZERO ALCOHOL - this is very important",
+      "Metallic taste is normal and goes away when finished",
+      "Dark urine is normal",
+      "Take with food to reduce nausea"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "antibiotico",
+      "antiparasitario",
+      "infeccion",
+      "gastrointestinal"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "cefalexina",
+    "nombreGenericoEs": "Cefalexina",
+    "nombreGenericoEn": "Cephalexin",
+    "nombresComercialesEs": [
+      "Keflex",
+      "Ceporex"
+    ],
+    "nombresComercialesEn": [
+      "Keflex"
+    ],
+    "claseEs": "Antibiotico - Cefalosporina de primera generacion",
+    "claseEn": "Antibiotic - First-generation cephalosporin",
+    "paraQueEsEs": "Trata infecciones de la piel, vias urinarias, huesos, oido medio y vias respiratorias superiores causadas por bacterias susceptibles.",
+    "paraQueEsEn": "Treats skin, urinary tract, bone, middle ear, and upper respiratory infections caused by susceptible bacteria.",
+    "comoFuncionaEs": "Interfiere con la formacion de la pared celular de las bacterias, causando su muerte.",
+    "comoFuncionaEn": "Interferes with bacterial cell wall formation, causing their death.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Suspension oral"
+    ],
+    "dosisUsualEs": "Adultos: 250-500 mg cada 6 horas o 500 mg cada 12 horas. Ninos: 25-50 mg/kg/dia dividido en dosis.",
+    "dosisUsualEn": "Adults: 250-500 mg every 6 hours or 500 mg every 12 hours. Children: 25-50 mg/kg/day divided into doses.",
+    "efectosSecundariosEs": [
+      "Diarrea",
+      "Nauseas",
+      "Dolor de estomago",
+      "Salpullido",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Diarrhea",
+      "Nausea",
+      "Stomach pain",
+      "Rash",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Reaccion alergica severa",
+      "Colitis por C. difficile",
+      "Reacciones cutaneas graves"
+    ],
+    "efectosGravesEn": [
+      "Severe allergic reaction",
+      "C. difficile colitis",
+      "Serious skin reactions"
+    ],
+    "interaccionesEs": [
+      "Probenecid (aumenta niveles de cefalexina)",
+      "Anticoagulantes (monitorear)"
+    ],
+    "interaccionesEn": [
+      "Probenecid (increases cephalexin levels)",
+      "Anticoagulants (monitor)"
+    ],
+    "precaucionesEs": [
+      "Informe si es alergico a penicilina (alergia cruzada posible)",
+      "Termine todo el curso de antibioticos"
+    ],
+    "precaucionesEn": [
+      "Inform if allergic to penicillin (cross-allergy possible)",
+      "Complete the entire antibiotic course"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a cefalosporinas",
+      "Reaccion alergica severa previa a penicilinas"
+    ],
+    "contraindicacionesEn": [
+      "Cephalosporin allergy",
+      "Previous severe allergic reaction to penicillins"
+    ],
+    "embarazoLactanciaEs": "Considerado seguro en el embarazo. Se excreta en leche materna en cantidades pequenas.",
+    "embarazoLactanciaEn": "Considered safe in pregnancy. Excreted in breast milk in small amounts.",
+    "consejosUsoEs": [
+      "Puede tomar con o sin alimentos",
+      "Refrigere la suspension",
+      "Complete todo el tratamiento"
+    ],
+    "consejosUsoEn": [
+      "Can take with or without food",
+      "Refrigerate suspension",
+      "Complete the entire course"
+    ],
+    "almacenamientoEs": "Capsulas: temperatura ambiente. Suspension: refrigerar.",
+    "almacenamientoEn": "Capsules: room temperature. Suspension: refrigerate.",
+    "categorias": [
+      "antibiotico",
+      "cefalosporina",
+      "infeccion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "doxiciclina",
+    "nombreGenericoEs": "Doxiciclina",
+    "nombreGenericoEn": "Doxycycline",
+    "nombresComercialesEs": [
+      "Vibramicina",
+      "Doryx",
+      "Monodox"
+    ],
+    "nombresComercialesEn": [
+      "Vibramycin",
+      "Doryx",
+      "Monodox"
+    ],
+    "claseEs": "Antibiotico - Tetraciclina",
+    "claseEn": "Antibiotic - Tetracycline",
+    "paraQueEsEs": "Trata acne, infecciones respiratorias, enfermedad de Lyme, clamidia, malaria (prevencion), rosacea y muchas otras infecciones.",
+    "paraQueEsEn": "Treats acne, respiratory infections, Lyme disease, chlamydia, malaria (prevention), rosacea, and many other infections.",
+    "comoFuncionaEs": "Impide que las bacterias produzcan proteinas esenciales, deteniendo su crecimiento y multiplicacion.",
+    "comoFuncionaEn": "Prevents bacteria from producing essential proteins, stopping their growth and multiplication.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Suspension oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "100 mg cada 12 horas el primer dia, luego 100 mg una vez al dia. Para acne: 50-100 mg al dia.",
+    "dosisUsualEn": "100 mg every 12 hours first day, then 100 mg once daily. For acne: 50-100 mg daily.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Sensibilidad al sol",
+      "Diarrea",
+      "Irritacion esofagica",
+      "Candidiasis vaginal"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Sun sensitivity",
+      "Diarrhea",
+      "Esophageal irritation",
+      "Vaginal yeast infection"
+    ],
+    "efectosGravesEs": [
+      "Esofagitis severa/ulcera esofagica",
+      "Reaccion alergica severa",
+      "Hipertension intracraneal",
+      "Fotosensibilidad severa"
+    ],
+    "efectosGravesEn": [
+      "Severe esophagitis/esophageal ulcer",
+      "Severe allergic reaction",
+      "Intracranial hypertension",
+      "Severe photosensitivity"
+    ],
+    "interaccionesEs": [
+      "Antiacidos, hierro, calcio (reducen absorcion)",
+      "Anticoagulantes (aumenta sangrado)",
+      "Anticonceptivos orales (puede reducir eficacia)",
+      "Isotretinoina (riesgo de hipertension intracraneal)"
+    ],
+    "interaccionesEn": [
+      "Antacids, iron, calcium (reduce absorption)",
+      "Anticoagulants (increases bleeding)",
+      "Oral contraceptives (may reduce efficacy)",
+      "Isotretinoin (risk of intracranial hypertension)"
+    ],
+    "precaucionesEs": [
+      "Tome con un vaso lleno de agua y no se acueste por 30 minutos",
+      "Use protector solar - sensibilidad al sol muy comun",
+      "No tome con leche, antiacidos o suplementos de hierro"
+    ],
+    "precaucionesEn": [
+      "Take with a full glass of water and do not lie down for 30 minutes",
+      "Use sunscreen - sun sensitivity very common",
+      "Do not take with milk, antacids, or iron supplements"
+    ],
+    "contraindicacionesEs": [
+      "Embarazo",
+      "Ninos menores de 8 anos (mancha dientes permanentemente)",
+      "Alergia a tetraciclinas"
+    ],
+    "contraindicacionesEn": [
+      "Pregnancy",
+      "Children under 8 years (permanently stains teeth)",
+      "Tetracycline allergy"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en el embarazo (dano a huesos y dientes del feto). Evitar durante la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy (damage to fetal bones and teeth). Avoid during breastfeeding.",
+    "consejosUsoEs": [
+      "Tome sentado con un vaso lleno de agua",
+      "Use protector solar SPF 30+ todos los dias",
+      "Separe de antiacidos, calcio y hierro por 2-3 horas",
+      "No se acueste por al menos 30 minutos despues de tomarla"
+    ],
+    "consejosUsoEn": [
+      "Take sitting up with a full glass of water",
+      "Use SPF 30+ sunscreen every day",
+      "Separate from antacids, calcium, and iron by 2-3 hours",
+      "Do not lie down for at least 30 minutes after taking it"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "antibiotico",
+      "tetraciclina",
+      "infeccion",
+      "acne"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "trimetoprim-sulfametoxazol",
+    "nombreGenericoEs": "Trimetoprim-Sulfametoxazol (TMP-SMX)",
+    "nombreGenericoEn": "Trimethoprim-Sulfamethoxazole (TMP-SMX)",
+    "nombresComercialesEs": [
+      "Bactrim",
+      "Septra"
+    ],
+    "nombresComercialesEn": [
+      "Bactrim",
+      "Septra"
+    ],
+    "claseEs": "Antibiotico - Sulfonamida combinada",
+    "claseEn": "Antibiotic - Combination sulfonamide",
+    "paraQueEsEs": "Trata infecciones urinarias, infecciones de oido, bronquitis, diarrea del viajero, e infecciones por MRSA de la piel. Tambien para prevenir infecciones en personas con VIH.",
+    "paraQueEsEn": "Treats urinary infections, ear infections, bronchitis, traveler's diarrhea, and MRSA skin infections. Also to prevent infections in people with HIV.",
+    "comoFuncionaEs": "Combina dos medicamentos que bloquean dos pasos diferentes en la produccion de acido folico de las bacterias, matandolas eficazmente.",
+    "comoFuncionaEn": "Combines two drugs that block two different steps in bacterial folic acid production, effectively killing them.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de doble potencia (DS)",
+      "Suspension oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "Adultos: 1 tableta DS (160/800 mg) cada 12 horas. ITU: 3 dias. Otras: 7-14 dias.",
+    "dosisUsualEn": "Adults: 1 DS tablet (160/800 mg) every 12 hours. UTI: 3 days. Others: 7-14 days.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Vomitos",
+      "Salpullido",
+      "Diarrea",
+      "Perdida de apetito"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Vomiting",
+      "Rash",
+      "Diarrhea",
+      "Loss of appetite"
+    ],
+    "efectosGravesEs": [
+      "Reacciones cutaneas graves (Stevens-Johnson)",
+      "Problemas de sangre (anemia, trombocitopenia)",
+      "Dano hepatico",
+      "Dano renal",
+      "Hiperkalemia"
+    ],
+    "efectosGravesEn": [
+      "Severe skin reactions (Stevens-Johnson)",
+      "Blood problems (anemia, thrombocytopenia)",
+      "Liver damage",
+      "Kidney damage",
+      "Hyperkalemia"
+    ],
+    "interaccionesEs": [
+      "Warfarina (aumenta sangrado significativamente)",
+      "Metotrexato (aumenta toxicidad)",
+      "Medicamentos para diabetes (aumenta hipoglucemia)",
+      "ACE inhibidores (riesgo de hiperkalemia)"
+    ],
+    "interaccionesEn": [
+      "Warfarin (significantly increases bleeding)",
+      "Methotrexate (increases toxicity)",
+      "Diabetes medications (increases hypoglycemia)",
+      "ACE inhibitors (hyperkalemia risk)"
+    ],
+    "precaucionesEs": [
+      "Beba mucha agua para prevenir cristales en la orina",
+      "Reporte cualquier salpullido inmediatamente",
+      "Use protector solar"
+    ],
+    "precaucionesEn": [
+      "Drink plenty of water to prevent crystals in urine",
+      "Report any rash immediately",
+      "Use sunscreen"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a sulfonamidas",
+      "Anemia megaloblastica por deficiencia de folato",
+      "Insuficiencia renal severa",
+      "Embarazo a termino"
+    ],
+    "contraindicacionesEn": [
+      "Sulfonamide allergy",
+      "Megaloblastic anemia from folate deficiency",
+      "Severe renal insufficiency",
+      "Pregnancy at term"
+    ],
+    "embarazoLactanciaEs": "Evitar en el primer trimestre y al final del embarazo. Se excreta en leche materna - precaucion.",
+    "embarazoLactanciaEn": "Avoid in first trimester and near end of pregnancy. Excreted in breast milk - use caution.",
+    "consejosUsoEs": [
+      "Beba al menos 8 vasos de agua al dia",
+      "Reporte cualquier erupcion cutanea inmediatamente",
+      "Use protector solar",
+      "Tome con o sin alimentos"
+    ],
+    "consejosUsoEn": [
+      "Drink at least 8 glasses of water per day",
+      "Report any skin rash immediately",
+      "Use sunscreen",
+      "Take with or without food"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "antibiotico",
+      "sulfonamida",
+      "infeccion",
+      "urinario"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "clindamicina",
+    "nombreGenericoEs": "Clindamicina",
+    "nombreGenericoEn": "Clindamycin",
+    "nombresComercialesEs": [
+      "Cleocin",
+      "Dalacin"
+    ],
+    "nombresComercialesEn": [
+      "Cleocin",
+      "Clindesse"
+    ],
+    "claseEs": "Antibiotico - Lincosamida",
+    "claseEn": "Antibiotic - Lincosamide",
+    "paraQueEsEs": "Trata infecciones serias de piel y tejidos blandos, infecciones dentales, infecciones oseas, e infecciones pelvicas. Buena alternativa en alergicos a penicilina.",
+    "paraQueEsEn": "Treats serious skin and soft tissue infections, dental infections, bone infections, and pelvic infections. Good alternative for penicillin-allergic patients.",
+    "comoFuncionaEs": "Impide que las bacterias produzcan proteinas necesarias para vivir, deteniendo su crecimiento.",
+    "comoFuncionaEn": "Prevents bacteria from producing proteins needed to live, stopping their growth.",
+    "formasPresentacion": [
+      "Capsula",
+      "Solucion oral",
+      "Inyeccion",
+      "Crema/Gel topico",
+      "Ovulo vaginal"
+    ],
+    "dosisUsualEs": "Oral: 150-450 mg cada 6-8 horas. Topico: aplicar delgada capa 2 veces al dia.",
+    "dosisUsualEn": "Oral: 150-450 mg every 6-8 hours. Topical: apply thin layer twice daily.",
+    "efectosSecundariosEs": [
+      "Diarrea (comun)",
+      "Nauseas",
+      "Dolor abdominal",
+      "Sabor metalico",
+      "Salpullido"
+    ],
+    "efectosSecundariosEn": [
+      "Diarrhea (common)",
+      "Nausea",
+      "Abdominal pain",
+      "Metallic taste",
+      "Rash"
+    ],
+    "efectosGravesEs": [
+      "Colitis por C. difficile (diarrea severa)",
+      "Reaccion alergica severa",
+      "Dano hepatico"
+    ],
+    "efectosGravesEn": [
+      "C. difficile colitis (severe diarrhea)",
+      "Severe allergic reaction",
+      "Liver damage"
+    ],
+    "interaccionesEs": [
+      "Eritromicina (antagonismo - no combinar)",
+      "Relajantes musculares (efecto aumentado)",
+      "Warfarina (monitorear)"
+    ],
+    "interaccionesEn": [
+      "Erythromycin (antagonism - do not combine)",
+      "Muscle relaxants (increased effect)",
+      "Warfarin (monitor)"
+    ],
+    "precaucionesEs": [
+      "Reporte diarrea severa inmediatamente (riesgo de C. difficile)",
+      "Tome con un vaso lleno de agua",
+      "No se acueste por 10 minutos"
+    ],
+    "precaucionesEn": [
+      "Report severe diarrhea immediately (C. difficile risk)",
+      "Take with a full glass of water",
+      "Do not lie down for 10 minutes"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a clindamicina o lincomicina",
+      "Historial de colitis por C. difficile"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to clindamycin or lincomycin",
+      "History of C. difficile colitis"
+    ],
+    "embarazoLactanciaEs": "Usar solo si claramente necesario en el embarazo. Se excreta en leche materna - monitorear al lactante por diarrea.",
+    "embarazoLactanciaEn": "Use only if clearly needed in pregnancy. Excreted in breast milk - monitor infant for diarrhea.",
+    "consejosUsoEs": [
+      "Tome las capsulas con un vaso lleno de agua",
+      "Si desarrolla diarrea severa, deje de tomar y llame al medico",
+      "Termine todo el tratamiento"
+    ],
+    "consejosUsoEn": [
+      "Take capsules with a full glass of water",
+      "If you develop severe diarrhea, stop taking and call the doctor",
+      "Complete the entire course"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "antibiotico",
+      "lincosamida",
+      "infeccion",
+      "piel"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "lisinopril",
+    "nombreGenericoEs": "Lisinopril",
+    "nombreGenericoEn": "Lisinopril",
+    "nombresComercialesEs": [
+      "Zestril",
+      "Prinivil"
+    ],
+    "nombresComercialesEn": [
+      "Zestril",
+      "Prinivil"
+    ],
+    "claseEs": "Inhibidor de la ECA (enzima convertidora de angiotensina)",
+    "claseEn": "ACE inhibitor (angiotensin-converting enzyme)",
+    "paraQueEsEs": "Trata la presion arterial alta, la insuficiencia cardiaca y protege los rinones en personas con diabetes. Tambien se usa despues de un infarto.",
+    "paraQueEsEn": "Treats high blood pressure, heart failure, and protects the kidneys in people with diabetes. Also used after a heart attack.",
+    "comoFuncionaEs": "Bloquea la enzima que produce angiotensina II, una sustancia que estrecha los vasos sanguineos. Al bloquearla, los vasos se relajan y la presion baja.",
+    "comoFuncionaEn": "Blocks the enzyme that produces angiotensin II, a substance that narrows blood vessels. By blocking it, vessels relax and pressure drops.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Hipertension: 10-40 mg una vez al dia. Insuficiencia cardiaca: iniciar con 2.5-5 mg al dia.",
+    "dosisUsualEn": "Hypertension: 10-40 mg once daily. Heart failure: start with 2.5-5 mg daily.",
+    "efectosSecundariosEs": [
+      "Tos seca persistente",
+      "Mareo",
+      "Dolor de cabeza",
+      "Fatiga",
+      "Niveles altos de potasio"
+    ],
+    "efectosSecundariosEn": [
+      "Persistent dry cough",
+      "Dizziness",
+      "Headache",
+      "Fatigue",
+      "High potassium levels"
+    ],
+    "efectosGravesEs": [
+      "Angioedema (hinchazon de cara, labios, lengua, garganta)",
+      "Falla renal",
+      "Niveles peligrosamente altos de potasio"
+    ],
+    "efectosGravesEn": [
+      "Angioedema (swelling of face, lips, tongue, throat)",
+      "Kidney failure",
+      "Dangerously high potassium levels"
+    ],
+    "interaccionesEs": [
+      "Suplementos de potasio (riesgo de hiperkalemia)",
+      "AINEs (reducen efecto y danan rinones)",
+      "Litio (aumenta niveles)",
+      "Diureticos ahorradores de potasio"
+    ],
+    "interaccionesEn": [
+      "Potassium supplements (hyperkalemia risk)",
+      "NSAIDs (reduce effect and harm kidneys)",
+      "Lithium (increases levels)",
+      "Potassium-sparing diuretics"
+    ],
+    "precaucionesEs": [
+      "Reporte hinchazon de cara o labios inmediatamente - es una emergencia",
+      "La tos seca es comun y no es peligrosa pero puede ser molesta",
+      "No use sustitutos de sal que contengan potasio"
+    ],
+    "precaucionesEn": [
+      "Report swelling of face or lips immediately - it is an emergency",
+      "Dry cough is common and not dangerous but can be bothersome",
+      "Do not use salt substitutes containing potassium"
+    ],
+    "contraindicacionesEs": [
+      "Embarazo (causa dano severo al feto)",
+      "Historial de angioedema",
+      "Uso con aliskiren en diabeticos"
+    ],
+    "contraindicacionesEn": [
+      "Pregnancy (causes severe fetal harm)",
+      "History of angioedema",
+      "Use with aliskiren in diabetics"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADO en el embarazo - puede causar muerte fetal y malformaciones. Evitar durante la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy - can cause fetal death and malformations. Avoid during breastfeeding.",
+    "consejosUsoEs": [
+      "Tome a la misma hora todos los dias",
+      "Si la tos es muy molesta, su medico puede cambiarlo a un ARB (losartan)",
+      "Levantese lentamente para evitar mareos"
+    ],
+    "consejosUsoEn": [
+      "Take at the same time every day",
+      "If cough is very bothersome, your doctor may switch to an ARB (losartan)",
+      "Get up slowly to avoid dizziness"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "cardiovascular",
+      "antihipertensivo",
+      "IECA",
+      "insuficiencia-cardiaca"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "losartan",
+    "nombreGenericoEs": "Losartan",
+    "nombreGenericoEn": "Losartan",
+    "nombresComercialesEs": [
+      "Cozaar",
+      "Losartan"
+    ],
+    "nombresComercialesEn": [
+      "Cozaar"
+    ],
+    "claseEs": "Bloqueador del receptor de angiotensina II (ARB/ARA-II)",
+    "claseEn": "Angiotensin II receptor blocker (ARB)",
+    "paraQueEsEs": "Trata la presion arterial alta, protege los rinones en diabeticos y reduce el riesgo de derrame cerebral. Buena alternativa si la tos del IECA es molesta.",
+    "paraQueEsEn": "Treats high blood pressure, protects kidneys in diabetics, and reduces stroke risk. Good alternative if ACE inhibitor cough is bothersome.",
+    "comoFuncionaEs": "Bloquea directamente los receptores donde actua la angiotensina II, impidiendo que estreche los vasos sanguineos. No causa tos como los IECA.",
+    "comoFuncionaEn": "Directly blocks receptors where angiotensin II acts, preventing blood vessel narrowing. Does not cause cough like ACE inhibitors.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "25-100 mg una vez al dia. Dosis habitual: 50 mg al dia.",
+    "dosisUsualEn": "25-100 mg once daily. Usual dose: 50 mg daily.",
+    "efectosSecundariosEs": [
+      "Mareo",
+      "Dolor de espalda",
+      "Fatiga",
+      "Diarrea",
+      "Congestion nasal"
+    ],
+    "efectosSecundariosEn": [
+      "Dizziness",
+      "Back pain",
+      "Fatigue",
+      "Diarrhea",
+      "Nasal congestion"
+    ],
+    "efectosGravesEs": [
+      "Angioedema (menos comun que con IECA)",
+      "Hiperkalemia",
+      "Falla renal"
+    ],
+    "efectosGravesEn": [
+      "Angioedema (less common than with ACE inhibitors)",
+      "Hyperkalemia",
+      "Kidney failure"
+    ],
+    "interaccionesEs": [
+      "Suplementos de potasio",
+      "AINEs",
+      "Litio",
+      "Diureticos ahorradores de potasio"
+    ],
+    "interaccionesEn": [
+      "Potassium supplements",
+      "NSAIDs",
+      "Lithium",
+      "Potassium-sparing diuretics"
+    ],
+    "precaucionesEs": [
+      "No use durante el embarazo",
+      "Evite sustitutos de sal con potasio",
+      "Levantese lentamente"
+    ],
+    "precaucionesEn": [
+      "Do not use during pregnancy",
+      "Avoid salt substitutes with potassium",
+      "Get up slowly"
+    ],
+    "contraindicacionesEs": [
+      "Embarazo",
+      "Uso con aliskiren en diabeticos",
+      "Alergia a losartan"
+    ],
+    "contraindicacionesEn": [
+      "Pregnancy",
+      "Use with aliskiren in diabetics",
+      "Losartan allergy"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADO en el embarazo. Se desconoce si se excreta en leche materna.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy. Unknown if excreted in breast milk.",
+    "consejosUsoEs": [
+      "Puede tomar con o sin alimentos",
+      "Si se olvido de una dosis, tomela cuando la recuerde, pero no doble la dosis"
+    ],
+    "consejosUsoEn": [
+      "Can take with or without food",
+      "If you missed a dose, take it when you remember, but do not double the dose"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "cardiovascular",
+      "antihipertensivo",
+      "ARB"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "amlodipino",
+    "nombreGenericoEs": "Amlodipino",
+    "nombreGenericoEn": "Amlodipine",
+    "nombresComercialesEs": [
+      "Norvasc",
+      "Amlodipino"
+    ],
+    "nombresComercialesEn": [
+      "Norvasc"
+    ],
+    "claseEs": "Bloqueador de canales de calcio",
+    "claseEn": "Calcium channel blocker",
+    "paraQueEsEs": "Trata la presion arterial alta y el dolor de pecho (angina). Relaja los vasos sanguineos para que la sangre fluya mejor.",
+    "paraQueEsEn": "Treats high blood pressure and chest pain (angina). Relaxes blood vessels so blood flows better.",
+    "comoFuncionaEs": "Bloquea la entrada de calcio en las celulas de los vasos sanguineos, haciendo que se relajen y se ensanchen, lo que baja la presion.",
+    "comoFuncionaEn": "Blocks calcium from entering blood vessel cells, causing them to relax and widen, which lowers pressure.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "2.5-10 mg una vez al dia. Dosis habitual: 5 mg al dia.",
+    "dosisUsualEn": "2.5-10 mg once daily. Usual dose: 5 mg daily.",
+    "efectosSecundariosEs": [
+      "Hinchazon de tobillos/pies",
+      "Mareo",
+      "Rubor facial",
+      "Dolor de cabeza",
+      "Fatiga"
+    ],
+    "efectosSecundariosEn": [
+      "Ankle/foot swelling",
+      "Dizziness",
+      "Facial flushing",
+      "Headache",
+      "Fatigue"
+    ],
+    "efectosGravesEs": [
+      "Presion arterial muy baja",
+      "Angina que empeora al iniciar el tratamiento (raro)",
+      "Reaccion alergica"
+    ],
+    "efectosGravesEn": [
+      "Very low blood pressure",
+      "Angina worsening when starting treatment (rare)",
+      "Allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Simvastatina (limitar dosis a 20 mg)",
+      "Ciclosporina (aumenta niveles)",
+      "Jugo de toronja (aumenta niveles del medicamento)"
+    ],
+    "interaccionesEn": [
+      "Simvastatin (limit dose to 20 mg)",
+      "Cyclosporine (increases levels)",
+      "Grapefruit juice (increases drug levels)"
+    ],
+    "precaucionesEs": [
+      "La hinchazon de tobillos es comun pero no peligrosa - eleve los pies",
+      "Evite jugo de toronja",
+      "No deje de tomar abruptamente"
+    ],
+    "precaucionesEn": [
+      "Ankle swelling is common but not dangerous - elevate feet",
+      "Avoid grapefruit juice",
+      "Do not stop taking abruptly"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a amlodipino",
+      "Estenosis aortica severa",
+      "Shock cardiogenico"
+    ],
+    "contraindicacionesEn": [
+      "Amlodipine allergy",
+      "Severe aortic stenosis",
+      "Cardiogenic shock"
+    ],
+    "embarazoLactanciaEs": "No se recomienda durante el embarazo. Se excreta en leche materna - usar con precaucion.",
+    "embarazoLactanciaEn": "Not recommended during pregnancy. Excreted in breast milk - use with caution.",
+    "consejosUsoEs": [
+      "Tome a la misma hora cada dia",
+      "La hinchazon de tobillos no significa que algo anda mal con el corazon",
+      "Evite la toronja"
+    ],
+    "consejosUsoEn": [
+      "Take at the same time each day",
+      "Ankle swelling does not mean something is wrong with the heart",
+      "Avoid grapefruit"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "cardiovascular",
+      "antihipertensivo",
+      "bloqueador-calcio"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "metoprolol",
+    "nombreGenericoEs": "Metoprolol",
+    "nombreGenericoEn": "Metoprolol",
+    "nombresComercialesEs": [
+      "Lopressor",
+      "Toprol-XL",
+      "Betaloc"
+    ],
+    "nombresComercialesEn": [
+      "Lopressor",
+      "Toprol-XL"
+    ],
+    "claseEs": "Betabloqueador cardioselectivo",
+    "claseEn": "Cardioselective beta-blocker",
+    "paraQueEsEs": "Trata presion alta, insuficiencia cardiaca, angina de pecho, arritmias y previene segundos infartos. Reduce la frecuencia cardiaca.",
+    "paraQueEsEn": "Treats high blood pressure, heart failure, angina, arrhythmias, and prevents second heart attacks. Reduces heart rate.",
+    "comoFuncionaEs": "Bloquea los receptores beta-1 del corazon, haciendo que lata mas lento y con menos fuerza. Esto reduce la presion y el trabajo del corazon.",
+    "comoFuncionaEn": "Blocks beta-1 receptors in the heart, making it beat slower and with less force. This reduces blood pressure and heart workload.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "Tartrato: 25-100 mg dos veces al dia. Succinato (XL): 25-200 mg una vez al dia.",
+    "dosisUsualEn": "Tartrate: 25-100 mg twice daily. Succinate (XL): 25-200 mg once daily.",
+    "efectosSecundariosEs": [
+      "Fatiga",
+      "Mareo",
+      "Manos y pies frios",
+      "Bradicardia",
+      "Diarrea",
+      "Nauseas"
+    ],
+    "efectosSecundariosEn": [
+      "Fatigue",
+      "Dizziness",
+      "Cold hands and feet",
+      "Slow heart rate",
+      "Diarrhea",
+      "Nausea"
+    ],
+    "efectosGravesEs": [
+      "Bradicardia severa",
+      "Bloqueo cardiaco",
+      "Empeoramiento de insuficiencia cardiaca",
+      "Broncoespasmo"
+    ],
+    "efectosGravesEn": [
+      "Severe bradycardia",
+      "Heart block",
+      "Worsening heart failure",
+      "Bronchospasm"
+    ],
+    "interaccionesEs": [
+      "Otros medicamentos que bajan la frecuencia cardiaca",
+      "Verapamilo/diltiazem",
+      "Clonidina (no suspender abruptamente)",
+      "Inhibidores de CYP2D6"
+    ],
+    "interaccionesEn": [
+      "Other heart rate-lowering medications",
+      "Verapamil/diltiazem",
+      "Clonidine (do not stop abruptly)",
+      "CYP2D6 inhibitors"
+    ],
+    "precaucionesEs": [
+      "NUNCA deje de tomar de repente - puede causar crisis cardiaca",
+      "Puede enmascarar sintomas de hipoglucemia en diabeticos",
+      "Precaucion si tiene asma"
+    ],
+    "precaucionesEn": [
+      "NEVER stop taking suddenly - can cause cardiac crisis",
+      "Can mask hypoglycemia symptoms in diabetics",
+      "Caution if you have asthma"
+    ],
+    "contraindicacionesEs": [
+      "Bradicardia severa",
+      "Bloqueo cardiaco",
+      "Shock cardiogenico",
+      "Insuficiencia cardiaca descompensada"
+    ],
+    "contraindicacionesEn": [
+      "Severe bradycardia",
+      "Heart block",
+      "Cardiogenic shock",
+      "Decompensated heart failure"
+    ],
+    "embarazoLactanciaEs": "Usar solo si el beneficio supera el riesgo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if benefit outweighs risk. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome el succinato (XL) con alimentos",
+      "Nunca deje de tomarlo de repente",
+      "Revise su pulso regularmente",
+      "Levantese lentamente"
+    ],
+    "consejosUsoEn": [
+      "Take succinate (XL) with food",
+      "Never stop taking it suddenly",
+      "Check your pulse regularly",
+      "Get up slowly"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "cardiovascular",
+      "betabloqueador",
+      "antihipertensivo",
+      "antiarritmico"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "atenolol",
+    "nombreGenericoEs": "Atenolol",
+    "nombreGenericoEn": "Atenolol",
+    "nombresComercialesEs": [
+      "Tenormin"
+    ],
+    "nombresComercialesEn": [
+      "Tenormin"
+    ],
+    "claseEs": "Betabloqueador cardioselectivo",
+    "claseEn": "Cardioselective beta-blocker",
+    "paraQueEsEs": "Trata presion arterial alta y angina de pecho. Tambien se usa para prevenir migranas y controlar temblor esencial.",
+    "paraQueEsEn": "Treats high blood pressure and angina. Also used to prevent migraines and control essential tremor.",
+    "comoFuncionaEs": "Bloquea selectivamente los receptores beta-1 del corazon, reduciendo la frecuencia cardiaca y la presion arterial.",
+    "comoFuncionaEn": "Selectively blocks beta-1 receptors in the heart, reducing heart rate and blood pressure.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "25-100 mg una vez al dia.",
+    "dosisUsualEn": "25-100 mg once daily.",
+    "efectosSecundariosEs": [
+      "Fatiga",
+      "Manos y pies frios",
+      "Mareo",
+      "Bradicardia",
+      "Depresion"
+    ],
+    "efectosSecundariosEn": [
+      "Fatigue",
+      "Cold hands and feet",
+      "Dizziness",
+      "Slow heart rate",
+      "Depression"
+    ],
+    "efectosGravesEs": [
+      "Bradicardia severa",
+      "Broncoespasmo",
+      "Empeoramiento de insuficiencia cardiaca"
+    ],
+    "efectosGravesEn": [
+      "Severe bradycardia",
+      "Bronchospasm",
+      "Worsening heart failure"
+    ],
+    "interaccionesEs": [
+      "Verapamilo/diltiazem",
+      "Clonidina",
+      "Digoxina",
+      "Otros antihipertensivos"
+    ],
+    "interaccionesEn": [
+      "Verapamil/diltiazem",
+      "Clonidine",
+      "Digoxin",
+      "Other antihypertensives"
+    ],
+    "precaucionesEs": [
+      "No suspender abruptamente",
+      "Ajustar dosis en insuficiencia renal",
+      "Precaucion en diabeticos"
+    ],
+    "precaucionesEn": [
+      "Do not stop abruptly",
+      "Adjust dose in kidney impairment",
+      "Caution in diabetics"
+    ],
+    "contraindicacionesEs": [
+      "Bradicardia severa",
+      "Bloqueo cardiaco",
+      "Asma no controlada"
+    ],
+    "contraindicacionesEn": [
+      "Severe bradycardia",
+      "Heart block",
+      "Uncontrolled asthma"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome a la misma hora cada dia",
+      "No deje de tomarlo de repente",
+      "Monitoree su pulso"
+    ],
+    "consejosUsoEn": [
+      "Take at the same time each day",
+      "Do not stop suddenly",
+      "Monitor your pulse"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "cardiovascular",
+      "betabloqueador",
+      "antihipertensivo"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "atorvastatina",
+    "nombreGenericoEs": "Atorvastatina",
+    "nombreGenericoEn": "Atorvastatin",
+    "nombresComercialesEs": [
+      "Lipitor"
+    ],
+    "nombresComercialesEn": [
+      "Lipitor"
+    ],
+    "claseEs": "Estatina (inhibidor de HMG-CoA reductasa)",
+    "claseEn": "Statin (HMG-CoA reductase inhibitor)",
+    "paraQueEsEs": "Baja el colesterol malo (LDL) y los trigliceridos en la sangre. Reduce el riesgo de infartos y derrames cerebrales.",
+    "paraQueEsEn": "Lowers bad cholesterol (LDL) and triglycerides in the blood. Reduces risk of heart attacks and strokes.",
+    "comoFuncionaEs": "Bloquea una enzima del higado (HMG-CoA reductasa) que el cuerpo necesita para fabricar colesterol. El higado entonces absorbe mas colesterol de la sangre.",
+    "comoFuncionaEn": "Blocks a liver enzyme (HMG-CoA reductase) the body needs to make cholesterol. The liver then absorbs more cholesterol from the blood.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "10-80 mg una vez al dia. Dosis habitual: 20-40 mg al dia.",
+    "dosisUsualEn": "10-80 mg once daily. Usual dose: 20-40 mg daily.",
+    "efectosSecundariosEs": [
+      "Dolor muscular",
+      "Dolor articular",
+      "Diarrea",
+      "Dolor de cabeza",
+      "Nauseas"
+    ],
+    "efectosSecundariosEn": [
+      "Muscle pain",
+      "Joint pain",
+      "Diarrhea",
+      "Headache",
+      "Nausea"
+    ],
+    "efectosGravesEs": [
+      "Rabdomiolisis (destruccion muscular severa)",
+      "Dano hepatico",
+      "Diabetes de nueva aparicion"
+    ],
+    "efectosGravesEn": [
+      "Rhabdomyolysis (severe muscle destruction)",
+      "Liver damage",
+      "New-onset diabetes"
+    ],
+    "interaccionesEs": [
+      "Jugo de toronja (aumenta niveles)",
+      "Gemfibrozil (riesgo de rabdomiolisis)",
+      "Ciclosporina",
+      "Claritromicina"
+    ],
+    "interaccionesEn": [
+      "Grapefruit juice (increases levels)",
+      "Gemfibrozil (rhabdomyolysis risk)",
+      "Cyclosporine",
+      "Clarithromycin"
+    ],
+    "precaucionesEs": [
+      "Reporte dolor muscular inexplicable inmediatamente",
+      "Evite toronja en exceso",
+      "Se necesitan analisis de sangre periodicos"
+    ],
+    "precaucionesEn": [
+      "Report unexplained muscle pain immediately",
+      "Avoid excessive grapefruit",
+      "Periodic blood tests needed"
+    ],
+    "contraindicacionesEs": [
+      "Enfermedad hepatica activa",
+      "Embarazo y lactancia",
+      "Alergia a estatinas"
+    ],
+    "contraindicacionesEn": [
+      "Active liver disease",
+      "Pregnancy and breastfeeding",
+      "Statin allergy"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en el embarazo y la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy and breastfeeding.",
+    "consejosUsoEs": [
+      "Puede tomar a cualquier hora del dia",
+      "El dolor muscular leve es comun pero el dolor severo necesita atencion",
+      "Mantenga la dieta saludable ademas del medicamento"
+    ],
+    "consejosUsoEn": [
+      "Can take at any time of day",
+      "Mild muscle pain is common but severe pain needs attention",
+      "Maintain healthy diet in addition to medication"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "cardiovascular",
+      "estatina",
+      "colesterol"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "rosuvastatina",
+    "nombreGenericoEs": "Rosuvastatina",
+    "nombreGenericoEn": "Rosuvastatin",
+    "nombresComercialesEs": [
+      "Crestor"
+    ],
+    "nombresComercialesEn": [
+      "Crestor"
+    ],
+    "claseEs": "Estatina (inhibidor de HMG-CoA reductasa)",
+    "claseEn": "Statin (HMG-CoA reductase inhibitor)",
+    "paraQueEsEs": "Baja el colesterol LDL y los trigliceridos. Es una de las estatinas mas potentes. Reduce el riesgo cardiovascular.",
+    "paraQueEsEn": "Lowers LDL cholesterol and triglycerides. One of the most potent statins. Reduces cardiovascular risk.",
+    "comoFuncionaEs": "Inhibe la HMG-CoA reductasa en el higado, reduciendo la produccion de colesterol y aumentando la captacion de LDL de la sangre.",
+    "comoFuncionaEn": "Inhibits HMG-CoA reductase in the liver, reducing cholesterol production and increasing LDL uptake from blood.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "5-40 mg una vez al dia. Dosis habitual: 10-20 mg al dia.",
+    "dosisUsualEn": "5-40 mg once daily. Usual dose: 10-20 mg daily.",
+    "efectosSecundariosEs": [
+      "Dolor muscular",
+      "Dolor de cabeza",
+      "Dolor abdominal",
+      "Nauseas",
+      "Debilidad"
+    ],
+    "efectosSecundariosEn": [
+      "Muscle pain",
+      "Headache",
+      "Abdominal pain",
+      "Nausea",
+      "Weakness"
+    ],
+    "efectosGravesEs": [
+      "Rabdomiolisis",
+      "Dano hepatico",
+      "Proteinuria"
+    ],
+    "efectosGravesEn": [
+      "Rhabdomyolysis",
+      "Liver damage",
+      "Proteinuria"
+    ],
+    "interaccionesEs": [
+      "Ciclosporina",
+      "Gemfibrozil",
+      "Anticoagulantes",
+      "Antiacidos (tomar 2 horas aparte)"
+    ],
+    "interaccionesEn": [
+      "Cyclosporine",
+      "Gemfibrozil",
+      "Anticoagulants",
+      "Antacids (take 2 hours apart)"
+    ],
+    "precaucionesEs": [
+      "Reporte dolor muscular inexplicable",
+      "Analisis de funcion hepatica periodicos"
+    ],
+    "precaucionesEn": [
+      "Report unexplained muscle pain",
+      "Periodic liver function tests"
+    ],
+    "contraindicacionesEs": [
+      "Enfermedad hepatica activa",
+      "Embarazo",
+      "Lactancia"
+    ],
+    "contraindicacionesEn": [
+      "Active liver disease",
+      "Pregnancy",
+      "Breastfeeding"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en el embarazo y la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy and breastfeeding.",
+    "consejosUsoEs": [
+      "Puede tomar a cualquier hora con o sin alimentos",
+      "No necesita evitar toronja (menos interaccion que atorvastatina)"
+    ],
+    "consejosUsoEn": [
+      "Can take at any time with or without food",
+      "No need to avoid grapefruit (less interaction than atorvastatin)"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "cardiovascular",
+      "estatina",
+      "colesterol"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "clopidogrel",
+    "nombreGenericoEs": "Clopidogrel",
+    "nombreGenericoEn": "Clopidogrel",
+    "nombresComercialesEs": [
+      "Plavix",
+      "Iscover"
+    ],
+    "nombresComercialesEn": [
+      "Plavix"
+    ],
+    "claseEs": "Antiagregante plaquetario",
+    "claseEn": "Antiplatelet agent",
+    "paraQueEsEs": "Previene coagulos de sangre despues de un infarto, derrame cerebral o colocacion de stent. Evita que las plaquetas se peguen entre si.",
+    "paraQueEsEn": "Prevents blood clots after a heart attack, stroke, or stent placement. Prevents platelets from sticking together.",
+    "comoFuncionaEs": "Bloquea permanentemente un receptor (P2Y12) en las plaquetas, impidiendo que se activen y formen coagulos.",
+    "comoFuncionaEn": "Permanently blocks a receptor (P2Y12) on platelets, preventing them from activating and forming clots.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "75 mg una vez al dia. Despues de stent o infarto: dosis de carga de 300-600 mg.",
+    "dosisUsualEn": "75 mg once daily. After stent or heart attack: loading dose of 300-600 mg.",
+    "efectosSecundariosEs": [
+      "Sangrado facil",
+      "Moretones",
+      "Dolor de estomago",
+      "Diarrea"
+    ],
+    "efectosSecundariosEn": [
+      "Easy bleeding",
+      "Bruising",
+      "Stomach pain",
+      "Diarrhea"
+    ],
+    "efectosGravesEs": [
+      "Sangrado severo que no para",
+      "Purpura trombotica trombocitopenica (PTT)",
+      "Sangrado gastrointestinal"
+    ],
+    "efectosGravesEn": [
+      "Severe bleeding that won't stop",
+      "Thrombotic thrombocytopenic purpura (TTP)",
+      "Gastrointestinal bleeding"
+    ],
+    "interaccionesEs": [
+      "Omeprazol/esomeprazol (reduce eficacia - usar pantoprazol en su lugar)",
+      "AINEs (aumenta sangrado)",
+      "Anticoagulantes"
+    ],
+    "interaccionesEn": [
+      "Omeprazole/esomeprazole (reduces efficacy - use pantoprazole instead)",
+      "NSAIDs (increases bleeding)",
+      "Anticoagulants"
+    ],
+    "precaucionesEs": [
+      "NO deje de tomarlo sin permiso de su cardiologo, especialmente si tiene stent",
+      "Informe a todos sus medicos y dentistas que lo toma",
+      "No use omeprazol - use pantoprazol si necesita protector de estomago"
+    ],
+    "precaucionesEn": [
+      "Do NOT stop taking it without your cardiologist's permission, especially with a stent",
+      "Inform all your doctors and dentists that you take it",
+      "Do not use omeprazole - use pantoprazole if you need stomach protection"
+    ],
+    "contraindicacionesEs": [
+      "Sangrado activo",
+      "Alergia a clopidogrel"
+    ],
+    "contraindicacionesEn": [
+      "Active bleeding",
+      "Clopidogrel allergy"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es absolutamente necesario. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Use only if absolutely necessary. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "No deje de tomarlo sin hablar con su cardiologo",
+      "Use cepillo de dientes suave",
+      "Tenga cuidado con cortaduras",
+      "Informe antes de cualquier cirugia o procedimiento dental"
+    ],
+    "consejosUsoEn": [
+      "Do not stop taking it without talking to your cardiologist",
+      "Use a soft toothbrush",
+      "Be careful with cuts",
+      "Inform before any surgery or dental procedure"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "cardiovascular",
+      "antiagregante",
+      "anticoagulacion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "warfarina",
+    "nombreGenericoEs": "Warfarina",
+    "nombreGenericoEn": "Warfarin",
+    "nombresComercialesEs": [
+      "Coumadin"
+    ],
+    "nombresComercialesEn": [
+      "Coumadin",
+      "Jantoven"
+    ],
+    "claseEs": "Anticoagulante (antagonista de vitamina K)",
+    "claseEn": "Anticoagulant (vitamin K antagonist)",
+    "paraQueEsEs": "Previene y trata coagulos de sangre en las piernas (trombosis venosa profunda), pulmones (embolia pulmonar), y previene derrames cerebrales en personas con fibrilacion auricular o valvulas cardiacas mecanicas.",
+    "paraQueEsEn": "Prevents and treats blood clots in legs (deep vein thrombosis), lungs (pulmonary embolism), and prevents strokes in people with atrial fibrillation or mechanical heart valves.",
+    "comoFuncionaEs": "Bloquea la vitamina K en el higado, que es necesaria para fabricar varios factores de coagulacion. Sin estos factores, la sangre tarda mas en coagularse.",
+    "comoFuncionaEn": "Blocks vitamin K in the liver, which is needed to make several clotting factors. Without these factors, blood takes longer to clot.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Muy variable - individualizada segun el INR. Dosis habitual: 2-10 mg al dia. Requiere analisis de sangre regulares (INR).",
+    "dosisUsualEn": "Highly variable - individualized based on INR. Usual dose: 2-10 mg daily. Requires regular blood tests (INR).",
+    "efectosSecundariosEs": [
+      "Sangrado facil",
+      "Moretones",
+      "Sangrado de encias",
+      "Sangrado nasal"
+    ],
+    "efectosSecundariosEn": [
+      "Easy bleeding",
+      "Bruising",
+      "Gum bleeding",
+      "Nosebleeds"
+    ],
+    "efectosGravesEs": [
+      "Sangrado interno severo",
+      "Sangrado cerebral",
+      "Necrosis cutanea",
+      "Dedo purpura del pie"
+    ],
+    "efectosGravesEn": [
+      "Severe internal bleeding",
+      "Brain bleeding",
+      "Skin necrosis",
+      "Purple toe syndrome"
+    ],
+    "interaccionesEs": [
+      "MUCHOS medicamentos interactuan - siempre consulte antes de tomar algo nuevo",
+      "Vitamina K en alimentos (verduras verdes)",
+      "Antibioticos",
+      "AINEs",
+      "Acetaminofen en dosis altas",
+      "Alcohol"
+    ],
+    "interaccionesEn": [
+      "MANY medications interact - always consult before taking anything new",
+      "Vitamin K in foods (green vegetables)",
+      "Antibiotics",
+      "NSAIDs",
+      "Acetaminophen in high doses",
+      "Alcohol"
+    ],
+    "precaucionesEs": [
+      "Requiere analisis de sangre INR regulares",
+      "Mantenga una dieta consistente en vitamina K (verduras verdes)",
+      "Reporte cualquier sangrado inusual",
+      "Use pulsera de alerta medica"
+    ],
+    "precaucionesEn": [
+      "Requires regular INR blood tests",
+      "Maintain consistent vitamin K diet (green vegetables)",
+      "Report any unusual bleeding",
+      "Wear medical alert bracelet"
+    ],
+    "contraindicacionesEs": [
+      "Embarazo",
+      "Sangrado activo",
+      "Aneurisma cerebral",
+      "Cirugia reciente del sistema nervioso central"
+    ],
+    "contraindicacionesEn": [
+      "Pregnancy",
+      "Active bleeding",
+      "Brain aneurysm",
+      "Recent CNS surgery"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en el embarazo - causa malformaciones fetales. Compatible con la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy - causes fetal malformations. Compatible with breastfeeding.",
+    "consejosUsoEs": [
+      "Tome a la misma hora todos los dias",
+      "No cambie su dieta drasticamente",
+      "No necesita eliminar verduras verdes - solo comer la misma cantidad",
+      "Consulte antes de tomar CUALQUIER medicamento nuevo, incluso los naturales"
+    ],
+    "consejosUsoEn": [
+      "Take at the same time every day",
+      "Do not change your diet drastically",
+      "You do not need to eliminate green vegetables - just eat the same amount",
+      "Consult before taking ANY new medication, even natural ones"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "cardiovascular",
+      "anticoagulante"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "apixaban",
+    "nombreGenericoEs": "Apixaban",
+    "nombreGenericoEn": "Apixaban",
+    "nombresComercialesEs": [
+      "Eliquis"
+    ],
+    "nombresComercialesEn": [
+      "Eliquis"
+    ],
+    "claseEs": "Anticoagulante oral directo (inhibidor del factor Xa)",
+    "claseEn": "Direct oral anticoagulant (factor Xa inhibitor)",
+    "paraQueEsEs": "Previene derrames cerebrales en personas con fibrilacion auricular y trata/previene coagulos en las piernas y pulmones. No requiere analisis de sangre regulares como la warfarina.",
+    "paraQueEsEn": "Prevents strokes in people with atrial fibrillation and treats/prevents clots in legs and lungs. Does not require regular blood tests like warfarin.",
+    "comoFuncionaEs": "Bloquea directamente el factor Xa de la coagulacion, que es esencial para formar coagulos. Esto hace la sangre menos propensa a coagularse.",
+    "comoFuncionaEn": "Directly blocks clotting factor Xa, which is essential for forming clots. This makes blood less likely to clot.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Fibrilacion auricular: 5 mg dos veces al dia (2.5 mg dos veces al dia en ciertos pacientes). TVP/EP: 10 mg dos veces al dia por 7 dias, luego 5 mg dos veces al dia.",
+    "dosisUsualEn": "Atrial fibrillation: 5 mg twice daily (2.5 mg twice daily in certain patients). DVT/PE: 10 mg twice daily for 7 days, then 5 mg twice daily.",
+    "efectosSecundariosEs": [
+      "Sangrado facil",
+      "Moretones",
+      "Nauseas",
+      "Anemia"
+    ],
+    "efectosSecundariosEn": [
+      "Easy bleeding",
+      "Bruising",
+      "Nausea",
+      "Anemia"
+    ],
+    "efectosGravesEs": [
+      "Sangrado severo",
+      "Sangrado gastrointestinal",
+      "Sangrado cerebral"
+    ],
+    "efectosGravesEn": [
+      "Severe bleeding",
+      "Gastrointestinal bleeding",
+      "Brain bleeding"
+    ],
+    "interaccionesEs": [
+      "Anticoagulantes y antiplaquetarios (aumentan sangrado)",
+      "Ketoconazol, itraconazol (aumentan niveles)",
+      "Rifampicina (reduce eficacia)",
+      "AINEs"
+    ],
+    "interaccionesEn": [
+      "Anticoagulants and antiplatelets (increase bleeding)",
+      "Ketoconazole, itraconazole (increase levels)",
+      "Rifampin (reduces efficacy)",
+      "NSAIDs"
+    ],
+    "precaucionesEs": [
+      "NO omita dosis - aumenta riesgo de coagulos",
+      "Tome las dos dosis diarias",
+      "No tiene antidoto facilmente disponible (aunque existe andexanet alfa)"
+    ],
+    "precaucionesEn": [
+      "Do NOT skip doses - increases clot risk",
+      "Take both daily doses",
+      "Does not have easily available antidote (although andexanet alfa exists)"
+    ],
+    "contraindicacionesEs": [
+      "Sangrado activo",
+      "Valvulas cardiacas mecanicas",
+      "Alergia a apixaban"
+    ],
+    "contraindicacionesEn": [
+      "Active bleeding",
+      "Mechanical heart valves",
+      "Apixaban allergy"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Tome dos veces al dia, aproximadamente cada 12 horas",
+      "No omita dosis",
+      "Si no puede tragar, puede triturar y mezclar con agua o jugo de manzana",
+      "Ventaja: no necesita analisis de sangre frecuentes como warfarina"
+    ],
+    "consejosUsoEn": [
+      "Take twice daily, approximately every 12 hours",
+      "Do not skip doses",
+      "If you cannot swallow, can crush and mix with water or apple juice",
+      "Advantage: does not need frequent blood tests like warfarin"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "cardiovascular",
+      "anticoagulante"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "furosemida",
+    "nombreGenericoEs": "Furosemida",
+    "nombreGenericoEn": "Furosemide",
+    "nombresComercialesEs": [
+      "Lasix",
+      "Furosemida"
+    ],
+    "nombresComercialesEn": [
+      "Lasix"
+    ],
+    "claseEs": "Diuretico de asa",
+    "claseEn": "Loop diuretic",
+    "paraQueEsEs": "Elimina el exceso de liquido del cuerpo en personas con insuficiencia cardiaca, enfermedad hepatica o renal. Tambien trata la presion arterial alta.",
+    "paraQueEsEn": "Removes excess fluid from the body in people with heart failure, liver disease, or kidney disease. Also treats high blood pressure.",
+    "comoFuncionaEs": "Actua en los rinones bloqueando la reabsorcion de sal y agua en el asa de Henle, causando que orine mas y eliminando el exceso de liquido.",
+    "comoFuncionaEn": "Acts in the kidneys blocking salt and water reabsorption in the loop of Henle, causing you to urinate more and eliminating excess fluid.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "20-80 mg una o dos veces al dia. Puede aumentarse segun necesidad. Maximo: 600 mg/dia.",
+    "dosisUsualEn": "20-80 mg once or twice daily. May be increased as needed. Maximum: 600 mg/day.",
+    "efectosSecundariosEs": [
+      "Aumento de la orina",
+      "Deshidratacion",
+      "Mareo",
+      "Calambres musculares",
+      "Debilidad"
+    ],
+    "efectosSecundariosEn": [
+      "Increased urination",
+      "Dehydration",
+      "Dizziness",
+      "Muscle cramps",
+      "Weakness"
+    ],
+    "efectosGravesEs": [
+      "Desequilibrio electrolitico severo (potasio bajo)",
+      "Sordera (a dosis altas)",
+      "Deshidratacion severa",
+      "Gota"
+    ],
+    "efectosGravesEn": [
+      "Severe electrolyte imbalance (low potassium)",
+      "Hearing loss (at high doses)",
+      "Severe dehydration",
+      "Gout"
+    ],
+    "interaccionesEs": [
+      "AINEs (reducen efecto diuretico)",
+      "Aminoglucosidos (aumenta riesgo de sordera)",
+      "Digoxina (hipokalemia aumenta toxicidad)",
+      "Litio (aumenta niveles)"
+    ],
+    "interaccionesEn": [
+      "NSAIDs (reduce diuretic effect)",
+      "Aminoglycosides (increases hearing loss risk)",
+      "Digoxin (hypokalemia increases toxicity)",
+      "Lithium (increases levels)"
+    ],
+    "precaucionesEs": [
+      "Pesese diariamente - reporte aumento de mas de 1 kg/dia",
+      "Tome por la manana para evitar levantarse por la noche a orinar",
+      "Puede necesitar suplemento de potasio"
+    ],
+    "precaucionesEn": [
+      "Weigh yourself daily - report gain of more than 2 lbs/day",
+      "Take in the morning to avoid getting up at night to urinate",
+      "May need potassium supplement"
+    ],
+    "contraindicacionesEs": [
+      "Anuria (no produccion de orina)",
+      "Alergia a furosemida o sulfonamidas",
+      "Deshidratacion severa"
+    ],
+    "contraindicacionesEn": [
+      "Anuria (no urine production)",
+      "Allergy to furosemide or sulfonamides",
+      "Severe dehydration"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario en el embarazo. Se excreta en leche materna y puede reducir la produccion de leche.",
+    "embarazoLactanciaEn": "Use only if necessary in pregnancy. Excreted in breast milk and may reduce milk production.",
+    "consejosUsoEs": [
+      "Tome por la manana",
+      "Coma alimentos ricos en potasio (bananas, naranjas)",
+      "Pesese todos los dias a la misma hora",
+      "Levantese lentamente"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning",
+      "Eat potassium-rich foods (bananas, oranges)",
+      "Weigh yourself every day at the same time",
+      "Get up slowly"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz. La solucion oral puede requerir refrigeracion.",
+    "almacenamientoEn": "Room temperature, protect from light. Oral solution may require refrigeration.",
+    "categorias": [
+      "cardiovascular",
+      "diuretico",
+      "insuficiencia-cardiaca"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "hidroclorotiazida",
+    "nombreGenericoEs": "Hidroclorotiazida",
+    "nombreGenericoEn": "Hydrochlorothiazide",
+    "nombresComercialesEs": [
+      "Microzide",
+      "HydroDIURIL"
+    ],
+    "nombresComercialesEn": [
+      "Microzide",
+      "HydroDIURIL"
+    ],
+    "claseEs": "Diuretico tiazidico",
+    "claseEn": "Thiazide diuretic",
+    "paraQueEsEs": "Trata la presion arterial alta y la retencion de liquidos (edema). Es uno de los diureticos mas recetados para la presion.",
+    "paraQueEsEn": "Treats high blood pressure and fluid retention (edema). One of the most prescribed diuretics for blood pressure.",
+    "comoFuncionaEs": "Actua en los rinones impidiendo la reabsorcion de sodio y agua, lo que aumenta la produccion de orina y baja la presion arterial.",
+    "comoFuncionaEn": "Acts in the kidneys preventing sodium and water reabsorption, which increases urine production and lowers blood pressure.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula"
+    ],
+    "dosisUsualEs": "12.5-50 mg una vez al dia.",
+    "dosisUsualEn": "12.5-50 mg once daily.",
+    "efectosSecundariosEs": [
+      "Aumento de orina",
+      "Mareo",
+      "Sensibilidad al sol",
+      "Niveles bajos de potasio",
+      "Aumento de azucar en sangre"
+    ],
+    "efectosSecundariosEn": [
+      "Increased urination",
+      "Dizziness",
+      "Sun sensitivity",
+      "Low potassium levels",
+      "Increased blood sugar"
+    ],
+    "efectosGravesEs": [
+      "Hipokalemia severa",
+      "Hiponatremia",
+      "Reacciones alergicas (contiene sulfonamida)",
+      "Pancreatitis"
+    ],
+    "efectosGravesEn": [
+      "Severe hypokalemia",
+      "Hyponatremia",
+      "Allergic reactions (contains sulfonamide)",
+      "Pancreatitis"
+    ],
+    "interaccionesEs": [
+      "AINEs (reducen efecto)",
+      "Litio (aumenta niveles)",
+      "Digoxina (mayor toxicidad si potasio bajo)",
+      "Medicamentos para diabetes"
+    ],
+    "interaccionesEn": [
+      "NSAIDs (reduce effect)",
+      "Lithium (increases levels)",
+      "Digoxin (greater toxicity if potassium low)",
+      "Diabetes medications"
+    ],
+    "precaucionesEs": [
+      "Use protector solar",
+      "Monitoree electrolitos",
+      "Tome por la manana",
+      "Puede empeorar gota y diabetes"
+    ],
+    "precaucionesEn": [
+      "Use sunscreen",
+      "Monitor electrolytes",
+      "Take in the morning",
+      "May worsen gout and diabetes"
+    ],
+    "contraindicacionesEs": [
+      "Anuria",
+      "Alergia a sulfonamidas",
+      "Insuficiencia renal severa"
+    ],
+    "contraindicacionesEn": [
+      "Anuria",
+      "Sulfonamide allergy",
+      "Severe kidney failure"
+    ],
+    "embarazoLactanciaEs": "Evitar en el embarazo si es posible. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Avoid in pregnancy if possible. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana",
+      "Use protector solar - la sensibilidad al sol es comun",
+      "Coma alimentos ricos en potasio"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning",
+      "Use sunscreen - sun sensitivity is common",
+      "Eat potassium-rich foods"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "cardiovascular",
+      "diuretico",
+      "antihipertensivo"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "espironolactona",
+    "nombreGenericoEs": "Espironolactona",
+    "nombreGenericoEn": "Spironolactone",
+    "nombresComercialesEs": [
+      "Aldactone"
+    ],
+    "nombresComercialesEn": [
+      "Aldactone",
+      "CaroSpir"
+    ],
+    "claseEs": "Diuretico ahorrador de potasio (antagonista de aldosterona)",
+    "claseEn": "Potassium-sparing diuretic (aldosterone antagonist)",
+    "paraQueEsEs": "Trata insuficiencia cardiaca, presion alta resistente, exceso de liquido por cirrosis hepatica (ascitis) y acne hormonal/hirsutismo en mujeres.",
+    "paraQueEsEn": "Treats heart failure, resistant high blood pressure, excess fluid from liver cirrhosis (ascites), and hormonal acne/hirsutism in women.",
+    "comoFuncionaEs": "Bloquea la hormona aldosterona en los rinones, lo que causa eliminacion de sodio y agua pero conserva el potasio. Tambien tiene efectos antiandrogenos.",
+    "comoFuncionaEn": "Blocks the hormone aldosterone in the kidneys, causing sodium and water excretion while conserving potassium. Also has anti-androgen effects.",
+    "formasPresentacion": [
+      "Tableta",
+      "Suspension oral"
+    ],
+    "dosisUsualEs": "Insuficiencia cardiaca: 12.5-50 mg al dia. Hipertension: 25-100 mg al dia. Acne: 50-200 mg al dia.",
+    "dosisUsualEn": "Heart failure: 12.5-50 mg daily. Hypertension: 25-100 mg daily. Acne: 50-200 mg daily.",
+    "efectosSecundariosEs": [
+      "Aumento de potasio",
+      "Crecimiento de pechos en hombres (ginecomastia)",
+      "Irregularidades menstruales",
+      "Mareo",
+      "Nauseas"
+    ],
+    "efectosSecundariosEn": [
+      "Increased potassium",
+      "Breast growth in men (gynecomastia)",
+      "Menstrual irregularities",
+      "Dizziness",
+      "Nausea"
+    ],
+    "efectosGravesEs": [
+      "Hiperkalemia severa (puede ser mortal)",
+      "Deshidratacion",
+      "Insuficiencia renal"
+    ],
+    "efectosGravesEn": [
+      "Severe hyperkalemia (can be fatal)",
+      "Dehydration",
+      "Kidney failure"
+    ],
+    "interaccionesEs": [
+      "Suplementos de potasio (PELIGRO de hiperkalemia)",
+      "IECA/ARBs (aumentan potasio)",
+      "AINEs",
+      "Litio",
+      "Digoxina"
+    ],
+    "interaccionesEn": [
+      "Potassium supplements (DANGER of hyperkalemia)",
+      "ACE inhibitors/ARBs (increase potassium)",
+      "NSAIDs",
+      "Lithium",
+      "Digoxin"
+    ],
+    "precaucionesEs": [
+      "NO use suplementos de potasio ni sustitutos de sal",
+      "Se necesitan analisis de potasio regulares",
+      "Puede causar cambios hormonales"
+    ],
+    "precaucionesEn": [
+      "Do NOT use potassium supplements or salt substitutes",
+      "Regular potassium tests needed",
+      "May cause hormonal changes"
+    ],
+    "contraindicacionesEs": [
+      "Insuficiencia renal severa",
+      "Hiperkalemia",
+      "Enfermedad de Addison"
+    ],
+    "contraindicacionesEn": [
+      "Severe kidney failure",
+      "Hyperkalemia",
+      "Addison's disease"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo (efectos antiandrogenos pueden afectar al feto masculino). Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy (anti-androgen effects may affect male fetus). Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome con alimentos para mejorar absorcion",
+      "Evite alimentos muy altos en potasio",
+      "No use sustitutos de sal",
+      "Sea paciente con el acne - puede tardar meses en ver resultados"
+    ],
+    "consejosUsoEn": [
+      "Take with food to improve absorption",
+      "Avoid foods very high in potassium",
+      "Do not use salt substitutes",
+      "Be patient with acne - it may take months to see results"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "cardiovascular",
+      "diuretico",
+      "insuficiencia-cardiaca",
+      "hormonal"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "metformina",
+    "nombreGenericoEs": "Metformina",
+    "nombreGenericoEn": "Metformin",
+    "nombresComercialesEs": [
+      "Glucophage",
+      "Glucofage"
+    ],
+    "nombresComercialesEn": [
+      "Glucophage",
+      "Glumetza",
+      "Fortamet"
+    ],
+    "claseEs": "Antidiabetico - Biguanida",
+    "claseEn": "Antidiabetic - Biguanide",
+    "paraQueEsEs": "Es el primer medicamento que se receta para la diabetes tipo 2. Baja el azucar en la sangre y puede ayudar con la perdida de peso.",
+    "paraQueEsEn": "It is the first medication prescribed for type 2 diabetes. Lowers blood sugar and may help with weight loss.",
+    "comoFuncionaEs": "Reduce la cantidad de azucar que produce el higado y mejora la respuesta del cuerpo a la insulina. No causa bajones de azucar por si sola.",
+    "comoFuncionaEn": "Reduces the amount of sugar the liver produces and improves the body's response to insulin. Does not cause low blood sugar by itself.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Inicio: 500 mg una o dos veces al dia con alimentos. Dosis habitual: 1500-2000 mg al dia dividido en dosis.",
+    "dosisUsualEn": "Start: 500 mg once or twice daily with food. Usual dose: 1500-2000 mg daily divided into doses.",
+    "efectosSecundariosEs": [
+      "Diarrea",
+      "Nauseas",
+      "Dolor de estomago",
+      "Sabor metalico",
+      "Gases"
+    ],
+    "efectosSecundariosEn": [
+      "Diarrhea",
+      "Nausea",
+      "Stomach pain",
+      "Metallic taste",
+      "Gas"
+    ],
+    "efectosGravesEs": [
+      "Acidosis lactica (rara pero grave)",
+      "Deficiencia de vitamina B12 a largo plazo"
+    ],
+    "efectosGravesEn": [
+      "Lactic acidosis (rare but serious)",
+      "Long-term vitamin B12 deficiency"
+    ],
+    "interaccionesEs": [
+      "Alcohol (aumenta riesgo de acidosis lactica)",
+      "Medios de contraste yodados (suspender temporalmente)",
+      "Inhibidores de la anhidrasa carbonica"
+    ],
+    "interaccionesEn": [
+      "Alcohol (increases lactic acidosis risk)",
+      "Iodinated contrast media (temporarily discontinue)",
+      "Carbonic anhydrase inhibitors"
+    ],
+    "precaucionesEs": [
+      "Tome con alimentos para reducir problemas de estomago",
+      "Suspender antes de estudios con contraste",
+      "Informar si tiene problemas renales"
+    ],
+    "precaucionesEn": [
+      "Take with food to reduce stomach problems",
+      "Discontinue before contrast studies",
+      "Inform if you have kidney problems"
+    ],
+    "contraindicacionesEs": [
+      "Insuficiencia renal severa (TFG menos de 30)",
+      "Acidosis metabolica aguda",
+      "Cetoacidosis diabetica"
+    ],
+    "contraindicacionesEn": [
+      "Severe kidney failure (GFR less than 30)",
+      "Acute metabolic acidosis",
+      "Diabetic ketoacidosis"
+    ],
+    "embarazoLactanciaEs": "Se usa en el embarazo para diabetes gestacional bajo supervision. Se excreta en leche materna en cantidades minimas.",
+    "embarazoLactanciaEn": "Used in pregnancy for gestational diabetes under supervision. Excreted in breast milk in minimal amounts.",
+    "consejosUsoEs": [
+      "Comience con dosis baja y aumente gradualmente para reducir molestias gastrointestinales",
+      "La version de liberacion prolongada causa menos diarrea",
+      "No causa bajones de azucar por si sola"
+    ],
+    "consejosUsoEn": [
+      "Start with low dose and increase gradually to reduce GI discomfort",
+      "Extended-release version causes less diarrhea",
+      "Does not cause low blood sugar by itself"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "insulina-glargina",
+    "nombreGenericoEs": "Insulina Glargina",
+    "nombreGenericoEn": "Insulin Glargine",
+    "nombresComercialesEs": [
+      "Lantus",
+      "Basaglar",
+      "Toujeo"
+    ],
+    "nombresComercialesEn": [
+      "Lantus",
+      "Basaglar",
+      "Toujeo"
+    ],
+    "claseEs": "Insulina de accion prolongada (basal)",
+    "claseEn": "Long-acting (basal) insulin",
+    "paraQueEsEs": "Proporciona un nivel constante de insulina durante 24 horas para controlar el azucar en sangre en diabetes tipo 1 y tipo 2.",
+    "paraQueEsEn": "Provides a constant level of insulin for 24 hours to control blood sugar in type 1 and type 2 diabetes.",
+    "comoFuncionaEs": "Es una insulina modificada que se absorbe lentamente y dura todo el dia, imitando la produccion natural de insulina del cuerpo entre comidas.",
+    "comoFuncionaEn": "It is a modified insulin that is slowly absorbed and lasts all day, mimicking the body's natural insulin production between meals.",
+    "formasPresentacion": [
+      "Pluma inyectable",
+      "Vial para inyeccion"
+    ],
+    "dosisUsualEs": "Muy individualizada. Tipo 2: iniciar con 10 unidades al dia. Se ajusta segun niveles de azucar.",
+    "dosisUsualEn": "Highly individualized. Type 2: start with 10 units daily. Adjusted based on blood sugar levels.",
+    "efectosSecundariosEs": [
+      "Hipoglucemia (bajo nivel de azucar)",
+      "Aumento de peso",
+      "Reacciones en sitio de inyeccion",
+      "Lipodistrofia"
+    ],
+    "efectosSecundariosEn": [
+      "Hypoglycemia (low blood sugar)",
+      "Weight gain",
+      "Injection site reactions",
+      "Lipodystrophy"
+    ],
+    "efectosGravesEs": [
+      "Hipoglucemia severa (puede causar convulsiones, perdida de conciencia)",
+      "Reaccion alergica severa",
+      "Hipokalemia"
+    ],
+    "efectosGravesEn": [
+      "Severe hypoglycemia (can cause seizures, loss of consciousness)",
+      "Severe allergic reaction",
+      "Hypokalemia"
+    ],
+    "interaccionesEs": [
+      "Otros medicamentos que bajan el azucar",
+      "Betabloqueadores (enmascaran sintomas de hipoglucemia)",
+      "Alcohol (aumenta riesgo de hipoglucemia)",
+      "Corticosteroides (aumentan azucar)"
+    ],
+    "interaccionesEn": [
+      "Other blood sugar-lowering medications",
+      "Beta-blockers (mask hypoglycemia symptoms)",
+      "Alcohol (increases hypoglycemia risk)",
+      "Corticosteroids (increase blood sugar)"
+    ],
+    "precaucionesEs": [
+      "Rote los sitios de inyeccion",
+      "Sepa reconocer y tratar la hipoglucemia",
+      "No mezcle con otras insulinas en la misma jeringa",
+      "Lleve siempre glucosa de emergencia"
+    ],
+    "precaucionesEn": [
+      "Rotate injection sites",
+      "Know how to recognize and treat hypoglycemia",
+      "Do not mix with other insulins in the same syringe",
+      "Always carry emergency glucose"
+    ],
+    "contraindicacionesEs": [
+      "Hipoglucemia activa",
+      "Alergia a insulina glargina"
+    ],
+    "contraindicacionesEn": [
+      "Active hypoglycemia",
+      "Insulin glargine allergy"
+    ],
+    "embarazoLactanciaEs": "Se puede usar en el embarazo bajo supervision estricta. La insulina no pasa a la leche materna de forma significativa.",
+    "embarazoLactanciaEn": "Can be used in pregnancy under strict supervision. Insulin does not pass into breast milk significantly.",
+    "consejosUsoEs": [
+      "Inyecte a la misma hora cada dia",
+      "Rote sitios: abdomen, muslo, brazo",
+      "No agite la pluma - puede girarla suavemente",
+      "No inyecte en areas con lipodistrofia"
+    ],
+    "consejosUsoEn": [
+      "Inject at the same time each day",
+      "Rotate sites: abdomen, thigh, arm",
+      "Do not shake the pen - can gently roll it",
+      "Do not inject into lipodystrophy areas"
+    ],
+    "almacenamientoEs": "Sin abrir: refrigerar (2-8 grados C). En uso: temperatura ambiente por hasta 28 dias. NUNCA congelar.",
+    "almacenamientoEn": "Unopened: refrigerate (2-8 degrees C). In use: room temperature for up to 28 days. NEVER freeze.",
+    "categorias": [
+      "diabetes",
+      "insulina",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "insulina-lispro",
+    "nombreGenericoEs": "Insulina Lispro",
+    "nombreGenericoEn": "Insulin Lispro",
+    "nombresComercialesEs": [
+      "Humalog",
+      "Admelog"
+    ],
+    "nombresComercialesEn": [
+      "Humalog",
+      "Admelog"
+    ],
+    "claseEs": "Insulina de accion rapida",
+    "claseEn": "Rapid-acting insulin",
+    "paraQueEsEs": "Controla el azucar en sangre durante las comidas. Se inyecta justo antes de comer para cubrir el aumento de azucar de los alimentos.",
+    "paraQueEsEn": "Controls blood sugar during meals. Injected just before eating to cover the blood sugar rise from food.",
+    "comoFuncionaEs": "Es una insulina modificada que actua muy rapido (en 15 minutos) para bajar el azucar que sube al comer.",
+    "comoFuncionaEn": "It is a modified insulin that acts very quickly (within 15 minutes) to lower blood sugar that rises when eating.",
+    "formasPresentacion": [
+      "Pluma inyectable",
+      "Vial para inyeccion"
+    ],
+    "dosisUsualEs": "Individualizada. Se calcula segun carbohidratos consumidos y nivel de azucar actual. Inyectar 15 minutos antes de comer.",
+    "dosisUsualEn": "Individualized. Calculated based on carbohydrates consumed and current blood sugar level. Inject 15 minutes before eating.",
+    "efectosSecundariosEs": [
+      "Hipoglucemia",
+      "Reacciones en sitio de inyeccion",
+      "Aumento de peso",
+      "Lipodistrofia"
+    ],
+    "efectosSecundariosEn": [
+      "Hypoglycemia",
+      "Injection site reactions",
+      "Weight gain",
+      "Lipodystrophy"
+    ],
+    "efectosGravesEs": [
+      "Hipoglucemia severa",
+      "Hipokalemia",
+      "Reaccion alergica"
+    ],
+    "efectosGravesEn": [
+      "Severe hypoglycemia",
+      "Hypokalemia",
+      "Allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Otros hipoglucemiantes",
+      "Betabloqueadores",
+      "Alcohol",
+      "Corticosteroides"
+    ],
+    "interaccionesEn": [
+      "Other hypoglycemics",
+      "Beta-blockers",
+      "Alcohol",
+      "Corticosteroids"
+    ],
+    "precaucionesEs": [
+      "DEBE comer despues de inyectarse",
+      "Lleve siempre glucosa de emergencia",
+      "Sepa los sintomas de hipoglucemia"
+    ],
+    "precaucionesEn": [
+      "MUST eat after injecting",
+      "Always carry emergency glucose",
+      "Know hypoglycemia symptoms"
+    ],
+    "contraindicacionesEs": [
+      "Hipoglucemia activa",
+      "Alergia a insulina lispro"
+    ],
+    "contraindicacionesEn": [
+      "Active hypoglycemia",
+      "Insulin lispro allergy"
+    ],
+    "embarazoLactanciaEs": "Se puede usar en el embarazo. No pasa significativamente a la leche materna.",
+    "embarazoLactanciaEn": "Can be used in pregnancy. Does not pass significantly into breast milk.",
+    "consejosUsoEs": [
+      "Inyecte 15 minutos antes de comer",
+      "Siempre tenga comida disponible despues de inyectarse",
+      "Rote sitios de inyeccion"
+    ],
+    "consejosUsoEn": [
+      "Inject 15 minutes before eating",
+      "Always have food available after injecting",
+      "Rotate injection sites"
+    ],
+    "almacenamientoEs": "Sin abrir: refrigerar. En uso: temperatura ambiente por hasta 28 dias. No congelar.",
+    "almacenamientoEn": "Unopened: refrigerate. In use: room temperature for up to 28 days. Do not freeze.",
+    "categorias": [
+      "diabetes",
+      "insulina",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "glipizida",
+    "nombreGenericoEs": "Glipizida",
+    "nombreGenericoEn": "Glipizide",
+    "nombresComercialesEs": [
+      "Glucotrol"
+    ],
+    "nombresComercialesEn": [
+      "Glucotrol",
+      "Glucotrol XL"
+    ],
+    "claseEs": "Antidiabetico - Sulfonilurea",
+    "claseEn": "Antidiabetic - Sulfonylurea",
+    "paraQueEsEs": "Estimula al pancreas para producir mas insulina. Se usa en diabetes tipo 2 cuando la metformina sola no es suficiente.",
+    "paraQueEsEn": "Stimulates the pancreas to produce more insulin. Used in type 2 diabetes when metformin alone is not enough.",
+    "comoFuncionaEs": "Actua sobre las celulas beta del pancreas para que liberen mas insulina, lo que baja el azucar en la sangre.",
+    "comoFuncionaEn": "Acts on pancreatic beta cells to release more insulin, which lowers blood sugar.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada"
+    ],
+    "dosisUsualEs": "Inicio: 5 mg al dia, 30 minutos antes del desayuno. Maximo: 40 mg al dia.",
+    "dosisUsualEn": "Start: 5 mg daily, 30 minutes before breakfast. Maximum: 40 mg daily.",
+    "efectosSecundariosEs": [
+      "Hipoglucemia",
+      "Aumento de peso",
+      "Nauseas",
+      "Mareo",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Hypoglycemia",
+      "Weight gain",
+      "Nausea",
+      "Dizziness",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Hipoglucemia severa",
+      "Reacciones hematologicas (raro)",
+      "Ictericia"
+    ],
+    "efectosGravesEn": [
+      "Severe hypoglycemia",
+      "Hematologic reactions (rare)",
+      "Jaundice"
+    ],
+    "interaccionesEs": [
+      "Alcohol (aumenta hipoglucemia)",
+      "AINEs (aumenta efecto)",
+      "Betabloqueadores (enmascaran hipoglucemia)",
+      "Fluoroquinolonas"
+    ],
+    "interaccionesEn": [
+      "Alcohol (increases hypoglycemia)",
+      "NSAIDs (increases effect)",
+      "Beta-blockers (mask hypoglycemia)",
+      "Fluoroquinolones"
+    ],
+    "precaucionesEs": [
+      "Tome 30 minutos antes de las comidas",
+      "Coma regularmente - no salte comidas",
+      "Lleve siempre dulces o glucosa para emergencias"
+    ],
+    "precaucionesEn": [
+      "Take 30 minutes before meals",
+      "Eat regularly - do not skip meals",
+      "Always carry candy or glucose for emergencies"
+    ],
+    "contraindicacionesEs": [
+      "Diabetes tipo 1",
+      "Cetoacidosis diabetica",
+      "Alergia a sulfonilureas"
+    ],
+    "contraindicacionesEn": [
+      "Type 1 diabetes",
+      "Diabetic ketoacidosis",
+      "Sulfonylurea allergy"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo (usar insulina). Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy (use insulin). Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Tome 30 minutos antes del desayuno",
+      "No salte comidas",
+      "Siempre lleve tabletas de glucosa"
+    ],
+    "consejosUsoEn": [
+      "Take 30 minutes before breakfast",
+      "Do not skip meals",
+      "Always carry glucose tablets"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "sitagliptina",
+    "nombreGenericoEs": "Sitagliptina",
+    "nombreGenericoEn": "Sitagliptin",
+    "nombresComercialesEs": [
+      "Januvia"
+    ],
+    "nombresComercialesEn": [
+      "Januvia"
+    ],
+    "claseEs": "Inhibidor de DPP-4 (gliptina)",
+    "claseEn": "DPP-4 inhibitor (gliptin)",
+    "paraQueEsEs": "Ayuda a controlar el azucar en sangre en diabetes tipo 2. No causa hipoglucemia ni aumento de peso significativo.",
+    "paraQueEsEn": "Helps control blood sugar in type 2 diabetes. Does not cause hypoglycemia or significant weight gain.",
+    "comoFuncionaEs": "Bloquea la enzima DPP-4, lo que aumenta las hormonas incretinas que estimulan la liberacion de insulina despues de comer.",
+    "comoFuncionaEn": "Blocks the DPP-4 enzyme, which increases incretin hormones that stimulate insulin release after eating.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "100 mg una vez al dia. Ajustar en insuficiencia renal.",
+    "dosisUsualEn": "100 mg once daily. Adjust in kidney impairment.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Congestion nasal",
+      "Dolor de garganta",
+      "Dolor articular"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Nasal congestion",
+      "Sore throat",
+      "Joint pain"
+    ],
+    "efectosGravesEs": [
+      "Pancreatitis",
+      "Reacciones alergicas graves",
+      "Dolor articular severo"
+    ],
+    "efectosGravesEn": [
+      "Pancreatitis",
+      "Severe allergic reactions",
+      "Severe joint pain"
+    ],
+    "interaccionesEs": [
+      "Digoxina (monitorear)",
+      "Insulina o sulfonilureas (puede necesitar reducir dosis para evitar hipoglucemia)"
+    ],
+    "interaccionesEn": [
+      "Digoxin (monitor)",
+      "Insulin or sulfonylureas (may need dose reduction to avoid hypoglycemia)"
+    ],
+    "precaucionesEs": [
+      "Reporte dolor abdominal severo (posible pancreatitis)",
+      "Ajustar dosis si tiene problemas renales"
+    ],
+    "precaucionesEn": [
+      "Report severe abdominal pain (possible pancreatitis)",
+      "Adjust dose if you have kidney problems"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a sitagliptina",
+      "Historial de pancreatitis con DPP-4"
+    ],
+    "contraindicacionesEn": [
+      "Sitagliptin allergy",
+      "History of pancreatitis with DPP-4"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Puede tomar con o sin alimentos",
+      "Bajo riesgo de hipoglucemia cuando se usa sola",
+      "No causa aumento de peso"
+    ],
+    "consejosUsoEn": [
+      "Can take with or without food",
+      "Low risk of hypoglycemia when used alone",
+      "Does not cause weight gain"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "empagliflozina",
+    "nombreGenericoEs": "Empagliflozina",
+    "nombreGenericoEn": "Empagliflozin",
+    "nombresComercialesEs": [
+      "Jardiance"
+    ],
+    "nombresComercialesEn": [
+      "Jardiance"
+    ],
+    "claseEs": "Inhibidor de SGLT2",
+    "claseEn": "SGLT2 inhibitor",
+    "paraQueEsEs": "Baja el azucar en sangre eliminandolo por la orina. Tambien protege el corazon y los rinones en personas con diabetes tipo 2 o insuficiencia cardiaca.",
+    "paraQueEsEn": "Lowers blood sugar by eliminating it through urine. Also protects the heart and kidneys in people with type 2 diabetes or heart failure.",
+    "comoFuncionaEs": "Bloquea una proteina en los rinones (SGLT2) que normalmente reabsorbe el azucar. Al bloquearla, el azucar se elimina por la orina.",
+    "comoFuncionaEn": "Blocks a protein in the kidneys (SGLT2) that normally reabsorbs sugar. By blocking it, sugar is eliminated through urine.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "10-25 mg una vez al dia por la manana.",
+    "dosisUsualEn": "10-25 mg once daily in the morning.",
+    "efectosSecundariosEs": [
+      "Infecciones urinarias",
+      "Infecciones genitales por hongos",
+      "Aumento de la orina",
+      "Sed",
+      "Mareo"
+    ],
+    "efectosSecundariosEn": [
+      "Urinary tract infections",
+      "Genital yeast infections",
+      "Increased urination",
+      "Thirst",
+      "Dizziness"
+    ],
+    "efectosGravesEs": [
+      "Cetoacidosis diabetica (aun con azucar normal)",
+      "Fascitis necrotizante del perine (rara pero grave)",
+      "Deshidratacion severa",
+      "Amputaciones (riesgo con canagliflozina)"
+    ],
+    "efectosGravesEn": [
+      "Diabetic ketoacidosis (even with normal sugar)",
+      "Necrotizing fasciitis of perineum (rare but serious)",
+      "Severe dehydration",
+      "Amputations (risk with canagliflozin)"
+    ],
+    "interaccionesEs": [
+      "Diureticos (aumenta deshidratacion)",
+      "Insulina/sulfonilureas (mayor riesgo de hipoglucemia)"
+    ],
+    "interaccionesEn": [
+      "Diuretics (increases dehydration)",
+      "Insulin/sulfonylureas (greater hypoglycemia risk)"
+    ],
+    "precaucionesEs": [
+      "Beba abundante agua",
+      "Mantenga buena higiene genital",
+      "Suspender antes de cirugias",
+      "Reporte sintomas de cetoacidosis: nauseas, vomitos, dolor abdominal"
+    ],
+    "precaucionesEn": [
+      "Drink plenty of water",
+      "Maintain good genital hygiene",
+      "Discontinue before surgeries",
+      "Report ketoacidosis symptoms: nausea, vomiting, abdominal pain"
+    ],
+    "contraindicacionesEs": [
+      "Diabetes tipo 1",
+      "Insuficiencia renal severa (para control de azucar)",
+      "Dialisis"
+    ],
+    "contraindicacionesEn": [
+      "Type 1 diabetes",
+      "Severe kidney failure (for sugar control)",
+      "Dialysis"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana",
+      "Beba mucha agua - al menos 8 vasos al dia",
+      "Mantenga buena higiene genital para prevenir infecciones",
+      "Beneficio adicional: protege corazon y rinones"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning",
+      "Drink plenty of water - at least 8 glasses daily",
+      "Maintain good genital hygiene to prevent infections",
+      "Additional benefit: protects heart and kidneys"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino",
+      "cardiovascular"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "semaglutida",
+    "nombreGenericoEs": "Semaglutida",
+    "nombreGenericoEn": "Semaglutide",
+    "nombresComercialesEs": [
+      "Ozempic",
+      "Wegovy",
+      "Rybelsus"
+    ],
+    "nombresComercialesEn": [
+      "Ozempic",
+      "Wegovy",
+      "Rybelsus"
+    ],
+    "claseEs": "Agonista del receptor de GLP-1",
+    "claseEn": "GLP-1 receptor agonist",
+    "paraQueEsEs": "Controla el azucar en sangre en diabetes tipo 2 y ayuda a perder peso. Reduce el apetito y protege el corazon.",
+    "paraQueEsEn": "Controls blood sugar in type 2 diabetes and helps with weight loss. Reduces appetite and protects the heart.",
+    "comoFuncionaEs": "Imita una hormona natural (GLP-1) que le dice al pancreas que produzca insulina, reduce el apetito y retrasa el vaciamiento del estomago.",
+    "comoFuncionaEn": "Mimics a natural hormone (GLP-1) that tells the pancreas to produce insulin, reduces appetite, and slows stomach emptying.",
+    "formasPresentacion": [
+      "Pluma inyectable (semanal)",
+      "Tableta oral (diaria - Rybelsus)"
+    ],
+    "dosisUsualEs": "Ozempic: iniciar con 0.25 mg semanal, aumentar a 0.5-1 mg semanal. Wegovy: hasta 2.4 mg semanal. Rybelsus: 3-14 mg diario.",
+    "dosisUsualEn": "Ozempic: start with 0.25 mg weekly, increase to 0.5-1 mg weekly. Wegovy: up to 2.4 mg weekly. Rybelsus: 3-14 mg daily.",
+    "efectosSecundariosEs": [
+      "Nauseas (muy comun al inicio)",
+      "Vomitos",
+      "Diarrea",
+      "Estrenimiento",
+      "Dolor abdominal"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea (very common initially)",
+      "Vomiting",
+      "Diarrhea",
+      "Constipation",
+      "Abdominal pain"
+    ],
+    "efectosGravesEs": [
+      "Pancreatitis",
+      "Tumores de tiroides (en estudios animales)",
+      "Obstruccion intestinal",
+      "Retinopatia diabetica que empeora",
+      "Enfermedad de vesicula biliar"
+    ],
+    "efectosGravesEn": [
+      "Pancreatitis",
+      "Thyroid tumors (in animal studies)",
+      "Intestinal obstruction",
+      "Worsening diabetic retinopathy",
+      "Gallbladder disease"
+    ],
+    "interaccionesEs": [
+      "Insulina/sulfonilureas (aumenta riesgo de hipoglucemia)",
+      "Medicamentos orales (la absorcion puede alterarse por el vaciamiento gastrico lento)"
+    ],
+    "interaccionesEn": [
+      "Insulin/sulfonylureas (increases hypoglycemia risk)",
+      "Oral medications (absorption may be altered by slow gastric emptying)"
+    ],
+    "precaucionesEs": [
+      "Comience con dosis baja - las nauseas mejoran con el tiempo",
+      "Reporte dolor abdominal severo",
+      "No usar si tiene historial familiar de cancer medular de tiroides"
+    ],
+    "precaucionesEn": [
+      "Start with low dose - nausea improves over time",
+      "Report severe abdominal pain",
+      "Do not use if you have family history of medullary thyroid cancer"
+    ],
+    "contraindicacionesEs": [
+      "Historial personal/familiar de cancer medular de tiroides",
+      "Neoplasia endocrina multiple tipo 2 (MEN2)",
+      "Alergia a semaglutida"
+    ],
+    "contraindicacionesEn": [
+      "Personal/family history of medullary thyroid cancer",
+      "Multiple endocrine neoplasia type 2 (MEN2)",
+      "Semaglutide allergy"
+    ],
+    "embarazoLactanciaEs": "No usar en el embarazo (suspender al menos 2 meses antes de intentar embarazo). Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Do not use in pregnancy (stop at least 2 months before trying to conceive). Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Las nauseas son normales al inicio y mejoran en semanas",
+      "Coma porciones pequenas y frecuentes",
+      "Inyecte una vez por semana el mismo dia (puede cambiar el dia)",
+      "Rybelsus: tomar en ayunas con un trago de agua, 30 min antes de comer"
+    ],
+    "consejosUsoEn": [
+      "Nausea is normal at the start and improves in weeks",
+      "Eat small, frequent portions",
+      "Inject once weekly on the same day (can change the day)",
+      "Rybelsus: take on empty stomach with a sip of water, 30 min before eating"
+    ],
+    "almacenamientoEs": "Pluma: refrigerar antes de abrir. En uso: temperatura ambiente o refrigerada por hasta 56 dias. Tabletas: temperatura ambiente.",
+    "almacenamientoEn": "Pen: refrigerate before opening. In use: room temperature or refrigerated for up to 56 days. Tablets: room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino",
+      "obesidad"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "liraglutida",
+    "nombreGenericoEs": "Liraglutida",
+    "nombreGenericoEn": "Liraglutide",
+    "nombresComercialesEs": [
+      "Victoza",
+      "Saxenda"
+    ],
+    "nombresComercialesEn": [
+      "Victoza",
+      "Saxenda"
+    ],
+    "claseEs": "Agonista del receptor de GLP-1",
+    "claseEn": "GLP-1 receptor agonist",
+    "paraQueEsEs": "Controla azucar en sangre en diabetes tipo 2 (Victoza) y ayuda a perder peso en personas con obesidad (Saxenda).",
+    "paraQueEsEn": "Controls blood sugar in type 2 diabetes (Victoza) and helps with weight loss in people with obesity (Saxenda).",
+    "comoFuncionaEs": "Imita la hormona GLP-1 para aumentar la produccion de insulina, reducir el apetito y hacer mas lenta la digestion.",
+    "comoFuncionaEn": "Mimics the GLP-1 hormone to increase insulin production, reduce appetite, and slow digestion.",
+    "formasPresentacion": [
+      "Pluma inyectable (diaria)"
+    ],
+    "dosisUsualEs": "Victoza: 0.6-1.8 mg diario. Saxenda: hasta 3 mg diario. Aumentar gradualmente.",
+    "dosisUsualEn": "Victoza: 0.6-1.8 mg daily. Saxenda: up to 3 mg daily. Increase gradually.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Diarrea",
+      "Estrenimiento",
+      "Dolor de cabeza",
+      "Dolor abdominal"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Diarrhea",
+      "Constipation",
+      "Headache",
+      "Abdominal pain"
+    ],
+    "efectosGravesEs": [
+      "Pancreatitis",
+      "Tumores de tiroides (riesgo en animales)",
+      "Problemas de vesicula biliar",
+      "Insuficiencia renal"
+    ],
+    "efectosGravesEn": [
+      "Pancreatitis",
+      "Thyroid tumors (risk in animals)",
+      "Gallbladder problems",
+      "Kidney failure"
+    ],
+    "interaccionesEs": [
+      "Insulina/sulfonilureas",
+      "Medicamentos orales (absorcion alterada)"
+    ],
+    "interaccionesEn": [
+      "Insulin/sulfonylureas",
+      "Oral medications (altered absorption)"
+    ],
+    "precaucionesEs": [
+      "Comience con dosis baja",
+      "Reporte dolor abdominal severo",
+      "Mantenga hidratacion adecuada"
+    ],
+    "precaucionesEn": [
+      "Start with low dose",
+      "Report severe abdominal pain",
+      "Maintain adequate hydration"
+    ],
+    "contraindicacionesEs": [
+      "Historial de cancer medular de tiroides",
+      "MEN2",
+      "Alergia a liraglutida"
+    ],
+    "contraindicacionesEn": [
+      "History of medullary thyroid cancer",
+      "MEN2",
+      "Liraglutide allergy"
+    ],
+    "embarazoLactanciaEs": "No usar en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Do not use in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Inyecte una vez al dia a cualquier hora",
+      "Las nauseas mejoran con el tiempo",
+      "Coma porciones mas pequenas"
+    ],
+    "consejosUsoEn": [
+      "Inject once daily at any time",
+      "Nausea improves over time",
+      "Eat smaller portions"
+    ],
+    "almacenamientoEs": "Sin abrir: refrigerar. En uso: temperatura ambiente o refrigerada por hasta 30 dias.",
+    "almacenamientoEn": "Unopened: refrigerate. In use: room temperature or refrigerated for up to 30 days.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino",
+      "obesidad"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "salbutamol",
+    "nombreGenericoEs": "Salbutamol (Albuterol)",
+    "nombreGenericoEn": "Albuterol (Salbutamol)",
+    "nombresComercialesEs": [
+      "Ventolin",
+      "ProAir",
+      "Proventil"
+    ],
+    "nombresComercialesEn": [
+      "Ventolin",
+      "ProAir",
+      "Proventil"
+    ],
+    "claseEs": "Broncodilatador de accion corta (agonista beta-2)",
+    "claseEn": "Short-acting bronchodilator (beta-2 agonist)",
+    "paraQueEsEs": "Alivia rapidamente la dificultad para respirar, la opresion en el pecho y las sibilancias en asma y EPOC. Es el inhalador de rescate mas comun.",
+    "paraQueEsEn": "Quickly relieves shortness of breath, chest tightness, and wheezing in asthma and COPD. It is the most common rescue inhaler.",
+    "comoFuncionaEs": "Relaja los musculos que rodean las vias respiratorias, abriendolas rapidamente para que pueda respirar mejor. Actua en minutos.",
+    "comoFuncionaEn": "Relaxes muscles surrounding the airways, quickly opening them so you can breathe better. Works within minutes.",
+    "formasPresentacion": [
+      "Inhalador de dosis medida (MDI)",
+      "Solucion para nebulizador",
+      "Tableta (raro)"
+    ],
+    "dosisUsualEs": "Inhalador: 1-2 inhalaciones cada 4-6 horas segun necesidad. Nebulizacion: 2.5 mg cada 4-6 horas.",
+    "dosisUsualEn": "Inhaler: 1-2 puffs every 4-6 hours as needed. Nebulization: 2.5 mg every 4-6 hours.",
+    "efectosSecundariosEs": [
+      "Temblor de manos",
+      "Nerviosismo",
+      "Taquicardia",
+      "Dolor de cabeza",
+      "Mareo"
+    ],
+    "efectosSecundariosEn": [
+      "Hand tremor",
+      "Nervousness",
+      "Rapid heart rate",
+      "Headache",
+      "Dizziness"
+    ],
+    "efectosGravesEs": [
+      "Broncoespasmo paradojico (raro)",
+      "Arritmias cardiacas",
+      "Hipokalemia con uso excesivo"
+    ],
+    "efectosGravesEn": [
+      "Paradoxical bronchospasm (rare)",
+      "Heart arrhythmias",
+      "Hypokalemia with excessive use"
+    ],
+    "interaccionesEs": [
+      "Betabloqueadores (reducen efecto del salbutamol)",
+      "Diureticos (aumentan perdida de potasio)",
+      "Otros estimulantes"
+    ],
+    "interaccionesEn": [
+      "Beta-blockers (reduce salbutamol effect)",
+      "Diuretics (increase potassium loss)",
+      "Other stimulants"
+    ],
+    "precaucionesEs": [
+      "Si necesita usarlo mas de 2 veces por semana, su asma no esta bien controlada",
+      "Lleve su inhalador siempre",
+      "Aprenda la tecnica correcta de inhalacion"
+    ],
+    "precaucionesEn": [
+      "If you need to use it more than twice a week, your asthma is not well controlled",
+      "Always carry your inhaler",
+      "Learn the correct inhalation technique"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a salbutamol"
+    ],
+    "contraindicacionesEn": [
+      "Salbutamol allergy"
+    ],
+    "embarazoLactanciaEs": "Se puede usar en el embarazo cuando es necesario. El asma no controlada es mas peligrosa para el feto.",
+    "embarazoLactanciaEn": "Can be used in pregnancy when needed. Uncontrolled asthma is more dangerous for the fetus.",
+    "consejosUsoEs": [
+      "Agite bien el inhalador antes de cada uso",
+      "Use un espaciador para mejor entrega del medicamento",
+      "Enjuague su boca despues de usarlo",
+      "Si lo necesita mas de 2 veces/semana, hable con su medico"
+    ],
+    "consejosUsoEn": [
+      "Shake inhaler well before each use",
+      "Use a spacer for better drug delivery",
+      "Rinse your mouth after use",
+      "If you need it more than 2 times/week, talk to your doctor"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. No perforar ni quemar el envase. Proteger del calor extremo.",
+    "almacenamientoEn": "Room temperature. Do not puncture or burn the container. Protect from extreme heat.",
+    "categorias": [
+      "respiratorio",
+      "broncodilatador",
+      "asma",
+      "EPOC"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "fluticasona",
+    "nombreGenericoEs": "Fluticasona",
+    "nombreGenericoEn": "Fluticasone",
+    "nombresComercialesEs": [
+      "Flonase",
+      "Flovent",
+      "Avamys"
+    ],
+    "nombresComercialesEn": [
+      "Flonase",
+      "Flovent",
+      "Arnuity"
+    ],
+    "claseEs": "Corticosteroide inhalado / nasal",
+    "claseEn": "Inhaled / nasal corticosteroid",
+    "paraQueEsEs": "Previene ataques de asma (inhalador) y alivia la congestion, estornudos y goteo nasal por alergias (spray nasal). No es para alivio inmediato.",
+    "paraQueEsEn": "Prevents asthma attacks (inhaler) and relieves congestion, sneezing, and runny nose from allergies (nasal spray). Not for immediate relief.",
+    "comoFuncionaEs": "Reduce la inflamacion en las vias respiratorias o la nariz. Al reducir la inflamacion, previene sintomas de asma y alergias.",
+    "comoFuncionaEn": "Reduces inflammation in the airways or nose. By reducing inflammation, it prevents asthma and allergy symptoms.",
+    "formasPresentacion": [
+      "Inhalador (asma)",
+      "Spray nasal (alergias)",
+      "Disco inhalador (Diskus)"
+    ],
+    "dosisUsualEs": "Inhalador asma: 1-2 inhalaciones dos veces al dia. Spray nasal: 1-2 atomizaciones en cada fosa nasal una vez al dia.",
+    "dosisUsualEn": "Asthma inhaler: 1-2 puffs twice daily. Nasal spray: 1-2 sprays in each nostril once daily.",
+    "efectosSecundariosEs": [
+      "Irritacion de garganta",
+      "Ronquera",
+      "Candidiasis oral (algodoncillo)",
+      "Sangrado nasal (spray)",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Throat irritation",
+      "Hoarseness",
+      "Oral thrush (candidiasis)",
+      "Nosebleeds (spray)",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Supresion adrenal (uso prolongado a dosis altas)",
+      "Retraso del crecimiento en ninos (dosis altas)",
+      "Glaucoma, cataratas (uso prolongado)"
+    ],
+    "efectosGravesEn": [
+      "Adrenal suppression (prolonged high-dose use)",
+      "Growth delay in children (high doses)",
+      "Glaucoma, cataracts (prolonged use)"
+    ],
+    "interaccionesEs": [
+      "Ritonavir (aumenta niveles de fluticasona significativamente)",
+      "Ketoconazol",
+      "Otros inhibidores de CYP3A4"
+    ],
+    "interaccionesEn": [
+      "Ritonavir (significantly increases fluticasone levels)",
+      "Ketoconazole",
+      "Other CYP3A4 inhibitors"
+    ],
+    "precaucionesEs": [
+      "Enjuague la boca despues de cada uso del inhalador",
+      "No es para ataques agudos de asma - use salbutamol",
+      "Puede tardar dias a semanas en hacer efecto completo"
+    ],
+    "precaucionesEn": [
+      "Rinse mouth after each inhaler use",
+      "Not for acute asthma attacks - use albuterol",
+      "May take days to weeks for full effect"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a fluticasona",
+      "Tratamiento primario de un ataque de asma agudo"
+    ],
+    "contraindicacionesEn": [
+      "Fluticasone allergy",
+      "Primary treatment of an acute asthma attack"
+    ],
+    "embarazoLactanciaEs": "Los inhalados se consideran seguros en el embarazo. El asma no controlada es mas riesgosa para madre y feto.",
+    "embarazoLactanciaEn": "Inhaled forms are considered safe in pregnancy. Uncontrolled asthma is riskier for mother and fetus.",
+    "consejosUsoEs": [
+      "Uselo TODOS LOS DIAS, no solo cuando tenga sintomas",
+      "Enjuague la boca despues de inhalar para prevenir hongos",
+      "No dejara de funcionar si lo usa regularmente",
+      "Spray nasal: apunte hacia afuera, no hacia el tabique"
+    ],
+    "consejosUsoEn": [
+      "Use it EVERY DAY, not just when you have symptoms",
+      "Rinse mouth after inhaling to prevent thrush",
+      "It will not stop working if you use it regularly",
+      "Nasal spray: aim outward, not toward septum"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. No congelar el inhalador.",
+    "almacenamientoEn": "Room temperature. Do not freeze the inhaler.",
+    "categorias": [
+      "respiratorio",
+      "corticosteroide",
+      "asma",
+      "alergia",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "montelukast",
+    "nombreGenericoEs": "Montelukast",
+    "nombreGenericoEn": "Montelukast",
+    "nombresComercialesEs": [
+      "Singulair"
+    ],
+    "nombresComercialesEn": [
+      "Singulair"
+    ],
+    "claseEs": "Antagonista de receptores de leucotrienos",
+    "claseEn": "Leukotriene receptor antagonist",
+    "paraQueEsEs": "Previene ataques de asma y alivia sintomas de rinitis alergica. Se toma diariamente como prevencion.",
+    "paraQueEsEn": "Prevents asthma attacks and relieves allergic rhinitis symptoms. Taken daily as prevention.",
+    "comoFuncionaEs": "Bloquea los leucotrienos, sustancias quimicas que causan inflamacion, hinchazon y produccion de moco en las vias respiratorias.",
+    "comoFuncionaEn": "Blocks leukotrienes, chemical substances that cause inflammation, swelling, and mucus production in the airways.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta masticable",
+      "Granulado oral"
+    ],
+    "dosisUsualEs": "Adultos: 10 mg una vez al dia por la noche. Ninos 6-14 anos: 5 mg masticable. Ninos 2-5 anos: 4 mg.",
+    "dosisUsualEn": "Adults: 10 mg once daily in the evening. Children 6-14: 5 mg chewable. Children 2-5: 4 mg.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Dolor abdominal",
+      "Fatiga",
+      "Congestion nasal"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Abdominal pain",
+      "Fatigue",
+      "Nasal congestion"
+    ],
+    "efectosGravesEs": [
+      "Cambios de humor, depresion, pensamientos suicidas (ADVERTENCIA EN CAJA NEGRA)",
+      "Reacciones alergicas severas",
+      "Hepatitis"
+    ],
+    "efectosGravesEn": [
+      "Mood changes, depression, suicidal thoughts (BLACK BOX WARNING)",
+      "Severe allergic reactions",
+      "Hepatitis"
+    ],
+    "interaccionesEs": [
+      "Fenobarbital (reduce niveles de montelukast)",
+      "Rifampicina (reduce niveles)"
+    ],
+    "interaccionesEn": [
+      "Phenobarbital (reduces montelukast levels)",
+      "Rifampin (reduces levels)"
+    ],
+    "precaucionesEs": [
+      "IMPORTANTE: vigile cambios en el comportamiento, humor o suenos",
+      "No es para ataques agudos de asma",
+      "Informe al medico si nota depresion o cambios de humor"
+    ],
+    "precaucionesEn": [
+      "IMPORTANT: watch for changes in behavior, mood, or dreams",
+      "Not for acute asthma attacks",
+      "Inform doctor if you notice depression or mood changes"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a montelukast"
+    ],
+    "contraindicacionesEn": [
+      "Montelukast allergy"
+    ],
+    "embarazoLactanciaEs": "Puede usarse si es necesario en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Can be used if necessary in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Tome por la noche para mejor efecto",
+      "Vigile cambios de humor especialmente en ninos y adolescentes",
+      "No sustituye al inhalador de rescate"
+    ],
+    "consejosUsoEn": [
+      "Take in the evening for best effect",
+      "Watch for mood changes especially in children and teenagers",
+      "Does not replace rescue inhaler"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "respiratorio",
+      "asma",
+      "alergia"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "tiotropio",
+    "nombreGenericoEs": "Tiotropio",
+    "nombreGenericoEn": "Tiotropium",
+    "nombresComercialesEs": [
+      "Spiriva"
+    ],
+    "nombresComercialesEn": [
+      "Spiriva"
+    ],
+    "claseEs": "Anticolinergico inhalado de accion prolongada (LAMA)",
+    "claseEn": "Long-acting inhaled anticholinergic (LAMA)",
+    "paraQueEsEs": "Trata la EPOC y el asma severa. Mantiene las vias respiratorias abiertas durante 24 horas.",
+    "paraQueEsEn": "Treats COPD and severe asthma. Keeps airways open for 24 hours.",
+    "comoFuncionaEs": "Bloquea la acetilcolina en las vias respiratorias, relajando los musculos y manteniendolas abiertas por 24 horas.",
+    "comoFuncionaEn": "Blocks acetylcholine in the airways, relaxing muscles and keeping them open for 24 hours.",
+    "formasPresentacion": [
+      "Inhalador de polvo seco (HandiHaler)",
+      "Inhalador de niebla suave (Respimat)"
+    ],
+    "dosisUsualEs": "1 inhalacion de 18 mcg una vez al dia (HandiHaler) o 2 inhalaciones de 2.5 mcg una vez al dia (Respimat).",
+    "dosisUsualEn": "1 inhalation of 18 mcg once daily (HandiHaler) or 2 puffs of 2.5 mcg once daily (Respimat).",
+    "efectosSecundariosEs": [
+      "Boca seca",
+      "Estrenimiento",
+      "Infeccion urinaria",
+      "Vision borrosa si entra en los ojos"
+    ],
+    "efectosSecundariosEn": [
+      "Dry mouth",
+      "Constipation",
+      "Urinary tract infection",
+      "Blurred vision if it gets in the eyes"
+    ],
+    "efectosGravesEs": [
+      "Retencion urinaria",
+      "Glaucoma de angulo cerrado",
+      "Reaccion alergica severa"
+    ],
+    "efectosGravesEn": [
+      "Urinary retention",
+      "Narrow-angle glaucoma",
+      "Severe allergic reaction"
+    ],
+    "interaccionesEs": [
+      "Otros anticolinergicos (efectos aditivos)",
+      "Ipratropio (no combinar)"
+    ],
+    "interaccionesEn": [
+      "Other anticholinergics (additive effects)",
+      "Ipratropium (do not combine)"
+    ],
+    "precaucionesEs": [
+      "No es para alivio rapido de sintomas",
+      "Evite que entre en los ojos",
+      "Precaucion en glaucoma y problemas de prostata"
+    ],
+    "precaucionesEn": [
+      "Not for quick symptom relief",
+      "Avoid getting it in the eyes",
+      "Caution with glaucoma and prostate problems"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a tiotropio o atropina"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to tiotropium or atropine"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Use una vez al dia a la misma hora",
+      "No trague las capsulas - son solo para el inhalador",
+      "Enjuague la boca despues de usar"
+    ],
+    "consejosUsoEn": [
+      "Use once daily at the same time",
+      "Do not swallow capsules - they are only for the inhaler",
+      "Rinse mouth after use"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. No exponer capsulas a la humedad.",
+    "almacenamientoEn": "Room temperature. Do not expose capsules to moisture.",
+    "categorias": [
+      "respiratorio",
+      "EPOC",
+      "broncodilatador"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "prednisona",
+    "nombreGenericoEs": "Prednisona",
+    "nombreGenericoEn": "Prednisone",
+    "nombresComercialesEs": [
+      "Deltasone",
+      "Meticorten"
+    ],
+    "nombresComercialesEn": [
+      "Deltasone",
+      "Rayos"
+    ],
+    "claseEs": "Corticosteroide oral",
+    "claseEn": "Oral corticosteroid",
+    "paraQueEsEs": "Reduce la inflamacion severa y suprime el sistema inmunologico. Se usa en asma severa, alergias graves, artritis, lupus, enfermedades autoinmunes y muchas otras condiciones.",
+    "paraQueEsEn": "Reduces severe inflammation and suppresses the immune system. Used in severe asthma, serious allergies, arthritis, lupus, autoimmune diseases, and many other conditions.",
+    "comoFuncionaEs": "Es una version sintetica del cortisol (hormona natural del cuerpo). Reduce la inflamacion y calma el sistema inmunologico cuando esta hiperactivo.",
+    "comoFuncionaEn": "It is a synthetic version of cortisol (a natural body hormone). Reduces inflammation and calms the immune system when it is overactive.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral",
+      "Tableta de liberacion retardada"
+    ],
+    "dosisUsualEs": "Muy variable: 5-60 mg al dia dependiendo de la condicion. Cursos cortos de 5-7 dias para asma o alergias.",
+    "dosisUsualEn": "Highly variable: 5-60 mg daily depending on the condition. Short courses of 5-7 days for asthma or allergies.",
+    "efectosSecundariosEs": [
+      "Aumento de apetito y peso",
+      "Retencion de liquidos",
+      "Cambios de humor",
+      "Dificultad para dormir",
+      "Aumento de azucar en sangre"
+    ],
+    "efectosSecundariosEn": [
+      "Increased appetite and weight",
+      "Fluid retention",
+      "Mood changes",
+      "Difficulty sleeping",
+      "Increased blood sugar"
+    ],
+    "efectosGravesEs": [
+      "Osteoporosis (uso prolongado)",
+      "Cataratas y glaucoma",
+      "Supresion adrenal",
+      "Infecciones oportunistas",
+      "Necrosis avascular",
+      "Diabetes inducida"
+    ],
+    "efectosGravesEn": [
+      "Osteoporosis (prolonged use)",
+      "Cataracts and glaucoma",
+      "Adrenal suppression",
+      "Opportunistic infections",
+      "Avascular necrosis",
+      "Induced diabetes"
+    ],
+    "interaccionesEs": [
+      "AINEs (aumenta riesgo de ulceras)",
+      "Vacunas vivas (evitar)",
+      "Anticoagulantes (monitorear)",
+      "Medicamentos para diabetes (pueden necesitar aumento de dosis)"
+    ],
+    "interaccionesEn": [
+      "NSAIDs (increases ulcer risk)",
+      "Live vaccines (avoid)",
+      "Anticoagulants (monitor)",
+      "Diabetes medications (may need dose increase)"
+    ],
+    "precaucionesEs": [
+      "NUNCA deje de tomar de repente si lo ha usado por mas de 2 semanas - debe reducir gradualmente",
+      "Tome por la manana para imitar el patron natural de cortisol",
+      "Use la dosis mas baja por el menor tiempo posible"
+    ],
+    "precaucionesEn": [
+      "NEVER stop suddenly if used for more than 2 weeks - must taper gradually",
+      "Take in the morning to mimic natural cortisol pattern",
+      "Use the lowest dose for the shortest time possible"
+    ],
+    "contraindicacionesEs": [
+      "Infecciones fungicas sistemicas",
+      "Alergia a prednisona"
+    ],
+    "contraindicacionesEn": [
+      "Systemic fungal infections",
+      "Prednisone allergy"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Dosis altas pueden afectar al feto. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. High doses may affect the fetus. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana con alimentos",
+      "No suspenda abruptamente",
+      "Lleve una tarjeta que indique que toma esteroides",
+      "Los cursos cortos (menos de 2 semanas) no requieren reduccion gradual"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning with food",
+      "Do not stop abruptly",
+      "Carry a card indicating you take steroids",
+      "Short courses (less than 2 weeks) do not require gradual tapering"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad y la luz.",
+    "almacenamientoEn": "Room temperature, protect from moisture and light.",
+    "categorias": [
+      "corticosteroide",
+      "antiinflamatorio",
+      "inmunosupresor",
+      "respiratorio",
+      "hormonal"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "omeprazol",
+    "nombreGenericoEs": "Omeprazol",
+    "nombreGenericoEn": "Omeprazole",
+    "nombresComercialesEs": [
+      "Prilosec",
+      "Losec"
+    ],
+    "nombresComercialesEn": [
+      "Prilosec",
+      "Prilosec OTC"
+    ],
+    "claseEs": "Inhibidor de la bomba de protones (IBP)",
+    "claseEn": "Proton pump inhibitor (PPI)",
+    "paraQueEsEs": "Trata la acidez estomacal, el reflujo gastroesofagico (ERGE), las ulceras estomacales y el sindrome de Zollinger-Ellison. Reduce la produccion de acido del estomago.",
+    "paraQueEsEn": "Treats heartburn, gastroesophageal reflux disease (GERD), stomach ulcers, and Zollinger-Ellison syndrome. Reduces stomach acid production.",
+    "comoFuncionaEs": "Apaga las bombas de acido en las celulas del estomago. Reduce dramaticamente la cantidad de acido que se produce.",
+    "comoFuncionaEn": "Turns off acid pumps in stomach cells. Dramatically reduces the amount of acid produced.",
+    "formasPresentacion": [
+      "Capsula",
+      "Capsula de liberacion retardada",
+      "Polvo para suspension",
+      "Tableta de desintegracion oral"
+    ],
+    "dosisUsualEs": "20-40 mg una vez al dia, 30 minutos antes del desayuno. ERGE: 20 mg al dia por 4-8 semanas.",
+    "dosisUsualEn": "20-40 mg once daily, 30 minutes before breakfast. GERD: 20 mg daily for 4-8 weeks.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Diarrea",
+      "Dolor abdominal",
+      "Nauseas",
+      "Gases"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Diarrhea",
+      "Abdominal pain",
+      "Nausea",
+      "Gas"
+    ],
+    "efectosGravesEs": [
+      "Deficiencia de magnesio (uso prolongado)",
+      "Fracturas oseas (uso prolongado)",
+      "Infeccion por C. difficile",
+      "Deficiencia de vitamina B12",
+      "Nefritis intersticial"
+    ],
+    "efectosGravesEn": [
+      "Magnesium deficiency (long-term use)",
+      "Bone fractures (long-term use)",
+      "C. difficile infection",
+      "Vitamin B12 deficiency",
+      "Interstitial nephritis"
+    ],
+    "interaccionesEs": [
+      "Clopidogrel (REDUCE SU EFICACIA - usar pantoprazol en su lugar)",
+      "Metotrexato (aumenta niveles)",
+      "Ketoconazol, itraconazol (reduce absorcion)"
+    ],
+    "interaccionesEn": [
+      "Clopidogrel (REDUCES ITS EFFICACY - use pantoprazole instead)",
+      "Methotrexate (increases levels)",
+      "Ketoconazole, itraconazole (reduces absorption)"
+    ],
+    "precaucionesEs": [
+      "Tome 30 minutos antes de comer",
+      "No use por mas de 14 dias sin supervision medica",
+      "El uso prolongado puede causar deficiencias de nutrientes"
+    ],
+    "precaucionesEn": [
+      "Take 30 minutes before eating",
+      "Do not use for more than 14 days without medical supervision",
+      "Long-term use can cause nutrient deficiencies"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a omeprazol o IBPs",
+      "Uso con rilpivirina"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to omeprazole or PPIs",
+      "Use with rilpivirine"
+    ],
+    "embarazoLactanciaEs": "Puede usarse en el embarazo si es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Can be used in pregnancy if necessary. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome 30 minutos antes del desayuno con el estomago vacio",
+      "No triture ni mastique las capsulas",
+      "El uso a corto plazo es seguro, pero evite uso cronico sin necesidad"
+    ],
+    "consejosUsoEn": [
+      "Take 30 minutes before breakfast on an empty stomach",
+      "Do not crush or chew capsules",
+      "Short-term use is safe, but avoid chronic use without need"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "gastrointestinal",
+      "IBP",
+      "acido",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "pantoprazol",
+    "nombreGenericoEs": "Pantoprazol",
+    "nombreGenericoEn": "Pantoprazole",
+    "nombresComercialesEs": [
+      "Protonix",
+      "Pantecta"
+    ],
+    "nombresComercialesEn": [
+      "Protonix"
+    ],
+    "claseEs": "Inhibidor de la bomba de protones (IBP)",
+    "claseEn": "Proton pump inhibitor (PPI)",
+    "paraQueEsEs": "Trata ERGE, esofagitis erosiva y condiciones de exceso de acido. Es el IBP preferido en pacientes que toman clopidogrel.",
+    "paraQueEsEn": "Treats GERD, erosive esophagitis, and excess acid conditions. Preferred PPI in patients taking clopidogrel.",
+    "comoFuncionaEs": "Bloquea la bomba de protones en las celulas del estomago, reduciendo la produccion de acido. Tiene menos interacciones que el omeprazol.",
+    "comoFuncionaEn": "Blocks the proton pump in stomach cells, reducing acid production. Has fewer interactions than omeprazole.",
+    "formasPresentacion": [
+      "Tableta",
+      "Inyeccion intravenosa",
+      "Granulado para suspension"
+    ],
+    "dosisUsualEs": "20-40 mg una vez al dia, 30 minutos antes del desayuno.",
+    "dosisUsualEn": "20-40 mg once daily, 30 minutes before breakfast.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Diarrea",
+      "Nauseas",
+      "Dolor abdominal"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Diarrhea",
+      "Nausea",
+      "Abdominal pain"
+    ],
+    "efectosGravesEs": [
+      "Deficiencia de magnesio",
+      "Fracturas oseas",
+      "C. difficile",
+      "Nefritis intersticial"
+    ],
+    "efectosGravesEn": [
+      "Magnesium deficiency",
+      "Bone fractures",
+      "C. difficile",
+      "Interstitial nephritis"
+    ],
+    "interaccionesEs": [
+      "Metotrexato",
+      "Menos interacciones que omeprazol - se puede usar con clopidogrel"
+    ],
+    "interaccionesEn": [
+      "Methotrexate",
+      "Fewer interactions than omeprazole - can be used with clopidogrel"
+    ],
+    "precaucionesEs": [
+      "Tome antes de comer",
+      "Evite uso prolongado innecesario"
+    ],
+    "precaucionesEn": [
+      "Take before eating",
+      "Avoid unnecessary prolonged use"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a pantoprazol o IBPs",
+      "Uso con rilpivirina"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to pantoprazole or PPIs",
+      "Use with rilpivirine"
+    ],
+    "embarazoLactanciaEs": "Usar si es necesario en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use if necessary in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Mejor opcion si tambien toma clopidogrel (Plavix)",
+      "Tome 30 minutos antes de la primera comida del dia"
+    ],
+    "consejosUsoEn": [
+      "Better choice if also taking clopidogrel (Plavix)",
+      "Take 30 minutes before the first meal of the day"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "IBP",
+      "acido"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "famotidina",
+    "nombreGenericoEs": "Famotidina",
+    "nombreGenericoEn": "Famotidine",
+    "nombresComercialesEs": [
+      "Pepcid"
+    ],
+    "nombresComercialesEn": [
+      "Pepcid",
+      "Pepcid AC"
+    ],
+    "claseEs": "Antagonista H2 (bloqueador de acido)",
+    "claseEn": "H2 antagonist (acid blocker)",
+    "paraQueEsEs": "Reduce la produccion de acido estomacal. Trata acidez, ERGE leve y ulceras. Menos potente que los IBP pero con menos efectos a largo plazo.",
+    "paraQueEsEn": "Reduces stomach acid production. Treats heartburn, mild GERD, and ulcers. Less potent than PPIs but with fewer long-term effects.",
+    "comoFuncionaEs": "Bloquea los receptores de histamina H2 en las celulas del estomago, reduciendo la produccion de acido.",
+    "comoFuncionaEn": "Blocks histamine H2 receptors in stomach cells, reducing acid production.",
+    "formasPresentacion": [
+      "Tableta",
+      "Suspension oral",
+      "Inyeccion",
+      "Tableta masticable"
+    ],
+    "dosisUsualEs": "Acidez: 10-20 mg dos veces al dia o 20-40 mg al acostarse. Ulcera: 40 mg al acostarse.",
+    "dosisUsualEn": "Heartburn: 10-20 mg twice daily or 20-40 mg at bedtime. Ulcer: 40 mg at bedtime.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Mareo",
+      "Estrenimiento",
+      "Diarrea"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Dizziness",
+      "Constipation",
+      "Diarrhea"
+    ],
+    "efectosGravesEs": [
+      "Arritmias cardiacas (con inyeccion IV rapida)",
+      "Confusion en ancianos (raro)"
+    ],
+    "efectosGravesEn": [
+      "Heart arrhythmias (with rapid IV injection)",
+      "Confusion in elderly (rare)"
+    ],
+    "interaccionesEs": [
+      "Ketoconazol, itraconazol (reduce absorcion)",
+      "Atazanavir (reduce absorcion)"
+    ],
+    "interaccionesEn": [
+      "Ketoconazole, itraconazole (reduces absorption)",
+      "Atazanavir (reduces absorption)"
+    ],
+    "precaucionesEs": [
+      "Ajustar dosis en insuficiencia renal",
+      "No necesita tomarse antes de las comidas"
+    ],
+    "precaucionesEn": [
+      "Adjust dose in kidney impairment",
+      "Does not need to be taken before meals"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a famotidina"
+    ],
+    "contraindicacionesEn": [
+      "Famotidine allergy"
+    ],
+    "embarazoLactanciaEs": "Puede usarse en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Can be used in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Buena alternativa a los IBP para uso a corto plazo",
+      "Puede tomar antes de comidas que causan acidez",
+      "Menos efectos secundarios a largo plazo que los IBP"
+    ],
+    "consejosUsoEn": [
+      "Good alternative to PPIs for short-term use",
+      "Can take before meals that cause heartburn",
+      "Fewer long-term side effects than PPIs"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "antiH2",
+      "acido",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "ondansetron",
+    "nombreGenericoEs": "Ondansetron",
+    "nombreGenericoEn": "Ondansetron",
+    "nombresComercialesEs": [
+      "Zofran"
+    ],
+    "nombresComercialesEn": [
+      "Zofran"
+    ],
+    "claseEs": "Antiemetico (antagonista 5-HT3)",
+    "claseEn": "Antiemetic (5-HT3 antagonist)",
+    "paraQueEsEs": "Previene y trata las nauseas y vomitos causados por quimioterapia, cirugia y gastroenteritis. Muy efectivo y bien tolerado.",
+    "paraQueEsEn": "Prevents and treats nausea and vomiting caused by chemotherapy, surgery, and gastroenteritis. Very effective and well tolerated.",
+    "comoFuncionaEs": "Bloquea los receptores de serotonina (5-HT3) en el centro del vomito del cerebro y en el intestino, deteniendo las nauseas.",
+    "comoFuncionaEn": "Blocks serotonin (5-HT3) receptors in the brain's vomiting center and in the intestine, stopping nausea.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de desintegracion oral (se disuelve en la boca)",
+      "Solucion oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "4-8 mg cada 8 horas segun necesidad. Tableta de desintegracion oral: colocar en la lengua y dejar que se disuelva.",
+    "dosisUsualEn": "4-8 mg every 8 hours as needed. Orally disintegrating tablet: place on tongue and let it dissolve.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Estrenimiento",
+      "Fatiga",
+      "Mareo"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Constipation",
+      "Fatigue",
+      "Dizziness"
+    ],
+    "efectosGravesEs": [
+      "Prolongacion del QT (arritmias cardiacas)",
+      "Sindrome serotoninergico (con otros medicamentos serotonergicos)"
+    ],
+    "efectosGravesEn": [
+      "QT prolongation (heart arrhythmias)",
+      "Serotonin syndrome (with other serotonergic medications)"
+    ],
+    "interaccionesEs": [
+      "Otros medicamentos que prolongan QT",
+      "Tramadol y otros serotonergicos",
+      "Apomorfina (contraindicado)"
+    ],
+    "interaccionesEn": [
+      "Other QT-prolonging medications",
+      "Tramadol and other serotonergics",
+      "Apomorphine (contraindicated)"
+    ],
+    "precaucionesEs": [
+      "Puede causar estrenimiento",
+      "Precaucion en personas con problemas cardiacos",
+      "La tableta de desintegracion oral no necesita agua"
+    ],
+    "precaucionesEn": [
+      "Can cause constipation",
+      "Caution in people with heart problems",
+      "Orally disintegrating tablet does not need water"
+    ],
+    "contraindicacionesEs": [
+      "Uso con apomorfina",
+      "Alergia a ondansetron"
+    ],
+    "contraindicacionesEn": [
+      "Use with apomorphine",
+      "Ondansetron allergy"
+    ],
+    "embarazoLactanciaEs": "Puede usarse en el embarazo para nauseas severas. Se considera relativamente seguro.",
+    "embarazoLactanciaEn": "Can be used in pregnancy for severe nausea. Considered relatively safe.",
+    "consejosUsoEs": [
+      "La tableta de desintegracion se coloca en la lengua seca - no necesita agua",
+      "Muy util para nauseas del embarazo cuando otros remedios fallan",
+      "Puede causar estrenimiento - beba agua y coma fibra"
+    ],
+    "consejosUsoEn": [
+      "Place disintegrating tablet on dry tongue - no water needed",
+      "Very useful for pregnancy nausea when other remedies fail",
+      "Can cause constipation - drink water and eat fiber"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Las tabletas de desintegracion son sensibles a la humedad - no abrir hasta usar.",
+    "almacenamientoEn": "Room temperature. Disintegrating tablets are moisture-sensitive - do not open until ready to use.",
+    "categorias": [
+      "gastrointestinal",
+      "antiemetico",
+      "nauseas"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "loperamida",
+    "nombreGenericoEs": "Loperamida",
+    "nombreGenericoEn": "Loperamide",
+    "nombresComercialesEs": [
+      "Imodium"
+    ],
+    "nombresComercialesEn": [
+      "Imodium",
+      "Imodium AD"
+    ],
+    "claseEs": "Antidiarreico",
+    "claseEn": "Antidiarrheal",
+    "paraQueEsEs": "Controla la diarrea aguda y cronica. Reduce la frecuencia de las evacuaciones y las hace mas solidas.",
+    "paraQueEsEn": "Controls acute and chronic diarrhea. Reduces frequency of bowel movements and makes them more solid.",
+    "comoFuncionaEs": "Actua en los musculos del intestino para hacerlos mas lentos, dando mas tiempo para que el agua sea absorbida y las heces se solidifiquen.",
+    "comoFuncionaEn": "Acts on intestinal muscles to slow them down, giving more time for water to be absorbed and stools to solidify.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Dosis inicial: 4 mg, luego 2 mg despues de cada evacuacion suelta. Maximo: 16 mg al dia (con receta) u 8 mg al dia (sin receta).",
+    "dosisUsualEn": "Initial dose: 4 mg, then 2 mg after each loose stool. Maximum: 16 mg daily (prescription) or 8 mg daily (OTC).",
+    "efectosSecundariosEs": [
+      "Estrenimiento",
+      "Dolor abdominal",
+      "Nauseas",
+      "Mareo",
+      "Boca seca"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation",
+      "Abdominal pain",
+      "Nausea",
+      "Dizziness",
+      "Dry mouth"
+    ],
+    "efectosGravesEs": [
+      "Megacolon toxico (con uso en diarrea bacteriana invasiva)",
+      "Arritmias cardiacas (con sobredosis)",
+      "Ileo paralitico"
+    ],
+    "efectosGravesEn": [
+      "Toxic megacolon (with use in invasive bacterial diarrhea)",
+      "Heart arrhythmias (with overdose)",
+      "Paralytic ileus"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de P-glicoproteina (aumentan niveles)",
+      "Quinidina"
+    ],
+    "interaccionesEn": [
+      "P-glycoprotein inhibitors (increase levels)",
+      "Quinidine"
+    ],
+    "precaucionesEs": [
+      "No use si la diarrea tiene sangre o fiebre alta",
+      "No use por mas de 2 dias sin mejoria",
+      "Mantenga la hidratacion"
+    ],
+    "precaucionesEn": [
+      "Do not use if diarrhea has blood or high fever",
+      "Do not use for more than 2 days without improvement",
+      "Maintain hydration"
+    ],
+    "contraindicacionesEs": [
+      "Diarrea sanguinolenta",
+      "Colitis ulcerosa aguda",
+      "Diarrea por C. difficile",
+      "Ninos menores de 2 anos"
+    ],
+    "contraindicacionesEn": [
+      "Bloody diarrhea",
+      "Acute ulcerative colitis",
+      "C. difficile diarrhea",
+      "Children under 2 years"
+    ],
+    "embarazoLactanciaEs": "Puede usarse brevemente en el embarazo si es necesario. Se excreta en leche materna en cantidades minimas.",
+    "embarazoLactanciaEn": "Can be used briefly in pregnancy if necessary. Excreted in breast milk in minimal amounts.",
+    "consejosUsoEs": [
+      "Lo mas importante con diarrea es mantenerse hidratado",
+      "No lo use si tiene fiebre alta o sangre en las heces",
+      "Si no mejora en 2 dias, consulte al medico"
+    ],
+    "consejosUsoEn": [
+      "The most important thing with diarrhea is to stay hydrated",
+      "Do not use if you have high fever or blood in stools",
+      "If not better in 2 days, see a doctor"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "antidiarreico",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "bisacodilo",
+    "nombreGenericoEs": "Bisacodilo",
+    "nombreGenericoEn": "Bisacodyl",
+    "nombresComercialesEs": [
+      "Dulcolax"
+    ],
+    "nombresComercialesEn": [
+      "Dulcolax"
+    ],
+    "claseEs": "Laxante estimulante",
+    "claseEn": "Stimulant laxative",
+    "paraQueEsEs": "Trata el estrenimiento y se usa para preparar el intestino antes de procedimientos medicos como colonoscopias.",
+    "paraQueEsEn": "Treats constipation and is used to prepare the bowel before medical procedures like colonoscopies.",
+    "comoFuncionaEs": "Estimula los nervios del intestino grueso para producir contracciones y aumenta la cantidad de agua en el intestino, facilitando la evacuacion.",
+    "comoFuncionaEn": "Stimulates nerves in the large intestine to produce contractions and increases water in the intestine, facilitating bowel movements.",
+    "formasPresentacion": [
+      "Tableta con cubierta enterica",
+      "Supositorio rectal"
+    ],
+    "dosisUsualEs": "Oral: 5-15 mg una vez al dia, generalmente al acostarse. Supositorio: 10 mg una vez. Efecto oral en 6-12 horas, rectal en 15-60 minutos.",
+    "dosisUsualEn": "Oral: 5-15 mg once daily, usually at bedtime. Suppository: 10 mg once. Oral effect in 6-12 hours, rectal in 15-60 minutes.",
+    "efectosSecundariosEs": [
+      "Calambres abdominales",
+      "Diarrea",
+      "Nauseas",
+      "Irritacion rectal (supositorio)"
+    ],
+    "efectosSecundariosEn": [
+      "Abdominal cramps",
+      "Diarrhea",
+      "Nausea",
+      "Rectal irritation (suppository)"
+    ],
+    "efectosGravesEs": [
+      "Desequilibrio electrolitico (uso prolongado)",
+      "Dependencia del laxante (uso cronico)",
+      "Deshidratacion"
+    ],
+    "efectosGravesEn": [
+      "Electrolyte imbalance (prolonged use)",
+      "Laxative dependence (chronic use)",
+      "Dehydration"
+    ],
+    "interaccionesEs": [
+      "Antiacidos y leche (no tomar juntos - disuelven la cubierta enterica prematuramente)",
+      "Diureticos (aumentan perdida de electrolitos)"
+    ],
+    "interaccionesEn": [
+      "Antacids and milk (do not take together - dissolve enteric coating prematurely)",
+      "Diuretics (increase electrolyte loss)"
+    ],
+    "precaucionesEs": [
+      "No mastique las tabletas",
+      "No tome con leche ni antiacidos",
+      "No use por mas de 1 semana sin supervision medica"
+    ],
+    "precaucionesEn": [
+      "Do not chew tablets",
+      "Do not take with milk or antacids",
+      "Do not use for more than 1 week without medical supervision"
+    ],
+    "contraindicacionesEs": [
+      "Obstruccion intestinal",
+      "Abdomen agudo",
+      "Inflamacion intestinal aguda"
+    ],
+    "contraindicacionesEn": [
+      "Intestinal obstruction",
+      "Acute abdomen",
+      "Acute intestinal inflammation"
+    ],
+    "embarazoLactanciaEs": "Puede usarse ocasionalmente en el embarazo. No se absorbe significativamente.",
+    "embarazoLactanciaEn": "Can be used occasionally in pregnancy. Not significantly absorbed.",
+    "consejosUsoEs": [
+      "Tome al acostarse para efecto por la manana",
+      "No mastique ni triture las tabletas",
+      "No tome con leche",
+      "No use diariamente por largo tiempo"
+    ],
+    "consejosUsoEn": [
+      "Take at bedtime for morning effect",
+      "Do not chew or crush tablets",
+      "Do not take with milk",
+      "Do not use daily for a long time"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Supositorios: pueden necesitar refrigeracion.",
+    "almacenamientoEn": "Room temperature. Suppositories: may need refrigeration.",
+    "categorias": [
+      "gastrointestinal",
+      "laxante",
+      "estrenimiento",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "polietilenglicol",
+    "nombreGenericoEs": "Polietilenglicol 3350 (PEG)",
+    "nombreGenericoEn": "Polyethylene glycol 3350 (PEG)",
+    "nombresComercialesEs": [
+      "MiraLAX",
+      "GlycoLax"
+    ],
+    "nombresComercialesEn": [
+      "MiraLAX",
+      "GlycoLax"
+    ],
+    "claseEs": "Laxante osmotico",
+    "claseEn": "Osmotic laxative",
+    "paraQueEsEs": "Trata el estrenimiento ocasional. Ablanda las heces al atraer agua al intestino. Es suave y bien tolerado.",
+    "paraQueEsEn": "Treats occasional constipation. Softens stools by drawing water into the intestine. Gentle and well tolerated.",
+    "comoFuncionaEs": "Atrae agua hacia el intestino por osmosis, ablandando las heces y facilitando su paso. No estimula contracciones como los laxantes estimulantes.",
+    "comoFuncionaEn": "Draws water into the intestine by osmosis, softening stools and facilitating their passage. Does not stimulate contractions like stimulant laxatives.",
+    "formasPresentacion": [
+      "Polvo para disolver en liquido"
+    ],
+    "dosisUsualEs": "17 gramos (una tapita) disueltos en 240 ml (8 oz) de agua, jugo o te, una vez al dia. Efecto en 1-3 dias.",
+    "dosisUsualEn": "17 grams (one capful) dissolved in 240 ml (8 oz) of water, juice, or tea, once daily. Effect in 1-3 days.",
+    "efectosSecundariosEs": [
+      "Gases",
+      "Hinchazon abdominal",
+      "Calambres leves",
+      "Diarrea",
+      "Nauseas"
+    ],
+    "efectosSecundariosEn": [
+      "Gas",
+      "Bloating",
+      "Mild cramps",
+      "Diarrhea",
+      "Nausea"
+    ],
+    "efectosGravesEs": [
+      "Deshidratacion (raro)",
+      "Desequilibrio electrolitico (uso prolongado)"
+    ],
+    "efectosGravesEn": [
+      "Dehydration (rare)",
+      "Electrolyte imbalance (prolonged use)"
+    ],
+    "interaccionesEs": [
+      "Pocas interacciones conocidas"
+    ],
+    "interaccionesEn": [
+      "Few known interactions"
+    ],
+    "precaucionesEs": [
+      "No use por mas de 7 dias sin consultar al medico",
+      "Beba suficiente agua",
+      "Puede tardar 1-3 dias en hacer efecto"
+    ],
+    "precaucionesEn": [
+      "Do not use for more than 7 days without consulting a doctor",
+      "Drink enough water",
+      "May take 1-3 days to take effect"
+    ],
+    "contraindicacionesEs": [
+      "Obstruccion intestinal conocida o sospechada",
+      "Alergia a polietilenglicol"
+    ],
+    "contraindicacionesEn": [
+      "Known or suspected intestinal obstruction",
+      "Polyethylene glycol allergy"
+    ],
+    "embarazoLactanciaEs": "Considerado seguro en el embarazo. No se absorbe significativamente.",
+    "embarazoLactanciaEn": "Considered safe in pregnancy. Not significantly absorbed.",
+    "consejosUsoEs": [
+      "Disuelva completamente el polvo en liquido",
+      "Es sin sabor ni olor - puede mezclar con cualquier bebida",
+      "Sea paciente - puede tardar hasta 3 dias en hacer efecto",
+      "Es uno de los laxantes mas suaves y seguros"
+    ],
+    "consejosUsoEn": [
+      "Dissolve powder completely in liquid",
+      "It is tasteless and odorless - can mix with any beverage",
+      "Be patient - it may take up to 3 days to take effect",
+      "One of the gentlest and safest laxatives"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "laxante",
+      "estrenimiento",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "sertralina",
+    "nombreGenericoEs": "Sertralina",
+    "nombreGenericoEn": "Sertraline",
+    "nombresComercialesEs": [
+      "Zoloft"
+    ],
+    "nombresComercialesEn": [
+      "Zoloft"
+    ],
+    "claseEs": "Antidepresivo - Inhibidor selectivo de recaptacion de serotonina (ISRS)",
+    "claseEn": "Antidepressant - Selective serotonin reuptake inhibitor (SSRI)",
+    "paraQueEsEs": "Trata depresion, ansiedad generalizada, trastorno de panico, trastorno obsesivo-compulsivo (TOC), trastorno de estres postraumatico (TEPT) y trastorno disforico premenstrual.",
+    "paraQueEsEn": "Treats depression, generalized anxiety, panic disorder, obsessive-compulsive disorder (OCD), post-traumatic stress disorder (PTSD), and premenstrual dysphoric disorder.",
+    "comoFuncionaEs": "Aumenta la cantidad de serotonina (un quimico del bienestar) disponible en el cerebro al impedir que las neuronas la reabsorban.",
+    "comoFuncionaEn": "Increases the amount of serotonin (a feel-good chemical) available in the brain by preventing neurons from reabsorbing it.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral concentrada"
+    ],
+    "dosisUsualEs": "Inicio: 25-50 mg una vez al dia. Dosis habitual: 50-200 mg al dia. Aumentar gradualmente cada 1-2 semanas.",
+    "dosisUsualEn": "Start: 25-50 mg once daily. Usual dose: 50-200 mg daily. Increase gradually every 1-2 weeks.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Diarrea",
+      "Dolor de cabeza",
+      "Insomnio o somnolencia",
+      "Disfuncion sexual",
+      "Boca seca",
+      "Sudoracion"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Diarrhea",
+      "Headache",
+      "Insomnia or drowsiness",
+      "Sexual dysfunction",
+      "Dry mouth",
+      "Sweating"
+    ],
+    "efectosGravesEs": [
+      "Pensamientos suicidas (especialmente en jovenes menores de 25 - ADVERTENCIA DE CAJA NEGRA)",
+      "Sindrome serotoninergico",
+      "Sangrado anormal",
+      "Mania/hipomania",
+      "Hiponatremia"
+    ],
+    "efectosGravesEn": [
+      "Suicidal thoughts (especially in young people under 25 - BLACK BOX WARNING)",
+      "Serotonin syndrome",
+      "Abnormal bleeding",
+      "Mania/hypomania",
+      "Hyponatremia"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO (CONTRAINDICADO - esperar 14 dias)",
+      "Tramadol, triptanos (sindrome serotoninergico)",
+      "Warfarina (aumenta sangrado)",
+      "Pimozida",
+      "Alcohol"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors (CONTRAINDICATED - wait 14 days)",
+      "Tramadol, triptans (serotonin syndrome)",
+      "Warfarin (increases bleeding)",
+      "Pimozide",
+      "Alcohol"
+    ],
+    "precaucionesEs": [
+      "Tarda 4-6 semanas en hacer efecto completo - sea paciente",
+      "No deje de tomar abruptamente (sindrome de discontinuacion)",
+      "Vigile pensamientos suicidas, especialmente al inicio",
+      "No mezcle con alcohol"
+    ],
+    "precaucionesEn": [
+      "Takes 4-6 weeks for full effect - be patient",
+      "Do not stop abruptly (discontinuation syndrome)",
+      "Watch for suicidal thoughts, especially at the start",
+      "Do not mix with alcohol"
+    ],
+    "contraindicacionesEs": [
+      "Uso con inhibidores de la MAO",
+      "Uso con pimozida",
+      "Uso con disulfiram (solucion oral contiene alcohol)"
+    ],
+    "contraindicacionesEn": [
+      "Use with MAO inhibitors",
+      "Use with pimozide",
+      "Use with disulfiram (oral solution contains alcohol)"
+    ],
+    "embarazoLactanciaEs": "Puede usarse si el beneficio supera el riesgo. Es uno de los ISRS mas estudiados en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Can be used if benefit outweighs risk. One of the most studied SSRIs in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Sea paciente - tarda semanas en hacer efecto",
+      "Tome por la manana si causa insomnio, o por la noche si causa somnolencia",
+      "No deje de tomarlo sin reducir la dosis gradualmente",
+      "Es normal sentir un poco de nausea al inicio"
+    ],
+    "consejosUsoEn": [
+      "Be patient - takes weeks to take effect",
+      "Take in the morning if it causes insomnia, or at night if it causes drowsiness",
+      "Do not stop without gradually reducing the dose",
+      "Mild nausea at the start is normal"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "ISRS",
+      "ansiedad",
+      "depresion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "fluoxetina",
+    "nombreGenericoEs": "Fluoxetina",
+    "nombreGenericoEn": "Fluoxetine",
+    "nombresComercialesEs": [
+      "Prozac",
+      "Sarafem"
+    ],
+    "nombresComercialesEn": [
+      "Prozac",
+      "Sarafem"
+    ],
+    "claseEs": "Antidepresivo - ISRS",
+    "claseEn": "Antidepressant - SSRI",
+    "paraQueEsEs": "Trata depresion, trastorno obsesivo-compulsivo, bulimia nerviosa, trastorno de panico y trastorno disforico premenstrual.",
+    "paraQueEsEn": "Treats depression, obsessive-compulsive disorder, bulimia nervosa, panic disorder, and premenstrual dysphoric disorder.",
+    "comoFuncionaEs": "Aumenta la serotonina en el cerebro impidiendo su recaptacion. Tiene la vida media mas larga de todos los ISRS.",
+    "comoFuncionaEn": "Increases serotonin in the brain by preventing its reuptake. Has the longest half-life of all SSRIs.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Solucion oral",
+      "Capsula semanal de liberacion retardada"
+    ],
+    "dosisUsualEs": "20-80 mg una vez al dia. Inicio: 20 mg al dia. Tarda 4-6 semanas en efecto completo.",
+    "dosisUsualEn": "20-80 mg once daily. Start: 20 mg daily. Takes 4-6 weeks for full effect.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Insomnio",
+      "Nerviosismo",
+      "Dolor de cabeza",
+      "Disfuncion sexual",
+      "Perdida de apetito"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Insomnia",
+      "Nervousness",
+      "Headache",
+      "Sexual dysfunction",
+      "Loss of appetite"
+    ],
+    "efectosGravesEs": [
+      "Pensamientos suicidas en jovenes (CAJA NEGRA)",
+      "Sindrome serotoninergico",
+      "Mania",
+      "Convulsiones",
+      "Hiponatremia"
+    ],
+    "efectosGravesEn": [
+      "Suicidal thoughts in young people (BLACK BOX)",
+      "Serotonin syndrome",
+      "Mania",
+      "Seizures",
+      "Hyponatremia"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO",
+      "Tioridazina",
+      "Pimozida",
+      "Tamoxifeno (reduce eficacia)",
+      "Warfarina"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors",
+      "Thioridazine",
+      "Pimozide",
+      "Tamoxifen (reduces efficacy)",
+      "Warfarin"
+    ],
+    "precaucionesEs": [
+      "Sea paciente con el inicio del efecto",
+      "Menos riesgo de sindrome de discontinuacion por su vida media larga",
+      "Vigile cambios de humor en jovenes"
+    ],
+    "precaucionesEn": [
+      "Be patient with onset of effect",
+      "Less risk of discontinuation syndrome due to long half-life",
+      "Watch for mood changes in young people"
+    ],
+    "contraindicacionesEs": [
+      "Inhibidores de la MAO",
+      "Tioridazina",
+      "Pimozida"
+    ],
+    "contraindicacionesEn": [
+      "MAO inhibitors",
+      "Thioridazine",
+      "Pimozide"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Es uno de los ISRS mas estudiados en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. One of the most studied SSRIs in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana (puede causar insomnio)",
+      "Ventaja: si olvida una dosis, la vida media larga lo protege",
+      "No mezcle con alcohol"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning (can cause insomnia)",
+      "Advantage: if you miss a dose, the long half-life protects you",
+      "Do not mix with alcohol"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "ISRS",
+      "depresion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "escitalopram",
+    "nombreGenericoEs": "Escitalopram",
+    "nombreGenericoEn": "Escitalopram",
+    "nombresComercialesEs": [
+      "Lexapro",
+      "Cipralex"
+    ],
+    "nombresComercialesEn": [
+      "Lexapro"
+    ],
+    "claseEs": "Antidepresivo - ISRS",
+    "claseEn": "Antidepressant - SSRI",
+    "paraQueEsEs": "Trata depresion y trastorno de ansiedad generalizada. Considerado uno de los ISRS mejor tolerados.",
+    "paraQueEsEn": "Treats depression and generalized anxiety disorder. Considered one of the best-tolerated SSRIs.",
+    "comoFuncionaEs": "Es la forma mas pura y activa del citalopram. Aumenta la serotonina en el cerebro de manera muy selectiva.",
+    "comoFuncionaEn": "It is the purest and most active form of citalopram. Increases serotonin in the brain very selectively.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "10-20 mg una vez al dia. Inicio: 10 mg. Maximo: 20 mg al dia.",
+    "dosisUsualEn": "10-20 mg once daily. Start: 10 mg. Maximum: 20 mg daily.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Insomnio",
+      "Somnolencia",
+      "Disfuncion sexual",
+      "Sudoracion",
+      "Fatiga"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Insomnia",
+      "Drowsiness",
+      "Sexual dysfunction",
+      "Sweating",
+      "Fatigue"
+    ],
+    "efectosGravesEs": [
+      "Pensamientos suicidas en jovenes (CAJA NEGRA)",
+      "Prolongacion del QT (no exceder 20 mg)",
+      "Sindrome serotoninergico",
+      "Hiponatremia"
+    ],
+    "efectosGravesEn": [
+      "Suicidal thoughts in young people (BLACK BOX)",
+      "QT prolongation (do not exceed 20 mg)",
+      "Serotonin syndrome",
+      "Hyponatremia"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO",
+      "Otros medicamentos que prolongan QT",
+      "Triptanos",
+      "Litio"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors",
+      "Other QT-prolonging medications",
+      "Triptans",
+      "Lithium"
+    ],
+    "precaucionesEs": [
+      "No exceder 20 mg al dia",
+      "Precaucion en ancianos y personas con problemas hepaticos",
+      "Reducir gradualmente al suspender"
+    ],
+    "precaucionesEn": [
+      "Do not exceed 20 mg daily",
+      "Caution in elderly and people with liver problems",
+      "Taper gradually when discontinuing"
+    ],
+    "contraindicacionesEs": [
+      "Inhibidores de la MAO",
+      "Pimozida",
+      "Alergia a escitalopram o citalopram"
+    ],
+    "contraindicacionesEn": [
+      "MAO inhibitors",
+      "Pimozide",
+      "Allergy to escitalopram or citalopram"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Puede tomar por la manana o por la noche",
+      "Generalmente bien tolerado con pocos efectos secundarios",
+      "Sea paciente - el efecto completo tarda semanas"
+    ],
+    "consejosUsoEn": [
+      "Can take in the morning or evening",
+      "Generally well tolerated with few side effects",
+      "Be patient - full effect takes weeks"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "ISRS",
+      "ansiedad",
+      "depresion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "duloxetina",
+    "nombreGenericoEs": "Duloxetina",
+    "nombreGenericoEn": "Duloxetine",
+    "nombresComercialesEs": [
+      "Cymbalta"
+    ],
+    "nombresComercialesEn": [
+      "Cymbalta"
+    ],
+    "claseEs": "Antidepresivo - Inhibidor de recaptacion de serotonina y norepinefrina (IRSN)",
+    "claseEn": "Antidepressant - Serotonin-norepinephrine reuptake inhibitor (SNRI)",
+    "paraQueEsEs": "Trata depresion, ansiedad generalizada, dolor neuropatico diabetico, fibromialgia y dolor cronico musculoesqueletico.",
+    "paraQueEsEn": "Treats depression, generalized anxiety, diabetic neuropathic pain, fibromyalgia, and chronic musculoskeletal pain.",
+    "comoFuncionaEs": "Aumenta tanto la serotonina como la norepinefrina en el cerebro, mejorando el animo y tambien ayudando a controlar el dolor cronico.",
+    "comoFuncionaEn": "Increases both serotonin and norepinephrine in the brain, improving mood and also helping control chronic pain.",
+    "formasPresentacion": [
+      "Capsula de liberacion retardada"
+    ],
+    "dosisUsualEs": "Depresion/ansiedad: 60 mg una vez al dia. Dolor neuropatico: 60 mg al dia. Fibromialgia: 30-60 mg al dia.",
+    "dosisUsualEn": "Depression/anxiety: 60 mg once daily. Neuropathic pain: 60 mg daily. Fibromyalgia: 30-60 mg daily.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Boca seca",
+      "Somnolencia",
+      "Estrenimiento",
+      "Mareo",
+      "Perdida de apetito",
+      "Sudoracion"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Dry mouth",
+      "Drowsiness",
+      "Constipation",
+      "Dizziness",
+      "Loss of appetite",
+      "Sweating"
+    ],
+    "efectosGravesEs": [
+      "Pensamientos suicidas en jovenes (CAJA NEGRA)",
+      "Dano hepatico",
+      "Sindrome serotoninergico",
+      "Presion arterial elevada",
+      "Sindrome de discontinuacion severo"
+    ],
+    "efectosGravesEn": [
+      "Suicidal thoughts in young people (BLACK BOX)",
+      "Liver damage",
+      "Serotonin syndrome",
+      "Elevated blood pressure",
+      "Severe discontinuation syndrome"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO",
+      "Tioridazina",
+      "Alcohol (riesgo hepatico)",
+      "Anticoagulantes"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors",
+      "Thioridazine",
+      "Alcohol (liver risk)",
+      "Anticoagulants"
+    ],
+    "precaucionesEs": [
+      "No abrir ni masticar las capsulas",
+      "Reduzca gradualmente al suspender - el sindrome de discontinuacion es severo",
+      "Evite alcohol",
+      "Monitoree presion arterial"
+    ],
+    "precaucionesEn": [
+      "Do not open or chew capsules",
+      "Taper gradually when stopping - discontinuation syndrome is severe",
+      "Avoid alcohol",
+      "Monitor blood pressure"
+    ],
+    "contraindicacionesEs": [
+      "Inhibidores de la MAO",
+      "Enfermedad hepatica severa",
+      "Insuficiencia renal severa",
+      "Uso con tioridazina"
+    ],
+    "contraindicacionesEn": [
+      "MAO inhibitors",
+      "Severe liver disease",
+      "Severe kidney failure",
+      "Use with thioridazine"
+    ],
+    "embarazoLactanciaEs": "Usar solo si claramente necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if clearly needed. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Ventaja: trata tanto la depresion como el dolor cronico",
+      "Nunca deje de tomar abruptamente",
+      "No mastique ni abra las capsulas",
+      "Evite el alcohol"
+    ],
+    "consejosUsoEn": [
+      "Advantage: treats both depression and chronic pain",
+      "Never stop taking abruptly",
+      "Do not chew or open capsules",
+      "Avoid alcohol"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "IRSN",
+      "dolor",
+      "depresion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "bupropion",
+    "nombreGenericoEs": "Bupropion",
+    "nombreGenericoEn": "Bupropion",
+    "nombresComercialesEs": [
+      "Wellbutrin",
+      "Zyban"
+    ],
+    "nombresComercialesEn": [
+      "Wellbutrin",
+      "Zyban"
+    ],
+    "claseEs": "Antidepresivo atipico (inhibidor de recaptacion de norepinefrina-dopamina)",
+    "claseEn": "Atypical antidepressant (norepinephrine-dopamine reuptake inhibitor)",
+    "paraQueEsEs": "Trata la depresion y ayuda a dejar de fumar. Ventaja: no causa disfuncion sexual ni aumento de peso como otros antidepresivos.",
+    "paraQueEsEn": "Treats depression and helps quit smoking. Advantage: does not cause sexual dysfunction or weight gain like other antidepressants.",
+    "comoFuncionaEs": "Aumenta los niveles de norepinefrina y dopamina en el cerebro. Actua diferente a los ISRS, por lo que no tiene los mismos efectos secundarios.",
+    "comoFuncionaEn": "Increases norepinephrine and dopamine levels in the brain. Works differently from SSRIs, so it does not have the same side effects.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion sostenida (SR)",
+      "Tableta de liberacion prolongada (XL)"
+    ],
+    "dosisUsualEs": "XL: 150-300 mg una vez al dia. SR: 150 mg dos veces al dia. Maximo: 450 mg al dia.",
+    "dosisUsualEn": "XL: 150-300 mg once daily. SR: 150 mg twice daily. Maximum: 450 mg daily.",
+    "efectosSecundariosEs": [
+      "Insomnio",
+      "Boca seca",
+      "Dolor de cabeza",
+      "Nauseas",
+      "Agitacion",
+      "Perdida de peso"
+    ],
+    "efectosSecundariosEn": [
+      "Insomnia",
+      "Dry mouth",
+      "Headache",
+      "Nausea",
+      "Agitation",
+      "Weight loss"
+    ],
+    "efectosGravesEs": [
+      "Convulsiones (riesgo aumentado dosis-dependiente)",
+      "Pensamientos suicidas en jovenes (CAJA NEGRA)",
+      "Hipertension",
+      "Mania"
+    ],
+    "efectosGravesEn": [
+      "Seizures (dose-dependent increased risk)",
+      "Suicidal thoughts in young people (BLACK BOX)",
+      "Hypertension",
+      "Mania"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO",
+      "Otros medicamentos que bajan el umbral convulsivo",
+      "Alcohol (aumenta riesgo de convulsiones)",
+      "Inhibidores de CYP2B6"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors",
+      "Other medications that lower seizure threshold",
+      "Alcohol (increases seizure risk)",
+      "CYP2B6 inhibitors"
+    ],
+    "precaucionesEs": [
+      "No exceder 450 mg al dia (riesgo de convulsiones)",
+      "No tome si tiene historial de convulsiones, bulimia o anorexia",
+      "Tome por la manana para evitar insomnio"
+    ],
+    "precaucionesEn": [
+      "Do not exceed 450 mg daily (seizure risk)",
+      "Do not take if you have history of seizures, bulimia, or anorexia",
+      "Take in the morning to avoid insomnia"
+    ],
+    "contraindicacionesEs": [
+      "Trastornos convulsivos",
+      "Bulimia o anorexia nerviosa",
+      "Uso con inhibidores de la MAO",
+      "Suspension abrupta de alcohol o sedantes"
+    ],
+    "contraindicacionesEn": [
+      "Seizure disorders",
+      "Bulimia or anorexia nervosa",
+      "Use with MAO inhibitors",
+      "Abrupt discontinuation of alcohol or sedatives"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana para evitar insomnio",
+      "No triture ni mastique las tabletas de liberacion prolongada",
+      "Ventaja: no causa aumento de peso ni disfuncion sexual",
+      "Tambien ayuda a dejar de fumar"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning to avoid insomnia",
+      "Do not crush or chew extended-release tablets",
+      "Advantage: does not cause weight gain or sexual dysfunction",
+      "Also helps quit smoking"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "dejar-de-fumar",
+      "depresion"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "alprazolam",
+    "nombreGenericoEs": "Alprazolam",
+    "nombreGenericoEn": "Alprazolam",
+    "nombresComercialesEs": [
+      "Xanax",
+      "Tafil"
+    ],
+    "nombresComercialesEn": [
+      "Xanax"
+    ],
+    "claseEs": "Benzodiazepina (ansiolitico)",
+    "claseEn": "Benzodiazepine (anxiolytic)",
+    "paraQueEsEs": "Trata la ansiedad severa y el trastorno de panico. Actua muy rapidamente para calmar la ansiedad aguda. Solo para uso a corto plazo.",
+    "paraQueEsEn": "Treats severe anxiety and panic disorder. Works very quickly to calm acute anxiety. Only for short-term use.",
+    "comoFuncionaEs": "Aumenta el efecto del GABA, un quimico cerebral que calma la actividad nerviosa. Produce un efecto tranquilizante rapido.",
+    "comoFuncionaEn": "Enhances the effect of GABA, a brain chemical that calms nerve activity. Produces a rapid calming effect.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de desintegracion oral",
+      "Tableta de liberacion prolongada",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Ansiedad: 0.25-0.5 mg tres veces al dia. Panico: 0.5-1 mg tres veces al dia. La dosis mas baja efectiva por el menor tiempo.",
+    "dosisUsualEn": "Anxiety: 0.25-0.5 mg three times daily. Panic: 0.5-1 mg three times daily. Lowest effective dose for shortest time.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Mareo",
+      "Fatiga",
+      "Dificultad de concentracion",
+      "Problemas de memoria",
+      "Irritabilidad"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Dizziness",
+      "Fatigue",
+      "Difficulty concentrating",
+      "Memory problems",
+      "Irritability"
+    ],
+    "efectosGravesEs": [
+      "Dependencia fisica y psicologica",
+      "Sindrome de abstinencia severo (convulsiones, psicosis)",
+      "Depresion respiratoria (especialmente con opioides)",
+      "Sobredosis potencialmente mortal"
+    ],
+    "efectosGravesEn": [
+      "Physical and psychological dependence",
+      "Severe withdrawal syndrome (seizures, psychosis)",
+      "Respiratory depression (especially with opioids)",
+      "Potentially fatal overdose"
+    ],
+    "interaccionesEs": [
+      "Opioides (RIESGO DE MUERTE)",
+      "Alcohol (RIESGO DE MUERTE)",
+      "Otros sedantes",
+      "Ketoconazol, itraconazol (aumentan niveles dramaticamente)"
+    ],
+    "interaccionesEn": [
+      "Opioids (RISK OF DEATH)",
+      "Alcohol (RISK OF DEATH)",
+      "Other sedatives",
+      "Ketoconazole, itraconazole (dramatically increase levels)"
+    ],
+    "precaucionesEs": [
+      "ALTO RIESGO DE DEPENDENCIA - solo para uso a corto plazo",
+      "NUNCA deje de tomar abruptamente (riesgo de convulsiones)",
+      "No mezcle con alcohol ni opioides",
+      "No conduzca"
+    ],
+    "precaucionesEn": [
+      "HIGH RISK OF DEPENDENCE - only for short-term use",
+      "NEVER stop abruptly (seizure risk)",
+      "Do not mix with alcohol or opioids",
+      "Do not drive"
+    ],
+    "contraindicacionesEs": [
+      "Glaucoma de angulo estrecho",
+      "Uso con ketoconazol/itraconazol",
+      "Miastenia gravis severa"
+    ],
+    "contraindicacionesEn": [
+      "Narrow-angle glaucoma",
+      "Use with ketoconazole/itraconazole",
+      "Severe myasthenia gravis"
+    ],
+    "embarazoLactanciaEs": "EVITAR en el embarazo (riesgo de malformaciones y sindrome de abstinencia neonatal). Se excreta en leche materna.",
+    "embarazoLactanciaEn": "AVOID in pregnancy (risk of malformations and neonatal withdrawal). Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Uselo solo cuando realmente lo necesite",
+      "Nunca lo comparta",
+      "No lo mezcle con alcohol - puede ser mortal",
+      "Si lo ha tomado regularmente, debe reducirlo gradualmente bajo supervision medica"
+    ],
+    "consejosUsoEn": [
+      "Use it only when you really need it",
+      "Never share it",
+      "Do not mix with alcohol - it can be fatal",
+      "If you have taken it regularly, must taper gradually under medical supervision"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Guardar en lugar seguro.",
+    "almacenamientoEn": "Room temperature. Store in a secure place.",
+    "categorias": [
+      "psiquiatrico",
+      "benzodiazepina",
+      "ansiedad",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "lorazepam",
+    "nombreGenericoEs": "Lorazepam",
+    "nombreGenericoEn": "Lorazepam",
+    "nombresComercialesEs": [
+      "Ativan"
+    ],
+    "nombresComercialesEn": [
+      "Ativan"
+    ],
+    "claseEs": "Benzodiazepina (ansiolitico/sedante)",
+    "claseEn": "Benzodiazepine (anxiolytic/sedative)",
+    "paraQueEsEs": "Trata ansiedad severa, insomnio, convulsiones agudas, agitacion, y nauseas por quimioterapia. Tambien se usa antes de procedimientos medicos para sedacion.",
+    "paraQueEsEn": "Treats severe anxiety, insomnia, acute seizures, agitation, and chemotherapy nausea. Also used before medical procedures for sedation.",
+    "comoFuncionaEs": "Aumenta la actividad del GABA en el cerebro, produciendo calma, relajacion muscular y efecto anticonvulsivo.",
+    "comoFuncionaEn": "Increases GABA activity in the brain, producing calm, muscle relaxation, and anticonvulsant effect.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "Ansiedad: 0.5-2 mg dos a tres veces al dia. Insomnio: 0.5-2 mg al acostarse.",
+    "dosisUsualEn": "Anxiety: 0.5-2 mg two to three times daily. Insomnia: 0.5-2 mg at bedtime.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Debilidad",
+      "Mareo",
+      "Inestabilidad al caminar",
+      "Problemas de memoria"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Weakness",
+      "Dizziness",
+      "Unsteadiness",
+      "Memory problems"
+    ],
+    "efectosGravesEs": [
+      "Dependencia",
+      "Sindrome de abstinencia severo",
+      "Depresion respiratoria",
+      "Amnesia"
+    ],
+    "efectosGravesEn": [
+      "Dependence",
+      "Severe withdrawal syndrome",
+      "Respiratory depression",
+      "Amnesia"
+    ],
+    "interaccionesEs": [
+      "Opioides (riesgo de muerte)",
+      "Alcohol (riesgo de muerte)",
+      "Otros depresores del SNC"
+    ],
+    "interaccionesEn": [
+      "Opioids (risk of death)",
+      "Alcohol (risk of death)",
+      "Other CNS depressants"
+    ],
+    "precaucionesEs": [
+      "No mezclar con alcohol ni opioides",
+      "No suspender abruptamente",
+      "No conducir",
+      "Riesgo de caidas en ancianos"
+    ],
+    "precaucionesEn": [
+      "Do not mix with alcohol or opioids",
+      "Do not stop abruptly",
+      "Do not drive",
+      "Fall risk in elderly"
+    ],
+    "contraindicacionesEs": [
+      "Glaucoma de angulo estrecho",
+      "Insuficiencia respiratoria severa",
+      "Apnea del sueno no tratada"
+    ],
+    "contraindicacionesEn": [
+      "Narrow-angle glaucoma",
+      "Severe respiratory failure",
+      "Untreated sleep apnea"
+    ],
+    "embarazoLactanciaEs": "EVITAR en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "AVOID in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Solo para uso a corto plazo",
+      "Nunca mezcle con alcohol",
+      "No conduzca ni opere maquinaria",
+      "Si necesita suspenderlo, hagalo gradualmente"
+    ],
+    "consejosUsoEn": [
+      "Only for short-term use",
+      "Never mix with alcohol",
+      "Do not drive or operate machinery",
+      "If you need to stop, do so gradually"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Refrigerar la solucion inyectable.",
+    "almacenamientoEn": "Room temperature. Refrigerate injectable solution.",
+    "categorias": [
+      "psiquiatrico",
+      "benzodiazepina",
+      "ansiedad",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "quetiapina",
+    "nombreGenericoEs": "Quetiapina",
+    "nombreGenericoEn": "Quetiapine",
+    "nombresComercialesEs": [
+      "Seroquel"
+    ],
+    "nombresComercialesEn": [
+      "Seroquel",
+      "Seroquel XR"
+    ],
+    "claseEs": "Antipsicotico atipico (segunda generacion)",
+    "claseEn": "Atypical antipsychotic (second generation)",
+    "paraQueEsEs": "Trata esquizofrenia, trastorno bipolar (episodios maniacos y depresivos), y como complemento en depresion resistente al tratamiento. A dosis bajas se usa para insomnio.",
+    "paraQueEsEn": "Treats schizophrenia, bipolar disorder (manic and depressive episodes), and as adjunct in treatment-resistant depression. At low doses used for insomnia.",
+    "comoFuncionaEs": "Bloquea receptores de dopamina y serotonina en el cerebro, ayudando a estabilizar el estado de animo y reducir sintomas psicoticos.",
+    "comoFuncionaEn": "Blocks dopamine and serotonin receptors in the brain, helping stabilize mood and reduce psychotic symptoms.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada (XR)"
+    ],
+    "dosisUsualEs": "Esquizofrenia: 150-750 mg al dia. Bipolar: 300-800 mg al dia. Depresion complementaria: 150-300 mg al dia.",
+    "dosisUsualEn": "Schizophrenia: 150-750 mg daily. Bipolar: 300-800 mg daily. Adjunct depression: 150-300 mg daily.",
+    "efectosSecundariosEs": [
+      "Somnolencia intensa",
+      "Aumento de peso",
+      "Boca seca",
+      "Mareo",
+      "Estrenimiento",
+      "Aumento de azucar y colesterol"
+    ],
+    "efectosSecundariosEn": [
+      "Intense drowsiness",
+      "Weight gain",
+      "Dry mouth",
+      "Dizziness",
+      "Constipation",
+      "Increased sugar and cholesterol"
+    ],
+    "efectosGravesEs": [
+      "Sindrome metabolico (diabetes, dislipidemia)",
+      "Discinesia tardia",
+      "Sindrome neuroleptico maligno",
+      "Cataratas",
+      "Prolongacion del QT"
+    ],
+    "efectosGravesEn": [
+      "Metabolic syndrome (diabetes, dyslipidemia)",
+      "Tardive dyskinesia",
+      "Neuroleptic malignant syndrome",
+      "Cataracts",
+      "QT prolongation"
+    ],
+    "interaccionesEs": [
+      "Otros depresores del SNC",
+      "Inhibidores de CYP3A4 (aumentan niveles)",
+      "Fenitoina, carbamazepina (reducen niveles)"
+    ],
+    "interaccionesEn": [
+      "Other CNS depressants",
+      "CYP3A4 inhibitors (increase levels)",
+      "Phenytoin, carbamazepine (reduce levels)"
+    ],
+    "precaucionesEs": [
+      "Monitoree peso, azucar en sangre y colesterol regularmente",
+      "Causa mucha somnolencia al inicio",
+      "Levantese lentamente",
+      "Examen ocular anual recomendado"
+    ],
+    "precaucionesEn": [
+      "Monitor weight, blood sugar, and cholesterol regularly",
+      "Causes significant drowsiness initially",
+      "Get up slowly",
+      "Annual eye exam recommended"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a quetiapina"
+    ],
+    "contraindicacionesEn": [
+      "Quetiapine allergy"
+    ],
+    "embarazoLactanciaEs": "Usar solo si el beneficio supera el riesgo. Puede causar sintomas de abstinencia en el recien nacido.",
+    "embarazoLactanciaEn": "Use only if benefit outweighs risk. May cause withdrawal symptoms in the newborn.",
+    "consejosUsoEs": [
+      "Tome por la noche - causa mucha somnolencia",
+      "Vigile su peso y niveles de azucar",
+      "Levantese lentamente para evitar mareos",
+      "No deje de tomar sin supervision medica"
+    ],
+    "consejosUsoEn": [
+      "Take at night - causes significant drowsiness",
+      "Watch your weight and sugar levels",
+      "Get up slowly to avoid dizziness",
+      "Do not stop without medical supervision"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "psiquiatrico",
+      "antipsicotico",
+      "bipolar",
+      "esquizofrenia"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "litio",
+    "nombreGenericoEs": "Litio (Carbonato de litio)",
+    "nombreGenericoEn": "Lithium (Lithium carbonate)",
+    "nombresComercialesEs": [
+      "Lithobid",
+      "Eskalith"
+    ],
+    "nombresComercialesEn": [
+      "Lithobid",
+      "Eskalith"
+    ],
+    "claseEs": "Estabilizador del estado de animo",
+    "claseEn": "Mood stabilizer",
+    "paraQueEsEs": "Trata y previene los episodios maniacos y depresivos del trastorno bipolar. Es el estandar de oro para el trastorno bipolar.",
+    "paraQueEsEn": "Treats and prevents manic and depressive episodes in bipolar disorder. It is the gold standard for bipolar disorder.",
+    "comoFuncionaEs": "El mecanismo exacto no se conoce completamente. Se cree que estabiliza la senalizacion nerviosa y protege las neuronas.",
+    "comoFuncionaEn": "The exact mechanism is not fully known. It is believed to stabilize nerve signaling and protect neurons.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Inicio: 300 mg dos a tres veces al dia. Ajustar segun niveles en sangre. Nivel terapeutico: 0.6-1.2 mEq/L.",
+    "dosisUsualEn": "Start: 300 mg two to three times daily. Adjust based on blood levels. Therapeutic level: 0.6-1.2 mEq/L.",
+    "efectosSecundariosEs": [
+      "Temblor fino de manos",
+      "Sed aumentada",
+      "Orinar mas frecuente",
+      "Nauseas",
+      "Aumento de peso",
+      "Diarrea"
+    ],
+    "efectosSecundariosEn": [
+      "Fine hand tremor",
+      "Increased thirst",
+      "More frequent urination",
+      "Nausea",
+      "Weight gain",
+      "Diarrhea"
+    ],
+    "efectosGravesEs": [
+      "Toxicidad por litio (confusion, vomitos, convulsiones)",
+      "Dano renal a largo plazo",
+      "Hipotiroidismo",
+      "Hiperparatiroidismo",
+      "Arritmias cardiacas"
+    ],
+    "efectosGravesEn": [
+      "Lithium toxicity (confusion, vomiting, seizures)",
+      "Long-term kidney damage",
+      "Hypothyroidism",
+      "Hyperparathyroidism",
+      "Heart arrhythmias"
+    ],
+    "interaccionesEs": [
+      "AINEs (AUMENTAN niveles de litio peligrosamente)",
+      "Diureticos tiazidicos (aumentan niveles)",
+      "IECA/ARBs (aumentan niveles)",
+      "Cafeina (reduce niveles)"
+    ],
+    "interaccionesEn": [
+      "NSAIDs (DANGEROUSLY increase lithium levels)",
+      "Thiazide diuretics (increase levels)",
+      "ACE inhibitors/ARBs (increase levels)",
+      "Caffeine (reduces levels)"
+    ],
+    "precaucionesEs": [
+      "Requiere analisis de sangre regulares para medir niveles",
+      "BEBA MUCHA AGUA - la deshidratacion causa toxicidad",
+      "Mantenga consumo constante de sal y liquidos",
+      "NO tome ibuprofeno ni naproxeno"
+    ],
+    "precaucionesEn": [
+      "Requires regular blood tests to measure levels",
+      "DRINK PLENTY OF WATER - dehydration causes toxicity",
+      "Maintain constant salt and fluid intake",
+      "Do NOT take ibuprofen or naproxen"
+    ],
+    "contraindicacionesEs": [
+      "Enfermedad renal severa",
+      "Deshidratacion severa",
+      "Hiponatremia severa"
+    ],
+    "contraindicacionesEn": [
+      "Severe kidney disease",
+      "Severe dehydration",
+      "Severe hyponatremia"
+    ],
+    "embarazoLactanciaEs": "Riesgo de malformacion cardiaca (anomalia de Ebstein) en el primer trimestre. Evitar en la lactancia.",
+    "embarazoLactanciaEn": "Risk of cardiac malformation (Ebstein anomaly) in first trimester. Avoid during breastfeeding.",
+    "consejosUsoEs": [
+      "Beba al menos 8-12 vasos de agua al dia",
+      "No cambie su dieta de sal drasticamente",
+      "Si tiene diarrea, vomito o fiebre, contacte a su medico (riesgo de deshidratacion)",
+      "Evite ibuprofeno - use paracetamol para el dolor"
+    ],
+    "consejosUsoEn": [
+      "Drink at least 8-12 glasses of water per day",
+      "Do not change your salt diet drastically",
+      "If you have diarrhea, vomiting, or fever, contact your doctor (dehydration risk)",
+      "Avoid ibuprofen - use acetaminophen for pain"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "psiquiatrico",
+      "estabilizador-animo",
+      "bipolar"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "metilfenidato",
+    "nombreGenericoEs": "Metilfenidato",
+    "nombreGenericoEn": "Methylphenidate",
+    "nombresComercialesEs": [
+      "Ritalin",
+      "Concerta",
+      "Ritalina"
+    ],
+    "nombresComercialesEn": [
+      "Ritalin",
+      "Concerta"
+    ],
+    "claseEs": "Estimulante del sistema nervioso central",
+    "claseEn": "Central nervous system stimulant",
+    "paraQueEsEs": "Trata el trastorno por deficit de atencion e hiperactividad (TDAH) y la narcolepsia. Mejora la concentracion y reduce la impulsividad.",
+    "paraQueEsEn": "Treats attention deficit hyperactivity disorder (ADHD) and narcolepsy. Improves concentration and reduces impulsivity.",
+    "comoFuncionaEs": "Aumenta los niveles de dopamina y norepinefrina en el cerebro, mejorando la atencion, la concentracion y el control de impulsos.",
+    "comoFuncionaEn": "Increases dopamine and norepinephrine levels in the brain, improving attention, concentration, and impulse control.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Capsula de liberacion prolongada",
+      "Parche transdermico",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Ninos: 5-20 mg dos a tres veces al dia. Adultos: 20-60 mg al dia. Concerta: 18-72 mg una vez al dia.",
+    "dosisUsualEn": "Children: 5-20 mg two to three times daily. Adults: 20-60 mg daily. Concerta: 18-72 mg once daily.",
+    "efectosSecundariosEs": [
+      "Perdida de apetito",
+      "Insomnio",
+      "Dolor de cabeza",
+      "Dolor de estomago",
+      "Nerviosismo",
+      "Aumento de frecuencia cardiaca"
+    ],
+    "efectosSecundariosEn": [
+      "Loss of appetite",
+      "Insomnia",
+      "Headache",
+      "Stomach pain",
+      "Nervousness",
+      "Increased heart rate"
+    ],
+    "efectosGravesEs": [
+      "Problemas cardiacos (arritmias, muerte subita en personas con problemas cardiacos)",
+      "Retraso del crecimiento en ninos",
+      "Psicosis",
+      "Dependencia",
+      "Comportamiento agresivo"
+    ],
+    "efectosGravesEn": [
+      "Heart problems (arrhythmias, sudden death in people with heart problems)",
+      "Growth delay in children",
+      "Psychosis",
+      "Dependence",
+      "Aggressive behavior"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO (CONTRAINDICADO)",
+      "Anticoagulantes (monitorear)",
+      "Antihipertensivos (puede reducir efecto)",
+      "Alcohol"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors (CONTRAINDICATED)",
+      "Anticoagulants (monitor)",
+      "Antihypertensives (may reduce effect)",
+      "Alcohol"
+    ],
+    "precaucionesEs": [
+      "Evaluacion cardiaca antes de iniciar",
+      "Monitorear crecimiento en ninos",
+      "Puede causar perdida de apetito - comer antes de tomarlo",
+      "No tome por la tarde (insomnio)"
+    ],
+    "precaucionesEn": [
+      "Cardiac evaluation before starting",
+      "Monitor growth in children",
+      "Can cause loss of appetite - eat before taking it",
+      "Do not take in the afternoon (insomnia)"
+    ],
+    "contraindicacionesEs": [
+      "Ansiedad severa",
+      "Glaucoma",
+      "Tics o Tourette",
+      "Uso con IMAO",
+      "Problemas cardiacos estructurales"
+    ],
+    "contraindicacionesEn": [
+      "Severe anxiety",
+      "Glaucoma",
+      "Tics or Tourette",
+      "Use with MAOIs",
+      "Structural heart problems"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome por la manana con el desayuno",
+      "No triture Concerta (la tableta vacia puede aparecer en las heces - es normal)",
+      "Coma bien antes de tomarlo",
+      "No tome despues de las 2 PM para evitar insomnio"
+    ],
+    "consejosUsoEn": [
+      "Take in the morning with breakfast",
+      "Do not crush Concerta (empty tablet may appear in stool - this is normal)",
+      "Eat well before taking it",
+      "Do not take after 2 PM to avoid insomnia"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Guardar en lugar seguro.",
+    "almacenamientoEn": "Room temperature. Store in a secure place.",
+    "categorias": [
+      "psiquiatrico",
+      "estimulante",
+      "TDAH",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "levotiroxina",
+    "nombreGenericoEs": "Levotiroxina",
+    "nombreGenericoEn": "Levothyroxine",
+    "nombresComercialesEs": [
+      "Synthroid",
+      "Eutirox",
+      "Levotirox"
+    ],
+    "nombresComercialesEn": [
+      "Synthroid",
+      "Levoxyl",
+      "Tirosint"
+    ],
+    "claseEs": "Hormona tiroidea sintetica",
+    "claseEn": "Synthetic thyroid hormone",
+    "paraQueEsEs": "Reemplaza la hormona tiroidea cuando la tiroides no produce suficiente (hipotiroidismo). Se toma de por vida en la mayoria de los casos.",
+    "paraQueEsEn": "Replaces thyroid hormone when the thyroid does not produce enough (hypothyroidism). Taken for life in most cases.",
+    "comoFuncionaEs": "Es la version sintetica de la hormona T4 que produce la tiroides. Regula el metabolismo, la energia, la temperatura corporal y muchas funciones vitales.",
+    "comoFuncionaEn": "It is the synthetic version of the T4 hormone produced by the thyroid. Regulates metabolism, energy, body temperature, and many vital functions.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula de gel",
+      "Solucion oral",
+      "Inyeccion"
+    ],
+    "dosisUsualEs": "Inicio: 25-50 mcg al dia (mas bajo en ancianos). Dosis habitual: 75-150 mcg al dia. Ajustar segun TSH.",
+    "dosisUsualEn": "Start: 25-50 mcg daily (lower in elderly). Usual dose: 75-150 mcg daily. Adjust based on TSH.",
+    "efectosSecundariosEs": [
+      "Generalmente bien tolerada a la dosis correcta. Si hay efectos, suelen indicar dosis excesiva: palpitaciones, nerviosismo, perdida de peso, insomnio, sudoracion"
+    ],
+    "efectosSecundariosEn": [
+      "Generally well tolerated at correct dose. If effects occur, they usually indicate excessive dose: palpitations, nervousness, weight loss, insomnia, sweating"
+    ],
+    "efectosGravesEs": [
+      "Angina de pecho o infarto (si dosis excesiva en cardiopatias)",
+      "Osteoporosis (dosis excesiva prolongada)",
+      "Arritmias"
+    ],
+    "efectosGravesEn": [
+      "Chest pain or heart attack (if excessive dose in heart disease)",
+      "Osteoporosis (prolonged excessive dose)",
+      "Arrhythmias"
+    ],
+    "interaccionesEs": [
+      "Calcio, hierro, antiacidos (reducen absorcion - separar por 4 horas)",
+      "Warfarina (aumenta efecto anticoagulante)",
+      "Soja (puede reducir absorcion)",
+      "Omeprazol (puede reducir absorcion)"
+    ],
+    "interaccionesEn": [
+      "Calcium, iron, antacids (reduce absorption - separate by 4 hours)",
+      "Warfarin (increases anticoagulant effect)",
+      "Soy (may reduce absorption)",
+      "Omeprazole (may reduce absorption)"
+    ],
+    "precaucionesEs": [
+      "Tome en ayunas, 30-60 minutos antes del desayuno",
+      "Separe de calcio, hierro y antiacidos por 4 horas",
+      "No cambie de marca sin consultar al medico",
+      "Requiere analisis de TSH regulares"
+    ],
+    "precaucionesEn": [
+      "Take on empty stomach, 30-60 minutes before breakfast",
+      "Separate from calcium, iron, and antacids by 4 hours",
+      "Do not change brands without consulting doctor",
+      "Requires regular TSH tests"
+    ],
+    "contraindicacionesEs": [
+      "Tirotoxicosis no tratada",
+      "Insuficiencia adrenal no corregida"
+    ],
+    "contraindicacionesEn": [
+      "Untreated thyrotoxicosis",
+      "Uncorrected adrenal insufficiency"
+    ],
+    "embarazoLactanciaEs": "SEGURA y necesaria en el embarazo. Las necesidades de dosis suelen aumentar durante el embarazo. Se excreta en leche materna en cantidades minimas.",
+    "embarazoLactanciaEn": "SAFE and necessary in pregnancy. Dose requirements usually increase during pregnancy. Excreted in breast milk in minimal amounts.",
+    "consejosUsoEs": [
+      "Tome TODOS LOS DIAS en ayunas con un vaso lleno de agua",
+      "Espere 30-60 minutos antes de comer o tomar cafe",
+      "No cambie de marca sin consultarlo",
+      "Es un medicamento de por vida - no deje de tomarlo"
+    ],
+    "consejosUsoEn": [
+      "Take EVERY DAY on empty stomach with a full glass of water",
+      "Wait 30-60 minutes before eating or drinking coffee",
+      "Do not switch brands without consulting",
+      "It is a lifetime medication - do not stop taking it"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "hormonal",
+      "endocrino",
+      "tiroides"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "anticonceptivos-orales",
+    "nombreGenericoEs": "Anticonceptivos Orales Combinados (etinil estradiol + progestina)",
+    "nombreGenericoEn": "Combined Oral Contraceptives (ethinyl estradiol + progestin)",
+    "nombresComercialesEs": [
+      "Yasmin",
+      "Diane",
+      "Microgynon",
+      "Nordet"
+    ],
+    "nombresComercialesEn": [
+      "Yasmin",
+      "Ortho Tri-Cyclen",
+      "Loestrin",
+      "Yaz"
+    ],
+    "claseEs": "Anticonceptivo hormonal",
+    "claseEn": "Hormonal contraceptive",
+    "paraQueEsEs": "Previene el embarazo. Tambien se usa para regular periodos irregulares, reducir dolor menstrual, tratar acne y endometriosis.",
+    "paraQueEsEn": "Prevents pregnancy. Also used to regulate irregular periods, reduce menstrual pain, treat acne, and endometriosis.",
+    "comoFuncionaEs": "Combina estrogeno y progestina para prevenir la ovulacion, engrosar el moco cervical y adelgazar el endometrio, impidiendo el embarazo.",
+    "comoFuncionaEn": "Combines estrogen and progestin to prevent ovulation, thicken cervical mucus, and thin the endometrium, preventing pregnancy.",
+    "formasPresentacion": [
+      "Tableta (paquetes de 21, 28 o 91 dias)"
+    ],
+    "dosisUsualEs": "1 tableta diaria a la misma hora. Paquetes de 28: incluye 7 tabletas inactivas/placebo.",
+    "dosisUsualEn": "1 tablet daily at the same time. 28-day packs: includes 7 inactive/placebo tablets.",
+    "efectosSecundariosEs": [
+      "Nauseas",
+      "Sensibilidad mamaria",
+      "Dolor de cabeza",
+      "Sangrado entre periodos",
+      "Cambios de humor",
+      "Retencion de liquidos"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea",
+      "Breast tenderness",
+      "Headache",
+      "Breakthrough bleeding",
+      "Mood changes",
+      "Fluid retention"
+    ],
+    "efectosGravesEs": [
+      "Coagulos sanguineos (trombosis venosa profunda, embolia pulmonar)",
+      "Derrame cerebral",
+      "Infarto (raro, mas riesgo en fumadoras mayores de 35)"
+    ],
+    "efectosGravesEn": [
+      "Blood clots (deep vein thrombosis, pulmonary embolism)",
+      "Stroke",
+      "Heart attack (rare, higher risk in smokers over 35)"
+    ],
+    "interaccionesEs": [
+      "Rifampicina (reduce eficacia significativamente)",
+      "Algunos anticonvulsivantes",
+      "Hierba de San Juan",
+      "Algunos antibioticos (la evidencia es debil excepto rifampicina)"
+    ],
+    "interaccionesEn": [
+      "Rifampin (significantly reduces efficacy)",
+      "Some anticonvulsants",
+      "St. John's Wort",
+      "Some antibiotics (evidence is weak except rifampin)"
+    ],
+    "precaucionesEs": [
+      "Tome a la misma hora todos los dias",
+      "Fumar y tener mas de 35 anos aumenta mucho el riesgo de coagulos",
+      "Busque atencion medica si tiene dolor de pierna, dolor de pecho o dolor de cabeza severo"
+    ],
+    "precaucionesEn": [
+      "Take at the same time every day",
+      "Smoking and being over 35 greatly increases clot risk",
+      "Seek medical attention for leg pain, chest pain, or severe headache"
+    ],
+    "contraindicacionesEs": [
+      "Fumadoras mayores de 35 anos",
+      "Historial de coagulos sanguineos",
+      "Cancer de mama",
+      "Migranas con aura",
+      "Enfermedad hepatica severa",
+      "Hipertension no controlada"
+    ],
+    "contraindicacionesEn": [
+      "Smokers over 35",
+      "History of blood clots",
+      "Breast cancer",
+      "Migraines with aura",
+      "Severe liver disease",
+      "Uncontrolled hypertension"
+    ],
+    "embarazoLactanciaEs": "Suspender si se confirma embarazo. Los anticonceptivos combinados pueden reducir la produccion de leche - se prefieren los de solo progestina durante la lactancia.",
+    "embarazoLactanciaEn": "Discontinue if pregnancy confirmed. Combined contraceptives may reduce milk production - progestin-only preferred during breastfeeding.",
+    "consejosUsoEs": [
+      "Tome a la misma hora cada dia",
+      "Si olvida una pastilla, tomela tan pronto la recuerde",
+      "Use un metodo de respaldo si olvida 2 o mas dias",
+      "No fume, especialmente si tiene mas de 35 anos"
+    ],
+    "consejosUsoEn": [
+      "Take at the same time each day",
+      "If you miss a pill, take it as soon as you remember",
+      "Use a backup method if you miss 2 or more days",
+      "Do not smoke, especially if over 35"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "hormonal",
+      "anticonceptivo",
+      "ginecologia"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "cetirizina",
+    "nombreGenericoEs": "Cetirizina",
+    "nombreGenericoEn": "Cetirizine",
+    "nombresComercialesEs": [
+      "Zyrtec",
+      "Virlix"
+    ],
+    "nombresComercialesEn": [
+      "Zyrtec"
+    ],
+    "claseEs": "Antihistaminico de segunda generacion",
+    "claseEn": "Second-generation antihistamine",
+    "paraQueEsEs": "Alivia los sintomas de alergias: estornudos, picazon de ojos y nariz, secrecion nasal y urticaria. Causa menos somnolencia que difenhidramina.",
+    "paraQueEsEn": "Relieves allergy symptoms: sneezing, itchy eyes and nose, runny nose, and hives. Causes less drowsiness than diphenhydramine.",
+    "comoFuncionaEs": "Bloquea los receptores de histamina H1, impidiendo que la histamina cause los sintomas de alergia como picazon, estornudos e hinchazon.",
+    "comoFuncionaEn": "Blocks H1 histamine receptors, preventing histamine from causing allergy symptoms like itching, sneezing, and swelling.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta masticable",
+      "Jarabe",
+      "Gotas"
+    ],
+    "dosisUsualEs": "Adultos y ninos mayores de 6 anos: 10 mg una vez al dia. Ninos 2-6 anos: 5 mg al dia.",
+    "dosisUsualEn": "Adults and children over 6: 10 mg once daily. Children 2-6: 5 mg daily.",
+    "efectosSecundariosEs": [
+      "Somnolencia leve (mas que loratadina)",
+      "Boca seca",
+      "Dolor de cabeza",
+      "Fatiga"
+    ],
+    "efectosSecundariosEn": [
+      "Mild drowsiness (more than loratadine)",
+      "Dry mouth",
+      "Headache",
+      "Fatigue"
+    ],
+    "efectosGravesEs": [
+      "Reaccion alergica al medicamento (raro)"
+    ],
+    "efectosGravesEn": [
+      "Allergic reaction to the medication (rare)"
+    ],
+    "interaccionesEs": [
+      "Alcohol (aumenta somnolencia)",
+      "Otros sedantes (efecto aditivo)"
+    ],
+    "interaccionesEn": [
+      "Alcohol (increases drowsiness)",
+      "Other sedatives (additive effect)"
+    ],
+    "precaucionesEs": [
+      "Puede causar algo de somnolencia - vea como le afecta antes de conducir",
+      "Ajustar dosis en insuficiencia renal"
+    ],
+    "precaucionesEn": [
+      "May cause some drowsiness - see how it affects you before driving",
+      "Adjust dose in kidney impairment"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a cetirizina o hidroxizina"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to cetirizine or hydroxyzine"
+    ],
+    "embarazoLactanciaEs": "Se considera uno de los antihistaminicos mas seguros en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Considered one of the safest antihistamines in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome una vez al dia - actua por 24 horas",
+      "Si le causa somnolencia, tomelo por la noche",
+      "Efectivo tanto para alergias nasales como urticaria"
+    ],
+    "consejosUsoEn": [
+      "Take once daily - works for 24 hours",
+      "If it causes drowsiness, take it at night",
+      "Effective for both nasal allergies and hives"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "alergia",
+      "antihistaminico",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "loratadina",
+    "nombreGenericoEs": "Loratadina",
+    "nombreGenericoEn": "Loratadine",
+    "nombresComercialesEs": [
+      "Claritin",
+      "Clarityne"
+    ],
+    "nombresComercialesEn": [
+      "Claritin",
+      "Alavert"
+    ],
+    "claseEs": "Antihistaminico de segunda generacion",
+    "claseEn": "Second-generation antihistamine",
+    "paraQueEsEs": "Alivia sintomas de alergias estacionales y perennes: estornudos, picazon, secrecion nasal y urticaria. Causa muy poca somnolencia.",
+    "paraQueEsEn": "Relieves seasonal and perennial allergy symptoms: sneezing, itching, runny nose, and hives. Causes very little drowsiness.",
+    "comoFuncionaEs": "Bloquea los receptores de histamina H1 sin penetrar mucho en el cerebro, por lo que causa menos somnolencia.",
+    "comoFuncionaEn": "Blocks H1 histamine receptors without penetrating much into the brain, causing less drowsiness.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de desintegracion oral",
+      "Jarabe"
+    ],
+    "dosisUsualEs": "Adultos y ninos mayores de 6 anos: 10 mg una vez al dia. Ninos 2-5 anos: 5 mg al dia.",
+    "dosisUsualEn": "Adults and children over 6: 10 mg once daily. Children 2-5: 5 mg daily.",
+    "efectosSecundariosEs": [
+      "Dolor de cabeza",
+      "Boca seca",
+      "Somnolencia (rara)",
+      "Fatiga"
+    ],
+    "efectosSecundariosEn": [
+      "Headache",
+      "Dry mouth",
+      "Drowsiness (rare)",
+      "Fatigue"
+    ],
+    "efectosGravesEs": [
+      "Reacciones alergicas (muy raro)"
+    ],
+    "efectosGravesEn": [
+      "Allergic reactions (very rare)"
+    ],
+    "interaccionesEs": [
+      "Pocas interacciones significativas"
+    ],
+    "interaccionesEn": [
+      "Few significant interactions"
+    ],
+    "precaucionesEs": [
+      "Ajustar dosis en insuficiencia hepatica o renal severa"
+    ],
+    "precaucionesEn": [
+      "Adjust dose in severe liver or kidney impairment"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a loratadina"
+    ],
+    "contraindicacionesEn": [
+      "Loratadine allergy"
+    ],
+    "embarazoLactanciaEs": "Considerado seguro en el embarazo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Considered safe in pregnancy. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "El antihistaminico que menos somnolencia causa",
+      "Puede tomar con o sin alimentos",
+      "Actua por 24 horas con una sola dosis"
+    ],
+    "consejosUsoEn": [
+      "The antihistamine that causes the least drowsiness",
+      "Can take with or without food",
+      "Works for 24 hours with a single dose"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "alergia",
+      "antihistaminico",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "difenhidramina",
+    "nombreGenericoEs": "Difenhidramina",
+    "nombreGenericoEn": "Diphenhydramine",
+    "nombresComercialesEs": [
+      "Benadryl"
+    ],
+    "nombresComercialesEn": [
+      "Benadryl"
+    ],
+    "claseEs": "Antihistaminico de primera generacion",
+    "claseEn": "First-generation antihistamine",
+    "paraQueEsEs": "Alivia sintomas de alergia, picazon, urticaria y se usa como ayuda para dormir. Tambien trata el mareo por movimiento y reacciones alergicas leves.",
+    "paraQueEsEn": "Relieves allergy symptoms, itching, hives, and is used as a sleep aid. Also treats motion sickness and mild allergic reactions.",
+    "comoFuncionaEs": "Bloquea los receptores de histamina H1 en todo el cuerpo y en el cerebro. El efecto en el cerebro causa somnolencia.",
+    "comoFuncionaEn": "Blocks H1 histamine receptors throughout the body and brain. The brain effect causes drowsiness.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Liquido/Jarabe",
+      "Crema topica"
+    ],
+    "dosisUsualEs": "Adultos: 25-50 mg cada 4-6 horas. Maximo: 300 mg al dia. Para dormir: 25-50 mg al acostarse.",
+    "dosisUsualEn": "Adults: 25-50 mg every 4-6 hours. Maximum: 300 mg daily. For sleep: 25-50 mg at bedtime.",
+    "efectosSecundariosEs": [
+      "Somnolencia intensa",
+      "Boca seca",
+      "Vision borrosa",
+      "Estrenimiento",
+      "Retencion urinaria",
+      "Mareo"
+    ],
+    "efectosSecundariosEn": [
+      "Intense drowsiness",
+      "Dry mouth",
+      "Blurred vision",
+      "Constipation",
+      "Urinary retention",
+      "Dizziness"
+    ],
+    "efectosGravesEs": [
+      "Confusion y delirio (especialmente en ancianos)",
+      "Convulsiones (sobredosis)",
+      "Arritmias (sobredosis)",
+      "Riesgo de demencia con uso cronico"
+    ],
+    "efectosGravesEn": [
+      "Confusion and delirium (especially in elderly)",
+      "Seizures (overdose)",
+      "Arrhythmias (overdose)",
+      "Dementia risk with chronic use"
+    ],
+    "interaccionesEs": [
+      "Alcohol (somnolencia severa)",
+      "Otros sedantes",
+      "Inhibidores de la MAO",
+      "Otros medicamentos anticolinergicos"
+    ],
+    "interaccionesEn": [
+      "Alcohol (severe drowsiness)",
+      "Other sedatives",
+      "MAO inhibitors",
+      "Other anticholinergic medications"
+    ],
+    "precaucionesEs": [
+      "Causa MUCHA somnolencia - no conduzca",
+      "EVITAR en ancianos (riesgo de confusion y caidas)",
+      "No use como ayuda para dormir a largo plazo",
+      "No mezcle con alcohol"
+    ],
+    "precaucionesEn": [
+      "Causes SIGNIFICANT drowsiness - do not drive",
+      "AVOID in elderly (risk of confusion and falls)",
+      "Do not use as long-term sleep aid",
+      "Do not mix with alcohol"
+    ],
+    "contraindicacionesEs": [
+      "Neonatos",
+      "Madres lactantes",
+      "Uso con inhibidores de la MAO",
+      "Glaucoma de angulo cerrado"
+    ],
+    "contraindicacionesEn": [
+      "Neonates",
+      "Breastfeeding mothers",
+      "Use with MAO inhibitors",
+      "Narrow-angle glaucoma"
+    ],
+    "embarazoLactanciaEs": "Puede usarse en el embarazo con precaucion. Evitar durante la lactancia.",
+    "embarazoLactanciaEn": "Can be used in pregnancy with caution. Avoid during breastfeeding.",
+    "consejosUsoEs": [
+      "Use solo cuando necesite - prefiera cetirizina o loratadina para uso diario",
+      "Causa mucha somnolencia - no conduzca",
+      "No es recomendable para personas mayores",
+      "No use como pastilla para dormir cronica"
+    ],
+    "consejosUsoEn": [
+      "Use only when needed - prefer cetirizine or loratadine for daily use",
+      "Causes significant drowsiness - do not drive",
+      "Not recommended for older adults",
+      "Do not use as chronic sleeping pill"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "alergia",
+      "antihistaminico",
+      "insomnio",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "epinefrina",
+    "nombreGenericoEs": "Epinefrina (Adrenalina) autoinyectable",
+    "nombreGenericoEn": "Epinephrine (Adrenaline) auto-injector",
+    "nombresComercialesEs": [
+      "EpiPen",
+      "Auvi-Q",
+      "Adrenaclick"
+    ],
+    "nombresComercialesEn": [
+      "EpiPen",
+      "Auvi-Q",
+      "Adrenaclick"
+    ],
+    "claseEs": "Simpaticomimetico (agonista adrenergico)",
+    "claseEn": "Sympathomimetic (adrenergic agonist)",
+    "paraQueEsEs": "Tratamiento de EMERGENCIA para anafilaxia (reaccion alergica severa que pone en peligro la vida). Puede salvar la vida.",
+    "paraQueEsEn": "EMERGENCY treatment for anaphylaxis (life-threatening severe allergic reaction). Can save a life.",
+    "comoFuncionaEs": "Rapidamente abre las vias respiratorias, sube la presion arterial y reduce la hinchazon. Revierte los efectos de una reaccion alergica severa en minutos.",
+    "comoFuncionaEn": "Rapidly opens airways, raises blood pressure, and reduces swelling. Reverses the effects of a severe allergic reaction within minutes.",
+    "formasPresentacion": [
+      "Autoinyector intramuscular (EpiPen)",
+      "Autoinyector (Auvi-Q)",
+      "Solucion inyectable"
+    ],
+    "dosisUsualEs": "Adultos y ninos mayores de 30 kg: 0.3 mg (EpiPen). Ninos 15-30 kg: 0.15 mg (EpiPen Jr). Inyectar en muslo externo.",
+    "dosisUsualEn": "Adults and children over 30 kg: 0.3 mg (EpiPen). Children 15-30 kg: 0.15 mg (EpiPen Jr). Inject in outer thigh.",
+    "efectosSecundariosEs": [
+      "Taquicardia",
+      "Temblor",
+      "Ansiedad",
+      "Sudoracion",
+      "Mareo",
+      "Nauseas",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Rapid heart rate",
+      "Tremor",
+      "Anxiety",
+      "Sweating",
+      "Dizziness",
+      "Nausea",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Arritmias cardiacas (raro a dosis normales)",
+      "Crisis hipertensiva (raro)",
+      "Edema pulmonar (raro)"
+    ],
+    "efectosGravesEn": [
+      "Heart arrhythmias (rare at normal doses)",
+      "Hypertensive crisis (rare)",
+      "Pulmonary edema (rare)"
+    ],
+    "interaccionesEs": [
+      "Betabloqueadores (pueden reducir eficacia - puede necesitar glucagon)",
+      "Antidepresivos triciclicos (aumentan efecto cardiovascular)"
+    ],
+    "interaccionesEn": [
+      "Beta-blockers (may reduce efficacy - may need glucagon)",
+      "Tricyclic antidepressants (increase cardiovascular effect)"
+    ],
+    "precaucionesEs": [
+      "SIEMPRE lleve dos autoinyectores",
+      "Llame al 911/emergencias DESPUES de inyectarse",
+      "Se puede inyectar a traves de la ropa",
+      "Los efectos secundarios son temporales y menores comparados con la anafilaxia"
+    ],
+    "precaucionesEn": [
+      "ALWAYS carry two auto-injectors",
+      "Call 911/emergency AFTER injecting",
+      "Can inject through clothing",
+      "Side effects are temporary and minor compared to anaphylaxis"
+    ],
+    "contraindicacionesEs": [
+      "No hay contraindicaciones absolutas en anafilaxia - SIEMPRE usar si se necesita"
+    ],
+    "contraindicacionesEn": [
+      "No absolute contraindications in anaphylaxis - ALWAYS use if needed"
+    ],
+    "embarazoLactanciaEs": "USAR en anafilaxia sin dudarlo - la anafilaxia es mortal para madre y feto.",
+    "embarazoLactanciaEn": "USE in anaphylaxis without hesitation - anaphylaxis is fatal for mother and fetus.",
+    "consejosUsoEs": [
+      "Practique con el entrenador (sin aguja) regularmente",
+      "Inyecte en la cara EXTERIOR del muslo - nunca en la nalga",
+      "Mantenga presionado por 10 segundos",
+      "Llame al 911 inmediatamente despues",
+      "Revise la fecha de vencimiento cada mes"
+    ],
+    "consejosUsoEn": [
+      "Practice with the trainer (needleless) regularly",
+      "Inject in the OUTER thigh - never in the buttock",
+      "Hold for 10 seconds",
+      "Call 911 immediately after",
+      "Check expiration date every month"
+    ],
+    "almacenamientoEs": "Temperatura ambiente (15-30 grados C). NO refrigerar. Proteger de la luz. Verificar que el liquido sea claro e incoloro.",
+    "almacenamientoEn": "Room temperature (15-30 degrees C). Do NOT refrigerate. Protect from light. Verify liquid is clear and colorless.",
+    "categorias": [
+      "emergencia",
+      "alergia",
+      "anafilaxia"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "antiacidos",
+    "nombreGenericoEs": "Antiacidos (Hidroxido de aluminio/magnesio, Carbonato de calcio)",
+    "nombreGenericoEn": "Antacids (Aluminum/magnesium hydroxide, Calcium carbonate)",
+    "nombresComercialesEs": [
+      "Tums",
+      "Maalox",
+      "Mylanta",
+      "Rolaids",
+      "Sal de uvas"
+    ],
+    "nombresComercialesEn": [
+      "Tums",
+      "Maalox",
+      "Mylanta",
+      "Rolaids"
+    ],
+    "claseEs": "Antiacido",
+    "claseEn": "Antacid",
+    "paraQueEsEs": "Alivio rapido de acidez estomacal, indigestion y malestar estomacal. Neutralizan el acido ya producido en el estomago.",
+    "paraQueEsEn": "Quick relief of heartburn, indigestion, and stomach upset. Neutralize acid already produced in the stomach.",
+    "comoFuncionaEs": "Son bases que neutralizan directamente el acido del estomago, proporcionando alivio rapido pero temporal.",
+    "comoFuncionaEn": "They are bases that directly neutralize stomach acid, providing quick but temporary relief.",
+    "formasPresentacion": [
+      "Tableta masticable",
+      "Tableta efervescente",
+      "Suspension liquida"
+    ],
+    "dosisUsualEs": "Segun el producto. Tums: 2-4 tabletas segun necesidad. Maalox: 10-20 ml entre comidas y al acostarse.",
+    "dosisUsualEn": "Per product. Tums: 2-4 tablets as needed. Maalox: 10-20 ml between meals and at bedtime.",
+    "efectosSecundariosEs": [
+      "Estrenimiento (los de aluminio)",
+      "Diarrea (los de magnesio)",
+      "Eructos (los de carbonato)",
+      "Gases"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation (aluminum-based)",
+      "Diarrhea (magnesium-based)",
+      "Belching (carbonate-based)",
+      "Gas"
+    ],
+    "efectosGravesEs": [
+      "Sindrome leche-alcali (con uso excesivo de calcio)",
+      "Hipermagnesemia en insuficiencia renal",
+      "Obstruccion intestinal (aluminio, raro)"
+    ],
+    "efectosGravesEn": [
+      "Milk-alkali syndrome (with excessive calcium use)",
+      "Hypermagnesemia in kidney failure",
+      "Intestinal obstruction (aluminum, rare)"
+    ],
+    "interaccionesEs": [
+      "MUCHOS medicamentos (reducen su absorcion): antibioticos, hierro, levotiroxina, etc. Separar por 2 horas"
+    ],
+    "interaccionesEn": [
+      "MANY medications (reduce their absorption): antibiotics, iron, levothyroxine, etc. Separate by 2 hours"
+    ],
+    "precaucionesEs": [
+      "Separar de otros medicamentos por al menos 2 horas",
+      "No use por mas de 2 semanas sin consultar al medico",
+      "Precaucion en insuficiencia renal (los de magnesio)"
+    ],
+    "precaucionesEn": [
+      "Separate from other medications by at least 2 hours",
+      "Do not use for more than 2 weeks without consulting a doctor",
+      "Caution in kidney failure (magnesium-based)"
+    ],
+    "contraindicacionesEs": [
+      "Insuficiencia renal severa (antiacidos de magnesio)",
+      "Alergia a los componentes"
+    ],
+    "contraindicacionesEn": [
+      "Severe kidney failure (magnesium antacids)",
+      "Allergy to components"
+    ],
+    "embarazoLactanciaEs": "Los de carbonato de calcio (Tums) son la primera opcion para acidez en el embarazo.",
+    "embarazoLactanciaEn": "Calcium carbonate ones (Tums) are first choice for heartburn in pregnancy.",
+    "consejosUsoEs": [
+      "Alivio rapido pero temporal",
+      "Si necesita antiacidos regularmente, hable con su medico sobre IBP",
+      "Separe de otros medicamentos por 2 horas",
+      "Tums tambien aporta calcio"
+    ],
+    "consejosUsoEn": [
+      "Quick but temporary relief",
+      "If you need antacids regularly, talk to your doctor about PPIs",
+      "Separate from other medications by 2 hours",
+      "Tums also provides calcium"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "antiacido",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "suplemento-hierro",
+    "nombreGenericoEs": "Sulfato Ferroso (Hierro)",
+    "nombreGenericoEn": "Ferrous Sulfate (Iron)",
+    "nombresComercialesEs": [
+      "Fer-In-Sol",
+      "Feosol"
+    ],
+    "nombresComercialesEn": [
+      "Fer-In-Sol",
+      "Feosol",
+      "Slow Fe"
+    ],
+    "claseEs": "Suplemento mineral (hierro)",
+    "claseEn": "Mineral supplement (iron)",
+    "paraQueEsEs": "Trata y previene la anemia por deficiencia de hierro. El hierro es necesario para que la sangre transporte oxigeno.",
+    "paraQueEsEn": "Treats and prevents iron deficiency anemia. Iron is needed for blood to carry oxygen.",
+    "comoFuncionaEs": "Proporciona hierro que el cuerpo necesita para fabricar hemoglobina, la proteina de los globulos rojos que transporta oxigeno.",
+    "comoFuncionaEn": "Provides iron that the body needs to make hemoglobin, the protein in red blood cells that carries oxygen.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Gotas/Liquido"
+    ],
+    "dosisUsualEs": "Adultos anemia: 325 mg (65 mg de hierro elemental) 1-3 veces al dia. Prevencion: 325 mg al dia.",
+    "dosisUsualEn": "Adults anemia: 325 mg (65 mg elemental iron) 1-3 times daily. Prevention: 325 mg daily.",
+    "efectosSecundariosEs": [
+      "Estrenimiento",
+      "Nauseas",
+      "Dolor de estomago",
+      "Heces negras (normal)",
+      "Sabor metalico"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation",
+      "Nausea",
+      "Stomach pain",
+      "Black stools (normal)",
+      "Metallic taste"
+    ],
+    "efectosGravesEs": [
+      "Intoxicacion por hierro (especialmente peligrosa en ninos)",
+      "Sobrecarga de hierro (uso excesivo/innecesario)"
+    ],
+    "efectosGravesEn": [
+      "Iron poisoning (especially dangerous in children)",
+      "Iron overload (excessive/unnecessary use)"
+    ],
+    "interaccionesEs": [
+      "Antiacidos, calcio, lacteos (reducen absorcion)",
+      "Antibioticos (tetracicilnas, quinolonas - reducen absorcion mutua)",
+      "Levotiroxina (separar por 4 horas)",
+      "Vitamina C (AUMENTA absorcion)"
+    ],
+    "interaccionesEn": [
+      "Antacids, calcium, dairy (reduce absorption)",
+      "Antibiotics (tetracyclines, quinolones - reduce mutual absorption)",
+      "Levothyroxine (separate by 4 hours)",
+      "Vitamin C (INCREASES absorption)"
+    ],
+    "precaucionesEs": [
+      "Las heces negras son NORMALES",
+      "Tome con vitamina C (jugo de naranja) para mejor absorcion",
+      "Mantenga fuera del alcance de los ninos - la sobredosis es peligrosa",
+      "El estrenimiento es comun - use un laxante suave si es necesario"
+    ],
+    "precaucionesEn": [
+      "Black stools are NORMAL",
+      "Take with vitamin C (orange juice) for better absorption",
+      "Keep out of reach of children - overdose is dangerous",
+      "Constipation is common - use a gentle laxative if needed"
+    ],
+    "contraindicacionesEs": [
+      "Hemocromatosis (sobrecarga de hierro)",
+      "Anemia no causada por deficiencia de hierro",
+      "Transfusiones frecuentes"
+    ],
+    "contraindicacionesEn": [
+      "Hemochromatosis (iron overload)",
+      "Anemia not caused by iron deficiency",
+      "Frequent transfusions"
+    ],
+    "embarazoLactanciaEs": "Frecuentemente necesario en el embarazo para prevenir anemia. Seguro durante la lactancia.",
+    "embarazoLactanciaEn": "Frequently needed in pregnancy to prevent anemia. Safe during breastfeeding.",
+    "consejosUsoEs": [
+      "Tome con el estomago vacio para mejor absorcion (o con comida si causa molestia)",
+      "Tome con jugo de naranja (la vitamina C mejora la absorcion)",
+      "Separe de la leche, cafe y te por 2 horas",
+      "Las heces oscuras son normales, no se alarme"
+    ],
+    "consejosUsoEn": [
+      "Take on empty stomach for best absorption (or with food if it causes discomfort)",
+      "Take with orange juice (vitamin C improves absorption)",
+      "Separate from milk, coffee, and tea by 2 hours",
+      "Dark stools are normal, do not be alarmed"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. MANTENER FUERA DEL ALCANCE DE LOS NINOS - la sobredosis es potencialmente mortal.",
+    "almacenamientoEn": "Room temperature. KEEP OUT OF REACH OF CHILDREN - overdose is potentially fatal.",
+    "categorias": [
+      "suplemento",
+      "mineral",
+      "hierro",
+      "anemia",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "calcio-vitamina-d",
+    "nombreGenericoEs": "Calcio con Vitamina D",
+    "nombreGenericoEn": "Calcium with Vitamin D",
+    "nombresComercialesEs": [
+      "Caltrate",
+      "Os-Cal",
+      "Citracal"
+    ],
+    "nombresComercialesEn": [
+      "Caltrate",
+      "Os-Cal",
+      "Citracal"
+    ],
+    "claseEs": "Suplemento mineral/vitamina",
+    "claseEn": "Mineral/vitamin supplement",
+    "paraQueEsEs": "Previene y trata la deficiencia de calcio y vitamina D. Fortalece los huesos y previene la osteoporosis.",
+    "paraQueEsEn": "Prevents and treats calcium and vitamin D deficiency. Strengthens bones and prevents osteoporosis.",
+    "comoFuncionaEs": "El calcio es el mineral principal de los huesos. La vitamina D ayuda al cuerpo a absorber el calcio del intestino.",
+    "comoFuncionaEn": "Calcium is the main mineral in bones. Vitamin D helps the body absorb calcium from the intestine.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta masticable",
+      "Capsula de gel",
+      "Liquido"
+    ],
+    "dosisUsualEs": "Calcio: 500-600 mg dos veces al dia (maximo 1000-1200 mg al dia de suplemento). Vitamina D: 600-2000 UI al dia.",
+    "dosisUsualEn": "Calcium: 500-600 mg twice daily (maximum 1000-1200 mg daily from supplement). Vitamin D: 600-2000 IU daily.",
+    "efectosSecundariosEs": [
+      "Estrenimiento",
+      "Gases",
+      "Hinchazon abdominal",
+      "Nauseas"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation",
+      "Gas",
+      "Bloating",
+      "Nausea"
+    ],
+    "efectosGravesEs": [
+      "Calculos renales (con dosis excesivas)",
+      "Hipercalcemia (raro con suplementos)",
+      "Calcificacion vascular (controversial, dosis muy altas)"
+    ],
+    "efectosGravesEn": [
+      "Kidney stones (with excessive doses)",
+      "Hypercalcemia (rare with supplements)",
+      "Vascular calcification (controversial, very high doses)"
+    ],
+    "interaccionesEs": [
+      "Levotiroxina (separar por 4 horas)",
+      "Antibioticos (tetraciclinas, quinolonas)",
+      "Hierro (separar)",
+      "Bisfosfonatos (separar por al menos 30 minutos)"
+    ],
+    "interaccionesEn": [
+      "Levothyroxine (separate by 4 hours)",
+      "Antibiotics (tetracyclines, quinolones)",
+      "Iron (separate)",
+      "Bisphosphonates (separate by at least 30 minutes)"
+    ],
+    "precaucionesEs": [
+      "No tome mas de 500-600 mg de calcio a la vez (el cuerpo no absorbe mas)",
+      "El citrato de calcio se absorbe mejor y causa menos estrenimiento",
+      "Tome calcio con alimentos para mejor absorcion"
+    ],
+    "precaucionesEn": [
+      "Do not take more than 500-600 mg of calcium at once (body cannot absorb more)",
+      "Calcium citrate absorbs better and causes less constipation",
+      "Take calcium with food for better absorption"
+    ],
+    "contraindicacionesEs": [
+      "Hipercalcemia",
+      "Hiperparatiroidismo severo",
+      "Sarcoidosis",
+      "Calculos renales recurrentes de calcio"
+    ],
+    "contraindicacionesEn": [
+      "Hypercalcemia",
+      "Severe hyperparathyroidism",
+      "Sarcoidosis",
+      "Recurrent calcium kidney stones"
+    ],
+    "embarazoLactanciaEs": "Recomendado durante el embarazo y la lactancia para mantener huesos sanos.",
+    "embarazoLactanciaEn": "Recommended during pregnancy and breastfeeding to maintain healthy bones.",
+    "consejosUsoEs": [
+      "Divida la dosis - tome 500 mg dos veces al dia",
+      "El citrato de calcio es mejor si tiene estomago sensible",
+      "Incluya alimentos ricos en calcio ademas del suplemento",
+      "La vitamina D se necesita para absorber el calcio"
+    ],
+    "consejosUsoEn": [
+      "Split the dose - take 500 mg twice daily",
+      "Calcium citrate is better if you have a sensitive stomach",
+      "Include calcium-rich foods in addition to the supplement",
+      "Vitamin D is needed to absorb calcium"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad.",
+    "almacenamientoEn": "Room temperature, protect from moisture.",
+    "categorias": [
+      "suplemento",
+      "mineral",
+      "vitamina",
+      "huesos",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "pseudoefedrina",
+    "nombreGenericoEs": "Pseudoefedrina",
+    "nombreGenericoEn": "Pseudoephedrine",
+    "nombresComercialesEs": [
+      "Sudafed"
+    ],
+    "nombresComercialesEn": [
+      "Sudafed"
+    ],
+    "claseEs": "Descongestionante nasal",
+    "claseEn": "Nasal decongestant",
+    "paraQueEsEs": "Alivia la congestion nasal y de senos paranasales causada por resfriados, gripe y alergias.",
+    "paraQueEsEn": "Relieves nasal and sinus congestion caused by colds, flu, and allergies.",
+    "comoFuncionaEs": "Contrae los vasos sanguineos en la nariz, reduciendo la hinchazon y abriendo los conductos nasales.",
+    "comoFuncionaEn": "Constricts blood vessels in the nose, reducing swelling and opening nasal passages.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de liberacion prolongada",
+      "Liquido"
+    ],
+    "dosisUsualEs": "Adultos: 30-60 mg cada 4-6 horas. Liberacion prolongada: 120 mg cada 12 horas. Maximo: 240 mg al dia.",
+    "dosisUsualEn": "Adults: 30-60 mg every 4-6 hours. Extended-release: 120 mg every 12 hours. Maximum: 240 mg daily.",
+    "efectosSecundariosEs": [
+      "Insomnio",
+      "Nerviosismo",
+      "Aumento de la presion arterial",
+      "Taquicardia",
+      "Dolor de cabeza",
+      "Boca seca"
+    ],
+    "efectosSecundariosEn": [
+      "Insomnia",
+      "Nervousness",
+      "Increased blood pressure",
+      "Rapid heart rate",
+      "Headache",
+      "Dry mouth"
+    ],
+    "efectosGravesEs": [
+      "Crisis hipertensiva",
+      "Arritmias cardiacas",
+      "Derrame cerebral (raro)"
+    ],
+    "efectosGravesEn": [
+      "Hypertensive crisis",
+      "Heart arrhythmias",
+      "Stroke (rare)"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO (CONTRAINDICADO - crisis hipertensiva)",
+      "Otros descongestionantes",
+      "Cafeina (aumenta estimulacion)"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors (CONTRAINDICATED - hypertensive crisis)",
+      "Other decongestants",
+      "Caffeine (increases stimulation)"
+    ],
+    "precaucionesEs": [
+      "No use si tiene presion arterial alta no controlada",
+      "Tome por la manana para evitar insomnio",
+      "No use por mas de 7 dias"
+    ],
+    "precaucionesEn": [
+      "Do not use if you have uncontrolled high blood pressure",
+      "Take in the morning to avoid insomnia",
+      "Do not use for more than 7 days"
+    ],
+    "contraindicacionesEs": [
+      "Hipertension severa",
+      "Enfermedad cardiaca severa",
+      "Uso con inhibidores de la MAO",
+      "Glaucoma de angulo cerrado"
+    ],
+    "contraindicacionesEn": [
+      "Severe hypertension",
+      "Severe heart disease",
+      "Use with MAO inhibitors",
+      "Narrow-angle glaucoma"
+    ],
+    "embarazoLactanciaEs": "Generalmente se evita en el primer trimestre. Se excreta en leche materna - puede reducir produccion de leche.",
+    "embarazoLactanciaEn": "Generally avoided in first trimester. Excreted in breast milk - may reduce milk production.",
+    "consejosUsoEs": [
+      "Se vende detras del mostrador (requiere identificacion)",
+      "Tome por la manana para evitar insomnio",
+      "No exceda la dosis recomendada"
+    ],
+    "consejosUsoEn": [
+      "Sold behind the counter (requires ID)",
+      "Take in the morning to avoid insomnia",
+      "Do not exceed recommended dose"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "descongestionante",
+      "resfriado",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "gabapentina",
+    "nombreGenericoEs": "Gabapentina",
+    "nombreGenericoEn": "Gabapentin",
+    "nombresComercialesEs": [
+      "Neurontin",
+      "Gabapentin"
+    ],
+    "nombresComercialesEn": [
+      "Neurontin",
+      "Gralise"
+    ],
+    "claseEs": "Anticonvulsivante / Analgesico neuropatico",
+    "claseEn": "Anticonvulsant / Neuropathic pain agent",
+    "paraQueEsEs": "Trata el dolor neuropatico (dolor de nervios), neuralgia posherpetica (dolor despues de herpes zoster) y convulsiones parciales.",
+    "paraQueEsEn": "Treats neuropathic pain (nerve pain), postherpetic neuralgia (pain after shingles), and partial seizures.",
+    "comoFuncionaEs": "Modifica las senales de dolor en los nervios al unirse a canales de calcio. No es un AINE ni un opioide.",
+    "comoFuncionaEn": "Modifies pain signals in nerves by binding to calcium channels. It is not an NSAID or an opioid.",
+    "formasPresentacion": [
+      "Capsula",
+      "Tableta",
+      "Solucion oral"
+    ],
+    "dosisUsualEs": "Dolor: 300-1200 mg tres veces al dia. Inicio gradual: 300 mg al dia, aumentar cada 3 dias.",
+    "dosisUsualEn": "Pain: 300-1200 mg three times daily. Gradual start: 300 mg daily, increase every 3 days.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Mareo",
+      "Fatiga",
+      "Edema periferico",
+      "Aumento de peso",
+      "Vision borrosa"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Dizziness",
+      "Fatigue",
+      "Peripheral edema",
+      "Weight gain",
+      "Blurred vision"
+    ],
+    "efectosGravesEs": [
+      "Depresion respiratoria (con opioides)",
+      "Pensamientos suicidas",
+      "Angioedema",
+      "Sindrome de abstinencia si se suspende abruptamente"
+    ],
+    "efectosGravesEn": [
+      "Respiratory depression (with opioids)",
+      "Suicidal thoughts",
+      "Angioedema",
+      "Withdrawal syndrome if stopped abruptly"
+    ],
+    "interaccionesEs": [
+      "Opioides (depresion respiratoria)",
+      "Antiacidos (reducen absorcion - separar por 2 horas)",
+      "Alcohol"
+    ],
+    "interaccionesEn": [
+      "Opioids (respiratory depression)",
+      "Antacids (reduce absorption - separate by 2 hours)",
+      "Alcohol"
+    ],
+    "precaucionesEs": [
+      "Comience con dosis baja y aumente gradualmente",
+      "No suspenda abruptamente",
+      "Precaucion al conducir",
+      "Ajustar dosis en insuficiencia renal"
+    ],
+    "precaucionesEn": [
+      "Start with low dose and increase gradually",
+      "Do not stop abruptly",
+      "Caution when driving",
+      "Adjust dose in kidney impairment"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a gabapentina"
+    ],
+    "contraindicacionesEn": [
+      "Gabapentin allergy"
+    ],
+    "embarazoLactanciaEs": "Usar solo si el beneficio supera el riesgo. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if benefit outweighs risk. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome gradualmente la dosis - no empiece con la dosis completa",
+      "No deje de tomarlo de repente",
+      "Puede causar somnolencia - vea como le afecta antes de conducir"
+    ],
+    "consejosUsoEn": [
+      "Take the dose gradually - do not start with full dose",
+      "Do not stop suddenly",
+      "Can cause drowsiness - see how it affects you before driving"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "dolor",
+      "neuropatico",
+      "anticonvulsivante"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "metoclopramida",
+    "nombreGenericoEs": "Metoclopramida",
+    "nombreGenericoEn": "Metoclopramide",
+    "nombresComercialesEs": [
+      "Reglan",
+      "Primperan"
+    ],
+    "nombresComercialesEn": [
+      "Reglan",
+      "Metozolv"
+    ],
+    "claseEs": "Procinetico / Antiemetico",
+    "claseEn": "Prokinetic / Antiemetic",
+    "paraQueEsEs": "Trata nauseas, vomitos y gastroparesia (vaciamiento lento del estomago). Mejora el movimiento del estomago.",
+    "paraQueEsEn": "Treats nausea, vomiting, and gastroparesis (slow stomach emptying). Improves stomach movement.",
+    "comoFuncionaEs": "Aumenta las contracciones del estomago y acelera el vaciamiento gastrico. Tambien bloquea los receptores de dopamina en el centro del vomito.",
+    "comoFuncionaEn": "Increases stomach contractions and accelerates gastric emptying. Also blocks dopamine receptors in the vomiting center.",
+    "formasPresentacion": [
+      "Tableta",
+      "Solucion oral",
+      "Inyeccion",
+      "Tableta de desintegracion oral"
+    ],
+    "dosisUsualEs": "5-10 mg 30 minutos antes de las comidas y al acostarse. No usar por mas de 12 semanas.",
+    "dosisUsualEn": "5-10 mg 30 minutes before meals and at bedtime. Do not use for more than 12 weeks.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Fatiga",
+      "Inquietud",
+      "Diarrea",
+      "Nauseas (paradojicamente)"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Fatigue",
+      "Restlessness",
+      "Diarrhea",
+      "Nausea (paradoxically)"
+    ],
+    "efectosGravesEs": [
+      "Discinesia tardia (movimientos involuntarios - puede ser irreversible)",
+      "Sindrome neuroleptico maligno",
+      "Depresion",
+      "Reacciones extrapiramidales"
+    ],
+    "efectosGravesEn": [
+      "Tardive dyskinesia (involuntary movements - may be irreversible)",
+      "Neuroleptic malignant syndrome",
+      "Depression",
+      "Extrapyramidal reactions"
+    ],
+    "interaccionesEs": [
+      "Otros medicamentos dopaminergicos (levodopa)",
+      "Opioides (efecto opuesto en motilidad)",
+      "Alcohol",
+      "Sedantes"
+    ],
+    "interaccionesEn": [
+      "Other dopaminergic medications (levodopa)",
+      "Opioids (opposing effect on motility)",
+      "Alcohol",
+      "Sedatives"
+    ],
+    "precaucionesEs": [
+      "No use por mas de 12 semanas (riesgo de discinesia tardia)",
+      "Reporte movimientos involuntarios inmediatamente",
+      "Puede causar depresion"
+    ],
+    "precaucionesEn": [
+      "Do not use for more than 12 weeks (tardive dyskinesia risk)",
+      "Report involuntary movements immediately",
+      "May cause depression"
+    ],
+    "contraindicacionesEs": [
+      "Obstruccion gastrointestinal",
+      "Feocromocitoma",
+      "Epilepsia",
+      "Historial de discinesia tardia"
+    ],
+    "contraindicacionesEn": [
+      "Gastrointestinal obstruction",
+      "Pheochromocytoma",
+      "Epilepsy",
+      "History of tardive dyskinesia"
+    ],
+    "embarazoLactanciaEs": "Usar solo si claramente necesario. Se excreta en leche materna - puede aumentar produccion de leche.",
+    "embarazoLactanciaEn": "Use only if clearly needed. Excreted in breast milk - may increase milk production.",
+    "consejosUsoEs": [
+      "Tome 30 minutos antes de las comidas",
+      "No use por mas de 12 semanas",
+      "Reporte cualquier movimiento involuntario de la cara o cuerpo"
+    ],
+    "consejosUsoEn": [
+      "Take 30 minutes before meals",
+      "Do not use for more than 12 weeks",
+      "Report any involuntary movement of face or body"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "gastrointestinal",
+      "antiemetico",
+      "procinetico"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "ranitidina-sustituida",
+    "nombreGenericoEs": "Sucralfato",
+    "nombreGenericoEn": "Sucralfate",
+    "nombresComercialesEs": [
+      "Carafate"
+    ],
+    "nombresComercialesEn": [
+      "Carafate"
+    ],
+    "claseEs": "Protector de la mucosa gastrica",
+    "claseEn": "Gastric mucosal protectant",
+    "paraQueEsEs": "Protege y ayuda a sanar ulceras estomacales y duodenales formando una barrera protectora sobre la ulcera.",
+    "paraQueEsEn": "Protects and helps heal stomach and duodenal ulcers by forming a protective barrier over the ulcer.",
+    "comoFuncionaEs": "Forma una pasta protectora que se adhiere al sitio de la ulcera, protegiendola del acido, la pepsina y las sales biliares.",
+    "comoFuncionaEn": "Forms a protective paste that adheres to the ulcer site, protecting it from acid, pepsin, and bile salts.",
+    "formasPresentacion": [
+      "Tableta",
+      "Suspension oral"
+    ],
+    "dosisUsualEs": "Ulcera activa: 1 gramo cuatro veces al dia (1 hora antes de comidas y al acostarse). Mantenimiento: 1 gramo dos veces al dia.",
+    "dosisUsualEn": "Active ulcer: 1 gram four times daily (1 hour before meals and at bedtime). Maintenance: 1 gram twice daily.",
+    "efectosSecundariosEs": [
+      "Estrenimiento",
+      "Boca seca",
+      "Nauseas",
+      "Malestar estomacal"
+    ],
+    "efectosSecundariosEn": [
+      "Constipation",
+      "Dry mouth",
+      "Nausea",
+      "Stomach discomfort"
+    ],
+    "efectosGravesEs": [
+      "Bezoar (masa en el estomago, raro)",
+      "Acumulacion de aluminio en insuficiencia renal"
+    ],
+    "efectosGravesEn": [
+      "Bezoar (mass in stomach, rare)",
+      "Aluminum accumulation in kidney failure"
+    ],
+    "interaccionesEs": [
+      "Reduce la absorcion de MUCHOS medicamentos: antibioticos, fenitoina, digoxina, levotiroxina, ketoconazol - separar por 2 horas"
+    ],
+    "interaccionesEn": [
+      "Reduces absorption of MANY medications: antibiotics, phenytoin, digoxin, levothyroxine, ketoconazole - separate by 2 hours"
+    ],
+    "precaucionesEs": [
+      "Tome con el estomago vacio, 1 hora antes de comer",
+      "Separe de otros medicamentos por al menos 2 horas"
+    ],
+    "precaucionesEn": [
+      "Take on empty stomach, 1 hour before eating",
+      "Separate from other medications by at least 2 hours"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a sucralfato"
+    ],
+    "contraindicacionesEn": [
+      "Sucralfate allergy"
+    ],
+    "embarazoLactanciaEs": "Considerado seguro en el embarazo (absorcion minima). Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Considered safe in pregnancy (minimal absorption). Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Tome 1 hora antes de las comidas con el estomago vacio",
+      "Separe de otros medicamentos",
+      "Es seguro porque casi no se absorbe"
+    ],
+    "consejosUsoEn": [
+      "Take 1 hour before meals on empty stomach",
+      "Separate from other medications",
+      "It is safe because it is barely absorbed"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "gastrointestinal",
+      "ulcera",
+      "protector-gastrico"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "linagliptina",
+    "nombreGenericoEs": "Linagliptina",
+    "nombreGenericoEn": "Linagliptin",
+    "nombresComercialesEs": [
+      "Tradjenta",
+      "Trayenta"
+    ],
+    "nombresComercialesEn": [
+      "Tradjenta"
+    ],
+    "claseEs": "Inhibidor de DPP-4 (gliptina)",
+    "claseEn": "DPP-4 inhibitor (gliptin)",
+    "paraQueEsEs": "Controla el azucar en sangre en diabetes tipo 2. Ventaja: no requiere ajuste de dosis en insuficiencia renal.",
+    "paraQueEsEn": "Controls blood sugar in type 2 diabetes. Advantage: does not require dose adjustment in kidney impairment.",
+    "comoFuncionaEs": "Bloquea la enzima DPP-4, aumentando las incretinas que estimulan la produccion de insulina despues de comer.",
+    "comoFuncionaEn": "Blocks the DPP-4 enzyme, increasing incretins that stimulate insulin production after eating.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "5 mg una vez al dia. No requiere ajuste en insuficiencia renal ni hepatica.",
+    "dosisUsualEn": "5 mg once daily. No adjustment needed in kidney or liver impairment.",
+    "efectosSecundariosEs": [
+      "Congestion nasal",
+      "Dolor de garganta",
+      "Dolor de cabeza",
+      "Dolor muscular"
+    ],
+    "efectosSecundariosEn": [
+      "Nasal congestion",
+      "Sore throat",
+      "Headache",
+      "Muscle pain"
+    ],
+    "efectosGravesEs": [
+      "Pancreatitis",
+      "Penfigo bulloso (ampollas en la piel)",
+      "Dolor articular severo"
+    ],
+    "efectosGravesEn": [
+      "Pancreatitis",
+      "Bullous pemphigoid (skin blisters)",
+      "Severe joint pain"
+    ],
+    "interaccionesEs": [
+      "Rifampicina (reduce niveles)",
+      "Insulina/sulfonilureas (aumenta riesgo de hipoglucemia)"
+    ],
+    "interaccionesEn": [
+      "Rifampin (reduces levels)",
+      "Insulin/sulfonylureas (increases hypoglycemia risk)"
+    ],
+    "precaucionesEs": [
+      "Reporte dolor abdominal severo",
+      "Bajo riesgo de hipoglucemia cuando se usa sola"
+    ],
+    "precaucionesEn": [
+      "Report severe abdominal pain",
+      "Low hypoglycemia risk when used alone"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a linagliptina",
+      "Historial de pancreatitis con DPP-4"
+    ],
+    "contraindicacionesEn": [
+      "Linagliptin allergy",
+      "History of pancreatitis with DPP-4"
+    ],
+    "embarazoLactanciaEs": "No se recomienda en el embarazo. Se desconoce si pasa a leche materna.",
+    "embarazoLactanciaEn": "Not recommended in pregnancy. Unknown if passes into breast milk.",
+    "consejosUsoEs": [
+      "Puede tomar con o sin alimentos",
+      "No requiere ajuste de dosis si tiene problemas renales - ventaja sobre sitagliptina"
+    ],
+    "consejosUsoEn": [
+      "Can take with or without food",
+      "No dose adjustment needed for kidney problems - advantage over sitagliptin"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "diabetes",
+      "antidiabetico",
+      "endocrino"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "amitriptilina",
+    "nombreGenericoEs": "Amitriptilina",
+    "nombreGenericoEn": "Amitriptyline",
+    "nombresComercialesEs": [
+      "Elavil",
+      "Tryptanol"
+    ],
+    "nombresComercialesEn": [
+      "Elavil"
+    ],
+    "claseEs": "Antidepresivo triciclico",
+    "claseEn": "Tricyclic antidepressant",
+    "paraQueEsEs": "Trata depresion, dolor neuropatico cronico, migranas (prevencion), fibromialgia e insomnio a dosis bajas.",
+    "paraQueEsEn": "Treats depression, chronic neuropathic pain, migraines (prevention), fibromyalgia, and insomnia at low doses.",
+    "comoFuncionaEs": "Aumenta los niveles de serotonina y norepinefrina en el cerebro al impedir su recaptacion. Tambien bloquea receptores de histamina causando sedacion.",
+    "comoFuncionaEn": "Increases serotonin and norepinephrine levels in the brain by preventing reuptake. Also blocks histamine receptors causing sedation.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Depresion: 25-150 mg al dia (inicio 25 mg al acostarse). Dolor/migranas: 10-75 mg al acostarse.",
+    "dosisUsualEn": "Depression: 25-150 mg daily (start 25 mg at bedtime). Pain/migraines: 10-75 mg at bedtime.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Boca seca",
+      "Estrenimiento",
+      "Vision borrosa",
+      "Aumento de peso",
+      "Retencion urinaria",
+      "Mareo"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Dry mouth",
+      "Constipation",
+      "Blurred vision",
+      "Weight gain",
+      "Urinary retention",
+      "Dizziness"
+    ],
+    "efectosGravesEs": [
+      "Arritmias cardiacas (sobredosis puede ser mortal)",
+      "Pensamientos suicidas en jovenes (CAJA NEGRA)",
+      "Sindrome serotoninergico",
+      "Convulsiones"
+    ],
+    "efectosGravesEn": [
+      "Heart arrhythmias (overdose can be fatal)",
+      "Suicidal thoughts in young people (BLACK BOX)",
+      "Serotonin syndrome",
+      "Seizures"
+    ],
+    "interaccionesEs": [
+      "Inhibidores de la MAO (CONTRAINDICADO)",
+      "Otros medicamentos serotonergicos",
+      "Alcohol",
+      "Medicamentos anticolinergicos",
+      "Cimetidina"
+    ],
+    "interaccionesEn": [
+      "MAO inhibitors (CONTRAINDICATED)",
+      "Other serotonergic medications",
+      "Alcohol",
+      "Anticholinergic medications",
+      "Cimetidine"
+    ],
+    "precaucionesEs": [
+      "Tome al acostarse (causa mucha somnolencia)",
+      "Peligrosa en sobredosis - no guardar cantidades grandes",
+      "No deje de tomar abruptamente",
+      "Evitar en ancianos"
+    ],
+    "precaucionesEn": [
+      "Take at bedtime (causes significant drowsiness)",
+      "Dangerous in overdose - do not keep large quantities",
+      "Do not stop abruptly",
+      "Avoid in elderly"
+    ],
+    "contraindicacionesEs": [
+      "Uso con inhibidores de la MAO",
+      "Infarto reciente",
+      "Arritmias",
+      "Glaucoma de angulo cerrado"
+    ],
+    "contraindicacionesEn": [
+      "Use with MAO inhibitors",
+      "Recent heart attack",
+      "Arrhythmias",
+      "Narrow-angle glaucoma"
+    ],
+    "embarazoLactanciaEs": "Usar solo si es necesario. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Use only if necessary. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome al acostarse por la somnolencia",
+      "Para dolor y migranas se usan dosis mas bajas que para depresion",
+      "No se desanime por los efectos secundarios iniciales - a menudo mejoran"
+    ],
+    "consejosUsoEn": [
+      "Take at bedtime due to drowsiness",
+      "For pain and migraines, lower doses are used than for depression",
+      "Do not be discouraged by initial side effects - they often improve"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "psiquiatrico",
+      "antidepresivo",
+      "triciclico",
+      "dolor",
+      "migrana"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "clonazepam",
+    "nombreGenericoEs": "Clonazepam",
+    "nombreGenericoEn": "Clonazepam",
+    "nombresComercialesEs": [
+      "Klonopin",
+      "Rivotril"
+    ],
+    "nombresComercialesEn": [
+      "Klonopin"
+    ],
+    "claseEs": "Benzodiazepina (anticonvulsivante/ansiolitico)",
+    "claseEn": "Benzodiazepine (anticonvulsant/anxiolytic)",
+    "paraQueEsEs": "Trata ciertos tipos de convulsiones, trastorno de panico y algunas formas de ansiedad severa.",
+    "paraQueEsEn": "Treats certain types of seizures, panic disorder, and some forms of severe anxiety.",
+    "comoFuncionaEs": "Potencia el efecto del GABA en el cerebro, reduciendo la actividad electrica excesiva (convulsiones) y la ansiedad.",
+    "comoFuncionaEn": "Enhances the effect of GABA in the brain, reducing excessive electrical activity (seizures) and anxiety.",
+    "formasPresentacion": [
+      "Tableta",
+      "Tableta de desintegracion oral",
+      "Gotas"
+    ],
+    "dosisUsualEs": "Panico: 0.25-2 mg dos veces al dia. Convulsiones: hasta 20 mg al dia. Inicio gradual.",
+    "dosisUsualEn": "Panic: 0.25-2 mg twice daily. Seizures: up to 20 mg daily. Gradual start.",
+    "efectosSecundariosEs": [
+      "Somnolencia",
+      "Mareo",
+      "Coordinacion reducida",
+      "Fatiga",
+      "Depresion",
+      "Problemas de memoria"
+    ],
+    "efectosSecundariosEn": [
+      "Drowsiness",
+      "Dizziness",
+      "Reduced coordination",
+      "Fatigue",
+      "Depression",
+      "Memory problems"
+    ],
+    "efectosGravesEs": [
+      "Dependencia fisica",
+      "Sindrome de abstinencia severo (convulsiones)",
+      "Depresion respiratoria",
+      "Pensamientos suicidas"
+    ],
+    "efectosGravesEn": [
+      "Physical dependence",
+      "Severe withdrawal syndrome (seizures)",
+      "Respiratory depression",
+      "Suicidal thoughts"
+    ],
+    "interaccionesEs": [
+      "Opioides (riesgo de muerte)",
+      "Alcohol (riesgo de muerte)",
+      "Otros depresores del SNC"
+    ],
+    "interaccionesEn": [
+      "Opioids (risk of death)",
+      "Alcohol (risk of death)",
+      "Other CNS depressants"
+    ],
+    "precaucionesEs": [
+      "Riesgo de dependencia",
+      "No suspender abruptamente",
+      "No mezclar con alcohol ni opioides",
+      "No conducir"
+    ],
+    "precaucionesEn": [
+      "Risk of dependence",
+      "Do not stop abruptly",
+      "Do not mix with alcohol or opioids",
+      "Do not drive"
+    ],
+    "contraindicacionesEs": [
+      "Glaucoma de angulo estrecho",
+      "Enfermedad hepatica severa"
+    ],
+    "contraindicacionesEn": [
+      "Narrow-angle glaucoma",
+      "Severe liver disease"
+    ],
+    "embarazoLactanciaEs": "EVITAR en el embarazo (riesgo de malformaciones). Se excreta en leche materna.",
+    "embarazoLactanciaEn": "AVOID in pregnancy (risk of malformations). Excreted in breast milk.",
+    "consejosUsoEs": [
+      "No deje de tomarlo de repente",
+      "No combine con alcohol",
+      "Puede causar dependencia - use por el menor tiempo posible"
+    ],
+    "consejosUsoEn": [
+      "Do not stop suddenly",
+      "Do not combine with alcohol",
+      "Can cause dependence - use for shortest time possible"
+    ],
+    "almacenamientoEs": "Temperatura ambiente. Guardar en lugar seguro.",
+    "almacenamientoEn": "Room temperature. Store in a secure place.",
+    "categorias": [
+      "psiquiatrico",
+      "benzodiazepina",
+      "anticonvulsivante",
+      "ansiedad",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "tamsulosina",
+    "nombreGenericoEs": "Tamsulosina",
+    "nombreGenericoEn": "Tamsulosin",
+    "nombresComercialesEs": [
+      "Flomax",
+      "Secotex"
+    ],
+    "nombresComercialesEn": [
+      "Flomax"
+    ],
+    "claseEs": "Bloqueador alfa-1 adrenergico",
+    "claseEn": "Alpha-1 adrenergic blocker",
+    "paraQueEsEs": "Mejora los sintomas urinarios de la prostata agrandada (hiperplasia prostatica benigna): dificultad para orinar, flujo debil, urgencia urinaria.",
+    "paraQueEsEn": "Improves urinary symptoms of enlarged prostate (benign prostatic hyperplasia): difficulty urinating, weak stream, urinary urgency.",
+    "comoFuncionaEs": "Relaja los musculos de la prostata y la vejiga, facilitando el flujo de orina.",
+    "comoFuncionaEn": "Relaxes muscles of the prostate and bladder, facilitating urine flow.",
+    "formasPresentacion": [
+      "Capsula"
+    ],
+    "dosisUsualEs": "0.4 mg una vez al dia, 30 minutos despues de la misma comida cada dia.",
+    "dosisUsualEn": "0.4 mg once daily, 30 minutes after the same meal each day.",
+    "efectosSecundariosEs": [
+      "Mareo",
+      "Eyaculacion anormal/retrograda",
+      "Congestion nasal",
+      "Dolor de cabeza"
+    ],
+    "efectosSecundariosEn": [
+      "Dizziness",
+      "Abnormal/retrograde ejaculation",
+      "Nasal congestion",
+      "Headache"
+    ],
+    "efectosGravesEs": [
+      "Hipotension ortostatica (caida de presion al levantarse)",
+      "Sindrome del iris flacido intraoperatorio (cirugia de cataratas)",
+      "Priapismo (raro)"
+    ],
+    "efectosGravesEn": [
+      "Orthostatic hypotension (pressure drop when standing)",
+      "Intraoperative floppy iris syndrome (cataract surgery)",
+      "Priapism (rare)"
+    ],
+    "interaccionesEs": [
+      "Otros bloqueadores alfa (hipotension)",
+      "Inhibidores de CYP3A4 y CYP2D6",
+      "Sildenafil/tadalafil (hipotension)"
+    ],
+    "interaccionesEn": [
+      "Other alpha blockers (hypotension)",
+      "CYP3A4 and CYP2D6 inhibitors",
+      "Sildenafil/tadalafil (hypotension)"
+    ],
+    "precaucionesEs": [
+      "Levantese lentamente para evitar mareos",
+      "Informe a su oftalmologo si va a tener cirugia de cataratas",
+      "La eyaculacion anormal es comun y no danina"
+    ],
+    "precaucionesEn": [
+      "Get up slowly to avoid dizziness",
+      "Inform your ophthalmologist if having cataract surgery",
+      "Abnormal ejaculation is common and not harmful"
+    ],
+    "contraindicacionesEs": [
+      "Alergia a tamsulosina o sulfonamidas"
+    ],
+    "contraindicacionesEn": [
+      "Allergy to tamsulosin or sulfonamides"
+    ],
+    "embarazoLactanciaEs": "No aplica - medicamento para varones.",
+    "embarazoLactanciaEn": "Not applicable - medication for males.",
+    "consejosUsoEs": [
+      "Tome despues de la misma comida cada dia",
+      "No mastique ni triture la capsula",
+      "Informe a su oftalmologo antes de cirugia de cataratas"
+    ],
+    "consejosUsoEn": [
+      "Take after the same meal each day",
+      "Do not chew or crush the capsule",
+      "Inform your ophthalmologist before cataract surgery"
+    ],
+    "almacenamientoEs": "Temperatura ambiente.",
+    "almacenamientoEn": "Room temperature.",
+    "categorias": [
+      "urologia",
+      "prostata",
+      "urinario"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "acido-folico",
+    "nombreGenericoEs": "Acido Folico (Vitamina B9)",
+    "nombreGenericoEn": "Folic Acid (Vitamin B9)",
+    "nombresComercialesEs": [
+      "Acido Folico",
+      "Folvite"
+    ],
+    "nombresComercialesEn": [
+      "Folic Acid",
+      "Folvite"
+    ],
+    "claseEs": "Suplemento vitaminico",
+    "claseEn": "Vitamin supplement",
+    "paraQueEsEs": "Previene defectos del tubo neural en el feto durante el embarazo. Trata la anemia por deficiencia de folato. Esencial para la formacion de ADN.",
+    "paraQueEsEn": "Prevents neural tube defects in the fetus during pregnancy. Treats folate deficiency anemia. Essential for DNA formation.",
+    "comoFuncionaEs": "Es una vitamina B esencial para la division celular y la formacion de ADN. Es especialmente importante durante el desarrollo fetal.",
+    "comoFuncionaEn": "It is a B vitamin essential for cell division and DNA formation. Especially important during fetal development.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Prevencion en embarazo: 400-800 mcg al dia (iniciar al menos 1 mes antes de la concepcion). Deficiencia: 1 mg al dia.",
+    "dosisUsualEn": "Prevention in pregnancy: 400-800 mcg daily (start at least 1 month before conception). Deficiency: 1 mg daily.",
+    "efectosSecundariosEs": [
+      "Practicamente sin efectos secundarios a dosis normales"
+    ],
+    "efectosSecundariosEn": [
+      "Virtually no side effects at normal doses"
+    ],
+    "efectosGravesEs": [
+      "Puede enmascarar deficiencia de vitamina B12 (en dosis altas)"
+    ],
+    "efectosGravesEn": [
+      "May mask vitamin B12 deficiency (at high doses)"
+    ],
+    "interaccionesEs": [
+      "Metotrexato (el folato reduce su eficacia y toxicidad)",
+      "Fenitoina (interaccion bidireccional)",
+      "Sulfasalazina (reduce absorcion de folato)"
+    ],
+    "interaccionesEn": [
+      "Methotrexate (folate reduces its efficacy and toxicity)",
+      "Phenytoin (bidirectional interaction)",
+      "Sulfasalazine (reduces folate absorption)"
+    ],
+    "precaucionesEs": [
+      "Toda mujer en edad fertil deberia tomar acido folico diariamente",
+      "No sustituye una dieta balanceada"
+    ],
+    "precaucionesEn": [
+      "Every woman of childbearing age should take folic acid daily",
+      "Does not substitute a balanced diet"
+    ],
+    "contraindicacionesEs": [
+      "Alergia al acido folico (extremadamente raro)"
+    ],
+    "contraindicacionesEn": [
+      "Folic acid allergy (extremely rare)"
+    ],
+    "embarazoLactanciaEs": "ESENCIAL antes y durante el embarazo para prevenir defectos del tubo neural (espina bifida). Seguro durante la lactancia.",
+    "embarazoLactanciaEn": "ESSENTIAL before and during pregnancy to prevent neural tube defects (spina bifida). Safe during breastfeeding.",
+    "consejosUsoEs": [
+      "Toda mujer que pueda quedar embarazada deberia tomarlo diariamente",
+      "Comience al menos 1 mes antes de intentar embarazarse",
+      "Puede tomar con o sin alimentos"
+    ],
+    "consejosUsoEn": [
+      "Every woman who could become pregnant should take it daily",
+      "Start at least 1 month before trying to conceive",
+      "Can take with or without food"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz.",
+    "almacenamientoEn": "Room temperature, protect from light.",
+    "categorias": [
+      "suplemento",
+      "vitamina",
+      "embarazo",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "multivitaminico",
+    "nombreGenericoEs": "Multivitaminico con Minerales",
+    "nombreGenericoEn": "Multivitamin with Minerals",
+    "nombresComercialesEs": [
+      "Centrum",
+      "One A Day",
+      "Pharmaton"
+    ],
+    "nombresComercialesEn": [
+      "Centrum",
+      "One A Day"
+    ],
+    "claseEs": "Suplemento vitaminico/mineral",
+    "claseEn": "Vitamin/mineral supplement",
+    "paraQueEsEs": "Complementa la dieta con vitaminas y minerales esenciales. Ayuda a prevenir deficiencias nutricionales en personas con dietas inadecuadas.",
+    "paraQueEsEn": "Supplements the diet with essential vitamins and minerals. Helps prevent nutritional deficiencies in people with inadequate diets.",
+    "comoFuncionaEs": "Proporciona una combinacion de vitaminas y minerales que el cuerpo necesita para funciones normales del cuerpo.",
+    "comoFuncionaEn": "Provides a combination of vitamins and minerals the body needs for normal body functions.",
+    "formasPresentacion": [
+      "Tableta",
+      "Capsula",
+      "Tableta masticable",
+      "Gomita",
+      "Liquido"
+    ],
+    "dosisUsualEs": "1 tableta al dia, generalmente con alimentos.",
+    "dosisUsualEn": "1 tablet daily, usually with food.",
+    "efectosSecundariosEs": [
+      "Nauseas (especialmente con el estomago vacio)",
+      "Estrenimiento (por el hierro)",
+      "Heces oscuras (por el hierro)",
+      "Sabor desagradable"
+    ],
+    "efectosSecundariosEn": [
+      "Nausea (especially on empty stomach)",
+      "Constipation (from iron)",
+      "Dark stools (from iron)",
+      "Unpleasant taste"
+    ],
+    "efectosGravesEs": [
+      "Toxicidad por hierro en ninos si ingieren multiples tabletas",
+      "Hipervitaminosis (con dosis excesivas)"
+    ],
+    "efectosGravesEn": [
+      "Iron toxicity in children if they ingest multiple tablets",
+      "Hypervitaminosis (with excessive doses)"
+    ],
+    "interaccionesEs": [
+      "Levotiroxina (el hierro y calcio reducen absorcion)",
+      "Antibioticos (tetraciclinas, quinolonas)",
+      "Anticoagulantes (vitamina K puede afectar warfarina)"
+    ],
+    "interaccionesEn": [
+      "Levothyroxine (iron and calcium reduce absorption)",
+      "Antibiotics (tetracyclines, quinolones)",
+      "Anticoagulants (vitamin K may affect warfarin)"
+    ],
+    "precaucionesEs": [
+      "Tome con alimentos para evitar nauseas",
+      "Mantenga fuera del alcance de los ninos",
+      "No exceda la dosis recomendada",
+      "Separe de otros medicamentos por 2 horas"
+    ],
+    "precaucionesEn": [
+      "Take with food to avoid nausea",
+      "Keep out of reach of children",
+      "Do not exceed recommended dose",
+      "Separate from other medications by 2 hours"
+    ],
+    "contraindicacionesEs": [
+      "Hemocromatosis (si contiene hierro)",
+      "Hipervitaminosis A o D"
+    ],
+    "contraindicacionesEn": [
+      "Hemochromatosis (if it contains iron)",
+      "Hypervitaminosis A or D"
+    ],
+    "embarazoLactanciaEs": "Use vitaminas prenatales especificas durante el embarazo, no multivitaminicos regulares (diferentes necesidades).",
+    "embarazoLactanciaEn": "Use specific prenatal vitamins during pregnancy, not regular multivitamins (different needs).",
+    "consejosUsoEs": [
+      "Tome con alimentos para evitar malestar estomacal",
+      "Un multivitaminico no reemplaza una dieta saludable",
+      "Elija una formula adecuada para su edad y genero"
+    ],
+    "consejosUsoEn": [
+      "Take with food to avoid stomach upset",
+      "A multivitamin does not replace a healthy diet",
+      "Choose a formula appropriate for your age and gender"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la humedad. Mantener fuera del alcance de los ninos.",
+    "almacenamientoEn": "Room temperature, protect from moisture. Keep out of reach of children.",
+    "categorias": [
+      "suplemento",
+      "vitamina",
+      "mineral",
+      "OTC"
+    ],
+    "necesitaReceta": false,
+    "controlado": false
+  },
+  {
+    "id": "estrógenos-conjugados",
+    "nombreGenericoEs": "Estrogenos conjugados / Estradiol",
+    "nombreGenericoEn": "Conjugated estrogens / Estradiol",
+    "nombresComercialesEs": [
+      "Premarin",
+      "Climara",
+      "Estrace"
+    ],
+    "nombresComercialesEn": [
+      "Premarin",
+      "Climara",
+      "Estrace"
+    ],
+    "claseEs": "Terapia hormonal - Estrogeno",
+    "claseEn": "Hormone therapy - Estrogen",
+    "paraQueEsEs": "Trata los sintomas de la menopausia: bochornos, sudores nocturnos, sequedad vaginal. Tambien previene la osteoporosis posmenopausica.",
+    "paraQueEsEn": "Treats menopause symptoms: hot flashes, night sweats, vaginal dryness. Also prevents postmenopausal osteoporosis.",
+    "comoFuncionaEs": "Reemplaza los estrogenos que el cuerpo deja de producir durante la menopausia, aliviando los sintomas relacionados.",
+    "comoFuncionaEn": "Replaces estrogens that the body stops producing during menopause, relieving related symptoms.",
+    "formasPresentacion": [
+      "Tableta",
+      "Parche transdermico",
+      "Crema vaginal",
+      "Anillo vaginal",
+      "Gel topico"
+    ],
+    "dosisUsualEs": "La dosis mas baja efectiva por el menor tiempo. Oral: 0.3-0.625 mg al dia. Parche: cambiar 1-2 veces por semana.",
+    "dosisUsualEn": "Lowest effective dose for shortest time. Oral: 0.3-0.625 mg daily. Patch: change 1-2 times per week.",
+    "efectosSecundariosEs": [
+      "Sensibilidad mamaria",
+      "Sangrado vaginal",
+      "Dolor de cabeza",
+      "Nauseas",
+      "Hinchazon",
+      "Cambios de humor"
+    ],
+    "efectosSecundariosEn": [
+      "Breast tenderness",
+      "Vaginal bleeding",
+      "Headache",
+      "Nausea",
+      "Bloating",
+      "Mood changes"
+    ],
+    "efectosGravesEs": [
+      "Coagulos sanguineos (trombosis)",
+      "Derrame cerebral",
+      "Cancer de mama (uso prolongado)",
+      "Cancer endometrial (sin progestina)",
+      "Enfermedad de la vesicula biliar"
+    ],
+    "efectosGravesEn": [
+      "Blood clots (thrombosis)",
+      "Stroke",
+      "Breast cancer (prolonged use)",
+      "Endometrial cancer (without progestin)",
+      "Gallbladder disease"
+    ],
+    "interaccionesEs": [
+      "Rifampicina (reduce niveles)",
+      "Anticonvulsivantes (reducen niveles)",
+      "Hierba de San Juan"
+    ],
+    "interaccionesEn": [
+      "Rifampin (reduces levels)",
+      "Anticonvulsants (reduce levels)",
+      "St. John's Wort"
+    ],
+    "precaucionesEs": [
+      "Use la dosis mas baja por el menor tiempo posible",
+      "Si tiene utero, debe tomar progestina junto con estrogeno para prevenir cancer endometrial",
+      "Vigile sangrado vaginal anormal"
+    ],
+    "precaucionesEn": [
+      "Use the lowest dose for the shortest time possible",
+      "If you have a uterus, must take progestin with estrogen to prevent endometrial cancer",
+      "Watch for abnormal vaginal bleeding"
+    ],
+    "contraindicacionesEs": [
+      "Cancer de mama",
+      "Coagulos sanguineos activos",
+      "Sangrado vaginal no diagnosticado",
+      "Enfermedad hepatica activa",
+      "Historial de derrame cerebral o infarto"
+    ],
+    "contraindicacionesEn": [
+      "Breast cancer",
+      "Active blood clots",
+      "Undiagnosed vaginal bleeding",
+      "Active liver disease",
+      "History of stroke or heart attack"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en el embarazo. No se recomienda durante la lactancia.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnancy. Not recommended during breastfeeding.",
+    "consejosUsoEs": [
+      "Use la dosis mas baja que alivie sus sintomas",
+      "Los parches causan menos riesgo de coagulos que las tabletas",
+      "Haga mamografias regulares",
+      "Discuta riesgos y beneficios con su medico regularmente"
+    ],
+    "consejosUsoEn": [
+      "Use the lowest dose that relieves your symptoms",
+      "Patches cause less clot risk than tablets",
+      "Get regular mammograms",
+      "Discuss risks and benefits with your doctor regularly"
+    ],
+    "almacenamientoEs": "Tabletas: temperatura ambiente. Parches: temperatura ambiente en sobre sellado hasta el uso.",
+    "almacenamientoEn": "Tablets: room temperature. Patches: room temperature in sealed pouch until use.",
+    "categorias": [
+      "hormonal",
+      "endocrino",
+      "menopausia",
+      "ginecologia"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  },
+  {
+    "id": "testosterona",
+    "nombreGenericoEs": "Testosterona",
+    "nombreGenericoEn": "Testosterone",
+    "nombresComercialesEs": [
+      "AndroGel",
+      "Testopel",
+      "Depo-Testosterone"
+    ],
+    "nombresComercialesEn": [
+      "AndroGel",
+      "Testopel",
+      "Depo-Testosterone"
+    ],
+    "claseEs": "Hormona androgenica",
+    "claseEn": "Androgenic hormone",
+    "paraQueEsEs": "Reemplazo hormonal en hombres con niveles bajos de testosterona (hipogonadismo). Trata la fatiga, baja libido, perdida de masa muscular y osea.",
+    "paraQueEsEn": "Hormone replacement in men with low testosterone levels (hypogonadism). Treats fatigue, low libido, loss of muscle and bone mass.",
+    "comoFuncionaEs": "Reemplaza la testosterona que el cuerpo no produce en cantidad suficiente, restaurando los niveles normales de esta hormona.",
+    "comoFuncionaEn": "Replaces testosterone that the body does not produce in sufficient amounts, restoring normal levels of this hormone.",
+    "formasPresentacion": [
+      "Gel topico",
+      "Inyeccion intramuscular",
+      "Parche",
+      "Pellets subcutaneos",
+      "Solucion nasal"
+    ],
+    "dosisUsualEs": "Gel: 50-100 mg al dia. Inyeccion cipionato: 100-200 mg cada 2 semanas. Individualizado segun niveles en sangre.",
+    "dosisUsualEn": "Gel: 50-100 mg daily. Cypionate injection: 100-200 mg every 2 weeks. Individualized based on blood levels.",
+    "efectosSecundariosEs": [
+      "Acne",
+      "Retencion de liquidos",
+      "Aumento de globulos rojos",
+      "Irritacion en sitio de aplicacion",
+      "Ginecomastia",
+      "Cambios de humor"
+    ],
+    "efectosSecundariosEn": [
+      "Acne",
+      "Fluid retention",
+      "Increased red blood cells",
+      "Application site irritation",
+      "Gynecomastia",
+      "Mood changes"
+    ],
+    "efectosGravesEs": [
+      "Policitemia (exceso de globulos rojos)",
+      "Apnea del sueno",
+      "Eventos cardiovasculares",
+      "Dano hepatico (formas orales)",
+      "Infertilidad"
+    ],
+    "efectosGravesEn": [
+      "Polycythemia (excess red blood cells)",
+      "Sleep apnea",
+      "Cardiovascular events",
+      "Liver damage (oral forms)",
+      "Infertility"
+    ],
+    "interaccionesEs": [
+      "Anticoagulantes (aumenta efecto)",
+      "Insulina (puede cambiar necesidades)",
+      "Corticosteroides (aumenta retencion de liquidos)"
+    ],
+    "interaccionesEn": [
+      "Anticoagulants (increases effect)",
+      "Insulin (may change needs)",
+      "Corticosteroids (increases fluid retention)"
+    ],
+    "precaucionesEs": [
+      "Evite transferencia del gel a otras personas (especialmente mujeres y ninos)",
+      "Requiere analisis de sangre regulares (hematocrito, PSA, lipidos)",
+      "Puede causar infertilidad - no use si planea tener hijos"
+    ],
+    "precaucionesEn": [
+      "Avoid gel transfer to other people (especially women and children)",
+      "Requires regular blood tests (hematocrit, PSA, lipids)",
+      "Can cause infertility - do not use if planning to have children"
+    ],
+    "contraindicacionesEs": [
+      "Cancer de mama o prostata",
+      "Policitemia",
+      "Insuficiencia cardiaca severa no controlada",
+      "Apnea del sueno severa no tratada"
+    ],
+    "contraindicacionesEn": [
+      "Breast or prostate cancer",
+      "Polycythemia",
+      "Uncontrolled severe heart failure",
+      "Untreated severe sleep apnea"
+    ],
+    "embarazoLactanciaEs": "CONTRAINDICADA en mujeres embarazadas - causa virilizacion del feto femenino.",
+    "embarazoLactanciaEn": "CONTRAINDICATED in pregnant women - causes virilization of female fetus.",
+    "consejosUsoEs": [
+      "Si usa gel, lave las manos despues y cubra el area de aplicacion",
+      "Evite contacto piel a piel con mujeres y ninos por varias horas",
+      "Informe a su medico si su pareja queda embarazada"
+    ],
+    "consejosUsoEn": [
+      "If using gel, wash hands after and cover application area",
+      "Avoid skin-to-skin contact with women and children for several hours",
+      "Inform your doctor if your partner becomes pregnant"
+    ],
+    "almacenamientoEs": "Segun la forma. Gel: temperatura ambiente. Inyecciones: temperatura ambiente.",
+    "almacenamientoEn": "According to form. Gel: room temperature. Injections: room temperature.",
+    "categorias": [
+      "hormonal",
+      "endocrino",
+      "controlado"
+    ],
+    "necesitaReceta": true,
+    "controlado": true
+  },
+  {
+    "id": "allopurinol",
+    "nombreGenericoEs": "Alopurinol",
+    "nombreGenericoEn": "Allopurinol",
+    "nombresComercialesEs": [
+      "Zyloprim",
+      "Alopurinol"
+    ],
+    "nombresComercialesEn": [
+      "Zyloprim"
+    ],
+    "claseEs": "Inhibidor de xantina oxidasa (antigotoso)",
+    "claseEn": "Xanthine oxidase inhibitor (antigout)",
+    "paraQueEsEs": "Previene ataques de gota y calculos renales de acido urico al reducir los niveles de acido urico en la sangre.",
+    "paraQueEsEn": "Prevents gout attacks and uric acid kidney stones by reducing uric acid levels in the blood.",
+    "comoFuncionaEs": "Bloquea la enzima xantina oxidasa, que es la que produce acido urico. Al bloquearla, el cuerpo produce menos acido urico.",
+    "comoFuncionaEn": "Blocks the xanthine oxidase enzyme, which produces uric acid. By blocking it, the body produces less uric acid.",
+    "formasPresentacion": [
+      "Tableta"
+    ],
+    "dosisUsualEs": "Inicio: 100 mg al dia. Dosis habitual: 200-300 mg al dia. Maximo: 800 mg al dia. Ajustar en insuficiencia renal.",
+    "dosisUsualEn": "Start: 100 mg daily. Usual dose: 200-300 mg daily. Maximum: 800 mg daily. Adjust in kidney impairment.",
+    "efectosSecundariosEs": [
+      "Salpullido",
+      "Diarrea",
+      "Nauseas",
+      "Dolor de cabeza",
+      "Ataques de gota al inicio del tratamiento"
+    ],
+    "efectosSecundariosEn": [
+      "Rash",
+      "Diarrhea",
+      "Nausea",
+      "Headache",
+      "Gout attacks at start of treatment"
+    ],
+    "efectosGravesEs": [
+      "Sindrome de hipersensibilidad al alopurinol (fiebre, erupcion, falla organica)",
+      "Sindrome de Stevens-Johnson",
+      "Hepatitis",
+      "Insuficiencia renal"
+    ],
+    "efectosGravesEn": [
+      "Allopurinol hypersensitivity syndrome (fever, rash, organ failure)",
+      "Stevens-Johnson syndrome",
+      "Hepatitis",
+      "Kidney failure"
+    ],
+    "interaccionesEs": [
+      "Azatioprina/6-mercaptopurina (REDUCIR dosis - interaccion peligrosa)",
+      "Amoxicilina (aumenta riesgo de salpullido)",
+      "Warfarina (monitorear)"
+    ],
+    "interaccionesEn": [
+      "Azathioprine/6-mercaptopurine (REDUCE dose - dangerous interaction)",
+      "Amoxicillin (increases rash risk)",
+      "Warfarin (monitor)"
+    ],
+    "precaucionesEs": [
+      "Puede empeorar la gota al inicio - su medico puede dar colchicina preventiva",
+      "Reporte CUALQUIER salpullido inmediatamente",
+      "Beba mucha agua",
+      "Comience con dosis baja"
+    ],
+    "precaucionesEn": [
+      "May worsen gout initially - your doctor may give preventive colchicine",
+      "Report ANY rash immediately",
+      "Drink plenty of water",
+      "Start with low dose"
+    ],
+    "contraindicacionesEs": [
+      "Alergia al alopurinol",
+      "Reaccion de hipersensibilidad previa"
+    ],
+    "contraindicacionesEn": [
+      "Allopurinol allergy",
+      "Previous hypersensitivity reaction"
+    ],
+    "embarazoLactanciaEs": "Evitar en el embarazo si es posible. Se excreta en leche materna.",
+    "embarazoLactanciaEn": "Avoid in pregnancy if possible. Excreted in breast milk.",
+    "consejosUsoEs": [
+      "Tome despues de las comidas para reducir malestar estomacal",
+      "Beba al menos 8 vasos de agua al dia",
+      "No empiece durante un ataque agudo de gota",
+      "Reporte cualquier erupcion cutanea inmediatamente"
+    ],
+    "consejosUsoEn": [
+      "Take after meals to reduce stomach upset",
+      "Drink at least 8 glasses of water daily",
+      "Do not start during an acute gout attack",
+      "Report any skin rash immediately"
+    ],
+    "almacenamientoEs": "Temperatura ambiente, proteger de la luz y la humedad.",
+    "almacenamientoEn": "Room temperature, protect from light and moisture.",
+    "categorias": [
+      "musculoesqueletico",
+      "gota",
+      "acido-urico"
+    ],
+    "necesitaReceta": true,
+    "controlado": false
+  }
+]`);
+
+// Export the data
+export const medicamentosEnciclopedia: MedicamentoEntry[] = medicamentosData;
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+
+/**
+ * Busca medicamentos por nombre, clase o categoria
+ * Searches medications by name, class, or category
+ */
+export function buscarMedicamento(query: string): MedicamentoEntry[] {
+  const q = query.toLowerCase().trim();
+  return medicamentosEnciclopedia.filter((med) => {
+    return (
+      med.id.toLowerCase().includes(q) ||
+      med.nombreGenericoEs.toLowerCase().includes(q) ||
+      med.nombreGenericoEn.toLowerCase().includes(q) ||
+      med.nombresComercialesEs.some((n) => n.toLowerCase().includes(q)) ||
+      med.nombresComercialesEn.some((n) => n.toLowerCase().includes(q)) ||
+      med.claseEs.toLowerCase().includes(q) ||
+      med.claseEn.toLowerCase().includes(q) ||
+      med.categorias.some((c) => c.toLowerCase().includes(q)) ||
+      med.paraQueEsEs.toLowerCase().includes(q) ||
+      med.paraQueEsEn.toLowerCase().includes(q)
+    );
+  });
+}
+
+/**
+ * Obtiene un medicamento por su ID
+ * Gets a medication by its ID
+ */
+export function getMedicamentoById(id: string): MedicamentoEntry | undefined {
+  return medicamentosEnciclopedia.find((med) => med.id === id);
+}
+
+/**
+ * Obtiene medicamentos por clase terapeutica
+ * Gets medications by therapeutic class
+ */
+export function getMedicamentosPorClase(clase: string): MedicamentoEntry[] {
+  const c = clase.toLowerCase().trim();
+  return medicamentosEnciclopedia.filter(
+    (med) =>
+      med.claseEs.toLowerCase().includes(c) ||
+      med.claseEn.toLowerCase().includes(c)
+  );
+}
+
+/**
+ * Obtiene medicamentos de venta libre (OTC)
+ * Gets over-the-counter medications
+ */
+export function getMedicamentosOTC(): MedicamentoEntry[] {
+  return medicamentosEnciclopedia.filter((med) => !med.necesitaReceta);
+}
+
+/**
+ * Obtiene medicamentos controlados
+ * Gets controlled substances
+ */
+export function getMedicamentosControlados(): MedicamentoEntry[] {
+  return medicamentosEnciclopedia.filter((med) => med.controlado);
+}

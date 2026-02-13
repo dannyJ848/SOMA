@@ -1,0 +1,108 @@
+{
+  "id": "ent-tinnitus",
+  "type": "patient-education",
+  "name": "Tinnitus",
+  "alternateNames": ["Ringing in the Ears", "Ear Ringing", "Phantom Sound Perception"],
+  "category": "ear",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Tinnitus is when you hear sounds in your ears or head that are not coming from outside - like ringing, buzzing, or humming.",
+      "explanation": "Tinnitus is the experience of hearing sound when there is no actual sound around you. The sound might be ringing, buzzing, hissing, humming, or even clicking. It can be in one ear, both ears, or seem like it is inside your head. Almost everyone has brief tinnitus occasionally, but for some people it lasts a long time and can be bothersome. Tinnitus is not a disease itself but a symptom that something is happening with your hearing system. Common causes include exposure to loud noise, earwax buildup, age-related hearing loss, and some medications. Most tinnitus is not dangerous, but it is important to have it checked, especially if it is in one ear only, comes with dizziness, or affects your hearing. While there is no cure for most tinnitus, many treatments can help make it less noticeable and less distressing.",
+      "keyTerms": [
+        {"term": "tinnitus", "definition": "Hearing sounds that are not caused by anything outside your body", "pronunciation": "TIN-ih-tus or tin-NIGHT-us"},
+        {"term": "ringing", "definition": "The most common description of tinnitus sound"},
+        {"term": "hearing loss", "definition": "Often occurs along with tinnitus"},
+        {"term": "loud noise", "definition": "A common cause of temporary or permanent tinnitus"}
+      ],
+      "analogies": ["Tinnitus is like your brain turning up the volume on your internal hearing system when it is not getting enough signals from the outside world."],
+      "examples": ["After attending a loud concert, you might notice ringing in your ears that usually fades within a few hours or days."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Tinnitus is a perceived sound without external stimulus, classified as subjective (heard only by patient) or objective (can be heard by examiner), with numerous potential causes.",
+      "explanation": "Subjective tinnitus (>99% of cases) is perceived only by the patient and usually associated with hearing loss of any type. Common causes include noise-induced hearing loss, presbycusis, cerumen impaction, otosclerosis, Meniere's disease, ototoxic medications (NSAIDs, aminoglycosides, loop diuretics, chemotherapy), acoustic neuroma, and head/neck trauma. Objective tinnitus can be heard by an examiner using a stethoscope, suggesting vascular (arterial bruit, venous hum, dural arteriovenous fistula) or muscular causes (palatal myoclonus, middle ear muscle spasm). Pulsatile tinnitus synchronous with heartbeat requires vascular imaging. Evaluation includes comprehensive audiometry, tinnitus pitch and loudness matching, and imaging if indicated (MRI for unilateral tinnitus, MRA/CT angiography for pulsatile). Treatment focuses on addressing underlying causes, hearing aids for hearing loss (which often reduces tinnitus), sound therapy (masking, enrichment), and cognitive behavioral therapy for distress management.",
+      "keyTerms": [
+        {"term": "subjective tinnitus", "definition": "Tinnitus heard only by the patient, not detectable by examiner"},
+        {"term": "objective tinnitus", "definition": "Tinnitus that can be heard by the examiner, suggesting vascular or muscular cause"},
+        {"term": "pulsatile tinnitus", "definition": "Rhythmic tinnitus synchronous with heartbeat, often vascular in origin"},
+        {"term": "sound therapy", "definition": "Use of external sounds to reduce tinnitus perception or distress"},
+        {"term": "ototoxic", "definition": "Medications that can damage hearing or cause tinnitus"}
+      ],
+      "analogies": ["The brain is like a noise-cancellation system - when outer hair cells are damaged and send fewer signals, the brain amplifies internal neural activity, which we perceive as tinnitus."],
+      "examples": ["A patient develops pulsatile tinnitus in one ear - this warrants vascular imaging to rule out conditions like dural arteriovenous fistula or carotid stenosis."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Tinnitus management requires systematic evaluation, exclusion of concerning etiologies, and multimodal treatment addressing auditory, psychological, and neuroplastic components.",
+      "explanation": "Tinnitus evaluation includes: history (onset, duration, laterality, quality, pitch, pulsatility, modifying factors, medication review), audiometry (hearing loss pattern, threshold shift), otoscopy, and assessment of impact (Tinnitus Handicap Inventory, Tinnitus Functional Index). Red flags requiring imaging: unilateral tinnitus, asymmetric hearing loss, pulsatile character, neurological symptoms. MRI with contrast evaluates for vestibular schwannoma; pulsatile tinnitus workup includes MRA, CT temporal bones, and potentially angiography. Somatosensory tinnitus (modulated by jaw/neck movement) may respond to physical therapy. Evidence-based treatments include: hearing aids (amplification reduces central gain), cognitive behavioral therapy (CBT - strongest evidence for reducing distress), tinnitus retraining therapy (TRT - habituation through counseling and sound generators), and sound enrichment. Medications (antidepressants, anxiolytics) address comorbid conditions but do not directly treat tinnitus. Neuromodulation approaches (repetitive TMS, cochlear implants for profound loss with tinnitus) are emerging.",
+      "keyTerms": [
+        {"term": "Tinnitus Handicap Inventory", "definition": "Validated questionnaire measuring tinnitus impact on daily life"},
+        {"term": "tinnitus retraining therapy", "definition": "Habituation-based approach combining counseling with sound generators"},
+        {"term": "somatosensory tinnitus", "definition": "Tinnitus modulated by neck, jaw, or eye movements"},
+        {"term": "central gain", "definition": "Increased neural activity in central auditory pathway compensating for reduced peripheral input"},
+        {"term": "sound generators", "definition": "Devices producing broadband or specialized sounds to reduce tinnitus perception"}
+      ],
+      "clinicalNotes": "AAO-HNS guidelines recommend against routine imaging for bilateral non-pulsatile tinnitus with symmetric hearing. Ginkgo biloba, melatonin, and most supplements lack evidence. Cochlear implantation for single-sided deafness often improves associated tinnitus."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Tinnitus pathophysiology involves peripheral deafferentation triggering maladaptive central plasticity, with limbic and attentional networks determining distress severity.",
+      "explanation": "Contemporary tinnitus models emphasize central rather than peripheral mechanisms. Cochlear damage causes reduced auditory nerve input (deafferentation), leading to: increased spontaneous firing in dorsal cochlear nucleus, altered tonotopic maps in auditory cortex, and homeostatic upregulation of central gain in inferior colliculus. Tinnitus perception requires engagement of non-auditory networks: limbic system (amygdala, hippocampus) for emotional salience, prefrontal cortex for attention, and default mode network for conscious perception. The degree of limbic involvement determines tinnitus distress independent of loudness. Cochlear synaptopathy (hidden hearing loss) may explain tinnitus with normal audiogram - preferential loss of low-spontaneous-rate fibers alters central processing. Somatosensory modulation occurs via trigeminal and cervical inputs to dorsal cochlear nucleus, explaining associations with temporomandibular disorders. Hyperacusis (reduced sound tolerance) frequently co-occurs, suggesting shared gain dysfunction. Understanding these mechanisms informs targeted interventions: CBT addresses limbic/attentional components, neuromodulation targets cortical hyperactivity.",
+      "keyTerms": [
+        {"term": "deafferentation", "definition": "Loss of sensory input to central neurons, triggering plastic changes"},
+        {"term": "dorsal cochlear nucleus", "definition": "Brainstem structure implicated in tinnitus generation, receives somatosensory input"},
+        {"term": "tonotopic reorganization", "definition": "Remapping of frequency representation in auditory cortex following hearing loss"},
+        {"term": "hyperacusis", "definition": "Reduced tolerance to everyday sounds, often comorbid with tinnitus"},
+        {"term": "hidden hearing loss", "definition": "Cochlear synaptopathy causing auditory dysfunction despite normal audiogram"}
+      ],
+      "clinicalNotes": "Extended high-frequency audiometry may reveal cochlear damage not seen on standard testing. Loudness discomfort levels assess hyperacusis. Limbic involvement in tinnitus distress supports psychologically-oriented treatments. Somatic modulation testing: check if jaw clench, neck rotation, or gaze direction alters tinnitus."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced tinnitus research explores biomarkers, precision medicine phenotyping, novel neuromodulation approaches, and pharmacologic targets based on molecular mechanisms.",
+      "explanation": "Tinnitus heterogeneity necessitates subtyping for precision treatment: proposed phenotypes include somatosensory-modulated, hyperacusis-associated, hearing loss-related, and psychological distress-dominant. Biomarker research uses EEG (gamma oscillation abnormalities, reduced alpha power), fMRI (limbic hyperconnectivity, auditory-attention network alterations), and pupillometry (autonomic reactivity). Neuromodulation advances include bimodal stimulation combining sound with vagal nerve or somatosensory stimulation, targeting spike-timing-dependent plasticity to restore normal neural synchrony. Repetitive TMS over auditory cortex shows modest efficacy; transcranial direct current stimulation and invasive approaches remain investigational. Pharmacologic research targets: potassium channel modulators (Kv7, addressing dorsal cochlear nucleus hyperactivity), GABA enhancers, NMDA antagonists, and neurotrophic agents. Gene therapy for underlying hearing loss may prevent or reverse tinnitus. Regenerative approaches restoring hair cells could address the peripheral trigger. Smartphone-based sound therapy apps offer accessible treatment delivery, with research on personalized spectra based on tinnitus pitch. Artificial intelligence applications include treatment response prediction and therapy optimization.",
+      "keyTerms": [
+        {"term": "bimodal stimulation", "definition": "Combining auditory and somatosensory/vagal stimulation to induce neural plasticity"},
+        {"term": "spike-timing-dependent plasticity", "definition": "Neural learning mechanism where timing of inputs determines synaptic strengthening or weakening"},
+        {"term": "Kv7 channels", "definition": "Potassium channels in DCN neurons, potential pharmacologic target for tinnitus"},
+        {"term": "gamma oscillations", "definition": "High-frequency brain rhythms, abnormalities implicated in tinnitus consciousness"},
+        {"term": "notched sound therapy", "definition": "Music with frequencies around tinnitus pitch removed, aiming to reduce cortical overrepresentation"}
+      ],
+      "clinicalNotes": "Susan Shore bimodal device (Lenire) showing promising Phase 3 results. No FDA-approved medications specifically for tinnitus; OTO-313 (gacyclidine NMDA antagonist) trials ongoing. Tinnitus outcomes research moving toward patient-reported outcome measures and responder definitions. Consider clinical trials for refractory cases."
+    }
+  },
+  "media": [
+    {
+      "id": "tinnitus-pathways",
+      "type": "diagram",
+      "filename": "tinnitus_neural_pathways.svg",
+      "title": "Tinnitus Neural Pathways",
+      "description": "Diagram showing central auditory pathway changes in tinnitus"
+    }
+  ],
+  "citations": [
+    {
+      "id": "aao-hns-tinnitus",
+      "type": "guideline",
+      "title": "Clinical Practice Guideline: Tinnitus",
+      "source": "American Academy of Otolaryngology-Head and Neck Surgery",
+      "url": "https://doi.org/10.1177/0194599814545325"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "ent-hearing-loss", "targetType": "condition", "relationship": "related", "label": "Hearing Loss"},
+    {"targetId": "ent-menieres-disease", "targetType": "condition", "relationship": "related", "label": "Meniere's Disease"},
+    {"targetId": "ent-hearing-aids", "targetType": "treatment", "relationship": "related", "label": "Hearing Aids"}
+  ],
+  "tags": {
+    "systems": ["auditory", "neurological"],
+    "topics": ["conditions", "symptom-management"],
+    "clinicalRelevance": "high",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

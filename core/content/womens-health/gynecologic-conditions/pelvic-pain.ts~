@@ -1,0 +1,363 @@
+import { WomensHealthContent } from '../types';
+
+export const pelvicPain: LegacyWomensHealthContent = {
+  id: 'condition-pelvic-pain',
+  type: 'condition',
+  name: 'Pelvic Pain',
+  alternateNames: ['Chronic pelvic pain', 'Lower abdominal pain', 'Pelvic discomfort'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Pelvic pain is pain in the lower part of your belly. It has many causes and can usually be treated once the cause is found.',
+      explanation: `**Types of Pelvic Pain:**
+- **Acute:** Sudden pain that needs quick attention
+- **Chronic:** Pain lasting 6 months or longer
+- **Cyclic:** Pain that comes with your period
+
+**Common Causes:**
+- Period cramps (dysmenorrhea)
+- Ovarian cysts
+- Endometriosis
+- Infections
+- Fibroids
+- Bladder problems
+- Bowel problems
+
+**When to See a Doctor:**
+- Pain that stops you from doing normal activities
+- Pain with fever
+- Pain during or after sex
+- Unusual vaginal bleeding or discharge
+- Pain that keeps getting worse
+
+**What to Expect at Your Visit:**
+- Questions about your pain (where, when, how long)
+- Physical exam
+- Maybe blood tests, urine test, or ultrasound
+- Finding the cause helps find the right treatment`,
+      keyTerms: [
+        { term: 'chronic pelvic pain', definition: 'Pain in the lower belly lasting 6 months or more' },
+        { term: 'dysmenorrhea', definition: 'Painful menstrual cramps' },
+        { term: 'ultrasound', definition: 'A test using sound waves to see inside your pelvis' },
+      ],
+      analogies: ['Pelvic pain is like a warning light in your car - it tells you something needs attention, but you need to find the specific cause to fix it.'],
+      examples: ['Cramping during your period that responds to ibuprofen', 'Deep pain during intercourse that needs evaluation'],
+    },
+    2: {
+      level: 2,
+      summary: 'Pelvic pain requires systematic evaluation to identify gynecologic, urologic, gastrointestinal, or musculoskeletal causes, with treatment directed at the underlying condition.',
+      explanation: `**Classification:**
+
+*By Duration:*
+- Acute: <3 months (may be emergency)
+- Chronic: ≥6 months
+
+*By Pattern:*
+- Cyclic: Related to menstrual cycle
+- Non-cyclic: Unrelated to menses
+- Intermittent vs. constant
+
+**Differential Diagnosis by System:**
+
+*Gynecologic:*
+- Dysmenorrhea (primary or secondary)
+- Endometriosis
+- Adenomyosis
+- Ovarian cysts
+- Fibroids
+- Pelvic inflammatory disease (PID)
+- Adhesions
+
+*Urologic:*
+- Interstitial cystitis/bladder pain syndrome
+- Urinary tract infection
+- Urethral syndrome
+
+*Gastrointestinal:*
+- Irritable bowel syndrome (IBS)
+- Inflammatory bowel disease
+- Constipation
+- Diverticular disease
+
+*Musculoskeletal:*
+- Pelvic floor dysfunction
+- Myofascial pain
+- Nerve entrapment
+
+**Evaluation:**
+- Detailed history (pain characteristics, associated symptoms)
+- Physical exam (abdominal, pelvic, musculoskeletal)
+- Labs: Pregnancy test, STI screening, urinalysis
+- Imaging: Pelvic ultrasound (transvaginal)
+- Laparoscopy if indicated (endometriosis diagnosis)`,
+      keyTerms: [
+        { term: 'endometriosis', definition: 'Tissue similar to uterine lining growing outside the uterus' },
+        { term: 'adenomyosis', definition: 'Uterine lining tissue growing into the muscle wall of the uterus' },
+        { term: 'interstitial cystitis', definition: 'Chronic bladder pain syndrome without infection' },
+        { term: 'pelvic floor dysfunction', definition: 'Problems with muscles supporting pelvic organs' },
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Chronic pelvic pain often involves multiple pain generators and central sensitization, requiring a multimodal treatment approach addressing physical, psychological, and social factors.',
+      explanation: `**Pathophysiology:**
+
+*Peripheral Sensitization:*
+- Ongoing tissue injury/inflammation
+- Increased local pain mediators
+- Lower threshold for pain signals
+
+*Central Sensitization:*
+- Amplified CNS pain processing
+- Altered pain modulation
+- Explains pain persistence after initial cause resolves
+- Hyperalgesia, allodynia
+
+*Psychological Factors:*
+- Anxiety and depression common comorbidities
+- Pain catastrophizing
+- Fear-avoidance behaviors
+- Sleep disturbance worsens pain
+
+**Systematic Evaluation:**
+
+*Pain Mapping:*
+- Systematic palpation
+- Identify point tenderness
+- Assess pelvic floor muscles
+- Single-digit exam technique
+
+*Red Flags (Require Urgent Evaluation):*
+- Abnormal uterine bleeding
+- Postmenopausal new-onset pain
+- Mass on exam
+- Constitutional symptoms
+
+**Condition-Specific Evaluation:**
+
+*Endometriosis:*
+- History: Dysmenorrhea, dyspareunia, dyschezia
+- Exam: Nodularity, fixed uterus
+- Imaging: Transvaginal US, MRI
+- Definitive diagnosis: Laparoscopy with biopsy
+
+*Interstitial Cystitis:*
+- Urinary symptoms (frequency, urgency)
+- Suprapubic pain worsens with filling
+- Potassium sensitivity test
+- Cystoscopy with hydrodistention
+
+*Pelvic Floor Myofascial Pain:*
+- Trigger points in levator ani
+- Pain with single-digit pressure
+- May contribute to other diagnoses
+
+**Multidisciplinary Approach:**
+- Gynecology, urology, GI, pain management
+- Physical therapy (pelvic floor)
+- Mental health integration
+- Often multiple contributing factors`,
+      keyTerms: [
+        { term: 'central sensitization', definition: 'Amplified processing of pain signals in the central nervous system' },
+        { term: 'allodynia', definition: 'Pain from stimuli that would not normally cause pain' },
+        { term: 'pain mapping', definition: 'Systematic palpation to identify specific areas of tenderness' },
+        { term: 'dyspareunia', definition: 'Pain during sexual intercourse' },
+      ],
+      clinicalNotes: 'Many patients have multiple pain contributors - treating only one may not resolve symptoms. Pelvic floor physical therapy has evidence for chronic pelvic pain regardless of primary diagnosis. Address anxiety/depression as they worsen pain perception.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced chronic pelvic pain management requires understanding of complex pain mechanisms, multimodal pharmacotherapy, interventional options, and coordination of interdisciplinary care.',
+      explanation: `**Pharmacologic Management:**
+
+*First-Line:*
+- NSAIDs: Cyclic pain, dysmenorrhea
+- Hormonal therapy: Suppress ovulation/menstruation
+  - Combined hormonal contraceptives
+  - Progestins (continuous)
+  - GnRH agonists/antagonists (with add-back)
+
+*Neuromodulators:*
+- Tricyclic antidepressants (amitriptyline 10-75 mg)
+- SNRIs (duloxetine, venlafaxine)
+- Gabapentinoids (gabapentin, pregabalin)
+- Often used for neuropathic component
+
+*Muscle Relaxants:*
+- Cyclobenzaprine
+- Baclofen (including intravaginal)
+- Diazepam suppositories (pelvic floor)
+
+**Interventional Options:**
+
+*Nerve Blocks:*
+- Ilioinguinal/iliohypogastric
+- Pudendal nerve
+- Trigger point injections
+
+*Neuromodulation:*
+- Sacral nerve stimulation (IC/PBS)
+- Transcutaneous nerve stimulation
+
+**Surgical Considerations:**
+
+*Laparoscopy:*
+- Diagnostic and therapeutic for endometriosis
+- Adhesiolysis (variable benefit)
+- Excision vs. ablation of endometriosis
+
+*Hysterectomy:*
+- Not first-line for chronic pelvic pain
+- May be appropriate if uterine pathology (adenomyosis, fibroids)
+- Counsel about potential for persistent pain
+
+*Neurectomy:*
+- Presacral neurectomy (midline pain)
+- Limited evidence
+
+**Pelvic Floor Physical Therapy:**
+- Internal and external manual therapy
+- Trigger point release
+- Stretching, relaxation techniques
+- Biofeedback
+- Home exercise program
+
+**Psychological Interventions:**
+- Cognitive behavioral therapy
+- Mindfulness-based stress reduction
+- Pain psychology consultation
+- Address trauma history
+
+**Treatment Refractory Cases:**
+- Reassess diagnosis
+- Consider central sensitization treatment focus
+- Interdisciplinary pain program
+- Patient-centered goals (function, not pain elimination)`,
+      keyTerms: [
+        { term: 'GnRH agonist', definition: 'Medication that suppresses ovarian hormones to treat endometriosis, fibroids' },
+        { term: 'pudendal nerve block', definition: 'Injection to block nerve carrying sensation from perineum' },
+        { term: 'presacral neurectomy', definition: 'Surgical interruption of sympathetic nerves for midline pelvic pain' },
+        { term: 'biofeedback', definition: 'Technique to gain awareness and control of pelvic floor muscles' },
+      ],
+      clinicalNotes: 'Avoid opioids for chronic pelvic pain due to ineffectiveness and hyperalgesia. Hysterectomy for pain without clear pathology has high failure rate. Set realistic expectations - goal is improved function, not pain-free state.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert chronic pelvic pain management involves integrating biopsychosocial frameworks, addressing healthcare disparities, implementing evidence-based interdisciplinary programs, and counseling through treatment uncertainty.',
+      explanation: `**Biopsychosocial Model:**
+
+*Biological Factors:*
+- Tissue pathology
+- Peripheral and central sensitization
+- Genetic predisposition
+- Hormonal influences
+
+*Psychological Factors:*
+- Anxiety, depression
+- Catastrophizing, fear-avoidance
+- History of trauma (often overlooked)
+- Sleep disturbance
+
+*Social Factors:*
+- Relationship impacts
+- Work disability
+- Healthcare utilization
+- Social isolation
+
+**Trauma-Informed Care:**
+- High prevalence of trauma history in CPP
+- Screen sensitively
+- Avoid retraumatization during exams
+- Integrate trauma-focused therapy
+
+**Disparities in Care:**
+- Pain dismissed ("it's in your head")
+- Diagnostic delays for endometriosis (average 7-10 years)
+- Racial disparities in pain treatment
+- Access to multidisciplinary care
+
+**Evidence Synthesis - Challenging Questions:**
+
+*Laparoscopy for Negative Imaging:*
+- May identify endometriosis, adhesions
+- Normal laparoscopy in 30-40%
+- Counsel about potential findings and treatments
+
+*Hysterectomy Outcomes:*
+- With clear pathology: 70-90% improvement
+- Without clear pathology: Much lower success
+- Careful patient selection and counseling
+
+*Opioids:*
+- No evidence for efficacy in CPP
+- Risk of dependence, hyperalgesia
+- May occasionally use short-term for acute flares
+
+**Program Development:**
+
+*Interdisciplinary Team:*
+- Gynecologist, urologist, GI specialist
+- Pelvic floor physical therapist
+- Pain psychologist
+- Pain physician/anesthesiologist
+- Nurse coordinator
+
+*Program Components:*
+- Comprehensive evaluation
+- Patient education
+- Physical therapy
+- Psychological intervention
+- Medical management optimization
+- Self-management strategies
+
+**Patient Communication:**
+
+*Key Messages:*
+- "I believe your pain is real"
+- Multiple factors usually contribute
+- Cure may not be possible; improvement is
+- Active participation needed
+- Treatment takes time
+
+*Shared Decision-Making:*
+- Discuss all options including observation
+- Explore patient goals and values
+- Surgery is not always the answer
+- Document discussions`,
+      keyTerms: [
+        { term: 'biopsychosocial model', definition: 'Framework integrating biological, psychological, and social factors in illness' },
+        { term: 'trauma-informed care', definition: 'Approach recognizing widespread impact of trauma and avoiding retraumatization' },
+        { term: 'pain catastrophizing', definition: 'Tendency to magnify, ruminate on, and feel helpless about pain' },
+        { term: 'interdisciplinary pain program', definition: 'Coordinated multispecialty approach to complex pain' },
+      ],
+      clinicalNotes: 'Many CPP patients have felt dismissed by healthcare system - validation is therapeutic. Trauma history should be explored but not required for treatment. Success is improved quality of life and function, not necessarily pain elimination.',
+    },
+  },
+  media: [],
+  citations: [
+    {
+      id: 'acog-chronic-pelvic-pain',
+      type: 'article',
+      title: 'ACOG Practice Bulletin: Chronic Pelvic Pain',
+      source: 'American College of Obstetricians and Gynecologists',
+      license: 'Copyright ACOG',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'condition-endometriosis', targetType: 'condition', relationship: 'related', label: 'Endometriosis' },
+    { targetId: 'condition-fibroids', targetType: 'condition', relationship: 'related', label: 'Fibroids' },
+    { targetId: 'condition-menstrual-disorders', targetType: 'condition', relationship: 'related', label: 'Menstrual Disorders' },
+  ],
+  tags: {
+    systems: ['reproductive'],
+    topics: ['gynecology', 'patient-education', 'womens-health', 'pain-management'],
+    keywords: ['pelvic pain', 'chronic pelvic pain', 'dysmenorrhea', 'dyspareunia'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

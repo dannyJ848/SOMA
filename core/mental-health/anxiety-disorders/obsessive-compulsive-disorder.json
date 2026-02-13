@@ -1,0 +1,155 @@
+{
+  "id": "condition-obsessive-compulsive-disorder",
+  "type": "condition",
+  "category": "anxiety-disorder",
+  "name": "Obsessive-Compulsive Disorder",
+  "alternateNames": ["OCD"],
+  "icd10": "F42",
+  "dsm5": "300.3",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "OCD causes unwanted, intrusive thoughts (obsessions) that lead to repetitive behaviors or mental acts (compulsions) performed to reduce anxiety.",
+      "explanation": "OCD involves two main parts: obsessions and compulsions. Obsessions are unwanted thoughts, images, or urges that pop into your mind and cause anxiety. For example, thoughts about germs, harm coming to loved ones, or things being 'just right.' Compulsions are behaviors or mental rituals you feel driven to do to reduce the anxiety - like washing hands repeatedly, checking locks over and over, or counting in certain patterns. The person knows these thoughts and behaviors don't make logical sense, but feels unable to stop. OCD can take up hours each day and significantly interfere with life.",
+      "keyTerms": [
+        { "term": "obsession", "definition": "An unwanted, intrusive thought, image, or urge that causes anxiety" },
+        { "term": "compulsion", "definition": "A repetitive behavior or mental act done to reduce anxiety from obsessions" },
+        { "term": "intrusive", "definition": "Unwanted and coming into your mind without invitation" }
+      ],
+      "analogies": ["OCD is like having a faulty alarm system in your brain that keeps going off about things you know aren't real threats, and the only way you've found to turn off the alarm is to do certain rituals - but the alarm keeps coming back."],
+      "examples": ["Someone with contamination OCD might wash their hands until the skin cracks, or spend hours cleaning. Someone with 'harm OCD' might have disturbing thoughts about accidentally hurting someone and check repeatedly to make sure they haven't."],
+      "importantNote": "Having OCD does NOT mean you're dangerous or will act on intrusive thoughts. The thoughts in OCD go against the person's values - that's precisely why they cause so much distress."
+    },
+    "2": {
+      "level": 2,
+      "summary": "OCD requires presence of obsessions, compulsions, or both that are time-consuming (>1 hour/day) or cause significant distress/impairment, and are not due to substances or another condition.",
+      "explanation": "DSM-5 criteria: Obsessions are recurrent, persistent, intrusive, unwanted thoughts/urges/images causing anxiety; person attempts to ignore, suppress, or neutralize them. Compulsions are repetitive behaviors or mental acts performed in response to obsessions or according to rigid rules; aimed at preventing/reducing anxiety or preventing dreaded event; not connected realistically to what they're designed to prevent, or clearly excessive. Obsessions/compulsions are time-consuming (>1 hour/day) or cause clinically significant distress/impairment. Common obsession themes: contamination, harm, symmetry/exactness, forbidden/taboo thoughts (sexual, religious, aggressive), need for certainty. Common compulsions: washing, checking, counting, ordering, repeating, mental rituals (praying, reviewing).",
+      "keyTerms": [
+        { "term": "ego-dystonic", "definition": "Thoughts or behaviors experienced as inconsistent with one's self-concept and values" },
+        { "term": "neutralization", "definition": "Mental or behavioral acts to 'undo' or counteract obsessive thoughts" },
+        { "term": "magical thinking", "definition": "Belief that thoughts can cause harm or that rituals prevent bad outcomes" },
+        { "term": "insight", "definition": "Degree to which person recognizes OCD beliefs are probably not true; varies from good to absent" }
+      ],
+      "diagnosticCriteria": "Obsessions and/or compulsions + time-consuming (>1hr/day) or significant distress/impairment + not substance-induced",
+      "prevalence": "Lifetime prevalence 2-3%; equal M:F; mean onset early 20s but bimodal (childhood peak ~10-12 years); chronic course without treatment"
+    },
+    "3": {
+      "level": 3,
+      "summary": "OCD involves dysfunction in cortico-striato-thalamo-cortical circuits; treatment includes SSRIs (often higher doses) and exposure with response prevention (ERP).",
+      "explanation": "Neurobiology: hyperactivity in orbitofrontal cortex (error detection), anterior cingulate cortex (conflict monitoring), and caudate nucleus (habit learning); reduced prefrontal inhibitory control; altered serotonergic and glutamatergic function. CSTC circuit model: failure to inhibit intrusive thoughts and compulsive urges. Insight specifier: good/fair (recognizes beliefs probably untrue), poor (thinks probably true), or absent/delusional (complete conviction). Treatment: SSRIs are first-line - often need higher doses than depression (fluoxetine 40-80mg, sertraline 200mg, fluvoxamine 300mg); response takes 8-12 weeks. ERP (Exposure and Response Prevention) is first-line psychotherapy: systematic exposure to obsessional triggers while preventing compulsive responses, allowing habituation and extinction. Combined medication + ERP may be superior.",
+      "keyTerms": [
+        { "term": "exposure and response prevention", "definition": "Gold-standard therapy: exposure to feared triggers while resisting compulsions until anxiety decreases naturally" },
+        { "term": "CSTC circuit", "definition": "Cortico-striato-thalamo-cortical circuit; implicated in OCD pathophysiology" },
+        { "term": "habituation", "definition": "Decrease in emotional response with prolonged or repeated exposure" },
+        { "term": "clomipramine", "definition": "TCA with serotonergic activity; effective for OCD but more side effects than SSRIs" }
+      ],
+      "clinicalNotes": "Y-BOCS (Yale-Brown Obsessive Compulsive Scale) is standard assessment tool. OCD often underdiagnosed due to shame about symptoms. Distinguish from OCD-related disorders: body dysmorphic disorder, hoarding, trichotillomania, excoriation. OCD is no longer classified with anxiety disorders in DSM-5 - now separate category."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced OCD management addresses treatment resistance, pure obsessional presentations, and integrates augmentation strategies and specialized ERP approaches.",
+      "explanation": "Treatment-resistant OCD: optimize SSRI (adequate dose 12+ weeks); switch SSRI; clomipramine trial (monitor ECG, anticholinergic effects); augmentation with risperidone, aripiprazole, or haloperidol (NNT ~5). ERP optimization: ensure adequate exposure duration and frequency; address mental rituals and reassurance-seeking; inhibitory learning approach (maximizing variability, occasional reinforced extinction, removing safety signals). 'Pure O' (Pure Obsessional): intrusive thoughts without overt compulsions - but always mental compulsions present (reviewing, reassurance-seeking, mental neutralization); ERP targets mental rituals. Hoarding: distinct neurobiology; specialized treatment combining CBT for hoarding with skills training; SSRIs less effective. OCD subtypes requiring specialized approaches: pediatric (family involvement, PANDAS/PANS consideration), perinatal (intrusive harm thoughts), scrupulosity (religious content), 'just right' (incompleteness feelings).",
+      "keyTerms": [
+        { "term": "pure O", "definition": "OCD presenting primarily with obsessions and covert mental compulsions rather than overt rituals" },
+        { "term": "PANDAS/PANS", "definition": "Pediatric autoimmune neuropsychiatric disorder - sudden-onset OCD following streptococcal or other infection" },
+        { "term": "inhibitory learning", "definition": "Model viewing exposure as creating new learning that competes with old fear associations" },
+        { "term": "scrupulosity", "definition": "OCD with religious or moral obsessions and related compulsions (excessive praying, confession)" }
+      ],
+      "clinicalNotes": "Reassurance-seeking is a compulsion - coach families not to provide reassurance. Mental compulsions must be identified and addressed in ERP. Shame and secrecy are common - create safe space to disclose symptoms. Suicidality risk exists - screen routinely. Comorbid tic disorders: consider antipsychotic augmentation earlier."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert OCD management integrates neurosurgical interventions for refractory cases, glutamatergic treatments, and precision approaches targeting core neurocircuitry dysfunction.",
+      "explanation": "Neurosurgical interventions for severe treatment-refractory OCD: deep brain stimulation (DBS) targeting ventral capsule/ventral striatum or subthalamic nucleus (FDA humanitarian device exemption); ablative procedures (anterior capsulotomy, cingulotomy) rare. Glutamatergic approaches: memantine, riluzole, N-acetylcysteine, ketamine - targeting glutamate dysregulation in CSTC circuits. Transcranial magnetic stimulation: targeting supplementary motor area or dorsomedial prefrontal cortex - FDA cleared. Intensive residential treatment: for severe, refractory cases requiring immersive ERP. Biomarkers under investigation: neuroimaging (OFC/caudate hyperactivity predicts treatment response); genetic (SLC1A1 glutamate transporter); autoimmune (Cunningham panel for PANDAS). Developmental trajectory: childhood-onset may have different neurobiology; PANDAS model suggests immune mechanisms in subset. Precision medicine: treatment matching based on symptom dimensions, comorbidities, biomarkers. Novel research: psilocybin for treatment-resistant OCD; NMDA modulators; vagus nerve stimulation.",
+      "keyTerms": [
+        { "term": "deep brain stimulation", "definition": "Implanted electrodes delivering electrical stimulation to specific brain regions; reversible neuromodulation" },
+        { "term": "anterior capsulotomy", "definition": "Ablative neurosurgical procedure targeting connections between thalamus and prefrontal cortex" },
+        { "term": "N-acetylcysteine", "definition": "Glutamate-modulating supplement with some evidence for OCD and related disorders" },
+        { "term": "supplementary motor area", "definition": "Brain region involved in movement preparation and sequencing; TMS target for OCD" }
+      ],
+      "clinicalNotes": "Treatment-refractory OCD (failed 2+ SSRIs, clomipramine, augmentation, adequate ERP) should be referred to specialized centers. Quality of life can be restored even in severe cases. Early, aggressive treatment may prevent chronicity. Advocate for access to ERP - remains underutilized. Dimensional approach: OCD exists on spectrum with normative intrusive thoughts and checking behaviors."
+    }
+  },
+
+  "commonObsessionThemes": [
+    "Contamination (germs, dirt, chemicals)",
+    "Harm (fear of causing harm to self or others)",
+    "Symmetry and exactness",
+    "Forbidden thoughts (sexual, violent, blasphemous)",
+    "Need to know or remember",
+    "Fear of losing things",
+    "Superstitious fears (unlucky numbers, colors)"
+  ],
+
+  "commonCompulsions": [
+    "Washing and cleaning",
+    "Checking (locks, stoves, that harm didn't occur)",
+    "Counting",
+    "Ordering and arranging",
+    "Repeating actions or words",
+    "Mental rituals (praying, reviewing, neutralizing)",
+    "Seeking reassurance"
+  ],
+
+  "riskFactors": [
+    "Family history of OCD",
+    "Genetic factors (heritability ~40-50%)",
+    "Stressful or traumatic life events",
+    "Childhood trauma",
+    "Perinatal complications",
+    "Streptococcal infection (PANDAS)",
+    "Other anxiety disorders"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "iocdfResources": "www.iocdf.org",
+      "treatmentProviders": "iocdf.org/find-help"
+    },
+    "message": "OCD can feel overwhelming and isolating, but it is highly treatable. The intrusive thoughts are NOT who you are. Help is available."
+  },
+
+  "treatments": {
+    "firstLine": ["SSRIs (higher doses)", "Exposure and Response Prevention (ERP)"],
+    "secondLine": ["Clomipramine", "SSRI augmentation with antipsychotic"],
+    "forRefractoryCases": ["TMS", "Deep brain stimulation", "Intensive residential treatment"],
+    "notRecommended": ["Benzodiazepines (interfere with exposure learning)", "Traditional talk therapy without ERP component"]
+  },
+
+  "citations": [
+    {
+      "id": "foa-2005",
+      "type": "study",
+      "title": "Randomized, Placebo-Controlled Trial of Exposure and Ritual Prevention, Clomipramine, and Their Combination",
+      "journal": "American Journal of Psychiatry",
+      "year": 2005
+    },
+    {
+      "id": "apa-dsm5-tr",
+      "type": "manual",
+      "title": "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision",
+      "authors": ["American Psychiatric Association"],
+      "year": 2022
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-body-dysmorphic-disorder", "targetType": "condition", "relationship": "related", "label": "Body Dysmorphic Disorder" },
+    { "targetId": "condition-hoarding-disorder", "targetType": "condition", "relationship": "related", "label": "Hoarding Disorder" },
+    { "targetId": "treatment-erp", "targetType": "treatment", "relationship": "treatment", "label": "Exposure and Response Prevention" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "ocd-related-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

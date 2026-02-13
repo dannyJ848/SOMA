@@ -1,0 +1,1266 @@
+/**
+ * Wilderness Trauma - Comprehensive Educational Content
+ *
+ * Managing traumatic injuries in remote settings where definitive care
+ * is delayed. Covers mechanisms of injury, assessment, stabilization,
+ improvisation, and evacuation considerations.
+ *
+ * IMPORTANT: This content is for educational purposes only. Trauma
+ * care in wilderness settings requires proper training and judgment.
+ */
+
+import { EducationalContent } from '../types';
+
+export const wildernessTraumaContent: EducationalContent = {
+  id: 'wilderness-trauma',
+  type: 'concept',
+  name: 'Wilderness Trauma Management',
+  alternateNames: ['Remote Area Trauma', 'Wilderness Injury Management', 'Backcountry Trauma Care'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Wilderness trauma is caring for serious injuries far from a hospital. This includes falls, cuts, broken bones, and other accidents. The most important things are keeping the person safe, stopping bad bleeding, and getting help.',
+      explanation: `## What Is Wilderness Trauma?
+
+Trauma means an injury from an accident. Wilderness trauma happens when someone gets hurt far from doctors and hospitals. You might be hiking, climbing, or doing other outdoor activities.
+
+## Common Types of Wilderness Injuries
+
+### Falls
+- Falling while hiking or climbing
+- Falling on rocks
+- Slipping on wet surfaces
+- Can cause broken bones, cuts, head injuries
+
+### Cuts and Scrapes
+- From sharp rocks
+- Tree branches
+- Falling on sharp objects
+- Tools like knives or axes
+
+### Animal-Related Injuries
+- Snake bites
+- Insect stings
+- Animal bites
+- Kicks or strikes
+
+### Burns
+- Campfire accidents
+- Hot water spills
+- Sunburn
+
+## The Most Important Steps
+
+### 1. Stay Safe First!
+- Make sure the area is safe for YOU
+- Look for dangers like falling rocks
+- Don't become another victim
+
+### 2. Check the Person
+
+**Follow the ABCs:**
+
+**A - Airway**
+- Can they breathe?
+- Is anything blocking their mouth?
+
+**B - Breathing**
+- Is their chest moving?
+- Can you hear them breathing?
+
+**C - Circulation**
+- Is there bad bleeding?
+- Do they have a pulse?
+
+### 3. Stop Bad Bleeding
+- Press directly on the wound
+- Use a clean cloth if possible
+- Keep pressing until bleeding stops
+
+### 4. Keep the Person Warm
+- Cover them with a blanket
+- Put something under them
+- Even warm days can feel cold when hurt
+
+### 5. Call for Help
+- Use phone if you have signal
+- Send someone to get help
+- Make noise (3 whistle blasts = help needed)
+
+## Common Injuries and What To Do
+
+### Broken Bones (Fractures)
+**Signs:**
+- Pain when touching or moving
+- Swelling
+- Strange shape
+- Cannot use that body part
+
+**What To Do:**
+- Don't move the broken part
+- Support it with something sturdy
+- Don't try to straighten it
+- Keep the person calm
+
+### Bad Cuts
+**What To Do:**
+- Clean with clean water if possible
+- Press on the cut to stop bleeding
+- Cover with a clean bandage
+- Raise the injured part if possible
+
+### Head Injuries
+**Signs:**
+- Hit their head
+- Confused or very sleepy
+- Throwing up
+- Cannot remember what happened
+
+**What To Do:**
+- Keep them still
+- Don't move their neck
+- Watch them closely
+- Get help right away!
+
+## Getting Help
+
+### How to Signal for Help
+- 3 whistle blasts (pause between)
+- 3 fires in a triangle
+- 3 piles of rocks
+- Bright colors spread out
+- Signal mirror on sunny days
+
+### What To Tell Rescue
+- Where you are (be specific!)
+- What happened
+- How many people are hurt
+- What kind of injuries
+- What you need
+
+## Stay With the Injured Person
+- Never leave someone alone unless you MUST get help
+- Talk to them
+- Keep them warm
+- Watch for changes`,
+      keyTerms: [
+        { term: 'trauma', definition: 'A serious injury or shock to the body' },
+        { term: 'fracture', definition: 'A broken bone' },
+        { term: 'bleeding', definition: 'Blood coming out of a cut or wound' },
+        { term: 'splint', definition: 'Something used to support and protect a broken bone' },
+        { term: 'rescue', definition: 'When help comes to get someone who is hurt or lost' },
+      ],
+      analogies: [
+        'Treating trauma is like fixing a chain - start with the most broken link first.',
+        'Your body is like a house - if the foundation (ABCs) isn\'t solid, nothing else matters.',
+        'Staying safe at an accident scene is like checking for ice before you walk - you don\'t want to fall too.',
+      ],
+      examples: [
+        'A hiker slips on wet rocks and breaks their ankle.',
+        'Someone falls while climbing and hits their head.',
+        'A camper cuts their leg while chopping wood.',
+      ],
+      patientCounselingPoints: [
+        'Stay calm - being scared makes everything worse.',
+        'Tell the person what you are doing before you do it.',
+        'Keep the injured person warm and comfortable.',
+        'Don\'t move someone who might have hurt their neck or back.',
+        'Ask someone else to call for help while you help the injured person.',
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Wilderness trauma management requires systematic assessment using the ABCDE approach, prioritizing life threats, and improvising with limited resources. Key skills include bleeding control, fracture stabilization, and environmental protection. Evacuation decisions balance injury severity with available resources and environmental constraints.',
+      explanation: `## Wilderness vs. Urban Trauma
+
+| Factor | Urban Setting | Wilderness Setting |
+|--------|--------------|-------------------|
+| Response time | Minutes | Hours to days |
+| Equipment | Specialized | Limited, improvised |
+| Environment | Controlled | Exposed to elements |
+| Help | Nearby | Self-sufficient |
+| Duration | Hand off quickly | Prolonged care |
+
+## Mechanisms of Wilderness Trauma
+
+### Falls
+- Most common wilderness injury mechanism
+- Risk increases with fatigue, terrain difficulty
+- Can cause multiple injuries
+- Consider spinal precautions
+
+### Blunt Force
+- Rock fall, avalanche
+- Being struck by object
+- Collision with object
+- Consider internal injuries
+
+### Penetrating
+- Sharp objects (rocks, branches)
+- Tools (knives, axes, ice axes)
+- Impalement injuries
+- Consider foreign bodies
+
+### Thermal/Burns
+- Campfires, stoves
+- Hot liquids
+- Sun exposure
+- Consider airway involvement
+
+## Primary Survey: ABCDE
+
+### A - Airway (with C-spine protection)
+- Ensure airway is open
+- Spinal precautions if trauma mechanism
+- Jaw thrust (not head tilt if spine injury possible)
+- Clear visible obstructions
+
+### B - Breathing
+- Look, listen, feel for breathing
+- Treat chest wounds immediately
+- Consider tension pneumothorax
+- Rescue breathing if needed
+
+### C - Circulation
+- Control major bleeding FIRST
+- Check for pulses
+- Assess skin signs
+- Begin CPR if needed
+
+### D - Disability (Neurologic)
+- Level of consciousness (AVPU)
+- Gross motor function
+- Pupils
+- Spine assessment
+
+### E - Environment/Exposure
+- Protect from elements
+- Prevent hypothermia
+- Ensure scene remains safe
+- Full body examine
+
+## Hemorrhage Control
+
+**Priority:** Uncontrolled bleeding kills before anything else
+
+**Methods (in order):**
+1. **Direct pressure** - Most effective, always first
+2. **Pressure dressings** - Over bleeding wound
+3. **Tourniquet** - Life-threatening limb bleeding only
+4. **Pressure points** - Adjunct only, less effective
+
+**Tourniquet Use:**
+- Windlass-style preferred (CAT, SOFT-T)
+- Place proximal to wound
+- Tighten until bleeding stops
+- Note time of application
+- Can stay on for <2 hours safely
+
+**Wound Packing:**
+- For deep wounds not suitable for tourniquet
+- Pack gauze directly into wound
+- Apply pressure over packed wound
+- Bleeding into gauze better than bleeding out
+
+## Fracture Management
+
+**Field Management Principles:**
+- Splint fractures as found
+- Immobilize joint above and below fracture
+- Check circulation before and after
+- Pad between splint and skin
+- Elevate if possible
+
+**Improvised Splinting:**
+\`\`\`
+C-A-T Method:
+C - Cushioning: Padding between splint and skin
+A - Anchoring: Secure above and below injury
+T - Tying: Tie securely but not too tight
+
+Materials:
+- Trekking poles
+- Sleeping pads
+- Tent stakes
+- Sticks/branches
+- Clothing
+- Duct tape
+\`\`\`
+
+**Reducing Fractures:**
+- Generally NOT recommended in wilderness
+- Exceptions:
+  - No pulse with fracture
+  - Skin tenting (imminent open fracture)
+  - Severe angulation prevents transport
+- Document neurovascular status before/after
+
+## Head Injuries
+
+**Concussion Signs:**
+- Confusion, memory problems
+- Headache, dizziness
+- Nausea, vomiting
+- Balance problems
+
+**Serious Head Injury Signs:**
+- Decreasing consciousness
+- Unequal pupils
+- Clear fluid from ear/nose
+- Seizures
+- Worsening symptoms
+
+**Management:**
+- Spine precautions
+- Monitor mental status closely
+- Evacuate any deterioration
+- Keep head of spine aligned
+
+## Spine Considerations
+
+**Indications for Spine Precautions:**
+- Fall from height (>3 feet)
+- Significant force to head/neck/back
+- Neck or back pain
+- Numbness/weakness in extremities
+- Altered mental status + trauma
+
+**Field Management:**
+- Manual C-spine stabilization
+- Log roll if needed
+- Immobilize with available materials
+- Padding between head and torso
+
+## Shock Recognition and Management
+
+**Types of Shock in Trauma:**
+- Hypovolemic (blood/fluid loss)
+- Cardiogenic (heart injury)
+- Neurogenic (spinal injury)
+- Combination
+
+**Field Management:**
+- Lie flat, elevate legs 12 inches
+- Keep warm
+- Do NOT give food or water (may need surgery)
+- Monitor vital signs
+- Treat underlying cause
+
+## Improvised Litters and Carries
+
+**Litter Construction:**
+- Toggle carry with jackets
+- Tarp/poncho litter with poles
+- Backpack frame litter
+- Search and carry (blanket drag)
+
+**Carry Methods:**
+- One-person assist (walking)
+- Two-person carry
+- Four-person carry
+- Litter carry for long distances`,
+      keyTerms: [
+        { term: 'ABCDE', definition: 'Systematic assessment: Airway, Breathing, Circulation, Disability, Environment' },
+        { term: 'tourniquet', definition: 'Device that compresses limb to stop bleeding', pronunciation: 'TOOR-ni-ket' },
+        { term: 'splint', definition: 'Device to immobilize injured limb' },
+        { term: 'AVPU', definition: 'Alert, responds to Verbal, Pain, Unresponsive - measures consciousness' },
+        { term: 'hypovolemic shock', definition: 'Low blood volume from blood or fluid loss', pronunciation: 'hy-poh-voe-LEE-mik' },
+      ],
+      analogies: [
+        'The ABCDE approach is like checking a car before a trip - you check the most important systems first.',
+        'A tourniquet is like turning off a faucet - you stop the flow at the source.',
+        'Splinting is like putting a cast on a broken house - it keeps things from moving until repair.',
+      ],
+      examples: [
+        'A climber falls 15 feet, has leg pain and deformity - probable fracture, splint and evacuate.',
+        'A hiker gets a deep cut on thigh from a fall - direct pressure first, then pressure dressing.',
+        'Someone gets hit by falling rock, confused and vomiting - head injury, evacuate urgently.',
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Wilderness trauma management integrates standard trauma principles with remote care challenges. The Primary Survey (ABCDE) identifies and treats immediate threats. Hemorrhage control, airway management, and fracture stabilization use field-expedient techniques. Prolonged field care and evacuation planning are essential components.',
+      explanation: `## Wilderness Trauma Assessment
+
+### Scene Size-Up
+
+**Hazards Assessment:**
+- Environmental (rockfall, avalanche, lightning)
+- Terrain (steep, unstable ground)
+- Weather (developing storm)
+- Safe access to patient
+
+**Mechanism of Injury:**
+- Kinetic energy: Mass × Velocity²
+- Higher energy = more injury
+- Consider multisystem trauma
+- Look for hidden injuries
+
+**Resource Assessment:**
+- Number of patients
+- Team capability
+- Equipment available
+- Time until dark
+- Distance to help
+
+## Primary Survey Details
+
+### Airway with C-Spine Protection
+
+**C-Spine Indications:**
+\`\`\`
+High-risk mechanisms:
+- Fall >10 feet (3 meters)
+- High-speed collision
+- Significant force to head/neck
+- Diving injury
+- Ejection from vehicle
+
+Clinical findings:
+- Neck pain/tenderness
+- Deformity
+- Neurologic deficit
+- Altered mental status + trauma
+\`\`\`
+
+**Management:**
+- Manual stabilization first
+- Log roll only when necessary
+- Collar if available
+- Improvise with towel, clothing
+- Secure to backboard if available
+
+### Breathing Assessment
+
+**Life-Threatening Chest Injuries:**
+
+**Tension Pneumothorax:**
+- Tracheal deviation (late sign)
+- Unilateral breath sounds
+- Respiratory distress
+- Distended neck veins
+- Shock signs
+- Treatment: Decompression if trained
+
+**Open Pneumothorax (Sucking Chest Wound):**
+- Opening in chest wall
+- Air movement with breathing
+- Treatment: Three-sided dressing, seal later
+
+**Flail Chest:**
+- Segment of chest wall detached
+- Paradoxical movement
+- Underlying lung injury
+- Treatment: Stabilize with padding
+
+### Circulation Assessment
+
+**Hemorrhage Classification:**
+
+**Class I (0-15% blood loss):**
+- Minimal vital sign changes
+- Normal to slightly anxious
+
+**Class II (15-30%):**
+- Tachycardia
+- Narrowed pulse pressure
+- Cool skin
+- Mild anxiety
+
+**Class III (30-40%):**
+- Marked tachycardia (>120)
+- Decreased mental status
+- Significantly decreased pulse pressure
+- Cool, pale skin
+- Significant decompensation
+
+**Class IV (>40%):**
+- Extreme tachycardia
+- Decreasing consciousness
+- Near-terminal
+- Requires immediate intervention
+
+**Bleeding Control Hierarchy:**
+1. Direct pressure - Always first
+2. Pressure dressing - Over wound
+3. Wound packing - Deep wounds
+4. Tourniquet - Limb-threatening bleeding
+5. Pressure points - Adjunct only
+
+**Tourniquet Guidelines:**
+- Indicated for life-threatening extremity bleeding
+- Place 2-3 inches above wound
+- Tighten until bleeding stops
+- Document time
+- Do NOT remove once placed (in wilderness setting)
+- Consider release >2 hours (only if close to definitive care)
+
+### Disability (Neurologic)
+
+**Level of Consciousness:**
+\`\`\`
+AVPU Scale:
+A - Alert: Interactive and oriented
+V - Verbal: Responds to voice
+P - Pain: Responds to pain
+U - Unresponsive: No response
+
+GCS (Glasgow Coma Scale):
+Eye: 1-4 (4 = spontaneous)
+Verbal: 1-5 (5 = normal conversation)
+Motor: 1-6 (6 = follows commands)
+Total: 3-15 (15 = normal)
+\`\`\`
+
+**Pupillary Assessment:**
+- Size (normal 3-5mm)
+- Equality (should be equal)
+- Reactivity to light
+- Remember: significant differences can indicate head injury
+
+## Secondary Survey
+
+**Head-to-Toe Examination:**
+\`\`\`
+Head: Inspect and palpate skull, face
+Eyes: Pupils, trauma, vision
+Ears: Blood, CSF, hearing
+Nose: Trauma, discharge, septum
+Mouth: Teeth, tongue, soft palate
+Neck: C-spine, trachea deviation
+Chest: Symmetry, breath sounds, heart sounds
+Abdomen: Quadrants, tenderness, guarding
+Pelvis: Stability, tenderness
+Extremities: Circulation, sensation, motion, skin
+Back: Inspect and palpate (log roll if possible)
+\`\`\`
+
+**SAMPLE History:**
+- **S**igns/symptoms
+- **A**llergies
+- **M**edications
+- **P**ast medical history
+- **L**ast oral intake
+- **E**vents leading to injury
+
+## Specific Injury Patterns
+
+### Musculoskeletal Trauma
+
+**Fracture Assessment:**
+\`\`\`
+Signs of Fracture:
+- Deformity
+- Crepitus (grating)
+- Pain with palpation/movement
+- Swelling/ecchymosis
+- Loss of function
+- False motion (abnormal movement)
+\`\`\`
+
+**Dislocation vs Fracture:**
+- Dislocation: Usually obvious deformity, false motion limited to joint
+- Fracture: Deformity may be anywhere along bone, crepitus possible
+- Both may be present
+
+**Joint Assessment:**
+- Compare to uninjured side
+- Active and passive range of motion
+- End feel (bone-on-bone vs soft)
+- Ligament testing
+
+**Reduction Considerations:**
+\`\`\`
+Indications for Reduction:
+- Distal pulse compromised
+- Progressive neurologic deficit
+- Skin tenting (imminent open fracture)
+- Severe angulation preventing transport
+
+Contraindications:
+- No training/experience
+- Open fracture
+- Neurovascular deficit if can't monitor
+- Multiple trauma
+
+Technique:
+- Traction along axis of bone
+- Counter-traction
+- Maintain alignment
+- Document neurovascular status before/after
+- Splint in reduced position
+\`\`\`
+
+### Head Trauma
+
+**Concussion Assessment:**
+\`\`\'
+Common Signs:
+- Headache
+- Dizziness
+- Nausea/vomiting
+- Balance problems
+- Confusion
+- Memory problems
+- Light/noise sensitivity
+
+Red Flags (worse than concussion):
+- Worsening symptoms
+- Focal neurologic deficits
+- Pupillary asymmetry
+- Decreasing consciousness
+- Seizures
+- Clear fluid from ear/nose (CSF)
+\`\`\`
+
+**Management:**
+- Spine precautions if indicated
+- Serial neurologic checks
+- Evacuate any red flags
+- Monitor for 24 hours after head injury
+
+### Spine Trauma
+
+**Assessment:**
+- Tenderness along spine
+- Deformity
+- Step-off
+- Neurologic deficit (motor/sensory)
+- Priapism (cord injury sign)
+
+**Field Management:**
+- Maintain neutral alignment
+- Improvise immobilization
+- Pad voids
+- Secure head to torso
+- Log roll for essential care only
+
+## Wilderness-Specific Considerations
+
+**Prolonged Field Care:**
+- Reassess regularly
+- Document changes
+- Prevent complications (positioning, hydration)
+- Plan for ongoing care
+
+**Environmental Protection:**
+- Insulate from ground
+- Protect from elements
+- Maintain body temperature
+- Consider terrain constraints
+
+**Evacuation Planning:**
+- Weight vs. urgency
+- Terrain difficulty
+- Weather windows
+- Team capability/experience
+- Available communication`,
+      keyTerms: [
+        { term: 'tension pneumothorax', definition: 'Air trapped in chest causing lung collapse and heart compression', pronunciation: 'noo-moh-THOR-aks' },
+        { term: 'flail chest', definition: 'Free-floating segment of rib cage that moves paradoxically' },
+        { term: 'crepitus', definition: 'Grating feeling or sound caused by broken bone ends rubbing', pronunciation: 'KREP-ih-tus' },
+        { term: 'CSF', definition: 'Cerebrospinal fluid - clear fluid around brain and spinal cord' },
+        { term: 'priapism', definition: 'Persistent erection, may indicate spinal cord injury', pronunciation: 'PRY-uh-piz-um' },
+      ],
+      clinicalNotes: 'Tourniquets can stay in place for <2 hours safely. Document time of application. Log roll only when essential - maintain spine alignment otherwise. Tension pneumothorax can be decompressed in the field with proper training. Assess neurovascular status before and after any fracture manipulation.',
+    },
+    4: {
+      level: 4,
+      summary: 'Wilderness trauma management requires integrating standard trauma protocols with field-expedient improvisation and prolonged care capabilities. Understanding injury biomechanics, shock physiology, and compartment syndrome guides assessment. Evidence-based hemorrhage control, fracture reduction techniques, and environmental protection optimize outcomes.',
+      explanation: `## Trauma Biomechanics
+
+### Energy Transfer
+
+**Kinetic Energy Formula:**
+\`\`\`
+KE = 1/2 × mass × velocity²
+
+Key points:
+- Velocity squared means speed matters most
+- Doubling speed = 4x energy
+- 50% increase in speed = 2.25x energy
+- Explains why high-speed injuries are severe
+\`\`\`
+
+**Deceleration Injuries:**
+- Rapid stop causes organs to continue moving
+- Brain hits skull (concussion)
+- Vessels tear (shearing injury)
+- Organs tear at attachment points
+
+**Cavitation:**
+- Projectile creates temporary cavity
+- Tissue pushed outward from path
+- Much larger than projectile diameter
+- Explains damage from penetrating trauma
+
+### Shock Physiology Revisited
+
+**Compensated Shock:**
+\`\`\`
+Normal BP maintained by:
+  Increased HR
+  Increased SVR
+  Fluid shifts (interstitial to vascular)
+  Catecholamine surge
+
+Clinical signs of compensation:
+  Mild tachycardia
+  Cool extremities
+  Prolonged capillary refill
+  Normal to slightly low BP
+\`\`\`
+
+**Decompensated Shock:**
+- Mechanisms fail
+- BP drops
+- Perfusion fails
+- Organ dysfunction begins
+- Mortality increases significantly
+
+**Wilderness Implications:**
+- Hypothermia mimics decompensated shock
+- Hypovolemia + hypothermia = lethal triad
+- Coagulopathy worsens with cold
+- Early recognition critical
+
+## Advanced Hemorrhage Control
+
+**Tourniquet Evidence:**
+- Modern studies show <2% complication rate
+- Windlass-style most effective
+- Improper application = ineffective
+- "High and tight" vs 2-3 inches above wound
+
+**Improvised Tourniquet:**
+\`\`\`
+Components:
+  Windlass: rigid material (stick, tool)
+  Cincture: strap, belt, clothing
+  Securing: knots, fasteners
+
+Technique:
+  Wrap cincture around limb
+  Tie overhand knot
+  Place windlass on knot
+  Tie second knot over windlass
+  Twist until bleeding stops
+  Secure windlass
+  Note time
+\`\`\`
+
+**Hemostatic Agents:**
+- Kaolin-based (QuikClot): Activates clotting cascade
+- Chitosan-based (Celox): Mucosal seal
+- Both effective when direct pressure insufficient
+- Pack into wound, hold pressure
+
+**Junctional Hemorrhage:**
+- Axilla, groin, perineum, neck
+- Tourniquet not applicable
+- Wound packing + hemostatic agent
+- Pressure over wound
+- Consider aortic compression (rare)
+
+## Orthopedic Management
+
+**Reduction Decision Algorithm:**
+\`\`\`
+Fracture/Dislocation
+  ↓
+Neurovascular deficit?
+  Yes → Consider reduction
+  No → Continue
+  ↓
+Skin tented?
+  Yes → Consider reduction
+  No → Continue
+  ↓
+Severely angulated?
+  Yes → Consider reduction
+  No → Splint as-is
+  ↓
+If reduction chosen:
+  - Document status before
+  - Use traction/counter-traction
+  - Document status after
+  - Splint in reduced position
+  - Recheck frequently
+\`\`\`
+
+**Compartment Syndrome:**
+\`\`\`
+Pathophysiology:
+  Increased tissue pressure
+    → Exceeds capillary perfusion pressure
+    → Muscle ischemia
+    → Nerve dysfunction
+    → Permanent damage within hours
+
+Clinical Signs (5 Ps):
+  Pain (disproportionate to injury)
+  Pallor (late sign)
+  Pulselessness (late sign)
+  Paresthesias (numbness, tingling)
+  Paralysis (late sign)
+
+Field Management:
+  Release constricting dressings/splints
+  Keep limb at heart level
+  Do NOT elevate (worsens ischemia)
+  URGENT evacuation needed
+\`\`\`
+
+**Traction Splints:**
+- Femur fractures reduce blood loss
+- Traction along bone axis
+- Counter-traction at groin
+- Improvised: weights, pulling with straps
+- Pain relief also significant benefit
+
+## Chest Trauma
+
+**Tension Pneumothorax Management:**
+
+**Diagnosis:**
+\`\`\`
+Classic Triad (rarely all present):
+  Respiratory distress
+  Unilateral breath sounds
+  Hypotension
+
+Other signs:
+  Tracheal deviation (LATE sign)
+  Distended neck veins
+  Hyperresonance to percussion
+  Cyanosis
+\`\`\`
+
+**Decompression (if trained):**
+- Site: 2nd intercostal space, midclavicular line
+- Alternative: 4th-5th intercostal, anterior axillary line
+- Equipment: 14-gauge catheter or commercial device
+- Needle should be 2-3 inches long (chest wall thickness)
+- Listen for rush of air
+- Secure in place
+- Convert to chest tube if available
+
+**Open Pneumothorax:**
+- Initial: Three-sided dressing (flutter valve)
+- Definitive: Occlusive dressing on all sides after decompression
+- Monitor for tension pneumothorax
+
+## Abdominal Trauma
+
+**Assessment Challenges:**
+- Difficult to assess in field
+- Solid organ vs. hollow organ injury
+- Signs may be delayed
+- High index of suspicion needed
+
+**Concerning Findings:**
+- Seat belt sign
+- Abdominal wall bruising
+- Rigid/tender abdomen
+- Patient in fetal position
+- Blood at urethral meatus (pelvic fracture)
+
+**Field Management:**
+- NOTHING by mouth
+- IV if available and trained
+- Monitor abdomen serially
+- Early evacuation for significant mechanism
+
+## Special Considerations
+
+**Pelvic Fractures:**
+\`\`\`
+Life-threatening hemorrhage risk
+  → Retroperitoneal bleeding
+  → Up to 2L blood loss possible
+
+Field management:
+  - Do NOT "rock" pelvis (may increase bleeding)
+  - Pelvic binder if available
+  - Improvise with sheet, belts
+  - Circumferential pressure at greater trochanters
+  - URGENT evacuation
+\`\`\`
+
+**Trauma in Pregnancy:**
+\`\`\`
+Considerations:
+  - Hypotension = late sign (blood volume increased 50%)
+  - Fetal viability >23-24 weeks
+  - Uterus vulnerable to direct trauma
+  - Placental abruption possible
+
+Management:
+  - Left lateral position (relieve vena cava compression)
+  - Oxygen for mother (fetal benefit)
+  - Monitor fetal heart rate if equipment available
+  - Early obstetric evaluation
+\`\`\`
+
+**Pediatric Trauma:**
+\`\`\`
+Differences:
+  - Larger head-to-body ratio (head injury common)
+  - More pliable skeleton (internal injuries without external signs)
+  - Greater fatiguability (endurance) but also faster fatigue
+  - Blood volume: 80 mL/kg (adults: 70 mL/kg)
+  - Tachycardia = early sign of shock
+
+Special concerns:
+  - Non-accidental trauma consideration
+  - Emotional support critical
+  - Parents as resource for history
+\`\`\``,
+      keyTerms: [
+        { term: 'kinetic energy', definition: 'Energy of motion = 1/2 × mass × velocity²' },
+        { term: 'cavitation', definition: 'Temporary cavity created by projectile causing tissue displacement' },
+        { term: 'deceleration injury', definition: 'Organ damage from rapid deceleration during trauma' },
+        { term: 'compartment syndrome', definition: 'Increased tissue pressure causing ischemia' },
+        { term: 'pelvic binder', definition: 'Device circumferentially compressing pelvis to stabilize fracture and reduce bleeding' },
+      ],
+      clinicalNotes: 'Cavitation explains why small projectiles cause extensive damage. Compartment syndrome diagnosis is clinical - measure compartment pressure if equipment available. Pelvic fractures can bleed 2 liters - apply binder. Traction splinting reduces blood loss and pain from femur fractures. Tension pneumothorax is a clinical diagnosis - decompress if trained.',
+    },
+    5: {
+      level: 5,
+      summary: 'Advanced wilderness trauma management integrates biomechanics, pathophysiology, and evidence-based field protocols. Understanding injury mechanisms, shock compensation/decompensation, and compartment syndrome guides assessment. Hemorrhage control techniques, fracture reduction, and environmental protection optimize outcomes. Prolonged field care requires monitoring for evolving conditions.',
+      explanation: `## Advanced Trauma Pathophysiology
+
+### Molecular Response to Trauma
+
+**Systemic Inflammatory Response:**
+\`\`\`
+Tissue injury + ischemia
+  ↓
+DAMP release (damage-associated molecular patterns)
+  ↓
+Immune cell activation
+  ↓
+Cytokine storm (TNF-α, IL-1, IL-6)
+  ↓
+Endothelial activation
+  ↓
+Capillary leak
+  ↓
+Edema, hypovolemia
+  ↓
+Organ dysfunction
+\`\`\`
+
+**Coagulopathy of Trauma:**
+\`\`\`
+Trauma-induced coagulopathy (TIC):
+  1. Tissue injury → thromboplastin release
+  2. Shock → thrombomodulin-thrombomodulin complex
+  3. Fibrinolysis (tPA release)
+  4. Factor consumption
+  5. Dilution from resuscitation
+
+Clinical: Bleeding despite normal coagulation tests
+\`\`\`
+
+**Combined with Hypothermia:**
+\`\`\`
+Lethal Triad:
+  1. Acidosis (shock)
+  2. Coagulopathy (trauma + cold)
+  3. Hypothermia (exposure)
+
+Each worsens the others
+  → Vicious cycle
+  → High mortality
+\`\`\`
+
+### Evidence-Based Updates
+
+**Tourniquet Outcomes:**
+\`\`\'
+Military experience (Afghanistan/Iraq):
+  Pre-tourniquet mortality: ~15%
+  Post-tourniquet mortality: ~2%
+  Complication rate: <2%
+
+Key findings:
+  - Earlier application = better outcomes
+  - Improvised tourniquets often ineffective
+  - Windlass-style most reliable
+  - Wide straps better than narrow
+  - Time to removal not absolute (consider >6h with caution)
+\`\`\`
+
+**Hemostatic Agent Comparison:**
+\`\`\`
+Kaolin-based (QuikClot):
+  - Activates factor XII
+  - No exothermic reaction (current formulations)
+  - Effective in 90%+ of cases
+  - Low complication rate
+
+Chitosan-based (Celox):
+  - Mucosal adhesive seal
+  - Works independent of clotting factors
+  - Useful in coagulopathic patients
+  - Similar efficacy to kaolin
+
+Both: Superior to gauze alone
+\`\`\`
+
+**Chest Secont Controversy:**
+\`\`\'
+Open pneumothorax management:
+  Traditional: 3-sided dressing
+  Emerging evidence: Occlusive dressing initially
+  Reason: Most won't develop tension pneumothorax
+  Clinical judgment: 3-sided if prolonged transport
+                   Occlusive if evacuation imminent
+\`\`\'
+
+## Special Situations
+
+**Drowning and Trauma:**
+\`\`\'
+Cervical spine injury risk:
+  - Shallow water diving
+  - Surf impact
+  - River obstacles
+
+Management priorities:
+  1. Spine precautions during rescue
+  2. CPR/resuscitation takes priority over spinal imaging
+  3. Can immobilize after breathing restored
+  4. High index of suspicion needed
+
+\`\`\'
+
+**Lightning Strike:**
+\`\`\'
+Unique injury patterns:
+  - Lichtenberg figures (ferns)
+  - Tympanic membrane rupture
+  - Cataracts (delayed)
+  - Neurologic syndrome (confusion, aphasia)
+
+Cardiac effects:
+  - Asystole most common
+  - May revert spontaneously
+  - Prolonged resuscitation indicated
+  - "Not dead until warm and dead" doesn't apply
+  - No hypothermia protective effect
+
+Management:
+  - Scene safe first (lightning can strike again)
+  - Reverse triage (treat apparent dead first)
+  - Standard ALS/BLS
+  - Cardiac monitoring
+\`\`\'
+
+**Avalanche:**
+\`\`\'
+Prognostic factors:
+  - Burial depth
+  - Burial duration
+  - Airway status (patent vs obstructed)
+  - Temperature
+  - Ice formation (airway)
+
+Assessment:
+  - Obvious death signs: frozen chest, injuries incompatible with life
+  - No vital signs >20 min burial with obstructed airway: nonsurvivable
+  - Core temp, potassium guide resuscitation decisions
+
+Trauma considerations:
+  - Multiple injuries common
+  - Hypothermia almost always present
+  - Asphyxia common cause of death
+  - Combination trauma + asphyxia + hypothermia
+\`\`\'
+
+## Prolonged Field Care
+
+**Monitoring Priorities:**
+\`\`\'
+Neurologic:
+  - GCS trends
+  - Pupils
+  - Focal deficits
+
+Cardiovascular:
+  - Pulse rate, quality
+  - Capillary refill
+  - Skin signs
+  - Blood pressure if available
+
+Respiratory:
+  - Rate, effort
+  - Breath sounds
+  - O2 saturation if available
+
+Fluid status:
+  - Input/output
+  - Mental status (hydration marker)
+  - Skin turgor (limited value)
+
+Pain:
+  - Location, severity
+  - Response to interventions
+  - Changes with movement
+\`\`\'
+
+**Complication Prevention:**
+\`\`\'
+Positioning:
+  - Log roll spine-injured patients q2h
+  - Protect pressure points
+  - Elevate injured areas when possible
+  - Avoid dependent positioning of injured limb
+
+Skin care:
+  - Clean, dry skin
+  - Protect from moisture
+  - Pad bony prominences
+  - Check for pressure injuries q4h
+
+Nutrition/hydration:
+  - Maintain caloric intake
+  - Prevent dehydration
+  - Nothing by mouth if surgery possible
+  - IV fluids if available and trained
+
+Pain management:
+  - NSAIDs for mild-moderate pain
+  - Acetaminophen alternative
+  - Opioids if available and trained
+  - Regional techniques (nerve blocks) if trained
+\`\`\'
+
+## Decision Support
+
+**Evacuation Urgency Classification:**
+\`\`\'
+IMMEDIATE (minutes):
+  - ABC compromise
+  - Uncontrolled major hemorrhage
+  - Worsening neurological status
+  - Tension pneumothorax
+  - Major burns (>20% TBSA)
+  - Spinal cord injury
+
+URGENT (hours):
+  - Fractures requiring reduction
+  - Significant pain uncontrolled
+  - Open fractures
+  - Major dislocations
+  - Significant soft tissue trauma
+
+EXPEDIENT (24-48h):
+  - Minor fractures
+  - Closed soft tissue injuries
+  - Stable responding to treatment
+  - Can walk out with assistance
+\`\`\'`,
+      keyTerms: [
+        { term: 'DAMPs', definition: 'Damage-associated molecular patterns - trigger inflammation after tissue injury' },
+        { term: 'TIC', definition: 'Trauma-induced coagulopathy - bleeding disorder from severe injury' },
+        { term: 'lethal triad', definition: 'Acidosis, coagulopathy, and hypothermia - fatal combination in trauma' },
+        { term: 'Lichtenberg figures', definition: 'Fern-like skin patterns from lightning strike' },
+        { term: 'exothermic', definition: 'Producing heat - early hemostatic agents did this, caused burns' },
+      ],
+      clinicalNotes: `Wilderness Trauma Clinical Pearls:
+
+1. Tourniquets can stay in place for up to 6 hours in wilderness setting
+2. Compartment syndrome is a clinical diagnosis - monitor the 5 Ps
+3. Pelvic fractures can bleed >2L - apply binder early
+4. Traction splinting significantly reduces femur fracture pain and bleeding
+5. GCS trending more important than single value
+6. Scene safety first - lightning CAN strike same place twice
+7. Avalanche burial >20 min with obstructed airway usually nonsurvivable
+8. Hypothermia does NOT protect from lightning injury
+9. Capillary refill better indicator than BP in field
+10. Consider TIC if bleeding seems excessive`,
+    },
+  },
+
+  media: [
+    {
+      id: 'abcde-primary-survey',
+      type: 'diagram',
+      filename: 'abcde-primary-survey.svg',
+      title: 'ABCDE Primary Survey Algorithm',
+      description: 'Systematic approach to trauma assessment in wilderness settings',
+    },
+    {
+      id: 'tourniquet-application',
+      type: 'image',
+      filename: 'tourniquet-placement.jpg',
+      title: 'Tourniquet Placement',
+      description: 'Proper tourniquet positioning and application technique',
+    },
+    {
+      id: 'improvised-splinting',
+      type: 'image',
+      filename: 'improvised-splinting.jpg',
+      title: 'Improvised Splinting Techniques',
+      description: 'Methods for creating splints from available materials',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'wms-trauma-guidelines',
+      type: 'article',
+      title: 'Wilderness Medical Society Practice Guidelines for Treatment of Acute Pain in Wilderness Environments',
+      source: 'Wilderness & Environmental Medicine',
+      year: '2020',
+    },
+    {
+      id: 'nols-wilderness-medicine',
+      type: 'textbook',
+      title: 'NOLS Wilderness Medicine',
+      authors: ['Schimelpfenig, T.', 'Lindsey, L.'],
+      source: 'Stackpole Books',
+      chapter: 'Trauma Management',
+    },
+    {
+      id: 'phtls-wilderness',
+      type: 'article',
+      title: 'Prehospital Trauma Life Support: Wilderness Considerations',
+      source: 'NAEMSP',
+    },
+    {
+      id: 'ata-advanced-guidelines',
+      type: 'article',
+      title: 'Advanced Trauma Life Support Guidelines Adapted for Wilderness',
+      source: 'ACS Committee on Trauma',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'wilderness-first-aid', targetType: 'concept', relationship: 'related', label: 'Wilderness First Aid' },
+    { targetId: 'wilderness-wound-care', targetType: 'concept', relationship: 'related', label: 'Wound Care' },
+    { targetId: 'wilderness-evacuation-decisions', targetType: 'concept', relationship: 'see-also', label: 'Evacuation Decisions' },
+  ],
+
+  tags: {
+    systems: ['all-systems'],
+    topics: ['wilderness-medicine', 'trauma', 'emergency-medicine', 'orthopedics'],
+    keywords: ['fracture', 'dislocation', 'bleeding', 'tourniquet', 'splint', 'ABCDE', 'shock'],
+    clinicalRelevance: 'critical',
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ['emergency-medicine', 'surgery', 'orthopedics'],
+    },
+  },
+
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  version: 1,
+  status: 'published',
+};
+
+export default wildernessTraumaContent;

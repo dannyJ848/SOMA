@@ -1,0 +1,19 @@
+/** Radiation Therapy — EducationalContent */
+import { oncEdu } from '../helpers';
+
+export const radiationTherapy = oncEdu({
+  id: 'onc-radiation-therapy', name: 'Radiation Therapy', nameEs: 'Radioterapia',
+  altNames: ['Radiotherapy', 'XRT', 'External beam radiation', 'EBRT'], type: 'concept',
+  l1: 'Radiation therapy uses high-energy beams (like powerful X-rays) to kill cancer cells by damaging their DNA. It is aimed very precisely at the tumor to limit harm to nearby healthy tissue. Treatment is usually given daily over several weeks. Side effects depend on the area being treated and may include skin redness, fatigue, and soreness.',
+  l2: 'External beam radiation therapy (EBRT) is the most common type, delivered by a linear accelerator. Brachytherapy places radioactive sources directly inside or next to the tumor (used in cervical, prostate, breast cancer). Radiation can be curative (definitive) or palliative (symptom relief). It is often combined with chemotherapy (chemoradiation) which makes cancer cells more sensitive to radiation. Common fractionation: 1.8-2 Gy/fraction, 5 days/week.',
+  l3: 'Radiation biology: the 4 Rs — repair (sublethal damage repair between fractions), reassortment (cell cycle redistribution), repopulation (tumor regrowth between fractions), reoxygenation (hypoxic cells become oxygenated). Linear-quadratic model: cell survival = e^-(alpha*D + beta*D^2); alpha/beta ratio determines fractionation sensitivity (~10 for tumors, ~3 for late-responding normal tissues). Techniques: 3D-CRT, IMRT, VMAT optimize dose conformality. SBRT/SABR delivers ablative doses in 1-5 fractions for small tumors (lung, liver, spine). Proton therapy reduces exit dose via Bragg peak.',
+  l4: 'Hypofractionation increasingly standard: breast (40 Gy/15 fractions, FAST-Forward 26 Gy/5), prostate (60 Gy/20), NSCLC SBRT (54 Gy/3 or 48 Gy/4). Adaptive radiation therapy using daily CBCT or MR-Linac adjusts plans based on anatomic changes. Oligometastatic paradigm (SABR-COMET): ablative RT to all metastatic sites improves OS. Radioligand therapy: Lu-177-PSMA (VISION) for mCRPC; Lu-177-DOTATATE for neuroendocrine tumors. Normal tissue complication probability (NTCP) models guide dose constraints: mean lung dose <20 Gy, heart V25 <10% for thoracic RT.',
+  l5: 'FLASH radiotherapy (>40 Gy/s ultra-high dose rate) shows preferential normal tissue sparing in preclinical models; first human trial (FAST-01) completed in bone metastases. MR-guided online adaptive radiotherapy (MRgRT) enables real-time plan adaptation for pancreas, liver, and oligometastases. Spatially fractionated radiotherapy (GRID, LATTICE) under investigation for bulky tumors. Combination of SBRT with immunotherapy showing abscopal effects in trials (PEMBRO-RT, MDACC). Radiogenomics: germline variants (ATM, BRCA) predict radiosensitivity and toxicity. Artificial intelligence for auto-contouring, plan optimization, and treatment response prediction rapidly entering clinical workflow.',
+  tags: { systems: ['general'], topics: ['radiation oncology', 'therapeutics', 'physics'], keywords: ['EBRT', 'SBRT', 'brachytherapy', 'IMRT', 'proton therapy', 'linear-quadratic', 'hypofractionation', 'FLASH'], clinicalRelevance: 'critical', examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'surgery'] } },
+  crossRefs: [
+    { targetId: 'onc-chemotherapy-principles', targetType: 'concept', relationship: 'sibling', label: 'Chemotherapy Principles' },
+    { targetId: 'onc-immunotherapy', targetType: 'concept', relationship: 'sibling', label: 'Immunotherapy' },
+    { targetId: 'onc-lung-staging', targetType: 'topic', relationship: 'related', label: 'Lung Cancer Staging & Treatment' },
+    { targetId: 'onc-breast-treatment', targetType: 'topic', relationship: 'related', label: 'Breast Cancer Treatment' },
+  ],
+});

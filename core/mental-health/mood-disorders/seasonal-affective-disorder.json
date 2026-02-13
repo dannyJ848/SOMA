@@ -1,0 +1,141 @@
+{
+  "id": "condition-seasonal-affective-disorder",
+  "type": "condition",
+  "category": "mood-disorder",
+  "name": "Seasonal Affective Disorder",
+  "alternateNames": ["SAD", "Seasonal Depression", "Winter Depression", "Winter Blues"],
+  "icd10": "F33.0",
+  "dsm5": "Specifier for MDD or Bipolar",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Seasonal affective disorder (SAD) is a type of depression that comes and goes with the seasons, usually starting in fall and lifting in spring.",
+      "explanation": "If you've noticed you feel sad, tired, and sluggish every winter but feel fine in spring and summer, you might have SAD. It's related to the shorter days and reduced sunlight during fall and winter months. Your body's internal clock gets thrown off, which affects your mood, energy, and sleep. SAD is more than just 'winter blues' - it's a real form of depression that deserves attention and treatment. The good news is that SAD responds well to treatment, especially light therapy.",
+      "keyTerms": [
+        { "term": "seasonal pattern", "definition": "Depression that follows a regular pattern with seasons" },
+        { "term": "light therapy", "definition": "Treatment using a special bright light to help reset your body's clock" },
+        { "term": "circadian rhythm", "definition": "Your body's internal 24-hour clock that affects sleep and mood" }
+      ],
+      "analogies": ["Just like some animals hibernate in winter, SAD can make you feel like you want to sleep more and slow down when days get shorter."],
+      "examples": ["Someone with SAD might feel fine all summer, but once October comes, they start sleeping more, craving carbohydrates, gaining weight, and feeling sad and withdrawn until March."],
+      "importantNote": "SAD is a real medical condition, not just being tired of winter. If you notice the same pattern every year, talk to a healthcare provider."
+    },
+    "2": {
+      "level": 2,
+      "summary": "SAD is classified as MDD or Bipolar with seasonal pattern specifier, characterized by regular temporal relationship between episodes and seasons, with winter-pattern being most common.",
+      "explanation": "DSM-5 defines seasonal pattern as: regular temporal relationship between onset of episodes and particular time of year; full remissions (or switch to opposite pole) at characteristic time of year; at least two major depressive episodes in last 2 years with this pattern; seasonal episodes substantially outnumber non-seasonal episodes. Winter-pattern SAD (most common) features: hypersomnia, overeating (carbohydrate craving), weight gain, and social withdrawal. Summer-pattern SAD (less common) features: insomnia, poor appetite, weight loss, agitation. Prevalence increases with latitude (higher in northern regions) and is more common in women.",
+      "keyTerms": [
+        { "term": "winter-pattern SAD", "definition": "Depression beginning in fall/winter with remission in spring/summer; features atypical symptoms" },
+        { "term": "summer-pattern SAD", "definition": "Less common; depression in spring/summer with symptoms resembling typical depression" },
+        { "term": "atypical features", "definition": "Increased sleep, increased appetite, weight gain, leaden paralysis - common in winter SAD" },
+        { "term": "latitude effect", "definition": "Higher prevalence in regions farther from equator with greater seasonal light variation" }
+      ],
+      "diagnosticCriteria": "Must meet criteria for MDD or Bipolar plus seasonal pattern specifier; pattern must be present for at least 2 years",
+      "prevalence": "Approximately 1-6% of general population depending on latitude; up to 10% at higher latitudes; F:M ratio 4:1"
+    },
+    "3": {
+      "level": 3,
+      "summary": "SAD pathophysiology involves disrupted circadian rhythms, altered melatonin and serotonin regulation, and reduced retinal light sensitivity, guiding targeted treatments.",
+      "explanation": "The phase-shift hypothesis proposes that reduced winter light delays circadian rhythms relative to sleep-wake cycle, creating internal desynchrony. Melatonin secretion from the pineal gland is prolonged in winter, while serotonin synthesis is reduced (serotonin transporter binding increases in winter, reducing synaptic serotonin). Retinal light sensitivity may be reduced in SAD patients. Vitamin D deficiency may play a role, though evidence is mixed. Treatment: Bright light therapy (10,000 lux, 30 min morning exposure) has NNT of ~3 and works by suppressing melatonin and advancing circadian phase. Dawn simulation (gradual light increase before waking) is also effective. SSRIs (especially fluoxetine, sertraline) and bupropion XL (FDA-approved for SAD prevention) are pharmacologic options. CBT adapted for SAD addresses behavioral withdrawal and cognitive patterns.",
+      "keyTerms": [
+        { "term": "phase-shift hypothesis", "definition": "Theory that SAD results from misalignment between circadian rhythms and sleep-wake cycle" },
+        { "term": "light therapy", "definition": "10,000 lux bright light exposure, typically 30 min each morning; first-line treatment for SAD" },
+        { "term": "dawn simulation", "definition": "Gradually increasing light in bedroom before wake time; mimics natural dawn" },
+        { "term": "melatonin", "definition": "Hormone produced in darkness; prolonged secretion in winter may contribute to SAD symptoms" }
+      ],
+      "clinicalNotes": "Light therapy contraindicated in macular degeneration, retinopathy; use with caution in bipolar (may trigger mania). Evening light or blue light devices should generally be avoided (disrupts sleep). Start treatment in early fall before symptoms begin for best prevention."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management of SAD involves optimizing chronobiological interventions, addressing comorbidities, and combining treatments for resistant cases.",
+      "explanation": "Light therapy optimization: timing based on morningness-eveningness questionnaire (MEQ); typically 6:00-8:00 AM for phase-delayed individuals; distance from light box affects intensity (typically 12-24 inches). Combination approaches: light therapy + SSRI may be superior to either alone; light therapy + CBT-SAD shows sustained effects. Sleep-wake schedule adjustment: enforcing consistent wake times, avoiding napping, limiting late evening light exposure. Chronotherapy: sleep deprivation (wake therapy) can produce rapid antidepressant effect; sleep phase advance maintains response. Melatonin: low-dose (0.5mg) in evening may help if circadian phase assessment shows delay. Treatment-resistant cases: consider adding bupropion, augmentation strategies from MDD protocols, or combination chronobiological approaches. Differentials: rule out hypothyroidism (also worse in winter), anemia, and primary hypersomnia.",
+      "keyTerms": [
+        { "term": "chronotherapy", "definition": "Treatments targeting circadian rhythm abnormalities; includes wake therapy and sleep phase advance" },
+        { "term": "wake therapy", "definition": "Therapeutic sleep deprivation; can produce rapid but temporary antidepressant effect" },
+        { "term": "MEQ", "definition": "Morningness-Eveningness Questionnaire; helps determine optimal light therapy timing" },
+        { "term": "sleep phase advance", "definition": "Shifting sleep earlier after wake therapy to maintain antidepressant response" }
+      ],
+      "clinicalNotes": "Subsyndromal SAD ('winter blues') may respond to lifestyle modifications and light exposure. Nordic countries use architectural interventions (light rooms, bright indoor environments). Encourage outdoor activity even in winter (natural light exposure). Tanning beds are not a substitute for light therapy and carry risks."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert-level understanding integrates chronobiology research, genetic factors, novel interventions, and global/public health perspectives on SAD.",
+      "explanation": "Genetic factors: variants in circadian clock genes (PER2, PER3), serotonin transporter (5-HTTLPR short allele), and melanopsin (OPN4) in intrinsically photosensitive retinal ganglion cells (ipRGCs) - the cells that signal light for circadian entrainment. Blue light (460-480nm) maximally activates ipRGCs, forming basis for blue light therapy devices; however, evening blue light should be avoided (screen filters, blue-light blocking glasses). Novel interventions under investigation: negative air ionization, cognitive-behavioral interventions targeting rumination, exercise as chronobiological intervention. Cross-cultural perspectives: prevalence variations may relate to cultural factors (indoor vs. outdoor lifestyle, diet), not just latitude; Iceland paradox (lower than expected rates possibly due to dietary fish/omega-3s or genetic adaptation). Climate change considerations: shifting seasonal patterns may affect SAD prevalence and timing. Public health implications: architectural design for natural light, workplace lighting policies, school start time adjustments. Research challenges: high placebo response to light therapy (expectation effects); difficulty blinding in light therapy trials.",
+      "keyTerms": [
+        { "term": "ipRGCs", "definition": "Intrinsically photosensitive retinal ganglion cells containing melanopsin; signal light for circadian entrainment" },
+        { "term": "melanopsin", "definition": "Photopigment in ipRGCs most sensitive to blue light; mediates circadian photoentrainment" },
+        { "term": "Iceland paradox", "definition": "Lower than expected SAD rates in Iceland despite high latitude; possibly due to diet or genetics" },
+        { "term": "chronobiological intervention", "definition": "Any treatment targeting the body's circadian timing system" }
+      ],
+      "clinicalNotes": "Long-term management: patients should own light box and maintain routine; preemptive treatment starting in September/October; maintain treatment through March/April. Consider screening for bipolar before starting light therapy in new patients. SAD is a lifelong condition requiring annual attention; educate patients about early warning signs and proactive management."
+    }
+  },
+
+  "riskFactors": [
+    "Living at higher latitudes",
+    "Female sex",
+    "Younger age",
+    "Family history of SAD or depression",
+    "Personal history of depression or bipolar disorder",
+    "Working in environments without natural light"
+  ],
+
+  "selfCareStrategies": [
+    "Maximize natural light exposure during day",
+    "Exercise regularly, preferably outdoors",
+    "Maintain consistent sleep-wake schedule",
+    "Consider a light therapy box",
+    "Stay socially connected during winter months",
+    "Eat a balanced diet",
+    "Limit alcohol and caffeine"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "crisisTextLine": "Text HOME to 741741"
+    },
+    "message": "If your seasonal mood changes feel overwhelming, please reach out for help."
+  },
+
+  "treatments": {
+    "firstLine": ["Bright light therapy (10,000 lux)", "Dawn simulation", "SSRIs", "Bupropion XL (prevention)"],
+    "psychotherapy": ["CBT-SAD"],
+    "adjunctive": ["Vitamin D (if deficient)", "Exercise", "Chronotherapy"]
+  },
+
+  "citations": [
+    {
+      "id": "rosenthal-1984",
+      "type": "study",
+      "title": "Seasonal Affective Disorder: A Description of the Syndrome and Preliminary Findings with Light Therapy",
+      "journal": "Archives of General Psychiatry",
+      "year": 1984
+    },
+    {
+      "id": "golden-2005",
+      "type": "guideline",
+      "title": "The Efficacy of Light Therapy in the Treatment of Mood Disorders: A Review and Meta-Analysis of the Evidence",
+      "journal": "American Journal of Psychiatry",
+      "year": 2005
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "parent", "label": "Major Depressive Disorder" },
+    { "targetId": "treatment-light-therapy", "targetType": "treatment", "relationship": "treatment", "label": "Light Therapy" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health", "endocrine"],
+    "topics": ["psychiatry", "chronobiology", "mood-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

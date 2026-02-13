@@ -1,0 +1,145 @@
+{
+  "id": "condition-bipolar-disorder",
+  "type": "condition",
+  "category": "mood-disorder",
+  "name": "Bipolar Disorder",
+  "alternateNames": ["Bipolar I Disorder", "Bipolar II Disorder", "Manic-Depressive Illness", "Bipolar Affective Disorder"],
+  "icd10": "F31",
+  "dsm5": "296.4x-296.8x",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Bipolar disorder causes unusual shifts in mood, energy, and activity levels - sometimes feeling extremely 'up' and other times feeling very 'down'.",
+      "explanation": "People with bipolar disorder experience mood episodes that are very different from typical mood swings. During 'up' periods (called mania or hypomania), they might feel extremely happy, have lots of energy, sleep very little, and sometimes make risky decisions. During 'down' periods (depression), they feel very sad, hopeless, and have little energy. These episodes can last days or weeks. Bipolar disorder is a lifelong condition, but with proper treatment, people can manage their symptoms and live full, productive lives.",
+      "keyTerms": [
+        { "term": "mania", "definition": "A period of extremely high energy, activity, and elevated or irritable mood" },
+        { "term": "depression", "definition": "A period of feeling very sad, hopeless, and having little energy" },
+        { "term": "mood episode", "definition": "A distinct period when mood is significantly different from usual" }
+      ],
+      "analogies": ["Imagine a seesaw that sometimes tips way up (mania) and sometimes tips way down (depression), rather than staying balanced in the middle like most people's moods."],
+      "examples": ["During a manic episode, someone might stay up for days working on projects, spend money they don't have, or make impulsive decisions they later regret."],
+      "importantNote": "Bipolar disorder is not a character flaw or weakness. It's a medical condition that responds well to treatment. Many successful people live fulfilling lives with bipolar disorder."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Bipolar I requires at least one manic episode; Bipolar II requires hypomanic episodes plus major depressive episodes. Both involve distinct mood states with specific symptom criteria.",
+      "explanation": "Bipolar I Disorder: At least one manic episode (abnormally elevated/irritable mood plus increased energy lasting 7+ days or requiring hospitalization). Manic symptoms include grandiosity, decreased need for sleep, pressured speech, racing thoughts, distractibility, increased goal-directed activity, and risky behavior (DIGFAST mnemonic). Bipolar II Disorder: At least one hypomanic episode (4+ days, less severe than mania, no psychosis, no hospitalization needed) plus at least one major depressive episode. Cyclothymic disorder: 2+ years of hypomanic and depressive symptoms not meeting full criteria. Mixed features specifier: manic/hypomanic episode with depressive symptoms or vice versa.",
+      "keyTerms": [
+        { "term": "hypomania", "definition": "A less severe form of mania lasting at least 4 days; noticeable but doesn't cause major impairment", "pronunciation": "HY-poh-MAY-nee-ah" },
+        { "term": "grandiosity", "definition": "Inflated self-esteem or belief in having special powers or importance" },
+        { "term": "pressured speech", "definition": "Talking rapidly and being difficult to interrupt" },
+        { "term": "flight of ideas", "definition": "Rapidly jumping from one topic to another in speech" }
+      ],
+      "diagnosticCriteria": "DIGFAST mnemonic for mania: Distractibility, Insomnia (decreased need for sleep), Grandiosity, Flight of ideas, Activities increased, Speech pressured, Taking risks (thoughtlessness)",
+      "prevalence": "Bipolar I: ~1%; Bipolar II: ~1.1%; equal in males and females; typical onset late teens to early 20s"
+    },
+    "3": {
+      "level": 3,
+      "summary": "Bipolar disorder involves dysregulation of circadian rhythms, monoamine systems, and intracellular signaling cascades, requiring mood stabilizers as cornerstone of treatment.",
+      "explanation": "Neurobiological findings include: dysregulated circadian rhythms (clock gene polymorphisms, social rhythm disruption), mitochondrial dysfunction, altered glutamatergic and GABAergic signaling, and intracellular signaling abnormalities (GSK-3beta, PKC pathways - targets of lithium and valproate). Imaging shows white matter abnormalities, amygdala hyperactivity, and prefrontal hypofunction during mood states. Genetic heritability is high (~80%); associated genes include ANK3, CACNA1C, ODZ4. First-line treatments: Lithium (gold standard, reduces suicide risk), valproate, carbamazepine, lamotrigine (primarily depression prevention), second-generation antipsychotics (quetiapine, lurasidone, cariprazine). Psychotherapy adjuncts: psychoeducation, CBT for bipolar, IPSRT (interpersonal and social rhythm therapy), family-focused therapy.",
+      "keyTerms": [
+        { "term": "mood stabilizer", "definition": "Medication that prevents or reduces mood episodes in bipolar disorder" },
+        { "term": "lithium", "definition": "First-line mood stabilizer; inhibits GSK-3beta and has neuroprotective effects; only medication proven to reduce suicide" },
+        { "term": "IPSRT", "definition": "Interpersonal and Social Rhythm Therapy; stabilizes daily routines and sleep-wake cycles" },
+        { "term": "rapid cycling", "definition": "Four or more mood episodes per year; associated with poorer prognosis" }
+      ],
+      "clinicalNotes": "Antidepressant monotherapy is contraindicated - risk of switching to mania or inducing rapid cycling. Always use with mood stabilizer if needed. Lithium requires monitoring of levels, renal function, and thyroid. Valproate contraindicated in women of childbearing potential (teratogenicity)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management requires distinguishing bipolar subtypes, optimizing polypharmacy, managing complex presentations, and integrating evidence-based psychosocial interventions.",
+      "explanation": "Diagnostic challenges: differentiating Bipolar II from unipolar depression (75% present initially with depression; screen for hypomania history, family history, early onset, antidepressant-induced hypomania); distinguishing from borderline personality disorder (both have mood instability, but BPD has interpersonal trigger, hours-long episodes, chronic emptiness). Treatment optimization: combination therapy often needed; lithium + valproate for mania; quetiapine effective for both poles; lamotrigine primarily prevents depression. Special situations: mixed features (avoid antidepressants; use valproate, carbamazepine, or atypical antipsychotics); rapid cycling (lithium less effective; consider carbamazepine, valproate, lamotrigine); psychotic features (antipsychotic + mood stabilizer; may need ECT). Cognitive dysfunction is common even in euthymia - affects executive function, memory, attention. Metabolic monitoring essential with antipsychotics (weight, glucose, lipids).",
+      "keyTerms": [
+        { "term": "euthymia", "definition": "Normal, stable mood state between episodes", "pronunciation": "yoo-THY-mee-ah" },
+        { "term": "kindling", "definition": "Theory that untreated episodes sensitize the brain, leading to more frequent and severe future episodes" },
+        { "term": "mixed features", "definition": "Presence of symptoms from opposite pole during mood episode; increases suicide risk" },
+        { "term": "soft bipolar spectrum", "definition": "Subthreshold presentations with cyclothymic temperament or antidepressant-induced hypomania" }
+      ],
+      "clinicalNotes": "Suicide risk is 20-30 times general population; highest during mixed and depressive episodes. Substance use comorbidity in 40-60%. Pregnancy planning is crucial - lithium and valproate are teratogenic; lamotrigine has better safety profile. Hospitalization may be necessary for severe mania or suicidality."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert management integrates precision medicine approaches, novel treatments, staging models, and addresses complex comorbidities and functional recovery.",
+      "explanation": "Staging models (Berk, Kapczinski): progression from at-risk/prodrome through early episodes to neuroprogressive late stages with cognitive impairment and treatment resistance. Early intervention may prevent progression. Biomarkers under investigation: inflammatory markers (CRP, IL-6), BDNF, oxidative stress markers, neuroimaging signatures. Novel treatments: ketamine for bipolar depression (with mood stabilizer coverage), pramipexole (dopamine agonist), modafinil for depression, anti-inflammatory agents, neurostimulation (TMS, ECT, DBS). Precision medicine: pharmacogenomics (HLA-B*1502 for carbamazepine-induced Stevens-Johnson in Asian populations), circadian phenotyping for chronotherapy. Complex presentations: comorbid ADHD (careful with stimulants - mood stabilizer coverage essential), substance use (integrated treatment), anxiety (often requires additional treatment). Functional recovery lags behind symptomatic recovery; cognitive remediation and vocational rehabilitation important. Long-term management: maintenance therapy is lifelong for most; shared decision-making about medication; relapse prevention planning; family involvement.",
+      "keyTerms": [
+        { "term": "neuroprogression", "definition": "Theory that repeated episodes cause cumulative brain changes and functional decline" },
+        { "term": "staging model", "definition": "Framework viewing bipolar disorder as progressive, with early intervention potentially altering disease course" },
+        { "term": "circadian phenotyping", "definition": "Characterizing individual's chronotype to optimize sleep-wake interventions" },
+        { "term": "functional recovery", "definition": "Return to premorbid levels of social, occupational, and cognitive functioning" }
+      ],
+      "clinicalNotes": "Bipolar I has worse acute episodes but similar long-term outcomes to Bipolar II. Depressive episodes account for more disability than manic. Promote sleep hygiene, routine, and stress management. Collaborative care models improve outcomes. ECT is highly effective for treatment-resistant mania and depression."
+    }
+  },
+
+  "riskFactors": [
+    "Family history of bipolar disorder or mood disorders",
+    "Genetic factors (80% heritability)",
+    "Stressful life events (can trigger episodes)",
+    "Sleep disruption",
+    "Substance use",
+    "Childhood adversity"
+  ],
+
+  "warningSignsForMania": [
+    "Decreased need for sleep",
+    "Unusually high energy",
+    "Racing thoughts",
+    "Rapid speech",
+    "Impulsive decisions",
+    "Grandiose beliefs",
+    "Irritability",
+    "Increased goal-directed activity"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "crisisTextLine": "Text HOME to 741741",
+      "samhsaHelpline": "1-800-662-4357"
+    },
+    "message": "If you're experiencing a mood crisis or having thoughts of suicide, please reach out for help immediately."
+  },
+
+  "treatments": {
+    "forMania": ["Lithium", "Valproate", "Atypical antipsychotics", "Carbamazepine", "ECT"],
+    "forDepression": ["Quetiapine", "Lurasidone", "Lamotrigine", "Lithium", "ECT"],
+    "maintenance": ["Lithium", "Valproate", "Lamotrigine", "Atypical antipsychotics"],
+    "psychotherapy": ["Psychoeducation", "CBT for bipolar", "IPSRT", "Family-focused therapy"]
+  },
+
+  "citations": [
+    {
+      "id": "apa-dsm5-tr",
+      "type": "manual",
+      "title": "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision",
+      "authors": ["American Psychiatric Association"],
+      "year": 2022
+    },
+    {
+      "id": "geddes-miklowitz-2013",
+      "type": "review",
+      "title": "Treatment of bipolar disorder",
+      "journal": "Lancet",
+      "year": 2013
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-major-depressive-disorder", "targetType": "condition", "relationship": "differential", "label": "Major Depressive Disorder" },
+    { "targetId": "condition-schizoaffective-disorder", "targetType": "condition", "relationship": "differential", "label": "Schizoaffective Disorder" },
+    { "targetId": "treatment-lithium", "targetType": "treatment", "relationship": "treatment", "label": "Lithium" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "mood-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

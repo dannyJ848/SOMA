@@ -1,0 +1,814 @@
+import { WomensHealthContent } from '../types';
+
+export const contraceptiveMethods: WomensHealthContent = {
+  id: 'contraceptive-methods',
+  title: 'Contraceptive Methods',
+  category: 'Fertility',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Types of Birth Control',
+      content: `There are many different methods of birth control. Understanding your options helps you choose the best one for you.
+
+**Long-Acting Reversible Contraception (LARC)**
+
+**IUD (Intrauterine Device):**
+- Small T-shaped device placed in uterus
+- Hormonal IUD (Mirena, Kyleena, Skyla, Liletta)
+- Copper IUD (Paragard)
+- Lasts 3-10 years
+- Over 99% effective
+
+**Implant (Nexplanon):**
+- Small rod inserted under arm skin
+- Releases progestin hormone
+- Lasts up to 5 years
+- Over 99% effective
+
+**Hormonal Methods**
+
+**Birth Control Pills:**
+- Take daily at same time
+- Prevents ovulation
+- 91-99% effective
+- Many types available
+
+**Patch (Xulane):**
+- Worn on skin (butt, arm, back)
+- Changed weekly
+- 91-99% effective
+
+**Vaginal Ring (NuvaRing, Annovera):**
+- Inserted in vagina
+- Left in for 3 weeks
+- 91-99% effective
+
+**Shot (Depo-Provera):**
+- Injection every 3 months
+- 94% effective
+- May cause bone density loss with long-term use
+
+**Barrier Methods**
+
+**Condoms:**
+- Worn on penis (male) or in vagina (female)
+- Protect against STIs
+- 82-98% effective
+- Used every time
+
+**Diaphragm/Cervical Cap:**
+- Dome with rim, covers cervix
+- Used with spermicide
+- 88-94% effective
+- Must be fitted by doctor
+
+**Sponge:**
+- Contains spermicide
+- Covers cervix
+- 76-88% effective
+- Available over-the-counter
+
+**Sterilization**
+
+**Tubal Ligation (women):**
+- Permanent surgery
+- Cuts or blocks fallopian tubes
+- Over 99% effective
+
+**Vasectomy (men):**
+- Minor surgery
+- Cuts vas deferens
+- Over 99% effective
+
+**Fertility Awareness:**
+- Track cycle, avoid sex during fertile days
+- Requires consistent tracking
+- 76-88% effective
+
+**Withdrawal:**
+- Pulling out before ejaculation
+- Not very reliable
+- 78% effective
+
+**Emergency Contraception:**
+- Morning-after pill
+- Can prevent pregnancy after unprotected sex
+- Use as soon as possible (within 5 days)
+- Copper IUD most effective
+
+**Choosing a Method:**
+- How important is effectiveness?
+- Do you want children in future?
+- Do you need STI protection?
+- Are you breastfeeding?
+- Do you have any health conditions?
+
+**Remember:** Talk to a healthcare provider to find the best method for you.`,
+      keyPoints: [
+        'LARC methods (IUD, implant) are most effective and long-lasting',
+        'Hormonal methods require consistent use',
+        'Barrier methods also protect against STIs',
+        'Sterilization is permanent'
+      ],
+      vocabulary: [
+        { term: 'IUD', definition: 'Intrauterine Device - T-shaped device in uterus' },
+        { term: 'Sterilization', definition: 'Permanent birth control surgery' },
+        { term: 'Fertility Awareness', definition: 'Tracking cycle to identify fertile days' },
+        { term: 'Withdrawal', definition: 'Pulling out before ejaculation' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most effective reversible contraceptive method?',
+          options: [
+            'Birth control pills',
+            'Male condoms',
+            'IUDs and implant (LARC)',
+            'Diaphragm'
+          ],
+          correctAnswer: 2,
+          explanation: 'LARC methods (IUDs and implant) are the most effective reversible contraceptives, with >99% effectiveness even with typical use.'
+        },
+        {
+          question: 'What is the primary advantage of condoms?',
+          options: [
+            'Highest effectiveness',
+            'Protection against both pregnancy and STIs',
+            'Long-term protection',
+            'Hormone-free option'
+          ],
+          correctAnswer: 1,
+          explanation: 'Condoms are the only contraceptive method that provides protection against both pregnancy and sexually transmitted infections when used consistently.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Contraceptive Methods Comparison',
+      content: `Comparing contraceptive methods helps in choosing the most appropriate method based on effectiveness, convenience, and personal preferences.
+
+**Effectiveness Comparison:**
+
+| Method | Perfect Use | Typical Use | Duration |
+|--------|-------------|-------------|----------|
+| Sterilization | 99.5% | 99.5% | Permanent |
+| LARC | 99.8% | 99.8% | 3-10 years |
+| Implant | 99.9% | 99.9% | 5 years |
+| LNG-IUD | 99.8% | 99.8% | 3-8 years |
+| Copper IUD | 99.2% | 99.2% | 10+ years |
+| Injection | 94% | 94% | 3 months |
+| Pill | 99.7% | 91% | Daily |
+| Patch | 99.7% | 91% | Weekly |
+| Ring | 99.7% | 91% | Monthly |
+| Male condom | 98% | 82% | Per act |
+| Female condom | 95% | 79% | Per act |
+| Diaphragm | 94% | 88% | Per act |
+| Sponge | 88% | 76-88% | Per act |
+| FAM | 95-99% | 76-88% | Per cycle |
+| Withdrawal | 96% | 78% | Per act |
+
+**Method Categories:**
+
+**Long-Acting Reversible Contraception (LARC):**
+- Highest effectiveness
+- Lowest user action required
+- Most cost-effective over time
+- Rapid return to fertility after removal
+- First-line recommendation for most women
+
+**Hormonal Methods:**
+- Highly effective when used correctly
+- Require consistent user action
+- Non-contraceptive benefits possible
+- Return to fertility immediate after stopping
+
+**Barrier Methods:**
+- Male condom: STI protection
+- Female condom: STI protection, can insert beforehand
+- Diaphragm/cap: requires fitting and spermicide
+- Sponge: no prescription needed
+- Fertility awareness compatible
+
+**Permanent Methods:**
+- Highly effective
+- For people sure they don't want children
+- Surgical procedures
+- Reversal possible but not guaranteed
+
+**Decision Factors:**
+
+**Effectiveness:**
+- How important is it to avoid pregnancy?
+- Will you be able to use the method correctly every time?
+- Is typical use effectiveness acceptable?
+
+**Side Effects:**
+- Hormonal side effects (mood, bleeding)
+- Weight changes
+- Period changes (lighter, heavier, none)
+- Return to fertility
+
+**Convenience:**
+- Daily action required vs. long-acting
+- Clinic visits required
+- Privacy and discretion
+- Partner involvement needed
+
+**Future Fertility:**
+- LARC: rapid return to fertility after removal
+- Injectable: delayed return to fertility
+- Hormonal: immediate return
+- Sterilization: permanent
+- Barrier/FAM: immediate return
+
+**STI Protection:**
+- Condoms (male and female): only methods that protect
+- All others: no STI protection
+- Consider dual protection
+
+**Postpartum Considerations:**
+- LARC: can be placed immediately postpartum
+- Progestin-only: safe for breastfeeding
+- Combined hormonal: wait 6 weeks if breastfeeding
+- Barrier methods: immediate use
+`,
+      keyPoints: [
+        'LARC has highest typical use effectiveness',
+        'Typical use effectiveness differs from perfect use due to user error',
+        'Condoms provide dual protection (pregnancy + STIs)',
+        'Return to fertility varies by method'
+      ],
+      vocabulary: [
+        { term: 'LARC', definition: 'Long-Acting Reversible Contraception' },
+        { term: 'Typical Use', definition: 'How method works in everyday life' },
+        { term: 'Perfect Use', definition: 'Correct and consistent use every time' },
+        { term: 'Dual Protection', definition: 'Using condoms plus another method' }
+      ],
+      quiz: [
+        {
+          question: 'What is the typical use effectiveness of birth control pills?',
+          options: [
+            '99%',
+            '91%',
+            '82%',
+            '76%'
+          ],
+          correctAnswer: 1,
+          explanation: 'The typical use effectiveness of birth control pills is 91%, meaning 9 out of 100 women will become pregnant in a year with typical use (missed pills, late pills).'
+        },
+        {
+          question: 'What contraceptive methods provide STI protection?',
+          options: [
+            'Only hormonal methods',
+          'Only condoms (male and female)',
+          'Only LARC methods',
+          'All contraceptive methods'
+          ],
+          correctAnswer: 1,
+          explanation: 'Only condoms (both male and female) provide protection against sexually transmitted infections. All other contraceptive methods do not prevent STIs.'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Contraceptive Methods: Mechanisms and Use',
+      content: `Understanding how each method works and how to use it correctly is essential for maximizing effectiveness.
+
+**Long-Acting Reversible Contraception (LARC):**
+
+**Levonorgestrel IUDs:**
+
+| Device | Dose | Size | Duration |
+|--------|------|------|----------|
+| Mirena | 52 mg | 32x32 mm | 6 years |
+| Liletta | 52 mg | 32x32 mm | 6 years |
+| Kyleena | 19.5 mg | 28x30 mm | 5 years |
+| Skyla | 13.5 mg | 28x30 mm | 3 years |
+
+**Mechanism:**
+- Thickens cervical mucus
+- Suppresses ovulation in some cycles
+- Thins endometrium
+- Local progestin effect
+
+**Placement:**
+- Speculum examination
+- Tenaculum to stabilize cervix
+- Sound uterus to measure depth
+- Insert through cervical canal
+- Strings trimmed
+
+**Follow-up:**
+- Check placement in 4-6 weeks
+- Strings visible at cervix
+- Self-check for strings
+
+**Copper IUD (Paragard, T380A):**
+- Copper ions inhibit sperm motility
+- Inhibits egg implantation
+- Non-hormonal
+- 10+ years duration
+
+**Implant (Nexplanon):**
+- Single rod, 4 cm long
+- Subdermal insertion
+- Etonogestrel 68 mg
+- 5 years duration
+- Inserted with special applicator
+
+**Combined Hormonal Contraceptives:**
+
+**Pill Formulations:**
+
+| Type | Estrogen | Progestin | Pills per pack |
+|------|----------|-----------|----------------|
+| Monophasic | Fixed | Fixed | 21/28 or 28 |
+| Biphasic | Varies | Varies | 28 |
+| Triphasic | Varies | Varies | 28 |
+| 24/4 | Fixed | Fixed | 28 |
+| 91-day | Fixed | Fixed | 91 |
+
+**Progestins:**
+- Norethindrone, norethindrone acetate
+- Ethynodiol diacetate
+- Levonorgestrel
+- Norgestimate, norgestrel
+- Drospirenone
+- Nomegestrol acetate
+
+**Patch (Xulane):**
+- 20 cm² patch
+- Release 150 mcg norelgestromin, 35 mcg EE daily
+- Apply weekly for 3 weeks, then 1 week off
+- Apply to clean, dry skin (buttock, abdomen, back, upper arm)
+- Rotate sites
+
+**Ring (NuvaRing, Annovera):**
+- Soft, flexible ring
+- Vaginal insertion
+- Left in place for 3 weeks
+- Remove, wait 1 week, insert new ring
+- Can use continuously for no periods
+
+**Barrier Methods:**
+
+**Male Condoms:**
+- Latex or polyurethane
+- Rolled onto erect penis
+- Leave space at tip
+- Withdraw while still erect
+- Dispose after use
+
+**Female Condom:**
+- Polyurethane sheath
+- Inserted prior to intercourse
+- External ring covers labia
+- Internal ring covers cervix
+- Removed after intercourse
+
+**Diaphragm:**
+- Dome-shaped silicone or latex
+- Rim covers cervix
+- Used with spermicide
+- Left in place for 6 hours after intercourse
+- Must be fitted by healthcare provider
+- Can be used multiple times with proper care
+
+**Cervical Cap:**
+- Thimble-shaped
+- Fits over cervix
+- Different sizes available
+- Used with spermicide
+- Left in place for 6 hours after intercourse
+- Must be fitted
+
+**Sponge (Today Sponge):**
+- Polyurethane sponge
+- Contains nonoxynol-9 (spermicide)
+- Fits over cervix
+- Effective for 24 hours of multiple acts of intercourse
+- Available OTC
+
+**Fertility Awareness Methods:**
+
+| Method | What's Tracked |
+|--------|---------------|
+| Temperature | Basal body temperature |
+| Cervical mucus | Consistency changes |
+| Calendar | Cycle days |
+| Symptothermal | Combination of methods |
+
+- TwoDay Method:
+- Cervical mucus monitoring
+- Abstain during secretory days
+- 12-day fertile window
+
+- Standard Days Method:
+- Calendar-based
+- Days 8-19 of cycle fertile
+- For cycles 26-32 days only
+
+- Basal Body Temperature:
+- Take temperature first thing in morning
+- Shift up after ovulation
+- Abstain until 3 days after shift
+- Requires consistent sleep patterns
+
+**Withdrawal:**
+- Penis withdrawn before ejaculation
+- Pre-ejaculation may contain sperm
+- High failure rate due to difficulty with timing
+- Requires high self-control
+`,
+      keyPoints: [
+        'LARC devices provide highly effective, long-acting contraception',
+        'Combined hormonal contraceptives come in pill, patch, and ring formulations',
+        'Barrier methods require use with every act of intercourse',
+        'Fertility awareness requires consistent tracking and abstinence during fertile window'
+      ],
+      vocabulary: [
+        { term: 'Monophasic', definition: 'Pill with fixed hormone levels throughout cycle' },
+        { term: 'Nonoxynol-9', definition: 'Spermicidal chemical in some contraceptives' },
+        { term: 'Secretory Phase', definition: 'Cervical mucus pattern in fertile window' },
+        { term: 'Basal Body Temperature', definition: 'Resting body temperature, rises after ovulation' }
+      ],
+      quiz: [
+        {
+          question: 'How long can a contraceptive sponge be used for multiple acts of intercourse?',
+          options: [
+            '6 hours',
+            '12 hours',
+            '24 hours',
+            '48 hours'
+          ],
+          correctAnswer: 2,
+          explanation: 'The contraceptive sponge is effective for 24 hours and can be used for multiple acts of intercourse during this time. It should be left in place for at least 6 hours after the last act of intercourse.'
+        },
+        {
+          question: 'What is the recommended duration for abstaining after the basal body temperature shift?',
+          options: [
+            '24 hours',
+            '48 hours',
+            '72 hours',
+            '1 week'
+          ],
+          correctAnswer: 2,
+          explanation: 'After the basal body temperature shifts upward indicating ovulation has occurred, abstinence is recommended for 3 days (72 hours) to ensure the fertile window has passed.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Contraindications and Side Effects',
+      content: `Every contraceptive method has specific contraindications and potential side effects that must be considered in method selection.
+
+**Contraindications to Combined Hormonal Contraception (WHO MEC):**
+
+**Category 4 (Unacceptable Health Risk):**
+
+**Cardiovascular:**
+- History of thromboembolism
+- Current or history of ischemic heart disease
+- Stroke
+- Complicated valvular disease
+- Hypertension with vascular disease
+
+**Neurological:**
+- Migraine with aura at any age
+- Focal neurological symptoms
+
+**Other:**
+- Breast cancer (current)
+- Diabetes with complications
+- Peri-menopause with risk factors
+- Smoker over age 35
+- Prolonged immobility
+
+**Category 3 (Theoretical risks usually outweigh advantages):**
+
+**Cardiovascular:**
+- Migraine without aura (age ≥35)
+- Hypertension well-controlled
+- Current or history of DVT with anticoagulation
+
+**Other:**
+- Obesity (BMI ≥30)
+- Headache with focal neurological symptoms
+- Certain medications that increase CHC risks
+
+**LARC Contraindications:**
+
+**IUDs:**
+
+**Copper IUD Contraindications:**
+- Wilson disease (copper metabolism)
+- Mirena IUDs:
+- - Current breast cancer
+- - Cervical cancer awaiting treatment
+- - Uterine distortion precluding placement
+- - Current pelvic infection
+- - Pregnancy (insert after)
+
+**Implant Contraindications:**
+- Breast cancer (current)
+- Certain medications:
+  - Bosentan
+  | - Certain anti-seizure meds
+  | | - St. John's wort
+
+**Barrier Method Considerations:**
+
+**Latex Allergy:**
+- Contraindicates latex condoms
+- Use polyurethane or polyisoprene condoms
+- Female condom non-latex
+
+**Spermicide Allergy:**
+- Contraindicates spermicides
+- Consider alternative methods
+- Diaphragm/cap require spermicide
+
+**Cervical Shape:**
+- Poor diaphragm/cap fit
+- History of toxic shock syndrome
+- Pelvic organ prolapse
+
+**Side Effects by Method:**
+
+**Hormonal Methods:**
+
+**Common:**
+- Breakthrough bleeding
+- Breast tenderness
+- Nausea
+- Headache
+- Mood changes
+- Weight change (minimal)
+
+**Serious:**
+- Venous thromboembolism (estrogen-containing)
+- Arterial thrombosis (estrogen-containing)
+- Stroke (estrogen-containing)
+- Myocardial infarction (estrogen-containing)
+- Breast cancer (small increase with CHC)
+- Liver problems (rare)
+
+**IUDs:**
+
+**Copper IUD:**
+- Heavier periods
+- More cramping
+- Anemia (rare)
+- Perforation (rare at insertion)
+- Expulsion (2-10%)
+
+**Hormonal IUD:**
+- Irregular bleeding initially
+- Amenorrhea (desired by many)
+- Ovarian cysts (usually resolve)
+- Perforation (rare)
+- Expulsion (2-10%)
+
+**Implant:**
+- Irregular bleeding
+- Amenorrhea
+- Weight gain (average 3 lbs)
+- Ovarian cysts (usually resolve)
+- Insertion problems (rare)
+- Scarring
+
+**Injection:**
+- Irregular bleeding
+- Amenorrhea
+- Weight gain (average 5-8 lbs)
+- Bone density loss (reversible)
+- Delayed return to fertility (average 10 months)
+
+**Barrier Methods:**
+- Allergic reactions (latex, spermicide)
+- Irritation
+- Urinary tract infections (spermicide)
+- Toxic shock syndrome (sponge, diaphragm - rare)
+
+**Sterilization:**
+- Surgical risks (anesthesia, bleeding, infection)
+- Regret possible (especially younger patients)
+- Failure possible (tubal recanalization)
+- Vasectomy failure rate: 0.1-0.2%
+- Tubal ligation failure rate: 0.5%
+`,
+      keyPoints: [
+        'Migraine with aura is Category 4 contraindication to estrogen-containing methods',
+        'IUDs generally safe for most women including breastfeeding',
+        'Weight gain is minimal with most hormonal methods except injection',
+        'Sterilization has surgical risks and potential for regret'
+      ],
+      vocabulary: [
+        { term: 'WHO MEC', definition: 'WHO Medical Eligibility Criteria for Contraceptive Use' },
+        { term: 'Breakthrough Bleeding', definition: 'Spotting or bleeding between periods' },
+        { term: 'VTE', definition: 'Venous Thromboembolism - blood clot in veins' },
+        { term: 'Perforation', definition: 'Puncture of uterus during IUD insertion' }
+      ],
+      quiz: [
+        {
+          question: 'Why is migraine with aura a contraindication to combined hormonal contraceptives?',
+          options: [
+            'It causes headaches to worsen',
+            'It increases risk of stroke',
+            'It interferes with hormone metabolism',
+            'It causes weight gain'
+          ],
+          correctAnswer: 1,
+          explanation: 'Migraine with aura increases the risk of stroke in women using combined hormonal contraceptives, making it a contraindication.'
+        },
+        {
+          question: 'What is the most common side effect of the copper IUD?',
+          options: [
+            'Weight gain',
+            'Heavier periods and more cramping',
+            'Irregular bleeding',
+            'Mood changes'
+          ],
+          correctAnswer: 1,
+          explanation: 'The copper IUD typically causes heavier periods and more menstrual cramping, which improves over time for most women.'
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Special Populations and Counseling',
+      content: `Contraceptive counseling requires individualized approaches for special populations and complex medical conditions.
+
+**Postpartum Contraception:**
+
+**Immediate Postpartum (First 48 Hours):**
+
+**Breastfeeding:**
+- Progestin-only pill immediately
+- Levonorgestrel IUD immediate postpartum
+- Etonogestrel implant immediate postpartum
+- Copper IUD immediate postpartum
+- DMPA immediate postpartum
+- Condoms recommended for STI protection
+
+**Not Breastfeeding:**
+- All methods available immediately postpartum
+- Combined hormonal contraceptives safe
+- IUD placement immediate (slightly higher expulsion risk)
+
+**Postpartum IUD Placement:**
+
+**Benefits:**
+- Highly effective
+- Long-acting
+- Breastfeeding compatible
+- Expulsion rate: 10-12% (immediate) vs. 3-5% (interval)
+
+**Technique:**
+- Manual insertion or using ring forceps
+- Placed at fundal region
+- Confirm placement with ultrasound if possible
+
+**Adolescents:**
+
+**Recommendations:**
+- LARC methods first-line
+- Condoms for STI protection (dual use)
+- Confidentiality laws may vary by state
+- Parental involvement laws vary
+
+**Counseling Points:**
+- Confidentiality assurance
+- LARC methods are reversible
+- Condoms prevent STIs
+- Explain typical vs perfect use
+- Emergency contraception information
+
+**Perimenopause:**
+
+- Considerations:
+- Fertility declining but present until 1 year post-menopause
+- LARC excellent option
+- Low-dose CHC possible if no contraindications
+- Copper IUD (non-hormonal option)
+- Non-hormonal options for those with contraindications
+
+**Medical Conditions:**
+
+**Diabetes:**
+- LARC first-line
+- Progestin-only options
+- CHC possible if no vascular complications
+- Monitor blood pressure, lipids
+
+- Obesity:
+- LARC first-line
+- Progestin-only pill (higher failure rate)
+- CHC possible but higher thrombosis risk
+- DMPA avoid (weight gain risk)
+
+**Depression:**
+- All methods safe
+- Monitor mood changes on hormonal methods
+- Some antidepressants reduce effectiveness of CHCs
+- No contraindication
+
+- Epilepsy:
+- Enzyme-inducing AEDs reduce CHC effectiveness
+- Higher dose CHC needed with enzyme inducers
+- LARC not affected by drug interactions
+- Progestin-only methods also affected
+
+**Rheumatologic:**
+
+**SLE:**
+- Contraindicated with antiphospholipid antibodies (avoid estrogen)
+- LARC and progestin-only safe
+- Monitor for thrombosis risk
+
+- RA:
+- All methods generally safe
+- No disease-specific contraindications
+
+**Emergency Contraception:**
+
+- Options:
+- Levonorgestrel (Plan B, Next Choice): 1 pill or 2 pills
+- Ulipristal (Ella): prescription, single dose
+- Copper IUD: most effective (99.9%)
+- Combined pills: Yuzpe method (4 pills, then 4 pills 12 hours later)
+
+- Effectiveness:
+- Ella: 85% for 3-5 days
+- Plan B: 88% within 72 hours, decreases to 58% by 96 hours
+- Copper IUD: 99.9%
+- Yuzpe: 75% (not commonly used now)
+
+- Eligibility:
+- All women can use some form of EC
+- No routine screening needed
+- Advance prescription available in some states
+
+- Counseling:
+- Use as soon as possible after unprotected sex
+- Regular contraception needed afterward
+- No protection for STIs
+- Can be used multiple times
+- Does not cause abortion
+
+**Counseling Framework:**
+- GATHER (Greet, Ask, Tell, Explain, Return)
+- Reproductive life plan discussion
+- Shared decision making
+- Respect patient preferences
+- Cultural sensitivity
+- Trauma-informed care
+`,
+      keyPoints: [
+        'All progestin-only methods are safe for breastfeeding',
+        'LARC is first-line for most medical conditions',
+        'Emergency contraception should be offered up to 5 days after unprotected sex',
+        'Contraceptive counseling should be patient-centered and culturally sensitive'
+      ],
+      vocabulary: [
+        { term: 'LARC', definition: 'Long-Acting Reversible Contraception' },
+        { term: 'AED', definition: 'Anti-Epileptic Drug' },
+        { term: 'GATHER', definition: 'Framework for contraceptive counseling' },
+        { term: 'Yuzpe Method', definition: 'Combined oral contraceptives as emergency contraception' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most effective emergency contraceptive?',
+          options: [
+          'Plan B (levonorgestrel)',
+          'Ella (ulipristal)',
+          'Copper IUD',
+          'Yuzpe method'
+          ],
+          correctAnswer: 2,
+          explanation: 'The copper IUD is the most effective emergency contraceptive at 99.9% effectiveness when inserted within 5 days after unprotected sex. It also provides ongoing contraception.'
+        },
+        {
+          question: 'What are the first-line contraceptive recommendations for adolescents?',
+          options: [
+          'Birth control pills only',
+          'LARC methods first-line',
+          'Condoms only',
+          'Fertility awareness only'
+          ],
+          correctAnswer: 1,
+          explanation: 'LARC methods (IUDs and implants) are first-line recommendations for adolescents due to high efficacy, long-acting nature, and reversibility.'
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'fertility-overview',
+    'contraception'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'CDC US MEC',
+    'ASRH Guidelines',
+    'ACOG Practice Bulletins'
+  ]
+}

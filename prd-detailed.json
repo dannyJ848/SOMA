@@ -1,0 +1,793 @@
+{
+  "name": "Biological Self",
+  "version": "1.0.0",
+  "description": "A local-first, privacy-preserving AI health repository with 3D anatomical interface for symptom tracking and physiological education. Counter-narrative to cloud-dependent healthcare AI.",
+  "vision": "Enable individuals to maintain complete ownership of their health data locally, with AI-assisted symptom recording via voice, anatomical body mapping, and educational explanations of physiological processes - all without data ever leaving their device.",
+  "principles": [
+    "Local-first: All data stored encrypted on user's device, never in cloud",
+    "Privacy by design: No telemetry, no external API calls for health data",
+    "Educational, not diagnostic: Teach physiology, never provide medical advice",
+    "Incremental value: Each feature works standalone, compounds together",
+    "Medical accuracy: Use validated anatomical models and physiological references"
+  ],
+  "techStack": {
+    "runtime": "Node.js / TypeScript",
+    "database": "SQLite with AES-256-GCM encryption",
+    "localLLM": {
+      "runtime": "Ollama",
+      "recommended": {
+        "reasoning": {
+          "primary": "deepseek-r1:7b",
+          "notes": "Best for chain-of-thought physiology reasoning, ~6GB VRAM"
+        },
+        "general": {
+          "primary": "qwen2.5:14b",
+          "fallback": "qwen2.5:7b",
+          "notes": "Strong medical/scientific knowledge, good structured output. 14B needs ~12GB, 7B needs ~6GB"
+        },
+        "fast": {
+          "primary": "llama3.1:8b",
+          "notes": "Quick responses for simple extraction tasks, ~6GB VRAM"
+        },
+        "embedding": {
+          "primary": "nomic-embed-text",
+          "fallback": "all-minilm:l6-v2",
+          "notes": "For RAG vector embeddings, ~300MB"
+        }
+      },
+      "notRecommended": [
+        "Kimi K2 - Cloud API only, not available for local deployment",
+        "GLM-4 full - Too large (100B+) for consumer hardware",
+        "GLM-4 Flash - API service only, no local weights available"
+      ],
+      "hardwareRequirements": {
+        "minimum": "16GB unified memory (M1/M2/M3 Mac) or 8GB VRAM (NVIDIA)",
+        "recommended": "24GB unified memory - can run full setup comfortably",
+        "optimal": "32GB+ for running multiple models simultaneously or 70B class models",
+        "current": "24GB unified memory (M-series Mac) - USE FULL SETUP"
+      },
+      "setupProfile": "full"
+    },
+    "voiceInput": {
+      "runtime": "Whisper.cpp",
+      "recommended": {
+        "fast": "whisper-tiny.en (~75MB, English only, fastest)",
+        "balanced": "whisper-base.en (~150MB, good accuracy)",
+        "accurate": "whisper-small.en (~500MB, best accuracy for size)"
+      },
+      "notes": "All models run fully local, no audio data leaves device"
+    },
+    "3dRendering": "Three.js with WebGL",
+    "desktop": "Tauri (Rust-based, smaller than Electron)",
+    "frontend": "React + TailwindCSS",
+    "anatomyAssets": "BodyParts3D (open source) or licensed Zygote models"
+  },
+  "phases": [
+    {
+      "id": "phase-0",
+      "name": "Foundation (COMPLETE)",
+      "description": "Core data model and import infrastructure",
+      "status": "complete"
+    },
+    {
+      "id": "phase-1",
+      "name": "Personal Tool MVP",
+      "description": "Functional local app with basic UI, voice input, and 2D body mapping",
+      "status": "in-progress"
+    },
+    {
+      "id": "phase-2",
+      "name": "3D Anatomical Interface",
+      "description": "Complete Anatomy-level 3D visualization with layered systems",
+      "status": "planned"
+    },
+    {
+      "id": "phase-3",
+      "name": "AI Physiology Engine",
+      "description": "Local RAG system for symptom-to-physiology reasoning",
+      "status": "planned"
+    },
+    {
+      "id": "phase-4",
+      "name": "Mass Distribution",
+      "description": "Generalized importers, cross-platform builds, documentation",
+      "status": "planned"
+    }
+  ],
+  "stories": [
+    {
+      "id": "story-001",
+      "phase": "phase-0",
+      "title": "Encrypted SQLite data store",
+      "description": "AES-256-GCM encrypted local database for all health data",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-002",
+      "phase": "phase-0",
+      "title": "Core health data types",
+      "description": "TypeScript interfaces for conditions, medications, allergies, surgeries, family history, labs, vitals, imaging",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-003",
+      "phase": "phase-0",
+      "title": "Lab results importer",
+      "description": "PDF parser with LLM extraction for lab results",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-004",
+      "phase": "phase-0",
+      "title": "Pharmacogenomics data model",
+      "description": "Gene variants, phenotypes, and drug guidance storage",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-005",
+      "phase": "phase-0",
+      "title": "Neuropsychological evaluations",
+      "description": "Comprehensive neuropsych test results with longitudinal tracking",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-006",
+      "phase": "phase-0",
+      "title": "Imaging reports importer",
+      "description": "CT/MRI/X-ray report storage with findings and impressions",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-007",
+      "phase": "phase-0",
+      "title": "Whoop wearable integration",
+      "description": "Import Whoop cycles (recovery, strain, HRV, sleep) and workouts",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-008",
+      "phase": "phase-0",
+      "title": "Apple Health integration",
+      "description": "Import Apple Health daily summaries and workouts from export.xml",
+      "status": "complete",
+      "priority": 1
+    },
+    {
+      "id": "story-009",
+      "phase": "phase-1",
+      "title": "Tauri desktop app shell",
+      "description": "Create Tauri application wrapper with React frontend. Configure build for macOS initially. Set up IPC bridge between Rust backend and React frontend for database operations.",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "Tauri app launches on macOS",
+        "React frontend renders inside Tauri window",
+        "IPC calls successfully reach TypeScript database layer",
+        "App icon and basic window chrome configured"
+      ],
+      "technicalNotes": "Use @tauri-apps/api for IPC. Keep existing TypeScript/SQLite code, invoke via Tauri commands."
+    },
+    {
+      "id": "story-010",
+      "phase": "phase-1",
+      "title": "Authentication and encryption setup flow",
+      "description": "First-run experience: create passphrase, explain local encryption, initialize database. Subsequent runs: passphrase entry to unlock.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "First-run detects no existing database",
+        "User creates and confirms passphrase",
+        "Clear explanation that data never leaves device",
+        "Passphrase unlocks existing database on subsequent launches",
+        "Failed passphrase shows error, allows retry"
+      ]
+    },
+    {
+      "id": "story-011",
+      "phase": "phase-1",
+      "title": "Dashboard home screen",
+      "description": "Main dashboard showing health snapshot: recent vitals, active conditions, current medications, latest labs with trends, recent symptoms.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Dashboard loads existing data from encrypted store",
+        "Shows cards for: vitals summary, active conditions, current meds, recent labs",
+        "Labs show trend indicators (up/down arrows)",
+        "Click any card to navigate to detail view",
+        "Empty states for sections with no data"
+      ]
+    },
+    {
+      "id": "story-012",
+      "phase": "phase-1",
+      "title": "Health timeline view",
+      "description": "Chronological timeline of all health events: symptoms, labs, imaging, medication changes, conditions diagnosed. Filterable by category.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Vertical timeline with events plotted by date",
+        "Color-coded by event type (lab=blue, imaging=purple, symptom=orange, etc.)",
+        "Filter toggles for each event type",
+        "Click event to see detail modal",
+        "Date range selector"
+      ]
+    },
+    {
+      "id": "story-013",
+      "phase": "phase-1",
+      "title": "Symptom data model",
+      "description": "Add Symptom type to data model: description, severity (1-10), body location (anatomical code), onset date, duration, associated factors, resolution.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Symptom interface in types.ts",
+        "symptoms[] array in BiologicalSelf",
+        "Store methods: addSymptom, updateSymptom, getSymptomsByLocation, getSymptomsByDateRange",
+        "Deserialize handles symptom dates"
+      ],
+      "technicalNotes": "Body location should use standardized anatomical codes (SNOMED or custom hierarchical: body.torso.abdomen.right-lower-quadrant)"
+    },
+    {
+      "id": "story-014",
+      "phase": "phase-1",
+      "title": "2D anatomical body diagram",
+      "description": "SVG-based 2D human body outline (anterior/posterior views) with clickable regions. Clicking a region selects it for symptom entry.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "SVG body diagram renders (front and back views)",
+        "Toggle between anterior/posterior",
+        "Hover highlights body region with name tooltip",
+        "Click selects region, shows selection state",
+        "Selected region ID passed to symptom entry form",
+        "Existing symptoms shown as markers on diagram"
+      ],
+      "technicalNotes": "Use hierarchical SVG groups: body > torso > abdomen > quadrants. Each clickable region has data-location attribute."
+    },
+    {
+      "id": "story-015",
+      "phase": "phase-1",
+      "title": "Manual symptom entry form",
+      "description": "Form to record a symptom: select body location (from diagram or dropdown), describe symptom, rate severity, set onset, add notes.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Form opens with body location pre-selected if clicked from diagram",
+        "Text field for symptom description",
+        "Severity slider 1-10 with descriptive labels",
+        "Date/time picker for onset",
+        "Duration field (ongoing or specify)",
+        "Associated factors (checkboxes: after eating, with exertion, at rest, etc.)",
+        "Save adds to database, shows on timeline and body diagram"
+      ]
+    },
+    {
+      "id": "story-016",
+      "phase": "phase-1",
+      "title": "Whisper.cpp local voice integration",
+      "description": "Integrate Whisper.cpp for local speech-to-text. No audio data leaves device. Transcription used for symptom entry.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Whisper model downloaded and bundled (tiny or base model)",
+        "Microphone permission requested on first use",
+        "Push-to-talk or tap-to-record button",
+        "Audio transcribed locally via Whisper.cpp",
+        "Transcription appears in text field for editing",
+        "Works offline"
+      ],
+      "technicalNotes": "Use whisper.cpp WASM build or native binary via Tauri sidecar. Start with tiny.en model (~75MB), option to download larger models."
+    },
+    {
+      "id": "story-017",
+      "phase": "phase-1",
+      "title": "Voice symptom recording flow",
+      "description": "Voice-first symptom entry: user speaks symptom, AI extracts structured data (location, severity, description), user confirms and saves.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "User taps mic button, speaks naturally: 'Sharp pain in my lower right abdomen, about a 6 out of 10, started this morning'",
+        "Whisper transcribes speech",
+        "Local LLM extracts: location='abdomen.right-lower-quadrant', severity=6, description='sharp pain', onset='today morning'",
+        "Extracted data shown in form for confirmation",
+        "User can edit before saving",
+        "Body diagram highlights extracted location"
+      ],
+      "technicalNotes": "Use Llama 3.1 8B for fast structured extraction - it's quick and good at JSON output. Whisper base.en for speech-to-text balance of speed and accuracy.",
+      "modelConfig": {
+        "speechToText": "whisper-base.en",
+        "extraction": "llama3.1:8b",
+        "outputFormat": "json",
+        "schema": {
+          "location": "string (anatomical code)",
+          "severity": "number (1-10)",
+          "description": "string",
+          "onset": "string (parseable datetime)"
+        }
+      }
+    },
+    {
+      "id": "story-018",
+      "phase": "phase-1",
+      "title": "Data import wizard",
+      "description": "Guided import flow for bringing in existing health data: labs (PDF), wearables (Whoop CSV, Apple Health XML), imaging reports.",
+      "status": "pending",
+      "priority": 4,
+      "acceptanceCriteria": [
+        "Import wizard accessible from settings/data menu",
+        "Step 1: Select data type (Labs, Wearables, Imaging, Other)",
+        "Step 2: File picker appropriate to type",
+        "Step 3: Preview extracted data before import",
+        "Step 4: Confirmation of imported records",
+        "Progress indicator for large imports",
+        "Error handling with clear messages"
+      ]
+    },
+    {
+      "id": "story-019",
+      "phase": "phase-2",
+      "title": "Three.js 3D viewer foundation",
+      "description": "Set up Three.js WebGL renderer in Tauri app. Basic scene with camera controls (orbit, zoom, pan). Placeholder geometry for testing.",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "Three.js scene renders in React component",
+        "OrbitControls for mouse/touch interaction",
+        "Responsive canvas sizing",
+        "Basic lighting setup (ambient + directional)",
+        "Performance acceptable (60fps on modern hardware)",
+        "Placeholder cube or sphere renders correctly"
+      ]
+    },
+    {
+      "id": "story-020",
+      "phase": "phase-2",
+      "title": "Anatomical model integration",
+      "description": "Load 3D human anatomy model into Three.js scene. Model should have separate meshes for major systems (skeletal, muscular, organs, vascular, nervous).",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "3D anatomy model loads (glTF/GLB format)",
+        "Model properly centered and scaled",
+        "Meshes organized by anatomical system",
+        "Model renders with appropriate materials",
+        "Loading indicator while model fetches"
+      ],
+      "technicalNotes": "BodyParts3D from DBCLS is open source. Alternatively, license from Zygote or TurboSquid. Convert to glTF for web. Consider LOD (level of detail) for performance."
+    },
+    {
+      "id": "story-021",
+      "phase": "phase-2",
+      "title": "Layer system UI",
+      "description": "Control panel to toggle visibility of anatomical layers: skin, muscles, organs, vasculature, nerves, skeleton. Smooth fade transitions.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Side panel with layer toggles",
+        "Each layer can be shown/hidden independently",
+        "Opacity slider for each layer",
+        "Preset buttons: 'Skin only', 'Muscular', 'Skeletal', 'All systems'",
+        "Smooth opacity transitions (not instant pop)",
+        "Layer state persists in session"
+      ]
+    },
+    {
+      "id": "story-022",
+      "phase": "phase-2",
+      "title": "3D region selection (raycasting)",
+      "description": "Click on 3D model to select anatomical structures. Raycasting identifies clicked mesh, highlights it, shows structure name.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Click on model triggers raycast",
+        "Clicked structure highlights (outline or color change)",
+        "Structure name appears in tooltip or info panel",
+        "Only selectable when layer is visible",
+        "Double-click isolates structure (hides others)",
+        "Escape or button to reset view"
+      ]
+    },
+    {
+      "id": "story-023",
+      "phase": "phase-2",
+      "title": "Symptom markers on 3D model",
+      "description": "Visualize recorded symptoms as markers/pins on the 3D anatomy model at their recorded locations.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Symptoms with body locations appear as 3D markers",
+        "Marker color indicates severity (green→yellow→red)",
+        "Marker size or pulse indicates recency",
+        "Hover marker shows symptom summary",
+        "Click marker opens symptom detail",
+        "Markers visible across appropriate layers"
+      ]
+    },
+    {
+      "id": "story-024",
+      "phase": "phase-2",
+      "title": "3D symptom entry",
+      "description": "Record symptoms by clicking directly on 3D anatomy. Click location → symptom form opens with anatomical location pre-filled.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Dedicated 'Add Symptom' mode",
+        "Click on 3D model places temporary marker",
+        "Clicked structure name auto-fills location field",
+        "Symptom form opens as modal/side panel",
+        "Cancel removes temporary marker",
+        "Save converts to permanent symptom marker"
+      ]
+    },
+    {
+      "id": "story-025",
+      "phase": "phase-2",
+      "title": "Cross-section and isolation views",
+      "description": "View anatomical cross-sections (sagittal, coronal, transverse planes). Isolate individual organs or systems for detailed view.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Clipping plane controls for X, Y, Z axes",
+        "Preset section views (sagittal, coronal, transverse)",
+        "Section plane position adjustable via slider",
+        "Right-click structure → 'Isolate' shows only that structure",
+        "Isolated view allows full rotation",
+        "Reset button returns to full model"
+      ]
+    },
+    {
+      "id": "story-026",
+      "phase": "phase-2",
+      "title": "Anatomical search and navigation",
+      "description": "Search for anatomical structures by name. Selecting search result zooms camera to structure and highlights it.",
+      "status": "pending",
+      "priority": 4,
+      "acceptanceCriteria": [
+        "Search input field with autocomplete",
+        "Anatomical terms database (structure names)",
+        "Search results show matching structures",
+        "Select result → camera animates to structure",
+        "Structure highlights and info panel opens",
+        "Recent searches remembered"
+      ]
+    },
+    {
+      "id": "story-027",
+      "phase": "phase-3",
+      "title": "Physiology knowledge base",
+      "description": "Create local vector database of physiological information: organ functions, systems, pathophysiology of common conditions. Source from open medical textbooks.",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "Vector database (sqlite-vec or similar) for embeddings",
+        "Chunked and embedded content from open physiology sources",
+        "Coverage: major organ systems, common conditions, basic pathophysiology",
+        "Embedding model runs locally via Ollama (nomic-embed-text)",
+        "Retrieval returns relevant chunks for query",
+        "Sources cited for all information"
+      ],
+      "technicalNotes": "OpenStax Anatomy & Physiology is CC-licensed. Wikipedia medical articles are also usable. Chunk by section, embed with nomic-embed-text via Ollama. Use sqlite-vec for vector storage to keep everything in SQLite.",
+      "modelConfig": {
+        "embedding": "nomic-embed-text",
+        "chunkSize": 512,
+        "chunkOverlap": 50
+      }
+    },
+    {
+      "id": "story-028",
+      "phase": "phase-3",
+      "title": "Structure info panel with physiology",
+      "description": "When anatomical structure is selected, show info panel with: structure name, system membership, basic function, common conditions, physiological processes.",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "Info panel appears on structure selection",
+        "Shows: anatomical name, Latin name, system (e.g., digestive)",
+        "Brief functional description",
+        "List of common conditions affecting structure",
+        "Links to related structures",
+        "'Learn more' expands with RAG-retrieved physiology content"
+      ]
+    },
+    {
+      "id": "story-029",
+      "phase": "phase-3",
+      "title": "Symptom-to-physiology AI reasoning",
+      "description": "Given a symptom (location + description), use local LLM + RAG to explain what physiological processes might produce such a symptom. Educational, not diagnostic.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Button on symptom detail: 'What might cause this?'",
+        "RAG retrieves relevant physiology chunks",
+        "Local LLM synthesizes educational explanation",
+        "Response structured: 'Symptoms in this area could relate to...'",
+        "Clear disclaimer: 'This is educational, not medical advice'",
+        "Cites sources from knowledge base",
+        "Suggests relevant structures to explore in 3D view"
+      ],
+      "technicalNotes": "Use DeepSeek-R1 for chain-of-thought reasoning about symptoms. It excels at step-by-step physiological reasoning. Fall back to Qwen 2.5 14B if DeepSeek unavailable.",
+      "modelConfig": {
+        "reasoning": "deepseek-r1:7b",
+        "fallback": "qwen2.5:14b",
+        "temperature": 0.3,
+        "systemPrompt": "You are a physiology educator. Explain what physiological processes could relate to the described symptoms. Be educational, cite anatomical structures, and never provide diagnoses."
+      }
+    },
+    {
+      "id": "story-030",
+      "phase": "phase-3",
+      "title": "Symptom pattern analysis",
+      "description": "Analyze patterns in user's symptom history: recurring symptoms, correlations with time/activities, trends over time.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Pattern analysis view accessible from symptoms section",
+        "Shows: most frequent symptom locations, severity trends over time",
+        "Correlations: symptoms vs time of day, day of week, activities",
+        "Timeline visualization of symptom frequency",
+        "AI-generated summary of observed patterns",
+        "Exportable summary for sharing with healthcare provider"
+      ]
+    },
+    {
+      "id": "story-031",
+      "phase": "phase-3",
+      "title": "Lab-symptom correlation view",
+      "description": "Visualize relationships between symptoms and lab results. When viewing a symptom, show potentially relevant lab trends. When viewing labs, show symptoms around that time.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Symptom detail shows: 'Labs around this time' section",
+        "Lab detail shows: 'Symptoms around this time' section",
+        "Visual timeline overlay: symptoms + labs",
+        "AI suggests potentially relevant labs for symptom type",
+        "Disclaimer about correlation ≠ causation"
+      ]
+    },
+    {
+      "id": "story-032",
+      "phase": "phase-3",
+      "title": "Medication-aware insights",
+      "description": "Factor medications into symptom analysis. Cross-reference pharmacogenomics data. Alert if symptom could be medication side effect.",
+      "status": "pending",
+      "priority": 4,
+      "acceptanceCriteria": [
+        "Symptom analysis considers active medications",
+        "Known side effects retrieved for current meds",
+        "If symptom matches known side effect, note this possibility",
+        "Pharmacogenomics integration: factor in metabolizer status",
+        "DrugBank or similar open database for side effect data"
+      ]
+    },
+    {
+      "id": "story-033",
+      "phase": "phase-4",
+      "title": "Generic lab PDF parser",
+      "description": "LLM-assisted parser that can extract structured data from any lab report PDF format, not just pre-configured ones.",
+      "status": "pending",
+      "priority": 1,
+      "acceptanceCriteria": [
+        "User uploads any lab PDF",
+        "LLM extracts test names, values, units, reference ranges",
+        "Preview extracted data for user confirmation",
+        "User can correct extraction errors",
+        "Corrections improve future extractions (few-shot learning)",
+        "Works with Quest, LabCorp, hospital labs, international formats"
+      ]
+    },
+    {
+      "id": "story-034",
+      "phase": "phase-4",
+      "title": "Wearable auto-sync",
+      "description": "OAuth-based automatic sync with wearable platforms: Whoop, Garmin, Oura, Fitbit. Data pulled and stored locally.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Settings page for connected devices",
+        "OAuth flow for each supported platform",
+        "Tokens stored securely in local keychain",
+        "Manual sync button per device",
+        "Optional automatic sync interval",
+        "Sync status and last sync time shown",
+        "Data never proxied through external servers"
+      ],
+      "technicalNotes": "OAuth tokens stored locally. API calls made directly from user's device. No backend server involved."
+    },
+    {
+      "id": "story-035",
+      "phase": "phase-4",
+      "title": "Cross-platform builds",
+      "description": "Build and package application for macOS, Windows, and Linux. Automated CI/CD pipeline for releases.",
+      "status": "pending",
+      "priority": 2,
+      "acceptanceCriteria": [
+        "Tauri builds for: macOS (Intel + Apple Silicon), Windows (x64), Linux (AppImage + deb)",
+        "Code signing for macOS and Windows",
+        "Auto-updater for new versions",
+        "GitHub Actions CI/CD pipeline",
+        "Release artifacts uploaded to GitHub Releases"
+      ]
+    },
+    {
+      "id": "story-036",
+      "phase": "phase-4",
+      "title": "First-run onboarding wizard",
+      "description": "New user experience: explain the app's purpose, set up encryption, optionally import existing data, configure preferences.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Multi-step onboarding flow",
+        "Step 1: Welcome, explain local-first privacy",
+        "Step 2: Create encryption passphrase",
+        "Step 3: Optional - import existing health data",
+        "Step 4: Configure preferences (units, date format)",
+        "Step 5: Quick tour of main features",
+        "Skippable for advanced users"
+      ]
+    },
+    {
+      "id": "story-037",
+      "phase": "phase-4",
+      "title": "Export and backup system",
+      "description": "Export all data in portable formats. Encrypted backup to user-chosen location. Restore from backup.",
+      "status": "pending",
+      "priority": 3,
+      "acceptanceCriteria": [
+        "Export all data as encrypted archive",
+        "Export options: Full backup, specific sections, date range",
+        "Export formats: Encrypted (for restore), JSON (for portability), PDF report",
+        "Restore from encrypted backup",
+        "Backup to local folder, external drive, or cloud storage of user's choice",
+        "Scheduled automatic backups option"
+      ]
+    },
+    {
+      "id": "story-038",
+      "phase": "phase-4",
+      "title": "Provider summary report",
+      "description": "Generate shareable summary for healthcare providers: recent symptoms, current meds, relevant labs, family history. PDF or printable format.",
+      "status": "pending",
+      "priority": 4,
+      "acceptanceCriteria": [
+        "Generate provider summary from menu",
+        "Customizable sections to include",
+        "Date range selector for symptoms and labs",
+        "Professional formatting suitable for medical records",
+        "PDF export with clear typography",
+        "Optional: QR code linking to detailed view (if user chooses to share)"
+      ]
+    },
+    {
+      "id": "story-039",
+      "phase": "phase-4",
+      "title": "Documentation and help system",
+      "description": "In-app help, user guide, FAQ. Documentation website for potential users.",
+      "status": "pending",
+      "priority": 4,
+      "acceptanceCriteria": [
+        "In-app help accessible via ? button",
+        "Contextual help for complex features",
+        "User guide covering all features",
+        "FAQ section",
+        "Documentation website (GitHub Pages or similar)",
+        "Video tutorials for key workflows"
+      ]
+    },
+    {
+      "id": "story-040",
+      "phase": "phase-4",
+      "title": "Open source release preparation",
+      "description": "Prepare codebase for public open source release: licensing, contributing guide, code cleanup, security audit.",
+      "status": "pending",
+      "priority": 5,
+      "acceptanceCriteria": [
+        "LICENSE file (MIT or Apache 2.0)",
+        "CONTRIBUTING.md with guidelines",
+        "CODE_OF_CONDUCT.md",
+        "README.md with project overview, screenshots, install instructions",
+        "Security audit of encryption implementation",
+        "Remove any hardcoded personal data or paths",
+        "CI checks pass on clean clone"
+      ]
+    }
+  ],
+  "currentFocus": {
+    "phase": "phase-1",
+    "nextStory": "story-009",
+    "notes": "Foundation complete with rich health data already imported. Next: build Tauri desktop shell to wrap existing functionality in user-friendly interface."
+  },
+  "resources": {
+    "anatomyModels": [
+      {
+        "name": "BodyParts3D",
+        "url": "https://lifesciencedb.jp/bp3d/",
+        "license": "CC BY-SA 2.1 JP",
+        "notes": "Open source, detailed, Japanese origin"
+      },
+      {
+        "name": "Zygote",
+        "url": "https://www.zygote.com/",
+        "license": "Commercial",
+        "notes": "Professional quality, requires licensing"
+      }
+    ],
+    "physiologyContent": [
+      {
+        "name": "OpenStax Anatomy and Physiology",
+        "url": "https://openstax.org/details/books/anatomy-and-physiology",
+        "license": "CC BY 4.0",
+        "notes": "Comprehensive, free, open license"
+      }
+    ],
+    "voiceRecognition": [
+      {
+        "name": "Whisper.cpp",
+        "url": "https://github.com/ggerganov/whisper.cpp",
+        "license": "MIT",
+        "notes": "Local, fast, multiple model sizes"
+      }
+    ],
+    "localLLM": [
+      {
+        "name": "DeepSeek-R1 7B",
+        "ollamaCommand": "ollama pull deepseek-r1:7b",
+        "size": "~4.5GB",
+        "vram": "~6GB",
+        "useCase": "Chain-of-thought reasoning, physiology explanations"
+      },
+      {
+        "name": "Qwen 2.5 14B",
+        "ollamaCommand": "ollama pull qwen2.5:14b",
+        "size": "~9GB",
+        "vram": "~12GB",
+        "useCase": "General medical/scientific knowledge, strong reasoning"
+      },
+      {
+        "name": "Qwen 2.5 7B",
+        "ollamaCommand": "ollama pull qwen2.5:7b",
+        "size": "~4.5GB",
+        "vram": "~6GB",
+        "useCase": "Fallback for lower-memory systems"
+      },
+      {
+        "name": "Llama 3.1 8B",
+        "ollamaCommand": "ollama pull llama3.1:8b",
+        "size": "~4.7GB",
+        "vram": "~6GB",
+        "useCase": "Fast extraction, structured output, general tasks"
+      },
+      {
+        "name": "Nomic Embed Text",
+        "ollamaCommand": "ollama pull nomic-embed-text",
+        "size": "~275MB",
+        "vram": "~500MB",
+        "useCase": "Text embeddings for RAG vector database"
+      }
+    ],
+    "ollamaSetup": {
+      "install": "curl -fsSL https://ollama.com/install.sh | sh",
+      "macInstall": "brew install ollama",
+      "quickStart": [
+        "ollama serve",
+        "ollama pull llama3.1:8b",
+        "ollama pull deepseek-r1:7b",
+        "ollama pull nomic-embed-text"
+      ],
+      "fullSetup": [
+        "ollama pull deepseek-r1:7b",
+        "ollama pull qwen2.5:14b",
+        "ollama pull llama3.1:8b",
+        "ollama pull nomic-embed-text"
+      ],
+      "recommended": "fullSetup",
+      "notes": "With 24GB unified memory, run the full setup. All models can be loaded without swapping. For simultaneous model use, Qwen 2.5 14B + nomic-embed-text fits comfortably."
+    }
+  }
+}

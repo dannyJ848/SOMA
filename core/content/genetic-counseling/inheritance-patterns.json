@@ -1,0 +1,447 @@
+{
+  "id": "gc-004",
+  "title": "Inheritance Patterns",
+  "category": "genetic-counseling",
+  "subcategory": "genetics-basics",
+  "description": "Understanding how genetic conditions are passed from parents to children through different inheritance patterns",
+  "keywords": ["inheritance", "autosomal dominant", "autosomal recessive", "X-linked", "mitochondrial", "multifactorial", "genetics"],
+  "lastUpdated": "2026-01-24",
+  "version": "1.0.0",
+  "content": {
+    "overview": {
+      "level1": {
+        "title": "How Genetic Conditions Are Inherited",
+        "content": "We inherit our genes from our parents. The way a genetic condition is passed down depends on which chromosome the gene is on and whether one or two copies of the changed gene are needed to cause the condition. Understanding inheritance helps predict who in a family might be at risk."
+      },
+      "level2": {
+        "title": "Understanding Patterns of Genetic Inheritance",
+        "content": "Genetic conditions follow different inheritance patterns based on the chromosome location (autosomal or sex chromosome) and the number of variant copies needed to cause disease. The main patterns are autosomal dominant (one copy causes disease), autosomal recessive (two copies needed), X-linked (gene on X chromosome), and mitochondrial (inherited from mother). Many common conditions follow multifactorial inheritance involving multiple genes and environmental factors."
+      },
+      "level3": {
+        "title": "Mendelian and Non-Mendelian Inheritance Mechanisms",
+        "content": "Classical Mendelian inheritance includes autosomal dominant, autosomal recessive, and X-linked patterns with predictable recurrence risks. Non-Mendelian mechanisms include mitochondrial inheritance, genomic imprinting, anticipation, and germline mosaicism. Variable expressivity and reduced penetrance modify phenotypic expression within families. Complex conditions involve polygenic inheritance with gene-environment interactions."
+      },
+      "level4": {
+        "title": "Advanced Concepts in Genetic Transmission",
+        "content": "Inheritance pattern analysis integrates family history, molecular findings, and population genetics. Challenges include de novo variants, germline mosaicism, phenocopies, and incomplete penetrance. Pedigree analysis identifies patterns while acknowledging limitations in small families. Molecular testing confirms inheritance mechanisms and refines recurrence risks. Advanced patterns include digenic inheritance, uniparental disomy, and contiguous gene syndromes."
+      },
+      "level5": {
+        "title": "Complex Inheritance and Precision Risk Assessment",
+        "content": "Contemporary genetics addresses the spectrum from highly penetrant Mendelian conditions to complex polygenic traits. Modifier genes, epigenetic factors, and gene-environment interactions influence phenotypic outcomes. Polygenic risk scores quantify common variant contributions to disease risk. Challenges include genotype-first ascertainment effects on penetrance estimates, novel gene validation, and integration of rare and common variant effects in unified risk frameworks."
+      }
+    },
+    "sections": {
+      "autosomalDominant": {
+        "title": "Autosomal Dominant Inheritance",
+        "level1": {
+          "content": "In autosomal dominant inheritance, only one copy of a changed gene is needed to cause the condition. Each child of an affected person has a 50% chance of inheriting the condition. It can be passed by either parent, and affected individuals are usually seen in every generation.",
+          "keyPoints": [
+            "Only one copy of the changed gene causes the condition",
+            "Each child has a 50% (1 in 2) chance of inheriting it",
+            "Can be passed by mother or father",
+            "Usually seen in every generation",
+            "Males and females are equally affected"
+          ],
+          "examples": [
+            "Huntington's disease",
+            "Hereditary breast and ovarian cancer (BRCA1/2)",
+            "Marfan syndrome",
+            "Neurofibromatosis",
+            "Achondroplasia"
+          ]
+        },
+        "level2": {
+          "content": "Autosomal dominant conditions result from a pathogenic variant in one copy of a gene located on an autosome (chromosomes 1-22). The variant is sufficient to cause disease regardless of the other gene copy. Vertical transmission through generations creates a characteristic pedigree pattern. Variable expressivity means affected family members may have different symptoms or severity. Reduced penetrance means some carriers never develop symptoms. New (de novo) variants can occur, meaning parents may be unaffected.",
+          "pedigreeFeatures": [
+            "Vertical transmission through generations",
+            "Approximately 50% of offspring affected",
+            "Male-to-male transmission can occur",
+            "Unaffected individuals do not transmit (unless reduced penetrance)",
+            "May see skipped generations with reduced penetrance"
+          ],
+          "specialConsiderations": [
+            "Variable expressivity: different symptoms/severity in family",
+            "Reduced penetrance: some carriers unaffected",
+            "De novo variants: affected child with unaffected parents",
+            "Germline mosaicism: recurrence risk if parent is mosaic"
+          ]
+        },
+        "level3": {
+          "content": "Autosomal dominant inheritance patterns are modified by penetrance (probability of phenotype given genotype), expressivity (range of phenotypic severity), and age of onset. Gene-specific penetrance estimates inform counseling (e.g., BRCA1 ~70% lifetime breast cancer risk). De novo variants account for a significant proportion of cases, especially for conditions affecting reproduction. Germline mosaicism in a parent creates recurrence risk despite negative parental testing. Dominant negative and gain-of-function mechanisms differ from haploinsufficiency in genotype-phenotype correlations.",
+          "penetranceConsiderations": [
+            "Complete penetrance: all carriers develop condition",
+            "Reduced penetrance: percentage of carriers affected",
+            "Age-related penetrance: risk increases over lifetime",
+            "Sex-influenced penetrance: risk differs by sex"
+          ],
+          "molecularMechanisms": [
+            "Haploinsufficiency: one copy insufficient for normal function",
+            "Dominant negative: variant protein interferes with normal protein",
+            "Gain of function: variant protein has new harmful activity",
+            "Mechanism affects genotype-phenotype correlation"
+          ]
+        },
+        "level4": {
+          "content": "Advanced autosomal dominant genetics addresses genotype-phenotype correlations, variant-specific penetrance, and modifier effects. Anticipation (earlier onset/greater severity in successive generations) occurs in trinucleotide repeat disorders. Mosaicism detection refines recurrence risks. Parent-of-origin effects influence some conditions. Cancer predisposition syndromes require second-hit (somatic) events for tumorigenesis according to Knudson's two-hit hypothesis.",
+          "advancedConcepts": [
+            "Anticipation in repeat expansion disorders",
+            "Gonadal vs. somatic mosaicism distinction",
+            "Parent-of-origin effects on expression",
+            "Two-hit hypothesis in tumor suppressors",
+            "Modifier genes and polygenic background"
+          ],
+          "clinicalImplications": [
+            "Cascade testing of at-risk relatives",
+            "Age-specific penetrance for surveillance timing",
+            "Variant-specific management when data available",
+            "De novo vs. inherited implications for family testing",
+            "Reproductive options including PGT"
+          ]
+        },
+        "level5": {
+          "content": "Precision risk assessment for autosomal dominant conditions integrates gene-specific penetrance estimates, variant-level data, polygenic background, and family history. Ascertainment bias in historical penetrance studies is addressed through population-based estimates. Modifier genes and common variant interactions refine individual risk predictions. Challenges include incomplete knowledge of penetrance modifiers and evolving variant interpretation. Research addresses the role of regulatory variants and epigenetic modifications in dominant disease expression.",
+          "precisionRiskAssessment": [
+            "Gene-specific penetrance data integration",
+            "Population-based vs. familial ascertainment",
+            "Polygenic risk score modification",
+            "Environmental and lifestyle risk modifiers",
+            "Dynamic risk updating with surveillance findings"
+          ]
+        }
+      },
+      "autosomalRecessive": {
+        "title": "Autosomal Recessive Inheritance",
+        "level1": {
+          "content": "In autosomal recessive inheritance, two copies of a changed gene are needed to cause the condition. People with one copy are called carriers and are usually healthy. When both parents are carriers, each child has a 25% chance of being affected, 50% chance of being a carrier, and 25% chance of being unaffected and not a carrier.",
+          "keyPoints": [
+            "Two copies of the changed gene are needed to be affected",
+            "Carriers (one copy) are usually healthy",
+            "When both parents are carriers, each child has a 25% chance of being affected",
+            "Often appears unexpectedly in families",
+            "Males and females are equally affected"
+          ],
+          "examples": [
+            "Cystic fibrosis",
+            "Sickle cell disease",
+            "Tay-Sachs disease",
+            "Spinal muscular atrophy",
+            "Phenylketonuria (PKU)"
+          ]
+        },
+        "level2": {
+          "content": "Autosomal recessive conditions require pathogenic variants in both copies of a gene. Carriers have one variant copy but are typically asymptomatic. Affected individuals may be homozygous (same variant on both copies) or compound heterozygous (different variants on each copy). The condition often appears unexpectedly without family history because carriers are healthy. Consanguinity increases recessive disease risk due to shared ancestry. Carrier frequency varies by population due to founder effects and selection pressures.",
+          "inheritanceRisks": [
+            "Both parents carriers: 25% affected, 50% carriers, 25% non-carriers",
+            "One parent affected, one carrier: 50% affected, 50% carriers",
+            "Both parents affected: 100% affected",
+            "One parent carrier, one non-carrier: 50% carriers, 50% non-carriers"
+          ],
+          "populationConsiderations": [
+            "Carrier frequency varies by population",
+            "Founder effects increase carrier frequency in some groups",
+            "Consanguinity increases homozygosity risk",
+            "Carrier screening identifies at-risk couples"
+          ]
+        },
+        "level3": {
+          "content": "Carrier frequency in the general population determines couple risk before testing. Common recessive conditions have higher carrier frequencies (e.g., CF carrier frequency ~1/25 in Northern Europeans). Compound heterozygosity requires determination of variant phase (cis vs. trans) through parental testing. Some recessive genes show manifesting carrier phenotypes (e.g., sickle cell trait). Pseudodeficiency alleles cause reduced enzyme activity without clinical consequences, complicating carrier screening.",
+          "carrierFrequencies": [
+            "Cystic fibrosis: ~1/25 Northern European",
+            "Sickle cell disease: ~1/12 African American",
+            "Tay-Sachs disease: ~1/30 Ashkenazi Jewish",
+            "Spinal muscular atrophy: ~1/50 pan-ethnic",
+            "Beta-thalassemia: varies by Mediterranean, Asian ancestry"
+          ],
+          "specialConsiderations": [
+            "Compound heterozygosity: phase determination needed",
+            "Manifesting carriers: partial phenotype possible",
+            "Pseudodeficiency alleles: reduced activity without disease",
+            "Uniparental disomy: both variants from one parent"
+          ]
+        },
+        "level4": {
+          "content": "Advanced recessive genetics addresses genotype-phenotype correlations for specific variant combinations, modifier gene effects, and newborn screening implications. Residual enzyme activity correlates with severity for metabolic conditions. Variant-specific prognosis guides treatment selection (e.g., CF modulator eligibility). Expanded carrier screening increases identification of compound heterozygosity risk for multiple conditions. Research addresses gene therapy and other disease-modifying treatments.",
+          "genotypePhentypeCorrelations": [
+            "Null variants typically cause severe phenotype",
+            "Missense variants may cause milder disease",
+            "Residual enzyme activity correlates with severity",
+            "Modifier genes influence expression",
+            "Variant combinations predict treatment eligibility"
+          ],
+          "clinicalImplications": [
+            "Newborn screening enables early intervention",
+            "Carrier screening informs reproductive planning",
+            "Genotype guides prognosis and treatment",
+            "Family variant testing after diagnosis",
+            "Gene therapy and emerging treatments"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary recessive disease management integrates precision genotype-phenotype correlations, emerging therapies, and population genetics. Treatments including enzyme replacement, gene therapy, and gene editing are genotype-specific. Population screening programs balance disease severity, carrier frequency, and health economics. Challenges include variant interpretation for rare alleles, health equity in screening access, and long-term outcomes for treated individuals. Research addresses modifier discovery and personalized treatment optimization.",
+          "emergingTherapies": [
+            "Gene therapy and gene editing approaches",
+            "Enzyme replacement and substrate reduction",
+            "Small molecule chaperones and read-through agents",
+            "Antisense oligonucleotides",
+            "Genotype-specific treatment eligibility"
+          ]
+        }
+      },
+      "xLinked": {
+        "title": "X-Linked Inheritance",
+        "level1": {
+          "content": "X-linked conditions are caused by genes on the X chromosome. Because males have one X and one Y chromosome, they are usually more severely affected. Females have two X chromosomes, so they often have milder symptoms or none at all if they are carriers. Carrier females can pass the condition to their sons.",
+          "keyPoints": [
+            "Gene is on the X chromosome",
+            "Males (XY) are usually more severely affected",
+            "Females (XX) are often carriers with mild or no symptoms",
+            "Affected males cannot pass to sons (sons get Y from father)",
+            "All daughters of affected males are carriers"
+          ],
+          "examples": [
+            "Hemophilia A and B",
+            "Duchenne muscular dystrophy",
+            "Color blindness",
+            "Fragile X syndrome"
+          ]
+        },
+        "level2": {
+          "content": "X-linked recessive conditions typically affect males who have a single X chromosome. Carrier females usually have mild or no symptoms due to their second normal X copy, though X-inactivation patterns can cause variable expression. X-linked dominant conditions affect both males and females, with some being lethal in males. Inheritance patterns show absence of male-to-male transmission. Carrier females have 50% chance of affected sons and 50% chance of carrier daughters.",
+          "xLinkedRecessive": {
+            "maleRisk": "Sons of carrier females: 50% affected",
+            "femaleRisk": "Daughters of carrier females: 50% carriers",
+            "manifestingCarriers": "Females may show symptoms due to skewed X-inactivation",
+            "affectedMales": "All daughters are carriers, no affected sons"
+          },
+          "xLinkedDominant": {
+            "pattern": "Affected males and females in family",
+            "maleLethal": "Some conditions are lethal in males",
+            "examples": "Rett syndrome, X-linked hypophosphatemia"
+          }
+        },
+        "level3": {
+          "content": "X-inactivation (lyonization) randomly silences one X chromosome in each cell of females. Skewed X-inactivation can cause carrier females to manifest disease symptoms or protect them from disease. Germline vs. somatic mosaicism affects recurrence risk calculations. New mutations are common in severe X-linked conditions due to reduced reproductive fitness in affected males. Prenatal and preimplantation testing options are available for carrier females.",
+          "xInactivationEffects": [
+            "Random inactivation: ~50/50 split expected",
+            "Skewed inactivation: unequal silencing of one X",
+            "Manifesting carriers: symptoms from skewing or tissue-specific effects",
+            "Functional mosaicism: females have two cell populations"
+          ],
+          "geneticCounseling": [
+            "Carrier testing for at-risk females",
+            "Recurrence risk calculations",
+            "Prenatal and preimplantation testing options",
+            "Consideration of de novo mutation rates",
+            "Germline mosaicism risk in apparently unaffected mothers"
+          ]
+        },
+        "level4": {
+          "content": "Advanced X-linked genetics addresses mechanisms of X-inactivation escape, X-Y homologous genes, and pseudoautosomal regions. Manifesting carriers may require management similar to affected males. Carrier detection methods include molecular testing, biochemical analysis, and family studies. X-inactivation studies can help predict carrier phenotype but have limitations. Males with 47,XXY (Klinefelter syndrome) may be carriers rather than affected for some X-linked conditions.",
+          "advancedConcepts": [
+            "X-inactivation escape genes",
+            "Pseudoautosomal region inheritance",
+            "X-Y homologous gene effects",
+            "47,XXY and X-linked conditions",
+            "X-inactivation pattern testing utility and limitations"
+          ],
+          "carrierManagement": [
+            "Biochemical and molecular carrier detection",
+            "Surveillance recommendations for manifesting carriers",
+            "Cardiac screening in DMD carriers",
+            "Factor level monitoring in hemophilia carriers",
+            "Psychological support for carrier status"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary understanding of X-linked inheritance integrates molecular mechanisms of X-inactivation with clinical phenotypes. Research addresses therapeutic approaches including gene therapy, exon skipping, and X-reactivation strategies. Prenatal testing for X-linked conditions includes non-invasive fetal sex determination to guide further testing. Challenges include predicting carrier phenotypes, understanding tissue-specific X-inactivation effects, and developing treatments for manifesting carriers.",
+          "researchDirections": [
+            "X-reactivation therapeutic strategies",
+            "Gene therapy for X-linked conditions",
+            "Exon skipping and other RNA-based therapies",
+            "Tissue-specific X-inactivation analysis",
+            "Carrier phenotype prediction models"
+          ]
+        }
+      },
+      "mitochondrial": {
+        "title": "Mitochondrial Inheritance",
+        "level1": {
+          "content": "Mitochondria are tiny structures in cells that produce energy. They have their own DNA, which is inherited only from your mother. Conditions caused by mitochondrial DNA changes are passed from mothers to all their children, but only daughters can pass them on. Mitochondrial conditions often affect organs that need a lot of energy, like muscles, brain, and heart.",
+          "keyPoints": [
+            "Mitochondria have their own DNA",
+            "Inherited only from mother",
+            "Passed from affected mother to all children",
+            "Only daughters can pass it to the next generation",
+            "Often affects muscles, brain, heart, and other energy-dependent organs"
+          ],
+          "examples": [
+            "MELAS (mitochondrial encephalomyopathy, lactic acidosis, stroke-like episodes)",
+            "MERRF (myoclonic epilepsy with ragged red fibers)",
+            "Leber hereditary optic neuropathy",
+            "Leigh syndrome"
+          ]
+        },
+        "level2": {
+          "content": "Mitochondrial DNA (mtDNA) is a small circular genome inherited maternally. Each cell contains hundreds to thousands of mitochondria, each with multiple mtDNA copies. Heteroplasmy occurs when a mixture of normal and mutant mtDNA exists within cells. The proportion of mutant mtDNA (heteroplasmy level) often correlates with disease severity. During reproduction, the mutant mtDNA proportion transmitted to offspring is unpredictable, leading to variable expression within families.",
+          "inheritanceCharacteristics": [
+            "Maternal inheritance: all children of affected mother at risk",
+            "No paternal transmission of mtDNA",
+            "Heteroplasmy: mixture of normal and mutant mtDNA",
+            "Threshold effect: symptoms occur above certain mutation level",
+            "Variable expression in siblings due to heteroplasmy differences"
+          ],
+          "clinicalFeatures": [
+            "Multi-system involvement common",
+            "Energy-dependent tissues most affected",
+            "Progressive course typical",
+            "Variable severity even within families",
+            "May present at any age"
+          ]
+        },
+        "level3": {
+          "content": "Mitochondrial disease genetics involves complex genotype-phenotype relationships. The mitochondrial genetic bottleneck during oocyte development causes random shifts in heteroplasmy levels between generations. Tissue-specific heteroplasmy affects organ involvement. Primary mtDNA mutations differ from nuclear gene mutations affecting mitochondrial function. Diagnosis requires integration of clinical features, biochemistry, imaging, muscle biopsy, and genetic testing of both mtDNA and nuclear genes.",
+          "diagnosticApproach": [
+            "Clinical evaluation of multi-system involvement",
+            "Biochemical testing (lactate, pyruvate)",
+            "Imaging studies (MRI, MRS)",
+            "Muscle biopsy with respiratory chain analysis",
+            "Genetic testing: mtDNA sequencing, nuclear gene panels"
+          ],
+          "reproductiveOptions": [
+            "Prenatal diagnosis (limited by heteroplasmy variability)",
+            "Preimplantation genetic testing",
+            "Mitochondrial replacement therapy (where available)",
+            "Oocyte/embryo donation",
+            "Adoption"
+          ]
+        },
+        "level4": {
+          "content": "Advanced mitochondrial genetics addresses the complexities of heteroplasmy quantification, tissue distribution, and threshold effects. Nuclear genes encoding mitochondrial proteins follow Mendelian inheritance patterns but cause overlapping phenotypes. Next-generation sequencing enables comprehensive mtDNA analysis and heteroplasmy quantification. Mitochondrial replacement therapy (MRT) offers reproductive options but raises ethical considerations. Research addresses mechanisms of mtDNA segregation and therapeutic approaches.",
+          "advancedConcepts": [
+            "Heteroplasmy quantification methods and tissues",
+            "mtDNA copy number assessment",
+            "Nuclear-encoded mitochondrial disease genes",
+            "Mitochondrial dynamics and quality control",
+            "Somatic mtDNA mutations in aging and disease"
+          ],
+          "therapeuticApproaches": [
+            "Mitochondrial replacement therapy (spindle transfer, pronuclear transfer)",
+            "Gene therapy approaches for mtDNA mutations",
+            "Mitochondrial biogenesis enhancement",
+            "Heteroplasmy shifting strategies",
+            "Supportive and symptomatic management"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary mitochondrial medicine integrates advanced genomics, functional assays, and emerging therapies. Mitochondrial replacement therapy represents a significant reproductive option with ongoing ethical and regulatory considerations. Research addresses mechanisms of mitochondrial bottleneck, selection against mutant mtDNA, and gene editing approaches. Challenges include predicting phenotype from heteroplasmy, understanding tissue-specific vulnerability, and developing effective treatments for established disease.",
+          "researchFrontiers": [
+            "mtDNA editing technologies",
+            "Mechanisms of mtDNA segregation and selection",
+            "Tissue-specific heteroplasmy dynamics",
+            "Mitochondrial-nuclear genome interactions",
+            "Biomarker development for disease monitoring",
+            "Outcomes of mitochondrial replacement therapy"
+          ]
+        }
+      },
+      "multifactorial": {
+        "title": "Multifactorial (Complex) Inheritance",
+        "level1": {
+          "content": "Many common conditions like heart disease, diabetes, and some cancers are caused by a combination of multiple genes and environmental factors like diet and lifestyle. These conditions tend to run in families but do not follow simple inheritance patterns. Having a family history increases your risk but does not mean you will definitely develop the condition.",
+          "keyPoints": [
+            "Caused by multiple genes plus environment",
+            "Runs in families but unpredictably",
+            "Family history increases risk but does not guarantee disease",
+            "Lifestyle factors can modify risk",
+            "Common conditions often follow this pattern"
+          ],
+          "examples": [
+            "Heart disease",
+            "Type 2 diabetes",
+            "High blood pressure",
+            "Many common cancers",
+            "Neural tube defects",
+            "Cleft lip and palate"
+          ]
+        },
+        "level2": {
+          "content": "Multifactorial conditions result from the combined effects of multiple genetic variants (polygenic inheritance) and environmental factors. Each genetic variant contributes a small amount to overall risk. The liability threshold model explains why conditions cluster in families while not following Mendelian ratios. Risk to relatives depends on the number of affected family members, severity of disease, and closeness of relationship. Heritability estimates the proportion of disease variation attributable to genetics.",
+          "riskFactors": [
+            "Number of affected relatives increases risk",
+            "Closer relatives confer higher risk",
+            "Severe or early-onset cases suggest stronger genetic component",
+            "Environmental factors can trigger or prevent disease",
+            "Sex differences in prevalence affect risk calculations"
+          ],
+          "empiricRisks": [
+            "First-degree relatives: typically 2-5x population risk",
+            "Second-degree relatives: intermediate risk elevation",
+            "Risk decreases with genetic distance",
+            "Multiple affected relatives increase risk further"
+          ]
+        },
+        "level3": {
+          "content": "Polygenic risk scores (PRS) aggregate the effects of many common variants to estimate genetic predisposition. GWAS studies identify associated variants, though most individually have small effects. The omnigenic model suggests that gene regulatory networks spread disease effects across many genes. Clinical utility of PRS is emerging for conditions like coronary artery disease and breast cancer. Heritability estimates from twin and family studies inform the genetic contribution to disease.",
+          "polygenicRiskScores": [
+            "Aggregate effects of many common variants",
+            "Derived from genome-wide association studies",
+            "Expressed as risk relative to population average",
+            "Currently most useful at distribution extremes",
+            "Clinical implementation is evolving"
+          ],
+          "clinicalApplications": [
+            "CAD risk stratification for statin therapy",
+            "Breast cancer risk refinement with PRS",
+            "Type 2 diabetes risk assessment",
+            "Prostate cancer screening decisions",
+            "Combined with traditional risk factors"
+          ]
+        },
+        "level4": {
+          "content": "Advanced multifactorial genetics integrates polygenic scores with monogenic variants and clinical factors. PRS validation across diverse populations is essential given ascertainment bias in GWAS. Gene-environment interactions modify genetic risk (e.g., FTO variants and diet). Mendelian randomization uses genetic variants as instruments to infer causal relationships. Challenges include limited ancestry diversity in genetic studies and the complexity of interpreting aggregate genetic risk.",
+          "integrationApproaches": [
+            "PRS combined with monogenic variant results",
+            "Integration with clinical risk calculators",
+            "Gene-environment interaction modeling",
+            "Pathway and network-based risk aggregation",
+            "Multi-ancestry PRS development"
+          ],
+          "limitations": [
+            "Limited predictive value for individuals",
+            "Ancestry bias in current PRS",
+            "Unclear clinical thresholds for action",
+            "Missing heritability not captured",
+            "Gene-environment interactions underexplored"
+          ]
+        },
+        "level5": {
+          "content": "Contemporary complex trait genetics employs multi-omic integration, machine learning, and diverse population studies to improve risk prediction. Research addresses the biological mechanisms underlying GWAS signals, the contribution of rare variants to common diseases, and the development of ancestry-appropriate PRS. Ethical considerations include the responsible implementation of polygenic prediction, avoiding genetic determinism, and ensuring equitable access. The distinction between clinical utility and clinical validity guides implementation.",
+          "futureDirections": [
+            "Multi-omic integration for prediction",
+            "Diverse population genetic studies",
+            "Rare variant contribution to common disease",
+            "Mechanistic understanding of GWAS loci",
+            "Responsible clinical implementation of PRS",
+            "Health equity in genetic risk prediction"
+          ]
+        }
+      }
+    }
+  },
+  "pedigreeSymbols": {
+    "basic": {
+      "square": "Male",
+      "circle": "Female",
+      "diamond": "Sex unknown or unspecified",
+      "filledSymbol": "Affected individual",
+      "halfFilled": "Carrier (for recessive conditions)",
+      "dotInCenter": "Obligate carrier",
+      "slashThrough": "Deceased"
+    },
+    "relationships": {
+      "horizontalLine": "Mating/partnership",
+      "verticalLine": "Descent from parents to children",
+      "doubleLine": "Consanguineous relationship"
+    }
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "topic": "Vitamin B12 and Folate Deficiency Anemia",
+  "category": "condition",
+  "system": "hematology",
+  "contents": [
+    {
+      "id": "condition-b12-deficiency-anemia",
+      "type": "condition",
+      "name": "Vitamin B12 Deficiency Anemia",
+      "alternateNames": ["Cobalamin deficiency", "Pernicious anemia", "Megaloblastic anemia"],
+      "icdCode": "D51",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "Vitamin B12 deficiency happens when your body doesn't have enough of this vitamin to make healthy red blood cells and keep your nerves working properly.",
+          "explanation": "Vitamin B12 is a special nutrient found mainly in animal foods like meat, fish, eggs, and dairy. Your body needs it to make red blood cells and to keep your brain and nerves healthy. When you don't have enough B12, your bone marrow makes red blood cells that are too big and don't work well. This can make you feel very tired and weak. B12 deficiency can also cause numbness and tingling in your hands and feet, and problems with memory and thinking.",
+          "keyTerms": [
+            {"term": "vitamin B12", "definition": "A vitamin found in animal foods that your body needs for healthy blood and nerves"},
+            {"term": "nerves", "definition": "The wires of your body that send messages between your brain and other body parts"},
+            {"term": "bone marrow", "definition": "The soft, spongy tissue inside your bones that makes blood cells"}
+          ],
+          "analogies": ["B12 is like the supervisor in a factory (your bone marrow) - without it, the workers make blood cells the wrong size that don't work properly."],
+          "examples": ["A person who follows a strict vegan diet without B12 supplements may develop deficiency over several years."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "B12 deficiency causes megaloblastic anemia where red blood cells are abnormally large, and can also damage the nervous system causing neurological symptoms.",
+          "explanation": "B12 is essential for DNA synthesis. Without enough B12, cells cannot divide properly, and this especially affects rapidly dividing cells like those in bone marrow. The result is megaloblastic anemia - red blood cells become very large (macrocytic) with MCV often >100 fL. The most common causes are pernicious anemia (autoimmune destruction of stomach cells that make intrinsic factor needed for B12 absorption), poor dietary intake (vegans), malabsorption (gastric surgery, Crohn's disease), and certain medications (metformin, PPIs). Neurological symptoms include peripheral neuropathy (numbness, tingling), difficulty walking, memory problems, and even dementia if untreated. Blood tests show low B12, high MCV, and often elevated homocysteine and methylmalonic acid.",
+          "keyTerms": [
+            {"term": "megaloblastic anemia", "definition": "Anemia caused by impaired DNA synthesis, producing abnormally large red blood cells", "pronunciation": "meg-uh-loh-BLAS-tik"},
+            {"term": "intrinsic factor", "definition": "A protein made by stomach cells necessary for B12 absorption in the small intestine"},
+            {"term": "pernicious anemia", "definition": "An autoimmune condition where the body attacks cells that make intrinsic factor", "pronunciation": "per-NISH-us"},
+            {"term": "macrocytic", "definition": "Red blood cells larger than normal (MCV >100 fL)", "pronunciation": "mak-roh-SIT-ik"},
+            {"term": "peripheral neuropathy", "definition": "Damage to nerves outside the brain and spinal cord, causing numbness and tingling", "pronunciation": "noo-ROP-uh-thee"}
+          ],
+          "analogies": ["Intrinsic factor is like a key that unlocks the door for B12 to enter your body from the intestine."],
+          "examples": ["A person with pernicious anemia must receive B12 injections because they cannot absorb oral B12."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "B12 deficiency presents with megaloblastic anemia, often with pancytopenia and hypersegmented neutrophils, and subacute combined degeneration of the spinal cord.",
+          "explanation": "B12 serves as a cofactor for two enzymes: methionine synthase (converting homocysteine to methionine, essential for DNA synthesis) and methylmalonyl-CoA mutase (propionate metabolism). Deficiency impairs DNA synthesis causing megaloblastic changes in bone marrow with nuclear-cytoplasmic dyssynchrony, ineffective erythropoiesis, and intramedullary hemolysis (elevated LDH, indirect bilirubin). The peripheral smear shows macrocytosis, macro-ovalocytes, and hypersegmented neutrophils (>5 lobes diagnostic). Pancytopenia may occur with severe deficiency. Neurological manifestations include subacute combined degeneration (demyelination of posterior and lateral columns causing sensory ataxia, spasticity), peripheral neuropathy, and neuropsychiatric symptoms. Diagnosis: serum B12 <200 pg/mL is deficient; 200-400 pg/mL is borderline (check methylmalonic acid and homocysteine - both elevated in B12 deficiency). Anti-intrinsic factor antibodies are specific but not sensitive for pernicious anemia.",
+          "keyTerms": [
+            {"term": "hypersegmented neutrophils", "definition": "Neutrophils with 5+ nuclear lobes, characteristic of megaloblastic anemia"},
+            {"term": "subacute combined degeneration", "definition": "B12 deficiency-related demyelination affecting posterior and lateral spinal cord columns"},
+            {"term": "methylmalonic acid", "definition": "MMA - metabolite elevated specifically in B12 deficiency (not folate)", "pronunciation": "meth-il-mah-LON-ik"},
+            {"term": "homocysteine", "definition": "Amino acid elevated in both B12 and folate deficiency"},
+            {"term": "ineffective erythropoiesis", "definition": "Production of defective red cell precursors that die before maturation, causing hemolysis within bone marrow"}
+          ],
+          "clinicalNotes": "Treat B12 deficiency before folate or folate alone - folate can improve anemia but not neurological damage, which may become irreversible. Reticulocyte response typically within 7 days of initiating B12 replacement."
+        },
+        "4": {
+          "level": 4,
+          "summary": "B12 metabolism involves complex absorption pathways requiring gastric, pancreatic, and ileal function, with deficiency producing characteristic metabolic perturbations and potentially irreversible neurological sequelae.",
+          "explanation": "B12 absorption is a multi-step process: dietary B12 binds salivary R-binders (haptocorrins), pancreatic proteases release B12 in duodenum to bind intrinsic factor (IF), the IF-B12 complex is absorbed in terminal ileum via cubilin receptors. Body stores are large (2-5mg), so deficiency takes years to develop. Causes: pernicious anemia (anti-IF or anti-parietal cell antibodies), atrophic gastritis, gastrectomy, pancreatic insufficiency, ileal disease/resection, bacterial overgrowth (consume B12), fish tapeworm (Diphyllobothrium latum), nitrous oxide exposure (oxidizes B12). Diagnosis algorithm: low B12 (<200 pg/mL) with elevated MMA (>0.4 umol/L) and homocysteine confirms functional deficiency. Holotranscobalamin (active B12) is an early marker but not widely available. Treatment: IM cyanocobalamin 1000mcg daily x 7 days, then weekly x 4 weeks, then monthly. High-dose oral B12 (1000-2000mcg) can work even without IF via mass action absorption (1-2% passive absorption).",
+          "keyTerms": [
+            {"term": "cubilin", "definition": "Ileal receptor for intrinsic factor-B12 complex, mutations cause Imerslund-Grasbeck syndrome"},
+            {"term": "haptocorrin", "definition": "R-binder proteins in saliva and plasma that bind B12; plasma haptocorrin (transcobalamin I) carries most circulating B12 but is not biologically active"},
+            {"term": "holotranscobalamin", "definition": "B12 bound to transcobalamin II - the metabolically active form delivered to tissues"},
+            {"term": "nitrous oxide", "definition": "Anesthetic gas that irreversibly oxidizes B12, causing acute neurological symptoms in those with borderline B12 stores"},
+            {"term": "Schilling test", "definition": "Historical test for B12 absorption using radiolabeled B12; largely replaced by serum markers"}
+          ],
+          "clinicalNotes": "Monitor potassium during B12 repletion - rapid erythropoiesis can cause severe hypokalemia. Neurological recovery may take months and may be incomplete if treatment delayed. MMA and homocysteine should normalize within 2 weeks of treatment."
+        },
+        "5": {
+          "level": 5,
+          "summary": "B12 deficiency requires understanding of cobalamin biochemistry, diagnostic nuances in borderline cases, and recognition of rare genetic causes including transcobalamin deficiency and inborn errors of metabolism.",
+          "explanation": "B12 exists as methylcobalamin (cofactor for methionine synthase) and adenosylcobalamin (cofactor for methylmalonyl-CoA mutase). Methionine synthase deficiency impairs methylation reactions essential for myelin synthesis (explaining neurological manifestations) and DNA synthesis (explaining megaloblastic changes). Functional B12 deficiency occurs with normal B12 levels but elevated MMA/homocysteine - seen in renal insufficiency, genetic transcobalamin II deficiency, or complementation group disorders (CblA-G). Rare causes: Imerslund-Grasbeck syndrome (cubilin mutations), transcobalamin II deficiency (presents in infancy despite normal B12 levels), and inborn errors of intracellular cobalamin metabolism. Diagnostic pearls: in pernicious anemia, elevated gastrin and low pepsinogen I (atrophic gastritis markers) support diagnosis; anti-IF antibodies are 50-70% sensitive but highly specific; anti-parietal cell antibodies are 80% sensitive but less specific. Pernicious anemia increases gastric carcinoid and adenocarcinoma risk - surveillance endoscopy may be warranted. Monitoring: reticulocyte count at 1 week, CBC at 1-2 months, MMA/homocysteine to confirm resolution, then periodic B12 levels if on replacement.",
+          "keyTerms": [
+            {"term": "complementation groups", "definition": "Genetic classifications (CblA-G) for inherited disorders of intracellular cobalamin metabolism"},
+            {"term": "methylcobalamin", "definition": "Active B12 form serving as cofactor for methionine synthase in cytoplasm"},
+            {"term": "adenosylcobalamin", "definition": "Active B12 form serving as cofactor for methylmalonyl-CoA mutase in mitochondria"},
+            {"term": "Imerslund-Grasbeck syndrome", "definition": "Autosomal recessive disorder with selective B12 malabsorption due to cubilin or amnionless mutations"},
+            {"term": "TCII deficiency", "definition": "Transcobalamin II deficiency - presents in infancy with megaloblastic anemia despite normal B12 levels"}
+          ],
+          "clinicalNotes": "In suspected functional deficiency with normal B12, trial of B12 replacement with monitoring of MMA is reasonable. Consider genetic testing in pediatric cases with unexplained B12-responsive abnormalities. Lifelong treatment required for pernicious anemia."
+        }
+      },
+      "media": [],
+      "citations": [
+        {
+          "id": "green-2017",
+          "type": "article",
+          "title": "Vitamin B12 deficiency",
+          "authors": ["Green R", "Allen LH", "Bjorke-Monsen AL", "et al"],
+          "source": "Nat Rev Dis Primers",
+          "year": 2017
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "condition-folate-deficiency", "targetType": "condition", "relationship": "related", "label": "Folate Deficiency"},
+        {"targetId": "condition-iron-deficiency-anemia", "targetType": "condition", "relationship": "differential", "label": "Iron Deficiency Anemia"},
+        {"targetId": "test-cbc-interpretation", "targetType": "test", "relationship": "diagnostic", "label": "CBC Interpretation"}
+      ],
+      "tags": {
+        "systems": ["hematology", "neurology"],
+        "topics": ["anemia", "B12 deficiency", "macrocytic anemia", "megaloblastic"],
+        "keywords": ["B12", "cobalamin", "pernicious anemia", "megaloblastic", "macrocytic"],
+        "clinicalRelevance": "critical",
+        "patientEducation": true
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "condition-folate-deficiency-anemia",
+      "type": "condition",
+      "name": "Folate Deficiency Anemia",
+      "alternateNames": ["Folic acid deficiency", "Vitamin B9 deficiency"],
+      "icdCode": "D52",
+      "levels": {
+        "1": {
+          "level": 1,
+          "summary": "Folate deficiency happens when your body doesn't have enough of this vitamin to make healthy red blood cells.",
+          "explanation": "Folate (also called folic acid or vitamin B9) is a vitamin found in leafy green vegetables, fruits, beans, and fortified foods. Your body needs folate to make new cells, including red blood cells. When you don't have enough folate, your bone marrow makes red blood cells that are too big and don't work well. This is similar to what happens with B12 deficiency. Unlike B12, your body can run out of folate within a few months if you're not getting enough from food.",
+          "keyTerms": [
+            {"term": "folate", "definition": "A B-vitamin (B9) needed to make new cells; found in leafy greens, beans, and fortified foods"},
+            {"term": "folic acid", "definition": "The synthetic form of folate found in supplements and fortified foods"},
+            {"term": "fortified foods", "definition": "Foods that have vitamins added to them, like breakfast cereals with added folic acid"}
+          ],
+          "analogies": ["Folate is like the instructions your body uses to build new cells - without the instructions, the cells come out wrong."],
+          "examples": ["Eating more spinach, beans, and fortified cereals can help prevent folate deficiency."]
+        },
+        "2": {
+          "level": 2,
+          "summary": "Folate deficiency causes megaloblastic anemia similar to B12 deficiency but typically without neurological symptoms, and develops more rapidly due to limited body stores.",
+          "explanation": "Folate is essential for DNA synthesis, specifically for making thymine (a DNA building block). Unlike B12 (years of stores), body folate stores last only 2-4 months. Common causes include poor diet (alcoholism, elderly, poverty), malabsorption (celiac disease, tropical sprue), increased requirements (pregnancy, hemolytic anemia, cancer), and medications (methotrexate, trimethoprim, phenytoin). Blood tests show low serum folate (<3 ng/mL), high MCV, and elevated homocysteine, but normal methylmalonic acid (unlike B12 deficiency). Red cell folate better reflects tissue stores but is rarely needed. Treatment is simple: folic acid 1-5mg daily orally. Response is rapid with reticulocytosis within 7 days.",
+          "keyTerms": [
+            {"term": "serum folate", "definition": "Blood level of folate; can fluctuate with recent diet; <3 ng/mL suggests deficiency"},
+            {"term": "red cell folate", "definition": "Folate content within red blood cells; reflects stores over past 2-3 months"},
+            {"term": "homocysteine", "definition": "Amino acid elevated in both folate and B12 deficiency"},
+            {"term": "methylmalonic acid", "definition": "Normal in folate deficiency but elevated in B12 deficiency - helps distinguish the two"}
+          ],
+          "analogies": ["Measuring red cell folate is like checking your savings account balance, while serum folate is like checking what's in your wallet right now."],
+          "examples": ["A pregnant woman needs extra folate - deficiency during pregnancy increases risk of neural tube defects in the baby."]
+        },
+        "3": {
+          "level": 3,
+          "summary": "Folate deficiency produces megaloblastic anemia indistinguishable from B12 deficiency hematologically, but is differentiated by normal MMA and lack of neurological manifestations.",
+          "explanation": "Folate as tetrahydrofolate (THF) carries one-carbon units essential for purine and thymidine synthesis. The 'folate trap' hypothesis explains B12-folate interaction: B12 is required to regenerate THF from methylTHF via methionine synthase. Thus, B12 deficiency functionally traps folate, explaining overlapping hematological features. Causes systematically: inadequate intake (alcoholism most common, also anorexia, elderly institutionalized), malabsorption (celiac, tropical sprue, IBD, short bowel), increased utilization (pregnancy, lactation, hemolysis, exfoliative dermatitis, malignancy), and drug interference (methotrexate inhibits dihydrofolate reductase, phenytoin impairs absorption, sulfasalazine). Laboratory: serum folate <3 ng/mL or RBC folate <140 ng/mL, elevated homocysteine, normal MMA. Peripheral smear shows megaloblastic features identical to B12 deficiency. Treatment: folic acid 1-5mg PO daily; response dramatic with reticulocytosis peaking day 7-10.",
+          "keyTerms": [
+            {"term": "tetrahydrofolate", "definition": "THF - the active reduced form of folate that carries one-carbon units", "pronunciation": "tet-ra-hy-droh-FOH-layt"},
+            {"term": "folate trap", "definition": "Hypothesis that B12 deficiency traps folate as methylTHF, unavailable for other reactions"},
+            {"term": "dihydrofolate reductase", "definition": "Enzyme that regenerates THF; inhibited by methotrexate and trimethoprim"},
+            {"term": "one-carbon metabolism", "definition": "Metabolic pathway using folate to transfer single carbon units for nucleotide synthesis"},
+            {"term": "folinic acid", "definition": "Leucovorin - active folate form that bypasses DHFR blockade; used as rescue after methotrexate"}
+          ],
+          "clinicalNotes": "Critical to measure B12 before treating presumed folate deficiency - folate supplementation may mask B12 deficiency hematologically while allowing irreversible neurological damage to progress."
+        },
+        "4": {
+          "level": 4,
+          "summary": "Folate metabolism involves polyglutamate formation for cellular retention, enterohepatic circulation, and complex interplay with methionine cycle and B12, with MTHFR polymorphisms affecting clinical phenotype.",
+          "explanation": "Dietary folate as polyglutamates is hydrolyzed by intestinal conjugase, absorbed in jejunum, converted to methylTHF in intestinal cells, and circulates bound to proteins. Cells convert methylTHF to polyglutamate forms (retained intracellularly). Folate undergoes significant enterohepatic circulation. MTHFR (methylenetetrahydrofolate reductase) converts 5,10-methyleneTHF to 5-methylTHF; the C677T polymorphism reduces enzyme activity by 35% (heterozygous) to 70% (homozygous), causing elevated homocysteine and possibly increased thrombosis and neural tube defect risk. Methotrexate inhibits dihydrofolate reductase; leucovorin rescue provides active folate downstream of this block. Folate antagonists (trimethoprim, pyrimethamine, proguanil) inhibit microbial DHFR. Probenecid blocks renal tubular folate reabsorption. Alcohol impairs folate absorption, hepatic storage, and enterohepatic circulation. Drug-nutrient interactions: valproate, carbamazepine, and phenytoin lower folate via multiple mechanisms.",
+          "keyTerms": [
+            {"term": "MTHFR", "definition": "Methylenetetrahydrofolate reductase - enzyme converting folate forms; common polymorphisms affect activity", "pronunciation": "meth-uh-leen-tet-ra-hy-droh-FOH-layt re-DUK-tays"},
+            {"term": "C677T polymorphism", "definition": "Common MTHFR variant (10-15% homozygous in Caucasians) causing reduced enzyme activity"},
+            {"term": "polyglutamation", "definition": "Addition of glutamate residues to folate, creating forms retained within cells"},
+            {"term": "enterohepatic circulation", "definition": "Recycling of folate through bile excretion and intestinal reabsorption"},
+            {"term": "leucovorin", "definition": "5-formylTHF (folinic acid) - active folate used to rescue methotrexate toxicity"}
+          ],
+          "clinicalNotes": "Folic acid supplementation 400-800mcg daily recommended for all women of childbearing age to prevent neural tube defects. Higher doses (4mg) for women with prior affected pregnancy. Monitor folate in chronic hemolysis as turnover depletes stores."
+        },
+        "5": {
+          "level": 5,
+          "summary": "Folate deficiency management requires understanding of drug-folate interactions, rare hereditary disorders of folate transport and metabolism, and the complex relationship between folate supplementation, B12 status, and cancer risk.",
+          "explanation": "Hereditary folate malabsorption (SLC46A1 mutations affecting proton-coupled folate transporter) presents with megaloblastic anemia and seizures in infancy - requires parenteral folinic acid and high-dose oral folate. Cerebral folate deficiency (anti-folate receptor autoantibodies or FOLR1 mutations) presents with neurological deterioration despite normal blood folate - diagnosis requires CSF folate measurement, treatment with high-dose folinic acid. The B12-folate-cancer controversy: observational data suggested folic acid fortification/supplementation might promote cancer progression, though large meta-analyses are reassuring for standard doses. Dual deficiency (B12 + folate) is common in alcoholism and malabsorption syndromes - replace both. Diagnostic approach in megaloblastic anemia: low B12 with high MMA = B12 deficiency; low folate with high homocysteine but normal MMA = folate deficiency; both low = dual deficiency or B12 deficiency trapping folate. In renal failure, homocysteine accumulates regardless of vitamin status, reducing its diagnostic utility. Rare: dihydrofolate reductase deficiency (megaloblastic anemia responsive to folinic acid but not folic acid).",
+          "keyTerms": [
+            {"term": "hereditary folate malabsorption", "definition": "Autosomal recessive disorder with PCFT (SLC46A1) mutations causing impaired intestinal folate absorption"},
+            {"term": "cerebral folate deficiency", "definition": "Reduced CSF folate due to anti-folate receptor antibodies or FOLR1 mutations, causing neurological disease despite normal serum folate"},
+            {"term": "proton-coupled folate transporter", "definition": "PCFT/SLC46A1 - primary intestinal folate transporter; also present at blood-brain barrier"},
+            {"term": "folate receptor alpha", "definition": "FOLR1 - receptor mediating folate transport across blood-brain barrier; autoantibodies or mutations cause cerebral folate deficiency"},
+            {"term": "methylation", "definition": "Transfer of methyl groups essential for DNA regulation, neurotransmitter synthesis, and countless other processes"}
+          ],
+          "clinicalNotes": "In unexplained neurological disease with normal serum folate/B12, consider CSF folate measurement. MTHFR genotyping is not routinely recommended despite widespread testing - clinical utility remains debated. Metformin can impair both B12 and folate - monitor in long-term users."
+        }
+      },
+      "media": [],
+      "citations": [
+        {
+          "id": "bailey-2015",
+          "type": "article",
+          "title": "Folate",
+          "authors": ["Bailey LB", "Stover PJ", "McNulty H", "et al"],
+          "source": "Adv Nutr",
+          "year": 2015
+        }
+      ],
+      "crossReferences": [
+        {"targetId": "condition-b12-deficiency-anemia", "targetType": "condition", "relationship": "related", "label": "B12 Deficiency"},
+        {"targetId": "condition-iron-deficiency-anemia", "targetType": "condition", "relationship": "differential", "label": "Iron Deficiency Anemia"}
+      ],
+      "tags": {
+        "systems": ["hematology"],
+        "topics": ["anemia", "folate deficiency", "macrocytic anemia", "megaloblastic"],
+        "keywords": ["folate", "folic acid", "B9", "megaloblastic", "macrocytic", "MTHFR"],
+        "clinicalRelevance": "high",
+        "patientEducation": true
+      },
+      "createdAt": "2026-01-24T00:00:00.000Z",
+      "updatedAt": "2026-01-24T00:00:00.000Z",
+      "version": 1,
+      "status": "published"
+    }
+  ]
+}

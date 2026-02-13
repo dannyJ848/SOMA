@@ -1,0 +1,403 @@
+import { WomensHealthContent } from '../types';
+
+export const premenstrualDisorders: LegacyWomensHealthContent = {
+  id: 'condition-premenstrual-disorders',
+  type: 'condition',
+  name: 'Premenstrual Disorders',
+  alternateNames: ['PMS', 'PMDD', 'Premenstrual syndrome', 'Premenstrual dysphoric disorder'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Premenstrual syndrome (PMS) and premenstrual dysphoric disorder (PMDD) cause physical and emotional symptoms in the week or two before your period that improve once your period starts.',
+      explanation: `**What is PMS?**
+PMS is a group of symptoms that many women experience before their period. They usually go away within a few days of your period starting.
+
+**Common PMS Symptoms:**
+- Bloating
+- Breast tenderness
+- Headaches
+- Mood swings
+- Irritability
+- Fatigue
+- Food cravings
+- Trouble sleeping
+
+**What is PMDD?**
+PMDD is a more severe form of PMS that significantly affects daily life. It includes more intense emotional symptoms.
+
+**PMDD Symptoms:**
+- Severe mood swings
+- Depression or hopelessness
+- Intense anger or irritability
+- Anxiety or tension
+- Difficulty concentrating
+- Feeling out of control
+
+**Key Feature:**
+- Symptoms happen in the 1-2 weeks BEFORE your period
+- They go away within a few days of your period starting
+- There should be a symptom-free time during your cycle
+
+**Treatment Options:**
+- Lifestyle changes (exercise, diet, sleep)
+- Over-the-counter pain relievers
+- Birth control pills (for some women)
+- Antidepressants (for PMDD)`,
+      keyTerms: [
+        { term: 'PMS', definition: 'Premenstrual syndrome - physical and emotional symptoms before your period' },
+        { term: 'PMDD', definition: 'Premenstrual dysphoric disorder - a severe form of PMS affecting mood' },
+        { term: 'luteal phase', definition: 'The second half of your menstrual cycle, after ovulation' },
+      ],
+      analogies: ['Think of PMS like a wave that comes before your period - it builds up, peaks, then recedes when your period arrives.'],
+      examples: ['Feeling unusually tearful and having chocolate cravings the week before your period', 'Having conflicts at work that only seem to happen before your period'],
+    },
+    2: {
+      level: 2,
+      summary: 'Premenstrual syndrome encompasses physical and psychological symptoms in the luteal phase, while PMDD is a severe form with predominant mood symptoms that meets specific DSM-5 criteria and significantly impairs functioning.',
+      explanation: `**PMS Criteria:**
+- At least one affective and one somatic symptom
+- Luteal phase (last 2 weeks of cycle)
+- Relief within a few days of menses
+- Affects work, relationships, or activities
+- Confirmed by 2 cycles of prospective charting
+
+*Affective Symptoms:*
+- Irritability
+- Depression
+- Anxiety
+- Mood lability
+- Confusion
+
+*Somatic Symptoms:*
+- Bloating
+- Breast tenderness
+- Headache
+- Swelling
+- Weight gain
+
+**PMDD Diagnostic Criteria (DSM-5):**
+
+*Required:*
+- 5+ symptoms present in final week before menses
+- Symptoms improve within a few days of menses onset
+- Minimal or absent in week after menses
+- At least one mood symptom
+
+*Core Symptoms (≥1 required):*
+1. Marked affective lability
+2. Marked irritability or anger
+3. Markedly depressed mood
+4. Marked anxiety or tension
+
+*Additional Symptoms:*
+- Decreased interest in usual activities
+- Difficulty concentrating
+- Lethargy
+- Appetite changes
+- Sleep disturbance
+- Feeling overwhelmed
+- Physical symptoms
+
+**Prevalence:**
+- PMS: 30-40% of women
+- PMDD: 3-8% of women
+- Symptoms typically begin in mid-20s
+
+**Prospective Symptom Tracking:**
+- Required for diagnosis
+- Daily rating scale for 2 cycles
+- Distinguishes from other mood disorders
+- Confirms luteal phase pattern`,
+      keyTerms: [
+        { term: 'prospective charting', definition: 'Daily symptom tracking over 2+ cycles to confirm timing pattern' },
+        { term: 'affective lability', definition: 'Rapid mood changes, tearfulness, or sensitivity to rejection' },
+        { term: 'somatic symptoms', definition: 'Physical symptoms like bloating, breast tenderness, headache' },
+        { term: 'luteal phase', definition: 'The 14-day period between ovulation and menstruation' },
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Premenstrual disorders result from abnormal sensitivity to normal hormonal fluctuations, with management including lifestyle modifications, SSRIs (which can be used continuously or luteal-phase only), and hormonal therapies to eliminate ovulation.',
+      explanation: `**Pathophysiology:**
+
+*Not Hormone Abnormality:*
+- Hormone levels are normal
+- Abnormal CNS sensitivity to normal fluctuations
+- Particularly to progesterone and its metabolite allopregnanolone
+
+*Serotonin Hypothesis:*
+- Reduced serotonergic activity in luteal phase
+- SSRIs effective even with intermittent dosing
+- Rapid response (within 1-2 days)
+
+*Neuroactive Steroids:*
+- Allopregnanolone is GABA modulator
+- Fluctuations affect mood-regulating circuits
+
+**Evaluation:**
+
+*Prospective Symptom Tracking:*
+- Daily Record of Severity of Problems (DRSP)
+- At least 2 cycles
+- 30% increase in symptoms in luteal phase
+- Confirms timing pattern
+
+*Exclude Other Conditions:*
+- Major depressive disorder
+- Anxiety disorders
+- Thyroid disease
+- Perimenopause
+- Medical conditions exacerbated by menses
+
+**Treatment - Stepwise Approach:**
+
+*Level 1 - Lifestyle:*
+- Regular exercise (aerobic)
+- Dietary modifications (complex carbs, limit salt, caffeine, alcohol)
+- Sleep hygiene
+- Stress management
+- Calcium 1000-1200 mg/day
+
+*Level 2 - Supplements:*
+- Calcium (evidence-based)
+- Vitamin B6 (up to 100 mg/day)
+- Chasteberry (Vitex)
+- Limited evidence for evening primrose, magnesium
+
+*Level 3 - Pharmacotherapy:*
+- SSRIs (first-line for PMDD)
+- Continuous or luteal-phase dosing
+- Response within 1-2 cycles
+
+*Level 4 - Hormonal:*
+- Combined oral contraceptives (24/4 regimen)
+- GnRH agonists (with add-back for long-term)`,
+      keyTerms: [
+        { term: 'DRSP', definition: 'Daily Record of Severity of Problems; validated PMDD symptom tracking tool' },
+        { term: 'luteal-phase dosing', definition: 'Taking medication only during the 2 weeks before menses' },
+        { term: 'allopregnanolone', definition: 'Progesterone metabolite that modulates GABA receptors' },
+        { term: 'Vitex', definition: 'Chasteberry; herbal supplement with some evidence for PMS' },
+      ],
+      clinicalNotes: 'SSRIs work quickly in PMDD (1-2 days) unlike in major depression (2-4 weeks), supporting a different mechanism. Yaz (drospirenone/EE) is FDA-approved for PMDD. Luteal-phase SSRI dosing is effective and reduces side effect burden.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced PMDD management addresses treatment-resistant cases, perimenopause-related symptom changes, comorbidities, and the role of surgical menopause for severe refractory cases.',
+      explanation: `**SSRI Details:**
+
+*Evidence-Based Options:*
+- Fluoxetine 20 mg
+- Sertraline 50-150 mg
+- Paroxetine 10-30 mg
+- Escitalopram 10-20 mg
+
+*Dosing Strategies:*
+- Continuous: Throughout cycle
+- Luteal: Start at ovulation or symptom onset
+- Symptom-onset: Only when symptoms begin
+
+*Treatment Failure:*
+- Try different SSRI
+- Increase dose
+- Switch to continuous dosing
+- Add hormonal therapy
+
+**Hormonal Therapies:**
+
+*Oral Contraceptives:*
+- Yaz (drospirenone/EE 20 mcg): FDA-approved for PMDD
+- 24/4 regimen better than 21/7
+- Extended or continuous cycling may help
+- Not effective for all women
+
+*GnRH Agonists:*
+- Medical oophorectomy
+- Very effective but significant side effects
+- Requires add-back therapy (estrogen + progestin)
+- Reserved for severe, refractory cases
+
+*Surgical Oophorectomy:*
+- Definitive treatment
+- Only for severe refractory PMDD
+- Requires trial of GnRH agonist first
+- Long-term HRT needed if premenopausal
+
+**Comorbidities:**
+
+*Major Depression:*
+- May coexist with PMDD
+- PMDD symptoms worsen other mood disorders
+- Continuous SSRI may be needed
+- May need higher doses
+
+*Anxiety Disorders:*
+- Common comorbidity
+- Cognitive behavioral therapy helpful
+- Treat both conditions
+
+**Perimenopause:**
+- PMDD symptoms often worsen
+- Irregular cycles complicate treatment
+- Consider continuous hormonal therapy
+- May improve after menopause
+
+**Emerging Treatments:**
+
+*Neurosteroid Modulators:*
+- Sepranolone (PMDD-specific development)
+- Blocks allopregnanolone effects
+- Phase 2/3 trials
+
+*Esketamine:*
+- Rapid antidepressant
+- Potential for acute symptom relief
+- Research ongoing`,
+      keyTerms: [
+        { term: 'symptom-onset dosing', definition: 'Starting SSRI only when symptoms begin, typically 3-5 days before menses' },
+        { term: 'add-back therapy', definition: 'Hormone replacement given with GnRH agonists to prevent menopausal symptoms' },
+        { term: 'sepranolone', definition: 'Investigational neurosteroid modulator specifically targeting PMDD' },
+        { term: 'medical oophorectomy', definition: 'Using medication (GnRH agonist) to suppress ovarian function' },
+      ],
+      clinicalNotes: 'Before considering surgical oophorectomy, confirm response to GnRH agonist trial. Bilateral oophorectomy in young women requires lifelong hormone therapy and has long-term health implications. Perimenopause worsens PMDD for many women.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert PMDD care involves understanding the neurobiology of hormonal sensitivity, addressing diagnostic challenges, implementing multidisciplinary approaches, and advocating for recognition of PMDD as a legitimate medical condition.',
+      explanation: `**Neurobiology Advances:**
+
+*Allopregnanolone Sensitivity:*
+- Normal hormone levels, abnormal response
+- GABA-A receptor modulation
+- Rapid mood regulation effects
+- Target for novel therapies
+
+*Genetic Factors:*
+- ESC/E(Z) gene complex
+- Affects hormone-sensitive gene expression
+- May explain individual vulnerability
+
+*Inflammatory Markers:*
+- Elevated inflammatory cytokines
+- May contribute to symptoms
+- Research target
+
+**Diagnostic Challenges:**
+
+*Overlapping Conditions:*
+- Premenstrual exacerbation of underlying disorder
+- Major depression with premenstrual worsening
+- Bipolar disorder
+- Borderline personality disorder
+
+*Key Differentiators:*
+- Symptom-free interval (follicular phase) in PMDD
+- Prospective charting essential
+- May have comorbid conditions treated differently
+
+**Validation and Advocacy:**
+
+*Historical Dismissal:*
+- "It's just PMS"
+- Symptoms minimized
+- Lack of research funding
+- Gender bias in medicine
+
+*Current Recognition:*
+- DSM-5 diagnosis
+- FDA-approved treatments
+- Growing research base
+- Patient advocacy organizations
+
+**Multidisciplinary Care:**
+
+*Team Approach:*
+- Gynecology
+- Psychiatry
+- Primary care
+- Psychology
+- Nutrition
+
+*Patient Education:*
+- Validate experience
+- Explain neurobiology
+- Discuss treatment options
+- Set realistic expectations
+
+**Quality of Life Impact:**
+
+*Documented Effects:*
+- Relationship disruption
+- Work productivity loss
+- Suicidal ideation (20% of severe PMDD)
+- Quality of life comparable to major depression
+
+*Addressing Impact:*
+- Workplace accommodations
+- Relationship counseling
+- Safety planning if needed
+- Support groups
+
+**Research Priorities:**
+- Biomarkers for diagnosis
+- Predictors of treatment response
+- Novel therapeutic targets
+- Prevention strategies
+
+**Patient-Centered Communication:**
+
+*Key Messages:*
+- "This is a real medical condition"
+- "It's treatable"
+- "Your symptoms are valid"
+- "We will work together to find what helps"
+
+*Shared Decision-Making:*
+- Lifestyle vs. medication
+- Continuous vs. intermittent dosing
+- Hormonal approaches
+- Fertility considerations`,
+      keyTerms: [
+        { term: 'premenstrual exacerbation', definition: 'Worsening of an underlying disorder premenstrually, distinct from PMDD' },
+        { term: 'ESC/E(Z) complex', definition: 'Gene complex affecting hormone sensitivity, implicated in PMDD' },
+        { term: 'symptom-free interval', definition: 'Period during follicular phase with minimal or no symptoms; key diagnostic feature' },
+        { term: 'gender bias', definition: 'Historical tendency to dismiss or minimize women\'s health conditions' },
+      ],
+      clinicalNotes: 'PMDD is associated with suicidal ideation in 20% of patients - assess safety. Validation of symptoms is therapeutic. The distinction between PMDD and premenstrual exacerbation of another disorder affects treatment approach.',
+    },
+  },
+
+  media: [],
+  citations: [
+    {
+      id: 'acog-premenstrual-pb',
+      type: 'article',
+      title: 'ACOG Practice Bulletin: Premenstrual Syndrome',
+      source: 'American College of Obstetricians and Gynecologists',
+      license: 'Copyright ACOG',
+    },
+    {
+      id: 'dsm-5-pmdd',
+      type: 'textbook',
+      title: 'DSM-5: Premenstrual Dysphoric Disorder',
+      source: 'American Psychiatric Association',
+      license: 'Copyright APA',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'concept-menstrual-cycle-explained', targetType: 'concept', relationship: 'related', label: 'Menstrual Cycle' },
+    { targetId: 'concept-postpartum-depression', targetType: 'concept', relationship: 'related', label: 'Postpartum Depression' },
+    { targetId: 'concept-perimenopause-mood-changes', targetType: 'concept', relationship: 'related', label: 'Perimenopause Mood' },
+  ],
+  tags: {
+    systems: ['nervous', 'reproductive'],
+    topics: ['womens-health', 'patient-education', 'mental-health', 'gynecology'],
+    keywords: ['PMS', 'PMDD', 'premenstrual syndrome', 'mood symptoms', 'luteal phase'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn', 'psychiatry'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

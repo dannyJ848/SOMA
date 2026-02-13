@@ -1,0 +1,118 @@
+{
+  "id": "concept-proteins",
+  "type": "concept",
+  "name": "Proteins",
+  "alternateNames": ["Dietary Protein", "Amino Acids", "Polypeptides"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Proteins are nutrients found in foods like meat, eggs, and beans that help your body build and repair muscles, skin, and other parts.",
+      "explanation": "Proteins are like building blocks for your body! Every part of you - your muscles, skin, hair, and even your blood - is made partly from protein. When you eat protein foods like chicken, fish, eggs, beans, or nuts, your body breaks them down into tiny pieces called amino acids. Then your body uses these amino acids like Lego blocks to build whatever it needs.\n\nYour body can make some amino acids on its own, but there are 9 special ones called 'essential amino acids' that you MUST get from food. That's why eating protein every day is so important!\n\n**Good protein foods include:**\n- Meat, chicken, and fish\n- Eggs\n- Milk, cheese, and yogurt\n- Beans, lentils, and nuts\n- Tofu and soy foods\n\nProtein also helps you feel full after eating and gives you energy (4 calories per gram, same as carbs). When you're growing, exercising, or healing from an injury, your body needs extra protein to do its work.",
+      "keyTerms": [
+        { "term": "amino acids", "definition": "The tiny building blocks that make up proteins - like Lego pieces that your body puts together" },
+        { "term": "essential amino acids", "definition": "Special amino acids your body cannot make, so you must eat them in food" },
+        { "term": "complete protein", "definition": "A food that has all the essential amino acids your body needs (like meat, eggs, or milk)" }
+      ],
+      "analogies": ["Proteins are like Lego blocks - your body takes them apart and rebuilds them into muscles, skin, and other body parts.", "Eating protein is like giving your body a repair kit to fix and build new parts."],
+      "examples": ["When you exercise and your muscles get sore, protein helps repair and strengthen them.", "Your fingernails grow because your body uses protein to build them."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Proteins are complex molecules made of amino acid chains that provide 4 kcal/gram, serve structural and functional roles, and must include essential amino acids from dietary sources.",
+      "explanation": "**Protein Structure**:\nProteins are polymers of amino acids linked by peptide bonds. Each amino acid has an amino group (NH2), carboxyl group (COOH), and unique side chain (R group). Protein structure includes:\n- Primary: Amino acid sequence\n- Secondary: Alpha helices, beta sheets (hydrogen bonding)\n- Tertiary: 3D folding\n- Quaternary: Multiple subunit assembly\n\n**Amino Acid Classification**:\n- *Essential (9)*: Must be obtained from diet - histidine, isoleucine, leucine, lysine, methionine, phenylalanine, threonine, tryptophan, valine\n- *Nonessential (11)*: Body can synthesize - alanine, asparagine, aspartic acid, glutamic acid, serine, etc.\n- *Conditionally essential*: Required in certain conditions (arginine in growth, glutamine in illness)\n\n**Complete vs Incomplete Proteins**:\n- Complete proteins contain all essential amino acids in adequate amounts (animal sources: meat, fish, eggs, dairy; plant: soy, quinoa)\n- Incomplete proteins lack or are low in one or more essential amino acids (most plant sources)\n- Complementary proteins: combining incomplete proteins to provide all essential amino acids (rice + beans)\n\n**Digestion and Absorption**:\n1. Stomach: HCl denatures proteins; pepsin begins breakdown\n2. Small intestine: Pancreatic proteases (trypsin, chymotrypsin, carboxypeptidase) continue digestion\n3. Brush border peptidases complete breakdown to amino acids and small peptides\n4. Absorption via amino acid transporters and peptide transporters (PepT1)",
+      "keyTerms": [
+        { "term": "peptide bond", "definition": "The chemical bond linking amino acids together in a protein chain; formed by condensation reaction", "pronunciation": "PEP-tide" },
+        { "term": "complete protein", "definition": "A protein source containing all nine essential amino acids in adequate amounts for human needs" },
+        { "term": "biological value", "definition": "Measure of how efficiently dietary protein is converted to body protein; eggs have highest BV (~100)" }
+      ],
+      "analogies": ["Essential amino acids are like ingredients you can only buy at the store - your body's kitchen can't make them.", "Combining rice and beans is like having two incomplete puzzle sets that together make a complete picture."],
+      "examples": ["Eggs have a biological value of 100, making them the reference standard for protein quality.", "Vegetarians can meet protein needs by eating varied plant proteins throughout the day (grains, legumes, nuts)."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Protein metabolism involves regulated amino acid catabolism, nitrogen balance, and protein turnover, with requirements determined by obligatory nitrogen losses and adjusted for factors affecting utilization.",
+      "explanation": "**Protein Digestion Biochemistry**:\nGastric pepsin (optimum pH 2) cleaves after aromatic amino acids. Pancreatic zymogens activated in duodenum: enterokinase activates trypsinogen → trypsin, which activates chymotrypsinogen, procarboxypeptidase, proelastase. Endopeptidases (trypsin, chymotrypsin) cleave internal bonds; exopeptidases (carboxypeptidase) cleave terminal residues.\n\n**Amino Acid Metabolism**:\n- *Transamination*: Transfer of amino group to α-ketoglutarate, forming glutamate (requires PLP/vitamin B6)\n- *Oxidative deamination*: Glutamate → α-ketoglutarate + NH4+ (glutamate dehydrogenase)\n- *Urea cycle*: Hepatic pathway converting ammonia to urea for excretion\n- Carbon skeletons enter TCA cycle as glucogenic or ketogenic substrates\n\n**Protein Quality Metrics**:\n- Protein Digestibility-Corrected Amino Acid Score (PDCAAS): Reference standard; corrects for digestibility; scale 0-1.0 (truncated)\n- Digestible Indispensable Amino Acid Score (DIAAS): Newer method using ileal digestibility; allows scores >100; preferred by FAO\n- Limiting amino acid: Essential amino acid present in lowest amount relative to requirements (lysine in grains, methionine in legumes)\n\n**Nitrogen Balance**:\n- Positive: Intake > output (growth, recovery, anabolism)\n- Equilibrium: Intake = output (maintenance)\n- Negative: Intake < output (starvation, illness, catabolism)\n- Obligatory nitrogen loss: ~54 mg N/kg/day (urine, feces, skin, other)\n\n**Protein Requirements**:\n- RDA: 0.8 g/kg/day for adults (based on nitrogen balance studies)\n- Athletes: 1.2-2.0 g/kg/day depending on sport and training phase\n- Older adults: May benefit from 1.0-1.2 g/kg/day due to anabolic resistance",
+      "keyTerms": [
+        { "term": "transamination", "definition": "Transfer of amino group from amino acid to keto acid; key step in amino acid metabolism; requires vitamin B6 (PLP)" },
+        { "term": "nitrogen balance", "definition": "Difference between nitrogen intake and excretion; indicator of protein status and anabolic/catabolic state" },
+        { "term": "PDCAAS", "definition": "Protein Digestibility-Corrected Amino Acid Score; protein quality metric comparing amino acid profile to reference pattern, adjusted for digestibility", "pronunciation": "P-D-CAS" }
+      ],
+      "clinicalNotes": "In renal failure, protein restriction (0.6-0.8 g/kg/day) may slow progression in non-dialysis CKD. Dialysis patients require higher intake (1.0-1.2 g/kg) due to protein losses. Essential amino acid or ketoacid supplements may allow further restriction while maintaining nitrogen balance."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Protein metabolism regulation involves mTOR signaling, leucine-triggered muscle protein synthesis, and the integrated stress response, with clinical implications for sarcopenia, critical illness, and optimized protein distribution.",
+      "explanation": "**mTORC1 Signaling**:\nmTOR complex 1 integrates nutrient and energy signals to regulate protein synthesis. Activation requires:\n- Amino acids (especially leucine) → Rag GTPases → mTORC1 recruitment to lysosome\n- Growth factors (insulin, IGF-1) → PI3K-Akt → TSC inhibition → Rheb-GTP activates mTORC1\n- Energy status: AMPK inhibits mTORC1 during energy deficit\n\nmTORC1 targets: S6K1 and 4E-BP1 phosphorylation enhances translation initiation and ribosome biogenesis.\n\n**Muscle Protein Synthesis**:\n- Postprandial MPS: Peaks 1-2 hours post-meal, returns to baseline by 3-4 hours (\"muscle full\" effect)\n- Leucine threshold: ~2-3g leucine (20-40g high-quality protein) maximally stimulates MPS\n- Refractory period: ~4-5 hours before MPS can be restimulated; basis for protein distribution recommendations\n- Anabolic resistance: Blunted MPS response in aging, disuse, inflammation; may require higher protein doses\n\n**Protein Distribution**:\nEvidence suggests distributing protein intake across meals (3-4 occasions, 0.4-0.55 g/kg per meal) optimizes 24-hour MPS versus skewed intake. Practical targets: 25-40g protein per meal for adults; higher end for older adults.\n\n**Critical Illness Protein Requirements**:\n- Acute phase: Protein breakdown exceeds synthesis regardless of intake; moderate provision (1.2-1.5 g/kg)\n- Recovery phase: Higher needs (1.5-2.0 g/kg) to support anabolism\n- Leucine supplementation or high-leucine formulas may partially overcome anabolic resistance\n- Glutamine: Conditionally essential in critical illness; may benefit surgical/trauma patients (controversial in ICU sepsis)\n\n**Protein and Satiety**:\nProtein is most satiating macronutrient per calorie. Mechanisms: slowed gastric emptying, GLP-1 and PYY release, reduced ghrelin. High-protein diets (25-30% of calories) enhance weight loss maintenance by preserving lean mass and increasing thermogenesis (thermic effect of protein ~20-30% vs ~5-10% for carbs/fat).",
+      "keyTerms": [
+        { "term": "mTORC1", "definition": "Mechanistic target of rapamycin complex 1; master regulator of protein synthesis, integrating nutrient, energy, and growth factor signals", "pronunciation": "M-TOR-C-one" },
+        { "term": "anabolic resistance", "definition": "Blunted muscle protein synthesis response to protein/amino acids; seen with aging, inactivity, and inflammation" },
+        { "term": "leucine threshold", "definition": "Minimum leucine dose (~2-3g) required to maximally stimulate muscle protein synthesis via mTORC1 activation" }
+      ],
+      "clinicalNotes": "Sarcopenia (age-related muscle loss) affects 10-16% of older adults; defined by low muscle mass plus low strength or physical performance. Prevention/treatment: resistance exercise (primary) plus adequate protein (1.0-1.2 g/kg/day), vitamin D sufficiency, and even protein distribution across meals."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Optimizing protein nutrition requires integration of protein quality, timing, distribution, and total intake based on individual factors, with evidence supporting higher intakes for preserving muscle in aging, weight loss, and athletic performance.",
+      "explanation": "**Updated Protein Requirements**:\nThe 0.8 g/kg RDA represents minimum to prevent deficiency, not optimal intake. Recent evidence supports:\n- General adults: 1.0-1.2 g/kg/day may optimize health outcomes\n- Older adults (65+): 1.0-1.2 g/kg/day minimum; up to 1.5 g/kg if sarcopenic or chronically ill\n- Weight loss: 1.2-1.6 g/kg/day (or 25-30% of calories) preserves lean mass during deficit\n- Athletes: 1.6-2.2 g/kg/day depending on sport; higher end for concurrent training and caloric deficit\n- Pregnancy/lactation: +25g/day additional protein\n\n**Protein Quality Considerations**:\nDIAAS preferred over PDCAAS; allows scores >100 to reflect superior quality. Animal proteins generally higher quality but environmental/sustainability concerns favor increased plant protein. Blended approaches optimize quality while reducing environmental impact.\n\n**Clinical Applications**:\n- *Chronic kidney disease*: Stage 3-5 non-dialysis: 0.55-0.6 g/kg or 0.28-0.43 g/kg with ketoanalogues; hemodialysis: 1.0-1.2 g/kg; peritoneal dialysis: 1.0-1.2 g/kg\n- *Hepatic encephalopathy*: Protein restriction no longer recommended; maintain 1.2-1.5 g/kg with vegetable and dairy protein preferred; BCAA supplements if intolerant\n- *Wound healing*: 1.25-1.5 g/kg; consider arginine, glutamine supplementation\n- *Pressure injuries*: Protein supplementation accelerates healing (Stage II-IV)\n\n**Protein Timing and Distribution**:\nPer-meal protein targets (absolute grams) may be more practical than relative targets:\n- Young adults: 0.24 g/kg or ~20g per meal stimulates maximal MPS\n- Older adults: 0.4 g/kg or ~40g per meal may be needed due to anabolic resistance\n- Pre-sleep protein (40g casein): May enhance overnight MPS and morning metabolism\n- Post-exercise window: Less critical than total daily intake; consume protein within 4-6 hours of exercise\n\n**Safety Considerations**:\n- No evidence high protein intake harms kidney function in healthy individuals\n- High protein may accelerate decline in pre-existing CKD\n- Protein from red/processed meat associated with increased colorectal cancer and CVD risk; favor fish, poultry, plant sources\n- Environmental impact: animal protein requires 6-36x more land and water than plant protein",
+      "keyTerms": [
+        { "term": "DIAAS", "definition": "Digestible Indispensable Amino Acid Score; FAO-recommended protein quality metric using ileal digestibility of individual amino acids", "pronunciation": "DYE-as" },
+        { "term": "branched-chain amino acids", "definition": "Leucine, isoleucine, valine; preferentially metabolized in muscle; leucine uniquely stimulates mTORC1 and MPS" },
+        { "term": "sarcopenic obesity", "definition": "Coexistence of reduced muscle mass and excess adiposity; particularly detrimental to function and metabolic health in older adults" }
+      ],
+      "clinicalNotes": "PROT-AGE study group and ESPEN guidelines recommend 1.0-1.2 g/kg/day for healthy older adults, increasing to 1.2-1.5 g/kg in acute/chronic illness. Optimal distribution: 25-30g high-quality protein per meal, 3-4 times daily. Exercise remains most potent anabolic stimulus; combine with protein for synergistic effects on muscle."
+    }
+  },
+
+  "media": [
+    {
+      "id": "protein-structure-levels",
+      "type": "diagram",
+      "filename": "protein_structure.svg",
+      "title": "Protein Structure Hierarchy",
+      "description": "Primary through quaternary protein structure illustration"
+    },
+    {
+      "id": "amino-acid-chart",
+      "type": "image",
+      "filename": "essential_amino_acids.png",
+      "title": "Essential and Nonessential Amino Acids",
+      "description": "Classification chart with food sources"
+    }
+  ],
+  "citations": [
+    {
+      "id": "morton-2018",
+      "type": "article",
+      "title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults",
+      "authors": ["Morton RW", "Murphy KT", "McKellar SR", "et al."],
+      "source": "British Journal of Sports Medicine",
+      "url": "https://doi.org/10.1136/bjsports-2017-097608"
+    },
+    {
+      "id": "prot-age-2013",
+      "type": "article",
+      "title": "Evidence-based recommendations for optimal dietary protein intake in older people",
+      "authors": ["Bauer J", "Biolo G", "Cederholm T", "et al."],
+      "source": "Journal of the American Medical Directors Association"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-carbohydrates", "targetType": "concept", "relationship": "sibling", "label": "Carbohydrates" },
+    { "targetId": "concept-fats", "targetType": "concept", "relationship": "sibling", "label": "Fats" },
+    { "targetId": "concept-amino-acids", "targetType": "concept", "relationship": "child", "label": "Amino Acids" },
+    { "targetId": "condition-sarcopenia", "targetType": "condition", "relationship": "related", "label": "Sarcopenia" },
+    { "targetId": "topic-athletic-nutrition", "targetType": "topic", "relationship": "related", "label": "Athletic Nutrition" }
+  ],
+  "tags": {
+    "systems": ["digestive", "musculoskeletal"],
+    "topics": ["nutrition", "metabolism", "macronutrients"],
+    "keywords": ["amino acids", "muscle", "mTOR", "nitrogen balance", "sarcopenia"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

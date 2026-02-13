@@ -1,0 +1,397 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const postpartumDepression: LegacyWomensHealthContent = {
+  id: 'condition-postpartum-depression',
+  type: 'condition',
+  name: 'Postpartum Depression',
+  alternateNames: ['PPD', 'Perinatal depression', 'Postnatal depression'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Postpartum depression is a serious but treatable condition affecting some new mothers, causing persistent sadness, anxiety, and difficulty caring for themselves and their baby.',
+      explanation: `**What is Postpartum Depression?**
+Postpartum depression (PPD) is more than "baby blues." It's a real medical condition that can happen after having a baby and needs treatment.
+
+**Baby Blues vs. Postpartum Depression:**
+
+*Baby Blues (Normal):*
+- Mood swings, crying, anxiety
+- Starts 2-3 days after birth
+- Goes away within 2 weeks
+- Affects up to 80% of new moms
+
+*Postpartum Depression (Needs Treatment):*
+- Lasts longer than 2 weeks
+- More intense symptoms
+- Affects ability to function
+- Affects 1 in 7 mothers
+
+**Symptoms:**
+- Feeling sad, hopeless, or empty
+- Crying a lot
+- Difficulty bonding with your baby
+- Withdrawing from family and friends
+- Trouble sleeping (even when baby sleeps)
+- Loss of appetite or overeating
+- Overwhelming tiredness
+- Feeling worthless or guilty
+- Anxiety or panic attacks
+- Thoughts of harming yourself or your baby
+
+**Important:**
+- PPD is NOT your fault
+- It does NOT mean you're a bad mother
+- Treatment works
+- Getting help is the right thing to do
+
+**When to Get Help Immediately:**
+- Thoughts of hurting yourself
+- Thoughts of hurting your baby
+- Hearing or seeing things that aren't there
+- Feeling confused or unable to care for yourself`,
+      keyTerms: [
+        { term: 'postpartum depression', definition: 'A serious mood disorder that can develop after giving birth' },
+        { term: 'baby blues', definition: 'Mild, short-lived mood changes that are normal after birth' },
+        { term: 'bonding', definition: 'The emotional connection between mother and baby' },
+      ],
+      analogies: ['Postpartum depression is like a thick fog that settles over you, making it hard to see the joy that should be there. Treatment helps clear the fog.'],
+      examples: ['Feeling unable to get out of bed even when the baby needs you', 'Crying uncontrollably and not knowing why, weeks after delivery'],
+    },
+    2: {
+      level: 2,
+      summary: 'Postpartum depression is a major depressive episode occurring within 4 weeks of delivery (DSM-5) or within a year (clinical practice), affecting mood, cognition, and maternal-infant bonding, requiring screening, prompt treatment, and attention to the mother-infant dyad.',
+      explanation: `**Epidemiology:**
+- Prevalence: 10-15% of new mothers
+- Higher in adolescents, low-income, prior depression
+- Can occur in fathers (10%) and adoptive parents
+
+**Risk Factors:**
+- History of depression or anxiety
+- Previous postpartum depression
+- Family history of mood disorders
+- Stressful life events
+- Poor social support
+- Relationship problems
+- Unplanned pregnancy
+- Pregnancy or birth complications
+- Breastfeeding difficulties
+
+**Clinical Features:**
+
+*DSM-5 Criteria (with peripartum onset specifier):*
+- Major depressive episode criteria met
+- Onset during pregnancy or within 4 weeks postpartum
+
+*Common Symptoms:*
+- Depressed mood most of the day
+- Loss of interest in activities (including baby care)
+- Sleep disturbance (insomnia or hypersomnia)
+- Psychomotor changes
+- Fatigue
+- Feelings of worthlessness or guilt
+- Difficulty concentrating
+- Thoughts of death or suicide
+- Anxiety symptoms often prominent
+- Obsessive thoughts about baby's health
+
+**Screening:**
+- Edinburgh Postnatal Depression Scale (EPDS)
+- Patient Health Questionnaire-9 (PHQ-9)
+- Screen at least once during perinatal period
+- Question 10 of EPDS addresses self-harm
+
+**Treatment:**
+- Mild-moderate: Psychotherapy (CBT, IPT) effective
+- Moderate-severe: Medication (SSRIs safe in breastfeeding)
+- Severe: Combination therapy
+- Brexanolone for severe cases (IV infusion)`,
+      keyTerms: [
+        { term: 'EPDS', definition: 'Edinburgh Postnatal Depression Scale; 10-question screening tool for perinatal depression' },
+        { term: 'peripartum onset', definition: 'DSM-5 specifier for mood episodes beginning in pregnancy or postpartum' },
+        { term: 'IPT', definition: 'Interpersonal psychotherapy; effective for perinatal depression' },
+        { term: 'mother-infant dyad', definition: 'The mother and baby as a unit; central to perinatal mental health care' },
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Perinatal depression management requires differentiation from other perinatal mental health conditions, evidence-based treatment selection considering lactation, and attention to prevention in high-risk women.',
+      explanation: `**Differential Diagnosis:**
+
+*Postpartum Blues:*
+- Onset day 2-3, resolves by day 10-14
+- Mood lability, tearfulness
+- No functional impairment
+- Very common (50-80%)
+
+*Postpartum Depression:*
+- Onset within 4 weeks (DSM-5) or year (clinical)
+- Persistent symptoms (≥2 weeks)
+- Functional impairment
+- Requires treatment
+
+*Postpartum Anxiety Disorders:*
+- GAD, panic disorder, OCD
+- Often co-occur with depression
+- Intrusive thoughts common
+- Treatment similar
+
+*Postpartum Psychosis:*
+- Rare (1-2 per 1000)
+- Onset first 2 weeks postpartum
+- Confusion, disorganization, hallucinations
+- Psychiatric emergency
+- Hospitalization required
+- Associated with bipolar disorder
+
+**Medication in Breastfeeding:**
+
+*SSRIs (Preferred):*
+- Sertraline: Minimal infant exposure
+- Paroxetine: Low breast milk levels
+- Citalopram/escitalopram: Acceptable
+
+*Other Options:*
+- SNRIs: Limited data but likely safe
+- Bupropion: Low levels
+- Avoid long-acting benzodiazepines
+
+*Counseling Points:*
+- Benefits of breastfeeding
+- Benefits of treating maternal depression
+- Risks of untreated depression to infant
+- Shared decision-making
+
+**Prevention:**
+
+*High-Risk Women:*
+- History of depression/PPD
+- Antidepressant during pregnancy
+
+*Strategies:*
+- Close postpartum monitoring
+- Early intervention at symptoms
+- Consider prophylactic antidepressant postpartum
+- Psychotherapy during pregnancy
+
+**Psychotherapy:**
+- CBT: Evidence-based for perinatal depression
+- IPT: Specifically adapted for perinatal period
+- May be first-line for mild-moderate symptoms
+- Combined with medication for severe cases`,
+      keyTerms: [
+        { term: 'postpartum psychosis', definition: 'Rare, severe psychiatric emergency with confusion, delusions, or hallucinations' },
+        { term: 'intrusive thoughts', definition: 'Unwanted, distressing thoughts often about harm to baby; common in perinatal anxiety' },
+        { term: 'CBT', definition: 'Cognitive behavioral therapy; effective psychotherapy for depression' },
+        { term: 'relative infant dose', definition: 'Percentage of maternal medication dose received by infant via breast milk' },
+      ],
+      clinicalNotes: 'Postpartum psychosis is a psychiatric emergency requiring immediate hospitalization. Distinguish intrusive thoughts (ego-dystonic, distressing) from command hallucinations or intent. Sertraline is often first-line SSRI for breastfeeding mothers.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced perinatal mental health care involves management of treatment-resistant cases, coordination with obstetric care, novel therapies, and addressing the impact of maternal mental health on child development.',
+      explanation: `**Treatment-Resistant Cases:**
+
+*Definition:*
+- Inadequate response to 2+ adequate trials
+- Consider: diagnosis, compliance, comorbidities
+
+*Options:*
+- Augmentation strategies
+- Medication switch
+- Intensive outpatient/partial hospital
+- ECT (safe in pregnancy and postpartum)
+- Brexanolone (novel IV therapy)
+
+**Brexanolone:**
+- Synthetic allopregnanolone
+- IV infusion over 60 hours
+- FDA approved for postpartum depression
+- REMS program (in-facility monitoring)
+- Rapid onset of action
+- Expensive, limited access
+
+**Electroconvulsive Therapy:**
+- Safe and effective in perinatal period
+- Consider for severe, treatment-resistant cases
+- Psychotic features
+- Imminent danger
+
+**Pregnancy Management:**
+
+*Preconception Counseling:*
+- Risk of recurrence
+- Medication continuation vs. discontinuation
+- Monitoring plan
+
+*During Pregnancy:*
+- Untreated depression has risks (preterm birth, low birth weight, bonding)
+- Most antidepressants safe
+- SSRI-exposed newborns: Monitor for adaptation syndrome
+
+*Medication Considerations:*
+- Paroxetine: Historical cardiac concerns (current data reassuring)
+- Sertraline, citalopram, escitalopram: Preferred
+- Venlafaxine: Neonatal effects
+- Bupropion: Lower sexual side effects
+
+**Impact on Child Development:**
+
+*Untreated Depression:*
+- Impaired bonding
+- Less responsive parenting
+- Cognitive and emotional effects on child
+- Long-term behavioral problems
+
+*Treatment Benefits:*
+- Improved maternal-infant interaction
+- Better child outcomes
+- Family functioning
+
+**Partner and Family:**
+- Paternal depression (10%)
+- Impact on relationship
+- Support for partner
+- Family therapy when indicated`,
+      keyTerms: [
+        { term: 'brexanolone', definition: 'IV neurosteroid therapy FDA-approved for postpartum depression' },
+        { term: 'allopregnanolone', definition: 'Neuroactive steroid that modulates GABA receptors; levels drop postpartum' },
+        { term: 'neonatal adaptation syndrome', definition: 'Temporary symptoms in newborns exposed to SSRIs in utero' },
+        { term: 'ECT', definition: 'Electroconvulsive therapy; safe and effective for severe perinatal depression' },
+      ],
+      clinicalNotes: 'Brexanolone provides rapid response but requires 60-hour inpatient infusion and is expensive. ECT is safe in all trimesters and postpartum. Untreated maternal depression affects child development - treatment benefits the dyad.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert perinatal mental health care involves integrated models of care, addressing disparities, understanding the neurobiology of perinatal mood disorders, and implementing system-level interventions.',
+      explanation: `**Integrated Care Models:**
+
+*Collaborative Care:*
+- Mental health embedded in OB/perinatal settings
+- Stepped care based on severity
+- Warm handoffs
+- Care coordination
+
+*Perinatal Psychiatry Consultation:*
+- National Maternal Mental Health Hotline
+- State-based consultation lines
+- Access to specialized expertise
+
+**Disparities:**
+
+*Documented Inequities:*
+- Lower screening rates in minorities
+- Higher prevalence, lower treatment rates
+- Stigma barriers
+- Access to mental health care
+
+*Addressing Disparities:*
+- Universal screening
+- Culturally sensitive care
+- Community-based programs
+- Peer support
+- Telehealth access
+
+**Neurobiology:**
+
+*Hormonal Changes:*
+- Rapid drop in progesterone/estrogen postpartum
+- Allopregnanolone changes (GABA modulation)
+- HPA axis dysregulation
+- Thyroid changes
+
+*Vulnerability:*
+- Sensitivity to hormonal fluctuations
+- Genetic predisposition
+- Inflammatory markers
+- Sleep deprivation
+
+**Prevention Programs:**
+
+*Evidence-Based:*
+- Interpersonal psychotherapy prevention
+- Peer support programs
+- Home visiting programs
+- Education and support
+
+*Policy Implications:*
+- Paid family leave
+- Healthcare coverage
+- Lactation support
+- Childcare access
+
+**Quality Improvement:**
+
+*Metrics:*
+- Screening rates
+- Time to treatment
+- Follow-up adherence
+- Outcomes
+
+*Implementation:*
+- EHR integration
+- Staff training
+- Referral pathways
+- Patient navigation
+
+**Emerging Therapies:**
+
+*Zuranolone:*
+- Oral neurosteroid
+- Daily for 14 days
+- Phase 3 trials completed
+- Potential outpatient option
+
+*Esketamine:*
+- Not specifically studied postpartum
+- Rapid antidepressant effect
+- Potential future application
+
+**Long-Term Outcomes:**
+- Recurrence risk with future pregnancies
+- Chronic depression in some
+- Importance of sustained treatment
+- Preventive strategies for subsequent pregnancies`,
+      keyTerms: [
+        { term: 'zuranolone', definition: 'Oral neurosteroid in development for postpartum depression' },
+        { term: 'collaborative care', definition: 'Integrated model with mental health in primary care setting' },
+        { term: 'perinatal psychiatry', definition: 'Subspecialty focused on mental health during pregnancy and postpartum' },
+        { term: 'HPA axis', definition: 'Hypothalamic-pituitary-adrenal axis; stress response system dysregulated in depression' },
+      ],
+      clinicalNotes: 'Universal screening is recommended by ACOG and USPSTF but implementation varies. Zuranolone offers potential for oral outpatient treatment. Address barriers to care including stigma, access, and competing demands of new motherhood.',
+    },
+  },
+
+  media: [],
+  citations: [
+    {
+      id: 'acog-ppd-co',
+      type: 'article',
+      title: 'ACOG Committee Opinion: Screening for Perinatal Depression',
+      source: 'American College of Obstetricians and Gynecologists',
+      license: 'Copyright ACOG',
+    },
+    {
+      id: 'aap-ppd',
+      type: 'article',
+      title: 'AAP Clinical Report: Incorporating Recognition and Management of Perinatal Depression',
+      source: 'American Academy of Pediatrics',
+      license: 'Copyright AAP',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'concept-postpartum-care', targetType: 'concept', relationship: 'related', label: 'Postpartum Care' },
+    { targetId: 'concept-premenstrual-disorders', targetType: 'concept', relationship: 'related', label: 'Premenstrual Disorders' },
+  ],
+  tags: {
+    systems: ['nervous'],
+    topics: ['womens-health', 'patient-education', 'mental-health', 'postpartum'],
+    keywords: ['postpartum depression', 'PPD', 'perinatal depression', 'baby blues', 'maternal mental health'],
+    clinicalRelevance: 'critical',
+    examRelevance: { usmle: true, shelf: ['obgyn', 'psychiatry'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

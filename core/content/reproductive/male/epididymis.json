@@ -1,0 +1,103 @@
+{
+  "id": "structure-epididymis",
+  "type": "structure",
+  "name": "Epididymis",
+  "alternateNames": ["Epididymides (plural)"],
+  "fmaId": "FMA:18255",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The epididymis is a coiled tube on the back of each testis where sperm mature and are stored.",
+      "explanation": "After sperm are made in the testes, they travel to the epididymis, which is a long, tightly coiled tube. Here, sperm spend about 2-3 weeks learning how to swim and becoming fully mature. Think of the epididymis as a 'finishing school' for sperm where they graduate from being unable to move to being strong swimmers ready to fertilize an egg.",
+      "keyTerms": [
+        { "term": "mature", "definition": "To become fully developed and ready to work properly" },
+        { "term": "coiled", "definition": "Wound in circles like a spring or garden hose" },
+        { "term": "sperm storage", "definition": "Keeping sperm safe until they are needed" }
+      ],
+      "analogies": ["The epididymis is like a training camp where baby sperm learn to swim and grow up before their big journey."],
+      "examples": ["If you uncoiled the epididymis, it would stretch about 20 feet (6 meters) long!"]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The epididymis is a highly coiled duct approximately 6 meters long that stores sperm and allows them to mature and gain motility.",
+      "explanation": "The epididymis has three parts: the head (caput), body (corpus), and tail (cauda). The head connects to the testis via efferent ductules and receives immature sperm from the rete testis. As sperm travel through the epididymis over 2-3 weeks, they undergo maturation: they become capable of forward motility and gain the ability to fertilize an egg. The tail stores mature sperm until ejaculation. The epididymis also absorbs excess fluid and removes abnormal sperm.",
+      "keyTerms": [
+        { "term": "caput", "definition": "The head of the epididymis, which receives sperm from the testis", "pronunciation": "KAP-ut" },
+        { "term": "corpus", "definition": "The body or middle portion of the epididymis", "pronunciation": "KOR-pus" },
+        { "term": "cauda", "definition": "The tail of the epididymis where mature sperm are stored", "pronunciation": "KAW-dah" },
+        { "term": "sperm maturation", "definition": "The process by which sperm gain the ability to swim and fertilize eggs" }
+      ],
+      "analogies": ["Think of the epididymis like an assembly line with three stations: receiving (head), processing (body), and shipping (tail)."],
+      "examples": ["Sperm in the tail of the epididymis can be stored for several weeks while remaining fertile."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The epididymis is a pseudostratified columnar epithelium-lined duct that facilitates sperm maturation through secretion and absorption, concentrating sperm and modifying their membranes for capacitation competence.",
+      "explanation": "The epididymal epithelium consists of principal cells (with stereocilia for absorption and secretion), basal cells (stem cell function), clear cells (endocytosis), and halo cells (immune function). Principal cells secrete proteins (including clusterin, CRISP1, and glutathione peroxidase) that are absorbed onto sperm membranes, modifying their surface for future capacitation and acrosome reaction. The epididymis absorbs approximately 90% of the fluid entering from the efferent ductules, concentrating sperm from 1 million/mL to over 1 billion/mL. Regional differences in gene expression create distinct microenvironments in caput, corpus, and cauda. The cauda serves as the main sperm reservoir and maintains sperm quiescence through low bicarbonate, low pH, and specific lipid composition.",
+      "keyTerms": [
+        { "term": "stereocilia", "definition": "Long, immotile microvilli on epididymal principal cells that increase surface area for absorption", "pronunciation": "STAIR-ee-oh-SIL-ee-ah" },
+        { "term": "capacitation", "definition": "Final maturation process in the female tract that prepares sperm for fertilization" },
+        { "term": "sperm quiescence", "definition": "State of dormancy that preserves sperm energy until ejaculation" },
+        { "term": "principal cells", "definition": "Main epithelial cells of epididymis responsible for secretion and absorption" },
+        { "term": "CRISP1", "definition": "Cysteine-rich secretory protein 1, an epididymal protein involved in sperm-egg fusion" }
+      ],
+      "examples": ["Epididymal dysfunction can result in sperm that appear normal morphologically but lack the surface modifications needed for fertilization."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The epididymis represents a regional-specific gene expression continuum that orchestrates sequential sperm membrane remodeling, protein acquisition, and metabolism modification essential for fertilization competence.",
+      "explanation": "Sperm undergo extensive membrane remodeling in the epididymis: cholesterol efflux, phospholipid reorganization, and acquisition of GPI-anchored proteins. Decapacitation factors maintain sperm in a quiescent state until removal in the female tract. Principal cells communicate with sperm via epididymosomes (small membrane vesicles) that transfer proteins like ADAM7, MIF, and SPAM1 to the sperm surface. The caput is characterized by active secretion and initial maturation; the corpus refines sperm motility patterns; the cauda maintains sperm viability through antioxidant protection (glutathione peroxidase 5, superoxide dismutase) and metabolic suppression. Androgen dependence is segment-specific, with the caput being most androgen-sensitive. The blood-epididymis barrier, formed by tight junctions between principal cells, creates an immunologically privileged luminal environment.",
+      "keyTerms": [
+        { "term": "epididymosomes", "definition": "Membrane-bound vesicles secreted by epididymal epithelium that transfer proteins to sperm" },
+        { "term": "decapacitation factors", "definition": "Molecules that prevent premature capacitation by coating sperm membrane" },
+        { "term": "blood-epididymis barrier", "definition": "Tight junction barrier protecting luminal sperm from immune cells and blood-borne substances" },
+        { "term": "ADAM7", "definition": "A disintegrin and metalloproteinase transferred to sperm via epididymosomes" },
+        { "term": "forward progressive motility", "definition": "Vigorous linear swimming pattern acquired during epididymal transit" }
+      ],
+      "clinicalNotes": "Epididymal obstruction (congenital bilateral absence of vas deferens in cystic fibrosis, post-infectious scarring) causes obstructive azoospermia. Sperm can be retrieved from the epididymis (PESA, MESA) for IVF-ICSI."
+    },
+    "5": {
+      "level": 5,
+      "summary": "The epididymis functions as a dynamic post-testicular maturation compartment whose regional transcriptome, secretome, and extracellular vesicle profiles are increasingly characterized as targets for male contraception and biomarkers of fertility potential.",
+      "explanation": "Single-cell RNA sequencing has revealed remarkable heterogeneity in epididymal epithelium, with distinct principal cell subtypes along the proximal-to-distal axis. Lumicrine signaling from testicular luminal factors regulates epididymal gene expression, while circulating androgens and locally produced factors (retinoic acid, FGF) maintain regional identity. Sperm RNA cargo, including small non-coding RNAs acquired in the epididymis, may influence embryo development (intergenerational epigenetic inheritance). Clinical applications include: 1) Epididymal markers (e.g., HE4/WFDC2 in serum) as potential male fertility biomarkers; 2) Epididymal sperm retrieval techniques (PESA: percutaneous epididymal sperm aspiration; MESA: microsurgical epididymal sperm aspiration) for obstructive azoospermia; 3) Post-vasectomy changes in epididymal function and sperm quality; 4) Investigation of epididymal targets for non-hormonal male contraception. Understanding epididymal contributions to sperm quality has implications for explaining unexplained male infertility.",
+      "keyTerms": [
+        { "term": "lumicrine signaling", "definition": "Signaling from testicular luminal factors (like androgens bound to ABP) that regulate downstream epididymal function" },
+        { "term": "MESA", "definition": "Microsurgical epididymal sperm aspiration - surgical retrieval of sperm directly from epididymis using operating microscope" },
+        { "term": "PESA", "definition": "Percutaneous epididymal sperm aspiration - needle aspiration of epididymal sperm without surgical incision" },
+        { "term": "sperm RNA payload", "definition": "Small non-coding RNAs in sperm that may transmit epigenetic information to offspring" },
+        { "term": "WFDC2/HE4", "definition": "Whey acidic protein four-disulfide core domain 2, highly expressed in epididymis with potential as male fertility biomarker" }
+      ],
+      "clinicalNotes": "In congenital bilateral absence of the vas deferens (CBAVD), associated with CFTR mutations, the epididymis may be partially or fully developed, and MESA/PESA can retrieve sperm for IVF-ICSI with excellent outcomes. Post-vasectomy, epididymal pressure changes can affect sperm quality, relevant for vasectomy reversal counseling."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-introduction",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-reproductive-male", "targetType": "system", "relationship": "parent", "label": "Male Reproductive System" },
+    { "targetId": "structure-testes", "targetType": "structure", "relationship": "related", "label": "Testes" },
+    { "targetId": "structure-vas-deferens", "targetType": "structure", "relationship": "related", "label": "Vas Deferens" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:18255"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

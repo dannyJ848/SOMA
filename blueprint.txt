@@ -1,0 +1,331 @@
+# SOMA Medical Education App - Blueprint
+
+## Project Overview
+
+SOMA ("The Biological Self") is a comprehensive, offline-capable medical education application with:
+- 3D anatomy visualization (52+ GLB models across 11 body systems)
+- 246 encyclopedia entries across 11 body systems
+- Multi-level content (patient, intermediate, professional)
+- Medical image library (21,386 images, 27 GB)
+- Personalized health tracking
+- AI-powered learning assistance (Ollama LLM, LanceDB/ChromaDB)
+
+---
+
+## Architecture
+
+### Tech Stack
+- **Frontend**: React 19.2.3 + TypeScript 5.9.3 + Vite 7.3.1
+- **Backend**: Tauri 2.9.1 (Rust) with SQLite
+- **3D**: Three.js 0.182.0 / React Three Fiber
+- **Storage**: Encrypted SQLite (AES-256-GCM)
+- **AI**: Ollama LLM (local), LanceDB/ChromaDB vector DB
+- **Offline**: All content local, no API dependencies
+
+### Directory Structure
+
+```
+SOMA-Combined Build/
+├── src/                          # React frontend
+│   ├── EncyclopediaEntry.tsx     # Encyclopedia with image gallery
+│   ├── AnatomyViewer.tsx         # 3D anatomy viewer
+│   └── ...
+├── core/                         # Business logic
+│   └── medical-simulation/
+│       └── encyclopedia/
+│           ├── entries/          # 246 encyclopedia entries
+│           ├── image-manifest.ts # Image catalog (needs update)
+│           ├── image-resolver.ts # Image utilities
+│           ├── types.ts          # TypeScript definitions
+│           └── seed.ts           # Entry seeding
+├── public/
+│   └── assets/
+│       └── images/               # 21,386 medical images (27 GB)
+│           ├── anatomy/          # 4,028 anatomical diagrams
+│           ├── histology/        # 1,579 microscopic tissue images
+│           ├── pathology/        # 4,370 pathology specimens
+│           ├── imaging/          # 2,406 X-ray, CT, MRI, ECG, ultrasound
+│           ├── clinical/         # 2,464 clinical/dermatology photos
+│           └── physiology/       # 2,518 physiology pathway diagrams
+├── src-tauri/                    # Rust backend
+└── tests/                        # Test suites
+```
+
+---
+
+## Medical Image Library
+
+### Overview
+21,386 real medical images sourced from Wikimedia Commons, organized in a matrix of 6 content sections x 11 body systems (66 subdirectories). Expanded from 2,877 images on 2026-02-05 (7.4x growth).
+
+### Image Breakdown by Section
+
+| Section | Count | Target | % | Format | Description |
+|---------|-------|--------|---|--------|-------------|
+| Anatomy | 4,028 | 5,500 | 73% | SVG/JPG/PNG | Anatomical diagrams and illustrations |
+| Histology | 1,579 | 5,500 | 29% | JPG/PNG | Microscopic tissue stains (H&E, etc.) |
+| Pathology | 4,370 | 5,500 | 79% | JPG/PNG | Gross and microscopic pathology specimens |
+| Imaging | 2,406 | 5,500 | 44% | JPG/SVG | X-ray, CT, MRI, ultrasound, ECG |
+| Clinical | 2,464 | 5,500 | 45% | JPG/PNG | Clinical photographs and dermatology |
+| Physiology | 2,518 | 5,500 | 46% | SVG/PNG | Pathway diagrams and physiology charts |
+| **Total** | **21,386** | **33,000** | **65%** | **Mixed** | **27 GB** |
+
+### Coverage by Body System
+
+| System | Anatomy | Histology | Pathology | Imaging | Clinical | Physiology | Total | Target | % |
+|--------|---------|-----------|-----------|---------|----------|------------|-------|--------|---|
+| Cardiovascular | 500 | 110 | 500 | 433 | 163 | 79 | **1,785** | 3,000 | 60% |
+| Nervous | 500 | 417 | 500 | 211 | 141 | 320 | **2,089** | 3,000 | 70% |
+| Respiratory | 393 | 53 | 464 | 177 | 357 | 500 | **1,944** | 3,000 | 65% |
+| Digestive | 500 | 501 | 500 | 500 | 295 | 500 | **2,796** | 3,000 | 93% |
+| Urinary | 494 | 124 | 360 | 256 | 426 | 115 | **1,775** | 3,000 | 59% |
+| Reproductive | 395 | 71 | 259 | 189 | 500 | 500 | **1,914** | 3,000 | 64% |
+| **Skeletal** | **500** | **500** | **500** | **500** | **500** | **500** | **3,000** | 3,000 | **100%** |
+| Muscular | 500 | 500 | 346 | 263 | 108 | 500 | **2,217** | 3,000 | 74% |
+| Integumentary | 247 | 89 | 465 | 75 | 242 | 148 | **1,266** | 3,000 | 42% |
+| Lymphatic | 331 | 113 | 319 | 144 | 315 | 500 | **1,722** | 3,000 | 57% |
+| Endocrine | 174 | 72 | 157 | 92 | 166 | 217 | **878** | 3,000 | 29% |
+
+### Cells at 500 (Target Hit): 23/66 (35%)
+- **Skeletal**: ALL 6 sections at 500 (100% complete)
+- **Digestive**: 5/6 sections (anatomy, histology, pathology, imaging, physiology)
+- **Muscular**: 4/6 sections (anatomy, histology, imaging, physiology)
+- Plus 8 scattered cells across other systems
+
+### Image Sources
+- **Wikimedia Commons** (CC BY / CC BY-SA / Public Domain) - Primary source
+- **OpenStax Anatomy & Physiology** (CC BY 4.0) - Anatomical diagrams
+- **CDC Public Health Image Library** (Public Domain) - Clinical photos
+- **NCI Visuals Online** (Public Domain) - Pathology
+- Downloaded via Wikimedia Commons API + Special:FilePath on 2026-02-04 and 2026-02-05
+
+### Directory Structure (per section)
+```
+public/assets/images/<section>/
+├── cardiovascular/
+├── nervous/
+├── respiratory/
+├── digestive/
+├── urinary/
+├── reproductive/
+├── skeletal/
+├── muscular/
+├── integumentary/
+├── lymphatic/
+└── endocrine/
+```
+
+---
+
+## Encyclopedia System
+
+### Content Model
+Each encyclopedia entry includes:
+- `entryId`: Unique identifier
+- `entryType`: condition, symptom, medication, anatomy, etc.
+- `name`: Display name
+- `category`: Medical specialty
+- `overview`: Multi-level content (patient/intermediate/professional)
+- `content`: Detailed sections with multi-level explanations
+- `images`: Associated medical images
+- `anatomyLinks`: 3D structure references
+- `relatedEntries`: Cross-references
+- `references`: Citations (CC BY attribution)
+
+### Image Manifest
+Location: `core/medical-simulation/encyclopedia/image-manifest.ts`
+
+Each image includes:
+- `id`: Unique identifier
+- `title`: Display title
+- `path`: File path in public/assets/images
+- `category`: anatomical, histology, pathology, clinical, imaging
+- `systems`: Related body systems
+- `description`: Alt text
+- `attribution`: Source and license info
+- `level`: patient, intermediate, professional
+- `tags`: Search keywords
+- `relatedEntryIds`: Linked encyclopedia entries
+
+### Image Resolver
+Location: `core/medical-simulation/encyclopedia/image-resolver.ts`
+
+Utilities:
+- `getEntryImages(entryId)`: Get all images for an entry
+- `getImageById(imageId)`: Lookup single image
+- `searchImages(query)`: Search by tag/keyword
+- `getImageStatistics()`: Report coverage
+
+### UI Components
+Location: `src/EncyclopediaEntry.tsx`
+
+Features:
+- Images tab (appears when images exist)
+- Featured image display
+- Thumbnail grid
+- Lightbox modal
+- Color-coded type badges
+- Attribution display
+
+---
+
+## Content Sources
+
+### Text Content
+- **Source**: OpenStax Anatomy & Physiology
+- **License**: CC BY 4.0
+- **Status**: 246 entries transcribed, fully offline
+
+### Images
+- **Primary Source**: Wikimedia Commons (CC BY / CC BY-SA / Public Domain)
+- **OpenStax**: Anatomical diagrams (CC BY 4.0)
+- **CDC PHIL**: Clinical photos (Public Domain)
+- **NCI Visuals Online**: Pathology (Public Domain)
+- **Status**: 21,386 real images across 66 subdirectories (27 GB)
+
+---
+
+## Development Guidelines
+
+### Adding New Images
+
+1. **Create/obtain image**:
+   - SVG: Create custom or source from CC BY
+   - JPG: Download from approved sources (Wikimedia, CDC, NCI)
+
+2. **Place file** in `public/assets/images/<section>/<system>/`
+
+3. **Add to manifest** (if linking to encyclopedia entries):
+   ```typescript
+   // image-manifest.ts
+   {
+     id: 'unique-id',
+     title: 'Image Title',
+     path: '/assets/images/category/system/filename.jpg',
+     category: 'histology',
+     systems: ['cardiovascular'],
+     description: 'Alt text',
+     attribution: { source: 'Source Name', license: 'CC BY' },
+     level: 'intermediate',
+     tags: ['tag1', 'tag2'],
+     relatedEntryIds: ['entry-id']
+   }
+   ```
+
+4. **Test**: Verify image appears in encyclopedia entry
+
+### Adding New Encyclopedia Entries
+
+1. Create entry file in `core/medical-simulation/encyclopedia/entries/`
+2. Import and add to `seed.ts`
+3. Add menu mappings in `regionMenuContentResolver.ts`
+4. Add images to manifest if applicable
+
+---
+
+## Testing
+
+### Current Status
+- TypeScript: 0 errors
+- Unit Tests: 179/179 passing
+- Integration Tests: Passing
+
+### Test Commands
+```bash
+npm test -- --run        # Run all tests
+npx tsc --noEmit         # Type check
+```
+
+---
+
+## Deployment
+
+### Build Commands
+```bash
+npm run build            # Web build
+npm run tauri build      # Desktop app build
+```
+
+### Git Workflow
+- Branch: `ralph/advanced-medical-intelligence`
+- Combined Build created: 2026-02-04
+- Image expansion: 2026-02-05
+
+---
+
+## Build History
+
+### SOMA-Combined Build (Current)
+Created 2026-02-04 by merging SOMA-Kimi Build (base) + 54 unique files from SOMA-Claude Build.
+
+### Merge Strategy
+- Used SOMA-Kimi Build as base (4,606 files, 126 medical specialties)
+- Merged 54 unique files from SOMA-Claude Build
+- Both builds: React 19.2.3, Three.js 0.182.0, TypeScript 5.9.3, Vite 7.3.1, Tauri 2.9.1
+
+### Image Library Expansion (2026-02-05)
+- Expanded from 2,877 to 21,386 images (7.4x growth)
+- 10 parallel Python download scripts
+- Deep 2-level Wikimedia Commons category traversal
+- Target: 500 images per cell (6 sections × 11 systems)
+
+---
+
+## Roadmap
+
+### Completed
+- [x] 246 encyclopedia entries
+- [x] 21,386 medical images (27 GB) across 11 body systems x 6 sections
+- [x] Image gallery UI
+- [x] Menu content resolver (492 mappings)
+- [x] TypeScript type safety
+- [x] Combined Build merge (Kimi + Claude)
+- [x] Skeletal system 100% complete (3,000/3,000 images)
+
+### In Progress
+- [ ] Update image-manifest.ts to reference all 21,386 images
+- [ ] Image quality review and cleanup
+- [ ] Image optimization (compression, WebP conversion)
+
+### Future
+- [ ] Fill remaining gaps (histology, endocrine, integumentary)
+- [ ] 3D anatomy improvements
+- [ ] AI content generation
+- [ ] Quiz system
+- [ ] User progress tracking
+- [ ] Mobile optimizations
+
+---
+
+## Resources
+
+### Documentation
+- `IMAGE-SOURCES.md` - Image sourcing guide and inventory
+- `progress.txt` - Development history and learnings
+- `handoff.txt` - Session handoff notes
+- `blueprint.txt` - This file
+
+### Download Scripts
+Located in `/Users/dannygomez/SOMA Builds/`:
+- `respiratory_download.py`
+- `reproductive_download.py`
+- `integumentary_download.py`
+- `endocrine_download.py`
+- `lymphatic_download.py`
+- `urinary_download.py`
+- `cv_gaps_download.py`
+- `nervous_gaps_download.py`
+
+### External References
+- OpenStax Anatomy & Physiology: https://openstax.org/books/anatomy-and-physiology/pages/index
+- Wikimedia Commons: https://commons.wikimedia.org/
+- CDC PHIL: https://phil.cdc.gov/
+- NCI Visuals: https://visualsonline.cancer.gov/
+
+---
+
+## License
+
+Content: CC BY 4.0 (OpenStax)
+Code: Proprietary
+Images: Mixed - CC BY, CC BY-SA, Public Domain (see IMAGE-SOURCES.md)

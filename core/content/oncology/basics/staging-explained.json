@@ -1,0 +1,125 @@
+{
+  "id": "oncology-staging",
+  "type": "education",
+  "name": "Cancer Staging Explained",
+  "alternateNames": ["TNM Staging", "Cancer Stage", "Stage of Cancer"],
+  "category": "oncology-basics",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Cancer staging tells you how big the cancer is and whether it has spread. Lower stages (1-2) usually mean smaller cancers that are easier to treat.",
+      "explanation": "When doctors find cancer, one of the first things they want to know is: how far has it spread? This is called staging.\n\nThink of staging like describing how far a fire has spread:\n- Stage 1: A small fire in one room\n- Stage 2: A larger fire, but still in one area\n- Stage 3: Fire has spread to nearby rooms\n- Stage 4: Fire has spread to other parts of the house\n\nDoctors use tests like CT scans, MRIs, and sometimes surgery to figure out the stage. This information helps them:\n- Understand how serious the cancer is\n- Choose the best treatment\n- Give you an idea of what to expect\n\nGenerally, cancers caught at earlier stages have better outcomes because they're smaller and haven't spread yet. This is why cancer screening is so important - it can find cancer before it grows and spreads.\n\nRemember: Your stage is just one piece of information. Many people with advanced stage cancer do well with treatment, and doctors consider many factors when planning your care.",
+      "keyTerms": [
+        { "term": "stage", "definition": "A way to describe how large a cancer is and whether it has spread" },
+        { "term": "localized", "definition": "Cancer that is only in the place where it started" },
+        { "term": "metastatic", "definition": "Cancer that has spread to other parts of the body far from where it started", "pronunciation": "met-ah-STAT-ik" }
+      ],
+      "analogies": [
+        "Staging is like measuring a plant - doctors check how big it is and whether roots have spread to other pots.",
+        "Cancer stages are like describing a leak: is it a small drip (stage 1), a bigger leak (stage 2), spreading to nearby pipes (stage 3), or flooding other rooms (stage 4)?"
+      ],
+      "examples": [
+        "Stage 1 breast cancer is a small tumor that hasn't spread to lymph nodes.",
+        "Stage 4 colon cancer means the cancer has spread to distant organs like the liver."
+      ],
+      "encouragement": "Learning your cancer stage can feel overwhelming, but this information helps your doctors create the best treatment plan for you. Many cancers at all stages respond well to treatment."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Cancer staging uses the TNM system to describe tumor size (T), lymph node involvement (N), and distant metastasis (M), which are combined into overall stages 0-IV to guide treatment decisions and prognosis.",
+      "explanation": "**The TNM System**\nMost cancers are staged using the TNM system developed by the American Joint Committee on Cancer (AJCC):\n\n**T (Tumor):** Size and extent of the primary tumor\n- TX: Primary tumor cannot be evaluated\n- T0: No evidence of primary tumor\n- Tis: Carcinoma in situ (abnormal cells present but not yet invasive)\n- T1-T4: Size and/or extent of the primary tumor (higher = larger/more invasive)\n\n**N (Nodes):** Whether cancer has spread to nearby lymph nodes\n- NX: Regional lymph nodes cannot be evaluated\n- N0: No regional lymph node involvement\n- N1-N3: Involvement of regional lymph nodes (number and/or extent)\n\n**M (Metastasis):** Whether cancer has spread to distant parts of the body\n- M0: No distant metastasis\n- M1: Distant metastasis present\n\n**Stage Groupings**\nTNM categories are combined into stage groups:\n- Stage 0: Carcinoma in situ (Tis)\n- Stage I: Small, localized cancer (early stage)\n- Stage II: Larger tumor or limited local spread\n- Stage III: Larger tumor and/or spread to nearby lymph nodes\n- Stage IV: Distant metastasis (advanced stage)\n\n**Clinical vs. Pathological Staging**\n- Clinical stage (cTNM): Based on physical exam and imaging before treatment\n- Pathological stage (pTNM): Based on surgical findings and tissue examination\n\nPathological staging is usually more accurate and may change the treatment plan.",
+      "keyTerms": [
+        { "term": "TNM", "definition": "Staging system based on Tumor size, lymph Node involvement, and distant Metastasis" },
+        { "term": "carcinoma in situ", "definition": "Very early cancer where abnormal cells are present but haven't invaded surrounding tissue", "pronunciation": "car-sin-OH-mah in SY-too" },
+        { "term": "lymph nodes", "definition": "Small bean-shaped organs that filter body fluid and are often the first place cancer spreads" },
+        { "term": "regional", "definition": "Nearby; regional lymph nodes are those close to the primary tumor" }
+      ],
+      "analogies": [
+        "The TNM system is like a three-part address: T tells you the size of the house, N tells you if it's spread to the neighborhood, and M tells you if it's in a different city.",
+        "Lymph nodes are like checkpoints on a highway - cancer often stops there first before traveling further."
+      ],
+      "examples": [
+        "T2N1M0 breast cancer means: medium-sized tumor (T2), spread to nearby lymph nodes (N1), no distant spread (M0) - this would typically be Stage II or III.",
+        "T1N0M0 colon cancer means: small tumor (T1), no lymph nodes involved (N0), no distant spread (M0) - typically Stage I."
+      ],
+      "encouragement": "Understanding your TNM stage helps you have informed conversations with your cancer care team about your treatment options and what to expect."
+    },
+    "3": {
+      "level": 3,
+      "summary": "Cancer staging integrates anatomic extent (TNM), tumor biology (grade, biomarkers), and patient factors to stratify prognosis and guide treatment selection, with stage-specific survival data and emerging molecular classifications refining traditional anatomic staging.",
+      "explanation": "**AJCC 8th Edition Framework**\n\nThe current AJCC staging (8th edition, 2018) incorporates:\n\n1. **Anatomic staging (TNM)**: Traditional extent-based criteria\n2. **Prognostic staging**: Adds biologic factors for selected cancers\n3. **Biomarkers**: ER/PR/HER2 for breast, CEA for colorectal, etc.\n4. **Grade**: Histologic differentiation assessment\n\n**T Category Specifics by Cancer Type**\n\nT definitions vary by tumor type:\n- *Breast*: T1 (≤2cm), T2 (>2-5cm), T3 (>5cm), T4 (chest wall/skin involvement)\n- *Colon*: Based on depth of invasion (mucosa → submucosa → muscularis → serosa)\n- *Lung*: T1 (≤3cm), T2 (>3-5cm), T3 (>5-7cm), T4 (>7cm or invasion)\n- *Melanoma*: Based on thickness (Breslow depth) and ulceration\n\n**Nodal Assessment**\n\n- Sentinel lymph node biopsy (SLNB): Identifies first draining nodes\n- Regional lymphadenectomy: Removal and examination of node basin\n- N staging often requires minimum node count for accuracy\n- Micrometastases (0.2-2mm) vs. isolated tumor cells (<0.2mm)\n- Extranodal extension (ENE) worsens prognosis in some cancers\n\n**Staging Modalities**\n\n- CT chest/abdomen/pelvis: Standard for solid tumors\n- PET-CT: Functional imaging detecting metabolically active disease\n- MRI: Superior for brain, liver, soft tissue\n- Bone scan: Skeletal metastases\n- Endoscopic ultrasound: T staging for GI tumors\n- Laparoscopy: Peritoneal staging for gastric, pancreatic cancers\n\n**Stage Migration (Will Rogers Phenomenon)**\n\nImproved imaging detects previously unrecognized metastatic disease, 'upgrading' patients. This artificially improves survival statistics for all stages without changing actual outcomes.\n\n**Stage-Specific Survival**\n\nSurvival statistics are reported as 5-year survival rates by stage, but individual prognosis depends on many factors beyond stage.",
+      "keyTerms": [
+        { "term": "sentinel lymph node", "definition": "The first lymph node(s) to which cancer is likely to spread from the primary tumor" },
+        { "term": "prognostic stage", "definition": "Stage incorporating both anatomic extent and biologic factors (grade, biomarkers)" },
+        { "term": "extranodal extension", "definition": "Cancer growth beyond the lymph node capsule into surrounding tissue" },
+        { "term": "PET-CT", "definition": "Positron emission tomography combined with CT; detects metabolically active disease" },
+        { "term": "Breslow depth", "definition": "Measurement of melanoma thickness from epidermis to deepest tumor cell" }
+      ],
+      "clinicalNotes": "Always verify the AJCC edition used for staging, as criteria change between editions. Breast cancer staging now incorporates ER/PR/HER2 and grade for prognostic staging. Lung cancer T staging was revised in 8th edition. Upstaging after pathologic review may change treatment recommendations."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Contemporary staging integrates genomic profiling, response assessment, and dynamic staging concepts alongside traditional anatomic classification, with molecular staging increasingly supplementing or replacing anatomic stage for treatment selection in selected cancers.",
+      "explanation": "**Molecular Staging and Risk Stratification**\n\nGenomics are augmenting traditional staging:\n\n*Breast cancer:*\n- Oncotype DX (21-gene RS): Predicts chemotherapy benefit in HR+/HER2- disease\n- MammaPrint (70-gene): Risk stratification\n- PAM50: Intrinsic subtypes (Luminal A/B, HER2-enriched, Basal-like)\n\n*Colorectal cancer:*\n- Microsatellite instability (MSI) status\n- BRAF V600E mutation (poor prognosis)\n- Consensus molecular subtypes (CMS1-4)\n\n*Lung cancer:*\n- Driver mutations guide therapy regardless of stage (EGFR, ALK, ROS1, etc.)\n- PD-L1 expression for immunotherapy selection\n\n**Response-Based Staging**\n\n*Post-neoadjuvant staging (ypTNM):*\n- Pathologic assessment after preoperative therapy\n- Complete pathologic response (pCR): No residual invasive disease\n- Residual cancer burden (RCB) scoring\n\n*Restaging during treatment:*\n- RECIST criteria for imaging response\n- iRECIST for immunotherapy (accounting for pseudoprogression)\n- Metabolic response (PET/CT)\n\n**Specialized Staging Systems**\n\nSome cancers use unique systems:\n\n*Hematologic malignancies:*\n- Ann Arbor staging (lymphoma)\n- Rai/Binet staging (CLL)\n- International Staging System (multiple myeloma)\n\n*CNS tumors:*\n- Chang staging (medulloblastoma)\n- Modified WHO classification\n\n*Genitourinary:*\n- FIGO staging (gynecologic cancers)\n- ISUP grading (prostate, renal)\n\n**Liquid Biopsy Integration**\n\n- ctDNA can detect minimal residual disease (MRD) after treatment\n- May identify molecular relapse before imaging relapse\n- Dynamic monitoring of tumor burden and clonal evolution\n\n**Risk Stratification Models**\n\nNomograms and calculators integrate multiple variables:\n- MSKCC nomograms for various cancers\n- Adjuvant! Online (breast)\n- PREDICT (breast, prostate)\n- National Comprehensive Cancer Network risk tables",
+      "keyTerms": [
+        { "term": "Oncotype DX", "definition": "21-gene assay providing recurrence score to guide chemotherapy decisions in ER+ breast cancer" },
+        { "term": "pathologic complete response", "definition": "Absence of residual invasive cancer in surgical specimen after neoadjuvant therapy (pCR)" },
+        { "term": "RECIST", "definition": "Response Evaluation Criteria in Solid Tumors - standardized measurement of treatment response" },
+        { "term": "minimal residual disease", "definition": "Small numbers of cancer cells remaining after treatment, detectable by sensitive methods" },
+        { "term": "nomogram", "definition": "Graphical tool integrating multiple variables to estimate individual prognosis" }
+      ],
+      "clinicalNotes": "Stage alone no longer drives treatment for many cancers - biomarker status may override stage (e.g., EGFR-mutant lung cancer receives TKI regardless of stage). pCR after neoadjuvant therapy carries prognostic significance and may guide adjuvant treatment decisions (e.g., T-DM1 for HER2+ breast with residual disease). MRD monitoring is standard in hematologic malignancies and emerging in solid tumors."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Staging evolution reflects a paradigm shift from purely anatomic classification toward integrated molecular-clinical staging frameworks, with implications for clinical trial design, real-world outcomes research, and precision oncology implementation.",
+      "explanation": "**Limitations of Anatomic Staging**\n\nHistorical staging has recognized limitations:\n- Stage heterogeneity: Similar stages have variable outcomes\n- Between-patient variability not captured\n- Does not reflect tumor biology or treatment response\n- Static snapshot at diagnosis\n\n**Toward Integrated Staging**\n\n*Proposed frameworks incorporate:*\n1. Anatomic extent (traditional TNM)\n2. Histologic features (grade, histotype, LVI, PNI)\n3. Biomarker status (IHC, FISH)\n4. Genomic classifiers (expression signatures, mutation profiles)\n5. Host factors (performance status, comorbidities)\n6. Tumor microenvironment (TILs, immune signatures)\n\n*Example - Breast cancer prognostic staging:*\nCombines T, N, M with grade, ER, PR, HER2 to produce different stage than anatomic TNM alone.\n\n**Clinical Trial Implications**\n\n- Eligibility criteria increasingly include molecular features\n- Basket trials enroll by mutation rather than histology\n- Adaptive designs allow biomarker-driven randomization\n- Real-world data supplements trial outcomes\n\n**Staging Infrastructure**\n\n*Cancer registries:*\n- SEER (Surveillance, Epidemiology, and End Results)\n- State cancer registries\n- Hospital cancer registries\n- International collaboration (IARC)\n\n*Data standards:*\n- AJCC staging manual as reference\n- NAACCR data dictionary\n- CAP synoptic reporting\n- mCODE (minimal Common Oncology Data Elements)\n\n**Future Directions**\n\n*Multi-omic staging:*\n- Integrating genomic, transcriptomic, proteomic, metabolomic data\n- Single-cell resolution of heterogeneity\n- Spatial biology mapping tumor architecture\n\n*Dynamic staging:*\n- Longitudinal ctDNA monitoring\n- Adaptive treatment based on molecular response\n- Digital twins predicting individual trajectories\n\n*AI/ML applications:*\n- Deep learning on pathology for improved grading\n- Radiomics extracting prognostic features from imaging\n- Integrated models outperforming traditional staging\n\n**Implementation Challenges**\n\n- Access disparities to molecular testing\n- Reimbursement for novel diagnostics\n- Provider education and adoption\n- Data infrastructure requirements\n- Validation across diverse populations",
+      "keyTerms": [
+        { "term": "basket trial", "definition": "Clinical trial enrolling patients with different tumor types sharing a common molecular feature" },
+        { "term": "radiomics", "definition": "Extraction of quantitative features from medical imaging for prognostic or predictive analysis" },
+        { "term": "mCODE", "definition": "Minimal Common Oncology Data Elements - standardized data elements for cancer EHR interoperability" },
+        { "term": "tumor-infiltrating lymphocytes", "definition": "Immune cells within the tumor; density correlates with prognosis and immunotherapy response in some cancers" },
+        { "term": "digital twin", "definition": "Computational model of an individual patient used to simulate treatment responses and outcomes" }
+      ],
+      "clinicalNotes": "Staging discussions should distinguish anatomic vs. prognostic stage (especially breast cancer). Molecular testing delays should not unduly delay treatment initiation for aggressive tumors. Stage-based survival statistics may not apply to individual patients, especially with modern targeted/immuno-therapies. Registry data typically lags current practice by 3-5 years."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "ajcc-8th",
+      "type": "textbook",
+      "title": "AJCC Cancer Staging Manual, 8th Edition",
+      "authors": ["American Joint Committee on Cancer"],
+      "source": "Springer",
+      "year": 2017
+    },
+    {
+      "id": "nci-staging",
+      "type": "web",
+      "title": "Cancer Staging",
+      "source": "National Cancer Institute",
+      "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/staging",
+      "accessDate": "2026-01-24"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "oncology-grading", "targetType": "education", "relationship": "related", "label": "Cancer Grading" },
+    { "targetId": "oncology-prognosis", "targetType": "education", "relationship": "related", "label": "Understanding Prognosis" },
+    { "targetId": "oncology-what-is-cancer", "targetType": "education", "relationship": "related", "label": "What is Cancer" }
+  ],
+  "tags": {
+    "systems": ["oncology"],
+    "topics": ["staging", "diagnosis", "patient-education"],
+    "keywords": ["TNM", "stage", "staging", "cancer stage", "prognosis"],
+    "clinicalRelevance": "critical",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published",
+  "contributors": ["Claude Opus 4.5"]
+}

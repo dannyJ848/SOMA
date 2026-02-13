@@ -1,0 +1,373 @@
+import { WomensHealthContent } from '../types';
+
+export const pcosContent: LegacyWomensHealthContent = {
+  id: 'condition-pcos',
+  type: 'condition',
+  name: 'Polycystic Ovary Syndrome (PCOS)',
+  alternateNames: ['PCOS', 'Polycystic ovarian syndrome', 'Stein-Leventhal syndrome'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'PCOS is a common hormone problem that can cause irregular periods, excess hair growth, acne, and difficulty getting pregnant. It can be managed with lifestyle changes and medications.',
+      explanation: `**What is PCOS?**
+PCOS affects how your ovaries work. It causes hormone imbalances that lead to various symptoms.
+
+**Common Symptoms:**
+- **Irregular periods:** Missing periods or having them rarely
+- **Excess hair:** Hair growth on face, chest, or back
+- **Acne:** Often on face, chest, back
+- **Weight gain:** Especially around the middle
+- **Difficulty getting pregnant**
+- **Thinning hair on head**
+
+**What Causes It?**
+The exact cause is unknown, but it involves:
+- Higher levels of male hormones (androgens)
+- Insulin resistance (body doesn't use insulin well)
+- Often runs in families
+
+**Treatment Options:**
+- Lifestyle changes (diet, exercise) - very important!
+- Birth control pills to regulate periods
+- Medications for specific symptoms
+- Fertility treatments if trying to conceive
+
+**Why Treatment Matters:**
+Without management, PCOS can increase risk of:
+- Diabetes
+- Heart disease
+- Endometrial (uterine lining) problems`,
+      keyTerms: [
+        { term: 'PCOS', definition: 'A hormonal condition causing irregular periods, excess hair, and cysts on ovaries' },
+        { term: 'androgens', definition: 'Hormones like testosterone that are higher than normal in PCOS' },
+        { term: 'insulin resistance', definition: 'When your body doesn\'t respond well to insulin, leading to high blood sugar' },
+      ],
+      analogies: ['Think of PCOS like a thermostat that\'s not working right - hormones (like temperature) don\'t stay balanced, causing problems throughout the body.'],
+      examples: ['Having your period every 2-3 months instead of monthly', 'Needing to remove facial hair more often than most women'],
+    },
+    2: {
+      level: 2,
+      summary: 'PCOS is diagnosed using the Rotterdam criteria requiring 2 of 3 features: irregular periods, clinical/biochemical hyperandrogenism, and polycystic ovarian morphology. Management addresses metabolic and reproductive concerns.',
+      explanation: `**Diagnosis (Rotterdam Criteria):**
+Need 2 of 3 (after excluding other causes):
+1. **Oligo-ovulation or anovulation** (irregular or absent periods)
+2. **Hyperandrogenism** (clinical: hirsutism, acne; or lab: elevated testosterone)
+3. **Polycystic ovarian morphology** (≥12 follicles or increased ovarian volume on ultrasound)
+
+**Phenotypes:**
+- Classic (all 3 criteria): Most severe metabolic risk
+- Ovulatory (hyperandrogenism + polycystic ovaries)
+- Non-hyperandrogenic (oligo-anovulation + polycystic ovaries)
+
+**Evaluation:**
+- History and physical (menstrual pattern, hirsutism, BMI)
+- Lab tests: Total testosterone, FSH, LH, TSH, prolactin
+- Exclude other causes: Thyroid disease, hyperprolactinemia, congenital adrenal hyperplasia
+- Ultrasound: Polycystic ovarian morphology
+- Metabolic screening: Fasting glucose, HbA1c, lipids
+
+**Management Approach:**
+
+*Lifestyle First:*
+- Weight loss (5-10% can restore ovulation)
+- Diet modification (low glycemic index)
+- Exercise (150 min/week moderate activity)
+
+*Menstrual Regulation:*
+- Combined hormonal contraceptives
+- Cyclic progestins
+
+*Hyperandrogenism:*
+- CHC (estrogen suppresses androgens)
+- Spironolactone (anti-androgen)
+- Topical treatments for hirsutism
+
+*Fertility:*
+- Letrozole (first-line for ovulation induction)
+- Clomiphene
+- Weight loss enhances fertility treatment success`,
+      keyTerms: [
+        { term: 'Rotterdam criteria', definition: 'Diagnostic criteria for PCOS requiring 2 of 3 specific features' },
+        { term: 'hirsutism', definition: 'Excess coarse hair growth in male-pattern distribution', pronunciation: 'HUR-soo-tizm' },
+        { term: 'polycystic ovarian morphology', definition: 'Ultrasound appearance of many small follicles on ovaries' },
+        { term: 'oligo-ovulation', definition: 'Infrequent or irregular ovulation' },
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'PCOS pathophysiology involves insulin resistance, hyperandrogenism, and gonadotropin dysregulation in a self-perpetuating cycle, with significant metabolic and reproductive consequences requiring long-term management.',
+      explanation: `**Pathophysiology:**
+
+*Hypothalamic-Pituitary Axis:*
+- Increased GnRH pulse frequency
+- Elevated LH, normal-low FSH
+- LH:FSH ratio often elevated (>2:1)
+- LH drives thecal androgen production
+
+*Ovarian Dysfunction:*
+- Theca cell hyperplasia
+- Excess androgen production
+- Impaired folliculogenesis (arrested follicle development)
+- Multiple small antral follicles (polycystic appearance)
+
+*Insulin Resistance:*
+- Present in 50-70% (lean and obese)
+- Hyperinsulinemia increases ovarian androgen production
+- Decreases SHBG (increases free testosterone)
+- Contributes to anovulation
+
+*Adipose Tissue:*
+- Peripheral aromatization
+- Pro-inflammatory cytokines
+- Adipokine dysregulation
+
+**Metabolic Complications:**
+
+*Glucose Intolerance:*
+- Impaired glucose tolerance: 30-40%
+- Type 2 diabetes: 10% (higher lifetime risk)
+- Screen with OGTT or HbA1c every 1-3 years
+
+*Cardiovascular Risk:*
+- Dyslipidemia (low HDL, elevated TG)
+- Hypertension
+- Subclinical atherosclerosis
+- Long-term CVD risk elevated
+
+*Endometrial Health:*
+- Chronic anovulation → unopposed estrogen
+- Endometrial hyperplasia risk
+- Periodic progestin withdrawal or CHC recommended
+
+**Pharmacotherapy Details:**
+
+*Metformin:*
+- Improves insulin sensitivity
+- May restore ovulation (less effective than letrozole)
+- Weight neutral or modest loss
+- Consider if impaired glucose tolerance
+
+*Combined Hormonal Contraceptives:*
+- Suppress ovarian androgens
+- Increase SHBG
+- Regulate menstrual cycle
+- Choose neutral or anti-androgenic progestin
+
+*Spironolactone:*
+- Androgen receptor blocker
+- 50-200 mg daily for hirsutism
+- Takes 6+ months for effect
+- Must use contraception (feminizes male fetus)`,
+      keyTerms: [
+        { term: 'SHBG', definition: 'Sex hormone-binding globulin; binds testosterone, reducing free hormone' },
+        { term: 'OGTT', definition: 'Oral glucose tolerance test; 2-hour glucose after 75g glucose load' },
+        { term: 'thecal hyperplasia', definition: 'Overgrowth of ovarian theca cells producing excess androgens' },
+        { term: 'folliculogenesis', definition: 'Process of ovarian follicle development; arrested in PCOS' },
+      ],
+      clinicalNotes: 'OGTT is preferred over fasting glucose for diabetes screening in PCOS (higher sensitivity). Endometrial protection is needed if menses occur less than every 3 months. Hirsutism treatment takes 6-12 months to show effect.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced PCOS management addresses fertility optimization, metabolic syndrome prevention, adolescent diagnosis challenges, and emerging therapies, with attention to phenotype-specific approaches.',
+      explanation: `**Fertility Management:**
+
+*Ovulation Induction:*
+- Letrozole: First-line (higher live birth rates than clomiphene)
+- Clomiphene: Second-line
+- Gonadotropins: Careful dosing (OHSS risk)
+- Weight loss prior to treatment improves outcomes
+
+*Ovarian Drilling:*
+- Laparoscopic electrocautery of ovarian surface
+- Second-line if medication-resistant
+- May restore spontaneous ovulation
+- Risk of reduced ovarian reserve
+
+*IVF:*
+- For resistant cases or other infertility factors
+- OHSS risk higher in PCOS
+- GnRH antagonist protocol with agonist trigger
+- Metformin may reduce OHSS
+
+**Adolescent PCOS:**
+
+*Diagnostic Challenges:*
+- Irregular periods normal for 2 years post-menarche
+- Polycystic morphology common in adolescents
+- All 3 Rotterdam criteria may be required in teens
+- Focus on hyperandrogenism + menstrual dysfunction
+
+*Management:*
+- Lifestyle intervention emphasized
+- CHC for menstrual regulation and hyperandrogenism
+- Metformin if metabolic abnormalities
+- Long-term counseling about fertility and metabolic risks
+
+**Phenotype-Specific Considerations:**
+
+*Classic PCOS (Full Phenotype):*
+- Highest metabolic risk
+- Aggressive metabolic screening
+- Lifestyle intervention crucial
+
+*Ovulatory PCOS:*
+- Hyperandrogenism without ovulatory dysfunction
+- Lower metabolic risk
+- Focus on androgenic symptoms
+
+*Non-Hyperandrogenic PCOS:*
+- May have milder metabolic profile
+- Menstrual regulation focus
+
+**Emerging Therapies:**
+
+*Inositol:*
+- Myo-inositol and D-chiro-inositol
+- Insulin sensitizing effects
+- May improve ovulation, metabolic parameters
+- Generally well-tolerated
+
+*GLP-1 Agonists:*
+- Significant weight loss
+- Improved metabolic parameters
+- May restore ovulation
+- Semaglutide, liraglutide
+
+*Anti-Mullerian Hormone (AMH):*
+- Elevated in PCOS
+- May become diagnostic criterion
+- Reflects follicle pool`,
+      keyTerms: [
+        { term: 'OHSS', definition: 'Ovarian hyperstimulation syndrome; serious complication of fertility treatment' },
+        { term: 'ovarian drilling', definition: 'Surgical puncture of ovarian surface to reduce androgen production' },
+        { term: 'myo-inositol', definition: 'Vitamin-like substance with insulin-sensitizing properties' },
+        { term: 'GLP-1 agonist', definition: 'Medication for diabetes and weight loss with potential benefits in PCOS' },
+      ],
+      clinicalNotes: 'Letrozole is now first-line for ovulation induction per ACOG. OHSS prevention in PCOS IVF cycles includes GnRH antagonist protocol, agonist trigger, and freeze-all if needed. GLP-1 agonists require contraception during use.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert PCOS care involves interpreting evolving diagnostic criteria, addressing healthcare disparities, managing complex metabolic phenotypes, and implementing evidence-based guidelines while counseling through diagnostic and treatment uncertainty.',
+      explanation: `**Evolving Diagnostic Criteria:**
+
+*International PCOS Guidelines (2023):*
+- Rotterdam criteria remain foundation
+- AMH may supplement ultrasound
+- Adolescent diagnosis: More stringent criteria
+- Menopausal PCOS: History-based diagnosis
+
+*Controversies:*
+- Reliance on ultrasound in era of overdiagnosis
+- Phenotype-specific screening recommendations
+- Role of AMH in diagnosis
+- Ethnic variations in presentation
+
+**Disparities and Access:**
+
+*Documented Disparities:*
+- Delayed diagnosis (average 2+ years)
+- Differences by race/ethnicity in presentation
+- Access to specialty care
+- Weight stigma affecting care
+
+*Addressing Disparities:*
+- Education for primary care providers
+- Culturally appropriate lifestyle counseling
+- Addressing weight bias
+- Access to fertility services
+
+**Complex Phenotypes:**
+
+*Lean PCOS:*
+- Normal BMI with metabolic dysfunction
+- May be underdiagnosed
+- Still need metabolic screening
+- Often present with fertility concerns
+
+*PCOS with Severe Insulin Resistance:*
+- Acanthosis nigricans
+- May need higher-dose insulin sensitizers
+- Screen for diabetes more frequently
+- Consider bariatric surgery if obese
+
+*PCOS and Mental Health:*
+- Higher rates of anxiety, depression
+- Eating disorders more common
+- Screen and address
+- Body image concerns
+
+**Long-term Outcomes:**
+
+*Cardiovascular:*
+- Increased CVD risk factors
+- Whether translates to events debated
+- Aggressive risk factor management recommended
+- Treat as high-risk population
+
+*Cancer Risk:*
+- Endometrial cancer 2-6x increased (anovulation)
+- Ovarian cancer slightly increased
+- Breast cancer data inconsistent
+- Protective effect of CHC use
+
+*Menopause Transition:*
+- Hyperandrogenism may improve
+- Metabolic dysfunction often persists
+- Continued cardiovascular risk
+
+**Shared Decision-Making:**
+
+*Treatment Goals:*
+- What matters most to patient (fertility, symptoms, metabolic)
+- Short-term vs. long-term priorities
+- Realistic expectations for symptom improvement
+- Lifestyle as foundation
+
+*Lifestyle Counseling:*
+- Avoid shame-based approaches
+- Small, sustainable changes
+- Address barriers
+- Any amount of physical activity beneficial
+
+*Fertility Counseling:*
+- Many with PCOS conceive naturally
+- Weight loss improves conception rates
+- Time-limited treatment trials
+- When to escalate care`,
+      keyTerms: [
+        { term: 'acanthosis nigricans', definition: 'Dark, velvety skin patches indicating severe insulin resistance' },
+        { term: 'lean PCOS', definition: 'PCOS in normal-weight women, often with metabolic dysfunction' },
+        { term: 'weight stigma', definition: 'Negative attitudes toward body weight affecting healthcare quality' },
+        { term: 'freeze-all cycle', definition: 'IVF strategy cryopreserving all embryos to prevent OHSS' },
+      ],
+      clinicalNotes: 'PCOS patients often report feeling dismissed by healthcare providers. Validate concerns and avoid weight-centric messaging that ignores metabolic dysfunction in lean patients. Long-term metabolic follow-up is needed even after reproductive years.',
+    },
+  },
+  media: [],
+  citations: [
+    {
+      id: 'pcos-international-guideline',
+      type: 'article',
+      title: 'International Evidence-Based Guideline for the Assessment and Management of PCOS',
+      source: 'ESHRE/ASRM',
+      license: 'Open access',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'concept-menstrual-cycle-explained', targetType: 'concept', relationship: 'related', label: 'Menstrual Cycle' },
+    { targetId: 'concept-fertility-basics', targetType: 'concept', relationship: 'related', label: 'Fertility Basics' },
+    { targetId: 'condition-menstrual-disorders', targetType: 'condition', relationship: 'related', label: 'Menstrual Disorders' },
+  ],
+  tags: {
+    systems: ['reproductive', 'endocrine'],
+    topics: ['gynecology', 'patient-education', 'womens-health', 'endocrinology'],
+    keywords: ['PCOS', 'polycystic ovary syndrome', 'hirsutism', 'infertility', 'insulin resistance'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn', 'medicine'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

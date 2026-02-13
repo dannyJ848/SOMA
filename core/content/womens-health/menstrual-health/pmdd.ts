@@ -1,0 +1,700 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const pmdd: WomensHealthContent = {
+  id: 'pmdd',
+  title: 'Premenstrual Dysphoric Disorder (PMDD)',
+  category: 'Menstrual Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'What is PMDD?',
+      content: `Premenstrual Dysphoric Disorder (PMDD) is a severe form of PMS that affects how you feel and act. It's much more intense than regular PMS and can seriously affect your life.
+
+**PMDD vs. Regular PMS:**
+
+| PMS | PMDD |
+|-----|------|
+| Mild symptoms | Severe symptoms |
+| Annoying but manageable | Life-disrupting |
+| Physical + emotional | Mostly emotional |
+| Common (75%) | Less common (3-8%) |
+
+**Common PMDD Symptoms:**
+
+**Severe Mood Symptoms:**
+- Feeling very sad or hopeless
+- Intense anger or irritability
+- Anxiety or panic attacks
+- Mood swings (extreme ups and downs)
+- Feeling overwhelmed or out of control
+
+**Physical Symptoms:**
+- Severe fatigue
+- Sleep problems (too much or too little)
+- Appetite changes or food cravings
+- Physical pain (cramps, headaches, muscle aches)
+
+**Behavioral Changes:**
+- Avoiding friends or activities
+- Trouble concentrating
+- Conflicts with others
+- Not being able to function normally
+
+**When to Get Help:**
+- Symptoms are severe
+- Symptoms affect your relationships
+- You can't do normal activities
+- You have suicidal thoughts
+
+**Remember:** PMDD is real and treatable. You don't have to suffer through it. Help is available.
+
+**Emergency Help:**
+If you're thinking about hurting yourself, call or text 988 (Suicide Crisis Line) immediately.
+
+`,
+      keyPoints: [
+        'PMDD is a severe form of PMS affecting 3-8% of menstruating people',
+        'PMDD causes severe emotional symptoms that disrupt daily life',
+        'PMDD symptoms are much more intense than regular PMS',
+        'PMDD is a medical condition that requires treatment',
+      ],
+      vocabulary: [
+        { term: 'PMDD', definition: 'Premenstrual Dysphoric Disorder - severe form of PMS' },
+        { term: 'Dysphoric', definition: 'Feeling unhappy, anxious, or dissatisfied' },
+        { term: 'Panic Attack', definition: 'Sudden episode of intense fear' },
+        { term: 'Suicidal', definition: 'Having thoughts about ending one\'s life' }
+      ],
+      quiz: [
+        {
+          question: 'What percentage of menstruating people have PMDD?',
+          options: [
+            'Less than 1%',
+            '3-8%',
+            '15-20%',
+            '40-50%',
+          ],
+          correctAnswer: 1,
+          explanation: 'PMDD affects approximately 3-8% of menstruating individuals, making it less common but much more severe than typical PMS.',
+        },
+        {
+          question: 'How does PMDD differ from regular PMS?',
+          options: [
+            'PMDD has only physical symptoms',
+            'PMDD symptoms are much more severe and life-disrupting',
+            'PMDD happens after the period',
+            'There is no difference',
+          ],
+          correctAnswer: 1,
+          explanation: 'While both PMS and PMDD occur before menstruation, PMDD causes much more severe symptoms that can significantly disrupt daily functioning, relationships, and quality of life.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Recognizing and Diagnosing PMDD',
+      content: `Premenstrual Dysphoric Disorder is a recognized mental health condition with specific diagnostic criteria. It's classified in the DSM-5-TR as a depressive disorder.
+
+**DSM-5-TR Diagnostic Criteria for PMDD:**
+
+To be diagnosed with PMDD, you must experience at least **5 of these symptoms** (including at least 1 mood symptom) during the week before your period:
+
+**Required Mood Symptoms (at least one):**
+1. Marked mood swings
+2. Irritability or anger
+3. Depressed mood or hopelessness
+4. Anxiety or tension
+
+**Additional Symptoms:**
+5. Decreased interest in usual activities
+6. Difficulty concentrating
+7. Lethargy or fatigue
+8. Appetite changes or specific food cravings
+9. Sleep problems (too much or too little)
+10. Feeling overwhelmed or out of control
+11. Physical symptoms (breast tenderness, bloating, weight gain)
+
+**Important Criteria:**
+- Symptoms start in the week before menses
+- Symptoms improve within a few days of period starting
+- Symptoms are minimal or absent in the week after menses
+- Symptoms are severe enough to interfere with work, school, or relationships
+- Pattern occurs for at least 2 menstrual cycles
+- Not just an worsening of another disorder
+
+**PMDD Symptom Cycle:**
+
+
+Week 1 (Follicular): Symptom-free or minimal symptoms
+Week 2 (Follicular): Feeling normal
+Week 3 (Luteal): Symptoms begin
+Week 4 (Luteal): Symptoms peak, period starts
+
+
+**Self-Assessment Questions:**
+- Do you have severe mood changes before your period?
+- Do these symptoms affect your relationships?
+- Do you miss work or school due to symptoms?
+- Do symptoms improve when your period starts?
+- Are you symptom-free for at least one week per month?
+
+**Screening Tools:**
+- Daily Record of Severity of Problems (DRSP)
+- Premenstrual Symptoms Screening Tool (PSST)
+- PMDD-specific questionnaires
+
+**Red Flags Requiring Immediate Care:**
+- Suicidal thoughts
+- Self-harm urges
+- Inability to care for yourself
+- Psychosis (losing touch with reality)`,
+      keyPoints: [
+        'PMDD requires at least 5 symptoms including one mood symptom',
+        'Symptoms must occur in a cyclical pattern tied to menstruation',
+        'PMDD is classified as a depressive disorder in the DSM-5-TR',
+        'Symptoms must cause significant impairment to qualify as PMDD',
+      ],
+      vocabulary: [
+        { term: 'DSM-5-TR', definition: 'Diagnostic and Statistical Manual of Mental Disorders, used by mental health professionals' },
+        { term: 'Cyclical', definition: 'Occurring in cycles, recurring regularly' },
+        { term: 'Lethargy', definition: 'Lack of energy and enthusiasm' },
+        { term: 'Psychosis', definition: 'Loss of contact with reality' }
+      ],
+      quiz: [
+        {
+          question: 'What is the minimum number of symptoms required for PMDD diagnosis?',
+          options: [
+            '3 symptoms',
+            '5 symptoms (including at least one mood symptom)',
+            '8 symptoms',
+            'All 11 symptoms',
+          ],
+          correctAnswer: 1,
+          explanation: 'The DSM-5-TR requires at least 5 symptoms for PMDD diagnosis, and at least one of these must be a mood symptom such as marked mood swings, irritability, depression, or anxiety.',
+        },
+        {
+          question: 'What distinguishes PMDD from other mental health conditions?',
+          options: [
+            'PMDD only affects teenagers',
+            'PMDD symptoms follow a clear cyclical pattern linked to menstruation',
+            'PMDD causes only physical symptoms',
+            'PMDD is not a recognized mental health condition',
+          ],
+          correctAnswer: 1,
+          explanation: 'The key feature that distinguishes PMDD from other mental health conditions is the clear cyclical pattern tied to the menstrual cycle, with symptoms occurring in the luteal phase and resolving after menses begins.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Treatment Approaches for PMDD',
+      content: `PMDD requires comprehensive treatment that addresses both physical and psychological symptoms. A combination of pharmacological, behavioral, and lifestyle interventions is often most effective.
+
+**First-Line Treatments:**
+
+**1. Selective Serotonin Reuptake Inhibitors (SSRIs)**
+
+These are the most effective treatment for PMDD:
+
+| Medication | Dosing | Efficacy |
+|------------|--------|----------|
+| Sertraline | 50-150 mg/day | 60-75% |
+| Fluoxetine | 10-20 mg/day | 60-70% |
+| Paroxetine CR | 12.5-25 mg/day | 65-75% |
+| Escitalopram | 10-20 mg/day | 60-70% |
+| Citalopram | 20-40 mg/day | 55-65% |
+
+**Dosing Strategies:**
+- **Continuous:** Daily throughout cycle
+- **Luteal phase only:** Starting 14 days before menses
+- **Semicontinuous:** Beginning at ovulation through menses
+
+Luteal dosing is effective for most women and reduces side effects.
+
+**2. Hormonal Contraceptives**
+
+**Combined Oral Contraceptives (COCs):**
+- Suppress ovulation and hormonal fluctuations
+- Certain pills approved specifically for PMDD
+- Drospirenone/EE formulations show best evidence
+- May take 2-3 cycles to see full benefit
+
+**Other Hormonal Options:**
+- Vaginal ring
+- Contraceptive patch
+- Some extended-cycle formulations
+
+**Second-Line Treatments:**
+
+**GnRH Agonists:**
+- Leuprolide, goserelin
+- Create temporary menopause
+- Add-back therapy required
+- Reserved for severe, treatment-resistant cases
+
+**Non-Pharmacological Treatments:**
+
+**Cognitive Behavioral Therapy (CBT):**
+- 8-12 weekly sessions
+- Learn coping strategies
+- Challenge negative thoughts
+- 40-50% improvement rates
+
+**Lifestyle Modifications:**
+
+| Intervention | Recommendation | Evidence |
+|--------------|----------------|----------|
+| Aerobic exercise | 30 min, 3x/week | Strong |
+| Sleep hygiene | Regular schedule | Moderate |
+| Stress reduction | Daily practice | Moderate |
+| Dietary changes | Complex carbs, reduced salt | Limited |
+| Supplements | Calcium, B6, magnesium | Moderate |
+
+**Nutritional Supplements:**
+- Calcium carbonate (1200 mg daily)
+- Vitamin B6 (50-100 mg daily)
+- Magnesium (200-400 mg daily)
+- Vitamin E (400 IU daily)
+- L-tryptophan (precursor to serotonin)
+
+**Complementary Therapies:**
+- Acupuncture
+- Light therapy
+- Herbal remedies (chasteberry)
+- Yoga and meditation
+
+**Treatment Selection Considerations:**
+
+**For Women Trying to Conceive:**
+- SSRIs may be continued in pregnancy
+- Some SSRIs safer than others
+- Non-pharmacologic options first
+
+**For Adolescents:**
+- Lifestyle modifications first-line
+- SSRIs if symptoms are severe
+- Careful monitoring required
+
+**Treatment Plan Structure:**
+1. Confirm diagnosis with symptom tracking
+2. Begin with first-line treatment
+3. Assess response after 2-3 cycles
+4. Adjust or combine treatments if needed
+5. Continue maintenance therapy
+
+**What to Expect:**
+- Improvement typically within 1-2 cycles
+- May need to try different treatments
+- Combination therapy often most effective
+- Long-term management often needed
+
+`,
+      keyPoints: [
+        'SSRIs are first-line treatment with 60-75% response rates',
+        'Luteal-phase dosing can reduce side effects while maintaining efficacy',
+        'Hormonal contraceptives that suppress ovulation can be effective',
+        'Combination approaches often yield the best outcomes',
+      ],
+      vocabulary: [
+        { term: 'SSRI', definition: 'Selective Serotonin Reuptake Inhibitor - antidepressant medication' },
+        { term: 'Luteal Phase Dosing', definition: 'Taking medication only during the 2 weeks before menstruation' },
+        { term: 'Cognitive Behavioral Therapy', definition: 'Type of talk therapy that focuses on changing thought patterns' },
+        { term: 'Add-back Therapy', definition: 'Low-dose hormones given to prevent side effects of GnRH agonists' }
+      ],
+      quiz: [
+        {
+          question: 'What is the primary first-line treatment for PMDD?',
+          options: [
+            'Birth control pills alone',
+            'SSRIs (antidepressants)',
+            'Only lifestyle changes',
+            'GnRH agonists',
+          ],
+          correctAnswer: 1,
+          explanation: 'SSRIs are considered first-line treatment for PMDD, showing 60-75% effectiveness. They can be taken continuously or only during the luteal phase.',
+        },
+        {
+          question: 'What is the advantage of luteal-phase only dosing for SSRIs?',
+          options: [
+            'It works faster',
+            'It has fewer side effects while maintaining efficacy',
+            'It requires lower doses',
+            'It cures PMDD permanently',
+          ],
+          correctAnswer: 1,
+          explanation: 'Luteal-phase only dosing (taking SSRIs only during the 2 weeks before menstruation) provides effective symptom relief while reducing overall side effects and medication exposure.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'PMDD Pathophysiology and Assessment',
+      content: `PMDD represents a complex interaction between normal hormonal fluctuations and abnormal central nervous system sensitivity. Understanding these mechanisms guides targeted treatment approaches.
+
+**Neuroendocrine Pathophysiology:**
+
+**Serotonin System Abnormalities:**
+- Reduced serotonin synthesis during luteal phase
+- Decreased serotonin transporter binding
+- Altered 5-HT1A and 5-HT2A receptor sensitivity
+- Tryptophan depletion triggers symptoms
+
+**Neurosteroid Sensitivity:**
+The key pathophysiological finding in PMDD is abnormal response to normal progesterone metabolites:
+
+**Allopregnanolone Mechanism:**
+- Metabolite of progesterone
+- Potent positive modulator of GABA-A receptors
+- Normally has calming, anxiolytic effects
+- Women with PMDD have paradoxical response
+
+**GABA-A Receptor Subunit Changes:**
+- α4βδ subunits increase in luteal phase
+- Changes receptor sensitivity to allopregnanolone
+- Results in negative mood effects instead of calming
+
+**Genetic Vulnerabilities:**
+
+**ESR1 (Estrogen Receptor Alpha) Polymorphisms:**
+- PvuII and XbaI variants
+- Increased PMDD risk
+- Affects hormone sensitivity
+
+**5-HTTLPR (Serotonin Transporter):**
+- Short (S) allele associated with PMDD
+- Reduced serotonin reuptake efficiency
+- Increased sensitivity to hormonal changes
+
+**BDNF (Brain-Derived Neurotrophic Factor):**
+- Val66Met polymorphism
+- Affects neuroplasticity
+- Influences treatment response
+
+**Comprehensive Assessment Protocol:**
+
+**Initial Evaluation:**
+1. **Prospective Symptom Tracking**
+   - Daily ratings for at least 2 cycles
+   - DRSP (Daily Record of Severity of Problems)
+   - Include symptom severity score (0-3 scale)
+
+2. **Medical History**
+   - Menstrual history
+   - Previous psychiatric diagnoses
+   - Current medications
+   - Substance use
+   - Family psychiatric history
+
+3. **Physical Examination**
+   - Complete exam to rule out other causes
+   - Thyroid assessment
+   - Neurological evaluation if indicated
+
+4. **Laboratory Testing**
+   - TSH, free T4
+   - CBC
+   - Vitamin D, B12
+   - Consider hormone levels (FSH, LH, estradiol, progesterone)
+
+**Differential Diagnosis:**
+
+| Condition | Overlapping Features | Distinguishing Features |
+|-----------|---------------------|------------------------|
+| Major Depression | Depressed mood | Non-cyclical, no luteal phase pattern |
+| Generalized Anxiety | Anxiety symptoms | Non-cyclical |
+| Bipolar Disorder | Mood swings | Manic episodes, non-cyclical |
+| Thyroid Disorders | Mood, fatigue | Abnormal TSH, non-cyclical |
+| Perimenopause | Mood changes, irregular cycles | Age >40, rising FSH |
+
+**Premenstrual Exacerbation:**
+Many psychiatric disorders worsen premenstrually:
+- Depression (30-50% worsen)
+- Anxiety disorders
+- Panic disorder
+- Substance use disorders
+- Eating disorders
+
+**Distinguishing PMDD from Premenstrual Exacerbation:**
+- PMDD: Minimal symptoms in follicular phase
+- Exacerbation: Significant symptoms year-round that worsen premenstrually
+
+**Severity Assessment Scales:**
+
+**DRSP Scoring:**
+- 0 = Not at all
+- 1 = Mild
+- 2 = Moderate
+- 3 = Severe
+
+PMDD criteria: 50% increase in luteal phase scores
+
+**Premenstrual Tension Syndrome Scale (PMTS):**
+- Rates physical and emotional symptoms
+- Scores >70 indicate PMDD range
+
+**Functional Impairment Assessment:**
+- Work/school functioning
+- Social relationships
+- Family relationships
+- Quality of life measures
+`,
+      keyPoints: [
+        'PMDD involves abnormal CNS sensitivity to normal hormonal fluctuations',
+        'Allopregnanolone paradoxical response is a key pathophysiological finding',
+        'Genetic factors in serotonin and estrogen receptors increase vulnerability',
+        'Distinguishing PMDD from premenstrual exacerbation is crucial',
+      ],
+      vocabulary: [
+        { term: 'Allopregnanolone', definition: 'Progesterone metabolite that modulates GABA-A receptors' },
+        { term: '5-HTTLPR', definition: 'Serotonin transporter gene polymorphism linked to mood disorders' },
+        { term: 'Premenstrual Exacerbation', definition: 'Worsening of existing mental health symptoms before menstruation' },
+        { term: 'DRSP', definition: 'Daily Record of Severity of Problems - PMDD symptom tracking tool' }
+      ],
+      quiz: [
+        {
+          question: 'What is the key neurobiological finding in PMDD?',
+          options: [
+            'Abnormally high progesterone levels',
+            'Paradoxical response to normal levels of allopregnanolone',
+            'Estrogen deficiency',
+            'Dopamine excess',
+          ],
+          correctAnswer: 1,
+          explanation: 'The key finding in PMDD is an abnormal CNS response to normal levels of allopregnanolone, a progesterone metabolite. Women with PMDD experience negative mood effects rather than the expected calming effects.',
+        },
+        {
+          question: 'How does PMDD differ from premenstrual exacerbation of depression?',
+          options: [
+            'PMDD is more severe',
+            'PMDD has minimal symptoms in follicular phase while exacerbation has year-round symptoms',
+            'PMDD affects older women',
+            'PMDD only causes physical symptoms',
+          ],
+          correctAnswer: 1,
+          explanation: 'PMDD is distinguished by the presence of minimal to no symptoms during the follicular phase, whereas premenstrual exacerbation involves significant baseline symptoms that worsen premenstrually.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Management and Special Considerations',
+      content: `Management of PMDD requires nuanced, individualized approaches based on symptom profile, comorbidities, reproductive goals, and treatment history. Recent advances offer new options for treatment-resistant cases.
+
+**Treatment Resistance and Augmentation:**
+
+**SSRI Non-Response Strategies:**
+
+**1. Optimize Current Treatment:**
+- Ensure adequate trial (minimum 3 cycles)
+- Verify luteal phase timing accuracy
+- Check adherence
+- Consider drug interactions
+
+**2. Switch Within Class:**
+- Try different SSRI
+- Different half-lives may affect response
+- Individual receptor profile variations
+
+**3. Switch to SNRI:**
+- Venlafaxine 75-225 mg/day
+- Duloxetine 30-60 mg/day
+- May be more effective for physical symptoms
+
+**4. Combination Strategies:**
+- SSRI + COC
+- SSRI + CBT
+- SSRI + buspirone
+- SSRI + low-dose antipsychotic (research setting)
+
+**Novel Pharmacological Approaches:**
+
+**Neurosteroid Modulators:**
+- **Sepranolone (UC1010):**
+  - Phase III trials completed
+  - Allopregnanolone antagonist
+  - Specifically targets PMDD pathophysiology
+  - Subcutaneous administration during luteal phase
+
+- **Zuranolone (SAGE-217):**
+  - Neuroactive steroid GABA modulator
+  - FDA-approved for postpartum depression
+  - Being studied for PMDD
+  - 14-day dosing course
+
+**Glutamatergic Agents:**
+- **Riluzole:** Glutamate release inhibitor
+- **Ketamine:** NMDA antagonist
+- Small studies show rapid effects
+- Maintenance dosing unclear
+
+**Opioid System Modulators:**
+- **Naltrexone:** Low-dose
+- **Buprenorphine:** Low-dose
+- Target endorphin fluctuations
+- Limited evidence, potential abuse risk
+
+**Hormonal Management:**
+
+**Extended/Continuous Contraception:**
+- Eliminces hormonal fluctuations
+- 84/7 or continuous regimens
+- May cause breakthrough bleeding initially
+- Amenorrhea as eventual goal
+
+**Dienogest:**
+- Selective progesterone receptor modulator
+- Minimal androgenic effects
+- May suppress allopregnanolone production
+- Limited data for PMDD
+
+**GnRH Antagonists:**
+- **Elagolix:** Lower risk of bone loss than agonists
+- Add-back therapy built-in
+- Expensive
+- Long-term safety unclear
+
+**Special Populations:**
+
+**Pregnancy Planning and PMDD:**
+- SSRIs: Most can be continued
+  - Sertraline, fluoxetine preferred
+  - Avoid paroxetine if possible
+  - Discuss risks/benefits
+
+- Postpartum risk:
+  - 70% risk of postpartum depression
+  - Plan for close monitoring
+  - Continue or restart treatment immediately postpartum
+
+**Breastfeeding Considerations:**
+- Sertraline: Low levels in breastmilk
+- Paroxetine: Moderate levels
+- Fluoxetine: Longer half-life, accumulates
+- Monitor infant for side effects
+
+**Adolescents:**
+- Higher risk of suicidal ideation with SSRIs
+- Requires close monitoring
+- CBT as first-line
+- Family involvement crucial
+- Avoid GnRH agonists (bone health)
+
+**Perimenopausal Women:**
+- Overlap with vasomotor symptoms
+- May need higher doses
+- Consider systemic estrogen
+- Monitor for switching to MDD
+
+**Comorbid Psychiatric Conditions:**
+
+**PMDD + Bipolar Disorder:**
+- SSRIs may trigger mania
+- Mood stabilizer optimization needed
+- Lamotrigine may help
+- Avoid antidepressant monotherapy
+
+**PMDD + Anxiety Disorders:**
+- SSRIs treat both
+- May need higher doses
+- Consider benzodiazepine for breakthrough anxiety
+- Buspirone as adjunct
+
+**PMDD + Eating Disorders:**
+- Higher prevalence noted
+- Treat eating disorder first
+- Consider SSRIs
+- Nutritional rehabilitation essential
+
+**Psychotherapeutic Interventions:**
+
+**Cognitive Behavioral Therapy (CBT):**
+- 12-16 weekly sessions
+- Specific protocols for PMDD
+- Focus on:
+  - Cognitive restructuring
+  - Behavioral activation
+  - Stress management
+  - Relapse prevention
+
+**Mindfulness-Based Cognitive Therapy (MBCT):**
+- Combines mindfulness with CBT
+- 8-week program
+- Shows promise for PMDD
+- Skills for symptom acceptance
+
+**Interpersonal Therapy (IPT):**
+- Focus on relationship impacts
+- 12-16 weekly sessions
+- Addresses social withdrawal
+- Improves communication
+
+**Digital Therapeutics:**
+- CBT-based apps
+- Symptom tracking with AI
+- Teletherapy options
+- Just-in-time interventions
+
+**Emerging Research Directions:**
+- Genetic testing for treatment selection
+- Microbiome-targeted therapies
+- Anti-inflammatory approaches
+- Circadian rhythm modulation
+- Personalized medicine protocols
+
+**Long-Term Management:**
+- Most require ongoing treatment
+- Periodic reassessment needed
+- Dosage adjustments over time
+- Consider treatment holidays only if stable
+- Relapse prevention planning
+`,
+      keyPoints: [
+        'Treatment-resistant PMDD requires systematic optimization and combination strategies',
+        'Novel neurosteroid modulators target the underlying pathophysiology',
+        'Special populations require tailored approaches based on reproductive status',
+        'Long-term management planning is essential for most patients',
+      ],
+      vocabulary: [
+        { term: 'SNRI', definition: 'Serotonin-Norepinephrine Reuptake Inhibitor - class of antidepressants' },
+        { term: 'Neuroactive Steroid', definition: 'Steroid hormone that affects brain function' },
+        { term: 'GABA Modulator', definition: 'Substance that affects GABA neurotransmitter activity' },
+        { term: 'Digital Therapeutic', definition: 'Evidence-based medical treatment delivered through software' }
+      ],
+      quiz: [
+        {
+          question: 'What is the mechanism of action for sepranolone in PMDD?',
+          options: [
+            'Increases serotonin levels',
+            'Blocks allopregnanolone at GABA-A receptors',
+            'Activates opioid receptors',
+            'Modulates glutamate',
+          ],
+          correctAnswer: 1,
+          explanation: 'Sepranolone is an allopregnanolone antagonist that works by blocking the paradoxical negative effects of allopregnanolone on GABA-A receptors, targeting the core pathophysiological mechanism of PMDD.',
+        },
+        {
+          question: 'Why is PMDD management important during pregnancy planning?',
+          options: [
+            'PMDD causes birth defects',
+            'High risk of postpartum depression and treatment planning needed',
+            'Pregnancy cures PMDD permanently',
+            'No special considerations needed',
+          ],
+          correctAnswer: 1,
+          explanation: 'Women with PMDD have approximately 70% risk of postpartum depression. Careful planning is needed regarding medication continuation during pregnancy and ensuring immediate treatment postpartum.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'pms',
+    'menstrual-cycle',
+    'depression',
+    'anxiety',
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'American Psychiatric Association. DSM-5-TR.',
+    'International Association for Premenstrual Disorders (IAPMD)',
+    'Cochrane Database of Systematic Reviews on PMDD treatments',
+  ]
+};

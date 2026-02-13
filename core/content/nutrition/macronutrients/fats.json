@@ -1,0 +1,118 @@
+{
+  "id": "concept-fats",
+  "type": "concept",
+  "name": "Dietary Fats",
+  "alternateNames": ["Lipids", "Fatty Acids", "Triglycerides"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Fats are nutrients found in foods like butter, oil, and nuts that give your body long-lasting energy and help absorb vitamins.",
+      "explanation": "Fats might sound bad, but your body actually NEEDS them to be healthy! Fats do many important jobs:\n\n**Why Your Body Needs Fat:**\n- Gives you energy that lasts a long time (more than twice as much as carbs!)\n- Keeps you warm by padding under your skin\n- Protects your organs like a cushion\n- Helps your body absorb vitamins A, D, E, and K\n- Makes your brain work well (your brain is 60% fat!)\n- Helps your skin and hair look healthy\n\n**Types of Fats:**\n- **Healthy fats** are found in fish, nuts, avocados, and olive oil. These are GOOD for your heart!\n- **Less healthy fats** are found in butter, cheese, and fatty meat. Eat these in smaller amounts.\n- **Bad fats** (trans fats) are found in some fried foods and packaged snacks. Try to avoid these!\n\nFats have 9 calories per gram - more than double what carbs and protein have. That's why eating too much fat can make you gain weight. But choosing the RIGHT kinds of fats is more important than eating less fat overall.",
+      "keyTerms": [
+        { "term": "healthy fats", "definition": "Fats from foods like fish, nuts, and olive oil that are good for your heart and brain" },
+        { "term": "saturated fat", "definition": "Fat that is solid at room temperature, found in butter and meat - eat less of this kind" },
+        { "term": "trans fat", "definition": "An unhealthy type of fat made in factories, found in some fried and packaged foods - try to avoid it" }
+      ],
+      "analogies": ["Fat is like a savings account for energy - your body stores it and uses it later when needed.", "The fat under your skin is like a cozy blanket that keeps you warm and protects your organs like bubble wrap."],
+      "examples": ["Salmon and walnuts have healthy fats that help your brain think better.", "The oils in your skin come from the fats you eat - that's why eating some fat helps keep your skin from getting too dry."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Dietary fats are lipid molecules providing 9 kcal/gram, classified by saturation level and chain length, with distinct effects on cardiovascular health and metabolic function.",
+      "explanation": "**Fat Chemistry Basics**:\nDietary fats are primarily triglycerides: three fatty acid chains attached to a glycerol backbone. Fatty acids are classified by:\n- *Chain length*: Short (<6 carbons), medium (6-12), long (>12), very long (>20)\n- *Saturation*: Number of double bonds in the carbon chain\n\n**Types of Fatty Acids**:\n\n**Saturated Fatty Acids (SFA)**:\n- No double bonds; straight chains pack tightly\n- Solid at room temperature\n- Sources: butter, coconut oil, palm oil, animal fats\n- Effect: Raises LDL cholesterol\n\n**Monounsaturated Fatty Acids (MUFA)**:\n- One double bond (usually at omega-9 position)\n- Liquid at room temperature\n- Sources: olive oil, avocados, nuts\n- Effect: Lowers LDL, may raise HDL\n\n**Polyunsaturated Fatty Acids (PUFA)**:\n- Two or more double bonds\n- *Omega-6*: Linoleic acid (essential); sources: vegetable oils, seeds\n- *Omega-3*: Alpha-linolenic acid (essential); EPA, DHA from fish\n- Effects: Lower LDL; omega-3s reduce inflammation and triglycerides\n\n**Trans Fatty Acids**:\n- Created by partial hydrogenation of vegetable oils\n- Raises LDL AND lowers HDL (worst of both worlds)\n- Banned from US food supply as of 2020\n- Small amounts occur naturally in dairy/meat (ruminant trans fats; less harmful)\n\n**Essential Fatty Acids**:\n- Linoleic acid (omega-6) and alpha-linolenic acid (omega-3)\n- Body cannot synthesize; must obtain from diet\n- Precursors to longer-chain fatty acids and eicosanoids",
+      "keyTerms": [
+        { "term": "saturated fat", "definition": "Fatty acid with no double bonds in carbon chain; solid at room temperature; raises LDL cholesterol" },
+        { "term": "omega-3 fatty acids", "definition": "Polyunsaturated fats with first double bond at carbon 3; includes ALA (plant), EPA/DHA (fish); anti-inflammatory", "pronunciation": "oh-MAY-gah three" },
+        { "term": "trans fat", "definition": "Unsaturated fat with hydrogen atoms on opposite sides of double bond; artificial trans fats raise CVD risk" }
+      ],
+      "analogies": ["Saturated fats are like straight sticks that stack neatly (solid at room temp), while unsaturated fats have kinks that prevent stacking (liquid at room temp).", "Essential fatty acids are like essential amino acids - your body's factory can't make them, so you must import them from food."],
+      "examples": ["The Mediterranean diet, rich in olive oil (MUFA) and fish (omega-3), is associated with lower heart disease rates.", "Partially hydrogenated vegetable oil on ingredient labels indicates trans fat presence."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Lipid metabolism involves regulated pathways of absorption via micelle formation, transport via lipoproteins, and oxidation for energy, with fatty acid composition influencing eicosanoid synthesis and inflammatory pathways.",
+      "explanation": "**Fat Digestion and Absorption**:\n1. *Mouth/Stomach*: Lingual and gastric lipases begin triglyceride hydrolysis (~10-30%)\n2. *Duodenum*: CCK stimulates gallbladder contraction and pancreatic enzyme secretion; bile salts emulsify fat\n3. *Small intestine*: Pancreatic lipase + colipase hydrolyze triglycerides to 2-monoacylglycerol + free fatty acids\n4. *Micelle formation*: Bile salts solubilize products for absorption at brush border\n5. *Enterocyte processing*: Re-esterification to triglycerides; packaged into chylomicrons\n6. *Lymphatic transport*: Chylomicrons enter lacteals, then thoracic duct, then systemic circulation\n\n**Lipoprotein Metabolism**:\n- *Chylomicrons*: Dietary fat transport; deliver TG to tissues via LPL\n- *VLDL*: Hepatic TG export; becomes IDL then LDL\n- *LDL*: Primary cholesterol carrier to tissues; receptor-mediated uptake\n- *HDL*: Reverse cholesterol transport; picks up cholesterol from tissues, delivers to liver\n\n**Fatty Acid Oxidation**:\nBeta-oxidation in mitochondria: sequential 2-carbon removal generating acetyl-CoA, FADH2, NADH. Long-chain fatty acids require carnitine shuttle (CPT-I, CPT-II). Complete oxidation of palmitate (C16:0) yields 106 ATP.\n\n**Eicosanoid Pathways**:\nArachidonic acid (omega-6, 20:4) is substrate for:\n- *Cyclooxygenase (COX)*: Prostaglandins, thromboxanes (inflammation, platelet aggregation)\n- *Lipoxygenase (LOX)*: Leukotrienes (bronchoconstriction, inflammation)\n\nEPA (omega-3, 20:5) competes for same enzymes, producing less inflammatory eicosanoids. Higher omega-3:omega-6 ratio shifts balance toward resolution of inflammation.",
+      "keyTerms": [
+        { "term": "micelles", "definition": "Spherical aggregates of bile salts and lipid digestion products that facilitate fat absorption at intestinal brush border", "pronunciation": "my-SELLS" },
+        { "term": "chylomicron", "definition": "Large lipoprotein particle formed in enterocytes; transports dietary triglycerides via lymph to circulation", "pronunciation": "KY-loh-MY-kron" },
+        { "term": "beta-oxidation", "definition": "Mitochondrial pathway that breaks down fatty acids two carbons at a time, generating acetyl-CoA for TCA cycle" }
+      ],
+      "clinicalNotes": "Statins inhibit HMG-CoA reductase (cholesterol synthesis), upregulating LDL receptors. Fish oil (2-4g EPA+DHA) reduces triglycerides 25-30%; higher doses for severe hypertriglyceridemia. Icosapent ethyl (purified EPA) reduces cardiovascular events in statin-treated patients with elevated TG."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Dietary fat recommendations have evolved from total fat restriction to emphasis on fatty acid composition, with evidence supporting replacement of saturated fat with polyunsaturated fat and omega-3 supplementation for specific indications.",
+      "explanation": "**Saturated Fat and CVD Risk**:\nClassic diet-heart hypothesis: SFA raises LDL-C, which causes atherosclerosis. However, recent meta-analyses show:\n- Replacing SFA with PUFA: ~25% reduction in CVD events\n- Replacing SFA with refined carbohydrates: No benefit or possible harm\n- SFA effect varies by food matrix (dairy fat may be neutral)\n- Individual SFA differ: lauric (C12) raises HDL; palmitic (C16) more atherogenic; stearic (C18) neutral\n\nCurrent recommendation: <10% of calories from SFA; replace with PUFA, not refined carbs.\n\n**Omega-3 Fatty Acid Evidence**:\n- *ALA* (plant omega-3): Modest CVD benefit; poor conversion to EPA/DHA (<10%)\n- *EPA/DHA* (marine omega-3): Reduce triglycerides, may reduce CVD mortality\n- REDUCE-IT trial: Icosapent ethyl 4g/day reduced MACE 25% in high-risk patients on statins\n- VITAL, STRENGTH trials: Mixed results for general population supplementation\n- Current guidance: 250-500mg EPA+DHA daily for general health; 2-4g for hypertriglyceridemia\n\n**Medium-Chain Triglycerides (MCT)**:\nAbsorbed directly into portal circulation (bypass lymph), rapidly oxidized. Uses:\n- Malabsorption syndromes (short bowel, pancreatic insufficiency)\n- Ketogenic diet supplementation\n- Potential metabolic benefits (increased thermogenesis, satiety)\n\n**Dietary Fat and Body Composition**:\nIsocaloric studies show no advantage of low-fat vs. low-carb for fat loss. Protein intake and caloric deficit are primary determinants. High-fat ketogenic diets may offer advantages for appetite suppression and metabolic flexibility in some individuals.\n\n**Cholesterol Intake**:\n2015 Dietary Guidelines removed 300mg/day cholesterol limit; dietary cholesterol has modest effect on serum cholesterol in most individuals. Focus shifted to saturated and trans fat reduction. However, eggs and other cholesterol-rich foods still studied; individualized responses exist (hyper-responders).",
+      "keyTerms": [
+        { "term": "diet-heart hypothesis", "definition": "Theory that saturated fat raises LDL cholesterol, which promotes atherosclerosis and cardiovascular disease" },
+        { "term": "EPA (eicosapentaenoic acid)", "definition": "Omega-3 fatty acid from marine sources; reduces inflammation, triglycerides; substrate for less inflammatory eicosanoids", "pronunciation": "eye-KOH-sah-pen-tah-EE-no-ik" },
+        { "term": "DHA (docosahexaenoic acid)", "definition": "Omega-3 fatty acid critical for brain and retina structure; abundant in fatty fish; 50% of brain phospholipid fatty acids", "pronunciation": "DOH-koh-sah-hex-ah-EE-no-ik" }
+      ],
+      "clinicalNotes": "2019 ACC/AHA guideline: For severe hypertriglyceridemia (TG >500 mg/dL), omega-3 fatty acids 4g/day as first-line to prevent pancreatitis. For high-risk ASCVD patients with TG 135-499 mg/dL on maximally tolerated statins, icosapent ethyl 4g/day is reasonable to reduce CVD risk."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary lipid nutrition emphasizes food matrix effects, personalized responses, and integration of evidence from mechanistic studies, clinical trials, and observational data to optimize cardiovascular and metabolic health.",
+      "explanation": "**Current Dietary Fat Recommendations**:\n- *Total fat*: 20-35% of calories (AHA/ACC); Mediterranean pattern may exceed this with MUFA\n- *Saturated fat*: <10% calories (DGA); <7% for elevated LDL (ACC/AHA)\n- *Trans fat*: As low as possible; industrial trans fats largely eliminated from US food supply\n- *Omega-3*: 1.1-1.6g ALA/day (AI); 250-500mg EPA+DHA/day for CVD prevention\n- *Omega-6*: 5-10% calories (adequate intake)\n\n**Controversies and Nuances**:\n\n*Coconut oil*: High in lauric acid (C12, medium-chain); raises both LDL and HDL. Not equivalent to MCT oil. Insufficient evidence to recommend over other plant oils.\n\n*Dairy fat*: Food matrix effects may attenuate SFA impact. Fermented dairy (cheese, yogurt) associated with neutral or beneficial CVD outcomes. Whole-fat dairy not clearly worse than low-fat in observational studies.\n\n*Red meat*: Beyond SFA, may involve TMAO (from carnitine/choline), advanced glycation end products, heme iron. Processed meat more consistently associated with harm than unprocessed.\n\n**Personalized Nutrition Considerations**:\n- Genetic variants (APOE, FADS, PPAR) influence lipid responses to dietary fat\n- Lean mass hyper-responders: Marked LDL increase on low-carb, high-fat diets; clinical significance debated\n- Microbiome influences TMAO production and potentially CVD risk from meat consumption\n\n**Clinical Applications**:\n\n*Dyslipidemia*: Therapeutic lifestyle changes remain foundation. Mediterranean, DASH, or Portfolio diets reduce LDL 10-15%. Adding plant sterols/stanols (2g/day) adds 6-15% reduction.\n\n*Hypertriglyceridemia*: Limit refined carbs, alcohol, added sugars. Weight loss effective. Omega-3 fatty acids for pharmacologic reduction.\n\n*NAFLD/NASH*: Mediterranean diet improves steatosis; PUFA may be beneficial. Avoid excessive fructose and SFA.\n\n*Inflammatory conditions*: Higher omega-3:omega-6 ratio may benefit rheumatoid arthritis, IBD. Evidence strongest for EPA+DHA supplements.\n\n*Pregnancy*: DHA critical for fetal brain development. 200-300mg DHA/day recommended; caution with high-mercury fish.\n\n**Emerging Research**:\n- Specialized pro-resolving mediators (SPMs) derived from omega-3s actively resolve inflammation\n- Odd-chain saturated fats (C15:0, C17:0) from dairy may have beneficial effects\n- Interesterified fats (SFA replacements) require further study",
+      "keyTerms": [
+        { "term": "TMAO (trimethylamine N-oxide)", "definition": "Gut microbiome metabolite of choline/carnitine; associated with increased CVD risk; elevated by red meat consumption", "pronunciation": "T-M-A-O" },
+        { "term": "food matrix", "definition": "The physical structure and nutrient interactions within a food that influence digestion, absorption, and metabolic effects" },
+        { "term": "specialized pro-resolving mediators", "definition": "Lipid mediators derived from EPA and DHA (resolvins, protectins, maresins) that actively resolve inflammation" }
+      ],
+      "clinicalNotes": "AHA 2021 Dietary Guidance: Replace tropical oils and animal fats with liquid plant oils rich in PUFA and MUFA. Emphasize fatty fish twice weekly. Minimize industrially processed foods. Food-based approach preferred over supplements for most individuals. For elevated Lp(a), niacin and PCSK9 inhibitors may help; specific dietary interventions limited."
+    }
+  },
+
+  "media": [
+    {
+      "id": "fatty-acid-structures",
+      "type": "diagram",
+      "filename": "fatty_acid_types.svg",
+      "title": "Fatty Acid Structure Comparison",
+      "description": "Saturated, monounsaturated, and polyunsaturated fatty acid structures"
+    },
+    {
+      "id": "lipoprotein-metabolism",
+      "type": "diagram",
+      "filename": "lipoprotein_pathways.svg",
+      "title": "Lipoprotein Metabolism Overview",
+      "description": "Chylomicron, VLDL, LDL, and HDL pathways"
+    }
+  ],
+  "citations": [
+    {
+      "id": "aha-dietary-2021",
+      "type": "article",
+      "title": "2021 Dietary Guidance to Improve Cardiovascular Health",
+      "authors": ["Lichtenstein AH", "Appel LJ", "Vadiveloo M", "et al."],
+      "source": "Circulation",
+      "url": "https://doi.org/10.1161/CIR.0000000000001031"
+    },
+    {
+      "id": "reduce-it-2019",
+      "type": "article",
+      "title": "Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia",
+      "authors": ["Bhatt DL", "Steg PG", "Miller M", "et al."],
+      "source": "New England Journal of Medicine"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-carbohydrates", "targetType": "concept", "relationship": "sibling", "label": "Carbohydrates" },
+    { "targetId": "concept-proteins", "targetType": "concept", "relationship": "sibling", "label": "Proteins" },
+    { "targetId": "concept-omega3", "targetType": "concept", "relationship": "child", "label": "Omega-3 Fatty Acids" },
+    { "targetId": "condition-dyslipidemia", "targetType": "condition", "relationship": "related", "label": "Dyslipidemia" },
+    { "targetId": "diet-mediterranean", "targetType": "concept", "relationship": "related", "label": "Mediterranean Diet" }
+  ],
+  "tags": {
+    "systems": ["cardiovascular", "digestive"],
+    "topics": ["nutrition", "metabolism", "macronutrients", "lipids"],
+    "keywords": ["omega-3", "saturated fat", "cholesterol", "triglycerides", "cardiovascular"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

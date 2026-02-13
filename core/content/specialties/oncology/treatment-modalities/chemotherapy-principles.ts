@@ -1,0 +1,19 @@
+/** Chemotherapy Principles — EducationalContent */
+import { oncEdu } from '../helpers';
+
+export const chemotherapyPrinciples = oncEdu({
+  id: 'onc-chemotherapy-principles', name: 'Chemotherapy Principles', nameEs: 'Principios de quimioterapia',
+  altNames: ['Cytotoxic therapy', 'Cancer chemotherapy', 'Systemic chemotherapy'], type: 'concept',
+  l1: 'Chemotherapy uses powerful medicines to kill cancer cells or stop them from growing. It works because cancer cells divide faster than most normal cells. Side effects like hair loss, nausea, and low blood counts happen because chemo also affects some healthy fast-growing cells. Treatment is given in cycles to let your body recover between doses.',
+  l2: 'Chemotherapy drugs are classified by mechanism: alkylating agents (cyclophosphamide, cisplatin) damage DNA; antimetabolites (5-FU, methotrexate, gemcitabine) mimic building blocks; topoisomerase inhibitors (doxorubicin, irinotecan) prevent DNA unwinding; mitotic inhibitors (paclitaxel, vincristine) block cell division. Combination regimens (e.g., FOLFOX, R-CHOP, AC-T) target multiple pathways to reduce resistance. Dose-limiting toxicities vary by agent.',
+  l3: 'Norton-Simon hypothesis: tumor kill is proportional to growth fraction; Goldie-Coldman model predicts drug resistance increases with tumor burden, supporting early combination therapy. Log-kill kinetics: each cycle kills a fixed fraction of cells. Cell cycle-specific agents (antimetabolites, vinca alkaloids) act in S or M phase; cell cycle-nonspecific agents (alkylators, anthracyclines) act throughout. Dose intensity (mg/m2/week) correlates with outcomes; dose-dense scheduling (CALGB 9741) improves DFS in breast cancer. Growth factor support (G-CSF) enables dose-dense regimens.',
+  l4: 'Pharmacogenomics guides dosing: DPD deficiency (DPYD variants) causes lethal 5-FU toxicity; UGT1A1*28 predicts irinotecan toxicity; TPMT/NUDT15 testing before thiopurines. Maximum tolerated dose (MTD) paradigm shifting toward optimal biological dose for targeted agents. Intraperitoneal and intrathecal routes for peritoneal and CNS disease. Tumor lysis syndrome prevention with rasburicase for high-burden disease. Antiemetic protocols: 5-HT3 + NK1 antagonist + dexamethasone for highly emetogenic regimens; olanzapine added as fourth agent.',
+  l5: 'Antibody-drug conjugates (ADCs) represent chemotherapy evolution: linker chemistry, payload selection (MMAE, DXd, SN-38, PBD), and DAR (drug-antibody ratio) optimize therapeutic index. Sacituzumab govitecan (Trop-2), T-DXd (HER2), enfortumab vedotin (Nectin-4) demonstrate paradigm-changing efficacy. Bispecific antibodies bypassing chemotherapy in hematologic malignancies. Chemo-free regimens emerging: lenalidomide-rituximab in follicular lymphoma, venetoclax-obinutuzumab in CLL. Circulating tumor DNA for real-time chemosensitivity assessment. AI-driven dose optimization models incorporating pharmacokinetic variability under investigation.',
+  tags: { systems: ['hematologic', 'general'], topics: ['pharmacology', 'therapeutics', 'toxicology'], keywords: ['alkylating agents', 'antimetabolites', 'dose-dense', 'ADC', 'antiemetics', 'pharmacogenomics', 'log-kill'], clinicalRelevance: 'critical', examRelevance: { usmle: true, nbme: true, shelf: ['medicine', 'surgery'] } },
+  crossRefs: [
+    { targetId: 'onc-immunotherapy', targetType: 'concept', relationship: 'sibling', label: 'Immunotherapy' },
+    { targetId: 'onc-radiation-therapy', targetType: 'concept', relationship: 'sibling', label: 'Radiation Therapy' },
+    { targetId: 'onc-breast-treatment', targetType: 'topic', relationship: 'related', label: 'Breast Cancer Treatment' },
+    { targetId: 'onc-lung-staging', targetType: 'topic', relationship: 'related', label: 'Lung Cancer Staging & Treatment' },
+  ],
+});

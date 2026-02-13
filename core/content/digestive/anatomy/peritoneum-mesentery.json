@@ -1,0 +1,101 @@
+{
+  "id": "structure-peritoneum-mesentery",
+  "type": "structure",
+  "name": "Peritoneum and Mesentery",
+  "alternateNames": ["Peritoneal cavity", "Abdominal membrane"],
+  "fmaId": "FMA:9584",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The peritoneum is a slippery membrane that covers your abdominal organs and helps them slide against each other smoothly.",
+      "explanation": "Imagine a plastic wrap that lines the inside of your belly and also wraps around many of your organs. This is the peritoneum. It makes a slippery fluid so organs can move and slide without rubbing painfully. Some organs like the stomach hang freely, attached by sheets of tissue (like curtains) called mesentery. The mesentery holds organs in place and carries blood vessels and nerves to them.",
+      "keyTerms": [
+        { "term": "membrane", "definition": "A thin layer of tissue that covers or lines body parts" },
+        { "term": "mesentery", "definition": "Sheets of tissue that attach organs to the back wall of your belly" },
+        { "term": "abdominal cavity", "definition": "The space inside your belly where many organs are located" }
+      ],
+      "analogies": ["The peritoneum is like the inside of a balloon that has been folded around your organs - one layer lines the wall, another wraps the organs."],
+      "examples": ["When you twist or bend, your intestines can shift around without getting tangled because of the slippery peritoneum."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The peritoneum consists of parietal (lining the abdominal wall) and visceral (covering organs) layers, with the mesentery connecting organs to the posterior abdominal wall and conveying vessels.",
+      "explanation": "The peritoneum is a serous membrane (like pleura and pericardium). Parietal peritoneum lines the abdominal wall; visceral peritoneum covers intraperitoneal organs. The potential space between contains ~50 mL of lubricating serous fluid. Organs are classified as intraperitoneal (suspended by mesentery: stomach, jejunum, ileum, transverse colon, sigmoid, spleen, liver) or retroperitoneal (behind peritoneum: kidneys, pancreas, duodenum, ascending/descending colon). The greater omentum hangs from the stomach, and the lesser omentum connects stomach/duodenum to the liver. The falciform ligament attaches the liver to the anterior wall.",
+      "keyTerms": [
+        { "term": "parietal peritoneum", "definition": "Peritoneum lining the abdominal wall", "pronunciation": "pah-RY-eh-tal" },
+        { "term": "visceral peritoneum", "definition": "Peritoneum covering the organs", "pronunciation": "VIS-er-al" },
+        { "term": "greater omentum", "definition": "Large fat-containing apron hanging from stomach over intestines; 'policeman of the abdomen'" }
+      ],
+      "analogies": ["Retroperitoneal organs are like pictures hung on a wall (behind the peritoneum), while intraperitoneal organs are like hanging plants (suspended in front)."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The peritoneal cavity is divided into greater and lesser sacs, with the mesentery representing a continuous structure carrying vasculature, lymphatics, and nerves, and the omentum providing immune and inflammatory functions.",
+      "explanation": "The lesser sac (omental bursa) is posterior to the stomach, accessed via the epiploic foramen of Winslow. It allows free movement of the stomach. The greater sac is the remaining peritoneal cavity. Embryologically, the mesentery is continuous from the duodenojejunal flexure to the rectum, though some portions fuse with the posterior wall. The mesenteric root runs from the left of L2 to the right sacroiliac joint, containing the superior mesenteric vessels. The greater omentum contains macrophages and lymphoid aggregates (milky spots), playing an immune surveillance role and walling off infection. Peritoneal mesothelial cells produce fluid, plasminogen activator inhibitor (PAI-1), and respond to injury with adhesion formation.",
+      "keyTerms": [
+        { "term": "lesser sac", "definition": "Omental bursa; peritoneal space posterior to stomach, accessed via epiploic foramen" },
+        { "term": "epiploic foramen", "definition": "Foramen of Winslow; communication between lesser and greater sacs" },
+        { "term": "milky spots", "definition": "Lymphoid aggregates in omentum; sites of peritoneal immune surveillance" }
+      ],
+      "clinicalNotes": "Adhesions from prior surgery or inflammation can cause bowel obstruction. Peritoneal carcinomatosis involves tumor seeding across peritoneal surfaces."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Peritoneal physiology involves fluid homeostasis between mesothelial secretion and lymphatic absorption, transport of particles via stomata, and the inflammatory response in peritonitis with fibrin deposition and adhesion formation.",
+      "explanation": "Normal peritoneal fluid (~50 mL) contains electrolytes similar to plasma, mesothelial cells, macrophages, and proteins (lower concentration than plasma). Fluid filters from subperitoneal capillaries, is reabsorbed via lymphatic stomata on the diaphragmatic surface. Particles, bacteria, and tumor cells can also enter stomata. Peritoneal macrophages provide first-line immunity. Injury or infection triggers mesothelial activation, inflammatory mediator release (IL-1, IL-6, TNF-alpha), increased vascular permeability, fibrin deposition, and neutrophil infiltration. Fibrin can be degraded by tissue plasminogen activator (tPA), but if PAI-1 predominates, fibrinous adhesions organize into permanent fibrous adhesions. Spontaneous bacterial peritonitis (SBP) occurs when bacteria translocate across the gut wall or via lymphatic/hematogenous routes in ascites; diagnosis by ascitic fluid PMN >250/mm3.",
+      "keyTerms": [
+        { "term": "stomata", "definition": "Openings in mesothelium connecting peritoneal cavity to lymphatic lacunae; located mainly on diaphragmatic peritoneum" },
+        { "term": "SBP", "definition": "Spontaneous bacterial peritonitis; infection of ascites without identifiable surgical source; common in cirrhosis" },
+        { "term": "adhesions", "definition": "Fibrous bands between organs or to abdominal wall resulting from surgery, infection, or inflammation" }
+      ],
+      "clinicalNotes": "Adhesion prevention strategies: minimize tissue handling, keep tissues moist, use adhesion barriers. SBP prophylaxis with norfloxacin or TMP-SMX in cirrhotic patients with GI bleeding or prior SBP."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical assessment of peritoneal pathology involves paracentesis, imaging, diagnostic laparoscopy, and management of ascites, peritonitis, peritoneal carcinomatosis, and mesenteric vascular disease.",
+      "explanation": "Ascites evaluation: diagnostic paracentesis for new ascites. Serum-ascites albumin gradient (SAAG) >1.1 indicates portal hypertension (cirrhosis, heart failure); <1.1 suggests peritoneal carcinomatosis, TB, pancreatitis. Low protein (<2.5 g/dL) ascites at higher SBP risk. Secondary bacterial peritonitis: multiple organisms, protein >1 g/dL, glucose <50, LDH >upper limit; requires imaging and surgery. Peritoneal carcinomatosis: often from ovarian, colorectal, appendiceal, gastric primaries. Cytoreductive surgery with HIPEC (hyperthermic intraperitoneal chemotherapy) for selected patients. Peritoneal dialysis uses the peritoneum as a dialysis membrane. Mesenteric ischemia: acute (SMA embolism or thrombosis) presents with pain out of proportion to exam, acidosis, elevated lactate; CT angiography diagnostic; treatment is surgical embolectomy/thrombectomy or endovascular intervention with bowel resection as needed. Chronic mesenteric ischemia: postprandial pain, weight loss; mesenteric angiography; revascularization indicated.",
+      "keyTerms": [
+        { "term": "SAAG", "definition": "Serum-ascites albumin gradient; (serum albumin) - (ascites albumin); >1.1 indicates portal hypertension" },
+        { "term": "HIPEC", "definition": "Hyperthermic intraperitoneal chemotherapy; heated chemo delivered during cytoreductive surgery for peritoneal carcinomatosis" },
+        { "term": "mesenteric ischemia", "definition": "Inadequate blood supply to the intestines; acute is a surgical emergency with high mortality" }
+      ],
+      "clinicalNotes": "Ascites management in cirrhosis: sodium restriction, diuretics (spironolactone + furosemide), large-volume paracentesis with albumin replacement, TIPS for refractory cases. Chylous ascites (triglycerides >200 mg/dL) from lymphatic disruption - treat underlying cause, low-fat diet with MCT."
+    }
+  },
+
+  "media": [
+    {
+      "id": "peritoneum-3d",
+      "type": "3d-model",
+      "filename": "peritoneum.glb",
+      "title": "3D Peritoneum Model",
+      "description": "Interactive 3D model showing peritoneal reflections, mesentery, and omentum"
+    }
+  ],
+  "citations": [
+    {
+      "id": "grays-anatomy-peritoneum",
+      "type": "textbook",
+      "title": "Gray's Anatomy",
+      "source": "Elsevier",
+      "chapter": "Peritoneum and Peritoneal Cavity"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-small-intestine", "targetType": "structure", "relationship": "related", "label": "Small Intestine" },
+    { "targetId": "structure-gi-blood-supply", "targetType": "structure", "relationship": "related", "label": "GI Blood Supply" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:9584"],
+    "topics": ["anatomy"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery", "medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

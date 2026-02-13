@@ -1,0 +1,617 @@
+import { WomensHealthContent } from '../types';
+
+export const endometriosis: WomensHealthContent = {
+  id: 'endometriosis',
+  title: 'Endometriosis',
+  category: 'Reproductive Conditions',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Endometriosis',
+      content: `Endometriosis is a condition where tissue similar to the lining of the uterus grows outside the uterus. It can cause pain and other problems.
+
+**What is Endometriosis?**
+- Tissue similar to uterine lining grows elsewhere
+| Common locations: ovaries, fallopian tubes, bladder, bowel
+| This tissue responds to hormones just like uterine lining
+| Can cause pain, scarring, and infertility
+
+**Common Symptoms:**
+| Pelvic pain (especially during periods)
+| Pain with intercourse
+| Heavy or irregular bleeding
+| Pain with bowel movements or urination
+| Infertility
+
+**Diagnosis:**
+| Medical history and symptom review
+| Physical exam
+| Imaging (ultrasound, MRI)
+| Laparoscopy (definitive diagnosis)
+
+**Treatment Options:**
+| Pain relievers (NSAIDs)
+| Hormonal therapies (birth control pills, progestins)
+| Surgery to remove implants
+| Lifestyle changes
+
+**Impact on Fertility:**
+| Can make it harder to get pregnant
+| Many women with endometriosis can still get pregnant
+| Treatment may improve fertility
+
+**Remember:** Endometriosis is common and treatable. If you have symptoms, talk to a healthcare provider.
+`,
+      keyPoints: [
+        'Endometriosis is when uterine-like tissue grows outside the uterus',
+        'Pelvic pain is the most common symptom',
+        'Can cause infertility but doesn\'t always',
+        'Treatment includes medications, surgery, or both',
+      ],
+      vocabulary: [
+        { term: 'Endometriosis', definition: 'Condition where uterine tissue grows outside uterus' },
+        { term: 'Implant', definition: 'Endometriosis tissue growing outside uterus' },
+        { term: 'Laparoscopy', definition: 'Surgery to view pelvic organs' },
+        { term: 'Infertility', definition: 'Difficulty getting pregnant' }
+      ],
+      quiz: [
+        {
+          question: 'What is the hallmark symptom of endometiosis?',
+          options: [
+            'Heavy bleeding',
+            'Pain that gets worse during menstruation',
+            'Irregular periods',
+            'No symptoms in most cases',
+          ],
+          correctAnswer: 1,
+          explanation: 'The hallmark symptom of endometosis is pain that gets worse during menstruation, including pelvic pain, back pain, and pain with intercourse.',
+        },
+        {
+          question: 'How is endometriosis definitively diagnosed?',
+          options: [
+            'Blood tests',
+            'Ultrasound',
+            'Laparoscopy (surgery)',
+            'MRI scan',
+          ],
+          correctAnswer: 2,
+          explanation: 'Laparoscopy is the definitive diagnostic test for endometriosis, allowing direct visualization and potential biopsy of implants.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Endometriosis Clinical Features',
+      content: `Endometriosis affects approximately 10% of reproductive-age women and is a leading cause of pelvic pain and infertility.
+
+**Staging Systems:**
+
+**Revised ASRM Stages (1996):**
+
+| Stage | Description | Location |
+|-------|-------------|
+| I | Minimal | Superficial peritoneal implants |
+| II | Mild | Some deeper implants |
+| III | Moderate | Deep implants with adhesions |
+| IV | Severe | Endometriomas present |
+
+**Enzian Classification:**
+
+| Stage | Implants | Description |
+|-------|----------|-------------|
+| I | Minimal | Small, superficial implants |
+| II | Mild | Some deeper implants |
+| III | Moderate | Deep implants with adhesions |
+| IV | Severe | Endometriomas present |
+
+**Clinical Presentation:**
+
+| Symptom | Frequency | Description |
+|--------|-----------|-------------|
+| Dysmenorrhea | 40-60% | Painful periods |
+| Dyspareunia | 30-50% | Painful intercourse |
+| Dyschezia | 30-40% | Painful bowel movements |
+| Menstrual dyspareunia | 40-60% | Pain during or immediately before menses |
+| Chronic pelvic pain | 30-50% | Constant pelvic pain |
+| Infertility | 30-40% | Difficulty conceiving |
+
+**Physical Examination:**
+| May be normal (30%)
+| Tender nodules on pelvic exam (30%)
+| Retroverted uterus (30%)
+| Uterosacral nodularity
+| Restricted uterine mobility
+
+**Risk Factors:**
+| Early menarche
+| Short menstrual cycles (≤27 days)
+| Heavy menstrual periods
+| Prolonged menstrual bleeding
+| Family history
+| Nulliparity
+| Low body weight
+
+**Natural History:**
+| Can progress, stabilize, or regress
+| Pregnancy often improves symptoms temporarily
+| Symptoms often improve after menopause
+| Hysterectomy with oophorectomy is curative
+
+**Diagnostic Evaluation:**
+
+| Test | Indication | Finding |
+|------|------------|---------|
+| Transvaginal ultrasound | First-line | Chocolate cysts, endometriomas |
+| CA-125 | Adnexal mass marker | Mildly elevated in endometriosis |
+| MRI | Complex cases | Deep infiltrative disease |
+| Laparoscopy | Definitive | Visual diagnosis, histology |
+
+| CA-125 Limitations:|
+| Elevated in many conditions (fibroids, cancer, infection)
+| Limited sensitivity for early disease
+| Best for monitoring response to treatment
+
+**Treatment:**
+| Pain management (NSAIDs, hormonal, surgery)
+| Hormonal suppression
+| Fertility treatment if desired
+`,
+      keyPoints: [
+        'Endometriosis affects 10% of reproductive-age women',
+        'ASRM stages I-IV and Enzian classification describe severity',
+        'CA-125 is a marker but not diagnostic for endometriosis',
+        'Laparoscopy provides definitive diagnosis and treatment',
+      ],
+      vocabulary: [
+        { term: 'Dysmenorrhea', definition: 'Painful menstrual cramping' },
+        { term: 'Dyspareunia', definition: 'Painful intercourse' },
+        { term: 'Endometrioma', definition: 'Chocolate cyst - endometrioma of ovary' },
+        { term: 'Retroverted Uterus', definition: 'Tipped backward uterus' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most common symptom of endometriosis?',
+          options: [
+            'Heavy bleeding',
+            'Pain that gets worse during menstruation',
+            'Irregular periods',
+            'No symptoms in most cases',
+          ],
+          correctAnswer: 1,
+          explanation: 'The most common symptoms of endometriosis are dysmenorrhea (painful periods) and dyspareunia (painful intercourse), both typically worsening during menstruation.',
+        },
+        {
+          question: 'What is an endometrioma?',
+          options: [
+            'A cyst on the ovary',
+            'Endometriosis implant on the ovary',
+            'A cystadenoma',
+            'Ovarian cancer',
+          ],
+          correctAnswer: 1,
+          explanation: 'An endometrioma is a cystic mass on the ovary containing endometriosis implant. It\'s often called a "chocolate cyst" due to its appearance.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Endometriosis Pathophysiology and Management',
+      content: `Endometriosis is a condition where endometrial tissue implants outside the uterus, causing inflammation, pain, and scarring.
+
+**Pathophysiology:**
+
+**Implantation Theory:**
+| Retrograde menstruation most accepted theory
+| Endometrial cells flow backward through tubes
+| Implant on peritoneal surfaces
+| Viable tissue establishes blood supply
+| Occurs in 76-90% of women
+
+**Coelomic Metaplasia:|
+| Transformation of coelomic epithelium into endometrial tissue
+| Explains endometriosis in unusual locations (pleura, pericardium)
+| Explains cases in girls before menarche
+
+**Inflammation:**
+| Chronic inflammatory state
+| Implants produce inflammatory mediators:
+  - Prostaglandins (PGE2, PGF2α)
+  - Cytokines (IL-1β, IL-6, TNF-α)
+| Inflammatory infiltrates activate sensory nerves
+| Causes pain and scarring
+
+**Hormonal Response:**
+| Ectopic endometrium responds to hormones
+| Creates estrogen and progesterone receptors
+| Cyclic bleeding causes microscopic bleeding
+| Inflammation triggers fibrosis
+
+**Clinical Presentation by Location:**
+
+| Location | Symptoms |
+|----------|----------|
+| Ovarian (endometrioma) | Mass, pain, elevation of CA-125 |
+| Peritoneal implants | Pelvic pain, adhesions |
+| Uterosacral ligaments | Pain, nodularity |
+| Bladder | Dysuria, urgency, hematuria |
+| Bowel | Dyschezia, constipation, bleeding |
+| Diaphragm | Shoulder pain, dyspnea |
+| Vagina | Pain with intercourse, spotting |
+
+**Diagnostic Algorithms:**
+
+| Indication | Test | Finding |
+|-----------|------|---------|
+| Chronic pelvic pain | Pelvic ultrasound | May show endometriomas |
+| Adnexal mass | CA-125 | May be elevated |
+| Infertility | Laparoscopy | Visual confirmation |
+| Suspicious mass | MRI | Deep infiltrative disease |
+
+**Surgical Staging:**
+| ASRM classification based on:
+| - Superficial vs. deep implants
+| - Presence/absence of adhesions
+| - Endometrioma presence/size
+| - Complete vs. incomplete resection
+
+**Management:**
+
+**Pain Management:**
+| NSAIDs (naproxen, ibuprofen) - first-line
+| Hormonal suppression
+| Laparoscopic excision with ablation
+| Hysterectomy with oophorectomy (definitive)
+
+**Hormonal Suppression:**
+| Combined oral contraceptives
+| Progestin-only methods
+| GnRH agonists/antagonists (add-back needed)
+| Aromatase inhibitors (experimental)
+| Surgical menopause (definitive)
+
+**Fertility Considerations:**
+| 30-40% of infertile women have endometriosis
+| Treat with surgical excision + medical management
+| IVF success rates lower if stage III/IV disease
+| Consider earlier referral for ART
+
+**Surgical Approaches:**
+
+| Stage | Approach | Fertility Preservation |
+|-------|----------|-----------------------|
+| I | Excision/ablation | Preserves ovarian tissue |
+| II | Excision/ablation | Preserves ovarian tissue |
+| III | Excision/ablation | Can preserve some ovarian tissue |
+| IV | Excision/ablation | May require oophorectomy |
+
+| Adhesiolysis:|
+| Essential for pain relief and fertility
+| Prevents adhesion reformation
+| Barriers used to prevent re-adhesion |
+| Surgical technique critical
+| Hyaluronic acid may reduce adhesions
+`,
+      keyPoints: [
+        'Retrograde menstruation is the leading theory for endometriosis',
+        'Chronic inflammation causes pain and scarring',
+        'Surgical staging guides treatment approach',
+        'Adhesion prevention is critical for surgical outcomes',
+      ],
+      vocabulary: [
+        { term: 'Retrograde Menstruation', definition: 'Backward flow of menstrual blood through tubes' },
+        { term: 'Coelomic Metaplasia', definition: 'Transformation of one cell type to another' },
+        { term: 'Ablation', definition: 'Destroying tissue with heat, laser, or energy' },
+        { term: 'Add-back Therapy', definition: 'Low-dose hormones given with GnRH agonists' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most accepted theory for endometriosis pathogenesis?',
+          options: [
+            'Autoimmune disease',
+            'Retrograde menstruation',
+            'Direct transplantation',
+            'Infection',
+          ],
+          correctAnswer: 1,
+          explanation: 'Retrograde menstruation is the most widely accepted theory, explaining how endometrial tissue reaches the pelvis through the fallopian tubes.',
+        },
+        {
+          question: 'What is the primary mechanism of pain in endometosis?',
+          options: [
+            'Direct nerve compression',
+            'Chronic inflammation and inflammatory mediators',
+            'Muscle tension',
+            'Hormone deficiency',
+          ],
+          correctAnswer: 1,
+          explanation: 'The primary mechanism of pain in endometosis is chronic inflammation, with implants producing prostaglandins and cytokines that activate sensory nerves and cause fibrosis.',
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Advanced Management of Endometriosis',
+      content: `Complex endometriosis requires individualized treatment balancing pain control, fertility preservation, and long-term management.
+
+**Medical Management:**
+
+**NSAIDs:**
+| Mechanism: Inhibit prostaglandin synthesis
+| Options: Naproxen, ibuprofen, diclofenac
+| Efficacy: 60-70% for mild-moderate pain
+| Side effects: GI upset, renal toxicity
+| Long-acting formulations (studies suggest efficacy)
+| Limit: Can't be used long-term
+
+**Hormonal Suppression:**
+
+**Combined Oral Contraceptives:**
+| Suppress ovarian function
+| Create atrophic endometrium
+| Reduce pain in 60-80%
+| Skip placebo week for continuous use
+| Risk: VTE (especially with smoking)
+
+**Progestin-Only:**
+| Norethindrone acetate 5-10 mg daily
+| Medroxyprogesterone acetate 10-30 mg daily
+| Effective for many patients
+| No VTE risk
+| May cause irregular bleeding
+
+**GnRH Agonists:**
+| Leuprolide, goserelin, nafarelin
+| Creates medical menopause
+| Add-back therapy (estrogen/progesterone) if needed
+| Limit to 6 months (bone loss concerns)
+| Side effects: Hot flashes, bone loss
+
+| GnRH Antagonists:|
+| Elagolix, relugolix, linzagolix
+| Rapid onset, shorter duration
+| Add-back therapy included
+| Fewer side effects than agonists
+| Limited availability
+
+| Aromatase Inhibitors:|
+| Letrozole, anastrozole, exemestane
+| Reduces estrogen levels
+| Limited side effects
+| May be combined with progestins
+
+**Surgical Management:**
+
+| Procedure | Indication | Fertility Preservation |
+|-----------|------------|---------------------|
+| Laparoscopic excision | Pain, infertility | Excision with/without ablation |
+| Laparoscopic ablation | Pain control | Excision preferred for fertility |
+| Hysterectomy | Pain control | Not an option |
+| Oophorectomy | Cancer risk, definitive | Not an option |
+| Bowel/Bladder resection | Deep infiltrative | Careful dissection |
+
+**Fertility Preservation:**
+
+| Consideration | Approach |
+|---------------|------------|
+| Mild disease | Excision with/without ablation |
+| Moderate disease | Excision with ablation |
+| Severe (Stage IV) | Excision with ablation, consider IVF later |
+| Bowel/bladder involvement | Excision of implants, consider specialist referral |
+| Ovarian involvement | Cystectomy if possible |
+
+| Outcomes:|
+| 40-50% conceive spontaneously after surgery
+| 30-40% require ART
+| Stage III/IV has lower fertility
+| Adhesion reformation is common
+
+| Prevention Strategies:|
+| Meticulous surgical technique
+| Minimize tissue damage
+| Irrigation
+| Avoid excessive electrocoagulation
+| Hydrodissection
+| Adhesion barriers (Seprafilm, Intercede, Adept, Intercede)
+| Peritoneal lavage
+| Ovarian suspension techniques
+
+| Post-Op Prevention:|
+| Hydroxyprogesterone (study promising)
+| Hormonal suppression
+| Early second-look laparoscopy (controversial)
+`,
+      keyPoints: [
+        'NSAIDs are first-line for pain management',
+        'Hormonal suppression effectively treats pain and prevents disease progression',
+        'Laparoscopic excision with ablation balances pain control and fertility',
+        'Adhesion prevention improves surgical outcomes',
+      ],
+      vocabulary: [
+        { term: 'Ablation', definition: 'Destruction of tissue with heat, laser, or energy' },
+        { term: 'Hydroxyprogesterone', definition: 'Form of progesterone studied for adhesion prevention' },
+        { term: 'Adhesion Barriers', definition: 'Physical barriers placed to prevent scar tissue formation' },
+        { term: 'Ovarian S suspension', definition: 'Technique to keep ovary from pelvic organs' }
+      ],
+      quiz: [
+        {
+          question: 'What is the advantage of GnRH antagonists over agonists for endometriosis?',
+          options: [
+            'Better pain control',
+            'Fewer side effects and shorter treatment time',
+            'Permanent treatment, no recurrence',
+            'Available as over-the-counter',
+          ],
+          correctAnswer: 1,
+          explanation: 'GnRH antagonists have fewer side effects (especially fewer hot flashes and bone loss) and shorter duration of action compared to agonists.',
+        },
+        {
+          question: 'When is hysterectomy indicated for endometriosis?',
+          options: [
+            'Mild disease with some pain',
+            'Severe symptoms after conservative management',
+            'Any diagnosis of endometriosis',
+            'Teenagers with endometriosis',
+          ],
+          correctAnswer: 1,
+          explanation: 'Hysterectomy is indicated for severe symptoms that haven\'t responded to conservative management after other treatments have failed. This is definitive surgery and ends fertility.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Endometriosis Concepts',
+      content: `Endometriosis is a complex condition involving genetics, stem cell biology, and chronic inflammation.
+
+**Pathogenesis:**
+
+**Stem Cell Theory:**
+| Endometrial stem cells residing in endometrium
+| Retrograde transport to pelvis
+| Ability to implant and differentiate
+| Explains endometriosis in distant locations
+
+**Clonality:|
+| Lesions are clonal
+| Each implant arises from single cell
+| Different metastatic potential
+| Somatic mutations in lesions (cancer driver mutations)
+
+**Inflammatory Milieu:**
+| Implants secrete inflammatory mediators:
+  - Prostaglandins (PGE2, PGF2α)
+  - Cytokines (IL-1β, IL-6, TNF-α)
+  - Growth factors (VEGF, EGF, PDGF)
+| Recruited immune cells:
+  - Macrophages
+  - Natural killer cells
+  - Mast cells
+  | Neutrophils
+| Fibrosis promoted by chronic inflammation
+
+**Pain Mechanisms:**
+
+**Inflammatory Pain:|
+| Prostaglandins sensitize nociceptors
+| Inflammatory cytokines activate nerves
+| Central and peripheral sensitization
+| Reduced pain threshold
+
+| Neurogenic Inflammation:|
+| Substance P released from nerve endings
+| Activates mast cells
+| Increases vascular permeability
+| Enhances pain signaling
+
+**Visceral Hyperalgesia:|
+| Increased sensitivity to pain
+| Heightened response to stimuli
+| Organ-specific patterns:
+  - Bladder urgency/pain
+  - Bowel pain/cramping
+  - Uterus cramping
+
+**Fibrosis Mechanisms:**
+| TGF-β stimulates fibroblast activation
+| Fibroblasts deposit collagen
+| Extracellular matrix accumulation
+| Tissue remodeling and scarring
+| Adhesion formation
+
+**Advanced Imaging:**
+
+**MRI for Deep Infiltrating Disease:|
+| Superior for deep infiltrative endometriosis
+| Can detect:
+  | - Rectovaginal septum
+  | - Uterosacral ligament disease
+  | | - Bladder/bowel involvement
+| 99% sensitivity for deep disease
+
+| Limitations:|
+| Cost considerations
+| Limited availability
+| Not needed for all cases
+
+| Ultrasound:|
+| First-line imaging
+| Detects endometriomas
+| Limited for deep peritoneal disease
+| Operator-dependent
+
+| Markers:|
+| CA-125: Non-specific marker
+| Anti-Müllerian Hormone (AMH): May be elevated
+| Serum and peritoneal fluid levels
+| Not routinely used clinically
+
+**Molecular Classifications:**
+| Superficial vs. deep infiltrating
+| Inflammatory phenotype
+| Hormone receptor expression
+| Genetic profile
+| Protein expression patterns
+
+| Precision Medicine:|
+| Hormone receptor genotyping
+| Inflammatory markers
+| Genetic susceptibility
+| Treatment response prediction
+
+| Future Directions:|
+| Targeted anti-inflammatory therapies
+| Aromatase inhibitors
+| Selective progesterone modulators (SPRMs)
+| Anti-angiogenic therapies
+| Epigenetic modulators
+| Gene expression profiling
+`,
+      keyPoints: [
+        'Endometriosis likely originates from stem cells with retrograde transport',
+        'Chronic inflammation causes pain and fibrosis',
+        'MRI is superior for detecting deep infiltrating disease',
+        'Molecular classifications may guide targeted therapies',
+      ],
+      vocabulary: [
+        { term: 'Clonality', definition: 'Cells arising from single cell' },
+        { term: 'Visceral Hyperalgesia', definition: 'Increased sensitivity to visceral pain' },
+        { term: 'TGF-β', definition: 'Transforming Growth Factor-beta - promotes fibrosis' },
+        { term: 'SPRMs', definition: 'Selective Progesterone Receptor Modulators' }
+      ],
+      quiz: [
+        {
+          question: 'What is the stem cell theory of endometriosis?',
+          options: [
+          'Endometriosis is cancerous',
+          'Endometrial stem cells travel through tubes and implant',
+          'It\'s caused by infection',
+          'It\'s purely genetic',
+          ],
+          correctAnswer: 1,
+          explanation: 'The stem cell theory proposes that endometrial stem cells in the uterine lining travel through the fallopian tubes and implant in the pelvis, where they grow and respond to hormones.',
+        },
+        {
+          question: 'Why is MRI superior for detecting deep infiltrating endometriosis?',
+          options: [
+            'Better at seeing small implants',
+            'It provides better soft tissue contrast for deep disease',
+            'It detects hormonal changes',
+            'It is less expensive',
+          ],
+          correctAnswer: 1,
+          explanation: 'MRI provides superior soft tissue characterization for deep infiltrating endometriosis, detecting features like rectovaginal septum, uterosacral ligament disease, and involvement of bowel and bladder.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-cycle',
+    'dysmenorrhea',
+    'infertility',
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'ASRM Practice Bulletin No. 114',
+    'ESHE Guideline on Endometriosis',
+    'UpToDate on Endometriosis',
+  ]
+}

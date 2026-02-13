@@ -1,0 +1,155 @@
+{
+  "id": "condition-specific-phobias",
+  "type": "condition",
+  "category": "anxiety-disorder",
+  "name": "Specific Phobias",
+  "alternateNames": ["Simple Phobias", "Phobias", "Isolated Phobias"],
+  "icd10": "F40.2xx",
+  "dsm5": "300.29",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "A specific phobia is an intense, irrational fear of a particular object or situation that leads you to avoid it, even though you know the fear is out of proportion.",
+      "explanation": "While many people feel uncomfortable around spiders or don't love heights, a specific phobia goes beyond normal discomfort. The fear is so intense that it causes real distress and leads people to go out of their way to avoid the feared object or situation. Someone with a phobia of dogs might cross the street to avoid one, or someone with a needle phobia might avoid needed medical care. The good news is that specific phobias respond very well to treatment - often just a few sessions of exposure therapy can make a huge difference.",
+      "keyTerms": [
+        { "term": "phobia", "definition": "An intense, irrational fear of something specific" },
+        { "term": "irrational", "definition": "Not based on logic or reason; the person often knows the fear is excessive" },
+        { "term": "avoidance", "definition": "Going out of your way to not encounter the feared thing" }
+      ],
+      "analogies": ["A phobia is like your brain's alarm system being set too sensitive for one specific thing - it goes off at full blast even when the actual danger is tiny or nonexistent."],
+      "examples": ["Common phobias include fear of spiders, snakes, heights, flying, blood, needles, enclosed spaces, and specific animals. Someone with a flying phobia might drive 20 hours rather than take a 2-hour flight."],
+      "importantNote": "Having a phobia doesn't mean you're weak or cowardly. Phobias are learned responses that can be unlearned with the right help."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Specific phobias require marked fear or anxiety about a specific object or situation that is avoided or endured with intense anxiety, persisting 6+ months with significant impairment.",
+      "explanation": "DSM-5 criteria: marked fear/anxiety about a specific object or situation (phobic stimulus); the phobic stimulus almost always immediately provokes fear/anxiety; phobic stimulus is actively avoided or endured with intense fear; fear is out of proportion to actual danger; persists 6+ months; causes significant distress or impairment. DSM-5 specifier types: animal (spiders, snakes, dogs); natural environment (heights, storms, water); blood-injection-injury (BII - unique physiology); situational (flying, enclosed spaces, elevators); other (choking, vomiting, loud sounds, costumed characters). BII phobia involves vasovagal response with potential fainting - unique among phobias.",
+      "keyTerms": [
+        { "term": "phobic stimulus", "definition": "The specific object or situation that triggers the phobic fear response" },
+        { "term": "blood-injection-injury phobia", "definition": "Phobia subtype with unique vasovagal fainting response", "pronunciation": "BII phobia" },
+        { "term": "vasovagal response", "definition": "Drop in heart rate and blood pressure that can cause fainting; occurs in BII phobia" },
+        { "term": "situational phobia", "definition": "Fear of specific situations like flying, driving, elevators, or enclosed spaces" }
+      ],
+      "diagnosticCriteria": "Marked fear + immediate anxiety + avoidance/endurance + disproportionate + 6+ months + impairment",
+      "prevalence": "Lifetime prevalence 7-9%; most common anxiety disorder; F:M ratio 2:1; bimodal onset (childhood for animal/BII, adolescence/young adulthood for situational)"
+    },
+    "3": {
+      "level": 3,
+      "summary": "Specific phobias involve conditioned fear responses with inadequate extinction; exposure therapy is the treatment of choice with very high efficacy.",
+      "explanation": "Etiology: conditioning model (phobic fear acquired through direct traumatic experience, observation, or information transmission); preparedness theory (evolutionary predisposition to fear ancestral threats like snakes/spiders); non-associative model (some fears emerge without learning). Neurobiologically: amygdala activation to phobic stimulus; impaired prefrontal inhibition of fear; enhanced fear conditioning. Treatment: exposure therapy is first-line and highly effective (often 80-90% response rates). In vivo exposure (real-life contact) is most effective; graduated exposure hierarchy from least to most feared; systematic desensitization (exposure with relaxation) or flooding (intense immediate exposure). One-session treatment (OST) - intensive 2-3 hour single session - effective for many specific phobias. Virtual reality exposure effective alternative. BII phobia: applied tension technique (tense muscles during exposure to prevent fainting).",
+      "keyTerms": [
+        { "term": "exposure therapy", "definition": "Treatment involving gradual, repeated contact with feared stimulus until fear decreases" },
+        { "term": "one-session treatment", "definition": "Intensive single exposure session lasting 2-3 hours; highly effective for specific phobias" },
+        { "term": "applied tension", "definition": "Technique for BII phobia: tensing muscles to maintain blood pressure and prevent fainting" },
+        { "term": "preparedness", "definition": "Theory that humans are evolutionarily prepared to easily learn fears of ancestral threats" }
+      ],
+      "clinicalNotes": "Specific phobias are among most treatable psychiatric conditions. Brief treatment often sufficient. Medications generally not needed and may interfere with exposure learning. Key is to approach rather than avoid. BII phobia requires modified approach due to fainting risk - applied tension before exposure."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced management addresses treatment resistance, multiple phobias, phobias impacting medical care, and optimizes exposure protocols.",
+      "explanation": "Treatment-resistant phobias: ensure adequate exposure (sufficient duration, frequency, variety of stimuli); address safety behaviors that prevent learning; cognitive therapy to address threat overestimation and avoidance beliefs; enhance exposure with D-cycloserine (modest evidence). Multiple phobias: transdiagnostic approach targeting shared mechanisms; prioritize most impairing phobia. Medical phobias (needles, blood, medical procedures): critical to address as they lead to healthcare avoidance; applied tension for BII; gradual exposure to medical settings; coordinate with medical providers. Dental phobia: common and undertreated; exposure plus cognitive approaches; conscious sedation bridge to exposure. Flying phobia: virtual reality effective; consider combined approach with acute anxiolytic for unavoidable flights while completing exposure therapy. Driving phobia: often post-accident; exposure with therapist in car; address PTSD if present.",
+      "keyTerms": [
+        { "term": "safety behaviors", "definition": "Actions during exposure that reduce anxiety but prevent learning that feared consequence won't occur" },
+        { "term": "threat overestimation", "definition": "Cognitive distortion of overestimating probability or severity of harm from phobic stimulus" },
+        { "term": "disgust sensitivity", "definition": "Heightened disgust response contributing to some phobias (BII, animals, contamination)" },
+        { "term": "virtual reality exposure", "definition": "Computer-generated simulation of phobic situation for exposure therapy" }
+      ],
+      "clinicalNotes": "Phobias often go untreated because people simply avoid - inquire proactively. Impact on functioning often underestimated. Needle/blood phobia can delay vaccinations, blood tests, surgeries - address early. Combining in vivo and VR exposure may optimize outcomes. Consider comorbidities (other anxiety, depression) if phobia persists despite exposure."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert understanding integrates fear conditioning neuroscience, reconsolidation-based approaches, and precision targeting of extinction-enhancing interventions.",
+      "explanation": "Fear learning neurobiology: amygdala stores fear memories; prefrontal cortex (vmPFC) inhibits amygdala during extinction; hippocampus provides context; extinction creates new 'safe' memory competing with original fear memory. Extinction enhancement: D-cycloserine (NMDA partial agonist) enhances consolidation of extinction memory - best given before successful exposures; yohimbine (alpha-2 antagonist) may enhance noradrenergic arousal during extinction; glucocorticoids enhance memory consolidation. Reconsolidation approaches: reactivating fear memory briefly, then interfering with reconsolidation (with medication or behavioral interference) may update or weaken original fear memory. Timing parameters: retrieval cue followed by extinction within reconsolidation window (hours). Precision medicine: startle potentiation, skin conductance, amygdala reactivity as biomarkers; individual differences in extinction learning. Novel approaches: direct stimulation of vmPFC (TMS); attention bias modification; psychedelic-assisted exposure (very early research). Developmental considerations: childhood phobias often remit; persistent phobias may become more entrenched if avoidance maintained.",
+      "keyTerms": [
+        { "term": "extinction learning", "definition": "New learning that phobic stimulus is safe; competes with original fear memory" },
+        { "term": "reconsolidation", "definition": "Process by which reactivated memories become transiently labile and can be modified" },
+        { "term": "vmPFC", "definition": "Ventromedial prefrontal cortex; inhibits amygdala fear responses during extinction" },
+        { "term": "startle potentiation", "definition": "Enhanced startle response in presence of feared stimulus; biomarker of fear" }
+      ],
+      "clinicalNotes": "Specific phobias represent opportunity for rapid, effective intervention - optimize access to evidence-based exposure therapy. Technology (VR, apps) may increase access. One-session treatment models are dissemination-friendly. Prevention: early exposure to common fear stimuli (dogs, water) under positive conditions may prevent phobia development."
+    }
+  },
+
+  "phobiaTypes": {
+    "animal": {
+      "examples": ["Spiders (arachnophobia)", "Snakes (ophidiophobia)", "Dogs (cynophobia)", "Insects", "Birds"],
+      "typicalOnset": "Childhood (~7 years)"
+    },
+    "naturalEnvironment": {
+      "examples": ["Heights (acrophobia)", "Storms (astraphobia)", "Water (aquaphobia)", "Darkness"],
+      "typicalOnset": "Childhood"
+    },
+    "bloodInjectionInjury": {
+      "examples": ["Blood", "Needles", "Medical procedures", "Injury"],
+      "typicalOnset": "Childhood (~9 years)",
+      "uniqueFeature": "Vasovagal fainting response - may need applied tension technique"
+    },
+    "situational": {
+      "examples": ["Flying (aviophobia)", "Enclosed spaces (claustrophobia)", "Driving", "Elevators", "Bridges"],
+      "typicalOnset": "Mid-20s"
+    },
+    "other": {
+      "examples": ["Choking", "Vomiting (emetophobia)", "Loud sounds", "Costumed characters", "Clowns"]
+    }
+  },
+
+  "riskFactors": [
+    "Traumatic experience with phobic stimulus",
+    "Witnessing others' fear or trauma",
+    "Learning about dangers (informational transmission)",
+    "Family history of phobias or anxiety",
+    "Temperament: behavioral inhibition",
+    "Disgust sensitivity (for BII, animal phobias)"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "adaaResources": "www.adaa.org",
+      "findATherapist": "www.abct.org/Resources/find-a-therapist/"
+    },
+    "message": "Specific phobias are among the most treatable conditions. If fear is limiting your life, brief treatment can often help dramatically."
+  },
+
+  "treatments": {
+    "firstLine": ["Exposure therapy", "One-session treatment (OST)", "Virtual reality exposure"],
+    "forBIIPhobia": ["Applied tension technique", "Gradual exposure"],
+    "adjunctive": ["Cognitive restructuring", "D-cycloserine (research)"],
+    "notRecommended": ["Benzodiazepines (interfere with learning)", "Avoidance"]
+  },
+
+  "citations": [
+    {
+      "id": "ost-1989",
+      "type": "study",
+      "title": "One-session treatment for specific phobias",
+      "journal": "Behaviour Research and Therapy",
+      "year": 1989
+    },
+    {
+      "id": "wolitzky-taylor-2008",
+      "type": "meta-analysis",
+      "title": "Psychological Approaches in the Treatment of Specific Phobias: A Meta-Analysis",
+      "journal": "Clinical Psychology Review",
+      "year": 2008
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-panic-disorder", "targetType": "condition", "relationship": "differential", "label": "Panic Disorder" },
+    { "targetId": "treatment-exposure-therapy", "targetType": "treatment", "relationship": "treatment", "label": "Exposure Therapy" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "anxiety-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

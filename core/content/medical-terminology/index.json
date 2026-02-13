@@ -1,0 +1,132 @@
+{
+  "id": "medical-terminology",
+  "title": "Medical Terminology: Understanding Your Healthcare Language",
+  "description": "Comprehensive patient education resource for understanding medical terminology, abbreviations, and how to read medical records",
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-24",
+  "complexityLevels": {
+    "1": {
+      "name": "Basic",
+      "description": "Simple explanations using everyday language, suitable for all readers",
+      "targetAudience": "General public, first-time patients"
+    },
+    "2": {
+      "name": "Foundational",
+      "description": "Includes basic medical concepts with clear explanations",
+      "targetAudience": "Patients managing ongoing conditions"
+    },
+    "3": {
+      "name": "Intermediate",
+      "description": "More detailed explanations with clinical context",
+      "targetAudience": "Engaged patients, caregivers, pre-health students"
+    },
+    "4": {
+      "name": "Advanced",
+      "description": "Comprehensive medical explanations with technical accuracy",
+      "targetAudience": "Health-literate patients, allied health professionals"
+    },
+    "5": {
+      "name": "Professional",
+      "description": "Full clinical detail and professional terminology",
+      "targetAudience": "Healthcare students, medical professionals"
+    }
+  },
+  "sections": [
+    {
+      "id": "word-building",
+      "title": "Word Building",
+      "description": "Learn how medical terms are constructed from prefixes, roots, and suffixes",
+      "files": [
+        "word-building/prefixes.json",
+        "word-building/suffixes.json",
+        "word-building/root-words.json",
+        "word-building/combining-forms.json"
+      ]
+    },
+    {
+      "id": "by-system",
+      "title": "Terms by Body System",
+      "description": "Medical terminology organized by body system",
+      "files": [
+        "by-system/cardiovascular.json",
+        "by-system/respiratory.json",
+        "by-system/gastrointestinal.json",
+        "by-system/neurological.json",
+        "by-system/musculoskeletal.json",
+        "by-system/endocrine.json",
+        "by-system/renal.json",
+        "by-system/hematology.json"
+      ]
+    },
+    {
+      "id": "abbreviations",
+      "title": "Common Medical Abbreviations",
+      "description": "Decode abbreviations found in prescriptions, labs, and medical records",
+      "files": [
+        "abbreviations/lab-abbreviations.json",
+        "abbreviations/prescription-abbreviations.json",
+        "abbreviations/hospital-abbreviations.json",
+        "abbreviations/documentation-abbreviations.json"
+      ]
+    },
+    {
+      "id": "understanding-records",
+      "title": "Understanding Your Medical Records",
+      "description": "Learn to read and interpret different types of medical documents",
+      "files": [
+        "understanding-records/pathology-reports.json",
+        "understanding-records/radiology-reports.json",
+        "understanding-records/discharge-summary.json",
+        "understanding-records/doctors-notes.json"
+      ]
+    },
+    {
+      "id": "pronunciation",
+      "title": "Pronunciation Guide",
+      "description": "How to pronounce medical terms correctly and ask about unfamiliar words",
+      "files": [
+        "pronunciation/commonly-mispronounced.json",
+        "pronunciation/asking-about-terms.json"
+      ]
+    },
+    {
+      "id": "clinical-terms",
+      "title": "Clinical Terms",
+      "description": "Terminology used in clinical settings and medical encounters",
+      "files": [
+        "clinical-terms/vital-signs.json",
+        "clinical-terms/physical-exam.json",
+        "clinical-terms/procedures.json",
+        "clinical-terms/diagnosis.json"
+      ]
+    },
+    {
+      "id": "glossary",
+      "title": "Searchable Glossary",
+      "description": "Complete searchable glossary of medical terms",
+      "files": [
+        "glossary/glossary-a-d.json",
+        "glossary/glossary-e-h.json",
+        "glossary/glossary-i-l.json",
+        "glossary/glossary-m-p.json",
+        "glossary/glossary-q-t.json",
+        "glossary/glossary-u-z.json"
+      ]
+    }
+  ],
+  "glossaryStructure": {
+    "term": "The medical term",
+    "pronunciation": "Phonetic pronunciation guide",
+    "definitions": {
+      "level1": "Simple, everyday language explanation",
+      "level2": "Basic medical concept explanation",
+      "level3": "Intermediate clinical explanation",
+      "level4": "Advanced medical explanation",
+      "level5": "Professional/clinical definition"
+    },
+    "exampleUsage": "How the term might appear in context",
+    "relatedTerms": "Associated or similar terms",
+    "etymology": "Word origin and breakdown",
+    "category": "Body system or topic category"
+  }
+}

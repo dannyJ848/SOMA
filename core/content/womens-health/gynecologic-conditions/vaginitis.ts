@@ -1,0 +1,399 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const vaginitisContent: LegacyWomensHealthContent = {
+  id: 'condition-vaginitis',
+  type: 'condition',
+  name: 'Vaginitis',
+  alternateNames: ['Vaginal infection', 'Vaginal discharge', 'Vulvovaginitis'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Vaginitis is irritation or infection of the vagina causing discharge, itching, or odor. The three main types are yeast infections, bacterial vaginosis, and trichomoniasis.',
+      explanation: `**Types of Vaginitis:**
+
+*Yeast Infection:*
+- Thick, white, cottage cheese-like discharge
+- Intense itching
+- NOT sexually transmitted
+- Very common
+
+*Bacterial Vaginosis (BV):*
+- Thin, grayish discharge
+- Fishy odor (especially after sex)
+- May have no symptoms
+- NOT a true infection, but imbalance
+
+*Trichomoniasis (Trich):*
+- Yellow-green, frothy discharge
+- Strong odor
+- IS sexually transmitted
+- Partners need treatment
+
+**When to See a Doctor:**
+- First-time symptoms
+- Symptoms don't improve with treatment
+- Frequent infections
+- Fever or pelvic pain
+- During pregnancy
+
+**Prevention Tips:**
+- Avoid douching
+- Wear cotton underwear
+- Avoid scented products near vagina
+- Wipe front to back
+- Practice safe sex`,
+      keyTerms: [
+        { term: 'yeast infection', definition: 'Common vaginal infection caused by fungus, causing itching and white discharge' },
+        { term: 'bacterial vaginosis', definition: 'Imbalance of vaginal bacteria causing fishy odor and discharge' },
+        { term: 'trichomoniasis', definition: 'Sexually transmitted infection causing green discharge and odor' },
+      ],
+      analogies: ['Think of your vagina like a garden - it needs the right balance of "good" bacteria. When that balance is off, problems can grow.'],
+      examples: ['Intense vaginal itching with thick white discharge (likely yeast)', 'Fishy smell after sex (likely BV)'],
+    },
+    2: {
+      level: 2,
+      summary: 'The three most common causes of vaginitis are vulvovaginal candidiasis (yeast), bacterial vaginosis, and trichomoniasis, each with distinct clinical features and treatment approaches.',
+      explanation: `**Vulvovaginal Candidiasis (VVC):**
+
+*Features:*
+- Thick, white, "cottage cheese" discharge
+- Vulvar/vaginal pruritus (intense)
+- Burning, especially with urination
+- Vulvar erythema, edema
+- Normal vaginal pH (<4.5)
+
+*Diagnosis:*
+- Wet mount: Yeast or pseudohyphae
+- Culture if recurrent or treatment failure
+- KOH prep enhances visualization
+
+*Treatment:*
+- Uncomplicated: OTC azoles (miconazole, clotrimazole)
+- Single dose fluconazole 150 mg PO
+- Partner treatment not needed
+
+**Bacterial Vaginosis (BV):**
+
+*Features:*
+- Thin, gray-white, homogeneous discharge
+- Fishy odor (positive whiff test)
+- Minimal irritation
+- Elevated vaginal pH (>4.5)
+
+*Diagnosis (Amsel Criteria - 3 of 4):*
+- Thin, homogeneous discharge
+- Clue cells on wet mount
+- pH >4.5
+- Positive whiff test (KOH)
+
+*Treatment:*
+- Metronidazole 500 mg BID x 7 days (or gel)
+- Clindamycin cream
+- Partner treatment not recommended
+- High recurrence rate
+
+**Trichomoniasis:**
+
+*Features:*
+- Yellow-green, frothy, malodorous discharge
+- Vulvovaginal irritation
+- Strawberry cervix (petechiae)
+- May be asymptomatic
+- Elevated pH (>4.5)
+
+*Diagnosis:*
+- Wet mount: Motile trichomonads (low sensitivity)
+- NAAT testing (preferred - higher sensitivity)
+
+*Treatment:*
+- Metronidazole 2g single dose (or 500 mg BID x 7 days)
+- Partner MUST be treated
+- STI screening recommended
+- Avoid alcohol with metronidazole`,
+      keyTerms: [
+        { term: 'clue cells', definition: 'Vaginal cells covered with bacteria, diagnostic for bacterial vaginosis' },
+        { term: 'whiff test', definition: 'Fishy odor when KOH added to vaginal discharge' },
+        { term: 'pseudohyphae', definition: 'Elongated yeast cells seen in candidal infection' },
+        { term: 'NAAT', definition: 'Nucleic acid amplification test; sensitive molecular test for infections' },
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Vaginitis evaluation requires systematic assessment with office testing, understanding of vaginal ecosystem, and management of recurrent infections with attention to predisposing factors.',
+      explanation: `**Vaginal Ecosystem:**
+
+*Normal Flora:*
+- Lactobacillus species predominate
+- Produce lactic acid, maintain pH 3.5-4.5
+- Produce hydrogen peroxide
+- Competitive inhibition of pathogens
+
+*Disruption Factors:*
+- Antibiotics
+- Douching
+- Sexual activity
+- Hormonal changes
+- Immunosuppression
+
+**Office Evaluation:**
+
+*Vaginal pH:*
+- Normal: 3.8-4.5
+- Elevated (>4.5): BV, trichomoniasis, atrophic vaginitis
+- Normal: Candidiasis
+
+*Wet Mount:*
+- Saline prep: Clue cells (BV), trichomonads, WBCs
+- KOH prep: Yeast, pseudohyphae; whiff test
+
+*Point-of-Care Tests:*
+- Rapid antigen tests for trichomoniasis
+- DNA probe tests (Affirm)
+- pH/amine testing combinations
+
+**Recurrent Vulvovaginal Candidiasis (RVVC):**
+
+*Definition:*
+- ≥4 episodes per year (with documented diagnosis)
+
+*Predisposing Factors:*
+- Uncontrolled diabetes
+- Immunosuppression
+- Antibiotic use
+- Non-albicans species
+
+*Management:*
+- Induction: 10-14 days fluconazole (or topical)
+- Suppression: Fluconazole 150 mg weekly x 6 months
+- Culture to identify species (non-albicans may be resistant)
+- Screen for diabetes if frequent
+
+**Recurrent BV:**
+
+*Risk Factors:*
+- Multiple/new partners
+- Lack of condom use
+- Vaginal douching
+- Smoking
+
+*Management:*
+- Longer initial treatment course
+- Suppressive therapy (metronidazole gel twice weekly)
+- Limited evidence for probiotics
+- Partner treatment not shown to help
+
+**Differential Diagnosis:**
+- Atrophic vaginitis
+- Allergic/irritant vaginitis
+- Desquamative inflammatory vaginitis
+- Foreign body
+- Cervicitis (chlamydia, gonorrhea)`,
+      keyTerms: [
+        { term: 'RVVC', definition: 'Recurrent vulvovaginal candidiasis; 4+ episodes yearly' },
+        { term: 'Lactobacillus', definition: 'Predominant beneficial bacteria in healthy vagina' },
+        { term: 'atrophic vaginitis', definition: 'Vaginal irritation from low estrogen, often postmenopause' },
+        { term: 'desquamative inflammatory vaginitis', definition: 'Rare condition with purulent discharge and epithelial shedding' },
+      ],
+      clinicalNotes: 'Always do microscopy before treating "yeast infection" - only 30% of self-diagnosed patients have candidiasis. BV in pregnancy is associated with preterm birth; treatment of asymptomatic BV in high-risk pregnancy is recommended.',
+    },
+    4: {
+      level: 4,
+      summary: 'Advanced vaginitis management addresses treatment failures, resistant organisms, special populations (pregnancy, immunocompromised), and emerging therapies including microbiome restoration.',
+      explanation: `**Treatment-Resistant Cases:**
+
+*Candida:*
+- Non-albicans species (C. glabrata, C. krusei)
+- Azole resistance testing
+- Alternative treatments:
+  - Boric acid 600 mg vaginal capsule x 14 days
+  - Flucytosine cream
+  - Amphotericin B
+
+*Trichomoniasis:*
+- Nitroimidazole resistance (rare but increasing)
+- Higher dose regimens: Metronidazole 2g daily x 7 days
+- Tinidazole may be more effective
+- CDC consultation for resistant cases
+
+**Pregnancy Considerations:**
+
+*BV:*
+- Associated with preterm birth, PROM, chorioamnionitis
+- Screen and treat in high-risk pregnancies
+- Metronidazole or clindamycin safe in pregnancy
+
+*Candidiasis:*
+- Topical azoles only (not oral fluconazole)
+- 7-day courses preferred
+- More common in pregnancy
+
+*Trichomoniasis:*
+- Associated with preterm birth, low birth weight
+- Treat: Metronidazole 2g single dose
+- May treat in any trimester
+
+**HIV and Immunocompromised:**
+
+*VVC:*
+- More frequent and severe
+- Recurrent infections common
+- Non-albicans species more common
+- May need prolonged suppression
+
+*BV:*
+- Increases HIV transmission risk
+- May affect vaginal microbicide efficacy
+
+**Emerging Approaches:**
+
+*Microbiome Restoration:*
+- Vaginal probiotics (Lactobacillus)
+- Limited evidence currently
+- LACTIN-V trial promising for BV prevention
+
+*Biofilm Disruption:*
+- BV involves biofilm formation
+- May explain recurrence
+- Biofilm-disrupting agents in research
+
+*Boric Acid:*
+- First-line for non-albicans Candida
+- May be adjunct for recurrent BV
+- 600 mg vaginal suppository
+
+**Desquamative Inflammatory Vaginitis:**
+- Purulent discharge, pH >4.5
+- Epithelial cell shedding
+- Responds to clindamycin cream
+- Often underdiagnosed`,
+      keyTerms: [
+        { term: 'boric acid', definition: 'Vaginal suppository used for resistant yeast and recurrent BV' },
+        { term: 'biofilm', definition: 'Protective bacterial community on surfaces that is resistant to antibiotics' },
+        { term: 'non-albicans', definition: 'Candida species other than C. albicans, often more resistant' },
+        { term: 'nitroimidazole', definition: 'Class of antibiotics including metronidazole and tinidazole' },
+      ],
+      clinicalNotes: 'Boric acid is teratogenic - ensure pregnancy test before use. C. glabrata often resistant to fluconazole. Desquamative inflammatory vaginitis is often misdiagnosed as treatment-resistant BV - wet mount shows parabasal cells.',
+    },
+    5: {
+      level: 5,
+      summary: 'Expert vaginitis management involves addressing diagnostic uncertainty, counseling through recurrence, understanding vaginal microbiome science, and managing atypical presentations.',
+      explanation: `**Diagnostic Challenges:**
+
+*Mixed Infections:*
+- Candida + BV common (10-20%)
+- Treat both simultaneously
+- May explain treatment "failures"
+
+*Atypical Presentations:*
+- Candida without classic discharge
+- BV without odor
+- Vulvar symptoms without vaginitis
+- Consider vulvodynia, dermatoses
+
+*Overdiagnosis of Yeast:*
+- Only 30% of self-treated patients have candidiasis
+- Consider contact dermatitis, vulvodynia
+- Office diagnosis before recurrent treatment
+
+**Counseling Recurrent Infections:**
+
+*Patient Frustration:*
+- Validate impact on quality of life
+- Sexual relationship effects
+- Explain recurrence biology
+- Set realistic expectations
+
+*Partner Concerns:*
+- BV: Partner treatment doesn't help (not STI)
+- Trich: Partner MUST be treated
+- Candida: Not sexually transmitted
+
+*Behavioral Modifications:*
+- Limited evidence for many recommendations
+- Avoiding douching (clear benefit)
+- Probiotics (insufficient evidence)
+- Diet changes (no strong evidence)
+
+**Vaginal Microbiome Science:**
+
+*Current Understanding:*
+- Lactobacillus dominance = health
+- Community state types (CSTs)
+- Diverse microbiomes may be normal in some
+
+*Research Directions:*
+- Microbiome transplantation
+- Targeted probiotics
+- Biofilm disruption
+- Bacteriophage therapy
+
+**Vulvovaginal Symptoms Without Infection:**
+
+*Consider:*
+- Vulvodynia
+- Contact dermatitis
+- Lichen sclerosus/planus
+- Atrophic changes
+- Pudendal neuralgia
+
+*Approach:*
+- Thorough history
+- Careful examination
+- Don't reflexively treat for "yeast"
+- Dermatology/vulvar specialty referral
+
+**Special Populations:**
+
+*Postmenopausal:*
+- Atrophic vaginitis common
+- Vaginal estrogen treatment
+- pH elevated (different from BV)
+- May have superimposed infections
+
+*Adolescents:*
+- Consider vulvovaginitis vs. vaginitis
+- STI screening if sexually active
+- Avoid invasive exams when possible
+
+**Quality Improvement:**
+- Ensure microscopy available and used
+- Culture before repeated antifungals
+- STI screening when appropriate
+- Document diagnosis method`,
+      keyTerms: [
+        { term: 'community state type', definition: 'Classification of vaginal microbiome composition patterns' },
+        { term: 'vulvodynia', definition: 'Chronic vulvar pain without identifiable cause' },
+        { term: 'lichen sclerosus', definition: 'Chronic vulvar skin condition causing itching and white patches' },
+        { term: 'microbiome transplantation', definition: 'Transferring healthy vaginal bacteria to treat dysbiosis' },
+      ],
+      clinicalNotes: 'Don\'t diagnose "chronic yeast infections" without documented positive cultures. Consider vulvar dermatoses in patients with persistent vulvar symptoms. Postmenopausal atrophic changes elevate pH similar to BV but treatment differs.',
+    },
+  },
+  media: [],
+  citations: [
+    {
+      id: 'cdc-std-guidelines-vaginitis',
+      type: 'website',
+      title: 'CDC STI Treatment Guidelines: Vaginitis',
+      source: 'Centers for Disease Control and Prevention',
+      url: 'https://www.cdc.gov/std/treatment-guidelines/',
+      license: 'Public domain',
+    },
+  ],
+  crossReferences: [
+    { targetId: 'concept-cervical-health-pap-smears', targetType: 'concept', relationship: 'related', label: 'Cervical Health' },
+    { targetId: 'concept-menopause-transition', targetType: 'concept', relationship: 'related', label: 'Menopause' },
+  ],
+  tags: {
+    systems: ['reproductive'],
+    topics: ['gynecology', 'patient-education', 'womens-health', 'infectious-disease'],
+    keywords: ['vaginitis', 'yeast infection', 'bacterial vaginosis', 'trichomoniasis', 'vaginal discharge'],
+    clinicalRelevance: 'high',
+    examRelevance: { usmle: true, shelf: ['obgyn'] },
+  },
+  createdAt: '2026-01-24T00:00:00.000Z',
+  updatedAt: '2026-01-24T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};

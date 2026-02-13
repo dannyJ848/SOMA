@@ -1,0 +1,118 @@
+{
+  "id": "structure-pulmonary-lymphatic-drainage",
+  "type": "structure",
+  "name": "Pulmonary Lymphatic Drainage",
+  "alternateNames": ["Lung lymphatics", "Pulmonary lymph nodes", "Thoracic lymphatic system"],
+  "fmaId": "FMA:45608",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Your lungs have a network of tiny tubes called lymphatics that collect fluid and germs, moving them to small filters called lymph nodes that help fight infection.",
+      "explanation": "Besides blood vessels, your lungs have another network of tubes called lymphatics. These are like the drainage system for your lungs. They collect extra fluid, dead cells, and any germs that get into your lungs. This fluid (called lymph) flows through these tubes to small bean-shaped filters called lymph nodes. In the lymph nodes, white blood cells check the fluid for germs and destroy any they find. The lung lymph nodes are located around your airways and in the center of your chest. This system helps keep your lungs clean and fights infections.",
+      "keyTerms": [
+        {"term": "lymphatics", "definition": "Small tubes that collect and drain fluid from tissues"},
+        {"term": "lymph", "definition": "Clear fluid collected from tissues, containing white blood cells"},
+        {"term": "lymph nodes", "definition": "Small bean-shaped filters where germs are trapped and destroyed"},
+        {"term": "white blood cells", "definition": "Cells that fight infection in your body"}
+      ],
+      "analogies": ["The lymphatic system is like the drainage and sewage system for a city - it collects waste and fluid from everywhere and takes it to treatment plants (lymph nodes) where it gets cleaned."],
+      "examples": ["When you have a lung infection, the lymph nodes in your chest may swell as they work hard to filter out the germs."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Pulmonary lymphatics form superficial and deep networks draining through hilar, mediastinal, and eventually systemic lymph nodes, playing crucial roles in fluid balance and immune surveillance.",
+      "explanation": "The lungs have two lymphatic networks: the superficial (subpleural) network in the visceral pleura, and the deep (peribronchial/perivascular) network around the airways and blood vessels. These networks connect at the hilum and drain to bronchopulmonary (hilar) nodes, then to tracheobronchial nodes (at the carina), and finally to mediastinal nodes. From there, lymph flows to the right lymphatic duct (right lung and left lower lobe) or thoracic duct (left upper lobe). Lymphatics are absent from alveolar walls - they begin at the level of respiratory bronchioles. The lymphatic system maintains fluid balance by removing about 10-20mL/hour of filtered fluid and proteins from the interstitium, and it's crucial for antigen transport to lymph nodes for immune responses.",
+      "keyTerms": [
+        {"term": "bronchopulmonary nodes", "definition": "Lymph nodes at the lung hilum, first to receive lung lymph drainage"},
+        {"term": "tracheobronchial nodes", "definition": "Lymph nodes at the carina and main bronchi, also called carinal nodes"},
+        {"term": "thoracic duct", "definition": "Main lymphatic vessel draining into the left subclavian vein"},
+        {"term": "subpleural lymphatics", "definition": "Superficial lymphatic network beneath the visceral pleura"},
+        {"term": "hilar nodes", "definition": "Lymph nodes at the root of the lung where bronchi and vessels enter"}
+      ],
+      "analogies": ["The lung lymphatic drainage is like a river system - small streams (subpleural and peribronchial) merge into larger rivers (hilar nodes) that flow to the ocean (thoracic duct and venous system)."],
+      "examples": ["Lung cancer often spreads first to the hilar lymph nodes before reaching other parts of the body."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Pulmonary lymphatic anatomy follows a standardized station map critical for lung cancer staging, with understanding of drainage patterns essential for surgical and oncological management.",
+      "explanation": "The IASLC lymph node map defines specific stations: Station 1 (highest mediastinal), 2 (upper paratracheal), 3a (prevascular), 3p (retrotracheal), 4 (lower paratracheal), 5 (subaortic/AP window), 6 (para-aortic), 7 (subcarinal), 8 (paraesophageal), 9 (pulmonary ligament), 10 (hilar), 11 (interlobar), 12 (lobar), 13 (segmental), 14 (subsegmental). N1 disease involves stations 10-14 (intrapulmonary); N2 involves stations 2-9 (ipsilateral mediastinal); N3 involves contralateral or supraclavicular nodes. Lymphatic drainage follows lobe-specific patterns: right upper lobe drains primarily to stations 2R, 4R; middle lobe to 4R, 7; right lower lobe to 7, 8, 9; left upper lobe to 5, 6; left lower lobe to 7, 8, 9. Cross-drainage occurs, especially at the subcarinal (station 7) nodes.",
+      "keyTerms": [
+        {"term": "IASLC lymph node map", "definition": "International Association for Study of Lung Cancer standardized lymph node station classification"},
+        {"term": "N staging", "definition": "Nodal staging in TNM classification: N1 (intrapulmonary), N2 (ipsilateral mediastinal), N3 (contralateral/supraclavicular)"},
+        {"term": "subcarinal nodes", "definition": "Station 7 nodes below the carina, common drainage site for all lobes"},
+        {"term": "mediastinoscopy", "definition": "Surgical procedure to sample upper mediastinal lymph nodes for staging"},
+        {"term": "EBUS-TBNA", "definition": "Endobronchial ultrasound-guided transbronchial needle aspiration of lymph nodes"}
+      ],
+      "clinicalNotes": "N2 disease (stage IIIA) often precludes upfront surgery; neoadjuvant therapy considered. Station 7 is sentinel node for many tumors. EBUS accesses stations 2, 4, 7, 10, 11; EUS complements for stations 5, 7, 8, 9."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pulmonary lymphatic physiology integrates interstitial fluid dynamics, lymphangiogenesis in disease, and the role of lymphatics in pulmonary edema, tumor metastasis, and inflammatory conditions.",
+      "explanation": "Pulmonary lymphatic flow increases with transvascular fluid filtration; they provide a safety factor against edema development, capable of increasing flow 10-fold before edema develops. Lymphatic endothelial cells express specific markers (LYVE-1, podoplanin, Prox1, VEGFR-3) and respond to VEGF-C/D for lymphangiogenesis. In interstitial lung diseases, lymphatic abnormalities may contribute to fluid accumulation and fibrosis. Lymphangioleiomyomatosis (LAM) involves abnormal smooth muscle proliferation obstructing lymphatics. In lung cancer, lymphatic invasion (LVI) is a key prognostic factor; tumor cells express factors (VEGF-C) promoting lymphangiogenesis at the tumor margin. Sentinel lymph node mapping has been explored in lung cancer but is not standard practice due to variable drainage patterns. PD-L1 expression in lymph node metastases may differ from primary tumor, impacting immunotherapy decisions.",
+      "keyTerms": [
+        {"term": "lymphatic safety factor", "definition": "Reserve capacity of lymphatics to increase flow before edema develops"},
+        {"term": "lymphangiogenesis", "definition": "Formation of new lymphatic vessels, often in response to VEGF-C/D"},
+        {"term": "lymphatic invasion", "definition": "Presence of tumor cells in lymphatic vessels; prognostic factor in lung cancer"},
+        {"term": "lymphangioleiomyomatosis", "definition": "Rare disease with abnormal smooth muscle obstructing pulmonary lymphatics"},
+        {"term": "VEGF-C", "definition": "Vascular endothelial growth factor C, primary driver of lymphangiogenesis"}
+      ],
+      "clinicalNotes": "Yellow nail syndrome triad: yellow nails, pleural effusions, lymphedema - lymphatic dysfunction. Chylothorax from thoracic duct injury shows milky fluid with triglycerides >110 mg/dL. Consider lymphoscintigraphy for lymphatic imaging."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced lymphatic assessment integrates molecular staging, minimally invasive techniques, and targeted therapies with evolving understanding of the lymphatic tumor microenvironment.",
+      "explanation": "Contemporary nodal staging in lung cancer utilizes multimodality approach: PET-CT for initial assessment (sensitivity 80%, specificity 90% for N2 disease), followed by tissue confirmation via EBUS-TBNA (stations 2, 3p, 4, 7, 10, 11) and/or EUS-FNA (stations 4L, 7, 8, 9). Mediastinoscopy remains gold standard for anterior mediastinum (stations 2, 4, 7). Molecular profiling of lymph node metastases guides therapy selection. Systematic nodal dissection at surgery improves staging accuracy; ACOSOG Z0030 showed no survival benefit of complete dissection over sampling, though practice varies. Lymphatic delivery of therapeutics (inhaled immunotherapy, lymphatic-targeted nanoparticles) is being explored. For chylothorax, thoracic duct ligation or embolization is effective; lymphovenous anastomosis emerging for lymphedema. Lymph node ratio and log odds of positive lymph nodes may better predict prognosis than simple N staging in some analyses.",
+      "keyTerms": [
+        {"term": "EBUS-TBNA", "definition": "Real-time endobronchial ultrasound-guided transbronchial needle aspiration for mediastinal staging"},
+        {"term": "EUS-FNA", "definition": "Endoscopic ultrasound-guided fine needle aspiration, complements EBUS for posterior mediastinum"},
+        {"term": "systematic nodal dissection", "definition": "Complete removal of lymph nodes from specific stations during lung cancer surgery"},
+        {"term": "lymph node ratio", "definition": "Ratio of positive to total sampled lymph nodes; may refine prognostication"},
+        {"term": "thoracic duct embolization", "definition": "Interventional procedure to occlude thoracic duct for chylothorax treatment"}
+      ],
+      "clinicalNotes": "PET-positive nodes require tissue confirmation before excluding from surgery. For clinical N2, consider neoadjuvant chemoimmunotherapy then surgery vs definitive chemoRT. Single-station N2 has better prognosis than multi-station. ESTS guidelines recommend minimum 6 nodes from 3 stations for adequate staging."
+    }
+  },
+  "media": [
+    {
+      "id": "lymphatic-drainage-3d-model",
+      "type": "3d-model",
+      "filename": "pulmonary_lymphatics.glb",
+      "title": "3D Pulmonary Lymphatic Drainage",
+      "description": "Interactive model showing lymphatic networks, node stations, and drainage pathways"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "iaslc-lymph-node-map",
+      "type": "article",
+      "title": "The IASLC Lung Cancer Staging Project: Proposals for the Revision of the N Descriptors",
+      "source": "J Thorac Oncol",
+      "url": "https://doi.org/10.1097/JTO.0b013e31821a731e"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "system-lymphatic", "targetType": "system", "relationship": "related", "label": "Lymphatic System"},
+    {"targetId": "condition-lung-cancer", "targetType": "condition", "relationship": "related", "label": "Lung Cancer"}
+  ],
+  "tags": {
+    "systems": ["respiratory", "lymphatic"],
+    "structures": ["FMA:45608"],
+    "topics": ["anatomy", "oncology", "staging"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

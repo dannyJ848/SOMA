@@ -1,0 +1,118 @@
+{
+  "id": "structure-esophagus",
+  "type": "structure",
+  "name": "Esophagus",
+  "alternateNames": ["Gullet", "Food pipe", "Oesophagus"],
+  "fmaId": "FMA:7131",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The esophagus is a tube that carries food from your mouth to your stomach.",
+      "explanation": "After you swallow food, it travels down a tube called the esophagus. This tube is about 10 inches long (about the length of a ruler). Muscles in the esophagus squeeze in waves to push food down to your stomach - you don't have to be standing up for this to work! This squeezing action is so strong that astronauts can eat in space even though there's no gravity.",
+      "keyTerms": [
+        { "term": "swallow", "definition": "The action of moving food from your mouth down your throat" },
+        { "term": "muscles", "definition": "Tissues in your body that can squeeze and relax to create movement" }
+      ],
+      "analogies": ["The esophagus works like a toothpaste tube - muscles squeeze from top to bottom to push food toward your stomach."],
+      "examples": ["When you drink water while lying down, it still goes to your stomach because muscles push it along."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The esophagus is a muscular tube approximately 25 cm long that transports food from the pharynx to the stomach through coordinated muscle contractions called peristalsis.",
+      "explanation": "The esophagus begins at the lower border of the cricoid cartilage (C6 vertebral level) and ends at the cardiac orifice of the stomach (T11 level). It has two sphincters: the upper esophageal sphincter (UES) composed of the cricopharyngeus muscle, and the lower esophageal sphincter (LES) which prevents stomach acid from refluxing upward. The esophagus has three anatomic narrowings: cricopharyngeal, broncho-aortic, and diaphragmatic.",
+      "keyTerms": [
+        { "term": "peristalsis", "definition": "Wave-like muscle contractions that push food through the digestive tract", "pronunciation": "pear-ih-STAL-sis" },
+        { "term": "sphincter", "definition": "A ring of muscle that controls the opening and closing of a passage", "pronunciation": "SFINK-ter" },
+        { "term": "reflux", "definition": "The backward flow of stomach contents into the esophagus" }
+      ],
+      "analogies": ["The sphincters are like one-way doors that let food go down but prevent stomach acid from coming back up."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The esophagus features a transition from striated to smooth muscle, coordinated peristaltic propulsion, and a physiologic lower esophageal sphincter that maintains gastroesophageal junction competency.",
+      "explanation": "The esophagus is divided into cervical, thoracic, and abdominal portions. The muscular wall transitions from striated muscle in the upper third (voluntary control), mixed in the middle third, to smooth muscle in the lower third (involuntary). Primary peristalsis is initiated by swallowing, while secondary peristalsis is triggered by residual bolus distension. The LES maintains a resting pressure of 10-45 mmHg, relaxing during swallowing via vasoactive intestinal peptide (VIP) and nitric oxide from inhibitory neurons. Anatomic components maintaining LES competence include the intrinsic smooth muscle, crural diaphragm, intra-abdominal esophageal segment, and angle of His.",
+      "keyTerms": [
+        { "term": "striated muscle", "definition": "Voluntary muscle with visible striations; upper esophagus" },
+        { "term": "smooth muscle", "definition": "Involuntary muscle without striations; lower esophagus" },
+        { "term": "angle of His", "definition": "Acute angle between esophagus and gastric fundus that creates a flap valve preventing reflux" }
+      ],
+      "clinicalNotes": "The three anatomic narrowings are common sites for foreign body impaction and stricture formation."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Esophageal function depends on coordinated neuromuscular control involving the swallowing center, vagal afferents and efferents, intramural plexuses, and interstitial cells of Cajal, with precise coordination of UES and LES relaxation.",
+      "explanation": "Swallowing involves oral (voluntary), pharyngeal (involuntary, ~1 second), and esophageal (involuntary, 8-10 seconds) phases. The swallowing center in the medulla (nucleus tractus solitarius and nucleus ambiguus) coordinates sequential activation of striated and smooth muscle. The myenteric (Auerbach's) plexus between circular and longitudinal muscle layers contains excitatory cholinergic neurons (contraction above bolus) and inhibitory nitrergic/VIPergic neurons (relaxation below bolus). The LES demonstrates receptive relaxation during swallowing via vagal inhibitory pathways. Transient lower esophageal sphincter relaxations (TLESRs) are the primary mechanism of physiologic reflux, mediated by gastric distension activating vagal mechanoreceptors.",
+      "keyTerms": [
+        { "term": "TLESR", "definition": "Transient lower esophageal sphincter relaxation; primary mechanism of both physiologic and pathologic reflux" },
+        { "term": "nucleus ambiguus", "definition": "Brainstem nucleus providing motor innervation to striated esophageal muscle via vagus nerve" },
+        { "term": "receptive relaxation", "definition": "Vagally-mediated LES relaxation preceding peristaltic wave" }
+      ],
+      "clinicalNotes": "Achalasia results from loss of inhibitory ganglion cells in the myenteric plexus, leading to failed LES relaxation and aperistalsis. High-resolution manometry is diagnostic."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical esophageal assessment integrates symptom analysis, high-resolution manometry with Chicago Classification, pH-impedance monitoring, endoscopy with biopsies, and advanced imaging to diagnose motility disorders, GERD, Barrett's esophagus, and malignancy.",
+      "explanation": "High-resolution manometry (HRM) with the Chicago Classification v4.0 categorizes esophageal motility disorders: achalasia (Types I-III), EGJ outflow obstruction, major disorders of peristalsis (absent contractility, distal esophageal spasm, hypercontractile esophagus), and minor disorders (ineffective esophageal motility, fragmented peristalsis). Integrated relaxation pressure (IRP) >15 mmHg suggests EGJ outflow obstruction. Ambulatory pH monitoring (Bravo capsule or catheter-based) with DeMeester score >14.7 indicates pathologic acid exposure. pH-impedance detects weakly acidic and nonacid reflux. Endoscopy grades esophagitis (LA Classification A-D), identifies Barrett's esophagus (salmon-colored mucosa with intestinal metaplasia on biopsy), and stages dysplasia (negative, indefinite, low-grade, high-grade). Endoscopic eradication therapy (radiofrequency ablation, endoscopic mucosal resection) for Barrett's with dysplasia. Esophageal adenocarcinoma staging uses EUS, CT, PET-CT; treatment multimodal with neoadjuvant chemoradiation for locally advanced disease.",
+      "keyTerms": [
+        { "term": "Chicago Classification", "definition": "Standardized classification system for esophageal motility disorders based on HRM; current version 4.0" },
+        { "term": "DeMeester score", "definition": "Composite score from pH monitoring; >14.7 indicates pathologic acid reflux" },
+        { "term": "LA Classification", "definition": "Los Angeles classification for erosive esophagitis severity; grades A-D based on mucosal break length" }
+      ],
+      "clinicalNotes": "Per-oral endoscopic myotomy (POEM) is first-line therapy for Type III achalasia. Nissen fundoplication for GERD refractory to PPI or with large hiatal hernia. Barrett's surveillance intervals depend on dysplasia status per ACG guidelines."
+    }
+  },
+
+  "media": [
+    {
+      "id": "esophagus-3d",
+      "type": "3d-model",
+      "filename": "esophagus.glb",
+      "title": "3D Esophagus Model",
+      "description": "Interactive 3D model showing esophageal anatomy, sphincters, and relationships"
+    },
+    {
+      "id": "esophagus-histology",
+      "type": "histology",
+      "filename": "esophagus_histology.jpg",
+      "title": "Esophageal Histology",
+      "description": "Stratified squamous epithelium and muscularis layers"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-2",
+      "type": "textbook",
+      "title": "The Digestive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.3",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "chicago-v4",
+      "type": "article",
+      "title": "Chicago Classification version 4.0",
+      "source": "Neurogastroenterology & Motility",
+      "url": "https://doi.org/10.1111/nmo.14058"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-oral-cavity", "targetType": "structure", "relationship": "sibling", "label": "Oral Cavity" },
+    { "targetId": "structure-stomach", "targetType": "structure", "relationship": "sibling", "label": "Stomach" },
+    { "targetId": "condition-gerd", "targetType": "condition", "relationship": "related", "label": "GERD" },
+    { "targetId": "condition-barretts", "targetType": "condition", "relationship": "related", "label": "Barrett's Esophagus" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:7131"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery", "medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

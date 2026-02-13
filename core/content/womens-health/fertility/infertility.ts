@@ -1,0 +1,855 @@
+import { WomensHealthContent, LegacyWomensHealthContent } from '../types';
+
+export const infertility: WomensHealthContent = {
+  id: 'infertility',
+  title: 'Infertility',
+  category: 'Fertility',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Infertility',
+      content: `Infertility means not being able to get pregnant after trying for a while. It's more common than you might think.
+
+**What is Infertility?**
+- Not getting pregnant after 1 year of trying (or 6 months if over 35)
+- Affects about 10-15% of couples
+- Many causes are treatable
+
+**Is Infertility Common?**
+- Yes! About 1 in 8 couples have trouble getting pregnant
+- You're not alone
+- Help is available
+
+**Common Causes:**
+
+**For Women:**
+- Problems with ovulation (not releasing eggs)
+- Blocked or damaged fallopian tubes
+- Endometriosis
+- Uterine problems (fibroids, polyps)
+- Age-related decline in fertility
+
+**For Men:**
+- Low sperm count
+- Poor sperm movement (motility)
+- Abnormal sperm shape
+- Blockages
+
+**Both:**
+- Stress and lifestyle factors
+- Weight problems
+- Smoking or alcohol use
+
+**Evaluation:**
+- Both partners are usually tested
+- Blood tests check hormone levels
+- Imaging tests check reproductive organs
+- Sperm analysis for men
+
+**Treatment Options:**
+- Medications to improve ovulation
+- Lifestyle changes
+- Surgery to fix problems
+- Fertility treatments (IUI, IVF)
+- Donor eggs/sperm or adoption
+
+**Remember:** Infertility doesn't mean you'll never have a baby. Many couples successfully conceive with treatment.`,
+      keyPoints: [
+        'Infertility affects 10-15% of couples',
+        'Causes can be in women, men, or both',
+        'Both partners should be evaluated',
+        'Many effective treatments are available'
+      ],
+      vocabulary: [
+        { term: 'Infertility', definition: 'Inability to conceive after 1 year of trying' },
+        { term: 'Ovulation', definition: 'Release of an egg from the ovary' },
+        { term: 'Fallopian Tubes', definition: 'Tubes that carry eggs from ovaries to uterus' },
+        { term: 'Sperm Analysis', definition: 'Test to check sperm count and quality' }
+      ],
+      quiz: [
+        {
+          question: 'What percentage of couples experience infertility?',
+          options: [
+            '1-2%',
+            '10-15%',
+            '25-30%',
+            '40-50%'
+          ],
+          correctAnswer: 1,
+          explanation: 'Infertility affects approximately 10-15% of couples, making it a relatively common condition that many people face.'
+        },
+        {
+          question: 'When should a couple seek help for infertility?',
+          options: [
+            'After 3 months of trying',
+            'After 6 months if under 35, or 1 year if over 35',
+            'After 2 years of trying',
+            'Only if the woman is over 40'
+          ],
+          correctAnswer: 1,
+          explanation: 'General guidelines recommend seeking help after 12 months of trying if under 35, or after 6 months if 35 or older.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Causes and Evaluation of Infertility',
+      content: `Infertility has many potential causes that affect either the female partner, male partner, or both. Systematic evaluation identifies the specific cause(s) to guide treatment.
+
+**Infertility Definitions:**
+
+**Primary Infertility:**
+- Never achieved a pregnancy
+- Most common (85-90% of cases)
+
+**Secondary Infertility:**
+- Previous pregnancy but unable to conceive again
+- 10-15% of cases
+
+**Etiology (Causes):**
+
+**Female Factors (40%):**
+
+| Cause | Description | Percentage |
+|-------|-------------|------------|
+| Ovulatory dysfunction | Failure to ovulate regularly | 25% |
+| Tubal factors | Blocked/damaged tubes | 15% |
+| Endometriosis | Uterine lining outside uterus | 10% |
+| Uterine factors | Fibroids, polyps, scarring | 10% |
+| Cervical factors | Mucus problems | 5% |
+| Unexplained | No identifiable cause | 10% |
+
+**Male Factors (40%):**
+
+| Issue | Description | Severity |
+|-------|-------------|----------|
+| Oligospermia | Low sperm count | Mild to severe |
+| Asthenospermia | Poor motility | Variable |
+| Teratospermia | Abnormal morphology | Variable |
+| Azoospermia | No sperm in ejaculate | Severe |
+| Retrograde ejaculation | Sperm enters bladder | Treatable |
+
+**Combined Factors (20%):**
+- Both partners have contributing factors
+- Or multiple factors in one or both partners
+
+**Risk Factors for Infertility:**
+
+**Female:**
+- Age >35
+- BMI <18 or >30
+- Smoking
+- Alcohol use (>3 drinks/day)
+- Sexually transmitted infections
+- Pelvic inflammatory disease
+- Endometriosis
+- Polycystic ovary syndrome
+
+**Male:**
+- Varicocele
+- Smoking
+- Alcohol abuse
+- Drug use (anabolic steroids, marijuana)
+- Heat exposure (hot tubs, laptops)
+- Certain medications
+- Trauma to testicles
+
+**Diagnostic Evaluation:**
+
+**Initial Assessment:**
+
+**History for Both:**
+- Duration of infertility
+- Frequency and timing of intercourse
+- Previous pregnancies (with any partner)
+- Medical and surgical history
+- Medications and exposures
+- Lifestyle factors
+
+**Female Evaluation:**
+
+**Menstrual History:**
+- Regularity (26-35 days normal)
+- Cycle length
+- Symptoms (PMS, pain, ovulation signs)
+- Premenstrual spotting (suggests luteal phase defect)
+
+**Physical Exam:**
+- Height, weight, BMI
+- Blood pressure
+- Thyroid examination
+- Breast examination (galactorrhea?)
+- Pelvic examination
+- Hirsutism assessment
+
+**Laboratory Testing:**
+
+**Day 3 Labs:**
+- FSH, LH, estradiol (ovarian reserve)
+- TSH (thyroid)
+- Prolactin (exclude hyperprolactinemia)
+- AMH (anti-Müllerian hormone)
+- Optional: androgens for PCOS
+
+**Other Labs:**
+- Mid-luteal progesterone (confirms ovulation)
+- Rubella, varicella immunity
+- HIV, syphilis (pre-treatment screening)
+- Genetic testing if indicated
+
+**Imaging:**
+- Pelvic ultrasound (anatomy, fibroids, cysts)
+- Sonohysterogram (uterine cavity)
+- Hysterosalpingography (tubal patency)
+- Laparoscopy (rare first-line)
+
+**Male Evaluation:**
+
+**History:**
+- Previous fertility
+- History of genital trauma/infection
+- Mumps after puberty
+- Undescended testicles
+- Surgery (hernia, vasectomy reversal)
+- Heat exposure
+- Medications
+
+**Physical Exam:**
+- Testicular size (normal 15-25 mL)
+- Varicocele assessment
+- Secondary sexual characteristics
+- Body mass index
+
+**Semen Analysis:**
+
+| Parameter | WHO Reference |
+|-----------|---------------|
+| Volume | ≥1.5 mL |
+| Concentration | ≥15 million/mL |
+| Total count | ≥39 million |
+| Motility | ≥40% total, ≥32% progressive |
+| Morphology | ≥4% normal |
+| Vitality | ≥58% live |
+
+**If Abnormal:**
+- Repeat in 2-3 months
+- Consider endocrine evaluation (FSH, LH, testosterone)
+- Scrotal ultrasound if indicated`,
+      keyPoints: [
+        'Infertility causes are distributed: 40% female, 40% male, 20% combined/unexplained',
+        'Semen analysis is the cornerstone of male fertility evaluation',
+        'Day 3 FSH and AMH assess ovarian reserve',
+        'Both partners should be evaluated simultaneously'
+      ],
+      vocabulary: [
+        { term: 'Oligospermia', definition: 'Low sperm count in semen' },
+        { term: 'Azoospermia', definition: 'Absence of sperm in semen' },
+        { term: 'Varicocele', definition: 'Enlarged veins in the scrotum' },
+        { term: 'Galactorrhea', definition: 'Inappropriate milk production not related to breastfeeding' }
+      ],
+      quiz: [
+        {
+          question: 'What is the most common cause of female infertility?',
+          options: [
+            'Tubal factors',
+            'Ovulatory dysfunction',
+            'Endometriosis',
+            'Uterine factors'
+          ],
+          correctAnswer: 1,
+          explanation: 'Ovulatory dysfunction is the most common cause of female infertility, accounting for approximately 25% of cases. This includes conditions like PCOS, hypothalamic amenorrhea, and other ovulation disorders.'
+        },
+        {
+          question: 'What is the WHO reference value for sperm concentration?',
+          options: [
+            '≥5 million/mL',
+            '≥10 million/mL',
+            '≥15 million/mL',
+            '≥20 million/mL'
+          ],
+          correctAnswer: 2,
+          explanation: 'The WHO reference value for sperm concentration is ≥15 million/mL. Values below this indicate oligospermia (low sperm count).'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Treatment of Infertility',
+      content: `Infertility treatment is directed at the underlying cause and may involve lifestyle modifications, medication, surgery, or assisted reproductive technology.
+
+**Treatment Principles:**
+
+**General Approach:**
+1. Correct reversible causes
+2. Improve natural fertility
+3. Use least invasive effective treatment
+4. Consider age and time constraints
+5. Address psychosocial aspects
+
+**Lifestyle Modifications:**
+
+**Weight Management:**
+- Underweight (BMI <18.5): Gain weight
+- Overweight/obese (BMI ≥25): Lose 5-10%
+- Weight loss improves ovulation in PCOS
+
+**Other Changes:**
+- Smoking cessation (both partners)
+- Reduce alcohol (<2 drinks/day)
+- Limit caffeine (<200-300 mg/day)
+- Moderate exercise (not excessive)
+- Stress reduction
+
+**Ovulation Induction:**
+
+**Clomiphene Citrate:**
+
+**Mechanism:**
+- Estrogen receptor modulator
+- Blocks negative feedback → increased GnRH, FSH, LH
+- Stimulates follicular development
+
+**Protocol:**
+- Days 5-9 (or 3-7) of cycle
+- Start 50 mg, max 150-150 mg
+- Monitor with ultrasound if multiple follicles
+
+**Success Rates:**
+- Ovulation: 80%
+- Pregnancy per cycle: 10-15%
+- Cumulative: 60-80% after 6 cycles
+
+**Risks:**
+- Multiple pregnancy (5-10%)
+- Ovarian hyperstimulation (rare)
+- Hot flashes, mood changes, visual symptoms
+
+**Letrozole:**
+
+**Mechanism:**
+- Aromatase inhibitor
+- Reduces estrogen conversion → increased FSH
+- Shorter half-life than clomiphene
+
+**Advantages:**
+- Better for PCOS
+- Lower multiple pregnancy rate
+- Fewer side effects
+- Better endometrial development
+
+**Success:**
+- Similar or better ovulation rates than clomiphene
+- Higher live birth rates in PCOS
+
+**Gonadotropins:**
+
+**Medications:**
+- Recombinant FSH (Follistim, Gonal-F)
+- Urinary FSH/LH (Menopur)
+- hCG trigger
+
+**Protocol:**
+- Injectable, daily dosing
+- Strict monitoring required
+- Dose adjusted to response
+
+**Risks:**
+- Higher order multiple pregnancy (20-30%)
+- Ovarian hyperstimulation syndrome
+- Expensive, requires monitoring
+
+**Surgical Treatments:**
+
+**Laparoscopy:**
+- Adhesiolysis (scar tissue removal)
+- Treatment of endometriosis
+- Ovarian drilling for PCOS
+- Tubal reconstruction
+
+**Myomectomy:**
+- Remove submucosal fibroids
+- Improves fertility if cavity distorted
+- Can be hysteroscopic or abdominal
+
+**Tubal Surgery:**
+- Salpingostomy (open blocked tube)
+- Tubal reanastomosis (reverse sterilization)
+- Fimbrioplasty (repair tube end)
+
+**Male Factor Treatments:**
+
+**Varicocele Repair:**
+- Surgical or embolization
+- Improves semen parameters in 60-70%
+- Pregnancy rates: 30-40%
+
+**Antibiotics:**
+- For documented infection
+- Prostatitis, epididymitis
+
+**Lifestyle:**
+- Scrotal cooling (avoid hot tubs, loose underwear)
+- Avoid testicular trauma
+- Smoking cessation
+
+**Intrauterine Insemination (IUI):**
+
+**Indications:**
+- Mild male factor
+- Cervical mucus issues
+- Unexplained infertility
+- Donor sperm
+
+**Protocol:**
+- Ovulation induction or natural cycle
+- Monitor ovulation (ultrasound, LH kit)
+- Prepare sperm (wash, concentrate)
+- Inseminate 24-36 hours after LH surge/hCG
+
+**Success:**
+- 8-12% per cycle
+- 60-80% cumulative after 3-6 cycles
+
+**Assisted Reproductive Technology (ART):**
+
+**IVF Indications:**
+- Tubal factor
+- Severe male factor
+- Endometriosis
+- Failed other treatments
+- Genetic conditions (PGD)
+- Unexplained infertility
+
+**Process:**
+1. Ovarian stimulation (8-12 days)
+2. Trigger ovulation with hCG
+3. Egg retrieval (transvaginal ultrasound)
+4. Fertilization (laboratory)
+5. Embryo culture (3-6 days)
+6. Embryo transfer
+7. Progesterone support
+
+**Success Rates:**
+- <35 years: 40-50% live birth per transfer
+- 35-37: 30-40%
+- 38-40: 20-30%
+- >40: 5-10%`,
+
+      keyPoints: [
+        'Clomiphene is first-line for ovulation induction',
+        'Letrozole has advantages for PCOS patients',
+        'IUI success is 8-12% per cycle',
+        'IVF success declines significantly with age'
+      ],
+      vocabulary: [
+        { term: 'GnRH', definition: 'Gonadotropin-Releasing Hormone - controls FSH and LH release' },
+        { term: 'Fimbrioplasty', definition: 'Surgical repair of the fimbriae at the end of the fallopian tube' },
+        { term: 'Salpingostomy', definition: 'Surgical creation of an opening in a blocked fallopian tube' },
+        { term: 'Cryopreservation', definition: 'Freezing and storing embryos or gametes' }
+      ],
+      quiz: [
+        {
+          question: 'What is the first-line medication for ovulation induction?',
+          options: [
+            'Gonadotropins',
+            'Clomiphene citrate',
+            'Letrozole',
+            'hCG'
+          ],
+          correctAnswer: 1,
+          explanation: 'Clomiphene citrate is the first-line medication for ovulation induction due to its effectiveness, oral administration, and relatively low cost.'
+        },
+        {
+          question: 'What is the approximate success rate per cycle for IUI?',
+          options: [
+            '2-5%',
+            '8-12%',
+            '20-25%',
+            '30-40%'
+          ],
+          correctAnswer: 1,
+          explanation: 'Intrauterine insemination has a success rate of approximately 8-12% per cycle, with cumulative rates of 60-80% after 3-6 cycles.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Advanced Infertility Management',
+      content: `Complex infertility cases require advanced reproductive technologies and individualized treatment approaches.
+
+**In Vitro Fertilization (IVF) Details:**
+
+**Controlled Ovarian Stimulation:**
+
+**Protocols:**
+
+**Long Protocol (Luteal Phase GnRH Agonist):**
+- Down-regulation with leuprolide
+- Prevents premature LH surge
+- Standard protocol, good success rates
+
+**Antagonist Protocol:**
+- GnRH antagonist (cetrorelix, ganirelix)
+- Added when lead follicle ≥14 mm
+- Shorter duration, lower OHSS risk
+
+**Flare Protocol:**
+- GnRH agonist from day 1-2
+- Induces flare of endogenous FSH/LH
+- For poor responders
+
+**Mild Stimulation:**
+- Lower gonadotropin doses
+- Fewer oocytes, lower cost
+- For high OHSS risk or patient preference
+
+**Monitoring:**
+- Estradiol levels
+- Ultrasound follicle measurements
+- LH surge monitoring
+- Adjust dosing accordingly
+
+**Trigger:**
+- hCG (Ovidrel) when follicles mature
+- GnRH agonist (in antagonist cycles)
+- Timing based on follicle size and estradiol
+
+**Egg Retrieval:**
+- Transvaginal ultrasound-guided
+- Sedation or anesthesia
+- Usually 34-36 hours after trigger
+- Follicular fluid aspiration
+- Typically 8-15 oocytes retrieved
+
+**Fertilization Methods:**
+
+**Conventional IVF:**
+- Eggs incubated with sperm
+- 50,000-100,000 sperm per egg
+- Natural selection process
+
+**ICSI (Intracytoplasmic Sperm Injection):**
+- Single sperm injected into each egg
+- Indicated for severe male factor
+- Previous fertilization failure
+- Non-obstructive azoospermia (surgical retrieval)
+- Fertilization rates: 70-80%
+
+**Embryo Culture:**
+- Day 3 (cleavage stage) or Day 5-6 (blastocyst)
+- Blastocyst transfer: better selection, higher implantation
+- Extended culture: may have no embryos to transfer
+
+**Embryo Transfer:**
+- Usually 1-2 embryos (to avoid multiples)
+- Day 5 blastocyst transfer preferred
+- Soft catheter, ultrasound guidance
+- Luteal phase support with progesterone
+
+**Ovarian Hyperstimulation Syndrome (OHSS):**
+
+**Pathophysiology:**
+- Vascular permeability increased
+- Fluid shift from intravascular space
+- Ascites, pleural effusion possible
+- Due to hCG trigger
+
+**Prevention:**
+- Antagonist protocol with GnRH trigger
+- Lower gonadotropin doses
+- Elective cryopreservation of all embryos
+
+**Grading:**
+
+| Grade | Description |
+|-------|-------------|
+| Mild | Abdominal discomfort, enlarged ovaries <5 cm |
+| Moderate | Abdominal pain, nausea, vomiting, ovaries 5-12 cm |
+| Severe | Clinical ascites, hydrothorax, oliguria, labs abnormal |
+
+**Treatment:**
+- Mild: Observation, hydration
+- Moderate: Outpatient management
+- Severe: Hospitalization, IV fluids, paracentesis
+
+**Male Factor Advanced Treatments:**
+
+**Sperm Retrieval Techniques:**
+
+**MESA (Microsurgical Epididymal Sperm Aspiration):**
+- Microscopic epididymal sperm retrieval
+- For obstructive azoospermia
+- Higher quality sperm
+
+**TESE (Testicular Sperm Extraction):**
+- Testicular biopsy
+- For non-obstructive azoospermia
+- May find focal sperm production
+
+**Testicular Sperm Aspiration:**
+- Office-based, needle aspiration
+- For obstruction
+
+**Donor Sperm:**
+- Anonymous sperm banks
+- Known donor
+- Screening: infectious diseases, genetic testing
+- Quarantine period (6 months)`,
+
+      keyPoints: [
+        'Antagonist protocol has lower OHSS risk than long protocol',
+        'ICSI is indicated for severe male factor infertility',
+        'Blastocyst transfer allows better embryo selection',
+        'OHSS is caused by vascular leak due to hCG trigger'
+      ],
+      vocabulary: [
+        { term: 'OHSS', definition: 'Ovarian Hyperstimulation Syndrome - complication of fertility drugs' },
+        { term: 'MESA', definition: 'Microsurgical Epididymal Sperm Aspiration' },
+        { term: 'TESE', definition: 'Testicular Sperm Extraction' },
+        { term: 'Blastocyst', definition: 'Day 5-6 embryo with differentiated cell types' }
+      ],
+      quiz: [
+        {
+          question: 'What is the advantage of the antagonist protocol for ovarian stimulation?',
+          options: [
+          'Higher pregnancy rates',
+          'Lower risk of OHSS and shorter duration',
+          'Lower cost',
+          'No need for trigger shot'
+          ],
+          correctAnswer: 1,
+          explanation: 'The antagonist protocol has a lower risk of ovarian hyperstimulation syndrome, shorter duration, and can use a GnRH agonist trigger instead of hCG, which further reduces OHSS risk.'
+        },
+        {
+          question: 'When is ICSI indicated?',
+          options: [
+          'First-line for all couples',
+          'Severe male factor infertility or previous fertilization failure',
+          'Only for women over 40',
+          'Only when using donor sperm'
+          ],
+          correctAnswer: 1,
+          explanation: 'ICSI is indicated for severe male factor infertility (very low count, motility, or morphology) or when there has been previous fertilization failure with conventional IVF.'
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Third-Party Reproduction and Emerging Technologies',
+      content: `Third-party reproduction involves gamete donation, gestational carriers, or surrogacy to help couples achieve pregnancy.
+
+**Egg Donation:**
+
+**Indications:**
+- Diminished ovarian reserve (high FSH, low AMH)
+- Primary ovarian insufficiency (POI)
+- Poor response to stimulation
+- Repeated IVF failure
+- Genetic conditions (recipient)
+- Same-sex male couples
+
+**Donor Screening:**
+
+**Medical:**
+- Age <30 preferred
+- Physical examination
+- Infectious disease screening (HIV, hepatitis, syphilis, gonorrhea, chlamydia)
+- Genetic testing (karyotype, cystic fibrosis, SMA)
+- Psychological evaluation
+
+**Process:**
+- Donor stimulation (as in IVF)
+- Recipient cycle synchronization
+- Fertilization with recipient/partner sperm
+- Embryos transferred to recipient
+
+**Success Rates:**
+- 50-60% live birth per transfer
+- Rates depend on recipient age, not donor age
+- Cumulative >80% with multiple cycles
+
+**Ethical/Legal:**
+- Anonymity vs. known donors
+- Payment for eggs (controversial)
+- Rights and responsibilities
+- Offspring right to know genetic origins
+
+**Sperm Donation:**
+
+**Indications:**
+- Azoospermia (no sperm in ejaculate)
+- Severe male factor
+- Genetic conditions (donor)
+- Single women
+- Same-sex female couples
+
+**Types:**
+- Anonymous donors (sperm banks)
+- Known donors
+- Directed donation
+
+**Screening:**
+- Infectious disease testing
+- Genetic testing (optional but common)
+- Quarantine (6 months) for frozen sperm
+
+**Use:**
+- IUI or IVF
+- Multiple vials purchased
+- Limits on number of pregnancies per donor (25-100 in various regions)
+
+**Gestational Carriers (Surrogacy):**
+
+**Indications:**
+- Absent uterus (congenital, surgical)
+- Uterine abnormalities (severe adhesions, malformations)
+- Medical contraindications to pregnancy
+- Recurrent pregnancy loss
+- Same-sex male couples
+
+**Types:**
+- Gestational carrier (no genetic link)
+- Traditional surrogacy (donor + carrier) - rarely done now
+
+**Process:**
+- IVF with intended parents' gametes
+- Donor eggs if needed
+- Embryo transfer to carrier
+- Legal contracts essential
+
+**Legal Considerations:**
+- Varies widely by jurisdiction
+- Pre-birth orders
+- Parental rights establishment
+- Compensation issues
+
+**Fertility Preservation:**
+
+**Indications:**
+- Medical (gonadotoxic therapy, cancer)
+- Social (age-related decline)
+- Gender affirming care
+
+**Egg Freezing (Oocyte Cryopreservation):**
+
+| Age | Success (Live Birth per Thawed Egg) |
+|-----|-----------------------------------|
+| <30 | 5-12% |
+| 30-34 | 3-9% |
+| 35-37 | 2-6% |
+| 38-40 | 1-3% |
+| >40 | <1% |
+
+**Process:**
+- Ovarian stimulation (10-14 days)
+- Egg retrieval
+- Vitrification (ultra-rapid freezing)
+- Storage indefinitely
+
+**Number Needed:**
+- Recommend 10-15 eggs for reasonable chance
+- Typically requires 2-3 cycles
+
+**Embryo Freezing:**
+- Higher survival than eggs
+- More established
+- Requires sperm donor or partner
+
+**Ovarian Tissue Cryopreservation:**
+- Experimental but successful
+- >100 live births reported
+- Can restore ovarian function
+- For children, cancer patients who can't delay treatment
+
+**Emerging Technologies:**
+
+**Mitochondrial Replacement Therapy (Three-Parent IVF):**
+- Prevents mitochondrial DNA transmission
+- Spindle transfer
+- Pronuclear transfer
+- Controversial, limited availability
+
+**In Vitro Gametogenesis (IVG):**
+- Gametes from stem cells
+- Experimental
+- Ethical concerns
+
+**Artificial Gametes:**
+- Creating sperm/eggs from somatic cells
+- Theoretical currently
+- Major technical and ethical hurdles
+
+**Preimplantation Genetic Testing (PGT):**
+
+**PGT-A (Aneuploidy):**
+- Screens for chromosomal number
+- Mosaicism detection
+- Improves implantation rates in selected populations
+
+**PGT-M (Monogenic):**
+- Testing for specific single-gene disorders
+- Cystic fibrosis, SMA, Huntington disease
+- Requires probe development
+
+**PGT-SR (Structural Rearrangement):**
+- Translocations (Robertsonian, reciprocal)
+- Inversions
+- Reduces miscarriage risk
+
+**Non-Invasive PGT:**
+- Cell-free DNA from culture media
+- May replace embryo biopsy in future
+- Less invasive, less risk
+- Still experimental
+`,
+      keyPoints: [
+        'Egg donation success rates depend on recipient age, not donor age',
+        'Egg freezing success declines significantly with age',
+        'Ovarian tissue cryopreservation has produced >100 live births',
+        'PGT allows genetic screening before embryo transfer'
+      ],
+      vocabulary: [
+        { term: 'Vitrification', definition: 'Ultra-rapid freezing technique for eggs/embryos' },
+        { term: 'Mosaicism', definition: 'Embryo with both normal and abnormal cells' },
+        { term: 'Aneuploidy', definition: 'Abnormal number of chromosomes' },
+        { term: 'Translocation', definition: 'Rearrangement of chromosome segments' }
+      ],
+      quiz: [
+        {
+          question: 'What determines success rates in egg donation cycles?',
+          options: [
+          'Donor age',
+          'Recipient age',
+          'Number of eggs retrieved',
+          'Sperm quality'
+          ],
+          correctAnswer: 1,
+          explanation: 'In egg donation, success rates depend primarily on recipient age, not donor age. The uterine environment and recipient health are more critical for implantation than egg quality.'
+        },
+        {
+          question: 'How many eggs are typically recommended for a reasonable chance of success with egg freezing?',
+          options: [
+          '5 or fewer',
+          '10-15 eggs',
+          '20-25 eggs',
+          '30+ eggs'
+          ],
+          correctAnswer: 1,
+          explanation: 'Most fertility specialists recommend freezing 10-15 eggs for a reasonable chance of success. This typically requires 2-3 stimulation cycles in most women.'
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'fertility-overview',
+    'fertility-treatments',
+    'menstrual-cycle',
+    'pcos'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'ASRM Guidelines',
+    'NICE Fertility Guidelines',
+    'UpToDate on Infertility'
+  ]
+}

@@ -1,0 +1,1185 @@
+{
+  "conditionCategories": {
+    "infectious": "Infeccioso",
+    "autoimmune": "Autoinmune",
+    "genetic": "Genetico",
+    "metabolic": "Metabolico",
+    "cardiovascular": "Cardiovascular",
+    "respiratory": "Respiratorio",
+    "neurological": "Neurologico",
+    "psychiatric": "Psiquiatrico",
+    "musculoskeletal": "Musculoesqueletico",
+    "gastrointestinal": "Gastrointestinal",
+    "endocrine": "Endocrino",
+    "dermatological": "Dermatologico",
+    "hematological": "Hematologico",
+    "oncological": "Oncologico",
+    "renal": "Renal",
+    "hepatic": "Hepatico",
+    "ophthalmological": "Oftalmologico",
+    "otological": "Otologico",
+    "gynecological": "Ginecologico",
+    "urological": "Urologico",
+    "pediatric": "Pediatrico",
+    "geriatric": "Geriatrico"
+  },
+  "conditions": {
+    "hypertension": {
+      "name": "Hipertension arterial",
+      "medicalName": "Hypertensio arterialis",
+      "commonName": "Presion alta",
+      "abbreviation": "HTA",
+      "description": "Condicion cronica donde la presion de la sangre contra las paredes de las arterias es consistentemente elevada",
+      "patientDescription": "Su corazon tiene que trabajar mas fuerte de lo normal para bombear sangre porque las arterias estan mas estrechas o rigidas"
+    },
+    "diabetes": {
+      "name": "Diabetes mellitus",
+      "medicalName": "Diabetes mellitus",
+      "commonName": "Diabetes / Azucar en la sangre",
+      "description": "Grupo de enfermedades metabolicas caracterizadas por niveles elevados de glucosa en sangre",
+      "patientDescription": "Su cuerpo no puede usar bien el azucar de los alimentos porque no produce suficiente insulina o no la usa correctamente"
+    },
+    "diabetesType1": {
+      "name": "Diabetes tipo 1",
+      "medicalName": "Diabetes mellitus tipo 1",
+      "description": "Enfermedad autoinmune donde el pancreas no produce insulina",
+      "patientDescription": "Su sistema inmunologico ataco las celulas que producen insulina, por lo que necesita inyectarse insulina"
+    },
+    "diabetesType2": {
+      "name": "Diabetes tipo 2",
+      "medicalName": "Diabetes mellitus tipo 2",
+      "description": "Condicion metabolica donde el cuerpo no usa la insulina eficientemente",
+      "patientDescription": "Su cuerpo no usa la insulina correctamente y eventualmente no produce suficiente"
+    },
+    "asthma": {
+      "name": "Asma",
+      "medicalName": "Asthma bronchiale",
+      "commonName": "Asma",
+      "description": "Enfermedad cronica de las vias respiratorias caracterizada por inflamacion y estrechamiento",
+      "patientDescription": "Sus vias respiratorias se inflaman y estrechan, haciendo dificil respirar, especialmente cuando se expone a ciertos disparadores"
+    },
+    "copd": {
+      "name": "Enfermedad pulmonar obstructiva cronica",
+      "medicalName": "EPOC",
+      "commonName": "EPOC",
+      "abbreviation": "EPOC",
+      "description": "Enfermedad pulmonar cronica que causa limitacion del flujo de aire",
+      "patientDescription": "Sus pulmones estan danados, generalmente por fumar, lo que hace dificil que el aire entre y salga"
+    },
+    "coronaryArteryDisease": {
+      "name": "Enfermedad de las arterias coronarias",
+      "medicalName": "Cardiopatia isquemica",
+      "commonName": "Enfermedad del corazon",
+      "description": "Estrechamiento de las arterias coronarias debido a acumulacion de placa",
+      "patientDescription": "Las arterias que llevan sangre al corazon se han estrechado por depositos de grasa, reduciendo el flujo sanguineo"
+    },
+    "heartFailure": {
+      "name": "Insuficiencia cardiaca",
+      "medicalName": "Insufficientia cordis",
+      "commonName": "Falla cardiaca",
+      "description": "Condicion donde el corazon no puede bombear suficiente sangre para satisfacer las necesidades del cuerpo",
+      "patientDescription": "Su corazon no puede bombear sangre tan bien como deberia, causando acumulacion de liquido y cansancio"
+    },
+    "atrialFibrillation": {
+      "name": "Fibrilacion auricular",
+      "medicalName": "Fibrillatio atriorum",
+      "commonName": "AFib",
+      "abbreviation": "FA",
+      "description": "Ritmo cardiaco irregular y frecuentemente rapido que puede causar coagulos",
+      "patientDescription": "Las camaras superiores de su corazon laten de forma irregular, lo que puede hacer que sienta palpitaciones y aumenta el riesgo de coagulos"
+    },
+    "stroke": {
+      "name": "Accidente cerebrovascular",
+      "medicalName": "Ictus / Apoplejia",
+      "commonName": "Derrame cerebral",
+      "abbreviation": "ACV",
+      "description": "Dano cerebral causado por interrupcion del suministro de sangre",
+      "patientDescription": "Parte de su cerebro no recibio sangre por un tiempo, lo que causo dano a esa area"
+    },
+    "myocardialInfarction": {
+      "name": "Infarto de miocardio",
+      "medicalName": "Infarctus myocardii",
+      "commonName": "Ataque al corazon / Infarto",
+      "abbreviation": "IAM",
+      "description": "Muerte del tejido cardiaco debido a falta de flujo sanguineo",
+      "patientDescription": "Una arteria de su corazon se bloqueo completamente, danando parte del musculo cardiaco"
+    },
+    "pneumonia": {
+      "name": "Neumonia",
+      "medicalName": "Pneumonia",
+      "commonName": "Pulmonia",
+      "description": "Infeccion que inflama los sacos de aire en uno o ambos pulmones",
+      "patientDescription": "Sus pulmones tienen una infeccion que causa que se llenen de liquido o pus"
+    },
+    "arthritis": {
+      "name": "Artritis",
+      "medicalName": "Arthritis",
+      "description": "Inflamacion de una o mas articulaciones causando dolor y rigidez",
+      "patientDescription": "Sus articulaciones estan inflamadas, lo que causa dolor, hinchazon y dificultad para moverse"
+    },
+    "osteoarthritis": {
+      "name": "Osteoartritis",
+      "medicalName": "Osteoarthritis",
+      "commonName": "Artritis por desgaste",
+      "description": "Enfermedad articular degenerativa por desgaste del cartilago",
+      "patientDescription": "El cartilago que protege sus articulaciones se ha desgastado con el tiempo"
+    },
+    "rheumatoidArthritis": {
+      "name": "Artritis reumatoide",
+      "medicalName": "Arthritis rheumatoides",
+      "description": "Enfermedad autoinmune que ataca las articulaciones",
+      "patientDescription": "Su sistema inmunologico ataca las membranas de sus articulaciones, causando inflamacion"
+    },
+    "hypothyroidism": {
+      "name": "Hipotiroidismo",
+      "medicalName": "Hypothyreosis",
+      "commonName": "Tiroides lenta",
+      "description": "Condicion donde la glandula tiroides no produce suficientes hormonas",
+      "patientDescription": "Su glandula tiroides no produce suficientes hormonas, lo que hace mas lento su metabolismo"
+    },
+    "hyperthyroidism": {
+      "name": "Hipertiroidismo",
+      "medicalName": "Hyperthyreosis",
+      "commonName": "Tiroides hiperactiva",
+      "description": "Condicion donde la glandula tiroides produce demasiadas hormonas",
+      "patientDescription": "Su glandula tiroides produce demasiadas hormonas, acelerando su metabolismo"
+    },
+    "depression": {
+      "name": "Depresion",
+      "medicalName": "Trastorno depresivo mayor",
+      "description": "Trastorno del estado de animo que causa sentimientos persistentes de tristeza",
+      "patientDescription": "Una condicion que afecta como se siente, piensa y maneja las actividades diarias"
+    },
+    "anxiety": {
+      "name": "Ansiedad",
+      "medicalName": "Trastorno de ansiedad generalizada",
+      "description": "Trastorno caracterizado por preocupacion excesiva y persistente",
+      "patientDescription": "Preocupacion y nerviosismo excesivos que son dificiles de controlar"
+    },
+    "gerd": {
+      "name": "Enfermedad por reflujo gastroesofagico",
+      "medicalName": "ERGE",
+      "commonName": "Reflujo / Acidez cronica",
+      "abbreviation": "ERGE",
+      "description": "Condicion donde el acido del estomago sube frecuentemente al esofago",
+      "patientDescription": "El acido de su estomago sube regularmente al esofago, causando ardor y malestar"
+    },
+    "ibs": {
+      "name": "Sindrome del intestino irritable",
+      "medicalName": "Colon irritable",
+      "abbreviation": "SII",
+      "description": "Trastorno comun que afecta el intestino grueso",
+      "patientDescription": "Su intestino es muy sensible, causando dolor abdominal y cambios en sus evacuaciones"
+    },
+    "chronicKidneyDisease": {
+      "name": "Enfermedad renal cronica",
+      "medicalName": "Insuficiencia renal cronica",
+      "abbreviation": "ERC",
+      "description": "Perdida gradual de la funcion renal con el tiempo",
+      "patientDescription": "Sus rinones estan gradualmente perdiendo la capacidad de filtrar los desechos de su sangre"
+    },
+    "anemia": {
+      "name": "Anemia",
+      "medicalName": "Anaemia",
+      "description": "Condicion donde la sangre no tiene suficientes globulos rojos sanos",
+      "patientDescription": "Su sangre no tiene suficientes celulas para transportar oxigeno, lo que puede hacerlo sentir cansado"
+    },
+    "osteoporosis": {
+      "name": "Osteoporosis",
+      "medicalName": "Osteoporosis",
+      "commonName": "Huesos fragiles",
+      "description": "Condicion que debilita los huesos haciendolos fragiles",
+      "patientDescription": "Sus huesos se han vuelto mas delgados y fragiles, aumentando el riesgo de fracturas"
+    },
+    "migraine": {
+      "name": "Migrana",
+      "medicalName": "Migrana",
+      "commonName": "Jaqueca",
+      "description": "Dolor de cabeza intenso que puede causar nauseas y sensibilidad a la luz",
+      "patientDescription": "Un tipo severo de dolor de cabeza que a menudo viene con otros sintomas como nauseas o ver luces"
+    },
+    "alzheimer": {
+      "name": "Enfermedad de Alzheimer",
+      "medicalName": "Morbus Alzheimer",
+      "description": "Trastorno cerebral progresivo que afecta la memoria y el pensamiento",
+      "patientDescription": "Una condicion que gradualmente afecta la memoria, el pensamiento y la capacidad de realizar tareas simples"
+    },
+    "parkinson": {
+      "name": "Enfermedad de Parkinson",
+      "medicalName": "Morbus Parkinson",
+      "description": "Trastorno del sistema nervioso que afecta el movimiento",
+      "patientDescription": "Una condicion que afecta como su cerebro controla el movimiento, causando temblores y rigidez"
+    },
+    "cancer": {
+      "name": "Cancer",
+      "medicalName": "Neoplasia maligna",
+      "description": "Enfermedad causada por crecimiento celular descontrolado",
+      "patientDescription": "Una condicion donde las celulas de su cuerpo crecen de manera descontrolada"
+    },
+    "obesity": {
+      "name": "Obesidad",
+      "medicalName": "Obesitas",
+      "description": "Exceso de grasa corporal que aumenta el riesgo de problemas de salud",
+      "patientDescription": "Tener mas grasa corporal de lo saludable, lo que puede afectar su salud general"
+    },
+    "sleepApnea": {
+      "name": "Apnea del sueno",
+      "medicalName": "Apnea obstructiva del sueno",
+      "description": "Trastorno donde la respiracion se detiene repetidamente durante el sueno",
+      "patientDescription": "Su respiracion se detiene brevemente muchas veces mientras duerme, interrumpiendo su descanso"
+    },
+    "hepatitis": {
+      "name": "Hepatitis",
+      "medicalName": "Hepatitis",
+      "description": "Inflamacion del higado, generalmente causada por virus",
+      "patientDescription": "Su higado esta inflamado, generalmente debido a una infeccion viral"
+    },
+    "cirrhosis": {
+      "name": "Cirrosis",
+      "medicalName": "Cirrhosis hepatis",
+      "description": "Cicatrizacion avanzada del higado",
+      "patientDescription": "Su higado tiene dano severo con cicatrices que afectan su funcion"
+    },
+    "pancreatitis": {
+      "name": "Pancreatitis",
+      "medicalName": "Pancreatitis",
+      "description": "Inflamacion del pancreas",
+      "patientDescription": "Su pancreas esta inflamado, lo que puede causar dolor abdominal severo"
+    },
+    "celiacDisease": {
+      "name": "Enfermedad celiaca",
+      "medicalName": "Morbus coeliacus",
+      "commonName": "Intolerancia al gluten",
+      "description": "Trastorno inmunologico donde el gluten dana el intestino delgado",
+      "patientDescription": "Su sistema inmunologico reacciona al gluten, danando su intestino delgado"
+    },
+    "crohnsDisease": {
+      "name": "Enfermedad de Crohn",
+      "medicalName": "Morbus Crohn",
+      "description": "Enfermedad inflamatoria intestinal cronica",
+      "patientDescription": "Una inflamacion cronica que puede afectar cualquier parte de su tracto digestivo"
+    },
+    "ulcerativeColitis": {
+      "name": "Colitis ulcerosa",
+      "medicalName": "Colitis ulcerosa",
+      "description": "Enfermedad inflamatoria del colon y recto",
+      "patientDescription": "Inflamacion y ulceras en el revestimiento de su colon y recto"
+    },
+    "lupus": {
+      "name": "Lupus",
+      "medicalName": "Lupus eritematoso sistemico",
+      "abbreviation": "LES",
+      "description": "Enfermedad autoinmune que puede afectar multiples organos",
+      "patientDescription": "Su sistema inmunologico ataca sus propios tejidos, pudiendo afectar muchas partes del cuerpo"
+    },
+    "multipleSclerosis": {
+      "name": "Esclerosis multiple",
+      "medicalName": "Sclerosis multiplex",
+      "abbreviation": "EM",
+      "description": "Enfermedad del sistema nervioso central",
+      "patientDescription": "Su sistema inmunologico ataca la cubierta protectora de los nervios"
+    },
+    "epilepsy": {
+      "name": "Epilepsia",
+      "medicalName": "Epilepsia",
+      "description": "Trastorno neurologico con convulsiones recurrentes",
+      "patientDescription": "Una condicion donde tiene episodios de actividad electrica anormal en el cerebro"
+    },
+    "psoriasis": {
+      "name": "Psoriasis",
+      "medicalName": "Psoriasis",
+      "description": "Condicion de la piel que causa manchas rojas y escamosas",
+      "patientDescription": "Su sistema inmunologico hace que las celulas de la piel crezcan demasiado rapido"
+    },
+    "eczema": {
+      "name": "Eczema",
+      "medicalName": "Dermatitis atopica",
+      "description": "Condicion que hace que la piel pique, se enrojezca e inflame",
+      "patientDescription": "Una condicion de la piel que causa areas secas, con picazon e inflamadas"
+    },
+    "glaucoma": {
+      "name": "Glaucoma",
+      "medicalName": "Glaucoma",
+      "description": "Grupo de enfermedades que danan el nervio optico",
+      "patientDescription": "La presion en su ojo puede danar el nervio que envia imagenes al cerebro"
+    },
+    "cataracts": {
+      "name": "Cataratas",
+      "medicalName": "Cataracta",
+      "description": "Opacidad del cristalino del ojo",
+      "patientDescription": "El lente natural de su ojo se ha vuelto nublado, afectando su vision"
+    },
+    "benignProstaticHyperplasia": {
+      "name": "Hiperplasia prostatica benigna",
+      "medicalName": "Hyperplasia prostatica benigna",
+      "commonName": "Prostata agrandada",
+      "abbreviation": "HPB",
+      "description": "Agrandamiento no canceroso de la prostata",
+      "patientDescription": "Su prostata se ha agrandado, lo que puede dificultar orinar"
+    },
+    "endometriosis": {
+      "name": "Endometriosis",
+      "medicalName": "Endometriosis",
+      "description": "Condicion donde tejido similar al uterino crece fuera del utero",
+      "patientDescription": "Tejido similar al del interior de su utero crece en otros lugares"
+    },
+    "polycysticOvarySyndrome": {
+      "name": "Sindrome de ovario poliquistico",
+      "medicalName": "Syndroma ovarii polycystici",
+      "abbreviation": "SOP",
+      "description": "Trastorno hormonal comun en mujeres en edad reproductiva",
+      "patientDescription": "Un desequilibrio hormonal que afecta sus ovarios y ciclo menstrual"
+    },
+    "gout": {
+      "name": "Gota",
+      "medicalName": "Arthritis urica",
+      "description": "Forma de artritis causada por cristales de acido urico",
+      "patientDescription": "Cristales de acido urico se acumulan en sus articulaciones, causando ataques de dolor severo"
+    },
+    "fibromyalgia": {
+      "name": "Fibromialgia",
+      "medicalName": "Fibromyalgia",
+      "description": "Condicion con dolor musculoesqueletico generalizado",
+      "patientDescription": "Una condicion que causa dolor generalizado, fatiga y otros sintomas"
+    },
+    "urinaryTractInfection": {
+      "name": "Infeccion del tracto urinario",
+      "medicalName": "Infectio tractus urinarii",
+      "commonName": "Infeccion urinaria",
+      "abbreviation": "ITU",
+      "description": "Infeccion en cualquier parte del sistema urinario",
+      "patientDescription": "Una infeccion en su vejiga o vias urinarias que causa ardor al orinar"
+    },
+    "deepVeinThrombosis": {
+      "name": "Trombosis venosa profunda",
+      "medicalName": "Thrombosis venosa profunda",
+      "abbreviation": "TVP",
+      "description": "Coagulo de sangre en una vena profunda, generalmente en la pierna",
+      "patientDescription": "Un coagulo de sangre se ha formado en una vena profunda de su pierna"
+    },
+    "pulmonaryEmbolism": {
+      "name": "Embolia pulmonar",
+      "medicalName": "Embolia pulmonalis",
+      "abbreviation": "EP",
+      "description": "Bloqueo de una arteria pulmonar por un coagulo",
+      "patientDescription": "Un coagulo de sangre ha viajado a sus pulmones, bloqueando una arteria"
+    }
+  },
+  "symptoms": {
+    "pain": {
+      "name": "Dolor",
+      "medicalTerm": "Dolor/Algia",
+      "description": "Sensacion desagradable que indica dano o enfermedad",
+      "patientDescription": "Molestia o sufrimiento fisico",
+      "questions": ["Donde le duele?", "Como describiria el dolor?", "Que tan fuerte es del 1 al 10?"]
+    },
+    "headache": {
+      "name": "Dolor de cabeza",
+      "medicalTerm": "Cefalea",
+      "description": "Dolor en cualquier region de la cabeza",
+      "patientDescription": "Dolor o presion en la cabeza",
+      "questions": ["Donde exactamente le duele la cabeza?", "Es pulsatil o constante?", "Tiene nauseas o sensibilidad a la luz?"]
+    },
+    "chestPain": {
+      "name": "Dolor de pecho",
+      "medicalTerm": "Dolor toracico/Precordialgia",
+      "description": "Dolor o molestia en el area del pecho",
+      "patientDescription": "Molestia o presion en el pecho",
+      "questions": ["Describa el dolor", "Se extiende al brazo o mandibula?", "Empeora con el esfuerzo?"]
+    },
+    "abdomenPain": {
+      "name": "Dolor abdominal",
+      "medicalTerm": "Dolor abdominal",
+      "description": "Dolor entre el pecho y la pelvis",
+      "patientDescription": "Dolor o molestia en el area del estomago o vientre",
+      "questions": ["Donde exactamente le duele?", "Es constante o viene y va?", "Se relaciona con las comidas?"]
+    },
+    "backPain": {
+      "name": "Dolor de espalda",
+      "medicalTerm": "Dorsalgia/Lumbalgia",
+      "description": "Dolor en la region posterior del torso",
+      "patientDescription": "Dolor en la espalda, ya sea en la parte alta, media o baja",
+      "questions": ["En que parte de la espalda?", "Baja a las piernas?", "Que lo mejora o empeora?"]
+    },
+    "fatigue": {
+      "name": "Fatiga",
+      "medicalTerm": "Astenia/Fatiga",
+      "description": "Cansancio extremo y falta de energia",
+      "patientDescription": "Sentirse muy cansado o sin energia",
+      "questions": ["Hace cuanto se siente asi?", "El descanso lo mejora?", "Afecta sus actividades diarias?"]
+    },
+    "fever": {
+      "name": "Fiebre",
+      "medicalTerm": "Pirexia",
+      "description": "Temperatura corporal elevada",
+      "patientDescription": "Temperatura del cuerpo mas alta de lo normal",
+      "questions": ["Cual ha sido su temperatura mas alta?", "Tiene escalofrios?", "Hace cuanto comenzo?"]
+    },
+    "chills": {
+      "name": "Escalofrios",
+      "medicalTerm": "Escalofrios",
+      "description": "Sensacion de frio con temblores",
+      "patientDescription": "Temblores y sensacion de frio",
+      "questions": ["Vienen con fiebre?", "Son constantes o intermitentes?"]
+    },
+    "cough": {
+      "name": "Tos",
+      "medicalTerm": "Tos",
+      "description": "Expulsion forzada de aire de las vias respiratorias",
+      "patientDescription": "Reflejo que limpia las vias respiratorias",
+      "questions": ["Es seca o con flema?", "De que color es la flema?", "Tiene sangre?"]
+    },
+    "shortnessOfBreath": {
+      "name": "Dificultad para respirar",
+      "medicalTerm": "Disnea",
+      "description": "Sensacion de falta de aire",
+      "patientDescription": "Sentir que no puede obtener suficiente aire",
+      "questions": ["Ocurre en reposo o solo con esfuerzo?", "Empeora acostado?", "Es subita o gradual?"]
+    },
+    "dizziness": {
+      "name": "Mareo",
+      "medicalTerm": "Vertigo/Mareo",
+      "description": "Sensacion de desequilibrio o que todo gira",
+      "patientDescription": "Sentir que usted o su entorno esta girando",
+      "questions": ["Siente que todo gira o es mas como desmayarse?", "Que lo desencadena?", "Tiene zumbido en los oidos?"]
+    },
+    "nausea": {
+      "name": "Nauseas",
+      "medicalTerm": "Nausea",
+      "description": "Sensacion de malestar estomacal con ganas de vomitar",
+      "patientDescription": "Malestar en el estomago con sensacion de querer vomitar",
+      "questions": ["Ha vomitado?", "Se relaciona con algun alimento?", "Tiene dolor abdominal tambien?"]
+    },
+    "vomiting": {
+      "name": "Vomito",
+      "medicalTerm": "Emesis",
+      "description": "Expulsion forzada del contenido del estomago",
+      "patientDescription": "Devolver lo que tiene en el estomago",
+      "questions": ["Cuantas veces ha vomitado?", "Tiene sangre?", "Que color es?"]
+    },
+    "diarrhea": {
+      "name": "Diarrea",
+      "medicalTerm": "Diarrea",
+      "description": "Heces sueltas o acuosas frecuentes",
+      "patientDescription": "Evacuaciones liquidas o muy sueltas",
+      "questions": ["Cuantas veces al dia?", "Tiene sangre o moco?", "Ha viajado recientemente?"]
+    },
+    "constipation": {
+      "name": "Estrenimiento",
+      "medicalTerm": "Constipacion",
+      "description": "Dificultad para evacuar o evacuaciones infrecuentes",
+      "patientDescription": "Dificultad para ir al bano o evacuaciones duras",
+      "questions": ["Hace cuantos dias no evacua?", "Las heces son duras?", "Tiene dolor al evacuar?"]
+    },
+    "swelling": {
+      "name": "Hinchazon",
+      "medicalTerm": "Edema",
+      "description": "Acumulacion anormal de liquido en los tejidos",
+      "patientDescription": "Area del cuerpo inflamada o hinchada",
+      "questions": ["Donde esta hinchado?", "Es en ambos lados o solo uno?", "Deja marca al presionar?"]
+    },
+    "rash": {
+      "name": "Sarpullido",
+      "medicalTerm": "Exantema/Erupcion cutanea",
+      "description": "Cambio notable en la textura o color de la piel",
+      "patientDescription": "Manchas, ronchas o cambios en la piel",
+      "questions": ["Donde empezo?", "Se ha extendido?", "Pica o duele?"]
+    },
+    "itching": {
+      "name": "Comezon",
+      "medicalTerm": "Prurito",
+      "description": "Sensacion que provoca deseo de rascarse",
+      "patientDescription": "Sensacion de picazon en la piel",
+      "questions": ["Donde le pica?", "Es peor de noche?", "Uso algo nuevo en la piel?"]
+    },
+    "weightLoss": {
+      "name": "Perdida de peso",
+      "medicalTerm": "Perdida ponderal",
+      "description": "Disminucion del peso corporal no intencional",
+      "patientDescription": "Bajar de peso sin intentarlo",
+      "questions": ["Cuanto peso ha perdido?", "En cuanto tiempo?", "Ha cambiado su apetito?"]
+    },
+    "weightGain": {
+      "name": "Aumento de peso",
+      "medicalTerm": "Ganancia ponderal",
+      "description": "Incremento del peso corporal",
+      "patientDescription": "Subir de peso",
+      "questions": ["Cuanto peso ha ganado?", "Ha cambiado su dieta o actividad?", "Nota hinchazon?"]
+    },
+    "insomnia": {
+      "name": "Insomnio",
+      "medicalTerm": "Insomnio",
+      "description": "Dificultad para dormir o mantener el sueno",
+      "patientDescription": "Problemas para quedarse dormido o mantenerse dormido",
+      "questions": ["Es dificil quedarse dormido o mantener el sueno?", "Se despierta muy temprano?", "Que tan descansado se siente?"]
+    },
+    "jointPain": {
+      "name": "Dolor articular",
+      "medicalTerm": "Artralgia",
+      "description": "Dolor en una o mas articulaciones",
+      "patientDescription": "Dolor en las coyunturas o articulaciones",
+      "questions": ["Cuales articulaciones le duelen?", "Estan hinchadas o calientes?", "Es peor en la manana?"]
+    },
+    "musclePain": {
+      "name": "Dolor muscular",
+      "medicalTerm": "Mialgia",
+      "description": "Dolor en los musculos",
+      "patientDescription": "Dolor en los musculos del cuerpo",
+      "questions": ["Donde le duelen los musculos?", "Hizo ejercicio intenso recientemente?", "Es generalizado o localizado?"]
+    },
+    "numbness": {
+      "name": "Adormecimiento",
+      "medicalTerm": "Parestesia/Hipoestesia",
+      "description": "Perdida de sensacion en un area",
+      "patientDescription": "Falta de sensibilidad o sensacion de hormigueo",
+      "questions": ["Donde siente el adormecimiento?", "Es constante?", "Tiene debilidad tambien?"]
+    },
+    "tingling": {
+      "name": "Hormigueo",
+      "medicalTerm": "Parestesia",
+      "description": "Sensacion de hormigueo o alfileres",
+      "patientDescription": "Sensacion de hormigueo como de dormirse una parte del cuerpo",
+      "questions": ["Donde siente el hormigueo?", "Es constante o viene y va?", "Que lo provoca?"]
+    },
+    "palpitations": {
+      "name": "Palpitaciones",
+      "medicalTerm": "Palpitaciones",
+      "description": "Sensacion de latidos cardiacos rapidos o irregulares",
+      "patientDescription": "Sentir los latidos del corazon fuertes, rapidos o irregulares",
+      "questions": ["Son rapidos o irregulares?", "Cuanto duran?", "Que estaba haciendo cuando empezaron?"]
+    },
+    "frequentUrination": {
+      "name": "Orinar frecuentemente",
+      "medicalTerm": "Polaquiuria",
+      "description": "Necesidad de orinar mas frecuentemente de lo normal",
+      "patientDescription": "Ir al bano a orinar muchas veces",
+      "questions": ["Cuantas veces al dia?", "Se levanta de noche?", "Siente urgencia?"]
+    },
+    "urinaryUrgency": {
+      "name": "Urgencia urinaria",
+      "medicalTerm": "Urgencia miccional",
+      "description": "Necesidad repentina e intensa de orinar",
+      "patientDescription": "Necesidad urgente de orinar que es dificil de controlar",
+      "questions": ["Tiene escapes de orina?", "Ocurre de dia y de noche?"]
+    },
+    "painfulUrination": {
+      "name": "Dolor al orinar",
+      "medicalTerm": "Disuria",
+      "description": "Dolor o ardor al orinar",
+      "patientDescription": "Ardor o molestia cuando orina",
+      "questions": ["Donde siente el ardor?", "Tiene flujo o secrecion?", "La orina tiene mal olor o color extrano?"]
+    },
+    "blurredVision": {
+      "name": "Vision borrosa",
+      "medicalTerm": "Vision borrosa",
+      "description": "Falta de agudeza visual",
+      "patientDescription": "Dificultad para ver claramente",
+      "questions": ["Es en uno o ambos ojos?", "Es constante o intermitente?", "Fue subita?"]
+    },
+    "hearingLoss": {
+      "name": "Perdida de audicion",
+      "medicalTerm": "Hipoacusia",
+      "description": "Disminucion de la capacidad de oir",
+      "patientDescription": "Dificultad para escuchar",
+      "questions": ["Es en uno o ambos oidos?", "Fue subita o gradual?", "Tiene zumbido?"]
+    },
+    "tinnitus": {
+      "name": "Zumbido en los oidos",
+      "medicalTerm": "Tinnitus/Acufeno",
+      "description": "Percepcion de sonido sin fuente externa",
+      "patientDescription": "Zumbido, pitido o ruido en los oidos",
+      "questions": ["Es constante o intermitente?", "Es en uno o ambos oidos?", "Como es el sonido?"]
+    },
+    "soreThroat": {
+      "name": "Dolor de garganta",
+      "medicalTerm": "Odinofagia/Faringodinia",
+      "description": "Dolor o irritacion en la garganta",
+      "patientDescription": "Molestia o dolor en la garganta, especialmente al tragar",
+      "questions": ["Tiene fiebre?", "Ve algo blanco en la garganta?", "Tiene tos?"]
+    },
+    "nasalCongestion": {
+      "name": "Congestion nasal",
+      "medicalTerm": "Congestion nasal",
+      "description": "Bloqueo de los conductos nasales",
+      "patientDescription": "Nariz tapada o congestionada",
+      "questions": ["Es en ambos lados?", "Tiene secrecion?", "De que color es la secrecion?"]
+    },
+    "appetiteLoss": {
+      "name": "Perdida de apetito",
+      "medicalTerm": "Anorexia",
+      "description": "Disminucion del deseo de comer",
+      "patientDescription": "No tener ganas de comer",
+      "questions": ["Hace cuanto perdio el apetito?", "Ha bajado de peso?", "Siente nauseas?"]
+    },
+    "anxiety_symptom": {
+      "name": "Sensacion de ansiedad",
+      "medicalTerm": "Ansiedad",
+      "description": "Sentimiento de preocupacion, nerviosismo o inquietud",
+      "patientDescription": "Sentirse nervioso, preocupado o inquieto",
+      "questions": ["Que lo hace sentir ansioso?", "Tiene dificultad para relajarse?", "Afecta su sueno?"]
+    },
+    "depression_symptom": {
+      "name": "Tristeza persistente",
+      "medicalTerm": "Animo deprimido",
+      "description": "Sentimientos persistentes de tristeza o desesperanza",
+      "patientDescription": "Sentirse triste, vacio o sin esperanza la mayor parte del tiempo",
+      "questions": ["Hace cuanto se siente asi?", "Ha perdido interes en actividades?", "Tiene pensamientos de hacerse dano?"]
+    },
+    "memoryProblems": {
+      "name": "Problemas de memoria",
+      "medicalTerm": "Deterioro cognitivo",
+      "description": "Dificultad para recordar informacion",
+      "patientDescription": "Dificultad para recordar cosas",
+      "questions": ["Es memoria reciente o antigua?", "Afecta sus actividades diarias?", "Ha empeorado rapidamente?"]
+    },
+    "difficultySwallowing": {
+      "name": "Dificultad para tragar",
+      "medicalTerm": "Disfagia",
+      "description": "Dificultad para pasar alimentos o liquidos",
+      "patientDescription": "Problema para tragar comida o bebidas",
+      "questions": ["Es con solidos, liquidos o ambos?", "Siente que la comida se atora?", "Tiene dolor al tragar?"]
+    },
+    "nightSweats": {
+      "name": "Sudoracion nocturna",
+      "medicalTerm": "Sudoracion nocturna",
+      "description": "Sudoracion excesiva durante el sueno",
+      "patientDescription": "Sudar mucho durante la noche, empapando la ropa o sabanas",
+      "questions": ["Cuantas noches a la semana?", "Tiene fiebre?", "Ha bajado de peso?"]
+    },
+    "bruising": {
+      "name": "Moretones faciles",
+      "medicalTerm": "Equimosis",
+      "description": "Tendencia a desarrollar moretones facilmente",
+      "patientDescription": "Aparicion facil de moretones sin trauma significativo",
+      "questions": ["Aparecen sin golpearse?", "Son grandes o pequenos?", "Sangra mas de lo normal de heridas?"]
+    },
+    "bleeding": {
+      "name": "Sangrado",
+      "medicalTerm": "Hemorragia",
+      "description": "Perdida de sangre",
+      "patientDescription": "Perdida de sangre de cualquier parte del cuerpo",
+      "questions": ["De donde sangra?", "Es abundante?", "Cuanto tiempo ha durado?"]
+    }
+  },
+  "vitalSigns": {
+    "bloodPressure": {
+      "name": "Presion arterial",
+      "abbreviation": "PA/TA",
+      "unit": "mmHg",
+      "description": "Fuerza de la sangre contra las paredes de las arterias",
+      "normalRange": "Sistolica menor de 120, diastolica menor de 80 mmHg"
+    },
+    "heartRate": {
+      "name": "Frecuencia cardiaca",
+      "abbreviation": "FC",
+      "unit": "latidos por minuto (lpm)",
+      "altUnits": ["lpm", "bpm"],
+      "description": "Numero de veces que el corazon late por minuto",
+      "normalRange": "60-100 latidos por minuto en reposo"
+    },
+    "respiratoryRate": {
+      "name": "Frecuencia respiratoria",
+      "abbreviation": "FR",
+      "unit": "respiraciones por minuto",
+      "description": "Numero de respiraciones por minuto",
+      "normalRange": "12-20 respiraciones por minuto"
+    },
+    "temperature": {
+      "name": "Temperatura",
+      "abbreviation": "Temp",
+      "unit": "grados Celsius",
+      "altUnits": ["grados Fahrenheit"],
+      "description": "Temperatura corporal",
+      "normalRange": "36.1 - 37.2 grados Celsius (97 - 99 grados Fahrenheit)"
+    },
+    "oxygenSaturation": {
+      "name": "Saturacion de oxigeno",
+      "abbreviation": "SpO2",
+      "unit": "%",
+      "description": "Porcentaje de hemoglobina saturada con oxigeno",
+      "normalRange": "95-100%"
+    },
+    "weight": {
+      "name": "Peso",
+      "unit": "kilogramos",
+      "altUnits": ["libras"],
+      "description": "Masa corporal",
+      "normalRange": "Varia segun estatura y composicion corporal"
+    },
+    "height": {
+      "name": "Estatura",
+      "unit": "centimetros",
+      "altUnits": ["metros", "pies/pulgadas"],
+      "description": "Altura del cuerpo",
+      "normalRange": "Varia segun edad, sexo y genetica"
+    },
+    "bmi": {
+      "name": "Indice de masa corporal",
+      "abbreviation": "IMC",
+      "unit": "kg/m2",
+      "description": "Relacion entre peso y estatura",
+      "normalRange": "18.5 - 24.9 kg/m2"
+    },
+    "pulse": {
+      "name": "Pulso",
+      "unit": "latidos por minuto",
+      "description": "Onda palpable causada por el latido cardiaco",
+      "normalRange": "60-100 latidos por minuto"
+    },
+    "hrv": {
+      "name": "Variabilidad de la frecuencia cardiaca",
+      "abbreviation": "VFC",
+      "unit": "milisegundos",
+      "description": "Variacion en el tiempo entre latidos consecutivos",
+      "normalRange": "Varia ampliamente; valores mas altos generalmente indican mejor salud"
+    },
+    "bloodGlucose": {
+      "name": "Glucosa en sangre",
+      "abbreviation": "Glicemia",
+      "unit": "mg/dL",
+      "description": "Nivel de azucar en la sangre",
+      "normalRange": "En ayunas: 70-100 mg/dL"
+    }
+  },
+  "labTests": {
+    "cbc": {
+      "name": "Hemograma completo",
+      "abbreviation": "BHC",
+      "fullName": "Biometria hematica completa",
+      "description": "Evaluacion de las celulas sanguineas",
+      "patientDescription": "Examen que mide las diferentes celulas en su sangre",
+      "unit": "Varios",
+      "category": "Hematologia"
+    },
+    "bmp": {
+      "name": "Panel metabolico basico",
+      "abbreviation": "PMB",
+      "description": "Evaluacion de electrolitos y funcion renal",
+      "patientDescription": "Examenes que miden sustancias importantes en su sangre",
+      "unit": "Varios",
+      "category": "Quimica"
+    },
+    "cmp": {
+      "name": "Panel metabolico completo",
+      "abbreviation": "PMC",
+      "description": "Evaluacion amplia de funcion metabolica",
+      "patientDescription": "Examenes mas completos que incluyen funcion del higado",
+      "unit": "Varios",
+      "category": "Quimica"
+    },
+    "lipidPanel": {
+      "name": "Perfil de lipidos",
+      "abbreviation": "Perfil lipidico",
+      "description": "Medicion de colesterol y trigliceridos",
+      "patientDescription": "Examenes que miden las grasas en su sangre",
+      "unit": "mg/dL",
+      "category": "Quimica"
+    },
+    "hba1c": {
+      "name": "Hemoglobina glucosilada",
+      "abbreviation": "HbA1c",
+      "description": "Promedio de glucosa en los ultimos 2-3 meses",
+      "patientDescription": "Muestra su control de azucar promedio de los ultimos meses",
+      "unit": "%",
+      "category": "Diabetes"
+    },
+    "tsh": {
+      "name": "Hormona estimulante de tiroides",
+      "abbreviation": "TSH",
+      "description": "Evaluacion de funcion tiroidea",
+      "patientDescription": "Mide que tan bien funciona su tiroides",
+      "unit": "mUI/L",
+      "category": "Endocrinologia"
+    },
+    "creatinine": {
+      "name": "Creatinina",
+      "description": "Marcador de funcion renal",
+      "patientDescription": "Indica que tan bien funcionan sus rinones",
+      "unit": "mg/dL",
+      "category": "Funcion renal"
+    },
+    "bun": {
+      "name": "Nitrogeno ureico en sangre",
+      "abbreviation": "BUN",
+      "description": "Otro marcador de funcion renal",
+      "patientDescription": "Ayuda a evaluar como funcionan sus rinones",
+      "unit": "mg/dL",
+      "category": "Funcion renal"
+    },
+    "gfr": {
+      "name": "Tasa de filtracion glomerular",
+      "abbreviation": "TFG",
+      "description": "Medida de funcion renal",
+      "patientDescription": "Calcula que tan bien sus rinones filtran la sangre",
+      "unit": "mL/min/1.73m2",
+      "category": "Funcion renal"
+    },
+    "ast": {
+      "name": "Aspartato aminotransferasa",
+      "abbreviation": "AST/TGO",
+      "description": "Enzima hepatica",
+      "patientDescription": "Enzima que indica salud del higado",
+      "unit": "U/L",
+      "category": "Funcion hepatica"
+    },
+    "alt": {
+      "name": "Alanina aminotransferasa",
+      "abbreviation": "ALT/TGP",
+      "description": "Enzima hepatica",
+      "patientDescription": "Enzima mas especifica del higado",
+      "unit": "U/L",
+      "category": "Funcion hepatica"
+    },
+    "bilirubin": {
+      "name": "Bilirrubina",
+      "description": "Producto de degradacion de globulos rojos",
+      "patientDescription": "Sustancia procesada por el higado",
+      "unit": "mg/dL",
+      "category": "Funcion hepatica"
+    },
+    "albumin": {
+      "name": "Albumina",
+      "description": "Proteina principal en la sangre",
+      "patientDescription": "Proteina importante hecha por el higado",
+      "unit": "g/dL",
+      "category": "Proteinas"
+    },
+    "psa": {
+      "name": "Antigeno prostatico especifico",
+      "abbreviation": "PSA",
+      "description": "Marcador de salud prostatica",
+      "patientDescription": "Proteina producida por la prostata",
+      "unit": "ng/mL",
+      "category": "Oncologia/Urologia"
+    },
+    "vitaminD": {
+      "name": "Vitamina D",
+      "abbreviation": "25-OH Vitamina D",
+      "description": "Nivel de vitamina D en sangre",
+      "patientDescription": "Mide cuanta vitamina D tiene en su cuerpo",
+      "unit": "ng/mL",
+      "category": "Vitaminas"
+    },
+    "b12": {
+      "name": "Vitamina B12",
+      "description": "Nivel de vitamina B12",
+      "patientDescription": "Importante para nervios y celulas sanguineas",
+      "unit": "pg/mL",
+      "category": "Vitaminas"
+    },
+    "ferritin": {
+      "name": "Ferritina",
+      "description": "Proteina que almacena hierro",
+      "patientDescription": "Indica las reservas de hierro en su cuerpo",
+      "unit": "ng/mL",
+      "category": "Hierro"
+    },
+    "iron": {
+      "name": "Hierro serico",
+      "description": "Nivel de hierro en sangre",
+      "patientDescription": "Cantidad de hierro en su sangre",
+      "unit": "mcg/dL",
+      "category": "Hierro"
+    },
+    "urinalysis": {
+      "name": "Examen general de orina",
+      "abbreviation": "EGO",
+      "description": "Analisis de la orina",
+      "patientDescription": "Examen de su orina para detectar problemas",
+      "unit": "Varios",
+      "category": "Urologia"
+    },
+    "inr": {
+      "name": "Razon normalizada internacional",
+      "abbreviation": "INR",
+      "description": "Medida de coagulacion sanguinea",
+      "patientDescription": "Mide que tan rapido coagula su sangre",
+      "unit": "Razon",
+      "category": "Coagulacion"
+    },
+    "pt": {
+      "name": "Tiempo de protrombina",
+      "abbreviation": "TP",
+      "description": "Tiempo de coagulacion",
+      "patientDescription": "Mide parte del proceso de coagulacion",
+      "unit": "segundos",
+      "category": "Coagulacion"
+    },
+    "troponin": {
+      "name": "Troponina",
+      "description": "Marcador de dano cardiaco",
+      "patientDescription": "Proteina que se libera cuando el corazon esta danado",
+      "unit": "ng/mL",
+      "category": "Cardiologia"
+    },
+    "bnp": {
+      "name": "Peptido natriuretico cerebral",
+      "abbreviation": "BNP",
+      "description": "Marcador de insuficiencia cardiaca",
+      "patientDescription": "Indica estres en el corazon",
+      "unit": "pg/mL",
+      "category": "Cardiologia"
+    },
+    "crp": {
+      "name": "Proteina C reactiva",
+      "abbreviation": "PCR",
+      "description": "Marcador de inflamacion",
+      "patientDescription": "Indica inflamacion en el cuerpo",
+      "unit": "mg/L",
+      "category": "Inflamacion"
+    },
+    "esr": {
+      "name": "Velocidad de sedimentacion globular",
+      "abbreviation": "VSG",
+      "description": "Otro marcador de inflamacion",
+      "patientDescription": "Indica si hay inflamacion en su cuerpo",
+      "unit": "mm/hr",
+      "category": "Inflamacion"
+    }
+  },
+  "procedures": {
+    "bloodDraw": {
+      "name": "Extraccion de sangre",
+      "medicalName": "Flebotomia/Venopuncion",
+      "description": "Obtencion de muestra de sangre de una vena",
+      "patientDescription": "Le sacan sangre del brazo para hacer examenes",
+      "preparation": "Puede requerir ayuno segun los examenes",
+      "recovery": "Presione el area unos minutos, evite cargar peso con ese brazo"
+    },
+    "ecg": {
+      "name": "Electrocardiograma",
+      "medicalName": "Electrocardiografia",
+      "description": "Registro de la actividad electrica del corazon",
+      "patientDescription": "Examen que registra los latidos de su corazon",
+      "preparation": "No se requiere preparacion especial",
+      "recovery": "Puede continuar actividades normales inmediatamente"
+    },
+    "echocardiogram": {
+      "name": "Ecocardiograma",
+      "medicalName": "Ecocardiografia",
+      "description": "Ultrasonido del corazon",
+      "patientDescription": "Examen que usa ondas de sonido para ver su corazon",
+      "preparation": "No se requiere preparacion especial",
+      "recovery": "Sin restricciones"
+    },
+    "xray": {
+      "name": "Radiografia",
+      "medicalName": "Radiografia",
+      "description": "Imagen usando rayos X",
+      "patientDescription": "Imagen del interior de su cuerpo usando rayos X",
+      "preparation": "Quitarse objetos metalicos del area",
+      "recovery": "Sin restricciones"
+    },
+    "ctScan": {
+      "name": "Tomografia computarizada",
+      "medicalName": "Tomografia axial computarizada",
+      "description": "Imagenes detalladas usando rayos X y computadora",
+      "patientDescription": "Examen que toma imagenes detalladas en cortes de su cuerpo",
+      "preparation": "Puede requerir ayuno o medio de contraste",
+      "recovery": "Beber muchos liquidos si uso contraste"
+    },
+    "mri": {
+      "name": "Resonancia magnetica",
+      "medicalName": "Imagen por resonancia magnetica",
+      "description": "Imagenes detalladas usando campos magneticos",
+      "patientDescription": "Examen que crea imagenes detalladas sin radiacion",
+      "preparation": "No objetos metalicos, informar de implantes",
+      "recovery": "Sin restricciones"
+    },
+    "ultrasound": {
+      "name": "Ultrasonido",
+      "medicalName": "Ecografia",
+      "description": "Imagenes usando ondas de sonido",
+      "patientDescription": "Examen que usa ondas de sonido para ver dentro del cuerpo",
+      "preparation": "Puede requerir vejiga llena o ayuno segun el area",
+      "recovery": "Sin restricciones"
+    },
+    "colonoscopy": {
+      "name": "Colonoscopia",
+      "medicalName": "Colonoscopia",
+      "description": "Examen visual del colon con camara",
+      "patientDescription": "Examen donde se introduce una camara para ver su intestino grueso",
+      "preparation": "Preparacion intestinal el dia anterior, ayuno",
+      "recovery": "No manejar ese dia, dieta ligera, vigilar sangrado"
+    },
+    "endoscopy": {
+      "name": "Endoscopia",
+      "medicalName": "Esofagogastroduodenoscopia",
+      "description": "Examen visual del tracto digestivo superior",
+      "patientDescription": "Examen donde se introduce una camara por la boca para ver el esofago y estomago",
+      "preparation": "Ayuno de 6-8 horas",
+      "recovery": "No manejar ese dia, esperar para comer"
+    },
+    "biopsy": {
+      "name": "Biopsia",
+      "medicalName": "Biopsia",
+      "description": "Extraccion de tejido para examen microscopico",
+      "patientDescription": "Tomar una pequena muestra de tejido para examinarla",
+      "preparation": "Varia segun el sitio",
+      "recovery": "Cuidado del sitio, vigilar sangrado e infeccion"
+    },
+    "catheterization": {
+      "name": "Cateterismo cardiaco",
+      "medicalName": "Cateterismo cardiaco/Angiografia coronaria",
+      "description": "Procedimiento para evaluar las arterias del corazon",
+      "patientDescription": "Procedimiento donde se introduce un tubo delgado para ver las arterias del corazon",
+      "preparation": "Ayuno, informar de alergias, examenes previos",
+      "recovery": "Reposo, vigilar sitio de puncion, hidratacion"
+    },
+    "surgery": {
+      "name": "Cirugia",
+      "medicalName": "Cirugia/Intervencion quirurgica",
+      "description": "Procedimiento operativo",
+      "patientDescription": "Operacion para tratar una condicion",
+      "preparation": "Ayuno, examenes preoperatorios, instrucciones especificas",
+      "recovery": "Segun el tipo de cirugia"
+    },
+    "vaccination": {
+      "name": "Vacunacion",
+      "medicalName": "Inmunizacion",
+      "description": "Administracion de vacuna para prevenir enfermedades",
+      "patientDescription": "Inyeccion que ayuda a su cuerpo a combatir enfermedades",
+      "preparation": "Informar de alergias o enfermedades actuales",
+      "recovery": "Puede tener dolor en el sitio o sintomas leves"
+    }
+  },
+  "medication": {
+    "dosage": "Dosis",
+    "dose": "Dosis",
+    "frequency": "Frecuencia",
+    "route": "Via de administracion",
+    "indication": "Indicacion",
+    "contraindication": "Contraindicacion",
+    "sideEffect": "Efecto secundario",
+    "adverseEffect": "Efecto adverso",
+    "interaction": "Interaccion",
+    "precaution": "Precaucion",
+    "warning": "Advertencia",
+    "blackBoxWarning": "Advertencia de recuadro negro",
+    "generic": "Generico",
+    "brandName": "Nombre comercial",
+    "prescription": "Con receta medica",
+    "overTheCounter": "Sin receta (de venta libre)",
+    "refill": "Resurtido",
+    "discontinue": "Suspender",
+    "taper": "Reducir gradualmente",
+    "titrate": "Ajustar dosis",
+    "oral": "Oral (por boca)",
+    "topical": "Topico (sobre la piel)",
+    "intravenous": "Intravenoso (en la vena)",
+    "intramuscular": "Intramuscular (en el musculo)",
+    "subcutaneous": "Subcutaneo (bajo la piel)",
+    "sublingual": "Sublingual (bajo la lengua)",
+    "rectal": "Rectal",
+    "inhaled": "Inhalado",
+    "nasal": "Nasal",
+    "ophthalmic": "Oftalmico (en los ojos)",
+    "otic": "Otico (en los oidos)",
+    "transdermal": "Transdermico (parche)",
+    "onceDaily": "Una vez al dia",
+    "twiceDaily": "Dos veces al dia",
+    "threeTimesDaily": "Tres veces al dia",
+    "fourTimesDaily": "Cuatro veces al dia",
+    "everyHours": "Cada {{hours}} horas",
+    "asNeeded": "Segun sea necesario",
+    "atBedtime": "Al acostarse",
+    "withMeals": "Con las comidas",
+    "beforeMeals": "Antes de las comidas",
+    "afterMeals": "Despues de las comidas",
+    "onEmptyStomach": "Con el estomago vacio",
+    "withFood": "Con alimentos",
+    "withoutFood": "Sin alimentos",
+    "takeWithFood": "Tomar con alimentos",
+    "takeOnEmptyStomach": "Tomar con el estomago vacio",
+    "doNotCrush": "No triturar",
+    "doNotChew": "No masticar",
+    "shakeWell": "Agitar bien antes de usar",
+    "refrigerate": "Mantener refrigerado",
+    "keepAwayFromLight": "Proteger de la luz",
+    "storeBelowTemperature": "Almacenar por debajo de {{temp}} grados",
+    "discardAfterOpening": "Desechar despues de {{days}} dias de abierto",
+    "swallowWhole": "Tragar entero",
+    "dissolveUnderTongue": "Disolver bajo la lengua",
+    "applyThinLayer": "Aplicar una capa delgada",
+    "doNotApplyBrokenSkin": "No aplicar sobre piel lesionada"
+  },
+  "findings": {
+    "normal": "Normal",
+    "abnormal": "Anormal",
+    "elevated": "Elevado",
+    "decreased": "Disminuido",
+    "low": "Bajo",
+    "high": "Alto",
+    "critical": "Critico",
+    "borderline": "Limite / En el limite",
+    "stable": "Estable",
+    "improving": "Mejorando",
+    "worsening": "Empeorando",
+    "unchanged": "Sin cambios",
+    "acute": "Agudo",
+    "chronic": "Cronico",
+    "subacute": "Subagudo",
+    "intermittent": "Intermitente",
+    "persistent": "Persistente",
+    "recurring": "Recurrente",
+    "resolving": "Resolviendo",
+    "resolved": "Resuelto",
+    "controlled": "Controlado",
+    "uncontrolled": "No controlado",
+    "mild": "Leve",
+    "moderate": "Moderado",
+    "severe": "Severo / Grave",
+    "positive": "Positivo",
+    "negative": "Negativo",
+    "reactive": "Reactivo",
+    "nonReactive": "No reactivo",
+    "present": "Presente",
+    "absent": "Ausente",
+    "detected": "Detectado",
+    "notDetected": "No detectado",
+    "within_normal_limits": "Dentro de limites normales",
+    "outside_normal_limits": "Fuera de limites normales"
+  },
+  "patientCommunication": {
+    "youMayExperience": "Puede experimentar...",
+    "contactDoctorIf": "Contacte a su medico si...",
+    "seekImmediateCare": "Busque atencion inmediata si...",
+    "callEmergencyIf": "Llame al servicio de emergencias si...",
+    "whenToSeekCare": "Cuando buscar atencion medica",
+    "commonSideEffects": "Efectos secundarios comunes",
+    "seriousSideEffects": "Efectos secundarios serios",
+    "whatToExpect": "Que esperar",
+    "howToTake": "Como tomar este medicamento",
+    "importantInformation": "Informacion importante",
+    "beforeTaking": "Antes de tomar este medicamento",
+    "whileTaking": "Mientras toma este medicamento",
+    "afterTaking": "Despues de tomar este medicamento",
+    "missedDose": "Si olvida una dosis",
+    "overdose": "En caso de sobredosis",
+    "storage": "Almacenamiento",
+    "disposal": "Desecho",
+    "doNotShare": "No comparta este medicamento con otras personas",
+    "keepOutOfReach": "Mantener fuera del alcance de los ninos",
+    "talkToDoctor": "Hable con su medico",
+    "talkToPharmacist": "Consulte con su farmaceutico",
+    "askQuestions": "No dude en hacer preguntas",
+    "bringMedicationList": "Traiga una lista de todos sus medicamentos"
+  },
+  "severity": {
+    "minimal": "Minimo",
+    "mild": "Leve",
+    "moderate": "Moderado",
+    "moderatelySevere": "Moderadamente severo",
+    "severe": "Severo / Grave",
+    "critical": "Critico",
+    "lifeThreatening": "Potencialmente mortal"
+  },
+  "urgency": {
+    "routine": "Rutinario",
+    "soon": "Pronto",
+    "urgent": "Urgente",
+    "emergent": "Emergente",
+    "stat": "Inmediato (STAT)",
+    "immediately": "Inmediatamente"
+  }
+}

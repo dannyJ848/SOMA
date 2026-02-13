@@ -1,0 +1,118 @@
+{
+  "id": "structure-larynx",
+  "type": "structure",
+  "name": "Larynx",
+  "alternateNames": ["Voice box", "Laryngeal apparatus"],
+  "fmaId": "FMA:55097",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The larynx is your voice box - it makes sounds when you speak and protects your airway when you swallow.",
+      "explanation": "The larynx is like a valve in your throat that does two important jobs. First, it contains your vocal cords - two flaps that vibrate when air from your lungs passes through them, creating the sounds of your voice. Second, it acts as a guard for your windpipe. When you swallow food or water, the larynx closes up tight so nothing goes into your lungs. You can feel your larynx move up when you swallow. In men, the front of the larynx sticks out and is called the Adam's apple.",
+      "keyTerms": [
+        {"term": "larynx", "definition": "The voice box in your throat that helps you speak"},
+        {"term": "vocal cords", "definition": "Two flaps in your larynx that vibrate to make sound"},
+        {"term": "Adam's apple", "definition": "The bump in the front of your throat where the larynx is"},
+        {"term": "windpipe", "definition": "The tube that carries air to your lungs, also called trachea"}
+      ],
+      "analogies": ["Your vocal cords work like guitar strings - when air passes through them, they vibrate to make different sounds, just like plucking guitar strings makes different notes."],
+      "examples": ["When you cough, your larynx closes briefly, then opens quickly to push out air and clear your throat."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The larynx is a cartilaginous structure in the neck containing the vocal folds, responsible for phonation, airway protection during swallowing, and serving as a conduit for respiration.",
+      "explanation": "The larynx is composed of nine cartilages: three single (thyroid, cricoid, epiglottis) and three paired (arytenoid, corniculate, cuneiform). The thyroid cartilage is the largest and forms the Adam's apple. The cricoid cartilage is a complete ring below the thyroid. The arytenoid cartilages attach to the vocal folds and control their movement. The epiglottis is a leaf-shaped cartilage that flips down during swallowing to protect the airway. The vocal folds (true vocal cords) stretch between the thyroid cartilage anteriorly and arytenoid cartilages posteriorly. The larynx is divided into three regions: supraglottis (above the vocal folds), glottis (the vocal folds), and subglottis (below the vocal folds).",
+      "keyTerms": [
+        {"term": "thyroid cartilage", "definition": "The largest laryngeal cartilage, forming the Adam's apple", "pronunciation": "THY-royd"},
+        {"term": "cricoid cartilage", "definition": "Ring-shaped cartilage below the thyroid cartilage", "pronunciation": "KRY-koyd"},
+        {"term": "arytenoid cartilages", "definition": "Paired cartilages that control vocal fold movement", "pronunciation": "ar-ih-TEE-noyd"},
+        {"term": "epiglottis", "definition": "Leaf-shaped cartilage that covers the airway during swallowing", "pronunciation": "ep-ih-GLOT-is"},
+        {"term": "glottis", "definition": "The space between the vocal folds"}
+      ],
+      "analogies": ["The larynx cartilages work together like the parts of a wind instrument, with the cartilages forming the structure and the vocal folds acting as vibrating reeds."],
+      "examples": ["During high-pitched singing, the vocal folds stretch thinner and vibrate faster."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The larynx features intricate cartilaginous framework, intrinsic and extrinsic musculature, and precise neural control enabling phonation, respiration, and airway protection.",
+      "explanation": "The laryngeal skeleton includes the cricothyroid joint (rotation and gliding for vocal fold tension) and cricoarytenoid joint (rotation and gliding for abduction/adduction). Intrinsic muscles control vocal fold position: posterior cricoarytenoid (only abductor - opens glottis), lateral cricoarytenoid and interarytenoid (adductors - close glottis), cricothyroid (tensor - lengthens/tenses folds), and thyroarytenoid/vocalis (relaxer - shortens folds). Extrinsic muscles (suprahyoid and infrahyoid) move the entire larynx. The recurrent laryngeal nerve (branch of vagus) innervates all intrinsic muscles except cricothyroid (external branch of superior laryngeal nerve). Sensory innervation: internal branch of superior laryngeal nerve (above glottis), recurrent laryngeal nerve (below glottis). The quadrangular membrane (supraglottic) contains the vestibular folds (false cords), while the conus elasticus (infraglottic) extends to form the vocal ligament.",
+      "keyTerms": [
+        {"term": "posterior cricoarytenoid", "definition": "Only abductor of the vocal folds; paralysis causes inspiratory stridor"},
+        {"term": "recurrent laryngeal nerve", "definition": "Branch of vagus nerve innervating all intrinsic laryngeal muscles except cricothyroid"},
+        {"term": "cricothyroid muscle", "definition": "Tensor of vocal folds, innervated by external branch of superior laryngeal nerve"},
+        {"term": "conus elasticus", "definition": "Elastic membrane extending from cricoid to vocal ligament"},
+        {"term": "Reinke's space", "definition": "Subepithelial potential space in the vocal fold; edema here affects voice quality"}
+      ],
+      "clinicalNotes": "RLN injury (thyroid surgery, mediastinal tumors) causes hoarseness (unilateral) or stridor (bilateral). Cricothyrotomy is performed through the cricothyroid membrane in emergent airway obstruction."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Laryngeal physiology involves complex biomechanics of vocal fold vibration, mucosal wave propagation, and neuromuscular control with implications for voice disorders and airway pathology.",
+      "explanation": "Phonation follows the myoelastic-aerodynamic theory: subglottic pressure builds, overcomes adducted vocal fold resistance, and airflow separates the folds; their elastic recoil and Bernoulli effect cause cyclic opening/closing. The vocal fold layered structure (epithelium, superficial/intermediate/deep lamina propria, vocalis muscle) enables the mucosal wave - essential for normal voice quality. Fundamental frequency (pitch) is determined by fold length, tension, and mass; intensity correlates with subglottic pressure and glottal resistance. Voice disorders include functional (muscle tension dysphonia), structural (nodules, polyps, Reinke's edema), neurological (paralysis, spasmodic dysphonia), and neoplastic. Laryngeal electromyography (LEMG) assesses neural integrity and predicts recovery in vocal fold paralysis. Stroboscopy visualizes the mucosal wave to detect subtle lesions. Laryngeal framework surgery (medialization thyroplasty, arytenoid adduction) treats unilateral paralysis.",
+      "keyTerms": [
+        {"term": "myoelastic-aerodynamic theory", "definition": "Model explaining phonation through interaction of muscle elasticity and airflow dynamics"},
+        {"term": "mucosal wave", "definition": "Traveling wave of superficial lamina propria displacement essential for normal voice quality"},
+        {"term": "stroboscopy", "definition": "Visualization technique using flashing light to observe vocal fold vibration in slow motion"},
+        {"term": "spasmodic dysphonia", "definition": "Neurological voice disorder with involuntary laryngeal muscle spasms; adductor or abductor type"},
+        {"term": "medialization thyroplasty", "definition": "Type I laryngeal framework surgery pushing paralyzed fold to midline using implant"}
+      ],
+      "clinicalNotes": "LEMG timing: 6 weeks post-injury establishes baseline, 6-12 months predicts recovery. Botulinum toxin injection treats spasmodic dysphonia. Office-based procedures (injection laryngoplasty) provide early voice restoration in paralysis."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced laryngeal management integrates precision diagnostics, regenerative approaches, and oncologic strategies with evolving understanding of neural plasticity and tissue engineering.",
+      "explanation": "Contemporary laryngology employs high-speed videoendoscopy (2000-4000 fps) and kymography for detailed vibratory analysis beyond stroboscopy limitations. Narrow-band imaging (NBI) enhances detection of premalignant lesions. Laryngeal cancer management stratifies by T stage: T1-2 treated with radiation or transoral laser microsurgery (TLM) with comparable oncologic outcomes; advanced T3-4 requires chemoradiation or laryngectomy with reconstruction. Total laryngectomy creates permanent stoma; voice restoration options include tracheoesophageal puncture with voice prosthesis (primary or secondary), electrolarynx, and esophageal speech. Laryngeal transplantation has been performed but remains experimental. Regenerative approaches include tissue-engineered vocal fold lamina propria, stem cell injection, and growth factor therapies. Laryngeal reinnervation using ansa cervicalis-RLN anastomosis provides bulk but not voluntary movement. Unilateral vocal fold paralysis treatment algorithm: observation if adequate compensation, injection laryngoplasty for temporary/early intervention, medialization thyroplasty +/- arytenoid adduction for permanent treatment.",
+      "keyTerms": [
+        {"term": "tracheoesophageal puncture", "definition": "Creation of connection between trachea and esophagus for voice prosthesis placement post-laryngectomy"},
+        {"term": "narrow-band imaging", "definition": "Optical technique enhancing mucosal microvasculature visualization for lesion detection"},
+        {"term": "TLM", "definition": "Transoral laser microsurgery - CO2 laser excision of laryngeal tumors, organ-preserving approach"},
+        {"term": "ansa cervicalis-RLN anastomosis", "definition": "Reinnervation procedure connecting ansa cervicalis to recurrent laryngeal nerve for vocal fold bulk"},
+        {"term": "laryngeal framework surgery", "definition": "Type I-IV thyroplasty procedures modifying cartilage framework to improve glottic closure"}
+      ],
+      "clinicalNotes": "ELS (European Laryngological Society) classification guides TLM resection types (I-VI). LEMG predictors of recovery: presence of motor unit potentials, absence of synkinesis. Consider bilateral medialization for bilateral paralysis if aspiration is manageable."
+    }
+  },
+  "media": [
+    {
+      "id": "larynx-3d-model",
+      "type": "3d-model",
+      "filename": "larynx_cartilages_muscles.glb",
+      "title": "3D Larynx Anatomy",
+      "description": "Interactive model showing cartilages, muscles, and vocal fold movement"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch22",
+      "type": "textbook",
+      "title": "The Respiratory System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "22",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-introduction",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "gray-anatomy",
+      "type": "textbook",
+      "title": "Gray's Anatomy for Students",
+      "authors": ["Drake RL", "Vogl AW", "Mitchell AWM"],
+      "source": "Elsevier"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "system-respiratory", "targetType": "system", "relationship": "parent", "label": "Respiratory System"},
+    {"targetId": "structure-pharynx", "targetType": "structure", "relationship": "related", "label": "Pharynx"},
+    {"targetId": "structure-trachea", "targetType": "structure", "relationship": "child", "label": "Trachea"}
+  ],
+  "tags": {
+    "systems": ["respiratory"],
+    "structures": ["FMA:55097"],
+    "topics": ["anatomy", "physiology", "phonation"],
+    "clinicalRelevance": "critical",
+    "examRelevance": {"usmle": true, "nbme": true, "shelf": ["surgery", "medicine"]}
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

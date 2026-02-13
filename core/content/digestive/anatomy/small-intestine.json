@@ -1,0 +1,113 @@
+{
+  "id": "structure-small-intestine",
+  "type": "structure",
+  "name": "Small Intestine",
+  "alternateNames": ["Small bowel", "Intestinum tenue"],
+  "fmaId": "FMA:7200",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The small intestine is a long, coiled tube where most of your food gets digested and absorbed into your body.",
+      "explanation": "Despite its name, the small intestine is actually very long - about 20 feet! It's called 'small' because it's narrower than the large intestine. This is where the real magic of digestion happens. The inner walls are covered with tiny finger-like bumps called villi that absorb nutrients from your food. If you could flatten out all these bumps, they would cover an area as big as a tennis court! The small intestine has three parts: the duodenum (first part), jejunum (middle), and ileum (last part).",
+      "keyTerms": [
+        { "term": "villi", "definition": "Tiny finger-like bumps that help absorb nutrients from food" },
+        { "term": "nutrients", "definition": "The good stuff in food that your body needs to grow and stay healthy" },
+        { "term": "absorb", "definition": "To take in or soak up" }
+      ],
+      "analogies": ["The villi are like millions of tiny fingers reaching out to grab nutrients from your food as it passes by."],
+      "examples": ["When you eat a sandwich, the bread, meat, and vegetables are all broken down and absorbed through your small intestine."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The small intestine (~6 meters) consists of duodenum, jejunum, and ileum, and is the primary site of chemical digestion and nutrient absorption through its specialized villi and microvilli.",
+      "explanation": "The duodenum (25cm, C-shaped) receives chyme from the stomach and secretions from the pancreas and liver. The jejunum (2.5m) is the primary absorptive segment with prominent circular folds (plicae circulares) and villi. The ileum (3.5m) absorbs bile salts and vitamin B12 and contains Peyer's patches (lymphoid tissue). The surface area is dramatically increased by plicae circulares (folds), villi (finger-like projections), and microvilli (brush border on absorptive cells). Enzymes in the brush border complete carbohydrate and protein digestion.",
+      "keyTerms": [
+        { "term": "duodenum", "definition": "First part of small intestine; receives bile and pancreatic juice", "pronunciation": "doo-oh-DEE-num" },
+        { "term": "jejunum", "definition": "Middle part of small intestine; primary site of absorption", "pronunciation": "jeh-JOO-num" },
+        { "term": "ileum", "definition": "Final part of small intestine; absorbs B12 and bile salts", "pronunciation": "IL-ee-um" },
+        { "term": "microvilli", "definition": "Microscopic projections on absorptive cells forming the brush border" }
+      ],
+      "analogies": ["The three levels of folding (plicae, villi, microvilli) are like wrinkles on wrinkles on wrinkles - all to maximize surface area."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The small intestine integrates pancreatic and biliary secretions with brush border enzymes to complete digestion, while specialized transport mechanisms absorb carbohydrates, proteins, lipids, vitamins, and minerals.",
+      "explanation": "Carbohydrate digestion: pancreatic amylase produces oligosaccharides; brush border enzymes (maltase, sucrase, lactase, isomaltase) yield monosaccharides absorbed via SGLT1 (glucose/galactose, sodium-coupled) and GLUT5 (fructose, facilitated). Protein digestion: pancreatic proteases (trypsin, chymotrypsin, carboxypeptidases) yield oligopeptides and amino acids; brush border peptidases and cytoplasmic peptidases complete digestion; absorption via multiple amino acid transporters and PepT1 (di/tripeptides). Lipid digestion: bile salts emulsify fats; pancreatic lipase (with colipase) produces monoglycerides and fatty acids; these form mixed micelles, diffuse into enterocytes, are re-esterified into triglycerides, packaged into chylomicrons, and enter lacteals. Fat-soluble vitamins (A, D, E, K) require bile for absorption.",
+      "keyTerms": [
+        { "term": "SGLT1", "definition": "Sodium-glucose linked transporter 1; apical membrane, secondary active transport" },
+        { "term": "chylomicron", "definition": "Lipoprotein particle that transports dietary lipids from intestine to lymphatics" },
+        { "term": "brush border enzymes", "definition": "Enzymes anchored in enterocyte microvilli; include disaccharidases and peptidases" }
+      ],
+      "clinicalNotes": "Lactase deficiency causes lactose intolerance. Celiac disease damages villi, causing malabsorption. Terminal ileum resection causes B12 and bile salt malabsorption."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Small intestinal function involves coordinated regulation of motility, secretion, and absorption through neural (enteric nervous system), hormonal (secretin, CCK, GIP, motilin), and paracrine mechanisms.",
+      "explanation": "Segmentation contractions mix chyme with digestive secretions; peristalsis propels contents aborally. The migrating motor complex (MMC) during fasting has three phases: Phase I (quiescence), Phase II (irregular contractions), Phase III (intense propulsive contractions originating in stomach, sweeping to ileum every 90-120 min). Motilin initiates MMC Phase III. CCK and secretin released by duodenal I-cells and S-cells respectively in response to fats and acid stimulate pancreatic secretion and bile release while inhibiting gastric emptying. GIP from K-cells potentiates insulin secretion (incretin effect). Enterocyte renewal occurs every 3-5 days from crypt stem cells; Paneth cells at crypt base secrete antimicrobial defensins and lysozyme. Goblet cells produce mucus. Tight junctions regulate paracellular permeability.",
+      "keyTerms": [
+        { "term": "migrating motor complex", "definition": "Cyclical pattern of interdigestive motility that clears residual material; disruption causes bacterial overgrowth" },
+        { "term": "incretin", "definition": "Gut hormones (GIP, GLP-1) that potentiate glucose-stimulated insulin secretion" },
+        { "term": "Paneth cells", "definition": "Secretory epithelial cells at crypt base producing defensins and lysozyme; role in innate immunity" }
+      ],
+      "clinicalNotes": "Small intestinal bacterial overgrowth (SIBO) results from impaired MMC or anatomic abnormalities; diagnosed by breath testing or jejunal aspirate culture."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical evaluation of small bowel pathology integrates capsule endoscopy, enteroscopy, cross-sectional imaging, and functional testing to diagnose and manage malabsorption, inflammatory conditions, neoplasia, and vascular disorders.",
+      "explanation": "Malabsorption workup: D-xylose test (normal excludes mucosal disease), fecal fat (>7g/day on 100g fat diet confirms steatorrhea), fecal elastase (<200 suggests pancreatic insufficiency), anti-TTG/EMA for celiac (HLA-DQ2/DQ8 for genetic susceptibility). Small bowel imaging: CT/MR enterography for Crohn's (wall thickening, enhancement, strictures, fistulae); capsule endoscopy for occult GI bleeding and Crohn's surveillance (avoid if stricture suspected). Deep enteroscopy (single/double balloon, spiral) for biopsies and intervention. Crohn's disease: transmural inflammation, skip lesions, granulomas on biopsy; treatment stratified by Montreal classification and risk factors (anti-TNF, vedolizumab, ustekinumab for moderate-severe). Small bowel tumors: adenocarcinoma (duodenum, celiac association), carcinoid (ileum, secrete serotonin), lymphoma, GIST. Mesenteric ischemia: acute (embolism or thrombosis of SMA) presents with pain out of proportion to exam; chronic causes postprandial pain and weight loss.",
+      "keyTerms": [
+        { "term": "capsule endoscopy", "definition": "Wireless video capsule for visualizing small bowel mucosa; contraindicated if stricture suspected" },
+        { "term": "anti-TTG", "definition": "Anti-tissue transglutaminase antibody; highly sensitive serologic test for celiac disease" },
+        { "term": "Montreal classification", "definition": "Classification system for Crohn's disease by age of onset, location, and behavior" }
+      ],
+      "clinicalNotes": "Short bowel syndrome after resection: <200cm requires TPN; jejunostomy worse than ileostomy; GLP-2 analogue (teduglutide) promotes intestinal adaptation. Crohn's strictures: endoscopic dilation for short (<4cm) accessible strictures; surgery for complex/long strictures."
+    }
+  },
+
+  "media": [
+    {
+      "id": "small-intestine-3d",
+      "type": "3d-model",
+      "filename": "small_intestine.glb",
+      "title": "3D Small Intestine Model",
+      "description": "Interactive 3D model showing duodenum, jejunum, ileum, and villi structure"
+    },
+    {
+      "id": "villi-histology",
+      "type": "histology",
+      "filename": "intestinal_villi.jpg",
+      "title": "Intestinal Villi Histology",
+      "description": "Villi, crypts, enterocytes, and goblet cells"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-5",
+      "type": "textbook",
+      "title": "The Small and Large Intestines",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.5",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-stomach", "targetType": "structure", "relationship": "sibling", "label": "Stomach" },
+    { "targetId": "structure-large-intestine", "targetType": "structure", "relationship": "sibling", "label": "Large Intestine" },
+    { "targetId": "condition-celiac", "targetType": "condition", "relationship": "related", "label": "Celiac Disease" },
+    { "targetId": "condition-crohns", "targetType": "condition", "relationship": "related", "label": "Crohn's Disease" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:7200"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

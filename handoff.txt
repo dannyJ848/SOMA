@@ -1,0 +1,141 @@
+# SOMA Handoff Document
+
+## Project: SOMA Medical Education App
+## Date: 2026-02-11
+## Session: React Hooks Violation Fix
+
+---
+
+## Session Summary
+
+Fixed critical React hooks violation in GLBAnatomyModel.tsx that was preventing 3D anatomy models from loading.
+
+### Root Cause
+The `useGLTF()` hook was being called inside a try-catch block (lines 333-386), violating React's **Rules of Hooks**:
+- Hooks must be called at the top level of a component
+- Hooks must be called in the same order on every render
+- Hooks cannot be called conditionally or inside try-catch blocks
+
+### What Was Fixed
+
+#### 1. GLBAnatomyModel.tsx - LoadedGLBModel Component
+**Before (BROKEN):**
+```typescript
+// Lines 333-386
+let scene: THREE.Group | null = null;
+try {
+  const result = useGLTF(resolvedUrl);  // HOOK INSIDE TRY-CATCH!
+  scene = result.scene;
+  // ... logging
+} catch (error) {
+  // Error handling
+}
+```
+
+**After (FIXED):**
+```typescript
+// Lines 333-360
+// Log loading start
+useEffect(() => {
+  const modelName = url.split('/').pop() || 'GLB';
+  console.log(`[GLB] Stage: LOADING ${modelName} from ${resolvedUrl}`);
+  addDebugLogEntry('info', `Loading GLB: ${modelName}`);
+  updateModelStatus({ loading: true, modelType: modelName });
+}, [url, resolvedUrl]);
+
+// PROPER REACT HOOKS USAGE: useGLTF must be called at component's top level
+// The hook throws a Promise during loading which Suspense boundary catches
+const gltf = useGLTF(resolvedUrl);
+
+// Log successful load
+useEffect(() => {
+  if (gltf) {
+    const modelName = url.split('/').pop() || 'GLB';
+    console.log(`[GLB] Stage: LOADED ${modelName} successfully`);
+    addDebugLogEntry('success', `GLB loaded: ${modelName}`);
+    updateModelStatus({ loading: false, loaded: true, progress: 1 });
+    if (onLoadSuccess) {
+      setTimeout(() => onLoadSuccess(), 0);
+    }
+  }
+}, [gltf, url, onLoadSuccess]);
+
+// Error handling is done by ErrorBoundary wrapper component
+// Errors from useGLTF will be caught there instead
+```
+
+**Changes:**
+- Moved `useGLTF(resolvedUrl)` to component top level (line 343)
+- Removed try-catch block entirely
+- Added `useEffect` for loading state logging
+- Error handling delegated to existing `ModelErrorBoundary` class component
+- Updated all `scene` references to `gltf.scene`
+
+#### 2. nervous-structures.ts Fixes
+- **Import path corrected:** `../../LayerTypes` → `../LayerTypes`
+- **Added missing fields** to `corpus-callosum` entry:
+  - `functionsEs: ['Comunicación interhemisférica', 'Integración sensorial', 'Relevo motor']`
+  - `innervates: ['Left hemisphere', 'Right hemisphere', 'Commissural fibers']`
+- **Removed duplicate helper function definitions** (were before NERVOUS_STRUCTURES const)
+
+---
+
+## Files Changed
+
+| File | Action | Details |
+|-------|---------|----------|
+| `src/anatomy/GLBAnatomyModel.tsx` | Modified | Fixed React hooks violation in LoadedGLBModel component (lines 333-360) |
+| `src/anatomy/layers/data/nervous-structures.ts` | Modified | Import path fix, added missing fields, removed duplicates |
+
+---
+
+## Learnings for Future Iterations
+
+### React Hooks Rules (CRITICAL)
+- **Hooks MUST be called at component top level** - never inside try-catch, conditionals, or nested functions
+- **Suspense Pattern**: `useGLTF` throws Promise during loading - this is EXPECTED behavior
+  - Let Suspense boundary catch the Promise, NOT try-catch
+  - ErrorBoundary class component catches actual render errors
+- **Hook Order**: Hooks must be called in same order on every render
+  - Moving `useGLTF` inside try-catch violated this (only called on error path)
+
+### File Structure Patterns
+- **LayerTypes import**: From `src/anatomy/layers/data/`, correct path is `../LayerTypes`
+- **Data files**: Must have all required interface fields (functionsEs, innervates, etc.)
+
+### Error Handling Architecture
+- **Loading states**: Use `useEffect` + state
+- **Suspense**: Catches Promise thrown by async hooks (useGLTF, useLoader, etc.)
+- **ErrorBoundary**: Class component catching React render errors
+
+---
+
+## Verification
+
+```bash
+# Type-check passes
+npx tsc --noEmit  # No errors related to these fixes
+
+# Build succeeds
+npx vite build  # Success (only chunk size warnings)
+```
+
+---
+
+## Handoff From
+
+Session completed by: Claude Code (Opus 4.6)
+Date: 2026-02-11
+Work: React hooks violation fix + nervous-structures.ts corrections
+
+## Handoff To
+
+Next developer: The 3D anatomy model loading should now work correctly.
+- Test: Run dev server and verify GLB models load without "3d anatomy failed to load" error
+- Monitor: Check console for `[GLB] Stage: LOADED` messages
+- Verify: Models appear in 3D viewer with proper materials and interactivity
+
+Known remaining work:
+- `GLBAnatomyModel-fixed.tsx` exists but can be deleted (fix applied to main file)
+- Consider testing on actual iOS device to verify cross-platform asset loading
+

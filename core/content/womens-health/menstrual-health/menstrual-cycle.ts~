@@ -1,0 +1,381 @@
+import { WomensHealthContent } from '../types';
+
+export const menstrualCycle: WomensHealthContent = {
+  id: 'menstrual-cycle',
+  title: 'Menstrual Cycle',
+  category: 'Menstrual Health',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'What is a Period?',
+      content: `A period is part of the menstrual cycle. It's when blood and tissue from the uterus leave the body through the vagina.
+
+**Key Points:**
+- A period usually happens once a month
+- It typically lasts 3-7 days
+- Most girls get their first period between ages 10-15
+- Periods are a normal part of growing up
+
+**What to Expect:**
+- You may see red or brown blood
+- You might feel cramps in your lower belly
+- You can use pads, tampons, or menstrual cups
+- It's normal for periods to be irregular at first
+
+Remember: Everyone's cycle is different. What's normal for you might be different from your friends.`,
+      keyPoints: [
+        'A period is blood and tissue leaving the uterus',
+        'It usually happens monthly and lasts 3-7 days',
+        'First periods typically start between ages 10-15',
+        'Irregular periods are normal when starting'
+      ],
+      vocabulary: [
+        { term: 'Period', definition: 'Monthly bleeding from the vagina' },
+        { term: 'Uterus', definition: 'The organ where a baby grows' },
+        { term: 'Vagina', definition: 'The passage connecting the uterus to outside the body' },
+        { term: 'Pad', definition: 'A product worn in underwear to catch period blood' }
+      ],
+      quiz: [
+        {
+          question: 'How long does a typical period last?',
+          options: ['1-2 days', '3-7 days', '10-14 days', '2-3 weeks'],
+          correctAnswer: 1,
+          explanation: 'A typical period lasts between 3-7 days, though this can vary from person to person.',
+        },
+        {
+          question: 'At what age do most girls get their first period?',
+          options: ['5-8 years', '10-15 years', '16-20 years', '20-25 years'],
+          correctAnswer: 1,
+          explanation: 'Most girls get their first period between ages 10-15, though this varies individually.',
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Understanding the Menstrual Cycle',
+      content: `The menstrual cycle is a monthly series of changes your body goes through to prepare for a possible pregnancy. It's controlled by hormones and typically lasts about 28 days, though anywhere from 21-35 days is normal.
+
+**The Four Phases:**
+
+1. **Menstruation (Days 1-5)**
+   - The lining of the uterus sheds
+   - This is when you have your period
+   - Bleeding typically lasts 3-7 days
+
+2. **Follicular Phase (Days 1-13)**
+   - Your body prepares to release an egg
+   - Hormone levels increase
+   - You may feel more energetic
+
+3. **Ovulation (Day 14)**
+   - An egg is released from the ovary
+   - This is when you're most fertile
+   - Some people feel mild pain called mittelschmerz
+
+4. **Luteal Phase (Days 15-28)**
+   - The body prepares for possible pregnancy
+   - If pregnancy doesn't occur, the cycle restarts
+   - PMS symptoms may occur during this time
+
+**Tracking Your Cycle:**
+- Use a calendar, app, or journal
+- Note when your period starts and ends
+- Track any symptoms or mood changes
+- This helps you understand what's normal for you`,
+      keyPoints: [
+        'The menstrual cycle has four distinct phases',
+        'A typical cycle lasts 21-35 days, with 28 days as average',
+        'Ovulation is when an egg is released and fertility is highest',
+        'Tracking your cycle helps identify your normal patterns'
+      ],
+      vocabulary: [
+        { term: 'Ovulation', definition: 'When an ovary releases an egg' },
+        { term: 'Hormones', definition: 'Chemicals that control body functions' },
+        { term: 'Follicle', definition: 'A sac in the ovary that contains an egg' },
+        { term: 'Mittelschmerz', definition: 'Mild pain felt during ovulation' }
+      ],
+      quiz: [
+        {
+          question: 'What happens during ovulation?',
+          options: [
+            'The uterus lining sheds',
+            'An egg is released from the ovary',
+            'Hormone levels decrease',
+            'The period ends'
+          ],
+          correctAnswer: 1,
+          explanation: 'Ovulation occurs when an egg is released from the ovary, typically around day 14 of a 28-day cycle.',
+        },
+        {
+          question: 'What is a normal cycle length range?',
+          options: ['14-20 days', '21-35 days', '35-45 days', '45-60 days'],
+          correctAnswer: 1,
+          explanation: 'A normal menstrual cycle can range from 21-35 days, with 28 days as the average.',
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Hormonal Regulation of the Menstrual Cycle',
+      content: `The menstrual cycle is a complex process regulated by the interaction of several hormones from the hypothalamus, pituitary gland, and ovaries. This is known as the hypothalamic-pituitary-ovarian (HPO) axis.
+
+**Key Hormones Involved:**
+
+1. **Gonadotropin-Releasing Hormone (GnRH)**
+   - Produced by the hypothalamus
+   - Stimulates the release of FSH and LH
+   - Pulsatile secretion pattern
+
+2. **Follicle-Stimulating Hormone (FSH)**
+   - Released by the pituitary gland
+   - Stimulates follicle development in the ovaries
+   - Highest during the follicular phase
+
+3. **Luteinizing Hormone (LH)**
+   - Released by the pituitary gland
+   - Triggers ovulation
+   - Surges mid-cycle to release the egg
+
+4. **Estrogen**
+   - Produced by developing follicles
+   - Builds up the uterine lining
+   - Peaks just before ovulation
+   - Causes LH surge
+
+5. **Progesterone**
+   - Produced by the corpus luteum after ovulation
+   - Maintains the uterine lining
+   - Rises during the luteal phase
+   - Decreases if pregnancy doesn't occur, triggering menstruation
+
+**Hormonal Changes Throughout the Cycle:**
+
+- **Follicular Phase:** FSH and estrogen rise
+- **Ovulation:** LH surge and estrogen peak
+- **Luteal Phase:** Progesterone rises, estrogen declines
+- **Menstruation:** All hormones drop if no pregnancy occurs
+
+**Feedback Loops:**
+- Estrogen has positive feedback on LH before ovulation
+- Progesterone has negative feedback on FSH and LH
+- This regulation ensures proper timing of ovulation`,
+      keyPoints: [
+        'The HPO axis regulates the menstrual cycle through hormonal interactions',
+        'FSH stimulates follicle development and LH triggers ovulation',
+        'Estrogen builds the uterine lining, progesterone maintains it',
+        'Feedback loops ensure proper cycle timing'
+      ],
+      vocabulary: [
+        { term: 'HPO Axis', definition: 'Hypothalamic-pituitary-ovarian axis that regulates the menstrual cycle' },
+        { term: 'Corpus Luteum', definition: 'Temporary gland that produces progesterone after ovulation' },
+        { term: 'Follicle', definition: 'Fluid-filled sac containing an immature egg' },
+        { term: 'Positive Feedback', definition: 'Process where a hormone stimulates more of its own release' }
+      ],
+      quiz: [
+        {
+          question: 'Which hormone surge triggers ovulation?',
+          options: ['FSH', 'LH', 'Estrogen', 'Progesterone'],
+          correctAnswer: 1,
+          explanation: 'The luteinizing hormone (LH) surge triggers the release of an egg from the ovary.',
+        },
+        {
+          question: 'What produces progesterone after ovulation?',
+          options: ['Hypothalamus', 'Pituitary gland', 'Corpus luteum', 'Developing follicle'],
+          correctAnswer: 2,
+          explanation: 'After ovulation, the transformed follicle becomes the corpus luteum, which produces progesterone.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Menstrual Cycle Physiology and Pathophysiology',
+      content: `The menstrual cycle involves complex physiological processes that prepare the female reproductive system for potential pregnancy each month. Understanding these mechanisms helps identify when variations may indicate underlying pathology.
+
+**Follicular Development:**
+
+Each cycle begins with recruitment of a cohort of follicles under FSH stimulation. Through a process of selection and atresia, typically one dominant follicle emerges. The granulosa cells in this follicle produce increasing amounts of estradiol.
+
+- **Antral follicle count** indicates ovarian reserve
+- **Dominant follicle** typically reaches 18-24mm before ovulation
+- **Atresia** eliminates non-dominant follicles
+
+**Endometrial Changes:**
+
+The endometrium undergoes characteristic changes throughout the cycle:
+
+1. **Proliferative Phase (Days 6-14)**
+   - Endometrium thickens from 1-2mm to 3-5mm
+   - Glands elongate and spiral arteries develop
+   - Estrogen-driven growth
+
+2. **Secretory Phase (Days 15-28)**
+   - Endometrium reaches 5-6mm
+   - Glands become secretory and tortuous
+   - Stromal edema develops
+   - Progesterone-driven transformation
+
+**Ovulatory Mechanism:**
+
+The LH surge is triggered by:
+1. Estrogen reaching threshold levels (~200 pg/mL for 50 hours)
+2. Positive feedback on the pituitary
+3. Rise in prostaglandins and inflammatory mediators
+4. Enzymatic breakdown of the follicular wall
+
+**Luteal Phase Dynamics:**
+
+After ovulation:
+- Corpus luteum forms from remaining follicular cells
+- Produces progesterone (10-30 ng/mL) and some estrogen
+- Lifespan is 14 days unless rescued by hCG
+- If no pregnancy, becomes corpus albicans
+
+**Cycle Variations and Abnormalities:**
+
+- **Luteal Phase Defect:** Inadequate progesterone production
+- **Anovulatory Cycles:** Failure to ovulate, common in perimenopause
+- **Follicular Persistence:** Failure of dominant follicle to rupture
+- **Short Luteal Phase:** <11 days from ovulation to menstruation`,
+      keyPoints: [
+        'Follicular development involves selection of a dominant follicle from a cohort',
+        'Endometrial changes are characterized by proliferative and secretory phases',
+        'Ovulation requires an LH surge triggered by estrogen threshold',
+        'Luteal phase defects can impact fertility and menstrual regularity'
+      ],
+      vocabulary: [
+        { term: 'Atresia', definition: 'Degeneration and reabsorption of ovarian follicles' },
+        { term: 'Antral Follicle', definition: 'Developing follicle with fluid-filled cavity' },
+        { term: 'Corpus Albicans', definition: 'Scar tissue formed after corpus luteum regresses' },
+        { term: 'Luteal Phase Defect', definition: 'Inadequate progesterone production after ovulation' }
+      ],
+      quiz: [
+        {
+          question: 'What is the typical size of a dominant follicle before ovulation?',
+          options: ['10-14mm', '15-17mm', '18-24mm', '25-30mm'],
+          correctAnswer: 2,
+          explanation: 'The dominant follicle typically reaches 18-24mm in diameter before ovulation occurs.',
+        },
+        {
+          question: 'What characterizes a luteal phase defect?',
+          options: [
+            'Excessive estrogen production',
+            'Inadequate progesterone production',
+            'Prolonged follicular phase',
+            'Absent LH surge'
+          ],
+          correctAnswer: 1,
+          explanation: 'Luteal phase defect is characterized by inadequate progesterone production, which can affect implantation and early pregnancy support.',
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Menstrual Cycle Endocrinology',
+      content: `The menstrual cycle represents a sophisticated interplay of neuroendocrine mechanisms that integrate hypothalamic, pituitary, and ovarian functions with peripheral tissue sensitivity and metabolic influences.
+
+**Hypothalamic Control:**
+
+GnRH neurons in the arcuate nucleus and preoptic area exhibit pulsatile secretion patterns:
+- **Frequency-dependent regulation:** Slow pulses favor FSH secretion; fast pulses favor LH
+- **Kisspeptin neurons** are the primary upstream regulators of GnRH
+- **Neurokinin B and dynorphin** (KNDy neurons) modulate pulse frequency
+- **Glutamate and GABA** provide excitatory and inhibitory inputs
+
+**Molecular Mechanisms of Folliculogenesis:**
+
+FSH receptor activation leads to:
+- cAMP-PKA pathway activation
+- Aromatase induction → estradiol synthesis
+- IGF-1 and amphiregulin production
+- Granulosa cell proliferation and differentiation
+
+LH receptor activation in theca cells:
+- Cholesterol side-chain cleavage (CYP11A1)
+- 17α-hydroxylase/17,20-lyase (CYP17) activity
+- Androstenedione production (substrate for estrogen synthesis)
+
+**The Two-Gonadotropin Two-Cell Theory:**
+
+1. **Theca cells:** LH → androstenedione
+2. **Granulosa cells:** FSH → aromatase → androstenedione → estradiol
+
+This explains why both FSH and LH are required for normal estrogen production.
+
+**LH Surge Mechanism:**
+
+The preovulatory LH surge involves:
+1. **Estrogen threshold** reaching critical levels
+2. **Upregulation of GnRH receptors** on gonadotropes
+3. **Increased GnRH pulse frequency**
+4. **Self-priming effect** of GnRH
+5. **Activation of progesterone receptors** in the hypothalamus
+
+**Steroid Feedback Mechanisms:**
+
+**Estrogen Feedback:**
+- Negative feedback: Low-dose, continuous administration
+- Positive feedback: High levels for sustained period (50 hours)
+- Involves ERα in the hypothalamus
+
+**Progesterone Feedback:**
+- Negative feedback on LH pulse frequency
+- Mediated through PR neurons in the arcuate nucleus
+- Requires prior estrogen priming
+
+**Clinical Implications:**
+
+- **Kallmann Syndrome:** GnRH deficiency due to failed neuronal migration
+- **PCOS:** Altered GnRH pulse frequency → increased LH:FSH ratio
+- **Hypothalamic Amenorrhea:** Reduced kisspeptin signaling from energy deficit
+- **Menopausal Transition:** Follicle depletion → loss of inhibin A → rising FSH`,
+      keyPoints: [
+        'GnRH pulse frequency differentially regulates FSH and LH secretion',
+        'The two-cell two-gonadotropin theory explains estrogen synthesis',
+        'Kisspeptin neurons are the primary regulators of GnRH secretion',
+        'Steroid feedback mechanisms are dose and duration dependent'
+      ],
+      vocabulary: [
+        { term: 'KNDy Neurons', definition: 'Kisspeptin/Neurokinin B/Dynorphin neurons regulating GnRH' },
+        { term: 'Two-Cell Theory', definition: 'Estrogen synthesis requires both theca and granulosa cells' },
+        { term: 'Self-Priming Effect', definition: 'GnRH upregulates its own receptor expression' },
+        { term: 'Inhibin', definition: 'Hormone from granulosa cells that selectively inhibits FSH' }
+      ],
+      quiz: [
+        {
+          question: 'How does GnRH pulse frequency affect gonadotropin secretion?',
+          options: [
+            'Slow pulses decrease both FSH and LH',
+            'Fast pulses favor LH, slow pulses favor FSH',
+            'Pulse frequency affects only LH',
+            'Pulse frequency affects only FSH'
+          ],
+          correctAnswer: 1,
+          explanation: 'Fast GnRH pulse frequencies favor LH secretion, while slower pulses favor FSH secretion due to differential gene regulation in gonadotropes.',
+        },
+        {
+          question: 'What is the role of kisspeptin neurons?',
+          options: [
+            'Directly stimulate ovarian follicles',
+            'Primary upstream regulators of GnRH secretion',
+            'Inhibit FSH secretion',
+            'Produce progesterone'
+          ],
+          correctAnswer: 1,
+          explanation: 'Kisspeptin neurons are now recognized as the primary upstream regulators of GnRH secretion, integrating metabolic and hormonal signals.',
+        }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-disorders',
+    'pms',
+    'fertility-overview',
+    'hormonal-health'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'Speroff L, et al. Clinical Gynecologic Endocrinology and Infertility. 8th ed.',
+    'American College of Obstetricians and Gynecologists. Practice Bulletin No. 128.',
+    'The Normal Menstrual Cycle and the Control of Ovulation. Endotext.'
+  ]
+};

@@ -44,6 +44,7 @@ export interface UserHealthProfile {
 export interface UserCondition {
   conditionId: string;
   name: string;
+  nameEs?: string;
   icdCode?: string;
   diagnosedDate?: Date;
   status: 'active' | 'resolved' | 'chronic';

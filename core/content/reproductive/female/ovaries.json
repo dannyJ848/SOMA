@@ -1,0 +1,108 @@
+{
+  "id": "structure-ovaries",
+  "type": "structure",
+  "name": "Ovaries",
+  "alternateNames": ["Female gonads", "Ovaria"],
+  "fmaId": "FMA:7209",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The ovaries are two small organs that make eggs and female hormones.",
+      "explanation": "The ovaries are located in the lower belly on each side of the uterus (womb). They are about the size and shape of almonds. The ovaries have two important jobs: making eggs (also called ova) that can combine with sperm to make a baby, and producing hormones like estrogen and progesterone that control puberty, menstrual periods, and pregnancy.",
+      "keyTerms": [
+        { "term": "egg", "definition": "The female cell that can combine with sperm to start a pregnancy" },
+        { "term": "estrogen", "definition": "A female hormone that helps with puberty and the menstrual cycle", "pronunciation": "ESS-tro-jen" },
+        { "term": "uterus", "definition": "The womb, where a baby grows during pregnancy", "pronunciation": "YOO-ter-us" }
+      ],
+      "analogies": ["The ovaries are like a nest that stores and releases eggs, while also sending out chemical messages (hormones) that tell the body what to do."],
+      "examples": ["During puberty, the ovaries start making more estrogen, which causes breasts to develop and menstrual periods to begin."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The ovaries are paired endocrine and exocrine organs that produce oocytes through ovulation and secrete estrogen, progesterone, and other hormones under hypothalamic-pituitary regulation.",
+      "explanation": "Each ovary is an almond-shaped organ (3-4 cm long) suspended in the pelvic cavity by the mesovarium (part of the broad ligament), suspensory ligament (containing ovarian vessels), and ovarian ligament (to uterus). The ovary has an outer cortex containing follicles at various stages of development and an inner medulla with blood vessels and nerves. Before birth, females develop approximately 1-2 million primary oocytes; by puberty, about 400,000 remain. Each month during reproductive years, FSH stimulates follicle development, one dominant follicle matures, and LH surge triggers ovulation (release of secondary oocyte). The remaining follicle becomes the corpus luteum, producing progesterone to prepare for pregnancy.",
+      "keyTerms": [
+        { "term": "ovulation", "definition": "Monthly release of an egg from the ovary", "pronunciation": "OV-yoo-LAY-shun" },
+        { "term": "follicle", "definition": "Structure in the ovary containing a developing egg surrounded by supporting cells" },
+        { "term": "corpus luteum", "definition": "Structure formed from the follicle after ovulation, produces progesterone", "pronunciation": "KOR-pus LOO-tee-um" },
+        { "term": "FSH", "definition": "Follicle-stimulating hormone, promotes follicle development" },
+        { "term": "LH", "definition": "Luteinizing hormone, triggers ovulation" },
+        { "term": "mesovarium", "definition": "Fold of broad ligament connecting ovary to pelvic wall", "pronunciation": "mez-oh-VAIR-ee-um" }
+      ],
+      "analogies": ["Think of the ovary as a garden where eggs develop in 'nests' (follicles). Each month, one flower (follicle) blooms fully and releases its seed (egg)."],
+      "examples": ["Women typically ovulate around day 14 of a 28-day cycle, which is the most fertile time for conception."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The ovaries contain follicles at various maturation stages from primordial through antral, with dominant follicle selection driven by FSH sensitivity, culminating in LH-triggered ovulation and corpus luteum formation for progesterone production.",
+      "explanation": "Folliculogenesis: Primordial follicles (oocyte arrested in prophase I + single layer of flat granulosa cells) → Primary follicles (cuboidal granulosa, zona pellucida forms) → Secondary follicles (multiple granulosa layers, theca interna appears) → Antral (Graafian) follicles (fluid-filled antrum, theca externa). FSH promotes granulosa cell aromatase expression, converting theca-derived androgens to estradiol ('two-cell, two-gonadotropin' model). Rising estrogen triggers LH surge via positive feedback on hypothalamus. LH surge causes oocyte meiotic resumption (to metaphase II), follicular rupture, and luteinization. The corpus luteum secretes progesterone and some estrogen; if pregnancy occurs, hCG maintains it; otherwise, it degenerates into corpus albicans. Ovarian blood supply: ovarian artery (from aorta) and ovarian branch of uterine artery.",
+      "keyTerms": [
+        { "term": "primordial follicle", "definition": "Dormant follicle containing oocyte arrested in prophase I of meiosis" },
+        { "term": "zona pellucida", "definition": "Glycoprotein layer surrounding oocyte, important for sperm binding", "pronunciation": "ZO-nah pel-LOO-sid-ah" },
+        { "term": "theca interna", "definition": "Inner vascular layer of follicle that produces androgens under LH stimulation" },
+        { "term": "two-cell two-gonadotropin model", "definition": "Theca cells make androgens (LH), granulosa convert to estrogen (FSH)" },
+        { "term": "aromatase", "definition": "Enzyme in granulosa cells that converts androgens to estrogens" },
+        { "term": "corpus albicans", "definition": "Fibrous remnant of degenerated corpus luteum", "pronunciation": "KOR-pus AL-bih-kanz" }
+      ],
+      "examples": ["Polycystic ovary syndrome (PCOS) involves disrupted folliculogenesis with multiple small antral follicles that fail to mature, often with hyperandrogenism and anovulation."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "Ovarian function integrates intraovarian paracrine signaling (AMH, inhibins, growth factors) with HPG axis endocrine control, governing follicle recruitment, dominant follicle selection, and the ovulatory cascade with implications for fertility and reproductive endocrine disorders.",
+      "explanation": "Follicle dynamics: Anti-Mullerian hormone (AMH) from granulosa cells inhibits primordial follicle recruitment and reduces FSH sensitivity. Inhibin B (from small antral follicles, early follicular phase) and Inhibin A (from corpus luteum, luteal phase) selectively suppress FSH. Dominant follicle selection occurs when one follicle gains FSH sensitivity advantage; declining FSH causes atresia of other follicles (Graafian follicle continues via high estrogen/LH receptors). LH surge triggers: meiotic resumption (via decreased intra-oocyte cAMP), cumulus expansion, follicular rupture (via proteases, prostaglandins), and luteinization. Ovarian steroidogenesis uses cholesterol transported by StAR protein. The aging ovary shows accelerating follicle depletion, declining AMH and inhibin, rising FSH, and eventual menopause. Ovarian reserve assessment: AMH, day 3 FSH/estradiol, antral follicle count (AFC) by ultrasound.",
+      "keyTerms": [
+        { "term": "AMH", "definition": "Anti-Mullerian hormone, marker of ovarian reserve from granulosa cells" },
+        { "term": "inhibin", "definition": "Glycoprotein hormone that selectively inhibits FSH secretion" },
+        { "term": "dominant follicle selection", "definition": "Process by which one follicle continues developing while others undergo atresia" },
+        { "term": "atresia", "definition": "Degeneration of ovarian follicles that do not ovulate" },
+        { "term": "ovarian reserve", "definition": "Quantity and quality of remaining ovarian follicles" },
+        { "term": "antral follicle count", "definition": "Ultrasound count of small antral follicles as measure of ovarian reserve" }
+      ],
+      "clinicalNotes": "AMH is the most stable ovarian reserve marker (non-cycle-dependent). Low AMH (<1.0 ng/mL) and high FSH (>10 IU/L) indicate diminished ovarian reserve. PCOS shows high AMH due to accumulated antral follicles. In IVF, ovarian reserve guides stimulation protocols."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical ovarian medicine spans fertility preservation strategies, ovarian stimulation protocols, surgical approaches to ovarian masses, and targeted therapies for ovarian malignancies based on molecular classification.",
+      "explanation": "Clinical applications: 1) Fertility preservation: oocyte/embryo cryopreservation, ovarian tissue cryopreservation (for prepubertal or urgent cases), in vitro maturation; 2) Ovarian stimulation for IVF: gonadotropin protocols guided by ovarian reserve, antagonist vs long-agonist protocols, trigger options (hCG, GnRH agonist); 3) PCOS management: lifestyle, metformin, ovulation induction (letrozole, clomiphene, gonadotropins); 4) Ovarian masses: ultrasound characterization (IOTA criteria), tumor markers (CA-125, HE4, AFP, hCG), frozen section for surgical planning; 5) Ovarian cancer: epithelial (high-grade serous most common, BRCA1/2 and HRD associated), germ cell, sex cord-stromal tumors; staging via laparotomy; debulking surgery; platinum-based chemotherapy; PARP inhibitors for BRCA/HRD; 6) Premature ovarian insufficiency: evaluation, HRT, fertility options (donor oocytes). Surgery: laparoscopic cystectomy, oophorectomy; ovarian preservation when possible in young women; risk-reducing salpingo-oophorectomy for BRCA carriers.",
+      "keyTerms": [
+        { "term": "ovarian tissue cryopreservation", "definition": "Freezing ovarian cortex strips for later transplantation or in vitro follicle maturation" },
+        { "term": "IOTA criteria", "definition": "International Ovarian Tumor Analysis ultrasound rules for ovarian mass characterization" },
+        { "term": "high-grade serous carcinoma", "definition": "Most common and aggressive epithelial ovarian cancer type, often BRCA/HRD associated" },
+        { "term": "BRCA1/2", "definition": "Tumor suppressor genes; germline mutations increase ovarian cancer risk significantly" },
+        { "term": "PARP inhibitors", "definition": "Targeted therapy exploiting DNA repair defects in BRCA/HRD ovarian cancers" },
+        { "term": "premature ovarian insufficiency", "definition": "Loss of ovarian function before age 40, characterized by amenorrhea and elevated FSH" }
+      ],
+      "clinicalNotes": "BRCA1 carriers have ~40% lifetime ovarian cancer risk, BRCA2 ~15%. Risk-reducing salpingo-oophorectomy recommended by age 35-40 (BRCA1) or 40-45 (BRCA2), reducing ovarian cancer risk by >90%. For fertility patients, time-sensitive decision making balances oncological urgency with fertility preservation options. Ovarian cancer survival has improved with PARP inhibitors in maintenance therapy."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-reproductive-female", "targetType": "system", "relationship": "parent", "label": "Female Reproductive System" },
+    { "targetId": "structure-fallopian-tubes", "targetType": "structure", "relationship": "related", "label": "Fallopian Tubes" },
+    { "targetId": "structure-uterus", "targetType": "structure", "relationship": "related", "label": "Uterus" },
+    { "targetId": "process-oogenesis", "targetType": "process", "relationship": "related", "label": "Oogenesis" }
+  ],
+  "tags": {
+    "systems": ["reproductive", "endocrine"],
+    "structures": ["FMA:7209"],
+    "topics": ["anatomy", "physiology", "endocrinology", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "nbme": true, "shelf": ["ob-gyn", "medicine"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

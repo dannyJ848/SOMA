@@ -1,0 +1,851 @@
+/**
+ * Dental Emergencies - Comprehensive Educational Content
+ *
+ * Covers common dental emergencies including toothaches, trauma,
+   abscesses, and urgent dental conditions with immediate management
+   and definitive treatment considerations.
+ */
+
+import { EducationalContent } from '../types';
+
+export const dentalEmergencies: EducationalContent = {
+  id: 'topic-dental-emergencies',
+  type: 'topic',
+  name: 'Dental Emergencies',
+  alternateNames: [
+    'Dental Urgency',
+    'Dental Trauma',
+    'Acute Dental Problems',
+    'Urgent Dental Care',
+  ],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Dental emergencies are urgent problems with your teeth or mouth that need immediate attention. Common emergencies include severe toothaches, knocked-out teeth, broken teeth, abscesses, and injuries to the mouth.',
+      explanation: `**Common Dental Emergencies**
+
+**1. Severe Toothache**
+- Pain that won't go away
+- Swelling in the face or jaw
+- Fever
+- Difficulty swallowing or breathing
+
+**What to do:**
+- Call your dentist immediately
+- Take over-the-counter pain medicine (Tylenol/Advil)
+- Use cold compress on outside of face
+- Avoid hot or cold foods
+
+**2. Knocked-Out Tooth (Avulsed Tooth)**
+- Tooth completely out of socket
+- This is a TRUE EMERGENCY
+- Best results if treated within 30 minutes
+
+**What to do:**
+- Find the tooth
+- Hold by the crown (not the root)
+- Rinse gently with water if dirty
+- Try to put it back in socket (correct way)
+- If can't reinsert, keep moist in milk or saliva
+- Go to dentist IMMEDIATELY
+
+**3. Chipped or Broken Tooth**
+- Sharp edges can cut your tongue
+- May have pain or sensitivity
+
+**What to do:**
+- Rinse mouth with warm water
+- Save any pieces if you find them
+- Use cold compress on face if swollen
+- See dentist as soon as possible
+- Temporary dental wax from pharmacy for sharp edges
+
+**4. Abscess (Infection)**
+- Pimple-like swelling on gums
+- Severe pain
+- Pus or bad taste
+- Fever
+- Swelling in face or neck
+
+**What to do:**
+- This is an emergency - see dentist or go to ER
+- Don't pop it!
+- Salt water rinses may help
+- Take over-the-counter pain medicine
+- May need antibiotics
+
+**5. Lost Filling or Crown**
+- Tooth suddenly sensitive
+- Sharp edges
+- Food getting stuck
+
+**What to do:**
+- Call dentist for appointment
+- Dental cement from pharmacy for temporary repair
+- Keep area clean
+- Avoid very hot or cold foods
+
+**6. Soft Tissue Injury**
+- Cuts to lips, tongue, cheeks
+- Bleeding
+
+**What to do:**
+- Clean with warm water
+- Apply pressure with clean cloth
+- Cold compress
+- If bleeding doesn't stop after 10-15 minutes, go to ER
+
+**When to Seek Emergency Care:**
+
+- Difficulty breathing or swallowing
+- Fever over 101°F
+- Swelling that spreads to face or neck
+- Severe, uncontrolled pain
+- Bleeding that won't stop
+- Trauma involving head injury
+
+**Prevention:**
+
+- Wear mouthguard during sports
+- Don't use teeth as tools
+- Avoid hard foods that can crack teeth
+- Get regular dental checkups`,
+      keyTerms: [
+        { term: 'toothache', definition: 'Pain in or around a tooth' },
+        { term: 'avulsed tooth', definition: 'Tooth that has been completely knocked out of the socket' },
+        { term: 'abscess', definition: 'Pocket of pus caused by bacterial infection' },
+        { term: 'crown', definition: 'Tooth-shaped cap that covers a tooth' },
+      ],
+      analogies: [
+        'An avulsed tooth is like a plant that\'s been pulled up - if you put it back quickly, it might survive.',
+        'A dental abscess is like a pimple - it\'s an infection that needs proper treatment.',
+      ],
+      examples: [
+        'A child who falls and knocks out a tooth needs immediate care.',
+        'Severe facial swelling from a tooth infection requires emergency treatment.',
+      ],
+      patientCounselingPoints: [
+        'Have your dentist\'s emergency number saved in your phone',
+        'If you knock out a tooth, every minute counts - get to a dentist within 30 minutes if possible',
+        'Never use your teeth to open bottles or packages - this is a common cause of broken teeth',
+        'Mouthguards prevent most sports-related dental injuries',
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Dental emergencies include traumatic injuries, acute infections, and severe pain that require urgent evaluation and management. Immediate first aid followed by definitive dental treatment optimizes outcomes.',
+      explanation: `## Classification of Dental Emergencies
+
+**True Emergencies (Immediate Care Required):**
+- Airway compromise
+- Severe facial swelling
+- Uncontrolled bleeding
+- Avulsed tooth (time-critical)
+- Facial fractures
+- Severe infection with systemic signs
+
+**Urgent (Same-Day Care):**
+- Severe toothache
+- Alveolar osteitis (dry socket)
+- Abscess without airway compromise
+- Luxation injuries
+- Crown/root fracture with pain
+
+**Semi-Urgent (Within 24-48 Hours):**
+- Lost restoration (filling/crown)
+- Chipped tooth without pain
+- Broken denture
+- Food impaction
+
+## Traumatic Injuries
+
+**Tooth Avulsion (Complete Displacement):**
+
+*Management (Time Critical):*
+1. Handle tooth by crown only (NOT root)
+2. If clean: Reimplant immediately
+3. If dirty: Rinse with saline/water, then reimplant
+4. Gently close mouth to hold tooth
+5. Seek immediate dental care
+
+*Storage if Cannot Reimplant:*
+- Best: Hank's Balanced Salt Solution
+- Good: Milk, saliva (buccal sulcus)
+- Acceptable: Saline
+- Avoid: Water, dry storage, paper towel
+
+*Prognosis:*
+- Best if reimplanted within 5 minutes
+- Good if <30 minutes
+- Fair if 30-60 minutes
+- Poor if >60 minutes (extraoral dry time)
+
+**Luxation Injuries:**
+
+*Concussion:*
+- Tooth sensitive to percussion
+- No mobility, no displacement
+- Manage: Soft diet, observation
+
+*Subluxation:*
+- Mobility but no displacement
+- Bleeding from gingival sulcus
+- Manage: Stabilization, soft diet
+
+*Lateral Luxation:*
+- Tooth displaced in any direction
+- May be locked into bone
+- Manage: Reposition, stabilize
+
+*Intrusion:*
+- Tooth pushed into bone
+- Worst prognosis
+- May need orthodontic or surgical repositioning
+
+*Extrusion:*
+- Tooth partially out of socket
+- Manage: Reposition, stabilize
+
+**Fractures:**
+
+*Enamel-Only:*
+- No sensitivity
+- Smooth sharp edges
+- Manage: Smoothing or restoration
+
+*Enamel-Dentin:*
+- May be sensitive
+- Risk of pulp exposure
+- Manage: Bonding, crown, possibly root canal
+
+*Enamel-Dentin-Pulp:*
+- Pulp visible or exposed
+- Very sensitive
+- Manage: Root canal + restoration
+
+*Root Fracture:*
+- Confirmed by radiograph
+- Prognosis depends on location
+- Manage: Stabilization, possible extraction
+
+**Alveolar Fracture:**
+- Fracture of the bone socket
+- Multiple teeth移动 together
+- Manage: Reposition, splint, antibiotics
+
+## Acute Dental Infections
+
+**Acute Apical Abscess:**
+- Pulp necrosis → bacterial spread
+- Rapid onset, severe pain
+- Swelling, possible fever
+- Treatment: Drainage (root canal or extraction) + antibiotics
+
+**Periodontal Abscess:**
+- Acute infection in periodontal pocket
+- Usually in patients with periodontitis
+- Treatment: Debridement, irrigation, antibiotics
+
+**Pericoronitis:**
+- Infection around erupting tooth (usually wisdom tooth)
+- Pain, swelling, limited opening
+- Treatment: Irrigation, antibiotics, extraction
+
+**Cellulitis:**
+- Spreading infection through tissues
+- No pus collection
+- Diffuse swelling, redness
+- Treatment: Antibiotics, treat source
+
+**Ludwig's Angina:**
+- Bilateral submandibular, submental, sublingual space infection
+- Life-threatening airway compromise
+- Treatment: Airway management, IV antibiotics, surgical drainage
+
+## Acute Pain Conditions
+
+**Irreversible Pulpitis:**
+- Severe, spontaneous pain
+- Lingering pain to temperature
+- Night pain common
+- Treatment: Root canal or extraction
+
+**Acute Apical Periodontitis:**
+- Pain to biting/percussion
+- Tooth feels "high"
+- Treatment: Root canal or extraction
+
+**Reversible Pulpitis:**
+- Pain to stimulus only
+- Quick recovery after stimulus removed
+- Treatment: Remove irritant (caries, high restoration)
+
+**Dry Socket (Alveolar Osteitis):**
+- After extraction (2-4 days)
+- Severe pain, bad taste/odor
+- Empty socket with exposed bone
+- Risk factors: Smoking, difficult extraction, oral contraceptives
+- Treatment: Irrigation, medicated dressing, analgesics
+
+## Soft Tissue Injuries
+
+**Lacerations:**
+- Lips, tongue, cheeks
+- Assess for foreign bodies
+- Clean, irrigate
+- Suture if needed
+- Update tetanus if >5 years
+
+**Mandibular Dislocation:**
+- TMJ dislocates anteriorly
+- Mouth locked open
+- Treatment: Manual reduction
+- Muscle relaxants, soft diet
+
+## Immediate Management
+
+**Pain Control:**
+- NSAIDs (ibuprofen): First-line
+- Acetaminophen: Alternative or adjunct
+- Combination: More effective than opioids
+- Opioids: Generally NOT indicated for dental pain
+
+**Antibiotics:**
+- Not first-line for most dental infections
+- Indicated for: Cellulitis, systemic signs, compromised host
+- Common choices: Amoxicillin, clindamycin (penicillin allergy)
+- Duration: 5-7 days typically
+
+**Cold Compress:**
+- 15-20 minutes on, 20 minutes off
+- Reduces swelling, provides some pain relief
+- Use during first 24-48 hours
+
+**Salt Water Rinses:**
+- 1/2 teaspoon salt in warm water
+- Cleansing, mild antibacterial
+- Do not swallow`,
+      keyTerms: [
+        { term: 'avulsion', definition: 'Complete displacement of tooth from socket' },
+        { term: 'luxation', definition: 'Displacement of tooth within socket; tooth still attached' },
+        { term: 'pulpitis', definition: 'Inflammation of dental pulp' },
+        { term: 'dry socket', definition: 'Painful condition after extraction when blood clot is lost' },
+        { term: 'cellulitis', definition: 'Spreading bacterial infection through connective tissue' },
+        { term: 'abscess', definition: 'Localized collection of pus' },
+      ],
+      analogies: [
+        'The avulsed tooth is like a plant - it needs to be replanted quickly with roots intact.',
+        'Dry socket is like a scab falling off too early - the raw bone is exposed and painful.',
+      ],
+      clinicalNotes: 'Avulsion prognosis decreases dramatically after 30 minutes extraoral time. Milk is acceptable transport medium if patient cannot reimplant. Ludwig\'s angina is life-threatening - airway management first priority. NSAIDs more effective than opioids for dental pain.',
+      patientCounselingPoints: [
+        'Store an avulsed tooth in milk or saliva if you can\'t put it back in the socket - never in water',
+        'NSAIDs work better than opioids for dental pain',
+        'Swelling that affects breathing or swallowing requires emergency room care immediately',
+        'Cold compresses during the first 24 hours help reduce swelling and pain',
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Dental emergencies encompass traumatic injuries, acute infections, and severe pain. Prompt assessment and management are essential to optimize outcomes, preserve teeth, and prevent life-threatening complications.',
+      explanation: `## Emergency Assessment
+
+**Primary Survey:**
+- Airway: Is it patent? Any compromise?
+- Breathing: Any respiratory distress?
+- Circulation: Signs of shock?
+- Disability: Neurological status?
+- Exposure: Full examination
+
+**Secondary Survey:**
+- Chief complaint
+- History of present illness
+- Medical history, medications, allergies
+- Focused examination
+- Appropriate imaging
+
+**Red Flags:**
+- Airway compromise
+- Difficulty breathing or swallowing
+- Drooling
+- Trismus (<20mm opening)
+- Facial asymmetry
+- Eye involvement
+- Altered mental status
+- Fever >38°C (100.4°F)
+- Immunocompromised
+
+## Trauma Management
+
+**Dental Trauma Guidelines (IADT):**
+
+*Avulsion Management (Permanent Tooth):*
+1. Handle by crown, avoid root surface
+2. Rinse if contaminated (<10 sec)
+3. Reimplant immediately
+4. Hold in place (gauze, foil, fingers)
+5. Refer immediately to dentist
+
+*Avulsion Management (Primary Tooth):*
+- Do NOT reimplant
+- May damage developing permanent tooth
+- Space maintenance may be needed
+- Reassure parents
+
+*Luxation Injuries:*
+- Local anesthesia as needed
+- Reposition to normal position
+- Stabilize with flexible splint
+- Monitor vitality, mobility
+- Splint duration: 7-14 days typically
+- Root canal if pulp necrosis develops
+
+*Fracture Management:*
+- Ellis Class I: Enamel only - smooth edges
+- Ellis Class II: Enamel/dentin - protect pulp, restore
+- Ellis Class III: Enamel/dentin/pulp - root canal treatment
+
+**Replantation Prognosis Factors:**
+- Extraoral dry time (most critical)
+- Storage medium
+- Patient age (open apex = better)
+- Timing of splint removal
+- Endodontic treatment timing
+
+## Infection Management
+
+**Anatomic Spaces:**
+
+*Maxillary:*
+- Canine space
+- Buccal space
+- Infratemporal space
+- Pterygomandibular space
+
+*Mandibular:*
+- Submental
+- Submandibular
+- Sublingual
+- Masseteric
+- Pterygomandibular
+
+*Spread Patterns:*
+- Maxillary infections: Periorbital, cavernous sinus
+- Mandibular infections: Ludwig's angina, mediastinum
+
+**Antibiotic Selection:**
+
+*First-line:*
+- Amoxicillin 500mg q8h
+- For penicillin allergy: Clindamycin 300mg q6h
+- Add metronidazole for anaerobes
+
+*Severe infections:*
+- Amoxicillin-clavulanate
+- Clindamycin + optional addition based on culture
+- Consider IV antibiotics for hospitalized patients
+
+**Indications for Antibiotics:**
+- Systemic signs of infection (fever, malaise)
+- Lymphadenopathy
+- Cellulitis
+- Trismus (<20mm)
+- Compromised host (diabetes, immunocompromised)
+- Inability to achieve adequate drainage
+
+**Antibiotics NOT Indicated:**
+- Uncomplicated abscess amenable to drainage
+- Reversible pulpitis
+- Irreversible pulpitis without systemic signs
+- Dry socket (unless infected)
+
+## Pain Management
+
+**Acute Dental Pain:**
+
+*NSAIDs (First-line):*
+- Ibuprofen 400-600mg q6h
+- Naproxen 500mg q12h
+- Mechanism: COX inhibition reduces prostaglandin-mediated inflammation
+- Effective for most dental pain
+
+*Combination Therapy:*
+- Ibuprofen + acetaminophen
+- More effective than either alone
+- Additive effect
+- Avoid exceeding daily maximums
+
+*Opioids:*
+- Generally NOT recommended for acute dental pain
+- Less effective than NSAIDs
+- Side effects, dependence risk
+- Consider only if NSAIDs contraindicated and severe pain
+
+*Local Anesthesia:*
+- Lidocaine 2% with epinephrine 1:100,000
+- Articaine 4% with epinephrine 1:100,000
+- Mepivacaine 3% without vasoconstrictor (cardiac patients)
+
+## Specific Emergency Presentations
+
+**Pericoronitis:**
+- Inflammation around partially erupted tooth
+- Usually third molar (wisdom tooth)
+- Symptoms: Pain, swelling, trismus, dysphagia
+- Management:
+  - Irrigate under operculum
+  - Chlorhexidine rinses
+  - Antibiotics if systemic signs
+  - Definitive: Extraction after resolution
+
+**Post-Extraction Complications:**
+- Dry socket: 2-4 days post-op, severe pain
+- Bleeding: Immediate to days post-op
+- Infection: 1-2 weeks post-op
+- Osteonecrosis (bisphosphonate-related): Rare, severe
+
+**Acute Necrotizing Ulcerative Gingivitis (ANUG):**
+- "Trench mouth"
+- Painful ulcers, necrosis, pseudomembrane
+- Foul odor, metallic taste
+- Risk factors: Stress, smoking, immunocompromise
+- Management: Debridement, chlorhexidine, metronidazole
+
+**Burning Mouth Syndrome:**
+- Chronic burning sensation
+- No visible mucosal changes
+- Diagnosis of exclusion
+- Management: Rule out causes, symptomatic treatment
+
+**Temporomandibular Disorder (TMD) Acute Flare:**
+- Jaw pain, clicking, limited opening
+- Muscle spasm, joint inflammation
+- Management: Soft diet, NSAIDs, physical therapy, splint
+- Rarely true emergency
+
+## Special Considerations
+
+**Pediatric Patients:**
+- Dose: Weight-based
+- Primary teeth: Do NOT reimplant avulsed teeth
+- Manage parents' anxiety
+- Faster recovery than adults
+
+**Geriatric Patients:**
+- Multiple comorbidities
+- Polypharmacy
+- Atypical presentations
+- May minimize symptoms
+
+**Pregnant Patients:**
+- Imaging: Shield abdomen, minimize radiation
+- Medications: Category B preferred
+- Local anesthetics safe
+- Second trimester optimal for treatment
+
+**Immunocompromised:**
+- HIV/AIDS
+- Chemotherapy
+- Diabetes
+- Transplant recipients
+- Lower threshold for antibiotics
+- May need hospitalization`,
+      keyTerms: [
+        { term: 'IADT', definition: 'International Association of Dental Traumatology; trauma guidelines' },
+        { term: 'Ellis classification', definition: 'Classification system for dental fractures' },
+        { term: 'pericoronitis', definition: 'Infection of tissue around partially erupted tooth' },
+        { term: 'trismus', definition: 'Restricted mouth opening due to muscle spasm or infection' },
+        { term: 'ANUG', definition: 'Acute necrotizing ulcerative gingivitis; "trench mouth"' },
+      ],
+      clinicalNotes: 'Ludwig\'s angina is a medical emergency - airway first priority, then IV antibiotics, then surgical drainage. Do not reimplant avulsed primary teeth. NSAIDs more effective than opioids for dental pain. Antibiotics only indicated for infections with systemic signs or spread.',
+      patientCounselingPoints: [
+        'Any difficulty breathing or swallowing from a dental infection requires immediate emergency care',
+        'Reimplant an avulsed adult tooth immediately - every minute counts',
+        'NSAIDs are the most effective medication for dental pain',
+        'Most dental emergencies can be prevented with regular care and mouthguards during sports',
+      ],
+    },
+    4: {
+      level: 4,
+      summary: 'Contemporary emergency dental care integrates updated antibiotic stewardship principles, advanced imaging for diagnosis, and evidence-based protocols for trauma management. Multidisciplinary approaches address complex cases involving systemic spread.',
+      explanation: `## Antibiotic Stewardship
+
+**Current Guidelines:**
+
+*Antibiotics are NOT first-line for:*
+- Irreversible pulpitis (inflammation localized)
+- Symptomatic apical periodontitis (no systemic signs)
+- Localized abscess amenable to drainage
+- Dry socket (unless infected)
+
+*Antibiotics ARE indicated for:*
+- Cellulitis (spreading without purulence)
+- Systemic signs of infection (fever, malaise)
+- Lymphadenopathy
+- Trismus (<20mm opening)
+- Infection in medically compromised patient
+- Inability to achieve adequate drainage
+
+**Recommended Regimens:**
+- Amoxicillin 500mg q8h × 5-7 days (first-line)
+- Clindamycin 300mg q6h (penicillin allergy)
+- Amoxicillin-clavulanate (severe infections)
+- Metronidazole added for anaerobes
+
+**Duration:**
+- 5-7 days typically
+- Extend based on clinical response
+- Reassess at 48-72 hours
+
+## Imaging in Emergencies
+
+**Indications for CBCT:**
+- Complex trauma
+- Root fractures
+- Alveolar fractures
+- Facial fractures
+- Foreign body localization
+- Pre-surgical planning
+
+**Advantages over 2D:**
+- 3D visualization
+- No superimposition
+- Accurate assessment
+- Better treatment planning
+
+**Disadvantages:**
+- Higher radiation dose than PA
+- Cost
+- Not always available
+
+## Life-Threatening Infections
+
+**Deep Neck Infections:**
+
+*Ludwig's Angina:*
+- Bilateral submandibular, submental, sublingual
+- Airway compromise risk
+- Treatment: Airway first (intubation/tracheostomy)
+- IV antibiotics: Ampicillin-sulbactam or clindamycin
+- Surgical drainage
+- ICU monitoring
+
+*Mediastinitis:*
+- Spread from deep neck infections
+- Mortality: 40% if untreated
+- Chest pain, dyspnea, fever
+- Treatment: IV antibiotics, surgical drainage
+- Thoracic surgery consultation
+
+*Cavernous Sinus Thrombosis:*
+- Spread from maxillary infections
+- Headache, fever, eye signs
+- Mortality: 30% with treatment
+- Treatment: IV antibiotics, anticoagulation controversial
+
+**Managing the Compromised Host:**
+- Diabetic patients: More aggressive
+- Immunocompromised: Lower threshold for hospitalization
+- Anticoagulated: Bleeding risk management
+- Prosthetic joints: Antibiotic prophylaxis
+
+## Advanced Trauma Protocols
+
+**Dental Trauma Score:**
+- Standardized assessment
+- Prognosis prediction
+- Treatment planning
+
+**Regenerative Endodontics:**
+- For immature permanent teeth with necrosis
+- Revascularization protocols
+- Better than traditional apexification
+- Potential for continued root development
+
+**Platelet-Rich Fibrin (PRF):**
+- Accelerates healing
+- Used in socket management
+- May prevent dry socket
+- Reduces complications
+
+## Emergency Conversions
+
+**Pain Management Strategies:**
+- Multimodal approach
+- Preemptive analgesia
+- Long-acting local anesthesia
+- Non-pharmacologic (cold, distraction)
+
+**Sedation Options:**
+- Nitrous oxide
+- Oral sedation
+- IV sedation
+- General anesthesia (uncooperative children, extensive trauma)
+
+**Specialized Equipment:**
+- Luxating instruments
+- Periotomes (less trauma)
+- Piezoelectric surgery
+- Surgical microscopes
+
+**Prophylaxis:**
+- Tetanus update for wounds
+- Antibiotic prophylaxis for high-risk cardiac patients
+- Management of anticoagulant therapy
+
+## Professional Communication
+
+**Referral Protocols:**
+- Clear documentation
+- Images, radiographs
+- Timeline of events
+- Emergency contact
+- Follow-up plan
+
+**Interprofessional Collaboration:**
+- Emergency physicians
+ ENT surgeons
+- Plastic surgeons
+- Oral and maxillofacial surgeons
+- Hospital dentistry
+
+## Follow-Up and Prevention
+
+**Post-Emergency Care:**
+- Appropriate interval follow-up
+- Monitoring for complications
+- Definitive treatment planning
+- Patient education
+
+**Prevention Strategies:**
+- Custom mouthguards
+- Counseling on prevention
+- Regular dental care
+- Early intervention`,
+      keyTerms: [
+        { term: 'antibiotic stewardship', definition: 'Efforts to optimize antibiotic use to combat resistance' },
+        { term: 'mediastinitis', definition: 'Infection/inflammation of mediastinum; life-threatening' },
+        { term: 'apexification', definition: 'Root end closure procedure for non-vital immature teeth' },
+      ],
+      clinicalNotes: 'Antibiotic resistance is a growing concern - use judiciously. Ludwig\'s angina requires airway management before antibiotics. CBCT valuable for complex trauma. Multimodal pain management more effective than opioids alone.',
+    },
+    5: {
+      level: 5,
+      summary: 'The future of emergency dental care includes tele-dentistry for triage, AI-assisted diagnosis, biomarkers for infection monitoring, and advanced molecular approaches to enhance healing. Integration with emergency medicine and hospital-based dental services is expanding.',
+      explanation: `## Emerging Approaches
+
+**Tele-dentistry for Triage:**
+- Photo/video assessment
+- Symptom screening
+- Urgency determination
+- Appropriate disposition
+- Reduced ER visits
+
+**AI-Assisted Diagnosis:**
+- Image analysis for trauma
+- Infection detection
+- Prognosis prediction
+- Treatment recommendations
+- Decision support
+
+**Biomarkers:**
+- Salivary markers for infection
+- Inflammatory mediators
+- Host response profiling
+- Personalized antibiotic selection
+
+**Advanced Therapeutics:**
+- Platelet concentrates (PRF, CGF)
+- Stem cell applications
+- Tissue engineering
+- Growth factor delivery
+- Regenerative protocols
+
+**Integration with Healthcare Systems:**
+- Emergency department dentists
+- Hospital dental services
+- Co-management protocols
+- Electronic health record integration
+- Interprofessional education
+
+**Global Health Considerations:**
+- Access to emergency dental care
+- Community health worker training
+- Portable diagnostic tools
+- Telemedicine outreach
+
+**Research Priorities:**
+- Optimal antibiotic protocols
+- Pain management strategies
+- Trauma outcomes improvement
+- Prevention technologies`,
+      keyTerms: [
+        { term: 'tele-dentistry', definition: 'Remote delivery of dental care using technology' },
+        { term: 'PRF', definition: 'Platelet-rich fibrin; healing concentrate from patient blood' },
+      ],
+      clinicalNotes: `Future practice:
+1. Tele-dentistry will expand access to emergency care
+2. AI will assist with triage and diagnosis
+3. Antibiotic stewardship will guide all prescribing
+4. Hospital-based dental services will expand
+5. Molecular approaches will enhance healing`,
+    },
+  },
+
+  media: [
+    {
+      id: 'tooth-avulsion',
+      type: 'diagram',
+      filename: 'tooth-avulsion-management.svg',
+      title: 'Managing an Avulsed Tooth',
+      description: 'Steps for handling a knocked-out tooth',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'iada-guidelines',
+      type: 'website',
+      title: 'International Association of Dental Traumatology Guidelines',
+      
+      source: "Dental Health Resources",
+source: "Dental Health Resources",
+      url: 'https://www.iadt-dentaltrauma.org',
+    },
+    {
+      id: 'ada-emergencies',
+      type: 'article',
+      title: 'Management of Dental Emergencies',
+      authors: ['American Dental Association Council on Scientific Affairs'],
+      source: 'Journal of the American Dental Association',
+      chapter: '2020',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'procedure-tooth-extraction', targetType: 'topic', relationship: 'related', label: 'Tooth Extraction' },
+    { targetId: 'procedure-root-canal-therapy', targetType: 'topic', relationship: 'related', label: 'Root Canal' },
+    { targetId: 'condition-gum-disease', targetType: 'condition', relationship: 'related', label: 'Gum Disease' },
+  ],
+
+  tags: {
+    systems: ['dental'],
+    structures: ['teeth', 'alveolar-bone', 'soft-tissue'],
+    topics: ['emergency', 'trauma', 'infection', 'pain-management'],
+    keywords: ['dental emergency', 'toothache', 'abscess', 'trauma', 'avulsion', 'dry socket'],
+    clinicalRelevance: 'critical',
+    examRelevance: {
+      usmle: false,
+      nbme: false,
+      shelf: [],
+    },
+  },
+
+  createdAt: '2026-01-25T00:00:00.000Z',
+  updatedAt: '2026-01-25T00:00:00.000Z',
+  version: 1,
+  status: 'published',
+};
+
+export default dentalEmergencies;

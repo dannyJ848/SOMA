@@ -1,0 +1,149 @@
+{
+  "id": "condition-major-depressive-disorder",
+  "type": "condition",
+  "category": "mood-disorder",
+  "name": "Major Depressive Disorder",
+  "alternateNames": ["Clinical Depression", "MDD", "Unipolar Depression"],
+  "icd10": "F32-F33",
+  "dsm5": "296.2x-296.3x",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Depression is more than feeling sad - it's a medical condition that affects how you think, feel, and handle daily activities.",
+      "explanation": "Everyone feels sad sometimes, but depression is different. It's a real medical condition where the brain's chemistry becomes unbalanced. People with depression often feel very sad or empty for weeks or months at a time. They may lose interest in things they used to enjoy, feel tired all the time, or have trouble sleeping. The good news is that depression is very treatable - most people who get help feel much better.",
+      "keyTerms": [
+        { "term": "depression", "definition": "A medical condition that causes persistent feelings of sadness and loss of interest" },
+        { "term": "mood", "definition": "Your overall emotional state or feeling" },
+        { "term": "treatment", "definition": "Help from doctors or therapists that can make you feel better" }
+      ],
+      "analogies": ["Depression is like having a heavy weight on your shoulders that makes everything harder - not just sadness, but a real physical burden that affects your whole body and mind."],
+      "examples": ["Someone with depression might stop enjoying their favorite hobbies, sleep much more or less than usual, or find it hard to concentrate at work or school."],
+      "importantNote": "Depression is not a character flaw or weakness. It's a medical condition, just like diabetes or heart disease."
+    },
+    "2": {
+      "level": 2,
+      "summary": "Major depressive disorder involves persistent depressed mood and/or loss of interest, along with other symptoms like changes in sleep, appetite, energy, and concentration, lasting at least two weeks.",
+      "explanation": "MDD is diagnosed when someone experiences at least five symptoms for at least two weeks, with at least one being either depressed mood or loss of interest/pleasure (anhedonia). Other symptoms include significant weight or appetite changes, insomnia or hypersomnia, psychomotor agitation or retardation, fatigue, feelings of worthlessness or excessive guilt, difficulty concentrating, and recurrent thoughts of death. These symptoms must cause significant distress or impairment and cannot be due to substances or another medical condition.",
+      "keyTerms": [
+        { "term": "anhedonia", "definition": "Loss of interest or pleasure in activities that were previously enjoyable", "pronunciation": "an-hee-DOE-nee-ah" },
+        { "term": "psychomotor changes", "definition": "Observable slowing down (retardation) or agitation of movements and thoughts" },
+        { "term": "insomnia", "definition": "Difficulty falling asleep, staying asleep, or waking too early" },
+        { "term": "hypersomnia", "definition": "Excessive sleepiness or sleeping too much" }
+      ],
+      "diagnosticCriteria": "SIG E CAPS mnemonic: Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicidal ideation",
+      "prevalence": "Lifetime prevalence approximately 16-17% in the US; twice as common in women"
+    },
+    "3": {
+      "level": 3,
+      "summary": "MDD involves dysregulation of monoamine neurotransmitters, HPA axis dysfunction, and structural brain changes, with various subtypes and specifiers guiding treatment selection.",
+      "explanation": "The monoamine hypothesis implicates deficiencies in serotonin, norepinephrine, and dopamine. However, the etiology is multifactorial, involving genetic vulnerability (heritability ~40%), neuroinflammation, HPA axis hyperactivity with elevated cortisol, reduced BDNF, and altered neuroplasticity. Structural changes include reduced hippocampal volume and prefrontal cortex gray matter. DSM-5 specifiers include: with anxious distress, mixed features, melancholic features, atypical features, mood-congruent/incongruent psychotic features, catatonia, peripartum onset, and seasonal pattern. Treatment typically begins with SSRIs or SNRIs, combined with psychotherapy (CBT, IPT, or behavioral activation).",
+      "keyTerms": [
+        { "term": "monoamine hypothesis", "definition": "Theory that depression results from deficiency of serotonin, norepinephrine, and/or dopamine in the brain" },
+        { "term": "HPA axis", "definition": "Hypothalamic-pituitary-adrenal axis; the stress response system that is often dysregulated in depression" },
+        { "term": "BDNF", "definition": "Brain-derived neurotrophic factor; supports neuronal growth and is often reduced in depression" },
+        { "term": "melancholic features", "definition": "Subtype with severe anhedonia, worse mood in morning, early awakening, psychomotor changes, weight loss" }
+      ],
+      "clinicalNotes": "Atypical features (mood reactivity, increased appetite, hypersomnia, leaden paralysis, rejection sensitivity) may respond better to MAOIs. Melancholic features may require higher medication doses or ECT."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Advanced understanding of MDD integrates neurocircuitry models, pharmacogenomics, treatment-resistant depression protocols, and evidence-based psychotherapy mechanisms.",
+      "explanation": "Neurocircuitry models implicate the default mode network (DMN - excessive rumination), salience network, and executive control network dysfunction. The limbic-cortical-striatal-pallidal-thalamic circuit shows abnormal connectivity. Pharmacogenomic testing (CYP450 enzymes: 2D6, 2C19, 3A4) can guide medication selection. Treatment-resistant depression (TRD) is defined as failure of 2+ adequate antidepressant trials. TRD approaches include augmentation (lithium, atypical antipsychotics, thyroid hormone), combination (add bupropion or mirtazapine), switching classes, ketamine/esketamine (NMDA antagonism), ECT (gold standard efficacy), TMS (FDA-approved for MDD), and VNS. Psychotherapy mechanisms: CBT targets cognitive distortions and behavioral activation; IPT addresses interpersonal deficits, role transitions, and grief; CBASP combines cognitive and interpersonal approaches for chronic depression.",
+      "keyTerms": [
+        { "term": "treatment-resistant depression", "definition": "MDD that fails to respond to at least two adequate trials of antidepressants from different classes" },
+        { "term": "augmentation", "definition": "Adding a second medication to enhance antidepressant effect" },
+        { "term": "ketamine", "definition": "NMDA receptor antagonist with rapid antidepressant effects; esketamine (Spravato) FDA-approved for TRD" },
+        { "term": "default mode network", "definition": "Brain network active during self-referential thinking; hyperactive in depression, contributing to rumination" }
+      ],
+      "clinicalNotes": "STAR*D trial showed remission rates of ~30% with first SSRI, decreasing with subsequent trials. Combination treatment (medication + psychotherapy) is superior to either alone. ECT remains most effective treatment for severe depression."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Expert-level management of MDD requires integration of precision psychiatry approaches, novel treatment modalities, and understanding of complex comorbidities and special populations.",
+      "explanation": "Precision psychiatry approaches include: blood-based biomarkers (inflammatory markers, metabolomics), neuroimaging biotypes (connectivity patterns predicting treatment response), and machine learning algorithms for treatment selection. Novel treatments: psilocybin (5-HT2A agonist, breakthrough therapy designation), SAGE-217/zuranolone (GABA-A PAM, rapid onset), anti-inflammatory agents (targeting IL-6, TNF-alpha), and deep brain stimulation (investigational for TRD). Special populations: geriatric depression (vascular depression, pseudodementia differentiation, increased sensitivity to anticholinergic effects), adolescent depression (FDA black box warning for suicidality, only fluoxetine approved <18), perinatal depression (risk-benefit of medications, ECT safe in pregnancy), and comorbid medical illness (cardiac effects, drug interactions). Complex comorbidities: MDD + anxiety (SSRIs first-line, may need benzodiazepines short-term), MDD + chronic pain (SNRIs, TCAs), MDD + substance use (address both simultaneously). Maintenance treatment: continue medication 6-12 months after first episode, longer for recurrent depression.",
+      "keyTerms": [
+        { "term": "precision psychiatry", "definition": "Using biomarkers, genetics, and neuroimaging to personalize treatment selection" },
+        { "term": "psilocybin", "definition": "Psychedelic compound under investigation for treatment-resistant depression; promotes neuroplasticity" },
+        { "term": "vascular depression", "definition": "Late-life depression associated with cerebrovascular disease; may respond poorly to antidepressants" },
+        { "term": "zuranolone", "definition": "Neuroactive steroid GABA-A PAM with rapid antidepressant effects; FDA-approved 2023 for PPD and MDD" }
+      ],
+      "clinicalNotes": "Long-term outcomes: 50% recover and remain well, 30% have recurrent episodes, 20% have chronic course. Suicide risk assessment is essential - MDD has 15x increased suicide risk. Protective factors include reasons for living, social support, and access to care."
+    }
+  },
+
+  "riskFactors": [
+    "Family history of depression",
+    "Personal history of depressive episodes",
+    "Childhood trauma or adverse experiences",
+    "Chronic medical illness",
+    "Substance use disorders",
+    "Stressful life events",
+    "Female sex",
+    "Low socioeconomic status"
+  ],
+
+  "warningSignsForSuicide": [
+    "Talking about wanting to die or kill oneself",
+    "Looking for ways to kill oneself",
+    "Talking about feeling hopeless or having no purpose",
+    "Talking about feeling trapped or in unbearable pain",
+    "Talking about being a burden to others",
+    "Increasing use of alcohol or drugs",
+    "Withdrawing or feeling isolated",
+    "Showing rage or talking about seeking revenge",
+    "Displaying extreme mood swings",
+    "Giving away prized possessions"
+  ],
+
+  "crisisResources": {
+    "national": {
+      "suicideLifeline": "988 (Suicide and Crisis Lifeline)",
+      "crisisTextLine": "Text HOME to 741741",
+      "veteransCrisisLine": "988, then press 1"
+    },
+    "message": "If you or someone you know is in crisis, please reach out for help immediately. You are not alone, and help is available."
+  },
+
+  "treatments": {
+    "firstLine": ["SSRIs", "SNRIs", "CBT", "IPT", "Behavioral Activation"],
+    "secondLine": ["Augmentation", "Combination therapy", "Switching antidepressant class"],
+    "forResistantCases": ["ECT", "TMS", "Ketamine/Esketamine", "VNS", "Psychedelic-assisted therapy (investigational)"]
+  },
+
+  "citations": [
+    {
+      "id": "apa-dsm5-tr",
+      "type": "manual",
+      "title": "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision",
+      "authors": ["American Psychiatric Association"],
+      "year": 2022
+    },
+    {
+      "id": "star-d",
+      "type": "study",
+      "title": "Acute and Longer-Term Outcomes in Depressed Outpatients Requiring One or Several Treatment Steps: A STAR*D Report",
+      "journal": "American Journal of Psychiatry",
+      "year": 2006
+    }
+  ],
+
+  "crossReferences": [
+    { "targetId": "condition-persistent-depressive-disorder", "targetType": "condition", "relationship": "related", "label": "Persistent Depressive Disorder" },
+    { "targetId": "condition-bipolar-disorder", "targetType": "condition", "relationship": "differential", "label": "Bipolar Disorder" },
+    { "targetId": "treatment-ssri", "targetType": "treatment", "relationship": "treatment", "label": "SSRIs" },
+    { "targetId": "treatment-cbt", "targetType": "treatment", "relationship": "treatment", "label": "CBT" }
+  ],
+
+  "tags": {
+    "systems": ["nervous", "mental-health"],
+    "topics": ["psychiatry", "psychology", "mood-disorders"],
+    "clinicalRelevance": "high",
+    "commonCondition": true
+  },
+
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

@@ -1,0 +1,787 @@
+import { WomensHealthContent } from '../types';
+
+export const fertilityOverview: WomensHealthContent = {
+  id: 'fertility-overview',
+  title: 'Fertility Overview',
+  category: 'Fertility',
+  complexityLevels: [
+    {
+      level: 1,
+      title: 'Understanding Fertility',
+      content: `Fertility is the ability to become pregnant and have a baby. For most couples, fertility is natural, but some people have difficulty getting pregnant.
+
+**What is Fertility?**
+- Fertility is being able to conceive a child
+| Infertility means not being able to get pregnant after trying for 1 year
+| For women over 35, it's 6 months of trying
+
+**The Menstrual Cycle and Fertility:**
+- Your cycle is when you're most fertile
+| Ovulation is when an egg is released from the ovary |
+| This happens about once a month |
+| You can get pregnant around the time of ovulation
+
+**When Are You Most Fertile?**
+- About 2 weeks before your period starts
+| This is called your "fertile window" |
+| The egg lives for about 12-24 hours |
+| Sperm can live inside the body for up to 5 days |
+
+**Things That Affect Fertility:**
+
+**For Women:**
+- Age (fertility decreases after age 35)
+| Weight (too high or too low) |
+| Smoking and alcohol |
+| Stress
+| Certain medical conditions
+
+**For Men:**
+- Age (though less than women)
+| Smoking and alcohol |
+| Weight
+| Heat exposure to testicles |
+| Certain medical conditions
+
+**When to See a Doctor:**
+| Under 35 and trying for 1 year |
+| 35 or older and trying for 6 months |
+| Known fertility issues |
+| Irregular or no periods |
+
+**Remember:** Many fertility problems are treatable. If you're concerned, talk to a healthcare provider.`,
+      keyPoints: [
+        'Fertility is the ability to conceive and have children',
+        'Ovulation is when an egg is released, about 2 weeks before your period',
+        'Age affects fertility, especially for women over 35',
+        'See a doctor if trying for 1 year (or 6 months if over 35)'
+      ],
+      vocabulary: [
+        { term: 'Fertility', definition: 'Ability to become pregnant and have a baby' },
+        { term: 'Infertility', definition: 'Not being able to get pregnant after trying for 1 year' },
+        { term: 'Ovulation', definition: 'When an ovary releases an egg' },
+        { term: 'Fertile Window', definition: 'Time when pregnancy is most likely to occur' }
+      ],
+      quiz: [
+        {
+          question: 'When is the best time to try to get pregnant?',
+          options: [
+            'During your period',
+            'About 2 weeks before your period starts (ovulation)',
+            'Right after your period ends',
+            'Any time during the month'
+          ],
+          correctAnswer: 1,
+          explanation: 'The fertile window occurs around ovulation, which typically happens about 2 weeks before your period starts. This is when you are most likely to conceive.'
+        },
+        {
+          question: 'How long should you try to get pregnant before seeing a doctor?',
+          options: [
+            '3 months',
+            '6 months if under 35, 3 months if over 35',
+            '1 year if under 35, 6 months if 35 or older',
+            '2 years'
+          ],
+          correctAnswer: 2,
+          explanation: 'General guidelines recommend seeing a fertility specialist after trying for 1 year if under 35, or after 6 months if 35 or older.'
+        }
+      ]
+    },
+    {
+      level: 2,
+      title: 'Understanding Fertility and the Menstrual Cycle',
+      content: `Understanding fertility requires knowledge of the menstrual cycle, ovulation, and factors that affect reproductive capacity.
+
+**The Menstrual Cycle and Fertility:**
+
+**Cycle Phases:**
+
+| Phase | Days | Fertility Status |
+|-------|------|------------------|
+| Menstruation | 1-5 | Low fertility |
+| Follicular | 6-13 | Increasing fertility |
+| Ovulation | 14 | Peak fertility |
+| Luteal | 15-28 | Low fertility |
+
+**Ovulation:**
+- Egg release from ovary
+| Usually day 14 of a 28-day cycle |
+| Egg survives 12-24 hours |
+| Sperm survives up to 5 days |
+| Fertile window: 5 days before ovulation to 1 day after |
+
+**Tracking Ovulation:**
+
+**Calendar Method:**
+- Track cycle length for several months
+| Ovulation ≈ 14 days before next period |
+| Less reliable for irregular cycles |
+
+**Basal Body Temperature:**
+- Temperature rises slightly after ovulation
+| Take temperature every morning before getting out of bed |
+| Best for confirming ovulation after it happens
+
+**Ovulation Predictor Kits:**
+| Detect LH surge in urine |
+| Predict ovulation 12-36 hours before |
+| Most accurate over-the-counter method
+
+**Cervical Mucus Changes:**
+- Clear, stretchy mucus = fertile
+| Thick, cloudy mucus = less fertile |
+
+**Fertility Awareness:**
+- Combines multiple tracking methods
+| Can be used to achieve or avoid pregnancy |
+| Requires training and practice
+
+**Factors Affecting Fertility:**
+
+**Age-Related Decline:**
+
+| Age (Women) | Monthly Fertility Rate |
+|-------------|----------------------|
+| 20 | 20-25% |
+| 30 | 15-20% |
+| 35 | 10-15% |
+| 40 | <5% |
+
+**Lifestyle Factors:**
+
+**Negative Impacts:**
+- Smoking (reduces egg quality)
+| Excessive alcohol |
+| Caffeine (>200 mg/day) |
+| Being very over- or underweight
+| Extreme exercise
+| Chronic stress
+
+**Positive Impacts:**
+- Balanced diet
+| Regular moderate exercise |
+| Healthy weight |
+| Managing stress
+| Adequate sleep
+
+**Medical Conditions Affecting Fertility:**
+
+**Women:**
+- PCOS (irregular ovulation)
+| Endometriosis |
+| Uterine fibroids |
+| Thyroid disorders |
+| Pelvic inflammatory disease
+| Primary ovarian insufficiency
+
+**Men:**
+- Varicocele
+| Low sperm count or motility
+| Erectile dysfunction
+| Hormonal imbalances |
+
+**When to Seek Help:**
+
+**Recommended Timeline:**
+- Women under 35: After 12 months
+| Women 35-39: After 6 months |
+| Women 40+: Immediate evaluation
+| Known risk factors: Anytime
+
+**Initial Evaluation:**
+- Medical history
+| Physical examination
+| Blood tests (hormone levels) |
+| Semen analysis (male partner) |
+| Ultrasound (female partner) |`,
+      keyPoints: [
+        'The fertile window is approximately 5 days before ovulation to 1 day after',
+        'Fertility declines significantly with age, especially after 35',
+        'Multiple methods exist for tracking ovulation',
+        'Both partners should be evaluated for fertility issues'
+      ],
+      vocabulary: [
+        { term: 'LH Surge', definition: 'Sudden rise in luteinizing hormone that triggers ovulation' },
+        { term: 'Basal Body Temperature', definition: 'Resting body temperature, rises after ovulation' },
+        { term: 'PCOS', definition: 'Polycystic Ovary Syndrome - causes irregular ovulation' },
+        { term: 'Semen Analysis', definition: 'Test to evaluate sperm count and quality' }
+      ],
+      quiz: [
+        {
+          question: 'What is the fertile window in relation to ovulation?',
+          options: [
+            'Only the day of ovulation',
+            'The day of ovulation plus one day after',
+            '5 days before ovulation to 1 day after',
+            'The entire month'
+          ],
+          correctAnswer: 2,
+          explanation: 'The fertile window extends from about 5 days before ovulation to 1 day after, because sperm can survive up to 5 days in the female reproductive tract and the egg survives for 12-24 hours.'
+        },
+        {
+          question: 'How does age affect female fertility?',
+          options: [
+            'Fertility remains constant until age 40',
+            'Fertility gradually declines, with more significant decline after 35',
+            'Fertility only declines after 45',
+            'Age has no effect on fertility'
+          ],
+          correctAnswer: 1,
+          explanation: 'Female fertility gradually declines with age, with a more significant decrease after age 35. By age 40, the monthly fertility rate is less than 5%.'
+        }
+      ]
+    },
+    {
+      level: 3,
+      title: 'Fertility Assessment and Diagnosis',
+      content: `Comprehensive fertility evaluation assesses both partners systematically to identify causes of infertility.
+
+**Definitions:**
+
+**Infertility:**
+- Inability to conceive after 12 months of unprotected intercourse
+| 6 months if female partner ≥35 years |
+| Or inability to carry a pregnancy to live birth
+
+**Primary Infertility:**
+| Never achieved a pregnancy
+
+**Secondary Infertility:**
+| Previous pregnancy but unable to conceive again
+
+**Initial Evaluation:**
+
+**Both Partners:**
+- Comprehensive medical history
+| Physical examination |
+| Lifestyle assessment |
+| Frequency and timing of intercourse
+
+**Female Evaluation:**
+
+**History:**
+| Menstrual history (regularity, symptoms) |
+| Obstetric history |
+| Surgical history |
+| Pelvic infection history |
+| Medications and exposures |
+| Family history
+
+**Laboratory Assessment:**
+
+**Day 3 Labs:**
+| FSH: Ovarian reserve (normal <10-12 mIU/mL) |
+| LH: LH/FSH ratio (elevated in PCOS) |
+| Estradiol: Ovarian function |
+| AMH: Ovarian reserve (normal 1-4 ng/mL) |
+| TSH: Thyroid function |
+| Prolactin: Exclude hyperprolactinemia
+
+**Ovulation Assessment:**
+| BBT charts |
+| Ovulation predictor kits |
+| Mid-luteal progesterone (>3 ng/mL confirms ovulation) |
+| Serial ultrasounds
+
+**Tubal and Uterine Evaluation:**
+
+**Hysterosalpingography (HSG):**
+| X-ray with contrast dye |
+| Evaluates:
+  - Tubal patency
+  - Uterine cavity shape |
+  - Proximal/distal tubal blockage |
+
+**Sonohysterogram:**
+| Saline infusion ultrasound |
+| Evaluates uterine cavity for:
+  - Polyps
+  - Fibroids
+  - Scar tissue |
+
+**Diagnostic Laparoscopy:**
+| Direct visualization |
+| Treat endometriosis, adhesions |
+| Gold standard for tubal evaluation (rarely used now)
+
+**Male Evaluation:**
+
+**Semen Analysis:**
+
+| Parameter | WHO Reference Values |
+|-----------|---------------------|
+| Volume | ≥1.5 mL |
+| Concentration | ≥15 million/mL |
+| Total motility | ≥40% |
+| Progressive motility | ≥32% |
+| Morphology | ≥4% normal forms |
+| Vitality | ≥58% live |
+| WBC | <1 million/mL |
+
+**If Abnormal:**
+| Repeat in 2-3 months |
+| Endocrine evaluation (FSH, LH, testosterone) |
+| Scrotal ultrasound (varicocele) |
+
+**Causes of Infertility:**
+
+**Female Causes (40%):**
+- Ovulatory dysfunction (25%)
+| Tubal factors (15%)
+| Endometriosis (10%)
+| Uterine/cervical factors (10%)
+| Unexplained (10%)
+
+**Male Causes (40%):**
+| Oligospermia (low sperm count) |
+| Asthenospermia (poor motility) |
+| Teratospermia (abnormal morphology) |
+| Azoospermia (no sperm) |
+
+**Combined Factors (20%):**
+
+**Unexplained Infertility (10-15%):**
+| Normal evaluation for both partners |
+| May involve subtle molecular/cellular defects |
+
+**Ovarian Reserve Testing:**
+
+**AMH (Anti-Müllerian Hormone):**
+| Produced by ovarian follicles |
+| Stable throughout cycle |
+| Low AMH: diminished reserve |
+
+**AFC (Antral Follicle Count):**
+| Ultrasound count of early follicles |
+| Day 3-5 of cycle |
+| Low count: diminished reserve
+
+**Clomid Challenge Test:**
+| FSH on day 3 and day 10 |
+| After clomiphene 100 mg days 5-9 |
+| Elevated day 10 FSH: diminished reserve |`,
+      keyPoints: [
+        'Infertility evaluation should assess both partners simultaneously',
+        'Semen analysis is the cornerstone of male fertility evaluation',
+        'AMH and AFC assess ovarian reserve',
+        'HSG evaluates tubal patency and uterine cavity'
+      ],
+      vocabulary: [
+        { term: 'AMH', definition: 'Anti-Müllerian Hormone - marker of ovarian reserve' },
+        { term: 'AFC', definition: 'Antral Follicle Count - ultrasound assessment of ovarian reserve' },
+        { term: 'HSG', definition: 'Hysterosalpingography - X-ray test of fallopian tubes and uterus' },
+        { term: 'Azoospermia', definition: 'Absence of sperm in semen' }
+      ],
+      quiz: [
+        {
+          question: 'What is the WHO reference value for sperm concentration?',
+          options: [
+            '≥5 million/mL',
+            '≥10 million/mL',
+            '≥15 million/mL',
+            '≥20 million/mL'
+          ],
+          correctAnswer: 2,
+          explanation: 'The WHO reference value for sperm concentration is ≥15 million/mL. Values below this indicate oligospermia (low sperm count).'
+        },
+        {
+          question: 'What does an elevated FSH level on day 3 indicate?',
+          options: [
+            'Normal ovarian reserve',
+            'Diminished ovarian reserve',
+            'Polycystic ovary syndrome',
+            'Hyperprolactinemia'
+          ],
+          correctAnswer: 1,
+          explanation: 'Elevated FSH on day 3 (especially >10-12 mIU/mL) indicates diminished ovarian reserve, meaning the ovary is not responding normally to stimulation.'
+        }
+      ]
+    },
+    {
+      level: 4,
+      title: 'Management of Infertility',
+      content: `Treatment of infertility is tailored to the underlying cause, duration of infertility, patient age, and treatment preferences.
+
+**Treatment Principles:**
+
+**General Approach:**
+1. Correct identifiable causes
+2. Improve natural fertility
+3. Assisted reproduction if needed
+| Consider age and time constraints
+
+**Lifestyle Modifications:**
+
+**Weight Management:**
+- Underweight: Gain to normal BMI
+| Overweight/obese: 5-10% weight loss can improve ovulation
+
+**Other Changes:**
+| Smoking cessation |
+| Limit alcohol |
+| Reduce caffeine |
+| Exercise moderation |
+| Stress reduction |
+
+**Ovulation Induction:**
+
+**Clomiphene Citrate:**
+
+**Mechanism:**
+| Estrogen receptor modulator |
+| Increases GnRH, FSH, LH |
+| Stimulates follicular development |
+
+**Indications:**
+| PCOS |
+| Unexplained infertility |
+| Hypothal-pituitary dysfunction
+
+**Protocol:**
+| Days 5-9 of cycle (or 3-7) |
+| Start 50 mg, increase to 100-150 mg |
+| Monitor with ultrasound (if multiple follicles)
+
+**Risks:**
+| Multiple pregnancy (5-10%) |
+| Ovarian hyperstimulation (rare) |
+| Hot flashes, mood changes |
+
+**Letrozole:**
+
+**Mechanism:**
+| Aromatase inhibitor |
+| Reduces estrogen conversion |
+| Increases FSH secretion
+
+**Advantages:**
+| Lower multiple pregnancy rate than clomiphene |
+| Better for PCOS
+| Fewer side effects
+
+**Gonadotropins:**
+
+**Medications:**
+| FSH alone (Follistim, Gonal-F) |
+| FSH + LH (Menopur) |
+| hCG trigger (Ovidrel)
+
+**Protocol:**
+| Injectable |
+| Strict monitoring required |
+| Can cause multiple ovulation
+| Higher multiple pregnancy risk (20-30%)
+
+**Surgical Treatments:**
+
+**Myomectomy:**
+| Remove fibroids |
+| Improves fertility if cavity distorted |
+
+**Ovarian Drilling:|
+| Laparoscopic treatment for PCOS |
+| Reduces androgen production |
+| Consider after failed ovulation induction
+
+**Tubal Surgery:|
+| Adhesiolysis |
+| Salpingostomy (for hydrosalpinx) |
+| Tubal reanastomosis (after sterilization)
+
+**Intrauterine Insemination (IUI):**
+
+**Indications:**
+| Mild male factor |
+| Cervical factor |
+| Unexplained infertility
+| Donor sperm
+
+**Procedure:**
+| Ovulation induction or natural cycle |
+| Wash and concentrate sperm |
+| Inseminate into uterine cavity
+| Timing: 24-36 hours after LH surge or hCG trigger
+
+**Success Rates:|
+| 8-15% per cycle
+| 60-80% after 3-6 cycles
+
+**Assisted Reproductive Technology (ART):**
+
+**In Vitro Fertilization (IVF):|
+
+**Indications:|
+| Tubal factor |
+| Severe male factor
+| Endometriosis
+| Failed IUI
+| Genetic conditions (PGD)
+
+**Process:|
+| 1. Ovarian stimulation (gonadotropins) |
+| 2. Egg retrieval (transvaginal aspiration) |
+| 3. Fertilization (laboratory) |
+| 4. Embryo culture (3-6 days) |
+| 5. Embryo transfer |
+| 6. Progesterone support
+
+**Success Rates:|
+| Live birth rate: 40-50% per transfer (younger women) |
+| Declines with age
+
+**Risks:|
+| Multiple pregnancy (if multiple embryos transferred) |
+| OHSS (ovarian hyperstimulation syndrome) |
+| Ectopic pregnancy (2-5%) |
+| Multiple birth complications |`,
+      keyPoints: [
+        'Lifestyle modifications are first-line for all infertility',
+        'Clomiphene is first-line for ovulation induction',
+        'Letrozole has lower multiple pregnancy risk than clomiphene',
+        'IVF success rates significantly decline with maternal age'
+      ],
+      vocabulary: [
+        { term: 'IUI', definition: 'Intrauterine Insemination - sperm placed directly in uterus' },
+        { term: 'ART', definition: 'Assisted Reproductive Technology - includes IVF and related procedures' },
+        { term: 'OHSS', definition: 'Ovarian Hyperstimulation Syndrome - over-response to fertility drugs' },
+        { term: 'PGD', definition: 'Preimplantation Genetic Diagnosis - testing embryos for genetic conditions' }
+      ],
+      quiz: [
+        {
+          question: 'What is the advantage of letrozole over clomiphene for ovulation induction?',
+          options: [
+            'Higher pregnancy rate',
+            'Lower multiple pregnancy rate',
+            'Fewer side effects',
+            'Both B and C'
+          ],
+          correctAnswer: 3,
+          explanation: 'Letrozole has several advantages over clomiphene: lower multiple pregnancy rate, better success in PCOS patients, and fewer side effects like hot flashes.'
+        },
+        {
+          question: 'What is the success rate for IVF per transfer in younger women?',
+          options: [
+            '10-20%',
+            '20-30%',
+            '40-50%',
+            '60-70%'
+          ],
+          correctAnswer: 2,
+          explanation: 'For younger women (<35), IVF has a live birth rate of approximately 40-50% per embryo transfer. Success rates decline significantly with age.'
+        }
+      ]
+    },
+    {
+      level: 5,
+      title: 'Advanced Infertility Management',
+      content: `Complex infertility cases require sophisticated management strategies including third-party reproduction and emerging technologies.
+
+**In Vitro Fertilization Advanced Techniques:**
+
+**Intracytoplasmic Sperm Injection (ICSI):**
+
+**Indications:**
+- Severe male factor
+| Previous fertilization failure |
+| Azoospermia (surgical retrieval) |
+
+**Technique:**
+| Single sperm injected into each egg |
+| Bypasses natural barriers |
+
+**Outcomes:**
+| Fertilization rates: 70-80% |
+| Similar pregnancy rates to standard IVF |
+
+**Assisted Hatching:**
+| Opening in zona pellucida before transfer |
+| Theorized to improve implantation |
+| Evidence for selected cases only |
+
+**Preimplantation Genetic Testing:**
+
+**PGT-A (Aneuploidy):**
+| Screens for chromosomal number abnormalities |
+| Mosaicism detection |
+| Improves implantation rates in selected populations
+| Reduces miscarriage rates
+
+**PGT-M (Monogenic):**
+| Testing for specific genetic mutations |
+| Single gene disorders (cystic fibrosis, SMA) |
+| Requires probe development
+
+**PGT-SR (Structural Rearrangements):**
+| Translocations, inversions |
+| Reduces miscarriage risk
+
+**Considerations:|
+| Requires IVF
+| Expensive |
+| Not 100% sensitive or specific |
+| Ethical considerations
+
+**Ovarian Tissue Cryopreservation:**
+
+**Indications:**
+- Cancer patients requiring gonadotoxic therapy |
+| Gender affirming care |
+| Primary ovarian insufficiency prevention |
+
+**Process:|
+| Ovarian tissue harvest |
+| Cryopreservation |
+| Later transplantation or in vitro maturation
+
+**Outcomes:|
+| >100 live births worldwide |
+| Restoration of ovarian function |
+| Still considered experimental
+
+**Third-Party Reproduction:**
+
+**Egg Donation:**
+
+**Indications:**
+| Diminished ovarian reserve |
+| Primary ovarian insufficiency |
+| Genetic conditions (recipient) |
+| Repeated IVF failure
+
+**Screening:**
+| Age <30 preferred |
+| Medical and psychological screening |
+| Genetic screening |
+| Legal contracts
+
+**Process:**
+| Donor ovarian stimulation |
+| Recipient cycle synchronization |
+| Embryos transferred to recipient |
+
+**Success Rates:|
+| 50-60% live birth per transfer
+| Dependent on recipient age (not donor)
+
+**Sperm Donation:**
+
+**Indications:**
+| Azoospermia |
+| Severe male factor |
+| Genetic conditions |
+| Single women/same-sex couples |
+
+**Types:**
+| Known donor |
+| Anonymous donor (sperm bank)
+| Directed donation
+
+**Gestational Surrogacy:**
+
+**Indications:**
+| Absent uterus |
+| Uterine abnormalities |
+| Medical contraindications to pregnancy |
+| Recurrent pregnancy loss |
+
+**Process:|
+| IVF with intended parents' gametes
+| Embryo transfer to gestational carrier
+
+**Legal/Ethical:**
+| Complex regulations vary by jurisdiction |
+| Contractual agreements essential
+| Pre-birth orders
+
+**Fertility Preservation:**
+
+**Indications:**
+- Medical (cancer treatment)
+| Social (age-related decline) |
+| Gender affirming
+
+**Options:**
+| Egg freezing (oocyte cryopreservation) |
+| Embryo freezing |
+| Ovarian tissue cryopreservation |
+| Ovarian transposition (surgery)
+
+**Egg Freezing:**
+
+**Outcomes:|
+| Survival: 85-95% after thaw |
+| Live birth per thawed oocyte: 2-12% |
+| Age-related decline in success
+
+**Recommendations:**
+| Elective: <35 years optimal |
+| Medical: anytime before gonadotoxic therapy |
+
+**Emerging Technologies:**
+
+**In Vitro Gametogenesis:**
+| Gametes from stem cells |
+| Experimental
+| Ethical concerns
+
+**Artificial Gametes:**
+| Creating sperm/eggs from other cells |
+| Theoretical only |
+
+**Uterus Transplantation:**
+| For women without uterus |
+| Experimental |
+| Several live births reported |
+| Complex procedure |
+| Temporary (must be removed after pregnancy) |`,
+      keyPoints: [
+        'ICSI is indicated for severe male factor infertility',
+        'PGT can screen for aneuploidy and specific genetic conditions',
+        'Egg donation success depends on recipient age, not donor age',
+        'Fertility preservation options exist for medical and social reasons'
+      ],
+      vocabulary: [
+        { term: 'ICSI', definition: 'Intracytoplasmic Sperm Injection - direct sperm injection into egg' },
+        { term: 'PGT-A', definition: 'Preimplantation Genetic Testing for Aneuploidy' },
+        { term: 'Cryopreservation', definition: 'Freezing and storing cells/tissues for later use' },
+        { term: 'Gestational Carrier', definition: 'Woman who carries pregnancy for intended parents' }
+      ],
+      quiz: [
+        {
+          question: 'What is the primary indication for ICSI?',
+          options: [
+          'Diminished ovarian reserve',
+          'Severe male factor infertility',
+          'Advanced maternal age',
+          'Tubal factor infertility'
+          ],
+          correctAnswer: 1,
+          explanation: 'ICSI was developed to treat severe male factor infertility, including low sperm count, poor motility, or abnormal morphology. It allows fertilization even with very few or poor quality sperm.'
+        },
+        {
+          question: 'What determines success rates in egg donation cycles?',
+          options: [
+          'Donor age',
+          'Recipient age',
+          'Number of eggs retrieved',
+          'Sperm quality'
+          ],
+          correctAnswer: 1,
+          explanation: 'In egg donation cycles, success rates depend primarily on recipient age rather than donor age, because the uterine environment and recipient health are more critical than egg quality for implantation.'
+          }
+      ]
+    }
+  ],
+  relatedTopics: [
+    'menstrual-cycle',
+    'infertility',
+    'fertility-treatments',
+    'pcos'
+  ],
+  lastUpdated: '2025-01-25',
+  references: [
+    'ASRM Guidelines',
+    'NICE Fertility Guidelines',
+    'UpToDate on Infertility'
+  ]
+};

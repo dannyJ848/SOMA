@@ -1,0 +1,96 @@
+{
+  "id": "concept-contraception-options",
+  "type": "concept",
+  "name": "Contraception Options",
+  "alternateNames": ["Birth control", "Family planning methods", "Pregnancy prevention"],
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Contraception means ways to prevent pregnancy. There are many safe choices, from daily pills to devices that last for years.",
+      "explanation": "Birth control helps you decide when (or if) you want to have children. Some methods are taken every day (like birth control pills), while others work for months or years without you having to think about them (like IUDs or implants). Condoms are the only method that also protects against infections spread through sex. No method is 100% perfect, but many are over 99% effective when used correctly. The best birth control is one you'll actually use correctly and consistently. Your doctor can help you find the right option based on your health, lifestyle, and plans.",
+      "keyTerms": [
+        { "term": "contraception", "definition": "Methods used to prevent pregnancy" },
+        { "term": "IUD", "definition": "A small T-shaped device placed in your uterus by a doctor that prevents pregnancy for years" },
+        { "term": "condom", "definition": "A thin covering worn during sex that blocks sperm and helps prevent infections" }
+      ],
+      "analogies": ["Birth control options are like car safety features - some you use every trip (seatbelt/daily pill), while others are always working in the background (airbags/IUD)."],
+      "examples": ["A college student might choose pills because she can stop them easily when ready for pregnancy. A mom who's done having kids might choose an IUD for long-term, worry-free protection."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Contraception methods include hormonal options (pills, patches, rings, injections, implants), intrauterine devices (IUDs), barrier methods (condoms), and permanent sterilization, each with different effectiveness, side effects, and duration.",
+      "explanation": "Contraceptive methods are categorized by how they work. Hormonal methods contain estrogen and/or progestin to prevent ovulation and thicken cervical mucus. These include combined pills (daily), patches (weekly), rings (monthly), injections (every 3 months), and implants (3-5 years). IUDs are placed in the uterus - hormonal types (Mirena, Kyleena) last 3-8 years, while copper IUDs (Paragard) last 10+ years and use no hormones. Barrier methods (male/female condoms, diaphragms) physically block sperm. Long-acting reversible contraceptives (LARCs) - IUDs and implants - are most effective (>99%) because they don't require daily action. Permanent options include tubal ligation for women and vasectomy for men.",
+      "keyTerms": [
+        { "term": "LARC", "definition": "Long-acting reversible contraception; includes IUDs and implants, most effective methods" },
+        { "term": "combined hormonal contraceptive", "definition": "Methods containing both estrogen and progestin, like most birth control pills" },
+        { "term": "progestin-only", "definition": "Hormonal methods with only progestin, safe for people who can't use estrogen" },
+        { "term": "ovulation", "definition": "Release of an egg from the ovary; prevented by hormonal contraception" }
+      ],
+      "analogies": ["LARCs are like automatic bill pay - set it up once and it works reliably for years without daily attention."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Contraceptive counseling requires understanding mechanism of action, typical vs perfect use effectiveness, contraindications (especially for estrogen-containing methods), non-contraceptive benefits, and shared decision-making based on patient priorities.",
+      "explanation": "Effectiveness varies by method: typical use failure rates range from <1% (implant, IUDs, sterilization) to 9% (pills, patches, rings) to 18% (male condoms) to 23% (withdrawal). Perfect use rates are higher. Combined hormonal contraceptives (CHCs) are contraindicated in patients with migraine with aura, smokers >35 years, history of VTE/stroke/CAD, and uncontrolled hypertension (MEC Category 4). The progestin-only pill, implant, and hormonal IUDs have fewer contraindications. Copper IUD provides hormone-free, highly effective contraception. Non-contraceptive benefits include menstrual regulation, decreased dysmenorrhea and HMB (especially LNG-IUD), acne improvement (CHCs), and decreased ovarian/endometrial cancer risk. Emergency contraception options include Plan B (levonorgestrel, most effective within 72 hours), ella (ulipristal acetate, effective up to 5 days), and copper IUD (most effective, up to 5 days).",
+      "keyTerms": [
+        { "term": "MEC", "definition": "Medical Eligibility Criteria (CDC/WHO) - guidelines for safe contraceptive use with medical conditions" },
+        { "term": "typical use", "definition": "Effectiveness rate accounting for human error and inconsistent use" },
+        { "term": "perfect use", "definition": "Effectiveness rate when method is used exactly as directed every time" },
+        { "term": "VTE", "definition": "Venous thromboembolism (blood clots); risk increased with estrogen-containing methods" }
+      ],
+      "clinicalNotes": "Quick start: can initiate any contraceptive method at any time in cycle if reasonably certain not pregnant. Back-up contraception needed for 7 days (CHC, POP) or 2 days (DMPA). Same-day IUD/implant insertion increases uptake."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Evidence-based contraceptive counseling integrates the CDC Medical Eligibility Criteria, LARC-first approaches (while respecting patient autonomy), recognition of contraceptive coercion risks, and management of side effects to optimize continuation rates.",
+      "explanation": "Tier 1 methods (LARC) have <1% failure rate; Tier 2 (injectables, pills, patches, rings) 6-12% typical use failure; Tier 3 (condoms, withdrawal) 18-23%. ACOG recommends offering LARC to all women, including adolescents and nulliparous women, but shared decision-making must respect patient preferences without coercion. CHC risks: VTE risk increases 3-4x (but absolute risk remains low, 3-9/10,000 women-years); risk factors include obesity, thrombophilia, immobility. Progestin-only methods: DMPA associated with bone density loss (reversible), irregular bleeding common with implant and POP. Hormonal IUD benefits: reduces menstrual bleeding 90%+, treats HMB, endometrial protection. Copper IUD: may increase bleeding/cramping, suitable for patients wanting non-hormonal LARC. Side effect management: breakthrough bleeding often resolves by 3 months, short courses of NSAIDs or supplemental estrogen can help.",
+      "keyTerms": [
+        { "term": "DMPA", "definition": "Depot medroxyprogesterone acetate (Depo-Provera); injectable contraceptive given every 12 weeks" },
+        { "term": "thrombophilia", "definition": "Inherited or acquired tendency to form blood clots; contraindicates estrogen use" },
+        { "term": "contraceptive coercion", "definition": "Pressuring someone toward/away from specific methods, violating reproductive autonomy" },
+        { "term": "nulliparous", "definition": "Never having given birth; IUDs are safe in nulliparous women despite historical misconceptions" }
+      ],
+      "clinicalNotes": "Estrogen-containing methods can start in postpartum patients: CHC at 3 weeks if not breastfeeding, 4-6 weeks if breastfeeding (MEC 4 before 6 weeks due to VTE risk). Immediate postpartum LARC placement is safe and effective."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced contraceptive care addresses complex medical conditions using MEC guidance, optimizes LARC utilization while preventing coercion, manages difficult side effects, counsels on fertility return, and integrates reproductive life planning into primary care.",
+      "explanation": "MEC Category 3/4 conditions require careful method selection: Category 4 (unacceptable risk) for CHC includes migraine with aura, BP >160/100, multiple VTE risk factors, <3 weeks postpartum. Category 3 (risks outweigh benefits) includes controlled hypertension, adequately treated depression, breast cancer in remission >5 years. Progestin-only methods generally have fewer Category 3/4 conditions. For extended/continuous CHC use, no hormone-free interval needed for contraceptive efficacy; scheduled breaks can manage breakthrough bleeding. Fertility return: immediate after stopping CHC, IUD removal, implant removal; DMPA averages 10 months delay. Special populations: adolescents (confidentiality, LARC education), perimenopause (continue contraception until 12 months amenorrhea if >50 or 24 months if <50), transgender men (may need contraception if uterus present). Reproductive life planning: assess pregnancy intentions at every visit using One Key Question approach.",
+      "keyTerms": [
+        { "term": "One Key Question", "definition": "Screening tool asking 'Would you like to become pregnant in the next year?' to guide contraceptive counseling" },
+        { "term": "extended cycling", "definition": "Taking active hormonal pills continuously for 12+ weeks to reduce withdrawal bleeding frequency" },
+        { "term": "MEC Category 4", "definition": "Condition where method poses unacceptable health risk; method should not be used" },
+        { "term": "reproductive autonomy", "definition": "Patient's right to make their own contraceptive decisions free from coercion" }
+      ],
+      "clinicalNotes": "LARC misconceptions to address: IUDs do not increase PID risk (beyond first 20 days), do not cause infertility, and can be safely placed in nulliparous patients. Immediate post-abortion IUD placement is safe and effective. Document contraceptive counseling and patient's informed decision."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "cdc-mec-2016",
+      "type": "website",
+      "title": "U.S. Medical Eligibility Criteria for Contraceptive Use",
+      "source": "Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/reproductivehealth/contraception/mmwr/mec/summary.html",
+      "license": "Public domain"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "concept-menstrual-cycle-explained", "targetType": "concept", "relationship": "related", "label": "Menstrual Cycle" },
+    { "targetId": "concept-fertility-basics", "targetType": "concept", "relationship": "related", "label": "Fertility Basics" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "topics": ["therapeutics", "patient-education", "womens-health"],
+    "keywords": ["birth control", "contraception", "IUD", "pills", "implant", "LARC", "family planning"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["obgyn"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

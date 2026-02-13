@@ -1,0 +1,105 @@
+{
+  "id": "structure-scrotum",
+  "type": "structure",
+  "name": "Scrotum",
+  "alternateNames": ["Scrotal sac"],
+  "fmaId": "FMA:18252",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The scrotum is the pouch of skin that holds and protects the testicles outside the body.",
+      "explanation": "The scrotum is a bag of skin located between the legs that contains the testicles. It hangs outside the body for an important reason: sperm need to develop at a temperature slightly lower than body temperature. The scrotum has a special muscle that can pull the testicles closer to the body when it's cold (to warm them up) or let them hang lower when it's hot (to cool them down). This is like having a built-in thermostat for sperm production.",
+      "keyTerms": [
+        { "term": "testicles", "definition": "The male organs that make sperm and hormones" },
+        { "term": "temperature regulation", "definition": "Keeping something at the right temperature" },
+        { "term": "pouch", "definition": "A bag-like container" }
+      ],
+      "analogies": ["The scrotum works like a smart thermostat - it adjusts to keep the testicles at just the right temperature for making sperm."],
+      "examples": ["On a cold day, you might notice the scrotum pulls up closer to the body. On a hot day, it hangs lower. This is the body's way of controlling temperature."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The scrotum is a cutaneous sac containing the testes and epididymides, with thermoregulatory mechanisms including the dartos and cremaster muscles that maintain optimal temperature for spermatogenesis.",
+      "explanation": "The scrotum consists of skin with rugae (wrinkles), underlying dartos muscle (smooth muscle in superficial fascia), and the external spermatic fascia, cremasteric fascia with cremaster muscle, and internal spermatic fascia (layers from the abdominal wall). The dartos muscle contracts in cold, wrinkling the scrotal skin to reduce surface area. The cremaster muscle (striated) elevates the testis toward the body. Together, these maintain testicular temperature at 2-3°C below core body temperature (approximately 34-35°C), which is essential for spermatogenesis. The median raphe divides the scrotum externally, and the scrotal septum divides it internally into two compartments. Blood supply is from external pudendal arteries (from femoral) and scrotal branches of internal pudendal arteries.",
+      "keyTerms": [
+        { "term": "dartos muscle", "definition": "Smooth muscle layer in scrotum that wrinkles the skin in response to cold", "pronunciation": "DAR-tohs" },
+        { "term": "cremaster muscle", "definition": "Striated muscle that elevates the testis, controlled by the cremaster reflex", "pronunciation": "kree-MAS-ter" },
+        { "term": "scrotal septum", "definition": "Internal partition dividing the scrotum into left and right compartments" },
+        { "term": "rugae", "definition": "Wrinkles or folds in the scrotal skin" },
+        { "term": "median raphe", "definition": "Visible line on external scrotum marking the fusion of left and right halves" }
+      ],
+      "analogies": ["The dartos and cremaster work like a pulley system - one wrinkles the bag, the other pulls the contents up or down."],
+      "examples": ["The cremasteric reflex is tested by stroking the inner thigh, which causes the testis on that side to rise. This tests the L1-L2 nerve segments."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The scrotum demonstrates specialized thermoregulatory anatomy with the pampiniform plexus functioning as a countercurrent heat exchanger, complementing dartos and cremaster muscle activity to optimize the testicular microenvironment.",
+      "explanation": "The scrotal wall layers (outside to inside): skin, dartos fascia/muscle, external spermatic fascia (from external oblique aponeurosis), cremasteric fascia and muscle (from internal oblique), internal spermatic fascia (from transversalis fascia), and tunica vaginalis (from processus vaginalis). Thermoregulation involves: 1) Surface area adjustment via dartos contraction; 2) Position adjustment via cremaster; 3) Countercurrent heat exchange in pampiniform plexus (venous blood cools arterial blood before it reaches testis); 4) Sweat glands for evaporative cooling. The scrotum develops from labioscrotal swellings, homologous to labia majora in females. Lymphatic drainage is to superficial inguinal nodes (scrotal skin) and para-aortic nodes (testis contents). The ilioinguinal nerve (L1) provides sensory innervation to anterior scrotum; the posterior scrotal nerves (from pudendal, S2-S4) supply the posterior scrotum.",
+      "keyTerms": [
+        { "term": "pampiniform plexus", "definition": "Venous network around testicular artery functioning as countercurrent heat exchanger" },
+        { "term": "countercurrent heat exchange", "definition": "Mechanism where adjacent vessels transfer heat, cooling arterial blood entering testis" },
+        { "term": "processus vaginalis", "definition": "Peritoneal extension that descends with testis, forming tunica vaginalis" },
+        { "term": "labioscrotal swellings", "definition": "Embryonic structures that form scrotum in males and labia majora in females" },
+        { "term": "ilioinguinal nerve", "definition": "Nerve from L1 providing sensation to anterior scrotum and upper medial thigh" }
+      ],
+      "clinicalNotes": "Scrotal contents have different lymphatic drainage than scrotal skin - testicular tumors drain to para-aortic nodes, while scrotal skin carcinoma drains to inguinal nodes. This affects staging and surgical management."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Scrotal pathology encompasses acute conditions (torsion, epididymo-orchitis, Fournier's gangrene) requiring emergent differentiation, and chronic conditions (varicocele, hydrocele, spermatocele) amenable to elective intervention based on symptoms and fertility impact.",
+      "explanation": "Acute scrotum differential: 1) Testicular torsion: peak bimodal (neonatal, adolescence), sudden onset, absent cremasteric reflex, high-riding testis, bell-clapper deformity predisposing; surgical emergency with 6-hour window for salvage; 2) Epididymo-orchitis: gradual onset, positive Prehn's sign (relief with elevation), urinalysis/culture positive, treat with antibiotics; 3) Fournier's gangrene: rapidly progressive necrotizing fasciitis, diabetes risk factor, surgical emergency requiring debridement; 4) Incarcerated hernia: reducible vs irreducible, bowel sounds in scrotum. Imaging: ultrasound with color Doppler is first-line for acute scrotum. Chronic conditions: varicocele (left > right due to left testicular vein draining to left renal vein), hydrocele (transillumination positive), spermatocele. Scrotal wall reconstruction may use skin grafts, flaps, or thigh pouches after extensive debridement.",
+      "keyTerms": [
+        { "term": "testicular torsion", "definition": "Twisting of spermatic cord cutting off blood supply, surgical emergency" },
+        { "term": "bell-clapper deformity", "definition": "Abnormal testicular suspension allowing rotation within tunica vaginalis" },
+        { "term": "Prehn's sign", "definition": "Relief of pain with testicular elevation, suggests epididymitis (not torsion)" },
+        { "term": "Fournier's gangrene", "definition": "Necrotizing fasciitis of scrotum/perineum, rapidly fatal without surgery" },
+        { "term": "transillumination", "definition": "Light transmission through fluid-filled mass, positive in hydrocele" },
+        { "term": "varicocele", "definition": "Dilated pampiniform plexus veins, 'bag of worms' on examination" }
+      ],
+      "clinicalNotes": "Testicular torsion: do not delay surgery for imaging if clinical suspicion is high. Manual detorsion ('open the book' - lateral rotation) can be attempted but exploration still required. Bilateral orchiopexy performed to prevent recurrence. Fournier's mortality remains 20-40% despite aggressive treatment."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Comprehensive scrotal management integrates imaging-guided diagnosis, fertility considerations in surgical planning, microsurgical techniques for varicocele and reconstruction, and multidisciplinary approaches for complex pathology including malignancy and necrotizing infection.",
+      "explanation": "Clinical integration: 1) Acute scrotum: high-frequency linear ultrasound with color/spectral Doppler - absent/reduced flow in torsion, increased flow in epididymo-orchitis; 'whirlpool sign' (twisted cord); radionuclide scan if ultrasound equivocal; 2) Varicocele: grading I-III by exam; indications for repair include pain, adolescent with testicular asymmetry, infertility; microsurgical subinguinal approach preserves testicular artery with magnification and Doppler; embolization alternative; 3) Hydrocele: jaboulay, Lord's plication, or excision based on size and wall thickness; 4) Testicular prosthesis: options after orchiectomy for cosmesis/psychological benefit; 5) Fournier's: aggressive debridement, broad-spectrum antibiotics, possible hyperbaric oxygen; staged reconstruction with split-thickness skin graft, local flaps, or gracilis flaps; 6) Scrotal cancer: Mohs or wide excision, sentinel lymph node biopsy, inguinal node dissection if positive; 7) Fertility preservation: sperm banking before any testicular surgery or gonadotoxic treatment.",
+      "keyTerms": [
+        { "term": "whirlpool sign", "definition": "Ultrasound finding of twisted spermatic cord in testicular torsion" },
+        { "term": "microsurgical varicocelectomy", "definition": "Varicocele ligation using operating microscope to spare testicular artery and lymphatics" },
+        { "term": "Jaboulay procedure", "definition": "Hydrocele repair by everting the tunica vaginalis around the testis" },
+        { "term": "testicular prosthesis", "definition": "Silicone implant placed after orchiectomy for cosmetic purposes" },
+        { "term": "split-thickness skin graft", "definition": "Thin skin graft for scrotal reconstruction after Fournier's or tumor resection" },
+        { "term": "gracilis flap", "definition": "Muscle flap from inner thigh used for complex perineal/scrotal reconstruction" }
+      ],
+      "clinicalNotes": "Intermittent torsion (torsion-detorsion) presents with recurrent scrotal pain - elective orchiopexy indicated. Microsurgical varicocelectomy has lowest recurrence (<1%) and complication rates; in adolescents, catch-up growth occurs in most after repair. Fournier's: CT helps define extent of necrotizing fasciitis, including retroperitoneal extension. Consider VAC (vacuum-assisted closure) for wound management before definitive closure."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-testes", "targetType": "structure", "relationship": "related", "label": "Testes" },
+    { "targetId": "structure-epididymis", "targetType": "structure", "relationship": "related", "label": "Epididymis" },
+    { "targetId": "structure-spermatic-cord", "targetType": "structure", "relationship": "related", "label": "Spermatic Cord" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:18252"],
+    "topics": ["anatomy"],
+    "clinicalRelevance": "high",
+    "examRelevance": { "usmle": true, "shelf": ["surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

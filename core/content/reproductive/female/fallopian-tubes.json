@@ -1,0 +1,106 @@
+{
+  "id": "structure-fallopian-tubes",
+  "type": "structure",
+  "name": "Fallopian Tubes",
+  "alternateNames": ["Uterine tubes", "Oviducts", "Salpinges"],
+  "fmaId": "FMA:18245",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The fallopian tubes are two tubes that carry eggs from the ovaries to the uterus.",
+      "explanation": "The fallopian tubes are about 10-13 cm (4-5 inches) long and connect each ovary to the uterus (womb). When an ovary releases an egg during ovulation, finger-like projections at the end of the tube sweep the egg inside. The tube then carries the egg toward the uterus. If sperm are present, fertilization (when sperm meets egg) usually happens in the fallopian tube. The fertilized egg then continues its journey to the uterus where it can implant and grow into a baby.",
+      "keyTerms": [
+        { "term": "ovulation", "definition": "When an egg is released from the ovary" },
+        { "term": "fertilization", "definition": "When a sperm cell joins with an egg cell" },
+        { "term": "uterus", "definition": "The womb, where a baby grows during pregnancy" }
+      ],
+      "analogies": ["The fallopian tube is like a slide at a playground that catches the egg and helps it travel down to the uterus."],
+      "examples": ["If the fallopian tubes are blocked or damaged, eggs cannot travel to the uterus, which can make it difficult to get pregnant."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The fallopian tubes are muscular ducts that capture ovulated oocytes, provide the site for fertilization, and transport the zygote/embryo to the uterus through ciliary action and peristalsis.",
+      "explanation": "Each fallopian tube has four regions: 1) Infundibulum - funnel-shaped end with finger-like fimbriae that sweep over the ovary to capture the egg; 2) Ampulla - widest section where fertilization typically occurs; 3) Isthmus - narrow muscular portion; 4) Intramural (interstitial) portion - passes through the uterine wall. The tube wall has three layers: outer serosa, middle muscularis (inner circular, outer longitudinal smooth muscle), and inner mucosa with ciliated and secretory cells. Cilia beat toward the uterus, and peristaltic contractions assist egg/embryo transport. The tube secretes fluid providing nutrients for gametes and early embryo. Transport from ovary to uterus takes approximately 3-4 days.",
+      "keyTerms": [
+        { "term": "fimbriae", "definition": "Finger-like projections at the end of the fallopian tube that capture the ovulated egg", "pronunciation": "FIM-bree-ay" },
+        { "term": "ampulla", "definition": "Widest part of the fallopian tube where fertilization usually occurs", "pronunciation": "am-PULL-ah" },
+        { "term": "isthmus", "definition": "Narrow part of the fallopian tube closer to the uterus", "pronunciation": "ISS-mus" },
+        { "term": "cilia", "definition": "Tiny hair-like structures that beat in waves to move the egg along" },
+        { "term": "peristalsis", "definition": "Wave-like muscle contractions that push contents through a tube" }
+      ],
+      "analogies": ["The fimbriae work like fingers catching a ball, while the cilia inside the tube work like a conveyor belt moving the egg toward the uterus."],
+      "examples": ["Ectopic pregnancy occurs when a fertilized egg implants in the fallopian tube instead of reaching the uterus, which is a medical emergency."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The fallopian tube epithelium undergoes cyclic hormonal changes, with ciliated cells and secretory (peg) cells creating a microenvironment that supports sperm capacitation, fertilization, and early embryo development during transport.",
+      "explanation": "The tubal mucosa contains ciliated cells (more abundant toward fimbriae) and secretory peg cells (more abundant toward isthmus), with proportions varying with menstrual cycle stage. Estrogen promotes ciliogenesis and increases ciliary beat frequency; progesterone enhances secretory activity. Tubal secretions contain glycoproteins, growth factors, and nutrients supporting gamete function. Sperm undergo capacitation in the tube, with isthmus serving as a sperm reservoir. Fertilization in the ampulla involves sperm penetrating cumulus cells, binding zona pellucida (via ZP3), acrosome reaction, and pronuclear fusion. The tube regulates embryo transport speed - too fast or too slow increases ectopic risk. Blood supply: ovarian and uterine artery branches. The tube is suspended by the mesosalpinx (part of broad ligament).",
+      "keyTerms": [
+        { "term": "peg cells", "definition": "Non-ciliated secretory cells in tubal epithelium producing nutrients and signaling molecules" },
+        { "term": "capacitation", "definition": "Functional changes in sperm that enable fertilization, occurring in female reproductive tract" },
+        { "term": "acrosome reaction", "definition": "Enzyme release from sperm head enabling penetration of zona pellucida" },
+        { "term": "mesosalpinx", "definition": "Part of broad ligament suspending the fallopian tube", "pronunciation": "mez-oh-SAL-pinks" },
+        { "term": "ciliogenesis", "definition": "Formation and development of cilia, promoted by estrogen" },
+        { "term": "sperm reservoir", "definition": "Isthmus region where sperm are stored and gradually released for fertilization" }
+      ],
+      "examples": ["Infections (chlamydia, gonorrhea) can damage the tubal epithelium and cilia, causing scarring that increases ectopic pregnancy risk and can lead to infertility."]
+    },
+    "4": {
+      "level": 4,
+      "summary": "The fallopian tube integrates mechanical, hormonal, and paracrine signaling to orchestrate gamete interaction and early embryo development, with tubal factor infertility often reflecting post-infectious damage amenable to surgical or IVF-based treatment.",
+      "explanation": "Tubal function regulation: Estrogen increases ciliary beat frequency, muscular contractility, and secretory volume; progesterone promotes secretory cell function and modulates muscular activity. Smooth muscle contraction is regulated by autonomic nerves and local factors (prostaglandins, NO, endothelin). Embryo-maternal dialogue: the preimplantation embryo signals its presence, and the tube secretes embryotrophic factors (IGFBP1, LIF, EGF). Tubal factor infertility causes: pelvic inflammatory disease (Chlamydia trachomatis most common), endometriosis, previous ectopic, surgical damage. Salpingitis causes luminal adhesions, fimbrial phimosis, and hydrosalpinx. Assessment: hysterosalpingography (HSG) for tubal patency, laparoscopy with chromotubation for detailed evaluation. Hydrosalpinx fluid is embryotoxic and reduces IVF success - salpingectomy or proximal tubal occlusion recommended before IVF.",
+      "keyTerms": [
+        { "term": "tubal factor infertility", "definition": "Infertility due to fallopian tube damage or blockage, ~30% of female infertility" },
+        { "term": "hydrosalpinx", "definition": "Fluid-filled, blocked fallopian tube, usually from infection", "pronunciation": "HY-droh-SAL-pinks" },
+        { "term": "hysterosalpingography (HSG)", "definition": "X-ray procedure using contrast to evaluate uterus and tubal patency" },
+        { "term": "chromotubation", "definition": "Injection of dye through tubes during laparoscopy to assess patency" },
+        { "term": "fimbrial phimosis", "definition": "Narrowing of fimbrial opening impairing egg capture" },
+        { "term": "pelvic inflammatory disease", "definition": "Infection of upper female reproductive tract, major cause of tubal damage" }
+      ],
+      "clinicalNotes": "Chlamydia screening and treatment prevents tubal factor infertility. Hydrosalpinx reduces IVF success by ~50% - removal or occlusion before embryo transfer is recommended. Tubal reanastomosis after tubal ligation has good success rates (50-80% pregnancy) if adequate tube length remains."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Contemporary tubal medicine encompasses fertility-restoring surgery, understanding of tubal origin of serous carcinomas, and salpingectomy for both risk reduction and contraception, integrating evidence from oncology and reproductive medicine.",
+      "explanation": "Clinical integration: 1) Tubal surgery: microsurgical reanastomosis for sterilization reversal, tuboplasty for distal tubal occlusion, selective tubal catheterization for proximal occlusion; 2) Ectopic pregnancy: methotrexate for small, unruptured ectopics (β-hCG <5000, no cardiac activity, <3.5cm); laparoscopic salpingostomy or salpingectomy for surgical management; 3) Oncology paradigm shift: recognition that high-grade serous carcinoma often originates from tubal epithelium (serous tubal intraepithelial carcinoma, STIC); opportunistic salpingectomy at benign hysterectomy reduces ovarian cancer risk; 4) Risk-reducing surgery: bilateral salpingo-oophorectomy for BRCA carriers; some advocate salpingectomy with delayed oophorectomy to preserve ovarian function; 5) Contraception: tubal ligation methods (clips, rings, partial salpingectomy); hysteroscopic tubal occlusion (Essure - discontinued); bilateral salpingectomy increasingly preferred for permanent contraception given cancer risk reduction benefit.",
+      "keyTerms": [
+        { "term": "STIC", "definition": "Serous tubal intraepithelial carcinoma, precursor lesion for high-grade serous ovarian cancer" },
+        { "term": "opportunistic salpingectomy", "definition": "Removal of tubes during benign gynecologic surgery for cancer risk reduction" },
+        { "term": "salpingostomy", "definition": "Incision into fallopian tube to remove ectopic pregnancy while preserving tube" },
+        { "term": "methotrexate", "definition": "Chemotherapy agent used for medical management of ectopic pregnancy" },
+        { "term": "tubal reanastomosis", "definition": "Microsurgical reconnection of fallopian tubes after sterilization" },
+        { "term": "bilateral salpingectomy", "definition": "Removal of both fallopian tubes, increasingly used for permanent contraception" }
+      ],
+      "clinicalNotes": "SEE-FIM (Sectioning and Extensively Examining the Fimbriated end) protocol identifies STICs in BRCA carrier risk-reducing specimens. ACOG and SGO support opportunistic salpingectomy at benign surgery in women done with childbearing. For ectopic pregnancy, methotrexate success rate ~90% with proper selection criteria. After salpingectomy for ectopic, future pregnancy rate is similar to salpingostomy if contralateral tube is normal."
+    }
+  },
+
+  "media": [],
+  "citations": [
+    {
+      "id": "openstax-ap-ch27",
+      "type": "textbook",
+      "title": "The Reproductive System",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "27",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "structure-ovaries", "targetType": "structure", "relationship": "related", "label": "Ovaries" },
+    { "targetId": "structure-uterus", "targetType": "structure", "relationship": "related", "label": "Uterus" },
+    { "targetId": "process-fertilization", "targetType": "process", "relationship": "related", "label": "Fertilization" }
+  ],
+  "tags": {
+    "systems": ["reproductive"],
+    "structures": ["FMA:18245"],
+    "topics": ["anatomy", "physiology", "oncology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["ob-gyn", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

@@ -1,0 +1,108 @@
+{
+  "id": "ent-ear-infections",
+  "type": "patient-education",
+  "name": "Ear Infections",
+  "alternateNames": ["Otitis Media", "Otitis Externa", "Middle Ear Infection", "Swimmer's Ear"],
+  "category": "ear",
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "Ear infections happen when germs cause swelling and pain in different parts of your ear, and they are very common, especially in children.",
+      "explanation": "There are two main types of ear infections. A middle ear infection (otitis media) happens behind your eardrum. This is very common in young children because the tube that drains their middle ear is smaller and more horizontal. When you have a cold, this tube can get blocked, fluid builds up, and germs can grow. Signs include ear pain, fever, trouble hearing, and in children, fussiness and pulling at the ear. Swimmer's ear (otitis externa) is an infection of the ear canal - the tunnel between the outside of your ear and your eardrum. It often happens when water stays in your ear after swimming. Signs include pain when you touch or pull on your outer ear, itching, and sometimes drainage. Both types need to be seen by a doctor who may prescribe ear drops or medicine to fight the infection.",
+      "keyTerms": [
+        {"term": "otitis media", "definition": "An infection in the middle ear, the space behind your eardrum"},
+        {"term": "otitis externa", "definition": "An infection in the ear canal, often called swimmer's ear"},
+        {"term": "eardrum", "definition": "The thin piece of tissue separating your ear canal from your middle ear"},
+        {"term": "ear canal", "definition": "The tube leading from outside your ear to your eardrum"}
+      ],
+      "analogies": ["Your middle ear is like a small room behind a closed door (the eardrum). When the ventilation tube gets blocked, the room gets stuffy and germs can take over."],
+      "examples": ["A child who has had a cold for several days suddenly wakes up at night crying with ear pain - this is a typical presentation of a middle ear infection."]
+    },
+    "2": {
+      "level": 2,
+      "summary": "Acute otitis media involves middle ear inflammation with effusion, while otitis externa is infection of the external auditory canal; each has distinct causes, presentations, and treatments.",
+      "explanation": "Acute otitis media (AOM) requires three criteria: acute onset, middle ear effusion (fluid), and signs of middle ear inflammation (bulging tympanic membrane, otalgia, or otorrhea through perforation). Common pathogens include Streptococcus pneumoniae, Haemophilus influenzae, and Moraxella catarrhalis. Risk factors include daycare attendance, tobacco smoke exposure, bottle feeding while supine, and Eustachian tube dysfunction. Treatment may involve observation (watchful waiting) for mild cases in children over 6 months, or antibiotics (amoxicillin first-line). Otitis media with effusion (OME) is fluid without acute infection, often following AOM. Otitis externa (OE) results from disruption of the protective cerumen layer and skin barrier, allowing bacterial (Pseudomonas aeruginosa, Staphylococcus aureus) or fungal invasion. Risk factors include water exposure, hearing aid use, and ear manipulation. Treatment involves topical antibiotic/acidifying drops and keeping the ear dry. Severe OE may require wick placement for medication delivery.",
+      "keyTerms": [
+        {"term": "otalgia", "definition": "Ear pain", "pronunciation": "oh-TAL-jee-ah"},
+        {"term": "otorrhea", "definition": "Discharge from the ear", "pronunciation": "oh-tor-REE-ah"},
+        {"term": "tympanic membrane", "definition": "The eardrum; its appearance helps diagnose middle ear conditions"},
+        {"term": "watchful waiting", "definition": "Observation without immediate antibiotics, used for mild AOM in appropriate patients"},
+        {"term": "cerumen", "definition": "Earwax; protective substance lining the ear canal"}
+      ],
+      "analogies": ["The ear canal's cerumen and acidic pH create a protective moat that keeps germs out; when water washes this away or skin is damaged, invaders can breach the defenses."],
+      "examples": ["A swimmer complains of progressively worsening ear pain over 3 days, with pain when the outer ear is pulled - this is classic otitis externa."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "Management of ear infections requires distinguishing acute otitis media from effusion, recognizing complications, and understanding antimicrobial selection and surgical indications.",
+      "explanation": "AOM diagnosis requires pneumatic otoscopy showing decreased tympanic membrane mobility with bulging, erythema, or purulent effusion. The AAP guidelines recommend immediate antibiotics for: children under 6 months, severe symptoms (moderate-severe otalgia or fever >39C), bilateral AOM in under 2 years, or otorrhea. High-dose amoxicillin (80-90 mg/kg/day) addresses resistant S. pneumoniae; amoxicillin-clavulanate for treatment failure or recent antibiotics. Recurrent AOM (3 episodes in 6 months or 4 in 12 months) may warrant tympanostomy tubes. Chronic OME (>3 months) affecting hearing requires audiometry and tube consideration. Complications of AOM include mastoiditis (postauricular erythema/fluctuance, protrusion of pinna), labyrinthitis, facial nerve paralysis, and intracranial extension (meningitis, epidural/brain abscess). Malignant (necrotizing) otitis externa is a life-threatening skull base osteomyelitis in diabetics/immunocompromised, presenting with severe OE, granulation tissue at bone-cartilage junction, and Pseudomonas infection requiring prolonged IV antibiotics.",
+      "keyTerms": [
+        {"term": "pneumatic otoscopy", "definition": "Examination technique using air puff to assess tympanic membrane mobility"},
+        {"term": "tympanostomy tubes", "definition": "Small tubes surgically placed through the eardrum to ventilate the middle ear"},
+        {"term": "mastoiditis", "definition": "Infection of the mastoid bone behind the ear, a complication of untreated AOM"},
+        {"term": "necrotizing otitis externa", "definition": "Severe skull base osteomyelitis from OE, occurring in diabetics/immunocompromised"},
+        {"term": "granulation tissue", "definition": "Abnormal healing tissue at bone-cartilage junction, warning sign in malignant OE"}
+      ],
+      "clinicalNotes": "Mastoiditis: CT temporal bones, IV antibiotics, possible mastoidectomy. Necrotizing OE: MRI/CT, prolonged fluoroquinolone therapy (6+ weeks), ESR/CRP monitoring. Topical quinolones safe in perforated TM; aminoglycosides potentially ototoxic with open middle ear."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Pathophysiology of ear infections involves mucosal immunology, biofilm formation, and evolving microbiology, with implications for prevention strategies and treatment resistance.",
+      "explanation": "AOM pathogenesis involves viral upper respiratory infection causing Eustachian tube inflammation and dysfunction, negative middle ear pressure, and bacterial colonization from nasopharyngeal flora. Biofilm formation on middle ear mucosa contributes to recurrent and chronic otitis media, explaining antibiotic resistance and persistence. Pneumococcal conjugate vaccines (PCV13, PCV15, PCV20) have reduced invasive disease and shifted serotype distribution in AOM, with increasing importance of non-vaccine serotypes and H. influenzae. Middle ear mucosal immunity involves secretory IgA, innate immune cells, and Toll-like receptor signaling; dysfunction contributes to otitis-prone state. OE microbiology increasingly includes methicillin-resistant S. aureus (MRSA), particularly in diabetics and healthcare-exposed patients. Fungal OE (otomycosis) often follows antibiotic drop use, presenting with pruritus and fluffy debris; Aspergillus and Candida species predominate. The external auditory canal microbiome research suggests protective commensal bacteria may prevent pathogen overgrowth.",
+      "keyTerms": [
+        {"term": "biofilm", "definition": "Structured bacterial community adherent to surfaces, highly resistant to antibiotics"},
+        {"term": "Eustachian tube dysfunction", "definition": "Impaired tube opening/closing causing negative middle ear pressure and predisposing to AOM"},
+        {"term": "otomycosis", "definition": "Fungal infection of the external auditory canal"},
+        {"term": "serotype replacement", "definition": "Emergence of non-vaccine bacterial strains following widespread vaccination"},
+        {"term": "otitis-prone", "definition": "Children experiencing frequent recurrent AOM, often with underlying immune or anatomic factors"}
+      ],
+      "clinicalNotes": "MRSA OE may require systemic antibiotics beyond topical therapy. Biofilm-targeted strategies under investigation include surfactants, DNase, and quorum sensing inhibitors. Xylitol and probiotics show modest prevention effect for recurrent AOM."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Advanced management of ear infections encompasses molecular diagnostics, novel therapeutics targeting biofilms and inflammation, and precision medicine approaches to prevention and surgical intervention.",
+      "explanation": "Middle ear microbiome research using 16S rRNA sequencing reveals complex polymicrobial communities in chronic OME beyond culturable pathogens. PCR-based diagnostics enable rapid pathogen and resistance gene identification from middle ear fluid. Novel therapeutic approaches include transtympanic drug delivery systems, anti-biofilm agents (enzymes, antimicrobial peptides), and immunomodulatory therapies. Tympanostomy tube innovations include drug-eluting coatings to reduce obstruction and infection. Eustachian tube balloon dilation (ETBD) offers treatment for Eustachian tube dysfunction in select patients, though evidence continues to evolve. Cholesteatoma complicating chronic OM requires surgical excision with canal wall-up or canal wall-down mastoidectomy depending on extent; endoscopic ear surgery offers enhanced visualization with potential for reduced morbidity. Ossicular chain reconstruction for chronic OM uses autograft (incus), allograft, or prosthetic (PORP/TORP) materials. Vaccination strategy evolution targets additional pneumococcal serotypes and non-typeable H. influenzae protein antigens.",
+      "keyTerms": [
+        {"term": "cholesteatoma", "definition": "Keratinizing epithelial growth in middle ear/mastoid, causing bone erosion, requires surgery"},
+        {"term": "ETBD", "definition": "Eustachian tube balloon dilation, procedure to improve Eustachian tube opening"},
+        {"term": "endoscopic ear surgery", "definition": "Minimally invasive approach using angled endoscopes for middle ear/cholesteatoma surgery"},
+        {"term": "PORP/TORP", "definition": "Partial/total ossicular replacement prostheses for reconstructing damaged ossicular chain"},
+        {"term": "16S rRNA sequencing", "definition": "Molecular technique identifying bacteria by genetic analysis, including non-culturable species"}
+      ],
+      "clinicalNotes": "Cholesteatoma staging (EAONO/JOS) guides surgical approach and outcome prediction. Endoscopic approaches offer visualization advantages but may limit two-handed dissection. Post-tympanostomy water precautions increasingly questioned for standard bathing; deep diving/submersion still generally avoided."
+    }
+  },
+  "media": [
+    {
+      "id": "otoscopy-findings",
+      "type": "diagram",
+      "filename": "otoscopy_normal_vs_aom.svg",
+      "title": "Otoscopic Findings",
+      "description": "Comparison of normal tympanic membrane vs. acute otitis media"
+    }
+  ],
+  "citations": [
+    {
+      "id": "aap-aom-guideline",
+      "type": "guideline",
+      "title": "Clinical Practice Guideline: Diagnosis and Management of Acute Otitis Media",
+      "source": "American Academy of Pediatrics",
+      "url": "https://doi.org/10.1542/peds.2012-3488"
+    }
+  ],
+  "crossReferences": [
+    {"targetId": "ent-ear-anatomy", "targetType": "anatomy", "relationship": "related", "label": "Ear Anatomy"},
+    {"targetId": "ent-ear-tubes", "targetType": "procedure", "relationship": "related", "label": "Ear Tubes"},
+    {"targetId": "ent-hearing-loss", "targetType": "condition", "relationship": "related", "label": "Hearing Loss"}
+  ],
+  "tags": {
+    "systems": ["auditory"],
+    "topics": ["conditions", "infections", "pediatrics"],
+    "clinicalRelevance": "high",
+    "patientFacing": true
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

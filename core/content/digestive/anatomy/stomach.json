@@ -1,0 +1,111 @@
+{
+  "id": "structure-stomach",
+  "type": "structure",
+  "name": "Stomach",
+  "alternateNames": ["Gaster", "Ventriculus"],
+  "fmaId": "FMA:7148",
+
+  "levels": {
+    "1": {
+      "level": 1,
+      "summary": "The stomach is a stretchy bag that holds food and breaks it down with strong acid and churning movements.",
+      "explanation": "Think of your stomach as a food mixer. When food arrives from your esophagus, your stomach stores it and mixes it with special juices that break down the food. The stomach walls are very muscular and squeeze the food, mixing it like a washing machine. The acid in your stomach is so strong it could dissolve metal! But your stomach has a special protective coating so it doesn't hurt itself. Food usually stays in your stomach for 2-6 hours before moving on.",
+      "keyTerms": [
+        { "term": "stomach acid", "definition": "A very strong acid that helps break down food in your stomach" },
+        { "term": "digest", "definition": "To break food down into tiny pieces your body can use" }
+      ],
+      "analogies": ["Your stomach is like a blender with acid - it mixes and breaks down food into a soupy mixture."],
+      "examples": ["After eating a big meal, you can sometimes hear your stomach gurgling - those are the mixing sounds!"]
+    },
+    "2": {
+      "level": 2,
+      "summary": "The stomach is a J-shaped organ that stores food, secretes hydrochloric acid and pepsin for protein digestion, and mechanically churns food into chyme.",
+      "explanation": "The stomach has four main regions: the cardia (where food enters), fundus (upper dome), body (main portion), and pylorus (outlet to small intestine). The stomach wall has three muscle layers that churn food, and the inner lining (mucosa) contains glands that secrete gastric juice. Gastric juice contains hydrochloric acid (HCl) with pH 1.5-3.5, pepsinogen (activated to pepsin for protein digestion), intrinsic factor (needed for vitamin B12 absorption), and mucus (protects the stomach lining). The pyloric sphincter controls food release into the duodenum.",
+      "keyTerms": [
+        { "term": "chyme", "definition": "The semi-liquid mixture of partially digested food and gastric juices", "pronunciation": "KIME" },
+        { "term": "pepsin", "definition": "An enzyme that breaks down proteins into smaller peptides" },
+        { "term": "pylorus", "definition": "The lower portion of the stomach that connects to the small intestine", "pronunciation": "pie-LOR-us" }
+      ],
+      "analogies": ["The stomach regions are like a hotel - cardia is the lobby, fundus is the penthouse, body is the main floors, and pylorus is the exit."]
+    },
+    "3": {
+      "level": 3,
+      "summary": "The stomach performs reservoir, secretory, and motor functions, with gastric acid secretion regulated by neural (vagal), paracrine (histamine), and endocrine (gastrin) pathways acting on parietal cells.",
+      "explanation": "Gastric glands contain multiple cell types: parietal cells (HCl via H+/K+-ATPase, intrinsic factor), chief cells (pepsinogen, gastric lipase), mucous neck cells (mucus), G cells (gastrin in antrum), D cells (somatostatin), and enterochromaffin-like (ECL) cells (histamine). Acid secretion has three phases: cephalic (vagal stimulation before eating, ~30%), gastric (distension and amino acids stimulate gastrin, ~60%), and intestinal (~10%, later inhibitory). The proton pump (H+/K+-ATPase) is the final common pathway for acid secretion. Gastric motility involves receptive relaxation (fundus), mixing contractions (body), and propulsive peristalsis (antrum). The migrating motor complex (MMC) clears residual material during fasting.",
+      "keyTerms": [
+        { "term": "parietal cell", "definition": "Gastric epithelial cell that secretes HCl and intrinsic factor; located in body/fundus" },
+        { "term": "H+/K+-ATPase", "definition": "Proton pump on parietal cell apical membrane; target of PPI drugs" },
+        { "term": "intrinsic factor", "definition": "Glycoprotein secreted by parietal cells; required for vitamin B12 absorption in terminal ileum" }
+      ],
+      "clinicalNotes": "Parietal cell loss in autoimmune gastritis causes achlorhydria, loss of intrinsic factor leading to pernicious anemia (B12 deficiency)."
+    },
+    "4": {
+      "level": 4,
+      "summary": "Gastric physiology integrates complex secretory regulation involving G-protein coupled receptors on parietal cells, mucosal defense mechanisms against acid-peptic injury, and neural control of motility patterns.",
+      "explanation": "Parietal cells express three major receptors that stimulate acid secretion: H2 histamine receptors (Gs-cAMP-PKA), M3 muscarinic receptors (Gq-IP3-Ca2+), and CCK-B/gastrin receptors (Gq-IP3-Ca2+). These pathways converge to activate the H+/K+-ATPase. Histamine from ECL cells is the primary paracrine stimulant; ECL cells are activated by gastrin and vagal ACh. Somatostatin from D cells inhibits gastrin release (paracrine on G cells) and directly inhibits parietal cells. Mucosal defense involves the mucus-bicarbonate barrier (gel layer), epithelial tight junctions, rapid cell turnover, prostaglandin-mediated blood flow and bicarbonate secretion, and sensory neuron-mediated hyperemia. NSAIDs disrupt prostaglandin synthesis, compromising defense. Helicobacter pylori urease generates ammonia, neutralizing local acid and causing chronic inflammation.",
+      "keyTerms": [
+        { "term": "ECL cell", "definition": "Enterochromaffin-like cell; releases histamine in response to gastrin and vagal stimulation to activate parietal cells" },
+        { "term": "somatostatin", "definition": "Inhibitory hormone from D cells; suppresses gastrin and acid secretion; activated by low luminal pH" },
+        { "term": "prostaglandins", "definition": "PGE2 and PGI2 maintain mucosal blood flow, stimulate mucus/bicarbonate secretion, inhibit acid secretion" }
+      ],
+      "clinicalNotes": "H. pylori eradication uses triple therapy (PPI + clarithromycin + amoxicillin) or bismuth quadruple therapy. Post-eradication testing recommended. NSAIDs + H. pylori synergistically increase ulcer risk."
+    },
+    "5": {
+      "level": 5,
+      "summary": "Clinical gastric disorders require integration of endoscopic diagnosis, histopathologic classification of gastritis and neoplasia, H. pylori management, acid suppression strategies, and surgical considerations for complicated disease.",
+      "explanation": "Peptic ulcer disease requires evaluation for H. pylori (urea breath test, stool antigen, or histology) and NSAID use. Gastric ulcers warrant malignancy exclusion with biopsy. Zollinger-Ellison syndrome (gastrinoma) presents with refractory ulcers and diarrhea; diagnose with fasting gastrin >1000 pg/mL or secretin stimulation test, localize with EUS and somatostatin receptor scintigraphy. Chronic gastritis classification: Type A (autoimmune, fundus/body, anti-parietal cell and anti-IF antibodies, risk of pernicious anemia and gastric carcinoid); Type B (H. pylori-associated, antral predominant, increased gastric cancer risk). Gastric adenocarcinoma: intestinal type (older patients, better prognosis, associated with atrophic gastritis and intestinal metaplasia) vs. diffuse type (younger, worse prognosis, signet ring cells, linitis plastica). TNM staging with EUS and CT; Lauren and WHO histologic classification. Treatment: endoscopic resection for T1a, surgery with D2 lymphadenectomy for resectable disease, perioperative chemotherapy (FLOT regimen). GISTs: c-KIT positive, treated with imatinib.",
+      "keyTerms": [
+        { "term": "Zollinger-Ellison syndrome", "definition": "Gastrin-secreting tumor (gastrinoma) causing severe ulcer disease and diarrhea; MEN1 association in 25%" },
+        { "term": "linitis plastica", "definition": "Diffuse gastric carcinoma causing thick, rigid 'leather bottle' stomach; poor prognosis" },
+        { "term": "intestinal metaplasia", "definition": "Replacement of gastric epithelium with intestinal-type epithelium; premalignant condition" }
+      ],
+      "clinicalNotes": "GIST treatment: surgical resection for localized, imatinib 400mg for unresectable/metastatic (dose escalate to 800mg for exon 9 mutations). Surveillance EGD for atrophic gastritis/intestinal metaplasia per MAPS guidelines."
+    }
+  },
+
+  "media": [
+    {
+      "id": "stomach-3d",
+      "type": "3d-model",
+      "filename": "stomach.glb",
+      "title": "3D Stomach Model",
+      "description": "Interactive 3D model showing stomach regions, sphincters, and wall layers"
+    },
+    {
+      "id": "stomach-histology",
+      "type": "histology",
+      "filename": "gastric_glands.jpg",
+      "title": "Gastric Gland Histology",
+      "description": "Parietal cells, chief cells, and mucous cells"
+    }
+  ],
+  "citations": [
+    {
+      "id": "openstax-ap-ch23-4",
+      "type": "textbook",
+      "title": "The Stomach",
+      "source": "OpenStax Anatomy and Physiology 2e",
+      "chapter": "23.4",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "crossReferences": [
+    { "targetId": "system-digestive", "targetType": "system", "relationship": "parent", "label": "Digestive System" },
+    { "targetId": "structure-esophagus", "targetType": "structure", "relationship": "sibling", "label": "Esophagus" },
+    { "targetId": "structure-duodenum", "targetType": "structure", "relationship": "sibling", "label": "Duodenum" },
+    { "targetId": "condition-pud", "targetType": "condition", "relationship": "related", "label": "Peptic Ulcer Disease" },
+    { "targetId": "condition-gastritis", "targetType": "condition", "relationship": "related", "label": "Gastritis" }
+  ],
+  "tags": {
+    "systems": ["digestive"],
+    "structures": ["FMA:7148"],
+    "topics": ["anatomy", "physiology"],
+    "clinicalRelevance": "critical",
+    "examRelevance": { "usmle": true, "shelf": ["medicine", "surgery"] }
+  },
+  "createdAt": "2026-01-24T00:00:00.000Z",
+  "updatedAt": "2026-01-24T00:00:00.000Z",
+  "version": 1,
+  "status": "published"
+}

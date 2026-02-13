@@ -1,0 +1,19 @@
+/** Cancer Immunotherapy — EducationalContent */
+import { oncEdu } from '../helpers';
+
+export const immunotherapy = oncEdu({
+  id: 'onc-immunotherapy', name: 'Cancer Immunotherapy', nameEs: 'Inmunoterapia del cancer',
+  altNames: ['Immune checkpoint inhibitors', 'ICI', 'Immuno-oncology', 'IO'], type: 'concept',
+  l1: 'Immunotherapy helps your own immune system recognize and fight cancer. Cancer cells can hide from your immune system by putting up "stop signs." Immunotherapy drugs remove those stop signs so your immune cells can attack the cancer. It can cause side effects when the immune system also attacks healthy tissues.',
+  l2: 'Immune checkpoint inhibitors (ICIs) are the main type: PD-1 inhibitors (pembrolizumab, nivolumab), PD-L1 inhibitors (atezolizumab, durvalumab), and CTLA-4 inhibitors (ipilimumab). They are approved for melanoma, lung, kidney, bladder, head/neck, and many other cancers. CAR-T cell therapy re-engineers a patient\'s own immune cells to target cancer. Immune-related side effects (irAEs) can affect any organ: skin, thyroid, colon, liver, lungs, pituitary.',
+  l3: 'PD-1/PD-L1 axis: tumor cells upregulate PD-L1, which binds PD-1 on T cells causing exhaustion. Blocking this restores T-cell cytotoxicity. CTLA-4 inhibition enhances T-cell priming in lymph nodes. Biomarkers: PD-L1 TPS/CPS, tumor mutational burden (TMB), microsatellite instability (MSI-H/dMMR). MSI-H/dMMR is the first tissue-agnostic biomarker (pembrolizumab approval across solid tumors). Combination ICI (nivo + ipi) increases response rates but also irAE rates (55-60% grade 3+). irAE management: corticosteroids first-line; infliximab for steroid-refractory colitis; mycophenolate for hepatitis.',
+  l4: 'Mechanisms of primary resistance: low TMB, immune-desert tumors, beta-2-microglobulin loss (MHC-I downregulation), JAK1/2 mutations, WNT/beta-catenin pathway activation. Acquired resistance: antigen loss, T-cell exhaustion, immunosuppressive TME (MDSCs, Tregs, TGF-beta). ICI in perioperative setting: neoadjuvant nivo + chemo in NSCLC (CheckMate 816), adjuvant pembro in melanoma (KEYNOTE-054), RCC (KEYNOTE-564), NSCLC (IMpower010). irAE pathogenesis: cross-reactive T-cell responses, autoantibody formation, cytokine-mediated; myocarditis mortality up to 50% — requires early troponin monitoring.',
+  l5: 'Next-generation IO: LAG-3 inhibitors (relatlimab + nivo, RELATIVITY-047 in melanoma); TIGIT inhibitors (tiragolumab, domvanalimab) with mixed results in NSCLC. Bispecific T-cell engagers and checkpoint antibodies combining in solid tumors. Intratumoral therapies: T-VEC (oncolytic virus), TLR9 agonists. Fecal microbiota transplant (FMT) restoring ICI response in melanoma (PERFORM). Cellular therapies expanding: TIL therapy (lifileucel) FDA-approved for melanoma; TCR-T cells (afamitresgene autoleucel for MAGE-A4). Personalized neoantigen vaccines (mRNA-4157/V940 + pembro) showing recurrence-free survival benefit in melanoma (KEYNOTE-942). Artificial intelligence for biomarker discovery and irAE prediction.',
+  tags: { systems: ['immune', 'general'], topics: ['immunology', 'therapeutics', 'molecular biology'], keywords: ['PD-1', 'PD-L1', 'CTLA-4', 'checkpoint inhibitor', 'CAR-T', 'irAE', 'TMB', 'MSI-H', 'TIL'], clinicalRelevance: 'critical', examRelevance: { usmle: true, nbme: true, shelf: ['medicine'] } },
+  crossRefs: [
+    { targetId: 'onc-chemotherapy-principles', targetType: 'concept', relationship: 'sibling', label: 'Chemotherapy Principles' },
+    { targetId: 'onc-radiation-therapy', targetType: 'concept', relationship: 'sibling', label: 'Radiation Therapy' },
+    { targetId: 'onc-lung-staging', targetType: 'topic', relationship: 'related', label: 'Lung Cancer Staging & Treatment' },
+    { targetId: 'onc-lymphoma', targetType: 'condition', relationship: 'related', label: 'Lymphoma' },
+  ],
+});

@@ -1,0 +1,766 @@
+{
+  "title": "Understanding the Healthcare System",
+  "category": "Healthcare Navigation",
+  "description": "Learn how the healthcare system works, the types of providers available, and when to seek care from different specialists.",
+  "content_type": "educational",
+  "sections": [
+    {
+      "title": "Types of Healthcare Providers",
+      "complexity_level": 1,
+      "content": {
+        "overview": "Many different types of healthcare providers can help you stay healthy. Understanding who does what helps you get the right care.",
+        "provider_types": [
+          {
+            "type": "Primary Care Provider (PCP)",
+            "other_names": ["Family doctor", "General practitioner", "Internist"],
+            "what_they_do": [
+              "Your main doctor for regular checkups",
+              "Treats common illnesses like colds and infections",
+              "Manages chronic conditions like diabetes and high blood pressure",
+              "Coordinates your overall healthcare",
+              "Refers you to specialists when needed"
+            ],
+            "when_to_see": "For regular checkups, when you feel sick, for vaccinations, and as your first stop for most health concerns"
+          },
+          {
+            "type": "Nurse Practitioner (NP)",
+            "what_they_do": [
+              "Can serve as your primary care provider",
+              "Diagnoses and treats illnesses",
+              "Prescribes medications",
+              "Orders and interprets tests"
+            ],
+            "when_to_see": "For the same reasons you would see a doctor - many NPs provide primary care"
+          },
+          {
+            "type": "Physician Assistant (PA)",
+            "what_they_do": [
+              "Works with doctors to provide care",
+              "Examines patients and diagnoses conditions",
+              "Prescribes medications",
+              "Assists in surgeries"
+            ],
+            "when_to_see": "Often available for same-day appointments and can handle many medical needs"
+          },
+          {
+            "type": "Specialists",
+            "what_they_do": [
+              "Focus on specific body parts or conditions",
+              "Have extra training in their specialty area",
+              "Treat complex conditions"
+            ],
+            "when_to_see": "When referred by your PCP or for specific health conditions"
+          },
+          {
+            "type": "Pharmacist",
+            "what_they_do": [
+              "Fills prescriptions",
+              "Explains how to take medications",
+              "Checks for drug interactions",
+              "Gives vaccinations",
+              "Answers medication questions"
+            ],
+            "when_to_see": "When picking up medications or needing medication advice"
+          }
+        ],
+        "key_points": [
+          "Your primary care provider is your healthcare 'home base'",
+          "Different providers have different training and specialties",
+          "It is okay to ask what type of provider you are seeing"
+        ]
+      }
+    },
+    {
+      "title": "Primary Care vs. Specialists",
+      "complexity_level": 2,
+      "content": {
+        "overview": "Understanding the difference between primary care and specialty care helps you know where to go for different health needs.",
+        "primary_care": {
+          "description": "Primary care is your first point of contact for healthcare",
+          "types": [
+            {
+              "name": "Family Medicine",
+              "serves": "All ages, from babies to elderly",
+              "focus": "Whole-person care for the entire family"
+            },
+            {
+              "name": "Internal Medicine",
+              "serves": "Adults (18 and older)",
+              "focus": "Adult diseases and prevention"
+            },
+            {
+              "name": "Pediatrics",
+              "serves": "Children and adolescents (birth to 18-21)",
+              "focus": "Child health and development"
+            },
+            {
+              "name": "Geriatrics",
+              "serves": "Older adults (65+)",
+              "focus": "Age-related health issues and quality of life"
+            },
+            {
+              "name": "OB/GYN",
+              "serves": "Women",
+              "focus": "Women's reproductive health (some women use as their PCP)"
+            }
+          ],
+          "benefits": [
+            "Knows your complete health history",
+            "Coordinates all your care",
+            "Builds a relationship with you over time",
+            "Focuses on prevention and wellness",
+            "Usually easier and cheaper to see"
+          ]
+        },
+        "specialty_care": {
+          "description": "Specialists focus on specific body systems, conditions, or procedures",
+          "common_specialists": [
+            {
+              "specialty": "Cardiology",
+              "focus": "Heart and blood vessels",
+              "sees_patients_for": "Heart disease, high blood pressure, heart failure, irregular heartbeat"
+            },
+            {
+              "specialty": "Dermatology",
+              "focus": "Skin, hair, and nails",
+              "sees_patients_for": "Rashes, skin cancer, acne, eczema, psoriasis"
+            },
+            {
+              "specialty": "Endocrinology",
+              "focus": "Hormones and glands",
+              "sees_patients_for": "Diabetes, thyroid problems, hormone imbalances"
+            },
+            {
+              "specialty": "Gastroenterology",
+              "focus": "Digestive system",
+              "sees_patients_for": "Stomach problems, liver disease, colonoscopies"
+            },
+            {
+              "specialty": "Neurology",
+              "focus": "Brain and nervous system",
+              "sees_patients_for": "Headaches, seizures, stroke, multiple sclerosis"
+            },
+            {
+              "specialty": "Oncology",
+              "focus": "Cancer",
+              "sees_patients_for": "Cancer diagnosis, treatment, and monitoring"
+            },
+            {
+              "specialty": "Orthopedics",
+              "focus": "Bones, joints, and muscles",
+              "sees_patients_for": "Fractures, arthritis, joint replacement, sports injuries"
+            },
+            {
+              "specialty": "Psychiatry",
+              "focus": "Mental health",
+              "sees_patients_for": "Depression, anxiety, bipolar disorder, schizophrenia"
+            },
+            {
+              "specialty": "Pulmonology",
+              "focus": "Lungs and breathing",
+              "sees_patients_for": "Asthma, COPD, sleep apnea, lung infections"
+            },
+            {
+              "specialty": "Rheumatology",
+              "focus": "Autoimmune diseases and joints",
+              "sees_patients_for": "Rheumatoid arthritis, lupus, gout"
+            },
+            {
+              "specialty": "Urology",
+              "focus": "Urinary system and male reproductive health",
+              "sees_patients_for": "Kidney stones, prostate problems, bladder issues"
+            }
+          ]
+        },
+        "key_differences": {
+          "access": "PCPs usually available quickly; specialists may have longer waits",
+          "cost": "PCP visits typically cost less than specialist visits",
+          "referrals": "Many insurance plans require PCP referral to see specialists",
+          "scope": "PCPs treat many conditions; specialists focus on specific areas"
+        }
+      }
+    },
+    {
+      "title": "When to See Which Doctor",
+      "complexity_level": 2,
+      "content": {
+        "overview": "Knowing where to go for care saves time, money, and helps you get the right treatment faster.",
+        "care_settings": [
+          {
+            "setting": "Primary Care Office",
+            "when_to_go": [
+              "Annual checkups and preventive care",
+              "Vaccinations",
+              "Cold, flu, or minor infections",
+              "Ongoing management of chronic conditions",
+              "Minor injuries",
+              "Mental health concerns",
+              "General health questions"
+            ],
+            "wait_time": "Usually can be seen within days, sometimes same-day",
+            "cost": "Generally lowest cost option"
+          },
+          {
+            "setting": "Urgent Care",
+            "when_to_go": [
+              "Illnesses that cannot wait for a regular appointment",
+              "Minor injuries (sprains, minor cuts needing stitches)",
+              "Ear infections",
+              "Urinary tract infections",
+              "Mild asthma attacks",
+              "Minor burns",
+              "Fever without emergency symptoms"
+            ],
+            "when_not_to_go": [
+              "Chest pain or heart attack symptoms",
+              "Stroke symptoms",
+              "Severe bleeding",
+              "Major injuries",
+              "Life-threatening emergencies"
+            ],
+            "wait_time": "Usually under 2 hours",
+            "cost": "More than PCP, less than ER"
+          },
+          {
+            "setting": "Emergency Room (ER)",
+            "when_to_go": [
+              "Chest pain or difficulty breathing",
+              "Signs of stroke (face drooping, arm weakness, speech difficulty)",
+              "Severe bleeding that will not stop",
+              "Serious burns",
+              "Broken bones with visible deformity",
+              "Severe allergic reactions",
+              "Loss of consciousness",
+              "Poisoning or overdose",
+              "Severe abdominal pain",
+              "High fever with stiff neck",
+              "Suicidal thoughts or behavior"
+            ],
+            "wait_time": "Can be hours; life-threatening cases seen first",
+            "cost": "Most expensive option"
+          },
+          {
+            "setting": "Telehealth/Virtual Visit",
+            "when_to_go": [
+              "Cold and flu symptoms",
+              "Rashes you can show on camera",
+              "Mental health counseling",
+              "Medication refills",
+              "Follow-up appointments",
+              "Health questions"
+            ],
+            "benefits": "No travel, often shorter waits, lower cost",
+            "limitations": "Cannot do physical exams or tests"
+          },
+          {
+            "setting": "Retail Clinic (in pharmacies/stores)",
+            "when_to_go": [
+              "Vaccinations",
+              "Simple infections",
+              "Minor skin conditions",
+              "Basic health screenings"
+            ],
+            "wait_time": "Usually minimal",
+            "cost": "Lower cost, often transparent pricing"
+          }
+        ],
+        "decision_guide": {
+          "step_1": "Is this life-threatening? If yes, call 911 or go to the ER",
+          "step_2": "Can this wait until I can see my regular doctor? If yes, schedule an appointment",
+          "step_3": "Is this urgent but not an emergency? Consider urgent care",
+          "step_4": "Is this something that can be handled by phone or video? Consider telehealth"
+        }
+      }
+    },
+    {
+      "title": "The Referral Process",
+      "complexity_level": 3,
+      "content": {
+        "overview": "A referral is when your primary care doctor sends you to see a specialist. Understanding this process helps ensure smooth care and insurance coverage.",
+        "what_is_a_referral": {
+          "definition": "A formal recommendation from your PCP for you to see a specialist or get specific services",
+          "purposes": [
+            "Ensures you see the right specialist for your condition",
+            "Provides the specialist with your medical history and the reason for the visit",
+            "Required by many insurance plans for coverage"
+          ]
+        },
+        "referral_process_steps": [
+          {
+            "step": 1,
+            "title": "Visit Your PCP",
+            "description": "Discuss your symptoms or concerns with your primary care provider",
+            "your_role": "Be clear about your symptoms, how long you have had them, and what you have tried"
+          },
+          {
+            "step": 2,
+            "title": "PCP Determines Need for Specialist",
+            "description": "Your doctor decides if specialty care would be helpful",
+            "your_role": "Ask why a specialist is needed and what type of specialist you are being referred to"
+          },
+          {
+            "step": 3,
+            "title": "Referral is Created",
+            "description": "Your PCP office creates the referral, often electronically",
+            "your_role": "Ask for a copy of the referral and what information will be sent"
+          },
+          {
+            "step": 4,
+            "title": "Insurance Authorization (if needed)",
+            "description": "Some plans require pre-approval before seeing specialists",
+            "your_role": "Confirm whether your insurance requires prior authorization"
+          },
+          {
+            "step": 5,
+            "title": "Schedule with Specialist",
+            "description": "Either you or your PCP office schedules the appointment",
+            "your_role": "Confirm who will schedule and when you should expect to be seen"
+          },
+          {
+            "step": 6,
+            "title": "Attend Specialist Appointment",
+            "description": "See the specialist with your referral information",
+            "your_role": "Bring referral paperwork, insurance card, and medical records if possible"
+          }
+        ],
+        "insurance_considerations": {
+          "hmo_plans": "Almost always require referrals to see specialists",
+          "ppo_plans": "Usually do not require referrals but may cost less with one",
+          "epo_plans": "May or may not require referrals - check your plan",
+          "hdhp_plans": "Usually do not require referrals"
+        },
+        "common_issues": [
+          {
+            "issue": "Referral expired",
+            "solution": "Most referrals are valid for 90 days to 1 year - check the dates and renew if needed"
+          },
+          {
+            "issue": "Wrong specialist listed",
+            "solution": "Contact your PCP to update the referral before your appointment"
+          },
+          {
+            "issue": "Insurance denies the referral",
+            "solution": "Ask your PCP to provide more documentation of medical necessity"
+          },
+          {
+            "issue": "Specialist cannot see you for months",
+            "solution": "Ask to be put on a cancellation list or ask your PCP for alternative specialists"
+          }
+        ],
+        "tips": [
+          "Always verify your referral is on file before your specialist appointment",
+          "Keep copies of all referral paperwork",
+          "Ask your insurance about referral requirements before scheduling",
+          "Do not assume a referral covers multiple visits - check the terms"
+        ]
+      }
+    },
+    {
+      "title": "Getting a Second Opinion",
+      "complexity_level": 3,
+      "content": {
+        "overview": "A second opinion means having another doctor review your diagnosis or treatment plan. It is a normal part of healthcare, especially for serious conditions.",
+        "what_is_a_second_opinion": {
+          "definition": "An evaluation by another qualified healthcare provider to confirm or offer alternatives to a diagnosis or treatment plan",
+          "purpose": [
+            "Confirms your diagnosis is correct",
+            "Explores alternative treatment options",
+            "Provides peace of mind for major decisions",
+            "May be required by insurance for certain procedures"
+          ]
+        },
+        "when_to_seek_second_opinion": [
+          {
+            "situation": "Serious diagnosis",
+            "examples": "Cancer, heart disease, conditions requiring major surgery"
+          },
+          {
+            "situation": "Risky treatment recommended",
+            "examples": "Surgery, chemotherapy, long-term medication with side effects"
+          },
+          {
+            "situation": "Rare condition",
+            "examples": "Uncommon diseases where expertise matters significantly"
+          },
+          {
+            "situation": "Treatment is not working",
+            "examples": "Symptoms persist despite following treatment plan"
+          },
+          {
+            "situation": "You have doubts",
+            "examples": "Something does not feel right about the diagnosis or plan"
+          },
+          {
+            "situation": "Multiple treatment options exist",
+            "examples": "Different approaches possible, unclear which is best for you"
+          }
+        ],
+        "how_to_get_second_opinion": {
+          "steps": [
+            {
+              "step": 1,
+              "action": "Tell your current doctor",
+              "details": "Most doctors understand and support second opinions - it is not an insult"
+            },
+            {
+              "step": 2,
+              "action": "Check with your insurance",
+              "details": "Verify coverage for second opinions and any requirements (referral, in-network)"
+            },
+            {
+              "step": 3,
+              "action": "Choose a second doctor",
+              "details": "Look for someone with expertise in your condition, ideally at a different practice"
+            },
+            {
+              "step": 4,
+              "action": "Gather your records",
+              "details": "Request copies of test results, images, pathology reports, and medical records"
+            },
+            {
+              "step": 5,
+              "action": "Schedule the appointment",
+              "details": "Explain you are seeking a second opinion when you call"
+            },
+            {
+              "step": 6,
+              "action": "Prepare questions",
+              "details": "Write down what you want to know and any concerns about the first opinion"
+            }
+          ]
+        },
+        "finding_a_doctor_for_second_opinion": {
+          "options": [
+            "Ask your current doctor for a recommendation",
+            "Contact an academic medical center or teaching hospital",
+            "Use your insurance company's specialist finder",
+            "Ask for recommendations from patient support groups",
+            "Look for doctors who specialize in your specific condition"
+          ]
+        },
+        "what_to_bring": [
+          "Complete medical records related to your condition",
+          "Test results and imaging (X-rays, MRIs, CT scans)",
+          "Pathology slides (for cancer or biopsies)",
+          "List of current medications",
+          "Timeline of your symptoms and treatments",
+          "Your questions and concerns"
+        ],
+        "if_opinions_differ": {
+          "steps": [
+            "Ask each doctor to explain their reasoning",
+            "Consider a third opinion if there is major disagreement",
+            "Ask about the evidence supporting each approach",
+            "Consider which option aligns with your values and priorities",
+            "Take time to decide - most conditions allow time for careful consideration"
+          ]
+        },
+        "your_rights": [
+          "You have the right to seek second opinions",
+          "Doctors cannot refuse to share your records for a second opinion",
+          "You do not have to tell your first doctor if you prefer not to",
+          "You can choose which doctor to continue with for treatment",
+          "Insurance cannot drop you for seeking second opinions"
+        ],
+        "insurance_coverage": {
+          "many_plans_cover": "Second opinions for surgeries, cancer treatment, and major procedures",
+          "may_require": "Referral from PCP or prior authorization",
+          "some_require": "Second opinions before certain expensive procedures",
+          "out_of_network": "May be covered for rare conditions or when expertise is limited"
+        }
+      }
+    },
+    {
+      "title": "Understanding Healthcare System Structure",
+      "complexity_level": 4,
+      "content": {
+        "overview": "The healthcare system includes many interconnected parts. Understanding how they work together helps you navigate care more effectively.",
+        "healthcare_settings": {
+          "outpatient_care": {
+            "definition": "Healthcare you receive without being admitted to a hospital",
+            "examples": [
+              "Doctor's office visits",
+              "Urgent care clinics",
+              "Outpatient surgery centers",
+              "Diagnostic labs and imaging centers",
+              "Physical therapy offices",
+              "Mental health clinics"
+            ],
+            "characteristics": "You go home the same day"
+          },
+          "inpatient_care": {
+            "definition": "Healthcare requiring hospital admission",
+            "examples": [
+              "Hospital stays",
+              "Surgeries requiring overnight recovery",
+              "Intensive care",
+              "Acute psychiatric hospitalization"
+            ],
+            "characteristics": "You stay at least one night"
+          },
+          "observation_status": {
+            "definition": "Outpatient status while in a hospital bed",
+            "important_note": "You may think you are admitted but technically you are not - this affects Medicare coverage and costs",
+            "your_right": "Ask if you are admitted as an inpatient or under observation"
+          },
+          "long_term_care": {
+            "definition": "Extended care for chronic conditions or recovery",
+            "examples": [
+              "Skilled nursing facilities",
+              "Rehabilitation centers",
+              "Nursing homes",
+              "Long-term acute care hospitals"
+            ]
+          },
+          "home_health": {
+            "definition": "Professional medical care in your home",
+            "services": [
+              "Nursing care",
+              "Physical and occupational therapy",
+              "Medical social work",
+              "Home health aides"
+            ]
+          },
+          "hospice": {
+            "definition": "Comfort care for terminal illness",
+            "focus": "Quality of life rather than cure",
+            "setting": "Can be at home, in a hospice facility, or in a hospital"
+          }
+        },
+        "healthcare_organizations": {
+          "health_systems": {
+            "description": "Large organizations owning multiple hospitals and clinics",
+            "examples": "Kaiser Permanente, Ascension, HCA Healthcare",
+            "benefit": "Coordinated care across settings",
+            "consideration": "May limit your choice of providers"
+          },
+          "academic_medical_centers": {
+            "description": "Hospitals affiliated with medical schools",
+            "benefits": [
+              "Access to latest treatments and clinical trials",
+              "Complex case expertise",
+              "Multiple specialists in one location"
+            ],
+            "considerations": [
+              "May have longer wait times",
+              "You may see residents and students (supervised by attending physicians)"
+            ]
+          },
+          "community_hospitals": {
+            "description": "Independent or small-system hospitals serving local areas",
+            "benefits": "Convenient, community-focused, often good for common conditions",
+            "considerations": "May transfer complex cases to larger centers"
+          },
+          "federally_qualified_health_centers": {
+            "description": "Community health centers receiving federal funding",
+            "benefits": [
+              "Serve all patients regardless of ability to pay",
+              "Sliding fee scale based on income",
+              "Comprehensive primary care"
+            ],
+            "who_they_serve": "Underserved communities, uninsured, and underinsured patients"
+          }
+        },
+        "care_coordination": {
+          "importance": "As you see multiple providers, coordination ensures everyone knows your complete health picture",
+          "patient_centered_medical_home": {
+            "description": "A care model where your PCP coordinates all your care",
+            "features": [
+              "Team-based care",
+              "Whole-person focus",
+              "Coordinated care across settings",
+              "Enhanced access (same-day appointments, after-hours care)"
+            ]
+          },
+          "care_coordinators": {
+            "role": "Help patients navigate complex care needs",
+            "services": [
+              "Scheduling appointments",
+              "Arranging transportation",
+              "Communicating between providers",
+              "Helping with insurance issues"
+            ]
+          },
+          "your_role_in_coordination": [
+            "Keep a list of all your doctors and their contact information",
+            "Maintain an updated medication list",
+            "Share information from one doctor with your other doctors",
+            "Ask how your providers communicate with each other"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Healthcare Quality and Safety",
+      "complexity_level": 5,
+      "content": {
+        "overview": "Understanding healthcare quality measures and safety helps you choose providers and facilities and participate in safe care.",
+        "measuring_quality": {
+          "structure": "What resources and systems are in place (staffing, equipment, technology)",
+          "process": "How care is delivered (following evidence-based guidelines)",
+          "outcome": "Results of care (survival rates, complications, patient satisfaction)"
+        },
+        "quality_indicators": {
+          "hospital_quality_measures": [
+            "Mortality rates for common conditions",
+            "Readmission rates",
+            "Hospital-acquired infections",
+            "Patient satisfaction scores",
+            "Safety events and complications"
+          ],
+          "physician_quality_measures": [
+            "Board certification",
+            "Patient outcomes",
+            "Adherence to clinical guidelines",
+            "Patient satisfaction"
+          ],
+          "where_to_find_quality_data": [
+            {
+              "source": "Hospital Compare (Medicare.gov)",
+              "information": "Hospital quality measures, patient experience, safety grades"
+            },
+            {
+              "source": "Physician Compare",
+              "information": "Doctor credentials and quality measures"
+            },
+            {
+              "source": "State health department websites",
+              "information": "Inspection reports, complaint records"
+            },
+            {
+              "source": "Leapfrog Group",
+              "information": "Hospital safety grades (A-F)"
+            },
+            {
+              "source": "Healthgrades",
+              "information": "Doctor and hospital ratings"
+            }
+          ]
+        },
+        "patient_safety": {
+          "your_role_in_safety": [
+            "Speak up if something seems wrong",
+            "Keep a current medication list and share it with all providers",
+            "Ask about hand washing - providers should wash before touching you",
+            "Know your care plan and ask questions if something unexpected happens",
+            "Bring a family member or friend to help listen and advocate"
+          ],
+          "common_safety_concerns": [
+            {
+              "concern": "Medication errors",
+              "prevention": "Verify medication name, dose, and frequency at each visit; use one pharmacy"
+            },
+            {
+              "concern": "Hospital-acquired infections",
+              "prevention": "Ask about infection rates; ensure staff wash hands; care for any lines or catheters properly"
+            },
+            {
+              "concern": "Surgical errors",
+              "prevention": "Verify correct site is marked; ask about surgical team experience; understand all consent forms"
+            },
+            {
+              "concern": "Diagnostic errors",
+              "prevention": "Ask what else could cause your symptoms; seek second opinions for serious diagnoses"
+            },
+            {
+              "concern": "Communication failures",
+              "prevention": "Ensure all your doctors have current information; ask questions; repeat back instructions"
+            }
+          ]
+        },
+        "reporting_safety_concerns": {
+          "internal_reporting": {
+            "who": "Patient relations, risk management, nursing supervisor",
+            "when": "For concerns during your care that need immediate attention"
+          },
+          "external_reporting": {
+            "state_health_department": "Licenses healthcare facilities and investigates complaints",
+            "the_joint_commission": "Accredits hospitals - accepts patient safety complaints",
+            "state_medical_board": "For concerns about physician conduct or competence",
+            "cms": "For Medicare-certified facilities"
+          }
+        },
+        "informed_consent": {
+          "definition": "Your agreement to treatment after receiving complete information",
+          "required_information": [
+            "Diagnosis and proposed treatment",
+            "Risks and benefits of treatment",
+            "Alternative treatments and their risks/benefits",
+            "Risks of no treatment",
+            "Answers to your questions"
+          ],
+          "your_rights": [
+            "Time to consider your options",
+            "Right to refuse treatment",
+            "Right to change your mind",
+            "Right to understandable explanations (not just medical jargon)"
+          ]
+        },
+        "healthcare_accreditation": {
+          "the_joint_commission": "Most widely recognized hospital accreditor",
+          "dnv_gl": "Alternative hospital accreditation",
+          "ncqa": "Accredits health plans and medical homes",
+          "carf": "Accredits rehabilitation and behavioral health programs",
+          "significance": "Accreditation indicates facilities meet quality and safety standards"
+        }
+      }
+    }
+  ],
+  "key_vocabulary": [
+    {
+      "term": "Primary Care Provider (PCP)",
+      "definition": "Your main doctor who provides routine care and coordinates specialty care"
+    },
+    {
+      "term": "Specialist",
+      "definition": "A doctor with advanced training in a specific area of medicine"
+    },
+    {
+      "term": "Referral",
+      "definition": "A recommendation from your doctor to see a specialist"
+    },
+    {
+      "term": "Second opinion",
+      "definition": "An evaluation by another doctor to confirm or offer alternatives to a diagnosis or treatment plan"
+    },
+    {
+      "term": "Inpatient",
+      "definition": "A patient who is formally admitted to a hospital"
+    },
+    {
+      "term": "Outpatient",
+      "definition": "A patient who receives care without being admitted to a hospital"
+    },
+    {
+      "term": "Academic medical center",
+      "definition": "A hospital affiliated with a medical school that provides complex care and conducts research"
+    },
+    {
+      "term": "Informed consent",
+      "definition": "Your agreement to treatment after receiving complete information about risks, benefits, and alternatives"
+    }
+  ],
+  "action_items": [
+    {
+      "action": "Establish a primary care provider if you do not have one",
+      "why": "Having a healthcare 'home base' improves your overall care"
+    },
+    {
+      "action": "Learn your insurance referral requirements",
+      "why": "Avoid surprise bills and ensure coverage for specialist visits"
+    },
+    {
+      "action": "Know the location of your nearest urgent care and emergency room",
+      "why": "Be prepared for situations when you need care quickly"
+    },
+    {
+      "action": "Keep a personal health record",
+      "why": "Help all your providers have accurate information about your health"
+    }
+  ],
+  "related_topics": [
+    "insurance-understanding",
+    "appointment-management",
+    "patient-advocacy"
+  ]
+}

@@ -18,6 +18,8 @@ import type {
   WeakAreaRecommendation,
   SpacedRepetitionItem,
   QuizState,
+  ContentDomain,
+  DifficultyLevel,
 } from './types';
 
 /**
@@ -26,6 +28,7 @@ import type {
 const cardiovascularQuestions: QuizQuestion[] = [
   {
     questionId: 'q-cv-001',
+    domain: 'anatomy',
     type: 'structure-identification',
     format: 'multiple-choice',
     system: 'cardiovascular',
@@ -72,7 +75,8 @@ const cardiovascularQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-cv-002',
-    type: 'pathway-sequence',
+    domain: 'physiology',
+    type: 'sequence-ordering',
     format: 'ordering',
     system: 'cardiovascular',
     difficulty: 2,
@@ -93,7 +97,8 @@ const cardiovascularQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-cv-003',
-    type: 'function-match',
+    domain: 'physiology',
+    type: 'process-mechanism',
     format: 'multiple-choice',
     system: 'cardiovascular',
     difficulty: 3,
@@ -139,7 +144,8 @@ const cardiovascularQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-cv-004',
-    type: 'clinical-correlation',
+    domain: 'clinical-integration',
+    type: 'clinical-presentation',
     format: 'multiple-choice',
     system: 'cardiovascular',
     difficulty: 4,
@@ -187,7 +193,8 @@ const cardiovascularQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-cv-005',
-    type: 'relationship',
+    domain: 'physiology',
+    type: 'process-mechanism',
     format: 'free-response',
     system: 'cardiovascular',
     difficulty: 5,
@@ -215,6 +222,7 @@ const cardiovascularQuestions: QuizQuestion[] = [
 const nervousQuestions: QuizQuestion[] = [
   {
     questionId: 'q-ns-001',
+    domain: 'anatomy',
     type: 'structure-identification',
     format: 'multiple-choice',
     system: 'nervous',
@@ -261,7 +269,8 @@ const nervousQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-ns-002',
-    type: 'function-match',
+    domain: 'physiology',
+    type: 'process-mechanism',
     format: 'multiple-choice',
     system: 'nervous',
     difficulty: 2,
@@ -309,7 +318,8 @@ const nervousQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-ns-003',
-    type: 'relationship',
+    domain: 'anatomy',
+    type: 'location-relationship',
     format: 'multiple-choice',
     system: 'nervous',
     difficulty: 3,
@@ -363,6 +373,7 @@ const nervousQuestions: QuizQuestion[] = [
 const respiratoryQuestions: QuizQuestion[] = [
   {
     questionId: 'q-rs-001',
+    domain: 'anatomy',
     type: 'structure-identification',
     format: 'multiple-choice',
     system: 'respiratory',
@@ -409,7 +420,8 @@ const respiratoryQuestions: QuizQuestion[] = [
   },
   {
     questionId: 'q-rs-002',
-    type: 'function-match',
+    domain: 'physiology',
+    type: 'process-mechanism',
     format: 'multiple-choice',
     system: 'respiratory',
     difficulty: 3,
@@ -480,8 +492,10 @@ function initializeScore(): QuizScore {
   return {
     correct: 0,
     incorrect: 0,
+    skipped: 0,
     total: 0,
     percentage: 0,
+    byDomain: new Map(),
     bySystem: new Map(),
     byDifficulty: new Map(),
     byType: new Map(),
@@ -500,6 +514,8 @@ export function getInitialQuizState(): QuizState {
       timesCorrect: 0,
       averageTime: 0,
       userDifficulty: q.difficulty,
+      successRate: 0,
+      tags: q.tags,
     });
   });
 
@@ -507,6 +523,7 @@ export function getInitialQuizState(): QuizState {
     currentSession: null,
     questionBank,
     topicPerformance: new Map(),
+    domainPerformance: new Map(),
     history: [],
     statistics: {
       totalQuizzes: 0,
@@ -515,14 +532,36 @@ export function getInitialQuizState(): QuizState {
       averageQuizDuration: 0,
       streakDays: 0,
       bestStreak: 0,
+      lastActivityDate: new Date(),
+      performanceByDomain: new Map(),
       performanceBySystem: new Map(),
       performanceByType: new Map(),
+      performanceByDifficulty: new Map(),
       recentTrend: 'stable',
+      weeklyAccuracy: [],
+      monthlyAccuracy: [],
       weakAreas: [],
       strongAreas: [],
+      averageTimePerQuestion: 0,
+      fastestCategory: 'anatomy',
+      slowestCategory: 'anatomy',
     },
     spacedRepetition: new Map(),
+    decks: new Map(),
+    flashcards: new Map(),
     isLoaded: true,
+    isLoading: false,
+    settings: {
+      defaultDifficulty: 2,
+      defaultQuestionCount: 10,
+      showTimer: true,
+      soundEffects: false,
+      hapticFeedback: false,
+      darkModeQuiz: false,
+      autoAdvance: false,
+      reviewMistakes: true,
+      dailyGoal: 10,
+    },
   };
 }
 
@@ -539,10 +578,8 @@ export function createQuizSession(
   const session: QuizSession = {
     sessionId: generateId('quiz'),
     userId: 'user-default',
+    config,
     title: generateQuizTitle(config),
-    systems: config.systems,
-    questionTypes: config.questionTypes,
-    difficulty: config.difficulty,
     questions: selectedQuestions,
     answers: [],
     currentQuestionIndex: 0,
@@ -550,7 +587,7 @@ export function createQuizSession(
     startedAt: new Date(),
     totalTime: 0,
     score: initializeScore(),
-    isAdaptive: config.isAdaptive,
+    currentDifficulty: config.difficulty,
   };
 
   return session;
@@ -668,25 +705,39 @@ export function submitAnswer(
  * Check if an answer is correct
  */
 function checkAnswer(question: QuizQuestion, answer: string): boolean {
+  const correctAnswer = question.correctAnswer;
+
+  // Handle string[] correctAnswer by joining or checking inclusion
+  const getCorrectAnswerString = (): string => {
+    if (Array.isArray(correctAnswer)) {
+      return correctAnswer.join(', ');
+    }
+    return correctAnswer;
+  };
+
   if (question.format === 'multiple-choice') {
-    return answer.toLowerCase() === question.correctAnswer.toLowerCase();
+    const correct = getCorrectAnswerString();
+    return answer.toLowerCase() === correct.toLowerCase();
   }
 
   if (question.format === 'free-response') {
     // Simple keyword matching for free response
-    const correctKeywords = question.correctAnswer.toLowerCase().split(/\s+/);
+    const correct = getCorrectAnswerString();
+    const correctKeywords = correct.toLowerCase().split(/\s+/);
     const answerKeywords = answer.toLowerCase().split(/\s+/);
-    const matchedKeywords = correctKeywords.filter((kw) =>
+    const matchedKeywords = correctKeywords.filter((kw: string) =>
       answerKeywords.some((aw) => aw.includes(kw) || kw.includes(aw))
     );
     return matchedKeywords.length >= correctKeywords.length * 0.5;
   }
 
   if (question.format === 'ordering') {
-    return answer.toLowerCase() === question.correctAnswer.toLowerCase();
+    const correct = getCorrectAnswerString();
+    return answer.toLowerCase() === correct.toLowerCase();
   }
 
-  return answer === question.correctAnswer;
+  const correct = getCorrectAnswerString();
+  return answer === correct;
 }
 
 /**
@@ -708,6 +759,12 @@ function calculateScore(
     } else {
       score.incorrect++;
     }
+
+    // By domain
+    const domainScore = score.byDomain.get(question.domain) || { correct: 0, total: 0 };
+    domainScore.total++;
+    if (answer.isCorrect) domainScore.correct++;
+    score.byDomain.set(question.domain, domainScore);
 
     // By system
     const systemScore = score.bySystem.get(question.system) || { correct: 0, total: 0 };
@@ -748,7 +805,7 @@ export function getCurrentQuestion(session: QuizSession): QuizQuestion | null {
  */
 export function getIncorrectAnswersReview(
   session: QuizSession
-): { question: QuizQuestion; userAnswer: string; explanation: QuestionExplanation }[] {
+): { question: QuizQuestion; userAnswer: string | string[]; explanation: QuestionExplanation }[] {
   return session.answers
     .filter((a) => !a.isCorrect)
     .map((a) => {
@@ -778,6 +835,7 @@ export function identifyWeakAreas(
       weakAreas.push({
         topicId: perf.topicId,
         topicName: perf.topicName,
+        domain: perf.domain,
         system: perf.system,
         accuracy: perf.accuracy,
         questionCount: perf.questionsAttempted,
@@ -894,10 +952,13 @@ export function createHistoryEntry(session: QuizSession): QuizHistoryEntry {
   return {
     sessionId: session.sessionId,
     title: session.title,
+    config: session.config,
     completedAt: session.completedAt || new Date(),
     score: session.score,
     duration: session.totalTime,
-    systems: session.systems,
-    difficulty: session.difficulty,
+    domains: session.config.domains,
+    systems: session.config.systems,
+    difficulty: session.config.difficulty,
+    questionCount: session.questions.length,
   };
 }

@@ -1,0 +1,922 @@
+/**
+ * Altitude Illness - Comprehensive Educational Content
+ *
+ * Medical conditions caused by rapid ascent to high altitude including
+ * Acute Mountain Sickness (AMS), High Altitude Cerebral Edema (HACE),
+ * and High Altitude Pulmonary Edema (HAPE).
+ *
+ * IMPORTANT: This content is for educational purposes only. In any
+ * altitude emergency, immediate descent can be life-saving.
+ */
+
+import { EducationalContent } from '../types';
+
+export const altitudeIllnessContent: EducationalContent = {
+  id: 'altitude-illness',
+  type: 'condition',
+  name: 'Altitude Illness',
+  alternateNames: ['Mountain Sickness', 'High Altitude Illness', 'Acute Mountain Sickness', 'AMS', 'HACE', 'HAPE'],
+
+  levels: {
+    1: {
+      level: 1,
+      summary: 'Altitude illness happens when you go up a mountain too fast. The air has less oxygen higher up, which can make you feel sick. Going back down is the best treatment.',
+      explanation: `## What Is Altitude Illness?
+
+When you climb high into the mountains, the air gets thinner. There's less oxygen in each breath. Your body needs time to get used to this change.
+
+If you go up too fast, you might get altitude illness. It's like your body saying, "I need time to adjust!"
+
+## What Makes You Feel Sick?
+
+- Less oxygen to breathe
+- Your body works harder to get oxygen
+- You might get dehydrated faster
+- Sleeping can be harder
+
+## Signs of Altitude Illness
+
+**Mild Signs (Common):**
+- Headache that won't go away
+- Feeling tired and weak
+- Upset stomach or throwing up
+- Feeling dizzy
+- Trouble sleeping
+
+**Serious Signs (Get Help Fast!):**
+- Confusion or acting strange
+- Can't walk straight (like being drunk)
+- Hard to breathe, even when resting
+- Coughing with pink or frothy spit
+- Chest feels tight
+- Lips or skin look blue
+
+**Remember: These Are Emergencies!**
+
+## How to Stay Safe
+
+**Climb Slowly:**
+- Don't rush up the mountain
+- Take breaks to rest
+- Sleep a bit lower than you climb during the day
+
+**Drink Water:**
+- Drink lots of water
+- Don't drink alcohol
+
+**Eat Well:**
+- Eat regular meals
+- Bring snacks you like
+
+**Watch Your Friends:**
+- Tell someone if you feel bad
+- Check on your friends
+- Don't leave anyone alone if they're sick
+
+## What To Do If Someone Feels Sick
+
+**Mild Sickness:**
+- Stop going up
+- Rest at the same height
+- Drink water
+- Take medicine for headache (ask an adult)
+- If no better in 24 hours, go down
+
+**Serious Sickness:**
+- GO DOWN right away!
+- Even going down a little bit helps
+- Call for help if you can
+- Never leave someone alone
+
+## The Golden Rule
+
+**When in doubt, go down!**
+
+Going down the mountain is the best treatment for altitude sickness. It can save a life.`,
+      keyTerms: [
+        { term: 'altitude', definition: 'How high up you are, like on a mountain' },
+        { term: 'oxygen', definition: 'The gas in air that your body needs to live' },
+        { term: 'headache', definition: 'Pain in your head that can be caused by altitude' },
+        { term: 'confused', definition: 'When your brain feels foggy and you do not think clearly' },
+        { term: 'descent', definition: 'Going down from a high place to a lower place' },
+      ],
+      analogies: [
+        'Getting used to altitude is like getting into a hot tub slowly - you need time to adjust!',
+        'Altitude sickness is like trying to run while holding your breath - your body needs more oxygen.',
+        'Going up a mountain too fast is like jumping into deep water before learning to swim.',
+      ],
+      examples: [
+        'A family flies to Denver and gets headaches - this is mild altitude sickness.',
+        'A climber on Mount Everest needs weeks to get used to the height.',
+        'Someone hiking fast up a 14,000-foot mountain feels dizzy and needs to rest.',
+      ],
+      patientCounselingPoints: [
+        'Listen to your body - if you feel bad, tell someone.',
+        'Never ignore a bad headache at high altitude.',
+        'It is okay to turn back if you do not feel well.',
+        'Drink water even before you feel thirsty.',
+        'Keep climbing slowly - the mountain will be there tomorrow!',
+      ],
+    },
+    2: {
+      level: 2,
+      summary: 'Altitude illness ranges from mild AMS to life-threatening HACE and HAPE. Prevention through gradual ascent is essential. Recognition of early symptoms and willingness to descend are critical for safety. Treatment involves descent, oxygen, and medications.',
+      explanation: `## Understanding Altitude Zones
+
+| Zone | Elevation | Risk Level |
+|------|-----------|------------|
+| Intermediate | 5,000-8,000 ft | Low risk |
+| High | 8,000-12,000 ft | AMS possible |
+| Very High | 12,000-18,000 ft | AMS common, HACE/HAPE possible |
+| Extreme | Above 18,000 ft | Severe risk, prolonged stay dangerous |
+
+## Types of Altitude Illness
+
+### Acute Mountain Sickness (AMS)
+The most common and mildest form.
+
+**Required for diagnosis:**
+- Headache (must have)
+- Plus one or more:
+  - Nausea or vomiting
+  - Fatigue or weakness
+  - Dizziness or lightheadedness
+  - Difficulty sleeping
+
+**Timing:** Usually starts 6-12 hours after arrival at altitude
+
+### High Altitude Cerebral Edema (HACE)
+Swelling in the brain - a medical emergency!
+
+**Warning signs:**
+- Severe headache
+- Confusion, acting strange
+- Cannot walk straight (ataxia) - the "drunk walk" test
+- Extreme tiredness
+- May progress to coma and death
+
+### High Altitude Pulmonary Edema (HAPE)
+Fluid in the lungs - also a medical emergency!
+
+**Warning signs:**
+- Very short of breath, even when resting
+- Cough, possibly with pink/frothy sputum
+- Chest tightness
+- Blue lips or fingernails (cyanosis)
+- Crackling sounds in lungs
+- Rapid heart rate
+
+**HAPE is the leading cause of death from altitude illness.**
+
+## Prevention Strategies
+
+### Gradual Ascent Rules
+- Above 8,000 feet: Go up no more than 1,000 feet per day
+- Take a rest day every 3,000 feet of climbing
+- "Climb high, sleep low" - hike higher during day, sleep at lower altitude
+
+### Hydration and Nutrition
+- Drink 3-4 liters of water per day
+- Eat regularly, even if not hungry
+- Avoid alcohol for first 48 hours
+- Avoid sedatives (they slow breathing)
+
+### Medications for Prevention
+- Acetazolamide (Diamox) helps prevent AMS
+- Start 1 day before ascent
+- Helps you breathe faster and adjust better
+
+## Treatment Principles
+
+### For Mild AMS
+1. Stop going up (no higher ascent)
+2. Rest at current altitude
+3. Drink plenty of water
+4. Take ibuprofen or acetaminophen for headache
+5. Consider acetazolamide
+6. If no better in 24 hours - descend
+
+### For HACE or HAPE - EMERGENCY!
+1. **Immediate descent** - most important treatment!
+2. Go down at least 1,000-3,000 feet
+3. Give oxygen if available
+4. Consider descent medication (dexamethasone for HACE)
+5. Use portable hyperbaric chamber if descent impossible
+6. **Call for rescue immediately**
+
+## Risk Assessment
+
+### Higher Risk If:
+- Previous altitude illness
+- Living at sea level
+- Rapid ascent (especially by plane)
+- Hard exercise right after arrival
+- Young adults (higher HACE risk)
+- Genetic factors
+
+### Lower Risk If:
+- Already live at moderate altitude
+- Take time to acclimatize
+- Stay well hydrated
+- Take preventive medications`,
+      keyTerms: [
+        { term: 'AMS', definition: 'Acute Mountain Sickness - mild altitude illness with headache and other symptoms' },
+        { term: 'HACE', definition: 'High Altitude Cerebral Edema - dangerous brain swelling at altitude', pronunciation: 'HAY-see' },
+        { term: 'HAPE', definition: 'High Altitude Pulmonary Edema - dangerous fluid in lungs at altitude', pronunciation: 'HAY-pee' },
+        { term: 'acclimatization', definition: 'The body gradually adjusting to higher altitude and less oxygen' },
+        { term: 'ataxia', definition: 'Loss of coordination - the "drunk walk" that signals HACE', pronunciation: 'uh-TAK-see-uh' },
+        { term: 'cyanosis', definition: 'Blue color of skin from lack of oxygen', pronunciation: 'sy-uh-NO-sis' },
+      ],
+      analogies: [
+        'Think of altitude acclimatization like breaking in new hiking boots - go slowly or you will feel it!',
+        'The three types of altitude illness are like warning lights: yellow (AMS), orange (worsening), and red (HACE/HAPE emergency).',
+        'Your blood at high altitude is like a delivery truck with only half the usual cargo - it has to make more trips.',
+      ],
+      examples: [
+        'A hiker from Florida flies directly to a 10,000-foot mountain cabin and wakes with headache and nausea - mild AMS.',
+        'A climber ignores worsening headache and becomes confused the next day - developing HACE.',
+        'Someone at 14,000 feet develops severe shortness of breath and coughing - HAPE requiring immediate descent.',
+      ],
+    },
+    3: {
+      level: 3,
+      summary: 'Altitude illness encompasses a spectrum from benign AMS to life-threatening HACE and HAPE. Pathophysiology involves hypoxic stress, fluid shifts, and vascular changes. Lake Louise scoring aids diagnosis. Descent remains the definitive treatment, with pharmacological interventions as adjuncts.',
+      explanation: `## Pathophysiology of Altitude Illness
+
+### The Hypoxic Environment
+At sea level: Atmospheric pressure = 760 mmHg, inspired PO2 ≈ 150 mmHg
+At 3,000m (10,000 ft): Pressure ≈ 520 mmHg, inspired PO2 ≈ 100 mmHg
+At 5,500m (18,000 ft): Pressure ≈ 380 mmHg, inspired PO2 ≈ 75 mmHg
+
+### Body's Response to Hypoxia
+
+**Immediate (minutes to hours):**
+- Increased breathing (hypoxic ventilatory response)
+- Increased heart rate and cardiac output
+- Pulmonary vasoconstriction (problematic in HAPE)
+- Sympathetic nervous system activation
+
+**Acclimatization (days to weeks):**
+- Increased 2,3-DPG shifts oxygen-hemoglobin curve right
+- Increased red blood cell production (EPO stimulation)
+- Increased capillary density in tissues
+- Improved cellular oxygen utilization
+
+## Acute Mountain Sickness (AMS)
+
+### Diagnosis: Lake Louise Score
+
+**Self-Assessment (each symptom 0-3):**
+- Headache
+- Gastrointestinal symptoms (nausea, vomiting)
+- Fatigue/weakness
+- Dizziness/lightheadedness
+- Difficulty sleeping
+
+**Diagnosis:** Headache (required) + total score ≥3
+
+### Pathophysiology
+- Mild cerebral edema (MRI shows brain swelling)
+- Increased cerebral blood flow
+- Possible blood-brain barrier changes
+- Individual variability in hypoxic ventilatory response
+
+### Risk Factors
+- Rapid ascent rate
+- Prior history of AMS
+- Low altitude residence
+- Exertion upon arrival
+- Obesity (independent risk factor)
+- Female gender (some studies)
+
+## High Altitude Cerebral Edema (HACE)
+
+### Pathophysiology
+- Vasogenic edema from BBB breakdown
+- Increased intracranial pressure
+- Cytotoxic edema component possible
+- Autoregulation failure
+
+### Clinical Features
+- **Hallmark sign:** Ataxia (test with tandem gait)
+- Altered mental status (confusion, drowsiness, inappropriate behavior)
+- Severe headache unresponsive to treatment
+- Can progress to coma in 24-72 hours untreated
+- Cranial nerve palsies possible
+
+### Diagnosis
+AMS symptoms plus either:
+1. Ataxia, OR
+2. Altered mental status in setting of recent altitude gain
+
+## High Altitude Pulmonary Edema (HAPE)
+
+### Pathophysiology
+\`\`\`
+Normal: Pulmonary arteries dilate with hypoxia
+HAPE: Exaggerated hypoxic pulmonary vasoconstriction
+  → Uneven vasoconstriction (some vessels constrict more)
+  → Over-perfusion of unaffected areas
+  → Capillary stress failure
+  → Non-cardiogenic pulmonary edema
+  → Protein-rich fluid leaks into alveoli
+\`\`\`
+
+### Clinical Features
+| Early Stage | Late Stage |
+|-------------|------------|
+| Decreased exercise tolerance | Dyspnea at rest |
+| Dry cough | Productive cough (pink/frothy) |
+| Mild tachycardia | Tachycardia, tachypnea |
+| Crackles at lung bases | Diffuse crackles, cyanosis |
+| SpO2 may be normal at rest | SpO2 <60% at rest |
+
+### HAPE Risk Factors
+- Prior HAPE episode (60% recurrence)
+- Rapid ascent
+- Heavy exertion
+- Cold exposure
+- Upper respiratory infection
+- Genetic predisposition
+- Certain anatomic variations
+
+## Treatment Protocols
+
+### AMS Treatment
+1. Stop ascent
+2. Rest at current altitude
+3. Acetazolamide 250mg BID
+4. Symptomatic treatment:
+   - Ibuprofen 400-600mg q6h for headache
+   - Ondansetron 4-8mg for nausea
+5. If no improvement in 24h: descend
+6. If worsening: immediate descent
+
+### HACE Treatment
+1. **Immediate descent** - minimum 1,000m (3,000 ft)
+2. **Dexamethasone** 8mg IV/IM/PO initial, then 4mg q6h
+3. Supplemental oxygen 2-4 L/min
+4. Portable hyperbaric chamber (Gamow bag) if descent impossible
+5. DO NOT leave patient alone
+
+### HAPE Treatment
+1. **Immediate descent** - definitive treatment
+2. **Supplemental oxygen** - high flow if available
+3. **Nifedipine** 30mg ER q12h (reduces pulmonary pressure)
+4. Minimize exertion - carry if possible
+5. Portable hyperbaric chamber
+6. Avoid respiratory depressants
+
+## Prevention
+
+### Graded Ascent
+- Above 3,000m: increase sleeping elevation ≤500m/day
+- Rest day every 1,000m of gain
+- "Climb high, sleep low" strategy
+
+### Pharmacologic Prophylaxis
+
+**Acetazolamide:**
+- 125-250mg PO BID starting 1 day before ascent
+- Continues through ascent and first 2 days at highest altitude
+- Side effects: paresthesias, dysgeusia, polyuria
+- Sulfa allergy contraindication
+
+**Dexamethasone:**
+- 4mg PO q12h (HACE prophylaxis)
+- For HACE-prone individuals or acetazolamide intolerant
+- Does not facilitate acclimatization - masks symptoms
+
+**Nifedipine:**
+- 30mg ER q12h (HAPE prophylaxis)
+- For HAPE-prone individuals
+- Monitor for hypotension`,
+      keyTerms: [
+        { term: 'Lake Louise Score', definition: 'Standardized scoring system for AMS diagnosis based on symptom severity' },
+        { term: 'hypoxic ventilatory response', definition: 'Increase in breathing rate triggered by low oxygen' },
+        { term: '2,3-DPG', definition: 'Molecule that helps release oxygen from hemoglobin to tissues' },
+        { term: 'vasogenic edema', definition: 'Swelling from fluid leaking due to blood vessel damage' },
+        { term: 'tandem gait', definition: 'Walking heel-to-toe; tests coordination and detects ataxia' },
+      ],
+      clinicalNotes: 'HACE can be rapidly fatal - ataxia is the most reliable early sign. HAPE can occur independently of AMS/HACE. Nifedipine reduces pulmonary artery pressure but does not improve oxygenation. The Gamow bag simulates descent by increasing pressure but does not replace actual descent.',
+    },
+    4: {
+      level: 4,
+      summary: 'Altitude illness results from complex interactions between hypoxic stress and individual variability in physiologic responses. HACE involves vasogenic edema from BBB disruption; HAPE stems from uneven hypoxic pulmonary vasoconstriction and capillary stress failure. Evidence-based management combines descent, targeted pharmacotherapy, and environmental interventions.',
+      explanation: `## Advanced Pathophysiology
+
+### Oxygen Cascade at Altitude
+
+\`\`\`
+Sea Level → 5,500m (18,000 ft)
+Inspired PO2: 150 mmHg → 75 mmHg
+Alveolar PO2: 100 mmHg → 45-50 mmHg
+Arterial PO2: 95 mmHg → 40-45 mmHg
+SaO2: 97-98% → 70-85%
+\`\`\`
+
+### Individual Susceptibility Factors
+
+**Genetic Determinants:**
+- HIF-1α pathway polymorphisms
+- EPAS1 variants (Tibetan adaptation)
+- eNOS gene variants (HAPE susceptibility)
+- ACE gene polymorphisms
+
+**Pulmonary Vascular Reactivity:**
+- Exaggerated hypoxic pulmonary vasoconstriction (HPV)
+- Reduced nitric oxide bioavailability
+- Elevated endothelin-1
+- Impaired endothelial function
+
+**Fluid Regulation:**
+- ADH elevation with hypoxia
+- Inappropriate fluid retention
+- Aldosterone changes
+- Atrial natriuretic peptide suppression
+
+### HACE: Detailed Mechanism
+
+**Blood-Brain Barrier Disruption:**
+\`\`\`
+Hypoxia → HIF-1α activation → VEGF overexpression
+  → Tight junction protein redistribution
+  → Increased transcytosis
+  → MMP activation
+  → Basement membrane degradation
+  → Vasogenic edema
+\`\`\`
+
+**Neuroimaging Findings:**
+- MRI T2/FLAIR: White matter hyperintensities
+- Corpus callosum splenium involvement (characteristic)
+- Microhemorrhages on susceptibility-weighted imaging
+- May persist despite clinical recovery
+
+### HAPE: Detailed Mechanism
+
+**Capillary Stress Failure Model:**
+\`\`\`
+Uneven HPV + PA pressure >60 mmHg
+  → Regional overcirculation
+  → Capillary transmural pressure ↑
+  → Mechanical disruption
+  → Protein/erythrocyte leakage
+  → Inflammatory amplification
+\`\`\`
+
+**HAPE Susceptibility:**
+- Lower exhaled NO at baseline
+- Reduced NO synthase activity
+- Elevated endothelin-1
+- Pulmonary artery hypertension at baseline
+
+## Pharmacology in Depth
+
+### Acetazolamide
+
+**Mechanism of Action:**
+- Carbonic anhydrase inhibitor
+- Causes bicarbonaturia → metabolic acidosis
+- Acidosis stimulates ventilation (mimics acclimatization)
+- Mild diuretic effect
+- May improve sleep periodic breathing
+
+**Dosing:**
+- Prevention: 125mg BID (effective as 250mg with fewer side effects)
+- Treatment: 250mg BID
+- Pediatric: 2.5 mg/kg BID
+- Continue until descent or acclimatized
+
+**Contraindications:**
+- Sulfa allergy (cross-reactivity ~10%)
+- Severe renal impairment
+- Hyponatremia
+- Hypokalemia
+
+### Dexamethasone
+
+**Mechanism:**
+- Reduces vasogenic edema
+- Stabilizes blood-brain barrier
+- Anti-inflammatory effects
+- May improve hypoxic ventilatory response
+
+**Dosing:**
+- HACE treatment: 8mg load, then 4mg q6h
+- HACE prevention: 4mg q12h
+- AMS prevention: 2-4mg q12h
+
+**Cautions:**
+- Masks symptoms without treating hypoxia
+- Rebound possible if stopped abruptly
+- Does not aid acclimatization
+- Side effects: hyperglycemia, adrenal suppression, psychosis
+
+### Nifedipine
+
+**Mechanism:**
+- Calcium channel blocker
+- Reduces pulmonary vascular resistance
+- Lowers pulmonary artery pressure
+- Improves V/Q mismatch
+- Does NOT improve oxygenation directly
+
+**Dosing:**
+- HAPE treatment: 30mg ER q12h
+- HAPE prevention: 30mg ER q12h
+- Alternative: 10mg IR q4h (more side effects)
+
+**Side Effects:**
+- Hypotension, reflex tachycardia
+- Headache, flushing
+- Peripheral edema
+
+### PDE-5 Inhibitors (Emerging)
+
+**Sildenafil/Tadalafil:**
+- Increase NO-mediated vasodilation
+- Reduce pulmonary artery pressure
+- Alternative to nifedipine
+- May be better tolerated
+
+## Portable Hyperbaric Therapy
+
+### Gamow Bag Physiology
+- Increases pressure by ~2 psi (105 mmHg)
+- Simulates descent of ~1,500-2,000m
+- Improves SaO2 by ~3-10%
+- Temporary effect - rebound after removal
+
+**Protocol:**
+- Inflate to 2 psi
+- Patient inside zipped bag
+- Continuous pumping (every 1-2 min) to flush CO2
+- Treat for 1-2 hours
+- Reassess after removal
+
+**Indications:**
+- HACE/HAPE when descent impossible or delayed
+- Temporary stabilization pending evacuation
+- Adjunct, not replacement for descent
+
+## Prognostic Indicators
+
+| Favorable Prognosis | Poor Prognosis |
+|---------------------|----------------|
+| Prompt descent | Delayed descent >12h |
+| SpO2 improves with O2 | SpO2 refractory |
+| Mental status improves | Progressing coma |
+| HACE <6h duration | HACE >24h duration |
+| Age <50 | Age >50 or comorbidities |
+
+## Special Populations
+
+### High-Altitude Pulmonary Edema (HAPE) Variants
+- Reentry HAPE: High-altitude natives returning after lowland stay
+- Swimming-induced HAPE at high altitude
+- Temperature-related HAPE (cold water)`,
+      keyTerms: [
+        { term: 'HIF-1α', definition: 'Hypoxia-inducible factor - master regulator of cellular hypoxia response', pronunciation: 'hif-one-alpha' },
+        { term: 'VEGF', definition: 'Vascular endothelial growth factor - increases vascular permeability', pronunciation: 'vej-eff-gee' },
+        { term: 'MMP', definition: 'Matrix metalloproteinases - enzymes that degrade basement membrane', pronunciation: 'emm-em-pee' },
+        { term: 'V/Q mismatch', definition: 'Ventilation-perfusion mismatch - impairs gas exchange' },
+        { term: 'reentry HAPE', definition: 'HAPE in high-altitude natives returning after lowland stay' },
+      ],
+      clinicalNotes: 'MRI abnormalities in HACE may persist for months despite clinical recovery. Reentry HAPE is an under-recognized entity in highland populations. PDE-5 inhibitors are reasonable alternatives to nifedipine for HAPE prophylaxis. Dexamethasone without descent risks symptom masking and delayed treatment.',
+    },
+    5: {
+      level: 5,
+      summary: 'Altitude illness represents a spectrum of hypoxia-induced pathology with complex genetic, physiologic, and environmental determinants. Contemporary understanding integrates molecular oxygen-sensing (HIF pathway), vascular biology, and inflammatory cascades. Evidence-based management combines targeted pharmacotherapy with definitive descent, while ongoing research explores genetic susceptibility markers and novel therapeutics.',
+      explanation: `## Molecular Mechanisms of Altitude Illness
+
+### HIF Pathway: Oxygen Sensing
+
+**Normoxia:**
+- Prolyl hydroxylases (PHD1-3) hydroxylate HIF-α
+- Von Hippel-Lindau (VHL) protein recognizes hydroxylated HIF-α
+- Ubiquitination and proteasomal degradation
+- Minimal HIF-mediated transcription
+
+**Hypoxia:**
+- PHD enzymes inhibited (require O2 as cofactor)
+- HIF-α stabilization
+- HIF-α/HIF-β dimerization
+- Nuclear translocation
+- Binding to hypoxia-response elements (HRE)
+- Activation of hundreds of genes
+
+**Key HIF Target Genes:**
+\`\`\`
+Erythropoiesis: EPO, EPAS1 (HIF-2α)
+Angiogenesis: VEGF, PDGF, ANGPTL4
+Metabolism: GLUT1, PDK1, LDHA, PFKFB3
+Vascular tone: eNOS, endothelin-1, iNOS
+Iron metabolism: Transferrin, DMT1, ferritin
+pH regulation: CA9, NHE1, SLC16A3 (MCT4)
+\`\`\`
+
+### Population Genetics of Adaptation
+
+**Tibetan Adaptations:**
+- EPAS1 variant (Denisovan introgression) → blunted erythropoietic response
+- EGLN1 variants → altered oxygen sensing
+- VHL variants
+- PPARA variants → metabolic adaptation
+- Result: Lower hemoglobin, reduced CMS risk
+
+**Andean Adaptations:**
+- Different genetic architecture
+- Higher hemoglobin (polycythemia common)
+- Larger lung volumes
+- Enhanced diffusing capacity
+
+**Ethiopian Adaptations:**
+- CBARA1, VAV3, BHLHE41 variants
+- Unique approach to altitude tolerance
+- Maintain SaO2 without excessive erythrocytosis
+
+### HACE: Neurovascular Unit Dysfunction
+
+**BBB Composition:**
+- Endothelial cells (tight junctions: claudins, occludin, JAMs)
+- Pericytes (capillary coverage, BBB maintenance)
+- Astrocyte end-feet (aquaporin-4 channels)
+- Basement membrane (type IV collagen, laminin)
+
+**Hypoxic Perturbation:**
+1. Endothelial activation (VEGF, inflammation)
+2. Tight junction redistribution
+3. MMP-2/9 activation → basement membrane degradation
+4. Pericyte dysfunction/detachment
+5. Astrocyte swelling (AQP4 dysregulation)
+6. Vasogenic edema ± cytotoxic component
+
+**Inflammatory Cascade:**
+- DAMPs from hypoxic cells
+- NLRP3 inflammasome activation
+- Microglial activation (M1 polarization)
+- Cytokine release (IL-1β, TNF-α, IL-6)
+- Complement activation
+- Neutrophil extracellular traps (NETs)
+
+**Advanced Imaging:**
+- High-field MRI: Splenium of corpus callosum
+- DTI: White matter tract disruption
+- SWI: Microhemorrhages
+- MRS: Metabolic changes
+
+### HAPE: Molecular Pathophysiology
+
+**Endothelial Dysfunction:**
+\`\`\`
+Normal: Balanced NO, endothelin, prostacyclin
+HAPE-susceptible: Reduced NO, elevated ET-1
+
+Evidence:
+  Lower exhaled NO at baseline
+  Reduced NO metabolites
+  Elevated ADMA (endogenous NOS inhibitor)
+  eNOS polymorphisms (Glu298Asp, -786T>C)
+  Asymmetric dimethylarginine elevation
+\`\`\`
+
+**Epithelial Injury:**
+- Type II pneumocyte injury from edema
+- Surfactant dysfunction (SP-B, SP-C)
+- Impaired alveolar fluid clearance (ENaC dysfunction)
+- Atelectasis, V/Q mismatch
+
+**Genetic Associations:**
+- eNOS variants (Glu298Asp, VNTR)
+- HLA-DR6, HLA-DQ5
+- ACE I/D polymorphism
+- VEGF promoter variants
+
+## Evidence-Based Therapeutics
+
+### Acetazolamide: Current Evidence
+
+**Meta-Analysis Data:**
+- NNT ~4-5 for AMS prevention at high-risk ascent
+- 125mg BID equally effective to 250mg BID
+- Side effect reduction at lower dose
+- Limited evidence for treatment (primarily prevention)
+
+**Special Populations:**
+- Pregnancy: Category C, generally considered safe
+- Pediatrics: 2.5 mg/kg BID effective
+- Renal impairment: Dose adjustment needed
+
+### Dexamethasone: Nuanced Use
+
+**Effectiveness:**
+- RR 0.60 for AMS prevention
+- Superior to acetazolamide for established HACE
+- Does NOT facilitate acclimatization
+- Symptom masking without addressing hypoxia
+
+**Safety:**
+- Glucose elevation (monitor in diabetics)
+- Adrenal suppression with prolonged use
+- Psychosis risk
+- Rebound AMS/HACE if stopped abruptly
+
+### Nifedipine vs. PDE-5 Inhibitors
+
+| Agent | Evidence Base | Advantages | Considerations |
+|-------|--------------|------------|----------------|
+| Nifedipine 30mg ER | Established | Long experience | Hypotension, reflex tachycardia |
+| Sildenafil 50mg TID | RCT data | Direct NO pathway | Headache common, TID dosing |
+| Tadalafil 10mg BID | Growing evidence | QD/BID dosing | Longer half-life |
+
+### Emerging Therapies
+
+**Ibuprofen:**
+- 600mg TID reduces AMS incidence
+- NNT ~5-6
+- Mechanism possibly central (prostaglandin-mediated)
+- Alternative for sulfa-allergic patients
+
+**Iron Supplementation:**
+- Iron deficiency impairs HIF response
+- May improve acclimatization
+- Ongoing research
+
+**Inhaled Beta-Agonists:**
+- Salmeterol may reduce HAPE incidence
+- Mechanism: alveolar fluid clearance upregulation
+- Adjunct, not primary prevention
+
+**Bosentan (ET Receptor Antagonist):**
+- Reduces pulmonary hypertension
+- Limited data, expensive
+- Potential for HAPE prevention
+
+## Special Populations
+
+### Reentry HAPE
+- High-altitude natives after lowland stay
+- Pulmonary vascular remodeling reverses at low altitude
+- Return triggers exaggerated HPV
+- Consider graded reascent, nifedipine prophylaxis
+
+### Chronic Mountain Sickness (Monge Disease)
+- Excessive erythrocytosis (Hct >65% in men, >60% in women)
+- Pulmonary hypertension
+- Right heart failure risk
+- Treatment: Descent or phlebotomy ± acetazolamide
+
+### Pediatric Considerations
+- Children may not articulate symptoms
+- Behavioral changes may indicate AMS
+- HAPE relatively more common than HACE
+- Acetazolamide: 2.5 mg/kg BID
+
+### Pregnancy at Altitude
+- Increased risk of preeclampsia, IUGR
+- Avoid travel >3,600m if possible
+- Acetazolamide generally considered safe
+- Gradual ascent essential
+
+## Decision Support: Evacuation Algorithm
+
+\`\`\`
+Recent Altitude Gain + Symptoms
+       |
+       v
+Is headache present?
+  No → Consider alternative diagnosis
+  Yes → + One other symptom?
+          |
+          +--- No → Monitor, symptomatic care
+          |
+          +--- Yes → AMS present
+                  |
+                  v
+              Lake Louise Score?
+                  |
+                  +--- <4 → Rest, hydrate, analgesics
+                  +--- 4-6 → Stop ascent, consider descent
+                  +--- >6 → Prepare for descent
+                  |
+                  v
+              Ataxia or confusion?
+                  |
+                  +--- Yes → HACE: Descent + O2 + Dexamethasone
+                  +--- No → Dyspnea at rest?
+                            |
+                            +--- Yes → HAPE: Descent + O2 + Nifedipine
+                            +--- No → Continue AMS protocol
+\`\`\`
+
+## Research Frontiers
+
+- Genetic testing for susceptibility (EPAS1, EGLN1, eNOS)
+- Point-of-care biomarkers (copeptin, sST2, NGAL)
+- Novel pulmonary vasodilators
+- Hypoxic preconditioning protocols
+- Personalized ascent profiles
+- AI-assisted decision support`,
+      keyTerms: [
+        { term: 'EPAS1', definition: 'Gene encoding HIF-2α; Tibetan variants protect against polycythemia', pronunciation: 'ee-pas-one' },
+        { term: 'prolyl hydroxylases', definition: 'Oxygen-sensing enzymes that regulate HIF degradation under normoxia' },
+        { term: 'NLRP3 inflammasome', definition: 'Protein complex activated by hypoxia contributing to HACE inflammation' },
+        { term: 'ADMA', definition: 'Asymmetric dimethylarginine - endogenous NOS inhibitor elevated in HAPE' },
+        { term: 'ENaC', definition: 'Epithelial sodium channel - critical for alveolar fluid clearance' },
+      ],
+      clinicalNotes: `Clinical Pearls - Altitude Medicine:
+
+1. Genetic testing may soon identify high-risk individuals before ascent
+2. HACE imaging abnormalities may persist despite clinical recovery
+3. Reentry HAPE under-recognized in highland populations
+4. PDE-5 inhibitors reasonable alternative to nifedipine
+5. Ibuprofen 600mg TID effective for AMS prevention
+6. Iron status should be optimized before high-altitude travel
+7. Pediatric AMS may present as behavioral changes
+8. The combination of HACE+HAPE has especially high mortality
+9. Consider HAPE in any child with respiratory distress at altitude
+10. Dexamethasone without descent risks masking progression`,
+    },
+  },
+
+  media: [
+    {
+      id: 'altitude-zones',
+      type: 'diagram',
+      filename: 'altitude-zones.svg',
+      title: 'Altitude Zones and Risks',
+      description: 'Visual representation of altitude classifications and associated illness risks',
+    },
+    {
+      id: 'lake-louise-score',
+      type: 'diagram',
+      filename: 'lake-louise-score.svg',
+      title: 'Lake Louise AMS Scoring System',
+      description: 'Self-assessment tool for diagnosing acute mountain sickness',
+    },
+    {
+      id: 'hace-hape-pathophysiology',
+      type: 'diagram',
+      filename: 'hace-hape-pathophysiology.svg',
+      title: 'HACE and HAPE Pathophysiology',
+      description: 'Mechanisms of brain and lung complications at altitude',
+    },
+  ],
+
+  citations: [
+    {
+      id: 'wms-altitude-guidelines',
+      type: 'article',
+      title: 'Wilderness Medical Society Practice Guidelines for Prevention and Treatment of Acute Altitude Illness',
+      source: 'Wilderness & Environmental Medicine',
+      year: '2019',
+    },
+    {
+      id: 'uiaa-guidelines',
+      type: 'article',
+      title: 'UIAA Medical Commission Recommendations: Prevention and Treatment of Acute Mountain Sickness',
+      source: 'High Altitude Medicine & Biology',
+    },
+    {
+      id: 'luks-altitude',
+      type: 'textbook',
+      title: 'Wilderness Medicine',
+      authors: ['Auerbach, P.S.'],
+      source: 'Elsevier',
+      chapter: 'High Altitude Medicine',
+    },
+    {
+      id: 'hif-pathway-review',
+      type: 'article',
+      title: 'HIF Pathway in Acute and Chronic Altitude Illness',
+      source: 'Journal of Applied Physiology',
+    },
+  ],
+
+  crossReferences: [
+    { targetId: 'wilderness-hypothermia', targetType: 'condition', relationship: 'related', label: 'Hypothermia' },
+    { targetId: 'wilderness-pulmonary-edema', targetType: 'condition', relationship: 'related', label: 'High Altitude Pulmonary Edema' },
+    { targetId: 'wilderness-cerebral-edema', targetType: 'condition', relationship: 'related', label: 'High Altitude Cerebral Edema' },
+    { targetId: 'wilderness-evacuation-decisions', targetType: 'concept', relationship: 'see-also', label: 'Evacuation Decisions' },
+  ],
+
+  tags: {
+    systems: ['respiratory', 'neurological', 'cardiovascular'],
+    topics: ['altitude', 'wilderness-medicine', 'environmental-medicine', 'hypoxia'],
+    keywords: ['AMS', 'HACE', 'HAPE', 'altitude sickness', 'mountain medicine', 'acclimatization'],
+    clinicalRelevance: 'critical',
+    examRelevance: {
+      usmle: true,
+      nbme: true,
+      shelf: ['emergency-medicine', 'medicine'],
+    },
+  },
+
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  version: 1,
+  status: 'published',
+};
+
+export default altitudeIllnessContent;

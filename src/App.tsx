@@ -8,9 +8,7 @@ import { ImportView } from './ImportView';
 import { EducationView } from './EducationView';
 import './CompleteAnatomyLaunchpad.css';
 
-// Lazy load components to prevent Three.js from blocking app startup
-const AnatomyViewer = lazy(() => import('./AnatomyViewer').then(m => ({ default: m.AnatomyViewer })));
-const AnatomyLaunchpad = lazy(() => import('./AnatomyLaunchpad').then(m => ({ default: m.AnatomyLaunchpad })));
+// Lazy load components to prevent Three.js from blocking startup
 const CompleteAnatomyLaunchpad = lazy(() => import('./CompleteAnatomyLaunchpad').then(m => ({ default: m.CompleteAnatomyLaunchpad })));
 
 interface HealthSummary {
@@ -93,7 +91,7 @@ interface TimelineData {
   totalCount: number;
 }
 
-type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'anatomy-launchpad' | 'import' | 'education';
+type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy-launchpad' | 'import' | 'education';
 
 function App() {
   const [unlocked, setUnlocked] = useState(true); // Skip passphrase for web
@@ -670,22 +668,6 @@ function App() {
             setActiveFilters(['lab']);
             setCurrentView('timeline');
           }}
-          dashboardData={dashboard}
-        />
-      </Suspense>
-    );
-  }
-
-  // 3D Anatomy View - Original (lazy loaded)
-  if (currentView === 'anatomy') {
-    return (
-      <Suspense fallback={
-        <div className="container">
-          <div className="loading">Loading 3D Anatomy Viewer...</div>
-        </div>
-      }>
-        <AnatomyViewer
-          onBack={() => setCurrentView('dashboard')}
           dashboardData={dashboard}
         />
       </Suspense>

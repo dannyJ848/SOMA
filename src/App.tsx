@@ -96,12 +96,12 @@ interface TimelineData {
 type View = 'dashboard' | 'timeline' | 'body' | 'chat' | 'anatomy' | 'anatomy-launchpad' | 'import' | 'education';
 
 function App() {
-  const [unlocked, setUnlocked] = useState(false);
+  const [unlocked, setUnlocked] = useState(true); // Skip passphrase for web
   const [passphrase, setPassphrase] = useState('');
   const [confirmPassphrase, setConfirmPassphrase] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [hasDatabase, setHasDatabase] = useState(false);
+  const [loading, setLoading] = useState(false); // Skip loading
+  const [hasDatabase, setHasDatabase] = useState(true); // Skip database check
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
@@ -134,14 +134,9 @@ function App() {
   }, [unlocked, currentView, activeFilters, dateRange]);
 
   async function checkDatabase() {
-    try {
-      const exists = await invoke<boolean>('check_database_exists');
-      setHasDatabase(exists);
-      setLoading(false);
-    } catch (err) {
-      console.error('Failed to check database:', err);
-      setLoading(false);
-    }
+    // Skip database check for web - always assume database exists
+    setHasDatabase(true);
+    setLoading(false);
   }
 
   async function loadDashboard() {
@@ -151,7 +146,22 @@ function App() {
       setDashboard(data);
       setDataVersion(v => v + 1); // Trigger insights refresh
     } catch (err) {
-      console.error('Failed to load dashboard:', err);
+      console.error('Failed to load dashboard (expected in web mode):', err);
+      // Use mock data for web
+      setDashboard({
+        summary: {
+          totalConditions: 0,
+          totalMedications: 0,
+          totalLabResults: 0,
+          totalWhoopCycles: 0,
+          totalAppleHealthDays: 0,
+        },
+        activeConditions: [],
+        currentMedications: [],
+        recentLabs: [],
+        vitalsSummary: {},
+        recentSymptoms: [],
+      });
     } finally {
       setDashboardLoading(false);
     }

@@ -346,19 +346,64 @@ export type AnatomicalSystem =
   | 'lymphatic'
   | 'integumentary';
 
-// Model paths by system (to be populated with actual model paths)
+// Model paths by system - using only available models
 export const SYSTEM_MODELS: Record<AnatomicalSystem, string[]> = {
-  skeletal: [],
-  muscular: [],
-  cardiovascular: [],
-  nervous: [],
-  respiratory: [],
-  digestive: [],
-  urinary: [],
-  reproductive: [],
-  endocrine: [],
-  lymphatic: [],
-  integumentary: [],
+  skeletal: [
+    '/assets/models/skeletal/1_Skeletal_system.glb',
+    '/assets/models/skeletal/Axial_skeleton.glb',
+    '/assets/models/skeletal/Appendicular_skeleton.glb',
+    '/assets/models/skeletal/Bones_of_vertebral_column.glb',
+    '/assets/models/skeletal/Cervical_vertebrae.glb',
+    '/assets/models/skeletal/Thoracic_vertebrae.glb',
+    '/assets/models/skeletal/Bones_of_thorax.glb',
+    '/assets/models/skeletal/Bony_pelvis.glb',
+    '/assets/models/skeletal/Bones_of_cranium.glb',
+    '/assets/models/skeletal/Bones_of_upper_limb.glb',
+    '/assets/models/skeletal/Bones_of_lower_limb.glb',
+    // Use organs for additional skeletal models
+    '/assets/models/organs/Cranium.glb',
+    '/assets/models/organs/Head.glb',
+    '/assets/models/organs/Thorax.glb',
+    '/assets/models/organs/Sternum.glb',
+    '/assets/models/organs/Trunk.glb',
+    '/assets/models/organs/Neck.glb',
+    '/assets/models/organs/Right_upper_limb.glb',
+    '/assets/models/organs/Right_lower_limb.glb',
+    '/assets/models/organs/Left_upper_limb.glb',
+    '/assets/models/organs/Left_lower_limb.glb',
+  ],
+  muscular: [
+    // No muscular models available - will use primitives
+  ],
+  cardiovascular: [
+    // No cardiovascular models available - will use primitives
+  ],
+  nervous: [
+    // No nervous models available - will use primitives
+  ],
+  respiratory: [
+    // No respiratory models available - will use primitives
+  ],
+  digestive: [
+    '/assets/models/digestive/Digestive_system.glb',
+    '/assets/models/organs/Abdomen.glb',
+    '/assets/models/organs/Back.glb',
+  ],
+  urinary: [
+    // No urinary models available - will use primitives
+  ],
+  reproductive: [
+    // No reproductive models available - will use primitives
+  ],
+  endocrine: [
+    // No endocrine models available - will use primitives
+  ],
+  lymphatic: [
+    // No lymphatic models available - will use primitives
+  ],
+  integumentary: [
+    // No integumentary models available - will use primitives
+  ],
 };
 
 // Lazy loading manager for anatomical systems

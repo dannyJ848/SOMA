@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { type DashboardData } from './App';
 import { CompactImageGallery } from './components/ImageGallery.js';
 import { getImagesByBodyRegion, getImagesByBodySystem, ImageMetadata } from './content/imageRegistry.js';
+import { useModelLoader, Model, SYSTEM_MODELS, type AnatomicalSystem } from './ModelLoader.js';
 
 interface CompleteAnatomyLaunchpadProps {
   onBack: () => void;
@@ -668,6 +669,83 @@ function TorsoGeometry({ scale }: { scale: [number, number, number] }) {
   );
 }
 
+// ============================================================================
+// ANATOMICAL MODEL VIEWER - Loads GLB models
+// ============================================================================
+
+interface AnatomicalModelViewerProps {
+  visibleSystems: SystemVisibility;
+}
+
+function AnatomicalModelViewer({ visibleSystems }: AnatomicalModelViewerProps) {
+  const { loadModel, loadStates } = useModelLoader();
+  const [loadedModels, setLoadedModels] = useState<Map<string, THREE.Group>>(new Map());
+  const [loading, setLoading] = useState(false);
+
+  // Load models when visible systems change
+  useEffect(() => {
+    const activeSystems: AnatomicalSystem[] = [];
+    if (visibleSystems.skeletal) activeSystems.push('skeletal');
+    if (visibleSystems.muscular) activeSystems.push('muscular');
+    if (visibleSystems.cardiovascular) activeSystems.push('cardiovascular');
+    if (visibleSystems.nervous) activeSystems.push('nervous');
+    if (visibleSystems.respiratory) activeSystems.push('respiratory');
+    if (visibleSystems.digestive) activeSystems.push('digestive');
+    if (visibleSystems.urinary) activeSystems.push('urinary');
+    if (visibleSystems.reproductive) activeSystems.push('reproductive');
+    if (visibleSystems.endocrine) activeSystems.push('endocrine');
+    if (visibleSystems.lymphatic) activeSystems.push('lymphatic');
+    if (visibleSystems.integumentary) activeSystems.push('integumentary');
+
+    if (activeSystems.length === 0) {
+      setLoadedModels(new Map());
+      return;
+    }
+
+    setLoading(true);
+
+    // Collect all model URLs to load
+    const modelsToLoad: string[] = [];
+    activeSystems.forEach(system => {
+      const systemModels = SYSTEM_MODELS[system];
+      if (systemModels) {
+        modelsToLoad.push(...systemModels);
+      }
+    });
+
+    // Load all models
+    Promise.all(modelsToLoad.map(url => loadModel(url)))
+      .then(models => {
+        const newLoadedModels = new Map<string, THREE.Group>();
+        models.forEach((model, index) => {
+          if (model) {
+            newLoadedModels.set(modelsToLoad[index], model);
+          }
+        });
+        setLoadedModels(newLoadedModels);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load models:', err);
+        setLoading(false);
+      });
+  }, [visibleSystems, loadModel]);
+
+  // Render loaded models
+  return (
+    <>
+      {Array.from(loadedModels.entries()).map(([url, model]) => (
+        <primitive
+          key={url}
+          object={model.clone()}
+          scale={1}
+          position={[0, 0, 0]}
+        />
+      ))}
+    </>
+  );
+}
+
 // Anatomically accurate head shape
 function HeadGeometry({ scale, clippingPlanes }: { scale: [number, number, number]; clippingPlanes?: THREE.Plane[] }) {
   return (
@@ -1134,6 +1212,9 @@ function AnatomyModel({
       {crossSectionMode !== 'none' && (
         <CutPlaneVisualizer mode={crossSectionMode} position={cutPosition} />
       )}
+
+      {/* GLB Anatomical Models */}
+      <AnatomicalModelViewer visibleSystems={visibleSystems} />
 
       {/* Body parts */}
       {BODY_REGIONS.map((region) => (

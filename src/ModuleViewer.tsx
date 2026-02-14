@@ -6,8 +6,8 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import type { EducationalModule, ComplexityLevel, QuizResult } from '../../core/education/types';
-import { COMPLEXITY_LEVELS } from '../../core/education/types';
+import type { EducationalModule, ComplexityLevel, QuizResult } from '../core/education/types';
+import { COMPLEXITY_LEVELS } from '../core/education/types';
 import { ImageGallery, CompactImageGallery } from './components/ImageGallery.js';
 import { filterImages, getImagesByCondition, ImageMetadata } from './content/imageRegistry.js';
 
